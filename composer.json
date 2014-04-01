@@ -1,0 +1,30 @@
+{
+    "name": "timetoogo/pinq",
+    "description": "Language ",
+    "keywords": ["collection", "query", "pinq"],
+    "homepage": "http://www.github.com/TimeToogo/Pinq",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Elliot Levin",
+            "email": "elliot@aanet.com.au"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "nikic/php-parser": "0.9.4"
+    },
+    "suggest": {
+        "doctrine/cache": "Cache the expression trees of parse functions (Highly recommended for optimal performance)"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-4": { 
+            "Pinq\\": "Source/",
+            "Pinq\\Tests\\": "Tests/" 
+        }
+    }
+}
