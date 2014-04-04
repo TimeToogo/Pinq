@@ -5,8 +5,8 @@ namespace Pinq;
 /**
  * Aggregating functionality interface
  */
-interface IAggregatable extends \Countable {
-    
+interface IAggregatable extends \Countable 
+{
     /**
      * Returns the first value
      * 
@@ -48,7 +48,7 @@ interface IAggregatable extends \Countable {
      * Returns the maximum value.
      * 
      * @param callable $Function The function which will return the values
-     * @return int|null
+     * @return mixed
      */
     public function Maximum(callable $Function = null);
     
@@ -57,7 +57,7 @@ interface IAggregatable extends \Countable {
      * Returns the maximum value.
      * 
      * @param callable $Function The function which will return the values
-     * @return int|null
+     * @return mixed
      */
     public function Minimum(callable $Function = null);
     
@@ -83,20 +83,20 @@ interface IAggregatable extends \Countable {
      * Returns a boolean of if all the values evaluate to true
      * 
      * @param callable $Function The function which will return the values
-     * @return boolean|null
+     * @return bool
      */
     public function All(callable $Function = null);
     
     /**
-     * Returns a boolean of if any the values evaluate to true
+     * Returns a boolean of if any of the values evaluate to true
      * 
      * @param callable $Function The function which will return the values
-     * @return boolean|null
+     * @return bool
      */
     public function Any(callable $Function = null);
     
     /**
-     * Returns a string of all the values concatented with the separator
+     * Returns a string of all the values concatented by the delimiter
      * 
      * @param string $Delimiter The string to delimit the values by
      * @param callable $Function The function which will return the values

@@ -11,16 +11,16 @@ use \Pinq\Expressions as O;
 class QueryStreamResolverWalker extends O\ExpressionWalker
 {
     /**
-     * @var \Pinq\IQueryBuilder
+     * @var \Pinq\Providers\IQueryProvider
      */
-    private $QueryBuilder;
+    private $QueryProvider;
 
     private $QueryVariableNames;
 
-    public function __construct(\Pinq\IQueryBuilder $QueryBuilder, array $QueryVariableNames)
+    public function __construct(\Pinq\Providers\IQueryProvider $QueryProvider, array $QueryVariableNames)
     {
-        $this->QueryBuilder = $QueryBuilder;
-        $this->QueryVariableNames = $this->QueryVariableNames;
+        $this->QueryProvider = $QueryProvider;
+        $this->QueryVariableNames = $QueryVariableNames;
     }
 
     public function WalkMethodCall(O\MethodCallExpression $Expression)
@@ -41,32 +41,35 @@ class QueryStreamResolverWalker extends O\ExpressionWalker
 
     private function ResolveQueryStream(O\MethodCallExpression $Expression)
     {
+        $Queryable = $this->QueryProvider->CreateQueryable(new \Pinq\Queries\QueryStream([]));
+        
         $MethodCallExpressions = [];
         while ($Expression instanceof O\MethodCallExpression) {
             $MethodCallExpressions[] = $Expression;
             if (!($Expression->GetNameExpression() instanceof O\ValueExpression)) {
                 return null;
             }
-            if (!method_exists($this->QueryBuilder, $Expression->GetNameExpression()->GetValue())) {
+            if (!method_exists($Queryable, $Expression->GetNameExpression()->GetValue())) {
                 return null;
             }
 
             $Expression = $Expression->GetValueExpression();
         }
 
-        $this->QueryBuilder->ClearStream();
-        $QueryBuilderValueExpression = O\Expression::Value($this->QueryBuilder);
+        $QueryableExpression = O\Expression::Value($Queryable);
 
         foreach ($MethodCallExpressions as $Expression) {
             $Expression = $this->ResolveClosureArguments($Expression);
-            $Expression = $Expression->UpdateValue($QueryBuilderValueExpression);
-
-            if (!($Expression->Simplify() instanceof O\ValueExpression)) {
+            $Expression = $Expression->UpdateValue($QueryableExpression);
+            
+            $QueryableExpression = $Expression->Simplify();
+            if (!($QueryableExpression instanceof O\ValueExpression)) {
                 return null;
             }
         }
-
-        return O\Expression::SubQuery($Expression->GetOriginExpression(), $this->QueryBuilder->GetStream());
+        $ResolvedQueryable = $QueryableExpression->GetValue();
+        
+        return O\Expression::SubQuery($Expression->GetOriginExpression(), $ResolvedQueryable->GetQueryStream());
     }
 
     private function ResolveClosureArguments(O\MethodCallExpression $Expression)
@@ -75,7 +78,7 @@ class QueryStreamResolverWalker extends O\ExpressionWalker
 
         foreach ($ArgumentExpressions as $Key => $ArgumentExpression) {
             if ($ArgumentExpression instanceof O\ClosureExpression) {
-                $FunctionExpressionTree = \Pinq\Parsing\FunctionExpressionTree::FromClosureExpression($ArgumentExpression);
+                $FunctionExpressionTree = \Pinq\FunctionExpressionTree::FromClosureExpression($ArgumentExpression);
                 $ArgumentExpressions[$Key] = O\Expression::Value($FunctionExpressionTree);
             }
         }

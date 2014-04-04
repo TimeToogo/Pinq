@@ -19,10 +19,13 @@ class Operation implements IQuery
      */
     private $Traversable;
 
-    public function __construct($OperationType, \Pinq\ITraversable $Traversable)
+    public function __construct($OperationType, \Pinq\ITraversable $Queryable)
     {
+        if(!self::IsValid($OperationType)) {
+            throw new \Pinq\PinqException('Invalid operation type');
+        }
         $this->OperationType = $OperationType;
-        $this->Traversable = $Traversable;
+        $this->Traversable = $Queryable;
     }
 
     final public static function IsValid($OperationType)
@@ -35,13 +38,13 @@ class Operation implements IQuery
         return self::Operate;
     }
 
-    public function Traverse(QueryStreamVisitor $Visitor)
+    public function Traverse(QueryStreamWalker $Walker)
     {
-        $Visitor->VisitOperation($this);
+        return $Walker->VisitOperation($this);
     }
 
     /**
-     * @return IQueryable
+     * @return int
      */
     public function GetOperationType()
     {

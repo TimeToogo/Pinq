@@ -16,22 +16,6 @@ interface ICollection extends ITraversable, \ArrayAccess
     public function Apply(callable $Function);
 
     /**
-     * Removes all the values matched by the predicate
-     *
-     * @param  callable $Predicate
-     * @return void
-     */
-    public function RemoveWhere(callable $Predicate);
-
-    /**
-     * Removes all the values.
-     *
-     * @param  callable $Function
-     * @return void
-     */
-    public function Clear();
-
-    /**
      * Adds a range of values to the collection
      *
      * @param  array|\Traversable $Values The values to add
@@ -46,4 +30,20 @@ interface ICollection extends ITraversable, \ArrayAccess
      * @return void
      */
     public function RemoveRange($Values);
+
+    /**
+     * Removes all the values matched by the predicate
+     *
+     * @param  callable $Predicate
+     * @return void
+     */
+    public function RemoveWhere(callable $Predicate);
+
+    /**
+     * Removes all the values.
+     *
+     * @param  callable $Function
+     * @return void
+     */
+    public function Clear();
 }

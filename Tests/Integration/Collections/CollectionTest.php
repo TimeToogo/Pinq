@@ -21,7 +21,7 @@ abstract class CollectionTest extends \Pinq\Tests\PinqTestCase
         $this->Collection = $this->Collection();
     }
 
-    final protected function AssertMatches(\Pinq\ICollection $Collection, array $Array, $Name = '')
+    final protected function AssertMatches(\Pinq\ITraversable $Collection, array $Array, $Name = '')
     {
         $this->assertEquals(!empty($Array), $Collection->Exists(), $Name . ' - Both empty or non empty -');
         $this->assertSameSize($Array, $Collection, $Name . ' - Same size -');

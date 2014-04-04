@@ -48,11 +48,11 @@ interface IQueryBuilder
 
     public function SelectMany(callable $Function);
 
-    public function Union(ITraversable $Traversable);
+    public function Union(ITraversable $Values);
 
-    public function Append(ITraversable $Traversable);
+    public function Append(ITraversable $Values);
 
-    public function Intersect(ITraversable $Traversable);
+    public function Intersect(ITraversable $Values);
 
-    public function Except(ITraversable $Traversable);
+    public function Except(ITraversable $Values);
 }

@@ -42,22 +42,22 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
 
     /**
      * @param  \ReflectionFunctionAbstract $Reflection
-     * @return FunctionExpressionTree
+     * @return \Pinq\FunctionExpressionTree
      */
     final protected function GetFunctionExpressionTree(
             \ReflectionFunctionAbstract $Reflection, callable $Function = null) {
-        return new FunctionExpressionTree(
+        return new \Pinq\FunctionExpressionTree(
                 $this->GetParameterNameTypeHintMap($Reflection),
                 $this->Parser->Parse($Reflection)->GetExpressions(),
                 $Function);
     }
 
     /**
-     * @return FunctionExpressionTree
+     * @return \Pinq\FunctionExpressionTree
      */
     final public function Convert(callable $Function)
     {
-        if($Function instanceof FunctionExpressionTree) {
+        if($Function instanceof \Pinq\FunctionExpressionTree) {
             return $Function;
         }
         
@@ -78,7 +78,7 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
     }
 
     final protected function Resolve(
-            FunctionExpressionTree $ExpressionTree,
+            \Pinq\FunctionExpressionTree $ExpressionTree,
             array $VariableValueMap,
             array $VariableExpressionMap) {
         $ExpressionTree->ResolveVariables($VariableValueMap, $VariableExpressionMap);

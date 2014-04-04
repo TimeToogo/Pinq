@@ -2,270 +2,237 @@
 
 namespace Pinq;
 
-class Queryable implements IQueryable, IOrderedQueryable
+class Queryable implements IQueryable
 {
     /**
-     * @var IQueryProvider
+     * @var Providers\IQueryProvider
      */
     protected $Provider;
-
+    
     /**
-     * @var IQueryBuilder
+     * @var Parsing\IFunctionToExpressionTreeConverter
      */
-    protected $QueryBuilder;
+    protected $FunctiontConverter;
+    
+    /**
+     * @var Providers\IQueryScope
+     */
+    protected $Scope;
+    
+    /**
+     * @var Queries\IQueryStream
+     */
+    protected $QueryStream;
+    
+    private $ValuesIterator = null;
+    private $Values = null;
 
-    public function __construct(IQueryProvider $Provider)
+    public function __construct(Providers\IQueryProvider $Provider, Providers\IQueryScope $Scope = null)
     {
         $this->Provider = $Provider;
-        $this->QueryBuilder = $Provider->InstantiateQueryBuilder();
+        $this->FunctiontConverter = $Provider->GetFunctionToExpressionTreeConverter();
+        $this->Scope = $Scope ?: $Provider->Scope(new Queries\QueryStream([]));
+        $this->QueryStream = $this->Scope->GetQueryStream();
+    }
+    
+    final protected function NewQuery(Queries\IQuery $Query)
+    {
+        return $this->Provider->CreateQueryable($this->QueryStream->Append($Query));
+    }
+    
+    final protected function UpdateLastQuery(Queries\IQuery $Query)
+    {
+        return $this->Provider->CreateQueryable($this->QueryStream->UpdateLast($Query));
+    }
+    
+    private function Load() {
+        if($this->ValuesIterator === null) {
+            $this->ValuesIterator = $this->Scope->GetValues();
+        }
+    }
+    
+    final public function AsArray()
+    {
+        $this->Load();
+        $this->Values = Utilities::ToArray($this->ValuesIterator);
+        
+        return $this->Values;
     }
     
     public function AsTraversable()
     {
         return new Traversable($this->AsArray());
     }
-    
-    final public function AsArray()
-    {
-        return $this->LoadQueryScope()->Retrieve();
-    }
 
     public function AsCollection()
     {
         return new Collection($this->AsArray());
     }
-
-    public function __clone()
-    {
-        $this->QueryBuilder = clone $this->QueryBuilder;
-    }
-
-    final protected function LoadQueryScope()
-    {
-        if (!$this->QueryBuilder->IsEmpty()) {
-            $this->Provider = $this->Provider->LoadQueryScope($this->QueryBuilder->GetStream());
-            $this->QueryBuilder->ClearStream();
-            $this->OnNewQueryScope();
-        }
-
-        return $this->Provider;
-    }
     
-    protected function OnNewQueryScope() {}
+    public function AsQueryable()
+    {
+        return $this;
+    }
+
+    final public function getIterator()
+    {
+        $this->Load();
+        
+        return $this->Values ? new \ArrayIterator($this->Values) : $this->ValuesIterator;
+    }
 
     final public function GetProvider()
     {
         return $this->Provider;
     }
-
-    final public function GetBuilder()
+    
+    public function GetQueryStream()
     {
-        return $this->QueryBuilder;
+        return $this->QueryStream;
     }
-
-    final public function getIterator()
+    
+    public function GetQueryScope()
     {
-        return new \ArrayIterator($this->AsArray());
+        return $this->Scope;
+    }
+    
+    final protected function Convert(callable $Function = null) 
+    {
+        return $Function === null ? null : $this->FunctiontConverter->Convert($Function);
     }
     
     public function Select(callable $Function)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->Select($Function);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\Select($this->Convert($Function)));
     }
 
     public function SelectMany(callable $Function)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->SelectMany($Function);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\SelectMany($this->Convert($Function)));
     }
 
     public function IndexBy(callable $Function)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->IndexBy($Function);
-
-        return $Clone;
-    }
-
-    public function Clear()
-    {
-        $this->LoadQueryScope()->Clear();
+        return $this->NewQuery(new Queries\IndexBy($this->Convert($Function)));
     }
 
     public function Where(callable $Predicate)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->Where($Predicate);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\Filter($this->Convert($Predicate)));
     }
 
     public function GroupBy(callable $Function)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->GroupBy($Function);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\GroupBy($this->Convert($Function)));
     }
 
-    public function Append(ITraversable $Traversable)
+    public function Append(ITraversable $Values)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->Append($Traversable);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\Operation(Queries\Operation::Append, $Values));
     }
 
-    public function Union(ITraversable $Traversable)
+    public function Union(ITraversable $Values)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->Union($Traversable);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\Operation(Queries\Operation::Union, $Values));
     }
 
-    public function Intersect(ITraversable $Traversable)
+    public function Intersect(ITraversable $Values)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->Intersect($Traversable);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\Operation(Queries\Operation::Intersect, $Values));
     }
 
-    public function Except(ITraversable $Traversable)
+    public function Except(ITraversable $Values)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->Except($Traversable);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\Operation(Queries\Operation::Except, $Values));
     }
 
     public function Skip($Amount)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->Skip($Amount);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\Range($Amount, null));
     }
 
     public function Take($Amount)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->Take($Amount);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\Range(0, $Amount));
     }
 
     public function Slice($Start, $Amount)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->Slice($Start, $Amount);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\Range($Start, $Amount));
     }
 
     public function OrderBy(callable $Function)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->OrderBy($Function);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\OrderBy([$Function], [true]));
     }
 
     public function OrderByDescending(callable $Function)
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->OrderByDescending($Function);
-
-        return $Clone;
+        return $this->NewQuery(new Queries\OrderBy([$Function], [false]));
     }
-
-    public function ThenBy(callable $Function)
-    {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->ThenBy($Function);
-
-        return $Clone;
-    }
-
-    public function ThenByDescending(callable $Function)
-    {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->ThenByDescending($Function);
-
-        return $Clone;
-    }
-
+    
     public function Unique()
     {
-        $Clone = clone $this;
-        $Clone->QueryBuilder->Unique();
-
-        return $Clone;
+        return $this->NewQuery(new Queries\Unique());
     }
 
     public function Count()
     {
-        return $this->LoadQueryScope()->Count();
+        return $this->Scope->Count();
     }
 
     public function Exists()
     {
-        return $this->LoadQueryScope()->Exists();
+        return $this->Scope->Exists();
     }
 
     public function First()
     {
-        return $this->LoadQueryScope()->First();
+        return $this->Scope->First();
     }
 
     public function Contains($Value)
     {
-        return $this->LoadQueryScope()->Contains($Value);
+        return $this->Scope->Contains($Value);
     }
 
     public function Aggregate(callable $Function)
     {
-        return $this->LoadQueryScope()->Aggregate($Function);
+        return $this->Scope->Aggregate($this->Convert($Function));
     }
 
     public function All(callable $Function = null)
     {
-        return $this->LoadQueryScope()->All($Function);
+        return $this->Scope->All($this->Convert($Function));
     }
 
     public function Any(callable $Function = null)
     {
-        return $this->LoadQueryScope()->Any($Function);
-    }
-
-    public function Average(callable $Function = null)
-    {
-        return $this->LoadQueryScope()->Average($Function);
-    }
-
-    public function Implode($Delimiter, callable $Function = null)
-    {
-        return $this->LoadQueryScope()->Implode($Delimiter, $Function);
+        return $this->Scope->Any($this->Convert($Function));
     }
 
     public function Maximum(callable $Function = null)
     {
-        return $this->LoadQueryScope()->Maximum($Function);
+        return $this->Scope->Maximum($this->Convert($Function));
     }
 
     public function Minimum(callable $Function = null)
     {
-        return $this->LoadQueryScope()->Minimum($Function);
+        return $this->Scope->Minimum($this->Convert($Function));
     }
 
     public function Sum(callable $Function = null)
     {
-        return $this->LoadQueryScope()->Sum($Function);
+        return $this->Scope->Sum($this->Convert($Function));
+    }
+
+    public function Average(callable $Function = null)
+    {
+        return $this->Scope->Average($this->Convert($Function));
+    }
+
+    public function Implode($Delimiter, callable $Function = null)
+    {
+        return $this->Scope->Implode($Delimiter, $this->Convert($Function));
     }
 }

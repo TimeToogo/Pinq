@@ -5,8 +5,36 @@ namespace Pinq;
 /**
  * Concrete classes should be immutable and return a new instance with every chained query call.
  */
-interface ITraversable extends IConvertable, IAggregatable, \IteratorAggregate
+interface ITraversable extends IAggregatable, \IteratorAggregate
 {
+    /**
+     * Returns the values as an array
+     *
+     * @return array
+     */
+    public function AsArray();
+
+    /**
+     * Returns the values as a traversable
+     *
+     * @return ITraversable
+     */
+    public function AsTraversable();
+
+    /**
+     * Returns the values as a collection
+     *
+     * @return ICollection
+     */
+    public function AsCollection();
+
+    /**
+     * Returns the values as a queryable
+     *
+     * @return IQueryable
+     */
+    public function AsQueryable();
+    
     /**
      * Specifies a predicate
      *
@@ -17,7 +45,7 @@ interface ITraversable extends IConvertable, IAggregatable, \IteratorAggregate
      *  }
      * </code>
      *
-     * @param  callable    $Predicate The predicate function
+     * @param  callable   $Predicate The predicate function
      * @return ITraversable
      */
     public function Where(callable $Predicate);
@@ -32,7 +60,7 @@ interface ITraversable extends IConvertable, IAggregatable, \IteratorAggregate
      * }
      * </code>
      *
-     * @param  callable           $Function The expression function
+     * @param  callable          $Function The expression function
      * @return IOrderedTraversable
      */
     public function OrderBy(callable $Function);
@@ -47,7 +75,7 @@ interface ITraversable extends IConvertable, IAggregatable, \IteratorAggregate
      * }
      * </code>
      *
-     * @param  callable           $Function The expression function
+     * @param  callable          $Function The expression function
      * @return IOrderedTraversable
      */
     public function OrderByDescending(callable $Function);
@@ -55,7 +83,7 @@ interface ITraversable extends IConvertable, IAggregatable, \IteratorAggregate
     /**
      * Specifies the amount to skip.
      *
-     * @param  int         $Amount The amount of values to skip
+     * @param  int        $Amount The amount of values to skip
      * @return ITraversable
      */
     public function Skip($Amount);
@@ -63,16 +91,16 @@ interface ITraversable extends IConvertable, IAggregatable, \IteratorAggregate
     /**
      * Specifies the amount to retrieve. Pass null to remove the limit.
      *
-     * @param  int|null    $Amount The amount of values to retrieve
+     * @param  int|null   $Amount The amount of values to retrieve
      * @return ITraversable
      */
     public function Take($Amount);
 
     /**
-     * Returns a slice of the enumerable
+     * Returns a slice of the collection
      *
-     * @param  int         $Start  The amount of values to skip
-     * @param  int|null    $Amount The amount of values to retrieve
+     * @param  int        $Start  The amount of values to skip
+     * @param  int|null   $Amount The amount of values to retrieve
      * @return ITraversable
      */
     public function Slice($Start, $Amount);
@@ -80,7 +108,7 @@ interface ITraversable extends IConvertable, IAggregatable, \IteratorAggregate
     /**
      * Will use the values of the supplied function as the index
      *
-     * @param  callable    $Function The function returning the key data
+     * @param  callable   $Function The function returning the key data
      * @return ITraversable
      */
     public function IndexBy(callable $Function);
@@ -95,7 +123,7 @@ interface ITraversable extends IConvertable, IAggregatable, \IteratorAggregate
      * }
      * </code>
      *
-     * @param  callable    $Function The grouping function
+     * @param  callable   $Function The grouping function
      * @return ITraversable
      */
     public function GroupBy(callable $Function);
@@ -121,7 +149,7 @@ interface ITraversable extends IConvertable, IAggregatable, \IteratorAggregate
      *  }
      * </code>
      *
-     * @param  callable    $Function The function returning the data to select
+     * @param  callable   $Function The function returning the data to select
      * @return ITraversable
      */
     public function Select(callable $Function);
@@ -129,41 +157,40 @@ interface ITraversable extends IConvertable, IAggregatable, \IteratorAggregate
     /**
      * Maps the data with the supplied function and flattens the results.
      *
-     * @param  callable    $Function The function returning the data to select
+     * @param  callable   $Function The function returning the data to select
      * @return ITraversable
      */
     public function SelectMany(callable $Function);
 
     /**
-     * Unions the results with the supplied enumerable
+     * Unions the results with the supplied collection
      *
-     * @param  ITraversable $Traversable
+     * @param  ITraversable $Values
      * @return ITraversable
      */
-    public function Union(ITraversable $Traversable);
+    public function Union(ITraversable $Values);
 
     /**
-     * Append the results of the supplied enumerable
+     * Append the results of the supplied collection
      *
-     * @param  ITraversable $Traversable
+     * @param  ITraversable $Values
      * @return ITraversable
      */
-    public function Append(ITraversable $Traversable);
+    public function Append(ITraversable $Values);
 
     /**
-     * Intersects the results of the supplied enumerable
+     * Intersects the results of the supplied collection
      *
-     * @param  ITraversable $Traversable
+     * @param  ITraversable $Values
      * @return ITraversable
      */
-    public function Intersect(ITraversable $Traversable);
+    public function Intersect(ITraversable $Values);
 
     /**
-     * Removes the matching results from the supplied enumerable
+     * Removes the matching results from the supplied collection
      *
-     * @param  ITraversable $Traversable
+     * @param  ITraversable $Values
      * @return ITraversable
      */
-    public function Except(ITraversable $Traversable);
-
+    public function Except(ITraversable $Values);
 }

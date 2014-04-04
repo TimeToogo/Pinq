@@ -7,18 +7,51 @@ class QueryStream implements IQueryStream
     /**
      * @var IQuery[]
      */
-    private $Stream = [];
+    private $Queries = [];
 
     public function __construct(array $Stream)
     {
-        $this->Stream = $Stream;
+        $this->Queries = $Stream;
     }
-
+    
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->Queries);
+    }
+    
     /**
      * @return IQuery[]
      */
-    public function GetStream()
+    public function GetQueries()
     {
-        return $this->Stream;
+        return $this->Queries;
+    }
+    
+    public function IsEmpty()
+    {
+        return empty($this->Queries);
+    }
+    
+    public function Append(IQuery $Query)
+    {
+        return new self(array_merge($this->Queries, [$Query]));
+    }
+    
+    public function Update(array $Queries)
+    {
+        if($this->Queries === $Queries) {
+            return $this;
+        }
+        
+        return new self($Queries);
+    }
+    
+    public function UpdateLast(IQuery $Query)
+    {
+        if(end($this->Queries) === $Query) {
+            return $this;
+        }
+        
+        return $this->Append($Query);
     }
 }

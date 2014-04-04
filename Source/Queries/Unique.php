@@ -9,9 +9,13 @@ class Unique implements IQuery
         return self::Unique;
     }
 
-    public function Traverse(QueryStreamVisitor $Visitor)
+    public function Traverse(QueryStreamWalker $Walker)
     {
-        $Visitor->VisitUnique($this);
+        return $Walker->VisitUnique($this);
     }
-
+    
+    public function Update() 
+    {
+        return $this;
+    }
 }

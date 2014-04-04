@@ -25,7 +25,7 @@ class CachingFunctionToExpressionTreeConverter extends FunctionToExpressionTreeC
             $ExpressionTree = $this->Cache->fetch($FunctionHash);
         }
 
-        if (!($ExpressionTree instanceof FunctionExpressionTree)) {
+        if (!($ExpressionTree instanceof \Pinq\FunctionExpressionTree)) {
             $ExpressionTree = $this->GetFunctionExpressionTree($Reflection);
 
             /*

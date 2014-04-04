@@ -7,7 +7,7 @@ interface IFunctionToExpressionTreeConverter
     /**
      * Converts a function to the equivalent expression tree.
      *
-     * @return FunctionExpressionTree
+     * @return \Pinq\FunctionExpressionTree
      */
     public function Convert(callable $Function);
 }

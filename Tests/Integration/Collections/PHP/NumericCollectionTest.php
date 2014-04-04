@@ -11,7 +11,7 @@ class NumericCollectionTest extends MemoryCollectionTest
 
     protected function ArrayData()
     {
-        return range(1, 1000);
+        return range(1, 100);
     }
 
     public function testOrderByTensThenDescending()
@@ -45,8 +45,8 @@ class NumericCollectionTest extends MemoryCollectionTest
                 ->Where(function ($I) { return $I % 2 === 0; })
                 ->OrderBy(function ($I) { return -$I; })
                 ->GroupBy(function ($I) { return $I % 7; })
-                ->Where(function (\Pinq\IQueryable $I) { return $I->Count() % 2 === 0; })
-                ->Select(function (\Pinq\IQueryable $Numbers) {
+                ->Where(function (\Pinq\ITraversable $I) { return $I->Count() % 2 === 0; })
+                ->Select(function (\Pinq\ITraversable $Numbers) {
                     return [
                         'First' => $Numbers->First(),
                         'Average' => $Numbers->Average(),
@@ -90,7 +90,8 @@ class NumericCollectionTest extends MemoryCollectionTest
     public function testUpdateValuesFunction()
     {
         $Collection = $this->Collection
-                ->Where(function ($I) { return $I % 2 === 0; });
+                ->Where(function ($I) { return $I % 2 === 0; })
+                ->AsCollection();
 
         $Collection->Apply(function (&$I) { $I *= 10; });
 
@@ -108,5 +109,12 @@ class NumericCollectionTest extends MemoryCollectionTest
         $NewData = array_filter($this->ArrayData, function ($I) { return $I % 2 !== 0; });
 
         $this->AssertMatches($this->Collection, $NewData, 'Removal');
+    }
+
+    public function testUniqueRemovesDuplicateValuesAndMaintainsKeys()
+    {
+        $Collection = new \Pinq\Collection([1, 2, 3, 4, 5, 4, 6, 4, 2, 7]);
+        
+        $this->AssertMatches($Collection->Unique(), [1, 2, 3, 4, 5, 6 => 6, 9 => 7]);
     }
 }

@@ -4,6 +4,7 @@ namespace Pinq\Tests;
 
 date_default_timezone_set('Australia/Melbourne');
 error_reporting(-1);
+set_time_limit(100);
 ini_set('display_errors', 'On');
 
 $PinqAsProjectAutoLoaderPath = __DIR__ . '/../vendor/autoload.php';

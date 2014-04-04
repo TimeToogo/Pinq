@@ -2,20 +2,11 @@
 
 namespace Pinq;
 
-class Collection extends Queryable implements ICollection
+class Collection extends Traversable implements ICollection
 {
-    private $Values;
-    
-    public function __construct(array $Values = [])
+    public function __construct($Values = [])
     {
-        //parent::__construct(new Providers\Generators\Provider($Values));
-        parent::__construct(new Providers\Arrays\Provider($Values));
-        $this->Values =& $Values;
-    }
-    
-    protected function OnNewQueryScope()
-    {
-        $this->Values =& $this->Provider->Retrieve();
+        parent::__construct($Values);
     }
     
     public function AsCollection()
@@ -23,68 +14,93 @@ class Collection extends Queryable implements ICollection
         return $this;
     }
     
-    public function AsTraversable()
+    public function Clear()
     {
-        return $this;
+        $this->ValuesIterator = new \EmptyIterator();
     }
     
     public function Apply(callable $Function)
     {
-        $this->LoadQueryScope();
-        array_walk($this->Values, $Function);
+        $Array = $this->AsArray();
+        array_walk($Array, $Function);
+        
+        $this->ValuesIterator = new \ArrayIterator($Array);
     }
 
     public function AddRange($Values)
     {
-        $this->LoadQueryScope();
-        foreach ($Values as $Value) {
-            $this->Values[] = $Value;
-        }
+        $this->ValuesIterator = new \ArrayIterator(
+                array_merge(
+                        $this->AsArray(), 
+                        is_array($Values) ? $Values : Utilities::ToArray($Values)));
     }
 
     public function RemoveRange($Values)
     {
-        $this->LoadQueryScope();
-        foreach ($Values as $Value) {
-            $Key = array_search($Value, $this->Values, true);
-            if($Key !== false) {
-                unset($this->Values[$Key]);
-            }
-        }
+        $FilteredArray = array_udiff(
+                $this->AsArray(), 
+                is_array($Values) ? $Values : Utilities::ToArray($Values), 
+                Utilities::$Identical);
+        
+        $this->ValuesIterator = new \ArrayIterator($FilteredArray);
     }
 
     public function RemoveWhere(callable $Predicate)
     {
-        $this->LoadQueryScope();
-        foreach ($this->Values as $Key => $Value) {
+        $Array = $this->AsArray();
+        foreach ($Array as $Key => $Value) {
             if($Predicate($Value, $Key)) {
-                unset($this->Values[$Key]);
+                unset($Array[$Key]);
             }
         }
+        
+        $this->ValuesIterator = new \ArrayIterator($Array);
     }
 
     public function offsetExists($Index)
     {
-        $this->LoadQueryScope();
-        return isset($this->Values[$Index]);
+        if($this->ValuesIterator instanceof \ArrayAccess) {
+            return $this->ValuesIterator->offsetExists($Index);
+        }
+        else {
+            return isset($this->AsArray()[$Index]);
+        }
     }
 
     public function offsetGet($Index)
     {
-        $this->LoadQueryScope();
-        return $this->Values[$Index];
+        if($this->ValuesIterator instanceof \ArrayAccess) {
+            return $this->ValuesIterator->offsetGet($Index);
+        }
+        else {
+            return $this->AsArray()[$Index];
+        }
     }
 
     public function offsetSet($Index, $Value)
     {
-        $this->LoadQueryScope();
-        $this->Values[$Index] = $Value;
+        if($this->ValuesIterator instanceof \ArrayAccess) {
+            return $this->ValuesIterator->offsetSet($Index, $Value);
+        }
+        else {
+            $Array = $this->AsArray();
+            $Array[$Index] = $Value;
+
+            $this->ValuesIterator = new \ArrayIterator($Array);
+        }
     }
 
     public function offsetUnset($Index)
     {
-        $this->LoadQueryScope();
-        unset($this->Values[$Index]);
+        if($this->ValuesIterator instanceof \ArrayAccess) {
+            return $this->ValuesIterator->offsetUnset($Index);
+        }
+        else {
+            $Array = $this->AsArray();
+            unset($Array[$Index]);
+
+            $this->ValuesIterator = new \ArrayIterator($Array);
+        }
     }
 
 }

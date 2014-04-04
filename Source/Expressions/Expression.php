@@ -222,11 +222,11 @@ abstract class Expression
     }
 
     /**
-     * @return ClosureExpression
+     * @return SubQueryExpression
      */
-    final public static function SubQuery(array $ParameterNameTypeHintMap, array $UsedVariables, array $BodyExpressions)
+    final public static function SubQuery(Expression $ValueExpression, \Pinq\Queries\IQueryStream $QueryStream)
     {
-        return new SubQueryExpression($ParameterNameTypeHintMap, $UsedVariables, $BodyExpressions);
+        return new SubQueryExpression($ValueExpression, $QueryStream);
     }
 
     // </editor-fold>
