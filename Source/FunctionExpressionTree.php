@@ -38,9 +38,9 @@ class FunctionExpressionTree
     public function __construct(callable $OriginalFunction = null, array $ParamterNameTypeHintMap, array $Expressions)
     {
         $this->ParamterNameTypeHintMap = $ParamterNameTypeHintMap;
+        $this->VariableResolverWalker = new Parsing\Walkers\VariableResolverWalker();
         $this->Invalidate($Expressions);
 
-        $this->VariableResolverWalker = new Parsing\Walkers\VariableResolverWalker();
         $this->CompiledFunction = $OriginalFunction;
     }
 
@@ -118,12 +118,16 @@ class FunctionExpressionTree
         return $this->ParamterNameTypeHintMap;
     }
 
-    final protected function Invalidate(array $NewBodyExpressions)
+    final protected function Invalidate(array $NewBodyExpressions, $WalkUnresolvedVariables = true)
     {
         if ($this->BodyExpressions === $NewBodyExpressions) {
             return;
         }
         
+        if($WalkUnresolvedVariables) {
+            $this->VariableResolverWalker->ResetUnresolvedVariables();
+            $this->VariableResolverWalker->WalkAll($this->BodyExpressions);
+        }
         $this->BodyExpressions = $NewBodyExpressions;
         $this->LoadReturnExpression();
         $this->CompiledFunction = null;
@@ -162,7 +166,7 @@ class FunctionExpressionTree
     {
         $this->VariableResolverWalker->ResetUnresolvedVariables();
         $this->VariableResolverWalker->SetVariableResolutionMap($VariableExpressionMap);
-        $this->Invalidate($this->VariableResolverWalker->WalkAll($this->BodyExpressions));
+        $this->Invalidate($this->VariableResolverWalker->WalkAll($this->BodyExpressions), false);
     }
 
     final protected function LoadReturnExpression()
