@@ -115,23 +115,11 @@ class ExpressionWalker
                 $this->WalkAll($Expression->GetArgumentExpressions()));
     }
 
-    public function WalkEntity(EntityExpression $Expression)
-    {
-        return $Expression;
-    }
-
     public function WalkNew(NewExpression $Expression)
     {
         return $Expression->Update(
                 $this->Walk($Expression->GetClassTypeExpression()),
                 $this->WalkAll($Expression->GetArgumentExpressions()));
-    }
-
-    public function WalkProperty(PropertyExpression $Expression)
-    {
-        return $Expression->Update(
-                $Expression->GetProperty(),
-                $this->Walk($Expression->GetParentPropertyExpression()));
     }
 
     public function WalkReturn(ReturnExpression $Expression)
@@ -155,11 +143,6 @@ class ExpressionWalker
     }
 
     public function WalkValue(ValueExpression $Expression)
-    {
-        return $Expression;
-    }
-
-    public function WalkAggregate(Aggregates\AggregateExpression $Expression)
     {
         return $Expression;
     }
