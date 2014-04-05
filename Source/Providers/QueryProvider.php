@@ -12,9 +12,10 @@ abstract class QueryProvider implements IQueryProvider
      */
     private $FunctionConverter;
     
-    public function __construct(IFunctionToExpressionTreeConverter $FunctionConverter)
+    public function __construct(IFunctionToExpressionTreeConverter $FunctionConverter = null)
     {
-        $this->FunctionConverter = $FunctionConverter;
+        $this->FunctionConverter = $FunctionConverter ?: 
+                new \Pinq\Parsing\FunctionToExpressionTreeConverter(new \Pinq\Parsing\PHPParser\Parser());
     }
     
     public function GetFunctionToExpressionTreeConverter()

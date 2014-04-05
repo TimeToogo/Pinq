@@ -11,7 +11,7 @@ class Provider extends \Pinq\Providers\QueryProvider
 
     public function __construct(\Pinq\ITraversable $Traversable)
     {
-        parent::__construct(new \Pinq\Parsing\FunctionToExpressionTreeConverter(new \Pinq\Parsing\PHPParser\Parser()));//TODO: Lazy?
+        parent::__construct();
         $this->QueryStreamEvaluator = new QueryStreamEvaluator();
         $this->Traversable = $Traversable;
     }
