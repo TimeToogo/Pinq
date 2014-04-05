@@ -124,11 +124,11 @@ class FunctionExpressionTree
             return;
         }
         
+        $this->BodyExpressions = $NewBodyExpressions;
         if($WalkUnresolvedVariables) {
             $this->VariableResolverWalker->ResetUnresolvedVariables();
             $this->VariableResolverWalker->WalkAll($this->BodyExpressions);
         }
-        $this->BodyExpressions = $NewBodyExpressions;
         $this->LoadReturnExpression();
         $this->CompiledFunction = null;
     }
