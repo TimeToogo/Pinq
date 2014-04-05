@@ -2,6 +2,8 @@
 
 namespace Pinq\Providers\Caching;
 
+use \Pinq\FunctionExpressionTree;
+
 class QueryScope extends \Pinq\Providers\QueryScope
 {
     /**
