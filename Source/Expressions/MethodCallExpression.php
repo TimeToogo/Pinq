@@ -87,9 +87,16 @@ class MethodCallExpression extends ObjectOperationExpression
     protected function CompileCode(&$Code)
     {
         $this->ValueExpression->CompileCode($Code);
-        $Code .= '->{';
-        $this->NameExpression->CompileCode($Code);
-        $Code .= '}(';
+        $Code .= '->';
+        if($this->NameExpression instanceof ValueExpression) {
+            $Code .= $this->NameExpression->GetValue(); 
+        }
+        else {
+            $Code .= '{';
+            $this->NameExpression->CompileCode($Code);
+            $Code .= '}';
+        }
+        $Code .= '(';
         $Code .= implode(',', self::CompileAll($this->ArgumentExpressions));
         $Code .= ')';
     }

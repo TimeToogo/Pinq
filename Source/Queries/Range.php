@@ -20,7 +20,7 @@ class Range implements IQuery
 
     public function Traverse(QueryStreamWalker $Walker)
     {
-        return $Walker->VisitRange($this);
+        return $Walker->WalkRange($this);
     }
 
     /**

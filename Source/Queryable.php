@@ -123,7 +123,7 @@ class Queryable implements IQueryable
 
     public function GroupBy(callable $Function)
     {
-        return $this->NewQuery(new Queries\GroupBy($this->Convert($Function)));
+        return $this->NewQuery(new Queries\GroupBy([$this->Convert($Function)]));
     }
 
     public function Append(ITraversable $Values)

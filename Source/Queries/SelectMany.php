@@ -9,9 +9,9 @@ class SelectMany extends ExpressionQuery
         return self::SelectMany;
     }
 
-    public function TraverseQuery(QueryStreamWalker $Walker)
+    public function Traverse(QueryStreamWalker $Walker)
     {
-        return $Walker->VisitSelectMany($this);
+        return $Walker->WalkSelectMany($this);
     }
 
 }

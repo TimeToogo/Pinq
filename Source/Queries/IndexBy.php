@@ -9,9 +9,9 @@ class IndexBy extends ExpressionQuery
         return self::IndexBy;
     }
 
-    public function TraverseQuery(QueryStreamWalker $Walker)
+    public function Traverse(QueryStreamWalker $Walker)
     {
-        return $Walker->VisitIndexBy($this);
+        return $Walker->WalkIndexBy($this);
     }
 
 }

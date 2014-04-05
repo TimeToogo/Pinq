@@ -9,9 +9,9 @@ class Select extends ExpressionQuery
         return self::Select;
     }
 
-    public function TraverseQuery(QueryStreamWalker $Walker)
+    public function Traverse(QueryStreamWalker $Walker)
     {
-        return $Walker->VisitSelect($this);
+        return $Walker->WalkSelect($this);
     }
 
 }

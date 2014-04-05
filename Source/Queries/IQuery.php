@@ -22,5 +22,5 @@ interface IQuery
     /**
      * @return Query
      */
-    public function Traverse(QueryStreamVisitor $Visitor);
+    public function Traverse(QueryStreamWalker $Walker);
 }

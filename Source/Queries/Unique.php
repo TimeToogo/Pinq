@@ -11,7 +11,7 @@ class Unique implements IQuery
 
     public function Traverse(QueryStreamWalker $Walker)
     {
-        return $Walker->VisitUnique($this);
+        return $Walker->WalkUnique($this);
     }
     
     public function Update() 

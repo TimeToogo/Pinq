@@ -9,8 +9,8 @@ class Filter extends ExpressionQuery
         return self::Filter;
     }
 
-    public function TraverseQuery(QueryStreamWalker $Walker)
+    public function Traverse(QueryStreamWalker $Walker)
     {
-        return $Walker->VisitFilter($this);
+        return $Walker->WalkFilter($this);
     }
 }

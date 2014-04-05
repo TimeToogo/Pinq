@@ -31,9 +31,9 @@ class OrderBy extends Query
         return self::OrderBy;
     }
 
-    public function TraverseQuery(QueryStreamWalker $Walker)
+    public function Traverse(QueryStreamWalker $Walker)
     {
-        return $Walker->VisitOrderBy($this);
+        return $Walker->WalkOrderBy($this);
     }
 
     /**

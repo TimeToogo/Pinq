@@ -90,7 +90,7 @@ class ArrayExpression extends Expression
                 $Code .= ', ';
             }
 
-            if (!($KeyExpression instanceof ValueExpression) && $KeyExpression->GetValue() !== null) {
+            if (!(($KeyExpression instanceof ValueExpression) && $KeyExpression->GetValue() === null)) {
                 $KeyExpression->CompileCode($Code);
                 $Code .= ' => ';
             }

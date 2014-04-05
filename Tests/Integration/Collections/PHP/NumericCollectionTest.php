@@ -42,6 +42,7 @@ class NumericCollectionTest extends MemoryCollectionTest
     public function testComplexAggregationQuery()
     {
         $Collection = $this->Collection
+                ->AsQueryable()
                 ->Where(function ($I) { return $I % 2 === 0; })
                 ->OrderBy(function ($I) { return -$I; })
                 ->GroupBy(function ($I) { return $I % 7; })
@@ -116,5 +117,12 @@ class NumericCollectionTest extends MemoryCollectionTest
         $Collection = new \Pinq\Collection([1, 2, 3, 4, 5, 4, 6, 4, 2, 7]);
         
         $this->AssertMatches($Collection->Unique(), [1, 2, 3, 4, 5, 6 => 6, 9 => 7]);
+    }
+
+    public function testAsQueryableUniqueRemovesDuplicateValuesAndMaintainsKeys()
+    {
+        $Collection = new \Pinq\Collection([1, 2, 3, 4, 5, 4, 6, 4, 2, 7]);
+        
+        $this->AssertMatches($Collection->AsQueryable()->Unique(), [1, 2, 3, 4, 5, 6 => 6, 9 => 7]);
     }
 }

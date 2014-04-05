@@ -2,7 +2,7 @@
 
 namespace Pinq\Parsing;
 
-final class Reflection implements IParser
+final class Reflection
 {
     private function __construct() {}
     

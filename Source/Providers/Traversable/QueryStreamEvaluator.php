@@ -52,7 +52,7 @@ class QueryStreamEvaluator extends Queries\QueryStreamVisitor
     public function VisitOrderBy(Queries\OrderBy $Query)
     {
         $IsAscendingArray = $Query->GetIsAscendingArray();
-        $First = false;
+        $First = true;
         foreach($Query->GetFunctionExpressionTrees() as $Key => $FunctionExpressionTree) {
             if($IsAscendingArray[$Key]) {
                 $this->Traversable = 
@@ -74,7 +74,7 @@ class QueryStreamEvaluator extends Queries\QueryStreamVisitor
 
     public function VisitGroupBy(Queries\GroupBy $Query)
     {
-        $First = false;
+        $First = true;
         foreach($Query->GetFunctionExpressionTrees() as $FunctionExpressionTree) {
             
             $this->Traversable = 

@@ -85,7 +85,7 @@ class AST implements IAST
         return $this->ParseNode($Node);
     }
 
-    final public static function ParseIndexNode($Node)
+    final public function ParseIndexNode($Node)
     {
         if ($Node === null) {
             return Expression::Value(null);

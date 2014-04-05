@@ -57,9 +57,9 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
     final protected function GetFunctionExpressionTree(
             \ReflectionFunctionAbstract $Reflection, callable $Function = null) {
         return new \Pinq\FunctionExpressionTree(
+                $Function,
                 $this->GetParameterNameTypeHintMap($Reflection),
-                $this->Parser->Parse($Reflection)->GetExpressions(),
-                $Function);
+                $this->Parser->Parse($Reflection)->GetExpressions());
     }
 
     /**
@@ -81,13 +81,13 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
     }
     
     protected function ConvertAndResolve(callable $Function, \ReflectionFunctionAbstract $Reflection) {
-        $ExpressionTree = $this->GetFunctionExpressionTree($Reflection);
+        $ExpressionTree = $this->GetFunctionExpressionTree($Reflection, $Function);
 
         //ReflectionFunction::getStaticVariables() returns the used variables for closures
         $this->Resolve($ExpressionTree, $Reflection->getStaticVariables(), []);
 
         if ($ExpressionTree->HasUnresolvedVariables()) {
-            throw InvalidFunctionException::ContainsUnresolvableVariables($Reflection, $ExpressionTree->GetUnresolvedVariables());
+           // throw InvalidFunctionException::ContainsUnresolvableVariables($Reflection, $ExpressionTree->GetUnresolvedVariables());
         }
 
         return $ExpressionTree;

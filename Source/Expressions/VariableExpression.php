@@ -44,9 +44,14 @@ class VariableExpression extends Expression
 
     protected function CompileCode(&$Code)
     {
-        $Code .= '${';
-        $this->NameExpression->CompileCode($Code);
-        $Code .= '}';
+        if($this->NameExpression instanceof ValueExpression) {
+            $Code .= '$' . $this->NameExpression->GetValue(); 
+        }
+        else {
+            $Code .= '${';
+            $this->NameExpression->CompileCode($Code);
+            $Code .= '}';
+        }
     }
 
 }

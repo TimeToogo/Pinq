@@ -31,7 +31,7 @@ class FunctionExpressionTree
     private $VariableResolverWalker;
 
     /**
-     * @var O\ReturnExpression|null
+     * @var callable|null
      */
     private $CompiledFunction = null;
 
@@ -46,10 +46,10 @@ class FunctionExpressionTree
 
     public static function FromClosureExpression(O\ClosureExpression $Expression, callable $OriginalFunction = null)
     {
-        return self::FromBodyExpressions(
+        return new self(
+                $OriginalFunction,
                 $Expression->GetParameterNameTypeHintMap(),
-                $Expression->GetBodyExpressions(),
-                $OriginalFunction);
+                $Expression->GetBodyExpressions());
     }
     
     public function SetOriginalFunction(callable $Function) {
@@ -59,7 +59,7 @@ class FunctionExpressionTree
     public function __invoke()
     {
         $Function = $this->LoadCompiledFunction();
-
+        
         return call_user_func_array($Function, func_get_args());
     }
 
@@ -68,8 +68,8 @@ class FunctionExpressionTree
         if ($this->CompiledFunction === null) {
             $Code = O\Expression::Closure($this->ParamterNameTypeHintMap, [], $this->BodyExpressions)
                     ->Compile();
-
-            $this->CompiledFunction = eval($Code);
+            
+            $this->CompiledFunction  = eval('$Closure = ' . $Code . '; return $Closure;');
         }
 
         return $this->CompiledFunction;
@@ -118,12 +118,13 @@ class FunctionExpressionTree
         return $this->ParamterNameTypeHintMap;
     }
 
-    final protected function Invalidate(array $NewExpressions)
+    final protected function Invalidate(array $NewBodyExpressions)
     {
-        if ($this->BodyExpressions === $NewExpressions) {
+        if ($this->BodyExpressions === $NewBodyExpressions) {
             return;
         }
-
+        
+        $this->BodyExpressions = $NewBodyExpressions;
         $this->LoadReturnExpression();
         $this->CompiledFunction = null;
     }

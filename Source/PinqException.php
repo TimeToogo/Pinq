@@ -15,9 +15,21 @@ class PinqException extends \Exception
             $Message = $MessageFormat;
         } 
         else {
-            $Message = call_user_func_array('sprintf', array_merge([$MessageFormat], array_slice(func_get_args(), 1)));
+            $Message = call_user_func_array('sprintf', func_get_args());
         }
 
         parent::__construct($Message, null, null);
+    }
+    
+    public static function Construct(array $Parameters) {
+        if ($Parameters === 1) {
+            $MessageFormat = array_shift($MessageFormat);
+            $Message = $MessageFormat;
+        } 
+        else {
+            $Message = call_user_func_array('sprintf', $Parameters);
+        }
+
+        return new self($Message);
     }
 }

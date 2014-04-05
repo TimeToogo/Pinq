@@ -21,6 +21,6 @@ class Provider extends \Pinq\Providers\QueryProvider
         $this->QueryStreamEvaluator->SetTraversable($this->Traversable);
         $this->QueryStreamEvaluator->Walk($QueryStream);
         
-        return new QueryScope($this->QueryStreamEvaluator->GetTraversable());
+        return new QueryScope($this->QueryStreamEvaluator->GetTraversable(), $QueryStream);
     }
 }

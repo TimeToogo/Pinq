@@ -26,9 +26,9 @@ class GroupBy extends Query
         return $this->FunctionExpressionTrees;
     }
     
-    public function TraverseQuery(QueryStreamWalker $Walker)
+    public function Traverse(QueryStreamWalker $Walker)
     {
-        return $Walker->VisitGroupBy($this);
+        return $Walker->WalkGroupBy($this);
     }
     
     public function AndBy(FunctionExpressionTree $FunctionExpressionTree) 
