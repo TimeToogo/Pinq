@@ -2,8 +2,7 @@
 
 namespace Pinq\Parsing;
 
-use \Pinq\PinqException;
-use \Doctrine\Common\Cache;
+use \Doctrine\Common\Cache\Cache;
 
 class CachingFunctionToExpressionTreeConverter extends FunctionToExpressionTreeConverter
 {
@@ -43,10 +42,6 @@ class CachingFunctionToExpressionTreeConverter extends FunctionToExpressionTreeC
              * to unresolved variables
              */
             $this->Resolve($ExpressionTree, $Reflection->getStaticVariables(), []);
-        }
-        
-        if ($ExpressionTree->HasUnresolvedVariables()) {
-            throw InvalidFunctionException::ContainsUnresolvableVariables($Reflection, $ExpressionTree->GetUnresolvedVariables());
         }
 
         return $ExpressionTree;
