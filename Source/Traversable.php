@@ -39,7 +39,7 @@ class Traversable implements \Pinq\ITraversable
     
     public function AsCollection()
     {
-        return new Collection($this->AsArray());
+        return new Collection($this->ValuesIterator);
     }
     
     public function AsQueryable()
@@ -49,6 +49,18 @@ class Traversable implements \Pinq\ITraversable
     
     // <editor-fold defaultstate="collapsed" desc="Querying">
     
+    public function First() {
+        foreach ($this->ValuesIterator as $Value) {
+            return $Value;
+        }
+        
+        return null;
+    }
+    
+    public function Last() {
+        $Array = $this->AsArray();
+        return end($Array) ?: null;
+    }
     public function Where(callable $Predicate) 
     {
         return new self(new \CallbackFilterIterator($this->ValuesIterator, $Predicate));
@@ -147,14 +159,6 @@ class Traversable implements \Pinq\ITraversable
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Aggregates">
-    
-    public function First() {
-        foreach ($this->ValuesIterator as $Value) {
-            return $Value;
-        }
-        
-        return null;
-    }
     
     public function Count() 
     {

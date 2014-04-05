@@ -7,12 +7,6 @@ namespace Pinq;
  */
 interface IAggregatable extends \Countable 
 {
-    /**
-     * Returns the first value
-     * 
-     * @return mixed The first value 
-     */
-    public function First();
     
     /**
      * Returns the amount of the values.

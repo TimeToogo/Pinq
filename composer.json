@@ -1,6 +1,6 @@
 {
     "name": "timetoogo/pinq",
-    "description": "Language ",
+    "description": "PHP Integrated query - Extensible collection query API for PHP",
     "keywords": ["collection", "query", "pinq"],
     "homepage": "http://www.github.com/TimeToogo/Pinq",
     "license": "MIT",
@@ -16,7 +16,7 @@
         "nikic/php-parser": "0.9.4"
     },
     "suggest": {
-        "doctrine/cache": "Cache the expression trees of parse functions (Highly recommended for optimal performance)"
+        "doctrine/cache": "Cache the expression trees of parsed functions (Highly recommended for optimal performance)"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"

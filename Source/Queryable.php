@@ -170,6 +170,16 @@ class Queryable implements IQueryable
     {
         return $this->NewQuery(new Queries\OrderBy([$Function], [false]));
     }
+
+    public function First()
+    {
+        return $this->Scope->First();
+    }
+    
+    public function Last()
+    {
+        return $this->Scope->Last();
+    }
     
     public function Unique()
     {
@@ -184,11 +194,6 @@ class Queryable implements IQueryable
     public function Exists()
     {
         return $this->Scope->Exists();
-    }
-
-    public function First()
-    {
-        return $this->Scope->First();
     }
 
     public function Contains($Value)

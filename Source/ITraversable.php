@@ -36,6 +36,20 @@ interface ITraversable extends IAggregatable, \IteratorAggregate
     public function AsQueryable();
     
     /**
+     * Returns the first value
+     * 
+     * @return mixed The first value 
+     */
+    public function First();
+    
+    /**
+     * Returns the last value
+     * 
+     * @return mixed The last value 
+     */
+    public function Last();
+    
+    /**
      * Specifies a predicate
      *
      * Example predicate function:

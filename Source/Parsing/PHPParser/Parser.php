@@ -22,7 +22,7 @@ class Parser extends ParserBase
         $FileNodes = $this->GetFileNodes($FileName);
         $FunctionBodyNodes = $this->GetFunctionBodyNodes($FileNodes, $Reflection);
 
-        return new AST($FunctionBodyNodes);
+        return (new AST($FunctionBodyNodes))->GetExpressions();
     }
 
     private function GetFileNodes($FileName)

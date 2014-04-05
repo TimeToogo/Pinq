@@ -22,6 +22,11 @@ interface IQueryScope
     public function First();
     
     /**
+     * @return mixed
+     */
+    public function Last();
+    
+    /**
      * @return int
      */
     public function Count();

@@ -59,7 +59,7 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
         return new \Pinq\FunctionExpressionTree(
                 $Function,
                 $this->GetParameterNameTypeHintMap($Reflection),
-                $this->Parser->Parse($Reflection)->GetExpressions());
+                $this->Parser->Parse($Reflection));
     }
 
     /**

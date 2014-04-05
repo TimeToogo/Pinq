@@ -28,6 +28,11 @@ class QueryScope extends \Pinq\Providers\QueryScope
         return $this->Traversable->First();
     }
     
+    public function Last()
+    {
+        return $this->Traversable->Last();
+    }
+    
     public function Count()
     {
         return $this->Traversable->Count();
