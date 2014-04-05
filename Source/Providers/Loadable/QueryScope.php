@@ -4,6 +4,7 @@ namespace Pinq\Providers\Loadable;
 
 use \Pinq\Queries;
 use \Pinq\Providers\Traversable;
+use \Pinq\FunctionExpressionTree;
 
 abstract class QueryScope extends \Pinq\Providers\QueryScope
 {
