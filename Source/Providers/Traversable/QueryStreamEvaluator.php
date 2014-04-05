@@ -85,7 +85,6 @@ class QueryStreamEvaluator extends Queries\QueryStreamVisitor
                 $First = false;
             }
         }
-        $this->Traversable = $this->Traversable->GroupBy($Query->G());
     }
 
     protected function VisitIndexBy(Queries\IndexBy $Query)
