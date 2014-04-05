@@ -12,7 +12,17 @@ class QueryScope extends \Pinq\Providers\QueryScope
     /**
      * @var array
      */
-    private $Cache = [];
+    private $MethodResultCache = [];
+    
+    /**
+     * @var array
+     */
+    private $MethodParametersLookup = [];
+    
+    /**
+     * @var array
+     */
+    private $ParameterizedMethodResultCache = [];
     
     public function __construct(\Pinq\Providers\IQueryScope $InnerQueryScope)
     {
@@ -22,11 +32,26 @@ class QueryScope extends \Pinq\Providers\QueryScope
     
     private function CacheMethodResult($MethodName, array $Arguments = []) 
     {
-        if(!isset($this->Cache[$MethodName])) {
-            $this->Cache[$MethodName] = call_user_func_array([$this->InnerQueryScope, $MethodName], $Arguments);
+        if(empty($Arguments)) {
+            if(!isset($this->MethodResultCache[$MethodName])) {
+                $this->MethodResultCache[$MethodName] = $this->InnerQueryScope->$MethodName();
+            }
+
+            return $this->MethodResultCache[$MethodName];
         }
-        
-        return $this->Cache[$MethodName];
+        else {
+            if(!isset($this->MethodParametersLookup[$MethodName])) {
+                $this->MethodParametersLookup[$MethodName] = [];
+            }
+            $Key = array_search($Arguments, $this->MethodParametersLookup[$MethodName], true);
+            
+            if($Key === false) {
+                $Key = count($this->MethodParametersLookup) + 1;
+                $this->ParameterizedMethodResultCache[$MethodName][$Key] = call_user_func_array([$this->InnerQueryScope, $MethodName], $Arguments);
+            }
+            
+            return $this->ParameterizedMethodResultCache[$MethodName][$Key];
+        }
     }
     
     final public function GetValues()
