@@ -109,6 +109,14 @@ class FunctionExpressionTree
         }
         return $this->ReturnExpression;
     }
+    
+    /**
+     * @return array
+     */
+    final public function GetParameterNameTypehintMap()
+    {
+        return $this->ParamterNameTypeHintMap;
+    }
 
     final protected function Invalidate(array $NewExpressions)
     {
