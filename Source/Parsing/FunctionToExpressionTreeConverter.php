@@ -8,6 +8,16 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
      * @var Functions\IParser
      */
     protected $Parser;
+    
+    /**
+     * @var callable[]
+     */
+    protected $FunctionLookup = [];
+    
+    /**
+     * @var \Pinq\FunctionExpressionTree[]
+     */
+    protected $ExpressionTreeCache = [];
 
     public function __construct(IParser $Parser)
     {
@@ -61,7 +71,13 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
             return $Function;
         }
         
-        return $this->ConvertAndResolve($Function, Reflection::FromCallable($Function));
+        $Key = array_search($Function, $this->FunctionLookup, true);
+        if($Key === false) {
+            $Key = count($this->FunctionLookup) + 1;
+            $this->ExpressionTreeCache[$Key] = $this->ConvertAndResolve($Function, Reflection::FromCallable($Function));
+        }
+        
+        return clone $this->ExpressionTreeCache[$Key];
     }
     
     protected function ConvertAndResolve(callable $Function, \ReflectionFunctionAbstract $Reflection) {
