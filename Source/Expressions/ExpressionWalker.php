@@ -147,6 +147,13 @@ class ExpressionWalker
         return $Expression;
     }
 
+    public function WalkSubQuery(SubQueryExpression $Expression)
+    {
+        return $Expression->Update(
+                $this->Walk($Expression->GetValueExpression()),
+                $Expression->GetQueryStream());
+    }
+
     public function WalkClosure(ClosureExpression $Expression)
     {
         return $Expression->Update(

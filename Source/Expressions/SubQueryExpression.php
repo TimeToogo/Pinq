@@ -78,19 +78,19 @@ class SubQueryExpression extends TraversalExpression
     /**
      * @return self
      */
-    public function Update(Expression $NameExpression, array $ArgumentExpressions = [])
+    public function Update(Expression $ValueExpression, Queries\IQueryStream $QueryStream)
     {
-        if ($this->ValueExpression === $NameExpression
-                && $this->QueryStream === $ArgumentExpressions) {
+        if ($this->ValueExpression === $ValueExpression
+                && $this->QueryStream === $QueryStream) {
             return $this;
         }
 
-        return new self($NameExpression, $ArgumentExpressions);
+        return new self($ValueExpression, $QueryStream);
     }
 
     protected function UpdateValueExpression(Expression $ValueExpression)
     {
-        
+        return new self($ValueExpression, $this->QueryStream);
     }
 
     protected function CompileCode(&$Code)
