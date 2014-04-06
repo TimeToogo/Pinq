@@ -45,9 +45,11 @@ class OrderedIterator extends LazyIterator
         foreach ($this->OrderByFunctions as $Key => $OrderFunction) {
             $OrderColumnValues = array_map($OrderFunction, $Array);
 
-            $MultisortArguments[] = $OrderColumnValues;
+            $MultisortArguments[] =& $OrderColumnValues;
             $MultisortArguments[] = $this->IsAscendingArray[$Key] ? SORT_ASC : SORT_DESC;
             $MultisortArguments[] = SORT_REGULAR;
+            
+            unset($OrderColumnValues);
         }
 
         \Pinq\Utilities::MultisortPreserveKeys($MultisortArguments, $Array);

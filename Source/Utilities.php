@@ -2,6 +2,8 @@
 
 namespace Pinq;
 
+DEFINE('IS_PHP_55', version_compare(PHP_VERSION, '5.5', '>='));
+
 final class Utilities
 {
     private function __construct() { }
@@ -31,8 +33,19 @@ final class Utilities
         }
         
         $Array = [];
-        foreach($Iterator as $Key => $Value) {
-            $Array[$Key] = $Value;
+        
+        if(IS_PHP_55) {
+            foreach($Iterator as $Key => $Value) {
+                $Array[$Key] = $Value;
+            }
+        }
+        else {
+            //Does not support returning custom keys
+            $Iterator->rewind();
+            while ($Iterator->valid()) {
+                $Array[$Iterator->key()] = $Iterator->current();
+                $Iterator->next();
+            }
         }
         
         return $Array;
