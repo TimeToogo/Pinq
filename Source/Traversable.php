@@ -65,7 +65,7 @@ class Traversable implements \Pinq\ITraversable
     }
     public function Where(callable $Predicate) 
     {
-        return new self(new \CallbackFilterIterator($this->ValuesIterator, $Predicate));
+        return new self(new Iterators\FilterIterator($this->ValuesIterator, $Predicate));
     }
     
     public function OrderByAscending(callable $Function) 

@@ -30,7 +30,12 @@ final class Utilities
             return $Iterator->getArrayCopy();
         }
         
-        return iterator_to_array($Iterator);
+        $Array = [];
+        foreach($Iterator as $Key => $Value) {
+            $Array[$Key] = $Value;
+        }
+        
+        return $Array;
     }
     
     public static function MultisortPreserveKeys(array $OrderArguments, array &$ArrayToSort)

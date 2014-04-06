@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <phpunit
     bootstrap="TestBootstrapper.php"
-    colors="false"
-    stopOnFailure="true">
+    colors="false">
 
     <testsuites>
       <testsuite name="Entirety">

@@ -5,5 +5,8 @@ php:
   - 5.4
   - hhvm
   
+allow-failures:
+  - hhvm
+
 install: composer install
 script: phpunit --configuration "Tests/Configuration.xml"

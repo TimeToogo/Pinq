@@ -20,6 +20,6 @@ class IndexByTest extends TraversableTest
     {
         $IndexedElements = $Traversable->IndexBy(function () { return null; });
         
-        $this->AssertMatches($IndexedElements, empty($Data) ? [] :[null => end($Data)]);
+        $this->AssertMatches($IndexedElements, empty($Data) ? [] : [null => end($Data)]);
     }
 }
