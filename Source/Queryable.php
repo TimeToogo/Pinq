@@ -69,12 +69,14 @@ class Queryable implements IQueryable
     
     public function AsTraversable()
     {
-        return new Traversable($this->AsArray());
+        $this->Load();
+        return new Traversable($this->ValuesIterator);
     }
 
     public function AsCollection()
     {
-        return new Collection($this->AsArray());
+        $this->Load();
+        return new Collection($this->ValuesIterator);
     }
     
     public function AsQueryable()
@@ -166,7 +168,7 @@ class Queryable implements IQueryable
         return $this->NewSegment(new Segments\Range($Start, $Amount));
     }
 
-    public function OrderBy(callable $Function)
+    public function OrderByAscending(callable $Function)
     {
         return $this->NewSegment(new Segments\OrderBy([$Function], [true]));
     }
@@ -174,6 +176,11 @@ class Queryable implements IQueryable
     public function OrderByDescending(callable $Function)
     {
         return $this->NewSegment(new Segments\OrderBy([$Function], [false]));
+    }
+    
+    public function OrderBy(callable $Function, $Direction)
+    {
+        return $this->NewSegment(new Segments\OrderBy([$Function], [$Direction !== Direction::Descending]));
     }
     
     public function Unique()

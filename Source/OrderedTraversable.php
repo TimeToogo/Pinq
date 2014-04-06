@@ -9,7 +9,12 @@ class OrderedTraversable extends Traversable implements \Pinq\IOrderedTraversabl
         parent::__construct($OrderedIterator);
     }
     
-    public function ThenBy(callable $Function)
+    public function ThenBy(callable $Function, $Direction)
+    {
+        return new self($this->ValuesIterator->ThenOrderBy($Function, $Direction !== Direction::Descending));
+    }
+    
+    public function ThenByAscending(callable $Function)
     {
         return new self($this->ValuesIterator->ThenOrderBy($Function, true));
     }

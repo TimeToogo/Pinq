@@ -45,4 +45,16 @@ class UnionTest extends TraversableTest
         
         $this->AssertMatches($Unioned, $Data);
     }
+    
+    /**
+     * @dataProvider OneToTen
+     */
+    public function testThatUnionUsesStrictEquality(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $OtherData = [100 => '1', 101 => '2', 102 => '3'];
+        $ValuesWithEquivalentStringValues = new \Pinq\Traversable($OtherData);
+        $Unioned = $Traversable->Union($ValuesWithEquivalentStringValues);
+        
+        $this->AssertMatches($Unioned, $Data + $OtherData);
+    }
 }

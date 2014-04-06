@@ -54,20 +54,15 @@ class ScopeEvaluator extends Segments\SegmentVisitor
         $IsAscendingArray = $Query->GetIsAscendingArray();
         $First = true;
         foreach($Query->GetFunctionExpressionTrees() as $Key => $FunctionExpressionTree) {
-            if($IsAscendingArray[$Key]) {
-                $this->Traversable = 
-                        $First ? 
-                        $this->Traversable->OrderBy($FunctionExpressionTree) : 
-                        $this->Traversable->ThenBy($FunctionExpressionTree);
+            
+            $Direction = $IsAscendingArray[$Key] ? \Pinq\Direction::Ascending : \Pinq\Direction::Descending;
+            
+            if($First) {
+                $this->Traversable = $this->Traversable->OrderBy($FunctionExpressionTree, $Direction);
+                $First = false;
             }
             else {
-                $this->Traversable = 
-                        $First ? 
-                        $this->Traversable->OrderByDescending($FunctionExpressionTree) : 
-                        $this->Traversable->ThenByDescending($FunctionExpressionTree);
-            }
-            if($First) {
-                $First = false;
+                $this->Traversable = $this->Traversable->ThenBy($FunctionExpressionTree, $Direction);
             }
         }
     }

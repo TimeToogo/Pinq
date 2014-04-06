@@ -66,7 +66,7 @@ class Traversable implements \Pinq\ITraversable
         return new self(new \CallbackFilterIterator($this->ValuesIterator, $Predicate));
     }
     
-    public function OrderBy(callable $Function) 
+    public function OrderByAscending(callable $Function) 
     {
         return new OrderedTraversable(new Iterators\OrderedIterator($this->ValuesIterator, $Function, true));
     }
@@ -74,6 +74,11 @@ class Traversable implements \Pinq\ITraversable
     public function OrderByDescending(callable $Function) 
     {
         return new OrderedTraversable(new Iterators\OrderedIterator($this->ValuesIterator, $Function, false));
+    }
+    
+    public function OrderBy(callable $Function, $Direction)
+    {
+        return $Direction === Direction::Descending ? $this->OrderByDescending($Function) : $this->OrderByAscending($Function);
     }
     
     public function Skip($Amount)

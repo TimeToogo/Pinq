@@ -15,7 +15,7 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
     public function testOrderByTensThenDescending(\Pinq\ITraversable $Traversable, array $Data)
     {
         $Traversable = $Traversable
-                ->OrderBy(function ($I) { return (int)($I / 10); })
+                ->OrderByAscending(function ($I) { return (int)($I / 10); })
                 ->ThenByDescending(function ($I) { return $I; });
 
         $EquivalentArray = [];
@@ -49,7 +49,7 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
         $Traversable = $Traversable
                 ->AsQueryable()
                 ->Where(function ($I) { return $I % 2 === 0; })
-                ->OrderBy(function ($I) { return -$I; })
+                ->OrderByAscending(function ($I) { return -$I; })
                 ->GroupBy(function ($I) { return $I % 7; })
                 ->Where(function (\Pinq\ITraversable $I) { return $I->Count() % 2 === 0; })
                 ->Select(function (\Pinq\ITraversable $Numbers) {

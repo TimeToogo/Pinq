@@ -9,7 +9,7 @@ class OrderByTest extends TraversableTest
      */
     public function testThatOrderByNegatingNumbersIsEquivalentToArrayReverse(\Pinq\ITraversable $Numbers, array $Data)
     {
-        $ReversedNumbers = $Numbers->OrderBy(function ($I) { return -$I; });
+        $ReversedNumbers = $Numbers->OrderByAscending(function ($I) { return -$I; });
         
         $this->AssertMatches($ReversedNumbers, array_reverse($Data, true));
     }
@@ -35,8 +35,8 @@ class OrderByTest extends TraversableTest
     public function testThatOrderStringsByMultipleCharsOrdersCorrectly(\Pinq\ITraversable $Names, array $Data)
     {
         $OrderedNames = $Names
-                ->OrderBy(function ($I) { return $I[0]; })
-                ->ThenBy(function ($I) { return $I[2]; });
+                ->OrderByAscending(function ($I) { return $I[0]; })
+                ->ThenByAscending(function ($I) { return $I[2]; });
         
         $this->AssertMatchesValues($OrderedNames, ['Andrew', 'Daniel', 'Frank', 'Fred', 'Sam', 'Sandy', 'Taylor']);
     }
@@ -47,8 +47,8 @@ class OrderByTest extends TraversableTest
     public function testThatOrderStringsCharsAndLengthCharsOrdersCorrectly(\Pinq\ITraversable $Names, array $Data)
     {        
         $OrderedNames = $Names
-                ->OrderBy(function ($I) { return $I[0]; })
-                ->ThenBy('strlen');
+                ->OrderByAscending(function ($I) { return $I[0]; })
+                ->ThenByAscending('strlen');
         
         $this->AssertMatchesValues($OrderedNames, ['Andrew', 'Daniel', 'Fred',  'Frank', 'Sam', 'Sandy', 'Taylor']);
     }
@@ -63,5 +63,57 @@ class OrderByTest extends TraversableTest
                 ->ThenByDescending('strlen');
         
         $this->AssertMatchesValues($OrderedNames, ['Taylor', 'Sandy', 'Sam',  'Frank', 'Fred', 'Daniel', 'Andrew']);
+    }
+    
+    /**
+     * @dataProvider Names
+     */
+    public function testThatOrderByAscendingIsEquivalentToOrderByWithAscendingDirection(\Pinq\ITraversable $Names, array $Data)
+    {
+        $Function = function ($I) { return $I[0]; };
+        $OrderedNames = $Names->OrderByAscending($Function);
+        $OtherOrderedNames = $Names->OrderBy($Function, \Pinq\Direction::Ascending);
+        
+        $this->assertSame($OrderedNames->AsArray(), $OtherOrderedNames->AsArray());
+    }
+    
+    /**
+     * @dataProvider Names
+     */
+    public function testThatOrderByDescendingIsEquivalentToOrderByWithDescendingDirection(\Pinq\ITraversable $Names, array $Data)
+    {
+        $Function = function ($I) { return $I[0]; };
+        $OrderedNames = $Names->OrderByDescending($Function);
+        $OtherOrderedNames = $Names->OrderBy($Function, \Pinq\Direction::Descending);
+        
+        $this->assertSame($OrderedNames->AsArray(), $OtherOrderedNames->AsArray());
+    }
+    
+    /**
+     * @dataProvider Names
+     */
+    public function testThatThenByAscendingIsEquivalentToThenByWithAscendingDirection(\Pinq\ITraversable $Names, array $Data)
+    {
+        $IrrelaventOrderByFunction = function ($I) { return 1; };
+        $ThenFunction = function ($I) { return $I[2]; };
+        
+        $OrderedNames = $Names->OrderByAscending($IrrelaventOrderByFunction)->ThenByAscending($ThenFunction);
+        $OtherOrderedNames = $Names->OrderByAscending($IrrelaventOrderByFunction)->ThenBy($ThenFunction, \Pinq\Direction::Ascending);
+        
+        $this->assertSame($OrderedNames->AsArray(), $OtherOrderedNames->AsArray());
+    }
+    
+    /**
+     * @dataProvider Names
+     */
+    public function testThatThenByDescendingIsEquivalentToThenByWithDescendingDirection(\Pinq\ITraversable $Names, array $Data)
+    {
+        $IrrelaventOrderByFunction = function ($I) { return 1; };
+        $ThenFunction = function ($I) { return $I[2]; };
+        
+        $OrderedNames = $Names->OrderByAscending($IrrelaventOrderByFunction)->ThenByDescending($ThenFunction);
+        $OtherOrderedNames = $Names->OrderByAscending($IrrelaventOrderByFunction)->ThenBy($ThenFunction, \Pinq\Direction::Descending);
+        
+        $this->assertSame($OrderedNames->AsArray(), $OtherOrderedNames->AsArray());
     }
 }

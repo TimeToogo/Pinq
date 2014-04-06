@@ -5,15 +5,25 @@ namespace Pinq;
 interface IOrderedTraversable extends ITraversable
 {
     /**
-     * Specifies the function to use for subsequent ascending ordering
+     * Subsequently orders the results using the supplied function according to
+     * the supplied direction
+     *
+     * @param  callable          $Function
+     * @param  int               $Direction
+     * @return IOrderedTraversable
+     */
+    public function ThenBy(callable $Function, $Direction);
+    
+    /**
+     * Subsequently orders the results using the supplied function ascendingly
      *
      * @param  callable          $Function
      * @return IOrderedTraversable
      */
-    public function ThenBy(callable $Function);
+    public function ThenByAscending(callable $Function);
 
     /**
-     * Specifies the function to use for subsequent descending ordering.
+     * Subsequently orders the results using the supplied function descendingly
      *
      * @param  callable          $Function
      * @return IOrderedTraversable

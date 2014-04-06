@@ -3,7 +3,9 @@
 namespace Pinq;
 
 /**
- * Concrete classes should be immutable and return a new instance with every chained query call.
+ * The root interface providing a fluent query API for a set of values.
+ * Implementing classes must be immutable and return a new instance with every query call.
+ * 
  */
 interface ITraversable extends IAggregatable, \IteratorAggregate
 {
@@ -17,49 +19,46 @@ interface ITraversable extends IAggregatable, \IteratorAggregate
     public function AsArray();
 
     /**
-     * Returns the values as a in-memory traversable
+     * Returns the values as a traversable.
+     * If the implementation is queryable the following operations will
+     * be performed in memory.
      *
      * @return ITraversable
      */
     public function AsTraversable();
 
     /**
-     * Returns the values as a in-memory collection
+     * Returns the values as a collection.
+     * If the implementation is queryable the following operations will
+     * be performed in memory.
      *
      * @return ICollection
      */
     public function AsCollection();
 
     /**
-     * Returns the values as a queryable
+     * Returns the values as a queryable.
      *
      * @return IQueryable
      */
     public function AsQueryable();
     
     /**
-     * Returns the first value
+     * Returns the first value, null if empty
      * 
      * @return mixed The first value 
      */
     public function First();
     
     /**
-     * Returns the last value
+     * Returns the last value, null if empty
      * 
      * @return mixed The last value 
      */
     public function Last();
     
     /**
-     * Specifies a predicate
-     *
-     * Example predicate function:
-     * <code>
-     *  function (Car $Car) use ($Name) {
-     *      return $Car->IsAvailable() && $Car->GetName() === $Name;
-     *  }
-     * </code>
+     * Filters the values by a predicate function.
      *
      * @param  callable   $Predicate The predicate function
      * @return ITraversable
@@ -67,53 +66,53 @@ interface ITraversable extends IAggregatable, \IteratorAggregate
     public function Where(callable $Predicate);
 
     /**
-     * Specifies the function to use for ascending ordering
+     * Orders the values mapped from the supplied function according the the supplied
+     * direction.
      *
-     * Example expression function:
-     * <code>
-     * function (Car $Car) {
-     *     return $Car->GetManufactureDate();
-     * }
-     * </code>
-     *
-     * @param  callable          $Function The expression function
+     * @param  callable          $Function The projection function
+     * @param  int               $Direction
      * @return IOrderedTraversable
      */
-    public function OrderBy(callable $Function);
+    public function OrderBy(callable $Function, $Direction);
 
     /**
-     * Specifies the function to use for descending ordering.
+     * Orders the values mapped from the supplied function ascendingly
+     *
+     * Example function:
+     *
+     * @param  callable          $Function The mapping function
+     * @return IOrderedTraversable
+     */
+    public function OrderByAscending(callable $Function);
+
+    /**
+     * Orders the values mapped from the supplied function descendingly
      *
      * Example expression function:
-     * <code>
-     * function (Car $Car) {
-     *     return $Car->GetManufactureDate();
-     * }
-     * </code>
      *
-     * @param  callable          $Function The expression function
+     * @param  callable          $Function The mapping function
      * @return IOrderedTraversable
      */
     public function OrderByDescending(callable $Function);
 
     /**
-     * Specifies the amount to skip.
+     * Skip the amount of values from the start.
      *
-     * @param  int        $Amount The amount of values to skip
+     * @param  int        $Amount The amount of values to skip, must be > 0
      * @return ITraversable
      */
     public function Skip($Amount);
 
     /**
-     * Specifies the amount to retrieve. Pass null to remove the limit.
+     * Retrieve only the specified amount of values
      *
-     * @param  int|null   $Amount The amount of values to retrieve
+     * @param  int|null   $Amount The amount of values to retrieve, must be > 0 or null if all
      * @return ITraversable
      */
     public function Take($Amount);
 
     /**
-     * Returns a slice of the collection
+     * Retrieve a slice of the values
      *
      * @param  int        $Start  The amount of values to skip
      * @param  int|null   $Amount The amount of values to retrieve
@@ -122,22 +121,16 @@ interface ITraversable extends IAggregatable, \IteratorAggregate
     public function Slice($Start, $Amount);
 
     /**
-     * Will use the values of the supplied function as the index
+     * Index the values according to the supplied mapping function.
      *
-     * @param  callable   $Function The function returning the key data
+     * @param  callable   $Function The projection function
      * @return ITraversable
      */
     public function IndexBy(callable $Function);
 
     /**
-     * Specifies the grouping function
-     *
-     * Example expression function:
-     * <code>
-     * function (Car $Car) {
-     *     return $Car->GetBrand();
-     * }
-     * </code>
+     * Groups values according the supplied function. (Uses strict equality '===')
+     * The values will be grouped into instances of ITraversable.
      *
      * @param  callable   $Function The grouping function
      * @return ITraversable
@@ -145,25 +138,14 @@ interface ITraversable extends IAggregatable, \IteratorAggregate
     public function GroupBy(callable $Function);
 
     /**
-     * Returns unique values
+     * Return only unique values. (Uses strict equality '===')
      *
      * @return ITraversable
      */
     public function Unique();
 
     /**
-     * Maps the data with the supplied function.
-     *
-     * Or the entity for for the simple property retrieval:
-     * <code>
-     *  function (Car $Car) {
-     *      return [
-     *          'Brand' => $Car->GetBrand(),
-     *          'Model Number' => $Car->GetModelNumber(),
-     *          'Sale Price' => $Car->GetRetailPrice() - $Car->GetDiscountPrice(),
-     *      ];
-     *  }
-     * </code>
+     * Returns the values mapped by the supplied function.
      *
      * @param  callable   $Function The function returning the data to select
      * @return ITraversable
@@ -171,7 +153,8 @@ interface ITraversable extends IAggregatable, \IteratorAggregate
     public function Select(callable $Function);
 
     /**
-     * Maps the data with the supplied function and flattens the results.
+     * Returns the values mapped by the supplied function and then flattens 
+     * the arrays or iteratorable values. Keys will be ignored.
      *
      * @param  callable   $Function The function returning the data to select
      * @return ITraversable
@@ -179,33 +162,34 @@ interface ITraversable extends IAggregatable, \IteratorAggregate
     public function SelectMany(callable $Function);
 
     /**
-     * Unions the results with the supplied collection
+     * Returns the two results merged. Any duplicate keys or values will remain as the
+     * original value.
      *
-     * @param  ITraversable $Values
+     * @param  ITraversable $Values The values to union
      * @return ITraversable
      */
     public function Union(ITraversable $Values);
 
     /**
-     * Append the results of the supplied collection
+     * Returns the two results merged. Keys will be ignored.
      *
-     * @param  ITraversable $Values
+     * @param  ITraversable $Values The values to append
      * @return ITraversable
      */
     public function Append(ITraversable $Values);
 
     /**
-     * Intersects the results of the supplied collection
+     * Returns the intersection of the results. (Uses strict equality '===') 
      *
-     * @param  ITraversable $Values
+     * @param  ITraversable $Values The values to intersect with
      * @return ITraversable
      */
     public function Intersect(ITraversable $Values);
 
     /**
-     * Removes the matching results from the supplied collection
+     * Removes any values present in the supplied traversable. (Uses strict equality '===') 
      *
-     * @param  ITraversable $Values
+     * @param  ITraversable $Values The values to remove
      * @return ITraversable
      */
     public function Except(ITraversable $Values);

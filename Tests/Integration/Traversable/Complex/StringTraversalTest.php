@@ -15,7 +15,7 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
     public function testOrderingMultiple(\Pinq\ITraversable $Traversable, array $Data)
     {
         $Traversable = $Traversable
-                ->OrderBy(function ($I) { return $I[0]; })
+                ->OrderByAscending(function ($I) { return $I[0]; })
                 ->ThenByDescending(function ($I) { return $I[2]; });
 
         $this->AssertMatches($Traversable, [1 => 'Bar', 4 => 'Data', 6 => 'Dallas', 0 => 'Foo', 5 => 'Lorem Ipsum', 3 => 'Pinq', 2 => 'Test']);

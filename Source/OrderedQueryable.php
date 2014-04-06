@@ -24,7 +24,12 @@ class OrderedQueryable extends Queryable implements \Pinq\IOrderedTraversable
         parent::__construct($Provider, $Scope);
     }
     
-    public function ThenBy(callable $Function)
+    public function ThenBy(callable $Function, $Direction)
+    {
+        return $this->UpdateLastSegment($this->OrderBy->ThenBy($this->Convert($Function), $Direction !== Direction::Descending));
+    }
+    
+    public function ThenByAscending(callable $Function)
     {
         return $this->UpdateLastSegment($this->OrderBy->ThenBy($this->Convert($Function), true));
     }

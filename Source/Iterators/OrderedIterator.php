@@ -26,7 +26,7 @@ class OrderedIterator extends LazyIterator
      */
     public function ThenOrderBy(callable $OrderByFunction, $IsAscending)
     {
-        $Copy = new self($this->Iterator, 'strlen', false);
+        $Copy = new self($this->Iterator, $OrderByFunction, $IsAscending);
         
         $Copy->OrderByFunctions = $this->OrderByFunctions;
         $Copy->IsAscendingArray = $this->IsAscendingArray;
