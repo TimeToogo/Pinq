@@ -78,17 +78,17 @@ class Traversable implements \Pinq\ITraversable
     
     public function Skip($Amount)
     {
-        return new self(new \LimitIterator($this->ValuesIterator, $Amount));
+        return new self(new Iterators\RangeIterator($this->ValuesIterator, $Amount, null));
     }
     
     public function Take($Amount) 
     {
-        return new self(new \LimitIterator($this->ValuesIterator, 0, $Amount));
+        return new self(new Iterators\RangeIterator($this->ValuesIterator, 0, $Amount));
     }
     
     public function Slice($Start, $Amount) 
     {
-        return new self(new \LimitIterator($this->ValuesIterator, $Start, $Amount));
+        return new self(new Iterators\RangeIterator($this->ValuesIterator, $Start, $Amount));
     }
     
     public function IndexBy(callable $Function) 

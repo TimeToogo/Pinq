@@ -67,8 +67,9 @@ class NumericCollectionTest extends MemoryCollectionTest
                 $Aggregates[$AggregateKey] = [
                     'Key' => $Value % 7,
                     'First' => $Value,
-                    'Numbers' => [],
+                    'Average' => null,
                     'Count' => 0,
+                    'Numbers' => [],
                 ];
             }
 

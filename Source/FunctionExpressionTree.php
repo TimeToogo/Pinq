@@ -9,7 +9,7 @@ use \Pinq\Expressions as O;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class FunctionExpressionTree
+class FunctionExpressionTree implements \Serializable
 {
     /**
      * @var array
@@ -28,7 +28,15 @@ class FunctionExpressionTree
      */
     private $ReturnExpression = null;
 
+    /**
+     * @var Parsing\Walkers\VariableResolver
+     */
     private $VariableResolverWalker;
+
+    /**
+     * @var string|null
+     */
+    private $SerializedData = null;
 
     /**
      * @var callable|null
@@ -38,7 +46,7 @@ class FunctionExpressionTree
     public function __construct(callable $OriginalFunction = null, array $ParamterNameTypeHintMap, array $Expressions)
     {
         $this->ParamterNameTypeHintMap = $ParamterNameTypeHintMap;
-        $this->VariableResolverWalker = new Parsing\Walkers\VariableResolverWalker();
+        $this->VariableResolverWalker = new Parsing\Walkers\VariableResolver();
         $this->Invalidate($Expressions);
 
         $this->CompiledFunction = $OriginalFunction;
@@ -54,6 +62,28 @@ class FunctionExpressionTree
     
     public function SetOriginalFunction(callable $Function) {
         $this->CompiledFunction = $Function;
+    }
+    
+    public function serialize()
+    {
+        if($this->SerializedData === null) {
+            $DataToSerialize = get_object_vars($this);
+            
+            unset($DataToSerialize['SerializedData']);
+            unset($DataToSerialize['CompiledFunction']);
+
+            $this->SerializedData = serialize($DataToSerialize);
+        }
+        
+        return $this->SerializedData;
+    }
+    
+    public function unserialize($Serialized)
+    {
+        foreach(unserialize($Serialized) as $PropertyName => $Value) {
+            $this->$PropertyName = $Value;
+        }
+        $this->SerializedData = $Serialized;
     }
 
     public function __invoke()
@@ -124,6 +154,7 @@ class FunctionExpressionTree
             return;
         }
         
+        $this->SerializedData = null;
         $this->BodyExpressions = $NewBodyExpressions;
         if($WalkUnresolvedVariables) {
             $this->VariableResolverWalker->ResetUnresolvedVariables();

@@ -224,9 +224,9 @@ abstract class Expression
     /**
      * @return SubQueryExpression
      */
-    final public static function SubQuery(Expression $ValueExpression, \Pinq\Queries\IQueryStream $QueryStream)
+    final public static function SubQuery(Expression $ValueExpression, \Pinq\Queries\IRequestQuery $RequestQuery)
     {
-        return new SubQueryExpression($ValueExpression, $QueryStream);
+        return new SubQueryExpression($ValueExpression, $RequestQuery);
     }
 
     // </editor-fold>

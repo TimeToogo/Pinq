@@ -52,4 +52,16 @@ class OrderByTest extends TraversableTest
         
         $this->AssertMatchesValues($OrderedNames, ['Andrew', 'Daniel', 'Fred',  'Frank', 'Sam', 'Sandy', 'Taylor']);
     }
+    
+    /**
+     * @dataProvider Names
+     */
+    public function testThatOrderStringsCharsAndLengthCharsDescendingOrdersCorrectly(\Pinq\ITraversable $Names, array $Data)
+    {        
+        $OrderedNames = $Names
+                ->OrderByDescending(function ($I) { return $I[0]; })
+                ->ThenByDescending('strlen');
+        
+        $this->AssertMatchesValues($OrderedNames, ['Taylor', 'Sandy', 'Sam',  'Frank', 'Fred', 'Daniel', 'Andrew']);
+    }
 }

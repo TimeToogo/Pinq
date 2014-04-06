@@ -3,19 +3,27 @@
 namespace Pinq\Providers;
 
 use \Pinq\Queries;
+use \Pinq\Queries\Segments;
 use \Pinq\Parsing\IFunctionToExpressionTreeConverter;
 
 abstract class QueryProvider implements IQueryProvider
 {
+    
     /**
      * @var IFunctionToExpressionTreeConverter 
      */
     private $FunctionConverter;
     
+    /**
+     * @var \SplObjectStorage 
+     */
+    private $RequestEvaluatorCache;
+    
     public function __construct(IFunctionToExpressionTreeConverter $FunctionConverter = null)
     {
         $this->FunctionConverter = $FunctionConverter ?: 
                 new \Pinq\Parsing\FunctionToExpressionTreeConverter(new \Pinq\Parsing\PHPParser\Parser());
+        $this->RequestEvaluatorCache = new \SplObjectStorage();
     }
     
     public function GetFunctionToExpressionTreeConverter()
@@ -23,22 +31,37 @@ abstract class QueryProvider implements IQueryProvider
         return $this->FunctionConverter;
     }
 
-    public function CreateQueryable(Queries\IQueryStream $QueryStream)
+    public function CreateQueryable(Queries\IScope $Scope)
     {
-        if($QueryStream->IsEmpty()) {
+        if($Scope->IsEmpty()) {
             return new \Pinq\Queryable($this);
         }
-        $Queries = $QueryStream->GetQueries();
-        $LastQuery = end($Queries);
+        $Segments = $Scope->GetSegments();
+        $LastSegment = end($Segments);
         
-        if($LastQuery instanceof Queries\OrderBy) {
-            return new \Pinq\OrderedQueryable($this, $this->Scope($QueryStream));
+        if($LastSegment instanceof Segments\OrderBy) {
+            return new \Pinq\OrderedQueryable($this, $Scope);
         }
-        else if($LastQuery instanceof Queries\GroupBy) {
-            return new \Pinq\GroupedQueryable($this, $this->Scope($QueryStream));
+        else if($LastSegment instanceof Segments\GroupBy) {
+            return new \Pinq\GroupedQueryable($this, $Scope);
         }
         else {
-            return new \Pinq\Queryable($this, $this->Scope($QueryStream));
+            return new \Pinq\Queryable($this, $Scope);
         }
     }
+    
+    final public function Load(Queries\IRequestQuery $Query)
+    {
+        $Scope = $Query->GetScope();
+        if(!isset($this->RequestEvaluatorCache[$Scope])) {
+            $this->RequestEvaluatorCache[$Scope] = $this->LoadRequestEvaluatorVisitor($Scope);
+        }
+        
+        $RequestEvaluator = $this->RequestEvaluatorCache[$Scope];
+        return $RequestEvaluator->Visit($Query->GetRequest());
+    }
+    /**
+     * @return Queries\Requests\RequestVisitor
+     */
+    protected abstract function LoadRequestEvaluatorVisitor(Queries\IScope $Scope);
 }

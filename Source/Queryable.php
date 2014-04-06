@@ -2,6 +2,10 @@
 
 namespace Pinq;
 
+use \Pinq\Queries;
+use \Pinq\Queries\Requests;
+use \Pinq\Queries\Segments;
+
 class Queryable implements IQueryable
 {
     /**
@@ -15,39 +19,43 @@ class Queryable implements IQueryable
     protected $FunctiontConverter;
     
     /**
-     * @var Providers\IQueryScope
+     * @var Providers\IScopedRequestEvaluator
      */
     protected $Scope;
     
     /**
-     * @var Queries\IQueryStream
+     * @var Queries\IScope
      */
     protected $QueryStream;
     
     private $ValuesIterator = null;
     private $Values = null;
 
-    public function __construct(Providers\IQueryProvider $Provider, Providers\IQueryScope $Scope = null)
+    public function __construct(Providers\IQueryProvider $Provider, Queries\IScope $Scope = null)
     {
         $this->Provider = $Provider;
         $this->FunctiontConverter = $Provider->GetFunctionToExpressionTreeConverter();
-        $this->Scope = $Scope ?: $Provider->Scope(new Queries\QueryStream([]));
-        $this->QueryStream = $this->Scope->GetQueryStream();
+        $this->Scope = $Scope ?: new Queries\Scope([]);
     }
     
-    final protected function NewQuery(Queries\IQuery $Query)
+    final protected function NewSegment(Queries\ISegment $Segment)
     {
-        return $this->Provider->CreateQueryable($this->QueryStream->Append($Query));
+        return $this->Provider->CreateQueryable($this->Scope->Append($Segment));
     }
     
-    final protected function UpdateLastQuery(Queries\IQuery $Query)
+    final protected function UpdateLastSegment(Queries\ISegment $Segment)
     {
-        return $this->Provider->CreateQueryable($this->QueryStream->UpdateLast($Query));
+        return $this->Provider->CreateQueryable($this->Scope->UpdateLast($Segment));
+    }
+    
+    private function LoadQuery(Queries\IRequest $Request) 
+    {
+        return $this->Provider->Load(new Queries\RequestQuery($this->Scope, $Request));
     }
     
     private function Load() {
         if($this->ValuesIterator === null) {
-            $this->ValuesIterator = $this->Scope->GetValues();
+            $this->ValuesIterator = $this->LoadQuery(new Requests\Values());
         }
     }
     
@@ -86,12 +94,7 @@ class Queryable implements IQueryable
         return $this->Provider;
     }
     
-    public function GetQueryStream()
-    {
-        return $this->QueryStream;
-    }
-    
-    public function GetQueryScope()
+    public function GetScope()
     {
         return $this->Scope;
     }
@@ -101,143 +104,153 @@ class Queryable implements IQueryable
         return $Function === null ? null : $this->FunctiontConverter->Convert($Function);
     }
     
+    // <editor-fold defaultstate="collapsed" desc="Query segments">
+    
     public function Select(callable $Function)
     {
-        return $this->NewQuery(new Queries\Select($this->Convert($Function)));
+        return $this->NewSegment(new Segments\Select($this->Convert($Function)));
     }
 
     public function SelectMany(callable $Function)
     {
-        return $this->NewQuery(new Queries\SelectMany($this->Convert($Function)));
+        return $this->NewSegment(new Segments\SelectMany($this->Convert($Function)));
     }
 
     public function IndexBy(callable $Function)
     {
-        return $this->NewQuery(new Queries\IndexBy($this->Convert($Function)));
+        return $this->NewSegment(new Segments\IndexBy($this->Convert($Function)));
     }
 
     public function Where(callable $Predicate)
     {
-        return $this->NewQuery(new Queries\Filter($this->Convert($Predicate)));
+        return $this->NewSegment(new Segments\Filter($this->Convert($Predicate)));
     }
 
     public function GroupBy(callable $Function)
     {
-        return $this->NewQuery(new Queries\GroupBy([$this->Convert($Function)]));
+        return $this->NewSegment(new Segments\GroupBy([$this->Convert($Function)]));
     }
 
     public function Append(ITraversable $Values)
     {
-        return $this->NewQuery(new Queries\Operation(Queries\Operation::Append, $Values));
+        return $this->NewSegment(new Segments\Operation(Segments\Operation::Append, $Values));
     }
 
     public function Union(ITraversable $Values)
     {
-        return $this->NewQuery(new Queries\Operation(Queries\Operation::Union, $Values));
+        return $this->NewSegment(new Segments\Operation(Segments\Operation::Union, $Values));
     }
 
     public function Intersect(ITraversable $Values)
     {
-        return $this->NewQuery(new Queries\Operation(Queries\Operation::Intersect, $Values));
+        return $this->NewSegment(new Segments\Operation(Segments\Operation::Intersect, $Values));
     }
 
     public function Except(ITraversable $Values)
     {
-        return $this->NewQuery(new Queries\Operation(Queries\Operation::Except, $Values));
+        return $this->NewSegment(new Segments\Operation(Segments\Operation::Except, $Values));
     }
 
     public function Skip($Amount)
     {
-        return $this->NewQuery(new Queries\Range($Amount, null));
+        return $this->NewSegment(new Segments\Range($Amount, null));
     }
 
     public function Take($Amount)
     {
-        return $this->NewQuery(new Queries\Range(0, $Amount));
+        return $this->NewSegment(new Segments\Range(0, $Amount));
     }
 
     public function Slice($Start, $Amount)
     {
-        return $this->NewQuery(new Queries\Range($Start, $Amount));
+        return $this->NewSegment(new Segments\Range($Start, $Amount));
     }
 
     public function OrderBy(callable $Function)
     {
-        return $this->NewQuery(new Queries\OrderBy([$Function], [true]));
+        return $this->NewSegment(new Segments\OrderBy([$Function], [true]));
     }
 
     public function OrderByDescending(callable $Function)
     {
-        return $this->NewQuery(new Queries\OrderBy([$Function], [false]));
-    }
-
-    public function First()
-    {
-        return $this->Scope->First();
-    }
-    
-    public function Last()
-    {
-        return $this->Scope->Last();
+        return $this->NewSegment(new Segments\OrderBy([$Function], [false]));
     }
     
     public function Unique()
     {
-        return $this->NewQuery(new Queries\Unique());
+        return $this->NewSegment(new Segments\Unique());
+    }
+    
+    // </editor-fold>
+    // 
+    // <editor-fold defaultstate="collapsed" desc="Query Requests">
+
+    public function First()
+    {
+        return $this->LoadQuery(new Requests\First());
+    }
+
+
+    public function Last()
+    {
+        return $this->LoadQuery(new Requests\Last());
     }
 
     public function Count()
     {
-        return $this->Scope->Count();
+        return $this->LoadQuery(new Requests\Count());
     }
 
     public function Exists()
     {
-        return $this->Scope->Exists();
+        return $this->LoadQuery(new Requests\Exists());
     }
 
     public function Contains($Value)
     {
-        return $this->Scope->Contains($Value);
+        return $this->LoadQuery(new Requests\Contains($Value));
     }
 
     public function Aggregate(callable $Function)
     {
-        return $this->Scope->Aggregate($this->Convert($Function));
+        return $this->LoadQuery(new Requests\Aggregate($this->Convert($Function)));
     }
 
     public function All(callable $Function = null)
     {
-        return $this->Scope->All($this->Convert($Function));
+        return $this->LoadQuery(new Requests\All($this->Convert($Function)));
     }
 
     public function Any(callable $Function = null)
     {
-        return $this->Scope->Any($this->Convert($Function));
+        return $this->LoadQuery(new Requests\Any($this->Convert($Function)));
     }
 
     public function Maximum(callable $Function = null)
     {
-        return $this->Scope->Maximum($this->Convert($Function));
+        return $this->LoadQuery(new Requests\Maximum($this->Convert($Function)));
     }
 
     public function Minimum(callable $Function = null)
     {
-        return $this->Scope->Minimum($this->Convert($Function));
+        return $this->LoadQuery(new Requests\Minimum($this->Convert($Function)));
     }
 
     public function Sum(callable $Function = null)
     {
-        return $this->Scope->Sum($this->Convert($Function));
+        return $this->LoadQuery(new Requests\Sum($this->Convert($Function)));
     }
 
     public function Average(callable $Function = null)
     {
-        return $this->Scope->Average($this->Convert($Function));
+        return $this->LoadQuery(new Requests\Average($this->Convert($Function)));
     }
 
     public function Implode($Delimiter, callable $Function = null)
     {
-        return $this->Scope->Implode($Delimiter, $this->Convert($Function));
+        return $this->LoadQuery(new Requests\Implode($Delimiter, $this->Convert($Function)));
     }
+
+    // </editor-fold>
+
 }

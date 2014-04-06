@@ -9,7 +9,7 @@ interface IQueryProvider
     /**
      * @return \Pinq\IQueryable
      */
-    public function CreateQueryable(Queries\IQueryStream $QueryStream);
+    public function CreateQueryable(Queries\IScope $Scope);
     
     /**
      * @return \Pinq\Parsing\IFunctionToExpressionTreeConverter
@@ -17,7 +17,7 @@ interface IQueryProvider
     public function GetFunctionToExpressionTreeConverter();
 
     /**
-     * @return IQueryScope
+     * @return mixed
      */
-    public function Scope(Queries\IQueryStream $QueryStream);
+    public function Load(Queries\IRequestQuery $Query);
 }

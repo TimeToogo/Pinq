@@ -2,27 +2,30 @@
 
 namespace Pinq;
 
+use \Pinq\Queries\Segments;
+
 class GroupedQueryable extends Queryable implements \Pinq\IGroupedTraversable
 {
     /**
-     * @var Queries\GroupBy 
+     * @var Segments\GroupBy 
      */
     private $GroupBy;
     
-    public function __construct(Providers\IQueryProvider $Provider, Providers\IQueryScope $Scope)
+    public function __construct(Providers\IQueryProvider $Provider, Queries\IScope $Scope)
     {
-        $Queries = $Scope->GetQueryStream()->GetQueries();
-        $LastQuery = end($Queries);
-        if(!($LastQuery instanceof Queries\GroupBy)) {
+        $Segments = $Scope->GetSegments();
+        $LastSegment = end($Segments);
+        
+        if(!($LastSegment instanceof Segments\GroupBy)) {
             throw new PinqException('Query scope must end in group by query');
         }
-        $this->GroupBy = $LastQuery;
+        $this->GroupBy = $LastSegment;
         
         parent::__construct($Provider, $Scope);
     }
     
     public function AndBy(callable $Function)
     {
-        return $this->UpdateLastQuery($this->GroupBy->AndBy($this->Convert($Function)));
+        return $this->UpdateLastSegment($this->GroupBy->AndBy($this->Convert($Function)));
     }
 }

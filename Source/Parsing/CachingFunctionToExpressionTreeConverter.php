@@ -41,7 +41,7 @@ class CachingFunctionToExpressionTreeConverter extends FunctionToExpressionTreeC
              * Simplify and resolve any remaining expressions that could not be resolved due
              * to unresolved variables
              */
-            $this->Resolve($ExpressionTree, $Reflection->getStaticVariables(), []);
+            $this->Resolve($ExpressionTree, $this->GetKnownVariables($Reflection, $Function), []);
         }
 
         return $ExpressionTree;

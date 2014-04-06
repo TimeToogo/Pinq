@@ -14,6 +14,16 @@ abstract class TraversableTest extends \Pinq\Tests\PinqTestCase
         ];
     }
     
+    public function Everything() {
+        $Data = [];
+        $DataProviders = ['EmptyData', 'OneToTen', 'AssocOneToTen', 'TenRandomStrings'];
+        foreach($DataProviders as $Provider) {
+            $Data = array_merge($Data, $this->$Provider());
+        }
+        
+        return $Data;
+    }
+    
     public function EmptyData()
     {
         return $this->TraversablesFor([]);
@@ -33,6 +43,12 @@ abstract class TraversableTest extends \Pinq\Tests\PinqTestCase
     {
         return $this->TraversablesFor($this->RandomStrings(10));
     }
+    
+    public function AssocTenRandomStrings()
+    {
+        return $this->TraversablesFor(array_combine($this->RandomStrings(10), $this->RandomStrings(10)));
+    }
+    
     private function RandomStrings($Amount)
     {
         $Letters = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-!@#$%^&*()_';
@@ -44,21 +60,13 @@ abstract class TraversableTest extends \Pinq\Tests\PinqTestCase
         return $RandomStrings;
     }
     
-    final protected function AssertBothMatches(
-            \Pinq\ITraversable $Traversable,
-            \Pinq\IQueryable $Queryable,
-            array $Array, $Message = '')
-    {
-        $this->assertEquals($Array, $Traversable->AsArray(), $Message);
-    }
-    
     final protected function AssertMatches(\Pinq\ITraversable $Traversable, array $Array, $Message = '')
     {
-        $this->assertEquals($Array, $Traversable->AsArray(), $Message);
+        $this->assertSame($Array, $Traversable->AsArray(), $Message);
     }
         
     final protected function AssertMatchesValues(\Pinq\ITraversable $Traversable, array $Array, $Message = '')
     {
-        $this->assertEquals(array_values($Array), array_values($Traversable->AsArray()), $Message);
+        $this->assertSame(array_values($Array), array_values($Traversable->AsArray()), $Message);
     }
 }

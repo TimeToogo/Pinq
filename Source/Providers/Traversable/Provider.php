@@ -6,21 +6,22 @@ use \Pinq\Queries;
 
 class Provider extends \Pinq\Providers\QueryProvider
 {
-    private $QueryStreamEvaluator;
+    private $ScopeEvaluator;
     protected $Traversable;
 
     public function __construct(\Pinq\ITraversable $Traversable)
     {
         parent::__construct();
-        $this->QueryStreamEvaluator = new QueryStreamEvaluator();
+        $this->ScopeEvaluator = new ScopeEvaluator();
         $this->Traversable = $Traversable;
     }
-
-    public function Scope(Queries\IQueryStream $QueryStream)
+    
+    
+    protected function LoadRequestEvaluatorVisitor(Queries\IScope $Scope)
     {
-        $this->QueryStreamEvaluator->SetTraversable($this->Traversable);
-        $this->QueryStreamEvaluator->Walk($QueryStream);
-        
-        return new QueryScope($this->QueryStreamEvaluator->GetTraversable(), $QueryStream);
+        $this->ScopeEvaluator->SetTraversable($this->Traversable);
+        $this->ScopeEvaluator->Walk($Scope);
+
+        return new RequestEvaluator($this->ScopeEvaluator->GetTraversable());
     }
 }

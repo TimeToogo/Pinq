@@ -82,11 +82,28 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
     
     protected function ConvertAndResolve(callable $Function, \ReflectionFunctionAbstract $Reflection) {
         $ExpressionTree = $this->GetFunctionExpressionTree($Reflection, $Function);
-
-        //ReflectionFunction::getStaticVariables() returns the used variables for closures
-        $this->Resolve($ExpressionTree, $Reflection->getStaticVariables(), []);
+        
+        $this->Resolve($ExpressionTree, $this->GetKnownVariables($Reflection, $Function), []);
 
         return $ExpressionTree;
+    }
+    
+    protected function GetKnownVariables(\ReflectionFunctionAbstract $Reflection, callable $Function)
+    {
+        //ReflectionFunction::getStaticVariables() returns the used variables for closures
+        $KnownVariables = $Reflection->getStaticVariables();
+        
+        if($Function instanceof \Closure) {
+            $ThisValue = $Reflection->getClosureThis();
+            if($ThisValue !== null) {
+                $KnownVariables['this'] = $ThisValue;
+            }
+        }
+        else if (is_array($Function) && is_object($Function[0])) {
+            $KnownVariables['this'] = $Function[0];
+        }
+        
+        return $KnownVariables;
     }
 
     final protected function Resolve(

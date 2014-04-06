@@ -13,12 +13,7 @@ interface IQueryable extends ITraversable
     public function GetProvider();
     
     /**
-     * @return Providers\IQueryScope
+     * @return Queries\IScope
      */
-    public function GetQueryScope();
-    
-    /**
-     * @return Queries\IQueryStream
-     */
-    public function GetQueryStream();
+    public function GetScope();
 }
