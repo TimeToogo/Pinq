@@ -6,3 +6,4 @@ php:
   - hhvm
   
 install: composer install
+script: phpunit --configuration "Tests/Configuration.xml"
