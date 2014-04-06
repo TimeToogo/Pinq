@@ -2,10 +2,13 @@
 
 namespace Pinq;
 
+/**
+ * Api for subsequent grouping of the supplied traversable query.
+ */
 interface IGroupedTraversable extends ITraversable
 {
     /**
-     * Specifies the function to use for grouping
+     * Subsequently groups values according the supplied function. (Uses strict equality '===')
      *
      * @param  callable $Function
      * @return IGroupedTraversable

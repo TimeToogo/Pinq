@@ -2,6 +2,9 @@
 
 namespace Pinq;
 
+/**
+ * Api for subsequent orderings of a traversable query.
+ */
 interface IOrderedTraversable extends ITraversable
 {
     /**

@@ -18,6 +18,8 @@ interface IRequest
     const All = 11;
     const Any = 12;
     const Implode = 13;
+    const GetIndex = 14;
+    const IssetIndex = 15;
 
     /**
      * @return int

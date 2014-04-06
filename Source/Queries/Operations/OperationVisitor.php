@@ -23,4 +23,8 @@ class OperationVisitor
     public function VisitRemoveWhere(RemoveWhere $Operation) {}
 
     public function VisitClear(Clear $Operation) {}
+    
+    public function VisitUnsetIndex(UnsetIndex $Operation) {}
+    
+    public function VisitSetIndex(SetIndex $Operation) {}
 }

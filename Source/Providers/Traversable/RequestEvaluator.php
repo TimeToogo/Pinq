@@ -45,6 +45,16 @@ class RequestEvaluator extends Requests\RequestVisitor
     {
         return $this->Traversable->Contains($Request->GetValue());
     }
+
+    public function VisitGetIndex(Requests\GetIndex $Request)
+    {
+        return $this->Traversable[$Request->GetIndex()];
+    }
+
+    public function VisitIssetIndex(Requests\IssetIndex $Operation)
+    {
+        return isset($this->Traversable[$Request->GetIndex()]);
+    }
     
     public function VisitAggregate(Requests\Aggregate $Request)
     {

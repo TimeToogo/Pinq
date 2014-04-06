@@ -2,6 +2,9 @@
 
 namespace Pinq;
 
+/**
+ * An in-memory implementation for collection api.
+ */
 class Collection extends Traversable implements ICollection
 {
     public function __construct($Values = [])
@@ -57,30 +60,10 @@ class Collection extends Traversable implements ICollection
         $this->ValuesIterator = new \ArrayIterator($Array);
     }
 
-    public function offsetExists($Index)
-    {
-        if($this->ValuesIterator instanceof \ArrayAccess) {
-            return $this->ValuesIterator->offsetExists($Index);
-        }
-        else {
-            return isset($this->AsArray()[$Index]);
-        }
-    }
-
-    public function offsetGet($Index)
-    {
-        if($this->ValuesIterator instanceof \ArrayAccess) {
-            return $this->ValuesIterator->offsetGet($Index);
-        }
-        else {
-            return $this->AsArray()[$Index];
-        }
-    }
-
     public function offsetSet($Index, $Value)
     {
         if($this->ValuesIterator instanceof \ArrayAccess) {
-            return $this->ValuesIterator->offsetSet($Index, $Value);
+            $this->ValuesIterator->offsetSet($Index, $Value);
         }
         else {
             $Array = $this->AsArray();
@@ -93,7 +76,7 @@ class Collection extends Traversable implements ICollection
     public function offsetUnset($Index)
     {
         if($this->ValuesIterator instanceof \ArrayAccess) {
-            return $this->ValuesIterator->offsetUnset($Index);
+            $this->ValuesIterator->offsetUnset($Index);
         }
         else {
             $Array = $this->AsArray();

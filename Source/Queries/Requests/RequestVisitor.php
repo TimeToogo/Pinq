@@ -41,4 +41,8 @@ class RequestVisitor
     public function VisitAny(Any $Request) {}
 
     public function VisitImplode(Implode $Request) {}
+    
+    public function VisitGetIndex(GetIndex $Request) {}
+    
+    public function VisitIssetIndex(IssetIndex $Request) {}
 }

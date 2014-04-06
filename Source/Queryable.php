@@ -6,7 +6,11 @@ use \Pinq\Queries;
 use \Pinq\Queries\Requests;
 use \Pinq\Queries\Segments;
 
-class Queryable implements IQueryable
+
+/**
+ * Implementation for allowing the traversable query api 
+ */
+class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
 {
     /**
      * @var Providers\IQueryProvider
@@ -17,16 +21,11 @@ class Queryable implements IQueryable
      * @var Parsing\IFunctionToExpressionTreeConverter
      */
     protected $FunctiontConverter;
-    
-    /**
-     * @var Providers\IScopedRequestEvaluator
-     */
-    protected $Scope;
-    
+        
     /**
      * @var Queries\IScope
      */
-    protected $QueryStream;
+    protected $Scope;
     
     private $ValuesIterator = null;
     private $Values = null;
@@ -133,6 +132,20 @@ class Queryable implements IQueryable
         return $this->NewSegment(new Segments\GroupBy([$this->Convert($Function)]));
     }
 
+    public function AndBy(callable $Function)
+    {
+        $Segments = $this->Scope->GetSegments();
+        $LastSegment = end($Segments);
+        if(!$LastSegment instanceof Segments\GroupBy) {
+            throw new PinqException(
+                    'Invalid call to %s: %s::%s must be called first',
+                    __METHOD__,
+                    __CLASS__,
+                    'GroupBy');
+        }
+        return $this->UpdateLastSegment($LastSegment->AndBy($this->Convert($Function)));
+    }
+    
     public function Append(ITraversable $Values)
     {
         return $this->NewSegment(new Segments\Operation(Segments\Operation::Append, $Values));
@@ -178,6 +191,36 @@ class Queryable implements IQueryable
         return $this->NewSegment(new Segments\OrderBy([$Function], [false]));
     }
     
+    private function ValidateOrderBy() 
+    {
+        $Segments = $this->Scope->GetSegments();
+        $LastSegment = end($Segments);
+        if(!$LastSegment instanceof Segments\OrderBy) {
+            throw new PinqException(
+                    'Invalid call to %s: %s::%s must be called first',
+                    __METHOD__,
+                    __CLASS__,
+                    'OrderBy');
+        }
+        
+        return $LastSegment;
+    }
+    
+    public function ThenBy(callable $Function, $Direction)
+    {
+        return $this->UpdateLastSegment($this->ValidateOrderBy()->ThenBy($this->Convert($Function), $Direction !== Direction::Descending));
+    }
+    
+    public function ThenByAscending(callable $Function)
+    {
+        return $this->UpdateLastSegment($this->ValidateOrderBy()->ThenBy($this->Convert($Function), true));
+    }
+    
+    public function ThenByDescending(callable $Function)
+    {
+        return $this->UpdateLastSegment($this->ValidateOrderBy()->ThenBy($this->Convert($Function), false));
+    }
+    
     public function OrderBy(callable $Function, $Direction)
     {
         return $this->NewSegment(new Segments\OrderBy([$Function], [$Direction !== Direction::Descending]));
@@ -189,9 +232,29 @@ class Queryable implements IQueryable
     }
     
     // </editor-fold>
-    // 
+   
     // <editor-fold defaultstate="collapsed" desc="Query Requests">
+    
+    public function offsetExists($Index)
+    {
+        return $this->LoadQuery(new Requests\IssetIndex($Index));
+    }
 
+    public function offsetGet($Index)
+    {
+        return $this->LoadQuery(new Requests\GetIndex($Index));
+    }
+
+    public function offsetSet($Index, $Value)
+    {
+        throw PinqException::NotSupported(__METHOD__);
+    }
+
+    public function offsetUnset($Index)
+    {
+        throw PinqException::NotSupported(__METHOD__);
+    }
+    
     public function First()
     {
         return $this->LoadQuery(new Requests\First());

@@ -3,9 +3,10 @@
 namespace Pinq;
 
 /**
- * A mutable list of values.
+ * The collection api, along with traversable query, a collection's values are mutable,
+ * they can be added, removed and altered.
  */
-interface ICollection extends ITraversable, \ArrayAccess
+interface ICollection extends ITraversable
 {
     /**
      * Applies the function the list of values

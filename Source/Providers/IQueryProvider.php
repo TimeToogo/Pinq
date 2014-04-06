@@ -9,7 +9,7 @@ interface IQueryProvider
     /**
      * @return \Pinq\IQueryable
      */
-    public function CreateQueryable(Queries\IScope $Scope);
+    public function CreateQueryable(Queries\IScope $Scope = null);
     
     /**
      * @return \Pinq\Parsing\IFunctionToExpressionTreeConverter

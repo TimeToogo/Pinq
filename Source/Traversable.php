@@ -2,6 +2,10 @@
 
 namespace Pinq;
 
+/**
+ * An in-memory implementation for the traversable query api.
+ * Making use of iterators to acheive lazy query execution.
+ */
 class Traversable implements \Pinq\ITraversable
 {
     /**
@@ -17,9 +21,7 @@ class Traversable implements \Pinq\ITraversable
     final public function getIterator()
     {
         return $this->ValuesIterator;
-    }
-    
-    
+    }   
     
     public function AsArray() 
     {
@@ -44,7 +46,7 @@ class Traversable implements \Pinq\ITraversable
     
     public function AsQueryable()
     {
-        return new Queryable(new Providers\Traversable\Provider($this));
+        return (new Providers\Traversable\Provider($this))->CreateQueryable();
     }
     
     // <editor-fold defaultstate="collapsed" desc="Querying">
@@ -161,6 +163,32 @@ class Traversable implements \Pinq\ITraversable
                 }));
     }
 
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Array Access">
+    
+    public function offsetExists($Index)
+    {
+        return $this->ValuesIterator instanceof \ArrayAccess ?
+                $this->ValuesIterator->offsetExists($Index) : isset($this->AsArray()[$Index]);
+    }
+
+    public function offsetGet($Index)
+    {
+        return $this->ValuesIterator instanceof \ArrayAccess ?
+                $this->ValuesIterator->offsetGet($Index) : $this->AsArray()[$Index];
+    }
+
+    public function offsetSet($Index, $Value)
+    {
+        throw PinqException::NotSupported(__METHOD__);
+    }
+
+    public function offsetUnset($Index)
+    {
+        throw PinqException::NotSupported(__METHOD__);
+    }
+    
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Aggregates">

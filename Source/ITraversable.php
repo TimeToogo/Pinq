@@ -4,10 +4,12 @@ namespace Pinq;
 
 /**
  * The root interface providing a fluent query API for a set of values.
- * Implementing classes must be immutable and return a new instance with every query call.
+ * 
+ * Query calls must be immutable and return a new instance with every query call.
+ * Queries should also be executed lazily upon iteration.
  * 
  */
-interface ITraversable extends IAggregatable, \IteratorAggregate
+interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
 {
     const ITraversableType = __CLASS__;
     

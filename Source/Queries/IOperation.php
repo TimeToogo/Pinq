@@ -9,6 +9,8 @@ interface IOperation
     const AddValues = 2;
     const Clear = 3;
     const RemoveWhere = 4;
+    const SetIndex = 7;
+    const UnsetIndex = 8;
 
     /**
      * @return int

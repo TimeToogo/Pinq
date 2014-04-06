@@ -32,4 +32,9 @@ class PinqException extends \Exception
 
         return new self($Message);
     }
+    
+    public static function NotSupported($Method)
+    {
+        return new self('Invalid call to %s: Method is not supported', $Method);
+    }
 }
