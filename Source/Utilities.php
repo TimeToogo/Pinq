@@ -12,6 +12,17 @@ final class Utilities
     {
         return $One === $Two;
     }
+
+    public static $Comparison = [__CLASS__, 'Compare'];
+
+    public static function Compare($One, $Two)
+    {
+        if($One === $Two || $One == $Two) {
+            return 0;
+        }
+        
+        return $One > $Two ? 1 : -1;
+    }
     
     public static function ToArray(\Traversable $Iterator)
     {

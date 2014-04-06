@@ -13,4 +13,13 @@ class IndexByTest extends TraversableTest
         
         $this->AssertMatches($IndexedElements, array_combine($Data, $Data));
     }
+    /**
+     * @dataProvider Everything
+     */
+    public function testThatIndexByNullReturnsLastArrayWithLastElement(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $IndexedElements = $Traversable->IndexBy(function () { return null; });
+        
+        $this->AssertMatches($IndexedElements, empty($Data) ? [] :[null => end($Data)]);
+    }
 }

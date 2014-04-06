@@ -16,7 +16,7 @@ abstract class TraversableTest extends \Pinq\Tests\PinqTestCase
     
     public function Everything() {
         $Data = [];
-        $DataProviders = ['EmptyData', 'OneToTen', 'AssocOneToTen', 'TenRandomStrings'];
+        $DataProviders = ['EmptyData', 'OneToTen', 'OneToTenTwice', 'AssocOneToTen', 'TenRandomStrings'];
         foreach($DataProviders as $Provider) {
             $Data = array_merge($Data, $this->$Provider());
         }
@@ -32,6 +32,11 @@ abstract class TraversableTest extends \Pinq\Tests\PinqTestCase
     public function OneToTen()
     {
         return $this->TraversablesFor(range(1, 10));
+    }
+    
+    public function OneToTenTwice()
+    {
+        return $this->TraversablesFor(array_merge(range(1, 10), range(1, 10)));
     }
     
     public function AssocOneToTen()

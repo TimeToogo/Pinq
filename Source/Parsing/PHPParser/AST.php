@@ -254,7 +254,7 @@ class AST implements IAST
             case isset(self::$UnaryOperatorsMap[$NodeType]):
                 return Expression::UnaryOperation(
                         self::$UnaryOperatorsMap[$NodeType],
-                        $this->ParseNode($Node->expr));
+                        $this->ParseNode($Node->expr ?: $Node->var));
 
             case isset(self::$CastOperatorMap[$NodeType]):
                 return Expression::Cast(

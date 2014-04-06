@@ -2,8 +2,6 @@
 
 namespace Pinq\Queries\Segments; 
 
-use \Pinq\Queries\SegmentWalker;
-
 class Operation extends Segment
 {
     const Union = 1;
@@ -21,13 +19,13 @@ class Operation extends Segment
      */
     private $Traversable;
 
-    public function __construct($OperationType, \Pinq\ITraversable $Queryable)
+    public function __construct($OperationType, \Pinq\ITraversable $Traversable)
     {
         if(!self::IsValid($OperationType)) {
             throw new \Pinq\PinqException('Invalid operation type');
         }
         $this->OperationType = $OperationType;
-        $this->Traversable = $Queryable;
+        $this->Traversable = $Traversable;
     }
 
     final public static function IsValid($OperationType)

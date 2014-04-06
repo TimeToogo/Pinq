@@ -67,6 +67,7 @@ class GroupedIterator extends LazyIterator
         $Groups = [];
         $SeenValueMap = [];
         $Count = 0;
+        
         foreach ($KeyGroupValueMap as $ValueKey => $GroupByValue) {
             $GroupKey = array_search($GroupByValue, $SeenValueMap, true);
             
@@ -76,7 +77,7 @@ class GroupedIterator extends LazyIterator
                 $Count++;
             }
             
-            $Groups[$GroupKey][] = $ArrayToGroup[$ValueKey];
+            $Groups[$GroupKey][$ValueKey] = $ArrayToGroup[$ValueKey];
         }
         
         return array_map(function ($Group) { return new \Pinq\Traversable($Group); }, $Groups);

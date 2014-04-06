@@ -7,6 +7,8 @@ namespace Pinq;
  */
 interface ITraversable extends IAggregatable, \IteratorAggregate
 {
+    const ITraversableType = __CLASS__;
+    
     /**
      * Returns the values as an array
      *
@@ -15,14 +17,14 @@ interface ITraversable extends IAggregatable, \IteratorAggregate
     public function AsArray();
 
     /**
-     * Returns the values as a traversable
+     * Returns the values as a in-memory traversable
      *
      * @return ITraversable
      */
     public function AsTraversable();
 
     /**
-     * Returns the values as a collection
+     * Returns the values as a in-memory collection
      *
      * @return ICollection
      */

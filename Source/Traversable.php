@@ -124,7 +124,7 @@ class Traversable implements \Pinq\ITraversable
     
     public function Union(ITraversable $Values)
     {
-        return $this->Append($Values)->Unique();
+        return new self(new Iterators\UnionIterator($this->ValuesIterator, $Values->getIterator()));
     }
     
     public function Append(ITraversable $Values)
@@ -140,7 +140,7 @@ class Traversable implements \Pinq\ITraversable
                             array_uintersect(
                                     Utilities::ToArray($ValuesIterator), 
                                     $Values->AsArray(), 
-                                    Utilities::$Identical));
+                                    Utilities::$Comparison));
                 }));
     }
     
@@ -152,7 +152,7 @@ class Traversable implements \Pinq\ITraversable
                             array_udiff(
                                     Utilities::ToArray($ValuesIterator), 
                                     $Values->AsArray(), 
-                                    Utilities::$Identical));
+                                    Utilities::$Comparison));
                 }));
     }
 

@@ -8,15 +8,16 @@ class FlatteningIterator extends LazyIterator
     {
         $Array = \Pinq\Utilities::ToArray($InnerIterator);
         
-        $FlatArray = [];
+        $ReturnedArrays = [];
         foreach($Array as $Value) {
             if(is_array($Value)) {
-                $FlatArray = array_merge($FlatArray, $Value);
+                $ReturnedArrays[] = array_values($Value);
             }
             if($Value instanceof \Traversable) {
-                $FlatArray = array_merge($FlatArray, \Pinq\Utilities::ToArray($Value));
+                $ReturnedArrays[] = array_values(\Pinq\Utilities::ToArray($Value));
             }
         }
+        $FlatArray = empty($ReturnedArrays) ? [] : call_user_func_array('array_merge', $ReturnedArrays);
         
         return new \ArrayIterator($FlatArray);
     }
