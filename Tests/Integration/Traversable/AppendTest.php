@@ -7,7 +7,7 @@ class AppendTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatExceptWithSelfReturnsMergedDataWithIgnoredKeys(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatAppendWithSelfReturnsMergedDataWithReindexedKeys(\Pinq\ITraversable $Traversable, array $Data)
     {
         $Appended = $Traversable->Append($Traversable);
         
@@ -17,7 +17,7 @@ class AppendTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatAppendtWithEmptyReturnsSameAsTheOriginalButIgnoresKeys(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatAppendtWithEmptyReturnsSameAsTheOriginalButReindexedKeys(\Pinq\ITraversable $Traversable, array $Data)
     {
         $Appended = $Traversable->Append(new \Pinq\Traversable());
         

@@ -12,9 +12,9 @@ use \Pinq\Expressions as O;
 class FunctionExpressionTree implements \Serializable
 {
     /**
-     * @var array
+     * @var O\ParameterExpression[]
      */
-    private $ParamterNameTypeHintMap;
+    private $ParameterExpressions;
 
     /**
      * The expressions in this expression tree
@@ -43,27 +43,44 @@ class FunctionExpressionTree implements \Serializable
      */
     private $CompiledFunction = null;
 
-    public function __construct(callable $OriginalFunction = null, array $ParamterNameTypeHintMap, array $Expressions)
+    /**
+     * @var booelean
+     */
+    private $HasPassByRefArgument;
+
+    public function __construct(callable $OriginalFunction = null, array $ParameterExpressions, array $Expressions)
     {
-        $this->ParamterNameTypeHintMap = $ParamterNameTypeHintMap;
+        $this->ParameterExpressions = $ParameterExpressions;
         $this->VariableResolverWalker = new Parsing\Walkers\VariableResolver();
         $this->Invalidate($Expressions);
 
         $this->CompiledFunction = $OriginalFunction;
+        
+        $this->HasPassByRefArgument = false;
+        foreach ($ParameterExpressions as $ParameterExpression) {
+            if($ParameterExpression->IsPassedByReference()) {
+                $this->HasPassByRefArgument = true;
+            }
+        }
     }
 
     public static function FromClosureExpression(O\ClosureExpression $Expression, callable $OriginalFunction = null)
     {
         return new self(
                 $OriginalFunction,
-                $Expression->GetParameterNameTypeHintMap(),
+                $Expression->GetParameterExpressions(),
                 $Expression->GetBodyExpressions());
     }
     
-    public function SetOriginalFunction(callable $Function) {
+    public function SetCompiledFunction(callable $Function) {
         $this->CompiledFunction = $Function;
     }
     
+    public function GetCompiledFunction()
+    {
+        return $this->LoadCompiledFunction();
+    }
+        
     public function serialize()
     {
         if($this->SerializedData === null) {
@@ -96,7 +113,7 @@ class FunctionExpressionTree implements \Serializable
     private function LoadCompiledFunction()
     {
         if ($this->CompiledFunction === null) {
-            $Code = O\Expression::Closure($this->ParamterNameTypeHintMap, [], $this->BodyExpressions)
+            $Code = O\Expression::Closure($this->ParameterExpressions, [], $this->BodyExpressions)
                     ->Compile();
             
             $this->CompiledFunction  = eval('$Closure = ' . $Code . '; return $Closure;');
@@ -141,11 +158,11 @@ class FunctionExpressionTree implements \Serializable
     }
     
     /**
-     * @return array
+     * @return O\ParameterExpression[]
      */
-    final public function GetParameterNameTypehintMap()
+    final public function GetParameterExpressions()
     {
-        return $this->ParamterNameTypeHintMap;
+        return $this->ParameterExpressions;
     }
 
     final protected function Invalidate(array $NewBodyExpressions, $WalkUnresolvedVariables = true)

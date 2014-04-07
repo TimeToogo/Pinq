@@ -29,11 +29,11 @@ class InvocationExpression extends TraversalExpression
         return $Walker->WalkInvocation($this);
     }
 
-    protected function Simplify()
+    public function Simplify()
     {
         $ValueExpression = $this->ValueExpression->Simplify();
         $ArgumentExpressions = self::SimplifyAll($this->ArgumentExpressions);
-
+        
         if($ValueExpression instanceof ValueExpression
                 && self::AllOfType($ArgumentExpressions, ValueExpression::GetType())) {
             $ObjectValue = $ValueExpression->GetValue();

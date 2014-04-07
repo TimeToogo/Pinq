@@ -109,7 +109,7 @@ class UnionIterator implements \Iterator
             $this->UpdateCurrentValues($this->UnionedIterator);
             
             //Skip matching keys or values
-            if(isset($this->OriginalIterator[$this->CurrentKey]) || in_array($this->CurrentValue, $this->OriginalValues, true)) {
+            if(isset($this->OriginalValues[$this->CurrentKey]) || in_array($this->CurrentValue, $this->OriginalValues, true)) {
                 $this->UnionedIterator->next();
                 continue;
             }

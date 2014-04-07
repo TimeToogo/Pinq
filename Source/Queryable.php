@@ -27,8 +27,10 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
      */
     protected $Scope;
     
-    private $ValuesIterator = null;
-    private $Values = null;
+    /**
+     * @var \Iterator 
+     */
+    protected $ValuesIterator = null;
 
     public function __construct(Providers\IQueryProvider $Provider, Queries\IScope $Scope = null)
     {
@@ -61,9 +63,14 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
     final public function AsArray()
     {
         $this->Load();
-        $this->Values = Utilities::ToArray($this->ValuesIterator);
         
-        return $this->Values;
+        $Values = Utilities::ToArray($this->ValuesIterator);
+        
+        if(!($this->ValuesIterator instanceof \ArrayIterator)) {
+            $this->ValuesIterator = new \ArrayIterator($Values);
+        }
+        
+        return $Values;
     }
     
     public function AsTraversable()
@@ -82,12 +89,23 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
     {
         return $this;
     }
+    
+    public function AsRepository()
+    {
+        if($this->Provider instanceof Providers\IRepositoryProvider) {
+            return $this->Provider->CreateRepository($this->Scope);
+        }
+        else {
+            $this->Load();
+            return (new Collection($this->ValuesIterator))->AsRepository();
+        }
+    }
 
     final public function getIterator()
     {
         $this->Load();
         
-        return $this->Values ? new \ArrayIterator($this->Values) : $this->ValuesIterator;
+        return $this->ValuesIterator;
     }
 
     final public function GetProvider()

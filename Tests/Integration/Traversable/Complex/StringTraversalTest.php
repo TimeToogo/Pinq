@@ -6,7 +6,7 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
 {
     public function SomeStrings()
     {
-        return $this->TraversablesFor(['Foo', 'Bar', 'Test', 'Pinq', 'Data', 'Lorem Ipsum', 'Dallas']);
+        return $this->ImplementationsFor(['Foo', 'Bar', 'Test', 'Pinq', 'Data', 'Lorem Ipsum', 'Dallas']);
     }
 
     /**

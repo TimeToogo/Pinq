@@ -12,9 +12,11 @@ $PinqAsDependencyAutoLoaderPath = __DIR__ . '/../../../../autoload.php';
 
 if (file_exists($PinqAsProjectAutoLoaderPath)) {
     $ComposerAutoLoader = require $PinqAsProjectAutoLoaderPath;
-} elseif (file_exists($PinqAsDependencyAutoLoaderPath)) {
+} 
+elseif (file_exists($PinqAsDependencyAutoLoaderPath)) {
     $ComposerAutoLoader = require $PinqAsDependencyAutoLoaderPath;
-} else {
+} 
+else {
     throw new \Exception('Cannot load pinq tests: Penumbra cannot be loaded, please load Penumbra via composer');
 }
 

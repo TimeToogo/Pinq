@@ -44,6 +44,13 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * @return IQueryable
      */
     public function AsQueryable();
+
+    /**
+     * Returns the values as a repository.
+     *
+     * @return IQueryable
+     */
+    public function AsRepository();
     
     /**
      * Returns the first value, null if empty

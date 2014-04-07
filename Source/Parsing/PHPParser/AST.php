@@ -145,7 +145,7 @@ class AST implements IAST
                 return $this->ParseClosureNode($Node);
 
             case $Node instanceof \PHPParser_Node_Expr_Empty:
-                return Expression::IsEmpty(
+                return Expression::EmptyExpression(
                         $this->ParseNode($Node->expr));
 
             case $Node instanceof \PHPParser_Node_Expr_Variable:
@@ -170,18 +170,18 @@ class AST implements IAST
             $ValueExpressions[$Key] = $this->ParseNode($Item->value);
         }
 
-        return Expression::NewArray($KeyExpressions, $ValueExpressions);
+        return Expression::ArrayExpression($KeyExpressions, $ValueExpressions);
     }
 
     private function ParseFunctionCallNode(\PHPParser_Node_Expr_FuncCall $Node)
     {
         $NameExpression = $this->ParseNameNode($Node->name);
-        if ($NameExpression instanceof O\TraversalExpression ||
-                $NameExpression instanceof O\EntityExpression) {
+        if ($NameExpression instanceof O\TraversalExpression || $NameExpression instanceof O\VariableExpression) {
             return Expression::Invocation(
                     $NameExpression,
                     $this->ParseNodes($Node->args));
-        } else {
+        } 
+        else {
             return Expression::FunctionCall(
                     $NameExpression,
                     $this->ParseNodes($Node->args));
@@ -198,9 +198,9 @@ class AST implements IAST
 
     private function ParseClosureNode(\PHPParser_Node_Expr_Closure $Node)
     {
-        $ParameterNameTypeHintMap = [];
-        foreach ($Node->params as $Parameter) {
-            $ParameterNameTypeHintMap[$Parameter->name] = (string) $Parameter->type;
+        $ParameterExpressions = [];
+        foreach ($Node->params as $ParameterNode) {
+            $ParameterExpressions[] = $this->ParseParameterNode($ParameterNode);
         }
 
         $UsedVariables = array_map(
@@ -211,7 +211,17 @@ class AST implements IAST
 
         $BodyExpressions = $this->ParseNodes($Node->stmts);
 
-        return Expression::Closure($ParameterNameTypeHintMap, $UsedVariables, $BodyExpressions);
+        return Expression::Closure($ParameterExpressions, $UsedVariables, $BodyExpressions);
+    }
+    
+    private function ParseParameterNode(\PHPParser_Node_Param $Node) 
+    {
+        return Expression::Parameter(
+                $Node->name, 
+                $Node->type === null ? null : (string)$Node, 
+                $Node->default !== null, 
+                $Node->default !== null ? $this->ParseNode($Node->default) : null, 
+                $Node->byRef);
     }
 
     // </editor-fold>
@@ -274,6 +284,7 @@ class AST implements IAST
         'PreInc' => Operators\Unary::PreIncrement,
         'PreDec' => Operators\Unary::PreDecrement,
         'UnaryMinus' => Operators\Unary::Negation,
+        'UnaryPlus' => Operators\Unary::Plus,
     ];
 
     private static $CastOperatorMap = [

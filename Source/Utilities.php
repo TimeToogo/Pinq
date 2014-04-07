@@ -25,6 +25,23 @@ final class Utilities
         
         return $One > $Two ? 1 : -1;
     }
+
+    public static function IsTransitive(array $Array)
+    {
+        foreach($Array as $Value) {
+            if(is_string($Value) || is_integer($Value)) {
+                continue;
+            }
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public static function GetTypeOrClass($Value)
+    {
+        return is_object($Value) ? get_class($Value) : gettype($Value);
+    }
     
     public static function ToArray(\Traversable $Iterator)
     {
@@ -49,6 +66,32 @@ final class Utilities
         }
         
         return $Array;
+    }
+    
+    /**
+     * @return \Iterator
+     */
+    public static function ToIterator($TraversableOrArray)
+    {
+        if(!is_array($TraversableOrArray) && !($TraversableOrArray instanceof \Traversable)) {
+            throw new PinqException(
+                    'Invalid argument for %s: expecting array or \Traversable, %s given',
+                    __METHOD__,
+                    self::GetTypeOrClass($TraversableOrArray));
+        }
+        
+        if($TraversableOrArray instanceof \Iterator) {
+            return $TraversableOrArray;
+        }
+        else if($TraversableOrArray instanceof \IteratorAggregate) {
+            return $TraversableOrArray->getIterator();
+        }
+        else if($TraversableOrArray instanceof \Traversable) {
+            return new \IteratorIterator($TraversableOrArray);
+        }
+        else {
+            return new \ArrayIterator($TraversableOrArray);
+        }
     }
     
     public static function MultisortPreserveKeys(array $OrderArguments, array &$ArrayToSort)

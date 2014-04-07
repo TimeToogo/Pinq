@@ -65,7 +65,8 @@ class ConstantValueNodeReplacerVisitor extends \PHPParser_NodeVisitorAbstract
 
                     if ($Key !== null) {
                         $Value[$Key] = $ItemValue;
-                    } else {
+                    } 
+                    else {
                         $Value[] = $ItemValue;
                     }
                 }

@@ -2,23 +2,62 @@
 
 namespace Pinq\Iterators;
 
-class FlatteningIterator extends LazyIterator
+class FlatteningIterator extends \IteratorIterator
 {
-    protected function InitializeIterator(\Traversable $InnerIterator)
+    private $Count = 0;
+    /**
+     * @var \Iterator
+     */
+    private $CurrentIterator;
+    
+    public function __construct(\Traversable $Iterator)
     {
-        $Array = \Pinq\Utilities::ToArray($InnerIterator);
-        
-        $ReturnedArrays = [];
-        foreach($Array as $Value) {
-            if(is_array($Value)) {
-                $ReturnedArrays[] = array_values($Value);
+        parent::__construct($Iterator);
+        $this->CurrentIterator = new \ArrayIterator();
+    }
+    
+    
+    public function current()
+    {
+        return $this->CurrentIterator->current();
+    }
+
+    public function key()
+    {
+        return $this->Count;
+    }
+
+    public function next()
+    {
+        $this->Count++;
+        $this->CurrentIterator->next();
+    }
+    
+    public function valid()
+    {
+        while(!$this->CurrentIterator->valid()) {
+            parent::next();
+            
+            if(!parent::valid()) {
+                return false;
             }
-            if($Value instanceof \Traversable) {
-                $ReturnedArrays[] = array_values(\Pinq\Utilities::ToArray($Value));
-            }
+            
+            $this->LoadCurrentIterator();
         }
-        $FlatArray = empty($ReturnedArrays) ? [] : call_user_func_array('array_merge', $ReturnedArrays);
         
-        return new \ArrayIterator($FlatArray);
+        return true;
+    }
+    
+    private function LoadCurrentIterator() {
+        $this->CurrentIterator = \Pinq\Utilities::ToIterator(parent::current());
+        
+        $this->CurrentIterator->rewind();
+    }
+    
+    public function rewind()
+    {
+        $this->Count = 0;
+        parent::rewind();
+        $this->LoadCurrentIterator();
     }
 }

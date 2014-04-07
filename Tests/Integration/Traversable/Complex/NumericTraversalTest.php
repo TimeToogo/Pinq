@@ -6,7 +6,7 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
 {
     public function OneToAHundred()
     {
-        return $this->TraversablesFor(range(1, 100));
+        return $this->GetImplementations(range(1, 100));
     }
     
     /**

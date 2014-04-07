@@ -60,12 +60,4 @@ abstract class LazyIterator extends \IteratorIterator
         return parent::rewind();
     }
 
-    public function valid()
-    {
-        if(!$this->IsInitialized) {
-            $this->Initialize();
-        }
-        return parent::valid();
-    }
-
 }

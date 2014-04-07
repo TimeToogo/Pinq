@@ -17,6 +17,11 @@ class Collection extends Traversable implements ICollection
         return $this;
     }
     
+    public function AsRepository()
+    {
+        return (new Providers\Collection\Provider($this))->CreateRepository();
+    }
+    
     public function Clear()
     {
         $this->ValuesIterator = new \EmptyIterator();
@@ -25,27 +30,46 @@ class Collection extends Traversable implements ICollection
     public function Apply(callable $Function)
     {
         $Array = $this->AsArray();
+        
+        //Fix for being unable to pass a variable number of args by ref
+        if($Function instanceof FunctionExpressionTree) {
+            $Function = $Function->GetCompiledFunction();
+        }
+        
         array_walk($Array, $Function);
         
         $this->ValuesIterator = new \ArrayIterator($Array);
     }
+    
+    private function InvalidRange($Method, $Argument, $Value) 
+    {
+        return new PinqException(
+                'Invalid argument to %s: %s must be an array or instance of traversable, %s given',
+                $Method,
+                $Argument,
+                Utilities::GetTypeOrClass($Value));
+    }
 
     public function AddRange($Values)
     {
-        $this->ValuesIterator = new \ArrayIterator(
-                array_merge(
-                        $this->AsArray(), 
-                        is_array($Values) ? $Values : Utilities::ToArray($Values)));
+        if(!is_array($Values) || $Values instanceof \Traversable) {
+            throw $this->InvalidRange(__METHOD__, 'Values', $Values);
+        }
+        
+        $FlattenedIterator = new Iterators\FlatteningIterator(new \ArrayIterator([$this->ValuesIterator, Utilities::ToIterator($Values)]));
+        
+        $this->ValuesIterator = new \ArrayIterator(Utilities::ToArray($FlattenedIterator));
     }
 
     public function RemoveRange($Values)
     {
-        $FilteredArray = array_udiff(
-                $this->AsArray(), 
-                is_array($Values) ? $Values : Utilities::ToArray($Values), 
-                Utilities::$Identical);
+        if(!is_array($Values) || $Values instanceof \Traversable) {
+            throw $this->InvalidRange(__METHOD__, 'Values', $Values);
+        }
         
-        $this->ValuesIterator = new \ArrayIterator($FilteredArray);
+        $ExceptIterator = new Iterators\ExceptIterator($this->ValuesIterator, Utilities::ToIterator($Values));
+        
+        $this->ValuesIterator = new \ArrayIterator(Utilities::ToArray($ExceptIterator));
     }
 
     public function RemoveWhere(callable $Predicate)

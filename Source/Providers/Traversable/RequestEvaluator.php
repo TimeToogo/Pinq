@@ -51,7 +51,7 @@ class RequestEvaluator extends Requests\RequestVisitor
         return $this->Traversable[$Request->GetIndex()];
     }
 
-    public function VisitIssetIndex(Requests\IssetIndex $Operation)
+    public function VisitIssetIndex(Requests\IssetIndex $Request)
     {
         return isset($this->Traversable[$Request->GetIndex()]);
     }

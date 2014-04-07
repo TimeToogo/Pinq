@@ -128,6 +128,11 @@ class ExpressionWalker
                 $this->Walk($Expression->GetValueExpression()));
     }
 
+    public function WalkParameter(ParameterExpression $Expression)
+    {
+        return $Expression;
+    }
+
     public function WalkTernary(TernaryExpression $Expression)
     {
         return $Expression->Update(
@@ -157,7 +162,7 @@ class ExpressionWalker
     public function WalkClosure(ClosureExpression $Expression)
     {
         return $Expression->Update(
-                $Expression->GetParameterNameTypeHintMap(),
+                $Expression->GetParameterExpressions(),
                 $Expression->GetUsedVariableNames(),
                 $this->WalkAll($Expression->GetBodyExpressions()));
     }

@@ -26,7 +26,7 @@ class OrderByTest extends TraversableTest
     
     public function Names()
     {
-        return $this->TraversablesFor(['Fred', 'Sam', 'Daniel', 'Frank', 'Andrew', 'Taylor', 'Sandy']);
+        return $this->GetImplementations(['Fred', 'Sam', 'Daniel', 'Frank', 'Andrew', 'Taylor', 'Sandy']);
     }
     
     /**

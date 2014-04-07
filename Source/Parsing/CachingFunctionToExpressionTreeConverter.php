@@ -34,7 +34,7 @@ class CachingFunctionToExpressionTreeConverter extends FunctionToExpressionTreeC
             $ExpressionTree->Simplify();
             $this->Cache->save($FunctionHash, $ExpressionTree);
         }
-        $ExpressionTree->SetOriginalFunction($Function);
+        $ExpressionTree->SetCompiledFunction($Function);
         
         if ($ExpressionTree->HasUnresolvedVariables()) {
             /*

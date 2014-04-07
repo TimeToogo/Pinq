@@ -134,7 +134,7 @@ abstract class Expression
     /**
      * @return InvocationExpression
      */
-    final public static function Invocation(Expression $ValueExpression, array $ArgumentExpressions)
+    final public static function Invocation(Expression $ValueExpression, array $ArgumentExpressions = [])
     {
         return new InvocationExpression($ValueExpression, $ArgumentExpressions);
     }
@@ -150,7 +150,7 @@ abstract class Expression
     /**
      * @return EmptyExpression
      */
-    final public static function IsEmpty(Expression $ValueExpression)
+    final public static function EmptyExpression(Expression $ValueExpression)
     {
         return new EmptyExpression($ValueExpression);
     }
@@ -190,6 +190,14 @@ abstract class Expression
     }
 
     /**
+     * @return ParameterExpression
+     */
+    final public static function Parameter($Name, $TypeHint, $HasDefaultValue, $DefaultValue, $IsPassedByReference)
+    {
+        return new ParameterExpression($Name, $TypeHint, $HasDefaultValue, $DefaultValue, $IsPassedByReference);
+    }
+
+    /**
      * @return ValueExpression
      */
     final public static function Value($Value)
@@ -208,7 +216,7 @@ abstract class Expression
     /**
      * @return ArrayExpression
      */
-    final public static function NewArray(array $KeyExpressions, array $ValueExpressions)
+    final public static function ArrayExpression(array $KeyExpressions, array $ValueExpressions)
     {
         return new ArrayExpression($KeyExpressions, $ValueExpressions);
     }

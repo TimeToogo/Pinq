@@ -21,7 +21,7 @@ class Traversable implements \Pinq\ITraversable
     final public function getIterator()
     {
         return $this->ValuesIterator;
-    }   
+    }
     
     public function AsArray() 
     {
@@ -47,6 +47,11 @@ class Traversable implements \Pinq\ITraversable
     public function AsQueryable()
     {
         return (new Providers\Traversable\Provider($this))->CreateQueryable();
+    }
+    
+    public function AsRepository()
+    {
+        return (new Collection($this->ValuesIterator))->AsRepository();
     }
     
     // <editor-fold defaultstate="collapsed" desc="Querying">
@@ -141,26 +146,12 @@ class Traversable implements \Pinq\ITraversable
     
     public function Intersect(ITraversable $Values)
     {
-        return new self(new Iterators\LazyCallbackIterator($this->ValuesIterator, 
-                function (\Traversable $ValuesIterator) use ($Values) {
-                    return new \ArrayIterator(
-                            array_uintersect(
-                                    Utilities::ToArray($ValuesIterator), 
-                                    $Values->AsArray(), 
-                                    Utilities::$Comparison));
-                }));
+        return new self(new Iterators\IntersectionIterator($this->ValuesIterator, $Values->getIterator()));
     }
     
     public function Except(ITraversable $Values)
     {
-        return new self(new Iterators\LazyCallbackIterator($this->ValuesIterator, 
-                function (\Traversable $ValuesIterator) use ($Values) {
-                    return new \ArrayIterator(
-                            array_udiff(
-                                    Utilities::ToArray($ValuesIterator), 
-                                    $Values->AsArray(), 
-                                    Utilities::$Comparison));
-                }));
+        return new self(new Iterators\ExceptIterator($this->ValuesIterator, $Values->getIterator()));
     }
 
     // </editor-fold>
@@ -246,23 +237,27 @@ class Traversable implements \Pinq\ITraversable
     }
     
     public function Maximum(callable $Function = null) 
-    {    
-        return max($this->MapArray($Function));
+    {
+        $Array = $this->MapArray($Function);
+        return empty($Array) ? null : max($Array);
     }
     
     public function Minimum(callable $Function = null)
     {
-        return min($this->MapArray($Function));
+        $Array = $this->MapArray($Function);
+        return empty($Array) ? null : min($Array);
     }
     
     public function Sum(callable $Function = null) 
     {
-        return array_sum($this->MapArray($Function));
+        $Array = $this->MapArray($Function);
+        return empty($Array) ? null : array_sum($Array);
     }
     
     public function Average(callable $Function = null)
     {
-        return $this->Sum($Function) / $this->Count();
+        $Array = $this->MapArray($Function);
+        return empty($Array) ? null : array_sum($Array) / count($Array);
     }
     
     public function All(callable $Function = null) 

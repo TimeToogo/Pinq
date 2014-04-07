@@ -7,49 +7,66 @@ use \Pinq\Queries\Operations;
 
 class Repository extends Queryable implements IRepository
 {
+    /**
+     * @var Providers\IRepositoryProvider 
+     */
+    protected $Provider;
+    
     public function __construct(Providers\IRepositoryProvider $Provider, Queries\IScope $Scope = null)
     {
         parent::__construct($Provider, $Scope);
     }
     
+    public function AsRepository()
+    {
+        return $this;
+    }
+    
     private function ExecuteQuery(Queries\IOperation $Operation) 
     {
-        return $this->Provider->Load(new Queries\RequestQuery($this->Scope, $Operation));
+        $this->Provider->Execute(new Queries\OperationQuery($this->Scope, $Operation));
     }
     
     public function AddRange($Values)
     {
-        return $this->ExecuteQuery(new Operations\AddValues($Values));
+        $this->ExecuteQuery(new Operations\AddValues($Values));
+        $this->ValuesIterator = null;
     }
     
     public function Apply(callable $Function)
     {
-        return $this->ExecuteQuery(new Operations\Apply($this->Convert($Function)));
+        $this->ExecuteQuery(new Operations\Apply($this->Convert($Function)));
+        $this->ValuesIterator = null;
     }
 
     public function RemoveRange($Values)
     {
-        return $this->ExecuteQuery(new Operations\RemoveValues($Values));
+        $this->ExecuteQuery(new Operations\RemoveValues($Values));
+        $this->ValuesIterator = null;
     }
 
     public function RemoveWhere(callable $Predicate)
     {
-        return $this->ExecuteQuery(new Operations\RemoveWhere($Values));
+        $this->ExecuteQuery(new Operations\RemoveWhere($this->Convert($Predicate)));
+        $this->ValuesIterator = null;
     }
 
     public function Clear()
     {
-        return $this->ExecuteQuery(new Operations\Clear());
+        $this->ExecuteQuery(new Operations\Clear());
+        $this->ValuesIterator = null;
     }
 
     public function offsetSet($Index, $Value)
     {
-        return $this->ExecuteQuery(new Operations\SetIndex($Index, $Value));
+        $this->ExecuteQuery(new Operations\SetIndex($Index, $Value));
+        $this->ValuesIterator = null;
     }
 
     public function offsetUnset($Index)
     {
-        return $this->ExecuteQuery(new Operations\UnsetIndex($Index));
+        $this->ExecuteQuery(new Operations\UnsetIndex($Index));
+        $this->ValuesIterator = null;
     }
 
 }

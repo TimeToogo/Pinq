@@ -38,8 +38,13 @@ class Parser extends ParserBase
     private function GetFunctionBodyNodes(array $FileNodes, \ReflectionFunctionAbstract $Reflection)
     {
         $FunctionLocatorTraverser = new \PHPParser_NodeTraverser();
+        
+        $NamespaceResolver = new \PHPParser_NodeVisitor_NameResolver();
         $FunctionLocator = new Visitors\FunctionLocatorVisitor($Reflection);
+        
+        $FunctionLocatorTraverser->addVisitor($NamespaceResolver);
         $FunctionLocatorTraverser->addVisitor($FunctionLocator);
+        
         $FunctionLocatorTraverser->traverse($FileNodes);
 
         if (!$FunctionLocator->HasLocatedFunction()) {

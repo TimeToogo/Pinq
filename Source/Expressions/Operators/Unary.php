@@ -10,6 +10,7 @@ namespace Pinq\Expressions\Operators;
 final class Unary
 {
     //Arithmetic
+    const Plus = '+%s';//Usless
     const Negation = '-%s';
     const Increment = '%s++';
     const Decrement = '%s--';

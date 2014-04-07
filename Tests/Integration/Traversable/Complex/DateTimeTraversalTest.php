@@ -6,7 +6,7 @@ class DateTimeTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversa
 {
     public function DateTimes()
     {
-        return $this->TraversablesFor(iterator_to_array(
+        return $this->ImplementationsFor(iterator_to_array(
                 new \DatePeriod(new \DateTime('-1 year'), \DateInterval::createFromDateString('3 days'), new \DateTime('+1 year'))));
     }
     

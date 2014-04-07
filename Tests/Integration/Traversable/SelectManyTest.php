@@ -17,6 +17,6 @@ class SelectManyTest extends TraversableTest
     
     private static function FlattenArrays(array $Arrays) 
     {
-        return call_user_func_array('array_merge', $Arrays);
+        return call_user_func_array('array_merge', array_map('array_values', $Arrays));
     }
 }

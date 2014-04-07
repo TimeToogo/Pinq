@@ -4,20 +4,23 @@ namespace Pinq\Expressions;
 
 class ClosureExpression extends Expression
 {
-    private $ParameterNameTypeHintMap;
+    private $ParameterExpressions;
     private $UsedVariables;
     private $BodyExpressions;
 
-    public function __construct(array $ParameterNameTypeHintMap, array $UsedVariables, array $BodyExpressions)
+    public function __construct(array $ParameterExpressions, array $UsedVariables, array $BodyExpressions)
     {
-        $this->ParameterNameTypeHintMap = $ParameterNameTypeHintMap;
+        $this->ParameterExpressions = $ParameterExpressions;
         $this->UsedVariables = $UsedVariables;
         $this->BodyExpressions = $BodyExpressions;
     }
-
-    public function GetParameterNameTypeHintMap()
+    
+    /**
+     * @return ParameterExpression[]
+     */
+    public function GetParameterExpressions()
     {
-        return $this->ParameterNameTypeHintMap;
+        return $this->ParameterExpressions;
     }
 
     public function GetUsedVariableNames()
@@ -41,38 +44,38 @@ class ClosureExpression extends Expression
     public function Simplify()
     {
         return $this->Update(
-                $this->ParameterNameTypeHintMap,
+                self::SimplifyAll($this->ParameterExpressions),
                 $this->UsedVariables,
                 self::SimplifyAll($this->BodyExpressions));
     }
 
-    public function Update(array $ParameterNameTypeHintMap, array $UsedVariables, array $BodyExpressions)
+    public function Update(array $ParameterExpressions, array $UsedVariables, array $BodyExpressions)
     {
-        if ($this->ParameterNameTypeHintMap === $ParameterNameTypeHintMap
+        if ($this->ParameterExpressions === $ParameterExpressions
                 && $this->UsedVariables === $UsedVariables
                 && $this->BodyExpressions === $BodyExpressions) {
             return $this;
         }
-
-        return new self($ParameterNameTypeHintMap, $UsedVariables, $BodyExpressions);
+        
+        return new self($ParameterExpressions, $UsedVariables, $BodyExpressions);
     }
 
     protected function CompileCode(&$Code)
     {
         $Code .= 'function (';
-        if (!empty($this->ParameterNameTypeHintMap)) {
-            $Parameters = [];
-            foreach ($this->ParameterNameTypeHintMap as $Name => $TypeHint) {
-                $Parameters[] = $TypeHint . ' $' . $Name;
-            }
-            $Code .= implode(',', $Parameters);
+        
+        if (!empty($this->ParameterExpressions)) {
+            $Code .= implode(',', self::CompileAll($this->ParameterExpressions));
         }
+        
         $Code .= ')';
+        
         if (!empty($this->UsedVariables)) {
             $Code .= 'use (';
             $Code .= '$' . implode(', $', $this->UsedVariables);
             $Code .= ')';
         }
+        
         $Code .= '{';
         foreach ($this->BodyExpressions as $Expression) {
             $Expression->CompileCode($Code);

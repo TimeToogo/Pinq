@@ -29,39 +29,53 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
         return $this->Parser;
     }
 
-    final protected function GetParameterNameTypeHintMap(\ReflectionFunctionAbstract $Reflection)
-    {
-        $ParameterNameTypeHintMap = [];
-        foreach ($Reflection->getParameters() as $Parameter) {
-            $TypeHint = null;
-            if ($Parameter->isArray()) {
-                $TypeHint = 'array';
-            } 
-            else if ($Parameter->isCallable()) {
-                $TypeHint = 'callable';
-            } 
-            else if ($Parameter->getClass() !== null) {
-                $TypeHint = $Parameter->getClass()->name;
-            }
-
-            $ParameterNameTypeHintMap[$Parameter->name] = $TypeHint;
-        }
-
-        return $ParameterNameTypeHintMap;
-    }
-
     /**
      * @param  \ReflectionFunctionAbstract $Reflection
      * @return \Pinq\FunctionExpressionTree
      */
     final protected function GetFunctionExpressionTree(
-            \ReflectionFunctionAbstract $Reflection, callable $Function = null) {
+            \ReflectionFunctionAbstract $Reflection, 
+            callable $Function = null) {
+        
         return new \Pinq\FunctionExpressionTree(
                 $Function,
-                $this->GetParameterNameTypeHintMap($Reflection),
+                $this->GetParameterExpressions($Reflection),
                 $this->Parser->Parse($Reflection));
     }
 
+
+    final protected function GetParameterExpressions(\ReflectionFunctionAbstract $Reflection)
+    {
+        $ParameterExpressions = [];
+        
+        foreach ($Reflection->getParameters() as $Parameter) {
+            $ParameterExpressions[] = $this->GetParameterExpression($Parameter);
+        }
+
+        return $ParameterExpressions;
+    }
+    
+    private function GetParameterExpression(\ReflectionParameter $Parameter) 
+    {
+        $TypeHint = null;
+        if ($Parameter->isArray()) {
+            $TypeHint = 'array';
+        } 
+        else if ($Parameter->isCallable()) {
+            $TypeHint = 'callable';
+        } 
+        else if ($Parameter->getClass() !== null) {
+            $TypeHint = $Parameter->getClass()->name;
+        }
+        
+        return \Pinq\Expressions\Expression::Parameter(
+                $Parameter->name, 
+                $TypeHint, 
+                $Parameter->isDefaultValueAvailable(), 
+                $Parameter->isDefaultValueAvailable() ? $Parameter->getDefaultValue() : null, 
+                $Parameter->isPassedByReference());
+    }
+    
     /**
      * @return \Pinq\FunctionExpressionTree
      */

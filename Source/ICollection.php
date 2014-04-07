@@ -17,7 +17,8 @@ interface ICollection extends ITraversable
     public function Apply(callable $Function);
 
     /**
-     * Adds a range of values to the collection
+     * Adds a range of values to the collection.
+     * The collection will be reindexed.
      *
      * @param  array|\Traversable $Values The values to add
      * @return void

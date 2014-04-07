@@ -14,12 +14,12 @@ use \Pinq\Expressions\Operators;
  * }
  * === resolves to ===
  * {
- *     4 + 5 - $Unresolvable;
+ *     $Var = 4 + 5 - $Unresolvable;
  *     return 3 + (4 + 5 - $Unresolvable)
  * }
  * === with ['Unresolvable' => 97] it resolves to ===
  * {
- *     4 + 5 - 97;
+ *     $Var = 4 + 5 - 97;
  *     return 3 + (4 + 5 - 97)
  * }
  *
@@ -103,7 +103,7 @@ class VariableResolver extends O\ExpressionWalker
 
             if ($BinaryOperator !== null) {
                 $CurrentValueExpression = isset($this->VariableExpressionMap[$AssignmentName]) ?
-                        $this->VariableExpressionMap[$AssignmentName] : O\Expression::Value(null);
+                        $this->VariableExpressionMap[$AssignmentName] : $AssignToExpression;
 
                 $VariableValueExpression =
                         O\Expression::BinaryOperation(
@@ -118,7 +118,7 @@ class VariableResolver extends O\ExpressionWalker
 
             $this->VariableExpressionMap[$AssignmentName] = $VariableValueExpression;
 
-            return $VariableValueExpression;
+            return O\Expression::Assign($AssignToExpression, Operators\Assignment::Equal, $VariableValueExpression);
         }
 
         return $Expression->Update(
@@ -157,7 +157,7 @@ class VariableResolver extends O\ExpressionWalker
         $this->Scope($UsedVariableNames);
 
         $Expression = $Expression->Update(
-                $Expression->GetParameterNameTypeHintMap(),
+                $Expression->GetParameterExpressions(),
                 $UsedVariableNames,
                 $this->WalkAll($Expression->GetBodyExpressions()));
 
