@@ -8,7 +8,7 @@ class FlatteningIterator extends \IteratorIterator
     /**
      * @var \Iterator
      */
-    private $CurrentIterator;
+    protected $CurrentIterator;
     
     public function __construct(\Traversable $Iterator)
     {

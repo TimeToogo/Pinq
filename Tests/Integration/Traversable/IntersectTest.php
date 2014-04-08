@@ -7,11 +7,11 @@ class IntersectTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatIntersectWithSelfReturnsTheSameAsTheOriginal(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatIntersectWithSelfReturnsUniqueValues(\Pinq\ITraversable $Traversable, array $Data)
     {
         $Intersection = $Traversable->Intersect($Traversable);
         
-        $this->AssertMatches($Intersection, $Data);
+        $this->AssertMatches($Intersection, array_unique($Data));
     }
     
     /**
@@ -19,9 +19,9 @@ class IntersectTest extends TraversableTest
      */
     public function testThatIntersectWithEmptyReturnsEmpty(\Pinq\ITraversable $Traversable, array $Data)
     {
-        $Unioned = $Traversable->Intersect(new \Pinq\Traversable());
+        $Intersection = $Traversable->Intersect(new \Pinq\Traversable());
         
-        $this->AssertMatches($Unioned, []);
+        $this->AssertMatches($Intersection, []);
     }
     
     

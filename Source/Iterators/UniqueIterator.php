@@ -4,11 +4,20 @@ namespace Pinq\Iterators;
 
 class UniqueIterator extends \IteratorIterator
 {
-    private $SeenValues = [];
+    /**
+     * @var HashSet 
+     */
+    private $SeenValues;
+    
+    public function __construct(\Traversable $iterator)
+    {
+        parent::__construct($iterator);
+        $this->SeenValues = new HashSet();
+    }
     
     public function rewind()
     {
-        $this->SeenValues = [];
+        $this->SeenValues = new HashSet();
         parent::rewind();
     }
     
@@ -17,8 +26,7 @@ class UniqueIterator extends \IteratorIterator
         while(parent::valid()) {
             $CurrentValue = self::current();
             
-            if(!in_array($CurrentValue, $this->SeenValues, true)) {
-                $this->SeenValues[] = $CurrentValue;
+            if($this->SeenValues->Add($CurrentValue)) {
                 return true;
             }
             

@@ -192,7 +192,7 @@ abstract class Expression
     /**
      * @return ParameterExpression
      */
-    final public static function Parameter($Name, $TypeHint, $HasDefaultValue, $DefaultValue, $IsPassedByReference)
+    final public static function Parameter($Name, $TypeHint = null, $HasDefaultValue = false, $DefaultValue = null, $IsPassedByReference = false)
     {
         return new ParameterExpression($Name, $TypeHint, $HasDefaultValue, $DefaultValue, $IsPassedByReference);
     }

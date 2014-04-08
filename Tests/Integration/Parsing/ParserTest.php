@@ -36,4 +36,9 @@ abstract class ParserTest extends \Pinq\Tests\PinqTestCase
                         is_array($Function) ? new \ReflectionMethod($Function[0], $Function[1]) : new \ReflectionFunction($Function)));
     }
     
+    protected static function Variable($Name)
+    {
+        return O\Expression::Variable(O\Expression::Value($Name));
+    }
+    
 }

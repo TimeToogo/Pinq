@@ -2,12 +2,12 @@
 
 namespace Pinq\Iterators;
 
-class IntersectionIterator extends OperationIterator
+class DifferenceIterator extends OperationIterator
 {
     public function valid()
     {
         while(parent::valid()) {
-            if($this->OtherValues->Remove(parent::current())) {
+            if($this->OtherValues->Add(parent::current())) {
                 return true;
             }
             

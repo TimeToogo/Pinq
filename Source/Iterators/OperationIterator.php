@@ -6,6 +6,9 @@ abstract class OperationIterator extends LazyIterator
 {
     private $OtherIterator;
     
+    /**
+     * @var HashSet
+     */
     protected $OtherValues;
     
     public function __construct(\Traversable $Iterator, \Traversable $OtherIterator)
@@ -16,6 +19,6 @@ abstract class OperationIterator extends LazyIterator
     
     final protected function InitializeIterator(\Traversable $InnerIterator)
     {
-        $this->OtherValues = \Pinq\Utilities::ToArray($this->OtherIterator);
+        $this->OtherValues = new HashSet($this->OtherIterator);
     }
 }

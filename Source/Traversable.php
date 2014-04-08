@@ -25,9 +25,6 @@ class Traversable implements \Pinq\ITraversable
     
     public function AsArray() 
     {
-        if($this->ValuesIterator instanceof \ArrayIterator) {
-            return $this->ValuesIterator->getArrayCopy();
-        }
         $Array = Utilities::ToArray($this->ValuesIterator);
         $this->ValuesIterator = new \ArrayIterator($Array);
         
@@ -132,16 +129,11 @@ class Traversable implements \Pinq\ITraversable
     
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="Operations">
+    // <editor-fold defaultstate="collapsed" desc="Set Operations">
     
     public function Union(ITraversable $Values)
     {
         return new self(new Iterators\UnionIterator($this->ValuesIterator, $Values->getIterator()));
-    }
-    
-    public function Append(ITraversable $Values)
-    {        
-        return new self(new Iterators\FlatteningIterator(new \ArrayIterator([$this->ValuesIterator, $Values->getIterator()])));
     }
     
     public function Intersect(ITraversable $Values)
@@ -149,8 +141,27 @@ class Traversable implements \Pinq\ITraversable
         return new self(new Iterators\IntersectionIterator($this->ValuesIterator, $Values->getIterator()));
     }
     
-    public function Except(ITraversable $Values)
+    public function Difference(ITraversable $Values)
     {
+        return new self(new Iterators\DifferenceIterator($this->ValuesIterator, $Values->getIterator()));
+    }
+
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Set Operations">
+    
+    public function Append(ITraversable $Values)
+    {        
+        return new self(new Iterators\FlatteningIterator(new \ArrayIterator([$this->ValuesIterator, $Values->getIterator()])));
+    }
+    
+    public function WhereIn(ITraversable $Values)
+    {        
+        return new self(new Iterators\WhereInIterator($this->ValuesIterator, $Values->getIterator()));
+    }
+    
+    public function Except(ITraversable $Values)
+    {        
         return new self(new Iterators\ExceptIterator($this->ValuesIterator, $Values->getIterator()));
     }
 

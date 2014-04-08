@@ -2,122 +2,48 @@
 
 namespace Pinq\Iterators;
 
-class UnionIterator implements \Iterator
+class UnionIterator extends FlatteningIterator
 {
-    private $OriginalValues = [];
-    
-    private $Valid = true;
-    private $CurrentKey;
-    private $CurrentValue;
-    
+    private $Count = 0;
     /**
-     * @var \Iterator
+     * @var HashSet
      */
-    private $OriginalIterator;
+    private $SeenValues;
     
-    private $IsOriginalIterator = false;
-    /**
-     * @var \Iterator
-     */
-    private $UnionedIterator;
-    
-    public function __construct(\Traversable $Iterator, \Traversable $UnionedIterator)
+    public function __construct(\Traversable $Iterator, \Traversable $OtherIterator)
     {
-        $this->OriginalIterator = $this->GetIterator($Iterator);
-        $this->UnionedIterator = $this->GetIterator($UnionedIterator);
+        parent::__construct(new \ArrayIterator([$Iterator, $OtherIterator]));
+        $this->SeenValues = new HashSet();
     }
     
-    private function GetIterator(\Traversable $Traversable) 
+    public function key()
     {
-        if($Traversable instanceof \IteratorAggregate) {
-            return $Traversable->getIterator();
-        }
-        else {
-            return $Traversable;
-        }
+        return $this->Count;
     }
     
     public function rewind()
     {
-        $this->OriginalValues = [];
-        
-        $this->OriginalIterator->rewind();
-        $this->UnionedIterator->rewind();
-        
-        $IsOriginalValid = $this->OriginalIterator->valid();
-        if($IsOriginalValid) {
-            $this->IsOriginalIterator = true;
-            $this->Valid = true;
-            $this->UpdateCurrentValues($this->OriginalIterator);
-            return;
-        }
-        
-        $this->IsOriginalIterator = false;
-        $this->Valid = $this->UnionedIterator->valid();
-        if($this->Valid) {
-            $this->Valid = true;
-            $this->UpdateCurrentValues($this->UnionedIterator);
-            return;
-        }
-    }
-    
-    private function UpdateCurrentValues(\Iterator $Iterator) 
-    {
-        $this->CurrentKey = $Iterator->key();
-        $this->CurrentValue = $Iterator->current();
-        if($this->IsOriginalIterator) {
-            $this->OriginalValues[$this->CurrentKey] = $this->CurrentValue;
-        }
-    }
-
-
-    public function key()
-    {
-        return $this->CurrentKey;
-    }
-    
-    public function current()
-    {
-        return $this->CurrentValue;
-    }
-    
-    public function valid()
-    {
-        return $this->Valid;
+        $this->SeenValues = new HashSet();
+        $this->Count = 0;
+        parent::rewind();
     }
     
     public function next()
     {
-        if($this->IsOriginalIterator) {
-            $this->OriginalIterator->next();
-            
-            if($this->OriginalIterator->valid()) {
-                $this->UpdateCurrentValues($this->OriginalIterator);
-                $this->Valid = true;
-                return;
-            }
-        }
-        
-        if($this->IsOriginalIterator) {
-            $this->IsOriginalIterator = false;
-        }
-        else {
-            $this->UnionedIterator->next();
-        }
-        
-        while($this->UnionedIterator->valid()) {
-            $this->UpdateCurrentValues($this->UnionedIterator);
-            
-            //Skip matching keys or values
-            if(isset($this->OriginalValues[$this->CurrentKey]) || in_array($this->CurrentValue, $this->OriginalValues, true)) {
-                $this->UnionedIterator->next();
-                continue;
+        $this->Count++;
+        parent::next();
+    }
+    
+    public function valid()
+    {
+        while(parent::valid()) {
+            if($this->SeenValues->Add(parent::current())) {
+                return true;
             }
             
-            $this->Valid = true;
-            return;
+            $this->next();
         }
         
-        $this->Valid = false;
+        return false;
     }
 }

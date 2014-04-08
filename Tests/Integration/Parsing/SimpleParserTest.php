@@ -124,6 +124,17 @@ abstract class SimpleParserTest extends ParserTest
                 O\Expression::Variable(O\Expression::Value('I')))]);
     }
     
+    /**
+     * @dataProvider Parsers
+     */
+    public function testTernary() 
+    {
+        $this->AssertParsedAs(function () { true ? true : false; }, [O\Expression::Ternary(
+                O\Expression::Value(true),
+                O\Expression::Value(true),
+                O\Expression::Value(false))]);
+    }
+    
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Binary Operators">

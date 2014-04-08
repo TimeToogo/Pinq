@@ -15,7 +15,7 @@ class ParameterExpression extends Expression
     private $DefaultValue;
     private $IsPassedByReference;
 
-    public function __construct($Name, $TypeHint, $HasDefaultValue, $DefaultValue, $IsPassedByReference)
+    public function __construct($Name, $TypeHint = null, $HasDefaultValue = false, $DefaultValue = null, $IsPassedByReference = false)
     {
         $this->Name = $Name;
         $this->TypeHint = $TypeHint;

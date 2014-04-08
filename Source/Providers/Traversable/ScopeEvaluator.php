@@ -94,11 +94,18 @@ class ScopeEvaluator extends Segments\SegmentVisitor
             case Segments\Operation::Union:
                 $this->Traversable = $this->Traversable->Union($OtherTraversable);
                 break;
+            case Segments\Operation::Intersect:
+                $this->Traversable = $this->Traversable->Intersect($OtherTraversable);
+                break;
+            case Segments\Operation::Difference:
+                $this->Traversable = $this->Traversable->Difference($OtherTraversable);
+                break;
+            
             case Segments\Operation::Append:
                 $this->Traversable = $this->Traversable->Append($OtherTraversable);
                 break;
-            case Segments\Operation::Intersect:
-                $this->Traversable = $this->Traversable->Intersect($OtherTraversable);
+            case Segments\Operation::WhereIn:
+                $this->Traversable = $this->Traversable->WhereIn($OtherTraversable);
                 break;
             case Segments\Operation::Except:
                 $this->Traversable = $this->Traversable->Except($OtherTraversable);

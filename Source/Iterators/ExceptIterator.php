@@ -7,9 +7,7 @@ class ExceptIterator extends OperationIterator
     public function valid()
     {
         while(parent::valid()) {
-            $CurrentValue = self::current();
-            
-            if(!in_array($CurrentValue, $this->OtherValues, true)) {
+            if(!$this->OtherValues->Contains(parent::current())) {
                 return true;
             }
             

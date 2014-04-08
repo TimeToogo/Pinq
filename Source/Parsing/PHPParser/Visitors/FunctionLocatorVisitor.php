@@ -69,7 +69,7 @@ class FunctionLocatorVisitor extends \PHPParser_NodeVisitorAbstract
     public function enterNode(\PHPParser_Node $Node)
     {
         if ($Node instanceof \PHPParser_Node_Stmt_Namespace) {
-            $this->CurrentNamespace = (string) $Node->name;
+            $this->CurrentNamespace = (string)$Node->name;
         }
 
         if($Node->getAttribute('startLine') === $this->StartLine

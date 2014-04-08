@@ -5,9 +5,12 @@ namespace Pinq\Queries\Segments;
 class Operation extends Segment
 {
     const Union = 1;
-    const Append = 2;
-    const Intersect = 3;
-    const Except = 4;
+    const Intersect = 2;
+    const Difference = 3;
+    
+    const Append = 4;
+    const WhereIn = 5;
+    const Except = 6;
 
     /**
      * @var int
@@ -30,7 +33,7 @@ class Operation extends Segment
 
     final public static function IsValid($OperationType)
     {
-        return in_array($OperationType, [self::Union, self::Append, self::Intersect, self::Except]);
+        return in_array($OperationType, [self::Union, self::Intersect, self::Difference, self::Append, self::WhereIn, self::Except]);
     }
 
     public function GetType()
@@ -40,7 +43,7 @@ class Operation extends Segment
 
     public function Traverse(SegmentWalker $Walker)
     {
-        return $Walker->VisitOperation($this);
+        return $Walker->WalkOperation($this);
     }
 
     /**

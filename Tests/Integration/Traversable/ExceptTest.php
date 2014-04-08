@@ -9,9 +9,9 @@ class ExceptTest extends TraversableTest
      */
     public function testThatExceptWithSelfReturnsAnEmptyArray(\Pinq\ITraversable $Traversable, array $Data)
     {
-        $Intersection = $Traversable->Except($Traversable);
+        $Except = $Traversable->Except($Traversable);
         
-        $this->AssertMatches($Intersection, []);
+        $this->AssertMatches($Except, []);
     }
     
     /**
@@ -19,9 +19,9 @@ class ExceptTest extends TraversableTest
      */
     public function testThatExceptWithEmptyReturnsSameAsTheOriginal(\Pinq\ITraversable $Traversable, array $Data)
     {
-        $Intersection = $Traversable->Except(new \Pinq\Traversable());
+        $Except = $Traversable->Except(new \Pinq\Traversable());
         
-        $this->AssertMatches($Intersection, $Data);
+        $this->AssertMatches($Except, $Data);
     }
     
     /**
@@ -32,9 +32,9 @@ class ExceptTest extends TraversableTest
         $OtherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
         $ValuesWithSomeMatchingValues = new \Pinq\Traversable($OtherData);
         
-        $Intersection = $Traversable->Except($ValuesWithSomeMatchingValues);
+        $Except = $Traversable->Except($ValuesWithSomeMatchingValues);
         
-        $this->AssertMatches($Intersection, array_diff($Data, $OtherData));
+        $this->AssertMatches($Except, array_diff($Data, $OtherData));
     }
     
     /**
@@ -45,8 +45,20 @@ class ExceptTest extends TraversableTest
         $OtherData = [0 => 'test', 2 => 0.01, 5 => 4, 'test' => 1];
         $ValuesWithSomeMatchingKeys = new \Pinq\Traversable($OtherData);
         
-        $Intersection = $Traversable->Except($ValuesWithSomeMatchingKeys);
+        $Except = $Traversable->Except($ValuesWithSomeMatchingKeys);
         
-        $this->AssertMatches($Intersection, array_diff($Data, $OtherData));
+        $this->AssertMatches($Except, array_diff($Data, $OtherData));
+    }
+    
+    /**
+     * @dataProvider AssocOneToTen
+     */
+    public function testThatExceptUsesStrictEquality(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $ValuesWithSomeMatchingKeys = new \Pinq\Traversable(array_map('strval', $Data));
+        
+        $Except = $Traversable->Except($ValuesWithSomeMatchingKeys);
+        
+        $this->AssertMatches($Except, $Data);
     }
 }
