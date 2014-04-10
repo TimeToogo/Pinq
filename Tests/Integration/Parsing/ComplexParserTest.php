@@ -85,7 +85,7 @@ abstract class ComplexParserTest extends ParserTest
     /**
      * @dataProvider Parsers
      */
-    public function testNestedVastOperators()
+    public function testNestedCastOperators()
     {
         $Function = function () {
             (double)(object)(boolean)(int)(string)$I;//This is value php...
