@@ -132,9 +132,11 @@ class BinaryOperationExpression extends Expression
 
     protected function CompileCode(&$Code)
     {
+        $Code .= '(';
         $this->LeftOperandExpression->CompileCode($Code);
         $Code .= $this->Operator;
         $this->RightOperandExpression->CompileCode($Code);
+        $Code .= ')';
     }
 
 }

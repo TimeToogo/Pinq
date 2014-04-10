@@ -84,6 +84,8 @@ class UnaryOperationExpression extends Expression
 
     protected function CompileCode(&$Code)
     {
+        $Code .= '(';
         $Code .= sprintf($this->Operator, $this->OperandExpression->Compile());
+        $Code .= ')';
     }
 }
