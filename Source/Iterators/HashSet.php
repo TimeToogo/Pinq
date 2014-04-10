@@ -2,6 +2,23 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Optimized for quick lookup speeds, depending on their type, values are stored in
+ * the most optimized way to check if they are contained in the set.
+ * 
+ * This is designed to check via strict equality (===)
+ * 
+ * Type storage methods:
+ * string       - array key
+ * integer      - array key
+ * double       - string cast array key
+ * boolean      - array key (auto casts to int 1/0)
+ * object       - SplObjectStorage (hash set for objects)
+ * null         - boolean (their is either a null value or not)
+ * array        - array value (no good way to hash an array identity)
+ * resource     - string cast array key (will become 'Resource id #{id}', guaranteed unique as per docs)
+ * unknown type - array value (wtf, why does this exist)
+ */
 class HashSet implements \IteratorAggregate
 {
     /**
@@ -50,7 +67,7 @@ class HashSet implements \IteratorAggregate
                 return in_array($Value, $this->Storage[$Type], true);
         }
     }
-    
+
     public function Add($Value) 
     {
         if($this->Contains($Value)) {
