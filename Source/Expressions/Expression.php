@@ -31,7 +31,7 @@ abstract class Expression
     {
         $ReducedExpressions = [];
         foreach ($Expressions as $Key => $Expression) {
-            $ReducedExpressions[$Key] = $Expression === null ? null : $Expression->Simplify();
+            $ReducedExpressions[$Key] = $Expression->Simplify();
         }
 
         return $ReducedExpressions;
@@ -156,6 +156,14 @@ abstract class Expression
     }
 
     /**
+     * @return IssetExpression
+     */
+    final public static function IssetExpression(array $ValueExpressions)
+    {
+        return new IssetExpression($ValueExpressions);
+    }
+
+    /**
      * @return FunctionCallExpression
      */
     final public static function FunctionCall(Expression $NameExpression, array $ArgumentValueExpressions = [])
@@ -192,7 +200,7 @@ abstract class Expression
     /**
      * @return ParameterExpression
      */
-    final public static function Parameter($Name, $TypeHint = null, $HasDefaultValue = false, $DefaultValue = null, $IsPassedByReference = false)
+    final public static function Parameter($Name, $TypeHint = null, $HasDefaultValue = ParameterExpression::IsRequired, $DefaultValue = null, $IsPassedByReference = false)
     {
         return new ParameterExpression($Name, $TypeHint, $HasDefaultValue, $DefaultValue, $IsPassedByReference);
     }

@@ -42,7 +42,7 @@ class InvocationExpression extends TraversalExpression
                 $ArgumentValues[] = $ArgumentExpression->GetValue();
             }
 
-            return Expression::Value(call_user_func_array([$ObjectValue], $ArgumentValues));
+            return Expression::Value(call_user_func_array($ObjectValue, $ArgumentValues));
         }
 
         return $this->Update(

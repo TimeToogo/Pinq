@@ -92,12 +92,16 @@ class TernaryExpression extends Expression
 
     protected function CompileCode(&$Code)
     {
+        $Code .= '(';
+        
         $this->ConditionExpression->CompileCode($Code);
-        $Code .= '?';
+        $Code .= ' ? ';
         if ($this->IfTrueExpression !== null) {
             $this->IfTrueExpression->CompileCode($Code);
         }
-        $Code .= ':';
-        $this->IfFalseExpression->CompileAll($Expressions);
+        $Code .= ' : ';
+        $this->IfFalseExpression->CompileCode($Code);
+        
+        $Code .= ')';
     }
 }

@@ -2,10 +2,9 @@
 
 namespace Pinq\Tests\Integration\Parsing;
 
-use \Pinq\Parsing\IParser;
 use \Pinq\Expressions as O;
 
-abstract class ComplexParserTest extends ParserTest
+class ComplexParserTest extends ParserTest
 {
     /**
      * @dataProvider Parsers

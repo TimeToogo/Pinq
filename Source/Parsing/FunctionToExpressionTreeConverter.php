@@ -2,6 +2,8 @@
 
 namespace Pinq\Parsing;
 
+use \Pinq\Expressions as O;
+
 class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConverter
 {
     /**
@@ -30,17 +32,47 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
     }
 
     /**
-     * @param  \ReflectionFunctionAbstract $Reflection
      * @return \Pinq\FunctionExpressionTree
      */
-    final protected function GetFunctionExpressionTree(
-            \ReflectionFunctionAbstract $Reflection, 
-            callable $Function = null) {
+    final protected function GetFunctionExpressionTree(\ReflectionFunctionAbstract $Reflection, callable $Function = null) 
+    {
+        
+        $ParameterExpressions = $this->GetParameterExpressions($Reflection);
+        $BodyExpressions = $Reflection->isUserDefined() ? 
+                $this->Parser->Parse($Reflection) : $this->InternalFunctionExpressions($Reflection);
         
         return new \Pinq\FunctionExpressionTree(
                 $Function,
-                $this->GetParameterExpressions($Reflection),
-                $this->Parser->Parse($Reflection));
+                $ParameterExpressions,
+                $BodyExpressions);
+    }
+    
+    private function InternalFunctionExpressions(\ReflectionFunctionAbstract $Reflection) 
+    {
+        $HasUnavailableDefaultValue = false;
+        $ArgumentExpressions = [];
+        foreach($Reflection->getParameters() as $Parameter) {
+            if($Parameter->isOptional() && !$Parameter->isDefaultValueAvailable()) {
+                $HasUnavailableDefaultValue = true;
+            }
+            $ArgumentExpressions[] = O\Expression::Variable(O\Expression::Value($Parameter->name));
+        }
+        
+        if(!$HasUnavailableDefaultValue) {
+            return [
+                O\Expression::ReturnExpression(
+                        O\Expression::FunctionCall(
+                                O\Expression::Value($Reflection->name),
+                                $ArgumentExpressions))
+            ];
+        }
+        else {
+            return [
+                O\Expression::ReturnExpression(
+                        O\Expression::FunctionCall(O\Expression::Value('call_user_func_array'),
+                                [O\Expression::Value($Reflection->name), O\Expression::FunctionCall(O\Expression::Value('func_get_args'))]))
+            ];
+        }
     }
 
 
@@ -68,10 +100,10 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
             $TypeHint = $Parameter->getClass()->name;
         }
         
-        return \Pinq\Expressions\Expression::Parameter(
+        return O\Expression::Parameter(
                 $Parameter->name, 
                 $TypeHint, 
-                $Parameter->isDefaultValueAvailable(), 
+                $Parameter->isOptional(), 
                 $Parameter->isDefaultValueAvailable() ? $Parameter->getDefaultValue() : null, 
                 $Parameter->isPassedByReference());
     }

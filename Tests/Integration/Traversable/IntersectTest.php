@@ -41,13 +41,12 @@ class IntersectTest extends TraversableTest
     /**
      * @dataProvider OneToTen
      */
-    public function testThatIntersectWithDuplicateKeysPreservesTheOriginalValues(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatIntersectUsesStrictEquality(\Pinq\ITraversable $Traversable, array $Data)
     {
-        $OtherData = [0 => 'test', 2 => 0.01, 5 => 4, 'test' => 1];
-        $ValuesWithSomeMatchingKeys = new \Pinq\Traversable($OtherData);
+        $OtherData = ['1', '2', '3', '4', '5'];
+        $ValuesWithEquivalentStringValues = new \Pinq\Traversable($OtherData);
+        $Insection = $Traversable->Intersect($ValuesWithEquivalentStringValues);
         
-        $Intersection = $Traversable->Intersect($ValuesWithSomeMatchingKeys);
-        
-        $this->AssertMatches($Intersection, array_intersect($Data, $OtherData));
+        $this->AssertMatches($Insection, []);
     }
 }

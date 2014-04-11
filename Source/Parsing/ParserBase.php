@@ -9,17 +9,9 @@ abstract class ParserBase implements IParser
     final public function Parse(\ReflectionFunctionAbstract $Reflection)
     {
         if (!$Reflection->isUserDefined()) {
-            $ArgumentExpressions = [];
-            foreach($Reflection->getParameters() as $Parameter) {
-                $ArgumentExpressions[] = O\Expression::Variable(O\Expression::Value($Parameter->name));
-            }
-            
-            return [
-                O\Expression::ReturnExpression(
-                        O\Expression::FunctionCall(
-                                O\Expression::Value($Reflection->name)),
-                                $ArgumentExpressions)
-            ];
+            throw new InvalidFunctionException(
+                    'Cannot parse function %s: Function is not user defined',
+                    $Reflection->getName());
         }
 
         $FileName = $Reflection->getFileName();

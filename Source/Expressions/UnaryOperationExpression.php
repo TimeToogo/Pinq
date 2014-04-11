@@ -61,6 +61,7 @@ class UnaryOperationExpression extends Expression
                 Operators\Unary::PreIncrement =>    function ($I) { return ++$I; },
                 Operators\Unary::PreDecrement =>    function ($I) { return --$I; },
                 Operators\Unary::Negation =>        function ($I) { return -$I; },
+                Operators\Unary::Plus =>            function ($I) { return +$I; },
             ];
         }
 

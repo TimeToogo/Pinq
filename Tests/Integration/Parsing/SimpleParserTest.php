@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Parsing;
 use \Pinq\Parsing\IParser;
 use \Pinq\Expressions as O;
 
-abstract class SimpleParserTest extends ParserTest
+class SimpleParserTest extends ParserTest
 {
     /**
      * @dataProvider Parsers
@@ -60,6 +60,14 @@ abstract class SimpleParserTest extends ParserTest
     /**
      * @dataProvider Parsers
      */
+    public function testIsset() 
+    {
+        $this->AssertParsedAs(function () { isset($I); }, [O\Expression::IssetExpression([O\Expression::Variable(O\Expression::Value('I'))])]);
+    }
+    
+    /**
+     * @dataProvider Parsers
+     */
     public function testFunctionCall() 
     {
         $this->AssertParsedAs(function () { func(); }, [O\Expression::FunctionCall(O\Expression::Value('func'))]);
@@ -81,6 +89,25 @@ abstract class SimpleParserTest extends ParserTest
         $this->AssertParsedAs(function () { [1 => 2]; }, [O\Expression::ArrayExpression(
                 [O\Expression::Value(1)], 
                 [O\Expression::Value(2)])]);
+    }
+    
+    /**
+     * @dataProvider Parsers
+     * @expectedException \Pinq\Parsing\InvalidFunctionException
+     */
+    public function testInternalFunctionIsRejected(IParser $Parser) 
+    {
+        $Parser->Parse(new \ReflectionFunction('strlen'));
+    }
+    
+    /**
+     * @dataProvider Parsers
+     * @expectedException \Pinq\Parsing\InvalidFunctionException
+     */
+    public function testEvaledFunctionIsRejected(IParser $Parser) 
+    {
+        $EvaledFunction = eval('return function () {};');
+        $Parser->Parse(new \ReflectionFunction($EvaledFunction));
     }
     
     // <editor-fold defaultstate="collapsed" desc="Value traversals">

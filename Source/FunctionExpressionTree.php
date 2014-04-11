@@ -43,11 +43,6 @@ class FunctionExpressionTree implements \Serializable
      */
     private $CompiledFunction = null;
 
-    /**
-     * @var booelean
-     */
-    private $HasPassByRefArgument;
-
     public function __construct(callable $OriginalFunction = null, array $ParameterExpressions, array $Expressions)
     {
         $this->ParameterExpressions = $ParameterExpressions;
@@ -55,13 +50,6 @@ class FunctionExpressionTree implements \Serializable
         $this->Invalidate($Expressions);
 
         $this->CompiledFunction = $OriginalFunction;
-        
-        $this->HasPassByRefArgument = false;
-        foreach ($ParameterExpressions as $ParameterExpression) {
-            if($ParameterExpression->IsPassedByReference()) {
-                $this->HasPassByRefArgument = true;
-            }
-        }
     }
 
     public static function FromClosureExpression(O\ClosureExpression $Expression, callable $OriginalFunction = null)
@@ -72,7 +60,7 @@ class FunctionExpressionTree implements \Serializable
                 $Expression->GetBodyExpressions());
     }
     
-    public function SetCompiledFunction(callable $Function) {
+    public function SetCompiledFunction(callable $Function = null) {
         $this->CompiledFunction = $Function;
     }
     
@@ -116,7 +104,10 @@ class FunctionExpressionTree implements \Serializable
             $Code = O\Expression::Closure($this->ParameterExpressions, [], $this->BodyExpressions)
                     ->Compile();
             
-            $this->CompiledFunction  = eval('$Closure = ' . $Code . '; return $Closure;');
+            $this->CompiledFunction  = eval('return ' . $Code . ';');
+            if(!($this->CompiledFunction instanceof \Closure)) {
+                throw new PinqException('Could not compile code into closure: %s', $Code);
+            }
         }
 
         return $this->CompiledFunction;
@@ -213,7 +204,7 @@ class FunctionExpressionTree implements \Serializable
     final public function ResolveVariablesToExpressions(array $VariableExpressionMap)
     {
         $this->VariableResolverWalker->ResetUnresolvedVariables();
-        $this->VariableResolverWalker->SetVariableResolutionMap($VariableExpressionMap);
+        $this->VariableResolverWalker->SetVariableExpressionMap($VariableExpressionMap);
         $this->Invalidate($this->VariableResolverWalker->WalkAll($this->BodyExpressions), false);
     }
 

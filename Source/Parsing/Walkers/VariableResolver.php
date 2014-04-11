@@ -3,27 +3,19 @@
 namespace Pinq\Parsing\Walkers;
 
 use \Pinq\Expressions as O;
-use \Pinq\Expressions\Operators;
 
 /**
- * Resolves all resolvable variables within the expression tree.
+ * Resolves variables within the expression tree.
  *
  * {
  *     $Var = 4 + 5 - $Unresolvable;
  *     return 3 + $Var;
  * }
- * === resolves to ===
- * {
- *     $Var = 4 + 5 - $Unresolvable;
- *     return 3 + (4 + 5 - $Unresolvable)
- * }
- * === with ['Unresolvable' => 97] it resolves to ===
+ * === with ['Unresolvable' => 97] resolves to ===
  * {
  *     $Var = 4 + 5 - 97;
- *     return 3 + (4 + 5 - 97)
+ *     return 3 + $Var
  * }
- *
- * This can handle assignments, variable variables and closures
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
@@ -54,77 +46,9 @@ class VariableResolver extends O\ExpressionWalker
         $this->UnresolvedVariables = [];
     }
 
-    public function SetVariableResolutionMap(array $VariableExpressionMap)
+    public function SetVariableExpressionMap(array $VariableExpressionMap)
     {
         $this->VariableExpressionMap = $VariableExpressionMap;
-    }
-
-    private static $AssignmentToBinaryOperator = [
-        Operators\Assignment::Addition => Operators\Binary::Addition,
-        Operators\Assignment::BitwiseAnd => Operators\Binary::BitwiseAnd,
-        Operators\Assignment::BitwiseOr => Operators\Binary::BitwiseOr,
-        Operators\Assignment::BitwiseXor => Operators\Binary::BitwiseXor,
-        Operators\Assignment::Concatenate => Operators\Binary::Concatenation,
-        Operators\Assignment::Division => Operators\Binary::Division,
-        Operators\Assignment::Modulus => Operators\Binary::Modulus,
-        Operators\Assignment::Multiplication => Operators\Binary::Multiplication,
-        Operators\Assignment::ShiftLeft => Operators\Binary::ShiftLeft,
-        Operators\Assignment::ShiftRight => Operators\Binary::ShiftRight,
-        Operators\Assignment::Subtraction => Operators\Binary::Subtraction,
-    ];
-    private function AssignmentToBinaryOperator($AssignmentOperator)
-    {
-        return isset(self::$AssignmentToBinaryOperator[$AssignmentOperator]) ?
-                self::$AssignmentToBinaryOperator[$AssignmentOperator] : null;
-    }
-
-    /*
-     * Convert any assignments to the equivalent binary expression and stores resolved value.
-     */
-    public function WalkAssignment(O\AssignmentExpression $Expression)
-    {
-        $AssignToExpression = $Expression->GetAssignToExpression();
-        if ($AssignToExpression instanceof O\VariableExpression) {
-            $AssignToExpression = $AssignToExpression->Update(
-                    $this->Walk($AssignToExpression->GetNameExpression()));
-        } 
-        else {
-            $AssignToExpression = $this->Walk($AssignToExpression);
-        }
-        $AssignToExpression = $AssignToExpression->Simplify();
-
-        $AssignmentOperator = $Expression->GetOperator();
-        $AssignmentValueExpression = $this->Walk($Expression->GetAssignmentValueExpression());
-
-        if($AssignToExpression instanceof O\VariableExpression
-                && $AssignToExpression->GetNameExpression() instanceof O\ValueExpression) {
-            $AssignmentName = $AssignToExpression->GetNameExpression()->GetValue();
-            $BinaryOperator = $this->AssignmentToBinaryOperator($AssignmentOperator);
-
-            if ($BinaryOperator !== null) {
-                $CurrentValueExpression = isset($this->VariableExpressionMap[$AssignmentName]) ?
-                        $this->VariableExpressionMap[$AssignmentName] : $AssignToExpression;
-
-                $VariableValueExpression =
-                        O\Expression::BinaryOperation(
-                                $CurrentValueExpression,
-                                $BinaryOperator,
-                                $AssignmentValueExpression);
-
-            } 
-            else {
-                $VariableValueExpression = $AssignmentValueExpression;
-            }
-
-            $this->VariableExpressionMap[$AssignmentName] = $VariableValueExpression;
-
-            return O\Expression::Assign($AssignToExpression, Operators\Assignment::Equal, $VariableValueExpression);
-        }
-
-        return $Expression->Update(
-                $AssignToExpression,
-                $AssignmentOperator,
-                $AssignmentValueExpression);
     }
 
     private function Scope(array $UsedVariableNames)
@@ -161,7 +85,7 @@ class VariableResolver extends O\ExpressionWalker
                 $UsedVariableNames,
                 $this->WalkAll($Expression->GetBodyExpressions()));
 
-        $this->Unscope($ExGetParameterNameTypeHintMapmeterNames());
+        $this->Unscope($UsedVariableNames);
 
         return $Expression;
     }
@@ -174,14 +98,12 @@ class VariableResolver extends O\ExpressionWalker
         $NameExpression = $this->Walk($Expression->GetNameExpression())->Simplify();
         if ($NameExpression instanceof O\ValueExpression) {
             $Name = $NameExpression->GetValue();
+            
             if (isset($this->VariableExpressionMap[$Name])) {
                 return $this->VariableExpressionMap[$Name];
             }
-            $this->AddUnresolvedVariable($Name);
-        } 
-        else {
-            $this->AddUnresolvedVariable($this->GetUnresolvedName($NameExpression));
         }
+        $this->AddUnresolvedVariable($Expression->Compile());
 
         return $Expression;
     }
@@ -190,19 +112,6 @@ class VariableResolver extends O\ExpressionWalker
     {
         if (!in_array($Name, $this->UnresolvedVariables)) {
             $this->UnresolvedVariables[] = $Name;
-        }
-    }
-
-    private function GetUnresolvedName(O\Expression $NameExpression)
-    {
-        if ($NameExpression instanceof O\ValueExpression) {
-            return $NameExpression->GetValue();
-        } 
-        else if ($NameExpression instanceof O\VariableExpression) {
-            return '$' . $this->GetUnresolvedName($NameExpression);
-        } 
-        else {
-            return '{COMPLEX UNRESOLVED NAME}';
         }
     }
 }

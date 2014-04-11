@@ -66,8 +66,15 @@ class FieldExpression extends ObjectOperationExpression
 
     protected function CompileCode(&$Code)
     {
-        $Code .= '->{';
         $this->ValueExpression->CompileCode($Code);
-        $Code .= '}';
+        $Code .= '->';
+        if($this->NameExpression instanceof ValueExpression) {
+            $Code .= $this->NameExpression->GetValue(); 
+        }
+        else {
+            $Code .= '{';
+            $this->NameExpression->CompileCode($Code);
+            $Code .= '}';
+        }
     }
 }

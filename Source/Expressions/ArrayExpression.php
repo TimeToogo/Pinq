@@ -13,6 +13,8 @@ class ArrayExpression extends Expression
     private $ValueExpressions;
     public function __construct(array $KeyExpressions, array $ValueExpressions)
     {
+        ksort($KeyExpressions);
+        ksort($ValueExpressions);
         if (array_keys($KeyExpressions) !== array_keys($ValueExpressions)) {
             throw new \Pinq\PinqException(
                     'The supplied key expression array keys must match the keys of the value expression array: (%s) !== (%s)',
@@ -24,7 +26,7 @@ class ArrayExpression extends Expression
     }
 
     /**
-     * @return Expression[]|null[]
+     * @return Expression|null[]
      */
     public function GetKeyExpressions()
     {
@@ -46,7 +48,7 @@ class ArrayExpression extends Expression
 
     public function Simplify()
     {
-        $KeyExpressions = self::SimplifyAll($this->KeyExpressions);
+        $KeyExpressions = self::SimplifyAll(array_filter($this->KeyExpressions)) + array_fill_keys(array_keys($this->KeyExpressions), null);
         $ValueExpressions = self::SimplifyAll($this->ValueExpressions);
 
         if(self::AllOfType($KeyExpressions, ValueExpression::GetType())
@@ -90,7 +92,7 @@ class ArrayExpression extends Expression
                 $Code .= ', ';
             }
 
-            if (!(($KeyExpression instanceof ValueExpression) && $KeyExpression->GetValue() === null)) {
+            if ($KeyExpression !== null) {
                 $KeyExpression->CompileCode($Code);
                 $Code .= ' => ';
             }

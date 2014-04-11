@@ -73,7 +73,7 @@ class AssignmentExpression extends Expression
     protected function CompileCode(&$Code)
     {
         $this->AssignToExpression->CompileCode($Code);
-        $Code .= $this->Operator;
+        $Code .= ' ' .  $this->Operator . ' ';
         $this->AssignmentValueExpression->CompileCode($Code);
     }
 }

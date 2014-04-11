@@ -38,9 +38,9 @@ class ExpressionWalker
     public function WalkAssignment(AssignmentExpression $Expression)
     {
         return $Expression->Update(
-                $this->Walk($Expression->GetAssignmentValueExpression()),
+                $this->Walk($Expression->GetAssignToExpression()),
                 $Expression->GetOperator(),
-                $this->Walk($Expression->GetAssignToExpression()));
+                $this->Walk($Expression->GetAssignmentValueExpression()));
     }
 
     public function WalkBinaryOperation(BinaryOperationExpression $Expression)
@@ -66,6 +66,12 @@ class ExpressionWalker
     }
 
     public function WalkEmpty(EmptyExpression $Expression)
+    {
+        return $Expression->Update(
+                $this->Walk($Expression->GetValueExpression()));
+    }
+
+    public function WalkIsset(IssetExpression $Expression)
     {
         return $Expression->Update(
                 $this->Walk($Expression->GetValueExpression()));

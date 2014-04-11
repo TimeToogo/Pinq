@@ -148,6 +148,10 @@ class AST implements IAST
                 return Expression::EmptyExpression(
                         $this->ParseNode($Node->expr));
 
+            case $Node instanceof \PHPParser_Node_Expr_Isset:
+                return Expression::IssetExpression(
+                        $this->ParseNodes($Node->vars));
+
             case $Node instanceof \PHPParser_Node_Expr_Variable:
                 $NameExpression = $this->ParseNameNode($Node->name);
 
@@ -219,8 +223,8 @@ class AST implements IAST
         return Expression::Parameter(
                 $Node->name, 
                 $Node->type === null ? null : (string)$Node, 
-                $Node->default !== null, 
-                $Node->default !== null ? $this->ParseNode($Node->default) : null, 
+                $Node->default === null ? O\ParameterExpression::IsRequired : O\ParameterExpression::HasDefaultValue , 
+                $Node->default === null ? null : $this->ParseNode($Node->default), 
                 $Node->byRef);
     }
 

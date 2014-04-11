@@ -134,7 +134,7 @@ class BinaryOperationExpression extends Expression
     {
         $Code .= '(';
         $this->LeftOperandExpression->CompileCode($Code);
-        $Code .= $this->Operator;
+        $Code .= ' ' .  $this->Operator . ' ';
         $this->RightOperandExpression->CompileCode($Code);
         $Code .= ')';
     }

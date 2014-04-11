@@ -20,7 +20,8 @@ class ConstantValueNodeReplacerVisitor extends \PHPParser_NodeVisitorAbstract
     {
         switch (true) {
             case $Node instanceof PHPParserResolvedValueNode:
-                return $Node->Value;
+                $Value = $Node->Value;
+                break;
 
             case $Node instanceof \PHPParser_Node_Scalar_DNumber:
             case $Node instanceof \PHPParser_Node_Scalar_LNumber:
@@ -40,36 +41,12 @@ class ConstantValueNodeReplacerVisitor extends \PHPParser_NodeVisitorAbstract
                 break;
 
             case $Node instanceof \PHPParser_Node_Expr_StaticPropertyFetch:
-                if ($Node->class instanceof \PHPParser_Node_Expr) {
+                if ($Node->class instanceof \PHPParser_Node_Expr || $Node->name instanceof \PHPParser_Node_Expr) {
+                    $IsConstant = false;
                     return;
                 }
                 $ClassName = (string) $Node->class;
                 $Value = $ClassName::${$Node->name};
-                break;
-
-            case $Node instanceof \PHPParser_Node_Expr_Array:
-                $Value = [];
-
-                foreach ($Node->items as $Key => $Item) {
-                    $IsKeyConstant = null;
-                    $IsValueConstant = null;
-
-                    $Key = $Item->key === null ? null : $this->GetConstantValue($Item->key, $IsKeyConstant);
-                    $ItemValue = $this->GetConstantValue($Item->value, $IsValueConstant);
-
-                    if (!$IsKeyConstant || !$IsValueConstant) {
-                        $IsConstant = false;
-
-                        return;
-                    }
-
-                    if ($Key !== null) {
-                        $Value[$Key] = $ItemValue;
-                    } 
-                    else {
-                        $Value[] = $ItemValue;
-                    }
-                }
                 break;
 
             default:
