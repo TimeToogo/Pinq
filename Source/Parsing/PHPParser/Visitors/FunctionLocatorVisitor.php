@@ -2,6 +2,8 @@
 
 namespace Pinq\Parsing\PHPParser\Visitors;
 
+define('IS_HHVM', defined('HHVM_VERSION'));
+
 /**
  * Attempts to locate a function node from the supplied function reflection.
  * If two ambigous function are found, it throws an exception.
@@ -63,7 +65,13 @@ class FunctionLocatorVisitor extends \PHPParser_NodeVisitorAbstract
 
     private function MatchesFunctionName($FunctionName)
     {
-        return $this->NamespaceName === $this->CurrentNamespace  && $this->FunctionName === $FunctionName;
+        //HHVM Compatibility: hhvm does not return namespaces for closures :/
+        if(IS_HHVM) {
+            return $this->FunctionName === $FunctionName;
+        }
+        else {
+            return $this->NamespaceName === $this->CurrentNamespace  && $this->FunctionName === $FunctionName;
+        }
     }
 
     public function enterNode(\PHPParser_Node $Node)
