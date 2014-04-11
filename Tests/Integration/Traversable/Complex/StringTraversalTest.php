@@ -20,6 +20,37 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
 
         $this->AssertMatches($Traversable, [1 => 'Bar', 4 => 'Data', 6 => 'Dallas', 0 => 'Foo', 5 => 'Lorem Ipsum', 3 => 'Pinq', 2 => 'Test']);
     }
+    
+    public function PHPDocExample()
+    {
+        return $this->ImplementationsFor([
+                0 => ['volume' => 67, 'edition' => 2],
+                1 => ['volume' => 86, 'edition' => 1],
+                2 => ['volume' => 85, 'edition' => 6],
+                3 => ['volume' => 98, 'edition' => 2],
+                4 => ['volume' => 86, 'edition' => 6],
+                5 => ['volume' => 67, 'edition' => 7]
+        ]);
+    }
+    
+    /**
+     * @dataProvider PHPDocExample
+     */
+    public function testOrderingMultiplePHPDocExampleButPreservesKeys(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $Traversable = $Traversable
+                ->OrderByDescending(function ($I) { return $I['volume']; })
+                ->ThenByAscending(function ($I) { return $I['edition']; });
+
+        $this->AssertMatches($Traversable,  [
+            3 => ['volume' => 98, 'edition' => 2], 
+            1 => ['volume' => 86, 'edition' => 1], 
+            4 => ['volume' => 86, 'edition' => 6], 
+            2 => ['volume' => 85, 'edition' => 6], 
+            0 => ['volume' => 67, 'edition' => 2], 
+            5 => ['volume' => 67, 'edition' => 7]
+        ]);
+    }
 
     /**
      * @dataProvider SomeStrings

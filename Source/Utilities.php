@@ -106,11 +106,14 @@ final class Utilities
             call_user_func_array('array_multisort', $OrderArguments);
         }
         else {
+            //HHVM Compatibility: hhvm array_multisort wants all argument by ref?
             $ReferencedOrderArguments = [];
-            foreach($OrderArguments as $Key => &$OrderArguments) {
-                $ReferencedOrderArguments[] =& $OrderArguments;
+            foreach($OrderArguments as $Key => $OrderArgument) {
+                $ReferencedOrderArguments[] =& $OrderArgument;
+                unset($OrderArgument);
             }
             $ReferencedOrderArguments[] =& $StringKeysArray;
+            
             call_user_func_array('array_multisort', $ReferencedOrderArguments);
         }
         
