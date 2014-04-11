@@ -87,7 +87,8 @@ class FunctionFinderVisitor extends \PHPParser_NodeVisitorAbstract
     
     private function ClosureNodeSignatureHash(\PHPParser_Node_Expr_Closure $Node)
     {
-        if(!defined('HHVM')) {
+        //HHVM Compatibility: hhvm does not return namespace for closure name
+        if(!defined('HHVM_VERSION')) {
             $Name = $this->CurrentNamespace . '\\{closure}';
         }
         else {
