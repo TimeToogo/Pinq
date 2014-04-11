@@ -6,8 +6,15 @@ use \Pinq\Parsing\ParserBase;
 
 class Parser extends ParserBase
 {
+    /**
+     * @var \PHPParser_Parser 
+     */
     private static $PHPParser;
-    private static $ParsedFiles;
+        
+    /**
+     * @var \PHPParser_Node[][][] 
+     */
+    private static $ParsedFileFunctionNodesMap;
 
     public function __construct()
     {
@@ -19,40 +26,51 @@ class Parser extends ParserBase
             self::$PHPParser = new \PHPParser_Parser(new \PHPParser_Lexer());
         }
 
-        $FileNodes = $this->GetFileNodes($FileName);
-        $FunctionBodyNodes = $this->GetFunctionBodyNodes($FileNodes, $Reflection);
+        $FunctionNodesMap = $this->GetFileFunctionNodesMap($FileName);
+        $FunctionBodyNodes = $this->GetFunctionBodyNodes($FunctionNodesMap, $Reflection);
 
         return (new AST($FunctionBodyNodes))->GetExpressions();
     }
 
-    private function GetFileNodes($FileName)
+    private function GetFileFunctionNodesMap($FileName)
     {
-        if (!isset(self::$ParsedFiles[$FileName])) {
-            $FileData = file_get_contents($FileName);
-            self::$ParsedFiles[$FileName] = self::$PHPParser->parse($FileData);
+        if (!isset(self::$ParsedFileFunctionNodesMap[$FileName])) {
+            $ParsedNodes =  self::$PHPParser->parse(file_get_contents($FileName));
+            
+            $FunctionLocatorTraverser = new \PHPParser_NodeTraverser();
+
+            $NamespaceResolver = new \PHPParser_NodeVisitor_NameResolver();
+            $FunctionFinder = new Visitors\FunctionFinderVisitor();
+            $FunctionLocatorTraverser->addVisitor($NamespaceResolver);
+            $FunctionLocatorTraverser->addVisitor($FunctionFinder);
+            
+            $FunctionLocatorTraverser->traverse($ParsedNodes);
+            
+            
+            self::$ParsedFileFunctionNodesMap[$FileName] = $FunctionFinder->GetLocatedFunctionNodesMap();
         }
 
-        return self::$ParsedFiles[$FileName];
+        return self::$ParsedFileFunctionNodesMap[$FileName];
     }
 
-    private function GetFunctionBodyNodes(array $FileNodes, \ReflectionFunctionAbstract $Reflection)
+    private function GetFunctionBodyNodes(array $FunctionNodesMap, \ReflectionFunctionAbstract $Reflection)
     {
-        $FunctionLocatorTraverser = new \PHPParser_NodeTraverser();
+        $FunctionHash = Visitors\FunctionFinderVisitor::FunctionSignatureHash($Reflection);
         
-        $NamespaceResolver = new \PHPParser_NodeVisitor_NameResolver();
-        $FunctionLocator = new Visitors\FunctionLocatorVisitor($Reflection);
-        
-        $FunctionLocatorTraverser->addVisitor($NamespaceResolver);
-        $FunctionLocatorTraverser->addVisitor($FunctionLocator);
-        
-        $FunctionLocatorTraverser->traverse($FileNodes);
-
-        if (!$FunctionLocator->HasLocatedFunction()) {
-            throw new \Pinq\Parsing\ASTException(
-                    'Could not parse function %s: The function could not be located',
-                    $Reflection->getName());
+        if (!isset($FunctionNodesMap[$FunctionHash])) {
+            throw \Pinq\Parsing\InvalidFunctionException::InvalidFunctionMessage(
+                    'Cannot parse function, the function could not be located',
+                    $Reflection);
+        }
+        else if (count($FunctionNodesMap[$FunctionHash]) > 1) {
+            throw \Pinq\Parsing\InvalidFunctionException::InvalidFunctionMessage(
+                    'Cannot parse function, two ambiguous functions are defined on the same line',
+                    $Reflection);
         }
 
-        return $FunctionLocator->GetBodyNodes();
+        /* @var $FunctionNode PHPParser_Node_Stmt_Function|PHPParser_Node_Stmt_ClassMethod|PHPParser_Node_Expr_Closure */
+        $FunctionNode = $FunctionNodesMap[$FunctionHash][0];
+        
+        return $FunctionNode->stmts;
     }
 }

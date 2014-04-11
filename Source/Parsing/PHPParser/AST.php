@@ -2,13 +2,12 @@
 
 namespace Pinq\Parsing\PHPParser;
 
-use \Pinq\Parsing\IAST;
 use \Pinq\Expressions as O;
 use \Pinq\Expressions\Expression;
 use \Pinq\Expressions\Operators;
 use \Pinq\Parsing\ASTException;
 
-class AST implements IAST
+class AST
 {
     private $Nodes = [];
 
