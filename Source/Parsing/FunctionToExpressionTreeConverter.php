@@ -139,7 +139,9 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
         //ReflectionFunction::getStaticVariables() returns the used variables for closures
         $KnownVariables = $Reflection->getStaticVariables();
         
-        if($Function instanceof \Closure) {
+        
+        //HHVM Compatibility: hhvm does not support ReflectionFunctionAbstract::getClosureThis
+        if($Function instanceof \Closure && !defined('HHVM_VERSION')) {
             $ThisValue = $Reflection->getClosureThis();
             if($ThisValue !== null) {
                 $KnownVariables['this'] = $ThisValue;
