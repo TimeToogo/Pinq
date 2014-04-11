@@ -101,8 +101,18 @@ final class Utilities
             $StringKeysArray['a' . $Key] = $Value;
         }
         
-        $OrderArguments[] =& $StringKeysArray;
-        call_user_func_array('array_multisort', $OrderArguments);
+        if(!defined('HHVM_VERSION')) {
+            $OrderArguments[] =& $StringKeysArray;
+            call_user_func_array('array_multisort', $OrderArguments);
+        }
+        else {
+            $ReferencedOrderArguments = [];
+            foreach($OrderArguments as $Key => &$OrderArguments) {
+                $ReferencedOrderArguments[] =& $OrderArguments;
+            }
+            $ReferencedOrderArguments[] =& $StringKeysArray;
+            call_user_func_array('array_multisort', $ReferencedOrderArguments);
+        }
         
         $UnserializedKeyArray = [];
         foreach ($StringKeysArray as $Key => $Value) {
