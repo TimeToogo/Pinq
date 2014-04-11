@@ -108,9 +108,8 @@ final class Utilities
         else {
             //HHVM Compatibility: hhvm array_multisort wants all argument by ref?
             $ReferencedOrderArguments = [];
-            foreach($OrderArguments as $Key => $OrderArgument) {
-                $ReferencedOrderArguments[] =& $OrderArgument;
-                unset($OrderArgument);
+            foreach($OrderArguments as $Key => &$OrderArgument) {
+                $ReferencedOrderArguments[$Key] =& $OrderArgument;
             }
             $ReferencedOrderArguments[] =& $StringKeysArray;
             
