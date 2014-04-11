@@ -71,7 +71,7 @@ class ComplexParserTest extends ParserTest
                                                         O\Expression::UnaryOperation(
                                                                 O\Operators\Unary::Plus,
                                                                 O\Expression::UnaryOperation(
-                                                                        O\Operators\Unary::Increment,/*>>>>>>>*/
+                                                                        O\Operators\Unary::Increment,
                                                                         self::Variable('I'))
                                                                 )
                                                         )
