@@ -55,14 +55,14 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
             if($Parameter->isOptional() && !$Parameter->isDefaultValueAvailable()) {
                 $HasUnavailableDefaultValue = true;
             }
-            $ArgumentExpressions[] = O\Expression::Variable(O\Expression::Value($Parameter->name));
+            $ArgumentExpressions[] = O\Expression::Variable(O\Expression::Value($Parameter->getName()));
         }
         
         if(!$HasUnavailableDefaultValue) {
             return [
                 O\Expression::ReturnExpression(
                         O\Expression::FunctionCall(
-                                O\Expression::Value($Reflection->name),
+                                O\Expression::Value($Reflection->getName()),
                                 $ArgumentExpressions))
             ];
         }
@@ -70,7 +70,7 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
             return [
                 O\Expression::ReturnExpression(
                         O\Expression::FunctionCall(O\Expression::Value('call_user_func_array'),
-                                [O\Expression::Value($Reflection->name), O\Expression::FunctionCall(O\Expression::Value('func_get_args'))]))
+                                [O\Expression::Value($Reflection->getName()), O\Expression::FunctionCall(O\Expression::Value('func_get_args'))]))
             ];
         }
     }
@@ -97,11 +97,11 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
             $TypeHint = 'callable';
         } 
         else if ($Parameter->getClass() !== null) {
-            $TypeHint = $Parameter->getClass()->name;
+            $TypeHint = $Parameter->getClass()->getName();
         }
         
         return O\Expression::Parameter(
-                $Parameter->name, 
+                $Parameter->getName(), 
                 $TypeHint, 
                 $Parameter->isOptional(), 
                 $Parameter->isDefaultValueAvailable() ? $Parameter->getDefaultValue() : null, 

@@ -23,7 +23,7 @@ class InvalidFunctionException extends \Pinq\PinqException
                 count($ParameterTypeHints),
                 implode(', ', $ParameterTypeHints),
                 $Reflection->getNumberOfParameters(),
-                implode(', ', array_map(function ($I) { return $I->getClass() ? $I->getClass()->name : '{NONE}'; }, $Reflection->getParameters())));
+                implode(', ', array_map(function ($I) { return $I->getClass() ? $I->getClass()->getName() : '{NONE}'; }, $Reflection->getParameters())));
     }
 
     public static function InvalidFunctionMessage($MessageFormat, \ReflectionFunctionAbstract $Reflection)
