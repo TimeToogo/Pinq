@@ -27,7 +27,7 @@ abstract class RequestEvaluator extends Requests\RequestVisitor
     {
         if(!$this->IsLoaded) {
             $Traversable = new \Pinq\Traversable($this->LoadValues());
-            $this->LoadedRequestEvaluator = new Traversable\RequestEvaluator($Traversable, $this->QueryStream);
+            $this->LoadedRequestEvaluator = new Traversable\RequestEvaluator($Traversable);
             $this->IsLoaded = true;
         }
         
