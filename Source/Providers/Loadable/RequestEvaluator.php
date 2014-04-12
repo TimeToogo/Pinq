@@ -18,9 +18,9 @@ abstract class RequestEvaluator extends Requests\RequestVisitor
      */
     private $IsLoaded = false;
     
-    public function __construct(Queries\IScope $QueryStream)
+    public function __construct()
     {
-        parent::__construct($QueryStream);
+        
     }
     
     public function VisitValues(Requests\Values $Request)

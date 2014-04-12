@@ -8,26 +8,25 @@ use \Pinq\Queries\Requests;
 class RequestEvaluator extends Requests\RequestVisitor
 {
     /**
-     * @var Traversable\QueryScope
+     * @var Requests\RequestVisitor
      */
-    private $InnerQueryScope;
+    private $InnerRequestEvaluator;
     
     /**
      * @var array
      */
     private $MethodResultCache = [];
     
-    public function __construct(\Pinq\Providers\IScopedRequestEvaluator $InnerQueryScope)
+    public function __construct(Requests\RequestVisitor $InnerRequestEvaluator)
     {
-        parent::__construct($InnerQueryScope->GetScope());
-        $this->InnerQueryScope = $InnerQueryScope;
+        $this->InnerRequestEvaluator = $InnerRequestEvaluator;
     }
     
     private function CacheMethodResult($MethodName, Queries\IRequest $Request) 
     {
         $Key = $MethodName . '-' . md5(serialize($Request));
         if(!isset($this->MethodResultCache[$Key])) {
-            $this->MethodResultCache[$Key] = $this->InnerQueryScope->$MethodName($Request);
+            $this->MethodResultCache[$Key] = $this->InnerRequestEvaluator->$MethodName($Request);
         }
 
         return $this->MethodResultCache[$Key];
