@@ -31,9 +31,7 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
 
     final public function Converters() 
     {
-        return [
-            $this->Implementations,
-        ];
+        return array_map(function ($I) { return [$I]; }, $this->Implementations);
     }
     
     final protected function AssertConvertsAndRecompilesCorrectly(callable $Function, array $ArgumentSets, O\Expression $ReturnExpression = null) 

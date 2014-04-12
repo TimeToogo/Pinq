@@ -25,14 +25,14 @@ abstract class ParserTest extends \Pinq\Tests\PinqTestCase
     
     protected function Implementations()
     {
-        return [new Parsing\PHPParser\Parser()];
+        return [
+            new Parsing\PHPParser\Parser(),
+        ];
     }
 
     final public function Parsers() 
     {
-        return [
-            $this->Implementations,
-        ];
+        return array_map(function ($I) { return [$I]; }, $this->Implementations);
     }
     
     final protected function AssertParsedAs(callable $Function, array $Expressions) 
