@@ -68,7 +68,7 @@ class FieldExpression extends ObjectOperationExpression
     {
         $this->ValueExpression->CompileCode($Code);
         $Code .= '->';
-        if($this->NameExpression instanceof ValueExpression) {
+        if($this->NameExpression instanceof ValueExpression && \Pinq\Utilities::IsNormalSyntaxName($this->NameExpression->GetValue())) {
             $Code .= $this->NameExpression->GetValue(); 
         }
         else {

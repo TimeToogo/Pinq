@@ -102,7 +102,7 @@ abstract class Expression
     /**
      * @return NewExpression
      */
-    final public static function Constructor(Expression $ClassTypeExpression, array $ArgumentValueExpressions = [])
+    final public static function NewExpression(Expression $ClassTypeExpression, array $ArgumentValueExpressions = [])
     {
         return new NewExpression($ClassTypeExpression, $ArgumentValueExpressions);
     }

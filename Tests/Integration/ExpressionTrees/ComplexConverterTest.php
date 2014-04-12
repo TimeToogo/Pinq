@@ -2,6 +2,7 @@
 
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
+use \Pinq\Expressions as O;
 
 class ComplexConverterTest extends ConverterTest
 {
@@ -24,6 +25,87 @@ class ComplexConverterTest extends ConverterTest
         
         $Factor = 5;
         $this->AssertConvertsAndRecompilesCorrectly(function ($I) use($Factor) { return $I * $Factor; }, $ValueSet);
+    }
+    
+    /**
+     * @dataProvider Converters
+     */
+    public function testVariableReturnValueResolution()
+    {
+        foreach([1, null, 'test', false, new \stdClass(), [1234567890, 'tests', new \stdClass()]] as $Value) {
+            $this->AssertFirstResolvedReturnExpression(function () use($Value) { return $Value; }, O\Expression::Value($Value));
+        }
+    }
+    
+    /**
+     * @dataProvider Converters
+     */
+    public function testOperationsReturnValueResolution()
+    {
+        $Value = 5;
+        $this->AssertReturnValueResolvesCorrectly(function () use($Value) { return $Value + 1; });
+        $this->AssertReturnValueResolvesCorrectly(function () use($Value) { return $Value - 1; });
+        $this->AssertReturnValueResolvesCorrectly(function () use($Value) { return $Value * 5; });
+        $this->AssertReturnValueResolvesCorrectly(function () use($Value) { return $Value / $Value + $Value - $Value % ~$Value; });
+    }
+    
+    /**
+     * @dataProvider Converters
+     */
+    public function testComplexReturnValueResolution()
+    {
+        $Value = 5;
+        $this->AssertReturnValueResolvesCorrectly(
+                function () use($Value) {
+                    $Copy = $Value;
+                    return $Copy + 1; 
+                });
+                
+        $this->AssertReturnValueResolvesCorrectly(
+                function () use($Value) {
+                    $Copy =& $Value;
+                    $Another = $Value + 1;
+                    return $Copy + 1 - $Another; 
+                });
+                
+        $this->AssertReturnValueResolvesCorrectly(
+                function () use($Value) {
+                    $Copy = $Value / $Value + $Value - $Value % ~$Value;
+                    $Another = $Value % 34 - $Copy + $Value;
+                    return $Another - $Copy + 1 - $Another * $Value % 34; 
+                });
+    }
+    /**
+     * @dataProvider Converters
+     */
+    public function testComplexReturnValueResolutionWithVariableVariables()
+    {
+        $Value = 5;
+        $Variable = 'Value';
+        $this->AssertReturnValueResolvesCorrectly(
+                function () use($Value, $Variable) {
+                    $Copy = $$Variable;
+                    return $Copy + 1; 
+                });
+                
+        $this->AssertReturnValueResolvesCorrectly(
+                function () use($Value, $Variable) {
+                    $Copy =& $$Variable;
+                    $Another = $Value + 1;
+                    return $Copy + 1 - $Another; 
+                });
+                
+        $this->AssertReturnValueResolvesCorrectly(
+                function () use($Value, $Variable) {
+                    $Copy = $$Variable / $Value + $Value - $Value % ~$$Variable;
+                    $Another = $Value % 34 - $Copy + $$Variable;
+                    return $Another - $Copy + 1 - $Another * $Value % 34; 
+                });
+    }
+    
+    final protected function AssertReturnValueResolvesCorrectly(callable $Function) 
+    {
+        $this->AssertFirstResolvedReturnExpression($Function, O\Expression::Value($Function()));
     }
     
     /** ---- Some code from the wild ---- **/

@@ -26,12 +26,22 @@ class FunctionExpressionTree implements \Serializable
     /**
      * @var O\ReturnExpression|null
      */
-    private $ReturnExpression = null;
+    private $ReturnValueExpressions = null;
 
     /**
      * @var Parsing\Walkers\VariableResolver
      */
-    private $VariableResolverWalker;
+    private $VariableResolver;
+
+    /**
+     * @var Parsing\Walkers\ValueUnresolver
+     */
+    private $ValueUnresolver;
+
+    /**
+     * @var Parsing\Walkers\ReturnValueExpressionResolver
+     */
+    private $ReturnValueExpressionResolver;
 
     /**
      * @var string|null
@@ -46,7 +56,14 @@ class FunctionExpressionTree implements \Serializable
     public function __construct(callable $OriginalFunction = null, array $ParameterExpressions, array $Expressions)
     {
         $this->ParameterExpressions = $ParameterExpressions;
-        $this->VariableResolverWalker = new Parsing\Walkers\VariableResolver();
+        
+        $this->VariableResolver = new O\Walkers\VariableResolver();
+        $this->ReturnValueExpressionResolver = new O\Walkers\ReturnValueExpressionResolver();
+        
+        //Only parameterize objects, arrays and resources
+        $this->ValueUnresolver = new O\Walkers\ValueUnresolver(function ($Value) { return !is_scalar($Value); });
+        
+        
         $this->Invalidate($Expressions);
 
         $this->CompiledFunction = $OriginalFunction;
@@ -68,6 +85,7 @@ class FunctionExpressionTree implements \Serializable
     {
         return $this->LoadCompiledFunction();
     }
+    
         
     public function serialize()
     {
@@ -97,20 +115,34 @@ class FunctionExpressionTree implements \Serializable
         
         return call_user_func_array($Function, func_get_args());
     }
-
+    
     private function LoadCompiledFunction()
     {
         if ($this->CompiledFunction === null) {
-            $Code = O\Expression::Closure($this->ParameterExpressions, [], $this->BodyExpressions)
-                    ->Compile();
+            $this->ValueUnresolver->ResetValueExpressionVariableNameMap();
+            $ParameterizedBodyExpressions = $this->ValueUnresolver->WalkAll($this->BodyExpressions);
+            $ParameterNameValueMap = $this->ValueUnresolver->GetVariableNameValueMap();
             
-            $this->CompiledFunction  = eval('return ' . $Code . ';');
+            $Code = O\Expression::Closure(
+                    $this->ParameterExpressions,
+                    array_keys($ParameterNameValueMap),
+                    $ParameterizedBodyExpressions)
+                            ->Compile();
+        
+            $this->EvaluateFunctionCode($Code, $ParameterNameValueMap);
+            
             if(!($this->CompiledFunction instanceof \Closure)) {
                 throw new PinqException('Could not compile code into closure: %s', $Code);
             }
         }
 
         return $this->CompiledFunction;
+    }
+    
+    private function EvaluateFunctionCode($___Code____00987654321, array $___UsedVariableNameValueMap____1234567890)
+    {
+        extract($___UsedVariableNameValueMap____1234567890);
+        eval('$this->CompiledFunction = ' . $___Code____00987654321 . ';');
     }
 
     /**
@@ -122,30 +154,15 @@ class FunctionExpressionTree implements \Serializable
     }
 
     /**
-     * @return boolean
-     */
-    final public function HasReturnExpression()
-    {
-        return $this->ReturnExpression !== null;
-    }
-
-    /**
-     * @return O\ReturnExpression|null
-     */
-    final public function GetReturnExpression()
-    {
-        return $this->ReturnExpression;
-    }
-
-    /**
      * @return O\ReturnExpression
+     * @throws Parsing\InvalidFunctionException
      */
-    final public function VerifyReturnExpression()
+    final public function GetFirstResolvedReturnValueExpression()
     {
-        if($this->ReturnExpression === null) {
-            throw InvalidFunctionException::MustContainValidReturnExpression(Reflection::FromCallable($this->CompiledFunction));
+        if(count($this->ReturnValueExpressions) === 0) {
+            throw Parsing\InvalidFunctionException::MustContainValidReturnExpression(Reflection::FromCallable($this->CompiledFunction));
         }
-        return $this->ReturnExpression;
+        return $this->ReturnValueExpressions[0];
     }
     
     /**
@@ -163,13 +180,19 @@ class FunctionExpressionTree implements \Serializable
         }
         
         $this->SerializedData = null;
-        $this->BodyExpressions = $NewBodyExpressions;
-        if($WalkUnresolvedVariables) {
-            $this->VariableResolverWalker->ResetUnresolvedVariables();
-            $this->VariableResolverWalker->WalkAll($this->BodyExpressions);
-        }
-        $this->LoadReturnExpression();
         $this->CompiledFunction = null;
+        
+        $this->BodyExpressions = $NewBodyExpressions;
+        
+        if($WalkUnresolvedVariables) {
+            $this->VariableResolver->ResetUnresolvedVariables();
+            $this->BodyExpressions = $this->VariableResolver->WalkAll($this->BodyExpressions);
+        }
+        
+        $this->ReturnValueExpressionResolver->ResetReturnExpressions();
+        $this->ReturnValueExpressionResolver->WalkAll($this->BodyExpressions);
+        $this->ReturnValueExpressions = $this->ReturnValueExpressionResolver->GetResolvedReturnValueExpression();
+        
     }
 
     final public function Walk(O\ExpressionWalker $ExpressionWalker)
@@ -184,12 +207,12 @@ class FunctionExpressionTree implements \Serializable
 
     final public function HasUnresolvedVariables()
     {
-        return $this->VariableResolverWalker->HasUnresolvedVariables();
+        return $this->VariableResolver->HasUnresolvedVariables();
     }
 
     final public function GetUnresolvedVariables()
     {
-        return $this->VariableResolverWalker->GetUnresolvedVariables();
+        return $this->VariableResolver->GetUnresolvedVariables();
     }
 
     final public function ResolveVariables(array $VariableValueMap, array $VariableExpressionMap = [])
@@ -203,18 +226,8 @@ class FunctionExpressionTree implements \Serializable
 
     final public function ResolveVariablesToExpressions(array $VariableExpressionMap)
     {
-        $this->VariableResolverWalker->ResetUnresolvedVariables();
-        $this->VariableResolverWalker->SetVariableExpressionMap($VariableExpressionMap);
-        $this->Invalidate($this->VariableResolverWalker->WalkAll($this->BodyExpressions), false);
-    }
-
-    final protected function LoadReturnExpression()
-    {
-        $this->ReturnExpression = null;
-        foreach ($this->BodyExpressions as $Expression) {
-            if ($Expression instanceof O\ReturnExpression) {
-                $this->ReturnExpression = $Expression;
-            }
-        }
+        $this->VariableResolver->ResetUnresolvedVariables();
+        $this->VariableResolver->SetVariableExpressionMap($VariableExpressionMap);
+        $this->Invalidate($this->VariableResolver->WalkAll($this->BodyExpressions), false);
     }
 }

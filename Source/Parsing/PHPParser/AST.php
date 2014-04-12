@@ -111,7 +111,7 @@ class AST
                 return $this->ParseFunctionCallNode($Node);
 
             case ($Node instanceof \PHPParser_Node_Expr_New):
-                return Expression::Constructor(
+                return Expression::NewExpression(
                         $this->ParseNameNode($Node->class),
                         $this->ParseNodes($Node->args));
 

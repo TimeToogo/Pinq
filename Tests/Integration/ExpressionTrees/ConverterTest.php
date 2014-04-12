@@ -3,6 +3,7 @@
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
 use \Pinq\Parsing\IFunctionToExpressionTreeConverter;
+use \Pinq\Expressions as O;
 
 abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
 {
@@ -18,7 +19,7 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
         parent::__construct($name, $data, $dataName);
         $this->Implementations = $this->Implementations();
         
-        $this->CurrentImplementation = isset($data[0][0]) ? $data[0][0] : null;
+        $this->CurrentImplementation = isset($data[0]) ? $data[0] : null;
     }
 
     protected function Implementations() 
@@ -31,11 +32,11 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
     final public function Converters() 
     {
         return [
-            array_map(function($I) { return [$I]; }, $this->Implementations),
+            $this->Implementations,
         ];
     }
     
-    final protected function AssertConvertsAndRecompilesCorrectly(callable $Function, array $ArgumentSets) 
+    final protected function AssertConvertsAndRecompilesCorrectly(callable $Function, array $ArgumentSets, O\Expression $ReturnExpression = null) 
     {
         if($this->CurrentImplementation === null) {
             throw new \Exception('Please remember to use the @dataProvider annotation to test all the implementations.');
@@ -53,5 +54,19 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
 
             $this->assertEquals($ExpectedReturn, $ActualReturn);
         }
+        
+        if($ReturnExpression !== null) {
+            $this->AssertFirstResolvedReturnExpression($Function, $ReturnExpression);
+        }
+    } 
+    
+    final protected function AssertFirstResolvedReturnExpression(callable $Function, O\Expression $Expression) 
+    {
+        if($this->CurrentImplementation === null) {
+            throw new \Exception('Please remember to use the @dataProvider annotation to test all the implementations.');
+        }
+        $FunctionExpressionTree = $this->CurrentImplementation->Convert($Function);
+        
+        $this->assertEquals($Expression, $FunctionExpressionTree->GetFirstResolvedReturnValueExpression());
     }    
 }

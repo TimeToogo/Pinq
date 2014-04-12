@@ -31,7 +31,7 @@ abstract class ParserTest extends \Pinq\Tests\PinqTestCase
     final public function Parsers() 
     {
         return [
-            array_map(function($I) { return $I; }, $this->Implementations),
+            $this->Implementations,
         ];
     }
     

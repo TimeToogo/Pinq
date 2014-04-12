@@ -19,14 +19,14 @@ class FuncBuilder extends FunctionExpressionTree
         return Lambda::Unary(
                 $Function, 
                 $Operator,
-                $this->VerifyReturnExpression());
+                $this->GetFirstResolvedReturnValueExpression());
     }
     
     private function Binary(\Closure $Function, $Value, $Operator)
     {
         return Lambda::Binary(
                 $Function, 
-                $this->VerifyReturnExpression(), 
+                $this->GetFirstResolvedReturnValueExpression(), 
                 $Operator,
                 self::ExpressionFor($Value));
     }
@@ -188,7 +188,7 @@ class FuncBuilder extends FunctionExpressionTree
         
         return Lambda::ReturnLambda(
                 function ($I) use ($O, $Value) { return $O($I)->{self::ValueFor($Value)}; }, 
-                O\Expression::Field($this->VerifyReturnExpression(), self::ExpressionFor($Value)));
+                O\Expression::Field($this->GetFirstResolvedReturnValueExpression(), self::ExpressionFor($Value)));
     }
     
     /**
@@ -202,7 +202,7 @@ class FuncBuilder extends FunctionExpressionTree
                 function ($I) use($O, $Name, $Arguments) { return empty($Arguments) ? 
                         $O($I)->{FuncBuilder::ValueFor($Name, $I)}() : 
                         call_user_func_array([$O($I), self::ValueFor($Name, $I)], self::ValuesFor($Arguments)); }, 
-                O\Expression::MethodCall($this->VerifyReturnExpression(), self::ExpressionFor($Name), self::ExpressionsFor($Arguments)));
+                O\Expression::MethodCall($this->Get(), self::ExpressionFor($Name), self::ExpressionsFor($Arguments)));
     }
     
     /**
@@ -213,8 +213,8 @@ class FuncBuilder extends FunctionExpressionTree
         $O = $this->OriginalFunction;
         
         return Lambda::ReturnLambda(
-                function ($I) use($O, $Index) { return $O($I)[self::ValueFor($Index, $I)]; }, 
-                O\Expression::Index($this->VerifyReturnExpression(), self::ExpressionFor($Index)));
+                function ($I) use($O, $Index) { return $O($I)[self::ValueFor($Index, $I)]; },
+                O\Expression::Index($this->GetFirstResolvedReturnValueExpression(), self::ExpressionFor($Index)));
     }
     
     /**
@@ -228,7 +228,7 @@ class FuncBuilder extends FunctionExpressionTree
                 function ($I) use($O, $Arguments) { $Return = $O($I); return empty($Arguments) ? 
                         $Return() : 
                         call_user_func_array($Return, self::ValuesFor($Arguments)); }, 
-                O\Expression::Invocation($this->VerifyReturnExpression(), self::ExpressionsFor($Arguments)));
+                O\Expression::Invocation($this->GetFirstResolvedReturnValueExpression(), self::ExpressionsFor($Arguments)));
     }
     
     // </editor-fold>
@@ -252,7 +252,7 @@ class FuncBuilder extends FunctionExpressionTree
     {
         if($Value instanceof FunctionExpressionTree) 
         {
-            return $Value->VerifyReturnExpression();
+            return $Value->GetFirstResolvedReturnValueExpression();
         }
         
         return O\Expression::Value($Value);

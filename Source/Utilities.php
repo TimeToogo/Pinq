@@ -93,4 +93,9 @@ final class Utilities
         
         $ArrayToSort = $UnserializedKeyArray;
     }
+    
+    public static function IsNormalSyntaxName($Name) 
+    {
+        return (bool)preg_match('/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/', $Name);
+    }
 }

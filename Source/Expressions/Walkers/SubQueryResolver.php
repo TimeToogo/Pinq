@@ -1,6 +1,6 @@
 <?php
 
-namespace Pinq\Parsing\Walkers;
+namespace Pinq\Expressions\Walkers;
 
 use \Pinq\Expressions as O;
 

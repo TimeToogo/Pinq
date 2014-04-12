@@ -2,6 +2,7 @@
 
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
+use \Pinq\Expressions as O;
 
 class BasicConverterTest extends ConverterTest
 {
@@ -18,14 +19,24 @@ class BasicConverterTest extends ConverterTest
      */
     public function testConstantReturnValueFunctions()
     {
-        $this->AssertConvertsAndRecompilesCorrectly(function () { return 1; }, []);
-        $this->AssertConvertsAndRecompilesCorrectly(function () { return 2; }, []);
-        $this->AssertConvertsAndRecompilesCorrectly(function () { return '1'; }, []);
-        $this->AssertConvertsAndRecompilesCorrectly(function () { return 1.01; }, []);
-        $this->AssertConvertsAndRecompilesCorrectly(function () { return true; }, []);
-        $this->AssertConvertsAndRecompilesCorrectly(function () { return null; }, []);
-        $this->AssertConvertsAndRecompilesCorrectly(function () { return [1,5,57,4 => 3, 'tset' => 'ftest']; }, []);
-        $this->AssertConvertsAndRecompilesCorrectly(function () { return new \stdClass(); }, []);
+        $this->AssertConvertsAndRecompilesCorrectly(function () { return 1; }, [], O\Expression::Value(1));
+        
+        $this->AssertConvertsAndRecompilesCorrectly(function () { return 2; }, [], O\Expression::Value(2));
+        
+        $this->AssertConvertsAndRecompilesCorrectly(function () { return '1'; }, [], O\Expression::Value('1'));
+        
+        $this->AssertConvertsAndRecompilesCorrectly(function () { return 1.01; }, [], O\Expression::Value(1.01));
+        
+        $this->AssertConvertsAndRecompilesCorrectly(function () { return true; }, [], O\Expression::Value(true));
+        
+        $this->AssertConvertsAndRecompilesCorrectly(function () { return null; }, [], O\Expression::Value(null));
+        
+        $this->AssertConvertsAndRecompilesCorrectly(function () { return [1,5,57,4 => 3, 'tset' => 'ftest']; }, [], 
+                O\Expression::ArrayExpression(
+                        [null, null, null, O\Expression::Value(4), O\Expression::Value('tset')], 
+                        [O\Expression::Value(1), O\Expression::Value(5), O\Expression::Value(57), O\Expression::Value(3), O\Expression::Value('ftest')]));
+        
+        $this->AssertConvertsAndRecompilesCorrectly(function () { return new \stdClass(); }, [], O\Expression::NewExpression(O\Expression::Value('stdClass')));
     }
     
     /**

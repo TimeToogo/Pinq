@@ -16,7 +16,7 @@ class ExpressionVisitor extends ExpressionWalker
 
     final public function WalkAssignment(AssignmentExpression $Expression)
     {
-        $this->VisitArray($Expression);
+        $this->VisitAssignment($Expression);
         return $Expression;
     }
     protected function VisitAssignment(AssignmentExpression $Expression) {}

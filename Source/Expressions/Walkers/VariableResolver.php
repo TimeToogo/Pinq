@@ -1,21 +1,15 @@
 <?php
 
-namespace Pinq\Parsing\Walkers;
+namespace Pinq\Expressions\Walkers;
 
 use \Pinq\Expressions as O;
 
 /**
- * Resolves variables within the expression tree.
+ * Resolves variables within the expression tree to the supplied expressions/values.
  *
- * {
- *     $Var = 4 + 5 - $Unresolvable;
- *     return 3 + $Var;
- * }
+ * $Var = 4 + 5 - $Unresolvable;
  * === with ['Unresolvable' => 97] resolves to ===
- * {
- *     $Var = 4 + 5 - 97;
- *     return 3 + $Var
- * }
+ * $Var = 4 + 5 - 97;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
