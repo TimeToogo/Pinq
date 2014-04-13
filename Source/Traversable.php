@@ -9,7 +9,7 @@ namespace Pinq;
 class Traversable implements \Pinq\ITraversable
 {
     /**
-     * @var Iterator 
+     * @var \Iterator 
      */
     protected $ValuesIterator;
     
