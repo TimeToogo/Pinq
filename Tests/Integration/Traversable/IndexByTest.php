@@ -5,6 +5,14 @@ namespace Pinq\Tests\Integration\Traversable;
 class IndexByTest extends TraversableTest
 {
     /**
+     * @dataProvider Everything
+     */
+    public function testThatExecutionIsDeffered(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $this->AssertThatExecutionIsDeffered([$Traversable, 'IndexBy']);
+    }
+    
+    /**
      * @dataProvider AssocOneToTen
      */
     public function testThatIndexByElementIndexesCorrectly(\Pinq\ITraversable $Traversable, array $Data)

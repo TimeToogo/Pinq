@@ -5,6 +5,27 @@ namespace Pinq\Tests\Integration\Traversable;
 class OrderByTest extends TraversableTest
 {
     /**
+     * @dataProvider Everything
+     */
+    public function testThatExecutionIsDeffered(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $this->AssertThatExecutionIsDeffered([$Traversable, 'OrderByAscending']);
+        $this->AssertThatExecutionIsDeffered([$Traversable, 'OrderByDescending']);
+    }
+    
+    /**
+     * @dataProvider Everything
+     */
+    public function testThatMultipleExecutionIsDeffered(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $this->AssertThatExecutionIsDeffered(function (callable $Function) use ($Traversable) {
+            return $Traversable->OrderByAscending($Function)
+                    ->ThenByAscending($Function)
+                    ->ThenByDescending($Function);
+        });
+    }
+    
+    /**
      * @dataProvider AssocOneToTen
      */
     public function testThatOrderByNegatingNumbersIsEquivalentToArrayReverse(\Pinq\ITraversable $Numbers, array $Data)

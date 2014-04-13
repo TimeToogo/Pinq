@@ -5,6 +5,14 @@ namespace Pinq\Tests\Integration\Traversable;
 class SelectTest extends TraversableTest
 {
     /**
+     * @dataProvider Everything
+     */
+    public function testThatExecutionIsDeffered(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $this->AssertThatExecutionIsDeffered([$Traversable, 'Select']);
+    }
+    
+    /**
      * @dataProvider AssocOneToTen
      */
     public function testThatSelectNumbersMapsCorrectlyAndPreservesKeys(\Pinq\ITraversable $Values, array $Data)

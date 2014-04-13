@@ -5,6 +5,14 @@ namespace Pinq\Tests\Integration\Traversable;
 class WhereTest extends TraversableTest
 {
     /**
+     * @dataProvider Everything
+     */
+    public function testThatExecutionIsDeffered(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $this->AssertThatExecutionIsDeffered([$Traversable, 'Where']);
+    }
+    
+    /**
      * @dataProvider AssocOneToTen
      */
     public function testThatWhereTrueDoesNotFilterAnyData(\Pinq\ITraversable $Numbers, array $Data)

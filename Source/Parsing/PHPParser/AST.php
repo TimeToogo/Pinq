@@ -237,6 +237,9 @@ class AST
             case $Node instanceof \PHPParser_Node_Stmt_Return:
                 return Expression::ReturnExpression(
                         $Node->expr !== null ? $this->ParseNode($Node->expr) : null);
+                
+            case $Node instanceof \PHPParser_Node_Stmt_Throw:
+                return Expression::ThrowExpression($this->ParseNode($Node->expr));
 
             default:
                 throw new ASTException(

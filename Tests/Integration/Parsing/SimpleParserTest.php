@@ -34,6 +34,14 @@ class SimpleParserTest extends ParserTest
     /**
      * @dataProvider Parsers
      */
+    public function testThrowNewExceptionStatment() 
+    {
+        $this->AssertParsedAs(function () { throw null; }, [O\Expression::ThrowExpression(O\Expression::Value(null))]);
+    }
+    
+    /**
+     * @dataProvider Parsers
+     */
     public function testReturnValueStatment() 
     {
         $this->AssertParsedAs(function () { return 1; }, [O\Expression::ReturnExpression(O\Expression::Value(1))]);

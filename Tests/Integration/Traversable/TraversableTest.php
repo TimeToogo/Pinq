@@ -2,8 +2,34 @@
 
 namespace Pinq\Tests\Integration\Traversable;
 
+class CustomException extends \Exception {}
+
 abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
 {
+    
+    final protected function AssertThatExecutionIsDeffered(callable $TraversableQuery)
+    {
+        $Exception = new CustomException();
+        
+        $ThowingFunction = function () use ($Exception) { throw $Exception; };
+        
+        try {
+            $Traversable = $TraversableQuery($ThowingFunction);
+        }
+        catch (\Exception $ThrownException) {
+            $this->assertFalse(true, 'Traversable query method should not have thrown exception');
+        }
+        
+        try {
+            foreach ($Traversable as $Key => $Value) {
+                $this->assertFalse(true, 'Iteration should have thrown an exception');
+            }
+        } 
+        catch (CustomException $ThrownException) {
+            $this->assertSame($Exception, $ThrownException);
+        }
+    }
+    
     
     final protected function ImplementationsFor(array $Data)
     {

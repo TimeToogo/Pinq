@@ -2,7 +2,7 @@
 
 namespace Pinq\Iterators;
 
-abstract class LazyIterator extends \IteratorIterator
+abstract class LazyIterator extends IteratorIterator
 {
     protected $Iterator;
     private $IsInitialized = false;

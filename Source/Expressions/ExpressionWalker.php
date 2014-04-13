@@ -134,6 +134,12 @@ class ExpressionWalker
                 $this->Walk($Expression->GetValueExpression()));
     }
 
+    public function WalkThrow(ThrowExpression $Expression)
+    {
+        return $Expression->Update(
+                $this->Walk($Expression->GetExceptionExpression()));
+    }
+
     public function WalkParameter(ParameterExpression $Expression)
     {
         return $Expression;

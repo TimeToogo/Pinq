@@ -2,7 +2,7 @@
 
 namespace Pinq\Iterators;
 
-class FilterIterator extends \IteratorIterator
+class FilterIterator extends IteratorIterator
 {
     private $Filter;
     

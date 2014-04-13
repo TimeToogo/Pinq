@@ -7,6 +7,14 @@ class GroupByTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
+    public function testThatExecutionIsDeffered(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $this->AssertThatExecutionIsDeffered([$Traversable, 'GroupBy']);
+    }
+    
+    /**
+     * @dataProvider Everything
+     */
     public function testThatGroupByElementReturnsITraversables(\Pinq\ITraversable $Traversable, array $Data)
     {
         $Groups = $Traversable->GroupBy(function ($I) { return $I; });

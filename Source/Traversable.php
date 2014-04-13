@@ -122,9 +122,9 @@ class Traversable implements \Pinq\ITraversable
     
     public function SelectMany(callable $Function) 
     {
-        $ProjectionIterator = new Iterators\ProjectionIterator($this->ValuesIterator, null, $Function);
+       // $ProjectionIterator = new Iterators\ProjectionIterator($this->ValuesIterator, null, $Function);
         
-        return new self(new Iterators\FlatteningIterator($ProjectionIterator));
+        return new self(new Iterators\FlatteningIterator($this->Select($Function)));
     }
     
     // </editor-fold>

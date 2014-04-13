@@ -5,6 +5,14 @@ namespace Pinq\Tests\Integration\Traversable;
 class SelectManyTest extends TraversableTest
 {
     /**
+     * @dataProvider Everything
+     */
+    public function testThatExecutionIsDeffered(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $this->AssertThatExecutionIsDeffered([$Traversable, 'SelectMany']);
+    }
+    
+    /**
      * @dataProvider TenRandomStrings
      */
     public function testThatSelectManyFlattensCorrectlyAndIgnoresKeys(\Pinq\ITraversable $Values, array $Data)

@@ -2,7 +2,7 @@
 
 namespace Pinq\Iterators;
 
-class FlatteningIterator extends \IteratorIterator
+class FlatteningIterator extends IteratorIterator
 {
     private $Count = 0;
     /**

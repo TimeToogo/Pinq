@@ -2,7 +2,7 @@
 
 namespace Pinq\Iterators;
 
-class RangeIterator extends \IteratorIterator
+class RangeIterator extends IteratorIterator
 {
     /**
      * @var int

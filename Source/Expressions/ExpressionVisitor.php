@@ -41,6 +41,13 @@ class ExpressionVisitor extends ExpressionWalker
         return $Expression;
     }
     protected function VisitClosure(ClosureExpression $Expression) {}
+    
+    final public function WalkParameter(ParameterExpression $Expression)
+    {
+        $this->VisitParameter($Expression);
+        return $Expression;
+    }
+    protected function VisitParameter(ParameterExpression $Expression) {}
 
     final public function WalkEmpty(EmptyExpression $Expression)
     {
@@ -48,6 +55,13 @@ class ExpressionVisitor extends ExpressionWalker
         return $Expression;
     }
     protected function VisitEmpty(EmptyExpression $Expression) {}
+    
+    final public function WalkIsset(IssetExpression $Expression)
+    {
+        $this->VisitIsset($Expression);
+        return $Expression;
+    }
+    protected function VisitIsset(IssetExpression $Expression) {}
 
     final public function WalkField(FieldExpression $Expression)
     {
@@ -98,6 +112,13 @@ class ExpressionVisitor extends ExpressionWalker
     }
     protected function VisitReturn(ReturnExpression $Expression) {}
 
+    public function WalkThrow(ThrowExpression $Expression)
+    {
+        $this->VisitThrow($Expression);
+        return $Expression;
+    }
+    protected function VisitThrow(ThrowExpression $Expression) {}
+    
     final public function WalkStaticMethodCall(StaticMethodCallExpression $Expression)
     {
         $this->VisitStaticMethodCall($Expression);

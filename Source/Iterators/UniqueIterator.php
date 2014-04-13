@@ -2,7 +2,7 @@
 
 namespace Pinq\Iterators;
 
-class UniqueIterator extends \IteratorIterator
+class UniqueIterator extends IteratorIterator
 {
     /**
      * @var HashSet 

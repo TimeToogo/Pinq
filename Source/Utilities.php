@@ -57,7 +57,7 @@ final class Utilities
             return $TraversableOrArray->getIterator();
         }
         else if($TraversableOrArray instanceof \Traversable) {
-            return new \IteratorIterator($TraversableOrArray);
+            return new IteratorIterator($TraversableOrArray);
         }
         else {
             return new \ArrayIterator($TraversableOrArray);

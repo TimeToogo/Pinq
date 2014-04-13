@@ -2,7 +2,7 @@
 
 namespace Pinq\Iterators;
 
-class ProjectionIterator extends \IteratorIterator
+class ProjectionIterator extends IteratorIterator
 {
     /**
      * @var callable|null

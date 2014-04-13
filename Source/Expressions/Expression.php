@@ -198,6 +198,14 @@ abstract class Expression
     }
 
     /**
+     * @return ThrowExpression
+     */
+    final public static function ThrowExpression(Expression $ExceptionExpression)
+    {
+        return new ThrowExpression($ExceptionExpression);
+    }
+
+    /**
      * @return ParameterExpression
      */
     final public static function Parameter($Name, $TypeHint = null, $HasDefaultValue = false, $DefaultValue = null, $IsPassedByReference = false)
