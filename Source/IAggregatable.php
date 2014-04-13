@@ -23,14 +23,6 @@ interface IAggregatable extends \Countable
     public function Exists();
     
     /**
-     * Returns whether the supplied value is contained within the aggregate
-     * 
-     * @param mixed $Value The value to check for
-     * @return boolean
-     */
-    public function Contains($Value);
-    
-    /**
      * Aggregates the values with the supplied function
      * 
      * @param callable $Function The aggregate function

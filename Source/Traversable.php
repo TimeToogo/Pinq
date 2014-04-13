@@ -18,6 +18,14 @@ class Traversable implements \Pinq\ITraversable
         $this->ValuesIterator = is_array($Values) ? new \ArrayIterator($Values) : $Values;
     }
     
+    /**
+     * @return ITraversable
+     */
+    final public static function From($Values)
+    {
+        return new self($Values);
+    }
+    
     final public function getIterator()
     {
         return $this->ValuesIterator;
@@ -122,9 +130,9 @@ class Traversable implements \Pinq\ITraversable
     
     public function SelectMany(callable $Function) 
     {
-       // $ProjectionIterator = new Iterators\ProjectionIterator($this->ValuesIterator, null, $Function);
+        $ProjectionIterator = new Iterators\ProjectionIterator($this->ValuesIterator, null, $Function);
         
-        return new self(new Iterators\FlatteningIterator($this->Select($Function)));
+        return new self(new Iterators\FlatteningIterator($ProjectionIterator));
     }
     
     // </editor-fold>

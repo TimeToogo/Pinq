@@ -47,7 +47,6 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
     public function testComplexAggregationQuery(\Pinq\ITraversable $Traversable, array $Data)
     {
         $Traversable = $Traversable
-                ->AsQueryable()
                 ->Where(function ($I) { return $I % 2 === 0; })
                 ->OrderByAscending(function ($I) { return -$I; })
                 ->GroupBy(function ($I) { return $I % 7; })

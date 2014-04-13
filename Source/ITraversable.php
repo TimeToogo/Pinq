@@ -67,7 +67,15 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     public function Last();
     
     /**
-     * Filters the values by a predicate function.
+     * Returns whether the supplied value is contained within the aggregate
+     * 
+     * @param mixed $Value The value to check for
+     * @return boolean
+     */
+    public function Contains($Value);
+    
+    /**
+     * Filters the values by a supplied predicate.
      *
      * @param  callable   $Predicate The predicate function
      * @return ITraversable
@@ -75,7 +83,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     public function Where(callable $Predicate);
 
     /**
-     * Orders the values mapped from the supplied function according the the supplied
+     * Orders the values mapped from the supplied function according the supplied
      * direction.
      *
      * @param  callable          $Function The projection function
@@ -113,7 +121,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     public function Skip($Amount);
 
     /**
-     * Retrieve only the specified amount of values
+     * Limits the amount of values by the supplied amount
      *
      * @param  int|null   $Amount The amount of values to retrieve, must be > 0 or null if all
      * @return ITraversable
@@ -147,7 +155,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     public function GroupBy(callable $Function);
 
     /**
-     * Return unique values. (Uses strict equality '===')
+     * Only return unique values. (Uses strict equality '===')
      *
      * @return ITraversable
      */
