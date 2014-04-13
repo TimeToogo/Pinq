@@ -5,6 +5,16 @@ namespace Pinq\Tests\Integration\Collection;
 class RemoveWhereTest extends CollectionTest
 {
     /**
+     * @dataProvider Everything
+     */
+    public function testThatExecutionIsNotDeferred(\Pinq\ICollection $Collection, array $Data)
+    {
+        if(count($Data) > 0) {
+            $this->AssertThatExecutionIsNotDeferred([$Collection, 'RemoveWhere']);
+        }
+    }
+    
+    /**
      * @dataProvider AssocOneToTen
      */
     public function testThatRemoveWhereRemovesItemsWhereTheFunctionReturnsTrueAndPreservesKeys(\Pinq\ICollection $Numbers, array $Data)

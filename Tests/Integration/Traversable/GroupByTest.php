@@ -7,9 +7,9 @@ class GroupByTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatExecutionIsDeffered(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExecutionIsDeferred(\Pinq\ITraversable $Traversable, array $Data)
     {
-        $this->AssertThatExecutionIsDeffered([$Traversable, 'GroupBy']);
+        $this->AssertThatExecutionIsDeferred([$Traversable, 'GroupBy']);
     }
     
     /**

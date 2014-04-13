@@ -7,9 +7,9 @@ class WhereTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatExecutionIsDeffered(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExecutionIsDeferred(\Pinq\ITraversable $Traversable, array $Data)
     {
-        $this->AssertThatExecutionIsDeffered([$Traversable, 'Where']);
+        $this->AssertThatExecutionIsDeferred([$Traversable, 'Where']);
     }
     
     /**

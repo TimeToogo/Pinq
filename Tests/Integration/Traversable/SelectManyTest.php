@@ -7,9 +7,9 @@ class SelectManyTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatExecutionIsDeffered(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExecutionIsDeferred(\Pinq\ITraversable $Traversable, array $Data)
     {
-        $this->AssertThatExecutionIsDeffered([$Traversable, 'SelectMany']);
+        $this->AssertThatExecutionIsDeferred([$Traversable, 'SelectMany']);
     }
     
     /**

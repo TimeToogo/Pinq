@@ -7,7 +7,7 @@ class CustomException extends \Exception {}
 abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
 {
     
-    final protected function AssertThatExecutionIsDeffered(callable $TraversableQuery)
+    final protected function AssertThatExecutionIsDeferred(callable $TraversableQuery)
     {
         $Exception = new CustomException();
         

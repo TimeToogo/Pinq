@@ -7,18 +7,18 @@ class OrderByTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatExecutionIsDeffered(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExecutionIsDeferred(\Pinq\ITraversable $Traversable, array $Data)
     {
-        $this->AssertThatExecutionIsDeffered([$Traversable, 'OrderByAscending']);
-        $this->AssertThatExecutionIsDeffered([$Traversable, 'OrderByDescending']);
+        $this->AssertThatExecutionIsDeferred([$Traversable, 'OrderByAscending']);
+        $this->AssertThatExecutionIsDeferred([$Traversable, 'OrderByDescending']);
     }
     
     /**
      * @dataProvider Everything
      */
-    public function testThatMultipleExecutionIsDeffered(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatMultipleExecutionIsDeferred(\Pinq\ITraversable $Traversable, array $Data)
     {
-        $this->AssertThatExecutionIsDeffered(function (callable $Function) use ($Traversable) {
+        $this->AssertThatExecutionIsDeferred(function (callable $Function) use ($Traversable) {
             return $Traversable->OrderByAscending($Function)
                     ->ThenByAscending($Function)
                     ->ThenByDescending($Function);

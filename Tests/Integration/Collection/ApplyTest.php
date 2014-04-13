@@ -4,6 +4,15 @@ namespace Pinq\Tests\Integration\Collection;
 
 class ApplyTest extends CollectionTest
 {
+    /**
+     * @dataProvider Everything
+     */
+    public function testThatExecutionIsNotDeferred(\Pinq\ICollection $Collection, array $Data)
+    {
+        if(count($Data) > 0) {
+            $this->AssertThatExecutionIsNotDeferred([$Collection, 'Apply']);
+        }
+    }
     
     /**
      * @dataProvider AssocOneToTen
