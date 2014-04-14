@@ -10,7 +10,7 @@ Based off the .NET's [Linq](http://msdn.microsoft.com/en-us/library/bb397926.asp
 
 Installation
 ============
-Add package to you composer.json
+Add package to your composer.json:
 ```json
 {
     "require": {
