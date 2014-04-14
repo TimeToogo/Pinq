@@ -129,8 +129,8 @@ $MyQueryableArray
 ```
 
 To implement a `IQueryProvider` one must understand the how the query will be represented, a query is represented in two parts:
- - `IScope` - This contains many `ISegment`, each segment represents one or more methods calls from the `IQueryable` implementation. For example the `->Where(...)` would become a `Filter` segment and the `->Select(...)` would becom a `Select` segment. 
- - `IRequest` - This represents the actual data requested, in this case `->Sum()`  so a `Sum` request, but it could be the underlying values (`AsArray()`), another aggregate (`Count()`, ...) etc.
+ - **`IScope`** - This contains many `ISegment`, each segment represents one or more methods calls from the `IQueryable` implementation. For example the `->Where(...)` would become a `Filter` segment and the `->Select(...)` would becom a `Select` segment. 
+ - **`IRequest`** - This represents the actual data requested, in this case `->Sum()`  so a `Sum` request, but it could be the underlying values (`AsArray()`), another aggregate (`Count()`, ...) etc.
 
 There is also the `FunctionExpressionTree`, functions in the query will be parsed into this class, this contains details of the parameters and an expression tree representing the body of the function.
 
