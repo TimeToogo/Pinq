@@ -21,7 +21,7 @@ class SliceTest extends TraversableTest
     {
         $FirstFiveElements = $Traversable->Take(5);
         
-        $this->AssertMatches($FirstFiveElements, array_slice($Data, 0, 5));
+        $this->AssertMatches($FirstFiveElements, array_slice($Data, 0, 5, true));
     }
     
     /**
