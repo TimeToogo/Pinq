@@ -41,7 +41,7 @@ class IssetExpression extends Expression
                 unset($ValueExpression[$Key]);
             }
         }
-        if(self::AllOfType($ValueExpression, ValueExpression::GetType())) {
+        if(self::AllOfType($ValueExpressions, ValueExpression::GetType())) {
             return Expression::Value(true);
         }
         

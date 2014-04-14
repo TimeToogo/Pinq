@@ -67,7 +67,7 @@ class SubQueryExpression extends TraversalExpression
 
     public function Traverse(ExpressionWalker $Walker)
     {
-        return $Walker->WalkQueryStream($this);
+        return $Walker->WalkSubQuery($this);
     }
 
     public function Simplify()

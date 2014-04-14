@@ -27,6 +27,7 @@ final class Utilities
             }
         }
         else {
+            $Iterator = self::ToIterator($Iterator);
             //Does not support returning custom keys
             $Iterator->rewind();
             while ($Iterator->valid()) {
@@ -57,7 +58,7 @@ final class Utilities
             return $TraversableOrArray->getIterator();
         }
         else if($TraversableOrArray instanceof \Traversable) {
-            return new IteratorIterator($TraversableOrArray);
+            return new \IteratorIterator($TraversableOrArray);
         }
         else {
             return new \ArrayIterator($TraversableOrArray);

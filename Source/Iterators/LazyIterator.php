@@ -20,12 +20,12 @@ abstract class LazyIterator extends IteratorIterator
     }
     protected abstract function InitializeIterator(\Traversable $InnerIterator);
     
-    public function getInnerIterator()
+    public function GetInnerIterator()
     {
         if(!$this->IsInitialized) {
             $this->Initialize();
         }
-        return parent::getInnerIterator();
+        return parent::GetInnerIterator();
     }
     
     public function current()

@@ -21,7 +21,11 @@ class IteratorIterator implements \Iterator
             $this->Iterator = new \Pinq\Iterators\IteratorIterator($Iterator);
         }
     }
-
+    
+    public function GetInnerIterator() 
+    {
+        return $this->Iterator;
+    }
     
     public function current()
     {

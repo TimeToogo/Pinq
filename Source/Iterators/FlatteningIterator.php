@@ -13,7 +13,7 @@ class FlatteningIterator extends IteratorIterator
     public function __construct(\Traversable $Iterator)
     {
         parent::__construct($Iterator);
-        $this->CurrentIterator = new \ArrayIterator();
+        $this->CurrentIterator = new \ArrayIterator([]);
     }
     
     

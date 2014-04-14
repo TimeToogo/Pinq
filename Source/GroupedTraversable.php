@@ -4,6 +4,11 @@ namespace Pinq;
 
 class GroupedTraversable extends Traversable implements \Pinq\IGroupedTraversable
 {
+    /**
+     * @var Iterators\GroupedIterator 
+     */
+    protected $ValuesIterator;
+    
     public function __construct(Iterators\GroupedIterator $GroupedIterator)
     {
         parent::__construct($GroupedIterator);

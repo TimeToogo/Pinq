@@ -74,7 +74,7 @@ class ExpressionWalker
     public function WalkIsset(IssetExpression $Expression)
     {
         return $Expression->Update(
-                $this->Walk($Expression->GetValueExpression()));
+                $this->Walk($Expression->GetValueExpressions()));
     }
 
     public function WalkField(FieldExpression $Expression)

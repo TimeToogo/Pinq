@@ -4,6 +4,11 @@ namespace Pinq;
 
 class OrderedTraversable extends Traversable implements \Pinq\IOrderedTraversable
 {
+    /**
+     * @var Iterators\OrderedIterator 
+     */
+    protected $ValuesIterator;
+    
     public function __construct(Iterators\OrderedIterator $OrderedIterator)
     {
         parent::__construct($OrderedIterator);

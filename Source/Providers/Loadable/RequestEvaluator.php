@@ -31,7 +31,7 @@ abstract class RequestEvaluator extends Requests\RequestVisitor
             $this->IsLoaded = true;
         }
         
-        return $this->LoadedRequestEvaluator->GetValues();
+        return $this->LoadedRequestEvaluator->VisitValues($Request);
     }
     protected abstract function LoadValues();
     
@@ -70,7 +70,7 @@ abstract class RequestEvaluator extends Requests\RequestVisitor
     final public function VisitContains(Requests\Contains $Request)
     {
         return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->Contains($Request) : 
+                $this->LoadedRequestEvaluator->VisitContains($Request) : 
                 $this->LoadContains($Request);
     }
     protected abstract function LoadContains(Requests\Contains $Request);

@@ -29,7 +29,7 @@ class SubQueryResolver extends O\ExpressionWalker
         if($Expression->OriginatesFrom(O\VariableExpression::GetType())
                 && $Expression->GetOriginExpression()->GetNameExpression() instanceof O\ValueExpression
                 && in_array($Expression->GetOriginExpression()->GetNameExpression()->GetValue(), $this->QueryVariableNames, true)) {
-            $QueryStreamExpression = $this->ResolveQueryStream($Expression);
+            $QueryStreamExpression = $this->ResolveSubQuery($Expression);
 
             if ($QueryStreamExpression !== null) {
                 return $QueryStreamExpression;
@@ -40,7 +40,7 @@ class SubQueryResolver extends O\ExpressionWalker
         }
     }
 
-    private function ResolveQueryStream(O\MethodCallExpression $Expression)
+    private function ResolveSubQuery(O\MethodCallExpression $Expression)
     {
         $Queryable = $this->QueryProvider->CreateQueryable(new \Pinq\Queries\Scope([]));
         
@@ -70,7 +70,7 @@ class SubQueryResolver extends O\ExpressionWalker
         }
         $ResolvedQueryable = $QueryableExpression->GetValue();
         
-        return O\Expression::SubQuery($Expression->GetOriginExpression(), $ResolvedQueryable->GetScope());
+        return O\Expression::SubQuery($Expression, $ResolvedQueryable->GetScope());
     }
 
     private function ResolveClosureArguments(O\MethodCallExpression $Expression)

@@ -43,10 +43,10 @@ class ValueUnresolver extends O\ExpressionWalker
         return $this->VariableNameValueMap;
     }
 
-    public function ResetValueExpressionVariableNameMap()
+    public function ResetVariableNameValueMap()
     {
         $this->VariableCount = 0;
-        $this->ValueExpressionVariableNameMap = [];
+        $this->VariableNameValueMap = [];
     }
 
     public function SetValueFilter(callable $ValueFilterFunction)

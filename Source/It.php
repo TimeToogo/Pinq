@@ -143,7 +143,7 @@ class FuncBuilder extends FunctionExpressionTree
                 O\Operators\Binary::Modulus);
     }
     
-    final public static function Concat($Value)
+    final public function Concat($Value)
     {
         $L = $this->OriginalFunction;
         
@@ -187,7 +187,7 @@ class FuncBuilder extends FunctionExpressionTree
         $O = $this->OriginalFunction;
         
         return Lambda::ReturnLambda(
-                function ($I) use ($O, $Value) { return $O($I)->{self::ValueFor($Value)}; }, 
+                function ($I) use ($O, $Value) { return $O($I)->{self::ValueFor($Value, $I)}; }, 
                 O\Expression::Field($this->GetFirstResolvedReturnValueExpression(), self::ExpressionFor($Value)));
     }
     
@@ -202,7 +202,7 @@ class FuncBuilder extends FunctionExpressionTree
                 function ($I) use($O, $Name, $Arguments) { return empty($Arguments) ? 
                         $O($I)->{FuncBuilder::ValueFor($Name, $I)}() : 
                         call_user_func_array([$O($I), self::ValueFor($Name, $I)], self::ValuesFor($Arguments)); }, 
-                O\Expression::MethodCall($this->Get(), self::ExpressionFor($Name), self::ExpressionsFor($Arguments)));
+                O\Expression::MethodCall($this->GetFirstResolvedReturnValueExpression(), self::ExpressionFor($Name), self::ExpressionsFor($Arguments)));
     }
     
     /**

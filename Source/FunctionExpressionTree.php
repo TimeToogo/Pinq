@@ -119,7 +119,7 @@ class FunctionExpressionTree implements \Serializable
     private function LoadCompiledFunction()
     {
         if ($this->CompiledFunction === null) {
-            $this->ValueUnresolver->ResetValueExpressionVariableNameMap();
+            $this->ValueUnresolver->ResetVariableNameValueMap();
             $ParameterizedBodyExpressions = $this->ValueUnresolver->WalkAll($this->BodyExpressions);
             $ParameterNameValueMap = $this->ValueUnresolver->GetVariableNameValueMap();
             
