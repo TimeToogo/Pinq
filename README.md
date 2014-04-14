@@ -8,11 +8,22 @@ What is Pinq?
 =============
 Based off the .NET's [Linq](http://msdn.microsoft.com/en-us/library/bb397926.aspx), Pinq unifies querying across [arrays/iterators](#pinq-examples) and [external data sources](#pinq-external-source), in a single readable and concise [fluent API](#pinq-api).
 
+Installation
+============
+Add package to you composer.json
+```json
+{
+    "require": {
+        "timetoogo/pinq": "dev-master"
+    }
+}
+```
+
 <a name="pinq-api"></a>Query and collection API
 ===============================================
 
-`ITraversable`
-==============
+ITraversable
+============
 
 The `ITraversable` interface represents a range of values that are able to be queried upon with the following methods:
 
@@ -59,8 +70,8 @@ The `ITraversable` interface represents a range of values that are able to be qu
 **Other**
  - `AsArray` - The values as an array
 
-`ICollection`
-=============
+ICollection
+===========
 
 The `ICollection` interface represents a queryable range of values that are also mutable, they can be manipulated and altered using the additional methods:
 
@@ -117,8 +128,8 @@ Limitations
 ====================================================================
 The `IQueryable` and `IRepository` interfaces are respective to `ITraversable` and `ICollection`. But the data source for these is not limited to an array or iterator, they are able to use any implementation of `IQueryProvider`/`IRepositoryProvider` respectively, one could query a database, XML, DOM, CSV, the possibilities are endless.
 
-Implementing an `IQueryProvider`
-================================
+Implementing an IQueryProvider
+==============================
 In this exercise to understand the `IQueryProvider` and how it is to be implemented, we will create a basic query provider for a constant array of numbers `[1,2,3,4,5,6,7,8,9,10]` (This is pointless as there is `Traversable` for a PHP array but this should help to illustrate the concept):
 
 The goal of this will be making a query provider capable of executing:
