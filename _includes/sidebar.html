@@ -1,0 +1,16 @@
+<aside id="sidebar">
+    {% for page in site.data.nav %}
+    <a href="{{ site.url }}{{ page.url }}" class="button">
+        {% if page.sub %}<small>{{ page.sub }}</small>{% endif %}
+        {{ page.name }}
+    </a>
+    {% endfor %}
+
+    <p class="repo-owner">
+        <a href="{{ site.data.repo.url }}">{{ site.name }}</a> is maintained by
+        {% for maintainer in  site.data.repo.maintainers %}
+            <a href="{{ maintainer.url }}">{{ maintainer.name }}</a>,
+        {% endfor %}
+    </p>
+    <p>This page is using a modified version of the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+</aside>

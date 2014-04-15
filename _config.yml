@@ -1,0 +1,7 @@
+name: Pinq
+sub-header: PHP Integrated query
+
+url: http://timetoogo.github.io/Pinq/
+
+markdown: redcarpet
+pygments: true

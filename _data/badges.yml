@@ -1,0 +1,15 @@
+- name: Build
+  image: https://api.travis-ci.org/TimeToogo/Pinq.png
+  url: https://travis-ci.org/TimeToogo/Pinq
+
+- name: Quality
+  image: https://scrutinizer-ci.com/g/TimeToogo/Pinq/badges/quality-score.png?s=ddce8f86d3192ab4ca1134aa98e17ab7340014f7
+  url: https://scrutinizer-ci.com/g/TimeToogo/Pinq
+  
+- name: Release
+  image: https://poser.pugx.org/timetoogo/pinq/v/stable.png
+  url: https://packagist.org/packages/timetoogo/pinq
+  
+- name: License
+  image: https://poser.pugx.org/timetoogo/pinq/license.png
+  url: https://packagist.org/packages/timetoogo/pinq

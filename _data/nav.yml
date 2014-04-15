@@ -1,0 +1,27 @@
+- name: Home 
+  url: 
+  sub: 
+      
+- name: Query API 
+  url: api.html
+  sub: 
+
+- name: Standard Classes
+  url: classes.html
+  sub: 
+  
+- name: Examples 
+  url: examples.html
+  sub: 
+      
+- name: Details
+  url: details.html
+  sub: The implementation and reasoning
+
+- name: Expressions 
+  url: expressions.html
+  sub: Function representations
+
+- name: The query provider 
+  url: query-provider.html
+  sub: Seamless integration with external data sources

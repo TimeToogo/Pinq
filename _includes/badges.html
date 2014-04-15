@@ -1,0 +1,5 @@
+<div class='badges'>
+{% for badge in site.data.badges %}
+<a href='{{ badge.url }}'><img src='{{ badge.image }}' alt='{{ badge.name }}' /></a>
+{% endfor %}
+</div>

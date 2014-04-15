@@ -1,0 +1,139 @@
+---
+layout: default
+title:  Examples
+---
+Examples using Traversable
+==========================
+
+Here are some examples demonstrating the functionality of the query API:
+
+**Starting off with the values**
+
+```php
+use Pinq\ITraversable, Pinq\Traversable;
+
+$Numbers = Traversable::From(range(1, 100));
+$Strings = Traversable::From(['foo', 'bar', 'baz', 'tear', 'cow', 'tripod', 'whisky', 'sand', 'which']);
+```
+
+**Filtering**
+
+```php
+foreach($Numbers->Where(function ($I) { return $I % 2 === 0; }) as $Number) {
+    //2, 4, 6, 8...
+}
+
+foreach($Numbers->Where(function ($I) { return $I % 2 === 1; }) as $Number) {
+    //1, 3, 5, 7....
+}
+
+foreach($Strings->Where(function ($I) { return strpos($I, 'w') === 0; })) as $String) {
+    //'whiskey', 'which'
+}
+```
+
+**Ordering**
+
+```php
+
+foreach($Numbers->OrderByAscending(function ($I) { return -$I; }) as $Number) {
+    //100, 99, 98, 97, 96...
+}
+
+foreach($Strings
+        ->OrderByAscending(function ($I) { return $I[0]; })
+        ->ThenByDescending(function ($I) { return $I[2]; }) as $String) {
+    //'baz', 'bar', 'cow', 'foo'...
+}
+```
+
+**Grouping**
+
+```php
+
+foreach($Numbers->GroupBy(function ($I) { return $I % 2; }) as $Group) {
+    //Traversable: [1, 3, 5, 7...], Traversable: [2, 4, 6, 8...]
+}
+
+foreach($Strings->GroupBy(function ($I) { return $I[0]; }) as $String) {
+    //Traversable: ['foo'], Traversable: ['bar', 'baz'], Traversable: ['tear', 'tripod']...
+}
+
+```
+
+**Selecting**
+
+```php
+
+foreach($Numbers->Select(function ($I) { return $I * 10; }) as $Number) {
+    //10, 20, 30, 40...
+}
+
+foreach($Strings->Select(function ($I) { return $I . '-poo'; }) as $String) {
+    //'foo-poo', 'bar-poo', 'baz-poo', 'tear-poo'...
+}
+
+foreach($Strings->Select('strlen') as $Length) {
+    //3, 3, 3, 4...
+}
+
+```
+
+**Selecting many**
+
+```php
+
+foreach($Strings->SelectMany('str_split') as $Character) {
+    //'f', 'o', 'o', 'b', 'a'...
+}
+
+```
+
+**Aggregating**
+
+```php
+
+$Numbers->Aggregate(function ($I, $K) { return $I * $K }); //100! (1 * 2 * 3 * 4...)
+
+$Numbers->Count(); //100
+
+$Numbers->Exists(); //true
+
+$Numbers->Sum(); //5050 (1 + 2 + 3 + 4...)
+
+$Numbers->Average(); //50.5
+
+$Numbers->Maximum(); //100
+
+$Numbers->Implode('-'); //'1-2-3-4-5-6...'
+
+
+$Strings->Implode(''); //'foobarbaztear...'
+
+$Strings->All(function ($I) { return strlen($I) >= 3; }); //true
+
+$Strings->Any(function ($I) { return strpos($I, 'z') !== false; }); //false
+
+$Strings->Average('strlen'); //4.111...
+
+```
+
+**Bringing it together**
+
+```php
+
+$NumberData = $Numbers
+        ->Where(function ($I) { return $I % 2 === 0; }) //Only even values
+        ->OrderByDescending(function ($I) { return $I; }) //Order from largest to smallest
+        ->GroupBy(function ($I) { return $I % 7; }) //Put into seven groups
+        ->Where(function (ITraversable $I) { return $I->Count() % 2 === 0; }) //Only groups with an even amount of values
+        ->Select(function (ITraversable $Numbers) {
+            return [
+                'First' => $Numbers->First(),
+                'Average' => $Numbers->Average(),
+                'Count' => $Numbers->Count(),
+                'Numbers' => $Numbers->AsArray(),
+            ];
+        });
+
+```
