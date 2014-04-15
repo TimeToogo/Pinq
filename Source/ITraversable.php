@@ -184,7 +184,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * @param  ITraversable $Values The values to append
      * @return ITraversable
      */
-    public function Append(ITraversable $Values);
+    public function Append($Values);
 
     /**
      * Returns all values from the original present in the supplied values. 
@@ -193,7 +193,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * @param  ITraversable $Values
      * @return ITraversable
      */
-    public function WhereIn(ITraversable $Values);
+    public function WhereIn($Values);
 
     /**
      * Returns values all values from the original not present in the supplied values.
@@ -202,7 +202,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * @param  ITraversable $Values The values to union
      * @return ITraversable
      */
-    public function Except(ITraversable $Values);
+    public function Except($Values);
 
     /**
      * Returns unique results present in both the original and supplied values, 
@@ -212,7 +212,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * @param  ITraversable $Values The values to union
      * @return ITraversable
      */
-    public function Union(ITraversable $Values);
+    public function Union($Values);
 
     /**
      * Returns unique values the are present in the original and supplied values. 
@@ -221,7 +221,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * @param  ITraversable $Values The values to intersect with
      * @return ITraversable
      */
-    public function Intersect(ITraversable $Values);
+    public function Intersect($Values);
 
     /**
      * Removes unique values from the original not present in the supplied values. 
@@ -230,5 +230,5 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * @param  ITraversable $Values The values to remove
      * @return ITraversable
      */
-    public function Difference(ITraversable $Values);
+    public function Difference($Values);
 }

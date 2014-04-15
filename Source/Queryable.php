@@ -163,32 +163,32 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
         }
         return $this->UpdateLastSegment($LastSegment->AndBy($this->Convert($Function)));
     }
-    public function Union(ITraversable $Values)
+    public function Union($Values)
     {
         return $this->NewSegment(new Segments\Operation(Segments\Operation::Union, $Values));
     }
 
-    public function Intersect(ITraversable $Values)
+    public function Intersect($Values)
     {
         return $this->NewSegment(new Segments\Operation(Segments\Operation::Intersect, $Values));
     }
 
-    public function Difference(ITraversable $Values)
+    public function Difference($Values)
     {
         return $this->NewSegment(new Segments\Operation(Segments\Operation::Difference, $Values));
     }
     
-    public function Append(ITraversable $Values)
+    public function Append($Values)
     {
         return $this->NewSegment(new Segments\Operation(Segments\Operation::Append, $Values));
     }
 
-    public function WhereIn(ITraversable $Values)
+    public function WhereIn($Values)
     {
         return $this->NewSegment(new Segments\Operation(Segments\Operation::WhereIn, $Values));
     }
 
-    public function Except(ITraversable $Values)
+    public function Except($Values)
     {
         return $this->NewSegment(new Segments\Operation(Segments\Operation::Except, $Values));
     }

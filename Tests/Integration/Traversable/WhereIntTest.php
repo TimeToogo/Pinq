@@ -43,9 +43,7 @@ class WhereIntTest extends TraversableTest
      */
     public function testThatWhereInUsesStrictEquality(\Pinq\ITraversable $Traversable, array $Data)
     {
-        $OtherData = ['1', '2', '3', '4', '5'];
-        $ValuesWithEquivalentStringValues = new \Pinq\Traversable($OtherData);
-        $Insection = $Traversable->Intersect($ValuesWithEquivalentStringValues);
+        $Insection = $Traversable->Intersect(['1', '2', '3', '4', '5']);
         
         $this->AssertMatches($Insection, []);
     }

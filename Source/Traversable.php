@@ -19,11 +19,11 @@ class Traversable implements \Pinq\ITraversable
     }
     
     /**
-     * @return ITraversable
+     * @return static
      */
-    final public static function From($Values)
+    public static function From($Values)
     {
-        return new self($Values);
+        return new static($Values);
     }
     
     final public function getIterator()
@@ -139,38 +139,38 @@ class Traversable implements \Pinq\ITraversable
     
     // <editor-fold defaultstate="collapsed" desc="Set Operations">
     
-    public function Union(ITraversable $Values)
+    public function Union($Values)
     {
-        return new self(new Iterators\UnionIterator($this->ValuesIterator, $Values->getIterator()));
+        return new self(new Iterators\UnionIterator($this->ValuesIterator, Utilities::ToIterator($Values)));
     }
     
-    public function Intersect(ITraversable $Values)
+    public function Intersect($Values)
     {
-        return new self(new Iterators\IntersectionIterator($this->ValuesIterator, $Values->getIterator()));
+        return new self(new Iterators\IntersectionIterator($this->ValuesIterator, Utilities::ToIterator($Values)));
     }
     
-    public function Difference(ITraversable $Values)
+    public function Difference($Values)
     {
-        return new self(new Iterators\DifferenceIterator($this->ValuesIterator, $Values->getIterator()));
+        return new self(new Iterators\DifferenceIterator($this->ValuesIterator, Utilities::ToIterator($Values)));
     }
 
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="Set Operations">
+    // <editor-fold defaultstate="collapsed" desc="Operations">
     
-    public function Append(ITraversable $Values)
+    public function Append($Values)
     {        
-        return new self(new Iterators\FlatteningIterator(new \ArrayIterator([$this->ValuesIterator, $Values->getIterator()])));
+        return new self(new Iterators\FlatteningIterator(new \ArrayIterator([$this->ValuesIterator, Utilities::ToIterator($Values)])));
     }
     
-    public function WhereIn(ITraversable $Values)
+    public function WhereIn($Values)
     {        
-        return new self(new Iterators\WhereInIterator($this->ValuesIterator, $Values->getIterator()));
+        return new self(new Iterators\WhereInIterator($this->ValuesIterator, Utilities::ToIterator($Values)));
     }
     
-    public function Except(ITraversable $Values)
+    public function Except($Values)
     {        
-        return new self(new Iterators\ExceptIterator($this->ValuesIterator, $Values->getIterator()));
+        return new self(new Iterators\ExceptIterator($this->ValuesIterator, Utilities::ToIterator($Values)));
     }
 
     // </editor-fold>

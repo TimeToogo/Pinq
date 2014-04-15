@@ -30,9 +30,7 @@ class ExceptTest extends TraversableTest
     public function testThatExceptWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $Traversable, array $Data)
     {
         $OtherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
-        $ValuesWithSomeMatchingValues = new \Pinq\Traversable($OtherData);
-        
-        $Except = $Traversable->Except($ValuesWithSomeMatchingValues);
+        $Except = $Traversable->Except($OtherData);
         
         $this->AssertMatches($Except, array_diff($Data, $OtherData));
     }
@@ -43,9 +41,7 @@ class ExceptTest extends TraversableTest
     public function testThatExceptWithDuplicateKeysPreservesTheOriginalValues(\Pinq\ITraversable $Traversable, array $Data)
     {
         $OtherData = [0 => 'test', 2 => 0.01, 5 => 4, 'test' => 1];
-        $ValuesWithSomeMatchingKeys = new \Pinq\Traversable($OtherData);
-        
-        $Except = $Traversable->Except($ValuesWithSomeMatchingKeys);
+        $Except = $Traversable->Except($OtherData);
         
         $this->AssertMatches($Except, array_diff($Data, $OtherData));
     }
@@ -55,9 +51,9 @@ class ExceptTest extends TraversableTest
      */
     public function testThatExceptUsesStrictEquality(\Pinq\ITraversable $Traversable, array $Data)
     {
-        $ValuesWithSomeMatchingKeys = new \Pinq\Traversable(array_map('strval', $Data));
+        $CastToStringValues = array_map('strval', $Data);
         
-        $Except = $Traversable->Except($ValuesWithSomeMatchingKeys);
+        $Except = $Traversable->Except($CastToStringValues);
         
         $this->AssertMatches($Except, $Data);
     }

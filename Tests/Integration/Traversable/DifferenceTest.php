@@ -30,9 +30,7 @@ class DifferenceTest extends TraversableTest
     public function testThatDifferenceWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $Traversable, array $Data)
     {
         $OtherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
-        $ValuesWithSomeMatchingValues = new \Pinq\Traversable($OtherData);
-        
-        $Intersection = $Traversable->Difference($ValuesWithSomeMatchingValues);
+        $Intersection = $Traversable->Difference($OtherData);
         
         $this->AssertMatches($Intersection, array_diff($Data, $OtherData));
     }
@@ -43,9 +41,7 @@ class DifferenceTest extends TraversableTest
     public function testThatDifferenceWithDuplicateKeysPreservesTheOriginalValues(\Pinq\ITraversable $Traversable, array $Data)
     {
         $OtherData = [0 => 'test', 2 => 0.01, 5 => 4, 'test' => 1];
-        $ValuesWithSomeMatchingKeys = new \Pinq\Traversable($OtherData);
-        
-        $Intersection = $Traversable->Difference($ValuesWithSomeMatchingKeys);
+        $Intersection = $Traversable->Difference($OtherData);
         
         $this->AssertMatches($Intersection, array_diff($Data, $OtherData));
     }

@@ -81,12 +81,14 @@ class FunctionExpressionTree implements \Serializable
         $this->CompiledFunction = $Function;
     }
     
+    /**
+     * @return callable
+     */
     public function GetCompiledFunction()
     {
         return $this->LoadCompiledFunction();
     }
     
-        
     public function serialize()
     {
         if($this->SerializedData === null) {

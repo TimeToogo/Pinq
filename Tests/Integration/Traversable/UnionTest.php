@@ -40,8 +40,7 @@ class UnionTest extends TraversableTest
     public function testThatUnionUsesStrictEquality(\Pinq\ITraversable $Traversable, array $Data)
     {
         $OtherData = [100 => '1', 101 => '2', 102 => '3'];
-        $ValuesWithEquivalentStringValues = new \Pinq\Traversable($OtherData);
-        $Unioned = $Traversable->Union($ValuesWithEquivalentStringValues);
+        $Unioned = $Traversable->Union($OtherData);
         
         $this->AssertMatches($Unioned, array_merge($Data, $OtherData));
     }

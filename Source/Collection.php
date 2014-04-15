@@ -27,6 +27,8 @@ class Collection extends Traversable implements ICollection
         $this->ValuesIterator = new \EmptyIterator();
     }
     
+    
+    
     public function Apply(callable $Function)
     {
         $Array = $this->AsArray();
