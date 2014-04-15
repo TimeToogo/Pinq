@@ -15,5 +15,5 @@ Add package to your composer.json:
 }
 ```
 
-See more at the [Pinq documentation site](http://timetoogo.github.io/Pinq/)
-===========================================================================
+[Pinq documentation site](http://timetoogo.github.io/Pinq/)
+===========================================================
