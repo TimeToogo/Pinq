@@ -182,7 +182,7 @@ a.button {
     
     box-shadow: 0 0 0 2px #ccc;
     -webkit-transition: background-position .3s, box-shadow .3s, opacity .3s;
-    transition: background-position .3s, box-shadow .3s, opacity .3s;
+    transition: background-position .3s, box-shadow .3s, opacity .3s, margin-left .3s;
     background-position: 0 0;
 }
 
@@ -220,6 +220,14 @@ aside a.button {
     display: block;
     margin-bottom: 20px;
     font-size: 21px;
+}
+
+.csstransitions aside a.button:hover, .csstransitions aside:not(:hover) a.button.active {
+    margin-left: 15px;
+}
+
+aside a.button.active {
+    pointer-events: none;
 }
 
 code, pre {

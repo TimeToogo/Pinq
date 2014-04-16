@@ -1,6 +1,7 @@
 <aside id="sidebar">
+    {% assign current_url = page.url|remove:'index.html' %}
     {% for page in site.data.nav %}
-    <a href="{{ site.url }}{{ page.url }}" class="button">
+    <a href="{{ site.url }}{{ page.url }}" class="{% if page.url == current_url %}active{% endif %} button">
         {% if page.sub %}<small>{{ page.sub }}</small>{% endif %}
         {{ page.name }}
     </a>

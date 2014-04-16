@@ -1,27 +1,27 @@
 - name: Home 
-  url: 
+  url: /
   sub: 
       
 - name: Query API 
-  url: api.html
+  url: /api.html
   sub: 
 
 - name: Standard Classes
-  url: classes.html
+  url: /classes.html
   sub: 
   
 - name: Examples 
-  url: examples.html
+  url: /examples.html
   sub: 
       
 - name: Details
-  url: details.html
+  url: /details.html
   sub: The implementation and reasoning
 
 - name: Expressions 
-  url: expressions.html
+  url: /expressions.html
   sub: Function representations
 
 - name: The query provider 
-  url: query-provider.html
+  url: /query-provider.html
   sub: Seamless integration with external data sources
