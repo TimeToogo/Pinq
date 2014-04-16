@@ -6,7 +6,7 @@ title:  Expressions
 What are expressions?
 =====================
 
-*You should only need to read this if you are thinking about [implementing `IQueryProvider`](query-provider.html)*
+*You should only need to read this if you are thinking about [implementing an `IQueryProvider`](query-provider.html)*
 
 An expression represents a piece of code. 
 
