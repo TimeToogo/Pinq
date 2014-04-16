@@ -14,7 +14,7 @@ A quick example
 
 The following shows an example query using the Pinq library:
 
-```php
+{% highlight php startinline %}
 
 $YoungPeopleDetails = $People
         ->Where(function (array $Row) { return $Row['Age'] <= 50; })
@@ -30,7 +30,7 @@ $YoungPeopleDetails = $People
             ]; 
         })
 
-```
+{% endhighlight %}
 
 The beauty of Pinq is as follows, the above query may be executing against a set of arrays or
 possibly against database table. Pinq blurs the lines between in-memory and external data-source,

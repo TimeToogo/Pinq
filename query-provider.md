@@ -16,12 +16,12 @@ You may need to refer to [Expressions documentation](expressions.html) if you ha
 
 The goal of this will be making a query provider capable of executing:
 
-```php
+{% highlight php startinline %}
 $MyQueryableArray
         ->Where(function ($Number)  { return $Number > 5; })
         ->Select(function ($Number)  { return $Number * 10; })
         ->Sum();
-```
+{% endhighlight %}
 
 To implement a `IQueryProvider` one must understand the how the query will be represented, a query is represented in two parts:
  - **`IScope`** - This contains many `ISegment`, each segment represents one or more methods calls from the `IQueryable` implementation. For example the `->Where(...)` would become a `Filter` segment and the `->Select(...)` would becom a `Select` segment. 
@@ -31,7 +31,7 @@ To implement a `IQueryProvider` one must understand the how the query will be re
 
  - For the first step we need the a class that will evaluate the expression tree of a given function against the array of values, this will extend the `ExpressionVisitor` class to traverse the expression tree:
 
-```php
+{% highlight php startinline %}
 use \Pinq\Expressions as O;
 use \Pinq\FunctionExpressionTree;
 
@@ -86,11 +86,11 @@ class ExpressionTreeEvaluator extends O\ExpressionVisitor
         }
     }
 }
-```
+{% endhighlight %}
 
  - For the second step we need the a class that will evaluate the query scope of the supplied array, this extends the `SegmentVisitor` and will evaluate the `->Where(...)->Select(...)` part of the query:
 
-```php
+{% highlight php startinline %}
 use \Pinq\Queries\Segments;
 
 /**
@@ -131,11 +131,11 @@ class QueryScopeEvaluator extends Segments\SegmentVisitor
         $this->Array = $MappedResults;
     }
 }
-````
+{% endhighlight %}`
 
  - Now to evaluate the `->Sum()` aggregate value, extending the `RequestVisitor` class, this is responsible for evaluating all the aggregates and retrieving the values:
 
-```php
+{% highlight php startinline %}
 
 use \Pinq\Queries\Requests;
 use \Pinq\FunctionExpressionTree;
@@ -179,11 +179,11 @@ class RequestEvaluator extends Requests\RequestVisitor
         }
     }
 }
-```
+{% endhighlight %}
 
 - Bringing it all together and implementing the `IQueryProvider` by extending `QueryProvider` which implements basic boiler plate for the query provider:
 
-```php
+{% highlight php startinline %}
 use \Pinq\Providers;
 use \Pinq\Queries;
 
@@ -202,11 +202,11 @@ class ArrayQueryProvider extends Providers\QueryProvider
         return new RequestEvaluator($ScopedArray);
     }
 }
-```
+{% endhighlight %}
 
 - If we wanted to we could wrap this in a nice subclass of `Queryable` and automatically pass the appropriate query provider:
 
-```php
+{% highlight php startinline %}
 class ArrayQueryable extends \Pinq\Queryable
 {
     public function __construct()
@@ -214,11 +214,11 @@ class ArrayQueryable extends \Pinq\Queryable
         parent::__construct(new ArrayQueryProvider());
     }
 }
-```
+{% endhighlight %}
 
 Finally, we can see the action:
 
-```php
+{% highlight php startinline %}
 $MyQueryableArray = new ArrayQueryable();
 
 echo $MyQueryableArray
@@ -226,7 +226,7 @@ echo $MyQueryableArray
         ->Select(function ($Number)  { return $Number * 10; })
         ->Sum();
 //Echos: 400
-```
+{% endhighlight %}
 
 This is an extremely basic, useless and naive implementation of the query provider, but nevertheless it does exactly as we wanted. 
 

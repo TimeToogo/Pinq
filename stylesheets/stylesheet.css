@@ -172,9 +172,10 @@ a.button {
     background: -o-linear-gradient(top, #2b85dd 0%,#3075c5 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top, #2b85dd 0%,#3075c5 100%); /* IE10+ */
     background: linear-gradient(to bottom, #2b85dd 0%,#3075c5 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2b85dd', endColorstr='#3075c5',GradientType=0 ); /* IE6-9 */
     
     border-radius: 10px;
+    background-clip: padding-box;
+    
     box-shadow: 0 0 0 2px #ccc;
     -webkit-transition: background-position .3s, box-shadow .3s, opacity .3s;
     transition: background-position .3s, box-shadow .3s, opacity .3s;
@@ -201,6 +202,7 @@ header a.button {
     top: 0;
     padding-left: 69px;
     padding-right: 0;
+    background: url(../images/github-button.png) 15px center no-repeat;
     background: transparent url(../images/github-button.png) 15px center no-repeat;
     border: 3px solid #fff;
     box-shadow: none!important;
@@ -217,7 +219,7 @@ aside a.button {
 }
 
 code, pre {
-    font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+    font-family: 'Segoe UI';
     color: #222;
     margin-bottom: 30px;
     font-size: 13px;
@@ -242,7 +244,6 @@ pre code {
     background-color: #fff;
     border: none;
     padding: 0;
-    letter-spacing: 1px;
 }
 
 ul, ol, dl {
