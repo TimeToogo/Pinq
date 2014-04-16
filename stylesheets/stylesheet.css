@@ -32,7 +32,7 @@ body {
     line-height: 1;
 }
 
-p {
+p, li {
    line-height: 2;
 }
 
