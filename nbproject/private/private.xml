@@ -6,5 +6,8 @@
             <file>file:/C:/Program%20Files%20(x86)/Apache%202.4/htdocs/Pinq/params.json</file>
             <file>file:/C:/Program%20Files%20(x86)/Apache%202.4/htdocs/Pinq/index.md</file>
         </group>
+        <group name="Projects">
+            <file>file:/C:/Program%20Files/Apache%20Software%20Foundation/Apache2.4/htdocs/Pinq/.gitignore</file>
+        </group>
     </open-files>
 </project-private>
