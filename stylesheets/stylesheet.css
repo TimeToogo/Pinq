@@ -32,6 +32,10 @@ body {
     line-height: 1;
 }
 
+p {
+   line-height: 2;
+}
+
 ol, ul {
     list-style: none;
 }
