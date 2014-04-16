@@ -24,12 +24,19 @@ $MyQueryableArray
 {% endhighlight %}
 
 To implement a `IQueryProvider` one must understand the how the query will be represented, a query is represented in two parts:
- - **`IScope`** - This contains many `ISegment`, each segment represents one or more methods calls from the `IQueryable` implementation. For example the `->Where(...)` would become a `Filter` segment and the `->Select(...)` would becom a `Select` segment. 
- - **`IRequest`** - This represents the actual data requested, in this case `->Sum()`  so a `Sum` request, but it could be the underlying values (`AsArray()`), another aggregate (`Count()`, ...) etc.
+
+ - **IScope** - This contains many `ISegment`, each segment represents one or more methods calls
+    from the `IQueryable` implementation. For example the `->Where(...)` would become a `Filter`
+    segment and the proceeding `->Select(...)` would become a `Select` segment. 
+ 
+ - **IRequest** - This represents the actual data requested, in this case `->Sum()`  so a `Sum`
+    request, but it could be the underlying values (`->AsArray()`), a different aggregate (`->Count()`, ...) etc.
 
 **Steps**
 
- - For the first step we need the a class that will evaluate the expression tree of a given function against the array of values, this will extend the `ExpressionVisitor` class to traverse the expression tree:
+ - For the first step we need the a class that will evaluate the expression tree of a given 
+   function against the array of values, this will extend the `ExpressionVisitor`
+   class to traverse the expression tree:
 
 {% highlight php startinline %}
 use \Pinq\Expressions as O;
@@ -62,7 +69,7 @@ class ExpressionTreeEvaluator extends O\ExpressionVisitor
     
     protected function VisitBinaryOperation(O\BinaryOperationExpression $Expression)
     {
-        //Ignore the left operand, assume it is the value parameter
+        //Ignore the left operand, assume it is the value parameter for simplicity
         
         $RightExpression = $Expression->GetRightOperandExpression();
         
@@ -228,6 +235,8 @@ echo $MyQueryableArray
 //Echos: 400
 {% endhighlight %}
 
-This is an extremely basic, useless and naive implementation of the query provider, but nevertheless it does exactly as we wanted. 
+This is an extremely basic, useless and naive implementation of the query provider, 
+but nevertheless it does exactly as we wanted. 
 
-Hopefully, this helps to illustrate the capabilities of Pinq and its built-in expression language. Its ability and to provide a seamless integration with PHP and external data sources.
+Hopefully, this helps to illustrate the capabilities of Pinq and its built-in expression language and query infrastructure. 
+The ability and to provide a seamless integration with PHP and external data sources.
