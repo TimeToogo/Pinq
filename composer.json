@@ -1,6 +1,6 @@
 {
     "name": "timetoogo/pinq",
-    "description": "PHP Integrated query - Extensible collection query API for PHP",
+    "description": "PHP Integrated query - A proper Linq for PHP",
     "keywords": ["collection", "query", "pinq"],
     "homepage": "http://www.github.com/TimeToogo/Pinq",
     "license": "MIT",
