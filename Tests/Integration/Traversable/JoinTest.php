@@ -84,4 +84,17 @@ class JoinTest extends TraversableTest
                 
         $this->AssertMatchesValues($Traversable, ['1-1', '2-2', '3-3']);
     }
+    
+    /**
+     * @dataProvider OneToTen
+     */
+    public function testJoinWithTransformProducesCorrectResult(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $Traversable = $Traversable
+                ->Join(range(10, 20))
+                ->OnEquality(function ($Outer) { return $Outer * 2; }, function ($Inner) { return $Inner; })
+                ->To(function($Outer, $Inner) { return $Outer . ':' . $Inner; });
+                
+        $this->AssertMatchesValues($Traversable, ['5:10', '6:12', '7:14', '8:16', '9:18', '10:20']);
+    }
 }
