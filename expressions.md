@@ -14,11 +14,11 @@ For example `5 + 3 - 2`, this can be represented as the following:
 
 ```
         BinaryOperation
-          |      |      |
+          |      |          |
         Left  Operator  Right
          /       |         \
         5       '+'      BinaryOperation
-                             |      |      |
+                             |      |          |
                            Left  Operator  Right
                             /       |       \
                            3        -        2
