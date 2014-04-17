@@ -68,7 +68,7 @@ foreach($Strings->GroupBy(function ($I) { return $I[0]; }) as $String) {
 foreach($Numbers
         ->Join(range(10, 20))
         ->OnEquality(function ($Outer) { return $Outer * 2; }, function ($Inner) { return $Inner; })
-        ->To(function($Outer, $Inner) { return $Outer . ':' . $Inner; } as $Joined) {
+        ->To(function($Outer, $Inner) { return $Outer . ':' . $Inner; }) as $Joined) {
     //'5:10', '6:12', '7:14', '8:16', '9:18', '10:20'
 }
 
