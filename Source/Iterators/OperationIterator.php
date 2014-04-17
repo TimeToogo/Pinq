@@ -7,7 +7,7 @@ abstract class OperationIterator extends LazyIterator
     private $OtherIterator;
     
     /**
-     * @var HashSet
+     * @var Utilities\Set
      */
     protected $OtherValues;
     
@@ -19,6 +19,6 @@ abstract class OperationIterator extends LazyIterator
     
     final protected function InitializeIterator(\Traversable $InnerIterator)
     {
-        $this->OtherValues = new HashSet($this->OtherIterator);
+        $this->OtherValues = new Utilities\Set($this->OtherIterator);
     }
 }

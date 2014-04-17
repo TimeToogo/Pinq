@@ -1,3 +1,5 @@
 /vendor/
 /nbproject/private/
 composer.lock
+/.idea/
+/_site/

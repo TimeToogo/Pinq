@@ -52,6 +52,6 @@ class Scope implements IScope
             return $this;
         }
         
-        return $this->Append($Segment);
+        return new self(array_merge(array_slice($this->Segments, 0, -1), [$Segment]));
     }
 }

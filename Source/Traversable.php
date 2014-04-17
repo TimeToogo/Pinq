@@ -118,6 +118,16 @@ class Traversable implements \Pinq\ITraversable
         return new GroupedTraversable(new Iterators\GroupedIterator($this->ValuesIterator, $Function));
     }
     
+    public function Join($Values)
+    {
+        return new JoiningOnTraversable($this->ValuesIterator, Utilities::ToIterator($Values), false);
+    }
+    
+    public function GroupJoin($Values)
+    {
+        return new JoiningOnTraversable($this->ValuesIterator, Utilities::ToIterator($Values), true);
+    }
+    
     public function Unique() 
     {
         return new self(new Iterators\UniqueIterator($this->ValuesIterator));

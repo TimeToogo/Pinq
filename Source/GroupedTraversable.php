@@ -2,7 +2,7 @@
 
 namespace Pinq;
 
-class GroupedTraversable extends Traversable implements \Pinq\IGroupedTraversable
+class GroupedTraversable extends Traversable implements IGroupedTraversable
 {
     /**
      * @var Iterators\GroupedIterator 

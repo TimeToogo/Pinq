@@ -6,14 +6,14 @@ class UnionIterator extends FlatteningIterator
 {
     private $Count = 0;
     /**
-     * @var HashSet
+     * @var Utilities\Set
      */
     private $SeenValues;
     
     public function __construct(\Traversable $Iterator, \Traversable $OtherIterator)
     {
         parent::__construct(new \ArrayIterator([$Iterator, $OtherIterator]));
-        $this->SeenValues = new HashSet();
+        $this->SeenValues = new Utilities\Set();
     }
     
     public function key()
@@ -23,7 +23,7 @@ class UnionIterator extends FlatteningIterator
     
     public function rewind()
     {
-        $this->SeenValues = new HashSet();
+        $this->SeenValues = new Utilities\Set();
         $this->Count = 0;
         parent::rewind();
     }

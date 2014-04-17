@@ -20,7 +20,7 @@ class GroupedIterator extends LazyIterator
      */
     public function AndGroupBy(callable $GroupByFunctions)
     {
-        $Copy = new self($this->Iterator, 'strlen');
+        $Copy = new self($this->Iterator, $GroupByFunctions);
         
         $Copy->GroupByFunctions = $this->GroupByFunctions;
         $Copy->GroupByFunctions[] = $GroupByFunctions;
@@ -31,55 +31,22 @@ class GroupedIterator extends LazyIterator
     protected function InitializeIterator(\Traversable $InnerIterator)
     {
         $Array = \Pinq\Utilities::ToArray($InnerIterator);
-        
-        $Groups = [];
+                
         if(count($this->GroupByFunctions) === 1) {
-            $Groups = $this->InitiliazeSingleGroupBy($this->GroupByFunctions[0], $Array);
+            $GroupByFunction = $this->GroupByFunctions[0];
         }
         else {
-            $Groups = $this->InitiliazeCompositeGroupBy($this->GroupByFunctions, $Array);
+            $GroupByFunction = function ($Value) {
+                return array_map(function ($I) use ($Value) { return $I($Value); }, $this->GroupByFunctions);
+            };
+        }
+        $GroupLookup = Utilities\Lookup::FromGroupingFunction($GroupByFunction, $InnerIterator, $GroupKeys);
+        
+        $Groups = [];
+        foreach ($GroupKeys as $GroupKey) {
+            $Groups[] = new \Pinq\Traversable($GroupLookup->Get($GroupKey));
         }
         
         return new \ArrayIterator($Groups);
-    }
-    
-    private function InitiliazeSingleGroupBy(callable $GroupByFunction, array &$Array) 
-    {
-        $KeyGroupValueMap = array_map($GroupByFunction, $Array);
-        
-        return $this->GroupBy($KeyGroupValueMap, $Array);
-    }
-    
-    private function InitiliazeCompositeGroupBy(array $GroupByFunctions, array &$Array) 
-    {
-        $KeyGroupValueMap = [];
-        
-        foreach ($GroupByFunctions as $GroupByKey => $GroupByFunction) {
-            foreach(array_map($GroupByFunction, $Array) as $ValueKey => $GroupByValue) {
-                $KeyGroupValueMap[$ValueKey][$GroupByKey] = $GroupByValue;
-            }
-        }
-        
-        return $this->GroupBy($KeyGroupValueMap, $Array);
-    }
-    
-    private function GroupBy(array $KeyGroupValueMap, array &$ArrayToGroup) {
-        $Groups = [];
-        $SeenValueMap = [];
-        $Count = 0;
-        
-        foreach ($KeyGroupValueMap as $ValueKey => $GroupByValue) {
-            $GroupKey = array_search($GroupByValue, $SeenValueMap, true);
-            
-            if($GroupKey === false) {
-                $GroupKey = $Count;
-                $SeenValueMap[$GroupKey] = $GroupByValue;
-                $Count++;
-            }
-            
-            $Groups[$GroupKey][$ValueKey] = $ArrayToGroup[$ValueKey];
-        }
-        
-        return array_map(function ($Group) { return new \Pinq\Traversable($Group); }, $Groups);
     }
 }

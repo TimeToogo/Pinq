@@ -8,11 +8,13 @@ interface ISegment
     const OrderBy = 1;
     const Range = 2;
     const GroupBy = 3;
-    const Select = 4;
-    const SelectMany = 5;
-    const Operate = 6;
-    const Unique = 7;
-    const IndexBy = 8;
+    const Join = 4;
+    const EqualityJoin = 5;
+    const Select = 6;
+    const SelectMany = 7;
+    const Operate = 8;
+    const Unique = 9;
+    const IndexBy = 10;
 
     /**
      * @return int The query type

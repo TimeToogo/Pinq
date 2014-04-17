@@ -48,8 +48,9 @@ class FunctionFinderVisitor extends \PHPParser_NodeVisitorAbstract
             return self::Hash([
                     self::$Method, 
                     $Reflection->getStartLine(), 
-                    $Reflection->getEndLine(), 
-                    $Reflection->getDeclaringClass()->getName(), 
+                    $Reflection->getEndLine(),  
+                    self::HashParameters($Reflection),
+                    $Reflection->getDeclaringClass()->getName(),
                     $Reflection->getName()
             ]);
         }
@@ -58,9 +59,23 @@ class FunctionFinderVisitor extends \PHPParser_NodeVisitorAbstract
                     $Reflection->isClosure() ? self::$Closure : self::$Function, 
                     $Reflection->getStartLine(), 
                     $Reflection->getEndLine(),
+                    self::HashParameters($Reflection),
                     $Reflection->getName()
             ]);
         }
+    }
+    
+    private static function HashParameters(\ReflectionFunctionAbstract $Reflection)
+    {
+        $Hash = '';
+        /* @var $Parameter \ReflectionParameter */
+        foreach($Reflection->getParameters() as $Parameter) {
+            $Hash .= $Parameter->getName();
+            $Hash .= $Parameter->isPassedByReference() ? '&' : '';
+            $Hash .= $Parameter->isOptional();
+        }
+        
+        return $Hash;
     }
     
     private function FunctionNodeSignatureHash(\PHPParser_Node_Stmt_Function $Node) 
@@ -69,6 +84,7 @@ class FunctionFinderVisitor extends \PHPParser_NodeVisitorAbstract
                 self::$Function, 
                 $Node->getAttribute('startLine'), 
                 $Node->getAttribute('endLine'), 
+                $this->HashParamerNodes($Node->params),
                 $this->CurrentNamespace . '\\' . $Node->name
         ]);
     }
@@ -80,6 +96,7 @@ class FunctionFinderVisitor extends \PHPParser_NodeVisitorAbstract
                 self::$Method, 
                 $Node->getAttribute('startLine'), 
                 $Node->getAttribute('endLine'), 
+                $this->HashParamerNodes($Node->params),
                 $this->CurrentNamespace . '\\' . $this->CurrentClass,
                 $Node->name
         ]);
@@ -99,8 +116,22 @@ class FunctionFinderVisitor extends \PHPParser_NodeVisitorAbstract
                 self::$Closure, 
                 $Node->getAttribute('startLine'), 
                 $Node->getAttribute('endLine'), 
+                $this->HashParamerNodes($Node->params),
                 $Name
         ]);
+    }
+    
+    private function HashParamerNodes(array $Nodes) 
+    {
+        $Hash = '';
+        /* @var $Parameter \PHPParser_Node_Param */
+        foreach($Nodes as $Parameter) {
+            $Hash .= $Parameter->name;
+            $Hash .= $Parameter->byRef ? '&' : '';
+            $Hash .= $Parameter->default !== null;
+        }
+        
+        return $Hash;
     }
 
     public function enterNode(\PHPParser_Node $Node)

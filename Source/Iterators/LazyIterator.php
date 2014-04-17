@@ -11,8 +11,7 @@ abstract class LazyIterator extends IteratorIterator
     {
         $this->Iterator = $Iterator;
     }
-    
-    
+        
     private function Initialize() {
         $Iterator = $this->InitializeIterator($this->Iterator) ?: $this->Iterator;
         parent::__construct($Iterator);

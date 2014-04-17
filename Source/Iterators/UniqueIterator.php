@@ -5,19 +5,19 @@ namespace Pinq\Iterators;
 class UniqueIterator extends IteratorIterator
 {
     /**
-     * @var HashSet 
+     * @var Utilities\Set 
      */
     private $SeenValues;
     
     public function __construct(\Traversable $iterator)
     {
         parent::__construct($iterator);
-        $this->SeenValues = new HashSet();
+        $this->SeenValues = new Utilities\Set();
     }
     
     public function rewind()
     {
-        $this->SeenValues = new HashSet();
+        $this->SeenValues = new Utilities\Set();
         parent::rewind();
     }
     

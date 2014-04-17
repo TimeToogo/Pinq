@@ -7,7 +7,6 @@ namespace Pinq;
  * 
  * Query calls must be immutable and return a new instance with every query call.
  * Queries should also be executed lazily upon iteration.
- * 
  */
 interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
 {
@@ -150,9 +149,25 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * The values will be grouped into instances of ITraversable.
      *
      * @param  callable   $Function The grouping function
-     * @return ITraversable
+     * @return IGroupedTraversable
      */
     public function GroupBy(callable $Function);
+
+    /**
+     * Joins the values
+     *
+     * @param  array|\Traversable   $Values
+     * @return IJoiningOnTraversable
+     */
+    public function Join($Values);
+    
+    /**
+     * Group joins the values
+     *
+     * @param  array|\Traversable   $Values
+     * @return IJoiningOnTraversable
+     */
+    public function GroupJoin($Values);
 
     /**
      * Only return unique values. (Uses strict equality '===')
@@ -181,7 +196,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     /**
      * Returns values from the original and supplied values, keys will be reindexed.
      *
-     * @param  ITraversable $Values The values to append
+     * @param  array|\Traversable $Values The values to append
      * @return ITraversable
      */
     public function Append($Values);
@@ -190,7 +205,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Returns all values from the original present in the supplied values. 
      * (Uses strict equality '===') 
      *
-     * @param  ITraversable $Values
+     * @param  array|\Traversable $Values
      * @return ITraversable
      */
     public function WhereIn($Values);
@@ -199,7 +214,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Returns values all values from the original not present in the supplied values.
      * (Uses strict equality '===') 
      *
-     * @param  ITraversable $Values The values to union
+     * @param  array|\Traversable $Values The values to union
      * @return ITraversable
      */
     public function Except($Values);
@@ -209,7 +224,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * keys will be reindexed.
      * (Uses strict equality '===') 
      *
-     * @param  ITraversable $Values The values to union
+     * @param  array|\Traversable $Values The values to union
      * @return ITraversable
      */
     public function Union($Values);
@@ -218,7 +233,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Returns unique values the are present in the original and supplied values. 
      * (Uses strict equality '===') 
      *
-     * @param  ITraversable $Values The values to intersect with
+     * @param  array|\Traversable $Values The values to intersect with
      * @return ITraversable
      */
     public function Intersect($Values);
@@ -227,7 +242,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Removes unique values from the original not present in the supplied values. 
      * (Uses strict equality '===') 
      *
-     * @param  ITraversable $Values The values to remove
+     * @param  array|\Traversable $Values The values to remove
      * @return ITraversable
      */
     public function Difference($Values);

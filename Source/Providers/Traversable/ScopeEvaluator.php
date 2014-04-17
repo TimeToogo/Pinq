@@ -81,6 +81,30 @@ class ScopeEvaluator extends Segments\SegmentVisitor
             }
         }
     }
+    
+    public function VisitJoin(Segments\Join $Query)
+    {
+        $this->Traversable = $this->GetJoin($Query)
+                ->On($Query->GetOnFunction())
+                ->To($Query->GetJoiningFunction());
+    }
+    
+    public function VisitEqualityJoin(Segments\EqualityJoin $Query)
+    {
+        $this->Traversable = $this->GetJoin($Query)
+                ->OnEquality($Query->GetOuterKeyFunction(), $Query->GetInnerKeyFunction())
+                ->To($Query->GetJoiningFunction());
+    }
+    
+    private function GetJoin(Segments\JoinBase $Query)
+    {
+         if($Query->IsGroupJoin()) {
+            return $this->Traversable->GroupJoin($Query->GetValues());
+        }
+        else {
+            return $this->Traversable->Join($Query->GetValues());
+        }
+    }
 
     protected function VisitIndexBy(Segments\IndexBy $Query)
     {

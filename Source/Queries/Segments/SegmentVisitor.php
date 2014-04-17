@@ -39,6 +39,20 @@ class SegmentVisitor extends SegmentWalker
     }
     public function VisitGroupBy(GroupBy $Query) {}
 
+    final public function WalkJoin(Join $Query)
+    {
+        $this->VisitJoin($Query);
+        return $Query;
+    }
+    public function VisitJoin(Join $Query) {}
+    
+    final public function WalkEqualityJoin(EqualityJoin $Query)
+    {
+        $this->VisitEqualityJoin($Query);
+        return $Query;
+    }
+    public function VisitEqualityJoin(EqualityJoin $Query) {}
+
     final public function WalkOrderBy(OrderBy $Query)
     {
         $this->VisitOrderBy($Query);

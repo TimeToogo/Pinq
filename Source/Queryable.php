@@ -163,6 +163,17 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
         }
         return $this->UpdateLastSegment($LastSegment->AndBy($this->Convert($Function)));
     }
+    
+    public function Join($Values)
+    {
+        return new JoiningOnQueryable($this->Provider, $this->Scope, $Values, false);
+    }
+    
+    public function GroupJoin($Values)
+    {
+        return new JoiningOnQueryable($this->Provider, $this->Scope, $Values, true);
+    }
+    
     public function Union($Values)
     {
         return $this->NewSegment(new Segments\Operation(Segments\Operation::Union, $Values));

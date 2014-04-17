@@ -24,6 +24,24 @@ class GroupByTest extends TraversableTest
     }
     
     /**
+     * @dataProvider OneToTen
+     * @depends testThatGroupByElementReturnsITraversables
+     */
+    public function testThatGroupByMultipleTest(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $Groups = $Traversable
+                ->GroupBy(function ($I) { return $I % 2 === 0; })
+                ->AndBy(function ($I) { return $I % 3 === 0; })
+                ->AsArray();
+        
+        $this->assertCount(4, $Groups);
+        $this->AssertMatchesValues($Groups[0], [1, 5, 7]);
+        $this->AssertMatchesValues($Groups[1], [2, 4, 8, 10]);
+        $this->AssertMatchesValues($Groups[2], [3, 9]);
+        $this->AssertMatchesValues($Groups[3], [6]);
+    }
+    
+    /**
      * @dataProvider AssocOneToTen
      * @depends testThatGroupByElementReturnsITraversables
      */

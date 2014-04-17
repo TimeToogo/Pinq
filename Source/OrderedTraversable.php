@@ -2,7 +2,7 @@
 
 namespace Pinq;
 
-class OrderedTraversable extends Traversable implements \Pinq\IOrderedTraversable
+class OrderedTraversable extends Traversable implements IOrderedTraversable
 {
     /**
      * @var Iterators\OrderedIterator 

@@ -16,7 +16,7 @@ abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
         try {
             $Traversable = $TraversableQuery($ThowingFunction);
         }
-        catch (\Exception $ThrownException) {
+        catch (CustomException $ThrownException) {
             $this->assertFalse(true, 'Traversable query method should not have thrown exception');
         }
         
