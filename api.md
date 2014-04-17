@@ -11,13 +11,17 @@ This is base interface for all query objects, it supports the following methods:
 **Queries**
 
  - `Where` - Filters the values according to the supplied predicate
- - `OrderBy/OrderByAscending/OrderByDescending` - Orders the values according the supplied order direction
- - `ThenBy/ThenByAscending/ThenByDescending` - Subsequently orders the values according the supplied order direction
+ - `OrderBy/OrderByAscending/OrderByDescending->ThenBy/ThenByAscending/ThenByDescending...` - 
+    Orders the values according the supplied order functions and direction(s)
  - `Skip` - Skip the supplied amount of values
  - `Take` - Limits the amount of values by the supplied amount
  - `Slice` - Retrieve a slice of values according to the specified offset and amount
  - `IndexBy` - Index the values according to the supplied mapping function
- - `GroupBy` - Groups the values according the supplied mapping function
+ - `GroupBy->AndBy...` - Groups the values according the supplied grouping function(s)
+ - `Join->On/OnEquality->To` - Matches the values with the supplied values according to the supplied filter then 
+   then maps the results into as according to the supplied function.
+ - `GroupJoin->On/OnEquality->To` - Matches the values with the supplied values according to the supplied filter, 
+   groups the results and then maps into as according to the supplied function.
  - `Unique` - Only return unique values
  - `Select` - Map the values according to the supplied function
  - `SelectMany` - Map the values according to the supplied function and merge the results
@@ -26,6 +30,7 @@ This is base interface for all query objects, it supports the following methods:
  - `Contains` - Returns if the supplied value is present in the values
  - `offsetGet` - Returns a value at the supplied index
  - `offsetExists` - Whether a value exists for the supplied index
+
 
 **Set/List Operations**
 

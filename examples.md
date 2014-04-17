@@ -61,6 +61,33 @@ foreach($Strings->GroupBy(function ($I) { return $I[0]; }) as $String) {
 
 {% endhighlight %}
 
+**Joining**
+
+{% highlight php startinline %}
+
+foreach($Numbers
+        ->Join(range(10, 20))
+        ->OnEquality(function ($Outer) { return $Outer * 2; }, function ($Inner) { return $Inner; })
+        ->To(function($Outer, $Inner) { return $Outer . ':' . $Inner; } as $Joined) {
+    //'5:10', '6:12', '7:14', '8:16', '9:18', '10:20'
+}
+
+foreach($Numbers
+        ->GroupJoin($Strings)
+        ->OnEquality(function ($Outer) { return $Outer; }, 'strlen')
+        ->To(function($Outer, \Pinq\ITraversable $InnerGroup) { return $Outer . ':' . $InnerGroup->Implode('|'); }) as $Joined) {
+    //'1:', '2:', '3:foo|bar|baz|cow', '4:tear|sand', '5:which', '6:tripod|whisky', '7:'...
+}
+
+foreach($Numbers
+        ->GroupJoin($Numbers)
+        ->On(function ($Outer, $Inner) { return $Outer >= $Inner; })
+        ->To(function($Outer, \Pinq\ITraversable $InnerGroup) { return $Outer . ':' . $InnerGroup->Implode('|'); }) as $Joined) {
+    //'1:1', '2:1|2', '3:1|2|3', '4:1|2|3|4', '5:1|2|3|4|5'...
+}
+
+{% endhighlight %}
+
 **Selecting**
 
 {% highlight php startinline %}
