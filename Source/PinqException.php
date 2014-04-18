@@ -33,6 +33,14 @@ class PinqException extends \Exception
         return new self($Message);
     }
     
+    public static function InvalidIterable($Method, $Value)
+    {
+        return new self(
+                    'Invalid argument for %s: expecting \Traversable or array, %s given',
+                    $Method,
+                    \Pinq\Utilities::GetTypeOrClass($Value));
+    }
+    
     public static function NotSupported($Method)
     {
         return new self('Invalid call to %s: Method is not supported', $Method);

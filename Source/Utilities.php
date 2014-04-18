@@ -13,6 +13,11 @@ final class Utilities
         return is_object($Value) ? get_class($Value) : gettype($Value);
     }
     
+    public static function IsIterable($Value)
+    {
+        return $Value instanceof \Traversable || is_array($Value);
+    }
+    
     public static function ToArray(\Traversable $Iterator)
     {
         if($Iterator instanceof \ArrayIterator || $Iterator instanceof \ArrayObject) {
@@ -44,11 +49,8 @@ final class Utilities
      */
     public static function ToIterator($TraversableOrArray)
     {
-        if(!is_array($TraversableOrArray) && !($TraversableOrArray instanceof \Traversable)) {
-            throw new PinqException(
-                    'Invalid argument for %s: expecting array or \Traversable, %s given',
-                    __METHOD__,
-                    self::GetTypeOrClass($TraversableOrArray));
+        if(!self::IsIterable($TraversableOrArray)) {
+            throw PinqException::InvalidIterable(__METHOD__, $TraversableOrArray);
         }
         
         if($TraversableOrArray instanceof \Iterator) {

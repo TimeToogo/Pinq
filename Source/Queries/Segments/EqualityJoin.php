@@ -45,7 +45,7 @@ class EqualityJoin extends JoinBase
         if($this->Values === $Values
                 && $this->IsGroupJoin === $IsGroupJoin
                 && $this->OuterKeyFunction === $OuterKeyFunction
-                && $this->OuterKeyFunction === $InnerKeyFunction
+                && $this->InnerKeyFunction === $InnerKeyFunction
                 && $this->JoiningFunction === $JoiningFunction) {
             return $this;
         }

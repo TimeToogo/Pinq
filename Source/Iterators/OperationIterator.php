@@ -2,14 +2,14 @@
 
 namespace Pinq\Iterators;
 
-abstract class OperationIterator extends LazyIterator
+abstract class OperationIterator extends IteratorIterator
 {
     private $OtherIterator;
     
     /**
      * @var Utilities\Set
      */
-    protected $OtherValues;
+    private $OtherValues;
     
     public function __construct(\Traversable $Iterator, \Traversable $OtherIterator)
     {
@@ -17,8 +17,24 @@ abstract class OperationIterator extends LazyIterator
         $this->OtherIterator = $OtherIterator;
     }
     
-    final protected function InitializeIterator(\Traversable $InnerIterator)
+    final public function valid()
+    {
+        while(parent::valid()) {
+            if($this->SetFilter(parent::current(), $this->OtherValues)) {
+                return true;
+            }
+            
+            parent::next();
+        }
+        return false;
+    }
+    
+    protected abstract function SetFilter($Value, Utilities\Set $OtherValues);
+    
+    final public function rewind()
     {
         $this->OtherValues = new Utilities\Set($this->OtherIterator);
+        parent::rewind();
     }
+    
 }

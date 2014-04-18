@@ -14,7 +14,7 @@ class ScopeSimplifier extends Segments\SegmentWalker
 
     public function WalkGroupBy(Segments\GroupBy $Query)
     {
-        return $Query->Update(array_map(function ($I) { return $I->Simplify(); }), $Query->GetFunctionExpressionTrees());
+        return $Query->Update(array_map(function ($I) { return $I->Simplify(); }, $Query->GetFunctionExpressionTrees()));
     }
 
     public function WalkIndexBy(Segments\IndexBy $Query)

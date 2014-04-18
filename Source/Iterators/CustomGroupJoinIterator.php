@@ -3,16 +3,11 @@
 namespace Pinq\Iterators;
 
 class CustomGroupJoinIterator extends CustomJoinIteratorBase
-{    
-    protected function GetInnerGroupIterator($OuterValue)
+{
+    protected function GetInnerGroupValuesIterator(callable $InnerValueFilterFunction)
     {
-        $JoinOnFunction = $this->JoinOnFunction;
+        $GroupTraversable = new \Pinq\Traversable(array_filter($this->InnerValues, $InnerValueFilterFunction));
         
-        $GroupTraversable = new \Pinq\Traversable(\array_filter($this->InnerValues, 
-                            function ($InnerValue) use ($OuterValue, $JoinOnFunction) {
-                                return $JoinOnFunction($OuterValue, $InnerValue);
-                            }));
-                            
         return new \ArrayIterator([$GroupTraversable]);
     }
 }

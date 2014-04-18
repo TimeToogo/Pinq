@@ -24,6 +24,7 @@ class FilterIterator extends IteratorIterator
             
             parent::next();
         }
+        
         return false;
     }
 }

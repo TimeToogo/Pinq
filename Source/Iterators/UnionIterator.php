@@ -41,7 +41,7 @@ class UnionIterator extends FlatteningIterator
                 return true;
             }
             
-            $this->next();
+            parent::next();
         }
         
         return false;

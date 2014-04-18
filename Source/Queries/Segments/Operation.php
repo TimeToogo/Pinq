@@ -24,11 +24,8 @@ class Operation extends Segment
 
     public function __construct($OperationType, $Values)
     {
-        if(!($Values instanceof \Traversable) && !is_array($Values)) {
-            throw new \Pinq\PinqException(
-                    'Invalid argument $values for %s: expecting \Traversable or array, %s given',
-                    __METHOD__,
-                    \Pinq\Utilities::GetTypeOrClass($Values));
+        if(!\Pinq\Utilities::IsIterable($Values)) {
+            throw \Pinq\PinqException::InvalidIterable(__METHOD__, $Values);
         }
         if(!self::IsValid($OperationType)) {
             throw new \Pinq\PinqException('Invalid operation type');

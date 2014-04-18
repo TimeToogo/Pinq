@@ -28,4 +28,18 @@ abstract class CustomJoinIteratorBase extends JoinIteratorBase
     {
         $this->InnerValues = \Pinq\Utilities::ToArray($this->InnerIterator);
     }
+    
+    final protected function GetInnerGroupIterator($OuterValue)
+    {
+        $JoinOnFunction = $this->JoinOnFunction;
+        
+        $InnerValueFilterFunction = 
+                function ($InnerValue) use ($OuterValue, $JoinOnFunction) {
+                    return $JoinOnFunction($OuterValue, $InnerValue);
+                };
+                
+        return $this->GetInnerGroupValuesIterator($InnerValueFilterFunction);
+    }
+    
+    protected abstract function GetInnerGroupValuesIterator(callable $InnerValueFilterFunction);
 }

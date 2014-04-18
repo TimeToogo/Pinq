@@ -29,9 +29,7 @@ class GroupedIterator extends LazyIterator
     }
     
     protected function InitializeIterator(\Traversable $InnerIterator)
-    {
-        $Array = \Pinq\Utilities::ToArray($InnerIterator);
-                
+    {   
         if(count($this->GroupByFunctions) === 1) {
             $GroupByFunction = $this->GroupByFunctions[0];
         }
@@ -40,6 +38,8 @@ class GroupedIterator extends LazyIterator
                 return array_map(function ($I) use ($Value) { return $I($Value); }, $this->GroupByFunctions);
             };
         }
+        
+        $GroupKeys = [];
         $GroupLookup = Utilities\Lookup::FromGroupingFunction($GroupByFunction, $InnerIterator, $GroupKeys);
         
         $Groups = [];

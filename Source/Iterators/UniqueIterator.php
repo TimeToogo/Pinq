@@ -2,36 +2,21 @@
 
 namespace Pinq\Iterators;
 
-class UniqueIterator extends IteratorIterator
+class UniqueIterator extends OperationIterator
 {
     /**
      * @var Utilities\Set 
      */
     private $SeenValues;
     
-    public function __construct(\Traversable $iterator)
+    public function __construct(\Traversable $Iterator)
     {
-        parent::__construct($iterator);
+        parent::__construct($Iterator, new \ArrayIterator());
         $this->SeenValues = new Utilities\Set();
     }
     
-    public function rewind()
+    protected function SetFilter($Value, Utilities\Set $SeenValues)
     {
-        $this->SeenValues = new Utilities\Set();
-        parent::rewind();
-    }
-    
-    public function valid()
-    {
-        while(parent::valid()) {
-            $CurrentValue = self::current();
-            
-            if($this->SeenValues->Add($CurrentValue)) {
-                return true;
-            }
-            
-            parent::next();
-        }
-        return false;
+        return $SeenValues->Add($Value);
     }
 }

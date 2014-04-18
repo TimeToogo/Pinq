@@ -47,7 +47,7 @@ abstract class RequestEvaluator extends Requests\RequestVisitor
     {
         return $this->IsLoaded ? 
                 $this->LoadedRequestEvaluator->VisitLast($Request) : 
-                $this->LoadFirst($Request);
+                $this->LoadLast($Request);
     }
     protected abstract function LoadLast(Requests\Last $Request);
     

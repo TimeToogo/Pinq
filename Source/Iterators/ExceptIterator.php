@@ -4,15 +4,8 @@ namespace Pinq\Iterators;
 
 class ExceptIterator extends OperationIterator
 {
-    public function valid()
+    protected function SetFilter($Value, Utilities\Set $OtherValues)
     {
-        while(parent::valid()) {
-            if(!$this->OtherValues->Contains(parent::current())) {
-                return true;
-            }
-            
-            parent::next();
-        }
-        return false;
+        return !$OtherValues->Contains($Value);
     }
 }

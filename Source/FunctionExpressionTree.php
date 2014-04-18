@@ -200,11 +200,15 @@ class FunctionExpressionTree implements \Serializable
     final public function Walk(O\ExpressionWalker $ExpressionWalker)
     {
         $this->Invalidate($ExpressionWalker->WalkAll($this->BodyExpressions));
+        
+        return $this;
     }
-
+    
     final public function Simplify()
     {
         $this->Invalidate(O\Expression::SimplifyAll($this->BodyExpressions));
+        
+        return $this;
     }
 
     final public function HasUnresolvedVariables()

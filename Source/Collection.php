@@ -54,7 +54,7 @@ class Collection extends Traversable implements ICollection
 
     public function AddRange($Values)
     {
-        if(!is_array($Values) || $Values instanceof \Traversable) {
+        if(!Utilities::IsIterable($Values)) {
             throw $this->InvalidRange(__METHOD__, 'Values', $Values);
         }
         
@@ -65,7 +65,7 @@ class Collection extends Traversable implements ICollection
 
     public function RemoveRange($Values)
     {
-        if(!is_array($Values) || $Values instanceof \Traversable) {
+        if(!Utilities::IsIterable($Values)) {
             throw $this->InvalidRange(__METHOD__, 'Values', $Values);
         }
         
@@ -111,5 +111,4 @@ class Collection extends Traversable implements ICollection
             $this->ValuesIterator = new \ArrayIterator($Array);
         }
     }
-
 }
