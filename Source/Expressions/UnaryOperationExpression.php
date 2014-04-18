@@ -89,4 +89,9 @@ class UnaryOperationExpression extends Expression
         $Code .= sprintf($this->Operator, $this->OperandExpression->Compile());
         $Code .= ')';
     }
+        
+    public function __clone()
+    {
+        $this->OperandExpression = clone $this->OperandExpression;
+    }
 }

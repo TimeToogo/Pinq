@@ -73,4 +73,10 @@ class NewExpression extends Expression
         $Code .= implode(',', self::CompileAll($this->ArgumentExpressions));
         $Code .= ')';
     }
+    
+    public function __clone()
+    {
+        $this->ClassTypeExpression = clone $this->ClassTypeExpression;
+        $this->ArgumentExpressions = self::CloneAll($this->ArgumentExpressions);
+    }
 }

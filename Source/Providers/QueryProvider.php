@@ -13,10 +13,9 @@ abstract class QueryProvider implements IQueryProvider
      */
     private $FunctionConverter;
     
-    public function __construct(IFunctionToExpressionTreeConverter $FunctionConverter = null)
+    public function __construct(\Pinq\Caching\IFunctionCache $FunctionCache = null)
     {
-        $this->FunctionConverter = $FunctionConverter ?: 
-                new \Pinq\Parsing\FunctionToExpressionTreeConverter(new \Pinq\Parsing\PHPParser\Parser());
+        $this->FunctionConverter = new \Pinq\Parsing\FunctionToExpressionTreeConverter(new \Pinq\Parsing\PHPParser\Parser(), $FunctionCache);
     }
     
     public function GetFunctionToExpressionTreeConverter()

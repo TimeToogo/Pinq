@@ -53,5 +53,9 @@ class VariableExpression extends Expression
             $Code .= '}';
         }
     }
-
+    
+    public function __clone()
+    {
+        $this->NameExpression = clone $this->NameExpression;
+    }
 }

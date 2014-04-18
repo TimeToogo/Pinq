@@ -10,10 +10,15 @@ abstract class CollectionTest extends \Pinq\Tests\Integration\DataTest
     {
         $Exception = new CustomException();
         
+        
         $ThowingFunction = function () use ($Exception) { throw $Exception; };
         
-        $this->setExpectedException(CustomException::CustomExceptionType);
-        $CollectionOperation($ThowingFunction);
+        try {
+            $CollectionOperation($ThowingFunction);
+        }
+        catch (CustomException $ThrownException) {
+            $this->assertSame($Exception, $ThrownException);
+        }
     }
     
     final protected function ImplementationsFor(array $Data)

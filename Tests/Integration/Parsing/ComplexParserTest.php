@@ -126,4 +126,28 @@ class ComplexParserTest extends ParserTest
                                 O\Expression::Value('Method')),
                         O\Expression::Value('Index'))]);
     }
+    
+    /**
+     * @dataProvider Parsers
+     */
+    public function testNestedClosures()
+    {
+        $Function = function () {
+            return function($Foo) { $Foo->Bar += 5; };
+        };
+        
+        $this->AssertParsedAs($Function, [
+                O\Expression::ReturnExpression(
+                        O\Expression::Closure(
+                                [O\Expression::Parameter('Foo')],
+                                [], //Used
+                                [O\Expression::Assign(
+                                        O\Expression::Field(self::Variable('Foo'), O\Expression::Value('Bar')), 
+                                        O\Operators\Assignment::Addition, 
+                                        O\Expression::Value(5))]
+                                )
+                        )
+                    ]
+            );
+    }
 }

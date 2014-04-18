@@ -9,6 +9,11 @@ namespace Pinq\Parsing;
 interface IParser
 {
     /**
+     * @return string
+     */
+    public function GetSignatureHash(\ReflectionFunctionAbstract $Reflection);
+    
+    /**
      * @return Expression[]
      */
     public function Parse(\ReflectionFunctionAbstract $Reflection);

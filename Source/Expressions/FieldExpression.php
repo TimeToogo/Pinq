@@ -77,4 +77,10 @@ class FieldExpression extends ObjectOperationExpression
             $Code .= '}';
         }
     }
+    
+    public function __clone()
+    {
+        $this->ValueExpression = clone $this->ValueExpression;
+        $this->NameExpression = clone $this->NameExpression;
+    }
 }

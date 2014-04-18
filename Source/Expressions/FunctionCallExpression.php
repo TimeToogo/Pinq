@@ -69,4 +69,10 @@ class FunctionCallExpression extends Expression
         $Code .= implode(',', self::CompileAll($this->ArgumentExpressions));
         $Code .= ')';
     }
+    
+    public function __clone()
+    {
+        $this->NameExpression = clone $this->NameExpression;
+        $this->ArgumentExpressions = self::CloneAll($this->ArgumentExpressions);
+    }
 }

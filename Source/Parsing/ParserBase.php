@@ -2,8 +2,6 @@
 
 namespace Pinq\Parsing;
 
-use \Pinq\Expressions as O;
-
 abstract class ParserBase implements IParser
 {
     final public function Parse(\ReflectionFunctionAbstract $Reflection)

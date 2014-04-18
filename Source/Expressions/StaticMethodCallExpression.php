@@ -90,4 +90,11 @@ class StaticMethodCallExpression extends Expression
         $Code .= implode(',', self::CompileAll($this->ArgumentExpressions));
         $Code .= ')';
     }
+    
+    public function __clone()
+    {
+        $this->ClassExpression = clone $this->ClassExpression;
+        $this->NameExpression = clone $this->NameExpression;
+        $this->ArgumentExpressions = self::CloneAll($this->ArgumentExpressions);
+    }
 }

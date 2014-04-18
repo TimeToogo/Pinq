@@ -32,9 +32,19 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testVariableReturnValueResolution()
     {
-        foreach([1, null, 'test', false, new \stdClass(), [1234567890, 'tests', new \stdClass()]] as $Value) {
+        foreach([1, null, 'test', false, new \stdClass(), [1234567890, 'tests', new \stdClass(), function () {}]] as $Value) {
             $this->AssertFirstResolvedReturnExpression(function () use($Value) { return $Value; }, O\Expression::Value($Value));
         }
+    }
+    
+    /**
+     * @dataProvider Converters
+     */
+    public function testNestedClosure()
+    {
+        $ValueSet = [[-500], [-5], [-2], [-1], [1], [2], [5], [500]];
+        
+        $this->AssertConvertsAndRecompilesCorrectly(function ($I) { $Divider = function () use ($I) { return $I / 5; }; return $Divider(); }, $ValueSet);
     }
     
     /**

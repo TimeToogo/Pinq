@@ -138,5 +138,10 @@ class BinaryOperationExpression extends Expression
         $this->RightOperandExpression->CompileCode($Code);
         $Code .= ')';
     }
-
+    
+    public function __clone()
+    {
+        $this->LeftOperandExpression = clone $this->LeftOperandExpression;
+        $this->RightOperandExpression = clone $this->RightOperandExpression;
+    }
 }

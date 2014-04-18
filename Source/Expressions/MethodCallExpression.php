@@ -100,4 +100,11 @@ class MethodCallExpression extends ObjectOperationExpression
         $Code .= implode(',', self::CompileAll($this->ArgumentExpressions));
         $Code .= ')';
     }
+    
+    public function __clone()
+    {
+        $this->ValueExpression = clone $this->ValueExpression;
+        $this->NameExpression = clone $this->NameExpression;
+        $this->ArgumentExpressions = self::CloneAll($this->ArgumentExpressions);
+    }
 }

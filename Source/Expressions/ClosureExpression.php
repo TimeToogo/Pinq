@@ -83,4 +83,10 @@ class ClosureExpression extends Expression
         }
         $Code .= '}';
     }
+    
+    public function __clone()
+    {
+        $this->ParameterExpressions = self::CloneAll($this->ParameterExpressions);
+        $this->BodyExpressions = self::CloneAll($this->BodyExpressions);
+    }
 }

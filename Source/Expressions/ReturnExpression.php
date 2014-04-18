@@ -60,4 +60,9 @@ class ReturnExpression extends Expression
             $this->ReturnValueExpression->CompileCode($Code);
         }
     }
+    
+    public function __clone()
+    {
+        $this->ReturnValueExpression = clone $this->ReturnValueExpression;
+    }
 }

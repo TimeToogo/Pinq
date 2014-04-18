@@ -92,5 +92,9 @@ class ParameterExpression extends Expression
             $Code .= ' = ' . var_export($this->DefaultValue, true);
         }
     }
-
+    
+    public function __clone()
+    {
+        $this->DefaultValue = is_object($this->DefaultValue) ? clone $this->DefaultValue : $this->DefaultValue;
+    }
 }

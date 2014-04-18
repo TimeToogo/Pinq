@@ -48,7 +48,7 @@ abstract class Expression
         return $Code;
     }
     abstract protected function CompileCode(&$Code);
-
+    
     /**
      * @return array
      */
@@ -61,15 +61,25 @@ abstract class Expression
      * @param string $Type
      * @return boolean
      */
-    final protected static function AllOfType(array $Expressions, $Type)
+    final protected static function AllOfType(array $Expressions, $Type, $AllowNull = false)
     {
         foreach ($Expressions as $Expression) {
-            if (!($Expression instanceof $Type)) {
+            if (!($Expression instanceof $Type) && !($Expression  === null && $AllowNull)) {
                 return false;
             }
         }
 
         return true;
+    }
+        
+    public abstract function __clone();
+    
+    /**
+     * @return array
+     */
+    final public static function CloneAll(array $Expressions)
+    {
+        return array_map(function (self $Expression = null) { return $Expression === null ? null : clone $Expression; }, $Expressions);
     }
 
     // <editor-fold desc="Factory Methods">
@@ -242,9 +252,9 @@ abstract class Expression
     /**
      * @return ClosureExpression
      */
-    final public static function Closure(array $ParameterNameTypeHintMap, array $UsedVariables, array $BodyExpressions)
+    final public static function Closure(array $ParameterExpressions, array $UsedVariables, array $BodyExpressions)
     {
-        return new ClosureExpression($ParameterNameTypeHintMap, $UsedVariables, $BodyExpressions);
+        return new ClosureExpression($ParameterExpressions, $UsedVariables, $BodyExpressions);
     }
 
     /**

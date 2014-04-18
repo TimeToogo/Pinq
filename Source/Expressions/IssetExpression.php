@@ -66,4 +66,9 @@ class IssetExpression extends Expression
         $Code .= implode(',', self::CompileAll($this->ValueExpressions));
         $Code .= ')';
     }
+    
+    public function __clone()
+    {
+        $this->ValueExpressions = self::CloneAll($this->ValueExpressions);
+    }
 }

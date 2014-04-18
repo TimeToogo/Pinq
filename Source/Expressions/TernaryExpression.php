@@ -104,4 +104,11 @@ class TernaryExpression extends Expression
         
         $Code .= ')';
     }
+        
+    public function __clone()
+    {
+        $this->ConditionExpression = clone $this->ConditionExpression;
+        $this->IfTrueExpression = clone $this->IfTrueExpression;
+        $this->IfFalseExpression = clone $this->IfFalseExpression;
+    }
 }

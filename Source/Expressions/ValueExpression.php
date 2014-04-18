@@ -53,10 +53,15 @@ class ValueExpression extends Expression
             $Code .= var_export($this->Value, true);
         } 
         else if ($this->Value instanceof \Closure) {
-            throw new \Pinq\PinqException('Cannot compile value expression: value of type Closure cannot be serialzed');
+            throw new \Pinq\PinqException('Cannot compile value expression: value of type \Closure cannot be serialzed');
         } 
         else {
             $Code .= 'unserialize(\'' . serialize($this->Value) . '\')';
         }
+    }
+        
+    public function __clone()
+    {
+        $this->Value = is_object($this->Value) ? clone $this->Value : $this->Value;
     }
 }

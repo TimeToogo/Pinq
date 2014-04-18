@@ -49,4 +49,9 @@ class ThrowExpression extends Expression
         $Code .= 'throw ';
         $this->ExceptionExpression->CompileCode($Code);
     }
+        
+    public function __clone()
+    {
+        $this->ExceptionExpression = clone $this->ExceptionExpression;
+    }
 }

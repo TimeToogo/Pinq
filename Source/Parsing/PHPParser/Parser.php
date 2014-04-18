@@ -19,6 +19,11 @@ class Parser extends ParserBase
     public function __construct()
     {
     }
+    
+    public function GetSignatureHash(\ReflectionFunctionAbstract $Reflection)
+    {
+        return Visitors\FunctionFinderVisitor::FunctionSignatureHash($Reflection);
+    }
 
     protected function ParseFunction(\ReflectionFunctionAbstract $Reflection, $FileName)
     {

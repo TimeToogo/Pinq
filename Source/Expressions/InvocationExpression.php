@@ -75,4 +75,10 @@ class InvocationExpression extends TraversalExpression
         $Code .= implode(',', self::CompileAll($this->ArgumentExpressions));
         $Code .= ')';
     }
+    
+    public function __clone()
+    {
+        $this->ValueExpression = clone $this->ValueExpression;
+        $this->ArgumentExpressions = self::CloneAll($this->ArgumentExpressions);
+    }
 }

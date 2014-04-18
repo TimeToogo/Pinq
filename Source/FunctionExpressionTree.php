@@ -24,7 +24,7 @@ class FunctionExpressionTree implements \Serializable
     private $BodyExpressions = [];
 
     /**
-     * @var O\ReturnExpression|null
+     * @var O\ReturnExpression[]|null
      */
     private $ReturnValueExpressions = null;
 
@@ -49,6 +49,11 @@ class FunctionExpressionTree implements \Serializable
     private $SerializedData = null;
 
     /**
+     * @var string|null
+     */
+    private $CompiledCode = null;
+
+    /**
      * @var callable|null
      */
     private $CompiledFunction = null;
@@ -61,12 +66,18 @@ class FunctionExpressionTree implements \Serializable
         $this->ReturnValueExpressionResolver = new O\Walkers\ReturnValueExpressionResolver();
         
         //Only parameterize objects, arrays and resources
-        $this->ValueUnresolver = new O\Walkers\ValueUnresolver(function ($Value) { return !is_scalar($Value); });
+        //Filter cannot be closure due to serialization
+        $this->ValueUnresolver = new O\Walkers\ValueUnresolver([__CLASS__, 'IsNotScalar']);
         
         
         $this->Invalidate($Expressions);
 
         $this->CompiledFunction = $OriginalFunction;
+    }
+    
+    public static function IsNotScalar($Value) 
+    {
+        return !is_scalar($Value);
     }
 
     public static function FromClosureExpression(O\ClosureExpression $Expression, callable $OriginalFunction = null)
@@ -79,6 +90,15 @@ class FunctionExpressionTree implements \Serializable
     
     public function SetCompiledFunction(callable $Function = null) {
         $this->CompiledFunction = $Function;
+    }
+    
+    /**
+     * @return string
+     */
+    public function GetCompiledCode()
+    {
+        $this->LoadCompiledFunction();
+        return $this->CompiledCode;
     }
     
     /**
@@ -96,7 +116,7 @@ class FunctionExpressionTree implements \Serializable
             
             unset($DataToSerialize['SerializedData']);
             unset($DataToSerialize['CompiledFunction']);
-
+            
             $this->SerializedData = serialize($DataToSerialize);
         }
         
@@ -109,6 +129,25 @@ class FunctionExpressionTree implements \Serializable
             $this->$PropertyName = $Value;
         }
         $this->SerializedData = $Serialized;
+    }
+    
+    public function __clone()
+    {
+        foreach($this->BodyExpressions as $Key => $BodyExpression) {
+            $this->BodyExpressions[$Key] = clone $BodyExpression;
+        }
+        foreach($this->ParameterExpressions as $Key => $ParameterExpressions) {
+            $this->ParameterExpressions[$Key] = clone $ParameterExpressions;
+        }
+        if($this->ReturnValueExpressions !== null) {
+            foreach($this->ReturnValueExpressions as $Key => $ReturnExpression) {
+                $this->ReturnValueExpressions[$Key] = clone $ReturnExpression;
+            }
+        }
+        $this->CompiledFunction = $this->CompiledFunction === null ? null : clone $this->CompiledFunction;
+        $this->ReturnValueExpressionResolver = clone $this->ReturnValueExpressionResolver;
+        $this->ValueUnresolver = clone $this->ValueUnresolver;
+        $this->VariableResolver = clone $this->VariableResolver;
     }
 
     public function __invoke()
@@ -125,16 +164,18 @@ class FunctionExpressionTree implements \Serializable
             $ParameterizedBodyExpressions = $this->ValueUnresolver->WalkAll($this->BodyExpressions);
             $ParameterNameValueMap = $this->ValueUnresolver->GetVariableNameValueMap();
             
-            $Code = O\Expression::Closure(
-                    $this->ParameterExpressions,
-                    array_keys($ParameterNameValueMap),
-                    $ParameterizedBodyExpressions)
-                            ->Compile();
+            if($this->CompiledCode === null) {
+                $this->CompiledCode = O\Expression::Closure(
+                        $this->ParameterExpressions,
+                        array_keys($ParameterNameValueMap),
+                        $ParameterizedBodyExpressions)
+                                ->Compile();
+            }
         
-            $this->EvaluateFunctionCode($Code, $ParameterNameValueMap);
+            $this->EvaluateFunctionCode($this->CompiledCode, $ParameterNameValueMap);
             
             if(!($this->CompiledFunction instanceof \Closure)) {
-                throw new PinqException('Could not compile code into closure: %s', $Code);
+                throw new PinqException('Could not compile code into closure: %s', $this->CompiledCode);
             }
         }
 
@@ -185,6 +226,7 @@ class FunctionExpressionTree implements \Serializable
         }
         
         $this->SerializedData = null;
+        $this->CompiledCode = null;
         $this->CompiledFunction = null;
         
         $this->BodyExpressions = $NewBodyExpressions;

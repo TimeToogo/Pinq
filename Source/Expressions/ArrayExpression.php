@@ -11,6 +11,7 @@ class ArrayExpression extends Expression
 {
     private $KeyExpressions;
     private $ValueExpressions;
+    
     public function __construct(array $KeyExpressions, array $ValueExpressions)
     {
         ksort($KeyExpressions);
@@ -56,7 +57,12 @@ class ArrayExpression extends Expression
             $ResolvedArray = [];
 
             foreach ($KeyExpressions as $ValueKey => $KeyExpression) {
-                $ResolvedArray[$KeyExpression->GetValue()] = $ValueExpressions[$ValueKey]->GetValue();
+                if($KeyExpression === null) {
+                    $ResolvedArray[] = $ValueExpressions[$ValueKey]->GetValue();
+                }
+                else {
+                    $ResolvedArray[$KeyExpression->GetValue()] = $ValueExpressions[$ValueKey]->GetValue();
+                }
             }
 
             return Expression::Value($ResolvedArray);
@@ -99,5 +105,11 @@ class ArrayExpression extends Expression
             $this->ValueExpressions[$Key]->CompileCode($Code);
         }
         $Code .= ']';
+    }
+    
+    public function __clone()
+    {
+        $this->KeyExpressions = self::CloneAll($this->KeyExpressions);
+        $this->ValueExpressions = self::CloneAll($this->ValueExpressions);
     }
 }

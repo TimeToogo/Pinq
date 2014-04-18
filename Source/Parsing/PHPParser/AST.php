@@ -233,7 +233,7 @@ class AST
         return Expression::Parameter(
                 $Node->name, 
                 $Node->type === null ? null : (string)$Node, 
-                $Node->default === null ? O\ParameterExpression::IsRequired : O\ParameterExpression::HasDefaultValue , 
+                $Node->default !== null, 
                 $Node->default === null ? null : $this->ParseNode($Node->default), 
                 $Node->byRef);
     }

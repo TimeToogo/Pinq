@@ -58,4 +58,9 @@ class EmptyExpression extends Expression
         $this->ValueExpression->CompileCode($Code);
         $Code .= ')';
     }
+    
+    public function __clone()
+    {
+        $this->ValueExpression = clone $this->ValueExpression;
+    }
 }

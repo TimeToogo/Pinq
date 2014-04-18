@@ -76,4 +76,10 @@ class AssignmentExpression extends Expression
         $Code .= ' ' .  $this->Operator . ' ';
         $this->AssignmentValueExpression->CompileCode($Code);
     }
+    
+    public function __clone()
+    {
+        $this->AssignToExpression = clone $this->AssignToExpression;
+        $this->AssignmentValueExpression = clone $this->AssignmentValueExpression;
+    }
 }

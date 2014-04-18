@@ -88,4 +88,9 @@ class CastExpression extends Expression
         $Code .= $this->CastType;
         $this->CastValueExpression->CompileCode($Code);
     }
+    
+    public function __clone()
+    {
+        $this->CastValueExpression = clone $this->CastValueExpression;
+    }
 }

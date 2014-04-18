@@ -96,4 +96,10 @@ class SubQueryExpression extends TraversalExpression
     protected function CompileCode(&$Code)
     {
     }
+        
+    public function __clone()
+    {
+        $this->ValueExpression = clone $this->ValueExpression;
+        $this->Query = clone $this->Query;
+    }
 }

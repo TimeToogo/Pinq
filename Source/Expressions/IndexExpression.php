@@ -72,4 +72,10 @@ class IndexExpression extends TraversalExpression
         $this->IndexExpression->CompileCode($Code);
         $Code .= ']';
     }
+    
+    public function __clone()
+    {
+        $this->ValueExpression = clone $this->ValueExpression;
+        $this->IndexExpression = clone $this->IndexExpression;
+    }
 }
