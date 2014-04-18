@@ -104,7 +104,7 @@ class CSVFileFunctionCache implements IFunctionCache
     {
         $FileHandle = $this->FileHandle;
         if ($FileHandle->flock(LOCK_EX)) {
-            $FileHandle->fseek(0);
+            $FileHandle->fseek(0, SEEK_SET);
             $FileHandle->ftruncate(0);
             foreach($this->GetFileData() as $Signature => $SerializedExpressionTree) {
                 $FileHandle->fputcsv([$Signature, $SerializedExpressionTree]);
