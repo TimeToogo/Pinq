@@ -58,11 +58,11 @@ the need to parse the functions on every request. A proper memory cache such as
 should be preferred but the alternative file/directory cache should be sufficient 
 for small sites and only requires disk access rather than the hassle of setting up a real cache.
 
-**NOTE FOR DURING DEVELOPMENT**
+During Development
+==================
 
 Using a cache during development can be problematic as when queries are changed, they may be ignored
-and continue to use the original version. To avoid this you can not configure a cache during the 
-development phase or use:
+and continue to use the original version. So during the development phase you should use:
 
 {% highlight php startinline %}
 \Pinq\Caching\Provider::SetDevelopmentMode(true);
