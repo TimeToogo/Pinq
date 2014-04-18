@@ -19,7 +19,7 @@ class ApplyTest extends CollectionTest
      */
     public function testThatCollectionApplyOperatesOnTheSameCollection(\Pinq\ICollection $Collection, array $Data)
     {
-        $Multiply = function (&$I) { $T = "\r"; $V = PHP_EOL;  $I = "\\r" . $I * 10 . PHP_EOL; };
+        $Multiply = function (&$I) { $I = "\\r" . $I * 10 . PHP_EOL; };
         $Collection->Apply($Multiply);
         
         array_walk($Data, $Multiply);
