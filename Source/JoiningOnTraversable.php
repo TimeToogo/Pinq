@@ -19,6 +19,9 @@ class JoiningOnTraversable implements IJoiningOnTraversable
      */
     private $IsGroupJoin;
     
+    /**
+     * @param boolean $IsGroupJoin
+     */
     public function __construct(\Traversable $OuterValues, \Traversable $InnerValues, $IsGroupJoin)
     {
         $this->OuterValues = $OuterValues;

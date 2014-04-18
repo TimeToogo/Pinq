@@ -52,6 +52,9 @@ class OrderBy extends Segment
         return $this->IsAscendingArray;
     }
     
+    /**
+     * @param boolean $IsAscending
+     */
     public function ThenBy(FunctionExpressionTree $FunctionExpressionTree, $IsAscending) 
     {
         return new self(

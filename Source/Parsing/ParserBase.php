@@ -25,5 +25,8 @@ abstract class ParserBase implements IParser
         return $this->ParseFunction($Reflection, $FileName);
     }
 
+    /**
+     * @param string $FileName
+     */
     abstract protected function ParseFunction(\ReflectionFunctionAbstract $Reflection, $FileName);
 }

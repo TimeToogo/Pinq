@@ -19,6 +19,10 @@ class RangeIterator extends IteratorIterator
      */
     private $RangeAmount;
     
+    /**
+     * @param integer $StartAmount
+     * @param null|integer $RangeAmount
+     */
     public function __construct(\Traversable $Iterator, $StartAmount, $RangeAmount)
     {
         parent::__construct($Iterator);

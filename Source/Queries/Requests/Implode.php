@@ -11,6 +11,9 @@ class Implode extends ProjectionRequest
      */
     private $Delimiter;
     
+    /**
+     * @param string $Delimiter
+     */
     public function __construct($Delimiter, FunctionExpressionTree $FunctionExpressionTree = null)
     {
         parent::__construct($FunctionExpressionTree);

@@ -43,6 +43,9 @@ class Collection extends Traversable implements ICollection
         $this->ValuesIterator = new \ArrayIterator($Array);
     }
     
+    /**
+     * @param string $Argument
+     */
     private function InvalidRange($Method, $Argument, $Value) 
     {
         return new PinqException(

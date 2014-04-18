@@ -59,6 +59,10 @@ class CastExpression extends Expression
         Operators\Cast::String => 'string',
         Operators\Cast::Object => 'object',
     ];
+
+    /**
+     * @param ValueExpression $Value
+     */
     private static function CastValue($CastTypeOperator, $Value)
     {
         settype($Value, self::$CastTypeMap[$CastTypeOperator]);

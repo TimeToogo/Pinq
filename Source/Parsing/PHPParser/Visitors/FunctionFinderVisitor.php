@@ -162,6 +162,9 @@ class FunctionFinderVisitor extends \PHPParser_NodeVisitorAbstract
         }
     }
     
+    /**
+     * @param string $Hash
+     */
     private function FoundFunctionNode($Hash, \PHPParser_Node $Node)
     {
         if (!isset($this->FunctionNodes[$Hash])) {

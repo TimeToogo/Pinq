@@ -58,6 +58,7 @@ abstract class Expression
     }
 
     /**
+     * @param string $Type
      * @return boolean
      */
     final protected static function AllOfType(array $Expressions, $Type)
@@ -206,6 +207,7 @@ abstract class Expression
     }
 
     /**
+     * @param string $Name
      * @return ParameterExpression
      */
     final public static function Parameter($Name, $TypeHint = null, $HasDefaultValue = false, $DefaultValue = null, $IsPassedByReference = false)

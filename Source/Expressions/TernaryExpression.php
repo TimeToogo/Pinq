@@ -29,7 +29,7 @@ class TernaryExpression extends Expression
     }
 
     /**
-     * @return Expression
+     * @return boolean
      */
     public function HasIfTrueExpression()
     {

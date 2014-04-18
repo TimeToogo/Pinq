@@ -64,6 +64,10 @@ class ReturnValueExpressionResolver extends O\ExpressionWalker
         Operators\Assignment::ShiftRight => Operators\Binary::ShiftRight,
         Operators\Assignment::Subtraction => Operators\Binary::Subtraction,
     ];
+
+    /**
+     * @param string $AssignmentOperator
+     */
     private function AssignmentToBinaryOperator($AssignmentOperator)
     {
         return isset(self::$AssignmentToBinaryOperator[$AssignmentOperator]) ?

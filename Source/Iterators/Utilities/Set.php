@@ -9,6 +9,9 @@ class Set implements \IteratorAggregate
      */
     private $Dictionary;
     
+    /**
+     * @param \Traversable $Values
+     */
     public function __construct($Values = null)
     {
         $this->Dictionary = new Dictionary();

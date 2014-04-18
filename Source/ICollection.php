@@ -44,7 +44,6 @@ interface ICollection extends ITraversable
     /**
      * Removes all the values.
      *
-     * @param  callable $Function
      * @return void
      */
     public function Clear();

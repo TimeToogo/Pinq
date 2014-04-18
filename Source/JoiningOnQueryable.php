@@ -27,6 +27,9 @@ class JoiningOnQueryable implements IJoiningOnTraversable
      */
     private $IsGroupJoin;
     
+    /**
+     * @param boolean $IsGroupJoin
+     */
     public function __construct(
             Providers\IQueryProvider $Provider, 
             Queries\IScope $Scope,

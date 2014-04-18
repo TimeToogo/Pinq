@@ -26,6 +26,9 @@ class InvalidFunctionException extends \Pinq\PinqException
                 implode(', ', array_map(function ($I) { return $I->getClass() ? $I->getClass()->getName() : '{NONE}'; }, $Reflection->getParameters())));
     }
 
+    /**
+     * @param string $MessageFormat
+     */
     public static function InvalidFunctionMessage($MessageFormat, \ReflectionFunctionAbstract $Reflection)
     {
         return self::Construct(array_merge([

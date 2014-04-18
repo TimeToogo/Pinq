@@ -58,7 +58,7 @@ class SubQueryExpression extends TraversalExpression
     }
 
     /**
-     * @return Queries\IQeuryStream
+     * @return Queries\IRequestQuery
      */
     public function GetQueryStream()
     {

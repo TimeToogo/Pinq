@@ -16,7 +16,7 @@ class GroupedIterator extends LazyIterator
     }
     
     /**
-     * @return OrderedIterator
+     * @return GroupedIterator
      */
     public function AndGroupBy(callable $GroupByFunctions)
     {

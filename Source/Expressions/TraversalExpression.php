@@ -39,6 +39,7 @@ abstract class TraversalExpression extends Expression
     }
 
     /**
+     * @param string $ExpressionType
      * @return boolean
      */
     final public function OriginatesFrom($ExpressionType)

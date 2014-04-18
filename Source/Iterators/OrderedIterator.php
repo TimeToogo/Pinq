@@ -22,6 +22,7 @@ class OrderedIterator extends LazyIterator
     }
     
     /**
+     * @param boolean $IsAscending
      * @return OrderedIterator
      */
     public function ThenOrderBy(callable $OrderByFunction, $IsAscending)

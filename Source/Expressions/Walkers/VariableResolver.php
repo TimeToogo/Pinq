@@ -102,6 +102,9 @@ class VariableResolver extends O\ExpressionWalker
         return $Expression;
     }
 
+    /**
+     * @param string $Name
+     */
     private function AddUnresolvedVariable($Name)
     {
         if (!in_array($Name, $this->UnresolvedVariables)) {

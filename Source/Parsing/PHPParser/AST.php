@@ -45,6 +45,9 @@ class AST
         return array_map(function ($Node) { return $this->ParseNode($Node); }, $Nodes);
     }
 
+    /**
+     * @return Expression
+     */
     private function ParseNode(\PHPParser_Node $Node)
     {
         switch (true) {
@@ -73,6 +76,9 @@ class AST
         return Expression::Value($Value);
     }
 
+    /**
+     * @return Expression
+     */
     final public function ParseNameNode($Node)
     {
         if ($Node instanceof \PHPParser_Node_Name || is_string($Node)) {
@@ -84,6 +90,11 @@ class AST
         return $this->ParseNode($Node);
     }
 
+    /**
+     * @param null|\PHPParser_Node_Expr $Node
+     *
+     * @return Expression
+     */
     final public function ParseIndexNode($Node)
     {
         if ($Node === null) {
@@ -252,6 +263,9 @@ class AST
 
     // <editor-fold defaultstate="collapsed" desc="Operater node maps">
 
+    /**
+     * @param string $NodeType
+     */
     private function ParseOperatorNode(\PHPParser_Node_Expr $Node, $NodeType)
     {
         switch (true) {

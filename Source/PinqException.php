@@ -5,7 +5,6 @@ namespace Pinq;
 class PinqException extends \Exception
 {
     /**
-     * @param \Exception $InnerException
      * @param type       $MessageFormat
      * @param mixed ... The values to interpole the message with
      */
