@@ -17,6 +17,10 @@
 - name: Details
   url: /details.html
   sub: The implementation and reasoning
+      
+- name: Performance
+  url: /performance.html
+  sub: Practicality and optimizations
 
 - name: Expressions 
   url: /expressions.html
