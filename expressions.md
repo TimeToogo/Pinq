@@ -13,15 +13,15 @@ An expression represents a piece of code.
 For example `5 + 3 - 2`, this can be represented as the following:
 
 ```
-        BinaryOperation
-          |      |      |
-        Left  Operator  Right
-         /       |         \
-        5       '+'      BinaryOperation
-                             |      |      |
-                           Left  Operator  Right
-                            /       |       \
-                           3        -        2
+          BinaryOperation
+          |           |           |
+        Left   Operator   Right
+         /            |             \
+        5            '+'        BinaryOperation
+                                   |           |           |
+                                 Left   Operator  Right
+                                 /             |              \
+                                3             -                2
 ```
 
 This is a pretty trivial example, but all your PHP code could be represented
