@@ -67,6 +67,16 @@ class IssetExpression extends Expression
         $Code .= ')';
     }
     
+    public function serialize()
+    {
+        return serialize($this->ValueExpressions);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        $this->ValueExpressions = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->ValueExpressions = self::CloneAll($this->ValueExpressions);

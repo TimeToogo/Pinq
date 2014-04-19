@@ -7,7 +7,7 @@ namespace Pinq\Expressions;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-abstract class Expression
+abstract class Expression implements \Serializable
 {
     final public static function GetType()
     {
@@ -48,6 +48,11 @@ abstract class Expression
         return $Code;
     }
     abstract protected function CompileCode(&$Code);
+    
+    final public function __toString()
+    {
+        return $this->Compile();
+    }
     
     /**
      * @return array

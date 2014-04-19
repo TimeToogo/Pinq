@@ -59,7 +59,17 @@ class ValueExpression extends Expression
             $Code .= 'unserialize(\'' . serialize($this->Value) . '\')';
         }
     }
-        
+    
+    public function serialize()
+    {
+        return serialize($this->Value);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        $this->Value = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->Value = is_object($this->Value) ? clone $this->Value : $this->Value;

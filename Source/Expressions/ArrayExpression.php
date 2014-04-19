@@ -107,6 +107,16 @@ class ArrayExpression extends Expression
         $Code .= ']';
     }
     
+    public function serialize()
+    {
+        return serialize([$this->KeyExpressions, $this->ValueExpressions]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->KeyExpressions, $this->ValueExpressions) = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->KeyExpressions = self::CloneAll($this->KeyExpressions);

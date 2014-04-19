@@ -50,6 +50,16 @@ class ThrowExpression extends Expression
         $this->ExceptionExpression->CompileCode($Code);
     }
         
+    public function serialize()
+    {
+        return serialize($this->ExceptionExpression);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        $this->ExceptionExpression = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->ExceptionExpression = clone $this->ExceptionExpression;

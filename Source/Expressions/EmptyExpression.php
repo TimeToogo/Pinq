@@ -59,6 +59,16 @@ class EmptyExpression extends Expression
         $Code .= ')';
     }
     
+    public function serialize()
+    {
+        return serialize($this->ValueExpression);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        $this->ValueExpression = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->ValueExpression = clone $this->ValueExpression;

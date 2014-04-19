@@ -91,6 +91,16 @@ class StaticMethodCallExpression extends Expression
         $Code .= ')';
     }
     
+    public function serialize()
+    {
+        return serialize([$this->ClassExpression, $this->NameExpression, $this->ArgumentExpressions]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->ClassExpression, $this->NameExpression, $this->ArgumentExpressions) = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->ClassExpression = clone $this->ClassExpression;

@@ -96,6 +96,16 @@ class SubQueryExpression extends TraversalExpression
     protected function CompileCode(&$Code)
     {
     }
+    
+    public function serialize()
+    {
+        return serialize([$this->ValueExpression, $this->Query]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->ValueExpression, $this->Query) = unserialize($Serialized);
+    }
         
     public function __clone()
     {

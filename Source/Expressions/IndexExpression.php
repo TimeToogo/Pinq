@@ -73,6 +73,16 @@ class IndexExpression extends TraversalExpression
         $Code .= ']';
     }
     
+    public function serialize()
+    {
+        return serialize([$this->ValueExpression, $this->IndexExpression]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->ValueExpression, $this->IndexExpression) = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->ValueExpression = clone $this->ValueExpression;

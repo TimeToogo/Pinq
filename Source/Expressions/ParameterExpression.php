@@ -93,6 +93,16 @@ class ParameterExpression extends Expression
         }
     }
     
+    public function serialize()
+    {
+        return serialize([$this->DefaultValue, $this->HasDefaultValue, $this->IsPassedByReference, $this->Name, $this->TypeHint]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->DefaultValue, $this->HasDefaultValue, $this->IsPassedByReference, $this->Name, $this->TypeHint) = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->DefaultValue = is_object($this->DefaultValue) ? clone $this->DefaultValue : $this->DefaultValue;

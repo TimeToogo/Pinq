@@ -89,6 +89,16 @@ class CastExpression extends Expression
         $this->CastValueExpression->CompileCode($Code);
     }
     
+    public function serialize()
+    {
+        return serialize([$this->CastType, $this->CastValueExpression]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->CastType, $this->CastValueExpression) = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->CastValueExpression = clone $this->CastValueExpression;

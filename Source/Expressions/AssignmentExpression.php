@@ -77,6 +77,16 @@ class AssignmentExpression extends Expression
         $this->AssignmentValueExpression->CompileCode($Code);
     }
     
+    public function serialize()
+    {
+        return serialize([$this->AssignToExpression, $this->Operator, $this->AssignmentValueExpression]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->AssignToExpression, $this->Operator, $this->AssignmentValueExpression) = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->AssignToExpression = clone $this->AssignToExpression;

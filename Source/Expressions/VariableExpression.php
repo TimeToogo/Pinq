@@ -54,6 +54,16 @@ class VariableExpression extends Expression
         }
     }
     
+    public function serialize()
+    {
+        return serialize($this->NameExpression);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        $this->NameExpression = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->NameExpression = clone $this->NameExpression;

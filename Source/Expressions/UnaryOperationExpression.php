@@ -89,6 +89,16 @@ class UnaryOperationExpression extends Expression
         $Code .= sprintf($this->Operator, $this->OperandExpression->Compile());
         $Code .= ')';
     }
+    
+    public function serialize()
+    {
+        return serialize([$this->OperandExpression, $this->Operator]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->OperandExpression, $this->Operator) = unserialize($Serialized);
+    }
         
     public function __clone()
     {

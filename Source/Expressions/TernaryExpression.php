@@ -104,7 +104,17 @@ class TernaryExpression extends Expression
         
         $Code .= ')';
     }
-        
+    
+    public function serialize()
+    {
+        return serialize([$this->ConditionExpression, $this->IfTrueExpression, $this->IfFalseExpression]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->ConditionExpression, $this->IfTrueExpression, $this->IfFalseExpression) = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->ConditionExpression = clone $this->ConditionExpression;

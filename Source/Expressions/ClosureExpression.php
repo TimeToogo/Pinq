@@ -84,6 +84,16 @@ class ClosureExpression extends Expression
         $Code .= '}';
     }
     
+    public function serialize()
+    {
+        return serialize([$this->ParameterExpressions, $this->UsedVariables, $this->BodyExpressions]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->ParameterExpressions, $this->UsedVariables, $this->BodyExpressions) = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->ParameterExpressions = self::CloneAll($this->ParameterExpressions);

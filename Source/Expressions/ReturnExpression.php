@@ -61,6 +61,16 @@ class ReturnExpression extends Expression
         }
     }
     
+    public function serialize()
+    {
+        return serialize($this->ReturnValueExpression);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        $this->ReturnValueExpression = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->ReturnValueExpression = clone $this->ReturnValueExpression;

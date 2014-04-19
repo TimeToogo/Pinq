@@ -74,6 +74,16 @@ class NewExpression extends Expression
         $Code .= ')';
     }
     
+    public function serialize()
+    {
+        return serialize([$this->ClassTypeExpression, $this->ArgumentExpressions]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->ClassTypeExpression, $this->ArgumentExpressions) = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->ClassTypeExpression = clone $this->ClassTypeExpression;

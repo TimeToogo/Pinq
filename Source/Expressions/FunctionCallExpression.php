@@ -70,6 +70,16 @@ class FunctionCallExpression extends Expression
         $Code .= ')';
     }
     
+    public function serialize()
+    {
+        return serialize([$this->NameExpression, $this->ArgumentExpressions]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->NameExpression, $this->ArgumentExpressions) = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->NameExpression = clone $this->NameExpression;

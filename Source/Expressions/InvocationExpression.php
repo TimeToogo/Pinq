@@ -76,6 +76,16 @@ class InvocationExpression extends TraversalExpression
         $Code .= ')';
     }
     
+    public function serialize()
+    {
+        return serialize([$this->ValueExpression, $this->ArgumentExpressions]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->ValueExpression, $this->ArgumentExpressions) = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->ValueExpression = clone $this->ValueExpression;

@@ -139,6 +139,16 @@ class BinaryOperationExpression extends Expression
         $Code .= ')';
     }
     
+    public function serialize()
+    {
+        return serialize([$this->LeftOperandExpression, $this->Operator, $this->RightOperandExpression]);
+    }
+    
+    public function unserialize($Serialized)
+    {
+        list($this->LeftOperandExpression, $this->Operator, $this->RightOperandExpression) = unserialize($Serialized);
+    }
+    
     public function __clone()
     {
         $this->LeftOperandExpression = clone $this->LeftOperandExpression;
