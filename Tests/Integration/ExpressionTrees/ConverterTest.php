@@ -49,14 +49,14 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
         foreach ($ArgumentSets as $ArgumentSet) {
             $ExpectedReturn = call_user_func_array($Function, $ArgumentSet);
             $ActualReturn = call_user_func_array($FunctionExpressionTree, $ArgumentSet);
-
+            
             $this->assertEquals($ExpectedReturn, $ActualReturn);
         }
         
         if($ReturnExpression !== null) {
             $this->AssertFirstResolvedReturnExpression($Function, $ReturnExpression);
         }
-    } 
+    }
     
     final protected function AssertFirstResolvedReturnExpression(callable $Function, O\Expression $Expression) 
     {
@@ -65,6 +65,6 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
         }
         $FunctionExpressionTree = $this->CurrentImplementation->Convert($Function);
         
-        $this->assertEquals($Expression, $FunctionExpressionTree->GetFirstResolvedReturnValueExpression());
+        $this->assertEquals($Expression->Simplify(), $FunctionExpressionTree->GetFirstResolvedReturnValueExpression());
     }    
 }

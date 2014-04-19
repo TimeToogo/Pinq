@@ -49,10 +49,13 @@ class ArrayExpression extends Expression
 
     public function Simplify()
     {
-        $KeyExpressions = self::SimplifyAll(array_filter($this->KeyExpressions)) + array_fill_keys(array_keys($this->KeyExpressions), null);
+        $KeyExpressions = [];
+        foreach ($this->KeyExpressions as $Key => $KeyExpression) {
+            $KeyExpressions[$Key] = $KeyExpression === null ? null : $KeyExpression->Simplify();
+        }
         $ValueExpressions = self::SimplifyAll($this->ValueExpressions);
 
-        if(self::AllOfType($KeyExpressions, ValueExpression::GetType())
+        if(self::AllOfType($KeyExpressions, ValueExpression::GetType(), true)
                 && self::AllOfType($ValueExpressions, ValueExpression::GetType())) {
             $ResolvedArray = [];
 

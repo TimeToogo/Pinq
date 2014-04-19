@@ -69,9 +69,10 @@ abstract class Expression implements \Serializable
     final protected static function AllOfType(array $Expressions, $Type, $AllowNull = false)
     {
         foreach ($Expressions as $Expression) {
-            if (!($Expression instanceof $Type) && !($Expression  === null && $AllowNull)) {
-                return false;
+            if ($Expression instanceof $Type || $Expression  === null && $AllowNull) {
+                continue;
             }
+            return false;
         }
 
         return true;
