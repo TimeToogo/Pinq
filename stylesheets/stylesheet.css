@@ -59,6 +59,14 @@ strong {
     font-weight: bold;
 }
 
+.clearfix:after {
+   content: " ";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
 /* LAYOUT STYLES */
 body {
     font-size: 15px;
@@ -79,13 +87,6 @@ a:hover {
 
 .top {
     padding: 10px 0;
-}
-.top, .top > .inner {
-    height: 20px;
-}
-
-.top > .inner > div {
-    height: 100%;
 }
 
 .top .badges {
@@ -177,12 +178,15 @@ a.button {
     background: -ms-linear-gradient(top, #2b85dd 0%,#3075c5 100%); /* IE10+ */
     background: linear-gradient(to bottom, #2b85dd 0%,#3075c5 100%); /* W3C */
     
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
     border-radius: 10px;
     background-clip: padding-box;
     
     box-shadow: 0 0 0 2px #ccc;
     -webkit-transition: background-position .3s, box-shadow .3s, opacity .3s;
-    transition: background-position .3s, box-shadow .3s, opacity .3s, margin-left .3s;
+    -moz-transition: .3s;
+    transition: .3s;
     background-position: 0 0;
 }
 
@@ -231,7 +235,7 @@ aside a.button.active {
 }
 
 code, pre {
-    font-family: 'Segoe UI';
+    font-family: 'Segoe UI', sans-serif, Arial;
     color: #222;
     margin-bottom: 30px;
     font-size: 13px;
@@ -532,8 +536,6 @@ footer a:hover {
         text-align: center;
         font-size: 13px;
         line-height: 1;
-        background-color: #9ddcff;
-        color: #2879d0;
         -moz-border-radius: 5px;
         -webkit-border-radius: 5px;
         border-radius: 5px;
@@ -544,14 +546,14 @@ footer a:hover {
         display: inline;
     }
 
-    #main-content,
-  aside#sidebar {
+    #main-content, aside#sidebar {
         float: none;
         width: 100% ! important;
     }
 
     aside#sidebar {
         background-image: none;
+        overflow: visible;
         margin-top: 20px;
         border-top: solid 1px #ddd;
         padding: 20px 0;
@@ -559,15 +561,29 @@ footer a:hover {
     }
 
     aside#sidebar a.button {
-        display: none;
+        width: 100%;
+        
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 10px;
+        margin-bottom: 10px;
+        margin-left: 0!important;
+        border-radius: 0;
     }
-
+    
+    aside#sidebar a.button:hover, aside#sidebar:not(:hover) a.button.active  {
+        width: calc(100% + 40px);
+        margin-left: -20px!important;
+        padding-left: 30px;
+    }
+    
     #main-content h1:before,
-  #main-content h2:before,
-  #main-content h3:before,
-  #main-content h4:before,
-  #main-content h5:before,
-  #main-content h6:before {
+    #main-content h2:before,
+    #main-content h3:before,
+    #main-content h4:before,
+    #main-content h5:before,
+    #main-content h6:before {
         content: none;
         padding-right: 0;
         margin-left: 0;
