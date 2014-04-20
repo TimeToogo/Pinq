@@ -309,10 +309,11 @@ form {
 }
 
 #main-content h1:before {
-    content: "/";
+    content: "{";
     color: #9ddcff;
-    padding-right: 0.3em;
-    margin-left: -0.9em;
+    padding-right: 0.2em;
+    margin-left: -0.8em;
+    font-size: 55px;
 }
 
 #main-content h2 {

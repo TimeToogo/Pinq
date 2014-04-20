@@ -84,7 +84,7 @@ Supported Expressions:
     - `Object::Method()`
 
  - **`SubQueryExpression`**
-    - To be implemented
+    - `$Traversable->Where(function ($I) { return $I > 5; })->Average()`
 
  - **`TernaryExpression`** 
     - `$I === true ? 1 : -1`
@@ -116,6 +116,7 @@ This class is the base for all expression classes. All expressions provide the f
  - `Simplify` - Simplifies the expression if possible
  - `Traverse` - Passes itself to the respective method on the supplied `ExpressionWalker`
  - `Compile` - Compiles to a string of valid PHP code
+ - `__clone` - Expressions support `clone` and should create a deep clone of the entire expression tree
 
 It also contains a set of static factory methods for all the concrete expression types.
 
