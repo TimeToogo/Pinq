@@ -78,14 +78,14 @@ class FieldExpression extends ObjectOperationExpression
         }
     }
     
-    public function serialize()
+    public function DataToSerialize()
     {
-        return serialize([$this->ValueExpression, $this->NameExpression]);
+        return $this->NameExpression;
     }
     
-    public function unserialize($Serialized)
+    public function UnserializedData($Data)
     {
-        list($this->ValueExpression, $this->NameExpression) = unserialize($Serialized);
+        $this->NameExpression = $Data;
     }
     
     public function __clone()

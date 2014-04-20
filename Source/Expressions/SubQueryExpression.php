@@ -77,14 +77,14 @@ class SubQueryExpression extends TraversalExpression
         $this->OriginalExpression->CompileCode($Code);
     }
     
-    public function serialize()
+    public function DataToSerialize()
     {
-        return serialize([$this->ValueExpression, $this->Query, $this->OriginalExpression]);
+        return [$this->Query, $this->OriginalExpression];
     }
     
-    public function unserialize($Serialized)
+    public function UnserializedData($Data)
     {
-        list($this->ValueExpression, $this->Query, $this->OriginalExpression) = unserialize($Serialized);
+        list($this->Query, $this->OriginalExpression) = $Data;
     }
         
     public function __clone()

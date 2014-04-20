@@ -101,14 +101,14 @@ class MethodCallExpression extends ObjectOperationExpression
         $Code .= ')';
     }
     
-    public function serialize()
+    public function DataToSerialize()
     {
-        return serialize([$this->ValueExpression, $this->NameExpression, $this->ArgumentExpressions]);
+        return [$this->NameExpression, $this->ArgumentExpressions];
     }
     
-    public function unserialize($Serialized)
+    public function UnserializedData($Data)
     {
-        list($this->ValueExpression, $this->NameExpression, $this->ArgumentExpressions) = unserialize($Serialized);
+        list($this->NameExpression, $this->ArgumentExpressions) = $Data;
     }
     
     public function __clone()

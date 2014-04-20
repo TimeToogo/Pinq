@@ -41,7 +41,7 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
         }
     }
     
-    final protected function AssertConvertsAndRecompilesCorrectly(callable $Function, array $ArgumentSets, O\Expression $ReturnExpression = null) 
+    final protected function AssertConvertsAndRecompilesCorrectly(callable $Function, array $ArgumentSets, O\Expression $ReturnExpression = null, $VerifySerialization = true) 
     {
         $this->VerifyImplementation();
         $FunctionExpressionTree = $this->CurrentImplementation->Convert($Function);
@@ -62,6 +62,26 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
         if($ReturnExpression !== null) {
             $this->AssertFirstResolvedReturnExpression($Function, $ReturnExpression);
         }
+        if($VerifySerialization) {
+            $this->AssertSerializesAndUnserializedCorrectly($FunctionExpressionTree);
+        }
+    }
+    
+    private function AssertSerializesAndUnserializedCorrectly(\Pinq\FunctionExpressionTree $FunctionExpressionTree) 
+    {
+        //Don't bother serializing the whole of PHPUnit...
+        $FunctionExpressionTree->ResolveVariables(['this' => null]);
+        
+        $SerializedFunctionExpressionTree = unserialize(serialize($FunctionExpressionTree));
+        
+        $this->assertEquals($FunctionExpressionTree->GetParameterExpressions(), $SerializedFunctionExpressionTree->GetParameterExpressions());
+        $this->assertTrue($FunctionExpressionTree->GetCompiledCode() == $SerializedFunctionExpressionTree->GetCompiledCode());
+        $this->assertEquals($FunctionExpressionTree->GetExpressions(), $SerializedFunctionExpressionTree->GetExpressions());
+        $this->assertEquals($FunctionExpressionTree->GetUnresolvedVariables(), $SerializedFunctionExpressionTree->GetUnresolvedVariables());
+        if($FunctionExpressionTree->HasReturnExpression()) {
+            $this->assertEquals($FunctionExpressionTree->GetFirstResolvedReturnValueExpression(), $SerializedFunctionExpressionTree->GetFirstResolvedReturnValueExpression());
+        }
+        $this->assertEquals($FunctionExpressionTree->HasReturnExpression(), $SerializedFunctionExpressionTree->HasReturnExpression());
     }
     
     final protected function AssertFirstResolvedReturnExpression(callable $Function, O\Expression $Expression) 

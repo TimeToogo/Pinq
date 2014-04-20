@@ -83,4 +83,24 @@ abstract class TraversalExpression extends Expression
         return $this->UpdateValueExpression($ValueExpression);
     }
     abstract protected function UpdateValueExpression(Expression $ValueExpression);
+    
+    final public function serialize()
+    {
+        return serialize([$this->ValueExpression, $this->DataToSerialize()]);
+    }
+    protected abstract function DataToSerialize();
+    
+    final public function unserialize($Serialized)
+    {
+        list($this->ValueExpression, $ChildData) = unserialize($Serialized);
+        $this->UnserializedData($ChildData);
+        
+        $this->TraversalDepth = 1;
+        $this->OriginExpression = $this->ValueExpression;
+        while($this->OriginExpression instanceof TraversalExpression) {
+            $this->TraversalDepth++;
+            $this->OriginExpression = $this->OriginExpression->GetValueExpression();
+        }
+    }
+    protected abstract function UnserializedData($Data);
 }

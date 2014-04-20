@@ -210,7 +210,7 @@ class FunctionExpressionTree implements \Serializable
                 throw new PinqException('Could not compile code into closure: %s', $this->CompiledCode);
             }
         }
-
+        
         return $this->CompiledFunction;
     }
     
@@ -234,13 +234,21 @@ class FunctionExpressionTree implements \Serializable
     }
 
     /**
+     * @return boolean
+     */
+    final public function HasReturnExpression()
+    {
+        return count($this->ReturnValueExpressions) > 0;
+    }
+    
+    /**
      * @return O\ReturnExpression
      * @throws Parsing\InvalidFunctionException
      */
     final public function GetFirstResolvedReturnValueExpression()
     {
         if(count($this->ReturnValueExpressions) === 0) {
-            throw Parsing\InvalidFunctionException::MustContainValidReturnExpression(Reflection::FromCallable($this->CompiledFunction));
+            throw Parsing\InvalidFunctionException::MustContainValidReturnExpression(Parsing\Reflection::FromCallable($this->CompiledFunction));
         }
         return $this->ReturnValueExpressions[0];
     }
