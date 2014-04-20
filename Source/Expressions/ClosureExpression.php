@@ -10,6 +10,9 @@ class ClosureExpression extends Expression
 
     public function __construct(array $ParameterExpressions, array $UsedVariables, array $BodyExpressions)
     {
+        if(in_array(null, $ParameterExpressions)) {
+            throw new \Exception();
+        }
         $this->ParameterExpressions = $ParameterExpressions;
         $this->UsedVariables = $UsedVariables;
         $this->BodyExpressions = $BodyExpressions;

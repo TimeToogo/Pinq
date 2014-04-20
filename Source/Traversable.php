@@ -6,7 +6,7 @@ namespace Pinq;
  * An in-memory implementation for the traversable query api.
  * Making use of iterators to acheive lazy query execution.
  */
-class Traversable implements \Pinq\ITraversable
+class Traversable implements \Pinq\ITraversable, \Serializable
 {
     /**
      * @var \Iterator 
@@ -57,6 +57,16 @@ class Traversable implements \Pinq\ITraversable
     public function AsRepository()
     {
         return (new Collection($this->ValuesIterator))->AsRepository();
+    }
+    
+    public function serialize()
+    {
+        return serialize($this->AsArray());
+    }
+    
+    public function unserialize($Serialized)
+    {
+        $this->ValuesIterator = new \ArrayIterator(unserialize($Serialized));
     }
     
     // <editor-fold defaultstate="collapsed" desc="Querying">

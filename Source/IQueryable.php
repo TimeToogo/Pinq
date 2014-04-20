@@ -9,6 +9,8 @@ namespace Pinq;
  */
 interface IQueryable extends ITraversable
 {
+    const IQueryableType = __CLASS__;
+    
     /**
      * The query provider for the implementation.
      * 

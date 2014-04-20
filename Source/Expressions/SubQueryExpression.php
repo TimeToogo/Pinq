@@ -3,42 +3,6 @@
 namespace Pinq\Expressions;
 
 use \Pinq\Queries;
-use \Pinq\Queries\Segments;
-
-class ScopeSimplifier extends Segments\SegmentWalker 
-{
-    public function WalkFilter(Segments\Filter $Query)
-    {
-        return $Query->Update($Query->GetFunctionExpressionTree()->Simplify());
-    }
-
-    public function WalkGroupBy(Segments\GroupBy $Query)
-    {
-        return $Query->Update(array_map(function ($I) { return $I->Simplify(); }, $Query->GetFunctionExpressionTrees()));
-    }
-
-    public function WalkIndexBy(Segments\IndexBy $Query)
-    {
-        return $Query->Update($Query->GetFunctionExpressionTree()->Simplify());
-    }
-
-    public function WalkOrderBy(Segments\OrderBy $Query)
-    {
-        return $Query->Update(
-                array_map(function ($I) { return $I->Simplify(); }, $Query->GetFunctionExpressionTrees()),
-                $Query->GetIsAscendingArray());
-    }
-
-    public function WalkSelect(Segments\Select $Query)
-    {
-        return $Query->Update($Query->GetFunctionExpressionTree()->Simplify());
-    }
-
-    public function WalkSelectMany(Segments\SelectMany $Query)
-    {
-        return $Query->Update($Query->GetFunctionExpressionTree()->Simplify());
-    }
-}
 
 /**
  * @author Elliot Levin <elliot@aanet.com.au>
@@ -49,20 +13,34 @@ class SubQueryExpression extends TraversalExpression
      * @var Queries\IRequestQuery
      */
     private $Query;
+    
+    /**
+     * @var TraversalExpression
+     */
+    private $OriginalExpression;
 
-    public function __construct(Expression $ValueExpression, Queries\IRequestQuery $Query)
+    public function __construct(Expression $ValueExpression, Queries\IRequestQuery $Query, TraversalExpression $OriginalExpression)
     {
         parent::__construct($ValueExpression);
 
         $this->Query = $Query;
+        $this->OriginalExpression = $OriginalExpression;
     }
 
     /**
      * @return Queries\IRequestQuery
      */
-    public function GetQueryStream()
+    public function GetRequestQuery()
     {
         return $this->Query;
+    }
+
+    /**
+     * @return TraversalExpression
+     */
+    public function GetOriginalExpression()
+    {
+        return $this->OriginalExpression;
     }
 
     public function Traverse(ExpressionWalker $Walker)
@@ -78,38 +56,41 @@ class SubQueryExpression extends TraversalExpression
     /**
      * @return self
      */
-    public function Update(Expression $ValueExpression,  Queries\IRequestQuery $Query)
+    public function Update(Expression $ValueExpression,  Queries\IRequestQuery $Query, TraversalExpression $OriginalExpression)
     {
         if ($this->ValueExpression === $ValueExpression
-                && $this->Query === $Query) {
+                && $this->Query === $Query
+                && $this->OriginalExpression === $OriginalExpression) {
             return $this;
         }
 
-        return new self($ValueExpression, $Query);
+        return new self($ValueExpression, $Query, $OriginalExpression);
     }
 
     protected function UpdateValueExpression(Expression $ValueExpression)
     {
-        return new self($ValueExpression, $this->Query);
+        return new self($ValueExpression, $this->Query, $this->OriginalExpression);
     }
 
     protected function CompileCode(&$Code)
     {
+        $this->OriginalExpression->CompileCode($Code);
     }
     
     public function serialize()
     {
-        return serialize([$this->ValueExpression, $this->Query]);
+        return serialize([$this->ValueExpression, $this->Query, $this->OriginalExpression]);
     }
     
     public function unserialize($Serialized)
     {
-        list($this->ValueExpression, $this->Query) = unserialize($Serialized);
+        list($this->ValueExpression, $this->Query, $this->OriginalExpression) = unserialize($Serialized);
     }
         
     public function __clone()
     {
         $this->ValueExpression = clone $this->ValueExpression;
         $this->Query = clone $this->Query;
+        $this->OriginalExpression = clone $this->OriginalExpression;
     }
 }

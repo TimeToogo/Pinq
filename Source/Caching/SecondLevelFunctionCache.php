@@ -16,7 +16,15 @@ class SecondLevelFunctionCache implements IFunctionCache
     public function __construct(IFunctionCache $InnerCache)
     {
         $this->RealCache = $InnerCache;
-    }    
+    }
+    
+    /**
+     * @return IFunctionCache
+     */
+    public function GetInnerCache()
+    {
+        return $this->RealCache;
+    }
     
     public function Save($FunctionHash, FunctionExpressionTree $FunctionExpressionTree)
     {

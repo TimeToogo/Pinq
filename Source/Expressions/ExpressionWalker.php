@@ -166,15 +166,13 @@ class ExpressionWalker
 
     public function WalkSubQuery(SubQueryExpression $Expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetValueExpression()),
-                $Expression->GetQueryStream());
+        return $Expression->UpdateValue($this->Walk($Expression->GetValueExpression()));
     }
 
     public function WalkClosure(ClosureExpression $Expression)
     {
         return $Expression->Update(
-                $Expression->GetParameterExpressions(),
+                $this->WalkAll($Expression->GetParameterExpressions()),
                 $Expression->GetUsedVariableNames(),
                 $this->WalkAll($Expression->GetBodyExpressions()));
     }

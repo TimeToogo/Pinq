@@ -23,6 +23,7 @@ class DirectoryCacheTest extends CacheTest
     protected function tearDown()
     {
         $this->Cache = null;
+        usleep(1000);
         self::DeleteDirectory(self::$CacheDirectoryPath);
     }
     

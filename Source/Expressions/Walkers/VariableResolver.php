@@ -15,9 +15,6 @@ use \Pinq\Expressions as O;
  */
 class VariableResolver extends O\ExpressionWalker
 {
-    private $ScopeUnresolvedVariablesStack = [];
-    private $UnresolvedVariables = [];
-    private $ScopeVariableExpressionMapStack = [];
     private $VariableExpressionMap = [];
 
     public function __construct(array $VariableExpressionMap = [])
@@ -25,44 +22,9 @@ class VariableResolver extends O\ExpressionWalker
         $this->VariableExpressionMap = $VariableExpressionMap;
     }
 
-    public function HasUnresolvedVariables()
-    {
-        return count($this->UnresolvedVariables) > 0;
-    }
-
-    public function GetUnresolvedVariables()
-    {
-        return $this->UnresolvedVariables;
-    }
-
-    public function ResetUnresolvedVariables()
-    {
-        $this->UnresolvedVariables = [];
-    }
-
     public function SetVariableExpressionMap(array $VariableExpressionMap)
     {
         $this->VariableExpressionMap = $VariableExpressionMap;
-    }
-
-    private function Scope(array $UsedVariableNames)
-    {
-        array_push($this->ScopeUnresolvedVariablesStack, $this->UnresolvedVariables);
-        $this->UnresolvedVariables = [];
-
-        array_push($this->ScopeVariableExpressionMapStack, $this->VariableExpressionMap);
-        $this->VariableExpressionMap = array_intersect_key(
-                $this->VariableExpressionMap,
-                array_flip(array_values($UsedVariableNames)));
-
-    }
-    private function Unscope(array $ParameterNames)
-    {
-        $this->UnresolvedVariables = array_merge(
-                array_pop($this->ScopeUnresolvedVariablesStack),
-                array_diff($this->UnresolvedVariables, $ParameterNames));
-
-        $this->VariableExpressionMap = array_pop($this->ScopeVariableExpressionMapStack);
     }
 
     /*
@@ -70,17 +32,23 @@ class VariableResolver extends O\ExpressionWalker
      */
     public function WalkClosure(O\ClosureExpression $Expression)
     {
+        $OriginalVariableExpressionMap = $this->VariableExpressionMap;
+        
         $UsedVariableNames = $Expression->GetUsedVariableNames();
-
-        $this->Scope($UsedVariableNames);
-
+        
+        //Filter to only used values
+        $this->VariableExpressionMap = array_intersect_key(
+                $this->VariableExpressionMap,
+                array_flip(array_values($UsedVariableNames)) + ['this' => null]);//Include $this variable scope
+        
         $Expression = $Expression->Update(
                 $Expression->GetParameterExpressions(),
-                $UsedVariableNames,
+                array_diff($UsedVariableNames, array_keys($this->VariableExpressionMap)),//Remove resolved used variables
                 $this->WalkAll($Expression->GetBodyExpressions()));
 
-        $this->Unscope($UsedVariableNames);
-
+        //Restore parent scope with all variables values
+        $this->VariableExpressionMap = $OriginalVariableExpressionMap;
+        
         return $Expression;
     }
 
@@ -97,18 +65,7 @@ class VariableResolver extends O\ExpressionWalker
                 return $this->VariableExpressionMap[$Name];
             }
         }
-        $this->AddUnresolvedVariable($Expression->Compile());
 
         return $Expression;
-    }
-
-    /**
-     * @param string $Name
-     */
-    private function AddUnresolvedVariable($Name)
-    {
-        if (!in_array($Name, $this->UnresolvedVariables)) {
-            $this->UnresolvedVariables[] = $Name;
-        }
     }
 }

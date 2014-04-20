@@ -12,12 +12,12 @@ class RangeIterator extends IteratorIterator
     /**
      * @var int
      */
-    private $StartAmount;
+    private $StartPosition;
     
     /**
      * @var int|null
      */
-    private $RangeAmount;
+    private $EndPosition;
     
     /**
      * @param integer $StartAmount
@@ -26,8 +26,8 @@ class RangeIterator extends IteratorIterator
     public function __construct(\Traversable $Iterator, $StartAmount, $RangeAmount)
     {
         parent::__construct($Iterator);
-        $this->StartAmount = $StartAmount;
-        $this->RangeAmount = $RangeAmount;
+        $this->StartPosition = $StartAmount;
+        $this->EndPosition = $RangeAmount === null ? null : $StartAmount + $RangeAmount;
     }
 
     public function next()
@@ -44,14 +44,14 @@ class RangeIterator extends IteratorIterator
 
     public function valid()
     {
-        while($this->Position < $this->StartAmount) {
+        while($this->Position < $this->StartPosition) {
             if(!parent::valid()) {
-                false;
+                return false;
             }
             $this->next();
         }
         
-        if($this->RangeAmount !== null && $this->Position >= $this->RangeAmount) {
+        if($this->EndPosition !== null && $this->Position >= $this->EndPosition) {
             return false;
         }
         

@@ -90,20 +90,6 @@ class AST
         return $this->ParseNode($Node);
     }
 
-    /**
-     * @param null|\PHPParser_Node_Expr $Node
-     *
-     * @return Expression
-     */
-    final public function ParseIndexNode($Node)
-    {
-        if ($Node === null) {
-            return Expression::Value(null);
-        }
-
-        return $this->ParseNode($Node);
-    }
-
     // <editor-fold defaultstate="collapsed" desc="Expression node parsers">
 
     public function ParseExpressionNode(\PHPParser_Node_Expr $Node)
@@ -140,7 +126,7 @@ class AST
             case $Node instanceof \PHPParser_Node_Expr_ArrayDimFetch:
                 return Expression::Index(
                         $this->ParseNode($Node->var),
-                        $this->ParseIndexNode($Node->dim));
+                        $Node->dim === null ? Expression::Value(null) : $this->ParseNode($Node->dim));
 
             case $Node instanceof \PHPParser_Node_Expr_StaticCall:
                 return Expression::StaticMethodCall(
@@ -251,13 +237,35 @@ class AST
                 
             case $Node instanceof \PHPParser_Node_Stmt_Throw:
                 return Expression::ThrowExpression($this->ParseNode($Node->expr));
-
+                
             default:
+                $this->VerifiyNotControlStructure($Node);
                 throw new ASTException(
                         'Cannot parse AST with unknown statement node: %s',
                         get_class($Node));
         }
     }
+    
+    private static $ConstructStructureMap = [
+        'Do' => ASTException::DoWhileLoop,
+        'For' => ASTException::ForLoop,
+        'Foreach' => ASTException::ForeachLoop,
+        'Goto' => ASTException::GotoStatement,
+        'If' => ASTException::IfStatement,
+        'Switch' => ASTException::SwitchStatement,
+        'TryCatch' => ASTException::TryCatchStatement,
+        'While' => ASTException::WhileLoop,
+    ];
+    
+    private function VerifiyNotControlStructure(\PHPParser_Node_Stmt $Node)
+    {
+        $NodeType = str_replace('PHPParser_Node_Stmt_', '', get_class($Node));
+        
+        if(isset(self::$ConstructStructureMap[$NodeType])) {
+            throw ASTException::ContainsControlStructure(self::$ConstructStructureMap[$NodeType], $Node->getAttribute('startLine'));
+        }
+    }
+    
 
     // </editor-fold>
 

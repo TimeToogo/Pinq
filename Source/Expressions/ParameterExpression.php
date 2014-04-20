@@ -31,7 +31,7 @@ class ParameterExpression extends Expression
 
     public function Traverse(ExpressionWalker $Walker)
     {
-        $Walker->WalkParameter($this);
+        return $Walker->WalkParameter($this);
     }
     
     public function GetName()

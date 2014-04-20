@@ -266,9 +266,9 @@ abstract class Expression implements \Serializable
     /**
      * @return SubQueryExpression
      */
-    final public static function SubQuery(Expression $ValueExpression, \Pinq\Queries\IRequestQuery $RequestQuery)
+    final public static function SubQuery(Expression $ValueExpression, \Pinq\Queries\IRequestQuery $RequestQuery, TraversalExpression $OriginalExpression)
     {
-        return new SubQueryExpression($ValueExpression, $RequestQuery);
+        return new SubQueryExpression($ValueExpression, $RequestQuery, $OriginalExpression);
     }
 
     // </editor-fold>

@@ -19,8 +19,13 @@ abstract class ParserBase implements IParser
                     $Reflection->getName(),
                     $FileName);
         }
-
-        return $this->ParseFunction($Reflection, $FileName);
+        
+        try {
+            return $this->ParseFunction($Reflection, $FileName);
+        }
+        catch (ASTException $ASTException) {
+            throw InvalidFunctionException::InvalidFunctionMessage($ASTException->getMessage(), $Reflection);
+        }
     }
 
     /**

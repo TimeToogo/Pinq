@@ -81,8 +81,7 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
 
     public function AsCollection()
     {
-        $this->Load();
-        return new Collection($this->ValuesIterator);
+        return new Collection($this->getIterator());
     }
     
     public function AsQueryable()
@@ -96,8 +95,7 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
             return $this->Provider->CreateRepository($this->Scope);
         }
         else {
-            $this->Load();
-            return (new Collection($this->ValuesIterator))->AsRepository();
+            return (new Collection($this->getIterator()))->AsRepository();
         }
     }
 

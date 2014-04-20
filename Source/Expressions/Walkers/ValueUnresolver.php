@@ -59,6 +59,22 @@ class ValueUnresolver extends O\ExpressionWalker
         return '___' . ++$this->VariableCount . '___';
     }
     
+    /**
+     * Walks the and finds any values in the body then adds them as used variables
+     * 
+     * @param O\ClosureExpression $Expression
+     * @return O\ClosureExpression
+     */
+    public function WalkClosure(O\ClosureExpression $Expression)
+    {
+        $WalkedBodyExpressions = $this->WalkAll($Expression->GetBodyExpressions());
+        
+        return $Expression->Update(
+                $Expression->GetParameterExpressions(),
+                array_merge($Expression->GetUsedVariableNames(), array_keys($this->VariableNameValueMap)),
+                $WalkedBodyExpressions);
+    }
+    
     public function WalkValue(O\ValueExpression $Expression)
     {
         $ValueFilter = $this->ValueFilterFunction;

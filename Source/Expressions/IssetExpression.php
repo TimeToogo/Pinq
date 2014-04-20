@@ -34,11 +34,13 @@ class IssetExpression extends Expression
         $ValueExpressions = self::SimplifyAll($this->ValueExpressions);
         
         foreach($ValueExpressions as $Key => $ValueExpression) {
-            if($ValueExpression instanceof ValueExpression && $ValueExpression->GetValue() === null) {
+            $IsConstantValue = $ValueExpression instanceof ValueExpression;
+            
+            if($IsConstantValue && $ValueExpression->GetValue() === null) {
                 return Expression::Value(false);
             }
-            else {
-                unset($ValueExpression[$Key]);
+            else if($IsConstantValue) {
+                unset($ValueExpressions[$Key]);
             }
         }
         if(self::AllOfType($ValueExpressions, ValueExpression::GetType())) {

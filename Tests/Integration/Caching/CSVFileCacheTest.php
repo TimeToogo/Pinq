@@ -23,6 +23,7 @@ class CSVFileCacheTest extends CacheTest
     protected function tearDown()
     {
         $this->Cache = null;
+        usleep(1000);
         unlink(self::$CacheFilePath);
     }
 }

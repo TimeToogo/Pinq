@@ -43,4 +43,14 @@ class SliceTest extends TraversableTest
         
         $this->AssertMatches($Values, $Data);
     }
+    
+    /**
+     * @dataProvider Everything
+     */
+    public function testThatSlicingReturnsTheCorrectSegmentOfDataAndPreservesKeys(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $Values = $Traversable->Slice(3, 2);
+        
+        $this->AssertMatches($Values, array_slice($Data, 3, 2, true));
+    }
 }

@@ -106,6 +106,17 @@ class BasicConverterTest extends ConverterTest
     /**
      * @dataProvider Converters
      */
+    public function testLanguageConstructs()
+    {
+        $ValueSet = [[''], ['1'], ['test'], [null], [true], [false], [['dsffd']], [[]], [0]];
+        
+        $this->AssertConvertsAndRecompilesCorrectly(function ($I) { return isset($I); }, $ValueSet);
+        $this->AssertConvertsAndRecompilesCorrectly(function ($I) { return empty($I); }, $ValueSet);
+    }
+    
+    /**
+     * @dataProvider Converters
+     */
     public function testTernary()
     {
         $ValueSet = [[1], [0], [-1], [-5], [5], [-500], [500]];

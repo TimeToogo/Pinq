@@ -3,6 +3,7 @@
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
 use \Pinq\Expressions as O;
+use \Pinq\Queries;
 
 class ComplexConverterTest extends ConverterTest
 {
@@ -25,6 +26,23 @@ class ComplexConverterTest extends ConverterTest
         
         $Factor = 5;
         $this->AssertConvertsAndRecompilesCorrectly(function ($I) use($Factor) { return $I * $Factor; }, $ValueSet);
+    }
+    
+    /**
+     * @dataProvider Converters
+     */
+    public function testNestedClosureUsedVariableResolution()
+    {
+        $ValueSet = [[-500], [-5], [-2], [-1], [1], [2], [5], [500]];
+        
+        $Factor = 5;
+        $this->AssertConvertsAndRecompilesCorrectly(
+                    function ($I) use($Factor) { 
+                        $InnerClosue = function ($I) use ($Factor) {
+                            return $I * $Factor;
+                        };
+                        return $InnerClosue($I);
+                    }, $ValueSet);
     }
     
     /**
@@ -85,6 +103,7 @@ class ComplexConverterTest extends ConverterTest
                     return $Another - $Copy + 1 - $Another * $Value % 34; 
                 });
     }
+    
     /**
      * @dataProvider Converters
      */
@@ -116,6 +135,72 @@ class ComplexConverterTest extends ConverterTest
     final protected function AssertReturnValueResolvesCorrectly(callable $Function) 
     {
         $this->AssertFirstResolvedReturnExpression($Function, O\Expression::Value($Function()));
+    }
+    
+    /**
+     * @dataProvider Converters
+     */
+    public function testThatResolvesSubQueries()
+    {
+        $this->AssertFirstResolvedReturnExpression(
+                function (\Pinq\ITraversable $Traversable) {
+                    return $Traversable->AsArray(); 
+                },
+                O\Expression::SubQuery(
+                        O\Expression::Variable(O\Expression::Value('Traversable')), 
+                        new Queries\RequestQuery(new Queries\Scope([]), new Queries\Requests\Values()), 
+                        O\Expression::MethodCall(O\Expression::Variable(O\Expression::Value('Traversable')), O\Expression::Value('AsArray'))));
+        
+        $this->AssertFirstResolvedReturnExpression(
+                function (\Pinq\ITraversable $Traversable) {
+                    return $Traversable->Where(function ($I) { return $I > 0; })->All(function ($I) { return $I % 2 === 0; }); 
+                },
+                O\Expression::SubQuery(
+                        O\Expression::Variable(O\Expression::Value('Traversable')), 
+                        new Queries\RequestQuery(
+                                new Queries\Scope([new Queries\Segments\Filter(new \Pinq\FunctionExpressionTree(
+                                        null, 
+                                        [O\Expression::Parameter('I')],
+                                        [O\Expression::ReturnExpression(
+                                                O\Expression::BinaryOperation(
+                                                        O\Expression::Variable(O\Expression::Value('I')), 
+                                                        O\Operators\Binary::GreaterThan, 
+                                                        O\Expression::Value(0)))]))]), 
+                                new Queries\Requests\All(new \Pinq\FunctionExpressionTree(
+                                        null, 
+                                        [O\Expression::Parameter('I')],
+                                        [O\Expression::ReturnExpression(
+                                                O\Expression::BinaryOperation(
+                                                        O\Expression::BinaryOperation(
+                                                                O\Expression::Variable(O\Expression::Value('I')),
+                                                                O\Operators\Binary::Modulus, 
+                                                                O\Expression::Value(2)), 
+                                                        O\Operators\Binary::Identity, 
+                                                        O\Expression::Value(0)))]))), 
+                        O\Expression::MethodCall(
+                                O\Expression::MethodCall(
+                                        O\Expression::Variable(O\Expression::Value('Traversable')), 
+                                        O\Expression::Value('Where'),
+                                        [O\Expression::Closure(
+                                                [O\Expression::Parameter('I')],
+                                                [],
+                                                [O\Expression::ReturnExpression(
+                                                        O\Expression::BinaryOperation(
+                                                                O\Expression::Variable(O\Expression::Value('I')), 
+                                                                O\Operators\Binary::GreaterThan, 
+                                                                O\Expression::Value(0)))])]), 
+                                O\Expression::Value('All'),
+                                [O\Expression::Closure(
+                                                [O\Expression::Parameter('I')],
+                                                [],
+                                                [O\Expression::ReturnExpression(
+                                                        O\Expression::BinaryOperation(
+                                                                O\Expression::BinaryOperation(
+                                                                        O\Expression::Variable(O\Expression::Value('I')),
+                                                                        O\Operators\Binary::Modulus, 
+                                                                        O\Expression::Value(2)), 
+                                                                O\Operators\Binary::Identity, 
+                                                                O\Expression::Value(0)))])])));
     }
     
     /** ---- Some code from the wild ---- **/

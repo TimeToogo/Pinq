@@ -25,6 +25,7 @@ class RequestEvaluator extends Requests\RequestVisitor
     private function CacheMethodResult($MethodName, Queries\IRequest $Request) 
     {
         $Key = $MethodName . '-' . md5(serialize($Request));
+        
         if(!isset($this->MethodResultCache[$Key])) {
             $this->MethodResultCache[$Key] = $this->InnerRequestEvaluator->$MethodName($Request);
         }
@@ -58,6 +59,16 @@ class RequestEvaluator extends Requests\RequestVisitor
     }
 
     public function VisitContains(Requests\Contains $Request)
+    {
+        return $this->CacheMethodResult(__FUNCTION__, $Request);
+    }
+    
+    public function VisitGetIndex(Requests\GetIndex $Request)
+    {
+        return $this->CacheMethodResult(__FUNCTION__, $Request);
+    }
+    
+    public function VisitIssetIndex(Requests\IssetIndex $Request)
     {
         return $this->CacheMethodResult(__FUNCTION__, $Request);
     }

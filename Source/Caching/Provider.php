@@ -80,6 +80,11 @@ final class Provider
     {
         self::$CacheImplementation = $Cache;
     }
+    
+    public static function RemoveCache()
+    {
+        self::$CacheImplementation = null;
+    }
 }
 
 class NullCache implements IFunctionCache {

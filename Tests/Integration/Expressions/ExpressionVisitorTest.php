@@ -26,7 +26,7 @@ class ExpressionVisitorTest extends ExpressionTest
             [O\Expression::Parameter(''), 'VisitParameter'],
             [O\Expression::ReturnExpression(), 'VisitReturn'],
             [O\Expression::StaticMethodCall(O\Expression::Value(0), O\Expression::Value(0)), 'VisitStaticMethodCall'],
-            [O\Expression::SubQuery(O\Expression::Value(0), $this->getMock('\Pinq\Queries\IRequestQuery')), 'VisitSubQuery'],
+            [O\Expression::SubQuery(O\Expression::Value(0), $this->getMock('\Pinq\Queries\IRequestQuery'), O\Expression::Invocation(O\Expression::Value(0))), 'VisitSubQuery'],
             [O\Expression::Ternary(O\Expression::Value(0), null, O\Expression::Value(0)), 'VisitTernary'],
             [O\Expression::ThrowExpression(O\Expression::Value(0)), 'VisitThrow'],
             [O\Expression::Value(0), 'VisitValue'],
@@ -37,7 +37,7 @@ class ExpressionVisitorTest extends ExpressionTest
     /**
      * @dataProvider ExpressionsToVisit
      */
-    public function testExpressionVisitorVisitsTheCorrectMethos(O\Expression $Expression, $Method)
+    public function testExpressionVisitorVisitsTheCorrectMethod(O\Expression $Expression, $Method)
     {
         $ExpressionVisitorMock = $this->getMock('\Pinq\Expressions\ExpressionVisitor', [$Method]);
         

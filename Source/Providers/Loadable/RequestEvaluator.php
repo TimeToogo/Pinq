@@ -26,14 +26,14 @@ abstract class RequestEvaluator extends Requests\RequestVisitor
     public function VisitValues(Requests\Values $Request)
     {
         if(!$this->IsLoaded) {
-            $Traversable = new \Pinq\Traversable($this->LoadValues());
+            $Traversable = new \Pinq\Traversable($this->LoadValues($Request));
             $this->LoadedRequestEvaluator = new Traversable\RequestEvaluator($Traversable);
             $this->IsLoaded = true;
         }
         
         return $this->LoadedRequestEvaluator->VisitValues($Request);
     }
-    protected abstract function LoadValues();
+    protected abstract function LoadValues(Requests\Values $Request);
     
     final public function VisitFirst(Requests\First $Request)
     {
@@ -98,6 +98,22 @@ abstract class RequestEvaluator extends Requests\RequestVisitor
                 $this->LoadMinimum($Request);
     }
     protected abstract function LoadMinimum(Requests\Minimum $Request);
+    
+    final public function VisitGetIndex(Requests\GetIndex $Request)
+    {
+        return $this->IsLoaded ? 
+                $this->LoadedRequestEvaluator->VisitGetIndex($Request) : 
+                $this->LoadGetIndex($Request);
+    }
+    protected abstract function LoadGetIndex(Requests\GetIndex $Request);
+    
+    final public function VisitIssetIndex(Requests\IssetIndex $Request)
+    {
+        return $this->IsLoaded ? 
+                $this->LoadedRequestEvaluator->VisitIssetIndex($Request) : 
+                $this->LoadIssetIndex($Request);
+    }
+    protected abstract function LoadIssetIndex(Requests\IssetIndex $Request);
     
     final public function VisitSum(Requests\Sum $Request)
     {

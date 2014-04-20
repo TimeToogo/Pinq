@@ -29,7 +29,7 @@ class PinqException extends \Exception
             $Message = call_user_func_array('sprintf', $Parameters);
         }
 
-        return new self($Message);
+        return new static($Message);
     }
     
     public static function InvalidIterable($Method, $Value)

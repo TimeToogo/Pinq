@@ -30,7 +30,7 @@ class ReturnValueExpressionResolver extends O\ExpressionWalker
     /**
      * @var O\Expression[]
      */
-    private $ReturnValueExpressions;
+    private $ReturnValueExpressions = [];
     
     public function __construct()
     {
@@ -112,6 +112,12 @@ class ReturnValueExpressionResolver extends O\ExpressionWalker
             $this->VariableExpressionMap[$AssignmentName] = $VariableValueExpression;
         }
         
+        return $Expression;
+    }
+    
+    public function WalkClosure(O\ClosureExpression $Expression)
+    {
+        //Ignore closures
         return $Expression;
     }
     
