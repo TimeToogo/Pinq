@@ -17,7 +17,7 @@ For example `5 + 3 - 2`, this can be represented as the following:
           |           |           |
         Left   Operator   Right
          /            |             \
-        5            '+'        BinaryOperation
+        5             +         BinaryOperation
                                    |           |           |
                                  Left   Operator  Right
                                  /             |              \
