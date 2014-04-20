@@ -76,8 +76,8 @@ Supported Expressions:
     - `new \DateTime()`
 
  - **`ParameterExpression`**
-    - `function ($I)`
-    - `function (\stdClass &$I = null)`
+    - `function ($I) ...`
+    - `function (\stdClass &$I = null) ...`
 
  - **`ReturnExpression`** 
     - `return $I`
