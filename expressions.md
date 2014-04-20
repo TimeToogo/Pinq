@@ -72,7 +72,7 @@ Supported Expressions:
     - `$I->Method()`
 
  - **`NewExpression`** 
-    - ``new stdClass()`
+    - `new stdClass()`
 
  - **`ParameterExpression`**
     - `\stdClass &$I = null`
