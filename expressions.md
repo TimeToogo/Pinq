@@ -72,10 +72,12 @@ Supported Expressions:
     - `$I->Method()`
 
  - **`NewExpression`** 
-    - `new stdClass()`
+    - `new \stdClass()`
+    - `new \DateTime()`
 
  - **`ParameterExpression`**
-    - `\stdClass &$I = null`
+    - `function ($I)`
+    - `function (\stdClass &$I = null)`
 
  - **`ReturnExpression`** 
     - `return $I`
