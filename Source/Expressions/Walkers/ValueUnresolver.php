@@ -5,7 +5,9 @@ namespace Pinq\Expressions\Walkers;
 use \Pinq\Expressions as O;
 
 /**
- * Unresolves and stores any values in the expression tree and replaces them with uncolliding variable names
+ * Unresolves and stores any values in the expression tree and replaces them with uncolliding variable names.
+ * This is useful when compiling an expression tree and certain values shouldn't be stored inline, such as
+ * objects or arrays.
  *
  * 3 + $Var;
  * === will become ===
@@ -16,16 +18,23 @@ use \Pinq\Expressions as O;
 class ValueUnresolver extends O\ExpressionWalker
 {
     /**
+     * The current amount of variables that have be inserted
+     * 
      * @var int
      */
     private $VariableCount = 0;
     
     /**
+     * An array with the variable names as key and the
+     * respective value as the value
+     * 
      * @var array<string, mixed>
      */
     private $VariableNameValueMap = [];
     
     /**
+     * Determines whether the value should be replaced a variable
+     * 
      * @var callable| null
      */
     private $ValueFilterFunction;
@@ -36,19 +45,29 @@ class ValueUnresolver extends O\ExpressionWalker
     }
 
     /**
+     * Returns the variable value map
+     * 
      * @return array<string, mixed>
      */
     public function GetVariableNameValueMap()
     {
         return $this->VariableNameValueMap;
     }
-
+    
+    /**
+     * @return void
+     */
     public function ResetVariableNameValueMap()
     {
         $this->VariableCount = 0;
         $this->VariableNameValueMap = [];
     }
-
+    
+    /**
+     * Sets the function to filter which values should not be inlined
+     * 
+     * @param callable $ValueFilterFunction The filter function
+     */
     public function SetValueFilter(callable $ValueFilterFunction)
     {
         $this->ValueFilterFunction = $ValueFilterFunction;

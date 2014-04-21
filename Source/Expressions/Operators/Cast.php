@@ -3,7 +3,7 @@
 namespace Pinq\Expressions\Operators;
 
 /**
- * The class containing php cast operators
+ * The enum containing PHP cast operators
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */

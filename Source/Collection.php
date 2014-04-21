@@ -3,7 +3,9 @@
 namespace Pinq;
 
 /**
- * An in-memory implementation for collection api.
+ * The standard collection class, fully implements the collection API
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Collection extends Traversable implements ICollection
 {
@@ -27,8 +29,6 @@ class Collection extends Traversable implements ICollection
         $this->ValuesIterator = new \EmptyIterator();
     }
     
-    
-    
     public function Apply(callable $Function)
     {
         $Array = $this->AsArray();
@@ -43,22 +43,10 @@ class Collection extends Traversable implements ICollection
         $this->ValuesIterator = new \ArrayIterator($Array);
     }
     
-    /**
-     * @param string $Argument
-     */
-    private function InvalidRange($Method, $Argument, $Value) 
-    {
-        return new PinqException(
-                'Invalid argument to %s: %s must be an array or instance of traversable, %s given',
-                $Method,
-                $Argument,
-                Utilities::GetTypeOrClass($Value));
-    }
-
     public function AddRange($Values)
     {
         if(!Utilities::IsIterable($Values)) {
-            throw $this->InvalidRange(__METHOD__, 'Values', $Values);
+            throw PinqException::InvalidIterable(__METHOD__, $Values);
         }
         
         $FlattenedIterator = new Iterators\FlatteningIterator(new \ArrayIterator([$this->ValuesIterator, Utilities::ToIterator($Values)]));
@@ -69,7 +57,7 @@ class Collection extends Traversable implements ICollection
     public function RemoveRange($Values)
     {
         if(!Utilities::IsIterable($Values)) {
-            throw $this->InvalidRange(__METHOD__, 'Values', $Values);
+            throw PinqException::InvalidIterable(__METHOD__, $Values);
         }
         
         $ExceptIterator = new Iterators\ExceptIterator($this->ValuesIterator, Utilities::ToIterator($Values));

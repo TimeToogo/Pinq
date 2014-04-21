@@ -10,7 +10,7 @@ class LoadableRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
     public function RequestsToLoad()
     {
         return [
-            [new Requests\Values(), 'LoadValues'],
+            [new Requests\Values(), 'LoadValues', []],
             [new Requests\Aggregate(new \Pinq\FunctionExpressionTree(null, [], [])), 'LoadAggregate'],
             [new Requests\All(), 'LoadAll'],
             [new Requests\Any(), 'LoadAny'],
@@ -32,21 +32,25 @@ class LoadableRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
     /**
      * @dataProvider RequestsToLoad
      */
-    public function testThatWillCallTheLoadMethodButNotWhenLoaded(Queries\IRequest $Request, $LoadMethod)
+    public function testThatWillCallTheLoadMethodButNotWhenLoaded(Queries\IRequest $Request, $LoadMethod, $ReturnValue = null)
     {
         $RequestEvaluatorMock = $this->getMockForAbstractClass('\Pinq\Providers\Loadable\RequestEvaluator');
         
-        $RequestEvaluatorMock
+        $MethodMock = $RequestEvaluatorMock
                 ->expects($this->once())
                 ->method($LoadMethod)
                 ->with($this->equalTo($Request));
+        
+        if($MethodMock !== null) {
+            $MethodMock->will($this->returnValue($ReturnValue));
+        }
         
         $LoadValuesRequest = new Requests\Values();
         $RequestEvaluatorMock
                 ->expects($this->once())
                 ->method('LoadValues')
                 ->with($this->equalTo($LoadValuesRequest))
-                ->will($this->returnValue([null]));
+                ->will($this->returnValue($ReturnValue ?: [null]));
         
         $RequestEvaluatorMock->Visit($Request);
         

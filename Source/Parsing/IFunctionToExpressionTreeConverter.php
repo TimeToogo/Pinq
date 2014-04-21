@@ -2,6 +2,11 @@
 
 namespace Pinq\Parsing;
 
+/**
+ * Facade for converting a function into the equivalent expression tree
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 interface IFunctionToExpressionTreeConverter
 {
     /**

@@ -2,6 +2,13 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Iterates the inner iterator and for every value, it is then iterated as
+ * the resulting values (pretty much a nested foreach loop)
+ * 
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class FlatteningIterator extends IteratorIterator
 {
     private $Count = 0;

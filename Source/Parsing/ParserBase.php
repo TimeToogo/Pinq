@@ -2,6 +2,13 @@
 
 namespace Pinq\Parsing;
 
+use \Pinq\Expressions\Expression;
+
+/**
+ * Base class for a function parser
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 abstract class ParserBase implements IParser
 {
     final public function Parse(\ReflectionFunctionAbstract $Reflection)
@@ -29,7 +36,9 @@ abstract class ParserBase implements IParser
     }
 
     /**
+     * @param \ReflectionFunctionAbstract $Reflection
      * @param string $FileName
+     * @return Expression[]
      */
     abstract protected function ParseFunction(\ReflectionFunctionAbstract $Reflection, $FileName);
 }

@@ -3,16 +3,37 @@
 namespace Pinq\Expressions;
 
 /**
- * Expression representing a function parameter.
- *
+ * <code>
+ * function (\stdClass &$I = null) {}
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ParameterExpression extends Expression
 {
+    /**
+     * @var string
+     */
     private $Name;
+    
+    /**
+     * @var string|null
+     */
     private $TypeHint;
+    
+    /**
+     * @var boolean
+     */
     private $HasDefaultValue;
+    
+    /**
+     * @var mixed
+     */
     private $DefaultValue;
+    
+    /**
+     * @var boolean
+     */
     private $IsPassedByReference;
 
     public function __construct($Name, $TypeHint = null, $HasDefaultValue = false, $DefaultValue = null, $IsPassedByReference = false)

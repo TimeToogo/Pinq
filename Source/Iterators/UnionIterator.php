@@ -2,9 +2,18 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Iterates the unique values contained in either the first values or in the second values.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class UnionIterator extends FlatteningIterator
 {
+    /**
+     * @var int
+     */
     private $Count = 0;
+    
     /**
      * @var Utilities\Set
      */

@@ -2,6 +2,11 @@
 
 namespace Pinq\Queries\Segments; 
 
+/**
+ * Query segment for a set/range operation
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class Operation extends Segment
 {
     const Union = 1;

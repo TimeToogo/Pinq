@@ -2,6 +2,12 @@
 
 namespace Pinq;
 
+/**
+ * This API required to combine the filtered joined values into
+ * the the elements of the resulting traversable
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 interface IJoiningToTraversable
 {    
     /**

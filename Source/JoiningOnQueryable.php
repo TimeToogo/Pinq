@@ -5,6 +5,11 @@ namespace Pinq;
 use \Pinq\Queries;
 use \Pinq\Queries\Segments;
 
+/**
+ * Implements the filtering API for a join / group join queryable.
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class JoiningOnQueryable implements IJoiningOnTraversable
 {
     /**

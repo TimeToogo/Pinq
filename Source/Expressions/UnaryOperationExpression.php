@@ -3,12 +3,25 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * -$I;
+ * $I++;
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class UnaryOperationExpression extends Expression
 {
+    /**
+     * @var int
+     */
     private $Operator;
+    
+    /**
+     * @var Expression
+     */
     private $OperandExpression;
+    
     public function __construct($Operator, Expression $OperandExpression)
     {
         $this->Operator = $Operator;

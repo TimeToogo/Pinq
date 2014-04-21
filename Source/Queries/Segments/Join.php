@@ -2,11 +2,23 @@
 
 namespace Pinq\Queries\Segments; 
 
+use \Pinq\FunctionExpressionTree;
+
+/**
+ * Query segment for a join filtered by the supplied function
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class Join extends JoinBase
 {
+    /**
+     * The join filter expression tree
+     *
+     * @var FunctionExpressionTree 
+     */
     private $OnFunction;
 
-    public function __construct($Values, $IsGroupJoin, callable $OnFunction, callable $JoiningFunction)
+    public function __construct($Values, $IsGroupJoin, FunctionExpressionTree $OnFunction, FunctionExpressionTree $JoiningFunction)
     {
         parent::__construct($Values, $IsGroupJoin, $JoiningFunction);
         $this->OnFunction = $OnFunction;
@@ -23,14 +35,14 @@ class Join extends JoinBase
     }
 
     /**
-     * @return callable
+     * @return FunctionExpressionTree
      */
-    public function GetOnFunction()
+    public function GetOnFunctionExpressionTree()
     {
         return $this->OnFunction;
     }
     
-    public function Update($Values, $IsGroupJoin, callable $OnFunction, callable $JoiningFunction)
+    public function Update($Values, $IsGroupJoin, FunctionExpressionTree $OnFunction, FunctionExpressionTree $JoiningFunction)
     {
         if($this->Values === $Values
                 && $this->IsGroupJoin === $IsGroupJoin

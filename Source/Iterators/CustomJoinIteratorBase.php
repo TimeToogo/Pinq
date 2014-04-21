@@ -2,6 +2,13 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Base class for a join iterator with a custom join on function.
+ * The equi-join lookup optimization cannot be made and the function must be run
+ * for every outer/inner pair.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 abstract class CustomJoinIteratorBase extends JoinIteratorBase
 {
     /**

@@ -3,13 +3,22 @@
 namespace Pinq\Expressions;
 
 /**
- * Expression representing an array declaration.
- *
+ * <code>
+ * [1, 2, 'test' => 4]
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ArrayExpression extends Expression
 {
+    /**
+     * @var Expression[] 
+     */
     private $KeyExpressions;
+    
+    /**
+     * @var Expression[] 
+     */
     private $ValueExpressions;
     
     public function __construct(array $KeyExpressions, array $ValueExpressions)

@@ -4,14 +4,28 @@ namespace Pinq\Parsing\PHPParser;
 
 use \Pinq\Parsing\ParserBase;
 
+/**
+ * Function parser implementation utilising nikic\PHP-Parser to
+ * accuratly locate and convert functions into the equivalent
+ * expression tree
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class Parser extends ParserBase
 {
     /**
+     * The PHP-Parser parser instanse, static because it is expensive
+     * to instantiate.
+     * 
      * @var \PHPParser_Parser 
      */
     private static $PHPParser;
         
     /**
+     * The array containing the parsed files, indexed by the file name, 
+     * each value contains an array of arrays of function nodes, they are grouped
+     * by there location/signature hash
+     * 
      * @var \PHPParser_Node[][][] 
      */
     private static $ParsedFileFunctionNodesMap;

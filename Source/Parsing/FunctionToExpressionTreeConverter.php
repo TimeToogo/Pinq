@@ -6,6 +6,12 @@ use \Pinq\Expressions as O;
 use \Pinq\Caching\Provider;
 use \Pinq\Caching\IFunctionCache;
 
+/**
+ * Default implementaion for the IFunctionToExpressionTreeConverter. 
+ * Requires a parser and optionally cache which will fallback to the cache provider implementation
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConverter
 {
     /**

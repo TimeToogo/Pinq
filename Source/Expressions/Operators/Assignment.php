@@ -3,7 +3,7 @@
 namespace Pinq\Expressions\Operators;
 
 /**
- * The class containing php assignment operators
+ * The enum containing PHP assignment operators
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */

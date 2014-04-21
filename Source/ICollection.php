@@ -3,8 +3,10 @@
 namespace Pinq;
 
 /**
- * The collection api, along with traversable query, a collection's values are mutable,
- * they can be added, removed and altered.
+ * The collection API, along with traversable query API, 
+ * a collection's values are mutable, they can be added, removed and altered.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface ICollection extends ITraversable
 {

@@ -2,9 +2,22 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Basy class for a lazy iterator, the initializer will be
+ * called once, when first accessed.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 abstract class LazyIterator extends IteratorIterator
 {
+    /**
+     * @var \Traversable
+     */
     protected $Iterator;
+    
+    /**
+     * @var boolean
+     */
     private $IsInitialized = false;
     
     public function __construct(\Traversable $Iterator)

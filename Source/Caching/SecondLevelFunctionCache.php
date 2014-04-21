@@ -4,9 +4,17 @@ namespace Pinq\Caching;
 
 use \Pinq\FunctionExpressionTree;
 
+/**
+ * Cache implementation that acts as second level cache for the supplied
+ * implementation
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class SecondLevelFunctionCache implements IFunctionCache
 {
     /**
+     * The underlying cache implementation
+     * 
      * @var IFunctionCache
      */
     private $RealCache;
@@ -19,6 +27,8 @@ class SecondLevelFunctionCache implements IFunctionCache
     }
     
     /**
+     * Gets the underlying cache implementation
+     * 
      * @return IFunctionCache
      */
     public function GetInnerCache()

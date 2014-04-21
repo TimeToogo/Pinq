@@ -2,8 +2,16 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Base class for a join iterator
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 abstract class JoinIteratorBase implements \Iterator
 {
+    /**
+     * @var int
+     */
     private $Count = 0;
     
     /**

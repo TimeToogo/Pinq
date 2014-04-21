@@ -4,6 +4,11 @@ namespace Pinq;
 
 use \Pinq\Queries;
 
+/**
+ * Implements the result API for a join / group join queryable.
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class JoiningToQueryable implements IJoiningToTraversable
 {
     /**

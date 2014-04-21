@@ -3,10 +3,17 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * $I[5]
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class IndexExpression extends TraversalExpression
 {
+    /**
+     * @var Expression
+     */
     private $IndexExpression;
 
     public function __construct(Expression $ValueExpression, Expression $IndexExpression)

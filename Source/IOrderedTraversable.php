@@ -3,7 +3,9 @@
 namespace Pinq;
 
 /**
- * Api for subsequent orderings of a traversable query.
+ * The API for subsequent orderings of a traversable query
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface IOrderedTraversable extends ITraversable
 {

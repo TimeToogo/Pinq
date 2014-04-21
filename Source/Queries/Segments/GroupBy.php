@@ -4,6 +4,12 @@ namespace Pinq\Queries\Segments;
 
 use \Pinq\FunctionExpressionTree;
 
+/**
+ * Query segment for grouping the values base on the supplied 
+ * grouping functions.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class GroupBy extends Segment
 {
     /**

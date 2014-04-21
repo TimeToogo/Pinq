@@ -4,6 +4,11 @@ namespace Pinq\Providers\Collection;
 
 use \Pinq\Queries\Operations;
 
+/**
+ * Evaluates the operations on the supplied collection instance
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class OperationEvaluator extends Operations\OperationVisitor
 {
     /**

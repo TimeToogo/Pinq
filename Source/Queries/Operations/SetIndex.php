@@ -2,6 +2,11 @@
 
 namespace Pinq\Queries\Operations; 
 
+/**
+ * Operation query for setting a specified index to a value
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class SetIndex extends IndexOperation
 {
     private $Value;

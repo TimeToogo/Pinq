@@ -2,14 +2,21 @@
 
 namespace Pinq\Iterators\Utilities;
 
+/**
+ * Represents a  range grouped values determined from a supplied grouping function
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class Lookup
 {
     /**
-     * @var Dictionary
+     * The dictionary containing the keyed groups
+     * 
+     * @var Dictionary<mixed, \ArrayObject>
      */
     private $Dictionary;
     
-    public function __construct()
+    private function __construct()
     {
         $this->Dictionary = new Dictionary();
     }
@@ -38,6 +45,9 @@ class Lookup
     }
     
     /**
+     * Returns the group of values from the specified key
+     * 
+     * @param mixed $Key
      * @return array
      */
     public function Get($Key)
@@ -46,6 +56,8 @@ class Lookup
     }
     
     /**
+     * Returns all the groups as an array
+     * 
      * @return array[]
      */
     public function AsArray()
@@ -58,6 +70,12 @@ class Lookup
         return $Groups;
     }
     
+    /**
+     * Returns whether there is a specified group
+     * 
+     * @param mixed $Key
+     * @return boolean
+     */
     public function Contains($Key) 
     {
         return $this->Dictionary->Contains($Key);

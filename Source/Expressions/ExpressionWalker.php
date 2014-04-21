@@ -3,6 +3,8 @@
 namespace Pinq\Expressions;
 
 /**
+ * Base class for traversing or manipulating an expression tree
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ExpressionWalker

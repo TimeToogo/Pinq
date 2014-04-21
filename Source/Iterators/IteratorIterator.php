@@ -2,6 +2,13 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Base class for wrapper iterators.
+ * The native implemenation was producing some weird results, I think it is
+ * related to http://blog.ircmaxell.com/2011/10/iteratoriterator-php-inconsistencies.html
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class IteratorIterator implements \Iterator
 {
     /**

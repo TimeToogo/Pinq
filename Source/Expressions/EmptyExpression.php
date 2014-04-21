@@ -3,11 +3,19 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * empty($I)
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class EmptyExpression extends Expression
 {
+    /**
+     * @var Expression
+     */
     private $ValueExpression;
+    
     public function __construct(Expression $ValueExpression)
     {
         $this->ValueExpression = $ValueExpression;

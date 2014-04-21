@@ -5,6 +5,13 @@ namespace Pinq\Providers\Caching;
 use \Pinq\Queries;
 use \Pinq\Queries\Requests;
 
+/**
+ * A caching request evaluator instance, the inner evaluators
+ * results will be cached and reused if an equivalent request is
+ * called again.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class RequestEvaluator extends Requests\RequestVisitor
 {
     /**
@@ -13,7 +20,7 @@ class RequestEvaluator extends Requests\RequestVisitor
     private $InnerRequestEvaluator;
     
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $MethodResultCache = [];
     

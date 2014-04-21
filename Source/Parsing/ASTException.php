@@ -2,6 +2,12 @@
 
 namespace Pinq\Parsing;
 
+/**
+ * Exception for errors while converting the AST into 
+ * an expression tree
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class ASTException extends InvalidFunctionException
 {
     const IfStatement = 'if(...)';

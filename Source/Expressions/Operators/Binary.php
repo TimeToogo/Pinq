@@ -3,7 +3,7 @@
 namespace Pinq\Expressions\Operators;
 
 /**
- * The class containing php binary operators
+ * The enum containing PHP binary operators
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */

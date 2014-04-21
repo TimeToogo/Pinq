@@ -5,9 +5,17 @@ namespace Pinq\Caching;
 use \Doctrine\Common\Cache\Cache;
 use \Pinq\FunctionExpressionTree;
 
+/**
+ * Adapter class for a doctring cache component that implements
+ * \Doctrine\Common\Cache\Cache
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class DoctrineFunctionCache implements IFunctionCache
 {    
     /**
+     * The doctrine cache implementation
+     * 
      * @var Cache 
      */
     private $DoctrineCache;

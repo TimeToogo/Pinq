@@ -4,6 +4,11 @@ namespace Pinq\Providers\Traversable;
 
 use \Pinq\Queries\Segments;
 
+/**
+ * Evaluates the query scope against the supplied traversable
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class ScopeEvaluator extends Segments\SegmentVisitor
 {
     /**
@@ -85,15 +90,15 @@ class ScopeEvaluator extends Segments\SegmentVisitor
     public function VisitJoin(Segments\Join $Query)
     {
         $this->Traversable = $this->GetJoin($Query)
-                ->On($Query->GetOnFunction())
-                ->To($Query->GetJoiningFunction());
+                ->On($Query->GetOnFunctionExpressionTree())
+                ->To($Query->GetJoiningFunctionExpressionTree());
     }
     
     public function VisitEqualityJoin(Segments\EqualityJoin $Query)
     {
         $this->Traversable = $this->GetJoin($Query)
-                ->OnEquality($Query->GetOuterKeyFunction(), $Query->GetInnerKeyFunction())
-                ->To($Query->GetJoiningFunction());
+                ->OnEquality($Query->GetOuterKeyFunctionExpressionTree(), $Query->GetInnerKeyFunctionExpressionTree())
+                ->To($Query->GetJoiningFunctionExpressionTree());
     }
     
     private function GetJoin(Segments\JoinBase $Query)

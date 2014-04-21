@@ -3,10 +3,12 @@
 namespace Pinq;
 
 /**
- * The root interface providing a fluent query API for a set of values.
+ * The root interface providing a fluent query API for a range of values.
  * 
  * Query calls must be immutable and return a new instance with every query call.
  * Queries should also be executed lazily upon iteration.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
 {

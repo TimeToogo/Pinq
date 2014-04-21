@@ -4,6 +4,12 @@ namespace Pinq\Queries\Segments;
 
 use \Pinq\FunctionExpressionTree;
 
+/**
+ * Query segment for ordering the values with the supplied functions
+ * and order directions
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class OrderBy extends Segment
 {
     /**

@@ -2,8 +2,17 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Base class for a set operation iterator, the other values
+ * are stored in a set which can be used to filter the resulting values
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 abstract class OperationIterator extends IteratorIterator
 {
+    /**
+     * @var \Traversable
+     */
     private $OtherIterator;
     
     /**

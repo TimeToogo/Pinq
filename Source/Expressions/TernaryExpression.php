@@ -3,12 +3,27 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * $I ? 1 : -1
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class TernaryExpression extends Expression
 {
+    /**
+     * @var Expression
+     */
     private $ConditionExpression;
+    
+    /**
+     * @var Expression
+     */
     private $IfTrueExpression;
+    
+    /**
+     * @var Expression
+     */
     private $IfFalseExpression;
 
     public function __construct(

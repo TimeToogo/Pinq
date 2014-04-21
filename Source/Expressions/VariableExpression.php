@@ -3,13 +3,19 @@
 namespace Pinq\Expressions;
 
 /**
- * Expression representing an unresolved value.
- *
+ * <code>
+ * $I
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class VariableExpression extends Expression
 {
+    /**
+     * @var Expression
+     */
     private $NameExpression;
+    
     public function __construct(Expression $NameExpression)
     {
         $this->NameExpression = $NameExpression;

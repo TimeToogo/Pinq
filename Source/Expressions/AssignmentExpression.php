@@ -3,15 +3,29 @@
 namespace Pinq\Expressions;
 
 /**
- * Expression representing an assignment to an entity property.
- *
+ * <code>
+ * $Variable += 5
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class AssignmentExpression extends Expression
 {
+    /**
+     * @var Expression
+     */
     private $AssignToExpression;
+    
+    /**
+     * @var int
+     */
     private $Operator;
+    
+    /**
+     * @var Expression
+     */
     private $AssignmentValueExpression;
+    
     public function __construct(Expression $AssignToExpression, $Operator, Expression $AssignmentValueExpression)
     {
         $this->AssignToExpression = $AssignToExpression;

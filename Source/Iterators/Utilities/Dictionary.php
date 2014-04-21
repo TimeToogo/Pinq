@@ -18,6 +18,8 @@ namespace Pinq\Iterators\Utilities;
  * array        - array tuple (no good way to hash an array identity)
  * resource     - array tuple with string cast array key (will become 'Resource id #{id}', guaranteed unique as per docs)
  * unknown type - array tuple (wtf, why does this exist)
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Dictionary implements \IteratorAggregate
 {

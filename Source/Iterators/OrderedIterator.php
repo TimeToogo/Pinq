@@ -2,6 +2,12 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Orders the values according to the supplied functions and directions
+ * using array_multisort
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class OrderedIterator extends LazyIterator
 {
     /**
@@ -53,8 +59,38 @@ class OrderedIterator extends LazyIterator
             unset($OrderColumnValues);
         }
 
-        \Pinq\Utilities::MultisortPreserveKeys($MultisortArguments, $Array);
+        self::MultisortPreserveKeys($MultisortArguments, $Array);
 
         return new \ArrayIterator($Array);
+    }
+    
+    private static function MultisortPreserveKeys(array $OrderArguments, array &$ArrayToSort)
+    {
+        $StringKeysArray = [];
+        foreach ($ArrayToSort as $Key => $Value) {
+            $StringKeysArray['a' . $Key] = $Value;
+        }
+        
+        if(!defined('HHVM_VERSION')) {
+            $OrderArguments[] =& $StringKeysArray;
+            call_user_func_array('array_multisort', $OrderArguments);
+        }
+        else {
+            //HHVM Compatibility: hhvm array_multisort wants all argument by ref?
+            $ReferencedOrderArguments = [];
+            foreach($OrderArguments as $Key => &$OrderArgument) {
+                $ReferencedOrderArguments[$Key] =& $OrderArgument;
+            }
+            $ReferencedOrderArguments[] =& $StringKeysArray;
+            
+            call_user_func_array('array_multisort', $ReferencedOrderArguments);
+        }
+        
+        $UnserializedKeyArray = [];
+        foreach ($StringKeysArray as $Key => $Value) {
+            $UnserializedKeyArray[substr($Key, 1)] = $Value;
+        }
+        
+        $ArrayToSort = $UnserializedKeyArray;
     }
 }

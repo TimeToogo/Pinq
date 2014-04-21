@@ -2,6 +2,11 @@
 
 namespace Pinq\Queries;
 
+/**
+ * Implementation of the IOperationQuery
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class OperationQuery extends Query implements IOperationQuery
 {
     /**

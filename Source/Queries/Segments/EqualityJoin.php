@@ -2,12 +2,36 @@
 
 namespace Pinq\Queries\Segments; 
 
+use \Pinq\FunctionExpressionTree;
+
+/**
+ * Query segment for an equality join base on a key select for the outer values
+ * an another for the inner values 
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class EqualityJoin extends JoinBase
 {
+    /**
+     * The outer key selector function
+     * 
+     * @var FunctionExpressionTree
+     */
     private $OuterKeyFunction;
+    
+    /**
+     * The inner key selector function
+     * 
+     * @var FunctionExpressionTree
+     */
     private $InnerKeyFunction;
 
-    public function __construct($Values, $IsGroupJoin, callable $OuterKeyFunction, callable $InnerKeyFunction, callable $JoiningFunction)
+    public function __construct(
+            $Values, 
+            $IsGroupJoin,
+            FunctionExpressionTree $OuterKeyFunction,
+            FunctionExpressionTree $InnerKeyFunction,
+            FunctionExpressionTree $JoiningFunction)
     {
         parent::__construct($Values, $IsGroupJoin, $JoiningFunction);
         $this->OuterKeyFunction = $OuterKeyFunction;
@@ -25,22 +49,27 @@ class EqualityJoin extends JoinBase
     }
 
     /**
-     * @return callable
+     * @return FunctionExpressionTree
      */
-    public function GetOuterKeyFunction()
+    public function GetOuterKeyFunctionExpressionTree()
     {
         return $this->OuterKeyFunction;
     }
 
     /**
-     * @return callable
+     * @return FunctionExpressionTree
      */
-    public function GetInnerKeyFunction()
+    public function GetInnerKeyFunctionExpressionTree()
     {
         return $this->InnerKeyFunction;
     }
     
-    public function Update($Values, $IsGroupJoin, callable $OuterKeyFunction, callable $InnerKeyFunction, callable $JoiningFunction)
+    public function Update(
+            $Values, 
+            $IsGroupJoin, 
+            FunctionExpressionTree $OuterKeyFunction, 
+            FunctionExpressionTree $InnerKeyFunction, 
+            FunctionExpressionTree $JoiningFunction)
     {
         if($this->Values === $Values
                 && $this->IsGroupJoin === $IsGroupJoin

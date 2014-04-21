@@ -2,6 +2,12 @@
 
 namespace Pinq\Queries;
 
+/**
+ * The interface for a operation query, one of the const types, they
+ * are all implemented as their own class in Operations namespace.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 interface IOperation
 {
     const Apply = 0;

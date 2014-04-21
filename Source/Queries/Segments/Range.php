@@ -2,6 +2,11 @@
 
 namespace Pinq\Queries\Segments; 
 
+/**
+ * Query segment for retrieving the specified range of values
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class Range extends Segment
 {
     private $RangeStart = 0;

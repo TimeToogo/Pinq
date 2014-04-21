@@ -3,10 +3,17 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * throw $I
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ThrowExpression extends Expression
 {
+    /**
+     * @var Expression
+     */
     private $ExceptionExpression;
 
     public function __construct(Expression $ExceptionExpression)

@@ -3,13 +3,29 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * Class::Method('foo')
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class StaticMethodCallExpression extends Expression
 {
+    /**
+     * @var Expression
+     */
     private $ClassExpression;
+    
+    /**
+     * @var Expression
+     */
     private $NameExpression;
+    
+    /**
+     * @var Expression[]
+     */
     private $ArgumentExpressions;
+    
     public function __construct(Expression $ClassExpression, Expression $NameExpression, array $ArgumentExpressions = [])
     {
         $this->ClassExpression = $ClassExpression;

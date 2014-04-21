@@ -2,6 +2,11 @@
 
 namespace Pinq\Queries;
 
+/**
+ * Implementation of the IScope
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class Scope implements IScope
 {
     /**

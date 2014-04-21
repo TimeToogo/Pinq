@@ -2,6 +2,11 @@
 
 namespace Pinq\Queries\Requests; 
 
+/**
+ * Request query for a the first value in the scope
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class First extends Request
 {
     public function GetType()

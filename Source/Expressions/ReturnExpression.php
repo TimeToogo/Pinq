@@ -3,10 +3,17 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * return true
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ReturnExpression extends Expression
 {
+    /**
+     * @var Expression
+     */
     private $ReturnValueExpression;
 
     public function __construct(Expression $ReturnValueExpression = null)

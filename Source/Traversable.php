@@ -3,22 +3,29 @@
 namespace Pinq;
 
 /**
- * An in-memory implementation for the traversable query api.
- * Making use of iterators to acheive lazy query execution.
+ * The standard traversable class, fully implements the traversable API
+ * using iterator to achieve lazy evaluation
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Traversable implements \Pinq\ITraversable, \Serializable
 {
     /**
+     * The current iterator for the traversable
+     * 
      * @var \Iterator 
      */
     protected $ValuesIterator;
     
     public function __construct($Values = [])
     {
-        $this->ValuesIterator = is_array($Values) ? new \ArrayIterator($Values) : $Values;
+        $this->ValuesIterator = Utilities::ToIterator($Values);
     }
     
     /**
+     * Constructs a new traversable object from the supplied values
+     * 
+     * @param array|\Traversable $Values The values
      * @return static
      */
     public static function From($Values)

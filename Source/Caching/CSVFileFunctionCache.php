@@ -5,7 +5,10 @@ namespace Pinq\Caching;
 use \Pinq\FunctionExpressionTree;
 
 /**
- * Stores the serialized expression trees in a single file in a csv format.
+ * Cache implementation for storing the serialized expression trees
+ * in a single file in a csv format, not very good for concurrency
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 class CSVFileFunctionCache implements IFunctionCache
 {

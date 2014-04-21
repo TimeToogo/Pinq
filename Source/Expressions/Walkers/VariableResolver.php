@@ -15,13 +15,24 @@ use \Pinq\Expressions as O;
  */
 class VariableResolver extends O\ExpressionWalker
 {
+    /**
+     * The array containing the variable name and the value to expression
+     * to replace it with
+     * 
+     * @var array<string, O\Expression>
+     */
     private $VariableExpressionMap = [];
 
     public function __construct(array $VariableExpressionMap = [])
     {
         $this->VariableExpressionMap = $VariableExpressionMap;
     }
-
+    
+    /**
+     * Sets which variables to replace with what
+     * 
+     * @param array<string, O\Expression> $VariableExpressionMap
+     */
     public function SetVariableExpressionMap(array $VariableExpressionMap)
     {
         $this->VariableExpressionMap = $VariableExpressionMap;

@@ -2,6 +2,11 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Iterates over a specified range of the inner values.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class RangeIterator extends IteratorIterator
 {
     /**

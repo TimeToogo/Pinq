@@ -3,13 +3,22 @@
 namespace Pinq\Expressions;
 
 /**
- * Expression representing the instantiating of a class.
- *
+ * <code>
+ * new \stdClass()
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class NewExpression extends Expression
 {
+    /**
+     * @var Expression
+     */
     private $ClassTypeExpression;
+    
+    /**
+     * @var Expression[]
+     */
     private $ArgumentExpressions;
 
     public function __construct(Expression $ClassTypeExpression, array $ArgumentExpressions = [])

@@ -4,6 +4,12 @@ namespace Pinq\Caching;
 
 use \Pinq\FunctionExpressionTree;
 
+/**
+ * The API for a cache implementation to store the expression trees
+ * of parsed functions.
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 interface IFunctionCache
 {
     /**

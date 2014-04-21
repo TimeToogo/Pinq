@@ -4,6 +4,12 @@ namespace Pinq\Parsing\PHPParser\Visitors;
 
 use \Pinq\Parsing\PHPParser\PHPParserResolvedValueNode;
 
+/**
+ * Replaces all applicable nodes with a custom constance value node,
+ * to be converted simpler in the AST class.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class ConstantValueNodeReplacerVisitor extends \PHPParser_NodeVisitorAbstract
 {
     public function leaveNode(\PHPParser_Node $Node)

@@ -7,10 +7,22 @@ use \Pinq\Expressions\Expression;
 use \Pinq\Expressions\Operators;
 use \Pinq\Parsing\ASTException;
 
+/**
+ * Converts the PHP-Parser nodes into the equivalent Pinq
+ * expression tree.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class AST
 {
+    /**
+     * @var \PHPParser_Node[]
+     */
     private $Nodes = [];
-
+    
+    /**
+     * @var Visitors\ConstantValueNodeReplacerVisitor
+     */
     private $ConstantValueNodeReplacer;
 
     public function __construct(array $Nodes)
@@ -21,6 +33,9 @@ class AST
         $this->ResolveConstantValues();
     }
 
+    /**
+     * @return void
+     */
     private function InitializeVisitors()
     {
         $this->ConstantValueNodeReplacer = new \PHPParser_NodeTraverser();
@@ -29,17 +44,28 @@ class AST
 
     /**
      * Replaces all constant value nodes to the PHPParserResolvedValueNode for easy parsing.
+     * 
+     * @return void
      */
     private function ResolveConstantValues()
     {
         $this->Nodes = $this->ConstantValueNodeReplacer->traverse($this->Nodes);
     }
-
+    
+    /**
+     * Parses the nodes into the equivalent expression tree
+     * 
+     * @return Expression[]
+     */
     public function GetExpressions()
     {
         return $this->ParseNodes($this->Nodes);
     }
-
+    
+    /**
+     * @param \PHPParser_Node[] $Nodes
+     * @return Expression[]
+     */
     private function ParseNodes(array $Nodes)
     {
         return array_map(function ($Node) { return $this->ParseNode($Node); }, $Nodes);
@@ -70,7 +96,11 @@ class AST
                         get_class($Node));
         }
     }
-
+    
+    /**
+     * @param mixed $Value The resolved value
+     * @return O\ValueExpression
+     */
     private function ParseResolvedValue($Value)
     {
         return Expression::Value($Value);

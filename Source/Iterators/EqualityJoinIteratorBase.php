@@ -2,6 +2,15 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Base class for a join iterator with an inner function whose result must be equal
+ * to that of the outer function.
+ * Because of this, the inner values are organized into a Lookup where they are keyed by the 
+ * inner function. The outer function is then run and the resulting key is searched for in
+ * the lookup to retrieve the matching values.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 abstract class EqualityJoinIteratorBase extends JoinIteratorBase
 {    
     /**

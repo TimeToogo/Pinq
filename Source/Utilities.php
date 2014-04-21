@@ -4,20 +4,43 @@ namespace Pinq;
 
 DEFINE('IS_PHP_55', version_compare(PHP_VERSION, '5.5', '>='));
 
+/**
+ * General utility class providing common and misc behaviour
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 final class Utilities
 {
     private function __construct() { }
     
+    /**
+     * Returns the type or class of the supplied function
+     * 
+     * @param mixed $Value The value
+     * @return string The type or class
+     */
     public static function GetTypeOrClass($Value)
     {
         return is_object($Value) ? get_class($Value) : gettype($Value);
     }
     
+    /**
+     * Returns whether the value is iterable
+     * 
+     * @param mixed $Value The value
+     * @return boolean Whether the value is iterable
+     */
     public static function IsIterable($Value)
     {
         return $Value instanceof \Traversable || is_array($Value);
     }
     
+    /**
+     * Returns the iterator as an array
+     * 
+     * @param \Traversable $Iterator The iterator value
+     * @return array
+     */
     public static function ToArray(\Traversable $Iterator)
     {
         if($Iterator instanceof \ArrayIterator || $Iterator instanceof \ArrayObject) {
@@ -45,7 +68,11 @@ final class Utilities
     }
     
     /**
+     * Returns the values as an iterator
+     * 
+     * @param array|\Traversable $TraversableOrArray The value
      * @return \Iterator
+     * @throws PinqException If the value is not a array nor \Traversable
      */
     public static function ToIterator($TraversableOrArray)
     {
@@ -67,36 +94,17 @@ final class Utilities
         }
     }
     
-    public static function MultisortPreserveKeys(array $OrderArguments, array &$ArrayToSort)
-    {
-        $StringKeysArray = [];
-        foreach ($ArrayToSort as $Key => $Value) {
-            $StringKeysArray['a' . $Key] = $Value;
-        }
-        
-        if(!defined('HHVM_VERSION')) {
-            $OrderArguments[] =& $StringKeysArray;
-            call_user_func_array('array_multisort', $OrderArguments);
-        }
-        else {
-            //HHVM Compatibility: hhvm array_multisort wants all argument by ref?
-            $ReferencedOrderArguments = [];
-            foreach($OrderArguments as $Key => &$OrderArgument) {
-                $ReferencedOrderArguments[$Key] =& $OrderArgument;
-            }
-            $ReferencedOrderArguments[] =& $StringKeysArray;
-            
-            call_user_func_array('array_multisort', $ReferencedOrderArguments);
-        }
-        
-        $UnserializedKeyArray = [];
-        foreach ($StringKeysArray as $Key => $Value) {
-            $UnserializedKeyArray[substr($Key, 1)] = $Value;
-        }
-        
-        $ArrayToSort = $UnserializedKeyArray;
-    }
-    
+    /**
+     * Returns whether the supplied name is cosidered normal name syntax
+     * and can be used plainly in code.
+     * 
+     * Example:
+     * 'foo' -> yes: $foo
+     * 'foo bar' -> no: ${'foo bar'}
+     * 
+     * @param string $Name The field, function, method or variable name
+     * @return boolean
+     */
     public static function IsNormalSyntaxName($Name) 
     {
         return (bool)preg_match('/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/', $Name);

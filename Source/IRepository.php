@@ -3,7 +3,9 @@
 namespace Pinq;
 
 /**
- * The repository allows traversable query and mutable collection api, on an external provider.
+ * The repository provides the mutable collection API on a queryable.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface IRepository extends IQueryable, ICollection
 {

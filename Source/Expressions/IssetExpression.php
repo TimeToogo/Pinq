@@ -3,11 +3,19 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * isset($I, $B)
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class IssetExpression extends Expression
 {
+    /**
+     * @var Expression[]
+     */
     private $ValueExpressions;
+    
     public function __construct(array $ValueExpressions)
     {
         if(count($ValueExpressions) === 0) {

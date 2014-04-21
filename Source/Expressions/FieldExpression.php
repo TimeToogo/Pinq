@@ -3,10 +3,17 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * $I->Field
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class FieldExpression extends ObjectOperationExpression
 {
+    /**
+     * @var Expression
+     */
     private $NameExpression;
 
     public function __construct(Expression $ObjectValueExpression, Expression $NameExpression)

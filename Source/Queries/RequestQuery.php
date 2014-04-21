@@ -2,6 +2,11 @@
 
 namespace Pinq\Queries;
 
+/**
+ * Implementation of the IRequestQuery
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class RequestQuery extends Query implements IRequestQuery
 {
     /**

@@ -2,6 +2,11 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Groups the values from the supplied grouping function(s)
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class GroupedIterator extends LazyIterator
 {
     /**

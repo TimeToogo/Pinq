@@ -11,14 +11,29 @@ use \Pinq\Expressions as O;
  */
 class UnresolvedVariableFinder extends O\ExpressionWalker
 {
+    /**
+     * @var string[] 
+     */
     private $VariablesToIgnore = [];
+    
+    /**
+     * @var string[] 
+     */
     private $UnresolvedVariables = [];
-
+    
+    /**
+     * @return void
+     */
     public function ResetUnresolvedVariables()
     {
         $this->UnresolvedVariables = [];
     }
 
+    /**
+     * The unresolved variables
+     * 
+     * @return string[]
+     */
     public function GetUnresolvedVariables()
     {
         return $this->UnresolvedVariables;

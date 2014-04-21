@@ -3,13 +3,30 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * $One + $Two;
+ * $Five . 'foo';
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class BinaryOperationExpression extends Expression
 {
+    /**
+     * @var Expression
+     */
     private $LeftOperandExpression;
+    
+    /**
+     * @var int
+     */
     private $Operator;
+    
+    /**
+     * @var Expression
+     */
     private $RightOperandExpression;
+    
     public function __construct(Expression $LeftOperandExpression, $Operator, Expression $RightOperandExpression)
     {
         $this->LeftOperandExpression = $LeftOperandExpression;

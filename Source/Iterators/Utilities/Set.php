@@ -2,16 +2,20 @@
 
 namespace Pinq\Iterators\Utilities;
 
+/**
+ * Represents set of unique values.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class Set implements \IteratorAggregate
 {
     /**
-     * @var Dictionary
+     * The dictionary containing the unique values as keys
+     * 
+     * @var Dictionary<mixed, true>
      */
     private $Dictionary;
     
-    /**
-     * @param \Traversable $Values
-     */
     public function __construct($Values = null)
     {
         $this->Dictionary = new Dictionary();
@@ -20,11 +24,24 @@ class Set implements \IteratorAggregate
         }
     }
     
+    /**
+     * Returns whether the values in contained in the set
+     * 
+     * @param mixed $Value
+     * @return boolean 
+     */
     public function Contains($Value) 
     {
         return $this->Dictionary->Contains($Value);
     }
 
+    /**
+     * Attempts to add the value to the set, will fail if the value
+     * is already contained in the set
+     * 
+     * @param mixed $Value
+     * @return boolean Whether the value was successfully added
+     */
     public function Add($Value) 
     {
         if($this->Dictionary->Contains($Value)) {
@@ -35,6 +52,12 @@ class Set implements \IteratorAggregate
         return true;
     }
     
+    /**
+     * Attempts to add a range of the value to the set
+     * 
+     * @param array|\Traversable $Values
+     * @return void
+     */
     public function AddRange($Values) 
     {
         foreach ($Values as $Value) {
@@ -42,6 +65,14 @@ class Set implements \IteratorAggregate
         }
     }
     
+
+    /**
+     * Attempts to remove the value from the set, will fail if the value
+     * is not contained in the set
+     * 
+     * @param mixed $Value
+     * @return boolean Whether the value was successfully removed
+     */
     public function Remove($Value) 
     {
         if(!$this->Dictionary->Contains($Value)) {
@@ -52,6 +83,12 @@ class Set implements \IteratorAggregate
         return true;
     }
     
+    /**
+     * Attempts to remove a range of the value to the set
+     * 
+     * @param array|\Traversable $Values
+     * @return void
+     */
     public function RemoveRange($Values) 
     {
         foreach ($Values as $Value) {

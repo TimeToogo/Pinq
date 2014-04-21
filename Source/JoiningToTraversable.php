@@ -2,6 +2,11 @@
 
 namespace Pinq;
 
+/**
+ * Implements the result API for a join / group join traversable.
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class JoiningToTraversable implements IJoiningToTraversable
 {
     /**

@@ -38,6 +38,8 @@ abstract class Expression implements \Serializable
     }
 
     /**
+     * Compiles into equivalent PHP code
+     * 
      * @return string
      */
     final public function Compile()
@@ -55,7 +57,7 @@ abstract class Expression implements \Serializable
     }
     
     /**
-     * @return array
+     * @return string[]
      */
     final public static function CompileAll(array $Expressions)
     {

@@ -2,6 +2,15 @@
 
 namespace Pinq\Queries\Segments;
 
+/**
+ * The segment visitor is a utility class that will visit any
+ * segment in a respective method.
+ * 
+ * This is used by the query providers to as to evaluate the
+ * scope of the query with the specified query segments
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class SegmentVisitor extends SegmentWalker
 {
     final public function WalkOperation(Operation $Query)

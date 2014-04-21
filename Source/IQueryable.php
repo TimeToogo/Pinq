@@ -3,9 +3,11 @@
 namespace Pinq;
 
 /**
- * The queryable allows traversable query api, on an exteral query provider.
+ * The queryable provides the traversable query API, on an exteral query provider.
  * Supplied functions are converted to expression trees and are used to execute
- * equivalent querys on an external source.
+ * equivalent querys on the external source.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface IQueryable extends ITraversable
 {

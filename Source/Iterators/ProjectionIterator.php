@@ -2,6 +2,11 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Returns the values / keys projected by the supplied function
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class ProjectionIterator extends IteratorIterator
 {
     /**

@@ -4,6 +4,11 @@ namespace Pinq\Queries\Requests;
 
 use \Pinq\FunctionExpressionTree;
 
+/**
+ * Request query for a custom aggregate using the supplied function
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class Aggregate extends Request
 {
     /**

@@ -4,6 +4,11 @@ namespace Pinq\Queries\Segments;
 
 use \Pinq\FunctionExpressionTree;
 
+/**
+ * Base class for a query segment with an function
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 abstract class ExpressionSegment extends Segment
 {
     /**

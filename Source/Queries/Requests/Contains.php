@@ -2,6 +2,12 @@
 
 namespace Pinq\Queries\Requests; 
 
+/**
+ * Request query for a boolean of whether the supplied value
+ * is contained within the scope
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class Contains extends Request
 {
     private $Value;

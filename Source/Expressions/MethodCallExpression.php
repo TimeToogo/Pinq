@@ -3,11 +3,22 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * $I->Method($One, true)
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class MethodCallExpression extends ObjectOperationExpression
 {
+    /**
+     * @var Expression
+     */
     private $NameExpression;
+    
+    /**
+     * @var Expression[]
+     */
     private $ArgumentExpressions;
 
     public function __construct(Expression $ObjectValueExpression, Expression $NameExpression, array $ArgumentExpressions = [])

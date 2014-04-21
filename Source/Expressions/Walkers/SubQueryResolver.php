@@ -5,6 +5,11 @@ namespace Pinq\Expressions\Walkers;
 use \Pinq\Queries;
 use \Pinq\Expressions as O;
 
+/**
+ * Mock implementation, all supplied functions should already be expression trees
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class FunctionToExpressionTreeConverter implements \Pinq\Parsing\IFunctionToExpressionTreeConverter
 {
     public function Convert(callable $Function)
@@ -13,6 +18,12 @@ class FunctionToExpressionTreeConverter implements \Pinq\Parsing\IFunctionToExpr
     }
 }
 
+/**
+ * Mock implementation, used to get the request query from the queryable method calls,
+ * it stores the request and can be retrieved for resolving the sub query expression
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class QueryProvider implements \Pinq\Providers\IQueryProvider 
 {
     private $Query;
@@ -39,7 +50,7 @@ class QueryProvider implements \Pinq\Providers\IQueryProvider
     }
     
     /**
-     * @return Queries\IRequestQuery|mill
+     * @return Queries\IRequestQuery|null
      */
     public function GetAndResetQuery() 
     {
@@ -51,16 +62,22 @@ class QueryProvider implements \Pinq\Providers\IQueryProvider
 }
 
 /**
- * Resolves all method call expression to their equivalent sub query expression. 
+ * Resolves the appropriate method call expression to their equivalent sub query expressions. 
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 class SubQueryResolver extends O\ExpressionWalker
 {
     /**
+     * The mock query provider to store the query
+     * 
      * @var QueryProvider
      */
     private $QueryProvider;
 
     /**
+     * The filter function determine the appropriate origin expressions
+     * 
      * @var callable|null
      */
     private $Filter;
@@ -98,7 +115,7 @@ class SubQueryResolver extends O\ExpressionWalker
     }
     
     /**
-     * @param \Pinq\Expressions\MethodCallExpression $MethodCallExpression
+     * @param O\MethodCallExpression $MethodCallExpression
      * @param int $MethodCallDepth
      * @return O\SubQueryExpression|null
      */

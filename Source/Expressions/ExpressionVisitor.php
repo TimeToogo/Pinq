@@ -3,6 +3,10 @@
 namespace Pinq\Expressions;
 
 /**
+ * Base class for traversing an expression tree, only the top
+ * expression will be visisted, the subclass should implement such
+ * that is visits all the appropriate expressions
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ExpressionVisitor extends ExpressionWalker

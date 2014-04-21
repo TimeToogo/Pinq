@@ -2,6 +2,11 @@
 
 namespace Pinq;
 
+/**
+ * Implements the subsequent ordering API for the traversable query.
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class OrderedTraversable extends Traversable implements IOrderedTraversable
 {
     /**

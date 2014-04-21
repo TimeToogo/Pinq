@@ -2,6 +2,12 @@
 
 namespace Pinq\Queries;
 
+/**
+ * The query scope. This contains many query segments which
+ * in order represent the scope of the query to be loaded/executed.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 interface IScope extends \IteratorAggregate
 {
     /**

@@ -2,6 +2,11 @@
 
 namespace Pinq;
 
+/**
+ * Base exception for all exception in the Pinq library
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class PinqException extends \Exception
 {
     /**
@@ -35,7 +40,7 @@ class PinqException extends \Exception
     public static function InvalidIterable($Method, $Value)
     {
         return new self(
-                    'Invalid argument for %s: expecting \Traversable or array, %s given',
+                    'Invalid argument for %s: expecting array or \Traversable, %s given',
                     $Method,
                     \Pinq\Utilities::GetTypeOrClass($Value));
     }

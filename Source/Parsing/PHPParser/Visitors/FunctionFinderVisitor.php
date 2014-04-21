@@ -5,6 +5,8 @@ namespace Pinq\Parsing\PHPParser\Visitors;
 /**
  * Attempts to locate a function node from the supplied function reflection.
  * If two ambigous function are found, it throws an exception.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 class FunctionFinderVisitor extends \PHPParser_NodeVisitorAbstract
 {
@@ -19,7 +21,14 @@ class FunctionFinderVisitor extends \PHPParser_NodeVisitorAbstract
      */
     private $FunctionNodes = [];
     
+    /**
+     * @var string|null
+     */
     private $CurrentNamespace;
+    
+    /**
+     * @var string|null
+     */
     private $CurrentClass;    
     
     public function beforeTraverse(array $Nodes)

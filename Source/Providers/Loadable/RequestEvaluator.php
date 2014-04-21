@@ -6,6 +6,12 @@ use \Pinq\Queries;
 use \Pinq\Queries\Requests;
 use \Pinq\Providers\Traversable;
 
+/**
+ * Base request evaluator for request evaluator in which the values
+ * can be loaded and once loaded, the requests can be performed in memory.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 abstract class RequestEvaluator extends Requests\RequestVisitor
 {
     /**

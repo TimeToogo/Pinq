@@ -3,13 +3,23 @@
 namespace Pinq\Expressions;
 
 /**
- * Expression representing a cast operation.
- *
+ * <code>
+ * (string)$I
+ * </code>
+ * 
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class CastExpression extends Expression
 {
+    /**
+     * @var int
+     */
     private $CastType;
+    
+    /**
+     * @var Expression
+     */
     private $CastValueExpression;
 
     public function __construct($CastType, Expression $CastValueExpression)

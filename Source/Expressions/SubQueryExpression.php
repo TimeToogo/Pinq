@@ -5,6 +5,10 @@ namespace Pinq\Expressions;
 use \Pinq\Queries;
 
 /**
+ * <code>
+ * $Traversable->Where(function ($I) { return $I > 5 })->Average();
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class SubQueryExpression extends TraversalExpression

@@ -4,6 +4,13 @@ namespace Pinq\Queries\Segments;
 
 use \Pinq\Queries\IScope;
 
+/**
+ * The segment walker is a utility class that will walk any
+ * segment in a respective method. This can be implemented such
+ * that it visitor or manipulates a query scope
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class SegmentWalker
 {
     /**

@@ -2,6 +2,11 @@
 
 namespace Pinq\Queries;
 
+/**
+ * Base implementation for the IQuery
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 abstract class Query implements IQuery
 {
     /**

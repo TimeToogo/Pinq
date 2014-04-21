@@ -3,13 +3,19 @@
 namespace Pinq\Expressions;
 
 /**
- * Expression representing a resolved value.
- *
+ * <code>
+ * 1, 'foo', [], null etc
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ValueExpression extends Expression
 {
+    /**
+     * @var mixed
+     */
     private $Value;
+    
     public function __construct($Value)
     {
         $this->Value = $Value;

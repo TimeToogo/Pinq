@@ -2,10 +2,28 @@
 
 namespace Pinq\Expressions;
 
+/**
+ * <code>
+ * function ($I) { return $I + 5; }
+ * </code>
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class ClosureExpression extends Expression
 {
+    /**
+     * @var ParameterExpression[] 
+     */
     private $ParameterExpressions;
+    
+    /**
+     * @var string[] 
+     */
     private $UsedVariables;
+    
+    /**
+     * @var Expression[] 
+     */
     private $BodyExpressions;
 
     public function __construct(array $ParameterExpressions, array $UsedVariables, array $BodyExpressions)
@@ -25,7 +43,10 @@ class ClosureExpression extends Expression
     {
         return $this->ParameterExpressions;
     }
-
+    
+    /**
+     * @return string[]
+     */
     public function GetUsedVariableNames()
     {
         return $this->UsedVariables;

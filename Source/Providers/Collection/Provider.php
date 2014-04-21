@@ -4,6 +4,12 @@ namespace Pinq\Providers\Collection;
 
 use \Pinq\Queries;
 
+/**
+ * Repository provider for evalating query of the supplied collection instance,
+ * this is useful for mocking a repository against an in memory collection.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class Provider extends \Pinq\Providers\RepositoryProvider
 {
     private $Collection;

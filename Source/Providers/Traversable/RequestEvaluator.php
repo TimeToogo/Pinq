@@ -4,6 +4,11 @@ namespace Pinq\Providers\Traversable;
 
 use \Pinq\Queries\Requests;
 
+/**
+ * Request evaluator for performing queries on the supplied traversable instance.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class RequestEvaluator extends Requests\RequestVisitor
 {
     /**

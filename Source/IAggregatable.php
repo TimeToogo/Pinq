@@ -3,7 +3,10 @@
 namespace Pinq;
 
 /**
- * Aggregating functionality interface
+ * The API defining all the aggregate results,
+ * mainly exists for organizational purposes
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface IAggregatable extends \Countable 
 {

@@ -2,6 +2,12 @@
 
 namespace Pinq\Queries;
 
+/**
+ * The interface for a request query, one of the const types, they
+ * are all implemented as their own class in Requests namespace.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 interface IRequest
 {
     const Values = 0;

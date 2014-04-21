@@ -4,9 +4,16 @@ namespace Pinq\Caching;
 
 use \Pinq\FunctionExpressionTree;
 
+/**
+ * Adapter class for a cache that implements \ArrayAccess
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class ArrayAccessCache implements IFunctionCache
 {    
     /**
+     * The cache object implementing array access
+     * 
      * @var \ArrayAccess 
      */
     private $ArrayAccess;

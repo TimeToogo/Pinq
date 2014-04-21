@@ -2,8 +2,16 @@
 
 namespace Pinq\Iterators;
 
+/**
+ * Returns the values that satisfy the supplied predicate function
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class FilterIterator extends IteratorIterator
 {
+    /**
+     * @var callable
+     */
     private $Filter;
     
     public function __construct(\Traversable $Iterator, callable $Filter)

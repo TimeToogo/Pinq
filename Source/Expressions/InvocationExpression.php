@@ -3,10 +3,17 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * $I('foo')
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class InvocationExpression extends TraversalExpression
 {
+    /**
+     * @var Expression[]
+     */
     private $ArgumentExpressions;
 
     public function __construct(Expression $ValueExpression, array $ArgumentExpressions)

@@ -2,6 +2,12 @@
 
 namespace Pinq;
 
+/**
+ * The standard implementation for the grouped traversable API, 
+ * offering an addition method to specify multiple group bys
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
 class GroupedTraversable extends Traversable implements IGroupedTraversable
 {
     /**

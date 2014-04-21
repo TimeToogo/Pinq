@@ -3,12 +3,24 @@
 namespace Pinq\Expressions;
 
 /**
+ * <code>
+ * strlen($I)
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class FunctionCallExpression extends Expression
 {
+    /**
+     * @var Expression
+     */
     private $NameExpression;
+    
+    /**
+     * @var Expression[]
+     */
     private $ArgumentExpressions;
+    
     public function __construct(Expression $NameExpression, array $ArgumentExpressions = [])
     {
         $this->NameExpression = $NameExpression;

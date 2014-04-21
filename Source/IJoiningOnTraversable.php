@@ -3,7 +3,9 @@
 namespace Pinq;
 
 /**
- * This iterface defines the filter options available to a joining traversable.
+ * This API for the filter options available to a joining traversable
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface IJoiningOnTraversable
 {

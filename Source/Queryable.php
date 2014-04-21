@@ -6,29 +6,38 @@ use \Pinq\Queries;
 use \Pinq\Queries\Requests;
 use \Pinq\Queries\Segments;
 
-
 /**
- * Implementation for allowing the traversable query api 
+ * The standard queryable class, fully implements the queryable API
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
 {
     /**
+     * The query provider implementation for this queryable
+     * 
      * @var Providers\IQueryProvider
      */
     protected $Provider;
     
     /**
+     * The function converter from the query provider
+     * 
      * @var Parsing\IFunctionToExpressionTreeConverter
      */
     protected $FunctiontConverter;
         
     /**
+     * The query scope of this instance
+     * 
      * @var Queries\IScope
      */
     protected $Scope;
     
     /**
-     * @var \Iterator 
+     * The underlying values iterator if loaded
+     * 
+     * @var \Iterator|null
      */
     protected $ValuesIterator = null;
 
@@ -39,21 +48,46 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
         $this->Scope = $Scope ?: new Queries\Scope([]);
     }
     
+    /**
+     * Returns a new queryable instance with the supplied query segment
+     * appended to the current scope
+     * 
+     * @param Queries\ISegment $Segment The new segment
+     * @return IQueryable
+     */
     final protected function NewSegment(Queries\ISegment $Segment)
     {
         return $this->Provider->CreateQueryable($this->Scope->Append($Segment));
     }
     
+    /**
+     * Returns a new queryable instance with the supplied query segment
+     * updating the last segment of the current scope
+     * 
+     * @param Queries\ISegment $Segment The new segment
+     * @return IQueryable
+     */
     final protected function UpdateLastSegment(Queries\ISegment $Segment)
     {
         return $this->Provider->CreateQueryable($this->Scope->UpdateLast($Segment));
     }
     
+    /**
+     * Returns the requested query from the query provider.
+     * 
+     * @param Queries\IRequest $Request The request to load
+     * @return mixed The result of the request query
+     */
     private function LoadQuery(Queries\IRequest $Request) 
     {
         return $this->Provider->Load(new Queries\RequestQuery($this->Scope, $Request));
     }
     
+    /**
+     * Loads the values iterator if not already load
+     * 
+     * @return void
+     */
     private function Load() {
         if($this->ValuesIterator === null) {
             $this->ValuesIterator = $this->LoadQuery(new Requests\Values());
