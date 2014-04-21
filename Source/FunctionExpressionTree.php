@@ -248,7 +248,7 @@ class FunctionExpressionTree implements \Serializable
     final public function GetFirstResolvedReturnValueExpression()
     {
         if(count($this->ReturnValueExpressions) === 0) {
-            throw Parsing\InvalidFunctionException::MustContainValidReturnExpression(Parsing\Reflection::FromCallable($this->CompiledFunction));
+            throw Parsing\InvalidFunctionException::MustContainValidReturnExpression(Parsing\Reflection::FromCallable($this->GetCompiledFunction()));
         }
         return $this->ReturnValueExpressions[0];
     }
