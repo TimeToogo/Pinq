@@ -6,15 +6,15 @@
 
     <testsuites>
       <testsuite name="Entirety">
-        <directory>./</directory>
+        <directory>./Tests/</directory>
       </testsuite>
     </testsuites>
     
     <filter>
         <whitelist>
-            <directory suffix=".php">../Source/</directory>
+            <directory suffix=".php">./Source/</directory>
             <exclude>
-                <directory>../vendor/</directory>
+                <directory>./vendor/</directory>
             </exclude>
         </whitelist>
     </filter>   
