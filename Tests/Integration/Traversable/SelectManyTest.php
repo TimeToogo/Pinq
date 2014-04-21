@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class SelectManyTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return $Traversable->SelectMany(function () { return []; });
+    }
+    
     /**
      * @dataProvider Everything
      */

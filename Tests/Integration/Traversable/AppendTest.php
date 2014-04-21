@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class AppendTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return $Traversable->Append([]);
+    }
+    
     /**
      * @dataProvider Everything
      */

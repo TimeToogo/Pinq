@@ -53,13 +53,15 @@ class Dictionary implements \IteratorAggregate
             case 'integer':
             case 'boolean':
             case 'object':
-                return $TypeStorage[$Key];
+                return isset($TypeStorage[$Key]) ? $TypeStorage[$Key] : null;
                 
             case 'double':
-                return $TypeStorage[(string)$Key];
+                $StringKey = (string)$Key;
+                return isset($TypeStorage[$StringKey]) ? $TypeStorage[$StringKey] : null;
                 
             case 'resource':
-                return $TypeStorage[(string)$Key][1];
+                $StringKey = (string)$Key;
+                return isset($TypeStorage[$StringKey][1]) ? $TypeStorage[$StringKey][1] : null;
             
             case 'array':
             case 'unknown type':

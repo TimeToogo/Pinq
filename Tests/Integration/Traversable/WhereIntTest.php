@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class WhereIntTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return $Traversable->WhereIn([]);
+    }
+    
     /**
      * @dataProvider Everything
      */

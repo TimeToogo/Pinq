@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class SliceTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return $Traversable->Slice(1, 2);
+    }
+    
     /**
      * @dataProvider Everything
      */

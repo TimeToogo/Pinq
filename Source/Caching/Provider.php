@@ -17,6 +17,11 @@ final class Provider
     private static $IsDevelopmentMode = false;
     
     /**
+     * @var boolean
+     */
+    private static $HasBeenCleared = false;
+    
+    /**
      * @var IFunctionCache|null
      */
     private static $CacheImplementation;
@@ -30,8 +35,9 @@ final class Provider
             self::$CacheImplementation = new NullCache();
         }
         
-        if(self::$IsDevelopmentMode) {
+        if(self::$IsDevelopmentMode && !self::$HasBeenCleared) {
             self::$CacheImplementation->Clear();
+            self::$HasBeenCleared = true;
         }
         
         return self::$CacheImplementation;
@@ -59,31 +65,37 @@ final class Provider
     public static function SetFileCache($FileName)
     {
         self::$CacheImplementation = new CSVFileFunctionCache($FileName);
+        self::$HasBeenCleared = false;
     }
     
     public static function SetDirectoryCache($Directory, $FileExtension = DirectoryFunctionCache::DefaultExtension)
     {
         self::$CacheImplementation = new DirectoryFunctionCache($Directory, $FileExtension);
+        self::$HasBeenCleared = false;
     }
     
     public static function SetDoctrineCache(\Doctrine\Common\Cache\Cache $Cache)
     {
         self::$CacheImplementation = new DoctrineFunctionCache($Cache);
+        self::$HasBeenCleared = false;
     }
     
     public static function SetArrayAccessCache(\ArrayAccess $Cache)
     {
         self::$CacheImplementation = new ArrayAccessCache($Cache);
+        self::$HasBeenCleared = false;
     }
     
     public static function SetCustomCache(IFunctionCache $Cache)
     {
         self::$CacheImplementation = $Cache;
+        self::$HasBeenCleared = false;
     }
     
     public static function RemoveCache()
     {
         self::$CacheImplementation = null;
+        self::$HasBeenCleared = false;
     }
 }
 

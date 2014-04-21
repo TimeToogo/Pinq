@@ -3,8 +3,7 @@
 namespace Pinq\Tests\Integration\Traversable;
 
 class FirstTest extends TraversableTest
-{
-    
+{    
     /**
      * @dataProvider OneToTen
      */

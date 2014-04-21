@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class OrderByTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return $Traversable->OrderByAscending(function () {});
+    }
+    
     /**
      * @dataProvider Everything
      */

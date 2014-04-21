@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class IndexByTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return $Traversable->IndexBy(function () {});
+    }
+    
     /**
      * @dataProvider Everything
      */

@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class DifferenceTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return $Traversable->Difference([]);
+    }
+    
     /**
      * @dataProvider Everything
      */

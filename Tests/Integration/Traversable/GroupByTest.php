@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class GroupByTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return $Traversable->GroupBy(function () {});
+    }
+    
     /**
      * @dataProvider Everything
      */

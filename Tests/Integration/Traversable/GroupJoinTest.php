@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class GroupJoinTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return $Traversable->GroupJoin([])->On(function ($I) {})->To(function ($K) {});
+    }
+    
     /**
      * @dataProvider Everything
      */

@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class ConstructionTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return \Pinq\Traversable::From($Traversable);
+    }
+    
     /**
      * @dataProvider Everything
      */

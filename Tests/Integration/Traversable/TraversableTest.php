@@ -6,7 +6,6 @@ class CustomException extends \Exception {}
 
 abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
 {
-    
     final protected function AssertThatExecutionIsDeferred(callable $TraversableQuery)
     {
         $Exception = new CustomException();
@@ -28,6 +27,29 @@ abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
         catch (CustomException $ThrownException) {
             $this->assertSame($Exception, $ThrownException);
         }
+    }
+    
+    /**
+     * @dataProvider Everything
+     */
+    final public function testThatReturnsNewInstance(\Pinq\ITraversable $Traversable, array $Data)
+    {
+        $ReturnedTraversable = $this->TestReturnsNewInstance($Traversable);
+        if($ReturnedTraversable === self::$Instance) {
+            return;
+        }
+        
+        $this->assertInstanceOf(\Pinq\ITraversable::ITraversableType, $ReturnedTraversable);
+        $this->assertNotSame($Traversable, $ReturnedTraversable);
+    }
+    private static $Instance;
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable) 
+    { 
+        if(self::$Instance === null) {
+            self::$Instance = new \stdClass();
+        }
+        
+        return self::$Instance;
     }
     
     

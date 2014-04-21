@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class ExceptTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return $Traversable->Except([]);
+    }
+    
     /**
      * @dataProvider Everything
      */

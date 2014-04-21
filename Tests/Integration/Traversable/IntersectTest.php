@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class IntersectTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return $Traversable->Intersect([]);
+    }
+    
     /**
      * @dataProvider Everything
      */

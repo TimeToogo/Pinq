@@ -4,6 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class UnionTest extends TraversableTest
 {
+    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    {
+        return $Traversable->Union([]);
+    }
+    
     /**
      * @dataProvider Everything
      */
