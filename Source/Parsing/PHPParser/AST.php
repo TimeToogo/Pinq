@@ -21,7 +21,7 @@ class AST
     private $Nodes = [];
     
     /**
-     * @var Visitors\ConstantValueNodeReplacerVisitor
+     * @var PHPParser_NodeTraverser
      */
     private $ConstantValueNodeReplacer;
 
