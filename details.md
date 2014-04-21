@@ -100,7 +100,7 @@ One could easily write the same using just the `ITraversable`:
 {% highlight php startinline %}
 $Values = \Pinq\Traversable::From(range(1, 10));
 
-$Values = $Values->Except(range(1, 5));
+$Values = $Values->Except(range(1, 4));
 
 foreach($Values as $Value) {
     //5, 6, 7, 8...
