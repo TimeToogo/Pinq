@@ -196,7 +196,7 @@ class Dictionary implements \IteratorAggregate
         return new \ArrayIterator(array_values(array_merge(
                 array_map('strval', array_keys($this->Storage['string'])),
                 array_keys($this->Storage['integer']),
-                array_map('boolval', array_keys($this->Storage['boolean'])),
+                array_map(function ($I) { return (bool)$I; }, array_keys($this->Storage['boolean'])),
                 array_map('doubleval', array_keys($this->Storage['double'])),
                 iterator_to_array($this->Storage['object'], false),
                 array_key_exists('NULL', $this->Storage) ? [null] : [],
