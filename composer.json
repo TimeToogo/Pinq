@@ -3,6 +3,7 @@
     "description": "PHP Integrated query - A real Linq for PHP",
     "keywords": ["collection", "query", "pinq"],
     "homepage": "http://www.github.com/TimeToogo/Pinq",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -10,17 +11,17 @@
             "email": "elliot@aanet.com.au"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
         "nikic/php-parser": "0.9.4"
     },
     "suggest": {
-        "doctrine/cache": "In-memory caching for parsed function (Recommended for optimal performance)"
+        "doctrine/cache": "In-memory caching components for parsed function (Recommended for optimal performance)"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
-        "satooshi/php-coveralls": "dev-master"
+        "satooshi/php-coveralls": "0.6.1"
     },
     "autoload": {
         "psr-4": { 
