@@ -140,11 +140,34 @@ parameters and body of the function. It has the following API:
  - `ResolveVariables` - Resolves the variables by name to their respective values
  - `Walk` - Walk the body expressions with the supplied `ExpressionWalker`
 
+Modifying an expression tree
+===============================
+
+To modify an expression tree, `ExpressionWalker`, This is designed to traverse an entire expression tree,
+contains a set of overridable methods, one for each type of expression. These can be 
+implemented to handle and `Update` any type of expression as desired.
+
+**Example**
+
+This expression walker will replace every variale's name with `'foo'`
+
+{% highlight php startinline %}
+use \Pinq\Expressions as O;
+
+class VariableNameReplacer extends O\ExpressionWalker
+{
+    public function WalkVariable(O\VariableExpression $Expression)
+    {
+        return $Expression->Update(O\Expression::Value('foo'));
+    }
+}
+{% endhighlight %}
+
+
 Interpreting an expression tree
 ===============================
 
-To interprete an expression tree, the are is a class, `ExpressionVisitor`, this extends the 
-`ExpressionWalker`, this class contains a set of overrides methods, one for each type of expression.
-This is designed to traverse an expression tree, visiting and handling every type of expression.
-Extending this class provides a versatile way to interprete an expression tree, this will become 
-necessary, when [implementing an `IQueryProvider`](query-provider.html).
+To interprete an expression tree, there is the `ExpressionVisitor`, which extends the `ExpressionWalker`.
+This class does should not return modified expression but instead is designed to be extended
+and provide a versatile way to interprete an expression tree, this will become necessary, 
+when [implementing an `IQueryProvider`](query-provider.html).
