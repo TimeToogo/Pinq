@@ -53,7 +53,6 @@ syntax is cool, but not only what Linq is about. Pinq aims to provide:
  - Full support for PHP closures and callable syntax (No magic strings)
  - And even building on the original Linq with offering an additional mutable query API
 
-
 Installation
 ============
 Add the package to your composer.json:
@@ -61,7 +60,7 @@ Add the package to your composer.json:
 ```json
 {
     "require": {
-        "timetoogo/pinq": "dev-master"
+        "timetoogo/pinq": "~1.0"
     }
 }
 ```
