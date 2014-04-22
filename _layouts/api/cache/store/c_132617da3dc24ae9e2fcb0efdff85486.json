@@ -1,0 +1,84 @@
+{
+    "name": "Pinq\\Parsing\\IFunctionToExpressionTreeConverter",
+    "line": 10,
+    "short_desc": "Facade for converting a function into the equivalent expression tree",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Parsing",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Parsing\\IFunctionToExpressionTreeConverter.php",
+    "hash": "230b469edcdf46d3486830819d17053d03ed2bd2",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": {
+        "Convert": {
+            "name": "Convert",
+            "line": 17,
+            "short_desc": "Converts a function to the equivalent expression tree.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Pinq\\FunctionExpressionTree",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 17,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

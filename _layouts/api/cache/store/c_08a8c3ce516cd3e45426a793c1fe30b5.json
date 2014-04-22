@@ -1,0 +1,167 @@
+{
+    "name": "Pinq\\Queries\\Requests\\Contains",
+    "line": 11,
+    "short_desc": "Request query for a boolean of whether the supplied value is contained within the scope",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Queries\\Requests",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Requests\\Contains.php",
+    "hash": "84fa335ed46019cbbef1150716af5065924fa261",
+    "parent": "Pinq\\Queries\\Requests\\Request",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 15,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Value": {
+                    "name": "Value",
+                    "line": 15,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "GetType": {
+            "name": "GetType",
+            "line": 20,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "int",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "GetValue": {
+            "name": "GetValue",
+            "line": 25,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "Traverse": {
+            "name": "Traverse",
+            "line": 30,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Visitor": {
+                    "name": "Visitor",
+                    "line": 30,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Queries\\Requests\\RequestVisitor",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "RequestVisitor",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

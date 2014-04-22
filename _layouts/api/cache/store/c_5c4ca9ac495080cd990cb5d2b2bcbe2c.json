@@ -1,0 +1,134 @@
+{
+    "name": "Pinq\\Parsing\\ASTException",
+    "line": 11,
+    "short_desc": "Exception for errors while converting the AST into  an expression tree",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Parsing",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Parsing\\ASTException.php",
+    "hash": "91786e0499ee8d8670b4d66211459835eba2fdad",
+    "parent": "Pinq\\Parsing\\InvalidFunctionException",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": {
+        "ContainsControlStructure": {
+            "name": "ContainsControlStructure",
+            "line": 22,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "ControlStrucuture": {
+                    "name": "ControlStrucuture",
+                    "line": 22,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "LineNumber": {
+                    "name": "LineNumber",
+                    "line": 22,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "IfStatement": {
+            "name": "IfStatement",
+            "line": 13,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "WhileLoop": {
+            "name": "WhileLoop",
+            "line": 14,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "DoWhileLoop": {
+            "name": "DoWhileLoop",
+            "line": 15,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "ForLoop": {
+            "name": "ForLoop",
+            "line": 16,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "ForeachLoop": {
+            "name": "ForeachLoop",
+            "line": 17,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "SwitchStatement": {
+            "name": "SwitchStatement",
+            "line": 18,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "GotoStatement": {
+            "name": "GotoStatement",
+            "line": 19,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "TryCatchStatement": {
+            "name": "TryCatchStatement",
+            "line": 20,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}

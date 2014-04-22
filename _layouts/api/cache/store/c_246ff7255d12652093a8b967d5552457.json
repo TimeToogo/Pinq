@@ -1,0 +1,111 @@
+{
+    "name": "Pinq\\Queries\\Operations\\Clear",
+    "line": 10,
+    "short_desc": "Operation query for clearing all values from the source",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Queries\\Operations",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Operations\\Clear.php",
+    "hash": "af89252f199222bbd078e4b53f673017aa086ad8",
+    "parent": "Pinq\\Queries\\Operations\\Operation",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": {
+        "GetType": {
+            "name": "GetType",
+            "line": 12,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "int",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "Traverse": {
+            "name": "Traverse",
+            "line": 17,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "void",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Visitor": {
+                    "name": "Visitor",
+                    "line": 17,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Queries\\Operations\\OperationVisitor",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "OperationVisitor",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

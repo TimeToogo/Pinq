@@ -4,11 +4,11 @@
       
 - name: Query API 
   url: /api.html
-  sub: 
-
-- name: Standard Classes
-  url: /classes.html
-  sub: 
+  sub: Standard query methods
+      
+- name: Full API 
+  url: /docs/
+  sub: Complete library documentation
   
 - name: Examples 
   url: /examples.html

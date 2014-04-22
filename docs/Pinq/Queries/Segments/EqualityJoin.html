@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Queries\Segments\EqualityJoin | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Pinq/Queries/Segments.html">Pinq\Queries\Segments</a>\EqualityJoin</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>EqualityJoin</strong>        extends <a href="../../../Pinq/Queries/Segments/JoinBase.html"><abbr title="Pinq\Queries\Segments\JoinBase">JoinBase</abbr></a></p>
+
+            <div class="description">
+            <p>Query segment for an equality join base on a key select for the outer values an another for the inner values</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>($Values, $IsGroupJoin, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $OuterKeyFunction, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $InnerKeyFunction, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $JoiningFunction)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_GetValues">GetValues</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Segments/JoinBase.html#method_GetValues"><abbr title="Pinq\Queries\Segments\JoinBase">JoinBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_IsGroupJoin">IsGroupJoin</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Segments/JoinBase.html#method_IsGroupJoin"><abbr title="Pinq\Queries\Segments\JoinBase">JoinBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_GetJoiningFunctionExpressionTree">GetJoiningFunctionExpressionTree</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Segments/JoinBase.html#method_GetJoiningFunctionExpressionTree"><abbr title="Pinq\Queries\Segments\JoinBase">JoinBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    int
+                </td>
+                <td class="last">
+                    <a href="#method_GetType">GetType</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_Traverse">Traverse</a>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $Walker)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_GetOuterKeyFunctionExpressionTree">GetOuterKeyFunctionExpressionTree</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_GetInnerKeyFunctionExpressionTree">GetInnerKeyFunctionExpressionTree</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_Update">Update</a>($Values, $IsGroupJoin, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $OuterKeyFunction, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $InnerKeyFunction, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $JoiningFunction)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 29</div>
+        <code>            public            
+    <strong>__construct</strong>($Values, $IsGroupJoin, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $OuterKeyFunction, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $InnerKeyFunction, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $JoiningFunction)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$Values</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$IsGroupJoin</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
+                <td>$OuterKeyFunction</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
+                <td>$InnerKeyFunction</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
+                <td>$JoiningFunction</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_GetValues">
+        <div class="location">in <a href="../../../Pinq/Queries/Segments/JoinBase.html#method_GetValues"><abbr title="Pinq\Queries\Segments\JoinBase">JoinBase</abbr></a> at line 44</div>
+        <code>final            public            array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+    <strong>GetValues</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_IsGroupJoin">
+        <div class="location">in <a href="../../../Pinq/Queries/Segments/JoinBase.html#method_IsGroupJoin"><abbr title="Pinq\Queries\Segments\JoinBase">JoinBase</abbr></a> at line 52</div>
+        <code>final            public            boolean
+    <strong>IsGroupJoin</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_GetJoiningFunctionExpressionTree">
+        <div class="location">in <a href="../../../Pinq/Queries/Segments/JoinBase.html#method_GetJoiningFunctionExpressionTree"><abbr title="Pinq\Queries\Segments\JoinBase">JoinBase</abbr></a> at line 60</div>
+        <code>final            public            <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>
+    <strong>GetJoiningFunctionExpressionTree</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_GetType">
+        <div class="location">at line 41</div>
+        <code>            public            int
+    <strong>GetType</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>int</td>
+            <td>The query type</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_Traverse">
+        <div class="location">at line 46</div>
+        <code>            public            <a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
+    <strong>Traverse</strong>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $Walker)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a></td>
+                <td>$Walker</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_GetOuterKeyFunctionExpressionTree">
+        <div class="location">at line 54</div>
+        <code>            public            <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>
+    <strong>GetOuterKeyFunctionExpressionTree</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_GetInnerKeyFunctionExpressionTree">
+        <div class="location">at line 62</div>
+        <code>            public            <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>
+    <strong>GetInnerKeyFunctionExpressionTree</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_Update">
+        <div class="location">at line 67</div>
+        <code>            public            
+    <strong>Update</strong>($Values, $IsGroupJoin, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $OuterKeyFunction, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $InnerKeyFunction, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $JoiningFunction)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$Values</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$IsGroupJoin</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
+                <td>$OuterKeyFunction</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
+                <td>$InnerKeyFunction</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
+                <td>$JoiningFunction</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

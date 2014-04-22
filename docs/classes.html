@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Classes | </title>
+                    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+                            </head>
+        <body id="overview">
+            <div class="header">
+        <ul>
+            <li><a href="classes.html">Classes</a></li>
+                            <li><a href="namespaces.html">Namespaces</a></li>
+                        <li><a href="interfaces.html">Interfaces</a></li>
+            <li><a href="traits.html">Traits</a></li>
+            <li><a href="doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <h1>Classes</h1>
+    </div>
+        <div class="content">
+                <table>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Caching/ArrayAccessCache.html" target="main"><abbr title="Pinq\Caching\ArrayAccessCache">Pinq\Caching\ArrayAccessCache</abbr></a>
+                                    </td>
+                <td>
+                    Adapter class for a cache that implements \ArrayAccess
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Caching/CSVFileFunctionCache.html" target="main"><abbr title="Pinq\Caching\CSVFileFunctionCache">Pinq\Caching\CSVFileFunctionCache</abbr></a>
+                                    </td>
+                <td>
+                    Cache implementation for storing the serialized expression trees in a single file in a csv format, not very good for concurrency
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Caching/DirectoryFunctionCache.html" target="main"><abbr title="Pinq\Caching\DirectoryFunctionCache">Pinq\Caching\DirectoryFunctionCache</abbr></a>
+                                    </td>
+                <td>
+                    Cache implementation for storing the serialized expression trees each in their own file in the specified directory
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Caching/DoctrineFunctionCache.html" target="main"><abbr title="Pinq\Caching\DoctrineFunctionCache">Pinq\Caching\DoctrineFunctionCache</abbr></a>
+                                    </td>
+                <td>
+                    Adapter class for a doctring cache component that implements \Doctrine\Common\Cache\Cache
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Caching/IFunctionCache.html" target="main"><abbr title="Pinq\Caching\IFunctionCache">Pinq\Caching\IFunctionCache</abbr></a>
+                    </em>                </td>
+                <td>
+                    The API for a cache implementation to store the expression trees of parsed functions.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Caching/NullCache.html" target="main"><abbr title="Pinq\Caching\NullCache">Pinq\Caching\NullCache</abbr></a>
+                                    </td>
+                <td>
+                    Used if no cache is configure, it will be wrapped in a second level cache so no need to do anything
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Caching/Provider.html" target="main"><abbr title="Pinq\Caching\Provider">Pinq\Caching\Provider</abbr></a>
+                                    </td>
+                <td>
+                    Static provider to configure and retrieve the cache implementation
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Caching/SecondLevelFunctionCache.html" target="main"><abbr title="Pinq\Caching\SecondLevelFunctionCache">Pinq\Caching\SecondLevelFunctionCache</abbr></a>
+                                    </td>
+                <td>
+                    Cache implementation that acts as second level cache for the supplied implementation
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Collection.html" target="main"><abbr title="Pinq\Collection">Pinq\Collection</abbr></a>
+                                    </td>
+                <td>
+                    The standard collection class, fully implements the collection API
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Direction.html" target="main"><abbr title="Pinq\Direction">Pinq\Direction</abbr></a>
+                                    </td>
+                <td>
+                    Enum for ordering direction
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/ArrayExpression.html" target="main"><abbr title="Pinq\Expressions\ArrayExpression">Pinq\Expressions\ArrayExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> [1, 2, 'test' => 4] </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/AssignmentExpression.html" target="main"><abbr title="Pinq\Expressions\AssignmentExpression">Pinq\Expressions\AssignmentExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> $Variable += 5 </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/BinaryOperationExpression.html" target="main"><abbr title="Pinq\Expressions\BinaryOperationExpression">Pinq\Expressions\BinaryOperationExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> $One + $Two; $Five .
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/CastExpression.html" target="main"><abbr title="Pinq\Expressions\CastExpression">Pinq\Expressions\CastExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> (string)$I </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/ClosureExpression.html" target="main"><abbr title="Pinq\Expressions\ClosureExpression">Pinq\Expressions\ClosureExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> function ($I) { return $I + 5; } </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/EmptyExpression.html" target="main"><abbr title="Pinq\Expressions\EmptyExpression">Pinq\Expressions\EmptyExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> empty($I) </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/Expression.html" target="main"><abbr title="Pinq\Expressions\Expression">Pinq\Expressions\Expression</abbr></a>
+                                    </td>
+                <td>
+                    The base class for object expressions.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/ExpressionVisitor.html" target="main"><abbr title="Pinq\Expressions\ExpressionVisitor">Pinq\Expressions\ExpressionVisitor</abbr></a>
+                                    </td>
+                <td>
+                    Base class for traversing an expression tree, only the top expression will be visisted, the subclass should implement such that is visits all the appropriate expressions
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/ExpressionWalker.html" target="main"><abbr title="Pinq\Expressions\ExpressionWalker">Pinq\Expressions\ExpressionWalker</abbr></a>
+                                    </td>
+                <td>
+                    Base class for traversing or manipulating an expression tree
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/FieldExpression.html" target="main"><abbr title="Pinq\Expressions\FieldExpression">Pinq\Expressions\FieldExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> $I->Field </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/FunctionCallExpression.html" target="main"><abbr title="Pinq\Expressions\FunctionCallExpression">Pinq\Expressions\FunctionCallExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> strlen($I) </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/IndexExpression.html" target="main"><abbr title="Pinq\Expressions\IndexExpression">Pinq\Expressions\IndexExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> $I[5] </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/InvocationExpression.html" target="main"><abbr title="Pinq\Expressions\InvocationExpression">Pinq\Expressions\InvocationExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> $I('foo') </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/IssetExpression.html" target="main"><abbr title="Pinq\Expressions\IssetExpression">Pinq\Expressions\IssetExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> isset($I, $B) </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/MethodCallExpression.html" target="main"><abbr title="Pinq\Expressions\MethodCallExpression">Pinq\Expressions\MethodCallExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> $I->Method($One, true) </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/NewExpression.html" target="main"><abbr title="Pinq\Expressions\NewExpression">Pinq\Expressions\NewExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> new \stdClass() </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/ObjectOperationExpression.html" target="main"><abbr title="Pinq\Expressions\ObjectOperationExpression">Pinq\Expressions\ObjectOperationExpression</abbr></a>
+                                    </td>
+                <td>
+                    
+
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/Operators/Assignment.html" target="main"><abbr title="Pinq\Expressions\Operators\Assignment">Pinq\Expressions\Operators\Assignment</abbr></a>
+                                    </td>
+                <td>
+                    The enum containing PHP assignment operators
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/Operators/Binary.html" target="main"><abbr title="Pinq\Expressions\Operators\Binary">Pinq\Expressions\Operators\Binary</abbr></a>
+                                    </td>
+                <td>
+                    The enum containing PHP binary operators
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/Operators/Cast.html" target="main"><abbr title="Pinq\Expressions\Operators\Cast">Pinq\Expressions\Operators\Cast</abbr></a>
+                                    </td>
+                <td>
+                    The enum containing PHP cast operators
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/Operators/Unary.html" target="main"><abbr title="Pinq\Expressions\Operators\Unary">Pinq\Expressions\Operators\Unary</abbr></a>
+                                    </td>
+                <td>
+                    The enum containing PHP unary operators
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/ParameterExpression.html" target="main"><abbr title="Pinq\Expressions\ParameterExpression">Pinq\Expressions\ParameterExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> function (\stdClass &amp;$I = null) {} </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/ReturnExpression.html" target="main"><abbr title="Pinq\Expressions\ReturnExpression">Pinq\Expressions\ReturnExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> return true </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/StaticMethodCallExpression.html" target="main"><abbr title="Pinq\Expressions\StaticMethodCallExpression">Pinq\Expressions\StaticMethodCallExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> Class::Method('foo') </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/SubQueryExpression.html" target="main"><abbr title="Pinq\Expressions\SubQueryExpression">Pinq\Expressions\SubQueryExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> $Traversable->Where(function ($I) { return $I > 5 })->Average(); </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/TernaryExpression.html" target="main"><abbr title="Pinq\Expressions\TernaryExpression">Pinq\Expressions\TernaryExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> $I ? 1 : -1 </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/ThrowExpression.html" target="main"><abbr title="Pinq\Expressions\ThrowExpression">Pinq\Expressions\ThrowExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> throw $I </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/TraversalExpression.html" target="main"><abbr title="Pinq\Expressions\TraversalExpression">Pinq\Expressions\TraversalExpression</abbr></a>
+                                    </td>
+                <td>
+                    Represents acting on a value (properties, methods, indexer...)
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/UnaryOperationExpression.html" target="main"><abbr title="Pinq\Expressions\UnaryOperationExpression">Pinq\Expressions\UnaryOperationExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> -$I; $I++; </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/ValueExpression.html" target="main"><abbr title="Pinq\Expressions\ValueExpression">Pinq\Expressions\ValueExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> 1, 'foo', [], null etc </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/VariableExpression.html" target="main"><abbr title="Pinq\Expressions\VariableExpression">Pinq\Expressions\VariableExpression</abbr></a>
+                                    </td>
+                <td>
+                    <code> $I </code>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/Walkers/FunctionToExpressionTreeConverter.html" target="main"><abbr title="Pinq\Expressions\Walkers\FunctionToExpressionTreeConverter">Pinq\Expressions\Walkers\FunctionToExpressionTreeConverter</abbr></a>
+                                    </td>
+                <td>
+                    Mock implementation, all supplied functions should already be expression trees
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/Walkers/QueryProvider.html" target="main"><abbr title="Pinq\Expressions\Walkers\QueryProvider">Pinq\Expressions\Walkers\QueryProvider</abbr></a>
+                                    </td>
+                <td>
+                    Mock implementation, used to get the request query from the queryable method calls, it stores the request and can be retrieved for resolving the sub query expression
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/Walkers/ReturnValueExpressionResolver.html" target="main"><abbr title="Pinq\Expressions\Walkers\ReturnValueExpressionResolver">Pinq\Expressions\Walkers\ReturnValueExpressionResolver</abbr></a>
+                                    </td>
+                <td>
+                    Resolves and stores the expression of the return statements in an expression tree.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/Walkers/SubQueryResolver.html" target="main"><abbr title="Pinq\Expressions\Walkers\SubQueryResolver">Pinq\Expressions\Walkers\SubQueryResolver</abbr></a>
+                                    </td>
+                <td>
+                    Resolves the appropriate method call expression to their equivalent sub query expressions.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/Walkers/UnresolvedVariableFinder.html" target="main"><abbr title="Pinq\Expressions\Walkers\UnresolvedVariableFinder">Pinq\Expressions\Walkers\UnresolvedVariableFinder</abbr></a>
+                                    </td>
+                <td>
+                    Locates and stores all unresolved variables
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/Walkers/ValueUnresolver.html" target="main"><abbr title="Pinq\Expressions\Walkers\ValueUnresolver">Pinq\Expressions\Walkers\ValueUnresolver</abbr></a>
+                                    </td>
+                <td>
+                    Unresolves and stores any values in the expression tree and replaces them with uncolliding variable names.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Expressions/Walkers/VariableResolver.html" target="main"><abbr title="Pinq\Expressions\Walkers\VariableResolver">Pinq\Expressions\Walkers\VariableResolver</abbr></a>
+                                    </td>
+                <td>
+                    Resolves variables within the expression tree to the supplied expressions/values.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/FunctionExpressionTree.html" target="main"><abbr title="Pinq\FunctionExpressionTree">Pinq\FunctionExpressionTree</abbr></a>
+                                    </td>
+                <td>
+                    Acts as a mutable container and compiler for the underlying expression tree of a function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/GroupedTraversable.html" target="main"><abbr title="Pinq\GroupedTraversable">Pinq\GroupedTraversable</abbr></a>
+                                    </td>
+                <td>
+                    The standard implementation for the grouped traversable API,  offering an addition method to specify multiple group bys
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/IAggregatable.html" target="main"><abbr title="Pinq\IAggregatable">Pinq\IAggregatable</abbr></a>
+                    </em>                </td>
+                <td>
+                    The API defining all the aggregate results, mainly exists for organizational purposes
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/ICollection.html" target="main"><abbr title="Pinq\ICollection">Pinq\ICollection</abbr></a>
+                    </em>                </td>
+                <td>
+                    The collection API, along with traversable query API,  a collection's values are mutable, they can be added, removed and altered.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/IGroupedTraversable.html" target="main"><abbr title="Pinq\IGroupedTraversable">Pinq\IGroupedTraversable</abbr></a>
+                    </em>                </td>
+                <td>
+                    Api for subsequent grouping of the supplied traversable query.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/IJoiningOnTraversable.html" target="main"><abbr title="Pinq\IJoiningOnTraversable">Pinq\IJoiningOnTraversable</abbr></a>
+                    </em>                </td>
+                <td>
+                    This API for the filter options available to a joining traversable
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/IJoiningToTraversable.html" target="main"><abbr title="Pinq\IJoiningToTraversable">Pinq\IJoiningToTraversable</abbr></a>
+                    </em>                </td>
+                <td>
+                    This API required to combine the filtered joined values into the the elements of the resulting traversable
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/IOrderedTraversable.html" target="main"><abbr title="Pinq\IOrderedTraversable">Pinq\IOrderedTraversable</abbr></a>
+                    </em>                </td>
+                <td>
+                    The API for subsequent orderings of a traversable query
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/IQueryable.html" target="main"><abbr title="Pinq\IQueryable">Pinq\IQueryable</abbr></a>
+                    </em>                </td>
+                <td>
+                    The queryable provides the traversable query API, on an exteral query provider.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/IRepository.html" target="main"><abbr title="Pinq\IRepository">Pinq\IRepository</abbr></a>
+                    </em>                </td>
+                <td>
+                    The repository provides the mutable collection API on a queryable.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/ITraversable.html" target="main"><abbr title="Pinq\ITraversable">Pinq\ITraversable</abbr></a>
+                    </em>                </td>
+                <td>
+                    The root interface providing a fluent query API for a range of values.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/CustomGroupJoinIterator.html" target="main"><abbr title="Pinq\Iterators\CustomGroupJoinIterator">Pinq\Iterators\CustomGroupJoinIterator</abbr></a>
+                                    </td>
+                <td>
+                    Iterates the matching outer value with all the matching inner values in a traversable
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/CustomJoinIterator.html" target="main"><abbr title="Pinq\Iterators\CustomJoinIterator">Pinq\Iterators\CustomJoinIterator</abbr></a>
+                                    </td>
+                <td>
+                    Iterates the matching outer value with every matching inner value individually
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/CustomJoinIteratorBase.html" target="main"><abbr title="Pinq\Iterators\CustomJoinIteratorBase">Pinq\Iterators\CustomJoinIteratorBase</abbr></a>
+                                    </td>
+                <td>
+                    Base class for a join iterator with a custom join on function.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/DifferenceIterator.html" target="main"><abbr title="Pinq\Iterators\DifferenceIterator">Pinq\Iterators\DifferenceIterator</abbr></a>
+                                    </td>
+                <td>
+                    Iterates the unique values contained in the first values but not in the second values.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/EqualityGroupJoinIterator.html" target="main"><abbr title="Pinq\Iterators\EqualityGroupJoinIterator">Pinq\Iterators\EqualityGroupJoinIterator</abbr></a>
+                                    </td>
+                <td>
+                    Iterates the matching outer value with all the matching inner values in a traversable
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/EqualityJoinIterator.html" target="main"><abbr title="Pinq\Iterators\EqualityJoinIterator">Pinq\Iterators\EqualityJoinIterator</abbr></a>
+                                    </td>
+                <td>
+                    Iterates the matching outer value with every matching inner value individually
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/EqualityJoinIteratorBase.html" target="main"><abbr title="Pinq\Iterators\EqualityJoinIteratorBase">Pinq\Iterators\EqualityJoinIteratorBase</abbr></a>
+                                    </td>
+                <td>
+                    Base class for a join iterator with an inner function whose result must be equal to that of the outer function.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/ExceptIterator.html" target="main"><abbr title="Pinq\Iterators\ExceptIterator">Pinq\Iterators\ExceptIterator</abbr></a>
+                                    </td>
+                <td>
+                    Iterates the values contained in the first values but not in the second values.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/FilterIterator.html" target="main"><abbr title="Pinq\Iterators\FilterIterator">Pinq\Iterators\FilterIterator</abbr></a>
+                                    </td>
+                <td>
+                    Returns the values that satisfy the supplied predicate function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/FlatteningIterator.html" target="main"><abbr title="Pinq\Iterators\FlatteningIterator">Pinq\Iterators\FlatteningIterator</abbr></a>
+                                    </td>
+                <td>
+                    Iterates the inner iterator and for every value, it is then iterated as the resulting values (pretty much a nested foreach loop)
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/GroupedIterator.html" target="main"><abbr title="Pinq\Iterators\GroupedIterator">Pinq\Iterators\GroupedIterator</abbr></a>
+                                    </td>
+                <td>
+                    Groups the values from the supplied grouping function(s)
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/IntersectionIterator.html" target="main"><abbr title="Pinq\Iterators\IntersectionIterator">Pinq\Iterators\IntersectionIterator</abbr></a>
+                                    </td>
+                <td>
+                    Iterates the unique values contained in the first values and in the second values.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/IteratorIterator.html" target="main"><abbr title="Pinq\Iterators\IteratorIterator">Pinq\Iterators\IteratorIterator</abbr></a>
+                                    </td>
+                <td>
+                    Base class for wrapper iterators.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/JoinIteratorBase.html" target="main"><abbr title="Pinq\Iterators\JoinIteratorBase">Pinq\Iterators\JoinIteratorBase</abbr></a>
+                                    </td>
+                <td>
+                    Base class for a join iterator
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/LazyIterator.html" target="main"><abbr title="Pinq\Iterators\LazyIterator">Pinq\Iterators\LazyIterator</abbr></a>
+                                    </td>
+                <td>
+                    Basy class for a lazy iterator, the initializer will be called once, when first accessed.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/OperationIterator.html" target="main"><abbr title="Pinq\Iterators\OperationIterator">Pinq\Iterators\OperationIterator</abbr></a>
+                                    </td>
+                <td>
+                    Base class for a set operation iterator, the other values are stored in a set which can be used to filter the resulting values
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/OrderedIterator.html" target="main"><abbr title="Pinq\Iterators\OrderedIterator">Pinq\Iterators\OrderedIterator</abbr></a>
+                                    </td>
+                <td>
+                    Orders the values according to the supplied functions and directions using array_multisort
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/ProjectionIterator.html" target="main"><abbr title="Pinq\Iterators\ProjectionIterator">Pinq\Iterators\ProjectionIterator</abbr></a>
+                                    </td>
+                <td>
+                    Returns the values / keys projected by the supplied function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/RangeIterator.html" target="main"><abbr title="Pinq\Iterators\RangeIterator">Pinq\Iterators\RangeIterator</abbr></a>
+                                    </td>
+                <td>
+                    Iterates over a specified range of the inner values.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/UnionIterator.html" target="main"><abbr title="Pinq\Iterators\UnionIterator">Pinq\Iterators\UnionIterator</abbr></a>
+                                    </td>
+                <td>
+                    Iterates the unique values contained in either the first values or in the second values.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/UniqueIterator.html" target="main"><abbr title="Pinq\Iterators\UniqueIterator">Pinq\Iterators\UniqueIterator</abbr></a>
+                                    </td>
+                <td>
+                    Iterates the unique values in the orignal values
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/Utilities/Dictionary.html" target="main"><abbr title="Pinq\Iterators\Utilities\Dictionary">Pinq\Iterators\Utilities\Dictionary</abbr></a>
+                                    </td>
+                <td>
+                    This class is like an array that supports keys of any type: Optimized for quick lookup speeds.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/Utilities/Lookup.html" target="main"><abbr title="Pinq\Iterators\Utilities\Lookup">Pinq\Iterators\Utilities\Lookup</abbr></a>
+                                    </td>
+                <td>
+                    Represents a  range grouped values determined from a supplied grouping function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/Utilities/Set.html" target="main"><abbr title="Pinq\Iterators\Utilities\Set">Pinq\Iterators\Utilities\Set</abbr></a>
+                                    </td>
+                <td>
+                    Represents set of unique values.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Iterators/WhereInIterator.html" target="main"><abbr title="Pinq\Iterators\WhereInIterator">Pinq\Iterators\WhereInIterator</abbr></a>
+                                    </td>
+                <td>
+                    Iterates the values contained in the first values and in the second values.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/JoiningOnQueryable.html" target="main"><abbr title="Pinq\JoiningOnQueryable">Pinq\JoiningOnQueryable</abbr></a>
+                                    </td>
+                <td>
+                    Implements the filtering API for a join / group join queryable.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/JoiningOnTraversable.html" target="main"><abbr title="Pinq\JoiningOnTraversable">Pinq\JoiningOnTraversable</abbr></a>
+                                    </td>
+                <td>
+                    Implements the filtering API for a join / group join traversable.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/JoiningToQueryable.html" target="main"><abbr title="Pinq\JoiningToQueryable">Pinq\JoiningToQueryable</abbr></a>
+                                    </td>
+                <td>
+                    Implements the result API for a join / group join queryable.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/JoiningToTraversable.html" target="main"><abbr title="Pinq\JoiningToTraversable">Pinq\JoiningToTraversable</abbr></a>
+                                    </td>
+                <td>
+                    Implements the result API for a join / group join traversable.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/OrderedTraversable.html" target="main"><abbr title="Pinq\OrderedTraversable">Pinq\OrderedTraversable</abbr></a>
+                                    </td>
+                <td>
+                    Implements the subsequent ordering API for the traversable query.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Parsing/ASTException.html" target="main"><abbr title="Pinq\Parsing\ASTException">Pinq\Parsing\ASTException</abbr></a>
+                                    </td>
+                <td>
+                    Exception for errors while converting the AST into  an expression tree
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Parsing/FunctionToExpressionTreeConverter.html" target="main"><abbr title="Pinq\Parsing\FunctionToExpressionTreeConverter">Pinq\Parsing\FunctionToExpressionTreeConverter</abbr></a>
+                                    </td>
+                <td>
+                    Default implementaion for the IFunctionToExpressionTreeConverter.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Parsing/IFunctionToExpressionTreeConverter.html" target="main"><abbr title="Pinq\Parsing\IFunctionToExpressionTreeConverter">Pinq\Parsing\IFunctionToExpressionTreeConverter</abbr></a>
+                    </em>                </td>
+                <td>
+                    Facade for converting a function into the equivalent expression tree
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Parsing/IParser.html" target="main"><abbr title="Pinq\Parsing\IParser">Pinq\Parsing\IParser</abbr></a>
+                    </em>                </td>
+                <td>
+                    The IParser is an abstraction for converting a function to an expression tree.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Parsing/InvalidFunctionException.html" target="main"><abbr title="Pinq\Parsing\InvalidFunctionException">Pinq\Parsing\InvalidFunctionException</abbr></a>
+                                    </td>
+                <td>
+                    Exception for errors while converting a function into  an expression tree
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Parsing/PHPParser/AST.html" target="main"><abbr title="Pinq\Parsing\PHPParser\AST">Pinq\Parsing\PHPParser\AST</abbr></a>
+                                    </td>
+                <td>
+                    Converts the PHP-Parser nodes into the equivalent Pinq expression tree.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Parsing/PHPParser/PHPParserResolvedValueNode.html" target="main"><abbr title="Pinq\Parsing\PHPParser\PHPParserResolvedValueNode">Pinq\Parsing\PHPParser\PHPParserResolvedValueNode</abbr></a>
+                                    </td>
+                <td>
+                    Placeholder node for a resolved value
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Parsing/PHPParser/Parser.html" target="main"><abbr title="Pinq\Parsing\PHPParser\Parser">Pinq\Parsing\PHPParser\Parser</abbr></a>
+                                    </td>
+                <td>
+                    Function parser implementation utilising nikic\PHP-Parser to accuratly locate and convert functions into the equivalent expression tree
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Parsing/PHPParser/Visitors/ConstantValueNodeReplacerVisitor.html" target="main"><abbr title="Pinq\Parsing\PHPParser\Visitors\ConstantValueNodeReplacerVisitor">Pinq\Parsing\PHPParser\Visitors\ConstantValueNodeReplacerVisitor</abbr></a>
+                                    </td>
+                <td>
+                    Replaces all applicable nodes with a custom constance value node, to be converted simpler in the AST class.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Parsing/PHPParser/Visitors/FunctionFinderVisitor.html" target="main"><abbr title="Pinq\Parsing\PHPParser\Visitors\FunctionFinderVisitor">Pinq\Parsing\PHPParser\Visitors\FunctionFinderVisitor</abbr></a>
+                                    </td>
+                <td>
+                    Attempts to locate a function node from the supplied function reflection.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Parsing/ParserBase.html" target="main"><abbr title="Pinq\Parsing\ParserBase">Pinq\Parsing\ParserBase</abbr></a>
+                                    </td>
+                <td>
+                    Base class for a function parser
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Parsing/Reflection.html" target="main"><abbr title="Pinq\Parsing\Reflection">Pinq\Parsing\Reflection</abbr></a>
+                                    </td>
+                <td>
+                    Utility class for getting the reflection from any type of callable.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/PinqException.html" target="main"><abbr title="Pinq\PinqException">Pinq\PinqException</abbr></a>
+                                    </td>
+                <td>
+                    Base exception for all exception in the Pinq library
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/Caching/RequestEvaluator.html" target="main"><abbr title="Pinq\Providers\Caching\RequestEvaluator">Pinq\Providers\Caching\RequestEvaluator</abbr></a>
+                                    </td>
+                <td>
+                    A caching request evaluator instance, the inner evaluators results will be cached and reused if an equivalent request is called again.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/Collection/OperationEvaluator.html" target="main"><abbr title="Pinq\Providers\Collection\OperationEvaluator">Pinq\Providers\Collection\OperationEvaluator</abbr></a>
+                                    </td>
+                <td>
+                    Evaluates the operations on the supplied collection instance
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/Collection/Provider.html" target="main"><abbr title="Pinq\Providers\Collection\Provider">Pinq\Providers\Collection\Provider</abbr></a>
+                                    </td>
+                <td>
+                    Repository provider for evalating query of the supplied collection instance, this is useful for mocking a repository against an in memory collection.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Providers/IQueryProvider.html" target="main"><abbr title="Pinq\Providers\IQueryProvider">Pinq\Providers\IQueryProvider</abbr></a>
+                    </em>                </td>
+                <td>
+                    The query provider is used to by the IQueryable as the data source in which the query requests are all loaded from
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Providers/IRepositoryProvider.html" target="main"><abbr title="Pinq\Providers\IRepositoryProvider">Pinq\Providers\IRepositoryProvider</abbr></a>
+                    </em>                </td>
+                <td>
+                    The query provider is used to by the IRepository as the data source in which the query requests are all loaded from and all operation query are executed against
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/Loadable/RequestEvaluator.html" target="main"><abbr title="Pinq\Providers\Loadable\RequestEvaluator">Pinq\Providers\Loadable\RequestEvaluator</abbr></a>
+                                    </td>
+                <td>
+                    Base request evaluator for request evaluator in which the values can be loaded and once loaded, the requests can be performed in memory.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/QueryProvider.html" target="main"><abbr title="Pinq\Providers\QueryProvider">Pinq\Providers\QueryProvider</abbr></a>
+                                    </td>
+                <td>
+                    Base class for the query provider, with default functionality for the function to expression tree converter and request evaluation
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/RepositoryProvider.html" target="main"><abbr title="Pinq\Providers\RepositoryProvider">Pinq\Providers\RepositoryProvider</abbr></a>
+                                    </td>
+                <td>
+                    Base class for the repository provider, with default functionality for request and optionary query evaluation.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/Traversable/Provider.html" target="main"><abbr title="Pinq\Providers\Traversable\Provider">Pinq\Providers\Traversable\Provider</abbr></a>
+                                    </td>
+                <td>
+                    Query provider for evalating query of the supplied traversable instance, this is useful for mocking a queryable against an in memory traversable.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/Traversable/RequestEvaluator.html" target="main"><abbr title="Pinq\Providers\Traversable\RequestEvaluator">Pinq\Providers\Traversable\RequestEvaluator</abbr></a>
+                                    </td>
+                <td>
+                    Request evaluator for performing queries on the supplied traversable instance.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/Traversable/ScopeEvaluator.html" target="main"><abbr title="Pinq\Providers\Traversable\ScopeEvaluator">Pinq\Providers\Traversable\ScopeEvaluator</abbr></a>
+                                    </td>
+                <td>
+                    Evaluates the query scope against the supplied traversable
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Queries/IOperation.html" target="main"><abbr title="Pinq\Queries\IOperation">Pinq\Queries\IOperation</abbr></a>
+                    </em>                </td>
+                <td>
+                    The interface for a operation query, one of the const types, they are all implemented as their own class in Operations namespace.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Queries/IOperationQuery.html" target="main"><abbr title="Pinq\Queries\IOperationQuery">Pinq\Queries\IOperationQuery</abbr></a>
+                    </em>                </td>
+                <td>
+                    An operation query is a type of query for IRepository, it represents an action to execute against the supplied scope of the source values.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Queries/IQuery.html" target="main"><abbr title="Pinq\Queries\IQuery">Pinq\Queries\IQuery</abbr></a>
+                    </em>                </td>
+                <td>
+                    Base interface for request / operation query types which both act upon the supplied scope
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Queries/IRequest.html" target="main"><abbr title="Pinq\Queries\IRequest">Pinq\Queries\IRequest</abbr></a>
+                    </em>                </td>
+                <td>
+                    The interface for a request query, one of the const types, they are all implemented as their own class in Requests namespace.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Queries/IRequestQuery.html" target="main"><abbr title="Pinq\Queries\IRequestQuery">Pinq\Queries\IRequestQuery</abbr></a>
+                    </em>                </td>
+                <td>
+                    An request query is a type of query for IQueryable, it represents an value to retrieve from the supplied scope of the source values.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Queries/IScope.html" target="main"><abbr title="Pinq\Queries\IScope">Pinq\Queries\IScope</abbr></a>
+                    </em>                </td>
+                <td>
+                    The query scope.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Queries/ISegment.html" target="main"><abbr title="Pinq\Queries\ISegment">Pinq\Queries\ISegment</abbr></a>
+                    </em>                </td>
+                <td>
+                    The interface for a query segment, one of the const types, they are all implemented as their own class class in Segments namespace.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/OperationQuery.html" target="main"><abbr title="Pinq\Queries\OperationQuery">Pinq\Queries\OperationQuery</abbr></a>
+                                    </td>
+                <td>
+                    Implementation of the IOperationQuery
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Operations/AddValues.html" target="main"><abbr title="Pinq\Queries\Operations\AddValues">Pinq\Queries\Operations\AddValues</abbr></a>
+                                    </td>
+                <td>
+                    Operation query for adding a range of values to the source
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Operations/Apply.html" target="main"><abbr title="Pinq\Queries\Operations\Apply">Pinq\Queries\Operations\Apply</abbr></a>
+                                    </td>
+                <td>
+                    Operation query for applying the supplied function to the source
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Operations/Clear.html" target="main"><abbr title="Pinq\Queries\Operations\Clear">Pinq\Queries\Operations\Clear</abbr></a>
+                                    </td>
+                <td>
+                    Operation query for clearing all values from the source
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Operations/ExpressionOperation.html" target="main"><abbr title="Pinq\Queries\Operations\ExpressionOperation">Pinq\Queries\Operations\ExpressionOperation</abbr></a>
+                                    </td>
+                <td>
+                    Base class for an operation query containing a function expression tree
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Operations/IndexOperation.html" target="main"><abbr title="Pinq\Queries\Operations\IndexOperation">Pinq\Queries\Operations\IndexOperation</abbr></a>
+                                    </td>
+                <td>
+                    Base class for an operation query using a supplied index
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Operations/Operation.html" target="main"><abbr title="Pinq\Queries\Operations\Operation">Pinq\Queries\Operations\Operation</abbr></a>
+                                    </td>
+                <td>
+                    Base operation query class  Currently here just for convenient namespace usage
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Operations/OperationVisitor.html" target="main"><abbr title="Pinq\Queries\Operations\OperationVisitor">Pinq\Queries\Operations\OperationVisitor</abbr></a>
+                                    </td>
+                <td>
+                    The operation visitor is a utility class that will visit any operation in a respective method.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Operations/RemoveValues.html" target="main"><abbr title="Pinq\Queries\Operations\RemoveValues">Pinq\Queries\Operations\RemoveValues</abbr></a>
+                                    </td>
+                <td>
+                    Operation query for removing a range of values to the source
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Operations/RemoveWhere.html" target="main"><abbr title="Pinq\Queries\Operations\RemoveWhere">Pinq\Queries\Operations\RemoveWhere</abbr></a>
+                                    </td>
+                <td>
+                    Operation query for removing values that satisfy the supplied function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Operations/SetIndex.html" target="main"><abbr title="Pinq\Queries\Operations\SetIndex">Pinq\Queries\Operations\SetIndex</abbr></a>
+                                    </td>
+                <td>
+                    Operation query for setting a specified index to a value
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Operations/UnsetIndex.html" target="main"><abbr title="Pinq\Queries\Operations\UnsetIndex">Pinq\Queries\Operations\UnsetIndex</abbr></a>
+                                    </td>
+                <td>
+                    Operation query for unsetting a value at the specified index
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Operations/ValuesOperation.html" target="main"><abbr title="Pinq\Queries\Operations\ValuesOperation">Pinq\Queries\Operations\ValuesOperation</abbr></a>
+                                    </td>
+                <td>
+                    Base class for an operation query for with a range of values
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Query.html" target="main"><abbr title="Pinq\Queries\Query">Pinq\Queries\Query</abbr></a>
+                                    </td>
+                <td>
+                    Base implementation for the IQuery
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/RequestQuery.html" target="main"><abbr title="Pinq\Queries\RequestQuery">Pinq\Queries\RequestQuery</abbr></a>
+                                    </td>
+                <td>
+                    Implementation of the IRequestQuery
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Aggregate.html" target="main"><abbr title="Pinq\Queries\Requests\Aggregate">Pinq\Queries\Requests\Aggregate</abbr></a>
+                                    </td>
+                <td>
+                    Request query for a custom aggregate using the supplied function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/All.html" target="main"><abbr title="Pinq\Queries\Requests\All">Pinq\Queries\Requests\All</abbr></a>
+                                    </td>
+                <td>
+                    Request query for a boolean of whether all the values satify the  supplied predicate function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Any.html" target="main"><abbr title="Pinq\Queries\Requests\Any">Pinq\Queries\Requests\Any</abbr></a>
+                                    </td>
+                <td>
+                    Request query for a boolean of whether any of the values satify the  supplied predicate function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Average.html" target="main"><abbr title="Pinq\Queries\Requests\Average">Pinq\Queries\Requests\Average</abbr></a>
+                                    </td>
+                <td>
+                    Request query for a double of the average of all the projected values
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Contains.html" target="main"><abbr title="Pinq\Queries\Requests\Contains">Pinq\Queries\Requests\Contains</abbr></a>
+                                    </td>
+                <td>
+                    Request query for a boolean of whether the supplied value is contained within the scope
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Count.html" target="main"><abbr title="Pinq\Queries\Requests\Count">Pinq\Queries\Requests\Count</abbr></a>
+                                    </td>
+                <td>
+                    Request query for an integer of the amount of values in the scope
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Exists.html" target="main"><abbr title="Pinq\Queries\Requests\Exists">Pinq\Queries\Requests\Exists</abbr></a>
+                                    </td>
+                <td>
+                    Request query for a boolean of whether any values are  contained in the scope
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/First.html" target="main"><abbr title="Pinq\Queries\Requests\First">Pinq\Queries\Requests\First</abbr></a>
+                                    </td>
+                <td>
+                    Request query for a the first value in the scope
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/GetIndex.html" target="main"><abbr title="Pinq\Queries\Requests\GetIndex">Pinq\Queries\Requests\GetIndex</abbr></a>
+                                    </td>
+                <td>
+                    Request query for a value at the specified index
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Implode.html" target="main"><abbr title="Pinq\Queries\Requests\Implode">Pinq\Queries\Requests\Implode</abbr></a>
+                                    </td>
+                <td>
+                    Request query for a string of all the projected values  concatenated by the specified delimiter
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/IndexRequest.html" target="main"><abbr title="Pinq\Queries\Requests\IndexRequest">Pinq\Queries\Requests\IndexRequest</abbr></a>
+                                    </td>
+                <td>
+                    Base class for a request with a specified index
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/IssetIndex.html" target="main"><abbr title="Pinq\Queries\Requests\IssetIndex">Pinq\Queries\Requests\IssetIndex</abbr></a>
+                                    </td>
+                <td>
+                    Request query for a boolean of whether a specified index is set
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Last.html" target="main"><abbr title="Pinq\Queries\Requests\Last">Pinq\Queries\Requests\Last</abbr></a>
+                                    </td>
+                <td>
+                    Request query for the last value in the scope
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Maximum.html" target="main"><abbr title="Pinq\Queries\Requests\Maximum">Pinq\Queries\Requests\Maximum</abbr></a>
+                                    </td>
+                <td>
+                    Request query for the maximum projected value in the scope
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Minimum.html" target="main"><abbr title="Pinq\Queries\Requests\Minimum">Pinq\Queries\Requests\Minimum</abbr></a>
+                                    </td>
+                <td>
+                    Request query for the minimum projected value in the scope
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/ProjectionRequest.html" target="main"><abbr title="Pinq\Queries\Requests\ProjectionRequest">Pinq\Queries\Requests\ProjectionRequest</abbr></a>
+                                    </td>
+                <td>
+                    Base class for a request which optionally projects the values with the supplied function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Request.html" target="main"><abbr title="Pinq\Queries\Requests\Request">Pinq\Queries\Requests\Request</abbr></a>
+                                    </td>
+                <td>
+                    Base class for a request query  Currently here for convenient namespacing
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/RequestVisitor.html" target="main"><abbr title="Pinq\Queries\Requests\RequestVisitor">Pinq\Queries\Requests\RequestVisitor</abbr></a>
+                                    </td>
+                <td>
+                    The operation visitor is a utility class that will visit any request in a respective method.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Sum.html" target="main"><abbr title="Pinq\Queries\Requests\Sum">Pinq\Queries\Requests\Sum</abbr></a>
+                                    </td>
+                <td>
+                    Request query for a double of the sum of all the projected values
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Requests/Values.html" target="main"><abbr title="Pinq\Queries\Requests\Values">Pinq\Queries\Requests\Values</abbr></a>
+                                    </td>
+                <td>
+                    Request query for an iterator which will iterate all the values of the current scope
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Scope.html" target="main"><abbr title="Pinq\Queries\Scope">Pinq\Queries\Scope</abbr></a>
+                                    </td>
+                <td>
+                    Implementation of the IScope
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/EqualityJoin.html" target="main"><abbr title="Pinq\Queries\Segments\EqualityJoin">Pinq\Queries\Segments\EqualityJoin</abbr></a>
+                                    </td>
+                <td>
+                    Query segment for an equality join base on a key select for the outer values an another for the inner values
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/ExpressionSegment.html" target="main"><abbr title="Pinq\Queries\Segments\ExpressionSegment">Pinq\Queries\Segments\ExpressionSegment</abbr></a>
+                                    </td>
+                <td>
+                    Base class for a query segment with an function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/Filter.html" target="main"><abbr title="Pinq\Queries\Segments\Filter">Pinq\Queries\Segments\Filter</abbr></a>
+                                    </td>
+                <td>
+                    Query segment for filtering the values based on the supplied function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/GroupBy.html" target="main"><abbr title="Pinq\Queries\Segments\GroupBy">Pinq\Queries\Segments\GroupBy</abbr></a>
+                                    </td>
+                <td>
+                    Query segment for grouping the values base on the supplied  grouping functions.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/IndexBy.html" target="main"><abbr title="Pinq\Queries\Segments\IndexBy">Pinq\Queries\Segments\IndexBy</abbr></a>
+                                    </td>
+                <td>
+                    Query segment for indexing the values by the supplied function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/Join.html" target="main"><abbr title="Pinq\Queries\Segments\Join">Pinq\Queries\Segments\Join</abbr></a>
+                                    </td>
+                <td>
+                    Query segment for a join filtered by the supplied function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/JoinBase.html" target="main"><abbr title="Pinq\Queries\Segments\JoinBase">Pinq\Queries\Segments\JoinBase</abbr></a>
+                                    </td>
+                <td>
+                    Base class for a join query segment with the joined values and the  resulting value function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/Operation.html" target="main"><abbr title="Pinq\Queries\Segments\Operation">Pinq\Queries\Segments\Operation</abbr></a>
+                                    </td>
+                <td>
+                    Query segment for a set/range operation
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/OrderBy.html" target="main"><abbr title="Pinq\Queries\Segments\OrderBy">Pinq\Queries\Segments\OrderBy</abbr></a>
+                                    </td>
+                <td>
+                    Query segment for ordering the values with the supplied functions and order directions
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/Range.html" target="main"><abbr title="Pinq\Queries\Segments\Range">Pinq\Queries\Segments\Range</abbr></a>
+                                    </td>
+                <td>
+                    Query segment for retrieving the specified range of values
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/Segment.html" target="main"><abbr title="Pinq\Queries\Segments\Segment">Pinq\Queries\Segments\Segment</abbr></a>
+                                    </td>
+                <td>
+                    Base class for a query segment  Currently here for convenient namespacing
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/SegmentVisitor.html" target="main"><abbr title="Pinq\Queries\Segments\SegmentVisitor">Pinq\Queries\Segments\SegmentVisitor</abbr></a>
+                                    </td>
+                <td>
+                    The segment visitor is a utility class that will visit any segment in a respective method.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/SegmentWalker.html" target="main"><abbr title="Pinq\Queries\Segments\SegmentWalker">Pinq\Queries\Segments\SegmentWalker</abbr></a>
+                                    </td>
+                <td>
+                    The segment walker is a utility class that will walk any segment in a respective method.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/Select.html" target="main"><abbr title="Pinq\Queries\Segments\Select">Pinq\Queries\Segments\Select</abbr></a>
+                                    </td>
+                <td>
+                    Query segment for retrieving the values mapped by the supplied function
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/SelectMany.html" target="main"><abbr title="Pinq\Queries\Segments\SelectMany">Pinq\Queries\Segments\SelectMany</abbr></a>
+                                    </td>
+                <td>
+                    Query segment for retrieving the values mapped by the supplied function which will be flattened into single range of values
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queries/Segments/Unique.html" target="main"><abbr title="Pinq\Queries\Segments\Unique">Pinq\Queries\Segments\Unique</abbr></a>
+                                    </td>
+                <td>
+                    Query segment for retrieving only unique values
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Queryable.html" target="main"><abbr title="Pinq\Queryable">Pinq\Queryable</abbr></a>
+                                    </td>
+                <td>
+                    The standard queryable class, fully implements the queryable API
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Repository.html" target="main"><abbr title="Pinq\Repository">Pinq\Repository</abbr></a>
+                                    </td>
+                <td>
+                    The standard repository class, fully implements the repository API
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Traversable.html" target="main"><abbr title="Pinq\Traversable">Pinq\Traversable</abbr></a>
+                                    </td>
+                <td>
+                    The standard traversable class, fully implements the traversable API using iterator to achieve lazy evaluation
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Utilities.html" target="main"><abbr title="Pinq\Utilities">Pinq\Utilities</abbr></a>
+                                    </td>
+                <td>
+                    General utility class providing common and misc behaviour
+                </td>
+            </tr>
+            </table>
+        </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

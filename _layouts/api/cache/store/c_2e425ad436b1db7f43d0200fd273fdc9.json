@@ -1,0 +1,123 @@
+{
+    "name": "Pinq\\JoiningToTraversable",
+    "line": 10,
+    "short_desc": "Implements the result API for a join \/ group join traversable.",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\JoiningToTraversable.php",
+    "hash": "bc42ac46bba1f52e686106c766e9c19c8dffea26",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": {
+        "Pinq\\IJoiningToTraversable": "Pinq\\IJoiningToTraversable"
+    },
+    "properties": [
+
+    ],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 17,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "ConstructJoinIteratorCallback": {
+                    "name": "ConstructJoinIteratorCallback",
+                    "line": 17,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "To": {
+            "name": "To",
+            "line": 22,
+            "short_desc": "Returns the appropriate values according to the supplied join function.",
+            "long_desc": "Both values will be passed as arguments to the supplied function.",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "JoinFunction": {
+                    "name": "JoinFunction",
+                    "line": 22,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

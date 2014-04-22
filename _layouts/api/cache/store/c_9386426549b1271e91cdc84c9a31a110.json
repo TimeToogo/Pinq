@@ -1,0 +1,128 @@
+{
+    "name": "Pinq\\Parsing\\IParser",
+    "line": 13,
+    "short_desc": "The IParser is an abstraction for converting a function to an expression tree.",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Parsing",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Parsing\\IParser.php",
+    "hash": "7eaa28f90188998bf42a9d24884facd563fab939",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": {
+        "Expression": "Pinq\\Expressions\\Expression"
+    },
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": {
+        "GetSignatureHash": {
+            "name": "GetSignatureHash",
+            "line": 18,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Reflection": {
+                    "name": "Reflection",
+                    "line": 18,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Parsing\\ReflectionFunctionAbstract",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "ReflectionFunctionAbstract",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Parse": {
+            "name": "Parse",
+            "line": 23,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\Expressions\\Expression",
+                    true
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Reflection": {
+                    "name": "Reflection",
+                    "line": 23,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Parsing\\ReflectionFunctionAbstract",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "ReflectionFunctionAbstract",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

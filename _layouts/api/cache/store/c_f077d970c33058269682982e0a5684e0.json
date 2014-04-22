@@ -1,0 +1,990 @@
+{
+    "name": "Pinq\\Expressions\\ExpressionWalker",
+    "line": 10,
+    "short_desc": "Base class for traversing or manipulating an expression tree",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Expressions",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\ExpressionWalker.php",
+    "hash": "15af4d02123adfb5dce38bdde4eb30fb5456ef94",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": {
+        "Walk": {
+            "name": "Walk",
+            "line": 15,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\Expressions\\Expression",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "33",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 15,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\Expression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Expression",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkAll": {
+            "name": "WalkAll",
+            "line": 23,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\Expressions\\Expression",
+                    true
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "33",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expressions": {
+                    "name": "Expressions",
+                    "line": 23,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "array",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkArray": {
+            "name": "WalkArray",
+            "line": 33,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 33,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\ArrayExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "ArrayExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkAssignment": {
+            "name": "WalkAssignment",
+            "line": 40,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 40,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\AssignmentExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "AssignmentExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkBinaryOperation": {
+            "name": "WalkBinaryOperation",
+            "line": 48,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 48,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\BinaryOperationExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "BinaryOperationExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkUnaryOperation": {
+            "name": "WalkUnaryOperation",
+            "line": 56,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 56,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\UnaryOperationExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "UnaryOperationExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkCast": {
+            "name": "WalkCast",
+            "line": 63,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 63,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\CastExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "CastExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkEmpty": {
+            "name": "WalkEmpty",
+            "line": 70,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 70,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\EmptyExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "EmptyExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkIsset": {
+            "name": "WalkIsset",
+            "line": 76,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 76,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\IssetExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "IssetExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkField": {
+            "name": "WalkField",
+            "line": 82,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 82,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\FieldExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "FieldExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkMethodCall": {
+            "name": "WalkMethodCall",
+            "line": 89,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 89,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\MethodCallExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "MethodCallExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkIndex": {
+            "name": "WalkIndex",
+            "line": 97,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 97,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\IndexExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "IndexExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkInvocation": {
+            "name": "WalkInvocation",
+            "line": 104,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 104,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\InvocationExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "InvocationExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkFunctionCall": {
+            "name": "WalkFunctionCall",
+            "line": 111,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 111,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\FunctionCallExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "FunctionCallExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkStaticMethodCall": {
+            "name": "WalkStaticMethodCall",
+            "line": 118,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 118,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\StaticMethodCallExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "StaticMethodCallExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkNew": {
+            "name": "WalkNew",
+            "line": 126,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 126,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\NewExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "NewExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkReturn": {
+            "name": "WalkReturn",
+            "line": 133,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 133,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\ReturnExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "ReturnExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkThrow": {
+            "name": "WalkThrow",
+            "line": 139,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 139,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\ThrowExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "ThrowExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkParameter": {
+            "name": "WalkParameter",
+            "line": 145,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 145,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\ParameterExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "ParameterExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkTernary": {
+            "name": "WalkTernary",
+            "line": 150,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 150,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\TernaryExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "TernaryExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkVariable": {
+            "name": "WalkVariable",
+            "line": 158,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 158,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\VariableExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "VariableExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkValue": {
+            "name": "WalkValue",
+            "line": 164,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 164,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\ValueExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "ValueExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkSubQuery": {
+            "name": "WalkSubQuery",
+            "line": 169,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 169,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\SubQueryExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "SubQueryExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WalkClosure": {
+            "name": "WalkClosure",
+            "line": 174,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Expression": {
+                    "name": "Expression",
+                    "line": 174,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\ClosureExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "ClosureExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

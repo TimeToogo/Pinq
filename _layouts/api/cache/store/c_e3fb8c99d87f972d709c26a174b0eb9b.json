@@ -1,0 +1,111 @@
+{
+    "name": "Pinq\\Queries\\Segments\\SelectMany",
+    "line": 11,
+    "short_desc": "Query segment for retrieving the values mapped by the supplied function which will be flattened into single range of values",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Queries\\Segments",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Segments\\SelectMany.php",
+    "hash": "961ee1172d9eee0bde5b49808ef2cd42d3500401",
+    "parent": "Pinq\\Queries\\Segments\\ExpressionSegment",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": {
+        "GetType": {
+            "name": "GetType",
+            "line": 13,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "int",
+                    false
+                ]
+            ],
+            "hint_desc": "The query type",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "Traverse": {
+            "name": "Traverse",
+            "line": 18,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\Queries\\ISegment",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Walker": {
+                    "name": "Walker",
+                    "line": 18,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Queries\\Segments\\SegmentWalker",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "SegmentWalker",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

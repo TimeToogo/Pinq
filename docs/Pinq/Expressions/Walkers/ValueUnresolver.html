@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Expressions\Walkers\ValueUnresolver | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Pinq/Expressions/Walkers.html">Pinq\Expressions\Walkers</a>\ValueUnresolver</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>ValueUnresolver</strong>        extends <a href="../../../Pinq/Expressions/ExpressionWalker.html"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></p>
+
+            <div class="description">
+            <p>Unresolves and stores any values in the expression tree and replaces them with uncolliding variable names.</p>
+            <p>This is useful when compiling an expression tree and certain values shouldn't be stored inline, such as
+objects or arrays.</p>
+
+<p>3 + $Var;
+=== will become ===
+${'some unclashing name'} + $Var</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>|null
+                </td>
+                <td class="last">
+                    <a href="#method_Walk">Walk</a>(<a href="../../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $Expression = null)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_Walk"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]
+                </td>
+                <td class="last">
+                    <a href="#method_WalkAll">WalkAll</a>(array $Expressions)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkAll"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkArray">WalkArray</a>(<a href="../../../Pinq/Expressions/ArrayExpression.html"><abbr title="Pinq\Expressions\ArrayExpression">ArrayExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkArray"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkAssignment">WalkAssignment</a>(<a href="../../../Pinq/Expressions/AssignmentExpression.html"><abbr title="Pinq\Expressions\AssignmentExpression">AssignmentExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkAssignment"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkBinaryOperation">WalkBinaryOperation</a>(<a href="../../../Pinq/Expressions/BinaryOperationExpression.html"><abbr title="Pinq\Expressions\BinaryOperationExpression">BinaryOperationExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkBinaryOperation"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkUnaryOperation">WalkUnaryOperation</a>(<a href="../../../Pinq/Expressions/UnaryOperationExpression.html"><abbr title="Pinq\Expressions\UnaryOperationExpression">UnaryOperationExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkUnaryOperation"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkCast">WalkCast</a>(<a href="../../../Pinq/Expressions/CastExpression.html"><abbr title="Pinq\Expressions\CastExpression">CastExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkCast"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkEmpty">WalkEmpty</a>(<a href="../../../Pinq/Expressions/EmptyExpression.html"><abbr title="Pinq\Expressions\EmptyExpression">EmptyExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkEmpty"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkIsset">WalkIsset</a>(<a href="../../../Pinq/Expressions/IssetExpression.html"><abbr title="Pinq\Expressions\IssetExpression">IssetExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkIsset"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkField">WalkField</a>(<a href="../../../Pinq/Expressions/FieldExpression.html"><abbr title="Pinq\Expressions\FieldExpression">FieldExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkField"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkMethodCall">WalkMethodCall</a>(<a href="../../../Pinq/Expressions/MethodCallExpression.html"><abbr title="Pinq\Expressions\MethodCallExpression">MethodCallExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkMethodCall"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkIndex">WalkIndex</a>(<a href="../../../Pinq/Expressions/IndexExpression.html"><abbr title="Pinq\Expressions\IndexExpression">IndexExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkIndex"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkInvocation">WalkInvocation</a>(<a href="../../../Pinq/Expressions/InvocationExpression.html"><abbr title="Pinq\Expressions\InvocationExpression">InvocationExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkInvocation"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkFunctionCall">WalkFunctionCall</a>(<a href="../../../Pinq/Expressions/FunctionCallExpression.html"><abbr title="Pinq\Expressions\FunctionCallExpression">FunctionCallExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkFunctionCall"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkStaticMethodCall">WalkStaticMethodCall</a>(<a href="../../../Pinq/Expressions/StaticMethodCallExpression.html"><abbr title="Pinq\Expressions\StaticMethodCallExpression">StaticMethodCallExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkStaticMethodCall"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkNew">WalkNew</a>(<a href="../../../Pinq/Expressions/NewExpression.html"><abbr title="Pinq\Expressions\NewExpression">NewExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkNew"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkReturn">WalkReturn</a>(<a href="../../../Pinq/Expressions/ReturnExpression.html"><abbr title="Pinq\Expressions\ReturnExpression">ReturnExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkReturn"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkThrow">WalkThrow</a>(<a href="../../../Pinq/Expressions/ThrowExpression.html"><abbr title="Pinq\Expressions\ThrowExpression">ThrowExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkThrow"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkParameter">WalkParameter</a>(<a href="../../../Pinq/Expressions/ParameterExpression.html"><abbr title="Pinq\Expressions\ParameterExpression">ParameterExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkParameter"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkTernary">WalkTernary</a>(<a href="../../../Pinq/Expressions/TernaryExpression.html"><abbr title="Pinq\Expressions\TernaryExpression">TernaryExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkTernary"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkVariable">WalkVariable</a>(<a href="../../../Pinq/Expressions/VariableExpression.html"><abbr title="Pinq\Expressions\VariableExpression">VariableExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkVariable"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkValue">WalkValue</a>(<abbr title="Pinq\Expressions\Walkers\O\ValueExpression">ValueExpression</abbr> $Expression)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_WalkSubQuery">WalkSubQuery</a>(<a href="../../../Pinq/Expressions/SubQueryExpression.html"><abbr title="Pinq\Expressions\SubQueryExpression">SubQueryExpression</abbr></a> $Expression)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkSubQuery"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Expressions\Walkers\O\ClosureExpression">ClosureExpression</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_WalkClosure">WalkClosure</a>(<abbr title="Pinq\Expressions\Walkers\O\ClosureExpression">ClosureExpression</abbr> $Expression)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(callable $ValueFilterFunction = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Expressions\Walkers\array&lt;string,">array&lt;string,</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_GetVariableNameValueMap">GetVariableNameValueMap</a>()
+                    <p>Returns the variable value map</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_ResetVariableNameValueMap">ResetVariableNameValueMap</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_SetValueFilter">SetValueFilter</a>(callable $ValueFilterFunction)
+                    <p>Sets the function to filter which values should not be inlined</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_Walk">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_Walk"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 15</div>
+        <code>final            public            <a href="../../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>|null
+    <strong>Walk</strong>(<a href="../../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $Expression = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkAll">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkAll"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 23</div>
+        <code>final            public            <a href="../../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]
+    <strong>WalkAll</strong>(array $Expressions)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$Expressions</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkArray">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkArray"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 33</div>
+        <code>            public            
+    <strong>WalkArray</strong>(<a href="../../../Pinq/Expressions/ArrayExpression.html"><abbr title="Pinq\Expressions\ArrayExpression">ArrayExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/ArrayExpression.html"><abbr title="Pinq\Expressions\ArrayExpression">ArrayExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkAssignment">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkAssignment"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 40</div>
+        <code>            public            
+    <strong>WalkAssignment</strong>(<a href="../../../Pinq/Expressions/AssignmentExpression.html"><abbr title="Pinq\Expressions\AssignmentExpression">AssignmentExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/AssignmentExpression.html"><abbr title="Pinq\Expressions\AssignmentExpression">AssignmentExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkBinaryOperation">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkBinaryOperation"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 48</div>
+        <code>            public            
+    <strong>WalkBinaryOperation</strong>(<a href="../../../Pinq/Expressions/BinaryOperationExpression.html"><abbr title="Pinq\Expressions\BinaryOperationExpression">BinaryOperationExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/BinaryOperationExpression.html"><abbr title="Pinq\Expressions\BinaryOperationExpression">BinaryOperationExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkUnaryOperation">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkUnaryOperation"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 56</div>
+        <code>            public            
+    <strong>WalkUnaryOperation</strong>(<a href="../../../Pinq/Expressions/UnaryOperationExpression.html"><abbr title="Pinq\Expressions\UnaryOperationExpression">UnaryOperationExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/UnaryOperationExpression.html"><abbr title="Pinq\Expressions\UnaryOperationExpression">UnaryOperationExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkCast">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkCast"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 63</div>
+        <code>            public            
+    <strong>WalkCast</strong>(<a href="../../../Pinq/Expressions/CastExpression.html"><abbr title="Pinq\Expressions\CastExpression">CastExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/CastExpression.html"><abbr title="Pinq\Expressions\CastExpression">CastExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkEmpty">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkEmpty"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 70</div>
+        <code>            public            
+    <strong>WalkEmpty</strong>(<a href="../../../Pinq/Expressions/EmptyExpression.html"><abbr title="Pinq\Expressions\EmptyExpression">EmptyExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/EmptyExpression.html"><abbr title="Pinq\Expressions\EmptyExpression">EmptyExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkIsset">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkIsset"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 76</div>
+        <code>            public            
+    <strong>WalkIsset</strong>(<a href="../../../Pinq/Expressions/IssetExpression.html"><abbr title="Pinq\Expressions\IssetExpression">IssetExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/IssetExpression.html"><abbr title="Pinq\Expressions\IssetExpression">IssetExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkField">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkField"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 82</div>
+        <code>            public            
+    <strong>WalkField</strong>(<a href="../../../Pinq/Expressions/FieldExpression.html"><abbr title="Pinq\Expressions\FieldExpression">FieldExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/FieldExpression.html"><abbr title="Pinq\Expressions\FieldExpression">FieldExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkMethodCall">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkMethodCall"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 89</div>
+        <code>            public            
+    <strong>WalkMethodCall</strong>(<a href="../../../Pinq/Expressions/MethodCallExpression.html"><abbr title="Pinq\Expressions\MethodCallExpression">MethodCallExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/MethodCallExpression.html"><abbr title="Pinq\Expressions\MethodCallExpression">MethodCallExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkIndex">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkIndex"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 97</div>
+        <code>            public            
+    <strong>WalkIndex</strong>(<a href="../../../Pinq/Expressions/IndexExpression.html"><abbr title="Pinq\Expressions\IndexExpression">IndexExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/IndexExpression.html"><abbr title="Pinq\Expressions\IndexExpression">IndexExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkInvocation">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkInvocation"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 104</div>
+        <code>            public            
+    <strong>WalkInvocation</strong>(<a href="../../../Pinq/Expressions/InvocationExpression.html"><abbr title="Pinq\Expressions\InvocationExpression">InvocationExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/InvocationExpression.html"><abbr title="Pinq\Expressions\InvocationExpression">InvocationExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkFunctionCall">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkFunctionCall"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 111</div>
+        <code>            public            
+    <strong>WalkFunctionCall</strong>(<a href="../../../Pinq/Expressions/FunctionCallExpression.html"><abbr title="Pinq\Expressions\FunctionCallExpression">FunctionCallExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/FunctionCallExpression.html"><abbr title="Pinq\Expressions\FunctionCallExpression">FunctionCallExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkStaticMethodCall">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkStaticMethodCall"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 118</div>
+        <code>            public            
+    <strong>WalkStaticMethodCall</strong>(<a href="../../../Pinq/Expressions/StaticMethodCallExpression.html"><abbr title="Pinq\Expressions\StaticMethodCallExpression">StaticMethodCallExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/StaticMethodCallExpression.html"><abbr title="Pinq\Expressions\StaticMethodCallExpression">StaticMethodCallExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkNew">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkNew"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 126</div>
+        <code>            public            
+    <strong>WalkNew</strong>(<a href="../../../Pinq/Expressions/NewExpression.html"><abbr title="Pinq\Expressions\NewExpression">NewExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/NewExpression.html"><abbr title="Pinq\Expressions\NewExpression">NewExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkReturn">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkReturn"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 133</div>
+        <code>            public            
+    <strong>WalkReturn</strong>(<a href="../../../Pinq/Expressions/ReturnExpression.html"><abbr title="Pinq\Expressions\ReturnExpression">ReturnExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/ReturnExpression.html"><abbr title="Pinq\Expressions\ReturnExpression">ReturnExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkThrow">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkThrow"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 139</div>
+        <code>            public            
+    <strong>WalkThrow</strong>(<a href="../../../Pinq/Expressions/ThrowExpression.html"><abbr title="Pinq\Expressions\ThrowExpression">ThrowExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/ThrowExpression.html"><abbr title="Pinq\Expressions\ThrowExpression">ThrowExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkParameter">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkParameter"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 145</div>
+        <code>            public            
+    <strong>WalkParameter</strong>(<a href="../../../Pinq/Expressions/ParameterExpression.html"><abbr title="Pinq\Expressions\ParameterExpression">ParameterExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/ParameterExpression.html"><abbr title="Pinq\Expressions\ParameterExpression">ParameterExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkTernary">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkTernary"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 150</div>
+        <code>            public            
+    <strong>WalkTernary</strong>(<a href="../../../Pinq/Expressions/TernaryExpression.html"><abbr title="Pinq\Expressions\TernaryExpression">TernaryExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/TernaryExpression.html"><abbr title="Pinq\Expressions\TernaryExpression">TernaryExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkVariable">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkVariable"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 158</div>
+        <code>            public            
+    <strong>WalkVariable</strong>(<a href="../../../Pinq/Expressions/VariableExpression.html"><abbr title="Pinq\Expressions\VariableExpression">VariableExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/VariableExpression.html"><abbr title="Pinq\Expressions\VariableExpression">VariableExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkValue">
+        <div class="location">at line 97</div>
+        <code>            public            
+    <strong>WalkValue</strong>(<abbr title="Pinq\Expressions\Walkers\O\ValueExpression">ValueExpression</abbr> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Expressions\Walkers\O\ValueExpression">ValueExpression</abbr></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkSubQuery">
+        <div class="location">in <a href="../../../Pinq/Expressions/ExpressionWalker.html#method_WalkSubQuery"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 169</div>
+        <code>            public            
+    <strong>WalkSubQuery</strong>(<a href="../../../Pinq/Expressions/SubQueryExpression.html"><abbr title="Pinq\Expressions\SubQueryExpression">SubQueryExpression</abbr></a> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Expressions/SubQueryExpression.html"><abbr title="Pinq\Expressions\SubQueryExpression">SubQueryExpression</abbr></a></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_WalkClosure">
+        <div class="location">at line 87</div>
+        <code>            public            <abbr title="Pinq\Expressions\Walkers\O\ClosureExpression">ClosureExpression</abbr>
+    <strong>WalkClosure</strong>(<abbr title="Pinq\Expressions\Walkers\O\ClosureExpression">ClosureExpression</abbr> $Expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Expressions\Walkers\O\ClosureExpression">ClosureExpression</abbr></td>
+                <td>$Expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Expressions\Walkers\O\ClosureExpression">ClosureExpression</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method___construct">
+        <div class="location">at line 42</div>
+        <code>            public            
+    <strong>__construct</strong>(callable $ValueFilterFunction = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$ValueFilterFunction</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_GetVariableNameValueMap">
+        <div class="location">at line 52</div>
+        <code>            public            <abbr title="Pinq\Expressions\Walkers\array&lt;string,">array&lt;string,</abbr>
+    <strong>GetVariableNameValueMap</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the variable value map</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Expressions\Walkers\array&lt;string,">array&lt;string,</abbr></td>
+            <td>mixed></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_ResetVariableNameValueMap">
+        <div class="location">at line 60</div>
+        <code>            public            void
+    <strong>ResetVariableNameValueMap</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_SetValueFilter">
+        <div class="location">at line 71</div>
+        <code>            public            
+    <strong>SetValueFilter</strong>(callable $ValueFilterFunction)</code>
+    </h3>
+    <div class="details">
+        <p>Sets the function to filter which values should not be inlined</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$ValueFilterFunction</td>
+                <td>The filter function</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

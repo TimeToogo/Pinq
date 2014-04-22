@@ -1,0 +1,287 @@
+{
+    "name": "Pinq\\Caching\\SecondLevelFunctionCache",
+    "line": 13,
+    "short_desc": "Cache implementation that acts as second level cache for the supplied implementation",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Caching",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Caching\\SecondLevelFunctionCache.php",
+    "hash": "768305f7c1d1af2e14485f2a5111aa3c8b4ee5ef",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "FunctionExpressionTree": "Pinq\\FunctionExpressionTree"
+    },
+    "errors": [
+
+    ],
+    "interfaces": {
+        "Pinq\\Caching\\IFunctionCache": "Pinq\\Caching\\IFunctionCache"
+    },
+    "properties": [
+
+    ],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "InnerCache": {
+                    "name": "InnerCache",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Caching\\IFunctionCache",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "IFunctionCache",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "GetInnerCache": {
+            "name": "GetInnerCache",
+            "line": 34,
+            "short_desc": "Gets the underlying cache implementation",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\Caching\\IFunctionCache",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "Save": {
+            "name": "Save",
+            "line": 39,
+            "short_desc": "Save the supplied expression tree of the functiom to the cache",
+            "long_desc": "",
+            "hint": [
+                [
+                    "void",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "FunctionHash": {
+                    "name": "FunctionHash",
+                    "line": 39,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "FunctionExpressionTree": {
+                    "name": "FunctionExpressionTree",
+                    "line": 39,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\FunctionExpressionTree",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "FunctionExpressionTree",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "TryGet": {
+            "name": "TryGet",
+            "line": 45,
+            "short_desc": "Attempt to get the cached expression tree of the supplied function reflection",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\FunctionExpressionTree",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "FunctionHash": {
+                    "name": "FunctionHash",
+                    "line": 45,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Clear": {
+            "name": "Clear",
+            "line": 55,
+            "short_desc": "Clears all cached function for the supplied function reflection.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "void",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "Remove": {
+            "name": "Remove",
+            "line": 61,
+            "short_desc": "Removes the cached expression tree for the supplied function reflection",
+            "long_desc": "",
+            "hint": [
+                [
+                    "void",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "FunctionHash": {
+                    "name": "FunctionHash",
+                    "line": 61,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

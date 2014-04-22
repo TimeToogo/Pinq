@@ -1,0 +1,352 @@
+{
+    "name": "Pinq\\Providers\\Collection\\OperationEvaluator",
+    "line": 12,
+    "short_desc": "Evaluates the operations on the supplied collection instance",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Providers\\Collection",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Providers\\Collection\\OperationEvaluator.php",
+    "hash": "cf808cfe2ad3032f323dcd2b98bad937e7115585",
+    "parent": "Pinq\\Queries\\Operations\\OperationVisitor",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Operations": "Pinq\\Queries\\Operations"
+    },
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 19,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Collection": {
+                    "name": "Collection",
+                    "line": 19,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Providers\\Collection\\Pinq\\ICollection",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Pinq\\ICollection",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "VisitApply": {
+            "name": "VisitApply",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Operation": {
+                    "name": "Operation",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Providers\\Collection\\Operations\\Apply",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Operations\\Apply",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "VisitAddValues": {
+            "name": "VisitAddValues",
+            "line": 29,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Operation": {
+                    "name": "Operation",
+                    "line": 29,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Providers\\Collection\\Operations\\AddValues",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Operations\\AddValues",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "VisitRemoveValues": {
+            "name": "VisitRemoveValues",
+            "line": 34,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Operation": {
+                    "name": "Operation",
+                    "line": 34,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Providers\\Collection\\Operations\\RemoveValues",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Operations\\RemoveValues",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "VisitRemoveWhere": {
+            "name": "VisitRemoveWhere",
+            "line": 39,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Operation": {
+                    "name": "Operation",
+                    "line": 39,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Providers\\Collection\\Operations\\RemoveWhere",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Operations\\RemoveWhere",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "VisitClear": {
+            "name": "VisitClear",
+            "line": 43,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Operation": {
+                    "name": "Operation",
+                    "line": 43,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Providers\\Collection\\Operations\\Clear",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Operations\\Clear",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "VisitSetIndex": {
+            "name": "VisitSetIndex",
+            "line": 48,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Operation": {
+                    "name": "Operation",
+                    "line": 48,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Providers\\Collection\\Operations\\SetIndex",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Operations\\SetIndex",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "VisitUnsetIndex": {
+            "name": "VisitUnsetIndex",
+            "line": 53,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Operation": {
+                    "name": "Operation",
+                    "line": 53,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Providers\\Collection\\Operations\\UnsetIndex",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Operations\\UnsetIndex",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

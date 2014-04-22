@@ -1,0 +1,67 @@
+{
+    "name": "Pinq\\Queries\\IOperationQuery",
+    "line": 11,
+    "short_desc": "An operation query is a type of query for IRepository, it represents an action to execute against the supplied scope of the source values.",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Queries",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\IOperationQuery.php",
+    "hash": "5862b591e603e1252a0a5f5da0b422dfe7b471af",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": {
+        "Pinq\\Queries\\IQuery": "Pinq\\Queries\\IQuery"
+    },
+    "properties": [
+
+    ],
+    "methods": {
+        "GetOperation": {
+            "name": "GetOperation",
+            "line": 16,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\Queries\\IOperation",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        }
+    },
+    "constants": [
+
+    ]
+}

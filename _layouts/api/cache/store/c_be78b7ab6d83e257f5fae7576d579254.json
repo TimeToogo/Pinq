@@ -1,0 +1,99 @@
+{
+    "name": "Pinq\\IQueryable",
+    "line": 12,
+    "short_desc": "The queryable provides the traversable query API, on an exteral query provider.",
+    "long_desc": "Supplied functions are converted to expression trees and are used to execute\nequivalent querys on the external source.",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\IQueryable.php",
+    "hash": "741081f5506532346656d102bc7e1d8c15396746",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": {
+        "Pinq\\ITraversable": "Pinq\\ITraversable"
+    },
+    "properties": [
+
+    ],
+    "methods": {
+        "GetProvider": {
+            "name": "GetProvider",
+            "line": 21,
+            "short_desc": "The query provider for the implementation.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\Providers\\IQueryProvider",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "GetScope": {
+            "name": "GetScope",
+            "line": 28,
+            "short_desc": "The current query scope.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\Queries\\IScope",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        }
+    },
+    "constants": {
+        "IQueryableType": {
+            "name": "IQueryableType",
+            "line": 14,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}

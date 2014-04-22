@@ -1,0 +1,106 @@
+{
+    "name": "Pinq\\Queries\\Operations\\ExpressionOperation",
+    "line": 12,
+    "short_desc": "Base class for an operation query containing a function expression tree",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Queries\\Operations",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Operations\\ExpressionOperation.php",
+    "hash": "a430dc5fc7e274cb933b543780274e983e1df2ac",
+    "parent": "Pinq\\Queries\\Operations\\Operation",
+    "modifiers": 16,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "FunctionExpressionTree": "Pinq\\FunctionExpressionTree"
+    },
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 19,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "FunctionExpressionTree": {
+                    "name": "FunctionExpressionTree",
+                    "line": 19,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\FunctionExpressionTree",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "FunctionExpressionTree",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "GetFunctionExpressionTree": {
+            "name": "GetFunctionExpressionTree",
+            "line": 27,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\FunctionExpressionTree",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        }
+    },
+    "constants": [
+
+    ]
+}

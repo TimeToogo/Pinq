@@ -1,0 +1,118 @@
+{
+    "name": "Pinq\\Expressions\\Operators\\Assignment",
+    "line": 10,
+    "short_desc": "The enum containing PHP assignment operators",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Expressions\\Operators",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\Operators\\Assignment.php",
+    "hash": "fec401df835d24839a95567db46ea42d08723a10",
+    "parent": null,
+    "modifiers": 32,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": [
+
+    ],
+    "constants": {
+        "Equal": {
+            "name": "Equal",
+            "line": 12,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "EqualReference": {
+            "name": "EqualReference",
+            "line": 13,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "Addition": {
+            "name": "Addition",
+            "line": 16,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "Subtraction": {
+            "name": "Subtraction",
+            "line": 17,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "Multiplication": {
+            "name": "Multiplication",
+            "line": 18,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "Division": {
+            "name": "Division",
+            "line": 19,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "Modulus": {
+            "name": "Modulus",
+            "line": 20,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "BitwiseAnd": {
+            "name": "BitwiseAnd",
+            "line": 23,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "BitwiseOr": {
+            "name": "BitwiseOr",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "BitwiseXor": {
+            "name": "BitwiseXor",
+            "line": 25,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "ShiftLeft": {
+            "name": "ShiftLeft",
+            "line": 26,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "ShiftRight": {
+            "name": "ShiftRight",
+            "line": 27,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "Concatenate": {
+            "name": "Concatenate",
+            "line": 30,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}

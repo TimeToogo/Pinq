@@ -17,12 +17,12 @@ The following shows an example query using the Pinq library:
 {% highlight php startinline %}
 
 $YoungPeopleDetails = $People
-        ->Where(function (array $Row) { return $Row['Age'] <= 50; })
-        ->OrderByAscending(function (array $Row) { return $Row['FirstName']; })
-        ->ThenByAscending(function (array $Row) { return $Row['LastName']; })
+        ->Where(function ($Row) { return $Row['Age'] <= 50; })
+        ->OrderByAscending(function ($Row) { return $Row['FirstName']; })
+        ->ThenByAscending(function ($Row) { return $Row['LastName']; })
         ->Take(50)
-        ->IndexBy(function (array $Row) { return $Row['PhoneNumber']; })
-        ->Select(function (array $Row) { 
+        ->IndexBy(function ($Row) { return $Row['PhoneNumber']; })
+        ->Select(function ($Row) { 
             return [
                 'FullName' => $Row['FirstName'] . ' ' . $Row['LastName'],
                 'Address' => $Row['Address'],
@@ -49,7 +49,7 @@ syntax is cool, but not only what Linq is about. Pinq aims to provide:
  - Full composer and PSR-4 support
  - Complete and thorough documentation
  - Linq-style fluent query API with lazy evaluation and immutable query objects
- - True and seamless external query support
+ - Truly seamless external query support
  - Full support for PHP closures and callable syntax (No magic strings)
  - And even building on the original Linq with offering an additional mutable query API
 

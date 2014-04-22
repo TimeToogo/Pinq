@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Iterators\Utilities\Lookup | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Pinq/Iterators/Utilities.html">Pinq\Iterators\Utilities</a>\Lookup</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>Lookup</strong></p>
+
+            <div class="description">
+            <p>Represents a  range grouped values determined from a supplied grouping function</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    static&nbsp;
+                </td>
+                <td class="last">
+                    <a href="#method_FromGroupingFunction">FromGroupingFunction</a>(callable $GroupingFunction, <abbr title="Pinq\Iterators\Utilities\Traversable">Traversable</abbr> $Values, array $GroupKeys = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_Get">Get</a>(mixed $Key)
+                    <p>Returns the group of values from the specified key</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array[]
+                </td>
+                <td class="last">
+                    <a href="#method_AsArray">AsArray</a>()
+                    <p>Returns all the groups as an array</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_Contains">Contains</a>(mixed $Key)
+                    <p>Returns whether there is a specified group</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getIterator">getIterator</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_FromGroupingFunction">
+        <div class="location">at line 24</div>
+        <code>        static    public            
+    <strong>FromGroupingFunction</strong>(callable $GroupingFunction, <abbr title="Pinq\Iterators\Utilities\Traversable">Traversable</abbr> $Values, array $GroupKeys = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$GroupingFunction</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Utilities\Traversable">Traversable</abbr></td>
+                <td>$Values</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$GroupKeys</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_Get">
+        <div class="location">at line 53</div>
+        <code>            public            array
+    <strong>Get</strong>(mixed $Key)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the group of values from the specified key</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$Key</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_AsArray">
+        <div class="location">at line 63</div>
+        <code>            public            array[]
+    <strong>AsArray</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns all the groups as an array</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_Contains">
+        <div class="location">at line 79</div>
+        <code>            public            boolean
+    <strong>Contains</strong>(mixed $Key)</code>
+    </h3>
+    <div class="details">
+        <p>Returns whether there is a specified group</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$Key</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getIterator">
+        <div class="location">at line 84</div>
+        <code>            public            
+    <strong>getIterator</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

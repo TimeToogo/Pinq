@@ -1,0 +1,146 @@
+{
+    "name": "Pinq\\IJoiningOnTraversable",
+    "line": 10,
+    "short_desc": "This API for the filter options available to a joining traversable",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\IJoiningOnTraversable.php",
+    "hash": "402209497f1ab869ae18518423e51b66295bf83f",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": {
+        "On": {
+            "name": "On",
+            "line": 19,
+            "short_desc": "Filters the join values according to the supplied function.",
+            "long_desc": "Both values will be passed as arguments to the supplied function.",
+            "hint": [
+                [
+                    "Pinq\\IJoiningToTraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 19,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "OnEquality": {
+            "name": "OnEquality",
+            "line": 29,
+            "short_desc": "Filters the join values via strict equality (===) on the outer and inner keys according to the supplied key functions.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\IJoiningToTraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "OuterKeyFunction": {
+                    "name": "OuterKeyFunction",
+                    "line": 29,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "InnerKeyFunction": {
+                    "name": "InnerKeyFunction",
+                    "line": 29,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

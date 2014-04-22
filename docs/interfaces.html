@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Interfaces | </title>
+                    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+                            </head>
+        <body id="overview">
+            <div class="header">
+        <ul>
+            <li><a href="classes.html">Classes</a></li>
+                            <li><a href="namespaces.html">Namespaces</a></li>
+                        <li><a href="interfaces.html">Interfaces</a></li>
+            <li><a href="traits.html">Traits</a></li>
+            <li><a href="doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <h1>Interfaces</h1>
+    </div>
+        <div class="content">
+                <table>
+                    <tr>
+                <td><a href="Pinq/Caching/IFunctionCache.html" target="main"><abbr title="Pinq\Caching\IFunctionCache">Pinq\Caching\IFunctionCache</abbr></a></td>
+                <td class="last">
+                    The API for a cache implementation to store the expression trees of parsed functions.
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/IAggregatable.html" target="main"><abbr title="Pinq\IAggregatable">Pinq\IAggregatable</abbr></a></td>
+                <td class="last">
+                    The API defining all the aggregate results, mainly exists for organizational purposes
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/ICollection.html" target="main"><abbr title="Pinq\ICollection">Pinq\ICollection</abbr></a></td>
+                <td class="last">
+                    The collection API, along with traversable query API,  a collection's values are mutable, they can be added, removed and altered.
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/IGroupedTraversable.html" target="main"><abbr title="Pinq\IGroupedTraversable">Pinq\IGroupedTraversable</abbr></a></td>
+                <td class="last">
+                    Api for subsequent grouping of the supplied traversable query.
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/IJoiningOnTraversable.html" target="main"><abbr title="Pinq\IJoiningOnTraversable">Pinq\IJoiningOnTraversable</abbr></a></td>
+                <td class="last">
+                    This API for the filter options available to a joining traversable
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/IJoiningToTraversable.html" target="main"><abbr title="Pinq\IJoiningToTraversable">Pinq\IJoiningToTraversable</abbr></a></td>
+                <td class="last">
+                    This API required to combine the filtered joined values into the the elements of the resulting traversable
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/IOrderedTraversable.html" target="main"><abbr title="Pinq\IOrderedTraversable">Pinq\IOrderedTraversable</abbr></a></td>
+                <td class="last">
+                    The API for subsequent orderings of a traversable query
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/IQueryable.html" target="main"><abbr title="Pinq\IQueryable">Pinq\IQueryable</abbr></a></td>
+                <td class="last">
+                    The queryable provides the traversable query API, on an exteral query provider.
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/IRepository.html" target="main"><abbr title="Pinq\IRepository">Pinq\IRepository</abbr></a></td>
+                <td class="last">
+                    The repository provides the mutable collection API on a queryable.
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/ITraversable.html" target="main"><abbr title="Pinq\ITraversable">Pinq\ITraversable</abbr></a></td>
+                <td class="last">
+                    The root interface providing a fluent query API for a range of values.
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/Parsing/IFunctionToExpressionTreeConverter.html" target="main"><abbr title="Pinq\Parsing\IFunctionToExpressionTreeConverter">Pinq\Parsing\IFunctionToExpressionTreeConverter</abbr></a></td>
+                <td class="last">
+                    Facade for converting a function into the equivalent expression tree
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/Parsing/IParser.html" target="main"><abbr title="Pinq\Parsing\IParser">Pinq\Parsing\IParser</abbr></a></td>
+                <td class="last">
+                    The IParser is an abstraction for converting a function to an expression tree.
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/Providers/IQueryProvider.html" target="main"><abbr title="Pinq\Providers\IQueryProvider">Pinq\Providers\IQueryProvider</abbr></a></td>
+                <td class="last">
+                    The query provider is used to by the IQueryable as the data source in which the query requests are all loaded from
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/Providers/IRepositoryProvider.html" target="main"><abbr title="Pinq\Providers\IRepositoryProvider">Pinq\Providers\IRepositoryProvider</abbr></a></td>
+                <td class="last">
+                    The query provider is used to by the IRepository as the data source in which the query requests are all loaded from and all operation query are executed against
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/Queries/IOperation.html" target="main"><abbr title="Pinq\Queries\IOperation">Pinq\Queries\IOperation</abbr></a></td>
+                <td class="last">
+                    The interface for a operation query, one of the const types, they are all implemented as their own class in Operations namespace.
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/Queries/IOperationQuery.html" target="main"><abbr title="Pinq\Queries\IOperationQuery">Pinq\Queries\IOperationQuery</abbr></a></td>
+                <td class="last">
+                    An operation query is a type of query for IRepository, it represents an action to execute against the supplied scope of the source values.
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/Queries/IQuery.html" target="main"><abbr title="Pinq\Queries\IQuery">Pinq\Queries\IQuery</abbr></a></td>
+                <td class="last">
+                    Base interface for request / operation query types which both act upon the supplied scope
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/Queries/IRequest.html" target="main"><abbr title="Pinq\Queries\IRequest">Pinq\Queries\IRequest</abbr></a></td>
+                <td class="last">
+                    The interface for a request query, one of the const types, they are all implemented as their own class in Requests namespace.
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/Queries/IRequestQuery.html" target="main"><abbr title="Pinq\Queries\IRequestQuery">Pinq\Queries\IRequestQuery</abbr></a></td>
+                <td class="last">
+                    An request query is a type of query for IQueryable, it represents an value to retrieve from the supplied scope of the source values.
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/Queries/IScope.html" target="main"><abbr title="Pinq\Queries\IScope">Pinq\Queries\IScope</abbr></a></td>
+                <td class="last">
+                    The query scope.
+                </td>
+            </tr>
+                    <tr>
+                <td><a href="Pinq/Queries/ISegment.html" target="main"><abbr title="Pinq\Queries\ISegment">Pinq\Queries\ISegment</abbr></a></td>
+                <td class="last">
+                    The interface for a query segment, one of the const types, they are all implemented as their own class class in Segments namespace.
+                </td>
+            </tr>
+            </table>
+        </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

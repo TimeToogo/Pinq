@@ -1,0 +1,472 @@
+{
+    "name": "Pinq\\IAggregatable",
+    "line": 11,
+    "short_desc": "The API defining all the aggregate results, mainly exists for organizational purposes",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\IAggregatable.php",
+    "hash": "916cc779d10dcc72077ac2d4b705296bc23d919b",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": {
+        "Countable": "Countable"
+    },
+    "properties": [
+
+    ],
+    "methods": {
+        "Count": {
+            "name": "Count",
+            "line": 19,
+            "short_desc": "Returns the amount of the values.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "int",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "Exists": {
+            "name": "Exists",
+            "line": 26,
+            "short_desc": "Returns whether any values exist.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "Aggregate": {
+            "name": "Aggregate",
+            "line": 34,
+            "short_desc": "Aggregates the values with the supplied function",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 34,
+                    "short_desc": "The aggregate function",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Maximum": {
+            "name": "Maximum",
+            "line": 42,
+            "short_desc": "Returns the maximum value.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 42,
+                    "short_desc": "The function which will return the values",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Minimum": {
+            "name": "Minimum",
+            "line": 51,
+            "short_desc": "Returns the maximum value.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 51,
+                    "short_desc": "The function which will return the values",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Sum": {
+            "name": "Sum",
+            "line": 59,
+            "short_desc": "Returns the sum of the values.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "int",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 59,
+                    "short_desc": "The function which will return the values",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Average": {
+            "name": "Average",
+            "line": 68,
+            "short_desc": "Returns the average of the values.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "double",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 68,
+                    "short_desc": "The function which will return the values",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "All": {
+            "name": "All",
+            "line": 77,
+            "short_desc": "Returns a boolean of if all the values evaluate to true",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 77,
+                    "short_desc": "The function which will return the values",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Any": {
+            "name": "Any",
+            "line": 85,
+            "short_desc": "Returns a boolean of if any of the values evaluate to true",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 85,
+                    "short_desc": "The function which will return the values",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Implode": {
+            "name": "Implode",
+            "line": 94,
+            "short_desc": "Returns a string of all the values concatented by the delimiter",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Delimiter": {
+                    "name": "Delimiter",
+                    "line": 94,
+                    "short_desc": "The string to delimit the values by",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "Function": {
+                    "name": "Function",
+                    "line": 94,
+                    "short_desc": "The function which will return the values",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

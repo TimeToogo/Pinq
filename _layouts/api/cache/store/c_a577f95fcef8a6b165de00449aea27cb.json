@@ -1,0 +1,190 @@
+{
+    "name": "Pinq\\IOrderedTraversable",
+    "line": 10,
+    "short_desc": "The API for subsequent orderings of a traversable query",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\IOrderedTraversable.php",
+    "hash": "ab73cb7717a23e25577b14cd4c025964b99f0b19",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": {
+        "Pinq\\ITraversable": "Pinq\\ITraversable"
+    },
+    "properties": [
+
+    ],
+    "methods": {
+        "ThenBy": {
+            "name": "ThenBy",
+            "line": 20,
+            "short_desc": "Subsequently orders the results using the supplied function according to the supplied direction",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\IOrderedTraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 20,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "Direction": {
+                    "name": "Direction",
+                    "line": 20,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "ThenByAscending": {
+            "name": "ThenByAscending",
+            "line": 28,
+            "short_desc": "Subsequently orders the results using the supplied function ascendingly",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\IOrderedTraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 28,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "ThenByDescending": {
+            "name": "ThenByDescending",
+            "line": 36,
+            "short_desc": "Subsequently orders the results using the supplied function descendingly",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\IOrderedTraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 36,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Providers\Loadable\RequestEvaluator | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Pinq/Providers/Loadable.html">Pinq\Providers\Loadable</a>\RequestEvaluator</h1>
+    </div>
+        <div class="content">
+                <p>abstract     class
+    <strong>RequestEvaluator</strong>        extends <a href="../../../Pinq/Queries/Requests/RequestVisitor.html"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a></p>
+
+            <div class="description">
+            <p>Base request evaluator for request evaluator in which the values can be loaded and once loaded, the requests can be performed in memory.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_Visit">Visit</a>(<a href="../../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a> $Request)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Requests/RequestVisitor.html#method_Visit"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitValues">VisitValues</a>(<abbr title="Pinq\Providers\Loadable\Requests\Values">Values</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitCount">VisitCount</a>(<abbr title="Pinq\Providers\Loadable\Requests\Count">Count</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitExists">VisitExists</a>(<abbr title="Pinq\Providers\Loadable\Requests\Exists">Exists</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitFirst">VisitFirst</a>(<abbr title="Pinq\Providers\Loadable\Requests\First">First</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitLast">VisitLast</a>(<abbr title="Pinq\Providers\Loadable\Requests\Last">Last</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitContains">VisitContains</a>(<abbr title="Pinq\Providers\Loadable\Requests\Contains">Contains</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitAggregate">VisitAggregate</a>(<abbr title="Pinq\Providers\Loadable\Requests\Aggregate">Aggregate</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitMaximum">VisitMaximum</a>(<abbr title="Pinq\Providers\Loadable\Requests\Maximum">Maximum</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitMinimum">VisitMinimum</a>(<abbr title="Pinq\Providers\Loadable\Requests\Minimum">Minimum</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitSum">VisitSum</a>(<abbr title="Pinq\Providers\Loadable\Requests\Sum">Sum</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitAverage">VisitAverage</a>(<abbr title="Pinq\Providers\Loadable\Requests\Average">Average</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitAll">VisitAll</a>(<abbr title="Pinq\Providers\Loadable\Requests\All">All</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitAny">VisitAny</a>(<abbr title="Pinq\Providers\Loadable\Requests\Any">Any</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitImplode">VisitImplode</a>(<abbr title="Pinq\Providers\Loadable\Requests\Implode">Implode</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitGetIndex">VisitGetIndex</a>(<abbr title="Pinq\Providers\Loadable\Requests\GetIndex">GetIndex</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_VisitIssetIndex">VisitIssetIndex</a>(<abbr title="Pinq\Providers\Loadable\Requests\IssetIndex">IssetIndex</abbr> $Request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_Visit">
+        <div class="location">in <a href="../../../Pinq/Queries/Requests/RequestVisitor.html#method_Visit"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a> at line 21</div>
+        <code>final            public            
+    <strong>Visit</strong>(<a href="../../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a></td>
+                <td>$Request</td>
+                <td>The returned value</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitValues">
+        <div class="location">at line 32</div>
+        <code>            public            
+    <strong>VisitValues</strong>(<abbr title="Pinq\Providers\Loadable\Requests\Values">Values</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\Values">Values</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitCount">
+        <div class="location">at line 60</div>
+        <code>final            public            
+    <strong>VisitCount</strong>(<abbr title="Pinq\Providers\Loadable\Requests\Count">Count</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\Count">Count</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitExists">
+        <div class="location">at line 68</div>
+        <code>final            public            
+    <strong>VisitExists</strong>(<abbr title="Pinq\Providers\Loadable\Requests\Exists">Exists</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\Exists">Exists</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitFirst">
+        <div class="location">at line 44</div>
+        <code>final            public            
+    <strong>VisitFirst</strong>(<abbr title="Pinq\Providers\Loadable\Requests\First">First</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\First">First</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitLast">
+        <div class="location">at line 52</div>
+        <code>final            public            
+    <strong>VisitLast</strong>(<abbr title="Pinq\Providers\Loadable\Requests\Last">Last</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\Last">Last</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitContains">
+        <div class="location">at line 76</div>
+        <code>final            public            
+    <strong>VisitContains</strong>(<abbr title="Pinq\Providers\Loadable\Requests\Contains">Contains</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\Contains">Contains</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitAggregate">
+        <div class="location">at line 84</div>
+        <code>final            public            
+    <strong>VisitAggregate</strong>(<abbr title="Pinq\Providers\Loadable\Requests\Aggregate">Aggregate</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\Aggregate">Aggregate</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitMaximum">
+        <div class="location">at line 92</div>
+        <code>final            public            
+    <strong>VisitMaximum</strong>(<abbr title="Pinq\Providers\Loadable\Requests\Maximum">Maximum</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\Maximum">Maximum</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitMinimum">
+        <div class="location">at line 100</div>
+        <code>final            public            
+    <strong>VisitMinimum</strong>(<abbr title="Pinq\Providers\Loadable\Requests\Minimum">Minimum</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\Minimum">Minimum</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitSum">
+        <div class="location">at line 124</div>
+        <code>final            public            
+    <strong>VisitSum</strong>(<abbr title="Pinq\Providers\Loadable\Requests\Sum">Sum</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\Sum">Sum</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitAverage">
+        <div class="location">at line 132</div>
+        <code>final            public            
+    <strong>VisitAverage</strong>(<abbr title="Pinq\Providers\Loadable\Requests\Average">Average</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\Average">Average</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitAll">
+        <div class="location">at line 140</div>
+        <code>final            public            
+    <strong>VisitAll</strong>(<abbr title="Pinq\Providers\Loadable\Requests\All">All</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\All">All</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitAny">
+        <div class="location">at line 148</div>
+        <code>final            public            
+    <strong>VisitAny</strong>(<abbr title="Pinq\Providers\Loadable\Requests\Any">Any</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\Any">Any</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitImplode">
+        <div class="location">at line 156</div>
+        <code>final            public            
+    <strong>VisitImplode</strong>(<abbr title="Pinq\Providers\Loadable\Requests\Implode">Implode</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\Implode">Implode</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitGetIndex">
+        <div class="location">at line 108</div>
+        <code>final            public            
+    <strong>VisitGetIndex</strong>(<abbr title="Pinq\Providers\Loadable\Requests\GetIndex">GetIndex</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\GetIndex">GetIndex</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_VisitIssetIndex">
+        <div class="location">at line 116</div>
+        <code>final            public            
+    <strong>VisitIssetIndex</strong>(<abbr title="Pinq\Providers\Loadable\Requests\IssetIndex">IssetIndex</abbr> $Request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Loadable\Requests\IssetIndex">IssetIndex</abbr></td>
+                <td>$Request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method___construct">
+        <div class="location">at line 27</div>
+        <code>            public            
+    <strong>__construct</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

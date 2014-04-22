@@ -1,0 +1,52 @@
+{
+    "name": "Pinq\\Direction",
+    "line": 10,
+    "short_desc": "Enum for ordering direction",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Direction.php",
+    "hash": "e8168adf06ea714bf1fe56862ca9748fc13c6e23",
+    "parent": null,
+    "modifiers": 32,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": [
+
+    ],
+    "constants": {
+        "Ascending": {
+            "name": "Ascending",
+            "line": 14,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "Descending": {
+            "name": "Descending",
+            "line": 15,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}

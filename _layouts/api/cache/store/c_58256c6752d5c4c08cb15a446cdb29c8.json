@@ -1,0 +1,1219 @@
+{
+    "name": "Pinq\\ITraversable",
+    "line": 13,
+    "short_desc": "The root interface providing a fluent query API for a range of values.",
+    "long_desc": "Query calls must be immutable and return a new instance with every query call.\nQueries should also be executed lazily upon iteration.",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\ITraversable.php",
+    "hash": "3dcfe5069d90e67a903a1c9e79cbf695ae54a245",
+    "parent": null,
+    "modifiers": null,
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": {
+        "Pinq\\IAggregatable": "Pinq\\IAggregatable",
+        "IteratorAggregate": "IteratorAggregate",
+        "ArrayAccess": "ArrayAccess"
+    },
+    "properties": [
+
+    ],
+    "methods": {
+        "AsArray": {
+            "name": "AsArray",
+            "line": 22,
+            "short_desc": "Returns the values as an array",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "AsTraversable": {
+            "name": "AsTraversable",
+            "line": 31,
+            "short_desc": "Returns the values as a traversable.",
+            "long_desc": "If the implementation is queryable the following operations will\nbe performed in memory.",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "AsCollection": {
+            "name": "AsCollection",
+            "line": 40,
+            "short_desc": "Returns the values as a collection.",
+            "long_desc": "If the implementation is queryable the following operations will\nbe performed in memory.",
+            "hint": [
+                [
+                    "Pinq\\ICollection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "AsQueryable": {
+            "name": "AsQueryable",
+            "line": 47,
+            "short_desc": "Returns the values as a queryable.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\IQueryable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "AsRepository": {
+            "name": "AsRepository",
+            "line": 54,
+            "short_desc": "Returns the values as a repository.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\IQueryable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "First": {
+            "name": "First",
+            "line": 61,
+            "short_desc": "Returns the first value, null if empty",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "The first value",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "Last": {
+            "name": "Last",
+            "line": 68,
+            "short_desc": "Returns the last value, null if empty",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "The last value",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "Contains": {
+            "name": "Contains",
+            "line": 76,
+            "short_desc": "Returns whether the supplied value is contained within the aggregate",
+            "long_desc": "",
+            "hint": [
+                [
+                    "boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Value": {
+                    "name": "Value",
+                    "line": 76,
+                    "short_desc": "The value to check for",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "mixed",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Where": {
+            "name": "Where",
+            "line": 84,
+            "short_desc": "Filters the values by a supplied predicate.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Predicate": {
+                    "name": "Predicate",
+                    "line": 84,
+                    "short_desc": "The predicate function",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "OrderBy": {
+            "name": "OrderBy",
+            "line": 94,
+            "short_desc": "Orders the values mapped from the supplied function according the supplied direction.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\IOrderedTraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 94,
+                    "short_desc": "The projection function",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "Direction": {
+                    "name": "Direction",
+                    "line": 94,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "OrderByAscending": {
+            "name": "OrderByAscending",
+            "line": 104,
+            "short_desc": "Orders the values mapped from the supplied function ascendingly",
+            "long_desc": "Example function:",
+            "hint": [
+                [
+                    "Pinq\\IOrderedTraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 104,
+                    "short_desc": "The mapping function",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "OrderByDescending": {
+            "name": "OrderByDescending",
+            "line": 114,
+            "short_desc": "Orders the values mapped from the supplied function descendingly",
+            "long_desc": "Example expression function:",
+            "hint": [
+                [
+                    "Pinq\\IOrderedTraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 114,
+                    "short_desc": "The mapping function",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Skip": {
+            "name": "Skip",
+            "line": 122,
+            "short_desc": "Skip the amount of values from the start.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Amount": {
+                    "name": "Amount",
+                    "line": 122,
+                    "short_desc": "The amount of values to skip, must be > 0",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Take": {
+            "name": "Take",
+            "line": 130,
+            "short_desc": "Limits the amount of values by the supplied amount",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Amount": {
+                    "name": "Amount",
+                    "line": 130,
+                    "short_desc": "The amount of values to retrieve, must be > 0 or null if all",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ],
+                        [
+                            "null",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Slice": {
+            "name": "Slice",
+            "line": 139,
+            "short_desc": "Retrieve a slice of the values",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Start": {
+                    "name": "Start",
+                    "line": 139,
+                    "short_desc": "The amount of values to skip",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "Amount": {
+                    "name": "Amount",
+                    "line": 139,
+                    "short_desc": "The amount of values to retrieve",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ],
+                        [
+                            "null",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "IndexBy": {
+            "name": "IndexBy",
+            "line": 147,
+            "short_desc": "Index the values according to the supplied mapping function.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 147,
+                    "short_desc": "The projection function",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "GroupBy": {
+            "name": "GroupBy",
+            "line": 156,
+            "short_desc": "Groups values according the supplied function.",
+            "long_desc": "(Uses strict equality '===')\nThe values will be grouped into instances of ITraversable.",
+            "hint": [
+                [
+                    "Pinq\\IGroupedTraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 156,
+                    "short_desc": "The grouping function",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Join": {
+            "name": "Join",
+            "line": 164,
+            "short_desc": "Matches the original values with the supplied values according to the supplied function.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\IJoiningOnTraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Values": {
+                    "name": "Values",
+                    "line": 164,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "\\Traversable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "GroupJoin": {
+            "name": "GroupJoin",
+            "line": 173,
+            "short_desc": "Matches the original values with the supplied values according to the supplied functions then groups the values.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\IJoiningOnTraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Values": {
+                    "name": "Values",
+                    "line": 173,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "\\Traversable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Unique": {
+            "name": "Unique",
+            "line": 180,
+            "short_desc": "Only return unique values.",
+            "long_desc": "(Uses strict equality '===')",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "Select": {
+            "name": "Select",
+            "line": 188,
+            "short_desc": "Returns the values mapped by the supplied function.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 188,
+                    "short_desc": "The function returning the data to select",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "SelectMany": {
+            "name": "SelectMany",
+            "line": 197,
+            "short_desc": "Returns the values mapped by the supplied function and then flattens  the values into a single traversable.",
+            "long_desc": "Keys will be reindexed.",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 197,
+                    "short_desc": "The function returning the data to select",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Append": {
+            "name": "Append",
+            "line": 205,
+            "short_desc": "Returns values from the original and supplied values, keys will be reindexed.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Values": {
+                    "name": "Values",
+                    "line": 205,
+                    "short_desc": "The values to append",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "\\Traversable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "WhereIn": {
+            "name": "WhereIn",
+            "line": 214,
+            "short_desc": "Returns all values from the original present in the supplied values.",
+            "long_desc": "(Uses strict equality '===')",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Values": {
+                    "name": "Values",
+                    "line": 214,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "\\Traversable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Except": {
+            "name": "Except",
+            "line": 223,
+            "short_desc": "Returns values all values from the original not present in the supplied values.",
+            "long_desc": "(Uses strict equality '===')",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Values": {
+                    "name": "Values",
+                    "line": 223,
+                    "short_desc": "The values to union",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "\\Traversable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Union": {
+            "name": "Union",
+            "line": 233,
+            "short_desc": "Returns unique results present in both the original and supplied values,  keys will be reindexed.",
+            "long_desc": "(Uses strict equality '===')",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Values": {
+                    "name": "Values",
+                    "line": 233,
+                    "short_desc": "The values to union",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "\\Traversable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Intersect": {
+            "name": "Intersect",
+            "line": 242,
+            "short_desc": "Returns unique values the are present in the original and supplied values.",
+            "long_desc": "(Uses strict equality '===')",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Values": {
+                    "name": "Values",
+                    "line": 242,
+                    "short_desc": "The values to intersect with",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "\\Traversable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "Difference": {
+            "name": "Difference",
+            "line": 251,
+            "short_desc": "Removes unique values from the original not present in the supplied values.",
+            "long_desc": "(Uses strict equality '===')",
+            "hint": [
+                [
+                    "Pinq\\ITraversable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Values": {
+                    "name": "Values",
+                    "line": 251,
+                    "short_desc": "The values to remove",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "\\Traversable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "ITraversableType": {
+            "name": "ITraversableType",
+            "line": 15,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}

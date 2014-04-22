@@ -1,0 +1,187 @@
+{
+    "name": "Pinq\\Expressions\\Walkers\\QueryProvider",
+    "line": 27,
+    "short_desc": "Mock implementation, used to get the request query from the queryable method calls, it stores the request and can be retrieved for resolving the sub query expression",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Expressions\\Walkers",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\Walkers\\SubQueryResolver.php",
+    "hash": "b412696a348e68030d014ea5aa08a68e6d6eb5b8",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Queries": "Pinq\\Queries",
+        "O": "Pinq\\Expressions"
+    },
+    "errors": [
+
+    ],
+    "interfaces": {
+        "Pinq\\Providers\\IQueryProvider": "Pinq\\Providers\\IQueryProvider"
+    },
+    "properties": [
+
+    ],
+    "methods": {
+        "CreateQueryable": {
+            "name": "CreateQueryable",
+            "line": 31,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Pinq\\IQueryable",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Scope": {
+                    "name": "Scope",
+                    "line": 31,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\Walkers\\Pinq\\Queries\\IScope",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Pinq\\Queries\\IScope",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "GetFunctionToExpressionTreeConverter": {
+            "name": "GetFunctionToExpressionTreeConverter",
+            "line": 36,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Pinq\\Parsing\\IFunctionToExpressionTreeConverter",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "Load": {
+            "name": "Load",
+            "line": 41,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Query": {
+                    "name": "Query",
+                    "line": 41,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\Walkers\\Queries\\IRequestQuery",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Queries\\IRequestQuery",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "GetAndResetQuery": {
+            "name": "GetAndResetQuery",
+            "line": 55,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\Expressions\\Walkers\\Queries\\IRequestQuery",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        }
+    },
+    "constants": [
+
+    ]
+}

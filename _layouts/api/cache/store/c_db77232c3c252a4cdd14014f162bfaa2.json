@@ -1,0 +1,267 @@
+{
+    "name": "Pinq\\Utilities",
+    "line": 12,
+    "short_desc": "General utility class providing common and misc behaviour",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Utilities.php",
+    "hash": "b7077d78469cdb1953ba5a009ee36315e8eaf301",
+    "parent": null,
+    "modifiers": 32,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [
+
+    ],
+    "errors": [
+
+    ],
+    "interfaces": [
+
+    ],
+    "properties": [
+
+    ],
+    "methods": {
+        "GetTypeOrClass": {
+            "name": "GetTypeOrClass",
+            "line": 22,
+            "short_desc": "Returns the type or class of the supplied function",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "The type or class",
+            "tags": [
+
+            ],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Value": {
+                    "name": "Value",
+                    "line": 22,
+                    "short_desc": "The value",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "mixed",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "IsIterable": {
+            "name": "IsIterable",
+            "line": 33,
+            "short_desc": "Returns whether the value is iterable",
+            "long_desc": "",
+            "hint": [
+                [
+                    "boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "Whether the value is iterable",
+            "tags": [
+
+            ],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Value": {
+                    "name": "Value",
+                    "line": 33,
+                    "short_desc": "The value",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "mixed",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "ToArray": {
+            "name": "ToArray",
+            "line": 44,
+            "short_desc": "Returns the iterator as an array",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Iterator": {
+                    "name": "Iterator",
+                    "line": 44,
+                    "short_desc": "The iterator value",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Traversable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Traversable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "ToIterator": {
+            "name": "ToIterator",
+            "line": 77,
+            "short_desc": "Returns the values as an iterator",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Iterator",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "PinqException",
+                    "If the value is not a array nor \\Traversable"
+                ]
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "TraversableOrArray": {
+                    "name": "TraversableOrArray",
+                    "line": 77,
+                    "short_desc": "The value",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "\\Traversable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "IsNormalSyntaxName": {
+            "name": "IsNormalSyntaxName",
+            "line": 108,
+            "short_desc": "Returns whether the supplied name is cosidered normal name syntax and can be used plainly in code.",
+            "long_desc": "Example:\n'foo' -> yes: $foo\n'foo bar' -> no: ${'foo bar'}",
+            "hint": [
+                [
+                    "boolean",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Name": {
+                    "name": "Name",
+                    "line": 108,
+                    "short_desc": "The field, function, method or variable name",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}

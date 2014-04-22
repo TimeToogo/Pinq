@@ -1,0 +1,165 @@
+{
+    "name": "Pinq\\Parsing\\FunctionToExpressionTreeConverter",
+    "line": 15,
+    "short_desc": "Default implementaion for the IFunctionToExpressionTreeConverter.",
+    "long_desc": "Requires a parser and optionally cache which will fallback to the cache provider implementation",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "Elliot",
+                "Levin",
+                "<elliot@aanet.com.au>"
+            ]
+        ]
+    },
+    "namespace": "Pinq\\Parsing",
+    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Parsing\\FunctionToExpressionTreeConverter.php",
+    "hash": "62e7dfc5266ea3d48f0e86cba35c3a419208e8cf",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "O": "Pinq\\Expressions",
+        "Provider": "Pinq\\Caching\\Provider",
+        "IFunctionCache": "Pinq\\Caching\\IFunctionCache"
+    },
+    "errors": [
+
+    ],
+    "interfaces": {
+        "Pinq\\Parsing\\IFunctionToExpressionTreeConverter": "Pinq\\Parsing\\IFunctionToExpressionTreeConverter"
+    },
+    "properties": [
+
+    ],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 27,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Parser": {
+                    "name": "Parser",
+                    "line": 27,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Parsing\\IParser",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "IParser",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "Cache": {
+                    "name": "Cache",
+                    "line": 27,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Caching\\IFunctionCache",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "IFunctionCache",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "GetParser": {
+            "name": "GetParser",
+            "line": 33,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "33",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "Convert": {
+            "name": "Convert",
+            "line": 46,
+            "short_desc": "Converts a function to the equivalent expression tree.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Pinq\\FunctionExpressionTree",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "33",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "Function": {
+                    "name": "Function",
+                    "line": 46,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "callable",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "callable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": [
+
+    ]
+}
