@@ -68,14 +68,14 @@ class UnaryOperationExpression extends Expression
     {
         if (self::$unaryOperations === null) {
             self::$unaryOperations = [
-                Operators\Unary::BITWISE_NOT => function ($i) { return ~$i; },
-                Operators\Unary::NOT => function ($i) { return !$i; },
-                Operators\Unary::INCREMENT => function ($i) { return $i++; },
-                Operators\Unary::DECREMENT => function ($i) { return $i--; },
-                Operators\Unary::PRE_INCREMENT => function ($i) { return ++$i; },
-                Operators\Unary::PRE_DECREMENT => function ($i) { return --$i; },
-                Operators\Unary::NEGATION => function ($i) { return -$i; },
-                Operators\Unary::PLUS => function ($i) { return +$i; }
+                Operators\Unary::BITWISE_NOT =>     function ($i) { return ~$i; },
+                Operators\Unary::NOT =>             function ($i) { return !$i; },
+                Operators\Unary::INCREMENT =>       function ($i) { return $i++; },
+                Operators\Unary::DECREMENT =>       function ($i) { return $i--; },
+                Operators\Unary::PRE_INCREMENT =>   function ($i) { return ++$i; },
+                Operators\Unary::PRE_DECREMENT =>   function ($i) { return --$i; },
+                Operators\Unary::NEGATION =>        function ($i) { return -$i; },
+                Operators\Unary::PLUS =>            function ($i) { return +$i; }
             ];
         }
         
