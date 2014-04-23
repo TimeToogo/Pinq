@@ -89,8 +89,13 @@ it supports querying and mutating external data sources.
 
 Limitations
 ===========
+
  - Within a query, one should not use control structures such as `if, switch, goto, while, foreach,...`, 
    these are not classified as valid query expressions and cannot be used with external data sources.
+
+ - One should not define multiple closures on the same line. An exception will be thrown for the following:
+   {% highlight php startinline %}
+   $Queryable->Where(function ($I) { return $I > 50; })->Where(function ($I) { return $I !== 70; });{% endhighlight %}
 
 
 Standard Classes
