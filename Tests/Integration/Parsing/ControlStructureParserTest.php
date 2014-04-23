@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Parsing;
 
@@ -12,120 +12,118 @@ class ControlStructureParserTest extends ParserTest
      */
     public function testThrowsExceptionWithIfStatement()
     {
-        $function = 
+        $function =
                 function () {
                     if (true) {
-                        
-                    }
-                    else {
-                        
+
+                    } else {
+
                     }
                 };
         $this->assertParsedAs($function, []);
     }
-    
+
     /**
      * @dataProvider Parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithForLoop()
     {
-        $function = 
+        $function =
                 function () {
                     for (;;) {
-                        
+
                     }
                 };
         $this->assertParsedAs($function, []);
     }
-    
+
     /**
      * @dataProvider Parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithForeachLoop()
     {
-        $function = 
+        $function =
                 function () {
                     foreach ($i as $i) {
-                        
+
                     }
                 };
         $this->assertParsedAs($function, []);
     }
-    
+
     /**
      * @dataProvider Parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithWhileLoop()
     {
-        $function = 
+        $function =
                 function () {
                     while (true) {
-                        
+
                     }
                 };
         $this->assertParsedAs($function, []);
     }
-    
+
     /**
      * @dataProvider Parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithDoWhileLoop()
     {
-        $function = 
+        $function =
                 function () {
                     do {
-                        
+
                     } while (true);
                 };
         $this->assertParsedAs($function, []);
     }
-    
+
     /**
      * @dataProvider Parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithGotoStatement()
     {
-        $function = 
+        $function =
                 function () {
                     goto Bed;
                     Bed:
                 };
         $this->assertParsedAs($function, []);
     }
-    
+
     /**
      * @dataProvider Parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithSwitchStatement()
     {
-        $function = 
+        $function =
                 function () {
                     switch (true) {
-                        
+
                     }
                 };
         $this->assertParsedAs($function, []);
     }
-    
+
     /**
      * @dataProvider Parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithTryCatchStatement()
     {
-        $function = 
+        $function =
                 function () {
                     try {
-                        
-                    }
-                    catch (\Exception $exception) {
-                        
+
+                    } catch (\Exception $exception) {
+
                     }
                 };
         $this->assertParsedAs($function, []);

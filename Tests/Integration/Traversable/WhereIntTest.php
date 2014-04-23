@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable;
 
@@ -8,27 +8,27 @@ class WhereIntTest extends TraversableTest
     {
         return $traversable->whereIn([]);
     }
-    
+
     /**
      * @dataProvider Everything
      */
     public function testThatWhereInWithSelfReturnsAllValues(\Pinq\ITraversable $traversable, array $data)
     {
         $values = $traversable->whereIn($traversable);
-        
+
         $this->assertMatches($values, $data);
     }
-    
+
     /**
      * @dataProvider Everything
      */
     public function testThatWhereInWithEmptyReturnsEmpty(\Pinq\ITraversable $traversable, array $data)
     {
         $values = $traversable->whereIn(new \Pinq\Traversable());
-        
+
         $this->assertMatches($values, []);
     }
-    
+
     /**
      * @dataProvider OneToTen
      */
@@ -37,17 +37,17 @@ class WhereIntTest extends TraversableTest
         $otherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
         $valuesWithSomeMatchingValues = new \Pinq\Traversable($otherData);
         $values = $traversable->whereIn($valuesWithSomeMatchingValues);
-        
+
         $this->assertMatches($values, array_intersect($data, $otherData));
     }
-    
+
     /**
      * @dataProvider OneToTen
      */
     public function testThatWhereInUsesStrictEquality(\Pinq\ITraversable $traversable, array $data)
     {
         $insection = $traversable->intersect(['1', '2', '3', '4', '5']);
-        
+
         $this->assertMatches($insection, []);
     }
 }

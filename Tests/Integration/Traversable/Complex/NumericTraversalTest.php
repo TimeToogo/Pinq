@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable\Complex;
 
@@ -8,7 +8,7 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
     {
         return $this->getImplementations(range(1, 100));
     }
-    
+
     /**
      * @dataProvider OneToAHundred
      */
@@ -17,33 +17,33 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
         $traversable = $traversable
                 ->orderByAscending(function ($i) { return (int) ($i / 10); })
                 ->thenByDescending(function ($i) { return $i; });
-                
+
         $equivalentArray = [];
         $array = [];
-        
+
         foreach ($data as $key => $value) {
             if ($value % 10 === 0) {
                 $equivalentArray += array_reverse($array, true);
                 $array = [];
             }
-            
+
             $array[$key] = $value;
         }
-        
+
         $equivalentArray += array_reverse($array, true);
         $this->assertMatches($traversable, $equivalentArray);
     }
-    
+
     /**
      * @dataProvider OneToAHundred
      */
     public function testSimpleAggregation(\Pinq\ITraversable $traversable, array $data)
     {
         $this->assertSame(array_sum($data), $traversable->sum());
-        
+
         $this->assertSame(array_sum($data) / count($data), $traversable->average());
     }
-    
+
     /**
      * @dataProvider OneToAHundred
      */
@@ -56,27 +56,27 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
                 ->where(function (\Pinq\ITraversable $i) { return $i->count() % 2 === 0; })
                 ->select(function (\Pinq\ITraversable $numbers) {
                     return [
-                        'First' => $numbers->first(), 
-                        'Average' => $numbers->average(), 
-                        'Count' => $numbers->count(), 
+                        'First' => $numbers->first(),
+                        'Average' => $numbers->average(),
+                        'Count' => $numbers->count(),
                         'Numbers' => $numbers->asArray()
                     ];
                 })
                 ->indexBy(function (array $values) { return implode(',', $values['Numbers']); });
-                
-        $newData = 
+
+        $newData =
                 array_filter($data, function ($i) {
                     return $i % 2 === 0;
                 });
         $newData = array_reverse($newData, true);
         $aggregates = [];
-        
+
         foreach ($newData as $key => $value) {
-            $aggregateKey = 
+            $aggregateKey =
                     array_search($value % 7, array_map(function ($i) {
                         return $i['Key'];
                     }, $aggregates));
-            
+
             if ($aggregateKey === false) {
                 $aggregateKey = count($aggregates) + 1;
                 $aggregates[$aggregateKey] = [
@@ -87,23 +87,23 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
                     'Numbers' => []
                 ];
             }
-            
+
             $aggregates[$aggregateKey]['Numbers'][$key] = $value;
             $aggregates[$aggregateKey]['Count']++;
         }
-        
+
         $indexedAggregates = [];
-        
+
         foreach ($aggregates as $key => &$value) {
             if ($value['Count'] % 2 !== 0) {
                 continue;
             }
-            
+
             unset($value['Key']);
             $value['Average'] = array_sum($value['Numbers']) / $value['Count'];
             $indexedAggregates[implode(',', $value['Numbers'])] =& $value;
         }
-        
+
         $this->assertMatches(
                 $traversable,
                 $indexedAggregates,

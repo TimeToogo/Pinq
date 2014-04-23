@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 namespace Pinq;
 
 /**
- * The collection API, along with traversable query API, 
+ * The collection API, along with traversable query API,
  * a collection's values are mutable, they can be added, removed and altered.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface ICollection extends ITraversable
@@ -17,7 +17,7 @@ interface ICollection extends ITraversable
      * @return void
      */
     public function apply(callable $function);
-    
+
     /**
      * Adds a range of values to the collection.
      * The collection will be reindexed.
@@ -26,7 +26,7 @@ interface ICollection extends ITraversable
      * @return void
      */
     public function addRange($values);
-    
+
     /**
      * Removes a range of values from the collection
      *
@@ -34,7 +34,7 @@ interface ICollection extends ITraversable
      * @return void
      */
     public function removeRange($values);
-    
+
     /**
      * Removes all the values matched by the predicate
      *
@@ -42,7 +42,7 @@ interface ICollection extends ITraversable
      * @return void
      */
     public function removeWhere(callable $predicate);
-    
+
     /**
      * Removes all the values.
      *

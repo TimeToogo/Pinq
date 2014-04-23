@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests;
 
@@ -13,8 +13,7 @@ if (file_exists($pinqAsProjectAutoLoaderPath)) {
     $composerAutoLoader = require $pinqAsProjectAutoLoaderPath;
 } elseif (file_exists($pinqAsDependencyAutoLoaderPath)) {
     $composerAutoLoader = require $pinqAsDependencyAutoLoaderPath;
-}
-else {
+} else {
     throw new \Exception('Cannot load pinq tests: Pinq cannot be loaded, please load Pinq via composer');
 }
 

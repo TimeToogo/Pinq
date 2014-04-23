@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq;
 
@@ -17,27 +17,25 @@ class PinqException extends \Exception
     {
         if (func_num_args() === 1) {
             $message = $messageFormat;
-        }
-        else {
+        } else {
             $message = call_user_func_array('sprintf', func_get_args());
         }
-        
+
         parent::__construct($message, null, null);
     }
-    
+
     public static function construct(array $parameters)
     {
         if ($parameters === 1) {
             $messageFormat = array_shift($messageFormat);
             $message = $messageFormat;
-        }
-        else {
+        } else {
             $message = call_user_func_array('sprintf', $parameters);
         }
-        
+
         return new static($message);
     }
-    
+
     public static function invalidIterable($method, $value)
     {
         return new self(
@@ -45,7 +43,7 @@ class PinqException extends \Exception
                 $method,
                 \Pinq\Utilities::getTypeOrClass($value));
     }
-    
+
     public static function notSupported($method)
     {
         return new self('Invalid call to %s: Method is not supported', $method);

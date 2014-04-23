@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Providers;
 
@@ -28,7 +28,7 @@ class CachingRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
             [new Requests\Sum(), 'VisitSum']
         ];
     }
-    
+
     /**
      * @dataProvider RequestsToCache
      */
@@ -36,19 +36,19 @@ class CachingRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
     {
         $innerRequestEvaluatorMock = $this->getMock('\\Pinq\\Queries\\Requests\\RequestVisitor');
         $returnValue = new \stdClass();
-        
+
         $innerRequestEvaluatorMock
                 ->expects($this->once())
                 ->method($calledMethod)
                 ->with($request)
                 ->will($this->returnValue($returnValue));
-        
+
         $cachingRequestEvaluator = new \Pinq\Providers\Caching\RequestEvaluator($innerRequestEvaluatorMock);
-        
+
         $firstReturn = $cachingRequestEvaluator->visit($request);
         //Inner evaluator should not be called a second time and result should be cached
         $secondReturn = $cachingRequestEvaluator->visit($request);
-        
+
         $this->assertSame($returnValue, $firstReturn);
         $this->assertSame($returnValue, $secondReturn);
     }

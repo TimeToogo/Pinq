@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 namespace Pinq\Queries\Operations;
 
 /**
  * Operation query for removing a range of values to the source
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class RemoveValues extends ValuesOperation
@@ -13,7 +13,7 @@ class RemoveValues extends ValuesOperation
     {
         return self::REMOVE_VALUES;
     }
-    
+
     public function traverse(OperationVisitor $visitor)
     {
         return $visitor->visitRemoveValues($this);

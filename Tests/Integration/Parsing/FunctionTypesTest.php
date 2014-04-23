@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Parsing;
 
@@ -13,7 +13,7 @@ define('TEST_FUNCTION', __NAMESPACE__ . '\\TestFunction');
 class Test
 {
     public static $method = [__CLASS__, 'Method'];
-    
+
     public static function method()
     {
         return 1.1;
@@ -33,7 +33,7 @@ class FunctionTypesTest extends ParserTest
                 },
                 [O\Expression::returnExpression(O\Expression::value(1.1))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -43,7 +43,7 @@ class FunctionTypesTest extends ParserTest
                 TEST_FUNCTION,
                 [O\Expression::returnExpression(O\Expression::value(1.1))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */

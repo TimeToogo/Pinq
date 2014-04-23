@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 namespace Pinq\Queries\Operations;
 
 /**
  * Operation query for clearing all values from the source
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Clear extends Operation
@@ -13,7 +13,7 @@ class Clear extends Operation
     {
         return self::CLEAR;
     }
-    
+
     public function traverse(OperationVisitor $visitor)
     {
         return $visitor->visitClear($this);

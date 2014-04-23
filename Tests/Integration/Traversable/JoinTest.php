@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable;
 
@@ -7,48 +7,48 @@ class JoinTest extends TraversableTest
     protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
         return $traversable->join([])->on(function ($i) {
-            
+
         })->to(function ($k) {
-            
+
         });
     }
-    
+
     /**
      * @dataProvider Everything
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatExecutionIsDeferred(function (callable $function) use($traversable) {
+        $this->assertThatExecutionIsDeferred(function (callable $function) use ($traversable) {
             return $traversable->join([])->on($function)->to($function);
         });
-        
-        $this->assertThatExecutionIsDeferred(function (callable $function) use($traversable) {
+
+        $this->assertThatExecutionIsDeferred(function (callable $function) use ($traversable) {
             return $traversable->join([])->onEquality($function, $function)->to($function);
         });
     }
-    
+
     /**
      * @dataProvider Everything
      */
     public function testJoinOnTrueProducesACartesianProduct(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
+        $traversable =
                 $traversable->join($data)->on(function () {
                     return true;
                 })->to(function ($outerValue, $innerValue) {
                     return [$outerValue, $innerValue];
                 });
         $cartesianProduct = [];
-        
+
         foreach ($data as $outerValue) {
             foreach ($data as $innerValue) {
                 $cartesianProduct[] = [$outerValue, $innerValue];
             }
         }
-        
+
         $this->assertMatchesValues($traversable, $cartesianProduct);
     }
-    
+
     /**
      * @dataProvider Everything
      */
@@ -59,10 +59,10 @@ class JoinTest extends TraversableTest
                 ->to(function ($outerValue, $innerValue) {
                     return [$outerValue, $innerValue];
                 });
-                
+
         $this->assertMatches($traversable, []);
     }
-    
+
     /**
      * @dataProvider OneToTen
      */
@@ -73,10 +73,10 @@ class JoinTest extends TraversableTest
                 ->to(function ($outer, $inner) {
                     return $outer . '-' . $inner;
                 });
-                
+
         $this->assertMatchesValues($traversable, ['1-1', '2-2', '3-3']);
     }
-    
+
     /**
      * @dataProvider OneToTen
      */
@@ -87,10 +87,10 @@ class JoinTest extends TraversableTest
                 ->to(function ($outer, $inner) {
                     return $outer . '-' . $inner;
                 });
-                
+
         $this->assertMatchesValues($traversable, ['1-1', '2-2', '3-3']);
     }
-    
+
     /**
      * @dataProvider OneToTen
      */
@@ -101,7 +101,7 @@ class JoinTest extends TraversableTest
                 ->to(function ($outer, $inner) {
                     return $outer . ':' . $inner;
                 });
-                
+
         $this->assertMatchesValues(
                 $traversable,
                 [

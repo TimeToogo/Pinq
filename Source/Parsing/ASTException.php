@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 namespace Pinq\Parsing;
 
 /**
- * Exception for errors while converting the AST into 
+ * Exception for errors while converting the AST into
  * an expression tree
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ASTException extends InvalidFunctionException
@@ -18,7 +18,7 @@ class ASTException extends InvalidFunctionException
     const SWITCH_STATEMENT = 'switch(...)';
     const GOTO_STATEMENT = 'goto ...;';
     const TRY_CATCH_STATEMENT = 'try ... catch(...)';
-    
+
     public static function containsControlStructure($controlStrucuture, $lineNumber)
     {
         return new self(

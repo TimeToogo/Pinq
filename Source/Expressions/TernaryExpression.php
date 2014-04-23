@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Expressions;
 
@@ -6,7 +6,7 @@ namespace Pinq\Expressions;
  * <code>
  * $I ? 1 : -1
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class TernaryExpression extends Expression
@@ -15,24 +15,24 @@ class TernaryExpression extends Expression
      * @var Expression
      */
     private $conditionExpression;
-    
+
     /**
      * @var Expression
      */
     private $ifTrueExpression;
-    
+
     /**
      * @var Expression
      */
     private $ifFalseExpression;
-    
+
     public function __construct(Expression $conditionExpression, Expression $ifTrueExpression = null, Expression $ifFalseExpression)
     {
         $this->conditionExpression = $conditionExpression;
         $this->ifTrueExpression = $ifTrueExpression;
         $this->ifFalseExpression = $ifFalseExpression;
     }
-    
+
     /**
      * @return Expression
      */
@@ -40,7 +40,7 @@ class TernaryExpression extends Expression
     {
         return $this->conditionExpression;
     }
-    
+
     /**
      * @return boolean
      */
@@ -48,7 +48,7 @@ class TernaryExpression extends Expression
     {
         return $this->ifTrueExpression !== null;
     }
-    
+
     /**
      * @return Expression
      */
@@ -56,7 +56,7 @@ class TernaryExpression extends Expression
     {
         return $this->ifTrueExpression;
     }
-    
+
     /**
      * @return Expression
      */
@@ -64,28 +64,28 @@ class TernaryExpression extends Expression
     {
         return $this->ifFalseExpression;
     }
-    
+
     public function traverse(ExpressionWalker $walker)
     {
         return $walker->walkTernary($this);
     }
-    
+
     public function simplify()
     {
         $conditionExpression = $this->conditionExpression->simplify();
         $ifTrueExpression = $this->ifTrueExpression->simplify();
         $ifFalseExpression = $this->ifFalseExpression->simplify();
-        
+
         if ($conditionExpression instanceof ValueExpression) {
             return $conditionExpression->getValue() ? $ifTrueExpression : $ifFalseExpression;
         }
-        
+
         return $this->update(
                 $conditionExpression,
                 $ifTrueExpression,
                 $ifFalseExpression);
     }
-    
+
     /**
      * @return self
      */
@@ -94,35 +94,35 @@ class TernaryExpression extends Expression
         if ($this->conditionExpression === $conditionExpression && $this->ifTrueExpression === $ifTrueExpression && $this->ifFalseExpression === $ifFalseExpression) {
             return $this;
         }
-        
+
         return new self($conditionExpression, $ifTrueExpression, $ifFalseExpression);
     }
-    
+
     protected function compileCode(&$code)
     {
         $code .= '(';
         $this->conditionExpression->compileCode($code);
         $code .= ' ? ';
-        
+
         if ($this->ifTrueExpression !== null) {
             $this->ifTrueExpression->compileCode($code);
         }
-        
+
         $code .= ' : ';
         $this->ifFalseExpression->compileCode($code);
         $code .= ')';
     }
-    
+
     public function serialize()
     {
         return serialize([$this->conditionExpression, $this->ifTrueExpression, $this->ifFalseExpression]);
     }
-    
+
     public function unserialize($serialized)
     {
         list($this->conditionExpression, $this->ifTrueExpression, $this->ifFalseExpression) = unserialize($serialized);
     }
-    
+
     public function __clone()
     {
         $this->conditionExpression = clone $this->conditionExpression;

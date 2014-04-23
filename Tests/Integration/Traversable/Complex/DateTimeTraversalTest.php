@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable\Complex;
 
@@ -11,7 +11,7 @@ class DateTimeTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversa
                 \DateInterval::createFromDateString('3 days'),
                 new \DateTime('+1 year'))));
     }
-    
+
     /**
      * @dataProvider DateTimes
      */
@@ -21,14 +21,14 @@ class DateTimeTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversa
                 ->where(function (\DateTime $dateTime) {
                     return in_array($dateTime->format('D'), ['Sat', 'Sun']);
                 });
-        
+
         foreach ($traversable as $dateTime) {
             $this->assertTrue(
                     in_array($dateTime->format('D'), ['Sat', 'Sun']),
                     'Must be saturday or sunday');
         }
     }
-    
+
     /**
      * @dataProvider DateTimes
      */

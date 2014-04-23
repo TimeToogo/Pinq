@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable;
 
@@ -8,7 +8,7 @@ class ConstructionTest extends TraversableTest
     {
         return \Pinq\Traversable::from($traversable);
     }
-    
+
     /**
      * @dataProvider Everything
      */

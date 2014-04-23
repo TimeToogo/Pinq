@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Parsing;
 
@@ -11,7 +11,7 @@ class ComplexParserTest extends ParserTest
      */
     public function testNestedVariableOperations()
     {
-        $function = 
+        $function =
                 function () {
                     $a += $b - $c / $d % $d;
                 };
@@ -31,13 +31,13 @@ class ComplexParserTest extends ParserTest
                                         O\Operators\Binary::MODULUS,
                                         self::variable('d'))))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testParenthesisedNestedVariableOperations()
     {
-        $function = 
+        $function =
                 function () {
                     $a >>= ($b - $c) / $d % $d;
                 };
@@ -57,13 +57,13 @@ class ComplexParserTest extends ParserTest
                                 O\Operators\Binary::MODULUS,
                                 self::variable('d')))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testNestedUnaryOperators()
     {
-        $function = 
+        $function =
                 function () {
                     -+-+-+$i++;
                 };
@@ -85,13 +85,13 @@ class ComplexParserTest extends ParserTest
                                                                         O\Operators\Unary::INCREMENT,
                                                                         self::variable('i'))))))))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testNestedCastOperators()
     {
-        $function = 
+        $function =
                 function () {
                     (double) (object) (bool) (int) (string)$i;
                 };
@@ -107,13 +107,13 @@ class ComplexParserTest extends ParserTest
                                                 O\Operators\Cast::INTEGER,
                                                 O\Expression::cast(O\Operators\Cast::STRING, self::variable('i'))))))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testNestedVariableTraversal()
     {
-        $function = 
+        $function =
                 function () {
                     $i->field->method()['index'];
                 };
@@ -125,13 +125,13 @@ class ComplexParserTest extends ParserTest
                                 O\Expression::value('method')),
                         O\Expression::value('index'))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testNestedClosures()
     {
-        $function = 
+        $function =
                 function () {
                     return function ($foo) {
                         $foo->bar += 5;

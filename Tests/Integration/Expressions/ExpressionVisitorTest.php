@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Expressions;
 
@@ -51,7 +51,7 @@ class ExpressionVisitorTest extends ExpressionTest
             [O\Expression::variable(O\Expression::value(0)), 'VisitVariable']
         ];
     }
-    
+
     /**
      * @dataProvider ExpressionsToVisit
      * @covers \Pinq\Expressions\ExpressionVisitor
@@ -59,12 +59,12 @@ class ExpressionVisitorTest extends ExpressionTest
     public function testExpressionVisitorVisitsTheCorrectMethod(O\Expression $expression, $method)
     {
         $expressionVisitorMock = $this->getMock('\\Pinq\\Expressions\\ExpressionVisitor', [$method]);
-        
+
         $expressionVisitorMock
                 ->expects($this->once())
                 ->method($method)
                 ->with($this->equalTo($expression));
-        
+
         $expressionVisitorMock->walk($expression);
     }
 }

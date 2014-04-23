@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Collection;
 
@@ -13,20 +13,20 @@ class ApplyTest extends CollectionTest
             $this->assertThatExecutionIsNotDeferred([$collection, 'apply']);
         }
     }
-    
+
     /**
      * @dataProvider AssocOneToTen
      */
     public function testThatCollectionApplyOperatesOnTheSameCollection(\Pinq\ICollection $collection, array $data)
     {
-        $multiply = 
+        $multiply =
                 function (&$i) {
                     $i *= 10;
                 };
-                
+
         $collection->apply($multiply);
         array_walk($data, $multiply);
-        
+
         $this->assertMatches($collection, $data);
     }
 }

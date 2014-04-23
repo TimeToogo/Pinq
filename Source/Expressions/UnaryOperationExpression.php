@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Expressions;
 
@@ -7,7 +7,7 @@ namespace Pinq\Expressions;
  * -$I;
  * $I++;
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class UnaryOperationExpression extends Expression
@@ -16,18 +16,18 @@ class UnaryOperationExpression extends Expression
      * @var int
      */
     private $operator;
-    
+
     /**
      * @var Expression
      */
     private $operandExpression;
-    
+
     public function __construct($operator, Expression $operandExpression)
     {
         $this->operator = $operator;
         $this->operandExpression = $operandExpression;
     }
-    
+
     /**
      * @return string
      */
@@ -35,7 +35,7 @@ class UnaryOperationExpression extends Expression
     {
         return $this->operator;
     }
-    
+
     /**
      * @return Expression
      */
@@ -43,27 +43,27 @@ class UnaryOperationExpression extends Expression
     {
         return $this->operandExpression;
     }
-    
+
     public function traverse(ExpressionWalker $walker)
     {
         return $walker->walkUnaryOperation($this);
     }
-    
+
     public function simplify()
     {
         $operandExpression = $this->operandExpression->simplify();
-        
+
         if ($operandExpression instanceof ValueExpression) {
             return Expression::value(self::doUnaryOperation(
                     $this->operator,
                     $operandExpression->getValue()));
         }
-        
+
         return $this->update($this->operator, $operandExpression);
     }
-    
+
     private static $unaryOperations;
-    
+
     private static function doUnaryOperation($operator, $value)
     {
         if (self::$unaryOperations === null) {
@@ -78,12 +78,12 @@ class UnaryOperationExpression extends Expression
                 Operators\Unary::PLUS =>            function ($i) { return +$i; }
             ];
         }
-        
+
         $operation = self::$unaryOperations[$operator];
-        
+
         return $operation($value);
     }
-    
+
     /**
      * @return self
      */
@@ -92,27 +92,27 @@ class UnaryOperationExpression extends Expression
         if ($this->operator === $operator && $this->operandExpression === $operandExpression) {
             return $this;
         }
-        
+
         return new self($operator, $operandExpression);
     }
-    
+
     protected function compileCode(&$code)
     {
         $code .= '(';
         $code .= sprintf($this->operator, $this->operandExpression->compile());
         $code .= ')';
     }
-    
+
     public function serialize()
     {
         return serialize([$this->operandExpression, $this->operator]);
     }
-    
+
     public function unserialize($serialized)
     {
         list($this->operandExpression, $this->operator) = unserialize($serialized);
     }
-    
+
     public function __clone()
     {
         $this->operandExpression = clone $this->operandExpression;

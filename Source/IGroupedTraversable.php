@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 namespace Pinq;
 
 /**
  * Api for subsequent grouping of the supplied traversable query.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface IGroupedTraversable extends ITraversable

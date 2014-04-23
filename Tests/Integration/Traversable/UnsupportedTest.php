@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable;
 
@@ -14,7 +14,7 @@ class UnsupportedTest extends TraversableTest
             $traversable[0] = null;
         }
     }
-    
+
     /**
      * @dataProvider Everything
      */

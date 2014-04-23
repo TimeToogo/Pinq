@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable;
 
@@ -10,7 +10,7 @@ class SelectManyTest extends TraversableTest
             return [];
         });
     }
-    
+
     /**
      * @dataProvider Everything
      */
@@ -18,7 +18,7 @@ class SelectManyTest extends TraversableTest
     {
         $this->assertThatExecutionIsDeferred([$traversable, 'selectMany']);
     }
-    
+
     /**
      * @dataProvider TenRandomStrings
      */
@@ -26,12 +26,12 @@ class SelectManyTest extends TraversableTest
     {
         $toCharacters = 'str_split';
         $characters = $values->selectMany($toCharacters);
-        
+
         $this->assertMatches(
                 $characters,
                 array_values(self::flattenArrays(array_map($toCharacters, $data))));
     }
-    
+
     private static function flattenArrays(array $arrays)
     {
         return call_user_func_array('array_merge', array_map('array_values', $arrays));

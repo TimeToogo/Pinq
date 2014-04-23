@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Expressions;
 
@@ -7,7 +7,7 @@ namespace Pinq\Expressions;
  * $One + $Two;
  * $Five . 'foo';
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class BinaryOperationExpression extends Expression
@@ -16,24 +16,24 @@ class BinaryOperationExpression extends Expression
      * @var Expression
      */
     private $leftOperandExpression;
-    
+
     /**
      * @var int
      */
     private $operator;
-    
+
     /**
      * @var Expression
      */
     private $rightOperandExpression;
-    
+
     public function __construct(Expression $leftOperandExpression, $operator, Expression $rightOperandExpression)
     {
         $this->leftOperandExpression = $leftOperandExpression;
         $this->operator = $operator;
         $this->rightOperandExpression = $rightOperandExpression;
     }
-    
+
     /**
      * @return string The binary operator
      */
@@ -41,7 +41,7 @@ class BinaryOperationExpression extends Expression
     {
         return $this->operator;
     }
-    
+
     /**
      * @return Expression
      */
@@ -49,7 +49,7 @@ class BinaryOperationExpression extends Expression
     {
         return $this->leftOperandExpression;
     }
-    
+
     /**
      * @return Expression
      */
@@ -57,47 +57,43 @@ class BinaryOperationExpression extends Expression
     {
         return $this->rightOperandExpression;
     }
-    
+
     public function traverse(ExpressionWalker $walker)
     {
         return $walker->walkBinaryOperation($this);
     }
-    
+
     public function simplify()
     {
         $left = $this->leftOperandExpression->simplify();
         $right = $this->rightOperandExpression->simplify();
-        
+
         if ($left instanceof ValueExpression && $right instanceof ValueExpression) {
             return Expression::value(self::doBinaryOperation(
                     $left->getValue(),
                     $this->operator,
                     $right->getValue()));
-        }
-        else if ($left instanceof ValueExpression || $right instanceof ValueExpression) {
+        } elseif ($left instanceof ValueExpression || $right instanceof ValueExpression) {
             $valueExpression = $left instanceof ValueExpression ? $left : $right;
             $otherExpression = $left instanceof ValueExpression ? $right : $left;
             $value = $valueExpression->getValue();
-            
+
             if ($this->operator === Operators\Binary::LOGICAL_OR && $value == true) {
                 return Expression::value(true);
-            }
-            else if ($this->operator === Operators\Binary::LOGICAL_OR && $value == false) {
+            } elseif ($this->operator === Operators\Binary::LOGICAL_OR && $value == false) {
                 return $otherExpression;
-            }
-            else if ($this->operator === Operators\Binary::LOGICAL_AND && $value == false) {
+            } elseif ($this->operator === Operators\Binary::LOGICAL_AND && $value == false) {
                 return Expression::value(false);
-            }
-            else if ($this->operator === Operators\Binary::LOGICAL_AND && $value == true) {
+            } elseif ($this->operator === Operators\Binary::LOGICAL_AND && $value == true) {
                 return $otherExpression;
             }
         }
-        
+
         return $this->update($left, $this->operator, $right);
     }
-    
+
     private static $binaryOperations;
-    
+
     private static function doBinaryOperation($left, $operator, $right)
     {
         if (self::$binaryOperations === null) {
@@ -126,12 +122,12 @@ class BinaryOperationExpression extends Expression
                 Operators\Binary::GREATER_THAN_OR_EQUAL_TO  => function ($l, $r) { return $l >= $r; }
             ];
         }
-        
+
         $operation = self::$binaryOperations[$operator];
-        
+
         return $operation($left, $right);
     }
-    
+
     /**
      * @return self
      */
@@ -140,10 +136,10 @@ class BinaryOperationExpression extends Expression
         if ($this->leftOperandExpression === $leftOperandExpression && $this->operator === $operator && $this->rightOperandExpression === $rightOperandExpression) {
             return $this;
         }
-        
+
         return new self($leftOperandExpression, $operator, $rightOperandExpression);
     }
-    
+
     protected function compileCode(&$code)
     {
         $code .= '(';
@@ -152,17 +148,17 @@ class BinaryOperationExpression extends Expression
         $this->rightOperandExpression->compileCode($code);
         $code .= ')';
     }
-    
+
     public function serialize()
     {
         return serialize([$this->leftOperandExpression, $this->operator, $this->rightOperandExpression]);
     }
-    
+
     public function unserialize($serialized)
     {
         list($this->leftOperandExpression, $this->operator, $this->rightOperandExpression) = unserialize($serialized);
     }
-    
+
     public function __clone()
     {
         $this->leftOperandExpression = clone $this->leftOperandExpression;

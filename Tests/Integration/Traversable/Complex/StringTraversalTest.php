@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable\Complex;
 
@@ -16,7 +16,7 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
             'Dallas'
         ]);
     }
-    
+
     /**
      * @dataProvider SomeStrings
      */
@@ -25,7 +25,7 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
         $traversable = $traversable
                 ->orderByAscending(function ($i) { return $i[0]; })
                 ->thenByDescending(function ($i) { return $i[2]; });
-                
+
         $this->assertMatches(
                 $traversable,
                 [
@@ -38,7 +38,7 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
                     2 => 'Test'
                 ]);
     }
-    
+
     public function pHPDocExample()
     {
         return $this->implementationsFor([
@@ -50,7 +50,7 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
             5 => ['volume' => 67, 'edition' => 7]
         ]);
     }
-    
+
     /**
      * @dataProvider PHPDocExample
      */
@@ -59,7 +59,7 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
         $traversable = $traversable
                 ->orderByDescending(function ($i) { return $i['volume']; })
                 ->thenByAscending(function ($i) { return $i['edition']; });
-                
+
         $this->assertMatches(
                 $traversable,
                 [
@@ -71,7 +71,7 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
                     5 => ['volume' => 67, 'edition' => 7]
                 ]);
     }
-    
+
     /**
      * @dataProvider SomeStrings
      */
@@ -81,42 +81,42 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
                 ->selectMany('str_split')
                 ->select(function ($char) { return ++$char; })
                 ->implode('');
-        
+
         $trueString = '';
-        
+
         foreach ($data as $i) {
             foreach (str_split($i) as $char) {
                 $trueString .= ++$char;
             }
         }
-        
+
         $this->assertEquals($trueString, $string);
     }
-    
+
     /**
      * @dataProvider SomeStrings
      */
     public function testAggregateValuesString(\Pinq\ITraversable $traversable, array $data)
     {
         $this->assertEquals(true, $traversable->all(), 'All');
-        
+
         $this->assertEquals(true, $traversable->any(), 'Any');
-        
+
         $this->assertEquals(
                 array_sum(array_map('strlen', $data)) / count($data),
                 $traversable->average('strlen'),
                 'Average string length');
-        
+
         $this->assertEquals(
                 array_sum(array_map('strlen', $data)),
                 $traversable->sum('strlen'),
                 'Sum string length');
-        
+
         $this->assertEquals(
                 array_unique($data),
                 $traversable->unique()->asArray(),
                 'Unique');
-        
+
         $this->assertEquals(
                 implode('- -- -', $data),
                 $traversable->implode('- -- -'),

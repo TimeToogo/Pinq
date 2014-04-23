@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable\Aggregates;
 
@@ -13,7 +13,7 @@ class ContainsTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
             $this->assertTrue($traversable->contains($value));
         }
     }
-    
+
     /**
      * @dataProvider AssocOneToTen
      */

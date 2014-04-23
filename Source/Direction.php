@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq;
 
@@ -11,9 +11,9 @@ final class Direction
 {
     private function __construct()
     {
-        
+
     }
-    
+
     const ASCENDING = 1;
     const DESCENDING = 2;
 }

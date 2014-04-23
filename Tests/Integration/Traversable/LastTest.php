@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable;
 
@@ -11,7 +11,7 @@ class LastTest extends TraversableTest
     {
         $this->assertEquals(end($data), $numbers->last());
     }
-    
+
     /**
      * @dataProvider EmptyData
      */

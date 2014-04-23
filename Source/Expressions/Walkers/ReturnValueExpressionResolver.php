@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Expressions\Walkers;
 
@@ -21,22 +21,22 @@ class ReturnValueExpressionResolver extends O\ExpressionWalker
      * @var array<string, O\Expression>
      */
     private $variableExpressionMap = [];
-    
+
     /**
      * @var VariableResolver
      */
     private $variableResolver;
-    
+
     /**
      * @var O\Expression[]
      */
     private $returnValueExpressions = [];
-    
+
     public function __construct()
     {
         $this->variableResolver = new VariableResolver();
     }
-    
+
     /**
      * @return O\Expression[]
      */
@@ -44,13 +44,13 @@ class ReturnValueExpressionResolver extends O\ExpressionWalker
     {
         return $this->returnValueExpressions;
     }
-    
+
     public function resetReturnExpressions()
     {
         $this->variableExpressionMap = [];
         $this->returnValueExpressions = [];
     }
-    
+
     private static $assignmentToBinaryOperator = [
         Operators\Assignment::ADDITION => Operators\Binary::ADDITION,
         Operators\Assignment::BITWISE_AND => Operators\Binary::BITWISE_AND,
@@ -64,7 +64,7 @@ class ReturnValueExpressionResolver extends O\ExpressionWalker
         Operators\Assignment::SHIFT_RIGHT => Operators\Binary::SHIFT_RIGHT,
         Operators\Assignment::SUBTRACTION => Operators\Binary::SUBTRACTION
     ];
-    
+
     /**
      * @param string $assignmentOperator
      */
@@ -72,14 +72,14 @@ class ReturnValueExpressionResolver extends O\ExpressionWalker
     {
         return isset(self::$assignmentToBinaryOperator[$assignmentOperator]) ? self::$assignmentToBinaryOperator[$assignmentOperator] : null;
     }
-    
+
     private function resolveVariables(O\Expression $expression)
     {
         $this->variableResolver->setVariableExpressionMap($this->variableExpressionMap);
-        
+
         return $this->variableResolver->walk($expression);
     }
-    
+
     /*
      * Convert any assignments to the equivalent binary expression and stores the value expression.
      */
@@ -88,44 +88,42 @@ class ReturnValueExpressionResolver extends O\ExpressionWalker
         $assignToExpression = $this->walk($this->resolveVariables($expression->getAssignToExpression()))->simplify();
         $assignmentOperator = $expression->getOperator();
         $assignmentValueExpression = $this->walk($this->resolveVariables($expression->getAssignmentValueExpression()));
-        
+
         if ($assignToExpression instanceof O\VariableExpression && $assignToExpression->getNameExpression() instanceof O\ValueExpression) {
             $assignmentName = $assignToExpression->getNameExpression()->getValue();
             $binaryOperator = $this->assignmentToBinaryOperator($assignmentOperator);
-            
+
             if ($binaryOperator !== null) {
                 $currentValueExpression = isset($this->variableExpressionMap[$assignmentName]) ? $this->variableExpressionMap[$assignmentName] : $assignToExpression;
-                $variableValueExpression = 
+                $variableValueExpression =
                         O\Expression::binaryOperation(
                                 $currentValueExpression,
                                 $binaryOperator,
                                 $assignmentValueExpression);
-            }
-            else {
+            } else {
                 $variableValueExpression = $assignmentValueExpression;
             }
-            
+
             $this->variableExpressionMap[$assignmentName] = $variableValueExpression;
         }
-        
+
         return $expression;
     }
-    
+
     public function walkClosure(O\ClosureExpression $expression)
     {
         //Ignore closures
         return $expression;
     }
-    
+
     public function walkReturn(O\ReturnExpression $returnExpression)
     {
         if ($returnExpression->hasValueExpression()) {
             $this->returnValueExpressions[] = $this->resolveVariables($returnExpression->getValueExpression())->simplify();
-        }
-        else {
+        } else {
             $this->returnValueExpressions[] = O\Expression::value(null);
         }
-        
+
         return $returnExpression;
     }
 }

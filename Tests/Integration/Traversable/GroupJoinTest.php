@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable;
 
@@ -8,21 +8,21 @@ class GroupJoinTest extends TraversableTest
     {
         return $traversable->groupJoin([])->on(function ($i) { })->to(function ($k) { });
     }
-    
+
     /**
      * @dataProvider Everything
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatExecutionIsDeferred(function (callable $function) use($traversable) {
+        $this->assertThatExecutionIsDeferred(function (callable $function) use ($traversable) {
             return $traversable->groupJoin([])->on($function)->to($function);
         });
-        
-        $this->assertThatExecutionIsDeferred(function (callable $function) use($traversable) {
+
+        $this->assertThatExecutionIsDeferred(function (callable $function) use ($traversable) {
             return $traversable->groupJoin([])->onEquality($function, $function)->to($function);
         });
     }
-    
+
     /**
      * @dataProvider Everything
      */
@@ -30,39 +30,39 @@ class GroupJoinTest extends TraversableTest
     {
         $traversable = $traversable
                 ->groupJoin($data)->on(function () { return true; })
-                ->to(function ($outerValue, \Pinq\ITraversable $group) { 
-                    return [$outerValue, $group->asArray()]; 
+                ->to(function ($outerValue, \Pinq\ITraversable $group) {
+                    return [$outerValue, $group->asArray()];
                 });
-        
+
         $correctResult = [];
-        
+
         foreach ($data as $outerValue) {
             $correctResult[] = [$outerValue, $data];
         }
-        
+
         $this->assertMatchesValues($traversable, $correctResult);
     }
-    
+
     /**
      * @dataProvider Everything
      */
     public function testGroupJoinOnFalseProducesEmptyLeftJoin(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
+        $traversable =
                 $traversable->groupJoin($data)->on(function () { return false; })
                 ->to(function ($outerValue, \Pinq\ITraversable $group) {
                     return [$outerValue, $group->asArray()];
                 });
-                
+
         $emptyLeftJoin = [];
-        
+
         foreach ($data as $value) {
             $emptyLeftJoin[] = [$value, []];
         }
-        
+
         $this->assertMatchesValues($traversable, $emptyLeftJoin);
     }
-    
+
     /**
      * @dataProvider OneToTen
      */
@@ -71,38 +71,38 @@ class GroupJoinTest extends TraversableTest
         $traversable = $traversable
                 ->groupJoin([1,2,2,3,'4','5'])
                 ->on(function ($outer, $inner) { return $outer === $inner; })
-                ->to(function ($outer, \Pinq\ITraversable $values) { 
-                    return $outer . '-' . $values->implode('-'); 
+                ->to(function ($outer, \Pinq\ITraversable $values) {
+                    return $outer . '-' . $values->implode('-');
                 });
-                
+
         $this->assertMatchesValues($traversable, ['1-1', '2-2-2', '3-3', '4-', '5-', '6-', '7-', '8-', '9-', '10-']);
     }
-    
+
     /**
      * @dataProvider OneToTen
      */
     public function testGroupJoinOnEqualityProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
+        $traversable =
                 $traversable->groupJoin([1, 2, 2, 3, '4', '5'])
                 ->onEquality(function ($outer) { return $outer; }, function ($inner) { return $inner; })
                 ->to(function ($outer, \Pinq\ITraversable $values) { return $outer . '-' . $values->implode('-'); });
-                
+
         $this->assertMatchesValues($traversable, ['1-1', '2-2-2', '3-3', '4-', '5-', '6-', '7-', '8-', '9-', '10-']);
     }
-    
+
     /**
      * @dataProvider OneToTen
      */
     public function testGroupJoinWithStringsProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
+        $traversable =
                 $traversable->groupJoin(['foo', 'bar', 'baz', 'tear', 'cow', 'tripod', 'whisky', 'sand', 'which'])
                 ->onEquality(function ($outer) { return $outer;}, 'strlen')
                 ->to(function ($outer, \Pinq\ITraversable $innerGroup) {
                     return $outer . ':' . $innerGroup->implode('|');
                 });
-                
+
         $this->assertMatchesValues(
                 $traversable,
                 [
@@ -118,19 +118,19 @@ class GroupJoinTest extends TraversableTest
                     '10:'
                 ]);
     }
-    
+
     /**
      * @dataProvider OneToTen
      */
     public function testGroupJoinWithGreaterThanProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
+        $traversable =
                 $traversable->groupJoin($traversable)->on(function ($outer, $inner) {
                     return $outer >= $inner;
                 })->to(function ($outer, \Pinq\ITraversable $innerGroup) {
                     return $outer . ':' . $innerGroup->implode('|');
                 });
-                
+
         $this->assertMatchesValues(
                 $traversable,
                 [

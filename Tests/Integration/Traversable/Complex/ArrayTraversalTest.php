@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable\Complex;
 
@@ -19,7 +19,7 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
             ['FirstName' => 'Daniel', 'LastName' => 'Dekresta', 'Age' => 32, 'Sex' => 'Male']
         ]);
     }
-    
+
     /**
      * @dataProvider People
      */
@@ -29,12 +29,12 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
                 ->orderByAscending(function ($i) { return $i['FirstName']; })
                 ->thenByDescending(function ($i) { return $i['LastName']; })
                 ->implode(':', function ($i) { return $i['FirstName'] . ' ' . $i['LastName']; });
-                
+
         $this->assertEquals(
                 'Alex Katter:Beth Baronksy:Casy Denali:Daniel Farmer:Daniel Dekresta:Dave Desopolous:David Faller:Hugo Tesserat:Sandy Williams:Zoe Black',
                 $orderedNames);
     }
-    
+
     /**
      * @dataProvider People
      */
@@ -43,12 +43,12 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
         $fileteredNames = $traversable
                 ->where(function ($i) { return strpos($i['FirstName'], 'D') !== false; })
                 ->implode(':', function ($i) { return $i['FirstName'] . ' ' . $i['LastName']; });
-                
+
         $this->assertEquals(
                 'Daniel Farmer:Dave Desopolous:David Faller:Daniel Dekresta',
                 $fileteredNames);
     }
-    
+
     /**
      * @dataProvider People
      */
@@ -58,7 +58,7 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
                 ->groupJoin($traversable)
                 ->onEquality(function ($outer) { return $outer['FirstName'][0]; }, function ($inner) { return $inner['LastName'][0]; })
                 ->to(function ($person, \Pinq\ITraversable $joinedPeople) {
-                    return $person['FirstName'] . '{' . 
+                    return $person['FirstName'] . '{' .
                             $joinedPeople->implode(
                                     ',',
                                     function ($person) {
@@ -66,13 +66,13 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
                                     }) . '}';
                 })
                 ->implode(':');
-                
+
         $this->assertEquals(
-                'Zoe{}:Alex{}:Daniel{Denali,Desopolous,Dekresta}:Casy{}:Dave{Denali,Desopolous,Dekresta}:' . 
+                'Zoe{}:Alex{}:Daniel{Denali,Desopolous,Dekresta}:Casy{}:Dave{Denali,Desopolous,Dekresta}:' .
                 'Hugo{}:Sandy{}:Beth{Black,Baronksy}:David{Denali,Desopolous,Dekresta}:Daniel{Denali,Desopolous,Dekresta}',
                 $joinedLastNames);
     }
-    
+
     /**
      * @dataProvider People
      */
@@ -86,15 +86,15 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
                 ->select(function (\Pinq\ITraversable $group) {
                     $ageGroup = floor($group->first()['Age'] / 10) * 10 . '+';
                     $sex = $group->first()['Sex'];
-                    
+
                     return sprintf('%s(%s){%s}', $ageGroup, $sex, $group->implode(',', function ($i) {
                         return $i['FirstName'];
                     }));
                 })
                 ->implode(':');
-                
+
         $this->assertEquals(
-                '20+(Male){Alex,Dave}:20+(Female){Casy}:30+(Female){Zoe,Sandy,Beth}:30+(Male){Daniel}:' . 
+                '20+(Male){Alex,Dave}:20+(Female){Casy}:30+(Female){Zoe,Sandy,Beth}:30+(Male){Daniel}:' .
                 '40+(Male){Hugo}:50+(Male){Daniel}:60+(Male){David}',
                 $joinedLastNames);
     }

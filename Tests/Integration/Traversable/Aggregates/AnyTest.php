@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable\Aggregates;
 
@@ -11,7 +11,7 @@ class AnyTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     {
         $this->assertFalse($traversable->any());
     }
-    
+
     /**
      * @dataProvider Everything
      */

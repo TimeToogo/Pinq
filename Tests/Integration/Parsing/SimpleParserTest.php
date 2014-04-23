@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Parsing;
 
@@ -13,10 +13,10 @@ class SimpleParserTest extends ParserTest
     public function testEmptyFunction()
     {
         $this->assertParsedAs(function () {
-            
+
         }, []);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -28,7 +28,7 @@ class SimpleParserTest extends ParserTest
                 },
                 [O\Expression::value(1)]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -40,7 +40,7 @@ class SimpleParserTest extends ParserTest
                 },
                 [O\Expression::returnExpression()]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -52,7 +52,7 @@ class SimpleParserTest extends ParserTest
                 },
                 [O\Expression::throwExpression(O\Expression::value(null))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -74,7 +74,7 @@ class SimpleParserTest extends ParserTest
                 },
                 [O\Expression::returnExpression(O\Expression::value(''))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -86,7 +86,7 @@ class SimpleParserTest extends ParserTest
                 },
                 [O\Expression::variable(O\Expression::value('i'))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -98,7 +98,7 @@ class SimpleParserTest extends ParserTest
                 },
                 [O\Expression::emptyExpression(O\Expression::variable(O\Expression::value('i')))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -110,7 +110,7 @@ class SimpleParserTest extends ParserTest
                 },
                 [O\Expression::issetExpression([O\Expression::variable(O\Expression::value('i'))])]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -122,7 +122,7 @@ class SimpleParserTest extends ParserTest
                 },
                 [O\Expression::functionCall(O\Expression::value('func'))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -136,7 +136,7 @@ class SimpleParserTest extends ParserTest
                         O\Expression::value('Object'),
                         O\Expression::value('method'))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -150,7 +150,7 @@ class SimpleParserTest extends ParserTest
                         [O\Expression::value(1)],
                         [O\Expression::value(2)])]);
     }
-    
+
     /**
      * @dataProvider Parsers
      * @expectedException \Pinq\Parsing\InvalidFunctionException
@@ -159,7 +159,7 @@ class SimpleParserTest extends ParserTest
     {
         $parser->parse(new \ReflectionFunction('strlen'));
     }
-    
+
     /**
      * @dataProvider Parsers
      * @expectedException \Pinq\Parsing\InvalidFunctionException
@@ -169,7 +169,7 @@ class SimpleParserTest extends ParserTest
         $evaledFunction = eval('return function () {};');
         $parser->parse(new \ReflectionFunction($evaledFunction));
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Value traversals">
     /**
      * @dataProvider Parsers
@@ -184,7 +184,7 @@ class SimpleParserTest extends ParserTest
                         O\Expression::variable(O\Expression::value('i')),
                         O\Expression::value('field'))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -198,7 +198,7 @@ class SimpleParserTest extends ParserTest
                         O\Expression::variable(O\Expression::value('i')),
                         O\Expression::value('method'))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -212,7 +212,7 @@ class SimpleParserTest extends ParserTest
                         O\Expression::variable(O\Expression::value('i')),
                         O\Expression::value(0))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -224,7 +224,7 @@ class SimpleParserTest extends ParserTest
                 },
                 [O\Expression::invocation(O\Expression::variable(O\Expression::value('i')))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -239,11 +239,11 @@ class SimpleParserTest extends ParserTest
                         O\Expression::value(true),
                         O\Expression::value(false))]);
     }
-    
+
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Binary Operators">
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -256,7 +256,7 @@ class SimpleParserTest extends ParserTest
                         $operator,
                         O\Expression::value($right))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -268,7 +268,7 @@ class SimpleParserTest extends ParserTest
         $this->assertBinaryOperation(function () { 1 / 1; }, 1, O\Operators\Binary::DIVISION, 1);
         $this->assertBinaryOperation(function () { 1 % 1; }, 1, O\Operators\Binary::MODULUS, 1);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -277,7 +277,7 @@ class SimpleParserTest extends ParserTest
         $this->assertBinaryOperation(function () { true && true; }, true, O\Operators\Binary::LOGICAL_AND, true);
         $this->assertBinaryOperation(function () { true || true; }, true, O\Operators\Binary::LOGICAL_OR, true);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -292,7 +292,7 @@ class SimpleParserTest extends ParserTest
         $this->assertBinaryOperation(function () { 1 < 1; }, 1, O\Operators\Binary::LESS_THAN, 1);
         $this->assertBinaryOperation(function () { 1 <= 1; }, 1, O\Operators\Binary::LESS_THAN_OR_EQUAL_TO, 1);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -304,7 +304,7 @@ class SimpleParserTest extends ParserTest
         $this->assertBinaryOperation(function () { 1 >> 1; }, 1, O\Operators\Binary::SHIFT_RIGHT, 1);
         $this->assertBinaryOperation(function () { 1 << 1; }, 1, O\Operators\Binary::SHIFT_LEFT, 1);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -312,11 +312,11 @@ class SimpleParserTest extends ParserTest
     {
         $this->assertBinaryOperation(function () { 1 . 1; }, 1, O\Operators\Binary::CONCATENATION, 1);
     }
-    
+
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Unary Operators">
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -328,7 +328,7 @@ class SimpleParserTest extends ParserTest
                         $operator,
                         O\Expression::variable(O\Expression::value($operandName)))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -341,7 +341,7 @@ class SimpleParserTest extends ParserTest
         $this->assertUnaryOperation(function () { +$i; }, O\Operators\Unary::PLUS, 'i');
         $this->assertUnaryOperation(function () { -$i; }, O\Operators\Unary::NEGATION, 'i');
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -354,7 +354,7 @@ class SimpleParserTest extends ParserTest
                 O\Operators\Unary::BITWISE_NOT,
                 'i');
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -367,11 +367,11 @@ class SimpleParserTest extends ParserTest
                 O\Operators\Unary::NOT,
                 'i');
     }
-    
+
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Assignment Operators">
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -384,7 +384,7 @@ class SimpleParserTest extends ParserTest
                         $operator,
                         O\Expression::variable(O\Expression::value($assigmentName)))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -393,7 +393,7 @@ class SimpleParserTest extends ParserTest
         $this->assertAssignment(function () { $l = $r; }, 'l', O\Operators\Assignment::EQUAL, 'r');
         $this->assertAssignment(function () { $l =& $r; }, 'l', O\Operators\Assignment::EQUAL_REFERENCE, 'r');
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -405,7 +405,7 @@ class SimpleParserTest extends ParserTest
         $this->assertAssignment(function () { $l /= $r; }, 'l', O\Operators\Assignment::DIVISION, 'r');
         $this->assertAssignment(function () { $l %= $r; }, 'l', O\Operators\Assignment::MODULUS, 'r');
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -417,7 +417,7 @@ class SimpleParserTest extends ParserTest
         $this->assertAssignment(function () { $l <<= $r; }, 'l', O\Operators\Assignment::SHIFT_LEFT, 'r');
         $this->assertAssignment(function () { $l >>= $r; }, 'l', O\Operators\Assignment::SHIFT_RIGHT, 'r');
     }
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -425,11 +425,11 @@ class SimpleParserTest extends ParserTest
     {
         $this->assertAssignment(function () { $l .= $r; }, 'l', O\Operators\Assignment::CONCATENATE, 'r');
     }
-    
+
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Cast Operators">
-    
+
     /**
      * @dataProvider Parsers
      */
@@ -441,7 +441,7 @@ class SimpleParserTest extends ParserTest
                         $typeOperator,
                         O\Expression::variable(O\Expression::value($castName)))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */

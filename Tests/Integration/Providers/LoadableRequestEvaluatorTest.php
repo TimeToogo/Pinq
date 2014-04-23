@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Providers;
 
@@ -28,31 +28,31 @@ class LoadableRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
             [new Requests\Sum(), 'LoadSum']
         ];
     }
-    
+
     /**
      * @dataProvider RequestsToLoad
      */
     public function testThatWillCallTheLoadMethodButNotWhenLoaded(Queries\IRequest $request, $loadMethod, $returnValue = null)
     {
         $requestEvaluatorMock = $this->getMockForAbstractClass('\\Pinq\\Providers\\Loadable\\RequestEvaluator');
-        
+
         $methodMock = $requestEvaluatorMock
                 ->expects($this->once())
                 ->method($loadMethod)
                 ->with($this->equalTo($request));
-        
+
         if ($methodMock !== null) {
             $methodMock->will($this->returnValue($returnValue));
         }
-        
+
         $loadValuesRequest = new Requests\Values();
-        
+
         $requestEvaluatorMock
                 ->expects($this->once())
                 ->method('LoadValues')
                 ->with($this->equalTo($loadValuesRequest))
                 ->will($this->returnValue($returnValue ?: [null]));
-        
+
         $requestEvaluatorMock->visit($request);
         //Load values
         $requestEvaluatorMock->visit($loadValuesRequest);

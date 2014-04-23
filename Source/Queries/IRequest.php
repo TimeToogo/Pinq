@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 namespace Pinq\Queries;
 
 /**
  * The interface for a request query, one of the const types, they
  * are all implemented as their own class in Requests namespace.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface IRequest
@@ -26,12 +26,12 @@ interface IRequest
     const IMPLODE = 13;
     const GET_INDEX = 14;
     const ISSET_INDEX = 15;
-    
+
     /**
      * @return int
      */
     public function getType();
-    
+
     /**
      * @return mixed
      */

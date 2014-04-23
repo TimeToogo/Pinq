@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 namespace Pinq\Parsing;
 
 /**
- * Exception for errors while converting a function into 
+ * Exception for errors while converting a function into
  * an expression tree
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class InvalidFunctionException extends \Pinq\PinqException
@@ -25,7 +25,7 @@ class InvalidFunctionException extends \Pinq\PinqException
             $reflection->getEndLine()
         ], array_slice(func_get_args(), 2)));
     }
-    
+
     /**
      * @param \ReflectionFunctionAbstract $reflection
      * @return self

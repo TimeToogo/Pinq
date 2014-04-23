@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq;
 
@@ -13,17 +13,17 @@ class JoiningOnTraversable implements IJoiningOnTraversable
      * @var \Traversable
      */
     private $outerValues;
-    
+
     /**
      * @var \Traversable
      */
     private $innerValues;
-    
+
     /**
      * @var boolean
      */
     private $isGroupJoin;
-    
+
     /**
      * @param boolean $isGroupJoin
      */
@@ -33,18 +33,17 @@ class JoiningOnTraversable implements IJoiningOnTraversable
         $this->innerValues = $innerValues;
         $this->isGroupJoin = $isGroupJoin;
     }
-    
+
     public function on(callable $joiningOnFunction)
     {
-        return new JoiningToTraversable(function (callable $joiningFunction) use($joiningOnFunction) {
+        return new JoiningToTraversable(function (callable $joiningFunction) use ($joiningOnFunction) {
             if ($this->isGroupJoin) {
                 return new Iterators\CustomGroupJoinIterator(
                         $this->outerValues,
                         $this->innerValues,
                         $joiningOnFunction,
                         $joiningFunction);
-            }
-            else {
+            } else {
                 return new Iterators\CustomJoinIterator(
                         $this->outerValues,
                         $this->innerValues,
@@ -53,10 +52,10 @@ class JoiningOnTraversable implements IJoiningOnTraversable
             }
         });
     }
-    
+
     public function onEquality(callable $outerKeyFunction, callable $innerKeyFunction)
     {
-        return new JoiningToTraversable(function (callable $joiningFunction) use($outerKeyFunction, $innerKeyFunction) {
+        return new JoiningToTraversable(function (callable $joiningFunction) use ($outerKeyFunction, $innerKeyFunction) {
             if ($this->isGroupJoin) {
                 return new Iterators\EqualityGroupJoinIterator(
                         $this->outerValues,
@@ -64,8 +63,7 @@ class JoiningOnTraversable implements IJoiningOnTraversable
                         $outerKeyFunction,
                         $innerKeyFunction,
                         $joiningFunction);
-            }
-            else {
+            } else {
                 return new Iterators\EqualityJoinIterator(
                         $this->outerValues,
                         $this->innerValues,

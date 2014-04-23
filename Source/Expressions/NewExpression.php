@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Expressions;
 
@@ -6,7 +6,7 @@ namespace Pinq\Expressions;
  * <code>
  * new \stdClass()
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class NewExpression extends Expression
@@ -15,18 +15,18 @@ class NewExpression extends Expression
      * @var Expression
      */
     private $classTypeExpression;
-    
+
     /**
      * @var Expression[]
      */
     private $argumentExpressions;
-    
+
     public function __construct(Expression $classTypeExpression, array $argumentExpressions = [])
     {
         $this->classTypeExpression = $classTypeExpression;
         $this->argumentExpressions = $argumentExpressions;
     }
-    
+
     /**
      * @return Expression
      */
@@ -34,7 +34,7 @@ class NewExpression extends Expression
     {
         return $this->classTypeExpression;
     }
-    
+
     /**
      * @return Expression[]
      */
@@ -42,12 +42,12 @@ class NewExpression extends Expression
     {
         return $this->argumentExpressions;
     }
-    
+
     public function traverse(ExpressionWalker $walker)
     {
         return $walker->walkNew($this);
     }
-    
+
     public function simplify()
     {
         //TODO: white list of deterministic classes to instanstiate
@@ -55,7 +55,7 @@ class NewExpression extends Expression
                 $this->classTypeExpression->simplify(),
                 self::simplifyAll($this->argumentExpressions));
     }
-    
+
     /**
      * @return self
      */
@@ -64,36 +64,35 @@ class NewExpression extends Expression
         if ($this->classTypeExpression === $classTypeExpression && $this->argumentExpressions === $argumentExpressions) {
             return $this;
         }
-        
+
         return new self($classTypeExpression, $argumentExpressions);
     }
-    
+
     protected function compileCode(&$code)
     {
         $code .= 'new ';
-        
+
         if ($this->classTypeExpression instanceof ValueExpression) {
             $code .= $this->classTypeExpression->getValue();
-        }
-        else {
+        } else {
             $this->classTypeExpression->compileCode($code);
         }
-        
+
         $code .= '(';
         $code .= implode(',', self::compileAll($this->argumentExpressions));
         $code .= ')';
     }
-    
+
     public function serialize()
     {
         return serialize([$this->classTypeExpression, $this->argumentExpressions]);
     }
-    
+
     public function unserialize($serialized)
     {
         list($this->classTypeExpression, $this->argumentExpressions) = unserialize($serialized);
     }
-    
+
     public function __clone()
     {
         $this->classTypeExpression = clone $this->classTypeExpression;

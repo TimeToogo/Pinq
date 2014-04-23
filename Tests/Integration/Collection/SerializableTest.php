@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Collection;
 
@@ -11,12 +11,12 @@ class SerializableTest extends CollectionTest
     {
         $serializedCollection = serialize($collection);
         $unserializedCollection = unserialize($serializedCollection);
-        
+
         $this->assertEquals(
                 $collection->asArray(),
                 $unserializedCollection->asArray());
     }
-    
+
     /**
      * @dataProvider Everything
      */
@@ -26,7 +26,7 @@ class SerializableTest extends CollectionTest
                 ->where(function ($i) { return $i !== false; });
         $serializedCollection = serialize($collection);
         $unserializedCollection = unserialize($serializedCollection);
-        
+
         $this->assertEquals(
                 $collection->asArray(),
                 $unserializedCollection->asArray());

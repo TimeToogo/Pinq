@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Expressions;
 
@@ -6,8 +6,8 @@ namespace Pinq\Expressions;
  * <code>
  * (string)$I
  * </code>
- * 
- * 
+ *
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class CastExpression extends Expression
@@ -16,18 +16,18 @@ class CastExpression extends Expression
      * @var int
      */
     private $castType;
-    
+
     /**
      * @var Expression
      */
     private $castValueExpression;
-    
+
     public function __construct($castType, Expression $castValueExpression)
     {
         $this->castType = $castType;
         $this->castValueExpression = $castValueExpression;
     }
-    
+
     /**
      * @return string The cast operator
      */
@@ -35,7 +35,7 @@ class CastExpression extends Expression
     {
         return $this->castType;
     }
-    
+
     /**
      * @return Expression The expression which is cast
      */
@@ -43,23 +43,23 @@ class CastExpression extends Expression
     {
         return $this->castValueExpression;
     }
-    
+
     public function traverse(ExpressionWalker $walker)
     {
         return $walker->walkCast($this);
     }
-    
+
     public function simplify()
     {
         $value = $this->castValueExpression->simplify();
-        
+
         if ($value instanceof ValueExpression) {
             return Expression::value(self::castValue($this->castType, $value));
         }
-        
+
         return $this->update($this->castType, $value);
     }
-    
+
     private static $castTypeMap = [
         Operators\Cast::ARRAY_CAST => 'array',
         Operators\Cast::BOOLEAN => 'bool',
@@ -68,17 +68,17 @@ class CastExpression extends Expression
         Operators\Cast::STRING => 'string',
         Operators\Cast::OBJECT => 'object'
     ];
-    
+
     /**
      * @param ValueExpression $value
      */
     private static function castValue($castTypeOperator, $value)
     {
         settype($value, self::$castTypeMap[$castTypeOperator]);
-        
+
         return $value;
     }
-    
+
     /**
      * @return self
      */
@@ -87,26 +87,26 @@ class CastExpression extends Expression
         if ($this->castType === $castType && $this->castValueExpression === $castValueExpression) {
             return $this;
         }
-        
+
         return new self($castType, $castValueExpression);
     }
-    
+
     protected function compileCode(&$code)
     {
         $code .= $this->castType;
         $this->castValueExpression->compileCode($code);
     }
-    
+
     public function serialize()
     {
         return serialize([$this->castType, $this->castValueExpression]);
     }
-    
+
     public function unserialize($serialized)
     {
         list($this->castType, $this->castValueExpression) = unserialize($serialized);
     }
-    
+
     public function __clone()
     {
         $this->castValueExpression = clone $this->castValueExpression;

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable;
 
@@ -10,7 +10,7 @@ class SelectTest extends TraversableTest
             return [];
         });
     }
-    
+
     /**
      * @dataProvider Everything
      */
@@ -18,18 +18,18 @@ class SelectTest extends TraversableTest
     {
         $this->assertThatExecutionIsDeferred([$traversable, 'select']);
     }
-    
+
     /**
      * @dataProvider AssocOneToTen
      */
     public function testThatSelectNumbersMapsCorrectlyAndPreservesKeys(\Pinq\ITraversable $values, array $data)
     {
-        $multiply = 
+        $multiply =
                 function ($i) {
                     return $i * 10;
                 };
         $multipliedValues = $values->select($multiply);
-        
+
         $this->assertMatches($multipliedValues, array_map($multiply, $data));
     }
 }

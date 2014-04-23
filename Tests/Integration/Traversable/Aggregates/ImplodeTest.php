@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable\Aggregates;
 
@@ -11,7 +11,7 @@ class ImplodeTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     {
         $this->assertSame('', $traversable->implode(','));
     }
-    
+
     /**
      * @dataProvider Everything
      */

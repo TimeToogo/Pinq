@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 namespace Pinq\Queries\Requests;
 
 /**
- * Request query for a boolean of whether all the values satify the 
+ * Request query for a boolean of whether all the values satify the
  * supplied predicate function
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class All extends ProjectionRequest
@@ -14,7 +14,7 @@ class All extends ProjectionRequest
     {
         return self::ALL;
     }
-    
+
     public function traverse(RequestVisitor $visitor)
     {
         return $visitor->visitAll($this);

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq;
 
@@ -16,22 +16,22 @@ class JoiningOnQueryable implements IJoiningOnTraversable
      * @var Providers\IQueryProvider
      */
     private $provider;
-    
+
     /**
      * @var Queries\IScope
      */
     private $scope;
-    
+
     /**
      * @var array|\Traversable
      */
     private $innerValues;
-    
+
     /**
      * @var boolean
      */
     private $isGroupJoin;
-    
+
     /**
      * @param boolean $isGroupJoin
      */
@@ -42,15 +42,15 @@ class JoiningOnQueryable implements IJoiningOnTraversable
         $this->innerValues = $innerValues;
         $this->isGroupJoin = $isGroupJoin;
     }
-    
+
     public function on(callable $joiningOnFunction)
     {
         $functionConverter = $this->provider->getFunctionToExpressionTreeConverter();
-        
+
         return new JoiningToQueryable(
                 $this->provider,
                 $this->scope,
-                function (callable $joiningFunction) use($functionConverter, $joiningOnFunction) {
+                function (callable $joiningFunction) use ($functionConverter, $joiningOnFunction) {
             return new Segments\Join(
                             $this->innerValues,
                             $this->isGroupJoin,
@@ -58,15 +58,15 @@ class JoiningOnQueryable implements IJoiningOnTraversable
                             $functionConverter->convert($joiningFunction));
         });
     }
-    
+
     public function onEquality(callable $outerKeyFunction, callable $innerKeyFunction)
     {
         $functionConverter = $this->provider->getFunctionToExpressionTreeConverter();
-        
+
         return new JoiningToQueryable(
                 $this->provider,
                 $this->scope,
-                function (callable $joiningFunction) use($functionConverter, $outerKeyFunction, $innerKeyFunction) {
+                function (callable $joiningFunction) use ($functionConverter, $outerKeyFunction, $innerKeyFunction) {
             return new Segments\EqualityJoin(
                             $this->innerValues,
                             $this->isGroupJoin,

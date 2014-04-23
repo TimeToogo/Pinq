@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq;
 
@@ -18,7 +18,7 @@ interface IOrderedTraversable extends ITraversable
      * @return IOrderedTraversable
      */
     public function thenBy(callable $function, $direction);
-    
+
     /**
      * Subsequently orders the results using the supplied function ascendingly
      *
@@ -26,7 +26,7 @@ interface IOrderedTraversable extends ITraversable
      * @return IOrderedTraversable
      */
     public function thenByAscending(callable $function);
-    
+
     /**
      * Subsequently orders the results using the supplied function descendingly
      *

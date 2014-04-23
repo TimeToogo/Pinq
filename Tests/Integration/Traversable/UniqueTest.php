@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable;
 
@@ -8,7 +8,7 @@ class UniqueTest extends TraversableTest
     {
         return $traversable->unique();
     }
-    
+
     public function notUniqueData()
     {
         $nonUnique = [
@@ -37,27 +37,27 @@ class UniqueTest extends TraversableTest
             'test',
             'test'
         ];
-        
+
         return $this->everything() + $this->getImplementations($nonUnique);
     }
-    
+
     /**
      * @dataProvider NotUniqueData
      */
     public function testThatUniqueValuesAreUnique(\Pinq\ITraversable $values, array $data)
     {
         $uniqueValues = $values->unique();
-        
+
         $this->assertMatches($uniqueValues, array_unique($data, SORT_REGULAR));
     }
-    
+
     /**
      * @dataProvider NotUniqueData
      */
     public function testThatUniqueValuesPreservesKeys(\Pinq\ITraversable $values, array $data)
     {
         $uniqueValuesArray = $values->unique()->asArray();
-        
+
         $this->assertSame(
                 array_keys(array_unique($data, SORT_REGULAR)),
                 array_keys($uniqueValuesArray));

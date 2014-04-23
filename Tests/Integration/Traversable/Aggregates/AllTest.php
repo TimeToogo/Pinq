@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq\Tests\Integration\Traversable\Aggregates;
 
@@ -11,7 +11,7 @@ class AllTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     {
         $this->assertTrue($traversable->all());
     }
-    
+
     public function falseyValues()
     {
         //                                                      V
@@ -21,7 +21,7 @@ class AllTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
                 //                                 V
                 $this->getImplementations([true, false, true]);
     }
-    
+
     /**
      * @dataProvider FalseyValues
      */
@@ -29,7 +29,7 @@ class AllTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     {
         $this->assertFalse($traversable->all());
     }
-    
+
     /**
      * @dataProvider Everything
      */

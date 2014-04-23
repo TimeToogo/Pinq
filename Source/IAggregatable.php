@@ -1,88 +1,88 @@
-<?php 
+<?php
 
 namespace Pinq;
 
 /**
  * The API defining all the aggregate results,
  * mainly exists for organizational purposes
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface IAggregatable extends \Countable
 {
     /**
      * Returns the amount of the values.
-     * 
+     *
      * @return int
      */
     public function count();
-    
+
     /**
      * Returns whether any values exist.
-     * 
+     *
      * @return boolean
      */
     public function exists();
-    
+
     /**
      * Aggregates the values with the supplied function
-     * 
+     *
      * @param callable $function The aggregate function
      * @return mixed
      */
     public function aggregate(callable $function);
-    
+
     /**
      * Returns the maximum value.
-     * 
+     *
      * @param callable $function The function which will return the values
      * @return mixed
      */
     public function maximum(callable $function = null);
-    
+
     /**
      * Returns the maximum value.
-     * 
+     *
      * @param callable $function The function which will return the values
      * @return mixed
      */
     public function minimum(callable $function = null);
-    
+
     /**
      * Returns the sum of the values.
-     * 
+     *
      * @param callable $function The function which will return the values
      * @return int|null
      */
     public function sum(callable $function = null);
-    
+
     /**
      * Returns the average of the values.
-     * 
+     *
      * @param callable $function The function which will return the values
      * @return double|null
      */
     public function average(callable $function = null);
-    
+
     /**
      * Returns a boolean of if all the values evaluate to true
-     * 
+     *
      * @param callable $function The function which will return the values
      * @return bool
      */
     public function all(callable $function = null);
-    
+
     /**
      * Returns a boolean of if any of the values evaluate to true
-     * 
+     *
      * @param callable $function The function which will return the values
      * @return bool
      */
     public function any(callable $function = null);
-    
+
     /**
      * Returns a string of all the values concatented by the delimiter
-     * 
+     *
      * @param string $delimiter The string to delimit the values by
      * @param callable $function The function which will return the values
      * @return string

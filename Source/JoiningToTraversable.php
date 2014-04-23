@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pinq;
 
@@ -13,16 +13,16 @@ class JoiningToTraversable implements IJoiningToTraversable
      * @var callable
      */
     protected $constructJoinIteratorCallback;
-    
+
     public function __construct(callable $constructJoinIteratorCallback)
     {
         $this->constructJoinIteratorCallback = $constructJoinIteratorCallback;
     }
-    
+
     public function to(callable $joinFunction)
     {
         $constructJoinIteratorCallback = $this->constructJoinIteratorCallback;
-        
+
         return new Traversable($constructJoinIteratorCallback($joinFunction));
     }
 }
