@@ -40,7 +40,7 @@ class ArrayAccessCache implements IFunctionCache
 
     public function clear()
     {
-        if (method_exists($this->arrayAccess, 'Clear')) {
+        if (method_exists($this->arrayAccess, 'clear')) {
             $this->arrayAccess->clear();
         } elseif ($this->arrayAccess instanceof \Traversable) {
             $keys = array_keys(iterator_to_array($this->arrayAccess, true));
