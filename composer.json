@@ -25,7 +25,11 @@
     },
     "autoload": {
         "psr-4": { 
-            "Pinq\\": "Source/",
+            "Pinq\\": "Source/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { 
             "Pinq\\Tests\\": "Tests/" 
         }
     }
