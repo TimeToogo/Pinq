@@ -7,23 +7,24 @@ class IssetIndexTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatIssetOnValidIndexesReturnTrue(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatIssetOnValidIndexesReturnTrue(\Pinq\ITraversable $traversable, array $data)
     {
-        foreach ($Data as $Key => $Value) {
-            $this->assertTrue(isset($Traversable[$Key]));
+        foreach ($data as $key => $value) {
+            $this->assertTrue(isset($traversable[$key]));
         }
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatIssetOnInvalidIndexesReturnFalse(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatIssetOnInvalidIndexesReturnFalse(\Pinq\ITraversable $traversable, array $data)
     {
-        $NotAnIndex = 0;
-        while (isset($Data[$NotAnIndex])) {
-            $NotAnIndex++;
+        $notAnIndex = 0;
+
+        while (isset($data[$notAnIndex])) {
+            $notAnIndex++;
         }
-        
-        $this->assertFalse(isset($Traversable[$NotAnIndex]));
+
+        $this->assertFalse(isset($traversable[$notAnIndex]));
     }
 }

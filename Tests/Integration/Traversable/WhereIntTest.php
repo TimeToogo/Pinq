@@ -4,52 +4,50 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class WhereIntTest extends TraversableTest
 {
-    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
-        return $Traversable->WhereIn([]);
+        return $traversable->whereIn([]);
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatWhereInWithSelfReturnsAllValues(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatWhereInWithSelfReturnsAllValues(\Pinq\ITraversable $traversable, array $data)
     {
-        $Values = $Traversable->WhereIn($Traversable);
-        
-        $this->AssertMatches($Values, $Data);
+        $values = $traversable->whereIn($traversable);
+
+        $this->assertMatches($values, $data);
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatWhereInWithEmptyReturnsEmpty(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatWhereInWithEmptyReturnsEmpty(\Pinq\ITraversable $traversable, array $data)
     {
-        $Values = $Traversable->WhereIn(new \Pinq\Traversable());
-        
-        $this->AssertMatches($Values, []);
+        $values = $traversable->whereIn(new \Pinq\Traversable());
+
+        $this->assertMatches($values, []);
     }
-    
-    
+
     /**
      * @dataProvider OneToTen
      */
-    public function testThatWhereInWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatWhereInWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $traversable, array $data)
     {
-        $OtherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
-        $ValuesWithSomeMatchingValues = new \Pinq\Traversable($OtherData);
-        
-        $Values = $Traversable->WhereIn($ValuesWithSomeMatchingValues);
-        
-        $this->AssertMatches($Values, array_intersect($Data, $OtherData));
+        $otherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
+        $valuesWithSomeMatchingValues = new \Pinq\Traversable($otherData);
+        $values = $traversable->whereIn($valuesWithSomeMatchingValues);
+
+        $this->assertMatches($values, array_intersect($data, $otherData));
     }
-    
+
     /**
      * @dataProvider OneToTen
      */
-    public function testThatWhereInUsesStrictEquality(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatWhereInUsesStrictEquality(\Pinq\ITraversable $traversable, array $data)
     {
-        $Insection = $Traversable->Intersect(['1', '2', '3', '4', '5']);
-        
-        $this->AssertMatches($Insection, []);
+        $insection = $traversable->intersect(['1', '2', '3', '4', '5']);
+
+        $this->assertMatches($insection, []);
     }
 }

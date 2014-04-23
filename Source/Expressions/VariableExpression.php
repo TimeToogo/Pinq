@@ -6,7 +6,7 @@ namespace Pinq\Expressions;
  * <code>
  * $I
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class VariableExpression extends Expression
@@ -14,64 +14,63 @@ class VariableExpression extends Expression
     /**
      * @var Expression
      */
-    private $NameExpression;
-    
-    public function __construct(Expression $NameExpression)
+    private $nameExpression;
+
+    public function __construct(Expression $nameExpression)
     {
-        $this->NameExpression = $NameExpression;
+        $this->nameExpression = $nameExpression;
     }
 
-    public function Traverse(ExpressionWalker $Walker)
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkVariable($this);
+        return $walker->walkVariable($this);
     }
 
-    public function Simplify()
+    public function simplify()
     {
-        return $this->Update($this->NameExpression->Simplify());
+        return $this->update($this->nameExpression->simplify());
     }
 
     /**
      * @return Expression
      */
-    public function GetNameExpression()
+    public function getNameExpression()
     {
-        return $this->NameExpression;
+        return $this->nameExpression;
     }
 
-    public function Update(Expression $NameExpression)
+    public function update(Expression $nameExpression)
     {
-        if ($this->NameExpression === $NameExpression) {
+        if ($this->nameExpression === $nameExpression) {
             return $this;
         }
 
-        return new self($NameExpression);
+        return new self($nameExpression);
     }
 
-    protected function CompileCode(&$Code)
+    protected function compileCode(&$code)
     {
-        if($this->NameExpression instanceof ValueExpression && \Pinq\Utilities::IsNormalSyntaxName($this->NameExpression->GetValue())) {
-            $Code .= '$' . $this->NameExpression->GetValue(); 
-        }
-        else {
-            $Code .= '${';
-            $this->NameExpression->CompileCode($Code);
-            $Code .= '}';
+        if ($this->nameExpression instanceof ValueExpression && \Pinq\Utilities::isNormalSyntaxName($this->nameExpression->getValue())) {
+            $code .= '$' . $this->nameExpression->getValue();
+        } else {
+            $code .= '${';
+            $this->nameExpression->compileCode($code);
+            $code .= '}';
         }
     }
-    
+
     public function serialize()
     {
-        return serialize($this->NameExpression);
+        return serialize($this->nameExpression);
     }
-    
-    public function unserialize($Serialized)
+
+    public function unserialize($serialized)
     {
-        $this->NameExpression = unserialize($Serialized);
+        $this->nameExpression = unserialize($serialized);
     }
-    
+
     public function __clone()
     {
-        $this->NameExpression = clone $this->NameExpression;
+        $this->nameExpression = clone $this->nameExpression;
     }
 }

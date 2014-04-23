@@ -2,19 +2,22 @@
 
 namespace Pinq\Tests\Integration\Parsing;
 
-use \Pinq\Parsing\IParser;
-use \Pinq\Expressions as O;
-
-
-function TestFunction () { return 1.1; }
-
+use Pinq\Parsing\IParser;
+use Pinq\Expressions as O;
+function TestFunction()
+{
+    return 1.1;
+}
 define('TEST_FUNCTION', __NAMESPACE__ . '\\TestFunction');
 
-class Test 
+class Test
 {
-    public static $Method = [__CLASS__, 'Method'];
-    
-    public static function Method () { return 1.1; }
+    public static $method = [__CLASS__, 'Method'];
+
+    public static function method()
+    {
+        return 1.1;
+    }
 }
 
 class FunctionTypesTest extends ParserTest
@@ -22,25 +25,32 @@ class FunctionTypesTest extends ParserTest
     /**
      * @dataProvider Parsers
      */
-    public function testClosure() 
+    public function testClosure()
     {
-        $this->AssertParsedAs(function () { return 1.1; }, [O\Expression::ReturnExpression(O\Expression::Value(1.1))]);
+        $this->assertParsedAs(
+                function () {
+                    return 1.1;
+                },
+                [O\Expression::returnExpression(O\Expression::value(1.1))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testFunction() 
+    public function testFunction()
     {
-        $this->AssertParsedAs(TEST_FUNCTION, [O\Expression::ReturnExpression(O\Expression::Value(1.1))]);
+        $this->assertParsedAs(
+                TEST_FUNCTION,
+                [O\Expression::returnExpression(O\Expression::value(1.1))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testMethod() 
+    public function testMethod()
     {
-        $this->AssertParsedAs(Test::$Method, [O\Expression::ReturnExpression(O\Expression::Value(1.1))]);
+        $this->assertParsedAs(
+                Test::$method,
+                [O\Expression::returnExpression(O\Expression::value(1.1))]);
     }
-    
 }

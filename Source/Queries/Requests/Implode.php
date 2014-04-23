@@ -1,13 +1,13 @@
 <?php
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
- * Request query for a string of all the projected values 
+ * Request query for a string of all the projected values
  * concatenated by the specified delimiter
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Implode extends ProjectionRequest
@@ -15,32 +15,32 @@ class Implode extends ProjectionRequest
     /**
      * @var string
      */
-    private $Delimiter;
-    
+    private $delimiter;
+
     /**
-     * @param string $Delimiter
+     * @param string $delimiter
      */
-    public function __construct($Delimiter, FunctionExpressionTree $FunctionExpressionTree = null)
+    public function __construct($delimiter, FunctionExpressionTree $functionExpressionTree = null)
     {
-        parent::__construct($FunctionExpressionTree);
-        $this->Delimiter = $Delimiter;
+        parent::__construct($functionExpressionTree);
+        $this->delimiter = $delimiter;
     }
-    
-    public function GetType()
+
+    public function getType()
     {
-        return self::Implode;
+        return self::IMPLODE;
     }
-    
+
     /**
      * @return string
      */
-    public function GetDelimiter()
+    public function getDelimiter()
     {
-        return $this->Delimiter;
+        return $this->delimiter;
     }
 
-    public function Traverse(RequestVisitor $Visitor)
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitImplode($this);
+        return $visitor->visitImplode($this);
     }
 }

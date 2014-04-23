@@ -7,48 +7,51 @@ class RemoveWhereTest extends CollectionTest
     /**
      * @dataProvider Everything
      */
-    public function testThatExecutionIsNotDeferred(\Pinq\ICollection $Collection, array $Data)
+    public function testThatExecutionIsNotDeferred(\Pinq\ICollection $collection, array $data)
     {
-        if(count($Data) > 0) {
-            $this->AssertThatExecutionIsNotDeferred([$Collection, 'RemoveWhere']);
+        if (count($data) > 0) {
+            $this->assertThatExecutionIsNotDeferred([$collection, 'RemoveWhere']);
         }
     }
-    
+
     /**
      * @dataProvider AssocOneToTen
      */
-    public function testThatRemoveWhereRemovesItemsWhereTheFunctionReturnsTrueAndPreservesKeys(\Pinq\ICollection $Numbers, array $Data)
+    public function testThatRemoveWhereRemovesItemsWhereTheFunctionReturnsTrueAndPreservesKeys(\Pinq\ICollection $numbers, array $data)
     {
-        $Predicate = function ($I) { return $I % 2 === 0; };
-        
-        $Numbers->RemoveWhere($Predicate);
-        
-        foreach($Data as $Key => $Value) {
-            if($Predicate($Value)) {
-                unset($Data[$Key]);
+        $predicate =
+                function ($i) {
+                    return $i % 2 === 0;
+                };
+
+        $numbers->removeWhere($predicate);
+
+        foreach ($data as $key => $value) {
+            if ($predicate($value)) {
+                unset($data[$key]);
             }
         }
-        
-        $this->AssertMatches($Numbers, $Data);
+
+        $this->assertMatches($numbers, $data);
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatRemoveWhereTrueRemovesAllItems(\Pinq\ICollection $Collection, array $Data)
+    public function testThatRemoveWhereTrueRemovesAllItems(\Pinq\ICollection $collection, array $data)
     {
-        $Collection->RemoveWhere(function () { return true; });
-        
-        $this->AssertMatchesValues($Collection, []);
+        $collection->removeWhere(function () { return true; });
+
+        $this->assertMatchesValues($collection, []);
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatRemoveWhereFalseRemovesNoItems(\Pinq\ICollection $Collection, array $Data)
+    public function testThatRemoveWhereFalseRemovesNoItems(\Pinq\ICollection $collection, array $data)
     {
-        $Collection->RemoveWhere(function () { return false; });
-        
-        $this->AssertMatchesValues($Collection, $Data);
+        $collection->removeWhere(function () { return false; });
+
+        $this->assertMatchesValues($collection, $data);
     }
 }

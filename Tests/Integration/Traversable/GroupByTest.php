@@ -4,61 +4,72 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class GroupByTest extends TraversableTest
 {
-    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
-        return $Traversable->GroupBy(function () {});
+        return $traversable->groupBy(function () {
+
+        });
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatExecutionIsDeferred(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->AssertThatExecutionIsDeferred([$Traversable, 'GroupBy']);
+        $this->assertThatExecutionIsDeferred([$traversable, 'groupBy']);
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatGroupByElementReturnsITraversables(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatGroupByElementReturnsITraversables(\Pinq\ITraversable $traversable, array $data)
     {
-        $Groups = $Traversable->GroupBy(function ($I) { return $I; });
-        foreach ($Groups as $Group) {
-            $this->assertInstanceOf(\Pinq\ITraversable::ITraversableType, $Group);
+        $groups =
+                $traversable->groupBy(function ($i) {
+                    return $i;
+                });
+
+        foreach ($groups as $group) {
+            $this->assertInstanceOf(\Pinq\ITraversable::ITRAVERSABLE_TYPE, $group);
         }
     }
-    
+
     /**
      * @dataProvider OneToTen
      * @depends testThatGroupByElementReturnsITraversables
      */
-    public function testThatGroupByMultipleTest(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatGroupByMultipleTest(\Pinq\ITraversable $traversable, array $data)
     {
-        $Groups = $Traversable
-                ->GroupBy(function ($I) { return $I % 2 === 0; })
-                ->AndBy(function ($I) { return $I % 3 === 0; })
-                ->AsArray();
-        
-        $this->assertCount(4, $Groups);
-        $this->AssertMatchesValues($Groups[0], [1, 5, 7]);
-        $this->AssertMatchesValues($Groups[1], [2, 4, 8, 10]);
-        $this->AssertMatchesValues($Groups[2], [3, 9]);
-        $this->AssertMatchesValues($Groups[3], [6]);
+        $groups = $traversable
+                ->groupBy(function ($i) { return $i % 2 === 0; })
+                ->andBy(function ($i) { return $i % 3 === 0; })->asArray();
+
+        $this->assertCount(4, $groups);
+        $this->assertMatchesValues($groups[0], [1, 5, 7]);
+        $this->assertMatchesValues($groups[1], [2, 4, 8, 10]);
+        $this->assertMatchesValues($groups[2], [3, 9]);
+        $this->assertMatchesValues($groups[3], [6]);
     }
-    
+
     /**
      * @dataProvider AssocOneToTen
      * @depends testThatGroupByElementReturnsITraversables
      */
-    public function testThatGroupByGroupsTheElementsCorrectlyAndPreservesKeys(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatGroupByGroupsTheElementsCorrectlyAndPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {
-        $IsEven = function ($I) { return $I % 2 === 0; };
-        
+        $isEven =
+                function ($i) {
+                    return $i % 2 === 0;
+                };
+
         //First number is odd, so the first group should be the odd group
-        list($Odd, $Even) = $Traversable->GroupBy($IsEven)->AsArray();
-        
-        $this->AssertMatches($Odd, array_filter($Data, function ($I) use($IsEven) { return !$IsEven($I); }));
-        $this->AssertMatches($Even, array_filter($Data, $IsEven));
+        list($odd, $even) = $traversable->groupBy($isEven)->asArray();
+
+        $this->assertMatches(
+                $odd,
+                array_filter($data, function ($i) use ($isEven) {
+                    return !$isEven($i);
+                }));
+        $this->assertMatches($even, array_filter($data, $isEven));
     }
-    
 }

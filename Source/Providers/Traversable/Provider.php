@@ -2,32 +2,32 @@
 
 namespace Pinq\Providers\Traversable;
 
-use \Pinq\Queries;
+use Pinq\Queries;
 
 /**
  * Query provider for evalating query of the supplied traversable instance,
  * this is useful for mocking a queryable against an in memory traversable.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Provider extends \Pinq\Providers\QueryProvider
 {
-    private $ScopeEvaluator;
-    protected $Traversable;
+    private $scopeEvaluator;
 
-    public function __construct(\Pinq\ITraversable $Traversable)
+    protected $traversable;
+
+    public function __construct(\Pinq\ITraversable $traversable)
     {
         parent::__construct();
-        $this->ScopeEvaluator = new ScopeEvaluator();
-        $this->Traversable = $Traversable;
+        $this->scopeEvaluator = new ScopeEvaluator();
+        $this->traversable = $traversable;
     }
-    
-    
-    protected function LoadRequestEvaluatorVisitor(Queries\IScope $Scope)
-    {
-        $this->ScopeEvaluator->SetTraversable($this->Traversable);
-        $this->ScopeEvaluator->Walk($Scope);
 
-        return new RequestEvaluator($this->ScopeEvaluator->GetTraversable());
+    protected function loadRequestEvaluatorVisitor(Queries\IScope $scope)
+    {
+        $this->scopeEvaluator->setTraversable($this->traversable);
+        $this->scopeEvaluator->walk($scope);
+
+        return new RequestEvaluator($this->scopeEvaluator->getTraversable());
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Pinq\Queries\Operations; 
+namespace Pinq\Queries\Operations;
 
 /**
  * Base class for an operation query using a supplied index
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 abstract class IndexOperation extends Operation
@@ -12,15 +12,15 @@ abstract class IndexOperation extends Operation
     /**
      * @var mixed
      */
-    private $Index;
-    
-    public function __construct($Index)
+    private $index;
+
+    public function __construct($index)
     {
-        $this->Index = $Index;
+        $this->index = $index;
     }
-    
-    final public function GetIndex()
+
+    final public function getIndex()
     {
-        return $this->Index;
+        return $this->index;
     }
 }

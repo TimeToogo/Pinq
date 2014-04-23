@@ -4,19 +4,15 @@ namespace Pinq\Parsing\PHPParser;
 
 /**
  * Placeholder node for a resolved value
- * 
- * @property mixed $Value The resolved value
- * 
+ *
+ * @property mixed $value The resolved value
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class PHPParserResolvedValueNode extends \PHPParser_Node_Expr
 {
-    public function __construct(&$Value)
+    public function __construct(&$value)
     {
-        parent::__construct(
-                [
-                    'Value' => &$Value
-                ],
-                []);
+        parent::__construct(['value' => &$value], []);
     }
 }

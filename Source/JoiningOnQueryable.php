@@ -2,8 +2,8 @@
 
 namespace Pinq;
 
-use \Pinq\Queries;
-use \Pinq\Queries\Segments;
+use Pinq\Queries;
+use Pinq\Queries\Segments;
 
 /**
  * Implements the filtering API for a join / group join queryable.
@@ -15,67 +15,64 @@ class JoiningOnQueryable implements IJoiningOnTraversable
     /**
      * @var Providers\IQueryProvider
      */
-    private $Provider;
-    
+    private $provider;
+
     /**
      * @var Queries\IScope
      */
-    private $Scope;
-    
+    private $scope;
+
     /**
      * @var array|\Traversable
      */
-    private $InnerValues;
-    
+    private $innerValues;
+
     /**
      * @var boolean
      */
-    private $IsGroupJoin;
-    
+    private $isGroupJoin;
+
     /**
-     * @param boolean $IsGroupJoin
+     * @param boolean $isGroupJoin
      */
-    public function __construct(
-            Providers\IQueryProvider $Provider, 
-            Queries\IScope $Scope,
-            $InnerValues, 
-            $IsGroupJoin)
+    public function __construct(Providers\IQueryProvider $provider, Queries\IScope $scope, $innerValues, $isGroupJoin)
     {
-        $this->Provider = $Provider;
-        $this->Scope = $Scope;
-        $this->InnerValues = $InnerValues;
-        $this->IsGroupJoin = $IsGroupJoin;
+        $this->provider = $provider;
+        $this->scope = $scope;
+        $this->innerValues = $innerValues;
+        $this->isGroupJoin = $isGroupJoin;
     }
 
-    
-    public function On(callable $JoiningOnFunction)
+    public function on(callable $joiningOnFunction)
     {
-        $FunctionConverter = $this->Provider->GetFunctionToExpressionTreeConverter();
+        $functionConverter = $this->provider->getFunctionToExpressionTreeConverter();
+
         return new JoiningToQueryable(
-                $this->Provider, 
-                $this->Scope,
-                function (callable $JoiningFunction) use ($FunctionConverter, $JoiningOnFunction) {
-                    return new Segments\Join(
-                            $this->InnerValues, 
-                            $this->IsGroupJoin, 
-                            $FunctionConverter->Convert($JoiningOnFunction), 
-                            $FunctionConverter->Convert($JoiningFunction));
-                });
+                $this->provider,
+                $this->scope,
+                function (callable $joiningFunction) use ($functionConverter, $joiningOnFunction) {
+            return new Segments\Join(
+                            $this->innerValues,
+                            $this->isGroupJoin,
+                            $functionConverter->convert($joiningOnFunction),
+                            $functionConverter->convert($joiningFunction));
+        });
     }
 
-    public function OnEquality(callable $OuterKeyFunction, callable $InnerKeyFunction)
+    public function onEquality(callable $outerKeyFunction, callable $innerKeyFunction)
     {
-        $FunctionConverter = $this->Provider->GetFunctionToExpressionTreeConverter();
+        $functionConverter = $this->provider->getFunctionToExpressionTreeConverter();
+
         return new JoiningToQueryable(
-                $this->Provider, 
-                $this->Scope,
-                function (callable $JoiningFunction) use ($FunctionConverter, $OuterKeyFunction, $InnerKeyFunction) {
-                    return new Segments\EqualityJoin(
-                            $this->InnerValues, 
-                            $this->IsGroupJoin, 
-                            $FunctionConverter->Convert($OuterKeyFunction), 
-                            $FunctionConverter->Convert($InnerKeyFunction), 
-                            $FunctionConverter->Convert($JoiningFunction));
-                });
+                $this->provider,
+                $this->scope,
+                function (callable $joiningFunction) use ($functionConverter, $outerKeyFunction, $innerKeyFunction) {
+            return new Segments\EqualityJoin(
+                            $this->innerValues,
+                            $this->isGroupJoin,
+                            $functionConverter->convert($outerKeyFunction),
+                            $functionConverter->convert($innerKeyFunction),
+                            $functionConverter->convert($joiningFunction));
+        });
     }
 }

@@ -2,83 +2,84 @@
 
 namespace Pinq\Queries\Segments;
 
-use \Pinq\Queries\IScope;
+use Pinq\Queries\IScope;
 
 /**
  * The segment walker is a utility class that will walk any
  * segment in a respective method. This can be implemented such
  * that it visitor or manipulates a query scope
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class SegmentWalker
 {
     /**
-     * @param IScope $Scope
+     * @param IScope $scope
      * @return IScope
      */
-    final public function Walk(IScope $Scope)
+    final public function walk(IScope $scope)
     {
-        $Queries = $Scope->GetSegments();
-        foreach ($Queries as $Key => $Query) {
-            $Queries[$Key] = $Query->Traverse($this);
+        $queries = $scope->getSegments();
+
+        foreach ($queries as $key => $query) {
+            $queries[$key] = $query->traverse($this);
         }
-        
-        return $Scope->Update($Queries);
+
+        return $scope->update($queries);
     }
 
-    public function WalkOperation(Operation $Query)
+    public function walkOperation(Operation $query)
     {
-        return $Query;
+        return $query;
     }
 
-    public function WalkRange(Range $Query)
+    public function walkRange(Range $query)
     {
-        return $Query;
+        return $query;
     }
 
-    public function WalkUnique(Unique $Query)
+    public function walkUnique(Unique $query)
     {
-        return $Query;
-    }
-    
-    public function WalkFilter(Filter $Query)
-    {
-        return $Query;
+        return $query;
     }
 
-    public function WalkGroupBy(GroupBy $Query)
+    public function walkFilter(Filter $query)
     {
-        return $Query;
+        return $query;
     }
 
-    public function WalkJoin(Join $Join)
+    public function walkGroupBy(GroupBy $query)
     {
-        return $Join;
+        return $query;
     }
 
-    public function WalkEqualityJoin(EqualityJoin $Join)
+    public function walkJoin(Join $join)
     {
-        return $Join;
+        return $join;
     }
 
-    public function WalkOrderBy(OrderBy $Query)
+    public function walkEqualityJoin(EqualityJoin $join)
     {
-        return $Query;
+        return $join;
     }
 
-    public function WalkSelect(Select $Query)
+    public function walkOrderBy(OrderBy $query)
     {
-        return $Query;
+        return $query;
     }
 
-    public function WalkSelectMany(SelectMany $Query)
+    public function walkSelect(Select $query)
     {
-        return $Query;
+        return $query;
     }
 
-    public function WalkIndexBy(IndexBy $Query)
+    public function walkSelectMany(SelectMany $query)
     {
-        return $Query;
+        return $query;
+    }
+
+    public function walkIndexBy(IndexBy $query)
+    {
+        return $query;
     }
 }

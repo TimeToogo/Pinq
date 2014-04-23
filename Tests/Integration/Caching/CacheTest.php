@@ -2,98 +2,109 @@
 
 namespace Pinq\Tests\Integration\Caching;
 
-use \Pinq\Expressions as O;
-use \Pinq\Caching\IFunctionCache;
+use Pinq\Expressions as O;
+use Pinq\Caching\IFunctionCache;
 
 abstract class CacheTest extends \Pinq\Tests\PinqTestCase
 {
-    protected static $RootCacheDirectory; 
-    
+    protected static $rootCacheDirectory;
+
     /**
-     * @var IFunctionCache 
+     * @var IFunctionCache
      */
-    protected $Cache;
-    
-    public function __construct($name = NULL, array $data = array(), $dataName = '')
+    protected $cache;
+
+    public function __construct($name = NULL, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        
-        self::$RootCacheDirectory = __DIR__ . DIRECTORY_SEPARATOR . 'CacheFiles' . DIRECTORY_SEPARATOR;
-        if(!is_dir(self::$RootCacheDirectory)) {
-            mkdir(self::$RootCacheDirectory, 0777, true);
+        self::$rootCacheDirectory = __DIR__ . DIRECTORY_SEPARATOR . 'CacheFiles' . DIRECTORY_SEPARATOR;
+
+        if (!is_dir(self::$rootCacheDirectory)) {
+            mkdir(self::$rootCacheDirectory, 511, true);
         }
     }
-    
+
     public function testThatCacheSavesAndRetrievesExpressionTree()
     {
-        $Hash = __METHOD__;
-        $ExpressionTree = new \Pinq\FunctionExpressionTree(
-                null, 
-                [O\Expression::Parameter('I')], 
-                [O\Expression::ReturnExpression(
-                        O\Expression::BinaryOperation(
-                                O\Expression::Variable(O\Expression::Value('I')), 
-                                O\Operators\Binary::Addition, 
-                                O\Expression::Value(2)))]);
-        
-        $this->AssertThatIsCachedCorrectrly($Hash, $ExpressionTree);
+        $hash = __METHOD__;
+        $expressionTree =
+                new \Pinq\FunctionExpressionTree(
+                        null,
+                        [O\Expression::parameter('I')],
+                        [O\Expression::returnExpression(O\Expression::binaryOperation(
+                                O\Expression::variable(O\Expression::value('I')),
+                                O\Operators\Binary::ADDITION,
+                                O\Expression::value(2)))]);
+
+        $this->assertThatIsCachedCorrectrly($hash, $expressionTree);
     }
-    
+
     public function testThatCacheSavesAndRetrievesBlankExpressionTree()
     {
-        $Hash = __METHOD__;
-        $BlankExpressionTree = new \Pinq\FunctionExpressionTree(null, [], []);
-        
-        $this->AssertThatIsCachedCorrectrly($Hash, $BlankExpressionTree);
+        $hash = __METHOD__;
+        $blankExpressionTree = new \Pinq\FunctionExpressionTree(null, [], []);
+
+        $this->assertThatIsCachedCorrectrly($hash, $blankExpressionTree);
     }
-    
-    final protected function AssertThatIsCachedCorrectrly($Hash, \Pinq\FunctionExpressionTree $ExpressionTree)
+
+    final protected function assertThatIsCachedCorrectrly($hash, \Pinq\FunctionExpressionTree $expressionTree)
     {
-        if($this->Cache === null) {
+        if ($this->cache === null) {
             throw new \Exception('Please set the Cache field');
         }
-        
-        $this->Cache->Save($Hash, $ExpressionTree);
-        
-        $RetrievedExpressionTree = $this->Cache->TryGet($Hash);
-        
-        $this->assertInstanceOf('\Pinq\FunctionExpressionTree', $RetrievedExpressionTree, 'The cache should return am expression tree and not null');
-        $this->assertNotSame($ExpressionTree, $RetrievedExpressionTree, 'The cache should return a clone and not the same instance');
-        $this->assertEquals($ExpressionTree, $RetrievedExpressionTree, 'The cache should not alter the expression tree');
+
+        $this->cache->save($hash, $expressionTree);
+        $retrievedExpressionTree = $this->cache->tryGet($hash);
+
+        $this->assertInstanceOf(
+                '\\Pinq\\FunctionExpressionTree',
+                $retrievedExpressionTree,
+                'The cache should return am expression tree and not null');
+
+        $this->assertNotSame(
+                $expressionTree,
+                $retrievedExpressionTree,
+                'The cache should return a clone and not the same instance');
+
+        $this->assertEquals(
+                $expressionTree,
+                $retrievedExpressionTree,
+                'The cache should not alter the expression tree');
     }
-    
+
     public function testThatTryingToGetNonExistentExpressionTreeReturnsNull()
     {
-        $this->assertNull($this->Cache->TryGet(__METHOD__));
+        $this->assertNull($this->cache->tryGet(__METHOD__));
     }
-    
+
     public function testThatRemovedExpressionTreeReturnsNull()
     {
-        $Hash1 = __METHOD__ . '1';
-        $Hash2 = __METHOD__ . '2';
-        $BlankExpressionTree = new \Pinq\FunctionExpressionTree(null, [], []);
-        
-        $this->Cache->Save($Hash1, $BlankExpressionTree);
-        $this->Cache->Save($Hash2, $BlankExpressionTree);
-        
-        $this->Cache->Remove($Hash1);
-        
-        $this->assertNull($this->Cache->TryGet($Hash1));
-        $this->assertEquals($BlankExpressionTree, $this->Cache->TryGet($Hash2));
+        $hash1 = __METHOD__ . '1';
+        $hash2 = __METHOD__ . '2';
+
+        $blankExpressionTree = new \Pinq\FunctionExpressionTree(null, [], []);
+        $this->cache->save($hash1, $blankExpressionTree);
+        $this->cache->save($hash2, $blankExpressionTree);
+        $this->cache->remove($hash1);
+
+        $this->assertNull($this->cache->tryGet($hash1));
+
+        $this->assertEquals(
+                $blankExpressionTree,
+                $this->cache->tryGet($hash2));
     }
-    
+
     public function testThatClearedCacheRemovesSavedExpressionTrees()
     {
-        $Hash1 = __METHOD__ . '1';
-        $Hash2 = __METHOD__ . '2';
-        $BlankExpressionTree = new \Pinq\FunctionExpressionTree(null, [], []);
-        
-        $this->Cache->Save($Hash1, $BlankExpressionTree);
-        $this->Cache->Save($Hash2, $BlankExpressionTree);
-        
-        $this->Cache->Clear();
-        
-        $this->assertNull($this->Cache->TryGet($Hash1));
-        $this->assertNull($this->Cache->TryGet($Hash2));
+        $hash1 = __METHOD__ . '1';
+        $hash2 = __METHOD__ . '2';
+
+        $blankExpressionTree = new \Pinq\FunctionExpressionTree(null, [], []);
+        $this->cache->save($hash1, $blankExpressionTree);
+        $this->cache->save($hash2, $blankExpressionTree);
+        $this->cache->clear();
+
+        $this->assertNull($this->cache->tryGet($hash1));
+        $this->assertNull($this->cache->tryGet($hash2));
     }
 }

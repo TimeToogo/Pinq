@@ -4,32 +4,36 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class SelectManyTest extends TraversableTest
 {
-    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
-        return $Traversable->SelectMany(function () { return []; });
+        return $traversable->selectMany(function () {
+            return [];
+        });
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatExecutionIsDeferred(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->AssertThatExecutionIsDeferred([$Traversable, 'SelectMany']);
+        $this->assertThatExecutionIsDeferred([$traversable, 'selectMany']);
     }
-    
+
     /**
      * @dataProvider TenRandomStrings
      */
-    public function testThatSelectManyFlattensCorrectlyAndIgnoresKeys(\Pinq\ITraversable $Values, array $Data)
+    public function testThatSelectManyFlattensCorrectlyAndIgnoresKeys(\Pinq\ITraversable $values, array $data)
     {
-        $ToCharacters = 'str_split';
-        $Characters = $Values->SelectMany($ToCharacters);
-        
-        $this->AssertMatches($Characters, array_values(self::FlattenArrays(array_map($ToCharacters, $Data))));
+        $toCharacters = 'str_split';
+        $characters = $values->selectMany($toCharacters);
+
+        $this->assertMatches(
+                $characters,
+                array_values(self::flattenArrays(array_map($toCharacters, $data))));
     }
-    
-    private static function FlattenArrays(array $Arrays) 
+
+    private static function flattenArrays(array $arrays)
     {
-        return call_user_func_array('array_merge', array_map('array_values', $Arrays));
+        return call_user_func_array('array_merge', array_map('array_values', $arrays));
     }
 }

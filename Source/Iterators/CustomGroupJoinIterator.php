@@ -4,15 +4,15 @@ namespace Pinq\Iterators;
 
 /**
  * Iterates the matching outer value with all the matching inner values in a traversable
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class CustomGroupJoinIterator extends CustomJoinIteratorBase
 {
-    protected function GetInnerGroupValuesIterator(callable $InnerValueFilterFunction)
+    protected function getInnerGroupValuesIterator(callable $innerValueFilterFunction)
     {
-        $GroupTraversable = new \Pinq\Traversable(array_filter($this->InnerValues, $InnerValueFilterFunction));
-        
-        return new \ArrayIterator([$GroupTraversable]);
+        $groupTraversable = new \Pinq\Traversable(array_filter($this->innerValues, $innerValueFilterFunction));
+
+        return new \ArrayIterator([$groupTraversable]);
     }
 }

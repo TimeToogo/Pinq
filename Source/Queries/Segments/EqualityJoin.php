@@ -1,84 +1,75 @@
 <?php
 
-namespace Pinq\Queries\Segments; 
+namespace Pinq\Queries\Segments;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Query segment for an equality join base on a key select for the outer values
- * an another for the inner values 
- * 
+ * an another for the inner values
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class EqualityJoin extends JoinBase
 {
     /**
      * The outer key selector function
-     * 
+     *
      * @var FunctionExpressionTree
      */
-    private $OuterKeyFunction;
-    
+    private $outerKeyFunction;
+
     /**
      * The inner key selector function
-     * 
+     *
      * @var FunctionExpressionTree
      */
-    private $InnerKeyFunction;
+    private $innerKeyFunction;
 
-    public function __construct(
-            $Values, 
-            $IsGroupJoin,
-            FunctionExpressionTree $OuterKeyFunction,
-            FunctionExpressionTree $InnerKeyFunction,
-            FunctionExpressionTree $JoiningFunction)
+    public function __construct($values, $isGroupJoin, FunctionExpressionTree $outerKeyFunction, FunctionExpressionTree $innerKeyFunction, FunctionExpressionTree $joiningFunction)
     {
-        parent::__construct($Values, $IsGroupJoin, $JoiningFunction);
-        $this->OuterKeyFunction = $OuterKeyFunction;
-        $this->InnerKeyFunction = $InnerKeyFunction;
+        parent::__construct($values, $isGroupJoin, $joiningFunction);
+        $this->outerKeyFunction = $outerKeyFunction;
+        $this->innerKeyFunction = $innerKeyFunction;
     }
 
-    public function GetType()
+    public function getType()
     {
-        return self::EqualityJoin;
+        return self::EQUALITY_JOIN;
     }
 
-    public function Traverse(SegmentWalker $Walker)
+    public function traverse(SegmentWalker $walker)
     {
-        return $Walker->WalkEqualityJoin($this);
+        return $walker->walkEqualityJoin($this);
     }
 
     /**
      * @return FunctionExpressionTree
      */
-    public function GetOuterKeyFunctionExpressionTree()
+    public function getOuterKeyFunctionExpressionTree()
     {
-        return $this->OuterKeyFunction;
+        return $this->outerKeyFunction;
     }
 
     /**
      * @return FunctionExpressionTree
      */
-    public function GetInnerKeyFunctionExpressionTree()
+    public function getInnerKeyFunctionExpressionTree()
     {
-        return $this->InnerKeyFunction;
+        return $this->innerKeyFunction;
     }
-    
-    public function Update(
-            $Values, 
-            $IsGroupJoin, 
-            FunctionExpressionTree $OuterKeyFunction, 
-            FunctionExpressionTree $InnerKeyFunction, 
-            FunctionExpressionTree $JoiningFunction)
+
+    public function update($values, $isGroupJoin, FunctionExpressionTree $outerKeyFunction, FunctionExpressionTree $innerKeyFunction, FunctionExpressionTree $joiningFunction)
     {
-        if($this->Values === $Values
-                && $this->IsGroupJoin === $IsGroupJoin
-                && $this->OuterKeyFunction === $OuterKeyFunction
-                && $this->InnerKeyFunction === $InnerKeyFunction
-                && $this->JoiningFunction === $JoiningFunction) {
+        if ($this->values === $values && $this->isGroupJoin === $isGroupJoin && $this->outerKeyFunction === $outerKeyFunction && $this->innerKeyFunction === $innerKeyFunction && $this->joiningFunction === $joiningFunction) {
             return $this;
         }
-        
-        return new self($Values, $IsGroupJoin, $OuterKeyFunction, $InnerKeyFunction, $JoiningFunction);
+
+        return new self(
+                $values,
+                $isGroupJoin,
+                $outerKeyFunction,
+                $innerKeyFunction,
+                $joiningFunction);
     }
 }

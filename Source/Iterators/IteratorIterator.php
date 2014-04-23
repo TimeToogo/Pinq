@@ -6,7 +6,7 @@ namespace Pinq\Iterators;
  * Base class for wrapper iterators.
  * The native implemenation was producing some weird results, I think it is
  * related to http://blog.ircmaxell.com/2011/10/iteratoriterator-php-inconsistencies.html
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class IteratorIterator implements \Iterator
@@ -14,48 +14,46 @@ class IteratorIterator implements \Iterator
     /**
      * @var \Iterator
      */
-    private $Iterator;
-    
-    public function __construct(\Traversable $Iterator)
+    private $iterator;
+
+    public function __construct(\Traversable $iterator)
     {
-        if($Iterator instanceof \IteratorAggregate) {
-            $this->Iterator = $Iterator->getIterator();
-        }
-        else if($Iterator instanceof \Iterator) {
-            $this->Iterator = $Iterator;
-        }
-        else {
-            $this->Iterator = new \Pinq\Iterators\IteratorIterator($Iterator);
+        if ($iterator instanceof \IteratorAggregate) {
+            $this->iterator = $iterator->getIterator();
+        } elseif ($iterator instanceof \Iterator) {
+            $this->iterator = $iterator;
+        } else {
+            $this->iterator = new \Pinq\Iterators\IteratorIterator($iterator);
         }
     }
-    
-    public function GetInnerIterator() 
+
+    public function getInnerIterator()
     {
-        return $this->Iterator;
+        return $this->iterator;
     }
-    
+
     public function current()
     {
-        return $this->Iterator->current();
+        return $this->iterator->current();
     }
 
     public function key()
     {
-        return $this->Iterator->key();
+        return $this->iterator->key();
     }
 
     public function next()
     {
-        return $this->Iterator->next();
+        return $this->iterator->next();
     }
 
     public function rewind()
     {
-        return $this->Iterator->rewind();
+        return $this->iterator->rewind();
     }
 
     public function valid()
     {
-        return $this->Iterator->valid();
+        return $this->iterator->valid();
     }
 }

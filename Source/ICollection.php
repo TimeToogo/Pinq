@@ -3,9 +3,9 @@
 namespace Pinq;
 
 /**
- * The collection API, along with traversable query API, 
+ * The collection API, along with traversable query API,
  * a collection's values are mutable, they can be added, removed and altered.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface ICollection extends ITraversable
@@ -13,40 +13,40 @@ interface ICollection extends ITraversable
     /**
      * Applies the function the list of values
      *
-     * @param  callable $Function
+     * @param  callable $function
      * @return void
      */
-    public function Apply(callable $Function);
+    public function apply(callable $function);
 
     /**
      * Adds a range of values to the collection.
      * The collection will be reindexed.
      *
-     * @param  array|\Traversable $Values The values to add
+     * @param  array|\Traversable $values The values to add
      * @return void
      */
-    public function AddRange($Values);
+    public function addRange($values);
 
     /**
      * Removes a range of values from the collection
      *
-     * @param  array|\Traversable $Values The values to remove
+     * @param  array|\Traversable $values The values to remove
      * @return void
      */
-    public function RemoveRange($Values);
+    public function removeRange($values);
 
     /**
      * Removes all the values matched by the predicate
      *
-     * @param  callable $Predicate
+     * @param  callable $predicate
      * @return void
      */
-    public function RemoveWhere(callable $Predicate);
+    public function removeWhere(callable $predicate);
 
     /**
      * Removes all the values.
      *
      * @return void
      */
-    public function Clear();
+    public function clear();
 }

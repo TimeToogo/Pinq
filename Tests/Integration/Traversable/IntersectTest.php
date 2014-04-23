@@ -4,50 +4,51 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class IntersectTest extends TraversableTest
 {
-    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
-        return $Traversable->Intersect([]);
+        return $traversable->intersect([]);
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatIntersectWithSelfReturnsUniqueValues(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatIntersectWithSelfReturnsUniqueValues(\Pinq\ITraversable $traversable, array $data)
     {
-        $Intersection = $Traversable->Intersect($Traversable);
-        
-        $this->AssertMatches($Intersection, array_unique($Data));
+        $intersection = $traversable->intersect($traversable);
+
+        $this->assertMatches($intersection, array_unique($data));
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatIntersectWithEmptyReturnsEmpty(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatIntersectWithEmptyReturnsEmpty(\Pinq\ITraversable $traversable, array $data)
     {
-        $Intersection = $Traversable->Intersect(new \Pinq\Traversable());
-        
-        $this->AssertMatches($Intersection, []);
+        $intersection = $traversable->intersect(new \Pinq\Traversable());
+
+        $this->assertMatches($intersection, []);
     }
-    
-    
+
     /**
      * @dataProvider OneToTen
      */
-    public function testThatIntersectionWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatIntersectionWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $traversable, array $data)
     {
-        $OtherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
-        $Intersection = $Traversable->Intersect($OtherData);
-        
-        $this->AssertMatches($Intersection, array_intersect($Data, $OtherData));
+        $otherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
+        $intersection = $traversable->intersect($otherData);
+
+        $this->assertMatches(
+                $intersection,
+                array_intersect($data, $otherData));
     }
-    
+
     /**
      * @dataProvider OneToTen
      */
-    public function testThatIntersectUsesStrictEquality(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatIntersectUsesStrictEquality(\Pinq\ITraversable $traversable, array $data)
     {
-        $Insection = $Traversable->Intersect(['1', '2', '3', '4', '5']);
-        
-        $this->AssertMatches($Insection, []);
+        $insection = $traversable->intersect(['1', '2', '3', '4', '5']);
+
+        $this->assertMatches($insection, []);
     }
 }

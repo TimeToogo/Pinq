@@ -6,7 +6,7 @@ namespace Pinq\Iterators;
  * Base class for a join iterator with a custom join on function.
  * The equi-join lookup optimization cannot be made and the function must be run
  * for every outer/inner pair.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 abstract class CustomJoinIteratorBase extends JoinIteratorBase
@@ -14,39 +14,33 @@ abstract class CustomJoinIteratorBase extends JoinIteratorBase
     /**
      * @var callable
      */
-    protected $JoinOnFunction;
-    
+    protected $joinOnFunction;
+
     /**
      * @var array
      */
-    protected $InnerValues;
-    
-    public function __construct(
-            \Traversable $OuterIterator,
-            \Traversable $InnerIterator,
-            callable $JoinOnFunction,
-            callable $JoiningFunction)
+    protected $innerValues;
+
+    public function __construct(\Traversable $outerIterator, \Traversable $innerIterator, callable $joinOnFunction, callable $joiningFunction)
     {
-        parent::__construct($OuterIterator, $InnerIterator, $JoiningFunction);
-        $this->JoinOnFunction = $JoinOnFunction;
+        parent::__construct($outerIterator, $innerIterator, $joiningFunction);
+        $this->joinOnFunction = $joinOnFunction;
     }
-    
-    final protected function Initialize()
+
+    final protected function initialize()
     {
-        $this->InnerValues = \Pinq\Utilities::ToArray($this->InnerIterator);
+        $this->innerValues = \Pinq\Utilities::toArray($this->innerIterator);
     }
-    
-    final protected function GetInnerGroupIterator($OuterValue)
+
+    final protected function getInnerGroupIterator($outerValue)
     {
-        $JoinOnFunction = $this->JoinOnFunction;
-        
-        $InnerValueFilterFunction = 
-                function ($InnerValue) use ($OuterValue, $JoinOnFunction) {
-                    return $JoinOnFunction($OuterValue, $InnerValue);
-                };
-                
-        return $this->GetInnerGroupValuesIterator($InnerValueFilterFunction);
+        $joinOnFunction = $this->joinOnFunction;
+        $innerValueFilterFunction = function ($innerValue) use ($outerValue, $joinOnFunction) {
+            return $joinOnFunction($outerValue, $innerValue);
+        };
+
+        return $this->getInnerGroupValuesIterator($innerValueFilterFunction);
     }
-    
-    protected abstract function GetInnerGroupValuesIterator(callable $InnerValueFilterFunction);
+
+    abstract protected function getInnerGroupValuesIterator(callable $innerValueFilterFunction);
 }

@@ -4,7 +4,7 @@ namespace Pinq\Parsing;
 
 /**
  * Facade for converting a function into the equivalent expression tree
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface IFunctionToExpressionTreeConverter
@@ -14,5 +14,5 @@ interface IFunctionToExpressionTreeConverter
      *
      * @return \Pinq\FunctionExpressionTree
      */
-    public function Convert(callable $Function);
+    public function convert(callable $function);
 }

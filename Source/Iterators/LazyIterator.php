@@ -5,7 +5,7 @@ namespace Pinq\Iterators;
 /**
  * Basy class for a lazy iterator, the initializer will be
  * called once, when first accessed.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 abstract class LazyIterator extends IteratorIterator
@@ -13,63 +13,69 @@ abstract class LazyIterator extends IteratorIterator
     /**
      * @var \Traversable
      */
-    protected $Iterator;
-    
+    protected $iterator;
+
     /**
      * @var boolean
      */
-    private $IsInitialized = false;
-    
-    public function __construct(\Traversable $Iterator)
+    private $isInitialized = false;
+
+    public function __construct(\Traversable $iterator)
     {
-        $this->Iterator = $Iterator;
+        $this->iterator = $iterator;
     }
-        
-    private function Initialize() {
-        $Iterator = $this->InitializeIterator($this->Iterator) ?: $this->Iterator;
-        parent::__construct($Iterator);
-        $this->IsInitialized = true;
-    }
-    protected abstract function InitializeIterator(\Traversable $InnerIterator);
-    
-    public function GetInnerIterator()
+
+    private function initialize()
     {
-        if(!$this->IsInitialized) {
-            $this->Initialize();
+        $iterator = $this->initializeIterator($this->iterator) ?: $this->iterator;
+        parent::__construct($iterator);
+        $this->isInitialized = true;
+    }
+
+    abstract protected function initializeIterator(\Traversable $innerIterator);
+
+    public function getInnerIterator()
+    {
+        if (!$this->isInitialized) {
+            $this->initialize();
         }
-        return parent::GetInnerIterator();
+
+        return parent::getInnerIterator();
     }
-    
+
     public function current()
     {
-        if(!$this->IsInitialized) {
-            $this->Initialize();
+        if (!$this->isInitialized) {
+            $this->initialize();
         }
+
         return parent::current();
     }
 
     public function key()
     {
-        if(!$this->IsInitialized) {
-            $this->Initialize();
+        if (!$this->isInitialized) {
+            $this->initialize();
         }
+
         return parent::key();
     }
 
     public function next()
     {
-        if(!$this->IsInitialized) {
-            $this->Initialize();
+        if (!$this->isInitialized) {
+            $this->initialize();
         }
+
         return parent::next();
     }
 
     public function rewind()
     {
-        if(!$this->IsInitialized) {
-            $this->Initialize();
+        if (!$this->isInitialized) {
+            $this->initialize();
         }
+
         return parent::rewind();
     }
-
 }

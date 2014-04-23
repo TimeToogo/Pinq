@@ -6,7 +6,7 @@ namespace Pinq\Expressions;
  * <code>
  * empty($I)
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class EmptyExpression extends Expression
@@ -14,71 +14,70 @@ class EmptyExpression extends Expression
     /**
      * @var Expression
      */
-    private $ValueExpression;
-    
-    public function __construct(Expression $ValueExpression)
+    private $valueExpression;
+
+    public function __construct(Expression $valueExpression)
     {
-        $this->ValueExpression = $ValueExpression;
+        $this->valueExpression = $valueExpression;
     }
 
     /**
      * @return Expression
      */
-    public function GetValueExpression()
+    public function getValueExpression()
     {
-        return $this->ValueExpression;
+        return $this->valueExpression;
     }
 
-    public function Traverse(ExpressionWalker $Walker)
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkEmpty($this);
+        return $walker->walkEmpty($this);
     }
 
-    public function Simplify()
+    public function simplify()
     {
-        $ValueExpression = $this->ValueExpression->Simplify();
+        $valueExpression = $this->valueExpression->simplify();
 
-        if ($ValueExpression instanceof ValueExpression) {
-            $Value = $ValueExpression->GetValue();
+        if ($valueExpression instanceof ValueExpression) {
+            $value = $valueExpression->getValue();
 
-            return Expression::Value(empty($Value));
+            return Expression::value(empty($value));
         }
 
-        return $this->Update(
-                $ValueExpression);
+        return $this->update($valueExpression);
     }
 
     /**
      * @return self
      */
-    public function Update(Expression $ValueExpression)
+    public function update(Expression $valueExpression)
     {
-        if ($this->ValueExpression === $ValueExpression) {
+        if ($this->valueExpression === $valueExpression) {
             return $this;
         }
 
-        return new self($ValueExpression);
+        return new self($valueExpression);
     }
 
-    protected function CompileCode(&$Code)
+    protected function compileCode(&$code)
     {
-        $Code .= 'empty(';
-        $this->ValueExpression->CompileCode($Code);
-        $Code .= ')';
+        $code .= 'empty(';
+        $this->valueExpression->compileCode($code);
+        $code .= ')';
     }
-    
+
     public function serialize()
     {
-        return serialize($this->ValueExpression);
+        return serialize($this->valueExpression);
     }
-    
-    public function unserialize($Serialized)
+
+    public function unserialize($serialized)
     {
-        $this->ValueExpression = unserialize($Serialized);
+        $this->valueExpression = unserialize($serialized);
     }
-    
+
     public function __clone()
     {
-        $this->ValueExpression = clone $this->ValueExpression;
+        $this->valueExpression = clone $this->valueExpression;
     }
 }

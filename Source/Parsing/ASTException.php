@@ -3,24 +3,27 @@
 namespace Pinq\Parsing;
 
 /**
- * Exception for errors while converting the AST into 
+ * Exception for errors while converting the AST into
  * an expression tree
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ASTException extends InvalidFunctionException
 {
-    const IfStatement = 'if(...)';
-    const WhileLoop = 'while(...)';
-    const DoWhileLoop = 'do...while(...)';
-    const ForLoop = 'for(...)';
-    const ForeachLoop = 'foreach(...)';
-    const SwitchStatement = 'switch(...)';
-    const GotoStatement = 'goto ...;';
-    const TryCatchStatement = 'try ... catch(...)';
-    
-    public static function ContainsControlStructure($ControlStrucuture, $LineNumber) 
+    const IF_STATEMENT = 'if(...)';
+    const WHILE_LOOP = 'while(...)';
+    const DO_WHILE_LOOP = 'do...while(...)';
+    const FOR_LOOP = 'for(...)';
+    const FOREACH_LOOP = 'foreach(...)';
+    const SWITCH_STATEMENT = 'switch(...)';
+    const GOTO_STATEMENT = 'goto ...;';
+    const TRY_CATCH_STATEMENT = 'try ... catch(...)';
+
+    public static function containsControlStructure($controlStrucuture, $lineNumber)
     {
-        return new self('Contains control structure \'%s\' on line %d', $ControlStrucuture, $LineNumber);
+        return new self(
+                'Contains control structure \'%s\' on line %d',
+                $controlStrucuture,
+                $lineNumber);
     }
 }

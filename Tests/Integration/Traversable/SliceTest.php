@@ -4,58 +4,62 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class SliceTest extends TraversableTest
 {
-    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
-        return $Traversable->Slice(1, 2);
+        return $traversable->slice(1, 2);
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatSkipRemovesCorrectAmountOfElementsFromTheStartAndPreservesKeys(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatSkipRemovesCorrectAmountOfElementsFromTheStartAndPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {
-        $WithoutFirstFiveElements = $Traversable->Skip(5);
-        
-        $this->AssertMatches($WithoutFirstFiveElements, array_slice($Data, 5, null, true));
+        $withoutFirstFiveElements = $traversable->skip(5);
+
+        $this->assertMatches(
+                $withoutFirstFiveElements,
+                array_slice($data, 5, null, true));
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatTakeGetsTheCorrectAmountOfElementsFromTheStartAndPreservesKeys(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatTakeGetsTheCorrectAmountOfElementsFromTheStartAndPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {
-        $FirstFiveElements = $Traversable->Take(5);
-        
-        $this->AssertMatches($FirstFiveElements, array_slice($Data, 0, 5, true));
+        $firstFiveElements = $traversable->take(5);
+
+        $this->assertMatches(
+                $firstFiveElements,
+                array_slice($data, 0, 5, true));
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatTakeZeroReturnsEmptyArray(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatTakeZeroReturnsEmptyArray(\Pinq\ITraversable $traversable, array $data)
     {
-        $NoNumbers = $Traversable->Take(0);
-        
-        $this->AssertMatches($NoNumbers, []);
+        $noNumbers = $traversable->take(0);
+
+        $this->assertMatches($noNumbers, []);
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatSkipZeroReturnsOriginalArray(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatSkipZeroReturnsOriginalArray(\Pinq\ITraversable $traversable, array $data)
     {
-        $Values = $Traversable->Skip(0);
-        
-        $this->AssertMatches($Values, $Data);
+        $values = $traversable->skip(0);
+
+        $this->assertMatches($values, $data);
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatSlicingReturnsTheCorrectSegmentOfDataAndPreservesKeys(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatSlicingReturnsTheCorrectSegmentOfDataAndPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {
-        $Values = $Traversable->Slice(3, 2);
-        
-        $this->AssertMatches($Values, array_slice($Data, 3, 2, true));
+        $values = $traversable->slice(3, 2);
+
+        $this->assertMatches($values, array_slice($data, 3, 2, true));
     }
 }

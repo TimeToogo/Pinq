@@ -2,379 +2,458 @@
 
 namespace Pinq\Tests\Integration\Parsing;
 
-use \Pinq\Parsing\IParser;
-use \Pinq\Expressions as O;
+use Pinq\Parsing\IParser;
+use Pinq\Expressions as O;
 
 class SimpleParserTest extends ParserTest
 {
     /**
      * @dataProvider Parsers
      */
-    public function testEmptyFunction() 
+    public function testEmptyFunction()
     {
-        $this->AssertParsedAs(function () {}, []);
+        $this->assertParsedAs(function () {
+
+        }, []);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testValue() 
+    public function testValue()
     {
-        $this->AssertParsedAs(function () { 1; }, [O\Expression::Value(1)]);
+        $this->assertParsedAs(
+                function () {
+                    1;
+                },
+                [O\Expression::value(1)]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testReturnStatment() 
+    public function testReturnStatment()
     {
-        $this->AssertParsedAs(function () { return; }, [O\Expression::ReturnExpression()]);
+        $this->assertParsedAs(
+                function () {
+                    return;
+                },
+                [O\Expression::returnExpression()]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testThrowNewExceptionStatment() 
+    public function testThrowNewExceptionStatment()
     {
-        $this->AssertParsedAs(function () { throw null; }, [O\Expression::ThrowExpression(O\Expression::Value(null))]);
+        $this->assertParsedAs(
+                function () {
+                    throw null;
+                },
+                [O\Expression::throwExpression(O\Expression::value(null))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testReturnValueStatment() 
+    public function testReturnValueStatment()
     {
-        $this->AssertParsedAs(function () { return 1; }, [O\Expression::ReturnExpression(O\Expression::Value(1))]);
-        $this->AssertParsedAs(function () { return null; }, [O\Expression::ReturnExpression(O\Expression::Value(null))]);
-        $this->AssertParsedAs(function () { return ''; }, [O\Expression::ReturnExpression(O\Expression::Value(''))]);
+        $this->assertParsedAs(
+                function () {
+                    return 1;
+                },
+                [O\Expression::returnExpression(O\Expression::value(1))]);
+        $this->assertParsedAs(
+                function () {
+                    return null;
+                },
+                [O\Expression::returnExpression(O\Expression::value(null))]);
+        $this->assertParsedAs(
+                function () {
+                    return '';
+                },
+                [O\Expression::returnExpression(O\Expression::value(''))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testVariable() 
+    public function testVariable()
     {
-        $this->AssertParsedAs(function () { $I; }, [O\Expression::Variable(O\Expression::Value('I'))]);
+        $this->assertParsedAs(
+                function () {
+                    $i;
+                },
+                [O\Expression::variable(O\Expression::value('i'))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testEmpty() 
+    public function testEmpty()
     {
-        $this->AssertParsedAs(function () { empty($I); }, [O\Expression::EmptyExpression(O\Expression::Variable(O\Expression::Value('I')))]);
+        $this->assertParsedAs(
+                function () {
+                    empty($i);
+                },
+                [O\Expression::emptyExpression(O\Expression::variable(O\Expression::value('i')))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testIsset() 
+    public function testIsset()
     {
-        $this->AssertParsedAs(function () { isset($I); }, [O\Expression::IssetExpression([O\Expression::Variable(O\Expression::Value('I'))])]);
+        $this->assertParsedAs(
+                function () {
+                    isset($i);
+                },
+                [O\Expression::issetExpression([O\Expression::variable(O\Expression::value('i'))])]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testFunctionCall() 
+    public function testFunctionCall()
     {
-        $this->AssertParsedAs(function () { func(); }, [O\Expression::FunctionCall(O\Expression::Value('func'))]);
+        $this->assertParsedAs(
+                function () {
+                    func();
+                },
+                [O\Expression::functionCall(O\Expression::value('func'))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testStaticMethodCall() 
+    public function testStaticMethodCall()
     {
-        $this->AssertParsedAs(function () { \Object::Method(); }, [O\Expression::StaticMethodCall(O\Expression::Value('Object'), O\Expression::Value('Method'))]);
+        $this->assertParsedAs(
+                function () {
+                    \Object::method();
+                },
+                [O\Expression::staticMethodCall(
+                        O\Expression::value('Object'),
+                        O\Expression::value('method'))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testArray() 
+    public function testArray()
     {
-        $this->AssertParsedAs(function () { [1 => 2]; }, [O\Expression::ArrayExpression(
-                [O\Expression::Value(1)], 
-                [O\Expression::Value(2)])]);
+        $this->assertParsedAs(
+                function () {
+                    [1 => 2];
+                },
+                [O\Expression::arrayExpression(
+                        [O\Expression::value(1)],
+                        [O\Expression::value(2)])]);
     }
-    
+
     /**
      * @dataProvider Parsers
      * @expectedException \Pinq\Parsing\InvalidFunctionException
      */
-    public function testInternalFunctionIsRejected(IParser $Parser) 
+    public function testInternalFunctionIsRejected(IParser $parser)
     {
-        $Parser->Parse(new \ReflectionFunction('strlen'));
+        $parser->parse(new \ReflectionFunction('strlen'));
     }
-    
+
     /**
      * @dataProvider Parsers
      * @expectedException \Pinq\Parsing\InvalidFunctionException
      */
-    public function testEvaledFunctionIsRejected(IParser $Parser) 
+    public function testEvaledFunctionIsRejected(IParser $parser)
     {
-        $EvaledFunction = eval('return function () {};');
-        $Parser->Parse(new \ReflectionFunction($EvaledFunction));
+        $evaledFunction = eval('return function () {};');
+        $parser->parse(new \ReflectionFunction($evaledFunction));
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Value traversals">
-    
     /**
      * @dataProvider Parsers
      */
-    public function testField() 
+    public function testField()
     {
-        $this->AssertParsedAs(function () { $I->Field; }, [O\Expression::Field(
-                O\Expression::Variable(O\Expression::Value('I')),
-                O\Expression::Value('Field'))]);
+        $this->assertParsedAs(
+                function () {
+                    $i->field;
+                },
+                [O\Expression::field(
+                        O\Expression::variable(O\Expression::value('i')),
+                        O\Expression::value('field'))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testMethodCall() 
+    public function testMethodCall()
     {
-        $this->AssertParsedAs(function () { $I->Method(); }, [O\Expression::MethodCall(
-                O\Expression::Variable(O\Expression::Value('I')),
-                O\Expression::Value('Method'))]);
+        $this->assertParsedAs(
+                function () {
+                    $i->method();
+                },
+                [O\Expression::methodCall(
+                        O\Expression::variable(O\Expression::value('i')),
+                        O\Expression::value('method'))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testIndex() 
+    public function testIndex()
     {
-        $this->AssertParsedAs(function () { $I[0]; }, [O\Expression::Index(
-                O\Expression::Variable(O\Expression::Value('I')),
-                O\Expression::Value(0))]);
+        $this->assertParsedAs(
+                function () {
+                    $i[0];
+                },
+                [O\Expression::index(
+                        O\Expression::variable(O\Expression::value('i')),
+                        O\Expression::value(0))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testInvocation() 
+    public function testInvocation()
     {
-        $this->AssertParsedAs(function () { $I(); }, [O\Expression::Invocation(
-                O\Expression::Variable(O\Expression::Value('I')))]);
+        $this->assertParsedAs(
+                function () {
+                    $i();
+                },
+                [O\Expression::invocation(O\Expression::variable(O\Expression::value('i')))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
-    public function testTernary() 
+    public function testTernary()
     {
-        $this->AssertParsedAs(function () { true ? true : false; }, [O\Expression::Ternary(
-                O\Expression::Value(true),
-                O\Expression::Value(true),
-                O\Expression::Value(false))]);
+        $this->assertParsedAs(
+                function () {
+                    true ? true : false;
+                },
+                [O\Expression::ternary(
+                        O\Expression::value(true),
+                        O\Expression::value(true),
+                        O\Expression::value(false))]);
     }
-    
+
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Binary Operators">
-    
+
     /**
      * @dataProvider Parsers
      */
-    private function AssertBinaryOperation(callable $Function, $Left, $Operator, $Right) 
+    private function assertBinaryOperation(callable $function, $left, $operator, $right)
     {
-        $this->AssertParsedAs($Function, 
-                [O\Expression::BinaryOperation(
-                        O\Expression::Value($Left),
-                        $Operator,
-                        O\Expression::Value($Right))
-                ]);
+        $this->assertParsedAs(
+                $function,
+                [O\Expression::binaryOperation(
+                        O\Expression::value($left),
+                        $operator,
+                        O\Expression::value($right))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testMathBinaryOperations()
     {
-        $this->AssertBinaryOperation(function () { 1 + 1; }, 1, O\Operators\Binary::Addition, 1);
-        $this->AssertBinaryOperation(function () { 1 - 1; }, 1, O\Operators\Binary::Subtraction, 1);
-        $this->AssertBinaryOperation(function () { 1 * 1; }, 1, O\Operators\Binary::Multiplication, 1);
-        $this->AssertBinaryOperation(function () { 1 / 1; }, 1, O\Operators\Binary::Division, 1);
-        $this->AssertBinaryOperation(function () { 1 % 1; }, 1, O\Operators\Binary::Modulus, 1);
+        $this->assertBinaryOperation(function () { 1 + 1; }, 1, O\Operators\Binary::ADDITION, 1);
+        $this->assertBinaryOperation(function () { 1 - 1; }, 1, O\Operators\Binary::SUBTRACTION, 1);
+        $this->assertBinaryOperation(function () { 1 * 1; }, 1, O\Operators\Binary::MULTIPLICATION, 1);
+        $this->assertBinaryOperation(function () { 1 / 1; }, 1, O\Operators\Binary::DIVISION, 1);
+        $this->assertBinaryOperation(function () { 1 % 1; }, 1, O\Operators\Binary::MODULUS, 1);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testLogicalBinaryOperations()
     {
-        $this->AssertBinaryOperation(function () { true && true; }, true, O\Operators\Binary::LogicalAnd, true);
-        $this->AssertBinaryOperation(function () { true || true; }, true, O\Operators\Binary::LogicalOr, true);
+        $this->assertBinaryOperation(function () { true && true; }, true, O\Operators\Binary::LOGICAL_AND, true);
+        $this->assertBinaryOperation(function () { true || true; }, true, O\Operators\Binary::LOGICAL_OR, true);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testComparisonBinaryOperations()
     {
-        $this->AssertBinaryOperation(function () { 1 === 1; }, 1, O\Operators\Binary::Identity, 1);
-        $this->AssertBinaryOperation(function () { 1 == 1; }, 1, O\Operators\Binary::Equality, 1);
-        $this->AssertBinaryOperation(function () { 1 !== 1; }, 1, O\Operators\Binary::NotIdentical, 1);
-        $this->AssertBinaryOperation(function () { 1 > 1; }, 1, O\Operators\Binary::GreaterThan, 1);
-        $this->AssertBinaryOperation(function () { 1 >= 1; }, 1, O\Operators\Binary::GreaterThanOrEqualTo, 1);
-        $this->AssertBinaryOperation(function () { 1 < 1; }, 1, O\Operators\Binary::LessThan, 1);
-        $this->AssertBinaryOperation(function () { 1 <= 1; }, 1, O\Operators\Binary::LessThanOrEqualTo, 1);
+        $this->assertBinaryOperation(function () { 1 === 1; }, 1, O\Operators\Binary::IDENTITY, 1);
+        $this->assertBinaryOperation(function () { 1 !== 1; }, 1, O\Operators\Binary::NOT_IDENTICAL, 1);
+        $this->assertBinaryOperation(function () { 1 == 1; }, 1, O\Operators\Binary::EQUALITY, 1);
+        $this->assertBinaryOperation(function () { 1 != 1; }, 1, O\Operators\Binary::INEQUALITY, 1);
+        $this->assertBinaryOperation(function () { 1 > 1; }, 1, O\Operators\Binary::GREATER_THAN, 1);
+        $this->assertBinaryOperation(function () { 1 >= 1; }, 1, O\Operators\Binary::GREATER_THAN_OR_EQUAL_TO, 1);
+        $this->assertBinaryOperation(function () { 1 < 1; }, 1, O\Operators\Binary::LESS_THAN, 1);
+        $this->assertBinaryOperation(function () { 1 <= 1; }, 1, O\Operators\Binary::LESS_THAN_OR_EQUAL_TO, 1);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testBitwiseBinaryOperations()
     {
-        $this->AssertBinaryOperation(function () { 1 & 1; }, 1, O\Operators\Binary::BitwiseAnd, 1);
-        $this->AssertBinaryOperation(function () { 1 | 1; }, 1, O\Operators\Binary::BitwiseOr, 1);
-        $this->AssertBinaryOperation(function () { 1 ^ 1; }, 1, O\Operators\Binary::BitwiseXor, 1);
-        $this->AssertBinaryOperation(function () { 1 >> 1; }, 1, O\Operators\Binary::ShiftRight, 1);
-        $this->AssertBinaryOperation(function () { 1 >> 1; }, 1, O\Operators\Binary::ShiftRight, 1);
+        $this->assertBinaryOperation(function () { 1 & 1; }, 1, O\Operators\Binary::BITWISE_AND, 1);
+        $this->assertBinaryOperation(function () { 1 | 1; }, 1, O\Operators\Binary::BITWISE_OR, 1);
+        $this->assertBinaryOperation(function () { 1 ^ 1; }, 1, O\Operators\Binary::BITWISE_XOR, 1);
+        $this->assertBinaryOperation(function () { 1 >> 1; }, 1, O\Operators\Binary::SHIFT_RIGHT, 1);
+        $this->assertBinaryOperation(function () { 1 << 1; }, 1, O\Operators\Binary::SHIFT_LEFT, 1);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testStringBinaryOperations()
     {
-        $this->AssertBinaryOperation(function () { '1' . '1'; }, '1', O\Operators\Binary::Concatenation, '1');
+        $this->assertBinaryOperation(function () { 1 . 1; }, 1, O\Operators\Binary::CONCATENATION, 1);
     }
-    
+
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Unary Operators">
-    
+
     /**
      * @dataProvider Parsers
      */
-    private function AssertUnaryOperation(callable $Function, $Operator, $OperandName) 
+    private function assertUnaryOperation(callable $function, $operator, $operandName)
     {
-        $this->AssertParsedAs($Function, 
-                [O\Expression::UnaryOperation(
-                        $Operator,
-                        O\Expression::Variable(O\Expression::Value($OperandName)))
-                ]);
+        $this->assertParsedAs(
+                $function,
+                [O\Expression::unaryOperation(
+                        $operator,
+                        O\Expression::variable(O\Expression::value($operandName)))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testMathUnaryOperations()
     {
-        $this->AssertUnaryOperation(function () { $I++; }, O\Operators\Unary::Increment, 'I');
-        $this->AssertUnaryOperation(function () { $I--; }, O\Operators\Unary::Decrement, 'I');
-        $this->AssertUnaryOperation(function () { ++$I; }, O\Operators\Unary::PreIncrement, 'I');
-        $this->AssertUnaryOperation(function () { --$I; }, O\Operators\Unary::PreDecrement, 'I');
-        $this->AssertUnaryOperation(function () { +$I; }, O\Operators\Unary::Plus, 'I');
-        $this->AssertUnaryOperation(function () { -$I; }, O\Operators\Unary::Negation, 'I');
+        $this->assertUnaryOperation(function () { $i++; }, O\Operators\Unary::INCREMENT, 'i');
+        $this->assertUnaryOperation(function () { $i--; }, O\Operators\Unary::DECREMENT, 'i');
+        $this->assertUnaryOperation(function () { ++$i; }, O\Operators\Unary::PRE_INCREMENT, 'i');
+        $this->assertUnaryOperation(function () { --$i; }, O\Operators\Unary::PRE_DECREMENT, 'i');
+        $this->assertUnaryOperation(function () { +$i; }, O\Operators\Unary::PLUS, 'i');
+        $this->assertUnaryOperation(function () { -$i; }, O\Operators\Unary::NEGATION, 'i');
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testBitwiseUnaryOperations()
     {
-        $this->AssertUnaryOperation(function () { ~$I; }, O\Operators\Unary::BitwiseNot, 'I');
+        $this->assertUnaryOperation(
+                function () {
+                    ~$i;
+                },
+                O\Operators\Unary::BITWISE_NOT,
+                'i');
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testLogicalUnaryOperations()
     {
-        $this->AssertUnaryOperation(function () { !$I; }, O\Operators\Unary::Not, 'I');
+        $this->assertUnaryOperation(
+                function () {
+                    !$i;
+                },
+                O\Operators\Unary::NOT,
+                'i');
     }
-    
+
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Assignment Operators">
-    
+
     /**
      * @dataProvider Parsers
      */
-    private function AssertAssignment(callable $Function, $AssignToName, $Operator, $AssigmentName) 
+    private function assertAssignment(callable $function, $assignToName, $operator, $assigmentName)
     {
-        $this->AssertParsedAs($Function, 
-                [O\Expression::Assign(
-                        O\Expression::Variable(O\Expression::Value($AssignToName)),
-                        $Operator,
-                        O\Expression::Variable(O\Expression::Value($AssigmentName)))
-                ]);
+        $this->assertParsedAs(
+                $function,
+                [O\Expression::assign(
+                        O\Expression::variable(O\Expression::value($assignToName)),
+                        $operator,
+                        O\Expression::variable(O\Expression::value($assigmentName)))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testNormalAssignmentOperations()
     {
-        $this->AssertAssignment(function () { $L = $R; }, 'L', O\Operators\Assignment::Equal, 'R');
-        $this->AssertAssignment(function () { $L =& $R; }, 'L', O\Operators\Assignment::EqualReference, 'R');
+        $this->assertAssignment(function () { $l = $r; }, 'l', O\Operators\Assignment::EQUAL, 'r');
+        $this->assertAssignment(function () { $l =& $r; }, 'l', O\Operators\Assignment::EQUAL_REFERENCE, 'r');
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function tesMathAssignmentOperations()
     {
-        $this->AssertAssignment(function () { $L += $R; }, 'L', O\Operators\Assignment::Addition, 'R');
-        $this->AssertAssignment(function () { $L -= $R; }, 'L', O\Operators\Assignment::Subtraction, 'R');
-        $this->AssertAssignment(function () { $L *= $R; }, 'L', O\Operators\Assignment::Multiplication, 'R');
-        $this->AssertAssignment(function () { $L /= $R; }, 'L', O\Operators\Assignment::Division, 'R');
-        $this->AssertAssignment(function () { $L %= $R; }, 'L', O\Operators\Assignment::Modulus, 'R');
+        $this->assertAssignment(function () { $l += $r; }, 'l', O\Operators\Assignment::ADDITION, 'r');
+        $this->assertAssignment(function () { $l -= $r; }, 'l', O\Operators\Assignment::SUBTRACTION, 'r');
+        $this->assertAssignment(function () { $l *= $r; }, 'l', O\Operators\Assignment::MULTIPLICATION, 'r');
+        $this->assertAssignment(function () { $l /= $r; }, 'l', O\Operators\Assignment::DIVISION, 'r');
+        $this->assertAssignment(function () { $l %= $r; }, 'l', O\Operators\Assignment::MODULUS, 'r');
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function tesBitwiseAssignmentOperations()
     {
-        $this->AssertAssignment(function () { $L &= $R; }, 'L', O\Operators\Assignment::BitwiseAnd, 'R');
-        $this->AssertAssignment(function () { $L |= $R; }, 'L', O\Operators\Assignment::BitwiseOr, 'R');
-        $this->AssertAssignment(function () { $L ^= $R; }, 'L', O\Operators\Assignment::BitwiseXor, 'R');
-        $this->AssertAssignment(function () { $L <<= $R; }, 'L', O\Operators\Assignment::ShiftLeft, 'R');
-        $this->AssertAssignment(function () { $L >>= $R; }, 'L', O\Operators\Assignment::ShiftRight, 'R');
+        $this->assertAssignment(function () { $l &= $r; }, 'l', O\Operators\Assignment::BITWISE_AND, 'r');
+        $this->assertAssignment(function () { $l |= $r; }, 'l', O\Operators\Assignment::BITWISE_OR, 'r');
+        $this->assertAssignment(function () { $l ^= $r; }, 'l', O\Operators\Assignment::BITWISE_XOR, 'r');
+        $this->assertAssignment(function () { $l <<= $r; }, 'l', O\Operators\Assignment::SHIFT_LEFT, 'r');
+        $this->assertAssignment(function () { $l >>= $r; }, 'l', O\Operators\Assignment::SHIFT_RIGHT, 'r');
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testStringAssignmentOperations()
     {
-        $this->AssertAssignment(function () { $L .= $R; }, 'L', O\Operators\Assignment::Concatenate, 'R');
+        $this->assertAssignment(function () { $l .= $r; }, 'l', O\Operators\Assignment::CONCATENATE, 'r');
     }
-    
+
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Cast Operators">
-    
+
     /**
      * @dataProvider Parsers
      */
-    private function AssertCast(callable $Function, $TypeOperator, $CastName) 
+    private function assertCast(callable $function, $typeOperator, $castName)
     {
-        $this->AssertParsedAs($Function, 
-                [O\Expression::Cast(
-                        $TypeOperator,
-                        O\Expression::Variable(O\Expression::Value($CastName)))
-                ]);
+        $this->assertParsedAs(
+                $function,
+                [O\Expression::cast(
+                        $typeOperator,
+                        O\Expression::variable(O\Expression::value($castName)))]);
     }
-    
+
     /**
      * @dataProvider Parsers
      */
     public function testCastOperators()
     {
-        $this->AssertCast(function () { (string)$I; }, O\Operators\Cast::String, 'I');
-        $this->AssertCast(function () { (int)$I; }, O\Operators\Cast::Integer, 'I');
-        $this->AssertCast(function () { (integer)$I; }, O\Operators\Cast::Integer, 'I');
-        $this->AssertCast(function () { (double)$I; }, O\Operators\Cast::Double, 'I');
-        $this->AssertCast(function () { (float)$I; }, O\Operators\Cast::Double, 'I');
-        $this->AssertCast(function () { (bool)$I; }, O\Operators\Cast::Boolean, 'I');
-        $this->AssertCast(function () { (boolean)$I; }, O\Operators\Cast::Boolean, 'I');
-        $this->AssertCast(function () { (object)$I; }, O\Operators\Cast::Object, 'I');
+        $this->assertCast(function () { (string)$i; }, O\Operators\Cast::STRING, 'i');
+        $this->assertCast(function () { (int)$i; }, O\Operators\Cast::INTEGER, 'i');
+        $this->assertCast(function () { (integer)$i; }, O\Operators\Cast::INTEGER, 'i');
+        $this->assertCast(function () { (double)$i; }, O\Operators\Cast::DOUBLE, 'i');
+        $this->assertCast(function () { (float)$i; }, O\Operators\Cast::DOUBLE, 'i');
+        $this->assertCast(function () { (object)$i; }, O\Operators\Cast::OBJECT, 'i');
+        $this->assertCast(function () { (array)$i; }, O\Operators\Cast::ARRAY_CAST, 'i');
     }
-    
     // </editor-fold>
 }

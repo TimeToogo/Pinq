@@ -7,24 +7,28 @@ class SerializableTest extends CollectionTest
     /**
      * @dataProvider Everything
      */
-    public function testThatCollectionIsSerializable(\Pinq\ICollection $Collection, array $Data)
+    public function testThatCollectionIsSerializable(\Pinq\ICollection $collection, array $data)
     {
-        $SerializedCollection = serialize($Collection);
-        $UnserializedCollection = unserialize($SerializedCollection);
-        
-        $this->assertEquals($Collection->AsArray(), $UnserializedCollection->AsArray());
+        $serializedCollection = serialize($collection);
+        $unserializedCollection = unserialize($serializedCollection);
+
+        $this->assertEquals(
+                $collection->asArray(),
+                $unserializedCollection->asArray());
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatCollectionIsSerializableAfterQueries(\Pinq\ICollection $Collection, array $Data)
+    public function testThatCollectionIsSerializableAfterQueries(\Pinq\ICollection $collection, array $data)
     {
-        $Collection = $Collection->Where(function ($I) { return $I !== false; });
-        
-        $SerializedCollection = serialize($Collection);
-        $UnserializedCollection = unserialize($SerializedCollection);
-        
-        $this->assertEquals($Collection->AsArray(), $UnserializedCollection->AsArray());
+        $collection = $collection
+                ->where(function ($i) { return $i !== false; });
+        $serializedCollection = serialize($collection);
+        $unserializedCollection = unserialize($serializedCollection);
+
+        $this->assertEquals(
+                $collection->asArray(),
+                $unserializedCollection->asArray());
     }
 }

@@ -1,35 +1,34 @@
 <?php
 
-namespace Pinq\Queries\Operations; 
+namespace Pinq\Queries\Operations;
 
 /**
  * Operation query for setting a specified index to a value
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class SetIndex extends IndexOperation
 {
-    private $Value;
-    
-    public function __construct($Index, $Value)
+    private $value;
+
+    public function __construct($index, $value)
     {
-        parent::__construct($Index);
-        $this->Value = $Value;
+        parent::__construct($index);
+        $this->value = $value;
     }
 
-    public function GetType()
+    public function getType()
     {
-        return self::SetIndex;
+        return self::SET_INDEX;
     }
 
-    public function GetValue()
+    public function getValue()
     {
-        return $this->Value;
+        return $this->value;
     }
 
-    public function Traverse(OperationVisitor $Visitor)
+    public function traverse(OperationVisitor $visitor)
     {
-        return $Visitor->VisitSetIndex($this);
+        return $visitor->visitSetIndex($this);
     }
-
 }

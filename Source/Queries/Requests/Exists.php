@@ -1,22 +1,22 @@
 <?php
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
- * Request query for a boolean of whether any values are 
+ * Request query for a boolean of whether any values are
  * contained in the scope
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Exists extends Request
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Exists;
+        return self::EXISTS;
     }
 
-    public function Traverse(RequestVisitor $Visitor)
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitExists($this);
+        return $visitor->visitExists($this);
     }
 }

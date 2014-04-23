@@ -7,22 +7,26 @@ class ApplyTest extends CollectionTest
     /**
      * @dataProvider Everything
      */
-    public function testThatExecutionIsNotDeferred(\Pinq\ICollection $Collection, array $Data)
+    public function testThatExecutionIsNotDeferred(\Pinq\ICollection $collection, array $data)
     {
-        if(count($Data) > 0) {
-            $this->AssertThatExecutionIsNotDeferred([$Collection, 'Apply']);
+        if (count($data) > 0) {
+            $this->assertThatExecutionIsNotDeferred([$collection, 'apply']);
         }
     }
-    
+
     /**
      * @dataProvider AssocOneToTen
      */
-    public function testThatCollectionApplyOperatesOnTheSameCollection(\Pinq\ICollection $Collection, array $Data)
+    public function testThatCollectionApplyOperatesOnTheSameCollection(\Pinq\ICollection $collection, array $data)
     {
-        $Multiply = function (&$I) { $I *= 10; };
-        $Collection->Apply($Multiply);
-        
-        array_walk($Data, $Multiply);
-        $this->AssertMatches($Collection, $Data);
+        $multiply =
+                function (&$i) {
+                    $i *= 10;
+                };
+
+        $collection->apply($multiply);
+        array_walk($data, $multiply);
+
+        $this->assertMatches($collection, $data);
     }
 }

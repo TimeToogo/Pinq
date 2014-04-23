@@ -13,25 +13,25 @@ interface IOrderedTraversable extends ITraversable
      * Subsequently orders the results using the supplied function according to
      * the supplied direction
      *
-     * @param  callable          $Function
-     * @param  int               $Direction
+     * @param  callable          $function
+     * @param  int               $direction
      * @return IOrderedTraversable
      */
-    public function ThenBy(callable $Function, $Direction);
-    
+    public function thenBy(callable $function, $direction);
+
     /**
      * Subsequently orders the results using the supplied function ascendingly
      *
-     * @param  callable          $Function
+     * @param  callable          $function
      * @return IOrderedTraversable
      */
-    public function ThenByAscending(callable $Function);
+    public function thenByAscending(callable $function);
 
     /**
      * Subsequently orders the results using the supplied function descendingly
      *
-     * @param  callable          $Function
+     * @param  callable          $function
      * @return IOrderedTraversable
      */
-    public function ThenByDescending(callable $Function);
+    public function thenByDescending(callable $function);
 }

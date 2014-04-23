@@ -1,72 +1,80 @@
 <?php
 
-namespace Pinq\Queries\Segments; 
+namespace Pinq\Queries\Segments;
 
 /**
  * Query segment for a set/range operation
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Operation extends Segment
 {
-    const Union = 1;
-    const Intersect = 2;
-    const Difference = 3;
-    
-    const Append = 4;
-    const WhereIn = 5;
-    const Except = 6;
+    const UNION = 1;
+    const INTERSECT = 2;
+    const DIFFERENCE = 3;
+    const APPEND = 4;
+    const WHERE_IN = 5;
+    const EXCEPT = 6;
 
     /**
      * @var int
      */
-    private $OperationType;
+    private $operationType;
 
     /**
      * @var \Traversable|array
      */
-    private $Values;
+    private $values;
 
-    public function __construct($OperationType, $Values)
+    public function __construct($operationType, $values)
     {
-        if(!\Pinq\Utilities::IsIterable($Values)) {
-            throw \Pinq\PinqException::InvalidIterable(__METHOD__, $Values);
+        if (!\Pinq\Utilities::isIterable($values)) {
+            throw \Pinq\PinqException::invalidIterable(__METHOD__, $values);
         }
-        if(!self::IsValid($OperationType)) {
+
+        if (!self::isValid($operationType)) {
             throw new \Pinq\PinqException('Invalid operation type');
         }
-        $this->OperationType = $OperationType;
-        $this->Values = $Values;
+
+        $this->operationType = $operationType;
+        $this->values = $values;
     }
 
-    final public static function IsValid($OperationType)
+    final public static function isValid($operationType)
     {
-        return in_array($OperationType, [self::Union, self::Intersect, self::Difference, self::Append, self::WhereIn, self::Except]);
+        return in_array($operationType, [
+            self::UNION,
+            self::INTERSECT,
+            self::DIFFERENCE,
+            self::APPEND,
+            self::WHERE_IN,
+            self::EXCEPT
+        ]);
     }
 
-    public function GetType()
+    public function getType()
     {
-        return self::Operate;
+        return self::OPERATE;
     }
 
-    public function Traverse(SegmentWalker $Walker)
+    public function traverse(SegmentWalker $walker)
     {
-        return $Walker->WalkOperation($this);
+        return $walker->walkOperation($this);
     }
 
     /**
      * @return int
      */
-    public function GetOperationType()
+    public function getOperationType()
     {
-        return $this->OperationType;
+        return $this->operationType;
     }
 
     /**
      * @return \Traversable|array
      */
-    public function GetTraversable()
+    public function getTraversable()
     {
-        return $this->Values;
+        return $this->values;
     }
 }

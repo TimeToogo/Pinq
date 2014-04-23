@@ -2,15 +2,15 @@
 
 namespace Pinq\Queries\Requests;
 
-use \Pinq\Queries\IRequest;
+use Pinq\Queries\IRequest;
 
 /**
  * The operation visitor is a utility class that will visit any
  * request in a respective method.
- * 
+ *
  * This is used by the query providers to as to load the
  * supplied request query
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class RequestVisitor
@@ -18,40 +18,88 @@ class RequestVisitor
     /**
      * @param mixed The returned value
      */
-    final public function Visit(IRequest $Request)
+    final public function visit(IRequest $request)
     {
-        return $Request->Traverse($this);
+        return $request->traverse($this);
     }
 
-    public function VisitValues(Values $Request) {}
+    public function visitValues(Values $request)
+    {
 
-    public function VisitCount(Count $Request) {}
+    }
 
-    public function VisitExists(Exists $Request) {}
+    public function visitCount(Count $request)
+    {
 
-    public function VisitFirst(First $Request) {}
+    }
 
-    public function VisitLast(Last $Request) {}
+    public function visitExists(Exists $request)
+    {
 
-    public function VisitContains(Contains $Request) {}
+    }
 
-    public function VisitAggregate(Aggregate $Request) {}
+    public function visitFirst(First $request)
+    {
 
-    public function VisitMaximum(Maximum $Request) {}
+    }
 
-    public function VisitMinimum(Minimum $Request) {}
+    public function visitLast(Last $request)
+    {
 
-    public function VisitSum(Sum $Request) {}
+    }
 
-    public function VisitAverage(Average $Request) {}
+    public function visitContains(Contains $request)
+    {
 
-    public function VisitAll(All $Request) {}
+    }
 
-    public function VisitAny(Any $Request) {}
+    public function visitAggregate(Aggregate $request)
+    {
 
-    public function VisitImplode(Implode $Request) {}
-    
-    public function VisitGetIndex(GetIndex $Request) {}
-    
-    public function VisitIssetIndex(IssetIndex $Request) {}
+    }
+
+    public function visitMaximum(Maximum $request)
+    {
+
+    }
+
+    public function visitMinimum(Minimum $request)
+    {
+
+    }
+
+    public function visitSum(Sum $request)
+    {
+
+    }
+
+    public function visitAverage(Average $request)
+    {
+
+    }
+
+    public function visitAll(All $request)
+    {
+
+    }
+
+    public function visitAny(Any $request)
+    {
+
+    }
+
+    public function visitImplode(Implode $request)
+    {
+
+    }
+
+    public function visitGetIndex(GetIndex $request)
+    {
+
+    }
+
+    public function visitIssetIndex(IssetIndex $request)
+    {
+
+    }
 }

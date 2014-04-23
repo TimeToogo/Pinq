@@ -1,22 +1,22 @@
 <?php
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
- * Request query for a boolean of whether any of the values satify the 
+ * Request query for a boolean of whether any of the values satify the
  * supplied predicate function
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Any extends ProjectionRequest
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Any;
+        return self::ANY;
     }
 
-    public function Traverse(RequestVisitor $Visitor)
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitAny($this);
+        return $visitor->visitAny($this);
     }
 }

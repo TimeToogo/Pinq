@@ -4,7 +4,7 @@ namespace Pinq\Expressions;
 
 /**
  * Base class for traversing or manipulating an expression tree
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ExpressionWalker
@@ -12,170 +12,166 @@ class ExpressionWalker
     /**
      * @return Expression|null
      */
-    final public function Walk(Expression $Expression = null)
+    final public function walk(Expression $expression = null)
     {
-        return $Expression === null ? null : $Expression->Traverse($this);
+        return $expression === null ? null : $expression->traverse($this);
     }
 
     /**
      * @return Expression[]
      */
-    final public function WalkAll(array $Expressions)
+    final public function walkAll(array $expressions)
     {
-        $WalkedExpressions = [];
-        foreach ($Expressions as $Key => $Expression) {
-            $WalkedExpressions[$Key] = $this->Walk($Expression);
+        $walkedExpressions = [];
+
+        foreach ($expressions as $key => $expression) {
+            $walkedExpressions[$key] = $this->walk($expression);
         }
 
-        return $WalkedExpressions;
+        return $walkedExpressions;
     }
 
-    public function WalkArray(ArrayExpression $Expression)
+    public function walkArray(ArrayExpression $expression)
     {
-        return $Expression->Update(
-                $this->WalkAll($Expression->GetKeyExpressions()),
-                $this->WalkAll($Expression->GetValueExpressions()));
+        return $expression->update(
+                $this->walkAll($expression->getKeyExpressions()),
+                $this->walkAll($expression->getValueExpressions()));
     }
 
-    public function WalkAssignment(AssignmentExpression $Expression)
+    public function walkAssignment(AssignmentExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetAssignToExpression()),
-                $Expression->GetOperator(),
-                $this->Walk($Expression->GetAssignmentValueExpression()));
+        return $expression->update(
+                $this->walk($expression->getAssignToExpression()),
+                $expression->getOperator(),
+                $this->walk($expression->getAssignmentValueExpression()));
     }
 
-    public function WalkBinaryOperation(BinaryOperationExpression $Expression)
+    public function walkBinaryOperation(BinaryOperationExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetLeftOperandExpression()),
-                $Expression->GetOperator(),
-                $this->Walk($Expression->GetRightOperandExpression()));
+        return $expression->update(
+                $this->walk($expression->getLeftOperandExpression()),
+                $expression->getOperator(),
+                $this->walk($expression->getRightOperandExpression()));
     }
 
-    public function WalkUnaryOperation(UnaryOperationExpression $Expression)
+    public function walkUnaryOperation(UnaryOperationExpression $expression)
     {
-        return $Expression->Update(
-                $Expression->GetOperator(),
-                $this->Walk($Expression->GetOperandExpression()));
+        return $expression->update(
+                $expression->getOperator(),
+                $this->walk($expression->getOperandExpression()));
     }
 
-    public function WalkCast(CastExpression $Expression)
+    public function walkCast(CastExpression $expression)
     {
-        return $Expression->Update(
-                $Expression->GetCastType(),
-                $this->Walk($Expression->GetCastValueExpression()));
+        return $expression->update(
+                $expression->getCastType(),
+                $this->walk($expression->getCastValueExpression()));
     }
 
-    public function WalkEmpty(EmptyExpression $Expression)
+    public function walkEmpty(EmptyExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetValueExpression()));
+        return $expression->update($this->walk($expression->getValueExpression()));
     }
 
-    public function WalkIsset(IssetExpression $Expression)
+    public function walkIsset(IssetExpression $expression)
     {
-        return $Expression->Update(
-                $this->WalkAll($Expression->GetValueExpressions()));
+        return $expression->update($this->walkAll($expression->getValueExpressions()));
     }
 
-    public function WalkField(FieldExpression $Expression)
+    public function walkField(FieldExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetValueExpression()),
-                $this->Walk($Expression->GetNameExpression()));
+        return $expression->update(
+                $this->walk($expression->getValueExpression()),
+                $this->walk($expression->getNameExpression()));
     }
 
-    public function WalkMethodCall(MethodCallExpression $Expression)
+    public function walkMethodCall(MethodCallExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetValueExpression()),
-                $this->Walk($Expression->GetNameExpression()),
-                $this->WalkAll($Expression->GetArgumentExpressions()));
+        return $expression->update(
+                $this->walk($expression->getValueExpression()),
+                $this->walk($expression->getNameExpression()),
+                $this->walkAll($expression->getArgumentExpressions()));
     }
 
-    public function WalkIndex(IndexExpression $Expression)
+    public function walkIndex(IndexExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetValueExpression()),
-                $this->Walk($Expression->GetIndexExpression()));
+        return $expression->update(
+                $this->walk($expression->getValueExpression()),
+                $this->walk($expression->getIndexExpression()));
     }
 
-    public function WalkInvocation(InvocationExpression $Expression)
+    public function walkInvocation(InvocationExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetValueExpression()),
-                $this->WalkAll($Expression->GetArgumentExpressions()));
+        return $expression->update(
+                $this->walk($expression->getValueExpression()),
+                $this->walkAll($expression->getArgumentExpressions()));
     }
 
-    public function WalkFunctionCall(FunctionCallExpression $Expression)
+    public function walkFunctionCall(FunctionCallExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetNameExpression()),
-                $this->WalkAll($Expression->GetArgumentExpressions()));
+        return $expression->update(
+                $this->walk($expression->getNameExpression()),
+                $this->walkAll($expression->getArgumentExpressions()));
     }
 
-    public function WalkStaticMethodCall(StaticMethodCallExpression $Expression)
+    public function walkStaticMethodCall(StaticMethodCallExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetClassExpression()),
-                $this->Walk($Expression->GetNameExpression()),
-                $this->WalkAll($Expression->GetArgumentExpressions()));
+        return $expression->update(
+                $this->walk($expression->getClassExpression()),
+                $this->walk($expression->getNameExpression()),
+                $this->walkAll($expression->getArgumentExpressions()));
     }
 
-    public function WalkNew(NewExpression $Expression)
+    public function walkNew(NewExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetClassTypeExpression()),
-                $this->WalkAll($Expression->GetArgumentExpressions()));
+        return $expression->update(
+                $this->walk($expression->getClassTypeExpression()),
+                $this->walkAll($expression->getArgumentExpressions()));
     }
 
-    public function WalkReturn(ReturnExpression $Expression)
+    public function walkReturn(ReturnExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetValueExpression()));
+        return $expression->update($this->walk($expression->getValueExpression()));
     }
 
-    public function WalkThrow(ThrowExpression $Expression)
+    public function walkThrow(ThrowExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetExceptionExpression()));
+        return $expression->update($this->walk($expression->getExceptionExpression()));
     }
 
-    public function WalkParameter(ParameterExpression $Expression)
+    public function walkParameter(ParameterExpression $expression)
     {
-        return $Expression;
+        return $expression;
     }
 
-    public function WalkTernary(TernaryExpression $Expression)
+    public function walkTernary(TernaryExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetConditionExpression()),
-                $this->Walk($Expression->GetIfTrueExpression()),
-                $this->Walk($Expression->GetIfFalseExpression()));
+        return $expression->update(
+                $this->walk($expression->getConditionExpression()),
+                $this->walk($expression->getIfTrueExpression()),
+                $this->walk($expression->getIfFalseExpression()));
     }
 
-    public function WalkVariable(VariableExpression $Expression)
+    public function walkVariable(VariableExpression $expression)
     {
-        return $Expression->Update(
-                $this->Walk($Expression->GetNameExpression()));
+        return $expression->update($this->walk($expression->getNameExpression()));
     }
 
-    public function WalkValue(ValueExpression $Expression)
+    public function walkValue(ValueExpression $expression)
     {
-        return $Expression;
+        return $expression;
     }
 
-    public function WalkSubQuery(SubQueryExpression $Expression)
+    public function walkSubQuery(SubQueryExpression $expression)
     {
-        return $Expression->UpdateValue($this->Walk($Expression->GetValueExpression()));
+        return $expression->updateValue($this->walk($expression->getValueExpression()));
     }
 
-    public function WalkClosure(ClosureExpression $Expression)
+    public function walkClosure(ClosureExpression $expression)
     {
-        return $Expression->Update(
-                $this->WalkAll($Expression->GetParameterExpressions()),
-                $Expression->GetUsedVariableNames(),
-                $this->WalkAll($Expression->GetBodyExpressions()));
+        return $expression->update(
+                $this->walkAll($expression->getParameterExpressions()),
+                $expression->getUsedVariableNames(),
+                $this->walkAll($expression->getBodyExpressions()));
     }
 }

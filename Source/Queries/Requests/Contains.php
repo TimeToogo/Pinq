@@ -1,34 +1,34 @@
 <?php
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Request query for a boolean of whether the supplied value
  * is contained within the scope
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Contains extends Request
 {
-    private $Value;
-    
-    public function __construct($Value)
+    private $value;
+
+    public function __construct($value)
     {
-        $this->Value = $Value;
-    }
-    
-    public function GetType()
-    {
-        return self::Contains;
-    }
-    
-    public function GetValue()
-    {
-        return $this->Value;
+        $this->value = $value;
     }
 
-    public function Traverse(RequestVisitor $Visitor)
+    public function getType()
     {
-        return $Visitor->VisitContains($this);
+        return self::CONTAINS;
+    }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    public function traverse(RequestVisitor $visitor)
+    {
+        return $visitor->visitContains($this);
     }
 }

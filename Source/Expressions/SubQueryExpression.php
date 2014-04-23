@@ -2,13 +2,13 @@
 
 namespace Pinq\Expressions;
 
-use \Pinq\Queries;
+use Pinq\Queries;
 
 /**
  * <code>
  * $Traversable->Where(function ($I) { return $I > 5 })->Average();
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class SubQueryExpression extends TraversalExpression
@@ -16,85 +16,82 @@ class SubQueryExpression extends TraversalExpression
     /**
      * @var Queries\IRequestQuery
      */
-    private $Query;
-    
+    private $query;
+
     /**
      * @var TraversalExpression
      */
-    private $OriginalExpression;
+    private $originalExpression;
 
-    public function __construct(Expression $ValueExpression, Queries\IRequestQuery $Query, TraversalExpression $OriginalExpression)
+    public function __construct(Expression $valueExpression, Queries\IRequestQuery $query, TraversalExpression $originalExpression)
     {
-        parent::__construct($ValueExpression);
-
-        $this->Query = $Query;
-        $this->OriginalExpression = $OriginalExpression;
+        parent::__construct($valueExpression);
+        $this->query = $query;
+        $this->originalExpression = $originalExpression;
     }
 
     /**
      * @return Queries\IRequestQuery
      */
-    public function GetRequestQuery()
+    public function getRequestQuery()
     {
-        return $this->Query;
+        return $this->query;
     }
 
     /**
      * @return TraversalExpression
      */
-    public function GetOriginalExpression()
+    public function getOriginalExpression()
     {
-        return $this->OriginalExpression;
+        return $this->originalExpression;
     }
 
-    public function Traverse(ExpressionWalker $Walker)
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkSubQuery($this);
+        return $walker->walkSubQuery($this);
     }
 
-    public function Simplify()
+    public function simplify()
     {
-        return $this->UpdateValueExpression($this->ValueExpression->Simplify());
+        return $this->updateValueExpression($this->valueExpression->simplify());
     }
 
     /**
      * @return self
      */
-    public function Update(Expression $ValueExpression,  Queries\IRequestQuery $Query, TraversalExpression $OriginalExpression)
+    public function update(Expression $valueExpression, Queries\IRequestQuery $query, TraversalExpression $originalExpression)
     {
-        if ($this->ValueExpression === $ValueExpression
-                && $this->Query === $Query
-                && $this->OriginalExpression === $OriginalExpression) {
+        if ($this->valueExpression === $valueExpression && $this->query === $query && $this->originalExpression === $originalExpression) {
             return $this;
         }
 
-        return new self($ValueExpression, $Query, $OriginalExpression);
+        return new self($valueExpression, $query, $originalExpression);
     }
 
-    protected function UpdateValueExpression(Expression $ValueExpression)
+    protected function updateValueExpression(Expression $valueExpression)
     {
-        return new self($ValueExpression, $this->Query, $this->OriginalExpression);
+        return new self($valueExpression, $this->query, $this->originalExpression);
     }
 
-    protected function CompileCode(&$Code)
+    protected function compileCode(&$code)
     {
-        $this->OriginalExpression->CompileCode($Code);
+        $this->originalExpression->compileCode($code);
     }
-    
-    public function DataToSerialize()
+
+    public function dataToSerialize()
     {
-        return [$this->Query, $this->OriginalExpression];
+        return [$this->query, $this->originalExpression];
     }
-    
-    public function UnserializedData($Data)
+
+    public function unserializedData($data)
     {
-        list($this->Query, $this->OriginalExpression) = $Data;
+        list($this->query, $this->originalExpression) = $data;
     }
-        
+
     public function __clone()
     {
-        $this->ValueExpression = clone $this->ValueExpression;
-        $this->Query = clone $this->Query;
-        $this->OriginalExpression = clone $this->OriginalExpression;
+        $this->valueExpression = clone $this->valueExpression;
+        $this->query = clone $this->query;
+        $this->originalExpression = clone $this->originalExpression;
     }
 }

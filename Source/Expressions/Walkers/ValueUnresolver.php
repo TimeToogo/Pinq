@@ -2,7 +2,7 @@
 
 namespace Pinq\Expressions\Walkers;
 
-use \Pinq\Expressions as O;
+use Pinq\Expressions as O;
 
 /**
  * Unresolves and stores any values in the expression tree and replaces them with uncolliding variable names.
@@ -19,97 +19,97 @@ class ValueUnresolver extends O\ExpressionWalker
 {
     /**
      * The current amount of variables that have be inserted
-     * 
+     *
      * @var int
      */
-    private $VariableCount = 0;
-    
+    private $variableCount = 0;
+
     /**
      * An array with the variable names as key and the
      * respective value as the value
-     * 
+     *
      * @var array<string, mixed>
      */
-    private $VariableNameValueMap = [];
-    
+    private $variableNameValueMap = [];
+
     /**
      * Determines whether the value should be replaced a variable
-     * 
+     *
      * @var callable| null
      */
-    private $ValueFilterFunction;
-    
-    public function __construct(callable $ValueFilterFunction = null)
+    private $valueFilterFunction;
+
+    public function __construct(callable $valueFilterFunction = null)
     {
-        $this->ValueFilterFunction = $ValueFilterFunction;
+        $this->valueFilterFunction = $valueFilterFunction;
     }
 
     /**
      * Returns the variable value map
-     * 
+     *
      * @return array<string, mixed>
      */
-    public function GetVariableNameValueMap()
+    public function getVariableNameValueMap()
     {
-        return $this->VariableNameValueMap;
+        return $this->variableNameValueMap;
     }
-    
+
     /**
      * @return void
      */
-    public function ResetVariableNameValueMap()
+    public function resetVariableNameValueMap()
     {
-        $this->VariableCount = 0;
-        $this->VariableNameValueMap = [];
+        $this->variableCount = 0;
+        $this->variableNameValueMap = [];
     }
-    
+
     /**
      * Sets the function to filter which values should not be inlined
-     * 
-     * @param callable $ValueFilterFunction The filter function
+     *
+     * @param callable $valueFilterFunction The filter function
      */
-    public function SetValueFilter(callable $ValueFilterFunction)
+    public function setValueFilter(callable $valueFilterFunction)
     {
-        $this->ValueFilterFunction = $ValueFilterFunction;
+        $this->valueFilterFunction = $valueFilterFunction;
     }
-    
-    private function MakeVariableName() 
+
+    private function makeVariableName()
     {
-        return '___' . ++$this->VariableCount . '___';
+        return '___' . ++$this->variableCount . '___';
     }
-    
+
     /**
      * Walks the and finds any values in the body then adds them as used variables
-     * 
-     * @param O\ClosureExpression $Expression
+     *
+     * @param O\ClosureExpression $expression
      * @return O\ClosureExpression
      */
-    public function WalkClosure(O\ClosureExpression $Expression)
+    public function walkClosure(O\ClosureExpression $expression)
     {
-        $WalkedBodyExpressions = $this->WalkAll($Expression->GetBodyExpressions());
-        
-        return $Expression->Update(
-                $Expression->GetParameterExpressions(),
-                array_merge($Expression->GetUsedVariableNames(), array_keys($this->VariableNameValueMap)),
-                $WalkedBodyExpressions);
-    }
-    
-    public function WalkValue(O\ValueExpression $Expression)
-    {
-        $ValueFilter = $this->ValueFilterFunction;
-        $Value = $Expression->GetValue();
-        
-        if($ValueFilter === null || $ValueFilter($Value)) {
-            $VariableName = array_search($Value, $this->VariableNameValueMap, true);
+        $walkedBodyExpressions = $this->walkAll($expression->getBodyExpressions());
 
-            if($VariableName === false) {
-                $VariableName = $this->MakeVariableName();
-                $this->VariableNameValueMap[$VariableName] = $Value;
+        return $expression->update(
+                $expression->getParameterExpressions(),
+                array_merge($expression->getUsedVariableNames(), array_keys($this->variableNameValueMap)),
+                $walkedBodyExpressions);
+    }
+
+    public function walkValue(O\ValueExpression $expression)
+    {
+        $valueFilter = $this->valueFilterFunction;
+        $value = $expression->getValue();
+
+        if ($valueFilter === null || $valueFilter($value)) {
+            $variableName = array_search($value, $this->variableNameValueMap, true);
+
+            if ($variableName === false) {
+                $variableName = $this->makeVariableName();
+                $this->variableNameValueMap[$variableName] = $value;
             }
 
-            return O\Expression::Variable(O\Expression::Value($VariableName)); 
+            return O\Expression::variable(O\Expression::value($variableName));
         }
-        
-        return $Expression;
+
+        return $expression;
     }
 }

@@ -7,34 +7,36 @@ class AllTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     /**
      * @dataProvider EmptyData
      */
-    public function testThatAllReturnsTrueIfEmpty(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatAllReturnsTrueIfEmpty(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertTrue($Traversable->All());
+        $this->assertTrue($traversable->all());
     }
-    
-    public function FalseyValues()
+
+    public function falseyValues()
     {
         //                                                      V
-        return $this->GetImplementations([1,1,1,1,1,1,10,11,1,1,0,1,1,1,1,]) +
+        return $this->getImplementations([1,1,1,1,1,1,10,11,1,1,0,1,1,1,1,]) +
                 //                                                                          V
-                $this->GetImplementations(['ert','rgrg', 'dgf', 'g4g43', 'as', 'vd', 'dw', '', 'saav']) +
+                $this->getImplementations(['ert','rgrg', 'dgf', 'g4g43', 'as', 'vd', 'dw', '', 'saav']) +
                 //                                 V
-                $this->GetImplementations([true, false, true]);
+                $this->getImplementations([true, false, true]);
     }
-    
+
     /**
      * @dataProvider FalseyValues
      */
-    public function testThatAllReturnsFalseIfThereIsAFalsyValue(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatAllReturnsFalseIfThereIsAFalsyValue(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertFalse($Traversable->All());
+        $this->assertFalse($traversable->all());
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatAllOperatesCorrectly(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatAllOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals(empty($Data) ?: (count(array_filter($Data)) === count($Data)), $Traversable->All());
+        $this->assertEquals(
+                empty($data) ?: count(array_filter($data)) === count($data),
+                $traversable->all());
     }
 }

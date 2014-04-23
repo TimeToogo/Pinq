@@ -1,21 +1,21 @@
 <?php
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Request query for an integer of the amount of values in the scope
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Count extends Request
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Count;
+        return self::COUNT;
     }
 
-    public function Traverse(RequestVisitor $Visitor)
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitCount($this);
+        return $visitor->visitCount($this);
     }
 }

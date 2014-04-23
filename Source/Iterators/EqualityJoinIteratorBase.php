@@ -5,60 +5,57 @@ namespace Pinq\Iterators;
 /**
  * Base class for a join iterator with an inner function whose result must be equal
  * to that of the outer function.
- * Because of this, the inner values are organized into a Lookup where they are keyed by the 
+ * Because of this, the inner values are organized into a Lookup where they are keyed by the
  * inner function. The outer function is then run and the resulting key is searched for in
  * the lookup to retrieve the matching values.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 abstract class EqualityJoinIteratorBase extends JoinIteratorBase
-{    
+{
     /**
      * @var callable
      */
-    private $OuterKeyFunction;
-    
+    private $outerKeyFunction;
+
     /**
      * @var callable
      */
-    private $InnerKeyFunction;
-    
+    private $innerKeyFunction;
+
     /**
      * @var Utilities\Lookup
      */
-    private $InnerKeyLookup;
-    
-    public function __construct(
-            \Traversable $OuterIterator,
-            \Traversable $InnerIterator,
-            callable $OuterKeyFunction,
-            callable $InnerKeyFunction,
-            callable $JoiningFunction)
+    private $innerKeyLookup;
+
+    public function __construct(\Traversable $outerIterator, \Traversable $innerIterator, callable $outerKeyFunction, callable $innerKeyFunction, callable $joiningFunction)
     {
-        parent::__construct($OuterIterator, $InnerIterator, $JoiningFunction);
-        $this->OuterKeyFunction = $OuterKeyFunction;
-        $this->InnerKeyFunction = $InnerKeyFunction;
+        parent::__construct($outerIterator, $innerIterator, $joiningFunction);
+        $this->outerKeyFunction = $outerKeyFunction;
+        $this->innerKeyFunction = $innerKeyFunction;
     }
-    
-    final protected function Initialize()
+
+    final protected function initialize()
     {
-        $this->InnerKeyLookup = Utilities\Lookup::FromGroupingFunction($this->InnerKeyFunction, $this->InnerIterator);
+        $this->innerKeyLookup =
+                Utilities\Lookup::fromGroupingFunction(
+                        $this->innerKeyFunction,
+                        $this->innerIterator);
     }
-    
-    final protected function GetInnerGroupIterator($OuterValue)
+
+    final protected function getInnerGroupIterator($outerValue)
     {
-        $OuterKeyFunction = $this->OuterKeyFunction;
-        $OuterKey = $OuterKeyFunction($OuterValue);
-        
-        if($this->InnerKeyLookup->Contains($OuterKey)) {
-            $CurrentInnerGroup = $this->InnerKeyLookup->Get($OuterKey);
+        $outerKeyFunction = $this->outerKeyFunction;
+        $outerKey = $outerKeyFunction($outerValue);
+
+        if ($this->innerKeyLookup->contains($outerKey)) {
+            $currentInnerGroup = $this->innerKeyLookup->get($outerKey);
+        } else {
+            $currentInnerGroup = [];
         }
-        else {
-            $CurrentInnerGroup = [];
-        }
-        
-        return $this->GetInnerGroupValueIterator($CurrentInnerGroup);
+
+        return $this->getInnerGroupValueIterator($currentInnerGroup);
     }
-    
-    protected abstract function GetInnerGroupValueIterator(array $InnerGroup);
+
+    abstract protected function getInnerGroupValueIterator(array $innerGroup);
 }

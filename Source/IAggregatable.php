@@ -5,92 +5,87 @@ namespace Pinq;
 /**
  * The API defining all the aggregate results,
  * mainly exists for organizational purposes
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-interface IAggregatable extends \Countable 
+interface IAggregatable extends \Countable
 {
-    
     /**
      * Returns the amount of the values.
-     * 
+     *
      * @return int
      */
-    public function Count();
-    
+    public function count();
+
     /**
      * Returns whether any values exist.
-     * 
+     *
      * @return boolean
      */
-    public function Exists();
-    
+    public function exists();
+
     /**
      * Aggregates the values with the supplied function
-     * 
-     * @param callable $Function The aggregate function
+     *
+     * @param callable $function The aggregate function
      * @return mixed
      */
-    public function Aggregate(callable $Function);
-    
+    public function aggregate(callable $function);
+
     /**
      * Returns the maximum value.
-     * 
-     * @param callable $Function The function which will return the values
+     *
+     * @param callable $function The function which will return the values
      * @return mixed
      */
-    public function Maximum(callable $Function = null);
-    
-    
+    public function maximum(callable $function = null);
+
     /**
      * Returns the maximum value.
-     * 
-     * @param callable $Function The function which will return the values
+     *
+     * @param callable $function The function which will return the values
      * @return mixed
      */
-    public function Minimum(callable $Function = null);
-    
+    public function minimum(callable $function = null);
+
     /**
      * Returns the sum of the values.
-     * 
-     * @param callable $Function The function which will return the values
+     *
+     * @param callable $function The function which will return the values
      * @return int|null
      */
-    public function Sum(callable $Function = null);
-    
-    
+    public function sum(callable $function = null);
+
     /**
      * Returns the average of the values.
-     * 
-     * @param callable $Function The function which will return the values
+     *
+     * @param callable $function The function which will return the values
      * @return double|null
      */
-    public function Average(callable $Function = null);
-    
-    
+    public function average(callable $function = null);
+
     /**
      * Returns a boolean of if all the values evaluate to true
-     * 
-     * @param callable $Function The function which will return the values
+     *
+     * @param callable $function The function which will return the values
      * @return bool
      */
-    public function All(callable $Function = null);
-    
+    public function all(callable $function = null);
+
     /**
      * Returns a boolean of if any of the values evaluate to true
-     * 
-     * @param callable $Function The function which will return the values
+     *
+     * @param callable $function The function which will return the values
      * @return bool
      */
-    public function Any(callable $Function = null);
-    
+    public function any(callable $function = null);
+
     /**
      * Returns a string of all the values concatented by the delimiter
-     * 
-     * @param string $Delimiter The string to delimit the values by
-     * @param callable $Function The function which will return the values
+     *
+     * @param string $delimiter The string to delimit the values by
+     * @param callable $function The function which will return the values
      * @return string
      */
-    public function Implode($Delimiter, callable $Function = null);
+    public function implode($delimiter, callable $function = null);
 }
-

@@ -1,22 +1,21 @@
 <?php
 
-namespace Pinq\Queries\Operations; 
+namespace Pinq\Queries\Operations;
 
 /**
  * Operation query for removing values that satisfy the supplied function
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class RemoveWhere extends ExpressionOperation
 {
-    public function GetType()
+    public function getType()
     {
-        return self::RemoveWhere;
+        return self::REMOVE_WHERE;
     }
 
-    public function Traverse(OperationVisitor $Visitor)
+    public function traverse(OperationVisitor $visitor)
     {
-        return $Visitor->VisitRemoveWhere($this);
+        return $visitor->visitRemoveWhere($this);
     }
-
 }

@@ -6,7 +6,7 @@ namespace Pinq\Expressions;
  * <code>
  * $I->Field
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class FieldExpression extends ObjectOperationExpression
@@ -14,90 +14,86 @@ class FieldExpression extends ObjectOperationExpression
     /**
      * @var Expression
      */
-    private $NameExpression;
+    private $nameExpression;
 
-    public function __construct(Expression $ObjectValueExpression, Expression $NameExpression)
+    public function __construct(Expression $objectValueExpression, Expression $nameExpression)
     {
-        parent::__construct($ObjectValueExpression);
-
-        $this->NameExpression = $NameExpression;
+        parent::__construct($objectValueExpression);
+        $this->nameExpression = $nameExpression;
     }
 
     /**
      * @return Expression
      */
-    public function GetNameExpression()
+    public function getNameExpression()
     {
-        return $this->NameExpression;
+        return $this->nameExpression;
     }
 
-    public function Traverse(ExpressionWalker $Walker)
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkField($this);
+        return $walker->walkField($this);
     }
 
-    public function Simplify()
+    public function simplify()
     {
-        $ValueExpression = $this->ValueExpression->Simplify();
-        $NameExpression = $this->NameExpression->Simplify();
+        $valueExpression = $this->valueExpression->simplify();
+        $nameExpression = $this->nameExpression->simplify();
 
-        if ($ValueExpression instanceof ValueExpression
-                && $NameExpression instanceof ValueExpression) {
-            $Value = $ValueExpression->GetValue();
-            $Name = $NameExpression->GetValue();
+        if ($valueExpression instanceof ValueExpression && $nameExpression instanceof ValueExpression) {
+            $value = $valueExpression->getValue();
+            $name = $nameExpression->getValue();
 
-            return Expression::Value($Value->{$Name});
+            return Expression::value($value->{$name});
         }
 
-        return $this->Update(
-                $ValueExpression,
-                $this->NameExpression);
+        return $this->update($valueExpression, $this->nameExpression);
     }
+
     /**
      * @return self
      */
-    public function Update(Expression $ObjectValueExpression, Expression $NameExpression)
+    public function update(Expression $objectValueExpression, Expression $nameExpression)
     {
-        if ($this->ValueExpression === $ObjectValueExpression
-                && $this->NameExpression === $NameExpression) {
+        if ($this->valueExpression === $objectValueExpression && $this->nameExpression === $nameExpression) {
             return $this;
         }
 
-        return new self($ObjectValueExpression, $NameExpression);
+        return new self($objectValueExpression, $nameExpression);
     }
 
-    protected function UpdateValueExpression(Expression $ValueExpression)
+    protected function updateValueExpression(Expression $valueExpression)
     {
-        return new self($ValueExpression, $this->NameExpression);
+        return new self($valueExpression, $this->nameExpression);
     }
 
-    protected function CompileCode(&$Code)
+    protected function compileCode(&$code)
     {
-        $this->ValueExpression->CompileCode($Code);
-        $Code .= '->';
-        if($this->NameExpression instanceof ValueExpression && \Pinq\Utilities::IsNormalSyntaxName($this->NameExpression->GetValue())) {
-            $Code .= $this->NameExpression->GetValue(); 
+        $this->valueExpression->compileCode($code);
+        $code .= '->';
+
+        if ($this->nameExpression instanceof ValueExpression && \Pinq\Utilities::isNormalSyntaxName($this->nameExpression->getValue())) {
+            $code .= $this->nameExpression->getValue();
+        } else {
+            $code .= '{';
+            $this->nameExpression->compileCode($code);
+            $code .= '}';
         }
-        else {
-            $Code .= '{';
-            $this->NameExpression->CompileCode($Code);
-            $Code .= '}';
-        }
     }
-    
-    public function DataToSerialize()
+
+    public function dataToSerialize()
     {
-        return $this->NameExpression;
+        return $this->nameExpression;
     }
-    
-    public function UnserializedData($Data)
+
+    public function unserializedData($data)
     {
-        $this->NameExpression = $Data;
+        $this->nameExpression = $data;
     }
-    
+
     public function __clone()
     {
-        $this->ValueExpression = clone $this->ValueExpression;
-        $this->NameExpression = clone $this->NameExpression;
+        $this->valueExpression = clone $this->valueExpression;
+        $this->nameExpression = clone $this->nameExpression;
     }
 }

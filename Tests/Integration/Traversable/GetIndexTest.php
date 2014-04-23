@@ -7,10 +7,10 @@ class GetIndexTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatIndexReturnsCorrectValue(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatIndexReturnsCorrectValue(\Pinq\ITraversable $traversable, array $data)
     {
-        foreach ($Data as $Key => $Value) {
-            $this->assertEquals($Value, $Traversable[$Key]);
+        foreach ($data as $key => $value) {
+            $this->assertEquals($value, $traversable[$key]);
         }
     }
 }

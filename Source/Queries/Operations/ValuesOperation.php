@@ -1,23 +1,23 @@
 <?php
 
-namespace Pinq\Queries\Operations; 
+namespace Pinq\Queries\Operations;
 
 /**
  * Base class for an operation query for with a range of values
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 abstract class ValuesOperation extends Operation
 {
-    private $Values;
-    
-    public function __construct($Values)
+    private $values;
+
+    public function __construct($values)
     {
-        $this->Values = $Values;
+        $this->values = $values;
     }
-    
-    public function GetValues()
+
+    public function getValues()
     {
-        return $this->Values;
+        return $this->values;
     }
 }

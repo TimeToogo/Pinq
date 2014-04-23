@@ -2,11 +2,11 @@
 
 namespace Pinq\Providers\Collection;
 
-use \Pinq\Queries\Operations;
+use Pinq\Queries\Operations;
 
 /**
  * Evaluates the operations on the supplied collection instance
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class OperationEvaluator extends Operations\OperationVisitor
@@ -14,45 +14,45 @@ class OperationEvaluator extends Operations\OperationVisitor
     /**
      * @var \Pinq\ICollection
      */
-    private $Collection;
-    
-    public function __construct(\Pinq\ICollection $Collection)
+    private $collection;
+
+    public function __construct(\Pinq\ICollection $collection)
     {
-        $this->Collection = $Collection;
-    }
-    
-    public function VisitApply(Operations\Apply $Operation)
-    {
-        $this->Collection->Apply($Operation->GetFunctionExpressionTree());
+        $this->collection = $collection;
     }
 
-    public function VisitAddValues(Operations\AddValues $Operation)
+    public function visitApply(Operations\Apply $operation)
     {
-        $this->Collection->AddRange($Operation->GetValues());
+        $this->collection->apply($operation->getFunctionExpressionTree());
     }
 
-    public function VisitRemoveValues(Operations\RemoveValues $Operation)
+    public function visitAddValues(Operations\AddValues $operation)
     {
-        $this->Collection->RemoveRange($Operation->GetValues());
+        $this->collection->addRange($operation->getValues());
     }
 
-    public function VisitRemoveWhere(Operations\RemoveWhere $Operation)
+    public function visitRemoveValues(Operations\RemoveValues $operation)
     {
-        $this->Collection->RemoveWhere($Operation->GetFunctionExpressionTree());
-    }
-    public function VisitClear(Operations\Clear $Operation)
-    {
-        $this->Collection->Clear();
+        $this->collection->removeRange($operation->getValues());
     }
 
-    public function VisitSetIndex(Operations\SetIndex $Operation)
+    public function visitRemoveWhere(Operations\RemoveWhere $operation)
     {
-        $this->Collection[$Operation->GetIndex()] = $Operation->GetValue();
+        $this->collection->removeWhere($operation->getFunctionExpressionTree());
     }
 
-    public function VisitUnsetIndex(Operations\UnsetIndex $Operation)
+    public function visitClear(Operations\Clear $operation)
     {
-        unset($this->Collection[$Operation->GetIndex()]);
+        $this->collection->clear();
     }
 
+    public function visitSetIndex(Operations\SetIndex $operation)
+    {
+        $this->collection[$operation->getIndex()] = $operation->getValue();
+    }
+
+    public function visitUnsetIndex(Operations\UnsetIndex $operation)
+    {
+        unset($this->collection[$operation->getIndex()]);
+    }
 }

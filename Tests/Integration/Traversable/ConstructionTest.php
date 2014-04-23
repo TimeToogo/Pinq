@@ -4,16 +4,16 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class ConstructionTest extends TraversableTest
 {
-    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
-        return \Pinq\Traversable::From($Traversable);
+        return \Pinq\Traversable::from($traversable);
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatTraversableReturnsEquivalentArrayAsSupplied(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatTraversableReturnsEquivalentArrayAsSupplied(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->AssertMatches($Traversable, $Data);
+        $this->assertMatches($traversable, $data);
     }
 }

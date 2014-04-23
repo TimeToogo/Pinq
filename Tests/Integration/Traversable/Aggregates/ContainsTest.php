@@ -7,26 +7,24 @@ class ContainsTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     /**
      * @dataProvider AssocOneToTen
      */
-    public function testThatContainsReturnsTrueForAContainedElement(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatContainsReturnsTrueForAContainedElement(\Pinq\ITraversable $traversable, array $data)
     {
-        foreach ($Data as $Value) {
-            $this->assertTrue($Traversable->Contains($Value));
+        foreach ($data as $value) {
+            $this->assertTrue($traversable->contains($value));
         }
     }
-    
+
     /**
      * @dataProvider AssocOneToTen
      */
-    public function testThatContainsReturnsWhetherItContainsAnIdenticalElement(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatContainsReturnsWhetherItContainsAnIdenticalElement(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertTrue($Traversable->Contains(1));
-        $this->assertFalse($Traversable->Contains("1"));
-        
-        $this->assertTrue($Traversable->Contains(10));
-        $this->assertFalse($Traversable->Contains("10"));
-        
-        $this->assertFalse($Traversable->Contains(-1));
-        $this->assertFalse($Traversable->Contains(0));
-        $this->assertFalse($Traversable->Contains(11));
+        $this->assertTrue($traversable->contains(1));
+        $this->assertFalse($traversable->contains('1'));
+        $this->assertTrue($traversable->contains(10));
+        $this->assertFalse($traversable->contains('10'));
+        $this->assertFalse($traversable->contains(-1));
+        $this->assertFalse($traversable->contains(0));
+        $this->assertFalse($traversable->contains(11));
     }
 }

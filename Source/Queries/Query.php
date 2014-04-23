@@ -4,7 +4,7 @@ namespace Pinq\Queries;
 
 /**
  * Base implementation for the IQuery
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 abstract class Query implements IQuery
@@ -12,15 +12,15 @@ abstract class Query implements IQuery
     /**
      * @var IScope
      */
-    private $Scope;
-    
-    public function __construct(IScope $Scope)
+    private $scope;
+
+    public function __construct(IScope $scope)
     {
-        $this->Scope = $Scope;
+        $this->scope = $scope;
     }
-    
-    final public function GetScope()
+
+    final public function getScope()
     {
-        return $this->Scope;
+        return $this->scope;
     }
 }

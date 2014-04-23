@@ -4,7 +4,7 @@ namespace Pinq\Iterators;
 
 /**
  * Groups the values from the supplied grouping function(s)
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class GroupedIterator extends LazyIterator
@@ -12,46 +12,50 @@ class GroupedIterator extends LazyIterator
     /**
      * @var callable[]
      */
-    private $GroupByFunctions = [];
-    
-    public function __construct(\Traversable $Iterator, callable $GroupByFunction)
+    private $groupByFunctions = [];
+
+    public function __construct(\Traversable $iterator, callable $groupByFunction)
     {
-        parent::__construct($Iterator);
-        $this->GroupByFunctions[] = $GroupByFunction;
+        parent::__construct($iterator);
+        $this->groupByFunctions[] = $groupByFunction;
     }
-    
+
     /**
      * @return GroupedIterator
      */
-    public function AndGroupBy(callable $GroupByFunctions)
+    public function andGroupBy(callable $groupByFunctions)
     {
-        $Copy = new self($this->Iterator, $GroupByFunctions);
-        
-        $Copy->GroupByFunctions = $this->GroupByFunctions;
-        $Copy->GroupByFunctions[] = $GroupByFunctions;
-        
-        return $Copy;
+        $copy = new self($this->iterator, $groupByFunctions);
+        $copy->groupByFunctions = $this->groupByFunctions;
+        $copy->groupByFunctions[] = $groupByFunctions;
+
+        return $copy;
     }
-    
-    protected function InitializeIterator(\Traversable $InnerIterator)
-    {   
-        if(count($this->GroupByFunctions) === 1) {
-            $GroupByFunction = $this->GroupByFunctions[0];
-        }
-        else {
-            $GroupByFunction = function ($Value) {
-                return array_map(function ($I) use ($Value) { return $I($Value); }, $this->GroupByFunctions);
+
+    protected function initializeIterator(\Traversable $innerIterator)
+    {
+        if (count($this->groupByFunctions) === 1) {
+            $groupByFunction = $this->groupByFunctions[0];
+        } else {
+            $groupByFunction = function ($value) {
+                return array_map(function ($i) use ($value) {
+                    return $i($value);
+                }, $this->groupByFunctions);
             };
         }
-        
-        $GroupKeys = [];
-        $GroupLookup = Utilities\Lookup::FromGroupingFunction($GroupByFunction, $InnerIterator, $GroupKeys);
-        
-        $Groups = [];
-        foreach ($GroupKeys as $GroupKey) {
-            $Groups[] = new \Pinq\Traversable($GroupLookup->Get($GroupKey));
+
+        $groupKeys = [];
+        $groupLookup =
+                Utilities\Lookup::fromGroupingFunction(
+                        $groupByFunction,
+                        $innerIterator,
+                        $groupKeys);
+        $groups = [];
+
+        foreach ($groupKeys as $groupKey) {
+            $groups[] = new \Pinq\Traversable($groupLookup->get($groupKey));
         }
-        
-        return new \ArrayIterator($Groups);
+
+        return new \ArrayIterator($groups);
     }
 }

@@ -4,19 +4,20 @@ namespace Pinq\Tests\Integration\Collection;
 
 class UnsetIndexTest extends CollectionTest
 {
-    
     /**
      * @dataProvider Everything
      */
-    public function testThatUnsetingAnIndexWillRemoveTheElementFromTheCollection(\Pinq\ICollection $Collection, array $Data)
+    public function testThatUnsetingAnIndexWillRemoveTheElementFromTheCollection(\Pinq\ICollection $collection, array $data)
     {
-        reset($Data);
-        $Key = key($Data);
-        if($Key === null) {
+        reset($data);
+        $key = key($data);
+
+        if ($key === null) {
             return;
         }
-        unset($Collection[$Key], $Data[$Key]);
-        
-        $this->AssertMatches($Collection, $Data);
+
+        unset($collection[$key], $data[$key]);
+
+        $this->assertMatches($collection, $data);
     }
 }

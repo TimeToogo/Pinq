@@ -4,85 +4,85 @@ namespace Pinq\Iterators\Utilities;
 
 /**
  * Represents a  range grouped values determined from a supplied grouping function
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Lookup
 {
     /**
      * The dictionary containing the keyed groups
-     * 
+     *
      * @var Dictionary<mixed, \ArrayObject>
      */
-    private $Dictionary;
-    
+    private $dictionary;
+
     private function __construct()
     {
-        $this->Dictionary = new Dictionary();
+        $this->dictionary = new Dictionary();
     }
-    
-    public static function FromGroupingFunction(callable $GroupingFunction, \Traversable $Values, array &$GroupKeys = null) 
+
+    public static function fromGroupingFunction(callable $groupingFunction, \Traversable $values, array &$groupKeys = null)
     {
-        $GroupKeys = [];
-        $Lookup = new self();
-        
-        $Values = \Pinq\Utilities::ToArray($Values);
-        $GroupByValues = array_map($GroupingFunction, $Values);
-        
-        foreach ($GroupByValues as $ValueKey => $GroupKey) {
-            
-            if($Lookup->Dictionary->Contains($GroupKey)) {
-                $Group = $Lookup->Dictionary->Get($GroupKey);
-                $Group[$ValueKey] = $Values[$ValueKey];
-            }
-            else {
-                $GroupKeys[] = $GroupKey;
-                $Lookup->Dictionary->Set($GroupKey, new \ArrayObject([$ValueKey => $Values[$ValueKey]]));
+        $groupKeys = [];
+        $lookup = new self();
+        $values = \Pinq\Utilities::toArray($values);
+        $groupByValues = array_map($groupingFunction, $values);
+
+        foreach ($groupByValues as $valueKey => $groupKey) {
+            if ($lookup->dictionary->contains($groupKey)) {
+                $group = $lookup->dictionary->get($groupKey);
+                $group[$valueKey] = $values[$valueKey];
+            } else {
+                $groupKeys[] = $groupKey;
+                $lookup->dictionary->set(
+                        $groupKey,
+                        new \ArrayObject([$valueKey => $values[$valueKey]]));
             }
         }
-        
-        return $Lookup;
+
+        return $lookup;
     }
-    
+
     /**
      * Returns the group of values from the specified key
-     * 
-     * @param mixed $Key
+     *
+     * @param mixed $key
      * @return array
      */
-    public function Get($Key)
+    public function get($key)
     {
-        return $this->Dictionary->Get($Key)->getArrayCopy();
+        return $this->dictionary->get($key)->getArrayCopy();
     }
-    
+
     /**
      * Returns all the groups as an array
-     * 
+     *
      * @return array[]
      */
-    public function AsArray()
+    public function asArray()
     {
-        $Groups = [];
-        foreach($this->Dictionary as $Key) {
-            $Groups[] = $this->Dictionary->Get($Key);
+        $groups = [];
+
+        foreach ($this->dictionary as $key) {
+            $groups[] = $this->dictionary->get($key);
         }
-        
-        return $Groups;
+
+        return $groups;
     }
-    
+
     /**
      * Returns whether there is a specified group
-     * 
-     * @param mixed $Key
+     *
+     * @param mixed $key
      * @return boolean
      */
-    public function Contains($Key) 
+    public function contains($key)
     {
-        return $this->Dictionary->Contains($Key);
+        return $this->dictionary->contains($key);
     }
-    
+
     public function getIterator()
     {
-        return $this->Dictionary->getIterator();
+        return $this->dictionary->getIterator();
     }
 }

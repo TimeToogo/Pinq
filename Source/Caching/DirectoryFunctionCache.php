@@ -2,7 +2,7 @@
 
 namespace Pinq\Caching;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Cache implementation for storing the serialized expression trees
@@ -12,68 +12,71 @@ use \Pinq\FunctionExpressionTree;
  */
 class DirectoryFunctionCache implements IFunctionCache
 {
-    const DefaultExtension = '.cached';
-            
+    const DEFAULT_EXTENSION = '.cached';
+
     /**
      * The directory to store the files
-     * 
+     *
      * @var string
      */
-    private $Directory;
-    
+    private $directory;
+
     /**
      * The exension to use for the stored files
-     * 
+     *
      * @var string
      */
-    private $FileExtension;
-    
-    public function __construct($Directory, $FileExtension = self::DefaultExtension)
+    private $fileExtension;
+
+    public function __construct($directory, $fileExtension = self::DEFAULT_EXTENSION)
     {
-        if(!is_dir($Directory)) {
-            if(!mkdir($Directory, 0777, true)) {
-                throw new \Pinq\PinqException('Invalid cache directory: %s does not exist and could not be created', $Directory);
+        if (!is_dir($directory)) {
+            if (!mkdir($directory, 511, true)) {
+                throw new \Pinq\PinqException(
+                        'Invalid cache directory: %s does not exist and could not be created',
+                        $directory);
             }
         }
-        
-        $this->Directory = $Directory;
-        $this->FileExtension = $FileExtension;
-    }
-    
-    private function GetCacheFilePath($FileName)
-    {
-        return $this->Directory . DIRECTORY_SEPARATOR . $FileName . $this->FileExtension;
-    }
-    
-    private function GetSignaturePath($FunctionHash)
-    {
-        return $this->GetCacheFilePath(md5($FunctionHash));
-    }
-    
-    public function Save($FunctionHash, FunctionExpressionTree $FunctionExpressionTree)
-    {
-        file_put_contents($this->GetSignaturePath($FunctionHash), serialize($FunctionExpressionTree));
+
+        $this->directory = $directory;
+        $this->fileExtension = $fileExtension;
     }
 
-    public function TryGet($FunctionHash)
+    private function getCacheFilePath($fileName)
     {
-        $FilePath = $this->GetSignaturePath($FunctionHash);
-        if(!is_readable($FilePath)) {
+        return $this->directory . DIRECTORY_SEPARATOR . $fileName . $this->fileExtension;
+    }
+
+    private function getSignaturePath($functionHash)
+    {
+        return $this->getCacheFilePath(md5($functionHash));
+    }
+
+    public function save($functionHash, FunctionExpressionTree $functionExpressionTree)
+    {
+        file_put_contents($this->getSignaturePath($functionHash), serialize($functionExpressionTree));
+    }
+
+    public function tryGet($functionHash)
+    {
+        $filePath = $this->getSignaturePath($functionHash);
+
+        if (!is_readable($filePath)) {
             return null;
         }
-        
-        return unserialize(file_get_contents($FilePath));
+
+        return unserialize(file_get_contents($filePath));
     }
 
-    public function Clear()
+    public function clear()
     {
-        foreach (glob($this->GetCacheFilePath('*')) as $Path) {
-            unlink($Path);
+        foreach (glob($this->getCacheFilePath('*')) as $path) {
+            unlink($path);
         }
     }
 
-    public function Remove($FunctionHash)
+    public function remove($functionHash)
     {
-        unlink($this->GetSignaturePath($FunctionHash));
+        unlink($this->getSignaturePath($functionHash));
     }
 }

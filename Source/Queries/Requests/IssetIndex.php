@@ -1,22 +1,21 @@
 <?php
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Request query for a boolean of whether a specified index is set
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class IssetIndex extends IndexRequest
 {
-    public function GetType()
+    public function getType()
     {
-        return self::IssetIndex;
+        return self::ISSET_INDEX;
     }
 
-    public function Traverse(RequestVisitor $Visitor)
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitIssetIndex($this);
+        return $visitor->visitIssetIndex($this);
     }
-
 }

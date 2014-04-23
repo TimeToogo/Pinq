@@ -4,22 +4,22 @@ namespace Pinq\Queries\Segments;
 
 /**
  * Query segment for retrieving only unique values
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Unique extends Segment
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Unique;
+        return self::UNIQUE;
     }
 
-    public function Traverse(SegmentWalker $Walker)
+    public function traverse(SegmentWalker $walker)
     {
-        return $Walker->WalkUnique($this);
+        return $walker->walkUnique($this);
     }
-    
-    public function Update() 
+
+    public function update()
     {
         return $this;
     }

@@ -7,28 +7,38 @@ class AggregateTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     /**
      * @dataProvider AssocOneToTen
      */
-    public function testThatAggregateOperatesCorrectly(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatAggregateOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $Aggregator = function ($A, $B) { return $A * $B; };
-        
-        $this->assertEquals(array_reduce($Data, $Aggregator, 1), $Traversable->Aggregate($Aggregator));
+        $aggregator =
+                function ($a, $b) {
+                    return $a * $b;
+                };
+
+        $this->assertEquals(
+                array_reduce($data, $aggregator, 1),
+                $traversable->aggregate($aggregator));
     }
-    
+
     /**
      * @dataProvider TenRandomStrings
      */
-    public function testThatAggregateOperatesCorrectlyWithStrings(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatAggregateOperatesCorrectlyWithStrings(\Pinq\ITraversable $traversable, array $data)
     {
-        $Aggregator = function ($A, $B) { return $A . $B; };
-        
-        $this->assertEquals(array_reduce($Data, $Aggregator, ''), $Traversable->Aggregate($Aggregator));
+        $aggregator =
+                function ($a, $b) {
+                    return $a . $b;
+                };
+
+        $this->assertEquals(
+                array_reduce($data, $aggregator, ''),
+                $traversable->aggregate($aggregator));
     }
-    
+
     /**
      * @dataProvider EmptyData
      */
-    public function testThatAggregateOnEmptyReturnsNull(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatAggregateOnEmptyReturnsNull(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertNull($Traversable->Aggregate(function () { return true; }));
+        $this->assertNull($traversable->aggregate(function () { return true; }));
     }
 }

@@ -7,11 +7,11 @@ class IterationTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatIndexReturnsCorrectValue(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatIndexReturnsCorrectValue(\Pinq\ITraversable $traversable, array $data)
     {
-        foreach ($Traversable as $Key => $Value) {
-            $this->assertTrue(isset($Data[$Key]));
-            $this->assertSame($Value, $Data[$Key]);
+        foreach ($traversable as $key => $value) {
+            $this->assertTrue(isset($data[$key]));
+            $this->assertSame($value, $data[$key]);
         }
     }
 }

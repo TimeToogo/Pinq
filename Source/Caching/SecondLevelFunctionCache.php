@@ -2,7 +2,7 @@
 
 namespace Pinq\Caching;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Cache implementation that acts as second level cache for the supplied
@@ -14,53 +14,54 @@ class SecondLevelFunctionCache implements IFunctionCache
 {
     /**
      * The underlying cache implementation
-     * 
+     *
      * @var IFunctionCache
      */
-    private $RealCache;
+    private $realCache;
 
-    private static $ArrayCache = [];
-    
-    public function __construct(IFunctionCache $InnerCache)
+    private static $arrayCache = [];
+
+    public function __construct(IFunctionCache $innerCache)
     {
-        $this->RealCache = $InnerCache;
+        $this->realCache = $innerCache;
     }
-    
+
     /**
      * Gets the underlying cache implementation
-     * 
+     *
      * @return IFunctionCache
      */
-    public function GetInnerCache()
+    public function getInnerCache()
     {
-        return $this->RealCache;
-    }
-    
-    public function Save($FunctionHash, FunctionExpressionTree $FunctionExpressionTree)
-    {
-        self::$ArrayCache[$FunctionHash] = clone $FunctionExpressionTree;
-        $this->RealCache->Save($FunctionHash, $FunctionExpressionTree);
+        return $this->realCache;
     }
 
-    public function TryGet($FunctionHash)
+    public function save($functionHash, FunctionExpressionTree $functionExpressionTree)
     {
-        if(!isset(self::$ArrayCache[$FunctionHash])) {
-            self::$ArrayCache[$FunctionHash] = $this->RealCache->TryGet($FunctionHash) ?: null;
+        self::$arrayCache[$functionHash] = clone $functionExpressionTree;
+        $this->realCache->save($functionHash, $functionExpressionTree);
+    }
+
+    public function tryGet($functionHash)
+    {
+        if (!isset(self::$arrayCache[$functionHash])) {
+            self::$arrayCache[$functionHash] = $this->realCache->tryGet($functionHash) ?: null;
         }
-        
-        $CachedValue = self::$ArrayCache[$FunctionHash];
-        return $CachedValue === null ? null : clone $CachedValue;
+
+        $cachedValue = self::$arrayCache[$functionHash];
+
+        return $cachedValue === null ? null : clone $cachedValue;
     }
 
-    public function Clear()
+    public function clear()
     {
-        self::$ArrayCache = [];
-        $this->RealCache->Clear();
+        self::$arrayCache = [];
+        $this->realCache->clear();
     }
 
-    public function Remove($FunctionHash)
+    public function remove($functionHash)
     {
-        unset(self::$ArrayCache[$FunctionHash]);
-        $this->RealCache->Remove($FunctionHash);
+        unset(self::$arrayCache[$functionHash]);
+        $this->realCache->remove($functionHash);
     }
 }

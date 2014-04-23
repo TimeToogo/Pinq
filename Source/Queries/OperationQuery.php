@@ -4,7 +4,7 @@ namespace Pinq\Queries;
 
 /**
  * Implementation of the IOperationQuery
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class OperationQuery extends Query implements IOperationQuery
@@ -12,16 +12,16 @@ class OperationQuery extends Query implements IOperationQuery
     /**
      * @var IOperation
      */
-    private $Operation;
-    
-    public function __construct(IScope $Scope, IOperation $Operation)
+    private $operation;
+
+    public function __construct(IScope $scope, IOperation $operation)
     {
-        parent::__construct($Scope);
-        $this->Operation = $Operation;
+        parent::__construct($scope);
+        $this->operation = $operation;
     }
 
-    public function GetOperation()
+    public function getOperation()
     {
-        return $this->Operation;
+        return $this->operation;
     }
 }

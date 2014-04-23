@@ -7,7 +7,7 @@ namespace Pinq\Expressions;
  * -$I;
  * $I++;
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class UnaryOperationExpression extends Expression
@@ -15,106 +15,106 @@ class UnaryOperationExpression extends Expression
     /**
      * @var int
      */
-    private $Operator;
-    
+    private $operator;
+
     /**
      * @var Expression
      */
-    private $OperandExpression;
-    
-    public function __construct($Operator, Expression $OperandExpression)
+    private $operandExpression;
+
+    public function __construct($operator, Expression $operandExpression)
     {
-        $this->Operator = $Operator;
-        $this->OperandExpression = $OperandExpression;
+        $this->operator = $operator;
+        $this->operandExpression = $operandExpression;
     }
 
     /**
      * @return string
      */
-    public function GetOperator()
+    public function getOperator()
     {
-        return $this->Operator;
+        return $this->operator;
     }
 
     /**
      * @return Expression
      */
-    public function GetOperandExpression()
+    public function getOperandExpression()
     {
-        return $this->OperandExpression;
+        return $this->operandExpression;
     }
 
-    public function Traverse(ExpressionWalker $Walker)
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkUnaryOperation($this);
+        return $walker->walkUnaryOperation($this);
     }
 
-    public function Simplify()
+    public function simplify()
     {
-        $OperandExpression = $this->OperandExpression->Simplify();
+        $operandExpression = $this->operandExpression->simplify();
 
-        if ($OperandExpression instanceof ValueExpression) {
-            return Expression::Value(self::DoUnaryOperation($this->Operator, $OperandExpression->GetValue()));
+        if ($operandExpression instanceof ValueExpression) {
+            return Expression::value(self::doUnaryOperation(
+                    $this->operator,
+                    $operandExpression->getValue()));
         }
 
-        return $this->Update(
-                $this->Operator,
-                $OperandExpression);
+        return $this->update($this->operator, $operandExpression);
     }
 
-    private static $UnaryOperations;
-    private static function DoUnaryOperation($Operator, $Value)
+    private static $unaryOperations;
+
+    private static function doUnaryOperation($operator, $value)
     {
-        if (self::$UnaryOperations === null) {
-            self::$UnaryOperations = [
-                Operators\Unary::BitwiseNot =>      function ($I) { return ~$I; },
-                Operators\Unary::Not =>             function ($I) { return !$I; },
-                Operators\Unary::Increment =>       function ($I) { return $I++; },
-                Operators\Unary::Decrement =>       function ($I) { return $I--; },
-                Operators\Unary::PreIncrement =>    function ($I) { return ++$I; },
-                Operators\Unary::PreDecrement =>    function ($I) { return --$I; },
-                Operators\Unary::Negation =>        function ($I) { return -$I; },
-                Operators\Unary::Plus =>            function ($I) { return +$I; },
+        if (self::$unaryOperations === null) {
+            self::$unaryOperations = [
+                Operators\Unary::BITWISE_NOT =>     function ($i) { return ~$i; },
+                Operators\Unary::NOT =>             function ($i) { return !$i; },
+                Operators\Unary::INCREMENT =>       function ($i) { return $i++; },
+                Operators\Unary::DECREMENT =>       function ($i) { return $i--; },
+                Operators\Unary::PRE_INCREMENT =>   function ($i) { return ++$i; },
+                Operators\Unary::PRE_DECREMENT =>   function ($i) { return --$i; },
+                Operators\Unary::NEGATION =>        function ($i) { return -$i; },
+                Operators\Unary::PLUS =>            function ($i) { return +$i; }
             ];
         }
 
-        $Operation = self::$UnaryOperations[$Operator];
+        $operation = self::$unaryOperations[$operator];
 
-        return $Operation($Value);
+        return $operation($value);
     }
 
     /**
      * @return self
      */
-    public function Update($Operator, Expression $OperandExpression)
+    public function update($operator, Expression $operandExpression)
     {
-        if ($this->Operator === $Operator
-                && $this->OperandExpression === $OperandExpression) {
+        if ($this->operator === $operator && $this->operandExpression === $operandExpression) {
             return $this;
         }
 
-        return new self($Operator, $OperandExpression);
+        return new self($operator, $operandExpression);
     }
 
-    protected function CompileCode(&$Code)
+    protected function compileCode(&$code)
     {
-        $Code .= '(';
-        $Code .= sprintf($this->Operator, $this->OperandExpression->Compile());
-        $Code .= ')';
+        $code .= '(';
+        $code .= sprintf($this->operator, $this->operandExpression->compile());
+        $code .= ')';
     }
-    
+
     public function serialize()
     {
-        return serialize([$this->OperandExpression, $this->Operator]);
+        return serialize([$this->operandExpression, $this->operator]);
     }
-    
-    public function unserialize($Serialized)
+
+    public function unserialize($serialized)
     {
-        list($this->OperandExpression, $this->Operator) = unserialize($Serialized);
+        list($this->operandExpression, $this->operator) = unserialize($serialized);
     }
-        
+
     public function __clone()
     {
-        $this->OperandExpression = clone $this->OperandExpression;
+        $this->operandExpression = clone $this->operandExpression;
     }
 }

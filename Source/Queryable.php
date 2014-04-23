@@ -2,395 +2,400 @@
 
 namespace Pinq;
 
-use \Pinq\Queries;
-use \Pinq\Queries\Requests;
-use \Pinq\Queries\Segments;
+use Pinq\Queries;
+use Pinq\Queries\Requests;
+use Pinq\Queries\Segments;
 
 /**
  * The standard queryable class, fully implements the queryable API
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
 {
     /**
      * The query provider implementation for this queryable
-     * 
+     *
      * @var Providers\IQueryProvider
      */
-    protected $Provider;
-    
+    protected $provider;
+
     /**
      * The function converter from the query provider
-     * 
+     *
      * @var Parsing\IFunctionToExpressionTreeConverter
      */
-    protected $FunctiontConverter;
-        
+    protected $functiontConverter;
+
     /**
      * The query scope of this instance
-     * 
+     *
      * @var Queries\IScope
      */
-    protected $Scope;
-    
+    protected $scope;
+
     /**
      * The underlying values iterator if loaded
-     * 
+     *
      * @var \Iterator|null
      */
-    protected $ValuesIterator = null;
+    protected $valuesIterator = null;
 
-    public function __construct(Providers\IQueryProvider $Provider, Queries\IScope $Scope = null)
+    public function __construct(Providers\IQueryProvider $provider, Queries\IScope $scope = null)
     {
-        $this->Provider = $Provider;
-        $this->FunctiontConverter = $Provider->GetFunctionToExpressionTreeConverter();
-        $this->Scope = $Scope ?: new Queries\Scope([]);
+        $this->provider = $provider;
+        $this->functiontConverter = $provider->getFunctionToExpressionTreeConverter();
+        $this->scope = $scope ?: new Queries\Scope([]);
     }
-    
+
     /**
      * Returns a new queryable instance with the supplied query segment
      * appended to the current scope
-     * 
-     * @param Queries\ISegment $Segment The new segment
+     *
+     * @param Queries\ISegment $segment The new segment
      * @return IQueryable
      */
-    final protected function NewSegment(Queries\ISegment $Segment)
+    final protected function newSegment(Queries\ISegment $segment)
     {
-        return $this->Provider->CreateQueryable($this->Scope->Append($Segment));
+        return $this->provider->createQueryable($this->scope->append($segment));
     }
-    
+
     /**
      * Returns a new queryable instance with the supplied query segment
      * updating the last segment of the current scope
-     * 
-     * @param Queries\ISegment $Segment The new segment
+     *
+     * @param Queries\ISegment $segment The new segment
      * @return IQueryable
      */
-    final protected function UpdateLastSegment(Queries\ISegment $Segment)
+    final protected function updateLastSegment(Queries\ISegment $segment)
     {
-        return $this->Provider->CreateQueryable($this->Scope->UpdateLast($Segment));
-    }
-    
-    /**
-     * Returns the requested query from the query provider.
-     * 
-     * @param Queries\IRequest $Request The request to load
-     * @return mixed The result of the request query
-     */
-    private function LoadQuery(Queries\IRequest $Request) 
-    {
-        return $this->Provider->Load(new Queries\RequestQuery($this->Scope, $Request));
-    }
-    
-    /**
-     * Loads the values iterator if not already load
-     * 
-     * @return void
-     */
-    private function Load() {
-        if($this->ValuesIterator === null) {
-            $this->ValuesIterator = $this->LoadQuery(new Requests\Values());
-        }
-    }
-    
-    final public function AsArray()
-    {
-        $this->Load();
-        
-        $Values = Utilities::ToArray($this->ValuesIterator);
-        
-        if(!($this->ValuesIterator instanceof \ArrayIterator)) {
-            $this->ValuesIterator = new \ArrayIterator($Values);
-        }
-        
-        return $Values;
-    }
-    
-    public function AsTraversable()
-    {
-        $this->Load();
-        return new Traversable($this->ValuesIterator);
+        return $this->provider->createQueryable($this->scope->updateLast($segment));
     }
 
-    public function AsCollection()
+    /**
+     * Returns the requested query from the query provider.
+     *
+     * @param Queries\IRequest $request The request to load
+     * @return mixed The result of the request query
+     */
+    private function loadQuery(Queries\IRequest $request)
+    {
+        return $this->provider->load(new Queries\RequestQuery($this->scope, $request));
+    }
+
+    /**
+     * Loads the values iterator if not already load
+     *
+     * @return void
+     */
+    private function load()
+    {
+        if ($this->valuesIterator === null) {
+            $this->valuesIterator = $this->loadQuery(new Requests\Values());
+        }
+    }
+
+    final public function asArray()
+    {
+        $this->load();
+        $values = Utilities::toArray($this->valuesIterator);
+
+        if (!$this->valuesIterator instanceof \ArrayIterator) {
+            $this->valuesIterator = new \ArrayIterator($values);
+        }
+
+        return $values;
+    }
+
+    public function asTraversable()
+    {
+        $this->load();
+
+        return new Traversable($this->valuesIterator);
+    }
+
+    public function asCollection()
     {
         return new Collection($this->getIterator());
     }
-    
-    public function AsQueryable()
+
+    public function asQueryable()
     {
         return $this;
     }
-    
-    public function AsRepository()
+
+    public function asRepository()
     {
-        if($this->Provider instanceof Providers\IRepositoryProvider) {
-            return $this->Provider->CreateRepository($this->Scope);
-        }
-        else {
-            return (new Collection($this->getIterator()))->AsRepository();
+        if ($this->provider instanceof Providers\IRepositoryProvider) {
+            return $this->provider->createRepository($this->scope);
+        } else {
+            return (new Collection($this->getIterator()))->asRepository();
         }
     }
 
     final public function getIterator()
     {
-        $this->Load();
-        
-        return $this->ValuesIterator;
+        $this->load();
+
+        return $this->valuesIterator;
     }
 
-    final public function GetProvider()
+    final public function getProvider()
     {
-        return $this->Provider;
+        return $this->provider;
     }
-    
-    public function GetScope()
+
+    public function getScope()
     {
-        return $this->Scope;
+        return $this->scope;
     }
-    
-    final protected function Convert(callable $Function = null) 
+
+    final protected function convert(callable $function = null)
     {
-        return $Function === null ? null : $this->FunctiontConverter->Convert($Function);
+        return $function === null ? null : $this->functiontConverter->convert($function);
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Query segments">
-    
-    public function Select(callable $Function)
+
+    public function select(callable $function)
     {
-        return $this->NewSegment(new Segments\Select($this->Convert($Function)));
+        return $this->newSegment(new Segments\Select($this->convert($function)));
     }
 
-    public function SelectMany(callable $Function)
+    public function selectMany(callable $function)
     {
-        return $this->NewSegment(new Segments\SelectMany($this->Convert($Function)));
+        return $this->newSegment(new Segments\SelectMany($this->convert($function)));
     }
 
-    public function IndexBy(callable $Function)
+    public function indexBy(callable $function)
     {
-        return $this->NewSegment(new Segments\IndexBy($this->Convert($Function)));
+        return $this->newSegment(new Segments\IndexBy($this->convert($function)));
     }
 
-    public function Where(callable $Predicate)
+    public function where(callable $predicate)
     {
-        return $this->NewSegment(new Segments\Filter($this->Convert($Predicate)));
+        return $this->newSegment(new Segments\Filter($this->convert($predicate)));
     }
 
-    public function GroupBy(callable $Function)
+    public function groupBy(callable $function)
     {
-        return $this->NewSegment(new Segments\GroupBy([$this->Convert($Function)]));
+        return $this->newSegment(new Segments\GroupBy([$this->convert($function)]));
     }
 
-    public function AndBy(callable $Function)
+    public function andBy(callable $function)
     {
-        $Segments = $this->Scope->GetSegments();
-        $LastSegment = end($Segments);
-        if(!$LastSegment instanceof Segments\GroupBy) {
+        $segments = $this->scope->getSegments();
+        $lastSegment = end($segments);
+
+        if (!$lastSegment instanceof Segments\GroupBy) {
             throw new PinqException(
                     'Invalid call to %s: %s::%s must be called first',
                     __METHOD__,
                     __CLASS__,
                     'GroupBy');
         }
-        return $this->UpdateLastSegment($LastSegment->AndBy($this->Convert($Function)));
-    }
-    
-    public function Join($Values)
-    {
-        return new JoiningOnQueryable($this->Provider, $this->Scope, $Values, false);
-    }
-    
-    public function GroupJoin($Values)
-    {
-        return new JoiningOnQueryable($this->Provider, $this->Scope, $Values, true);
-    }
-    
-    public function Union($Values)
-    {
-        return $this->NewSegment(new Segments\Operation(Segments\Operation::Union, $Values));
+
+        return $this->updateLastSegment($lastSegment->andBy($this->convert($function)));
     }
 
-    public function Intersect($Values)
+    public function join($values)
     {
-        return $this->NewSegment(new Segments\Operation(Segments\Operation::Intersect, $Values));
+        return new JoiningOnQueryable($this->provider, $this->scope, $values, false);
     }
 
-    public function Difference($Values)
+    public function groupJoin($values)
     {
-        return $this->NewSegment(new Segments\Operation(Segments\Operation::Difference, $Values));
-    }
-    
-    public function Append($Values)
-    {
-        return $this->NewSegment(new Segments\Operation(Segments\Operation::Append, $Values));
+        return new JoiningOnQueryable($this->provider, $this->scope, $values, true);
     }
 
-    public function WhereIn($Values)
+    public function union($values)
     {
-        return $this->NewSegment(new Segments\Operation(Segments\Operation::WhereIn, $Values));
+        return $this->newSegment(new Segments\Operation(Segments\Operation::UNION, $values));
     }
 
-    public function Except($Values)
+    public function intersect($values)
     {
-        return $this->NewSegment(new Segments\Operation(Segments\Operation::Except, $Values));
+        return $this->newSegment(new Segments\Operation(Segments\Operation::INTERSECT, $values));
     }
 
-    public function Skip($Amount)
+    public function difference($values)
     {
-        return $this->NewSegment(new Segments\Range($Amount, null));
+        return $this->newSegment(new Segments\Operation(Segments\Operation::DIFFERENCE, $values));
     }
 
-    public function Take($Amount)
+    public function append($values)
     {
-        return $this->NewSegment(new Segments\Range(0, $Amount));
+        return $this->newSegment(new Segments\Operation(Segments\Operation::APPEND, $values));
     }
 
-    public function Slice($Start, $Amount)
+    public function whereIn($values)
     {
-        return $this->NewSegment(new Segments\Range($Start, $Amount));
+        return $this->newSegment(new Segments\Operation(Segments\Operation::WHERE_IN, $values));
     }
 
-    public function OrderByAscending(callable $Function)
+    public function except($values)
     {
-        return $this->NewSegment(new Segments\OrderBy([$Function], [true]));
+        return $this->newSegment(new Segments\Operation(Segments\Operation::EXCEPT, $values));
     }
 
-    public function OrderByDescending(callable $Function)
+    public function skip($amount)
     {
-        return $this->NewSegment(new Segments\OrderBy([$Function], [false]));
+        return $this->newSegment(new Segments\Range($amount, null));
     }
-    
-    private function ValidateOrderBy() 
+
+    public function take($amount)
     {
-        $Segments = $this->Scope->GetSegments();
-        $LastSegment = end($Segments);
-        if(!$LastSegment instanceof Segments\OrderBy) {
+        return $this->newSegment(new Segments\Range(0, $amount));
+    }
+
+    public function slice($start, $amount)
+    {
+        return $this->newSegment(new Segments\Range($start, $amount));
+    }
+
+    public function orderByAscending(callable $function)
+    {
+        return $this->newSegment(new Segments\OrderBy([$function], [true]));
+    }
+
+    public function orderByDescending(callable $function)
+    {
+        return $this->newSegment(new Segments\OrderBy([$function], [false]));
+    }
+
+    private function validateOrderBy()
+    {
+        $segments = $this->scope->getSegments();
+        $lastSegment = end($segments);
+
+        if (!$lastSegment instanceof Segments\OrderBy) {
             throw new PinqException(
                     'Invalid call to %s: %s::%s must be called first',
                     __METHOD__,
                     __CLASS__,
                     'OrderBy');
         }
-        
-        return $LastSegment;
+
+        return $lastSegment;
     }
-    
-    public function ThenBy(callable $Function, $Direction)
+
+    public function thenBy(callable $function, $direction)
     {
-        return $this->UpdateLastSegment($this->ValidateOrderBy()->ThenBy($this->Convert($Function), $Direction !== Direction::Descending));
+        return $this->updateLastSegment($this->validateOrderBy()->thenBy(
+                $this->convert($function),
+                $direction !== Direction::DESCENDING));
     }
-    
-    public function ThenByAscending(callable $Function)
+
+    public function thenByAscending(callable $function)
     {
-        return $this->UpdateLastSegment($this->ValidateOrderBy()->ThenBy($this->Convert($Function), true));
+        return $this->updateLastSegment($this->validateOrderBy()->thenBy($this->convert($function), true));
     }
-    
-    public function ThenByDescending(callable $Function)
+
+    public function thenByDescending(callable $function)
     {
-        return $this->UpdateLastSegment($this->ValidateOrderBy()->ThenBy($this->Convert($Function), false));
+        return $this->updateLastSegment($this->validateOrderBy()->thenBy($this->convert($function), false));
     }
-    
-    public function OrderBy(callable $Function, $Direction)
+
+    public function orderBy(callable $function, $direction)
     {
-        return $this->NewSegment(new Segments\OrderBy([$Function], [$Direction !== Direction::Descending]));
+        return $this->newSegment(new Segments\OrderBy(
+                [$function],
+                [$direction !== Direction::DESCENDING]));
     }
-    
-    public function Unique()
+
+    public function unique()
     {
-        return $this->NewSegment(new Segments\Unique());
+        return $this->newSegment(new Segments\Unique());
     }
-    
+
     // </editor-fold>
-   
+
     // <editor-fold defaultstate="collapsed" desc="Query Requests">
-    
-    public function offsetExists($Index)
+
+    public function offsetExists($index)
     {
-        return $this->LoadQuery(new Requests\IssetIndex($Index));
+        return $this->loadQuery(new Requests\IssetIndex($index));
     }
 
-    public function offsetGet($Index)
+    public function offsetGet($index)
     {
-        return $this->LoadQuery(new Requests\GetIndex($Index));
+        return $this->loadQuery(new Requests\GetIndex($index));
     }
 
-    public function offsetSet($Index, $Value)
+    public function offsetSet($index, $value)
     {
-        throw PinqException::NotSupported(__METHOD__);
+        throw PinqException::notSupported(__METHOD__);
     }
 
-    public function offsetUnset($Index)
+    public function offsetUnset($index)
     {
-        throw PinqException::NotSupported(__METHOD__);
-    }
-    
-    public function First()
-    {
-        return $this->LoadQuery(new Requests\First());
+        throw PinqException::notSupported(__METHOD__);
     }
 
-
-    public function Last()
+    public function first()
     {
-        return $this->LoadQuery(new Requests\Last());
+        return $this->loadQuery(new Requests\First());
     }
 
-    public function Count()
+    public function last()
     {
-        return $this->LoadQuery(new Requests\Count());
+        return $this->loadQuery(new Requests\Last());
     }
 
-    public function Exists()
+    public function count()
     {
-        return $this->LoadQuery(new Requests\Exists());
+        return $this->loadQuery(new Requests\Count());
     }
 
-    public function Contains($Value)
+    public function exists()
     {
-        return $this->LoadQuery(new Requests\Contains($Value));
+        return $this->loadQuery(new Requests\Exists());
     }
 
-    public function Aggregate(callable $Function)
+    public function contains($value)
     {
-        return $this->LoadQuery(new Requests\Aggregate($this->Convert($Function)));
+        return $this->loadQuery(new Requests\Contains($value));
     }
 
-    public function All(callable $Function = null)
+    public function aggregate(callable $function)
     {
-        return $this->LoadQuery(new Requests\All($this->Convert($Function)));
+        return $this->loadQuery(new Requests\Aggregate($this->convert($function)));
     }
 
-    public function Any(callable $Function = null)
+    public function all(callable $function = null)
     {
-        return $this->LoadQuery(new Requests\Any($this->Convert($Function)));
+        return $this->loadQuery(new Requests\All($this->convert($function)));
     }
 
-    public function Maximum(callable $Function = null)
+    public function any(callable $function = null)
     {
-        return $this->LoadQuery(new Requests\Maximum($this->Convert($Function)));
+        return $this->loadQuery(new Requests\Any($this->convert($function)));
     }
 
-    public function Minimum(callable $Function = null)
+    public function maximum(callable $function = null)
     {
-        return $this->LoadQuery(new Requests\Minimum($this->Convert($Function)));
+        return $this->loadQuery(new Requests\Maximum($this->convert($function)));
     }
 
-    public function Sum(callable $Function = null)
+    public function minimum(callable $function = null)
     {
-        return $this->LoadQuery(new Requests\Sum($this->Convert($Function)));
+        return $this->loadQuery(new Requests\Minimum($this->convert($function)));
     }
 
-    public function Average(callable $Function = null)
+    public function sum(callable $function = null)
     {
-        return $this->LoadQuery(new Requests\Average($this->Convert($Function)));
+        return $this->loadQuery(new Requests\Sum($this->convert($function)));
     }
 
-    public function Implode($Delimiter, callable $Function = null)
+    public function average(callable $function = null)
     {
-        return $this->LoadQuery(new Requests\Implode($Delimiter, $this->Convert($Function)));
+        return $this->loadQuery(new Requests\Average($this->convert($function)));
+    }
+
+    public function implode($delimiter, callable $function = null)
+    {
+        return $this->loadQuery(new Requests\Implode($delimiter, $this->convert($function)));
     }
 
     // </editor-fold>
-
 }

@@ -4,19 +4,18 @@ namespace Pinq\Queries\Segments;
 
 /**
  * Query segment for retrieving the values mapped by the supplied function
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Select extends ExpressionSegment
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Select;
+        return self::SELECT;
     }
 
-    public function Traverse(SegmentWalker $Walker)
+    public function traverse(SegmentWalker $walker)
     {
-        return $Walker->WalkSelect($this);
+        return $walker->walkSelect($this);
     }
-
 }

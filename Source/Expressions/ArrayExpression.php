@@ -6,132 +6,133 @@ namespace Pinq\Expressions;
  * <code>
  * [1, 2, 'test' => 4]
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ArrayExpression extends Expression
 {
     /**
-     * @var Expression[] 
+     * @var Expression[]
      */
-    private $KeyExpressions;
-    
+    private $keyExpressions;
+
     /**
-     * @var Expression[] 
+     * @var Expression[]
      */
-    private $ValueExpressions;
-    
-    public function __construct(array $KeyExpressions, array $ValueExpressions)
+    private $valueExpressions;
+
+    public function __construct(array $keyExpressions, array $valueExpressions)
     {
-        ksort($KeyExpressions);
-        ksort($ValueExpressions);
-        if (array_keys($KeyExpressions) !== array_keys($ValueExpressions)) {
+        ksort($keyExpressions);
+        ksort($valueExpressions);
+
+        if (array_keys($keyExpressions) !== array_keys($valueExpressions)) {
             throw new \Pinq\PinqException(
                     'The supplied key expression array keys must match the keys of the value expression array: (%s) !== (%s)',
-                    implode(', ', array_keys($KeyExpressions)),
-                    implode(', ', array_keys($ValueExpressions)));
+                    implode(', ', array_keys($keyExpressions)),
+                    implode(', ', array_keys($valueExpressions)));
         }
-        $this->KeyExpressions = $KeyExpressions;
-        $this->ValueExpressions = $ValueExpressions;
+
+        $this->keyExpressions = $keyExpressions;
+        $this->valueExpressions = $valueExpressions;
     }
 
     /**
      * @return Expression|null[]
      */
-    public function GetKeyExpressions()
+    public function getKeyExpressions()
     {
-        return $this->KeyExpressions;
+        return $this->keyExpressions;
     }
 
     /**
      * @return Expression[]
      */
-    public function GetValueExpressions()
+    public function getValueExpressions()
     {
-        return $this->ValueExpressions;
+        return $this->valueExpressions;
     }
 
-    public function Traverse(ExpressionWalker $Walker)
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkArray($this);
+        return $walker->walkArray($this);
     }
 
-    public function Simplify()
+    public function simplify()
     {
-        $KeyExpressions = [];
-        foreach ($this->KeyExpressions as $Key => $KeyExpression) {
-            $KeyExpressions[$Key] = $KeyExpression === null ? null : $KeyExpression->Simplify();
+        $keyExpressions = [];
+
+        foreach ($this->keyExpressions as $key => $keyExpression) {
+            $keyExpressions[$key] = $keyExpression === null ? null : $keyExpression->simplify();
         }
-        $ValueExpressions = self::SimplifyAll($this->ValueExpressions);
 
-        if(self::AllOfType($KeyExpressions, ValueExpression::GetType(), true)
-                && self::AllOfType($ValueExpressions, ValueExpression::GetType())) {
-            $ResolvedArray = [];
+        $valueExpressions = self::simplifyAll($this->valueExpressions);
 
-            foreach ($KeyExpressions as $ValueKey => $KeyExpression) {
-                if($KeyExpression === null) {
-                    $ResolvedArray[] = $ValueExpressions[$ValueKey]->GetValue();
-                }
-                else {
-                    $ResolvedArray[$KeyExpression->GetValue()] = $ValueExpressions[$ValueKey]->GetValue();
+        if (self::allOfType($keyExpressions, ValueExpression::getType(), true) && self::allOfType($valueExpressions, ValueExpression::getType())) {
+            $resolvedArray = [];
+
+            foreach ($keyExpressions as $valueKey => $keyExpression) {
+                if ($keyExpression === null) {
+                    $resolvedArray[] = $valueExpressions[$valueKey]->getValue();
+                } else {
+                    $resolvedArray[$keyExpression->getValue()] = $valueExpressions[$valueKey]->getValue();
                 }
             }
 
-            return Expression::Value($ResolvedArray);
+            return Expression::value($resolvedArray);
         }
 
-        return $this->Update(
-                $KeyExpressions,
-                $ValueExpressions);
+        return $this->update($keyExpressions, $valueExpressions);
     }
 
     /**
      * @return self
      */
-    public function Update(array $KeyExpressions, array $ValueExpressions)
+    public function update(array $keyExpressions, array $valueExpressions)
     {
-        if ($this->ValueExpressions === $ValueExpressions
-                && $this->KeyExpressions === $KeyExpressions) {
+        if ($this->valueExpressions === $valueExpressions && $this->keyExpressions === $keyExpressions) {
             return $this;
         }
 
-        return new self($KeyExpressions, $ValueExpressions);
+        return new self($keyExpressions, $valueExpressions);
     }
 
-    protected function CompileCode(&$Code)
+    protected function compileCode(&$code)
     {
-        $Code .= '[';
-        $First = true;
-        foreach ($this->KeyExpressions as $Key => $KeyExpression) {
-            if ($First) {
-                $First = false;
-            } 
-            else {
-                $Code .= ', ';
+        $code .= '[';
+        $first = true;
+
+        foreach ($this->keyExpressions as $key => $keyExpression) {
+            if ($first) {
+                $first = false;
+            } else {
+                $code .= ', ';
             }
 
-            if ($KeyExpression !== null) {
-                $KeyExpression->CompileCode($Code);
-                $Code .= ' => ';
+            if ($keyExpression !== null) {
+                $keyExpression->compileCode($code);
+                $code .= ' => ';
             }
-            $this->ValueExpressions[$Key]->CompileCode($Code);
+
+            $this->valueExpressions[$key]->compileCode($code);
         }
-        $Code .= ']';
+
+        $code .= ']';
     }
-    
+
     public function serialize()
     {
-        return serialize([$this->KeyExpressions, $this->ValueExpressions]);
+        return serialize([$this->keyExpressions, $this->valueExpressions]);
     }
-    
-    public function unserialize($Serialized)
+
+    public function unserialize($serialized)
     {
-        list($this->KeyExpressions, $this->ValueExpressions) = unserialize($Serialized);
+        list($this->keyExpressions, $this->valueExpressions) = unserialize($serialized);
     }
-    
+
     public function __clone()
     {
-        $this->KeyExpressions = self::CloneAll($this->KeyExpressions);
-        $this->ValueExpressions = self::CloneAll($this->ValueExpressions);
+        $this->keyExpressions = self::cloneAll($this->keyExpressions);
+        $this->valueExpressions = self::cloneAll($this->valueExpressions);
     }
 }

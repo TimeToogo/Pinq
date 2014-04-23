@@ -12,68 +12,65 @@ class JoiningOnTraversable implements IJoiningOnTraversable
     /**
      * @var \Traversable
      */
-    private $OuterValues;
-    
+    private $outerValues;
+
     /**
      * @var \Traversable
      */
-    private $InnerValues;
-    
+    private $innerValues;
+
     /**
      * @var boolean
      */
-    private $IsGroupJoin;
-    
+    private $isGroupJoin;
+
     /**
-     * @param boolean $IsGroupJoin
+     * @param boolean $isGroupJoin
      */
-    public function __construct(\Traversable $OuterValues, \Traversable $InnerValues, $IsGroupJoin)
+    public function __construct(\Traversable $outerValues, \Traversable $innerValues, $isGroupJoin)
     {
-        $this->OuterValues = $OuterValues;
-        $this->InnerValues = $InnerValues;
-        $this->IsGroupJoin = $IsGroupJoin;
+        $this->outerValues = $outerValues;
+        $this->innerValues = $innerValues;
+        $this->isGroupJoin = $isGroupJoin;
     }
 
-    public function On(callable $JoiningOnFunction)
+    public function on(callable $joiningOnFunction)
     {
-        return new JoiningToTraversable(function (callable $JoiningFunction) use ($JoiningOnFunction) {
-            if($this->IsGroupJoin) {
+        return new JoiningToTraversable(function (callable $joiningFunction) use ($joiningOnFunction) {
+            if ($this->isGroupJoin) {
                 return new Iterators\CustomGroupJoinIterator(
-                        $this->OuterValues, 
-                        $this->InnerValues,
-                        $JoiningOnFunction,
-                        $JoiningFunction);
-            }
-            else {
+                        $this->outerValues,
+                        $this->innerValues,
+                        $joiningOnFunction,
+                        $joiningFunction);
+            } else {
                 return new Iterators\CustomJoinIterator(
-                        $this->OuterValues, 
-                        $this->InnerValues,
-                        $JoiningOnFunction, 
-                        $JoiningFunction);
+                        $this->outerValues,
+                        $this->innerValues,
+                        $joiningOnFunction,
+                        $joiningFunction);
             }
         });
     }
 
-    public function OnEquality(callable $OuterKeyFunction, callable $InnerKeyFunction)
+    public function onEquality(callable $outerKeyFunction, callable $innerKeyFunction)
     {
-        return new JoiningToTraversable(function (callable $JoiningFunction) use ($OuterKeyFunction, $InnerKeyFunction) {
-            if($this->IsGroupJoin) {
+        return new JoiningToTraversable(function (callable $joiningFunction) use ($outerKeyFunction, $innerKeyFunction) {
+            if ($this->isGroupJoin) {
                 return new Iterators\EqualityGroupJoinIterator(
-                        $this->OuterValues, 
-                        $this->InnerValues,
-                        $OuterKeyFunction, 
-                        $InnerKeyFunction,
-                        $JoiningFunction);
-            }
-            else {
+                        $this->outerValues,
+                        $this->innerValues,
+                        $outerKeyFunction,
+                        $innerKeyFunction,
+                        $joiningFunction);
+            } else {
                 return new Iterators\EqualityJoinIterator(
-                        $this->OuterValues, 
-                        $this->InnerValues,
-                        $OuterKeyFunction, 
-                        $InnerKeyFunction,
-                        $JoiningFunction);
+                        $this->outerValues,
+                        $this->innerValues,
+                        $outerKeyFunction,
+                        $innerKeyFunction,
+                        $joiningFunction);
             }
         });
-        
     }
 }

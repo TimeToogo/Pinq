@@ -12,95 +12,97 @@ abstract class TraversalExpression extends Expression
     /**
      * @var Expression
      */
-    protected $ValueExpression;
+    protected $valueExpression;
 
     /**
      * @var Expression
      */
-    protected $OriginExpression;
+    protected $originExpression;
 
     /**
      * @var int
      */
-    protected $TraversalDepth;
+    protected $traversalDepth;
 
-    public function __construct(Expression $ValueExpression)
+    public function __construct(Expression $valueExpression)
     {
-        $this->ValueExpression = $ValueExpression;
+        $this->valueExpression = $valueExpression;
 
-        if ($ValueExpression instanceof self) {
-            $this->OriginExpression = $ValueExpression->OriginExpression;
-            $this->TraversalDepth = $ValueExpression->TraversalDepth + 1;
-        } 
-        else {
-            $this->OriginExpression = $ValueExpression;
-            $this->TraversalDepth = 1;
+        if ($valueExpression instanceof self) {
+            $this->originExpression = $valueExpression->originExpression;
+            $this->traversalDepth = $valueExpression->traversalDepth + 1;
+        } else {
+            $this->originExpression = $valueExpression;
+            $this->traversalDepth = 1;
         }
     }
 
     /**
-     * @param string $ExpressionType
+     * @param string $expressionType
      * @return boolean
      */
-    final public function OriginatesFrom($ExpressionType)
+    final public function originatesFrom($expressionType)
     {
-        return $this->OriginExpression instanceof $ExpressionType;
+        return $this->originExpression instanceof $expressionType;
     }
 
     /**
      * @return Expression
      */
-    final public function GetOriginExpression()
+    final public function getOriginExpression()
     {
-        return $this->OriginExpression;
+        return $this->originExpression;
     }
 
     /**
      * @return int
      */
-    final public function GetTraversalDepth()
+    final public function getTraversalDepth()
     {
-        return $this->TraversalDepth;
+        return $this->traversalDepth;
     }
 
     /**
      * @return Expression
      */
-    final public function GetValueExpression()
+    final public function getValueExpression()
     {
-        return $this->ValueExpression;
+        return $this->valueExpression;
     }
 
     /**
      * @return Expression
      */
-    final public function UpdateValue(Expression $ValueExpression)
+    final public function updateValue(Expression $valueExpression)
     {
-        if ($this->ValueExpression === $ValueExpression) {
+        if ($this->valueExpression === $valueExpression) {
             return $this;
         }
 
-        return $this->UpdateValueExpression($ValueExpression);
+        return $this->updateValueExpression($valueExpression);
     }
-    abstract protected function UpdateValueExpression(Expression $ValueExpression);
-    
+
+    abstract protected function updateValueExpression(Expression $valueExpression);
+
     final public function serialize()
     {
-        return serialize([$this->ValueExpression, $this->DataToSerialize()]);
+        return serialize([$this->valueExpression, $this->dataToSerialize()]);
     }
-    protected abstract function DataToSerialize();
-    
-    final public function unserialize($Serialized)
+
+    abstract protected function dataToSerialize();
+
+    final public function unserialize($serialized)
     {
-        list($this->ValueExpression, $ChildData) = unserialize($Serialized);
-        $this->UnserializedData($ChildData);
-        
-        $this->TraversalDepth = 1;
-        $this->OriginExpression = $this->ValueExpression;
-        while($this->OriginExpression instanceof TraversalExpression) {
-            $this->TraversalDepth++;
-            $this->OriginExpression = $this->OriginExpression->GetValueExpression();
+        list($this->valueExpression, $childData) = unserialize($serialized);
+        $this->unserializedData($childData);
+        $this->traversalDepth = 1;
+        $this->originExpression = $this->valueExpression;
+
+        while ($this->originExpression instanceof TraversalExpression) {
+            $this->traversalDepth++;
+            $this->originExpression = $this->originExpression->getValueExpression();
         }
     }
-    protected abstract function UnserializedData($Data);
+
+    abstract protected function unserializedData($data);
 }

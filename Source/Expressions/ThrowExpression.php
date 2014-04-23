@@ -6,7 +6,7 @@ namespace Pinq\Expressions;
  * <code>
  * throw $I
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ThrowExpression extends Expression
@@ -14,61 +14,61 @@ class ThrowExpression extends Expression
     /**
      * @var Expression
      */
-    private $ExceptionExpression;
+    private $exceptionExpression;
 
-    public function __construct(Expression $ExceptionExpression)
+    public function __construct(Expression $exceptionExpression)
     {
-        $this->ExceptionExpression = $ExceptionExpression;
+        $this->exceptionExpression = $exceptionExpression;
     }
 
     /**
      * @return Expression
      */
-    public function GetExceptionExpression()
+    public function getExceptionExpression()
     {
-        return $this->ExceptionExpression;
+        return $this->exceptionExpression;
     }
 
-    public function Traverse(ExpressionWalker $Walker)
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkThrow($this);
+        return $walker->walkThrow($this);
     }
 
-    public function Simplify()
+    public function simplify()
     {
-        return $this->Update($this->ExceptionExpression->Simplify());
+        return $this->update($this->exceptionExpression->simplify());
     }
 
     /**
      * @return self
      */
-    public function Update(Expression $ExceptionExpression)
+    public function update(Expression $exceptionExpression)
     {
-        if ($this->ExceptionExpression === $ExceptionExpression) {
+        if ($this->exceptionExpression === $exceptionExpression) {
             return $this;
         }
 
-        return new self($ExceptionExpression);
+        return new self($exceptionExpression);
     }
 
-    protected function CompileCode(&$Code)
+    protected function compileCode(&$code)
     {
-        $Code .= 'throw ';
-        $this->ExceptionExpression->CompileCode($Code);
+        $code .= 'throw ';
+        $this->exceptionExpression->compileCode($code);
     }
-        
+
     public function serialize()
     {
-        return serialize($this->ExceptionExpression);
+        return serialize($this->exceptionExpression);
     }
-    
-    public function unserialize($Serialized)
+
+    public function unserialize($serialized)
     {
-        $this->ExceptionExpression = unserialize($Serialized);
+        $this->exceptionExpression = unserialize($serialized);
     }
-    
+
     public function __clone()
     {
-        $this->ExceptionExpression = clone $this->ExceptionExpression;
+        $this->exceptionExpression = clone $this->exceptionExpression;
     }
 }

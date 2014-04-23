@@ -9,23 +9,20 @@ namespace Pinq\Expressions\Operators;
  */
 final class Assignment
 {
-    const Equal = '=';
-    const EqualReference = '=&';
-
+    const EQUAL = '=';
+    const EQUAL_REFERENCE = '=&';
     //Arthmetic
-    const Addition = '+=';
-    const Subtraction = '-=';
-    const Multiplication = '*=';
-    const Division = '/=';
-    const Modulus = '%=';
-
+    const ADDITION = '+=';
+    const SUBTRACTION = '-=';
+    const MULTIPLICATION = '*=';
+    const DIVISION = '/=';
+    const MODULUS = '%=';
     //Bitwise
-    const BitwiseAnd = '&=';
-    const BitwiseOr = '|=';
-    const BitwiseXor = '^=';
-    const ShiftLeft = '<<=';
-    const ShiftRight = '>>=';
-
+    const BITWISE_AND = '&=';
+    const BITWISE_OR = '|=';
+    const BITWISE_XOR = '^=';
+    const SHIFT_LEFT = '<<=';
+    const SHIFT_RIGHT = '>>=';
     //String
-    const Concatenate = '.=';
+    const CONCATENATE = '.=';
 }

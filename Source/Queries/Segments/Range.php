@@ -1,56 +1,56 @@
 <?php
 
-namespace Pinq\Queries\Segments; 
+namespace Pinq\Queries\Segments;
 
 /**
  * Query segment for retrieving the specified range of values
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Range extends Segment
 {
-    private $RangeStart = 0;
-    private $RangeAmount = 0;
+    private $rangeStart = 0;
 
-    public function __construct($RangeStart, $RangeAmount)
+    private $rangeAmount = 0;
+
+    public function __construct($rangeStart, $rangeAmount)
     {
-        $this->RangeStart = $RangeStart;
-        $this->RangeAmount = $RangeAmount;
+        $this->rangeStart = $rangeStart;
+        $this->rangeAmount = $rangeAmount;
     }
 
-    public function GetType()
+    public function getType()
     {
-        return self::Range;
+        return self::RANGE;
     }
 
-    public function Traverse(SegmentWalker $Walker)
+    public function traverse(SegmentWalker $walker)
     {
-        return $Walker->WalkRange($this);
+        return $walker->walkRange($this);
     }
 
     /**
      * @return int
      */
-    public function GetRangeStart()
+    public function getRangeStart()
     {
-        return $this->RangeStart;
+        return $this->rangeStart;
     }
 
     /**
      * @return int|null
      */
-    public function GetRangeAmount()
+    public function getRangeAmount()
     {
-        return $this->RangeAmount;
+        return $this->rangeAmount;
     }
-    
-    public function Update($RangeStart, $RangeAmount)
+
+    public function update($rangeStart, $rangeAmount)
     {
-        if($this->RangeStart === $RangeStart
-                && $this->RangeAmount === $RangeAmount) {
+        if ($this->rangeStart === $rangeStart && $this->rangeAmount === $rangeAmount) {
             return $this;
         }
-        
-        return new self($RangeStart, $RangeAmount);
+
+        return new self($rangeStart, $rangeAmount);
     }
 }

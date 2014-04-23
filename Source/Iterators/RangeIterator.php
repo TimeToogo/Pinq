@@ -4,7 +4,7 @@ namespace Pinq\Iterators;
 
 /**
  * Iterates over a specified range of the inner values.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class RangeIterator extends IteratorIterator
@@ -12,54 +12,57 @@ class RangeIterator extends IteratorIterator
     /**
      * @var int
      */
-    private $Position = 0;
-    
+    private $position = 0;
+
     /**
      * @var int
      */
-    private $StartPosition;
-    
+    private $startPosition;
+
     /**
      * @var int|null
      */
-    private $EndPosition;
-    
+    private $endPosition;
+
     /**
-     * @param integer $StartAmount
-     * @param null|integer $RangeAmount
+     * @param integer $startAmount
+     * @param null|integer $rangeAmount
      */
-    public function __construct(\Traversable $Iterator, $StartAmount, $RangeAmount)
+    public function __construct(\Traversable $iterator, $startAmount, $rangeAmount)
     {
-        parent::__construct($Iterator);
-        $this->StartPosition = $StartAmount;
-        $this->EndPosition = $RangeAmount === null ? null : $StartAmount + $RangeAmount;
+        parent::__construct($iterator);
+        $this->startPosition = $startAmount;
+        $this->endPosition = $rangeAmount === null ? null : $startAmount + $rangeAmount;
     }
 
     public function next()
     {
-        $this->Position++;
+        $this->position++;
+
         return parent::next();
     }
 
     public function rewind()
     {
-        $this->Position = 0;
+        $this->position = 0;
+
         return parent::rewind();
     }
 
     public function valid()
     {
-        while($this->Position < $this->StartPosition) {
-            if(!parent::valid()) {
+        while ($this->position < $this->startPosition) {
+            if (!parent::valid()) {
                 return false;
             }
+
             $this->next();
         }
-        
-        if($this->EndPosition !== null && $this->Position >= $this->EndPosition) {
+
+        if ($this->endPosition !== null && $this->position >= $this->endPosition) {
             return false;
         }
-        
+
         return parent::valid();
     }
 }

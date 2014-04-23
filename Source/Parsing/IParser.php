@@ -2,12 +2,12 @@
 
 namespace Pinq\Parsing;
 
-use \Pinq\Expressions\Expression;
+use Pinq\Expressions\Expression;
 
 /**
  * The IParser is an abstraction for converting a function
  * to an expression tree.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 interface IParser
@@ -15,10 +15,10 @@ interface IParser
     /**
      * @return string
      */
-    public function GetSignatureHash(\ReflectionFunctionAbstract $Reflection);
-    
+    public function getSignatureHash(\ReflectionFunctionAbstract $reflection);
+
     /**
      * @return Expression[]
      */
-    public function Parse(\ReflectionFunctionAbstract $Reflection);
+    public function parse(\ReflectionFunctionAbstract $reflection);
 }

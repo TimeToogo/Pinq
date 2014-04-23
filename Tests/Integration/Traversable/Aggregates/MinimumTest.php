@@ -7,8 +7,10 @@ class MinimumTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatMinimumOperatesCorrectly(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatMinimumOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals(empty($Data) ? null : min($Data), $Traversable->Minimum());
+        $this->assertEquals(
+                empty($data) ? null : min($data),
+                $traversable->minimum());
     }
 }

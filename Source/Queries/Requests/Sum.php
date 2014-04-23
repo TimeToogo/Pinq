@@ -1,21 +1,21 @@
 <?php
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Request query for a double of the sum of all the projected values
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Sum extends ProjectionRequest
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Sum;
+        return self::SUM;
     }
 
-    public function Traverse(RequestVisitor $Visitor)
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitSum($this);
+        return $visitor->visitSum($this);
     }
 }

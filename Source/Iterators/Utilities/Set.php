@@ -4,100 +4,102 @@ namespace Pinq\Iterators\Utilities;
 
 /**
  * Represents set of unique values.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Set implements \IteratorAggregate
 {
     /**
      * The dictionary containing the unique values as keys
-     * 
+     *
      * @var Dictionary<mixed, true>
      */
-    private $Dictionary;
-    
-    public function __construct($Values = null)
+    private $dictionary;
+
+    public function __construct($values = null)
     {
-        $this->Dictionary = new Dictionary();
-        if($Values !== null) {
-            $this->AddRange($Values);
+        $this->dictionary = new Dictionary();
+
+        if ($values !== null) {
+            $this->addRange($values);
         }
     }
-    
+
     /**
      * Returns whether the values in contained in the set
-     * 
-     * @param mixed $Value
-     * @return boolean 
+     *
+     * @param mixed $value
+     * @return boolean
      */
-    public function Contains($Value) 
+    public function contains($value)
     {
-        return $this->Dictionary->Contains($Value);
+        return $this->dictionary->contains($value);
     }
 
     /**
      * Attempts to add the value to the set, will fail if the value
      * is already contained in the set
-     * 
-     * @param mixed $Value
+     *
+     * @param mixed $value
      * @return boolean Whether the value was successfully added
      */
-    public function Add($Value) 
+    public function add($value)
     {
-        if($this->Dictionary->Contains($Value)) {
+        if ($this->dictionary->contains($value)) {
             return false;
         }
-        $this->Dictionary->Set($Value, true);
-        
+
+        $this->dictionary->set($value, true);
+
         return true;
     }
-    
+
     /**
      * Attempts to add a range of the value to the set
-     * 
-     * @param array|\Traversable $Values
+     *
+     * @param array|\Traversable $values
      * @return void
      */
-    public function AddRange($Values) 
+    public function addRange($values)
     {
-        foreach ($Values as $Value) {
-            $this->Dictionary->Set($Value, true);
+        foreach ($values as $value) {
+            $this->dictionary->set($value, true);
         }
     }
-    
 
     /**
      * Attempts to remove the value from the set, will fail if the value
      * is not contained in the set
-     * 
-     * @param mixed $Value
+     *
+     * @param mixed $value
      * @return boolean Whether the value was successfully removed
      */
-    public function Remove($Value) 
+    public function remove($value)
     {
-        if(!$this->Dictionary->Contains($Value)) {
+        if (!$this->dictionary->contains($value)) {
             return false;
         }
-        $this->Dictionary->Remove($Value);
-        
+
+        $this->dictionary->remove($value);
+
         return true;
     }
-    
+
     /**
      * Attempts to remove a range of the value to the set
-     * 
-     * @param array|\Traversable $Values
+     *
+     * @param array|\Traversable $values
      * @return void
      */
-    public function RemoveRange($Values) 
+    public function removeRange($values)
     {
-        foreach ($Values as $Value) {
-            $this->Dictionary->Remove($Value);
+        foreach ($values as $value) {
+            $this->dictionary->remove($value);
         }
     }
-    
+
     public function getIterator()
     {
-        return $this->Dictionary->getIterator();
+        return $this->dictionary->getIterator();
     }
 }

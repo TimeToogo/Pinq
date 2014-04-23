@@ -1,25 +1,24 @@
 <?php
 
-namespace Pinq\Queries\Operations; 
+namespace Pinq\Queries\Operations;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Operation query for applying the supplied function
  * to the source
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Apply extends ExpressionOperation
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Apply;
+        return self::APPLY;
     }
 
-    public function Traverse(OperationVisitor $Visitor)
+    public function traverse(OperationVisitor $visitor)
     {
-        return $Visitor->VisitApply($this);
+        return $visitor->visitApply($this);
     }
-
 }

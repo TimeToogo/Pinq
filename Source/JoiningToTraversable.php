@@ -12,17 +12,17 @@ class JoiningToTraversable implements IJoiningToTraversable
     /**
      * @var callable
      */
-    protected $ConstructJoinIteratorCallback;
-    
-    public function __construct(callable $ConstructJoinIteratorCallback)
+    protected $constructJoinIteratorCallback;
+
+    public function __construct(callable $constructJoinIteratorCallback)
     {
-        $this->ConstructJoinIteratorCallback = $ConstructJoinIteratorCallback;
+        $this->constructJoinIteratorCallback = $constructJoinIteratorCallback;
     }
 
-    public function To(callable $JoinFunction)
+    public function to(callable $joinFunction)
     {
-        $ConstructJoinIteratorCallback = $this->ConstructJoinIteratorCallback;
-        return new Traversable($ConstructJoinIteratorCallback($JoinFunction));
-    }
+        $constructJoinIteratorCallback = $this->constructJoinIteratorCallback;
 
+        return new Traversable($constructJoinIteratorCallback($joinFunction));
+    }
 }

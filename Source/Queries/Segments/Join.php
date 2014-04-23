@@ -1,12 +1,12 @@
 <?php
 
-namespace Pinq\Queries\Segments; 
+namespace Pinq\Queries\Segments;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Query segment for a join filtered by the supplied function
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Join extends JoinBase
@@ -14,43 +14,40 @@ class Join extends JoinBase
     /**
      * The join filter expression tree
      *
-     * @var FunctionExpressionTree 
+     * @var FunctionExpressionTree
      */
-    private $OnFunction;
+    private $onFunction;
 
-    public function __construct($Values, $IsGroupJoin, FunctionExpressionTree $OnFunction, FunctionExpressionTree $JoiningFunction)
+    public function __construct($values, $isGroupJoin, FunctionExpressionTree $onFunction, FunctionExpressionTree $joiningFunction)
     {
-        parent::__construct($Values, $IsGroupJoin, $JoiningFunction);
-        $this->OnFunction = $OnFunction;
+        parent::__construct($values, $isGroupJoin, $joiningFunction);
+        $this->onFunction = $onFunction;
     }
 
-    public function GetType()
+    public function getType()
     {
-        return self::Join;
+        return self::JOIN;
     }
 
-    public function Traverse(SegmentWalker $Walker)
+    public function traverse(SegmentWalker $walker)
     {
-        return $Walker->WalkJoin($this);
+        return $walker->walkJoin($this);
     }
 
     /**
      * @return FunctionExpressionTree
      */
-    public function GetOnFunctionExpressionTree()
+    public function getOnFunctionExpressionTree()
     {
-        return $this->OnFunction;
+        return $this->onFunction;
     }
-    
-    public function Update($Values, $IsGroupJoin, FunctionExpressionTree $OnFunction, FunctionExpressionTree $JoiningFunction)
+
+    public function update($values, $isGroupJoin, FunctionExpressionTree $onFunction, FunctionExpressionTree $joiningFunction)
     {
-        if($this->Values === $Values
-                && $this->IsGroupJoin === $IsGroupJoin
-                && $this->OnFunction === $OnFunction
-                && $this->JoiningFunction = $JoiningFunction) {
+        if ($this->values === $values && $this->isGroupJoin === $isGroupJoin && $this->onFunction === $onFunction && ($this->joiningFunction = $joiningFunction)) {
             return $this;
         }
-        
-        return new self($Values, $IsGroupJoin, $OnFunction, $JoiningFunction);
+
+        return new self($values, $isGroupJoin, $onFunction, $joiningFunction);
     }
 }

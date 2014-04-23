@@ -7,8 +7,8 @@ class ExistsTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatCountReturnsWhetherItHasAnyElements(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatCountReturnsWhetherItHasAnyElements(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals($Traversable->Exists(), !empty($Data));
+        $this->assertEquals($traversable->exists(), !empty($data));
     }
 }

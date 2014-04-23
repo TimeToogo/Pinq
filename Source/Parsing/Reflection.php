@@ -5,33 +5,33 @@ namespace Pinq\Parsing;
 /**
  * Utility class for getting the reflection from any
  * type of callable.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 final class Reflection
 {
-    private function __construct() {}
-    
+    private function __construct()
+    {
+
+    }
+
     /**
-     * @param callable $Function
+     * @param callable $function
      * @return \ReflectionFunctionAbstract
      */
-    final public static function FromCallable(callable $Function)
+    final public static function fromCallable(callable $function)
     {
-        if (is_array($Function)) {
-            return new \ReflectionMethod($Function[0], $Function[1]);
-        } 
-        else if ($Function instanceof \Closure) {
-            return new \ReflectionFunction($Function);
-        } 
-        else if (is_object($Function)) {
-            return new \ReflectionMethod($Function, '__invoke');
-        } 
-        else {
-            $Name = null;
-            is_callable($Function, false, $Name);
+        if (is_array($function)) {
+            return new \ReflectionMethod($function[0], $function[1]);
+        } elseif ($function instanceof \Closure) {
+            return new \ReflectionFunction($function);
+        } elseif (is_object($function)) {
+            return new \ReflectionMethod($function, '__invoke');
+        } else {
+            $name = null;
+            is_callable($function, false, $name);
 
-            return new \ReflectionFunction($Name);
+            return new \ReflectionFunction($name);
         }
     }
 }

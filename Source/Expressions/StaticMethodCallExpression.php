@@ -6,7 +6,7 @@ namespace Pinq\Expressions;
  * <code>
  * Class::Method('foo')
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class StaticMethodCallExpression extends Expression
@@ -14,113 +14,109 @@ class StaticMethodCallExpression extends Expression
     /**
      * @var Expression
      */
-    private $ClassExpression;
-    
+    private $classExpression;
+
     /**
      * @var Expression
      */
-    private $NameExpression;
-    
+    private $nameExpression;
+
     /**
      * @var Expression[]
      */
-    private $ArgumentExpressions;
-    
-    public function __construct(Expression $ClassExpression, Expression $NameExpression, array $ArgumentExpressions = [])
+    private $argumentExpressions;
+
+    public function __construct(Expression $classExpression, Expression $nameExpression, array $argumentExpressions = [])
     {
-        $this->ClassExpression = $ClassExpression;
-        $this->NameExpression = $NameExpression;
-        $this->ArgumentExpressions = $ArgumentExpressions;
+        $this->classExpression = $classExpression;
+        $this->nameExpression = $nameExpression;
+        $this->argumentExpressions = $argumentExpressions;
     }
 
     /**
      * @return Expression
      */
-    public function GetClassExpression()
+    public function getClassExpression()
     {
-        return $this->ClassExpression;
+        return $this->classExpression;
     }
 
     /**
      * @return Expression
      */
-    public function GetNameExpression()
+    public function getNameExpression()
     {
-        return $this->NameExpression;
+        return $this->nameExpression;
     }
 
     /**
      * @return Expression[]
      */
-    public function GetArgumentExpressions()
+    public function getArgumentExpressions()
     {
-        return $this->ArgumentExpressions;
+        return $this->argumentExpressions;
     }
 
-    public function Traverse(ExpressionWalker $Walker)
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkStaticMethodCall($this);
+        return $walker->walkStaticMethodCall($this);
     }
 
-    public function Simplify()
+    public function simplify()
     {
-        return $this->Update(
-                $this->ClassExpression->Simplify(),
-                $this->NameExpression->Simplify(),
-                self::SimplifyAll($this->ArgumentExpressions));
+        return $this->update(
+                $this->classExpression->simplify(),
+                $this->nameExpression->simplify(),
+                self::simplifyAll($this->argumentExpressions));
     }
 
     /**
      * @return self
      */
-    public function Update(Expression $ClassExpression, Expression $NameExpression, array $ArgumentExpressions = [])
+    public function update(Expression $classExpression, Expression $nameExpression, array $argumentExpressions = [])
     {
-        if ($this->ClassExpression === $ClassExpression
-                && $this->NameExpression === $NameExpression
-                && $this->ArgumentExpressions === $ArgumentExpressions) {
+        if ($this->classExpression === $classExpression && $this->nameExpression === $nameExpression && $this->argumentExpressions === $argumentExpressions) {
             return $this;
         }
 
-        return new self($ClassExpression, $NameExpression, $ArgumentExpressions);
+        return new self($classExpression, $nameExpression, $argumentExpressions);
     }
 
-    protected function CompileCode(&$Code)
+    protected function compileCode(&$code)
     {
-        if ($this->ClassExpression instanceof ValueExpression) {
-            $Code .= $this->ClassExpression->GetValue();
-        } 
-        else {
-            $this->ClassExpression->CompileCode($Code);
+        if ($this->classExpression instanceof ValueExpression) {
+            $code .= $this->classExpression->getValue();
+        } else {
+            $this->classExpression->compileCode($code);
         }
 
-        $Code .= '::';
+        $code .= '::';
 
-        if ($this->NameExpression instanceof ValueExpression) {
-            $Code .= $this->NameExpression->GetValue();
-        } 
-        else {
-            $this->NameExpression->CompileCode($Code);
+        if ($this->nameExpression instanceof ValueExpression) {
+            $code .= $this->nameExpression->getValue();
+        } else {
+            $this->nameExpression->compileCode($code);
         }
 
-        $Code .= '(';
-        $Code .= implode(',', self::CompileAll($this->ArgumentExpressions));
-        $Code .= ')';
+        $code .= '(';
+        $code .= implode(',', self::compileAll($this->argumentExpressions));
+        $code .= ')';
     }
-    
+
     public function serialize()
     {
-        return serialize([$this->ClassExpression, $this->NameExpression, $this->ArgumentExpressions]);
+        return serialize([$this->classExpression, $this->nameExpression, $this->argumentExpressions]);
     }
-    
-    public function unserialize($Serialized)
+
+    public function unserialize($serialized)
     {
-        list($this->ClassExpression, $this->NameExpression, $this->ArgumentExpressions) = unserialize($Serialized);
+        list($this->classExpression, $this->nameExpression, $this->argumentExpressions) = unserialize($serialized);
     }
-    
+
     public function __clone()
     {
-        $this->ClassExpression = clone $this->ClassExpression;
-        $this->NameExpression = clone $this->NameExpression;
-        $this->ArgumentExpressions = self::CloneAll($this->ArgumentExpressions);
+        $this->classExpression = clone $this->classExpression;
+        $this->nameExpression = clone $this->nameExpression;
+        $this->argumentExpressions = self::cloneAll($this->argumentExpressions);
     }
 }

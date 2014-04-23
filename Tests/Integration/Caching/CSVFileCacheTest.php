@@ -2,28 +2,27 @@
 
 namespace Pinq\Tests\Integration\Caching;
 
-use \Pinq\Caching\CSVFileFunctionCache;
+use Pinq\Caching\CSVFileFunctionCache;
 
 class CSVFileCacheTest extends CacheTest
 {
-    private static $CacheFilePath;
-    
-    public function __construct($name = NULL, array $data = array(), $dataName = '')
+    private static $cacheFilePath;
+
+    public function __construct($name = NULL, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        
-        self::$CacheFilePath = self::$RootCacheDirectory . 'CSVCache.cache';
+        self::$cacheFilePath = self::$rootCacheDirectory . 'CSVCache.cache';
     }
-    
+
     protected function setUp()
     {
-        $this->Cache = new CSVFileFunctionCache(self::$CacheFilePath);
+        $this->cache = new CSVFileFunctionCache(self::$cacheFilePath);
     }
-    
+
     protected function tearDown()
     {
-        $this->Cache = null;
+        $this->cache = null;
         usleep(1000);
-        unlink(self::$CacheFilePath);
+        unlink(self::$cacheFilePath);
     }
 }

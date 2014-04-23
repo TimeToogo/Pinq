@@ -5,7 +5,7 @@ namespace Pinq\Iterators;
 /**
  * Base class for a set operation iterator, the other values
  * are stored in a set which can be used to filter the resulting values
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 abstract class OperationIterator extends IteratorIterator
@@ -13,37 +13,37 @@ abstract class OperationIterator extends IteratorIterator
     /**
      * @var \Traversable
      */
-    private $OtherIterator;
-    
+    private $otherIterator;
+
     /**
      * @var Utilities\Set
      */
-    private $OtherValues;
-    
-    public function __construct(\Traversable $Iterator, \Traversable $OtherIterator)
+    private $otherValues;
+
+    public function __construct(\Traversable $iterator, \Traversable $otherIterator)
     {
-        parent::__construct($Iterator);
-        $this->OtherIterator = $OtherIterator;
+        parent::__construct($iterator);
+        $this->otherIterator = $otherIterator;
     }
-    
+
     final public function valid()
     {
-        while(parent::valid()) {
-            if($this->SetFilter(parent::current(), $this->OtherValues)) {
+        while (parent::valid()) {
+            if ($this->setFilter(parent::current(), $this->otherValues)) {
                 return true;
             }
-            
+
             parent::next();
         }
+
         return false;
     }
-    
-    protected abstract function SetFilter($Value, Utilities\Set $OtherValues);
-    
+
+    abstract protected function setFilter($value, Utilities\Set $otherValues);
+
     final public function rewind()
     {
-        $this->OtherValues = new Utilities\Set($this->OtherIterator);
+        $this->otherValues = new Utilities\Set($this->otherIterator);
         parent::rewind();
     }
-    
 }

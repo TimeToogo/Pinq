@@ -1,22 +1,21 @@
 <?php
 
-namespace Pinq\Queries\Operations; 
+namespace Pinq\Queries\Operations;
 
 /**
  * Operation query for unsetting a value at the specified index
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class UnsetIndex extends IndexOperation
 {
-    public function GetType()
+    public function getType()
     {
-        return self::UnsetIndex;
+        return self::UNSET_INDEX;
     }
 
-    public function Traverse(OperationVisitor $Visitor)
+    public function traverse(OperationVisitor $visitor)
     {
-        return $Visitor->VisitUnsetIndex($this);
+        return $visitor->visitUnsetIndex($this);
     }
-
 }

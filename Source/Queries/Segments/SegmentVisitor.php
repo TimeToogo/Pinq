@@ -5,88 +5,143 @@ namespace Pinq\Queries\Segments;
 /**
  * The segment visitor is a utility class that will visit any
  * segment in a respective method.
- * 
+ *
  * This is used by the query providers to as to evaluate the
  * scope of the query with the specified query segments
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class SegmentVisitor extends SegmentWalker
 {
-    final public function WalkOperation(Operation $Query)
+    final public function walkOperation(Operation $query)
     {
-        $this->VisitOperation($Query);
-        return $Query;
-    }
-    public function VisitOperation(Operation $Query) {}
+        $this->visitOperation($query);
 
-    final public function WalkRange(Range $Query)
-    {
-        $this->VisitRange($Query);
-        return $Query;
+        return $query;
     }
-    public function VisitRange(Range $Query) {}
 
-    final public function WalkUnique(Unique $Query)
+    public function visitOperation(Operation $query)
     {
-        $this->VisitUnique($Query);
-        return $Query;
-    }
-    public function VisitUnique(Unique $Query) {}
-    
-    final public function WalkFilter(Filter $Query)
-    {
-        $this->VisitFilter($Query);
-        return $Query;
-    }
-    public function VisitFilter(Filter $Query) {}
 
-    final public function WalkGroupBy(GroupBy $Query)
-    {
-        $this->VisitGroupBy($Query);
-        return $Query;
     }
-    public function VisitGroupBy(GroupBy $Query) {}
 
-    final public function WalkJoin(Join $Query)
+    final public function walkRange(Range $query)
     {
-        $this->VisitJoin($Query);
-        return $Query;
-    }
-    public function VisitJoin(Join $Query) {}
-    
-    final public function WalkEqualityJoin(EqualityJoin $Query)
-    {
-        $this->VisitEqualityJoin($Query);
-        return $Query;
-    }
-    public function VisitEqualityJoin(EqualityJoin $Query) {}
+        $this->visitRange($query);
 
-    final public function WalkOrderBy(OrderBy $Query)
-    {
-        $this->VisitOrderBy($Query);
-        return $Query;
+        return $query;
     }
-    public function VisitOrderBy(OrderBy $Query) {}
 
-    final public function WalkSelect(Select $Query)
+    public function visitRange(Range $query)
     {
-        $this->VisitSelect($Query);
-        return $Query;
-    }
-    public function VisitSelect(Select $Query) {}
 
-    final public function WalkSelectMany(SelectMany $Query)
-    {
-        $this->VisitSelectMany($Query);
-        return $Query;
     }
-    public function VisitSelectMany(SelectMany $Query) {}
 
-    final public function WalkIndexBy(IndexBy $Query)
+    final public function walkUnique(Unique $query)
     {
-        $this->VisitIndexBy($Query);
-        return $Query;
+        $this->visitUnique($query);
+
+        return $query;
     }
-    protected function VisitIndexBy(IndexBy $Query) {}
+
+    public function visitUnique(Unique $query)
+    {
+
+    }
+
+    final public function walkFilter(Filter $query)
+    {
+        $this->visitFilter($query);
+
+        return $query;
+    }
+
+    public function visitFilter(Filter $query)
+    {
+
+    }
+
+    final public function walkGroupBy(GroupBy $query)
+    {
+        $this->visitGroupBy($query);
+
+        return $query;
+    }
+
+    public function visitGroupBy(GroupBy $query)
+    {
+
+    }
+
+    final public function walkJoin(Join $query)
+    {
+        $this->visitJoin($query);
+
+        return $query;
+    }
+
+    public function visitJoin(Join $query)
+    {
+
+    }
+
+    final public function walkEqualityJoin(EqualityJoin $query)
+    {
+        $this->visitEqualityJoin($query);
+
+        return $query;
+    }
+
+    public function visitEqualityJoin(EqualityJoin $query)
+    {
+
+    }
+
+    final public function walkOrderBy(OrderBy $query)
+    {
+        $this->visitOrderBy($query);
+
+        return $query;
+    }
+
+    public function visitOrderBy(OrderBy $query)
+    {
+
+    }
+
+    final public function walkSelect(Select $query)
+    {
+        $this->visitSelect($query);
+
+        return $query;
+    }
+
+    public function visitSelect(Select $query)
+    {
+
+    }
+
+    final public function walkSelectMany(SelectMany $query)
+    {
+        $this->visitSelectMany($query);
+
+        return $query;
+    }
+
+    public function visitSelectMany(SelectMany $query)
+    {
+
+    }
+
+    final public function walkIndexBy(IndexBy $query)
+    {
+        $this->visitIndexBy($query);
+
+        return $query;
+    }
+
+    protected function visitIndexBy(IndexBy $query)
+    {
+
+    }
 }

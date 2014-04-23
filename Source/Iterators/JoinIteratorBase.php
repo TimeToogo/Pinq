@@ -4,7 +4,7 @@ namespace Pinq\Iterators;
 
 /**
  * Base class for a join iterator
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 abstract class JoinIteratorBase implements \Iterator
@@ -12,96 +12,94 @@ abstract class JoinIteratorBase implements \Iterator
     /**
      * @var int
      */
-    private $Count = 0;
-    
+    private $count = 0;
+
     /**
      * @var boolean
      */
-    protected $IsInitialized = false;
-    
+    protected $isInitialized = false;
+
     /**
      * @var \Iterator
      */
-    protected $OuterIterator;
-    
+    protected $outerIterator;
+
     /**
      * @var \Iterator
      */
-    protected $InnerIterator;
+    protected $innerIterator;
+
     /**
      * @var mixed
      */
-    private $CurrentOuterValue = null;
-    
+    private $currentOuterValue = null;
+
     /**
      * @var \Iterator
      */
-    private $CurrentInnerGroupIterator;
-    
+    private $currentInnerGroupIterator;
+
     /**
      * @var callable
      */
-    protected $JoiningFunction;    
-    
-    public function __construct(
-            \Traversable $OuterIterator,
-            \Traversable $InnerIterator,
-            callable $JoiningFunction)
+    protected $joiningFunction;
+
+    public function __construct(\Traversable $outerIterator, \Traversable $innerIterator, callable $joiningFunction)
     {
-        $this->OuterIterator = \Pinq\Utilities::ToIterator($OuterIterator);
-        $this->InnerIterator = \Pinq\Utilities::ToIterator($InnerIterator);
-        $this->JoiningFunction = $JoiningFunction;
+        $this->outerIterator = \Pinq\Utilities::toIterator($outerIterator);
+        $this->innerIterator = \Pinq\Utilities::toIterator($innerIterator);
+        $this->joiningFunction = $joiningFunction;
     }
-    
+
     final public function key()
     {
-        return $this->Count;
+        return $this->count;
     }
-    
+
     final public function current()
     {
-        $JoiningFunction = $this->JoiningFunction;
-        
-        return $JoiningFunction($this->CurrentOuterValue, $this->CurrentInnerGroupIterator->current());
+        $joiningFunction = $this->joiningFunction;
+
+        return $joiningFunction($this->currentOuterValue, $this->currentInnerGroupIterator->current());
     }
 
     final public function next()
     {
-        $this->CurrentInnerGroupIterator->next();
-        $this->Count++;
+        $this->currentInnerGroupIterator->next();
+        $this->count++;
     }
-    
+
     final public function valid()
     {
-        while(!$this->CurrentInnerGroupIterator->valid()) {
-            if(!$this->OuterIterator->valid()) {
+        while (!$this->currentInnerGroupIterator->valid()) {
+            if (!$this->outerIterator->valid()) {
                 return false;
             }
-            
-            $this->CurrentOuterValue = $this->OuterIterator->current();
-            $this->CurrentInnerGroupIterator = $this->GetInnerGroupIterator($this->CurrentOuterValue);
-            $this->OuterIterator->next();
+
+            $this->currentOuterValue = $this->outerIterator->current();
+            $this->currentInnerGroupIterator = $this->getInnerGroupIterator($this->currentOuterValue);
+            $this->outerIterator->next();
         }
-        
+
         return true;
     }
-    
+
     /**
      * @return \Iterator
      */
-    protected abstract function GetInnerGroupIterator($OuterValue);
-    
-    
+    abstract protected function getInnerGroupIterator($outerValue);
+
     public function rewind()
     {
-        if(!$this->IsInitialized) {
-            $this->Initialize();
-            $this->IsInitialized = true;
+        if (!$this->isInitialized) {
+            $this->initialize();
+            $this->isInitialized = true;
         }
-        $this->CurrentOuterValue = null;
-        $this->CurrentInnerGroupIterator = new \ArrayIterator();
-        $this->Count = 0;
+
+        $this->currentOuterValue = null;
+        $this->currentInnerGroupIterator = new \ArrayIterator();
+        $this->count = 0;
     }
-    
-    protected abstract function Initialize();
+
+    abstract protected function initialize();
 }

@@ -2,13 +2,13 @@
 
 namespace Pinq\Parsing\PHPParser;
 
-use \Pinq\Parsing\ParserBase;
+use Pinq\Parsing\ParserBase;
 
 /**
  * Function parser implementation utilising nikic\PHP-Parser to
  * accuratly locate and convert functions into the equivalent
  * expression tree
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Parser extends ParserBase
@@ -16,80 +16,75 @@ class Parser extends ParserBase
     /**
      * The PHP-Parser parser instanse, static because it is expensive
      * to instantiate.
-     * 
-     * @var \PHPParser_Parser 
+     *
+     * @var \PHPParser_Parser
      */
-    private static $PHPParser;
-        
+    private static $phpParser;
+
     /**
-     * The array containing the parsed files, indexed by the file name, 
+     * The array containing the parsed files, indexed by the file name,
      * each value contains an array of arrays of function nodes, they are grouped
      * by there location/signature hash
-     * 
-     * @var \PHPParser_Node[][][] 
+     *
+     * @var \PHPParser_Node[][][]
      */
-    private static $ParsedFileFunctionNodesMap;
+    private static $parsedFileFunctionNodesMap;
 
     public function __construct()
     {
-    }
-    
-    public function GetSignatureHash(\ReflectionFunctionAbstract $Reflection)
-    {
-        return Visitors\FunctionFinderVisitor::FunctionSignatureHash($Reflection);
+
     }
 
-    protected function ParseFunction(\ReflectionFunctionAbstract $Reflection, $FileName)
+    public function getSignatureHash(\ReflectionFunctionAbstract $reflection)
     {
-        if (self::$PHPParser === null) {
-            self::$PHPParser = new \PHPParser_Parser(new \PHPParser_Lexer());
+        return Visitors\FunctionFinderVisitor::functionSignatureHash($reflection);
+    }
+
+    protected function parseFunction(\ReflectionFunctionAbstract $reflection, $fileName)
+    {
+        if (self::$phpParser === null) {
+            self::$phpParser = new \PHPParser_Parser(new \PHPParser_Lexer());
         }
 
-        $FunctionNodesMap = $this->GetFileFunctionNodesMap($FileName);
-        $FunctionBodyNodes = $this->GetFunctionBodyNodes($FunctionNodesMap, $Reflection);
+        $functionNodesMap = $this->getFileFunctionNodesMap($fileName);
+        $functionBodyNodes = $this->getFunctionBodyNodes($functionNodesMap, $reflection);
 
-        return (new AST($FunctionBodyNodes))->GetExpressions();
+        return (new AST($functionBodyNodes))->getExpressions();
     }
 
-    private function GetFileFunctionNodesMap($FileName)
+    private function getFileFunctionNodesMap($fileName)
     {
-        if (!isset(self::$ParsedFileFunctionNodesMap[$FileName])) {
-            $ParsedNodes =  self::$PHPParser->parse(file_get_contents($FileName));
-            
-            $FunctionLocatorTraverser = new \PHPParser_NodeTraverser();
-
-            $NamespaceResolver = new \PHPParser_NodeVisitor_NameResolver();
-            $FunctionFinder = new Visitors\FunctionFinderVisitor();
-            $FunctionLocatorTraverser->addVisitor($NamespaceResolver);
-            $FunctionLocatorTraverser->addVisitor($FunctionFinder);
-            
-            $FunctionLocatorTraverser->traverse($ParsedNodes);
-            
-            
-            self::$ParsedFileFunctionNodesMap[$FileName] = $FunctionFinder->GetLocatedFunctionNodesMap();
+        if (!isset(self::$parsedFileFunctionNodesMap[$fileName])) {
+            $parsedNodes = self::$phpParser->parse(file_get_contents($fileName));
+            $functionLocatorTraverser = new \PHPParser_NodeTraverser();
+            $namespaceResolver = new \PHPParser_NodeVisitor_NameResolver();
+            $functionFinder = new Visitors\FunctionFinderVisitor();
+            $functionLocatorTraverser->addVisitor($namespaceResolver);
+            $functionLocatorTraverser->addVisitor($functionFinder);
+            $functionLocatorTraverser->traverse($parsedNodes);
+            self::$parsedFileFunctionNodesMap[$fileName] = $functionFinder->getLocatedFunctionNodesMap();
         }
 
-        return self::$ParsedFileFunctionNodesMap[$FileName];
+        return self::$parsedFileFunctionNodesMap[$fileName];
     }
 
-    private function GetFunctionBodyNodes(array $FunctionNodesMap, \ReflectionFunctionAbstract $Reflection)
+    private function getFunctionBodyNodes(array $functionNodesMap, \ReflectionFunctionAbstract $reflection)
     {
-        $FunctionHash = Visitors\FunctionFinderVisitor::FunctionSignatureHash($Reflection);
-        
-        if (!isset($FunctionNodesMap[$FunctionHash])) {
-            throw \Pinq\Parsing\InvalidFunctionException::InvalidFunctionMessage(
+        $functionHash = Visitors\FunctionFinderVisitor::functionSignatureHash($reflection);
+
+        if (!isset($functionNodesMap[$functionHash])) {
+            throw \Pinq\Parsing\InvalidFunctionException::invalidFunctionMessage(
                     'Cannot parse function, the function could not be located',
-                    $Reflection);
-        }
-        else if (count($FunctionNodesMap[$FunctionHash]) > 1) {
-            throw \Pinq\Parsing\InvalidFunctionException::InvalidFunctionMessage(
+                    $reflection);
+        } elseif (count($functionNodesMap[$functionHash]) > 1) {
+            throw \Pinq\Parsing\InvalidFunctionException::invalidFunctionMessage(
                     'Cannot parse function, two ambiguous functions are defined on the same line',
-                    $Reflection);
+                    $reflection);
         }
 
         /* @var $FunctionNode PHPParser_Node_Stmt_Function|PHPParser_Node_Stmt_ClassMethod|PHPParser_Node_Expr_Closure */
-        $FunctionNode = $FunctionNodesMap[$FunctionHash][0];
-        
-        return $FunctionNode->stmts;
+        $functionNode = $functionNodesMap[$functionHash][0];
+
+        return $functionNode->stmts;
     }
 }

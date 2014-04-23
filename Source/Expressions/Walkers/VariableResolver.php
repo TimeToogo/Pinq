@@ -2,7 +2,7 @@
 
 namespace Pinq\Expressions\Walkers;
 
-use \Pinq\Expressions as O;
+use Pinq\Expressions as O;
 
 /**
  * Resolves variables within the expression tree to the supplied expressions/values.
@@ -18,65 +18,62 @@ class VariableResolver extends O\ExpressionWalker
     /**
      * The array containing the variable name and the value to expression
      * to replace it with
-     * 
+     *
      * @var array<string, O\Expression>
      */
-    private $VariableExpressionMap = [];
+    private $variableExpressionMap = [];
 
-    public function __construct(array $VariableExpressionMap = [])
+    public function __construct(array $variableExpressionMap = [])
     {
-        $this->VariableExpressionMap = $VariableExpressionMap;
+        $this->variableExpressionMap = $variableExpressionMap;
     }
-    
+
     /**
      * Sets which variables to replace with what
-     * 
-     * @param array<string, O\Expression> $VariableExpressionMap
+     *
+     * @param array<string, O\Expression> $variableExpressionMap
      */
-    public function SetVariableExpressionMap(array $VariableExpressionMap)
+    public function setVariableExpressionMap(array $variableExpressionMap)
     {
-        $this->VariableExpressionMap = $VariableExpressionMap;
+        $this->variableExpressionMap = $variableExpressionMap;
     }
 
     /*
      * Resolves scoped the variables in closures
      */
-    public function WalkClosure(O\ClosureExpression $Expression)
+    public function walkClosure(O\ClosureExpression $expression)
     {
-        $OriginalVariableExpressionMap = $this->VariableExpressionMap;
-        
-        $UsedVariableNames = $Expression->GetUsedVariableNames();
-        
+        $originalVariableExpressionMap = $this->variableExpressionMap;
+        $usedVariableNames = $expression->getUsedVariableNames();
         //Filter to only used values
-        $this->VariableExpressionMap = array_intersect_key(
-                $this->VariableExpressionMap,
-                array_flip(array_values($UsedVariableNames)) + ['this' => null]);//Include $this variable scope
-        
-        $Expression = $Expression->Update(
-                $Expression->GetParameterExpressions(),
-                array_diff($UsedVariableNames, array_keys($this->VariableExpressionMap)),//Remove resolved used variables
-                $this->WalkAll($Expression->GetBodyExpressions()));
-
+        $this->variableExpressionMap = array_intersect_key($this->variableExpressionMap, array_flip(array_values($usedVariableNames)) + ['this' => null]);
+        //Include $this variable scope
+        $expression =
+                $expression->update(
+                        $expression->getParameterExpressions(),
+                        array_diff($usedVariableNames, array_keys($this->variableExpressionMap)),
+                        $this->walkAll($expression->getBodyExpressions()));
         //Restore parent scope with all variables values
-        $this->VariableExpressionMap = $OriginalVariableExpressionMap;
-        
-        return $Expression;
+        $this->variableExpressionMap = $originalVariableExpressionMap;
+
+        return $expression;
     }
 
     /*
      * Replace the variable with the value expression of the current scope
      */
-    public function WalkVariable(O\VariableExpression $Expression)
+    public function walkVariable(O\VariableExpression $expression)
     {
-        $NameExpression = $this->Walk($Expression->GetNameExpression())->Simplify();
-        if ($NameExpression instanceof O\ValueExpression) {
-            $Name = $NameExpression->GetValue();
-            
-            if (isset($this->VariableExpressionMap[$Name])) {
-                return $this->VariableExpressionMap[$Name];
+        $nameExpression = $this->walk($expression->getNameExpression())->simplify();
+
+        if ($nameExpression instanceof O\ValueExpression) {
+            $name = $nameExpression->getValue();
+
+            if (isset($this->variableExpressionMap[$name])) {
+                return $this->variableExpressionMap[$name];
             }
         }
 
-        return $Expression;
+        return $expression;
     }
 }

@@ -1,21 +1,21 @@
 <?php
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Request query for the minimum projected value in the scope
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Minimum extends ProjectionRequest
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Minimum;
+        return self::MINIMUM;
     }
 
-    public function Traverse(RequestVisitor $Visitor)
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitMinimum($this);
+        return $visitor->visitMinimum($this);
     }
 }

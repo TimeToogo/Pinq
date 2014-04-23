@@ -6,7 +6,7 @@ namespace Pinq\Expressions;
  * <code>
  * 1, 'foo', [], null etc
  * </code>
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ValueExpression extends Expression
@@ -14,27 +14,27 @@ class ValueExpression extends Expression
     /**
      * @var mixed
      */
-    private $Value;
-    
-    public function __construct($Value)
+    private $value;
+
+    public function __construct($value)
     {
-        $this->Value = $Value;
+        $this->value = $value;
     }
 
     /**
      * @return mixed The resolved value
      */
-    public function GetValue()
+    public function getValue()
     {
-        return $this->Value;
+        return $this->value;
     }
 
-    public function Traverse(ExpressionWalker $Walker)
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkValue($this);
+        return $walker->walkValue($this);
     }
 
-    public function Simplify()
+    public function simplify()
     {
         return $this;
     }
@@ -42,42 +42,38 @@ class ValueExpression extends Expression
     /**
      * @return self
      */
-    public function Update($Value)
+    public function update($value)
     {
-        if ($this->Value === $Value) {
+        if ($this->value === $value) {
             return $this;
         }
 
-        return new self($Value);
+        return new self($value);
     }
 
-    protected function CompileCode(&$Code)
+    protected function compileCode(&$code)
     {
-        if(is_scalar($this->Value)
-                || is_array($this->Value)
-                || (is_object($this->Value) && method_exists($this->Value, '__set_state'))) {
-            $Code .= var_export($this->Value, true);
-        } 
-        else if ($this->Value instanceof \Closure) {
-            throw new \Pinq\PinqException('Cannot compile value expression: value of type \Closure cannot be serialzed');
-        } 
-        else {
-            $Code .= 'unserialize(\'' . serialize($this->Value) . '\')';
+        if (is_scalar($this->value) || is_array($this->value) || is_object($this->value) && method_exists($this->value, '__set_state')) {
+            $code .= var_export($this->value, true);
+        } elseif ($this->value instanceof \Closure) {
+            throw new \Pinq\PinqException('Cannot compile value expression: value of type \\Closure cannot be serialzed');
+        } else {
+            $code .= 'unserialize(\'' . serialize($this->value) . '\')';
         }
     }
-    
+
     public function serialize()
     {
-        return serialize($this->Value);
+        return serialize($this->value);
     }
-    
-    public function unserialize($Serialized)
+
+    public function unserialize($serialized)
     {
-        $this->Value = unserialize($Serialized);
+        $this->value = unserialize($serialized);
     }
-    
+
     public function __clone()
     {
-        $this->Value = is_object($this->Value) ? clone $this->Value : $this->Value;
+        $this->value = is_object($this->value) ? clone $this->value : $this->value;
     }
 }

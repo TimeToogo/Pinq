@@ -7,24 +7,30 @@ class SerializableTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatCollectionIsSerializable(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatCollectionIsSerializable(\Pinq\ITraversable $traversable, array $data)
     {
-        $SerializedTraversable = serialize($Traversable);
-        $UnserializedTraversable = unserialize($SerializedTraversable);
-        
-        $this->assertEquals($Traversable->AsArray(), $UnserializedTraversable->AsArray());
+        $serializedTraversable = serialize($traversable);
+        $unserializedTraversable = unserialize($serializedTraversable);
+
+        $this->assertEquals(
+                $traversable->asArray(),
+                $unserializedTraversable->asArray());
     }
-    
+
     /**
      * @dataProvider Everything
      */
-    public function testThatCollectionIsSerializableAfterQueries(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatCollectionIsSerializableAfterQueries(\Pinq\ITraversable $traversable, array $data)
     {
-        $Traversable = $Traversable->Where(function ($I) { return $I !== false; });
-        
-        $SerializedTraversable = serialize($Traversable);
-        $UnserializedTraversable = unserialize($SerializedTraversable);
-        
-        $this->assertEquals($Traversable->AsArray(), $UnserializedTraversable->AsArray());
+        $traversable =
+                $traversable->where(function ($i) {
+                    return $i !== false;
+                });
+        $serializedTraversable = serialize($traversable);
+        $unserializedTraversable = unserialize($serializedTraversable);
+
+        $this->assertEquals(
+                $traversable->asArray(),
+                $unserializedTraversable->asArray());
     }
 }

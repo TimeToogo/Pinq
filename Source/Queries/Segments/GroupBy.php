@@ -1,13 +1,13 @@
 <?php
 
-namespace Pinq\Queries\Segments; 
+namespace Pinq\Queries\Segments;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
- * Query segment for grouping the values base on the supplied 
+ * Query segment for grouping the values base on the supplied
  * grouping functions.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class GroupBy extends Segment
@@ -15,39 +15,39 @@ class GroupBy extends Segment
     /**
      * @var FunctionExpressionTree[]
      */
-    private $FunctionExpressionTrees;
+    private $functionExpressionTrees;
 
-    public function __construct(array $FunctionExpressionTrees)
+    public function __construct(array $functionExpressionTrees)
     {
-        $this->FunctionExpressionTrees = $FunctionExpressionTrees;
+        $this->functionExpressionTrees = $functionExpressionTrees;
     }
 
-    public function GetType()
+    public function getType()
     {
-        return self::GroupBy;
+        return self::GROUP_BY;
     }
-    
-    public function GetFunctionExpressionTrees()
+
+    public function getFunctionExpressionTrees()
     {
-        return $this->FunctionExpressionTrees;
+        return $this->functionExpressionTrees;
     }
-    
-    public function Traverse(SegmentWalker $Walker)
+
+    public function traverse(SegmentWalker $walker)
     {
-        return $Walker->WalkGroupBy($this);
+        return $walker->walkGroupBy($this);
     }
-    
-    public function AndBy(FunctionExpressionTree $FunctionExpressionTree) 
+
+    public function andBy(FunctionExpressionTree $functionExpressionTree)
     {
-        return new self(array_merge($this->FunctionExpressionTrees, [$FunctionExpressionTree]));
+        return new self(array_merge($this->functionExpressionTrees, [$functionExpressionTree]));
     }
-    
-    public function Update(array $FunctionExpressionTrees)
+
+    public function update(array $functionExpressionTrees)
     {
-        if($this->FunctionExpressionTrees === $FunctionExpressionTrees) {
+        if ($this->functionExpressionTrees === $functionExpressionTrees) {
             return $this;
         }
-        
-        return new self($FunctionExpressionTrees);
+
+        return new self($functionExpressionTrees);
     }
 }

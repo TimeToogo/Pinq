@@ -4,7 +4,7 @@ namespace Pinq\Queries;
 
 /**
  * Implementation of the IRequestQuery
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class RequestQuery extends Query implements IRequestQuery
@@ -12,16 +12,16 @@ class RequestQuery extends Query implements IRequestQuery
     /**
      * @var IRequest
      */
-    private $Request;
-    
-    public function __construct(IScope $Scope, IRequest $Request)
+    private $request;
+
+    public function __construct(IScope $scope, IRequest $request)
     {
-        parent::__construct($Scope);
-        $this->Request = $Request;
+        parent::__construct($scope);
+        $this->request = $request;
     }
 
-    public function GetRequest()
+    public function getRequest()
     {
-        return $this->Request;
+        return $this->request;
     }
 }

@@ -2,109 +2,141 @@
 
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
-use \Pinq\Parsing\IFunctionToExpressionTreeConverter;
-use \Pinq\Expressions as O;
+use Pinq\Parsing\IFunctionToExpressionTreeConverter;
+use Pinq\Expressions as O;
 
 abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
 {
-    private $Implementations;
-    
+    private $implementations;
+
     /**
      * @var IFunctionToExpressionTreeConverter
      */
-    private $CurrentImplementation;
-    
-    public function __construct($name = NULL, array $data = array(), $dataName = '')
+    private $currentImplementation;
+
+    public function __construct($name = NULL, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        $this->Implementations = $this->Implementations();
-        
-        $this->CurrentImplementation = isset($data[0]) ? $data[0] : null;
+        $this->implementations = $this->implementations();
+        $this->currentImplementation = isset($data[0]) ? $data[0] : null;
     }
 
-    protected function Implementations() 
+    protected function implementations()
     {
-        return [
-            new \Pinq\Parsing\FunctionToExpressionTreeConverter(new \Pinq\Parsing\PHPParser\Parser()),
-        ];
+        return [new \Pinq\Parsing\FunctionToExpressionTreeConverter(new \Pinq\Parsing\PHPParser\Parser())];
     }
 
-    final public function Converters() 
+    final public function converters()
     {
-        return array_map(function ($I) { return [$I]; }, $this->Implementations);
+        return array_map(function ($i) {
+            return [$i];
+        }, $this->implementations);
     }
-    
-    private function VerifyImplementation()
+
+    private function verifyImplementation()
     {
-        if($this->CurrentImplementation === null) {
+        if ($this->currentImplementation === null) {
             throw new \Exception('Please remember to use the @dataProvider annotation to test all the implementations.');
         }
     }
-    
-    final protected function AssertConvertsAndRecompilesCorrectly(callable $Function, array $ArgumentSets, O\Expression $ReturnExpression = null, $VerifySerialization = true) 
+
+    final protected function assertConvertsAndRecompilesCorrectly(callable $function, array $argumentSets, O\Expression $returnExpression = null, $verifySerialization = true)
     {
-        $this->VerifyImplementation();
-        $FunctionExpressionTree = $this->CurrentImplementation->Convert($Function);
+        $this->verifyImplementation();
+        $functionExpressionTree = $this->currentImplementation->convert($function);
         //Ensure that function is recompiled
-        $FunctionExpressionTree->SetCompiledFunction(null);
-        
-        if(empty($ArgumentSets)) {
-            $ArgumentSets = [[]];
+        $functionExpressionTree->setCompiledFunction(null);
+
+        if (empty($argumentSets)) {
+            $argumentSets = [[]];
         }
-        foreach ($ArgumentSets as $ArgumentSet) {
-            $ExpectedReturn = call_user_func_array($Function, $ArgumentSet);
-            $ActualReturn = call_user_func_array($FunctionExpressionTree, $ArgumentSet);
-            
-            $this->assertEquals($ExpectedReturn, $ActualReturn, 
-                    'Should return equivalent results for arguments: ' . implode(', ', array_map(function ($I) { return var_export($I, true); }, $ArgumentSet)));
+
+        foreach ($argumentSets as $argumentSet) {
+            $expectedReturn = call_user_func_array($function, $argumentSet);
+            $actualReturn = call_user_func_array($functionExpressionTree, $argumentSet);
+
+            $this->assertEquals(
+                    $expectedReturn,
+                    $actualReturn,
+                    'Should return equivalent results for arguments: ' .
+                            implode(', ', array_map(function ($i) {
+                                return var_export($i, true);
+                            }, $argumentSet)));
         }
-        
-        if($ReturnExpression !== null) {
-            $this->AssertFirstResolvedReturnExpression($Function, $ReturnExpression);
+
+        if ($returnExpression !== null) {
+            $this->assertFirstResolvedReturnExpression(
+                    $function,
+                    $returnExpression);
         }
-        if($VerifySerialization) {
-            $this->AssertSerializesAndUnserializedCorrectly($FunctionExpressionTree);
+
+        if ($verifySerialization) {
+            $this->assertSerializesAndUnserializedCorrectly($functionExpressionTree);
         }
     }
-    
-    private function AssertSerializesAndUnserializedCorrectly(\Pinq\FunctionExpressionTree $FunctionExpressionTree) 
+
+    private function assertSerializesAndUnserializedCorrectly(\Pinq\FunctionExpressionTree $functionExpressionTree)
     {
         //Don't bother serializing the whole of PHPUnit...
-        $FunctionExpressionTree->ResolveVariables(['this' => null]);
-        
-        $SerializedFunctionExpressionTree = unserialize(serialize($FunctionExpressionTree));
-        
-        $this->assertEquals($FunctionExpressionTree->GetParameterExpressions(), $SerializedFunctionExpressionTree->GetParameterExpressions());
-        $this->assertTrue($FunctionExpressionTree->GetCompiledCode() == $SerializedFunctionExpressionTree->GetCompiledCode());
-        $this->assertEquals($FunctionExpressionTree->GetExpressions(), $SerializedFunctionExpressionTree->GetExpressions());
-        $this->assertEquals($FunctionExpressionTree->GetUnresolvedVariables(), $SerializedFunctionExpressionTree->GetUnresolvedVariables());
-        if($FunctionExpressionTree->HasReturnExpression()) {
-            $this->assertEquals($FunctionExpressionTree->GetFirstResolvedReturnValueExpression(), $SerializedFunctionExpressionTree->GetFirstResolvedReturnValueExpression());
+        $functionExpressionTree->resolveVariables(['this' => null]);
+
+        $serializedFunctionExpressionTree = unserialize(serialize($functionExpressionTree));
+
+        $this->assertEquals(
+                $functionExpressionTree->getParameterExpressions(),
+                $serializedFunctionExpressionTree->getParameterExpressions());
+
+        $this->assertTrue($functionExpressionTree->getCompiledCode() == $serializedFunctionExpressionTree->getCompiledCode());
+
+        $this->assertEquals(
+                $functionExpressionTree->getExpressions(),
+                $serializedFunctionExpressionTree->getExpressions());
+
+        $this->assertEquals(
+                $functionExpressionTree->getUnresolvedVariables(),
+                $serializedFunctionExpressionTree->getUnresolvedVariables());
+
+        if ($functionExpressionTree->hasReturnExpression()) {
+            $this->assertEquals(
+                    $functionExpressionTree->getFirstResolvedReturnValueExpression(),
+                    $serializedFunctionExpressionTree->getFirstResolvedReturnValueExpression());
         }
-        $this->assertEquals($FunctionExpressionTree->HasReturnExpression(), $SerializedFunctionExpressionTree->HasReturnExpression());
+
+        $this->assertEquals(
+                $functionExpressionTree->hasReturnExpression(),
+                $serializedFunctionExpressionTree->hasReturnExpression());
     }
-    
-    final protected function AssertFirstResolvedReturnExpression(callable $Function, O\Expression $Expression) 
+
+    final protected function assertFirstResolvedReturnExpression(callable $function, O\Expression $expression)
     {
-        $this->VerifyImplementation();
-        $FunctionExpressionTree = $this->CurrentImplementation->Convert($Function);
-        
-        $this->assertEquals($Expression->Simplify(), $FunctionExpressionTree->GetFirstResolvedReturnValueExpression());
+        $this->verifyImplementation();
+
+        $functionExpressionTree = $this->currentImplementation->convert($function);
+
+        $this->assertEquals(
+                $expression->simplify(),
+                $functionExpressionTree->getFirstResolvedReturnValueExpression());
     }
-    
-    final protected function AssertParametersAre(callable $Function, array $ParameterExpresssions) 
+
+    final protected function assertParametersAre(callable $function, array $parameterExpresssions)
     {
-        $this->VerifyImplementation();
-        $FunctionExpressionTree = $this->CurrentImplementation->Convert($Function);
-        
-        $this->assertEquals($FunctionExpressionTree->GetParameterExpressions(), $ParameterExpresssions);
+        $this->verifyImplementation();
+
+        $functionExpressionTree = $this->currentImplementation->convert($function);
+
+        $this->assertEquals(
+                $functionExpressionTree->getParameterExpressions(),
+                $parameterExpresssions);
     }
-    
-    final protected function AssertUnresolvedVariablesAre(callable $Function, array $UnresolvedVariables) 
+
+    final protected function assertUnresolvedVariablesAre(callable $function, array $unresolvedVariables)
     {
-        $this->VerifyImplementation();
-        $FunctionExpressionTree = $this->CurrentImplementation->Convert($Function);
-        
-        $this->assertEquals(array_values($FunctionExpressionTree->GetUnresolvedVariables()), array_values($UnresolvedVariables));
+        $this->verifyImplementation();
+
+        $functionExpressionTree = $this->currentImplementation->convert($function);
+
+        $this->assertEquals(
+                array_values($functionExpressionTree->getUnresolvedVariables()),
+                array_values($unresolvedVariables));
     }
 }

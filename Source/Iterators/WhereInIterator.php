@@ -4,13 +4,13 @@ namespace Pinq\Iterators;
 
 /**
  * Iterates the values contained in the first values and in the second values.
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class WhereInIterator extends OperationIterator
 {
-    protected function SetFilter($Value, Utilities\Set $OtherValues)
+    protected function setFilter($value, Utilities\Set $otherValues)
     {
-        return $OtherValues->Contains($Value);
+        return $otherValues->contains($value);
     }
 }

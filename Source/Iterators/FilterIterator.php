@@ -4,7 +4,7 @@ namespace Pinq\Iterators;
 
 /**
  * Returns the values that satisfy the supplied predicate function
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class FilterIterator extends IteratorIterator
@@ -12,27 +12,28 @@ class FilterIterator extends IteratorIterator
     /**
      * @var callable
      */
-    private $Filter;
-    
-    public function __construct(\Traversable $Iterator, callable $Filter)
+    private $filter;
+
+    public function __construct(\Traversable $iterator, callable $filter)
     {
-        parent::__construct($Iterator);
-        $this->Filter = $Filter;
+        parent::__construct($iterator);
+        $this->filter = $filter;
     }
-    
+
     public function valid()
     {
-        $Filter = $this->Filter;
-        while(parent::valid()) {
-            $CurrentValue = self::current();
-            
-            if($Filter($CurrentValue)) {
+        $filter = $this->filter;
+
+        while (parent::valid()) {
+            $currentValue = self::current();
+
+            if ($filter($currentValue)) {
                 return true;
             }
-            
+
             parent::next();
         }
-        
+
         return false;
     }
 }

@@ -4,7 +4,7 @@ namespace Pinq\Queries;
 
 /**
  * Implementation of the IScope
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Scope implements IScope
@@ -12,51 +12,51 @@ class Scope implements IScope
     /**
      * @var ISegment[]
      */
-    private $Segments = [];
+    private $segments = [];
 
-    public function __construct(array $Segments)
+    public function __construct(array $segments)
     {
-        $this->Segments = $Segments;
+        $this->segments = $segments;
     }
-    
+
     public function getIterator()
     {
-        return new \ArrayIterator($this->Segments);
+        return new \ArrayIterator($this->segments);
     }
-    
+
     /**
      * @return ISegment[]
      */
-    public function GetSegments()
+    public function getSegments()
     {
-        return $this->Segments;
+        return $this->segments;
     }
-    
-    public function IsEmpty()
+
+    public function isEmpty()
     {
-        return empty($this->Segments);
+        return empty($this->segments);
     }
-    
-    public function Append(ISegment $Query)
+
+    public function append(ISegment $query)
     {
-        return new self(array_merge($this->Segments, [$Query]));
+        return new self(array_merge($this->segments, [$query]));
     }
-    
-    public function Update(array $Segments)
+
+    public function update(array $segments)
     {
-        if($this->Segments === $Segments) {
+        if ($this->segments === $segments) {
             return $this;
         }
-        
-        return new self($Segments);
+
+        return new self($segments);
     }
-    
-    public function UpdateLast(ISegment $Segment)
+
+    public function updateLast(ISegment $segment)
     {
-        if(end($this->Segments) === $Segment) {
+        if (end($this->segments) === $segment) {
             return $this;
         }
-        
-        return new self(array_merge(array_slice($this->Segments, 0, -1), [$Segment]));
+
+        return new self(array_merge(array_slice($this->segments, 0, -1), [$segment]));
     }
 }

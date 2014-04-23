@@ -1,22 +1,21 @@
 <?php
 
-namespace Pinq\Queries\Operations; 
+namespace Pinq\Queries\Operations;
 
 /**
  * Operation query for clearing all values from the source
- * 
+ *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class Clear extends Operation
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Clear;
+        return self::CLEAR;
     }
 
-    public function Traverse(OperationVisitor $Visitor)
+    public function traverse(OperationVisitor $visitor)
     {
-        return $Visitor->VisitClear($this);
+        return $visitor->visitClear($this);
     }
-
 }

@@ -2,7 +2,7 @@
 
 namespace Pinq\Caching;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * The API for a cache implementation to store the expression trees
@@ -14,35 +14,33 @@ interface IFunctionCache
 {
     /**
      * Save the supplied expression tree of the functiom to the cache
-     * 
-     * @param string $FunctionHash
-     * @param FunctionExpressionTree $FunctionExpressionTree
+     *
+     * @param string $functionHash
+     * @param FunctionExpressionTree $functionExpressionTree
      * @return void
      */
-    public function Save(
-            $FunctionHash,
-            FunctionExpressionTree $FunctionExpressionTree);
-    
+    public function save($functionHash, FunctionExpressionTree $functionExpressionTree);
+
     /**
      * Attempt to get the cached expression tree of the supplied function reflection
-     * 
-     * @param string $FunctionHash
+     *
+     * @param string $functionHash
      * @return FunctionExpressionTree|null
      */
-    public function TryGet($FunctionHash);
-    
+    public function tryGet($functionHash);
+
     /**
      * Removes the cached expression tree for the supplied function reflection
-     * 
-     * @param string $FunctionHash
+     *
+     * @param string $functionHash
      * @return void
      */
-    public function Remove($FunctionHash);
-    
+    public function remove($functionHash);
+
     /**
      * Clears all cached function for the supplied function reflection.
-     * 
+     *
      * @return void
      */
-    public function Clear();
+    public function clear();
 }
