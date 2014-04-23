@@ -15,6 +15,7 @@ class DifferenceTest extends TraversableTest
     public function testThatDifferenceWithSelfReturnsAnEmptyArray(\Pinq\ITraversable $traversable, array $data)
     {
         $intersection = $traversable->difference($traversable);
+        
         $this->assertMatches($intersection, []);
     }
     
@@ -24,6 +25,7 @@ class DifferenceTest extends TraversableTest
     public function testThatDifferenceWithEmptyReturnsSameAsTheOriginal(\Pinq\ITraversable $traversable, array $data)
     {
         $intersection = $traversable->difference(new \Pinq\Traversable());
+        
         $this->assertMatches($intersection, array_unique($data));
     }
     
@@ -34,6 +36,7 @@ class DifferenceTest extends TraversableTest
     {
         $otherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
         $intersection = $traversable->difference($otherData);
+        
         $this->assertMatches($intersection, array_diff($data, $otherData));
     }
     
@@ -44,6 +47,7 @@ class DifferenceTest extends TraversableTest
     {
         $otherData = [0 => 'test', 2 => 0.01, 5 => 4, 'test' => 1];
         $intersection = $traversable->difference($otherData);
+        
         $this->assertMatches($intersection, array_diff($data, $otherData));
     }
 }

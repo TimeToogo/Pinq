@@ -157,6 +157,7 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
     }
     
     // <editor-fold defaultstate="collapsed" desc="Query segments">
+    
     public function select(callable $function)
     {
         return $this->newSegment(new Segments\Select($this->convert($function)));
@@ -309,7 +310,9 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
     }
     
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Query Requests">
+    
     public function offsetExists($index)
     {
         return $this->loadQuery(new Requests\IssetIndex($index));
@@ -394,4 +397,6 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
     {
         return $this->loadQuery(new Requests\Implode($delimiter, $this->convert($function)));
     }
+    
+    // </editor-fold>
 }

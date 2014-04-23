@@ -15,6 +15,7 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
     public function testThatNoCacheWillReturnANullCache()
     {
         $cacheImplementation = Caching\Provider::getCache();
+        
         $this->assertInstanceOf(
                 'Pinq\\Caching\\NullCache',
                 $cacheImplementation->getInnerCache());
@@ -22,7 +23,12 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
     
     public function caches()
     {
-        return [['SetCustomCache', $this->getMock('Pinq\\Caching\\IFunctionCache'), true], ['SetArrayAccessCache', new \ArrayObject(), 'Pinq\\Caching\\ArrayAccessCache'], ['SetFileCache', 'php://memory', 'Pinq\\Caching\\CSVFileFunctionCache'], ['SetDirectoryCache', __DIR__, 'Pinq\\Caching\\DirectoryFunctionCache']];
+        return [
+            ['SetCustomCache', $this->getMock('Pinq\\Caching\\IFunctionCache'), true], 
+            ['SetArrayAccessCache', new \ArrayObject(), 'Pinq\\Caching\\ArrayAccessCache'], 
+            ['SetFileCache', 'php://memory', 'Pinq\\Caching\\CSVFileFunctionCache'], 
+            ['SetDirectoryCache', __DIR__, 'Pinq\\Caching\\DirectoryFunctionCache']
+        ];
     }
     
     /**
@@ -32,6 +38,7 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
     {
         Caching\Provider::$method($cache);
         $cacheImplementation = Caching\Provider::getCache();
+        
         $this->assertInstanceOf(
                 'Pinq\\Caching\\SecondLevelFunctionCache',
                 $cacheImplementation);
@@ -49,7 +56,11 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
     public function testThatDevelopmentModeWillClearTheCacheOnce()
     {
         $functionCacheMock = $this->getMock('Pinq\\Caching\\IFunctionCache');
-        $functionCacheMock->expects($this->once())->method('Clear');
+        
+        $functionCacheMock
+                ->expects($this->once())
+                ->method('Clear');
+        
         Caching\Provider::setCustomCache($functionCacheMock);
         Caching\Provider::setDevelopmentMode(true);
         //Should clear

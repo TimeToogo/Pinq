@@ -45,6 +45,7 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
     public function testThatDictionaryContainsReturnsTrueForSetKeys($key)
     {
         $this->dictionary->set($key, true);
+        
         $this->assertTrue(
                 $this->dictionary->contains($key),
                 'The dictionary should return true for the set key');
@@ -57,6 +58,7 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
     {
         $this->dictionary->set($key, true);
         $this->dictionary->remove($key);
+        
         $this->assertFalse(
                 $this->dictionary->contains($key),
                 'The dictionary should return false for the removed key');
@@ -69,6 +71,7 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
     {
         $value = new \stdClass();
         $this->dictionary->set($key, $value);
+        
         $this->assertSame(
                 $value,
                 $this->dictionary->get($key),
@@ -80,6 +83,7 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
         $instance = new \stdClass();
         $range = ['string' => $instance, 5 => 'foo', 'bar' => 5.42];
         $this->dictionary->addRange($range);
+        
         $this->assertSame($instance, $this->dictionary->get('string'));
         $this->assertSame('foo', $this->dictionary->get(5));
         $this->assertSame(5.42, $this->dictionary->get('bar'));
@@ -91,6 +95,7 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
         $range = ['string' => $instance, 5 => 'foo', 'bar' => 5.42];
         $this->dictionary->addRange($range);
         $this->dictionary->removeRange(array_keys($range));
+        
         $this->assertFalse($this->dictionary->contains('string'));
         $this->assertFalse($this->dictionary->contains(5));
         $this->assertFalse($this->dictionary->contains('bar'));
@@ -99,6 +104,7 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
     public function testGetReturnsNullForUnsetKey()
     {
         $this->dictionary->set('boo', 'bar');
+        
         $this->assertFalse($this->dictionary->contains(5));
         $this->assertNull($this->dictionary->get(5));
     }

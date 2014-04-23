@@ -9,7 +9,7 @@ class WhereTest extends TraversableTest
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatExecutionIsDeferred([$traversable, 'Where']);
+        $this->assertThatExecutionIsDeferred([$traversable, 'where']);
     }
     
     /**
@@ -17,10 +17,8 @@ class WhereTest extends TraversableTest
      */
     public function testThatWhereTrueDoesNotFilterAnyData(\Pinq\ITraversable $numbers, array $data)
     {
-        $allNumbers = 
-                $numbers->where(function () {
-                    return true;
-                });
+        $allNumbers = $numbers->where(function () { return true; });
+        
         $this->assertMatches($allNumbers, $data);
     }
     
@@ -29,10 +27,8 @@ class WhereTest extends TraversableTest
      */
     public function testThatWhereFalseFiltersAllItems(\Pinq\ITraversable $numbers, array $data)
     {
-        $noNumbers = 
-                $numbers->where(function () {
-                    return false;
-                });
+        $noNumbers = $numbers->where(function () { return false; });
+        
         $this->assertMatches($noNumbers, []);
     }
     

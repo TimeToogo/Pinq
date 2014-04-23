@@ -77,6 +77,7 @@ class Traversable implements \Pinq\ITraversable, \Serializable
     }
     
     // <editor-fold defaultstate="collapsed" desc="Querying">
+    
     public function first()
     {
         foreach ($this->valuesIterator as $value) {
@@ -182,7 +183,9 @@ class Traversable implements \Pinq\ITraversable, \Serializable
     }
     
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Set Operations">
+    
     public function union($values)
     {
         return new self(new Iterators\UnionIterator(
@@ -205,7 +208,9 @@ class Traversable implements \Pinq\ITraversable, \Serializable
     }
     
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Operations">
+    
     public function append($values)
     {
         return new self(new Iterators\FlatteningIterator(new \ArrayIterator([$this->valuesIterator, Utilities::toIterator($values)])));
@@ -226,7 +231,9 @@ class Traversable implements \Pinq\ITraversable, \Serializable
     }
     
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Array Access">
+    
     public function offsetExists($index)
     {
         return $this->valuesIterator instanceof \ArrayAccess ? $this->valuesIterator->offsetExists($index) : isset($this->asArray()[$index]);
@@ -248,7 +255,9 @@ class Traversable implements \Pinq\ITraversable, \Serializable
     }
     
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Aggregates">
+    
     public function count()
     {
         return $this->valuesIterator instanceof \Countable ? $this->valuesIterator->count() : count($this->asArray());
@@ -356,4 +365,6 @@ class Traversable implements \Pinq\ITraversable, \Serializable
     {
         return implode($delimiter, $this->mapArray($function));
     }
+    
+    // </editor-fold>
 }

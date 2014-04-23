@@ -13,6 +13,7 @@ class AggregateTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
                 function ($a, $b) {
                     return $a * $b;
                 };
+                
         $this->assertEquals(
                 array_reduce($data, $aggregator, 1),
                 $traversable->aggregate($aggregator));
@@ -27,6 +28,7 @@ class AggregateTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
                 function ($a, $b) {
                     return $a . $b;
                 };
+                
         $this->assertEquals(
                 array_reduce($data, $aggregator, ''),
                 $traversable->aggregate($aggregator));
@@ -37,8 +39,6 @@ class AggregateTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
      */
     public function testThatAggregateOnEmptyReturnsNull(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertNull($traversable->aggregate(function () {
-            return true;
-        }));
+        $this->assertNull($traversable->aggregate(function () { return true; }));
     }
 }

@@ -23,6 +23,7 @@ class RemoveWhereTest extends CollectionTest
                 function ($i) {
                     return $i % 2 === 0;
                 };
+                
         $numbers->removeWhere($predicate);
         
         foreach ($data as $key => $value) {
@@ -39,9 +40,8 @@ class RemoveWhereTest extends CollectionTest
      */
     public function testThatRemoveWhereTrueRemovesAllItems(\Pinq\ICollection $collection, array $data)
     {
-        $collection->removeWhere(function () {
-            return true;
-        });
+        $collection->removeWhere(function () { return true; });
+        
         $this->assertMatchesValues($collection, []);
     }
     
@@ -50,9 +50,8 @@ class RemoveWhereTest extends CollectionTest
      */
     public function testThatRemoveWhereFalseRemovesNoItems(\Pinq\ICollection $collection, array $data)
     {
-        $collection->removeWhere(function () {
-            return false;
-        });
+        $collection->removeWhere(function () { return false; });
+        
         $this->assertMatchesValues($collection, $data);
     }
 }

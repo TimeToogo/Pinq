@@ -17,6 +17,7 @@ class UnsetIndexTest extends CollectionTest
         }
         
         unset($collection[$key], $data[$key]);
+        
         $this->assertMatches($collection, $data);
     }
 }

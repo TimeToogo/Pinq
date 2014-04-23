@@ -22,12 +22,10 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
      */
     public function testOrderingMultiple(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
-                $traversable->orderByAscending(function ($i) {
-                    return $i[0];
-                })->thenByDescending(function ($i) {
-                    return $i[2];
-                });
+        $traversable = $traversable
+                ->orderByAscending(function ($i) { return $i[0]; })
+                ->thenByDescending(function ($i) { return $i[2]; });
+                
         $this->assertMatches(
                 $traversable,
                 [
@@ -58,12 +56,10 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
      */
     public function testOrderingMultiplePHPDocExampleButPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
-                $traversable->orderByDescending(function ($i) {
-                    return $i['volume'];
-                })->thenByAscending(function ($i) {
-                    return $i['edition'];
-                });
+        $traversable = $traversable
+                ->orderByDescending(function ($i) { return $i['volume']; })
+                ->thenByAscending(function ($i) { return $i['edition']; });
+                
         $this->assertMatches(
                 $traversable,
                 [
@@ -81,10 +77,11 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
      */
     public function testSelectManyQuery(\Pinq\ITraversable $traversable, array $data)
     {
-        $string = 
-                $traversable->selectMany('str_split')->select(function ($char) {
-                    return ++$char;
-                })->implode('');
+        $string = $traversable
+                ->selectMany('str_split')
+                ->select(function ($char) { return ++$char; })
+                ->implode('');
+        
         $trueString = '';
         
         foreach ($data as $i) {
@@ -102,19 +99,24 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
     public function testAggregateValuesString(\Pinq\ITraversable $traversable, array $data)
     {
         $this->assertEquals(true, $traversable->all(), 'All');
+        
         $this->assertEquals(true, $traversable->any(), 'Any');
+        
         $this->assertEquals(
                 array_sum(array_map('strlen', $data)) / count($data),
                 $traversable->average('strlen'),
                 'Average string length');
+        
         $this->assertEquals(
                 array_sum(array_map('strlen', $data)),
                 $traversable->sum('strlen'),
                 'Sum string length');
+        
         $this->assertEquals(
                 array_unique($data),
                 $traversable->unique()->asArray(),
                 'Unique');
+        
         $this->assertEquals(
                 implode('- -- -', $data),
                 $traversable->implode('- -- -'),

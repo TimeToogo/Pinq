@@ -15,6 +15,7 @@ class ExceptTest extends TraversableTest
     public function testThatExceptWithSelfReturnsAnEmptyArray(\Pinq\ITraversable $traversable, array $data)
     {
         $except = $traversable->except($traversable);
+        
         $this->assertMatches($except, []);
     }
     
@@ -24,6 +25,7 @@ class ExceptTest extends TraversableTest
     public function testThatExceptWithEmptyReturnsSameAsTheOriginal(\Pinq\ITraversable $traversable, array $data)
     {
         $except = $traversable->except(new \Pinq\Traversable());
+        
         $this->assertMatches($except, $data);
     }
     
@@ -34,6 +36,7 @@ class ExceptTest extends TraversableTest
     {
         $otherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
         $except = $traversable->except($otherData);
+        
         $this->assertMatches($except, array_diff($data, $otherData));
     }
     
@@ -44,6 +47,7 @@ class ExceptTest extends TraversableTest
     {
         $otherData = [0 => 'test', 2 => 0.01, 5 => 4, 'test' => 1];
         $except = $traversable->except($otherData);
+        
         $this->assertMatches($except, array_diff($data, $otherData));
     }
     
@@ -54,6 +58,7 @@ class ExceptTest extends TraversableTest
     {
         $castToStringValues = array_map('strval', $data);
         $except = $traversable->except($castToStringValues);
+        
         $this->assertMatches($except, $data);
     }
 }

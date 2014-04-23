@@ -54,6 +54,7 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
         foreach ($argumentSets as $argumentSet) {
             $expectedReturn = call_user_func_array($function, $argumentSet);
             $actualReturn = call_user_func_array($functionExpressionTree, $argumentSet);
+            
             $this->assertEquals(
                     $expectedReturn,
                     $actualReturn,
@@ -78,14 +79,19 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
     {
         //Don't bother serializing the whole of PHPUnit...
         $functionExpressionTree->resolveVariables(['this' => null]);
+        
         $serializedFunctionExpressionTree = unserialize(serialize($functionExpressionTree));
+        
         $this->assertEquals(
                 $functionExpressionTree->getParameterExpressions(),
                 $serializedFunctionExpressionTree->getParameterExpressions());
+        
         $this->assertTrue($functionExpressionTree->getCompiledCode() == $serializedFunctionExpressionTree->getCompiledCode());
+        
         $this->assertEquals(
                 $functionExpressionTree->getExpressions(),
                 $serializedFunctionExpressionTree->getExpressions());
+        
         $this->assertEquals(
                 $functionExpressionTree->getUnresolvedVariables(),
                 $serializedFunctionExpressionTree->getUnresolvedVariables());
@@ -104,7 +110,9 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
     protected final function assertFirstResolvedReturnExpression(callable $function, O\Expression $expression)
     {
         $this->verifyImplementation();
+        
         $functionExpressionTree = $this->currentImplementation->convert($function);
+        
         $this->assertEquals(
                 $expression->simplify(),
                 $functionExpressionTree->getFirstResolvedReturnValueExpression());
@@ -113,7 +121,9 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
     protected final function assertParametersAre(callable $function, array $parameterExpresssions)
     {
         $this->verifyImplementation();
+        
         $functionExpressionTree = $this->currentImplementation->convert($function);
+        
         $this->assertEquals(
                 $functionExpressionTree->getParameterExpressions(),
                 $parameterExpresssions);
@@ -122,7 +132,9 @@ abstract class ConverterTest extends \Pinq\Tests\PinqTestCase
     protected final function assertUnresolvedVariablesAre(callable $function, array $unresolvedVariables)
     {
         $this->verifyImplementation();
+        
         $functionExpressionTree = $this->currentImplementation->convert($function);
+        
         $this->assertEquals(
                 array_values($functionExpressionTree->getUnresolvedVariables()),
                 array_values($unresolvedVariables));

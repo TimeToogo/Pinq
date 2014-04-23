@@ -16,7 +16,7 @@ class SelectTest extends TraversableTest
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatExecutionIsDeferred([$traversable, 'Select']);
+        $this->assertThatExecutionIsDeferred([$traversable, 'select']);
     }
     
     /**
@@ -29,6 +29,7 @@ class SelectTest extends TraversableTest
                     return $i * 10;
                 };
         $multipliedValues = $values->select($multiply);
+        
         $this->assertMatches($multipliedValues, array_map($multiply, $data));
     }
 }

@@ -15,7 +15,7 @@ if (file_exists($pinqAsProjectAutoLoaderPath)) {
     $composerAutoLoader = require $pinqAsDependencyAutoLoaderPath;
 }
 else {
-    throw new \Exception('Cannot load pinq tests: Penumbra cannot be loaded, please load Penumbra via composer');
+    throw new \Exception('Cannot load pinq tests: Pinq cannot be loaded, please load Pinq via composer');
 }
 
 $composerAutoLoader->addPsr4(__NAMESPACE__ . '\\', __DIR__);

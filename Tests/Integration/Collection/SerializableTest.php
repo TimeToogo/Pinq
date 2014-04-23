@@ -11,6 +11,7 @@ class SerializableTest extends CollectionTest
     {
         $serializedCollection = serialize($collection);
         $unserializedCollection = unserialize($serializedCollection);
+        
         $this->assertEquals(
                 $collection->asArray(),
                 $unserializedCollection->asArray());
@@ -21,12 +22,11 @@ class SerializableTest extends CollectionTest
      */
     public function testThatCollectionIsSerializableAfterQueries(\Pinq\ICollection $collection, array $data)
     {
-        $collection = 
-                $collection->where(function ($i) {
-                    return $i !== false;
-                });
+        $collection = $collection
+                ->where(function ($i) { return $i !== false; });
         $serializedCollection = serialize($collection);
         $unserializedCollection = unserialize($serializedCollection);
+        
         $this->assertEquals(
                 $collection->asArray(),
                 $unserializedCollection->asArray());

@@ -16,7 +16,7 @@ class IndexByTest extends TraversableTest
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatExecutionIsDeferred([$traversable, 'IndexBy']);
+        $this->assertThatExecutionIsDeferred([$traversable, 'indexBy']);
     }
     
     /**
@@ -24,10 +24,8 @@ class IndexByTest extends TraversableTest
      */
     public function testThatIndexByElementIndexesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $indexedElements = 
-                $traversable->indexBy(function ($i) {
-                    return $i;
-                });
+        $indexedElements = $traversable->indexBy(function ($i) { return $i; });
+                
         $this->assertMatches($indexedElements, array_combine($data, $data));
     }
     
@@ -36,10 +34,8 @@ class IndexByTest extends TraversableTest
      */
     public function testThatIndexByNullReturnsLastArrayWithLastElement(\Pinq\ITraversable $traversable, array $data)
     {
-        $indexedElements = 
-                $traversable->indexBy(function () {
-                    return null;
-                });
+        $indexedElements = $traversable->indexBy(function () { return null; });
+                
         $this->assertMatches(
                 $indexedElements,
                 empty($data) ? [] : [null => end($data)]);

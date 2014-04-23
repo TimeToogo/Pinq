@@ -16,7 +16,7 @@ class GroupByTest extends TraversableTest
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatExecutionIsDeferred([$traversable, 'GroupBy']);
+        $this->assertThatExecutionIsDeferred([$traversable, 'groupBy']);
     }
     
     /**
@@ -40,12 +40,10 @@ class GroupByTest extends TraversableTest
      */
     public function testThatGroupByMultipleTest(\Pinq\ITraversable $traversable, array $data)
     {
-        $groups = 
-                $traversable->groupBy(function ($i) {
-                    return $i % 2 === 0;
-                })->andBy(function ($i) {
-                    return $i % 3 === 0;
-                })->asArray();
+        $groups = $traversable
+                ->groupBy(function ($i) { return $i % 2 === 0; })
+                ->andBy(function ($i) { return $i % 3 === 0; })->asArray();
+                
         $this->assertCount(4, $groups);
         $this->assertMatchesValues($groups[0], [1, 5, 7]);
         $this->assertMatchesValues($groups[1], [2, 4, 8, 10]);
@@ -63,8 +61,10 @@ class GroupByTest extends TraversableTest
                 function ($i) {
                     return $i % 2 === 0;
                 };
+                
         //First number is odd, so the first group should be the odd group
         list($odd, $even) = $traversable->groupBy($isEven)->asArray();
+        
         $this->assertMatches(
                 $odd,
                 array_filter($data, function ($i) use($isEven) {

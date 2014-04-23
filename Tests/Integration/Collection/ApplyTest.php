@@ -10,7 +10,7 @@ class ApplyTest extends CollectionTest
     public function testThatExecutionIsNotDeferred(\Pinq\ICollection $collection, array $data)
     {
         if (count($data) > 0) {
-            $this->assertThatExecutionIsNotDeferred([$collection, 'Apply']);
+            $this->assertThatExecutionIsNotDeferred([$collection, 'apply']);
         }
     }
     
@@ -23,8 +23,10 @@ class ApplyTest extends CollectionTest
                 function (&$i) {
                     $i *= 10;
                 };
+                
         $collection->apply($multiply);
         array_walk($data, $multiply);
+        
         $this->assertMatches($collection, $data);
     }
 }

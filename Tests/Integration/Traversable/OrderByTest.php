@@ -16,8 +16,8 @@ class OrderByTest extends TraversableTest
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatExecutionIsDeferred([$traversable, 'OrderByAscending']);
-        $this->assertThatExecutionIsDeferred([$traversable, 'OrderByDescending']);
+        $this->assertThatExecutionIsDeferred([$traversable, 'orderByAscending']);
+        $this->assertThatExecutionIsDeferred([$traversable, 'orderByDescending']);
     }
     
     /**
@@ -35,10 +35,8 @@ class OrderByTest extends TraversableTest
      */
     public function testThatOrderByNegatingNumbersIsEquivalentToArrayReverse(\Pinq\ITraversable $numbers, array $data)
     {
-        $reversedNumbers = 
-                $numbers->orderByAscending(function ($i) {
-                    return -$i;
-                });
+        $reversedNumbers = $numbers->orderByAscending(function ($i) { return -$i; });
+                
         $this->assertMatches($reversedNumbers, array_reverse($data, true));
     }
     
@@ -47,10 +45,8 @@ class OrderByTest extends TraversableTest
      */
     public function testThatDescendingNegatingNumbersIsEquivalentToOriginal(\Pinq\ITraversable $numbers, array $data)
     {
-        $unalteredNumbers = 
-                $numbers->orderByDescending(function ($i) {
-                    return -$i;
-                });
+        $unalteredNumbers = $numbers->orderByDescending(function ($i) { return -$i; });
+                
         $this->assertMatches($unalteredNumbers, $data);
     }
     
@@ -72,12 +68,10 @@ class OrderByTest extends TraversableTest
      */
     public function testThatOrderStringsByMultipleCharsOrdersCorrectly(\Pinq\ITraversable $names, array $data)
     {
-        $orderedNames = 
-                $names->orderByAscending(function ($i) {
-                    return $i[0];
-                })->thenByAscending(function ($i) {
-                    return $i[2];
-                });
+        $orderedNames = $names
+                ->orderByAscending(function ($i) { return $i[0]; })
+                ->thenByAscending(function ($i) { return $i[2]; });
+                
         $this->assertMatchesValues(
                 $orderedNames,
                 [
@@ -96,10 +90,10 @@ class OrderByTest extends TraversableTest
      */
     public function testThatOrderStringsCharsAndLengthCharsOrdersCorrectly(\Pinq\ITraversable $names, array $data)
     {
-        $orderedNames = 
-                $names->orderByAscending(function ($i) {
-                    return $i[0];
-                })->thenByAscending('strlen');
+        $orderedNames = $names
+                ->orderByAscending(function ($i) { return $i[0]; })
+                ->thenByAscending('strlen');
+                
         $this->assertMatchesValues(
                 $orderedNames,
                 [
@@ -118,10 +112,10 @@ class OrderByTest extends TraversableTest
      */
     public function testThatOrderStringsCharsAndLengthCharsDescendingOrdersCorrectly(\Pinq\ITraversable $names, array $data)
     {
-        $orderedNames = 
-                $names->orderByDescending(function ($i) {
-                    return $i[0];
-                })->thenByDescending('strlen');
+        $orderedNames = $names
+                ->orderByDescending(function ($i) { return $i[0]; })
+                ->thenByDescending('strlen');
+                
         $this->assertMatchesValues(
                 $orderedNames,
                 [
@@ -144,8 +138,10 @@ class OrderByTest extends TraversableTest
                 function ($i) {
                     return $i[0];
                 };
+                
         $orderedNames = $names->orderByAscending($function);
         $otherOrderedNames = $names->orderBy($function, \Pinq\Direction::ASCENDING);
+        
         $this->assertSame(
                 $orderedNames->asArray(),
                 $otherOrderedNames->asArray());
@@ -160,8 +156,10 @@ class OrderByTest extends TraversableTest
                 function ($i) {
                     return $i[0];
                 };
+                
         $orderedNames = $names->orderByDescending($function);
         $otherOrderedNames = $names->orderBy($function, \Pinq\Direction::DESCENDING);
+        
         $this->assertSame(
                 $orderedNames->asArray(),
                 $otherOrderedNames->asArray());
@@ -180,11 +178,14 @@ class OrderByTest extends TraversableTest
                 function ($i) {
                     return $i[2];
                 };
-        $orderedNames = $names->orderByAscending($irrelaventOrderByFunction)->thenByAscending($thenFunction);
-        $otherOrderedNames = 
-                $names->orderByAscending($irrelaventOrderByFunction)->thenBy(
-                        $thenFunction,
-                        \Pinq\Direction::ASCENDING);
+                
+        $orderedNames = $names
+                ->orderByAscending($irrelaventOrderByFunction)
+                ->thenByAscending($thenFunction);
+        $otherOrderedNames = $names
+                ->orderByAscending($irrelaventOrderByFunction)
+                ->thenBy($thenFunction, \Pinq\Direction::ASCENDING);
+        
         $this->assertSame(
                 $orderedNames->asArray(),
                 $otherOrderedNames->asArray());
@@ -203,11 +204,15 @@ class OrderByTest extends TraversableTest
                 function ($i) {
                     return $i[2];
                 };
-        $orderedNames = $names->orderByAscending($irrelaventOrderByFunction)->thenByDescending($thenFunction);
-        $otherOrderedNames = 
-                $names->orderByAscending($irrelaventOrderByFunction)->thenBy(
-                        $thenFunction,
-                        \Pinq\Direction::DESCENDING);
+                
+        $orderedNames = $names
+                ->orderByAscending($irrelaventOrderByFunction)
+                ->thenByDescending($thenFunction);
+        
+        $otherOrderedNames = $names
+                ->orderByAscending($irrelaventOrderByFunction)
+                ->thenBy($thenFunction, \Pinq\Direction::DESCENDING);
+        
         $this->assertSame(
                 $orderedNames->asArray(),
                 $otherOrderedNames->asArray());

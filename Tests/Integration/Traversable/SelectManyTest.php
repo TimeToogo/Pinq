@@ -16,7 +16,7 @@ class SelectManyTest extends TraversableTest
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatExecutionIsDeferred([$traversable, 'SelectMany']);
+        $this->assertThatExecutionIsDeferred([$traversable, 'selectMany']);
     }
     
     /**
@@ -26,6 +26,7 @@ class SelectManyTest extends TraversableTest
     {
         $toCharacters = 'str_split';
         $characters = $values->selectMany($toCharacters);
+        
         $this->assertMatches(
                 $characters,
                 array_values(self::flattenArrays(array_map($toCharacters, $data))));

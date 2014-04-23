@@ -15,6 +15,7 @@ class SliceTest extends TraversableTest
     public function testThatSkipRemovesCorrectAmountOfElementsFromTheStartAndPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {
         $withoutFirstFiveElements = $traversable->skip(5);
+        
         $this->assertMatches(
                 $withoutFirstFiveElements,
                 array_slice($data, 5, null, true));
@@ -26,6 +27,7 @@ class SliceTest extends TraversableTest
     public function testThatTakeGetsTheCorrectAmountOfElementsFromTheStartAndPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {
         $firstFiveElements = $traversable->take(5);
+        
         $this->assertMatches(
                 $firstFiveElements,
                 array_slice($data, 0, 5, true));
@@ -37,6 +39,7 @@ class SliceTest extends TraversableTest
     public function testThatTakeZeroReturnsEmptyArray(\Pinq\ITraversable $traversable, array $data)
     {
         $noNumbers = $traversable->take(0);
+        
         $this->assertMatches($noNumbers, []);
     }
     
@@ -46,6 +49,7 @@ class SliceTest extends TraversableTest
     public function testThatSkipZeroReturnsOriginalArray(\Pinq\ITraversable $traversable, array $data)
     {
         $values = $traversable->skip(0);
+        
         $this->assertMatches($values, $data);
     }
     
@@ -55,6 +59,7 @@ class SliceTest extends TraversableTest
     public function testThatSlicingReturnsTheCorrectSegmentOfDataAndPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {
         $values = $traversable->slice(3, 2);
+        
         $this->assertMatches($values, array_slice($data, 3, 2, true));
     }
 }

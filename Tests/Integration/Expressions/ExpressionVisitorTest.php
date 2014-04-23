@@ -59,7 +59,12 @@ class ExpressionVisitorTest extends ExpressionTest
     public function testExpressionVisitorVisitsTheCorrectMethod(O\Expression $expression, $method)
     {
         $expressionVisitorMock = $this->getMock('\\Pinq\\Expressions\\ExpressionVisitor', [$method]);
-        $expressionVisitorMock->expects($this->once())->method($method)->with($this->equalTo($expression));
+        
+        $expressionVisitorMock
+                ->expects($this->once())
+                ->method($method)
+                ->with($this->equalTo($expression));
+        
         $expressionVisitorMock->walk($expression);
     }
 }

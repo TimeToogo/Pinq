@@ -19,6 +19,7 @@ class SetIndexTest extends CollectionTest
         $instance = new \stdClass();
         $collection[$key] = $instance;
         $data[$key] = $instance;
+        
         $this->assertMatches($collection, $data);
     }
 }

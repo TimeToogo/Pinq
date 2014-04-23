@@ -14,12 +14,10 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
      */
     public function testOrderByTensThenDescending(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
-                $traversable->orderByAscending(function ($i) {
-                    return (int) ($i / 10);
-                })->thenByDescending(function ($i) {
-                    return $i;
-                });
+        $traversable = $traversable
+                ->orderByAscending(function ($i) { return (int) ($i / 10); })
+                ->thenByDescending(function ($i) { return $i; });
+                
         $equivalentArray = [];
         $array = [];
         
@@ -42,9 +40,8 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
     public function testSimpleAggregation(\Pinq\ITraversable $traversable, array $data)
     {
         $this->assertSame(array_sum($data), $traversable->sum());
-        $this->assertSame(
-                array_sum($data) / count($data),
-                $traversable->average());
+        
+        $this->assertSame(array_sum($data) / count($data), $traversable->average());
     }
     
     /**
@@ -52,20 +49,21 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
      */
     public function testComplexAggregationQuery(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
-                $traversable->where(function ($i) {
-                    return $i % 2 === 0;
-                })->orderByAscending(function ($i) {
-                    return -$i;
-                })->groupBy(function ($i) {
-                    return $i % 7;
-                })->where(function (\Pinq\ITraversable $i) {
-                    return $i->count() % 2 === 0;
-                })->select(function (\Pinq\ITraversable $numbers) {
-                    return ['First' => $numbers->first(), 'Average' => $numbers->average(), 'Count' => $numbers->count(), 'Numbers' => $numbers->asArray()];
-                })->indexBy(function (array $values) {
-                    return implode(',', $values['Numbers']);
-                });
+        $traversable = $traversable
+                ->where(function ($i) { return $i % 2 === 0; })
+                ->orderByAscending(function ($i) { return -$i; })
+                ->groupBy(function ($i) { return $i % 7; })
+                ->where(function (\Pinq\ITraversable $i) { return $i->count() % 2 === 0; })
+                ->select(function (\Pinq\ITraversable $numbers) {
+                    return [
+                        'First' => $numbers->first(), 
+                        'Average' => $numbers->average(), 
+                        'Count' => $numbers->count(), 
+                        'Numbers' => $numbers->asArray()
+                    ];
+                })
+                ->indexBy(function (array $values) { return implode(',', $values['Numbers']); });
+                
         $newData = 
                 array_filter($data, function ($i) {
                     return $i % 2 === 0;

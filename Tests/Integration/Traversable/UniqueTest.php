@@ -47,6 +47,7 @@ class UniqueTest extends TraversableTest
     public function testThatUniqueValuesAreUnique(\Pinq\ITraversable $values, array $data)
     {
         $uniqueValues = $values->unique();
+        
         $this->assertMatches($uniqueValues, array_unique($data, SORT_REGULAR));
     }
     
@@ -56,6 +57,7 @@ class UniqueTest extends TraversableTest
     public function testThatUniqueValuesPreservesKeys(\Pinq\ITraversable $values, array $data)
     {
         $uniqueValuesArray = $values->unique()->asArray();
+        
         $this->assertSame(
                 array_keys(array_unique($data, SORT_REGULAR)),
                 array_keys($uniqueValuesArray));

@@ -15,34 +15,11 @@ class AllTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     public function falseyValues()
     {
         //                                                      V
-        return $this->getImplementations([
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            10,
-            11,
-            1,
-            1,
-            0,
-            1,
-            1,
-            1,
-            1
-        ]) + 
-                $this->getImplementations([
-                    'ert',
-                    'rgrg',
-                    'dgf',
-                    'g4g43',
-                    'as',
-                    'vd',
-                    'dw',
-                    '',
-                    'saav'
-                ]) + $this->getImplementations([true, false, true]);
+        return $this->getImplementations([1,1,1,1,1,1,10,11,1,1,0,1,1,1,1,]) +
+                //                                                                          V
+                $this->getImplementations(['ert','rgrg', 'dgf', 'g4g43', 'as', 'vd', 'dw', '', 'saav']) +
+                //                                 V
+                $this->getImplementations([true, false, true]);
     }
     
     /**

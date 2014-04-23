@@ -21,6 +21,7 @@ class JoinTest extends TraversableTest
         $this->assertThatExecutionIsDeferred(function (callable $function) use($traversable) {
             return $traversable->join([])->on($function)->to($function);
         });
+        
         $this->assertThatExecutionIsDeferred(function (callable $function) use($traversable) {
             return $traversable->join([])->onEquality($function, $function)->to($function);
         });
@@ -53,12 +54,12 @@ class JoinTest extends TraversableTest
      */
     public function testJoinOnFalseProducesEmpty(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
-                $traversable->join($data)->on(function () {
-                    return false;
-                })->to(function ($outerValue, $innerValue) {
+        $traversable = $traversable
+                ->join($data)->on(function () { return false; })
+                ->to(function ($outerValue, $innerValue) {
                     return [$outerValue, $innerValue];
                 });
+                
         $this->assertMatches($traversable, []);
     }
     
@@ -67,18 +68,12 @@ class JoinTest extends TraversableTest
      */
     public function testJoinOnProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
-                $traversable->join([
-                    1,
-                    2,
-                    3,
-                    '4',
-                    '5'
-                ])->on(function ($outer, $inner) {
-                    return $outer === $inner;
-                })->to(function ($outer, $inner) {
+        $traversable = $traversable->join([1, 2, 3, '4', '5'])
+                ->on(function ($outer, $inner) { return $outer === $inner; })
+                ->to(function ($outer, $inner) {
                     return $outer . '-' . $inner;
                 });
+                
         $this->assertMatchesValues($traversable, ['1-1', '2-2', '3-3']);
     }
     
@@ -87,22 +82,12 @@ class JoinTest extends TraversableTest
      */
     public function testJoinOnEqualityProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
-                $traversable->join([
-                    1,
-                    2,
-                    3,
-                    '4',
-                    '5'
-                ])->onEquality(
-                        function ($outer) {
-                            return $outer;
-                        },
-                        function ($inner) {
-                            return $inner;
-                        })->to(function ($outer, $inner) {
+        $traversable = $traversable->join([1, 2, 3, '4', '5'])
+                ->onEquality(function ($outer) { return $outer; }, function ($inner) { return $inner; })
+                ->to(function ($outer, $inner) {
                     return $outer . '-' . $inner;
                 });
+                
         $this->assertMatchesValues($traversable, ['1-1', '2-2', '3-3']);
     }
     
@@ -111,16 +96,12 @@ class JoinTest extends TraversableTest
      */
     public function testJoinWithTransformProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
-                $traversable->join(range(10, 20))->onEquality(
-                        function ($outer) {
-                            return $outer * 2;
-                        },
-                        function ($inner) {
-                            return $inner;
-                        })->to(function ($outer, $inner) {
+        $traversable = $traversable->join(range(10, 20))
+                ->onEquality(function ($outer) { return $outer * 2; }, function ($inner) { return $inner;})
+                ->to(function ($outer, $inner) {
                     return $outer . ':' . $inner;
                 });
+                
         $this->assertMatchesValues(
                 $traversable,
                 [

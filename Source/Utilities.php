@@ -111,6 +111,6 @@ final class Utilities
      */
     public static function isNormalSyntaxName($name)
     {
-        return (bool) preg_match('/[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*/', $name);
+        return (bool)preg_match('/[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*/', $name);
     }
 }

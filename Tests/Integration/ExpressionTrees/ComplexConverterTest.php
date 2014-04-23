@@ -12,16 +12,8 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testDefaultOrderOfBinaryOperationFunction()
     {
-        $valueSet = [
-            [-500],
-            [-5],
-            [-2],
-            [-1],
-            [1],
-            [2],
-            [5],
-            [500]
-        ];
+        $valueSet = [[-500], [-5], [-2], [-1], [1], [2], [5], [500]];
+        
         $this->assertConvertsAndRecompilesCorrectly(
                 function ($i) {
                     return $i * -$i + 5 ^ $i / -$i % $i + 2 << $i - +$i;
@@ -34,17 +26,9 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testUsedVariableResolution()
     {
-        $valueSet = [
-            [-500],
-            [-5],
-            [-2],
-            [-1],
-            [1],
-            [2],
-            [5],
-            [500]
-        ];
+        $valueSet = [[-500], [-5], [-2], [-1], [1], [2], [5], [500]];
         $factor = 5;
+        
         $this->assertConvertsAndRecompilesCorrectly(
                 function ($i) use($factor) {
                     return $i * $factor;
@@ -57,17 +41,9 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testNestedClosureUsedVariableResolution()
     {
-        $valueSet = [
-            [-500],
-            [-5],
-            [-2],
-            [-1],
-            [1],
-            [2],
-            [5],
-            [500]
-        ];
+        $valueSet = [[-500], [-5], [-2], [-1], [1], [2], [5], [500]];
         $factor = 5;
+        
         $this->assertConvertsAndRecompilesCorrectly(
                 function ($i) use($factor) {
                     $innerClosue = 
@@ -85,16 +61,7 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testVariableReturnValueResolution()
     {
-        foreach ([
-            1,
-            null,
-            'test',
-            false,
-            new \stdClass(),
-            [1234567890, 'tests', new \stdClass(), function () {
-                
-            }]
-        ] as $value) {
+        foreach([1, null, 'test', false, new \stdClass(), [1234567890, 'tests', new \stdClass(), function () {}]] as $value) {
             $this->assertFirstResolvedReturnExpression(
                     function () use($value) {
                         return $value;
@@ -108,16 +75,8 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testNestedClosure()
     {
-        $valueSet = [
-            [-500],
-            [-5],
-            [-2],
-            [-1],
-            [1],
-            [2],
-            [5],
-            [500]
-        ];
+        $valueSet = [[-500], [-5], [-2], [-1], [1], [2], [5], [500]];
+        
         $this->assertConvertsAndRecompilesCorrectly(
                 function ($i) {
                     $divider = 
@@ -136,15 +95,19 @@ class ComplexConverterTest extends ConverterTest
     public function testOperationsReturnValueResolution()
     {
         $value = 5;
+        
         $this->assertReturnValueResolvesCorrectly(function () use($value) {
             return $value + 1;
         });
+        
         $this->assertReturnValueResolvesCorrectly(function () use($value) {
             return $value - 1;
         });
+        
         $this->assertReturnValueResolvesCorrectly(function () use($value) {
             return $value * 5;
         });
+        
         $this->assertReturnValueResolvesCorrectly(function () use($value) {
             return $value / $value + $value - $value % ~$value;
         });
@@ -156,17 +119,20 @@ class ComplexConverterTest extends ConverterTest
     public function testComplexReturnValueResolution()
     {
         $value = 5;
+        
         $this->assertReturnValueResolvesCorrectly(function () use($value) {
             $copy = $value;
             
             return $copy + 1;
         });
+        
         $this->assertReturnValueResolvesCorrectly(function () use($value) {
             $copy =& $value;
             $another = $value + 1;
             
             return $copy + 1 - $another;
         });
+        
         $this->assertReturnValueResolvesCorrectly(function () use($value) {
             $copy = $value / $value + $value - $value % ~$value;
             $another = $value % 34 - $copy + $value;
@@ -182,17 +148,20 @@ class ComplexConverterTest extends ConverterTest
     {
         $value = 5;
         $variable = 'value';
+        
         $this->assertReturnValueResolvesCorrectly(function () use($value, $variable) {
             $copy = ${$variable};
             
             return $copy + 1;
         });
+        
         $this->assertReturnValueResolvesCorrectly(function () use($value, $variable) {
             $copy =& ${$variable};
             $another = $value + 1;
             
             return $copy + 1 - $another;
         });
+        
         $this->assertReturnValueResolvesCorrectly(function () use($value, $variable) {
             $copy = ${$variable} / $value + $value - $value % ~${$variable};
             $another = $value % 34 - $copy + ${$variable};
@@ -225,6 +194,8 @@ class ComplexConverterTest extends ConverterTest
                         O\Expression::methodCall(
                                 O\Expression::variable(O\Expression::value('traversable')),
                                 O\Expression::value('asArray'))));
+                
+                
         $this->assertFirstResolvedReturnExpression(
                 function (\Pinq\ITraversable $traversable) {
                     return $traversable
@@ -282,31 +253,22 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testFileSizeFormatter()
     {
-        $formatter = 
-                function ($bytes, $precision = 2) {
-                    $units = [
-                        'B',
-                        'KB',
-                        'MB',
-                        'GB',
-                        'TB'
-                    ];
-                    $bytes = max($bytes, 0);
-                    $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
-                    $pow = min($pow, count($units) - 1);
-                    
-                    // Uncomment one of the following alternatives
-                    // $bytes /= pow(1024, $pow);
-                    // $bytes /= (1 << (10 * $pow));
-                    return round($bytes, $precision) . ' ' . $units[$pow];
-                };
-        $valueSet = [
-            [0],
-            [1000],
-            [500050],
-            [323241234],
-            [5000000]
-        ];
+        $formatter = function ($bytes, $precision = 2) { 
+            $units = array('B', 'KB', 'MB', 'GB', 'TB'); 
+
+            $bytes = max($bytes, 0); 
+            $pow = floor(($bytes ? log($bytes) : 0) / log(1024)); 
+            $pow = min($pow, count($units) - 1); 
+
+            // Uncomment one of the following alternatives
+            // $bytes /= pow(1024, $pow);
+            // $bytes /= (1 << (10 * $pow)); 
+
+            return round($bytes, $precision) . ' ' . $units[$pow]; 
+        };
+        
+        $valueSet = [[0], [1000], [500050], [323241234], [5000000]];
+        
         $this->assertConvertsAndRecompilesCorrectly($formatter, $valueSet);
     }
 }

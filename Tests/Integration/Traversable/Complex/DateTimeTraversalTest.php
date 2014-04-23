@@ -17,8 +17,8 @@ class DateTimeTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversa
      */
     public function testWeekendDateFilter(\Pinq\ITraversable $traversable, array $data)
     {
-        $traversable = 
-                $traversable->where(function (\DateTime $dateTime) {
+        $traversable = $traversable
+                ->where(function (\DateTime $dateTime) {
                     return in_array($dateTime->format('D'), ['Sat', 'Sun']);
                 });
         

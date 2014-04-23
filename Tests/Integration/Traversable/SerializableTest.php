@@ -11,6 +11,7 @@ class SerializableTest extends TraversableTest
     {
         $serializedTraversable = serialize($traversable);
         $unserializedTraversable = unserialize($serializedTraversable);
+        
         $this->assertEquals(
                 $traversable->asArray(),
                 $unserializedTraversable->asArray());
@@ -27,6 +28,7 @@ class SerializableTest extends TraversableTest
                 });
         $serializedTraversable = serialize($traversable);
         $unserializedTraversable = unserialize($serializedTraversable);
+        
         $this->assertEquals(
                 $traversable->asArray(),
                 $unserializedTraversable->asArray());

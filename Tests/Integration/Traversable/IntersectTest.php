@@ -15,6 +15,7 @@ class IntersectTest extends TraversableTest
     public function testThatIntersectWithSelfReturnsUniqueValues(\Pinq\ITraversable $traversable, array $data)
     {
         $intersection = $traversable->intersect($traversable);
+        
         $this->assertMatches($intersection, array_unique($data));
     }
     
@@ -24,6 +25,7 @@ class IntersectTest extends TraversableTest
     public function testThatIntersectWithEmptyReturnsEmpty(\Pinq\ITraversable $traversable, array $data)
     {
         $intersection = $traversable->intersect(new \Pinq\Traversable());
+        
         $this->assertMatches($intersection, []);
     }
     
@@ -34,6 +36,7 @@ class IntersectTest extends TraversableTest
     {
         $otherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
         $intersection = $traversable->intersect($otherData);
+        
         $this->assertMatches(
                 $intersection,
                 array_intersect($data, $otherData));
@@ -44,14 +47,8 @@ class IntersectTest extends TraversableTest
      */
     public function testThatIntersectUsesStrictEquality(\Pinq\ITraversable $traversable, array $data)
     {
-        $insection = 
-                $traversable->intersect([
-                    '1',
-                    '2',
-                    '3',
-                    '4',
-                    '5'
-                ]);
+        $insection = $traversable->intersect(['1', '2', '3', '4', '5']);
+        
         $this->assertMatches($insection, []);
     }
 }

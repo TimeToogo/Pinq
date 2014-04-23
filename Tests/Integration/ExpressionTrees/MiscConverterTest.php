@@ -49,59 +49,15 @@ class MiscConverterTest extends ConverterTest
      */
     public function testUnresolvedVariables()
     {
-        $this->assertUnresolvedVariablesAre(
-                function () {
-                    return null;
-                },
-                []);
-                
-        $this->assertUnresolvedVariablesAre(
-                function ($i) {
-                    return $i;
-                },
-                []);
-                
-        $this->assertUnresolvedVariablesAre(
-                function ($i) {
-                    return $i . $i;
-                },
-                []);
-                
-        $this->assertUnresolvedVariablesAre(
-                function ($i) {
-                    return $i . $foo;
-                },
-                ['foo']);
-                
-        $this->assertUnresolvedVariablesAre(
-                function () {
-                    return $i . $foo;
-                },
-                ['i', 'foo']);
-                
-        $this->assertUnresolvedVariablesAre(
-                function () {
-                    return $i . $i;
-                },
-                ['i']);
-                
-        $this->assertUnresolvedVariablesAre(
-                function () {
-                    $boo = $nah;
-                },
-                ['nah']);
-                
-        $this->assertUnresolvedVariablesAre(
-                function () {
-                    $boo += $nah;
-                },
-                ['boo', 'nah']);
-                
-        $this->assertUnresolvedVariablesAre(
-                function () {
-                    ${$boo};
-                },
-                ['$boo']);
+        $this->assertUnresolvedVariablesAre(function () { return null; }, []);
+        $this->assertUnresolvedVariablesAre(function ($i) { return $i; }, []);
+        $this->assertUnresolvedVariablesAre(function ($i) { return $i . $i; }, []);
+        $this->assertUnresolvedVariablesAre(function ($i) { return $i . $foo; }, ['foo']);
+        $this->assertUnresolvedVariablesAre(function () { return $i . $foo; }, ['i', 'foo']);
+        $this->assertUnresolvedVariablesAre(function () { return $i . $i; }, ['i']);
+        $this->assertUnresolvedVariablesAre(function () { $boo = $nah; }, ['nah']);
+        $this->assertUnresolvedVariablesAre(function () { $boo += $nah; }, ['boo', 'nah']);
+        $this->assertUnresolvedVariablesAre(function () { ${$boo}; }, ['$boo']);
                 
         $this->assertUnresolvedVariablesAre(
                 function () {
