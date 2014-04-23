@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -14,126 +14,119 @@ class TernaryExpression extends Expression
     /**
      * @var Expression
      */
-    private $ConditionExpression;
+    private $conditionExpression;
     
     /**
      * @var Expression
      */
-    private $IfTrueExpression;
+    private $ifTrueExpression;
     
     /**
      * @var Expression
      */
-    private $IfFalseExpression;
-
-    public function __construct(
-            Expression $ConditionExpression,
-            Expression $IfTrueExpression = null,
-            Expression $IfFalseExpression) {
-        $this->ConditionExpression = $ConditionExpression;
-        $this->IfTrueExpression = $IfTrueExpression;
-        $this->IfFalseExpression = $IfFalseExpression;
+    private $ifFalseExpression;
+    
+    public function __construct(Expression $conditionExpression, Expression $ifTrueExpression = null, Expression $ifFalseExpression)
+    {
+        $this->conditionExpression = $conditionExpression;
+        $this->ifTrueExpression = $ifTrueExpression;
+        $this->ifFalseExpression = $ifFalseExpression;
     }
-
+    
     /**
      * @return Expression
      */
-    public function GetConditionExpression()
+    public function getConditionExpression()
     {
-        return $this->ConditionExpression;
+        return $this->conditionExpression;
     }
-
+    
     /**
      * @return boolean
      */
-    public function HasIfTrueExpression()
+    public function hasIfTrueExpression()
     {
-        return $this->IfTrueExpression !== null;
+        return $this->ifTrueExpression !== null;
     }
-
+    
     /**
      * @return Expression
      */
-    public function GetIfTrueExpression()
+    public function getIfTrueExpression()
     {
-        return $this->IfTrueExpression;
+        return $this->ifTrueExpression;
     }
-
+    
     /**
      * @return Expression
      */
-    public function GetIfFalseExpression()
+    public function getIfFalseExpression()
     {
-        return $this->IfFalseExpression;
+        return $this->ifFalseExpression;
     }
-
-    public function Traverse(ExpressionWalker $Walker)
+    
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkTernary($this);
+        return $walker->walkTernary($this);
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
-        $ConditionExpression = $this->ConditionExpression->Simplify();
-        $IfTrueExpression = $this->IfTrueExpression->Simplify();
-        $IfFalseExpression = $this->IfFalseExpression->Simplify();
-
-        if ($ConditionExpression instanceof ValueExpression) {
-            return $ConditionExpression->GetValue() ?
-                    $IfTrueExpression : $IfFalseExpression;
+        $conditionExpression = $this->conditionExpression->simplify();
+        $ifTrueExpression = $this->ifTrueExpression->simplify();
+        $ifFalseExpression = $this->ifFalseExpression->simplify();
+        
+        if ($conditionExpression instanceof ValueExpression) {
+            return $conditionExpression->getValue() ? $ifTrueExpression : $ifFalseExpression;
         }
-
-        return $this->Update(
-                $ConditionExpression,
-                $IfTrueExpression,
-                $IfFalseExpression);
+        
+        return $this->update(
+                $conditionExpression,
+                $ifTrueExpression,
+                $ifFalseExpression);
     }
-
+    
     /**
      * @return self
      */
-    public function Update(
-            Expression $ConditionExpression,
-            Expression $IfTrueExpression,
-            Expression $IfFalseExpression) {
-        if ($this->ConditionExpression === $ConditionExpression
-                && $this->IfTrueExpression === $IfTrueExpression
-                && $this->IfFalseExpression === $IfFalseExpression) {
+    public function update(Expression $conditionExpression, Expression $ifTrueExpression, Expression $ifFalseExpression)
+    {
+        if ($this->conditionExpression === $conditionExpression && $this->ifTrueExpression === $ifTrueExpression && $this->ifFalseExpression === $ifFalseExpression) {
             return $this;
         }
-
-        return new self($ConditionExpression, $IfTrueExpression, $IfFalseExpression);
+        
+        return new self($conditionExpression, $ifTrueExpression, $ifFalseExpression);
     }
-
-    protected function CompileCode(&$Code)
+    
+    protected function compileCode(&$code)
     {
-        $Code .= '(';
+        $code .= '(';
+        $this->conditionExpression->compileCode($code);
+        $code .= ' ? ';
         
-        $this->ConditionExpression->CompileCode($Code);
-        $Code .= ' ? ';
-        if ($this->IfTrueExpression !== null) {
-            $this->IfTrueExpression->CompileCode($Code);
+        if ($this->ifTrueExpression !== null) {
+            $this->ifTrueExpression->compileCode($code);
         }
-        $Code .= ' : ';
-        $this->IfFalseExpression->CompileCode($Code);
         
-        $Code .= ')';
+        $code .= ' : ';
+        $this->ifFalseExpression->compileCode($code);
+        $code .= ')';
     }
     
     public function serialize()
     {
-        return serialize([$this->ConditionExpression, $this->IfTrueExpression, $this->IfFalseExpression]);
+        return serialize([$this->conditionExpression, $this->ifTrueExpression, $this->ifFalseExpression]);
     }
     
-    public function unserialize($Serialized)
+    public function unserialize($serialized)
     {
-        list($this->ConditionExpression, $this->IfTrueExpression, $this->IfFalseExpression) = unserialize($Serialized);
+        list($this->conditionExpression, $this->ifTrueExpression, $this->ifFalseExpression) = unserialize($serialized);
     }
     
     public function __clone()
     {
-        $this->ConditionExpression = clone $this->ConditionExpression;
-        $this->IfTrueExpression = clone $this->IfTrueExpression;
-        $this->IfFalseExpression = clone $this->IfFalseExpression;
+        $this->conditionExpression = clone $this->conditionExpression;
+        $this->ifTrueExpression = clone $this->ifTrueExpression;
+        $this->ifFalseExpression = clone $this->ifFalseExpression;
     }
 }

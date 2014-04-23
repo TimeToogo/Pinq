@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Iterators;
 
@@ -12,21 +12,22 @@ class FilterIterator extends IteratorIterator
     /**
      * @var callable
      */
-    private $Filter;
+    private $filter;
     
-    public function __construct(\Traversable $Iterator, callable $Filter)
+    public function __construct(\Traversable $iterator, callable $filter)
     {
-        parent::__construct($Iterator);
-        $this->Filter = $Filter;
+        parent::__construct($iterator);
+        $this->filter = $filter;
     }
     
     public function valid()
     {
-        $Filter = $this->Filter;
-        while(parent::valid()) {
-            $CurrentValue = self::current();
+        $filter = $this->filter;
+        
+        while (parent::valid()) {
+            $currentValue = self::current();
             
-            if($Filter($CurrentValue)) {
+            if ($filter($currentValue)) {
                 return true;
             }
             

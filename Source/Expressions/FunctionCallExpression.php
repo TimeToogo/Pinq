@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -14,87 +14,87 @@ class FunctionCallExpression extends Expression
     /**
      * @var Expression
      */
-    private $NameExpression;
+    private $nameExpression;
     
     /**
      * @var Expression[]
      */
-    private $ArgumentExpressions;
+    private $argumentExpressions;
     
-    public function __construct(Expression $NameExpression, array $ArgumentExpressions = [])
+    public function __construct(Expression $nameExpression, array $argumentExpressions = [])
     {
-        $this->NameExpression = $NameExpression;
-        $this->ArgumentExpressions = $ArgumentExpressions;
+        $this->nameExpression = $nameExpression;
+        $this->argumentExpressions = $argumentExpressions;
     }
-
+    
     /**
      * @return Expression
      */
-    public function GetNameExpression()
+    public function getNameExpression()
     {
-        return $this->NameExpression;
+        return $this->nameExpression;
     }
-
+    
     /**
      * @return Expression[]
      */
-    public function GetArgumentExpressions()
+    public function getArgumentExpressions()
     {
-        return $this->ArgumentExpressions;
+        return $this->argumentExpressions;
     }
-
-    public function Traverse(ExpressionWalker $Walker)
+    
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkFunctionCall($this);
+        return $walker->walkFunctionCall($this);
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
         //TODO: Add a whitelist of deteministic and side-effect free functions.
-        return $this->Update(
-                $this->NameExpression->Simplify(),
-                self::SimplifyAll($this->ArgumentExpressions));
+        return $this->update(
+                $this->nameExpression->simplify(),
+                self::simplifyAll($this->argumentExpressions));
     }
-
+    
     /**
      * @return self
      */
-    public function Update(Expression $NameExpression, array $ArgumentExpressions = [])
+    public function update(Expression $nameExpression, array $argumentExpressions = [])
     {
-        if ($this->NameExpression === $NameExpression
-                && $this->ArgumentExpressions === $ArgumentExpressions) {
+        if ($this->nameExpression === $nameExpression && $this->argumentExpressions === $argumentExpressions) {
             return $this;
         }
-
-        return new self($NameExpression, $ArgumentExpressions);
+        
+        return new self($nameExpression, $argumentExpressions);
     }
-
-    protected function CompileCode(&$Code)
+    
+    protected function compileCode(&$code)
     {
-        if ($this->NameExpression instanceof ValueExpression) {
-            $Code .= $this->NameExpression->GetValue();
-        } 
-        else {
-            $this->NameExpression->CompileCode($Code);
+        if ($this->nameExpression instanceof ValueExpression) {
+            $code .= $this->nameExpression->getValue();
         }
-        $Code .= '(';
-        $Code .= implode(',', self::CompileAll($this->ArgumentExpressions));
-        $Code .= ')';
+        else {
+            $this->nameExpression->compileCode($code);
+        }
+        
+        $code .= '(';
+        $code .= implode(',', self::compileAll($this->argumentExpressions));
+        $code .= ')';
     }
     
     public function serialize()
     {
-        return serialize([$this->NameExpression, $this->ArgumentExpressions]);
+        return serialize([$this->nameExpression, $this->argumentExpressions]);
     }
     
-    public function unserialize($Serialized)
+    public function unserialize($serialized)
     {
-        list($this->NameExpression, $this->ArgumentExpressions) = unserialize($Serialized);
+        list($this->nameExpression, $this->argumentExpressions) = unserialize($serialized);
     }
     
     public function __clone()
     {
-        $this->NameExpression = clone $this->NameExpression;
-        $this->ArgumentExpressions = self::CloneAll($this->ArgumentExpressions);
+        $this->nameExpression = clone $this->nameExpression;
+        $this->argumentExpressions = self::cloneAll($this->argumentExpressions);
     }
 }

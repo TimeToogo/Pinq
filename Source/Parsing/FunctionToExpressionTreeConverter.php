@@ -1,10 +1,10 @@
-<?php
+<?php 
 
 namespace Pinq\Parsing;
 
-use \Pinq\Expressions as O;
-use \Pinq\Caching\Provider;
-use \Pinq\Caching\IFunctionCache;
+use Pinq\Expressions as O;
+use Pinq\Caching\Provider;
+use Pinq\Caching\IFunctionCache;
 
 /**
  * Default implementaion for the IFunctionToExpressionTreeConverter. 
@@ -17,172 +17,168 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
     /**
      * @var IParser
      */
-    protected $Parser;
+    protected $parser;
     
     /**
      * @var IFunctionCache 
      */
-    private $Cache;
-
-    public function __construct(IParser $Parser, IFunctionCache $Cache = null)
+    private $cache;
+    
+    public function __construct(IParser $parser, IFunctionCache $cache = null)
     {
-        $this->Parser = $Parser;
-        $this->Cache = $Cache ?: Provider::GetCache();
-    }
-
-    final public function GetParser()
-    {
-        return $this->Parser;
+        $this->parser = $parser;
+        $this->cache = $cache ?: Provider::getCache();
     }
     
-    private function GetFunctionHash(\ReflectionFunctionAbstract $Reflection)
+    public final function getParser()
     {
-        return md5($this->Parser->GetSignatureHash($Reflection) . '-' . $Reflection->getFileName());
+        return $this->parser;
+    }
+    
+    private function getFunctionHash(\ReflectionFunctionAbstract $reflection)
+    {
+        return md5($this->parser->getSignatureHash($reflection) . '-' . $reflection->getFileName());
     }
     
     /**
      * @return \Pinq\FunctionExpressionTree
      */
-    final public function Convert(callable $Function)
+    public final function convert(callable $function)
     {
-        if($Function instanceof \Pinq\FunctionExpressionTree) {
-            return $Function;
+        if ($function instanceof \Pinq\FunctionExpressionTree) {
+            return $function;
         }
         
-        $Reflection = Reflection::FromCallable($Function);
+        $reflection = Reflection::fromCallable($function);
+        $fullFunctionHash = $this->getFunctionHash($reflection);
+        $expressionTree = $this->cache->tryGet($fullFunctionHash);
         
-        $FullFunctionHash = $this->GetFunctionHash($Reflection);
-        
-        $ExpressionTree = $this->Cache->TryGet($FullFunctionHash);
-        
-        if (!($ExpressionTree instanceof \Pinq\FunctionExpressionTree)) {
-            $ExpressionTree = $this->GetFunctionExpressionTree($Reflection);
-
+        if (!$expressionTree instanceof \Pinq\FunctionExpressionTree) {
+            $expressionTree = $this->getFunctionExpressionTree($reflection);
             /*
              * Resolve all that can be currently resolved and save the expression tree with all
              * the unresolvable variables so it can be resolved with different values later
              */
-            $ExpressionTree->Simplify();
-            
+            $expressionTree->simplify();
             //Force code to compile for optimal cached state
-            $ExpressionTree->GetCompiledCode();
-            
-            $this->Cache->Save($FullFunctionHash, $ExpressionTree);
+            $expressionTree->getCompiledCode();
+            $this->cache->save($fullFunctionHash, $expressionTree);
         }
-        //Set the compiled function with the original to prevent having to eval
-        $ExpressionTree->SetCompiledFunction($Function);
         
-        if ($ExpressionTree->HasUnresolvedVariables()) {
+        //Set the compiled function with the original to prevent having to eval
+        $expressionTree->setCompiledFunction($function);
+        
+        if ($expressionTree->hasUnresolvedVariables()) {
             /*
              * Simplify and resolve any remaining expressions that could not be resolved due
              * to unresolved variables
              */
-            $this->Resolve($ExpressionTree, $this->GetKnownVariables($Reflection, $Function), []);
+            $this->resolve(
+                    $expressionTree,
+                    $this->getKnownVariables($reflection, $function),
+                    []);
         }
-
-        return $ExpressionTree;
+        
+        return $expressionTree;
     }
     
-    protected function GetKnownVariables(\ReflectionFunctionAbstract $Reflection, callable $Function)
+    protected function getKnownVariables(\ReflectionFunctionAbstract $reflection, callable $function)
     {
         //ReflectionFunction::getStaticVariables() returns the used variables for closures
-        $KnownVariables = $Reflection->getStaticVariables();
+        $knownVariables = $reflection->getStaticVariables();
         
         //HHVM Compatibility: hhvm does not support ReflectionFunctionAbstract::getClosureThis
-        if($Function instanceof \Closure && !defined('HHVM_VERSION')) {
-            $ThisValue = $Reflection->getClosureThis();
-            if($ThisValue !== null) {
-                $KnownVariables['this'] = $ThisValue;
+        if ($function instanceof \Closure && !defined('HHVM_VERSION')) {
+            $thisValue = $reflection->getClosureThis();
+            
+            if ($thisValue !== null) {
+                $knownVariables['this'] = $thisValue;
             }
         }
-        else if (is_array($Function) && is_object($Function[0])) {
-            $KnownVariables['this'] = $Function[0];
+        else if (is_array($function) && is_object($function[0])) {
+            $knownVariables['this'] = $function[0];
         }
         
-        return $KnownVariables;
+        return $knownVariables;
     }
-
-    final protected function Resolve(
-            \Pinq\FunctionExpressionTree $ExpressionTree,
-            array $VariableValueMap,
-            array $VariableExpressionMap) {
-        $ExpressionTree->ResolveVariables($VariableValueMap, $VariableExpressionMap);
-        $ExpressionTree->Simplify();
+    
+    protected final function resolve(\Pinq\FunctionExpressionTree $expressionTree, array $variableValueMap, array $variableExpressionMap)
+    {
+        $expressionTree->resolveVariables(
+                $variableValueMap,
+                $variableExpressionMap);
+        $expressionTree->simplify();
     }
-
+    
     /**
      * @return \Pinq\FunctionExpressionTree
      */
-    final protected function GetFunctionExpressionTree(\ReflectionFunctionAbstract $Reflection, callable $Function = null) 
+    protected final function getFunctionExpressionTree(\ReflectionFunctionAbstract $reflection, callable $function = null)
     {
-        $ParameterExpressions = $this->GetParameterExpressions($Reflection);
-        $BodyExpressions = $Reflection->isUserDefined() ? 
-                $this->Parser->Parse($Reflection) : $this->InternalFunctionExpressions($Reflection);
+        $parameterExpressions = $this->getParameterExpressions($reflection);
+        $bodyExpressions = $reflection->isUserDefined() ? $this->parser->parse($reflection) : $this->internalFunctionExpressions($reflection);
         
         return new \Pinq\FunctionExpressionTree(
-                $Function,
-                $ParameterExpressions,
-                $BodyExpressions);
+                $function,
+                $parameterExpressions,
+                $bodyExpressions);
     }
     
-    private function InternalFunctionExpressions(\ReflectionFunctionAbstract $Reflection) 
+    private function internalFunctionExpressions(\ReflectionFunctionAbstract $reflection)
     {
-        $HasUnavailableDefaultValue = false;
-        $ArgumentExpressions = [];
-        foreach($Reflection->getParameters() as $Parameter) {
-            if($Parameter->isOptional() && !$Parameter->isDefaultValueAvailable()) {
-                $HasUnavailableDefaultValue = true;
+        $hasUnavailableDefaultValue = false;
+        $argumentExpressions = [];
+        
+        foreach ($reflection->getParameters() as $parameter) {
+            if ($parameter->isOptional() && !$parameter->isDefaultValueAvailable()) {
+                $hasUnavailableDefaultValue = true;
             }
-            $ArgumentExpressions[] = O\Expression::Variable(O\Expression::Value($Parameter->getName()));
+            
+            $argumentExpressions[] = O\Expression::variable(O\Expression::value($parameter->getName()));
         }
         
-        if(!$HasUnavailableDefaultValue) {
-            return [
-                O\Expression::ReturnExpression(
-                        O\Expression::FunctionCall(
-                                O\Expression::Value($Reflection->getName()),
-                                $ArgumentExpressions))
-            ];
+        if (!$hasUnavailableDefaultValue) {
+            return [O\Expression::returnExpression(O\Expression::functionCall(
+                    O\Expression::value($reflection->getName()),
+                    $argumentExpressions))];
         }
         else {
-            return [
-                O\Expression::ReturnExpression(
-                        O\Expression::FunctionCall(O\Expression::Value('call_user_func_array'),
-                                [O\Expression::Value($Reflection->getName()), O\Expression::FunctionCall(O\Expression::Value('func_get_args'))]))
-            ];
+            return [O\Expression::returnExpression(O\Expression::functionCall(
+                    O\Expression::value('call_user_func_array'),
+                    [O\Expression::value($reflection->getName()), O\Expression::functionCall(O\Expression::value('func_get_args'))]))];
         }
-    }
-
-
-    final protected function GetParameterExpressions(\ReflectionFunctionAbstract $Reflection)
-    {
-        $ParameterExpressions = [];
-        
-        foreach ($Reflection->getParameters() as $Parameter) {
-            $ParameterExpressions[] = $this->GetParameterExpression($Parameter);
-        }
-
-        return $ParameterExpressions;
     }
     
-    private function GetParameterExpression(\ReflectionParameter $Parameter) 
+    protected final function getParameterExpressions(\ReflectionFunctionAbstract $reflection)
     {
-        $TypeHint = null;
-        if ($Parameter->isArray()) {
-            $TypeHint = 'array';
-        } 
-        else if ($Parameter->isCallable()) {
-            $TypeHint = 'callable';
-        } 
-        else if ($Parameter->getClass() !== null) {
-            $TypeHint = $Parameter->getClass()->getName();
+        $parameterExpressions = [];
+        
+        foreach ($reflection->getParameters() as $parameter) {
+            $parameterExpressions[] = $this->getParameterExpression($parameter);
         }
         
-        return O\Expression::Parameter(
-                $Parameter->getName(), 
-                $TypeHint, 
-                $Parameter->isOptional(), 
-                $Parameter->isDefaultValueAvailable() ? $Parameter->getDefaultValue() : null, 
-                $Parameter->isPassedByReference());
+        return $parameterExpressions;
+    }
+    
+    private function getParameterExpression(\ReflectionParameter $parameter)
+    {
+        $typeHint = null;
+        
+        if ($parameter->isArray()) {
+            $typeHint = 'array';
+        }
+        else if ($parameter->isCallable()) {
+            $typeHint = 'callable';
+        }
+        else if ($parameter->getClass() !== null) {
+            $typeHint = $parameter->getClass()->getName();
+        }
+        
+        return O\Expression::parameter(
+                $parameter->getName(),
+                $typeHint,
+                $parameter->isOptional(),
+                $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null,
+                $parameter->isPassedByReference());
     }
 }

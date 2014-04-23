@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -14,72 +14,72 @@ class ReturnExpression extends Expression
     /**
      * @var Expression
      */
-    private $ReturnValueExpression;
-
-    public function __construct(Expression $ReturnValueExpression = null)
+    private $returnValueExpression;
+    
+    public function __construct(Expression $returnValueExpression = null)
     {
-        $this->ReturnValueExpression = $ReturnValueExpression;
+        $this->returnValueExpression = $returnValueExpression;
     }
-
+    
     /**
      * @return boolean
      */
-    public function HasValueExpression()
+    public function hasValueExpression()
     {
-        return $this->ReturnValueExpression !== null;
+        return $this->returnValueExpression !== null;
     }
-
+    
     /**
      * @return Expression|null
      */
-    public function GetValueExpression()
+    public function getValueExpression()
     {
-        return $this->ReturnValueExpression;
+        return $this->returnValueExpression;
     }
-
-    public function Traverse(ExpressionWalker $Walker)
+    
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkReturn($this);
+        return $walker->walkReturn($this);
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
-        return $this->Update($this->ReturnValueExpression->Simplify());
+        return $this->update($this->returnValueExpression->simplify());
     }
-
+    
     /**
      * @return self
      */
-    public function Update(Expression $ReturnValueExpression = null)
+    public function update(Expression $returnValueExpression = null)
     {
-        if ($this->ReturnValueExpression === $ReturnValueExpression) {
+        if ($this->returnValueExpression === $returnValueExpression) {
             return $this;
         }
-
-        return new self($ReturnValueExpression);
+        
+        return new self($returnValueExpression);
     }
-
-    protected function CompileCode(&$Code)
+    
+    protected function compileCode(&$code)
     {
-        $Code .= 'return ';
-
-        if ($this->ReturnValueExpression !== null) {
-            $this->ReturnValueExpression->CompileCode($Code);
+        $code .= 'return ';
+        
+        if ($this->returnValueExpression !== null) {
+            $this->returnValueExpression->compileCode($code);
         }
     }
     
     public function serialize()
     {
-        return serialize($this->ReturnValueExpression);
+        return serialize($this->returnValueExpression);
     }
     
-    public function unserialize($Serialized)
+    public function unserialize($serialized)
     {
-        $this->ReturnValueExpression = unserialize($Serialized);
+        $this->returnValueExpression = unserialize($serialized);
     }
     
     public function __clone()
     {
-        $this->ReturnValueExpression = clone $this->ReturnValueExpression;
+        $this->returnValueExpression = clone $this->returnValueExpression;
     }
 }

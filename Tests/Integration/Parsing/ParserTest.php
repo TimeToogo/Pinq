@@ -1,54 +1,52 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Parsing;
 
-use \Pinq\Parsing;
-use \Pinq\Parsing\IParser;
-use \Pinq\Expressions as O;
+use Pinq\Parsing;
+use Pinq\Parsing\IParser;
+use Pinq\Expressions as O;
 
 abstract class ParserTest extends \Pinq\Tests\PinqTestCase
 {
-    private $Implementations;
+    private $implementations;
     
     /**
      * @var IParser
      */
-    private $CurrentImplementation;
+    private $currentImplementation;
     
-    public function __construct($name = NULL, array $data = array(), $dataName = '')
+    public function __construct($name = NULL, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        $this->Implementations = $this->Implementations();
-        
-        $this->CurrentImplementation = isset($data[0]) ? $data[0] : null;
+        $this->implementations = $this->implementations();
+        $this->currentImplementation = isset($data[0]) ? $data[0] : null;
     }
     
-    protected function Implementations()
+    protected function implementations()
     {
-        return [
-            new Parsing\PHPParser\Parser(),
-        ];
-    }
-
-    final public function Parsers() 
-    {
-        return array_map(function ($I) { return [$I]; }, $this->Implementations);
+        return [new Parsing\PHPParser\Parser()];
     }
     
-    final protected function AssertParsedAs(callable $Function, array $Expressions) 
+    public final function parsers()
     {
-        if($this->CurrentImplementation === null) {
+        return array_map(function ($i) {
+            return [$i];
+        }, $this->implementations);
+    }
+    
+    protected final function assertParsedAs(callable $function, array $expressions)
+    {
+        if ($this->currentImplementation === null) {
             throw new \Exception('Please remember to use the @dataProvider annotation to test all the implementations.');
         }
         
-        $this->assertEquals($Expressions,
-                $this->CurrentImplementation->Parse(
-                        is_array($Function) ? new \ReflectionMethod($Function[0], $Function[1]) : new \ReflectionFunction($Function)));
+        $this->assertEquals(
+                $expressions,
+                $this->currentImplementation->parse(is_array($function) ? new \ReflectionMethod($function[0], $function[1]) : new \ReflectionFunction($function)));
     }
     
-    protected static function Variable($Name)
+    protected static function variable($name)
     {
-        return O\Expression::Variable(O\Expression::Value($Name));
+        return O\Expression::variable(O\Expression::value($name));
     }
-    
 }

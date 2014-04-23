@@ -1,83 +1,94 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration;
 
 abstract class DataTest extends \Pinq\Tests\PinqTestCase
 {
-    private $ImplementationCounter = 0;
-        
-    protected abstract function ImplementationsFor(array $Data);
+    private $implementationCounter = 0;
     
-    final protected function GetImplementations(array $Data) 
+    protected abstract function implementationsFor(array $data);
+    
+    protected final function getImplementations(array $data)
     {
-        $Implementations = [];
-        foreach ($this->ImplementationsFor($Data) as $Implementation) {
-            $Implementations[++$this->ImplementationCounter] = $Implementation;
+        $implementations = [];
+        
+        foreach ($this->implementationsFor($data) as $implementation) {
+            $implementations[++$this->implementationCounter] = $implementation;
         }
         
-        return $Implementations;
+        return $implementations;
     }
     
-    public function Everything() 
+    public function everything()
     {
-        $Data = [];
-        $DataProviders = ['EmptyData', 'OneToTen', 'OneToTenTwice', 'AssocOneToTen', 'TenRandomStrings'];
+        $data = [];
+        $dataProviders = [
+            'EmptyData',
+            'OneToTen',
+            'OneToTenTwice',
+            'AssocOneToTen',
+            'TenRandomStrings'
+        ];
         
-        foreach($DataProviders as $Provider) {
-            $Data = array_merge($Data, $this->$Provider());
+        foreach ($dataProviders as $provider) {
+            $data = array_merge($data, $this->{$provider}());
         }
         
-        return $Data;
+        return $data;
     }
     
-    public function EmptyData()
+    public function emptyData()
     {
-        return $this->GetImplementations([]);
+        return $this->getImplementations([]);
     }
     
-    public function OneToTen()
+    public function oneToTen()
     {
-        return $this->GetImplementations(range(1, 10));
+        return $this->getImplementations(range(1, 10));
     }
     
-    public function OneToTenTwice()
+    public function oneToTenTwice()
     {
-        return $this->GetImplementations(array_merge(range(1, 10), range(1, 10)));
+        return $this->getImplementations(array_merge(range(1, 10), range(1, 10)));
     }
     
-    public function AssocOneToTen()
+    public function assocOneToTen()
     {
-        return $this->GetImplementations(array_combine($this->RandomStrings(10), range(1, 10)));
+        return $this->getImplementations(array_combine($this->randomStrings(10), range(1, 10)));
     }
     
-    public function TenRandomStrings()
+    public function tenRandomStrings()
     {
-        return $this->GetImplementations($this->RandomStrings(10));
+        return $this->getImplementations($this->randomStrings(10));
     }
     
-    public function AssocTenRandomStrings()
+    public function assocTenRandomStrings()
     {
-        return $this->GetImplementations(array_combine($this->RandomStrings(10), $this->RandomStrings(10)));
+        return $this->getImplementations(array_combine($this->randomStrings(10), $this->randomStrings(10)));
     }
     
-    private function RandomStrings($Amount)
+    private function randomStrings($amount)
     {
-        $Letters = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-!@#$%^&*()_';
-        $RandomStrings = [];
-        for ($Count = 0; $Count < $Amount; $Count++) {
-            $RandomStrings[] = substr(str_shuffle($Letters), 0, rand(5, 10));
+        $letters = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-!@#$%^&*()_';
+        $randomStrings = [];
+        
+        for ($count = 0; $count < $amount; $count++) {
+            $randomStrings[] = substr(str_shuffle($letters), 0, rand(5, 10));
         }
         
-        return $RandomStrings;
+        return $randomStrings;
     }
     
-    final protected function AssertMatches(\Pinq\ITraversable $Traversable, array $Array, $Message = '')
+    protected final function assertMatches(\Pinq\ITraversable $traversable, array $array, $message = '')
     {
-        $this->assertSame($Array, $Traversable->AsArray(), $Message);
+        $this->assertSame($array, $traversable->asArray(), $message);
     }
-        
-    final protected function AssertMatchesValues(\Pinq\ITraversable $Traversable, array $Array, $Message = '')
+    
+    protected final function assertMatchesValues(\Pinq\ITraversable $traversable, array $array, $message = '')
     {
-        $this->assertSame(array_values($Array), array_values($Traversable->AsArray()), $Message);
+        $this->assertSame(
+                array_values($array),
+                array_values($traversable->asArray()),
+                $message);
     }
 }

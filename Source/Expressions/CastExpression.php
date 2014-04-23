@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -15,102 +15,100 @@ class CastExpression extends Expression
     /**
      * @var int
      */
-    private $CastType;
+    private $castType;
     
     /**
      * @var Expression
      */
-    private $CastValueExpression;
-
-    public function __construct($CastType, Expression $CastValueExpression)
+    private $castValueExpression;
+    
+    public function __construct($castType, Expression $castValueExpression)
     {
-        $this->CastType = $CastType;
-        $this->CastValueExpression = $CastValueExpression;
+        $this->castType = $castType;
+        $this->castValueExpression = $castValueExpression;
     }
-
+    
     /**
      * @return string The cast operator
      */
-    public function GetCastType()
+    public function getCastType()
     {
-        return $this->CastType;
+        return $this->castType;
     }
-
+    
     /**
      * @return Expression The expression which is cast
      */
-    public function GetCastValueExpression()
+    public function getCastValueExpression()
     {
-        return $this->CastValueExpression;
+        return $this->castValueExpression;
     }
-
-    public function Traverse(ExpressionWalker $Walker)
+    
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkCast($this);
+        return $walker->walkCast($this);
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
-        $Value = $this->CastValueExpression->Simplify();
-        if ($Value instanceof ValueExpression) {
-            return Expression::Value(self::CastValue($this->CastType, $Value));
+        $value = $this->castValueExpression->simplify();
+        
+        if ($value instanceof ValueExpression) {
+            return Expression::value(self::castValue($this->castType, $value));
         }
-
-        return $this->Update(
-                $this->CastType,
-                $Value);
+        
+        return $this->update($this->castType, $value);
     }
-
-    private static $CastTypeMap = [
-        Operators\Cast::ArrayCast => 'array',
-        Operators\Cast::Boolean => 'bool',
-        Operators\Cast::Double => 'double',
-        Operators\Cast::Integer => 'int',
-        Operators\Cast::String => 'string',
-        Operators\Cast::Object => 'object',
+    
+    private static $castTypeMap = [
+        Operators\Cast::ARRAY_CAST => 'array',
+        Operators\Cast::BOOLEAN => 'bool',
+        Operators\Cast::DOUBLE => 'double',
+        Operators\Cast::INTEGER => 'int',
+        Operators\Cast::STRING => 'string',
+        Operators\Cast::OBJECT => 'object'
     ];
-
+    
     /**
-     * @param ValueExpression $Value
+     * @param ValueExpression $value
      */
-    private static function CastValue($CastTypeOperator, $Value)
+    private static function castValue($castTypeOperator, $value)
     {
-        settype($Value, self::$CastTypeMap[$CastTypeOperator]);
-
-        return $Value;
+        settype($value, self::$castTypeMap[$castTypeOperator]);
+        
+        return $value;
     }
-
+    
     /**
      * @return self
      */
-    public function Update($CastType, Expression $CastValueExpression)
+    public function update($castType, Expression $castValueExpression)
     {
-        if ($this->CastType === $CastType
-                && $this->CastValueExpression === $CastValueExpression) {
+        if ($this->castType === $castType && $this->castValueExpression === $castValueExpression) {
             return $this;
         }
-
-        return new self($CastType, $CastValueExpression);
+        
+        return new self($castType, $castValueExpression);
     }
-
-    protected function CompileCode(&$Code)
+    
+    protected function compileCode(&$code)
     {
-        $Code .= $this->CastType;
-        $this->CastValueExpression->CompileCode($Code);
+        $code .= $this->castType;
+        $this->castValueExpression->compileCode($code);
     }
     
     public function serialize()
     {
-        return serialize([$this->CastType, $this->CastValueExpression]);
+        return serialize([$this->castType, $this->castValueExpression]);
     }
     
-    public function unserialize($Serialized)
+    public function unserialize($serialized)
     {
-        list($this->CastType, $this->CastValueExpression) = unserialize($Serialized);
+        list($this->castType, $this->castValueExpression) = unserialize($serialized);
     }
     
     public function __clone()
     {
-        $this->CastValueExpression = clone $this->CastValueExpression;
+        $this->castValueExpression = clone $this->castValueExpression;
     }
 }

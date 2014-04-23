@@ -1,42 +1,42 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Caching;
 
-use \Pinq\Caching\DirectoryFunctionCache;
+use Pinq\Caching\DirectoryFunctionCache;
 
 class DirectoryCacheTest extends CacheTest
 {
-    private static $CacheDirectoryPath;
+    private static $cacheDirectoryPath;
     
-    public function __construct($name = NULL, array $data = array(), $dataName = '')
+    public function __construct($name = NULL, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        
-        self::$CacheDirectoryPath = self::$RootCacheDirectory . 'DirectoryCache';
+        self::$cacheDirectoryPath = self::$rootCacheDirectory . 'DirectoryCache';
     }
     
     protected function setUp()
     {
-        $this->Cache = new DirectoryFunctionCache(self::$CacheDirectoryPath);
+        $this->cache = new DirectoryFunctionCache(self::$cacheDirectoryPath);
     }
     
     protected function tearDown()
     {
-        $this->Cache = null;
+        $this->cache = null;
         usleep(1000);
-        self::DeleteDirectory(self::$CacheDirectoryPath);
+        self::deleteDirectory(self::$cacheDirectoryPath);
     }
     
-    private static function DeleteDirectory($Directory)
+    private static function deleteDirectory($directory)
     {
-        foreach(glob($Directory . DIRECTORY_SEPARATOR . '*') as $Path) {
-            if(is_dir($Path)) {
-                self::DeleteDirectory($Path); 
+        foreach (glob($directory . DIRECTORY_SEPARATOR . '*') as $path) {
+            if (is_dir($path)) {
+                self::deleteDirectory($path);
             }
             else {
-                unlink($Path); 
+                unlink($path);
             }
         }
-        rmdir($Directory);
+        
+        rmdir($directory);
     }
 }

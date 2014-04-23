@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Queries\Segments;
 
@@ -9,17 +9,17 @@ namespace Pinq\Queries\Segments;
  */
 class Unique extends Segment
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Unique;
-    }
-
-    public function Traverse(SegmentWalker $Walker)
-    {
-        return $Walker->WalkUnique($this);
+        return self::UNIQUE;
     }
     
-    public function Update() 
+    public function traverse(SegmentWalker $walker)
+    {
+        return $walker->walkUnique($this);
+    }
+    
+    public function update()
     {
         return $this;
     }

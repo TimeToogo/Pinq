@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Parsing;
 
@@ -14,5 +14,5 @@ interface IFunctionToExpressionTreeConverter
      *
      * @return \Pinq\FunctionExpressionTree
      */
-    public function Convert(callable $Function);
+    public function convert(callable $function);
 }

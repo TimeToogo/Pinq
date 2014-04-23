@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq;
 
@@ -15,240 +15,258 @@ class Traversable implements \Pinq\ITraversable, \Serializable
      * 
      * @var \Iterator 
      */
-    protected $ValuesIterator;
+    protected $valuesIterator;
     
-    public function __construct($Values = [])
+    public function __construct($values = [])
     {
-        $this->ValuesIterator = Utilities::ToIterator($Values);
+        $this->valuesIterator = Utilities::toIterator($values);
     }
     
     /**
      * Constructs a new traversable object from the supplied values
      * 
-     * @param array|\Traversable $Values The values
+     * @param array|\Traversable $values The values
      * @return static
      */
-    public static function From($Values)
+    public static function from($values)
     {
-        return new static($Values);
+        return new static($values);
     }
     
-    final public function getIterator()
+    public final function getIterator()
     {
-        return $this->ValuesIterator;
+        return $this->valuesIterator;
     }
     
-    public function AsArray() 
+    public function asArray()
     {
-        $Array = Utilities::ToArray($this->ValuesIterator);
-        $this->ValuesIterator = new \ArrayIterator($Array);
+        $array = Utilities::toArray($this->valuesIterator);
+        $this->valuesIterator = new \ArrayIterator($array);
         
-        return $Array;
+        return $array;
     }
     
-    public function AsTraversable()
+    public function asTraversable()
     {
         return $this;
     }
     
-    public function AsCollection()
+    public function asCollection()
     {
-        return new Collection($this->ValuesIterator);
+        return new Collection($this->valuesIterator);
     }
     
-    public function AsQueryable()
+    public function asQueryable()
     {
-        return (new Providers\Traversable\Provider($this))->CreateQueryable();
+        return (new Providers\Traversable\Provider($this))->createQueryable();
     }
     
-    public function AsRepository()
+    public function asRepository()
     {
-        return (new Collection($this->ValuesIterator))->AsRepository();
+        return (new Collection($this->valuesIterator))->asRepository();
     }
     
     public function serialize()
     {
-        return serialize($this->AsArray());
+        return serialize($this->asArray());
     }
     
-    public function unserialize($Serialized)
+    public function unserialize($serialized)
     {
-        $this->ValuesIterator = new \ArrayIterator(unserialize($Serialized));
+        $this->valuesIterator = new \ArrayIterator(unserialize($serialized));
     }
     
     // <editor-fold defaultstate="collapsed" desc="Querying">
-    
-    public function First() {
-        foreach ($this->ValuesIterator as $Value) {
-            return $Value;
+    public function first()
+    {
+        foreach ($this->valuesIterator as $value) {
+            return $value;
         }
         
         return null;
     }
     
-    public function Last() {
-        $Array = $this->AsArray();
-        return end($Array) ?: null;
-    }
-    public function Where(callable $Predicate) 
+    public function last()
     {
-        return new self(new Iterators\FilterIterator($this->ValuesIterator, $Predicate));
-    }
-    
-    public function OrderByAscending(callable $Function) 
-    {
-        return new OrderedTraversable(new Iterators\OrderedIterator($this->ValuesIterator, $Function, true));
-    }
-    
-    public function OrderByDescending(callable $Function) 
-    {
-        return new OrderedTraversable(new Iterators\OrderedIterator($this->ValuesIterator, $Function, false));
-    }
-    
-    public function OrderBy(callable $Function, $Direction)
-    {
-        return $Direction === Direction::Descending ? $this->OrderByDescending($Function) : $this->OrderByAscending($Function);
-    }
-    
-    public function Skip($Amount)
-    {
-        return new self(new Iterators\RangeIterator($this->ValuesIterator, $Amount, null));
-    }
-    
-    public function Take($Amount) 
-    {
-        return new self(new Iterators\RangeIterator($this->ValuesIterator, 0, $Amount));
-    }
-    
-    public function Slice($Start, $Amount) 
-    {
-        return new self(new Iterators\RangeIterator($this->ValuesIterator, $Start, $Amount));
-    }
-    
-    public function IndexBy(callable $Function) 
-    {
-        return new self(new Iterators\ProjectionIterator($this->ValuesIterator, $Function, null));
-    }
-    
-    public function GroupBy(callable $Function) 
-    {
-        return new GroupedTraversable(new Iterators\GroupedIterator($this->ValuesIterator, $Function));
-    }
-    
-    public function Join($Values)
-    {
-        return new JoiningOnTraversable($this->ValuesIterator, Utilities::ToIterator($Values), false);
-    }
-    
-    public function GroupJoin($Values)
-    {
-        return new JoiningOnTraversable($this->ValuesIterator, Utilities::ToIterator($Values), true);
-    }
-    
-    public function Unique() 
-    {
-        return new self(new Iterators\UniqueIterator($this->ValuesIterator));
-    }
-    
-    public function Select(callable $Function) 
-    {
-        return new self(new Iterators\ProjectionIterator($this->ValuesIterator, null, $Function));
-    }
-    
-    public function SelectMany(callable $Function) 
-    {
-        $ProjectionIterator = new Iterators\ProjectionIterator($this->ValuesIterator, null, $Function);
+        $array = $this->asArray();
         
-        return new self(new Iterators\FlatteningIterator($ProjectionIterator));
+        return end($array) ?: null;
+    }
+    
+    public function where(callable $predicate)
+    {
+        return new self(new Iterators\FilterIterator($this->valuesIterator, $predicate));
+    }
+    
+    public function orderByAscending(callable $function)
+    {
+        return new OrderedTraversable(new Iterators\OrderedIterator($this->valuesIterator, $function, true));
+    }
+    
+    public function orderByDescending(callable $function)
+    {
+        return new OrderedTraversable(new Iterators\OrderedIterator($this->valuesIterator, $function, false));
+    }
+    
+    public function orderBy(callable $function, $direction)
+    {
+        return $direction === Direction::DESCENDING ? $this->orderByDescending($function) : $this->orderByAscending($function);
+    }
+    
+    public function skip($amount)
+    {
+        return new self(new Iterators\RangeIterator($this->valuesIterator, $amount, null));
+    }
+    
+    public function take($amount)
+    {
+        return new self(new Iterators\RangeIterator($this->valuesIterator, 0, $amount));
+    }
+    
+    public function slice($start, $amount)
+    {
+        return new self(new Iterators\RangeIterator($this->valuesIterator, $start, $amount));
+    }
+    
+    public function indexBy(callable $function)
+    {
+        return new self(new Iterators\ProjectionIterator(
+                $this->valuesIterator,
+                $function,
+                null));
+    }
+    
+    public function groupBy(callable $function)
+    {
+        return new GroupedTraversable(new Iterators\GroupedIterator($this->valuesIterator, $function));
+    }
+    
+    public function join($values)
+    {
+        return new JoiningOnTraversable(
+                $this->valuesIterator,
+                Utilities::toIterator($values),
+                false);
+    }
+    
+    public function groupJoin($values)
+    {
+        return new JoiningOnTraversable(
+                $this->valuesIterator,
+                Utilities::toIterator($values),
+                true);
+    }
+    
+    public function unique()
+    {
+        return new self(new Iterators\UniqueIterator($this->valuesIterator));
+    }
+    
+    public function select(callable $function)
+    {
+        return new self(new Iterators\ProjectionIterator(
+                $this->valuesIterator,
+                null,
+                $function));
+    }
+    
+    public function selectMany(callable $function)
+    {
+        $projectionIterator = 
+                new Iterators\ProjectionIterator(
+                        $this->valuesIterator,
+                        null,
+                        $function);
+        
+        return new self(new Iterators\FlatteningIterator($projectionIterator));
     }
     
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Set Operations">
-    
-    public function Union($Values)
+    public function union($values)
     {
-        return new self(new Iterators\UnionIterator($this->ValuesIterator, Utilities::ToIterator($Values)));
+        return new self(new Iterators\UnionIterator(
+                $this->valuesIterator,
+                Utilities::toIterator($values)));
     }
     
-    public function Intersect($Values)
+    public function intersect($values)
     {
-        return new self(new Iterators\IntersectionIterator($this->ValuesIterator, Utilities::ToIterator($Values)));
+        return new self(new Iterators\IntersectionIterator(
+                $this->valuesIterator,
+                Utilities::toIterator($values)));
     }
     
-    public function Difference($Values)
+    public function difference($values)
     {
-        return new self(new Iterators\DifferenceIterator($this->ValuesIterator, Utilities::ToIterator($Values)));
+        return new self(new Iterators\DifferenceIterator(
+                $this->valuesIterator,
+                Utilities::toIterator($values)));
     }
-
+    
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Operations">
-    
-    public function Append($Values)
-    {        
-        return new self(new Iterators\FlatteningIterator(new \ArrayIterator([$this->ValuesIterator, Utilities::ToIterator($Values)])));
+    public function append($values)
+    {
+        return new self(new Iterators\FlatteningIterator(new \ArrayIterator([$this->valuesIterator, Utilities::toIterator($values)])));
     }
     
-    public function WhereIn($Values)
-    {        
-        return new self(new Iterators\WhereInIterator($this->ValuesIterator, Utilities::ToIterator($Values)));
+    public function whereIn($values)
+    {
+        return new self(new Iterators\WhereInIterator(
+                $this->valuesIterator,
+                Utilities::toIterator($values)));
     }
     
-    public function Except($Values)
-    {        
-        return new self(new Iterators\ExceptIterator($this->ValuesIterator, Utilities::ToIterator($Values)));
+    public function except($values)
+    {
+        return new self(new Iterators\ExceptIterator(
+                $this->valuesIterator,
+                Utilities::toIterator($values)));
     }
-
+    
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Array Access">
+    public function offsetExists($index)
+    {
+        return $this->valuesIterator instanceof \ArrayAccess ? $this->valuesIterator->offsetExists($index) : isset($this->asArray()[$index]);
+    }
     
-    public function offsetExists($Index)
+    public function offsetGet($index)
     {
-        return $this->ValuesIterator instanceof \ArrayAccess ?
-                $this->ValuesIterator->offsetExists($Index) : isset($this->AsArray()[$Index]);
+        return $this->valuesIterator instanceof \ArrayAccess ? $this->valuesIterator->offsetGet($index) : $this->asArray()[$index];
     }
-
-    public function offsetGet($Index)
+    
+    public function offsetSet($index, $value)
     {
-        return $this->ValuesIterator instanceof \ArrayAccess ?
-                $this->ValuesIterator->offsetGet($Index) : $this->AsArray()[$Index];
+        throw PinqException::notSupported(__METHOD__);
     }
-
-    public function offsetSet($Index, $Value)
+    
+    public function offsetUnset($index)
     {
-        throw PinqException::NotSupported(__METHOD__);
-    }
-
-    public function offsetUnset($Index)
-    {
-        throw PinqException::NotSupported(__METHOD__);
+        throw PinqException::notSupported(__METHOD__);
     }
     
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Aggregates">
-    
-    public function Count() 
+    public function count()
     {
-        return $this->ValuesIterator instanceof \Countable ? 
-                $this->ValuesIterator->count() : count($this->AsArray());
+        return $this->valuesIterator instanceof \Countable ? $this->valuesIterator->count() : count($this->asArray());
     }
     
-    public function Exists() 
+    public function exists()
     {
-        foreach ($this->ValuesIterator as $Value) {
+        foreach ($this->valuesIterator as $value) {
             return true;
         }
         
         return false;
     }
     
-    public function Contains($Value) 
+    public function contains($value)
     {
-        foreach ($this->ValuesIterator as $ContainedValue) {
-            if($ContainedValue === $Value) {
+        foreach ($this->valuesIterator as $containedValue) {
+            if ($containedValue === $value) {
                 return true;
             }
         }
@@ -256,60 +274,66 @@ class Traversable implements \Pinq\ITraversable, \Serializable
         return false;
     }
     
-    public function Aggregate(callable $Function) 
+    public function aggregate(callable $function)
     {
-        $HasValue = false;
-        $AggregateValue = null;
-        foreach ($this->AsArray() as $Value) {
-            if(!$HasValue) {
-                $AggregateValue = $Value;
-                $HasValue = true;
+        $hasValue = false;
+        $aggregateValue = null;
+        
+        foreach ($this->asArray() as $value) {
+            if (!$hasValue) {
+                $aggregateValue = $value;
+                $hasValue = true;
                 continue;
             }
             
-            $AggregateValue = $Function($AggregateValue, $Value);
+            $aggregateValue = $function($aggregateValue, $value);
         }
-        return $AggregateValue;
+        
+        return $aggregateValue;
     }
     
-    private function MapArray(callable $Function = null) 
+    private function mapArray(callable $function = null)
     {
-        if($Function === null) {
-            return $this->AsArray();
+        if ($function === null) {
+            return $this->asArray();
         }
         else {
-            return array_map($Function, $this->AsArray());
+            return array_map($function, $this->asArray());
         }
     }
     
-    public function Maximum(callable $Function = null) 
+    public function maximum(callable $function = null)
     {
-        $Array = $this->MapArray($Function);
-        return empty($Array) ? null : max($Array);
+        $array = $this->mapArray($function);
+        
+        return empty($array) ? null : max($array);
     }
     
-    public function Minimum(callable $Function = null)
+    public function minimum(callable $function = null)
     {
-        $Array = $this->MapArray($Function);
-        return empty($Array) ? null : min($Array);
+        $array = $this->mapArray($function);
+        
+        return empty($array) ? null : min($array);
     }
     
-    public function Sum(callable $Function = null) 
+    public function sum(callable $function = null)
     {
-        $Array = $this->MapArray($Function);
-        return empty($Array) ? null : array_sum($Array);
+        $array = $this->mapArray($function);
+        
+        return empty($array) ? null : array_sum($array);
     }
     
-    public function Average(callable $Function = null)
+    public function average(callable $function = null)
     {
-        $Array = $this->MapArray($Function);
-        return empty($Array) ? null : array_sum($Array) / count($Array);
+        $array = $this->mapArray($function);
+        
+        return empty($array) ? null : array_sum($array) / count($array);
     }
     
-    public function All(callable $Function = null) 
+    public function all(callable $function = null)
     {
-        foreach ($this->MapArray($Function) as $Value) {
-            if(!$Value) {
+        foreach ($this->mapArray($function) as $value) {
+            if (!$value) {
                 return false;
             }
         }
@@ -317,10 +341,10 @@ class Traversable implements \Pinq\ITraversable, \Serializable
         return true;
     }
     
-    public function Any(callable $Function = null) 
+    public function any(callable $function = null)
     {
-        foreach ($this->MapArray($Function) as $Value) {
-            if($Value) {
+        foreach ($this->mapArray($function) as $value) {
+            if ($value) {
                 return true;
             }
         }
@@ -328,10 +352,8 @@ class Traversable implements \Pinq\ITraversable, \Serializable
         return false;
     }
     
-    public function Implode($Delimiter, callable $Function = null)
+    public function implode($delimiter, callable $function = null)
     {
-        return implode($Delimiter, $this->MapArray($Function));
+        return implode($delimiter, $this->mapArray($function));
     }
-    
-    // </editor-fold>
 }

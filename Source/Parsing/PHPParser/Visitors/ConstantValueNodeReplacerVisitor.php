@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Parsing\PHPParser\Visitors;
 
-use \Pinq\Parsing\PHPParser\PHPParserResolvedValueNode;
+use Pinq\Parsing\PHPParser\PHPParserResolvedValueNode;
 
 /**
  * Replaces all applicable nodes with a custom constance value node,
@@ -12,56 +12,62 @@ use \Pinq\Parsing\PHPParser\PHPParserResolvedValueNode;
  */
 class ConstantValueNodeReplacerVisitor extends \PHPParser_NodeVisitorAbstract
 {
-    public function leaveNode(\PHPParser_Node $Node)
+    public function leaveNode(\PHPParser_Node $node)
     {
-        $IsConstant = null;
-        $Value = $this->GetConstantValue($Node, $IsConstant);
-
-        if ($IsConstant) {
-            return new PHPParserResolvedValueNode($Value);
+        $isConstant = null;
+        $value = $this->getConstantValue($node, $isConstant);
+        
+        if ($isConstant) {
+            return new PHPParserResolvedValueNode($value);
         }
     }
-
-    private function GetConstantValue(\PHPParser_Node $Node, &$IsConstant)
+    
+    private function getConstantValue(\PHPParser_Node $node, &$isConstant)
     {
         switch (true) {
-            case $Node instanceof PHPParserResolvedValueNode:
-                $Value = $Node->Value;
+            
+            case $node instanceof PHPParserResolvedValueNode:
+                $value = $node->value;
                 break;
-
-            case $Node instanceof \PHPParser_Node_Scalar_DNumber:
-            case $Node instanceof \PHPParser_Node_Scalar_LNumber:
-            case $Node instanceof \PHPParser_Node_Scalar_String:
-                $Value = $Node->value;
+            
+            case $node instanceof \PHPParser_Node_Scalar_DNumber:
+            
+            case $node instanceof \PHPParser_Node_Scalar_LNumber:
+            
+            case $node instanceof \PHPParser_Node_Scalar_String:
+                $value = $node->value;
                 break;
-
-            case $Node instanceof \PHPParser_Node_Expr_ConstFetch:
-                $Value = constant((string) $Node->name);
+            
+            case $node instanceof \PHPParser_Node_Expr_ConstFetch:
+                $value = constant((string) $node->name);
                 break;
-
-            case $Node instanceof \PHPParser_Node_Expr_ClassConstFetch:
-                if ($Node->class instanceof \PHPParser_Node_Expr) {
+            
+            case $node instanceof \PHPParser_Node_Expr_ClassConstFetch:
+                if ($node->class instanceof \PHPParser_Node_Expr) {
                     return;
                 }
-                $Value = constant((string) $Node->class . '::' . $Node->name);
+                
+                $value = constant((string) $node->class . '::' . $node->name);
                 break;
-
-            case $Node instanceof \PHPParser_Node_Expr_StaticPropertyFetch:
-                if ($Node->class instanceof \PHPParser_Node_Expr || $Node->name instanceof \PHPParser_Node_Expr) {
-                    $IsConstant = false;
+            
+            case $node instanceof \PHPParser_Node_Expr_StaticPropertyFetch:
+                if ($node->class instanceof \PHPParser_Node_Expr || $node->name instanceof \PHPParser_Node_Expr) {
+                    $isConstant = false;
+                    
                     return;
                 }
-                $ClassName = (string) $Node->class;
-                $Value = $ClassName::${$Node->name};
+                
+                $className = (string) $node->class;
+                $value = $className::${$node->name};
                 break;
-
+            
             default:
-                $IsConstant = false;
-
+                $isConstant = false;
+                
                 return;
         }
-        $IsConstant = true;
-
-        return $Value;
+        $isConstant = true;
+        
+        return $value;
     }
 }

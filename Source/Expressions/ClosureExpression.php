@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -14,113 +14,114 @@ class ClosureExpression extends Expression
     /**
      * @var ParameterExpression[] 
      */
-    private $ParameterExpressions;
+    private $parameterExpressions;
     
     /**
      * @var string[] 
      */
-    private $UsedVariables;
+    private $usedVariables;
     
     /**
      * @var Expression[] 
      */
-    private $BodyExpressions;
-
-    public function __construct(array $ParameterExpressions, array $UsedVariables, array $BodyExpressions)
+    private $bodyExpressions;
+    
+    public function __construct(array $parameterExpressions, array $usedVariables, array $bodyExpressions)
     {
-        if(in_array(null, $ParameterExpressions)) {
+        if (in_array(null, $parameterExpressions)) {
             throw new \Exception();
         }
-        $this->ParameterExpressions = $ParameterExpressions;
-        $this->UsedVariables = $UsedVariables;
-        $this->BodyExpressions = $BodyExpressions;
+        
+        $this->parameterExpressions = $parameterExpressions;
+        $this->usedVariables = $usedVariables;
+        $this->bodyExpressions = $bodyExpressions;
     }
     
     /**
      * @return ParameterExpression[]
      */
-    public function GetParameterExpressions()
+    public function getParameterExpressions()
     {
-        return $this->ParameterExpressions;
+        return $this->parameterExpressions;
     }
     
     /**
      * @return string[]
      */
-    public function GetUsedVariableNames()
+    public function getUsedVariableNames()
     {
-        return $this->UsedVariables;
+        return $this->usedVariables;
     }
-
+    
     /**
      * @return Expression[]
      */
-    public function GetBodyExpressions()
+    public function getBodyExpressions()
     {
-        return $this->BodyExpressions;
+        return $this->bodyExpressions;
     }
-
-    public function Traverse(ExpressionWalker $Walker)
+    
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkClosure($this);
+        return $walker->walkClosure($this);
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
-        return $this->Update(
-                self::SimplifyAll($this->ParameterExpressions),
-                $this->UsedVariables,
-                self::SimplifyAll($this->BodyExpressions));
+        return $this->update(
+                self::simplifyAll($this->parameterExpressions),
+                $this->usedVariables,
+                self::simplifyAll($this->bodyExpressions));
     }
-
-    public function Update(array $ParameterExpressions, array $UsedVariables, array $BodyExpressions)
+    
+    public function update(array $parameterExpressions, array $usedVariables, array $bodyExpressions)
     {
-        if ($this->ParameterExpressions === $ParameterExpressions
-                && $this->UsedVariables === $UsedVariables
-                && $this->BodyExpressions === $BodyExpressions) {
+        if ($this->parameterExpressions === $parameterExpressions && $this->usedVariables === $usedVariables && $this->bodyExpressions === $bodyExpressions) {
             return $this;
         }
         
-        return new self($ParameterExpressions, $UsedVariables, $BodyExpressions);
+        return new self($parameterExpressions, $usedVariables, $bodyExpressions);
     }
-
-    protected function CompileCode(&$Code)
+    
+    protected function compileCode(&$code)
     {
-        $Code .= 'function (';
+        $code .= 'function (';
         
-        if (!empty($this->ParameterExpressions)) {
-            $Code .= implode(',', self::CompileAll($this->ParameterExpressions));
+        if (!empty($this->parameterExpressions)) {
+            $code .= implode(',', self::compileAll($this->parameterExpressions));
         }
         
-        $Code .= ')';
+        $code .= ')';
         
-        if (!empty($this->UsedVariables)) {
-            $Code .= 'use (';
-            $Code .= '$' . implode(', $', $this->UsedVariables);
-            $Code .= ')';
+        if (!empty($this->usedVariables)) {
+            $code .= 'use (';
+            $code .= '$' . implode(', $', $this->usedVariables);
+            $code .= ')';
         }
         
-        $Code .= '{';
-        foreach ($this->BodyExpressions as $Expression) {
-            $Expression->CompileCode($Code);
-            $Code .= ';';
+        $code .= '{';
+        
+        foreach ($this->bodyExpressions as $expression) {
+            $expression->compileCode($code);
+            $code .= ';';
         }
-        $Code .= '}';
+        
+        $code .= '}';
     }
     
     public function serialize()
     {
-        return serialize([$this->ParameterExpressions, $this->UsedVariables, $this->BodyExpressions]);
+        return serialize([$this->parameterExpressions, $this->usedVariables, $this->bodyExpressions]);
     }
     
-    public function unserialize($Serialized)
+    public function unserialize($serialized)
     {
-        list($this->ParameterExpressions, $this->UsedVariables, $this->BodyExpressions) = unserialize($Serialized);
+        list($this->parameterExpressions, $this->usedVariables, $this->bodyExpressions) = unserialize($serialized);
     }
     
     public function __clone()
     {
-        $this->ParameterExpressions = self::CloneAll($this->ParameterExpressions);
-        $this->BodyExpressions = self::CloneAll($this->BodyExpressions);
+        $this->parameterExpressions = self::cloneAll($this->parameterExpressions);
+        $this->bodyExpressions = self::cloneAll($this->bodyExpressions);
     }
 }

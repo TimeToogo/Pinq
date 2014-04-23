@@ -1,42 +1,40 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Collection;
 
 class RemoveRangeTest extends CollectionTest
 {
-    
     /**
      * @dataProvider Everything
      */
-    public function testThatRemoveRangeRemovesAllValuesFromCollection(\Pinq\ICollection $Collection, array $Data)
+    public function testThatRemoveRangeRemovesAllValuesFromCollection(\Pinq\ICollection $collection, array $data)
     {
-        $Collection->RemoveRange($Collection->AsArray());
-        
-        $this->AssertMatchesValues($Collection, []);
+        $collection->removeRange($collection->asArray());
+        $this->assertMatchesValues($collection, []);
     }
     
     /**
      * @dataProvider OneToTenTwice
      */
-    public function testThatRemoveRangeWillRemovesIdenticalValuesFromCollectionAndPreserveKeys(\Pinq\ICollection $Collection, array $Data)
+    public function testThatRemoveRangeWillRemovesIdenticalValuesFromCollectionAndPreserveKeys(\Pinq\ICollection $collection, array $data)
     {
-        $Collection->RemoveRange([1, "2"]);
+        $collection->removeRange([1, '2']);
         
-        foreach($Data as $Key => $Value) {
-            if($Value === 1) {
-               unset($Data[$Key]);
+        foreach ($data as $key => $value) {
+            if ($value === 1) {
+                unset($data[$key]);
             }
         }
         
-        $this->AssertMatchesValues($Collection, $Data);
+        $this->assertMatchesValues($collection, $data);
     }
     
     /**
      * @dataProvider OneToTen
      * @expectedException \Pinq\PinqException
      */
-    public function testThatInvalidValueThrowsExceptionWhenCallingRemoveRange(\Pinq\ICollection $Collection, array $Data)
+    public function testThatInvalidValueThrowsExceptionWhenCallingRemoveRange(\Pinq\ICollection $collection, array $data)
     {
-        $Collection->RemoveRange(1);
+        $collection->removeRange(1);
     }
 }

@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Request query for a double of the average of all the projected
@@ -10,13 +10,13 @@ namespace Pinq\Queries\Requests;
  */
 class Average extends ProjectionRequest
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Average;
+        return self::AVERAGE;
     }
-
-    public function Traverse(RequestVisitor $Visitor)
+    
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitAverage($this);
+        return $visitor->visitAverage($this);
     }
 }

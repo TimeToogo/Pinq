@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Request query for the maximum projected value in the scope
@@ -9,13 +9,13 @@ namespace Pinq\Queries\Requests;
  */
 class Maximum extends ProjectionRequest
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Maximum;
+        return self::MAXIMUM;
     }
-
-    public function Traverse(RequestVisitor $Visitor)
+    
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitMaximum($this);
+        return $visitor->visitMaximum($this);
     }
 }

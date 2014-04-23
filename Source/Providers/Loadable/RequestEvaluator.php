@@ -1,10 +1,10 @@
-<?php
+<?php 
 
 namespace Pinq\Providers\Loadable;
 
-use \Pinq\Queries;
-use \Pinq\Queries\Requests;
-use \Pinq\Providers\Traversable;
+use Pinq\Queries;
+use Pinq\Queries\Requests;
+use Pinq\Providers\Traversable;
 
 /**
  * Base request evaluator for request evaluator in which the values
@@ -17,147 +17,133 @@ abstract class RequestEvaluator extends Requests\RequestVisitor
     /**
      * @var Traversable\RequestEvaluator
      */
-    private $LoadedRequestEvaluator;
+    private $loadedRequestEvaluator;
     
     /**
      * @var boolean
      */
-    private $IsLoaded = false;
+    private $isLoaded = false;
     
     public function __construct()
     {
         
     }
     
-    public function VisitValues(Requests\Values $Request)
+    public function visitValues(Requests\Values $request)
     {
-        if(!$this->IsLoaded) {
-            $Traversable = new \Pinq\Traversable($this->LoadValues($Request));
-            $this->LoadedRequestEvaluator = new Traversable\RequestEvaluator($Traversable);
-            $this->IsLoaded = true;
+        if (!$this->isLoaded) {
+            $traversable = new \Pinq\Traversable($this->loadValues($request));
+            $this->loadedRequestEvaluator = new Traversable\RequestEvaluator($traversable);
+            $this->isLoaded = true;
         }
         
-        return $this->LoadedRequestEvaluator->VisitValues($Request);
+        return $this->loadedRequestEvaluator->visitValues($request);
     }
-    protected abstract function LoadValues(Requests\Values $Request);
     
-    final public function VisitFirst(Requests\First $Request)
-    {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitFirst($Request) : 
-                $this->LoadFirst($Request);
-    }
-    protected abstract function LoadFirst(Requests\First $Request);
+    protected abstract function loadValues(Requests\Values $request);
     
-    final public function VisitLast(Requests\Last $Request)
+    public final function visitFirst(Requests\First $request)
     {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitLast($Request) : 
-                $this->LoadLast($Request);
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitFirst($request) : $this->loadFirst($request);
     }
-    protected abstract function LoadLast(Requests\Last $Request);
     
-    final public function VisitCount(Requests\Count $Request)
-    {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitCount($Request) : 
-                $this->LoadCount($Request);
-    }
-    protected abstract function LoadCount(Requests\Count $Request);
+    protected abstract function loadFirst(Requests\First $request);
     
-    final public function VisitExists(Requests\Exists $Request)
+    public final function visitLast(Requests\Last $request)
     {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitExists($Request) : 
-                $this->LoadExists($Request);
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitLast($request) : $this->loadLast($request);
     }
-    protected abstract function LoadExists(Requests\Exists $Request);
     
-    final public function VisitContains(Requests\Contains $Request)
-    {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitContains($Request) : 
-                $this->LoadContains($Request);
-    }
-    protected abstract function LoadContains(Requests\Contains $Request);
+    protected abstract function loadLast(Requests\Last $request);
     
-    final public function VisitAggregate(Requests\Aggregate $Request)
+    public final function visitCount(Requests\Count $request)
     {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitAggregate($Request) : 
-                $this->LoadAggregate($Request);
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitCount($request) : $this->loadCount($request);
     }
-    protected abstract function LoadAggregate(Requests\Aggregate $Request);
     
-    final public function VisitMaximum(Requests\Maximum $Request)
-    {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitMaximum($Request) :
-                $this->LoadMaximum($Request);
-    }
-    protected abstract function LoadMaximum(Requests\Maximum $Request);
+    protected abstract function loadCount(Requests\Count $request);
     
-    final public function VisitMinimum(Requests\Minimum $Request)
+    public final function visitExists(Requests\Exists $request)
     {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitMinimum($Request) : 
-                $this->LoadMinimum($Request);
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitExists($request) : $this->loadExists($request);
     }
-    protected abstract function LoadMinimum(Requests\Minimum $Request);
     
-    final public function VisitGetIndex(Requests\GetIndex $Request)
-    {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitGetIndex($Request) : 
-                $this->LoadGetIndex($Request);
-    }
-    protected abstract function LoadGetIndex(Requests\GetIndex $Request);
+    protected abstract function loadExists(Requests\Exists $request);
     
-    final public function VisitIssetIndex(Requests\IssetIndex $Request)
+    public final function visitContains(Requests\Contains $request)
     {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitIssetIndex($Request) : 
-                $this->LoadIssetIndex($Request);
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitContains($request) : $this->loadContains($request);
     }
-    protected abstract function LoadIssetIndex(Requests\IssetIndex $Request);
     
-    final public function VisitSum(Requests\Sum $Request)
-    {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitSum($Request) : 
-                $this->LoadSum($Request);
-    }
-    protected abstract function LoadSum(Requests\Sum $Request);
+    protected abstract function loadContains(Requests\Contains $request);
     
-    final public function VisitAverage(Requests\Average $Request)
+    public final function visitAggregate(Requests\Aggregate $request)
     {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitAverage($Request) : 
-                $this->LoadAverage($Request);
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitAggregate($request) : $this->loadAggregate($request);
     }
-    protected abstract function LoadAverage(Requests\Average $Request);
     
-    final public function VisitAll(Requests\All $Request)
-    {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitAll($Request) : 
-                $this->LoadAll($Request);
-    }
-    protected abstract function LoadAll(Requests\All $Request);
+    protected abstract function loadAggregate(Requests\Aggregate $request);
     
-    final public function VisitAny(Requests\Any $Request)
+    public final function visitMaximum(Requests\Maximum $request)
     {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitAny($Request) : 
-                $this->LoadAny($Request);
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitMaximum($request) : $this->loadMaximum($request);
     }
-    protected abstract function LoadAny(Requests\Any $Request);
     
-    final public function VisitImplode(Requests\Implode $Request)
+    protected abstract function loadMaximum(Requests\Maximum $request);
+    
+    public final function visitMinimum(Requests\Minimum $request)
     {
-        return $this->IsLoaded ? 
-                $this->LoadedRequestEvaluator->VisitImplode($Request) : 
-                $this->LoadImplode($Request);
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitMinimum($request) : $this->loadMinimum($request);
     }
-    protected abstract function LoadImplode(Requests\Implode $Request);
+    
+    protected abstract function loadMinimum(Requests\Minimum $request);
+    
+    public final function visitGetIndex(Requests\GetIndex $request)
+    {
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitGetIndex($request) : $this->loadGetIndex($request);
+    }
+    
+    protected abstract function loadGetIndex(Requests\GetIndex $request);
+    
+    public final function visitIssetIndex(Requests\IssetIndex $request)
+    {
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitIssetIndex($request) : $this->loadIssetIndex($request);
+    }
+    
+    protected abstract function loadIssetIndex(Requests\IssetIndex $request);
+    
+    public final function visitSum(Requests\Sum $request)
+    {
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitSum($request) : $this->loadSum($request);
+    }
+    
+    protected abstract function loadSum(Requests\Sum $request);
+    
+    public final function visitAverage(Requests\Average $request)
+    {
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitAverage($request) : $this->loadAverage($request);
+    }
+    
+    protected abstract function loadAverage(Requests\Average $request);
+    
+    public final function visitAll(Requests\All $request)
+    {
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitAll($request) : $this->loadAll($request);
+    }
+    
+    protected abstract function loadAll(Requests\All $request);
+    
+    public final function visitAny(Requests\Any $request)
+    {
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitAny($request) : $this->loadAny($request);
+    }
+    
+    protected abstract function loadAny(Requests\Any $request);
+    
+    public final function visitImplode(Requests\Implode $request)
+    {
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitImplode($request) : $this->loadImplode($request);
+    }
+    
+    protected abstract function loadImplode(Requests\Implode $request);
 }

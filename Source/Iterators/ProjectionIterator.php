@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Iterators;
 
@@ -12,29 +12,31 @@ class ProjectionIterator extends IteratorIterator
     /**
      * @var callable|null
      */
-    private $KeyProjectionFunction;
+    private $keyProjectionFunction;
     
     /**
      * @var callable|null
      */
-    private $ValueProjectionFunction;
+    private $valueProjectionFunction;
     
-    public function __construct(\Traversable $Iterator, callable $KeyProjectionFunction = null, callable $ValueProjectionFunction = null)
+    public function __construct(\Traversable $iterator, callable $keyProjectionFunction = null, callable $valueProjectionFunction = null)
     {
-        parent::__construct($Iterator);
-        $this->KeyProjectionFunction = $KeyProjectionFunction;
-        $this->ValueProjectionFunction = $ValueProjectionFunction;
+        parent::__construct($iterator);
+        $this->keyProjectionFunction = $keyProjectionFunction;
+        $this->valueProjectionFunction = $valueProjectionFunction;
     }
     
     public function key()
     {
-        $Function = $this->KeyProjectionFunction;
-        return $Function === null ? parent::key() : $Function(parent::current());
+        $function = $this->keyProjectionFunction;
+        
+        return $function === null ? parent::key() : $function(parent::current());
     }
     
     public function current()
     {
-        $Function = $this->ValueProjectionFunction;
-        return $Function === null ? parent::current() : $Function(parent::current());
+        $function = $this->valueProjectionFunction;
+        
+        return $function === null ? parent::current() : $function(parent::current());
     }
 }

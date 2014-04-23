@@ -1,38 +1,63 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Traversable;
 
 class UniqueTest extends TraversableTest
 {
-    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
-        return $Traversable->Unique();
+        return $traversable->unique();
     }
     
-    public function NotUniqueData()
+    public function notUniqueData()
     {
-        $NonUnique = ['test' => 1,2, 'test',4,4,2,1,4,5,6,3,7,'foo' => 23,7,3,46, 'two' => 2,6,3,653,76457,5 ,'test', 'test'];
+        $nonUnique = [
+            'test' => 1,
+            2,
+            'test',
+            4,
+            4,
+            2,
+            1,
+            4,
+            5,
+            6,
+            3,
+            7,
+            'foo' => 23,
+            7,
+            3,
+            46,
+            'two' => 2,
+            6,
+            3,
+            653,
+            76457,
+            5,
+            'test',
+            'test'
+        ];
         
-        return $this->Everything() + $this->GetImplementations($NonUnique);
+        return $this->everything() + $this->getImplementations($nonUnique);
     }
     
     /**
      * @dataProvider NotUniqueData
      */
-    public function testThatUniqueValuesAreUnique(\Pinq\ITraversable $Values, array $Data)
+    public function testThatUniqueValuesAreUnique(\Pinq\ITraversable $values, array $data)
     {
-        $UniqueValues = $Values->Unique();
-        
-        $this->AssertMatches($UniqueValues, array_unique($Data, SORT_REGULAR));
+        $uniqueValues = $values->unique();
+        $this->assertMatches($uniqueValues, array_unique($data, SORT_REGULAR));
     }
     
     /**
      * @dataProvider NotUniqueData
      */
-    public function testThatUniqueValuesPreservesKeys(\Pinq\ITraversable $Values, array $Data)
+    public function testThatUniqueValuesPreservesKeys(\Pinq\ITraversable $values, array $data)
     {
-        $UniqueValuesArray = $Values->Unique()->AsArray();
-        
-        $this->assertSame(array_keys(array_unique($Data, SORT_REGULAR)), array_keys($UniqueValuesArray));
+        $uniqueValuesArray = $values->unique()->asArray();
+        $this->assertSame(
+                array_keys(array_unique($data, SORT_REGULAR)),
+                array_keys($uniqueValuesArray));
     }
 }

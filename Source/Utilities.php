@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq;
 
@@ -11,86 +11,90 @@ DEFINE('IS_PHP_55', version_compare(PHP_VERSION, '5.5', '>='));
  */
 final class Utilities
 {
-    private function __construct() { }
+    private function __construct()
+    {
+        
+    }
     
     /**
      * Returns the type or class of the supplied function
      * 
-     * @param mixed $Value The value
+     * @param mixed $value The value
      * @return string The type or class
      */
-    public static function GetTypeOrClass($Value)
+    public static function getTypeOrClass($value)
     {
-        return is_object($Value) ? get_class($Value) : gettype($Value);
+        return is_object($value) ? get_class($value) : gettype($value);
     }
     
     /**
      * Returns whether the value is iterable
      * 
-     * @param mixed $Value The value
+     * @param mixed $value The value
      * @return boolean Whether the value is iterable
      */
-    public static function IsIterable($Value)
+    public static function isIterable($value)
     {
-        return $Value instanceof \Traversable || is_array($Value);
+        return $value instanceof \Traversable || is_array($value);
     }
     
     /**
      * Returns the iterator as an array
      * 
-     * @param \Traversable $Iterator The iterator value
+     * @param \Traversable $iterator The iterator value
      * @return array
      */
-    public static function ToArray(\Traversable $Iterator)
+    public static function toArray(\Traversable $iterator)
     {
-        if($Iterator instanceof \ArrayIterator || $Iterator instanceof \ArrayObject) {
-            return $Iterator->getArrayCopy();
+        if ($iterator instanceof \ArrayIterator || $iterator instanceof \ArrayObject) {
+            return $iterator->getArrayCopy();
         }
         
-        $Array = [];
+        $array = [];
         
-        if(IS_PHP_55) {
-            foreach($Iterator as $Key => $Value) {
-                $Array[$Key] = $Value;
+        if (IS_PHP_55) {
+            foreach ($iterator as $key => $value) {
+                $array[$key] = $value;
             }
         }
         else {
-            $Iterator = self::ToIterator($Iterator);
+            $iterator = self::toIterator($iterator);
             //Does not support returning custom keys
-            $Iterator->rewind();
-            while ($Iterator->valid()) {
-                $Array[$Iterator->key()] = $Iterator->current();
-                $Iterator->next();
+            $iterator->rewind();
+            
+            while ($iterator->valid()) {
+                $array[$iterator->key()] = $iterator->current();
+                $iterator->next();
             }
         }
         
-        return $Array;
+        return $array;
     }
     
     /**
      * Returns the values as an iterator
      * 
-     * @param array|\Traversable $TraversableOrArray The value
+     * @param array|\Traversable $traversableOrArray The value
      * @return \Iterator
      * @throws PinqException If the value is not a array nor \Traversable
      */
-    public static function ToIterator($TraversableOrArray)
+    public static function toIterator($traversableOrArray)
     {
-        if(!self::IsIterable($TraversableOrArray)) {
-            throw PinqException::InvalidIterable(__METHOD__, $TraversableOrArray);
+        if (!self::isIterable($traversableOrArray)) {
+            throw PinqException::invalidIterable(__METHOD__, $traversableOrArray);
         }
         
-        if($TraversableOrArray instanceof \Iterator) {
-            return $TraversableOrArray;
+        if ($traversableOrArray instanceof \Iterator) {
+            return $traversableOrArray;
         }
-        else if($TraversableOrArray instanceof \IteratorAggregate) {
-            return $TraversableOrArray->getIterator();
+        else if ($traversableOrArray instanceof \IteratorAggregate) {
+            return $traversableOrArray->getIterator();
         }
-        else if($TraversableOrArray instanceof \Traversable) {
-            return new \IteratorIterator($TraversableOrArray);
+        else if ($traversableOrArray instanceof \Traversable) {
+            return new \IteratorIterator($traversableOrArray);
         }
         else {
-            return new \ArrayIterator($TraversableOrArray);
+            return new \ArrayIterator($traversableOrArray);
         }
     }
     
@@ -102,11 +106,11 @@ final class Utilities
      * 'foo' -> yes: $foo
      * 'foo bar' -> no: ${'foo bar'}
      * 
-     * @param string $Name The field, function, method or variable name
+     * @param string $name The field, function, method or variable name
      * @return boolean
      */
-    public static function IsNormalSyntaxName($Name) 
+    public static function isNormalSyntaxName($name)
     {
-        return (bool)preg_match('/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/', $Name);
+        return (bool) preg_match('/[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*/', $name);
     }
 }

@@ -1,105 +1,135 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Traversable;
 
 class JoinTest extends TraversableTest
 {
-    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
-        return $Traversable->Join([])->On(function ($I) {})->To(function ($K) {});
-    }
-    
-    /**
-     * @dataProvider Everything
-     */
-    public function testThatExecutionIsDeferred(\Pinq\ITraversable $Traversable, array $Data)
-    {
-        $this->AssertThatExecutionIsDeferred(function (callable $Function) use ($Traversable) {
-            return $Traversable->Join([])->On($Function)->To($Function);
-        });
-        
-        $this->AssertThatExecutionIsDeferred(function (callable $Function) use ($Traversable) {
-            return $Traversable->Join([])->OnEquality($Function, $Function)->To($Function);
+        return $traversable->join([])->on(function ($i) {
+            
+        })->to(function ($k) {
+            
         });
     }
     
     /**
      * @dataProvider Everything
      */
-    public function testJoinOnTrueProducesACartesianProduct(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $Traversable = $Traversable
-                ->Join($Data)
-                ->On(function () { return true; })
-                ->To(function ($OuterValue, $InnerValue) {
-                    return [$OuterValue, $InnerValue];
+        $this->assertThatExecutionIsDeferred(function (callable $function) use($traversable) {
+            return $traversable->join([])->on($function)->to($function);
+        });
+        $this->assertThatExecutionIsDeferred(function (callable $function) use($traversable) {
+            return $traversable->join([])->onEquality($function, $function)->to($function);
+        });
+    }
+    
+    /**
+     * @dataProvider Everything
+     */
+    public function testJoinOnTrueProducesACartesianProduct(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable = 
+                $traversable->join($data)->on(function () {
+                    return true;
+                })->to(function ($outerValue, $innerValue) {
+                    return [$outerValue, $innerValue];
                 });
-                
-        $CartesianProduct = [];
-        foreach($Data as $OuterValue) {
-            foreach($Data as $InnerValue) {
-                $CartesianProduct[] = [$OuterValue, $InnerValue];
+        $cartesianProduct = [];
+        
+        foreach ($data as $outerValue) {
+            foreach ($data as $innerValue) {
+                $cartesianProduct[] = [$outerValue, $innerValue];
             }
         }
-                
-        $this->AssertMatchesValues($Traversable, $CartesianProduct);
+        
+        $this->assertMatchesValues($traversable, $cartesianProduct);
     }
     
     /**
      * @dataProvider Everything
      */
-    public function testJoinOnFalseProducesEmpty(\Pinq\ITraversable $Traversable, array $Data)
+    public function testJoinOnFalseProducesEmpty(\Pinq\ITraversable $traversable, array $data)
     {
-        $Traversable = $Traversable
-                ->Join($Data)
-                ->On(function () { return false; })
-                ->To(function ($OuterValue, $InnerValue) {
-                    return [$OuterValue, $InnerValue];
+        $traversable = 
+                $traversable->join($data)->on(function () {
+                    return false;
+                })->to(function ($outerValue, $innerValue) {
+                    return [$outerValue, $innerValue];
                 });
-                
-        $this->AssertMatches($Traversable, []);
+        $this->assertMatches($traversable, []);
     }
     
     /**
      * @dataProvider OneToTen
      */
-    public function testJoinOnProducesCorrectResult(\Pinq\ITraversable $Traversable, array $Data)
+    public function testJoinOnProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
-        $Traversable = $Traversable
-                ->Join([1, 2, 3, '4', '5'])
-                ->On(function ($Outer, $Inner) { return $Outer === $Inner; })
-                ->To(function ($Outer, $Inner) {
-                    return $Outer . '-' . $Inner;
+        $traversable = 
+                $traversable->join([
+                    1,
+                    2,
+                    3,
+                    '4',
+                    '5'
+                ])->on(function ($outer, $inner) {
+                    return $outer === $inner;
+                })->to(function ($outer, $inner) {
+                    return $outer . '-' . $inner;
                 });
-                
-        $this->AssertMatchesValues($Traversable, ['1-1', '2-2', '3-3']);
+        $this->assertMatchesValues($traversable, ['1-1', '2-2', '3-3']);
     }
     
     /**
      * @dataProvider OneToTen
      */
-    public function testJoinOnEqualityProducesCorrectResult(\Pinq\ITraversable $Traversable, array $Data)
+    public function testJoinOnEqualityProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
-        $Traversable = $Traversable
-                ->Join([1, 2, 3, '4', '5'])
-                ->OnEquality(function ($Outer) { return $Outer; }, function ($Inner) { return $Inner; })
-                ->To(function ($Outer, $Inner) {
-                    return $Outer . '-' . $Inner;
+        $traversable = 
+                $traversable->join([
+                    1,
+                    2,
+                    3,
+                    '4',
+                    '5'
+                ])->onEquality(
+                        function ($outer) {
+                            return $outer;
+                        },
+                        function ($inner) {
+                            return $inner;
+                        })->to(function ($outer, $inner) {
+                    return $outer . '-' . $inner;
                 });
-                
-        $this->AssertMatchesValues($Traversable, ['1-1', '2-2', '3-3']);
+        $this->assertMatchesValues($traversable, ['1-1', '2-2', '3-3']);
     }
     
     /**
      * @dataProvider OneToTen
      */
-    public function testJoinWithTransformProducesCorrectResult(\Pinq\ITraversable $Traversable, array $Data)
+    public function testJoinWithTransformProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
-        $Traversable = $Traversable
-                ->Join(range(10, 20))
-                ->OnEquality(function ($Outer) { return $Outer * 2; }, function ($Inner) { return $Inner; })
-                ->To(function($Outer, $Inner) { return $Outer . ':' . $Inner; });
-                
-        $this->AssertMatchesValues($Traversable, ['5:10', '6:12', '7:14', '8:16', '9:18', '10:20']);
+        $traversable = 
+                $traversable->join(range(10, 20))->onEquality(
+                        function ($outer) {
+                            return $outer * 2;
+                        },
+                        function ($inner) {
+                            return $inner;
+                        })->to(function ($outer, $inner) {
+                    return $outer . ':' . $inner;
+                });
+        $this->assertMatchesValues(
+                $traversable,
+                [
+                    '5:10',
+                    '6:12',
+                    '7:14',
+                    '8:16',
+                    '9:18',
+                    '10:20'
+                ]);
     }
 }

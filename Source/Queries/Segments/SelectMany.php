@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Queries\Segments;
 
@@ -10,14 +10,13 @@ namespace Pinq\Queries\Segments;
  */
 class SelectMany extends ExpressionSegment
 {
-    public function GetType()
+    public function getType()
     {
-        return self::SelectMany;
+        return self::SELECT_MANY;
     }
-
-    public function Traverse(SegmentWalker $Walker)
+    
+    public function traverse(SegmentWalker $walker)
     {
-        return $Walker->WalkSelectMany($this);
+        return $walker->walkSelectMany($this);
     }
-
 }

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq;
 
@@ -12,25 +12,27 @@ class OrderedTraversable extends Traversable implements IOrderedTraversable
     /**
      * @var Iterators\OrderedIterator 
      */
-    protected $ValuesIterator;
+    protected $valuesIterator;
     
-    public function __construct(Iterators\OrderedIterator $OrderedIterator)
+    public function __construct(Iterators\OrderedIterator $orderedIterator)
     {
-        parent::__construct($OrderedIterator);
+        parent::__construct($orderedIterator);
     }
     
-    public function ThenBy(callable $Function, $Direction)
+    public function thenBy(callable $function, $direction)
     {
-        return new self($this->ValuesIterator->ThenOrderBy($Function, $Direction !== Direction::Descending));
+        return new self($this->valuesIterator->thenOrderBy(
+                $function,
+                $direction !== Direction::DESCENDING));
     }
     
-    public function ThenByAscending(callable $Function)
+    public function thenByAscending(callable $function)
     {
-        return new self($this->ValuesIterator->ThenOrderBy($Function, true));
+        return new self($this->valuesIterator->thenOrderBy($function, true));
     }
     
-    public function ThenByDescending(callable $Function)
+    public function thenByDescending(callable $function)
     {
-        return new self($this->ValuesIterator->ThenOrderBy($Function, false));
+        return new self($this->valuesIterator->thenOrderBy($function, false));
     }
 }

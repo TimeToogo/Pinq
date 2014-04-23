@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq;
 
@@ -13,16 +13,15 @@ class GroupedTraversable extends Traversable implements IGroupedTraversable
     /**
      * @var Iterators\GroupedIterator 
      */
-    protected $ValuesIterator;
+    protected $valuesIterator;
     
-    public function __construct(Iterators\GroupedIterator $GroupedIterator)
+    public function __construct(Iterators\GroupedIterator $groupedIterator)
     {
-        parent::__construct($GroupedIterator);
+        parent::__construct($groupedIterator);
     }
-
-    public function AndBy(callable $Function)
+    
+    public function andBy(callable $function)
     {
-        return new self($this->ValuesIterator->AndGroupBy($Function));
+        return new self($this->valuesIterator->andGroupBy($function));
     }
-
 }

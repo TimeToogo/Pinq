@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions\Operators;
 
@@ -9,10 +9,10 @@ namespace Pinq\Expressions\Operators;
  */
 final class Cast
 {
-    const ArrayCast = '(array) ';
-    const Boolean = '(bool) ';
-    const Double = '(double) ';
-    const Integer = '(int) ';
-    const Object = '(object) ';
-    const String = '(string) ';
+    const ARRAY_CAST = '(array) ';
+    const BOOLEAN = '(bool) ';
+    const DOUBLE = '(double) ';
+    const INTEGER = '(int) ';
+    const OBJECT = '(object) ';
+    const STRING = '(string) ';
 }

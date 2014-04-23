@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Segments; 
+namespace Pinq\Queries\Segments;
 
 /**
  * Base class for a query segment

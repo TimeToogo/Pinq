@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq;
 
@@ -11,19 +11,19 @@ namespace Pinq;
  */
 interface IQueryable extends ITraversable
 {
-    const IQueryableType = __CLASS__;
+    const IQUERYABLE_TYPE = __CLASS__;
     
     /**
      * The query provider for the implementation.
      * 
      * @return Providers\IQueryProvider
      */
-    public function GetProvider();
+    public function getProvider();
     
     /**
      * The current query scope.
      * 
      * @return Queries\IScope
      */
-    public function GetScope();
+    public function getScope();
 }

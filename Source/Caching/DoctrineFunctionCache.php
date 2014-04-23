@@ -1,9 +1,9 @@
-<?php
+<?php 
 
 namespace Pinq\Caching;
 
-use \Doctrine\Common\Cache\Cache;
-use \Pinq\FunctionExpressionTree;
+use Doctrine\Common\Cache\Cache;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Adapter class for a doctring cache component that implements
@@ -12,40 +12,42 @@ use \Pinq\FunctionExpressionTree;
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class DoctrineFunctionCache implements IFunctionCache
-{    
+{
     /**
      * The doctrine cache implementation
      * 
      * @var Cache 
      */
-    private $DoctrineCache;
+    private $doctrineCache;
     
-    public function __construct(Cache $DoctrineCache)
+    public function __construct(Cache $doctrineCache)
     {
-        $this->DoctrineCache = $DoctrineCache;
+        $this->doctrineCache = $doctrineCache;
     }
-
-    public function Save($FunctionHash, FunctionExpressionTree $FunctionExpressionTree)
+    
+    public function save($functionHash, FunctionExpressionTree $functionExpressionTree)
     {
-        $this->DoctrineCache->save($FunctionHash, clone $FunctionExpressionTree);
+        $this->doctrineCache->save(
+                $functionHash,
+                clone $functionExpressionTree);
     }
-
-    public function TryGet($FunctionHash)
+    
+    public function tryGet($functionHash)
     {
-        $Result = $this->DoctrineCache->fetch($FunctionHash) ;
+        $result = $this->doctrineCache->fetch($functionHash);
         
-        return $Result === false ? null : $Result;
+        return $result === false ? null : $result;
     }
     
-    public function Remove($FunctionHash)
+    public function remove($functionHash)
     {
-        $this->DoctrineCache->delete($FunctionHash);
+        $this->doctrineCache->delete($functionHash);
     }
-
-    public function Clear()
+    
+    public function clear()
     {
-        if($this->DoctrineCache instanceof \Doctrine\Common\Cache\CacheProvider) {
-            $this->DoctrineCache->deleteAll();
+        if ($this->doctrineCache instanceof \Doctrine\Common\Cache\CacheProvider) {
+            $this->doctrineCache->deleteAll();
         }
     }
 }

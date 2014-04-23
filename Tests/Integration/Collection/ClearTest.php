@@ -1,17 +1,15 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Collection;
 
 class ClearTest extends CollectionTest
 {
-    
     /**
      * @dataProvider Everything
      */
-    public function testThatClearRemovesAllItems(\Pinq\ICollection $Collection, array $Data)
+    public function testThatClearRemovesAllItems(\Pinq\ICollection $collection, array $data)
     {
-        $Collection->Clear();
-        
-        $this->AssertMatchesValues($Collection, []);
+        $collection->clear();
+        $this->assertMatchesValues($collection, []);
     }
 }

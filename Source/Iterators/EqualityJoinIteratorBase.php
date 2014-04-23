@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Iterators;
 
@@ -12,53 +12,51 @@ namespace Pinq\Iterators;
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 abstract class EqualityJoinIteratorBase extends JoinIteratorBase
-{    
+{
     /**
      * @var callable
      */
-    private $OuterKeyFunction;
+    private $outerKeyFunction;
     
     /**
      * @var callable
      */
-    private $InnerKeyFunction;
+    private $innerKeyFunction;
     
     /**
      * @var Utilities\Lookup
      */
-    private $InnerKeyLookup;
+    private $innerKeyLookup;
     
-    public function __construct(
-            \Traversable $OuterIterator,
-            \Traversable $InnerIterator,
-            callable $OuterKeyFunction,
-            callable $InnerKeyFunction,
-            callable $JoiningFunction)
+    public function __construct(\Traversable $outerIterator, \Traversable $innerIterator, callable $outerKeyFunction, callable $innerKeyFunction, callable $joiningFunction)
     {
-        parent::__construct($OuterIterator, $InnerIterator, $JoiningFunction);
-        $this->OuterKeyFunction = $OuterKeyFunction;
-        $this->InnerKeyFunction = $InnerKeyFunction;
+        parent::__construct($outerIterator, $innerIterator, $joiningFunction);
+        $this->outerKeyFunction = $outerKeyFunction;
+        $this->innerKeyFunction = $innerKeyFunction;
     }
     
-    final protected function Initialize()
+    protected final function initialize()
     {
-        $this->InnerKeyLookup = Utilities\Lookup::FromGroupingFunction($this->InnerKeyFunction, $this->InnerIterator);
+        $this->innerKeyLookup = 
+                Utilities\Lookup::fromGroupingFunction(
+                        $this->innerKeyFunction,
+                        $this->innerIterator);
     }
     
-    final protected function GetInnerGroupIterator($OuterValue)
+    protected final function getInnerGroupIterator($outerValue)
     {
-        $OuterKeyFunction = $this->OuterKeyFunction;
-        $OuterKey = $OuterKeyFunction($OuterValue);
+        $outerKeyFunction = $this->outerKeyFunction;
+        $outerKey = $outerKeyFunction($outerValue);
         
-        if($this->InnerKeyLookup->Contains($OuterKey)) {
-            $CurrentInnerGroup = $this->InnerKeyLookup->Get($OuterKey);
+        if ($this->innerKeyLookup->contains($outerKey)) {
+            $currentInnerGroup = $this->innerKeyLookup->get($outerKey);
         }
         else {
-            $CurrentInnerGroup = [];
+            $currentInnerGroup = [];
         }
         
-        return $this->GetInnerGroupValueIterator($CurrentInnerGroup);
+        return $this->getInnerGroupValueIterator($currentInnerGroup);
     }
     
-    protected abstract function GetInnerGroupValueIterator(array $InnerGroup);
+    protected abstract function getInnerGroupValueIterator(array $innerGroup);
 }

@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Parsing;
 
-use \Pinq\Parsing;
+use Pinq\Parsing;
 
 class ControlStructureParserTest extends ParserTest
 {
@@ -12,16 +12,16 @@ class ControlStructureParserTest extends ParserTest
      */
     public function testThrowsExceptionWithIfStatement()
     {
-        $Function = function () {
-            if(true) {
-                
-            }
-            else {
-                
-            }
-        };
-        
-        $this->AssertParsedAs($Function, []);
+        $function = 
+                function () {
+                    if (true) {
+                        
+                    }
+                    else {
+                        
+                    }
+                };
+        $this->assertParsedAs($function, []);
     }
     
     /**
@@ -30,13 +30,13 @@ class ControlStructureParserTest extends ParserTest
      */
     public function testThrowsExceptionWithForLoop()
     {
-        $Function = function () {
-            for (;;) {
-                
-            }
-        };
-        
-        $this->AssertParsedAs($Function, []);
+        $function = 
+                function () {
+                    for (;;) {
+                        
+                    }
+                };
+        $this->assertParsedAs($function, []);
     }
     
     /**
@@ -45,13 +45,13 @@ class ControlStructureParserTest extends ParserTest
      */
     public function testThrowsExceptionWithForeachLoop()
     {
-        $Function = function () {
-            foreach ($I as $I) {
-                
-            }
-        };
-        
-        $this->AssertParsedAs($Function, []);
+        $function = 
+                function () {
+                    foreach ($i as $i) {
+                        
+                    }
+                };
+        $this->assertParsedAs($function, []);
     }
     
     /**
@@ -60,13 +60,13 @@ class ControlStructureParserTest extends ParserTest
      */
     public function testThrowsExceptionWithWhileLoop()
     {
-        $Function = function () {
-            while (true) {
-                
-            }
-        };
-        
-        $this->AssertParsedAs($Function, []);
+        $function = 
+                function () {
+                    while (true) {
+                        
+                    }
+                };
+        $this->assertParsedAs($function, []);
     }
     
     /**
@@ -75,13 +75,13 @@ class ControlStructureParserTest extends ParserTest
      */
     public function testThrowsExceptionWithDoWhileLoop()
     {
-        $Function = function () {
-            do {
-                
-            } while (true);
-        };
-        
-        $this->AssertParsedAs($Function, []);
+        $function = 
+                function () {
+                    do {
+                        
+                    } while (true);
+                };
+        $this->assertParsedAs($function, []);
     }
     
     /**
@@ -90,12 +90,12 @@ class ControlStructureParserTest extends ParserTest
      */
     public function testThrowsExceptionWithGotoStatement()
     {
-        $Function = function () {
-            goto Bed;
-            Bed:
-        };
-        
-        $this->AssertParsedAs($Function, []);
+        $function = 
+                function () {
+                    goto Bed;
+                    Bed:
+                };
+        $this->assertParsedAs($function, []);
     }
     
     /**
@@ -104,13 +104,13 @@ class ControlStructureParserTest extends ParserTest
      */
     public function testThrowsExceptionWithSwitchStatement()
     {
-        $Function = function () {
-            switch (true) {
-                
-            }
-        };
-        
-        $this->AssertParsedAs($Function, []);
+        $function = 
+                function () {
+                    switch (true) {
+                        
+                    }
+                };
+        $this->assertParsedAs($function, []);
     }
     
     /**
@@ -119,15 +119,15 @@ class ControlStructureParserTest extends ParserTest
      */
     public function testThrowsExceptionWithTryCatchStatement()
     {
-        $Function = function () {
-            try {
-                
-            } 
-            catch (\Exception $Exception) {
-                
-            }
-        };
-        
-        $this->AssertParsedAs($Function, []);
+        $function = 
+                function () {
+                    try {
+                        
+                    }
+                    catch (\Exception $exception) {
+                        
+                    }
+                };
+        $this->assertParsedAs($function, []);
     }
 }

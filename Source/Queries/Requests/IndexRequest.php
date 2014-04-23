@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Base class for a request with a specified index
@@ -12,15 +12,15 @@ abstract class IndexRequest extends Request
     /**
      * @var mixed
      */
-    private $Index;
+    private $index;
     
-    public function __construct($Index)
+    public function __construct($index)
     {
-        $this->Index = $Index;
+        $this->index = $index;
     }
     
-    final public function GetIndex()
+    public final function getIndex()
     {
-        return $this->Index;
+        return $this->index;
     }
 }

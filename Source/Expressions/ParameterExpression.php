@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -14,118 +14,126 @@ class ParameterExpression extends Expression
     /**
      * @var string
      */
-    private $Name;
+    private $name;
     
     /**
      * @var string|null
      */
-    private $TypeHint;
+    private $typeHint;
     
     /**
      * @var boolean
      */
-    private $HasDefaultValue;
+    private $hasDefaultValue;
     
     /**
      * @var mixed
      */
-    private $DefaultValue;
+    private $defaultValue;
     
     /**
      * @var boolean
      */
-    private $IsPassedByReference;
-
-    public function __construct($Name, $TypeHint = null, $HasDefaultValue = false, $DefaultValue = null, $IsPassedByReference = false)
+    private $isPassedByReference;
+    
+    public function __construct($name, $typeHint = null, $hasDefaultValue = false, $defaultValue = null, $isPassedByReference = false)
     {
-        $this->Name = $Name;
-        $this->TypeHint = $TypeHint;
-        $this->HasDefaultValue = $HasDefaultValue;
-        $this->DefaultValue = $DefaultValue;
-        $this->IsPassedByReference = $IsPassedByReference;
+        $this->name = $name;
+        $this->typeHint = $typeHint;
+        $this->hasDefaultValue = $hasDefaultValue;
+        $this->defaultValue = $defaultValue;
+        $this->isPassedByReference = $isPassedByReference;
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
         return $this;
-    }    
-
-    public function Traverse(ExpressionWalker $Walker)
-    {
-        return $Walker->WalkParameter($this);
     }
     
-    public function GetName()
+    public function traverse(ExpressionWalker $walker)
     {
-        return $this->Name;
-    }
-
-    public function HasTypeHint()
-    {
-        return $this->TypeHint !== null;
-    }
-
-    public function GetTypeHint()
-    {
-        return $this->TypeHint;
-    }
-
-    public function HasDefaultValue()
-    {
-        return $this->HasDefaultValue;
-    }
-
-    public function GetDefaultValue()
-    {
-        return $this->DefaultValue;
-    }
-
-    public function IsPassedByReference()
-    {
-        return $this->IsPassedByReference;
+        return $walker->walkParameter($this);
     }
     
-    public function Update($Name, $TypeHint, $HasDefaultValue, $DefaultValue, $IsPassedByReference)
+    public function getName()
     {
-        if($this->Name === $Name
-                && $this->TypeHint === $TypeHint
-                && $this->HasDefaultValue === $HasDefaultValue
-                && $this->DefaultValue === $DefaultValue
-                && $this->IsPassedByReference === $IsPassedByReference) {
+        return $this->name;
+    }
+    
+    public function hasTypeHint()
+    {
+        return $this->typeHint !== null;
+    }
+    
+    public function getTypeHint()
+    {
+        return $this->typeHint;
+    }
+    
+    public function hasDefaultValue()
+    {
+        return $this->hasDefaultValue;
+    }
+    
+    public function getDefaultValue()
+    {
+        return $this->defaultValue;
+    }
+    
+    public function isPassedByReference()
+    {
+        return $this->isPassedByReference;
+    }
+    
+    public function update($name, $typeHint, $hasDefaultValue, $defaultValue, $isPassedByReference)
+    {
+        if ($this->name === $name && $this->typeHint === $typeHint && $this->hasDefaultValue === $hasDefaultValue && $this->defaultValue === $defaultValue && $this->isPassedByReference === $isPassedByReference) {
             return $this;
         }
         
-        return new self($Name, $TypeHint, $HasDefaultValue, $DefaultValue, $IsPassedByReference);
+        return new self(
+                $name,
+                $typeHint,
+                $hasDefaultValue,
+                $defaultValue,
+                $isPassedByReference);
     }
-
-    protected function CompileCode(&$Code)
+    
+    protected function compileCode(&$code)
     {
-        if($this->TypeHint !== null) {
-            $Code .= $this->TypeHint . ' ';
+        if ($this->typeHint !== null) {
+            $code .= $this->typeHint . ' ';
         }
         
-        if($this->IsPassedByReference) {
-            $Code .= '&';
+        if ($this->isPassedByReference) {
+            $code .= '&';
         }
-        $Code .= '$' . $this->Name;
         
-        if($this->HasDefaultValue) {
-            $Code .= ' = ' . var_export($this->DefaultValue, true);
+        $code .= '$' . $this->name;
+        
+        if ($this->hasDefaultValue) {
+            $code .= ' = ' . var_export($this->defaultValue, true);
         }
     }
     
     public function serialize()
     {
-        return serialize([$this->DefaultValue, $this->HasDefaultValue, $this->IsPassedByReference, $this->Name, $this->TypeHint]);
+        return serialize([
+            $this->defaultValue,
+            $this->hasDefaultValue,
+            $this->isPassedByReference,
+            $this->name,
+            $this->typeHint
+        ]);
     }
     
-    public function unserialize($Serialized)
+    public function unserialize($serialized)
     {
-        list($this->DefaultValue, $this->HasDefaultValue, $this->IsPassedByReference, $this->Name, $this->TypeHint) = unserialize($Serialized);
+        list($this->defaultValue, $this->hasDefaultValue, $this->isPassedByReference, $this->name, $this->typeHint) = unserialize($serialized);
     }
     
     public function __clone()
     {
-        $this->DefaultValue = is_object($this->DefaultValue) ? clone $this->DefaultValue : $this->DefaultValue;
+        $this->defaultValue = is_object($this->defaultValue) ? clone $this->defaultValue : $this->defaultValue;
     }
 }

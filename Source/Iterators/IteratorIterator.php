@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Iterators;
 
@@ -14,48 +14,48 @@ class IteratorIterator implements \Iterator
     /**
      * @var \Iterator
      */
-    private $Iterator;
+    private $iterator;
     
-    public function __construct(\Traversable $Iterator)
+    public function __construct(\Traversable $iterator)
     {
-        if($Iterator instanceof \IteratorAggregate) {
-            $this->Iterator = $Iterator->getIterator();
+        if ($iterator instanceof \IteratorAggregate) {
+            $this->iterator = $iterator->getIterator();
         }
-        else if($Iterator instanceof \Iterator) {
-            $this->Iterator = $Iterator;
+        else if ($iterator instanceof \Iterator) {
+            $this->iterator = $iterator;
         }
         else {
-            $this->Iterator = new \Pinq\Iterators\IteratorIterator($Iterator);
+            $this->iterator = new \Pinq\Iterators\IteratorIterator($iterator);
         }
     }
     
-    public function GetInnerIterator() 
+    public function getInnerIterator()
     {
-        return $this->Iterator;
+        return $this->iterator;
     }
     
     public function current()
     {
-        return $this->Iterator->current();
+        return $this->iterator->current();
     }
-
+    
     public function key()
     {
-        return $this->Iterator->key();
+        return $this->iterator->key();
     }
-
+    
     public function next()
     {
-        return $this->Iterator->next();
+        return $this->iterator->next();
     }
-
+    
     public function rewind()
     {
-        return $this->Iterator->rewind();
+        return $this->iterator->rewind();
     }
-
+    
     public function valid()
     {
-        return $this->Iterator->valid();
+        return $this->iterator->valid();
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Queries;
 
@@ -12,15 +12,15 @@ abstract class Query implements IQuery
     /**
      * @var IScope
      */
-    private $Scope;
+    private $scope;
     
-    public function __construct(IScope $Scope)
+    public function __construct(IScope $scope)
     {
-        $this->Scope = $Scope;
+        $this->scope = $scope;
     }
     
-    final public function GetScope()
+    public final function getScope()
     {
-        return $this->Scope;
+        return $this->scope;
     }
 }

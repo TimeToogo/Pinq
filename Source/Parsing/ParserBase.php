@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Parsing;
 
-use \Pinq\Expressions\Expression;
+use Pinq\Expressions\Expression;
 
 /**
  * Base class for a function parser
@@ -11,34 +11,37 @@ use \Pinq\Expressions\Expression;
  */
 abstract class ParserBase implements IParser
 {
-    final public function Parse(\ReflectionFunctionAbstract $Reflection)
+    public final function parse(\ReflectionFunctionAbstract $reflection)
     {
-        if (!$Reflection->isUserDefined()) {
+        if (!$reflection->isUserDefined()) {
             throw new InvalidFunctionException(
                     'Cannot parse function %s: Function is not user defined',
-                    $Reflection->getName());
+                    $reflection->getName());
         }
-
-        $FileName = $Reflection->getFileName();
-        if (!is_readable($FileName)) {
+        
+        $fileName = $reflection->getFileName();
+        
+        if (!is_readable($fileName)) {
             throw new InvalidFunctionException(
                     'Cannot parse function %s: \'%s\' is not a valid accessable file',
-                    $Reflection->getName(),
-                    $FileName);
+                    $reflection->getName(),
+                    $fileName);
         }
         
         try {
-            return $this->ParseFunction($Reflection, $FileName);
-        }
-        catch (ASTException $ASTException) {
-            throw InvalidFunctionException::InvalidFunctionMessage($ASTException->getMessage(), $Reflection);
+            return $this->parseFunction($reflection, $fileName);
+        } 
+        catch (ASTException $astException) {
+            throw InvalidFunctionException::invalidFunctionMessage(
+                    $astException->getMessage(),
+                    $reflection);
         }
     }
-
+    
     /**
-     * @param \ReflectionFunctionAbstract $Reflection
-     * @param string $FileName
+     * @param \ReflectionFunctionAbstract $reflection
+     * @param string $fileName
      * @return Expression[]
      */
-    abstract protected function ParseFunction(\ReflectionFunctionAbstract $Reflection, $FileName);
+    protected abstract function parseFunction(\ReflectionFunctionAbstract $reflection, $fileName);
 }

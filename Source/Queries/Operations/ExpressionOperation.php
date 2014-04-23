@@ -1,8 +1,8 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Operations; 
+namespace Pinq\Queries\Operations;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Base class for an operation query containing a function expression tree
@@ -14,18 +14,18 @@ abstract class ExpressionOperation extends Operation
     /**
      * @var FunctionExpressionTree
      */
-    private $FunctionExpressionTree;
-
-    public function __construct(FunctionExpressionTree $FunctionExpressionTree)
+    private $functionExpressionTree;
+    
+    public function __construct(FunctionExpressionTree $functionExpressionTree)
     {
-        $this->FunctionExpressionTree = $FunctionExpressionTree;
+        $this->functionExpressionTree = $functionExpressionTree;
     }
     
     /**
      * @return FunctionExpressionTree
      */
-    public function GetFunctionExpressionTree()
+    public function getFunctionExpressionTree()
     {
-        return $this->FunctionExpressionTree;
+        return $this->functionExpressionTree;
     }
 }

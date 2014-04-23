@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Parsing;
 
@@ -11,27 +11,29 @@ namespace Pinq\Parsing;
 class InvalidFunctionException extends \Pinq\PinqException
 {
     /**
-     * @param string $MessageFormat
-     * @param \ReflectionFunctionAbstract $Reflection
+     * @param string $messageFormat
+     * @param \ReflectionFunctionAbstract $reflection
      * @return self
      */
-    public static function InvalidFunctionMessage($MessageFormat, \ReflectionFunctionAbstract $Reflection)
+    public static function invalidFunctionMessage($messageFormat, \ReflectionFunctionAbstract $reflection)
     {
-        return self::Construct(array_merge([
-            'Invalid function %s defined in %s lines %d-%d: ' . $MessageFormat,
-            $Reflection->getName(),
-            $Reflection->getFileName(),
-            $Reflection->getStartLine(),
-            $Reflection->getEndLine()],
-            array_slice(func_get_args(), 2)));
+        return self::construct(array_merge([
+            'Invalid function %s defined in %s lines %d-%d: ' . $messageFormat,
+            $reflection->getName(),
+            $reflection->getFileName(),
+            $reflection->getStartLine(),
+            $reflection->getEndLine()
+        ], array_slice(func_get_args(), 2)));
     }
     
     /**
-     * @param \ReflectionFunctionAbstract $Reflection
+     * @param \ReflectionFunctionAbstract $reflection
      * @return self
      */
-    public static function MustContainValidReturnExpression(\ReflectionFunctionAbstract $Reflection)
+    public static function mustContainValidReturnExpression(\ReflectionFunctionAbstract $reflection)
     {
-         return self::InvalidFunctionMessage('must contain a valid return statement', $Reflection);
+        return self::invalidFunctionMessage(
+                'must contain a valid return statement',
+                $reflection);
     }
 }

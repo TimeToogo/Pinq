@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Operations; 
+namespace Pinq\Queries\Operations;
 
 /**
  * Operation query for removing values that satisfy the supplied function
@@ -9,14 +9,13 @@ namespace Pinq\Queries\Operations;
  */
 class RemoveWhere extends ExpressionOperation
 {
-    public function GetType()
+    public function getType()
     {
-        return self::RemoveWhere;
+        return self::REMOVE_WHERE;
     }
-
-    public function Traverse(OperationVisitor $Visitor)
+    
+    public function traverse(OperationVisitor $visitor)
     {
-        return $Visitor->VisitRemoveWhere($this);
+        return $visitor->visitRemoveWhere($this);
     }
-
 }

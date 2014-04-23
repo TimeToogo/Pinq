@@ -1,9 +1,9 @@
-<?php
+<?php 
 
 namespace Pinq;
 
-use \Pinq\Queries;
-use \Pinq\Queries\Operations;
+use Pinq\Queries;
+use Pinq\Queries\Operations;
 
 /**
  * The standard repository class, fully implements the repository API
@@ -17,14 +17,14 @@ class Repository extends Queryable implements IRepository
      * 
      * @var Providers\IRepositoryProvider 
      */
-    protected $Provider;
+    protected $provider;
     
-    public function __construct(Providers\IRepositoryProvider $Provider, Queries\IScope $Scope = null)
+    public function __construct(Providers\IRepositoryProvider $provider, Queries\IScope $scope = null)
     {
-        parent::__construct($Provider, $Scope);
+        parent::__construct($provider, $scope);
     }
     
-    public function AsRepository()
+    public function asRepository()
     {
         return $this;
     }
@@ -32,62 +32,61 @@ class Repository extends Queryable implements IRepository
     /**
      * Executes the supplied operation query on the underlying repository provider
      * 
-     * @param Queries\IOperation $Operation The operation query to execute
+     * @param Queries\IOperation $operation The operation query to execute
      * @return voide
      */
-    private function ExecuteQuery(Queries\IOperation $Operation) 
+    private function executeQuery(Queries\IOperation $operation)
     {
-        $this->Provider->Execute(new Queries\OperationQuery($this->Scope, $Operation));
+        $this->provider->execute(new Queries\OperationQuery($this->scope, $operation));
     }
     
-    public function AddRange($Values)
+    public function addRange($values)
     {
-        if(!Utilities::IsIterable($Values)) {
-            throw PinqException::InvalidIterable(__METHOD__, $Values);
+        if (!Utilities::isIterable($values)) {
+            throw PinqException::invalidIterable(__METHOD__, $values);
         }
         
-        $this->ExecuteQuery(new Operations\AddValues($Values));
-        $this->ValuesIterator = null;
+        $this->executeQuery(new Operations\AddValues($values));
+        $this->valuesIterator = null;
     }
     
-    public function Apply(callable $Function)
+    public function apply(callable $function)
     {
-        $this->ExecuteQuery(new Operations\Apply($this->Convert($Function)));
-        $this->ValuesIterator = null;
+        $this->executeQuery(new Operations\Apply($this->convert($function)));
+        $this->valuesIterator = null;
     }
-
-    public function RemoveRange($Values)
+    
+    public function removeRange($values)
     {
-        if(!Utilities::IsIterable($Values)) {
-            throw PinqException::InvalidIterable(__METHOD__, $Values);
+        if (!Utilities::isIterable($values)) {
+            throw PinqException::invalidIterable(__METHOD__, $values);
         }
         
-        $this->ExecuteQuery(new Operations\RemoveValues($Values));
-        $this->ValuesIterator = null;
+        $this->executeQuery(new Operations\RemoveValues($values));
+        $this->valuesIterator = null;
     }
-
-    public function RemoveWhere(callable $Predicate)
+    
+    public function removeWhere(callable $predicate)
     {
-        $this->ExecuteQuery(new Operations\RemoveWhere($this->Convert($Predicate)));
-        $this->ValuesIterator = null;
+        $this->executeQuery(new Operations\RemoveWhere($this->convert($predicate)));
+        $this->valuesIterator = null;
     }
-
-    public function Clear()
+    
+    public function clear()
     {
-        $this->ExecuteQuery(new Operations\Clear());
-        $this->ValuesIterator = null;
+        $this->executeQuery(new Operations\Clear());
+        $this->valuesIterator = null;
     }
-
-    public function offsetSet($Index, $Value)
+    
+    public function offsetSet($index, $value)
     {
-        $this->ExecuteQuery(new Operations\SetIndex($Index, $Value));
-        $this->ValuesIterator = null;
+        $this->executeQuery(new Operations\SetIndex($index, $value));
+        $this->valuesIterator = null;
     }
-
-    public function offsetUnset($Index)
+    
+    public function offsetUnset($index)
     {
-        $this->ExecuteQuery(new Operations\UnsetIndex($Index));
-        $this->ValuesIterator = null;
+        $this->executeQuery(new Operations\UnsetIndex($index));
+        $this->valuesIterator = null;
     }
-
 }

@@ -1,9 +1,9 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions\Walkers;
 
-use \Pinq\Queries;
-use \Pinq\Expressions as O;
+use Pinq\Queries;
+use Pinq\Expressions as O;
 
 /**
  * Mock implementation, all supplied functions should already be expression trees
@@ -12,9 +12,9 @@ use \Pinq\Expressions as O;
  */
 class FunctionToExpressionTreeConverter implements \Pinq\Parsing\IFunctionToExpressionTreeConverter
 {
-    public function Convert(callable $Function)
+    public function convert(callable $function)
     {
-        return $Function;
+        return $function;
     }
 }
 
@@ -24,24 +24,25 @@ class FunctionToExpressionTreeConverter implements \Pinq\Parsing\IFunctionToExpr
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class QueryProvider implements \Pinq\Providers\IQueryProvider 
+class QueryProvider implements \Pinq\Providers\IQueryProvider
 {
-    private $Query;
+    private $query;
     
-    public function CreateQueryable(\Pinq\Queries\IScope $Scope = null)
+    public function createQueryable(\Pinq\Queries\IScope $scope = null)
     {
-        return new \Pinq\Queryable($this, $Scope);
+        return new \Pinq\Queryable($this, $scope);
     }
-
-    public function GetFunctionToExpressionTreeConverter()
+    
+    public function getFunctionToExpressionTreeConverter()
     {
         return new FunctionToExpressionTreeConverter();
     }
-
-    public function Load(Queries\IRequestQuery $Query)
+    
+    public function load(Queries\IRequestQuery $query)
     {
-        $this->Query = $Query;
-        if($Query->GetRequest() instanceof Queries\Requests\Values) {
+        $this->query = $query;
+        
+        if ($query->getRequest() instanceof Queries\Requests\Values) {
             return new \ArrayIterator();
         }
         else {
@@ -52,12 +53,12 @@ class QueryProvider implements \Pinq\Providers\IQueryProvider
     /**
      * @return Queries\IRequestQuery|null
      */
-    public function GetAndResetQuery() 
+    public function getAndResetQuery()
     {
-        $Query = $this->Query;
-        $this->Query = null;
+        $query = $this->query;
+        $this->query = null;
         
-        return $Query;
+        return $query;
     }
 }
 
@@ -73,105 +74,116 @@ class SubQueryResolver extends O\ExpressionWalker
      * 
      * @var QueryProvider
      */
-    private $QueryProvider;
-
+    private $queryProvider;
+    
     /**
      * The filter function determine the appropriate origin expressions
      * 
      * @var callable|null
      */
-    private $Filter;
-
+    private $filter;
+    
     public function __construct()
     {
-        $this->QueryProvider = new QueryProvider();
+        $this->queryProvider = new QueryProvider();
     }
     
-    public function SetFilter(callable $Function = null)
+    public function setFilter(callable $function = null)
     {
-        $this->Filter = $Function;
+        $this->filter = $function;
     }
-
-    public function WalkMethodCall(O\MethodCallExpression $MethodCallExpression)
+    
+    public function walkMethodCall(O\MethodCallExpression $methodCallExpression)
     {
-        $Expression = $MethodCallExpression;
-        $MethodCallDepth = 0;
-        $Filter = $this->Filter;
-        while($Expression instanceof O\MethodCallExpression) {
-            
-            if($Filter === null || $Filter($Expression)) {
-                $SubQueryExpression = $this->ResolveSubQuery($MethodCallExpression, $Expression->GetValueExpression(), $MethodCallDepth);
+        $expression = $methodCallExpression;
+        $methodCallDepth = 0;
+        $filter = $this->filter;
+        
+        while ($expression instanceof O\MethodCallExpression) {
+            if ($filter === null || $filter($expression)) {
+                $subQueryExpression = 
+                        $this->resolveSubQuery(
+                                $methodCallExpression,
+                                $expression->getValueExpression(),
+                                $methodCallDepth);
                 
-                if($SubQueryExpression !== null) {
-                    return $SubQueryExpression;
+                if ($subQueryExpression !== null) {
+                    return $subQueryExpression;
                 }
             }
             
-            $MethodCallDepth++;
-            $Expression = $Expression->GetValueExpression();
+            $methodCallDepth++;
+            $expression = $expression->getValueExpression();
         }
         
-        return parent::WalkMethodCall($MethodCallExpression);
+        return parent::walkMethodCall($methodCallExpression);
     }
     
     /**
-     * @param O\MethodCallExpression $MethodCallExpression
-     * @param int $MethodCallDepth
+     * @param O\MethodCallExpression $methodCallExpression
+     * @param int $methodCallDepth
      * @return O\SubQueryExpression|null
      */
-    private function ResolveSubQuery(O\MethodCallExpression $MethodCallExpression, O\Expression $QueryableOriginExpression, $MethodCallDepth)
+    private function resolveSubQuery(O\MethodCallExpression $methodCallExpression, O\Expression $queryableOriginExpression, $methodCallDepth)
     {
-        $Queryable = $this->QueryProvider->CreateQueryable(new \Pinq\Queries\Scope([]));
-        
+        $queryable = $this->queryProvider->createQueryable(new \Pinq\Queries\Scope([]));
         /*
          * Update the expression with the blank queryable as the value and resolve closure arguments
          * into fucntion expression trees
          */
-        $QueryMethodCallExpression = $this->ResolveMethodCallExpression(
-                $MethodCallExpression, 
-                $MethodCallDepth,
-                O\Expression::Value($Queryable));
-        
+        $queryMethodCallExpression = 
+                $this->resolveMethodCallExpression(
+                        $methodCallExpression,
+                        $methodCallDepth,
+                        O\Expression::value($queryable));
         // Attempt execute the methods agains the queryable
-        $ResultExpression = $QueryMethodCallExpression->Simplify();
+        $resultExpression = $queryMethodCallExpression->simplify();
         
-        if($ResultExpression instanceof O\ValueExpression) {
+        if ($resultExpression instanceof O\ValueExpression) {
             //Methods successfully executed upon the queryable, the value should contain the correct scope
-            $Query = $this->QueryProvider->GetAndResetQuery();
-            if($Query === null) {
-                $Query = new Queries\RequestQuery($Queryable->GetScope(), new Queries\Requests\Values());
+            $query = $this->queryProvider->getAndResetQuery();
+            
+            if ($query === null) {
+                $query = 
+                        new Queries\RequestQuery(
+                                $queryable->getScope(),
+                                new Queries\Requests\Values());
             }
-            return O\Expression::SubQuery($QueryableOriginExpression, $Query, $MethodCallExpression);
+            
+            return O\Expression::subQuery(
+                    $queryableOriginExpression,
+                    $query,
+                    $methodCallExpression);
         }
-    }
-
-    private function ResolveMethodCallExpression(O\MethodCallExpression $Expression, $MethodCallDepth, O\Expression $ReplacementExpression) 
-    {
-        $Expression = $Expression->Update(
-                $Expression->GetValueExpression(), 
-                $Expression->GetNameExpression(), 
-                $this->ResolveClosureArguments($Expression->GetArgumentExpressions()));
-        
-        if($MethodCallDepth === 0) {
-            return $Expression->UpdateValue($ReplacementExpression);
-        }
-        
-        return $Expression->UpdateValue(
-                $this->ResolveMethodCallExpression(
-                        $Expression->GetValueExpression(),
-                        --$MethodCallDepth, 
-                        $ReplacementExpression));
     }
     
-    private function ResolveClosureArguments(array $ArgumentExpressions)
+    private function resolveMethodCallExpression(O\MethodCallExpression $expression, $methodCallDepth, O\Expression $replacementExpression)
     {
-        foreach ($ArgumentExpressions as $Key => $ArgumentExpression) {
-            if ($ArgumentExpression instanceof O\ClosureExpression) {
-                $FunctionExpressionTree = \Pinq\FunctionExpressionTree::FromClosureExpression($ArgumentExpression);
-                $ArgumentExpressions[$Key] = O\Expression::Value($FunctionExpressionTree);
+        $expression = 
+                $expression->update(
+                        $expression->getValueExpression(),
+                        $expression->getNameExpression(),
+                        $this->resolveClosureArguments($expression->getArgumentExpressions()));
+        
+        if ($methodCallDepth === 0) {
+            return $expression->updateValue($replacementExpression);
+        }
+        
+        return $expression->updateValue($this->resolveMethodCallExpression(
+                $expression->getValueExpression(),
+                --$methodCallDepth,
+                $replacementExpression));
+    }
+    
+    private function resolveClosureArguments(array $argumentExpressions)
+    {
+        foreach ($argumentExpressions as $key => $argumentExpression) {
+            if ($argumentExpression instanceof O\ClosureExpression) {
+                $functionExpressionTree = \Pinq\FunctionExpressionTree::fromClosureExpression($argumentExpression);
+                $argumentExpressions[$key] = O\Expression::value($functionExpressionTree);
             }
         }
-
-        return $ArgumentExpressions;
+        
+        return $argumentExpressions;
     }
 }

@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Request query for the last value in the scope
@@ -9,13 +9,13 @@ namespace Pinq\Queries\Requests;
  */
 class Last extends Request
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Last;
+        return self::LAST;
     }
-
-    public function Traverse(RequestVisitor $Visitor)
+    
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitLast($this);
+        return $visitor->visitLast($this);
     }
 }

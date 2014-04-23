@@ -1,65 +1,71 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Traversable;
 
-class CustomException extends \Exception {}
+class CustomException extends \Exception
+{
+    
+}
 
 abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
 {
-    final protected function AssertThatExecutionIsDeferred(callable $TraversableQuery)
+    protected final function assertThatExecutionIsDeferred(callable $traversableQuery)
     {
-        $Exception = new CustomException();
-        
-        $ThowingFunction = function () use ($Exception) { throw $Exception; };
-        
-        try {
-            $Traversable = $TraversableQuery($ThowingFunction);
-        }
-        catch (CustomException $ThrownException) {
-            $this->assertFalse(true, 'Traversable query method should not have thrown exception');
-        }
+        $exception = new CustomException();
+        $thowingFunction = 
+                function () use($exception) {
+                    throw $exception;
+                };
         
         try {
-            foreach ($Traversable as $Key => $Value) {
+            $traversable = $traversableQuery($thowingFunction);
+        }
+        catch (CustomException $thrownException) {
+            $this->assertFalse(
+                    true,
+                    'Traversable query method should not have thrown exception');
+        }
+        
+        try {
+            foreach ($traversable as $key => $value) {
                 $this->assertFalse(true, 'Iteration should have thrown an exception');
             }
-        } 
-        catch (CustomException $ThrownException) {
-            $this->assertSame($Exception, $ThrownException);
+        }
+        catch (CustomException $thrownException) {
+            $this->assertSame($exception, $thrownException);
         }
     }
     
     /**
      * @dataProvider Everything
      */
-    final public function testThatReturnsNewInstance(\Pinq\ITraversable $Traversable, array $Data)
+    public final function testThatReturnsNewInstance(\Pinq\ITraversable $traversable, array $data)
     {
-        $ReturnedTraversable = $this->TestReturnsNewInstance($Traversable);
-        if($ReturnedTraversable === self::$Instance) {
+        $returnedTraversable = $this->_testReturnsNewInstance($traversable);
+        
+        if ($returnedTraversable === self::$instance) {
             return;
         }
         
-        $this->assertInstanceOf(\Pinq\ITraversable::ITraversableType, $ReturnedTraversable);
-        $this->assertNotSame($Traversable, $ReturnedTraversable);
+        $this->assertInstanceOf(
+                \Pinq\ITraversable::ITRAVERSABLE_TYPE,
+                $returnedTraversable);
+        $this->assertNotSame($traversable, $returnedTraversable);
     }
-    private static $Instance;
-    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable) 
-    { 
-        if(self::$Instance === null) {
-            self::$Instance = new \stdClass();
+    
+    private static $instance;
+    
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
+    {
+        if (self::$instance === null) {
+            self::$instance = new \stdClass();
         }
         
-        return self::$Instance;
+        return self::$instance;
     }
     
-    
-    final protected function ImplementationsFor(array $Data)
+    protected final function implementationsFor(array $data)
     {
-        return [
-            [new \Pinq\Traversable($Data), $Data],
-            [(new \Pinq\Traversable($Data))->AsCollection(), $Data],
-            [(new \Pinq\Traversable($Data))->AsQueryable(), $Data],
-            [(new \Pinq\Traversable($Data))->AsRepository(), $Data],
-        ];
+        return [[new \Pinq\Traversable($data), $data], [(new \Pinq\Traversable($data))->asCollection(), $data], [(new \Pinq\Traversable($data))->asQueryable(), $data], [(new \Pinq\Traversable($data))->asRepository(), $data]];
     }
 }

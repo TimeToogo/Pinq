@@ -1,9 +1,9 @@
-<?php
+<?php 
 
 namespace Pinq\Providers\Caching;
 
-use \Pinq\Queries;
-use \Pinq\Queries\Requests;
+use Pinq\Queries;
+use Pinq\Queries\Requests;
 
 /**
  * A caching request evaluator instance, the inner evaluators
@@ -17,106 +17,106 @@ class RequestEvaluator extends Requests\RequestVisitor
     /**
      * @var Requests\RequestVisitor
      */
-    private $InnerRequestEvaluator;
+    private $innerRequestEvaluator;
     
     /**
      * @var array<string, mixed>
      */
-    private $MethodResultCache = [];
+    private $methodResultCache = [];
     
-    public function __construct(Requests\RequestVisitor $InnerRequestEvaluator)
+    public function __construct(Requests\RequestVisitor $innerRequestEvaluator)
     {
-        $this->InnerRequestEvaluator = $InnerRequestEvaluator;
+        $this->innerRequestEvaluator = $innerRequestEvaluator;
     }
     
-    private function CacheMethodResult($MethodName, Queries\IRequest $Request) 
+    private function cacheMethodResult($methodName, Queries\IRequest $request)
     {
-        $Key = $MethodName . '-' . md5(serialize($Request));
+        $key = $methodName . '-' . md5(serialize($request));
         
-        if(!isset($this->MethodResultCache[$Key])) {
-            $this->MethodResultCache[$Key] = $this->InnerRequestEvaluator->$MethodName($Request);
+        if (!isset($this->methodResultCache[$key])) {
+            $this->methodResultCache[$key] = $this->innerRequestEvaluator->{$methodName}($request);
         }
-
-        return $this->MethodResultCache[$Key];
+        
+        return $this->methodResultCache[$key];
     }
     
-    public function VisitValues(Requests\Values $Request)
+    public function visitValues(Requests\Values $request)
     {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
-    }
-
-    public function VisitCount(Requests\Count $Request)
-    {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
-    }
-
-    public function VisitExists(Requests\Exists $Request)
-    {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
-    }
-
-    public function VisitFirst(Requests\First $Request)
-    {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
-    }
-
-    public function VisitLast(Requests\Last $Request)
-    {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
-    }
-
-    public function VisitContains(Requests\Contains $Request)
-    {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
+        return $this->cacheMethodResult(__FUNCTION__, $request);
     }
     
-    public function VisitGetIndex(Requests\GetIndex $Request)
+    public function visitCount(Requests\Count $request)
     {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
+        return $this->cacheMethodResult(__FUNCTION__, $request);
     }
     
-    public function VisitIssetIndex(Requests\IssetIndex $Request)
+    public function visitExists(Requests\Exists $request)
     {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
+        return $this->cacheMethodResult(__FUNCTION__, $request);
     }
     
-    public function VisitAggregate(Requests\Aggregate $Request)
+    public function visitFirst(Requests\First $request)
     {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
+        return $this->cacheMethodResult(__FUNCTION__, $request);
     }
-
-    public function VisitMaximum(Requests\Maximum $Request)
+    
+    public function visitLast(Requests\Last $request)
     {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
+        return $this->cacheMethodResult(__FUNCTION__, $request);
     }
-
-    public function VisitMinimum(Requests\Minimum $Request)
+    
+    public function visitContains(Requests\Contains $request)
     {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
+        return $this->cacheMethodResult(__FUNCTION__, $request);
     }
-
-    public function VisitSum(Requests\Sum $Request)
+    
+    public function visitGetIndex(Requests\GetIndex $request)
     {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
+        return $this->cacheMethodResult(__FUNCTION__, $request);
     }
-
-    public function VisitAverage(Requests\Average $Request)
+    
+    public function visitIssetIndex(Requests\IssetIndex $request)
     {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
+        return $this->cacheMethodResult(__FUNCTION__, $request);
     }
-
-    public function VisitAll(Requests\All $Request)
+    
+    public function visitAggregate(Requests\Aggregate $request)
     {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
+        return $this->cacheMethodResult(__FUNCTION__, $request);
     }
-
-    public function VisitAny(Requests\Any $Request)
+    
+    public function visitMaximum(Requests\Maximum $request)
     {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
+        return $this->cacheMethodResult(__FUNCTION__, $request);
     }
-
-    public function VisitImplode(Requests\Implode $Request)
+    
+    public function visitMinimum(Requests\Minimum $request)
     {
-        return $this->CacheMethodResult(__FUNCTION__, $Request);
+        return $this->cacheMethodResult(__FUNCTION__, $request);
+    }
+    
+    public function visitSum(Requests\Sum $request)
+    {
+        return $this->cacheMethodResult(__FUNCTION__, $request);
+    }
+    
+    public function visitAverage(Requests\Average $request)
+    {
+        return $this->cacheMethodResult(__FUNCTION__, $request);
+    }
+    
+    public function visitAll(Requests\All $request)
+    {
+        return $this->cacheMethodResult(__FUNCTION__, $request);
+    }
+    
+    public function visitAny(Requests\Any $request)
+    {
+        return $this->cacheMethodResult(__FUNCTION__, $request);
+    }
+    
+    public function visitImplode(Requests\Implode $request)
+    {
+        return $this->cacheMethodResult(__FUNCTION__, $request);
     }
 }

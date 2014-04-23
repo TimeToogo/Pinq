@@ -1,9 +1,9 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
-use \Pinq\Expressions as O;
-use \Pinq\Queries;
+use Pinq\Expressions as O;
+use Pinq\Queries;
 
 class ComplexConverterTest extends ConverterTest
 {
@@ -12,9 +12,21 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testDefaultOrderOfBinaryOperationFunction()
     {
-        $ValueSet = [[-500], [-5], [-2], [-1], [1], [2], [5], [500]];
-        
-        $this->AssertConvertsAndRecompilesCorrectly(function ($I) { return $I * -$I + 5 ^ $I / -$I % $I + 2 << $I - +$I;  }, $ValueSet);
+        $valueSet = [
+            [-500],
+            [-5],
+            [-2],
+            [-1],
+            [1],
+            [2],
+            [5],
+            [500]
+        ];
+        $this->assertConvertsAndRecompilesCorrectly(
+                function ($i) {
+                    return $i * -$i + 5 ^ $i / -$i % $i + 2 << $i - +$i;
+                },
+                $valueSet);
     }
     
     /**
@@ -22,10 +34,22 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testUsedVariableResolution()
     {
-        $ValueSet = [[-500], [-5], [-2], [-1], [1], [2], [5], [500]];
-        
-        $Factor = 5;
-        $this->AssertConvertsAndRecompilesCorrectly(function ($I) use($Factor) { return $I * $Factor; }, $ValueSet);
+        $valueSet = [
+            [-500],
+            [-5],
+            [-2],
+            [-1],
+            [1],
+            [2],
+            [5],
+            [500]
+        ];
+        $factor = 5;
+        $this->assertConvertsAndRecompilesCorrectly(
+                function ($i) use($factor) {
+                    return $i * $factor;
+                },
+                $valueSet);
     }
     
     /**
@@ -33,16 +57,27 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testNestedClosureUsedVariableResolution()
     {
-        $ValueSet = [[-500], [-5], [-2], [-1], [1], [2], [5], [500]];
-        
-        $Factor = 5;
-        $this->AssertConvertsAndRecompilesCorrectly(
-                    function ($I) use($Factor) { 
-                        $InnerClosue = function ($I) use ($Factor) {
-                            return $I * $Factor;
-                        };
-                        return $InnerClosue($I);
-                    }, $ValueSet);
+        $valueSet = [
+            [-500],
+            [-5],
+            [-2],
+            [-1],
+            [1],
+            [2],
+            [5],
+            [500]
+        ];
+        $factor = 5;
+        $this->assertConvertsAndRecompilesCorrectly(
+                function ($i) use($factor) {
+                    $innerClosue = 
+                            function ($i) use($factor) {
+                                return $i * $factor;
+                            };
+                    
+                    return $innerClosue($i);
+                },
+                $valueSet);
     }
     
     /**
@@ -50,8 +85,21 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testVariableReturnValueResolution()
     {
-        foreach([1, null, 'test', false, new \stdClass(), [1234567890, 'tests', new \stdClass(), function () {}]] as $Value) {
-            $this->AssertFirstResolvedReturnExpression(function () use($Value) { return $Value; }, O\Expression::Value($Value));
+        foreach ([
+            1,
+            null,
+            'test',
+            false,
+            new \stdClass(),
+            [1234567890, 'tests', new \stdClass(), function () {
+                
+            }]
+        ] as $value) {
+            $this->assertFirstResolvedReturnExpression(
+                    function () use($value) {
+                        return $value;
+                    },
+                    O\Expression::value($value));
         }
     }
     
@@ -60,9 +108,26 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testNestedClosure()
     {
-        $ValueSet = [[-500], [-5], [-2], [-1], [1], [2], [5], [500]];
-        
-        $this->AssertConvertsAndRecompilesCorrectly(function ($I) { $Divider = function () use ($I) { return $I / 5; }; return $Divider(); }, $ValueSet);
+        $valueSet = [
+            [-500],
+            [-5],
+            [-2],
+            [-1],
+            [1],
+            [2],
+            [5],
+            [500]
+        ];
+        $this->assertConvertsAndRecompilesCorrectly(
+                function ($i) {
+                    $divider = 
+                            function () use($i) {
+                                return $i / 5;
+                            };
+                    
+                    return $divider();
+                },
+                $valueSet);
     }
     
     /**
@@ -70,11 +135,19 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testOperationsReturnValueResolution()
     {
-        $Value = 5;
-        $this->AssertReturnValueResolvesCorrectly(function () use($Value) { return $Value + 1; });
-        $this->AssertReturnValueResolvesCorrectly(function () use($Value) { return $Value - 1; });
-        $this->AssertReturnValueResolvesCorrectly(function () use($Value) { return $Value * 5; });
-        $this->AssertReturnValueResolvesCorrectly(function () use($Value) { return $Value / $Value + $Value - $Value % ~$Value; });
+        $value = 5;
+        $this->assertReturnValueResolvesCorrectly(function () use($value) {
+            return $value + 1;
+        });
+        $this->assertReturnValueResolvesCorrectly(function () use($value) {
+            return $value - 1;
+        });
+        $this->assertReturnValueResolvesCorrectly(function () use($value) {
+            return $value * 5;
+        });
+        $this->assertReturnValueResolvesCorrectly(function () use($value) {
+            return $value / $value + $value - $value % ~$value;
+        });
     }
     
     /**
@@ -82,26 +155,24 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testComplexReturnValueResolution()
     {
-        $Value = 5;
-        $this->AssertReturnValueResolvesCorrectly(
-                function () use($Value) {
-                    $Copy = $Value;
-                    return $Copy + 1; 
-                });
-                
-        $this->AssertReturnValueResolvesCorrectly(
-                function () use($Value) {
-                    $Copy =& $Value;
-                    $Another = $Value + 1;
-                    return $Copy + 1 - $Another; 
-                });
-                
-        $this->AssertReturnValueResolvesCorrectly(
-                function () use($Value) {
-                    $Copy = $Value / $Value + $Value - $Value % ~$Value;
-                    $Another = $Value % 34 - $Copy + $Value;
-                    return $Another - $Copy + 1 - $Another * $Value % 34; 
-                });
+        $value = 5;
+        $this->assertReturnValueResolvesCorrectly(function () use($value) {
+            $copy = $value;
+            
+            return $copy + 1;
+        });
+        $this->assertReturnValueResolvesCorrectly(function () use($value) {
+            $copy =& $value;
+            $another = $value + 1;
+            
+            return $copy + 1 - $another;
+        });
+        $this->assertReturnValueResolvesCorrectly(function () use($value) {
+            $copy = $value / $value + $value - $value % ~$value;
+            $another = $value % 34 - $copy + $value;
+            
+            return $another - $copy + 1 - $another * $value % 34;
+        });
     }
     
     /**
@@ -109,32 +180,32 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testComplexReturnValueResolutionWithVariableVariables()
     {
-        $Value = 5;
-        $Variable = 'Value';
-        $this->AssertReturnValueResolvesCorrectly(
-                function () use($Value, $Variable) {
-                    $Copy = $$Variable;
-                    return $Copy + 1; 
-                });
-                
-        $this->AssertReturnValueResolvesCorrectly(
-                function () use($Value, $Variable) {
-                    $Copy =& $$Variable;
-                    $Another = $Value + 1;
-                    return $Copy + 1 - $Another; 
-                });
-                
-        $this->AssertReturnValueResolvesCorrectly(
-                function () use($Value, $Variable) {
-                    $Copy = $$Variable / $Value + $Value - $Value % ~$$Variable;
-                    $Another = $Value % 34 - $Copy + $$Variable;
-                    return $Another - $Copy + 1 - $Another * $Value % 34; 
-                });
+        $value = 5;
+        $variable = 'value';
+        $this->assertReturnValueResolvesCorrectly(function () use($value, $variable) {
+            $copy = ${$variable};
+            
+            return $copy + 1;
+        });
+        $this->assertReturnValueResolvesCorrectly(function () use($value, $variable) {
+            $copy =& ${$variable};
+            $another = $value + 1;
+            
+            return $copy + 1 - $another;
+        });
+        $this->assertReturnValueResolvesCorrectly(function () use($value, $variable) {
+            $copy = ${$variable} / $value + $value - $value % ~${$variable};
+            $another = $value % 34 - $copy + ${$variable};
+            
+            return $another - $copy + 1 - $another * $value % 34;
+        });
     }
     
-    final protected function AssertReturnValueResolvesCorrectly(callable $Function) 
+    protected final function assertReturnValueResolvesCorrectly(callable $function)
     {
-        $this->AssertFirstResolvedReturnExpression($Function, O\Expression::Value($Function()));
+        $this->assertFirstResolvedReturnExpression(
+                $function,
+                O\Expression::value($function()));
     }
     
     /**
@@ -142,92 +213,100 @@ class ComplexConverterTest extends ConverterTest
      */
     public function testThatResolvesSubQueries()
     {
-        $this->AssertFirstResolvedReturnExpression(
-                function (\Pinq\ITraversable $Traversable) {
-                    return $Traversable->AsArray(); 
+        $this->assertFirstResolvedReturnExpression(
+                function (\Pinq\ITraversable $traversable) {
+                    return $traversable->asArray();
                 },
-                O\Expression::SubQuery(
-                        O\Expression::Variable(O\Expression::Value('Traversable')), 
-                        new Queries\RequestQuery(new Queries\Scope([]), new Queries\Requests\Values()), 
-                        O\Expression::MethodCall(O\Expression::Variable(O\Expression::Value('Traversable')), O\Expression::Value('AsArray'))));
-        
-        $this->AssertFirstResolvedReturnExpression(
-                function (\Pinq\ITraversable $Traversable) {
-                    return $Traversable->Where(function ($I) { return $I > 0; })->All(function ($I) { return $I % 2 === 0; }); 
+                O\Expression::subQuery(
+                        O\Expression::variable(O\Expression::value('traversable')),
+                        new Queries\RequestQuery(
+                                new Queries\Scope([]),
+                                new Queries\Requests\Values()),
+                        O\Expression::methodCall(
+                                O\Expression::variable(O\Expression::value('traversable')),
+                                O\Expression::value('asArray'))));
+        $this->assertFirstResolvedReturnExpression(
+                function (\Pinq\ITraversable $traversable) {
+                    return $traversable
+                            ->where(function ($i) { return $i > 0; })
+                            ->all(function ($i) { return $i % 2 === 0; });
                 },
-                O\Expression::SubQuery(
-                        O\Expression::Variable(O\Expression::Value('Traversable')), 
+                O\Expression::subQuery(
+                        O\Expression::variable(O\Expression::value('traversable')),
                         new Queries\RequestQuery(
                                 new Queries\Scope([new Queries\Segments\Filter(new \Pinq\FunctionExpressionTree(
-                                        null, 
-                                        [O\Expression::Parameter('I')],
-                                        [O\Expression::ReturnExpression(
-                                                O\Expression::BinaryOperation(
-                                                        O\Expression::Variable(O\Expression::Value('I')), 
-                                                        O\Operators\Binary::GreaterThan, 
-                                                        O\Expression::Value(0)))]))]), 
+                                        null,
+                                        [O\Expression::parameter('i')],
+                                        [O\Expression::returnExpression(O\Expression::binaryOperation(
+                                                O\Expression::variable(O\Expression::value('i')),
+                                                O\Operators\Binary::GREATER_THAN,
+                                                O\Expression::value(0)))]))]),
                                 new Queries\Requests\All(new \Pinq\FunctionExpressionTree(
-                                        null, 
-                                        [O\Expression::Parameter('I')],
-                                        [O\Expression::ReturnExpression(
-                                                O\Expression::BinaryOperation(
-                                                        O\Expression::BinaryOperation(
-                                                                O\Expression::Variable(O\Expression::Value('I')),
-                                                                O\Operators\Binary::Modulus, 
-                                                                O\Expression::Value(2)), 
-                                                        O\Operators\Binary::Identity, 
-                                                        O\Expression::Value(0)))]))), 
-                        O\Expression::MethodCall(
-                                O\Expression::MethodCall(
-                                        O\Expression::Variable(O\Expression::Value('Traversable')), 
-                                        O\Expression::Value('Where'),
-                                        [O\Expression::Closure(
-                                                [O\Expression::Parameter('I')],
+                                        null,
+                                        [O\Expression::parameter('i')],
+                                        [O\Expression::returnExpression(O\Expression::binaryOperation(
+                                                O\Expression::binaryOperation(
+                                                        O\Expression::variable(O\Expression::value('i')),
+                                                        O\Operators\Binary::MODULUS,
+                                                        O\Expression::value(2)),
+                                                O\Operators\Binary::IDENTITY,
+                                                O\Expression::value(0)))]))),
+                        O\Expression::methodCall(
+                                O\Expression::methodCall(
+                                        O\Expression::variable(O\Expression::value('traversable')),
+                                        O\Expression::value('where'),
+                                        [O\Expression::closure(
+                                                [O\Expression::parameter('i')],
                                                 [],
-                                                [O\Expression::ReturnExpression(
-                                                        O\Expression::BinaryOperation(
-                                                                O\Expression::Variable(O\Expression::Value('I')), 
-                                                                O\Operators\Binary::GreaterThan, 
-                                                                O\Expression::Value(0)))])]), 
-                                O\Expression::Value('All'),
-                                [O\Expression::Closure(
-                                                [O\Expression::Parameter('I')],
-                                                [],
-                                                [O\Expression::ReturnExpression(
-                                                        O\Expression::BinaryOperation(
-                                                                O\Expression::BinaryOperation(
-                                                                        O\Expression::Variable(O\Expression::Value('I')),
-                                                                        O\Operators\Binary::Modulus, 
-                                                                        O\Expression::Value(2)), 
-                                                                O\Operators\Binary::Identity, 
-                                                                O\Expression::Value(0)))])])));
+                                                [O\Expression::returnExpression(O\Expression::binaryOperation(
+                                                        O\Expression::variable(O\Expression::value('i')),
+                                                        O\Operators\Binary::GREATER_THAN,
+                                                        O\Expression::value(0)))])]),
+                                O\Expression::value('all'),
+                                [O\Expression::closure(
+                                        [O\Expression::parameter('i')],
+                                        [],
+                                        [O\Expression::returnExpression(O\Expression::binaryOperation(
+                                                O\Expression::binaryOperation(
+                                                        O\Expression::variable(O\Expression::value('i')),
+                                                        O\Operators\Binary::MODULUS,
+                                                        O\Expression::value(2)),
+                                                O\Operators\Binary::IDENTITY,
+                                                O\Expression::value(0)))])])));
     }
     
     /** ---- Some code from the wild ---- **/
-    
     /**
      * @dataProvider Converters
      * @source http://stackoverflow.com/questions/2510434/format-bytes-to-kilobytes-megabytes-gigabytes
      */
     public function testFileSizeFormatter()
     {
-        $Formatter = function($bytes, $precision = 2) 
-        { 
-            $units = array('B', 'KB', 'MB', 'GB', 'TB'); 
-
-            $bytes = max($bytes, 0); 
-            $pow = floor(($bytes ? log($bytes) : 0) / log(1024)); 
-            $pow = min($pow, count($units) - 1); 
-
-            // Uncomment one of the following alternatives
-            // $bytes /= pow(1024, $pow);
-            // $bytes /= (1 << (10 * $pow)); 
-
-            return round($bytes, $precision) . ' ' . $units[$pow]; 
-        };
-        
-        $ValueSet = [[0], [1000], [500050], [323241234], [5000000]];
-        
-        $this->AssertConvertsAndRecompilesCorrectly($Formatter, $ValueSet);
+        $formatter = 
+                function ($bytes, $precision = 2) {
+                    $units = [
+                        'B',
+                        'KB',
+                        'MB',
+                        'GB',
+                        'TB'
+                    ];
+                    $bytes = max($bytes, 0);
+                    $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+                    $pow = min($pow, count($units) - 1);
+                    
+                    // Uncomment one of the following alternatives
+                    // $bytes /= pow(1024, $pow);
+                    // $bytes /= (1 << (10 * $pow));
+                    return round($bytes, $precision) . ' ' . $units[$pow];
+                };
+        $valueSet = [
+            [0],
+            [1000],
+            [500050],
+            [323241234],
+            [5000000]
+        ];
+        $this->assertConvertsAndRecompilesCorrectly($formatter, $valueSet);
     }
 }

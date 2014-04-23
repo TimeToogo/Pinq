@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -7,8 +7,8 @@ namespace Pinq\Expressions;
  */
 abstract class ObjectOperationExpression extends TraversalExpression
 {
-    public function __construct(Expression $ObjectValueExpression)
+    public function __construct(Expression $objectValueExpression)
     {
-        parent::__construct($ObjectValueExpression);
+        parent::__construct($objectValueExpression);
     }
 }

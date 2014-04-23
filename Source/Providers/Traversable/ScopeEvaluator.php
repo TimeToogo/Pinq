@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Providers\Traversable;
 
-use \Pinq\Queries\Segments;
+use Pinq\Queries\Segments;
 
 /**
  * Evaluates the query scope against the supplied traversable
@@ -14,132 +14,136 @@ class ScopeEvaluator extends Segments\SegmentVisitor
     /**
      * @var \Pinq\ITraversable
      */
-    protected $Traversable;
-
-    final public function SetTraversable(\Pinq\ITraversable $Traversable)
+    protected $traversable;
+    
+    public final function setTraversable(\Pinq\ITraversable $traversable)
     {
-        $this->Traversable = $Traversable;
+        $this->traversable = $traversable;
     }
-
+    
     /**
      * @return \Pinq\ITraversable
      */
-    public function GetTraversable()
+    public function getTraversable()
     {
-        return $this->Traversable;
+        return $this->traversable;
     }
     
-    public function VisitFilter(Segments\Filter $Query)
+    public function visitFilter(Segments\Filter $query)
     {
-        $this->Traversable = $this->Traversable->Where($Query->GetFunctionExpressionTree());
+        $this->traversable = $this->traversable->where($query->getFunctionExpressionTree());
     }
-
-    public function VisitRange(Segments\Range $Query)
+    
+    public function visitRange(Segments\Range $query)
     {
-        $this->Traversable = $this->Traversable->Slice($Query->GetRangeStart(), $Query->GetRangeAmount());
+        $this->traversable = 
+                $this->traversable->slice(
+                        $query->getRangeStart(),
+                        $query->getRangeAmount());
     }
-
-    public function VisitSelect(Segments\Select $Query)
+    
+    public function visitSelect(Segments\Select $query)
     {
-        $this->Traversable = $this->Traversable->Select($Query->GetFunctionExpressionTree());
+        $this->traversable = $this->traversable->select($query->getFunctionExpressionTree());
     }
-
-    public function VisitSelectMany(Segments\SelectMany $Query)
+    
+    public function visitSelectMany(Segments\SelectMany $query)
     {
-        $this->Traversable = $this->Traversable->SelectMany($Query->GetFunctionExpressionTree());
+        $this->traversable = $this->traversable->selectMany($query->getFunctionExpressionTree());
     }
-
-    public function VisitUnique(Segments\Unique $Query)
+    
+    public function visitUnique(Segments\Unique $query)
     {
-        $this->Traversable = $this->Traversable->Unique();
+        $this->traversable = $this->traversable->unique();
     }
-
-    public function VisitOrderBy(Segments\OrderBy $Query)
+    
+    public function visitOrderBy(Segments\OrderBy $query)
     {
-        $IsAscendingArray = $Query->GetIsAscendingArray();
-        $First = true;
-        foreach($Query->GetFunctionExpressionTrees() as $Key => $FunctionExpressionTree) {
+        $isAscendingArray = $query->getIsAscendingArray();
+        $first = true;
+        
+        foreach ($query->getFunctionExpressionTrees() as $key => $functionExpressionTree) {
+            $direction = $isAscendingArray[$key] ? \Pinq\Direction::ASCENDING : \Pinq\Direction::DESCENDING;
             
-            $Direction = $IsAscendingArray[$Key] ? \Pinq\Direction::Ascending : \Pinq\Direction::Descending;
-            
-            if($First) {
-                $this->Traversable = $this->Traversable->OrderBy($FunctionExpressionTree, $Direction);
-                $First = false;
+            if ($first) {
+                $this->traversable = $this->traversable->orderBy($functionExpressionTree, $direction);
+                $first = false;
             }
             else {
-                $this->Traversable = $this->Traversable->ThenBy($FunctionExpressionTree, $Direction);
+                $this->traversable = $this->traversable->thenBy($functionExpressionTree, $direction);
             }
         }
     }
-
-    public function VisitGroupBy(Segments\GroupBy $Query)
+    
+    public function visitGroupBy(Segments\GroupBy $query)
     {
-        $First = true;
-        foreach($Query->GetFunctionExpressionTrees() as $FunctionExpressionTree) {
+        $first = true;
+        
+        foreach ($query->getFunctionExpressionTrees() as $functionExpressionTree) {
+            $this->traversable = $first ? $this->traversable->groupBy($functionExpressionTree) : $this->traversable->andBy($functionExpressionTree);
             
-            $this->Traversable = 
-                    $First ?
-                    $this->Traversable->GroupBy($FunctionExpressionTree) :
-                    $this->Traversable->AndBy($FunctionExpressionTree);
-            if($First) {
-                $First = false;
+            if ($first) {
+                $first = false;
             }
         }
     }
     
-    public function VisitJoin(Segments\Join $Query)
+    public function visitJoin(Segments\Join $query)
     {
-        $this->Traversable = $this->GetJoin($Query)
-                ->On($Query->GetOnFunctionExpressionTree())
-                ->To($Query->GetJoiningFunctionExpressionTree());
+        $this->traversable = $this->getJoin($query)->on($query->getOnFunctionExpressionTree())->to($query->getJoiningFunctionExpressionTree());
     }
     
-    public function VisitEqualityJoin(Segments\EqualityJoin $Query)
+    public function visitEqualityJoin(Segments\EqualityJoin $query)
     {
-        $this->Traversable = $this->GetJoin($Query)
-                ->OnEquality($Query->GetOuterKeyFunctionExpressionTree(), $Query->GetInnerKeyFunctionExpressionTree())
-                ->To($Query->GetJoiningFunctionExpressionTree());
+        $this->traversable = 
+                $this->getJoin($query)->onEquality(
+                        $query->getOuterKeyFunctionExpressionTree(),
+                        $query->getInnerKeyFunctionExpressionTree())->to($query->getJoiningFunctionExpressionTree());
     }
     
-    private function GetJoin(Segments\JoinBase $Query)
+    private function getJoin(Segments\JoinBase $query)
     {
-         if($Query->IsGroupJoin()) {
-            return $this->Traversable->GroupJoin($Query->GetValues());
+        if ($query->isGroupJoin()) {
+            return $this->traversable->groupJoin($query->getValues());
         }
         else {
-            return $this->Traversable->Join($Query->GetValues());
+            return $this->traversable->join($query->getValues());
         }
     }
-
-    protected function VisitIndexBy(Segments\IndexBy $Query)
+    
+    protected function visitIndexBy(Segments\IndexBy $query)
     {
-        $this->Traversable = $this->Traversable->IndexBy($Query->GetFunctionExpressionTree());
+        $this->traversable = $this->traversable->indexBy($query->getFunctionExpressionTree());
     }
-
-    public function VisitOperation(Segments\Operation $Query)
+    
+    public function visitOperation(Segments\Operation $query)
     {
-        $OtherTraversable = $Query->GetTraversable();
-        switch ($Query->GetOperationType()) {
-            case Segments\Operation::Union:
-                $this->Traversable = $this->Traversable->Union($OtherTraversable);
-                break;
-            case Segments\Operation::Intersect:
-                $this->Traversable = $this->Traversable->Intersect($OtherTraversable);
-                break;
-            case Segments\Operation::Difference:
-                $this->Traversable = $this->Traversable->Difference($OtherTraversable);
+        $otherTraversable = $query->getTraversable();
+        switch ($query->getOperationType()) {
+            
+            case Segments\Operation::UNION:
+                $this->traversable = $this->traversable->union($otherTraversable);
                 break;
             
-            case Segments\Operation::Append:
-                $this->Traversable = $this->Traversable->Append($OtherTraversable);
+            case Segments\Operation::INTERSECT:
+                $this->traversable = $this->traversable->intersect($otherTraversable);
                 break;
-            case Segments\Operation::WhereIn:
-                $this->Traversable = $this->Traversable->WhereIn($OtherTraversable);
+            
+            case Segments\Operation::DIFFERENCE:
+                $this->traversable = $this->traversable->difference($otherTraversable);
                 break;
-            case Segments\Operation::Except:
-                $this->Traversable = $this->Traversable->Except($OtherTraversable);
+            
+            case Segments\Operation::APPEND:
+                $this->traversable = $this->traversable->append($otherTraversable);
+                break;
+            
+            case Segments\Operation::WHERE_IN:
+                $this->traversable = $this->traversable->whereIn($otherTraversable);
+                break;
+            
+            case Segments\Operation::EXCEPT:
+                $this->traversable = $this->traversable->except($otherTraversable);
                 break;
         }
     }
-
 }

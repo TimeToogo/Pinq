@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
-use \Pinq\Expressions as O;
+use Pinq\Expressions as O;
 
 class MiscConverterTest extends ConverterTest
 {
@@ -11,14 +11,37 @@ class MiscConverterTest extends ConverterTest
      */
     public function testParameterExpressions()
     {
-        $this->AssertParametersAre(function ($I) {  }, [O\Expression::Parameter('I')]);
-        $this->AssertParametersAre(function ($I, $Foo) {  }, [O\Expression::Parameter('I'), O\Expression::Parameter('Foo')]);
-        $this->AssertParametersAre(function ($I = null) {  }, [O\Expression::Parameter('I', null, true, null)]);
-        $this->AssertParametersAre(function ($I = 'bar') {  }, [O\Expression::Parameter('I', null, true, 'bar')]);
-        $this->AssertParametersAre(function (\DateTime $I) {  }, [O\Expression::Parameter('I', 'DateTime')]);
-        $this->AssertParametersAre(function (&$I) {  }, [O\Expression::Parameter('I', null, false, null, true)]);
-        $this->AssertParametersAre(function (\stdClass &$I = null, array $Array =  ['foo']) {  }, [O\Expression::Parameter('I', 'stdClass', true, null, true), O\Expression::Parameter('Array', 'array', true,  ['foo'])]);
-        $this->AssertParametersAre(function (callable &$V = null) {  }, [O\Expression::Parameter('V', 'callable', true, null, true)]);
+        $this->assertParametersAre(
+                function ($i) { },
+                [O\Expression::parameter('i')]);
+                
+        $this->assertParametersAre(
+                function ($i, $foo) { },
+                [O\Expression::parameter('i'), O\Expression::parameter('foo')]);
+                
+        $this->assertParametersAre(
+                function ($i = null) { },
+                [O\Expression::parameter('i', null, true, null)]);
+                
+        $this->assertParametersAre(
+                function ($i = 'bar') { },
+                [O\Expression::parameter('i', null, true, 'bar')]);
+                
+        $this->assertParametersAre(
+                function (\DateTime $i) { },
+                [O\Expression::parameter('i', 'DateTime')]);
+                
+        $this->assertParametersAre(
+                function (&$i) { },
+                [O\Expression::parameter('i', null, false, null, true)]);
+                
+        $this->assertParametersAre(
+                function (\stdClass &$i = null, array $array = ['foo']) { },
+                [O\Expression::parameter('i', 'stdClass', true, null, true), O\Expression::parameter('array', 'array', true, ['foo'])]);
+                
+        $this->assertParametersAre(
+                function (callable &$v = null) { },
+                [O\Expression::parameter('v', 'callable', true, null, true)]);
     }
     
     /**
@@ -26,16 +49,67 @@ class MiscConverterTest extends ConverterTest
      */
     public function testUnresolvedVariables()
     {
-        $this->AssertUnresolvedVariablesAre(function () { return null; }, []);
-        $this->AssertUnresolvedVariablesAre(function ($I) { return $I; }, []);
-        $this->AssertUnresolvedVariablesAre(function ($I) { return $I . $I; }, []);
-        $this->AssertUnresolvedVariablesAre(function ($I) { return $I . $Foo; }, ['Foo']);
-        $this->AssertUnresolvedVariablesAre(function () { return $I . $Foo; }, ['I', 'Foo']);
-        $this->AssertUnresolvedVariablesAre(function () { return $I . $I; }, ['I']);
-        $this->AssertUnresolvedVariablesAre(function () { $Boo = $Nah; }, ['Nah']);
-        $this->AssertUnresolvedVariablesAre(function () { $Boo += $Nah; }, ['Boo', 'Nah']);
-        $this->AssertUnresolvedVariablesAre(function () { $$Boo; }, ['$Boo']);
-        $this->AssertUnresolvedVariablesAre(function () { function ($I) use ($NonExistent) {}; }, ['NonExistent']);
+        $this->assertUnresolvedVariablesAre(
+                function () {
+                    return null;
+                },
+                []);
+                
+        $this->assertUnresolvedVariablesAre(
+                function ($i) {
+                    return $i;
+                },
+                []);
+                
+        $this->assertUnresolvedVariablesAre(
+                function ($i) {
+                    return $i . $i;
+                },
+                []);
+                
+        $this->assertUnresolvedVariablesAre(
+                function ($i) {
+                    return $i . $foo;
+                },
+                ['foo']);
+                
+        $this->assertUnresolvedVariablesAre(
+                function () {
+                    return $i . $foo;
+                },
+                ['i', 'foo']);
+                
+        $this->assertUnresolvedVariablesAre(
+                function () {
+                    return $i . $i;
+                },
+                ['i']);
+                
+        $this->assertUnresolvedVariablesAre(
+                function () {
+                    $boo = $nah;
+                },
+                ['nah']);
+                
+        $this->assertUnresolvedVariablesAre(
+                function () {
+                    $boo += $nah;
+                },
+                ['boo', 'nah']);
+                
+        $this->assertUnresolvedVariablesAre(
+                function () {
+                    ${$boo};
+                },
+                ['$boo']);
+                
+        $this->assertUnresolvedVariablesAre(
+                function () {
+                    function ($i) use($nonExistent) {
+                        
+                    };
+                },
+                ['nonExistent']);
     }
     
     /**
@@ -43,7 +117,20 @@ class MiscConverterTest extends ConverterTest
      */
     public function testUnresolvedVariableInNestedClosure()
     {
-        $this->AssertUnresolvedVariablesAre(function () { return function ($I) { return $I; }; }, []);
-        $this->AssertUnresolvedVariablesAre(function () { return function ($I) { return $Bar; }; }, ['Bar']);
+        $this->assertUnresolvedVariablesAre(
+                function () {
+                    return function ($i) {
+                        return $i;
+                    };
+                },
+                []);
+                
+        $this->assertUnresolvedVariablesAre(
+                function () {
+                    return function ($i) {
+                        return $bar;
+                    };
+                },
+                ['bar']);
     }
 }

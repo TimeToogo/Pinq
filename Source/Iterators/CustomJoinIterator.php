@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Iterators;
 
@@ -9,8 +9,10 @@ namespace Pinq\Iterators;
  */
 class CustomJoinIterator extends CustomJoinIteratorBase
 {
-    protected function GetInnerGroupValuesIterator(callable $InnerValueFilterFunction)
+    protected function getInnerGroupValuesIterator(callable $innerValueFilterFunction)
     {
-        return new FilterIterator(new \ArrayIterator($this->InnerValues), $InnerValueFilterFunction);
+        return new FilterIterator(
+                new \ArrayIterator($this->innerValues),
+                $innerValueFilterFunction);
     }
 }

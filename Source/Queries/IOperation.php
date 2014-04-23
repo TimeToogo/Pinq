@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Queries;
 
@@ -10,21 +10,21 @@ namespace Pinq\Queries;
  */
 interface IOperation
 {
-    const Apply = 0;
-    const RemoveValues = 1;
-    const AddValues = 2;
-    const Clear = 3;
-    const RemoveWhere = 4;
-    const SetIndex = 7;
-    const UnsetIndex = 8;
-
+    const APPLY = 0;
+    const REMOVE_VALUES = 1;
+    const ADD_VALUES = 2;
+    const CLEAR = 3;
+    const REMOVE_WHERE = 4;
+    const SET_INDEX = 7;
+    const UNSET_INDEX = 8;
+    
     /**
      * @return int
      */
-    public function GetType();
-
+    public function getType();
+    
     /**
      * @return void
      */
-    public function Traverse(Operations\OperationVisitor $Visitor);
+    public function traverse(Operations\OperationVisitor $visitor);
 }

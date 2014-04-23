@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Queries;
 
@@ -12,16 +12,16 @@ class OperationQuery extends Query implements IOperationQuery
     /**
      * @var IOperation
      */
-    private $Operation;
+    private $operation;
     
-    public function __construct(IScope $Scope, IOperation $Operation)
+    public function __construct(IScope $scope, IOperation $operation)
     {
-        parent::__construct($Scope);
-        $this->Operation = $Operation;
+        parent::__construct($scope);
+        $this->operation = $operation;
     }
-
-    public function GetOperation()
+    
+    public function getOperation()
     {
-        return $this->Operation;
+        return $this->operation;
     }
 }

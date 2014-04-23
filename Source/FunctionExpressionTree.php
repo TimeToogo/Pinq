@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq;
 
-use \Pinq\Expressions as O;
+use Pinq\Expressions as O;
 
 /**
  * Acts as a mutable container and compiler for the underlying expression tree of a function
@@ -14,362 +14,359 @@ class FunctionExpressionTree implements \Serializable
     /**
      * @var O\ParameterExpression[]
      */
-    private $ParameterExpressions;
-
+    private $parameterExpressions;
+    
     /**
      * The expressions of the body statements of the function
      *
      * @var O\Expression[]
      */
-    private $BodyExpressions = [];
-
+    private $bodyExpressions = [];
+    
     /**
      * The body expressions with resolved sub queries
      *
      * @var O\Expression[]
      */
-    private $BodyExpressionsWithSubQueries = [];
-
+    private $bodyExpressionsWithSubQueries = [];
+    
     /**
      * Expressions which can resolve to subqueries
      *
      * @var O\Expression[]
      */
-    private $QueryableExpressions = [];
-
+    private $queryableExpressions = [];
+    
     /**
      * @var O\ReturnExpression[]
      */
-    private $ReturnValueExpressions = [];
-
+    private $returnValueExpressions = [];
+    
     /**
      * @var O\Walkers\VariableResolver
      */
-    private $VariableResolver;
-
+    private $variableResolver;
+    
     /**
      * @var O\Walkers\UnresolvedVariableFinder
      */
-    private $UnresolvedVariableFinder;
-
+    private $unresolvedVariableFinder;
+    
     /**
      * @var O\Walkers\ValueUnresolver
      */
-    private $ValueUnresolver;
-
+    private $valueUnresolver;
+    
     /**
      * @var O\Walkers\ReturnValueExpressionResolver
      */
-    private $ReturnValueExpressionResolver;
-
+    private $returnValueExpressionResolver;
+    
     /**
      * @var O\Walkers\SubQueryResolver
      */
-    private $SubQueryResolver;
-
+    private $subQueryResolver;
+    
     /**
      * @var string[]
      */
-    private $UnresolvedVariables = [];
-
+    private $unresolvedVariables = [];
+    
     /**
      * @var string|null
      */
-    private $SerializedData = null;
-
+    private $serializedData = null;
+    
     /**
      * @var string|null
      */
-    private $CompiledCode = null;
-
+    private $compiledCode = null;
+    
     /**
      * @var callable|null
      */
-    private $CompiledFunction = null;
-
-    public function __construct(callable $OriginalFunction = null, array $ParameterExpressions, array $Expressions)
+    private $compiledFunction = null;
+    
+    public function __construct(callable $originalFunction = null, array $parameterExpressions, array $expressions)
     {
-        $this->ParameterExpressions = $ParameterExpressions;
-        
-        $this->VariableResolver = new O\Walkers\VariableResolver();
-        $this->UnresolvedVariableFinder = new O\Walkers\UnresolvedVariableFinder();
-        $this->ReturnValueExpressionResolver = new O\Walkers\ReturnValueExpressionResolver();
-        
+        $this->parameterExpressions = $parameterExpressions;
+        $this->variableResolver = new O\Walkers\VariableResolver();
+        $this->unresolvedVariableFinder = new O\Walkers\UnresolvedVariableFinder();
+        $this->returnValueExpressionResolver = new O\Walkers\ReturnValueExpressionResolver();
         //Only parameterize objects, arrays and resources. Filter cannot be closure due to serialization.
-        $this->ValueUnresolver = new O\Walkers\ValueUnresolver([__CLASS__, 'IsNotScalar']);
-        
-        $this->SubQueryResolver = new O\Walkers\SubQueryResolver();
-        
-        $this->Invalidate($Expressions);
-
-        $this->CompiledFunction = $OriginalFunction;
+        $this->valueUnresolver = new O\Walkers\ValueUnresolver([__CLASS__, 'isNotScalar']);
+        $this->subQueryResolver = new O\Walkers\SubQueryResolver();
+        $this->invalidate($expressions);
+        $this->compiledFunction = $originalFunction;
     }
     
-    public static function IsNotScalar($Value) 
+    public static function isNotScalar($value)
     {
-        return !is_scalar($Value);
+        return !is_scalar($value);
     }
-
-    public static function FromClosureExpression(O\ClosureExpression $Expression, callable $OriginalFunction = null)
+    
+    public static function fromClosureExpression(O\ClosureExpression $expression, callable $originalFunction = null)
     {
         return new self(
-                $OriginalFunction,
-                $Expression->GetParameterExpressions(),
-                $Expression->GetBodyExpressions());
+                $originalFunction,
+                $expression->getParameterExpressions(),
+                $expression->getBodyExpressions());
     }
     
-    public function SetCompiledFunction(callable $Function = null) {
-        $this->CompiledFunction = $Function;
+    public function setCompiledFunction(callable $function = null)
+    {
+        $this->compiledFunction = $function;
     }
     
     /**
      * @return string
      */
-    public function GetCompiledCode()
+    public function getCompiledCode()
     {
-        $this->LoadCompiledFunction();
-        return $this->CompiledCode;
+        $this->loadCompiledFunction();
+        
+        return $this->compiledCode;
     }
     
     /**
      * @return callable
      */
-    public function GetCompiledFunction()
+    public function getCompiledFunction()
     {
-        return $this->LoadCompiledFunction();
+        return $this->loadCompiledFunction();
     }
     
     public function serialize()
     {
-        if($this->SerializedData === null) {
-            $DataToSerialize = get_object_vars($this);
-            
-            unset($DataToSerialize['SerializedData']);
-            unset($DataToSerialize['CompiledFunction']);
-            
-            $this->SerializedData = serialize($DataToSerialize);
+        if ($this->serializedData === null) {
+            $dataToSerialize = get_object_vars($this);
+            unset($dataToSerialize['serializedData']);
+            unset($dataToSerialize['compiledFunction']);
+            $this->serializedData = serialize($dataToSerialize);
         }
         
-        return $this->SerializedData;
+        return $this->serializedData;
     }
     
-    public function unserialize($Serialized)
+    public function unserialize($serialized)
     {
-        foreach(unserialize($Serialized) as $PropertyName => $Value) {
-            $this->$PropertyName = $Value;
+        foreach (unserialize($serialized) as $propertyName => $value) {
+            $this->{$propertyName} = $value;
         }
         
-        $this->SerializedData = $Serialized;
+        $this->serializedData = $serialized;
     }
     
     public function __clone()
     {
-        foreach($this->BodyExpressions as $Key => $BodyExpression) {
-            $this->BodyExpressions[$Key] = clone $BodyExpression;
+        foreach ($this->bodyExpressions as $key => $bodyExpression) {
+            $this->bodyExpressions[$key] = clone $bodyExpression;
         }
-        foreach($this->BodyExpressionsWithSubQueries as $Key => $BodyExpression) {
-            $this->BodyExpressionsWithSubQueries[$Key] = clone $BodyExpression;
-        }
-        foreach($this->ParameterExpressions as $Key => $ParameterExpressions) {
-            $this->ParameterExpressions[$Key] = clone $ParameterExpressions;
-        }
-        foreach($this->ReturnValueExpressions as $Key => $ReturnExpression) {
-            $this->ReturnValueExpressions[$Key] = clone $ReturnExpression;
-        }
-        $this->CompiledFunction = $this->CompiledFunction === null ? null : clone $this->CompiledFunction;
-        $this->ReturnValueExpressionResolver = clone $this->ReturnValueExpressionResolver;
-        $this->ValueUnresolver = clone $this->ValueUnresolver;
-        $this->VariableResolver = clone $this->VariableResolver;
-    }
-
-    public function __invoke()
-    {
-        $Function = $this->LoadCompiledFunction();
         
-        return call_user_func_array($Function, func_get_args());
+        foreach ($this->bodyExpressionsWithSubQueries as $key => $bodyExpression) {
+            $this->bodyExpressionsWithSubQueries[$key] = clone $bodyExpression;
+        }
+        
+        foreach ($this->parameterExpressions as $key => $parameterExpressions) {
+            $this->parameterExpressions[$key] = clone $parameterExpressions;
+        }
+        
+        foreach ($this->returnValueExpressions as $key => $returnExpression) {
+            $this->returnValueExpressions[$key] = clone $returnExpression;
+        }
+        
+        $this->compiledFunction = $this->compiledFunction === null ? null : clone $this->compiledFunction;
+        $this->returnValueExpressionResolver = clone $this->returnValueExpressionResolver;
+        $this->valueUnresolver = clone $this->valueUnresolver;
+        $this->variableResolver = clone $this->variableResolver;
     }
     
-    private function LoadCompiledFunction()
+    public function __invoke()
     {
-        if ($this->CompiledFunction === null) {
-            $this->ValueUnresolver->ResetVariableNameValueMap();
-            $ParameterizedBodyExpressions = $this->ValueUnresolver->WalkAll($this->BodyExpressions);
-            $ParameterNameValueMap = $this->ValueUnresolver->GetVariableNameValueMap();
-            
-            if($this->CompiledCode === null) {
-                $this->CompiledCode = O\Expression::Closure(
-                        $this->ParameterExpressions,
-                        array_keys($ParameterNameValueMap),
-                        $ParameterizedBodyExpressions)
-                                ->Compile();
-            }
+        $function = $this->loadCompiledFunction();
         
-            $this->EvaluateFunctionCode($this->CompiledCode, $ParameterNameValueMap);
+        return call_user_func_array($function, func_get_args());
+    }
+    
+    private function loadCompiledFunction()
+    {
+        if ($this->compiledFunction === null) {
+            $this->valueUnresolver->resetVariableNameValueMap();
+            $parameterizedBodyExpressions = $this->valueUnresolver->walkAll($this->bodyExpressions);
+            $parameterNameValueMap = $this->valueUnresolver->getVariableNameValueMap();
             
-            if(!($this->CompiledFunction instanceof \Closure)) {
-                throw new PinqException('Could not compile code into closure: %s', $this->CompiledCode);
+            if ($this->compiledCode === null) {
+                $this->compiledCode = 
+                        O\Expression::closure(
+                                $this->parameterExpressions,
+                                array_keys($parameterNameValueMap),
+                                $parameterizedBodyExpressions)->compile();
+            }
+            
+            $this->evaluateFunctionCode(
+                    $this->compiledCode,
+                    $parameterNameValueMap);
+            
+            if (!$this->compiledFunction instanceof \Closure) {
+                throw new PinqException(
+                        'Could not compile code into closure: %s',
+                        $this->compiledCode);
             }
         }
         
-        return $this->CompiledFunction;
+        return $this->compiledFunction;
     }
     
     /**
      * @param string $___Code____00987654321
      */
-    private function EvaluateFunctionCode($___Code____00987654321, array $___UsedVariableNameValueMap____1234567890)
+    private function evaluateFunctionCode($___Code____00987654321, array $___UsedVariableNameValueMap____1234567890)
     {
         extract($___UsedVariableNameValueMap____1234567890);
-        eval('$this->CompiledFunction = ' . $___Code____00987654321 . ';');
+        eval('$this->compiledFunction = ' . $___Code____00987654321 . ';');
     }
-
+    
     /**
      * Gets the body expressions
      * 
      * @return O\Expression[]
      */
-    final public function GetExpressions()
+    public final function getExpressions()
     {
-        return $this->BodyExpressionsWithSubQueries;
+        return $this->bodyExpressionsWithSubQueries;
     }
-
+    
     /**
      * @return boolean
      */
-    final public function HasReturnExpression()
+    public final function hasReturnExpression()
     {
-        return count($this->ReturnValueExpressions) > 0;
+        return count($this->returnValueExpressions) > 0;
     }
     
     /**
      * @return O\ReturnExpression
      * @throws Parsing\InvalidFunctionException
      */
-    final public function GetFirstResolvedReturnValueExpression()
+    public final function getFirstResolvedReturnValueExpression()
     {
-        if(count($this->ReturnValueExpressions) === 0) {
-            throw Parsing\InvalidFunctionException::MustContainValidReturnExpression(Parsing\Reflection::FromCallable($this->GetCompiledFunction()));
+        if (count($this->returnValueExpressions) === 0) {
+            throw Parsing\InvalidFunctionException::mustContainValidReturnExpression(Parsing\Reflection::fromCallable($this->getCompiledFunction()));
         }
-        return $this->ReturnValueExpressions[0];
+        
+        return $this->returnValueExpressions[0];
     }
     
     /**
      * @return O\ParameterExpression[]
      */
-    final public function GetParameterExpressions()
+    public final function getParameterExpressions()
     {
-        return $this->ParameterExpressions;
+        return $this->parameterExpressions;
     }
-
-    final public function Walk(O\ExpressionWalker $ExpressionWalker)
+    
+    public final function walk(O\ExpressionWalker $expressionWalker)
     {
-        $this->Invalidate($ExpressionWalker->WalkAll($this->BodyExpressions));
+        $this->invalidate($expressionWalker->walkAll($this->bodyExpressions));
         
         return $this;
     }
     
-    final public function Simplify()
+    public final function simplify()
     {
-        $this->Invalidate(O\Expression::SimplifyAll($this->BodyExpressions));
+        $this->invalidate(O\Expression::simplifyAll($this->bodyExpressions));
         
         return $this;
     }
-
-    final public function HasUnresolvedVariables()
+    
+    public final function hasUnresolvedVariables()
     {
-        return !empty($this->UnresolvedVariables);
+        return !empty($this->unresolvedVariables);
     }
-
-    final public function GetUnresolvedVariables()
+    
+    public final function getUnresolvedVariables()
     {
-        return $this->UnresolvedVariables;
+        return $this->unresolvedVariables;
     }
-
-    final public function ResolveVariables(array $VariableValueMap, array $VariableExpressionMap = [])
+    
+    public final function resolveVariables(array $variableValueMap, array $variableExpressionMap = [])
     {
-        foreach ($VariableValueMap as $VariableName => $Value) {
-            $VariableValueMap[$VariableName] = O\Expression::Value($Value);
+        foreach ($variableValueMap as $variableName => $value) {
+            $variableValueMap[$variableName] = O\Expression::value($value);
         }
-
-        $this->ResolveVariablesToExpressions($VariableExpressionMap + $VariableValueMap);
+        
+        $this->resolveVariablesToExpressions($variableExpressionMap + $variableValueMap);
     }
-
-    final public function ResolveVariablesToExpressions(array $VariableExpressionMap)
+    
+    public final function resolveVariablesToExpressions(array $variableExpressionMap)
     {
-        $this->VariableResolver->SetVariableExpressionMap($VariableExpressionMap);
-        $this->Invalidate($this->VariableResolver->WalkAll($this->BodyExpressions));
+        $this->variableResolver->setVariableExpressionMap($variableExpressionMap);
+        $this->invalidate($this->variableResolver->walkAll($this->bodyExpressions));
     }
-
-    final public function SetQueryableExpressions(array $Expressions)
+    
+    public final function setQueryableExpressions(array $expressions)
     {
-        $this->QueryableExpressions = $Expressions;
-        $this->Invalidate($this->BodyExpressions);
+        $this->queryableExpressions = $expressions;
+        $this->invalidate($this->bodyExpressions);
     }
-
-    final protected function Invalidate(array $NewBodyExpressions)
+    
+    protected final function invalidate(array $newBodyExpressions)
     {
-        if ($this->BodyExpressions === $NewBodyExpressions) {
+        if ($this->bodyExpressions === $newBodyExpressions) {
             return;
         }
         
-        $this->BodyExpressions = $NewBodyExpressions;
-        
-        $this->SerializedData = null;
-        $this->CompiledCode = null;
-        $this->CompiledFunction = null;
-        
-        $this->LoadUnresolvedVariables();
-        
-        $this->LoadResolvedReturnExpressions();
-        
-        $this->LoadResolvedSubQueriesExpressions();
+        $this->bodyExpressions = $newBodyExpressions;
+        $this->serializedData = null;
+        $this->compiledCode = null;
+        $this->compiledFunction = null;
+        $this->loadUnresolvedVariables();
+        $this->loadResolvedReturnExpressions();
+        $this->loadResolvedSubQueriesExpressions();
     }
     
-    private function LoadUnresolvedVariables()
+    private function loadUnresolvedVariables()
     {
-        $this->UnresolvedVariableFinder->ResetUnresolvedVariables();
-        $this->UnresolvedVariableFinder->WalkAll($this->BodyExpressions);
+        $this->unresolvedVariableFinder->resetUnresolvedVariables();
+        $this->unresolvedVariableFinder->walkAll($this->bodyExpressions);
+        $parameterNames = [];
         
-        $ParameterNames = [];
-        foreach ($this->ParameterExpressions as $ParameterExpression) {
-            $ParameterNames[] = $ParameterExpression->GetName();
+        foreach ($this->parameterExpressions as $parameterExpression) {
+            $parameterNames[] = $parameterExpression->getName();
         }
         
-        $this->UnresolvedVariables = array_diff($this->UnresolvedVariableFinder->GetUnresolvedVariables(), $ParameterNames); 
+        $this->unresolvedVariables = array_diff($this->unresolvedVariableFinder->getUnresolvedVariables(), $parameterNames);
     }
     
-    private function LoadResolvedReturnExpressions()
+    private function loadResolvedReturnExpressions()
     {
-        $this->ReturnValueExpressionResolver->ResetReturnExpressions();
-        $this->ReturnValueExpressionResolver->WalkAll($this->BodyExpressions);
-        
-        $this->ReturnValueExpressions = $this->ReturnValueExpressionResolver->GetResolvedReturnValueExpression();
-        $this->ReturnValueExpressions = $this->ResolveSubQueries($this->ReturnValueExpressions);
+        $this->returnValueExpressionResolver->resetReturnExpressions();
+        $this->returnValueExpressionResolver->walkAll($this->bodyExpressions);
+        $this->returnValueExpressions = $this->returnValueExpressionResolver->getResolvedReturnValueExpression();
+        $this->returnValueExpressions = $this->resolveSubQueries($this->returnValueExpressions);
     }
     
-    
-    private function LoadResolvedSubQueriesExpressions()
+    private function loadResolvedSubQueriesExpressions()
     {
-        $this->BodyExpressionsWithSubQueries = $this->ResolveSubQueries($this->BodyExpressions);
+        $this->bodyExpressionsWithSubQueries = $this->resolveSubQueries($this->bodyExpressions);
     }
     
-    private function ResolveSubQueries(array $Expressions)
+    private function resolveSubQueries(array $expressions)
     {
-        $this->SubQueryResolver->SetFilter(function (O\MethodCallExpression $Expression) {
-            $ValueExpression = $Expression->GetValueExpression();
+        $this->subQueryResolver->setFilter(function (O\MethodCallExpression $expression) {
+            $valueExpression = $expression->getValueExpression();
             
-            if(in_array($ValueExpression, $this->QueryableExpressions)) {
+            if (in_array($valueExpression, $this->queryableExpressions)) {
                 return true;
             }
-            else if($ValueExpression instanceof O\ValueExpression && $ValueExpression->GetValue() instanceof ITraversable) {
+            else if ($valueExpression instanceof O\ValueExpression && $valueExpression->getValue() instanceof ITraversable) {
                 return true;
             }
-            else if($ValueExpression instanceof O\VariableExpression && $ValueExpression->GetNameExpression() instanceof O\ValueExpression) {
-                $VariableName = $ValueExpression->GetNameExpression()->GetValue();
-                foreach($this->ParameterExpressions as $ParameterExpression) {
-                    if($ParameterExpression->HasTypeHint() 
-                            && is_a($ParameterExpression->GetTypeHint(), ITraversable::ITraversableType, true)
-                            && $ParameterExpression->GetName() === $VariableName) {
+            else if ($valueExpression instanceof O\VariableExpression && $valueExpression->getNameExpression() instanceof O\ValueExpression) {
+                $variableName = $valueExpression->getNameExpression()->getValue();
+                
+                foreach ($this->parameterExpressions as $parameterExpression) {
+                    if ($parameterExpression->hasTypeHint() && is_a($parameterExpression->getTypeHint(), ITraversable::ITRAVERSABLE_TYPE, true) && $parameterExpression->getName() === $variableName) {
                         return true;
                     }
                 }
@@ -377,11 +374,9 @@ class FunctionExpressionTree implements \Serializable
             
             return false;
         });
+        $resolvedExpressions = $this->subQueryResolver->walkAll($expressions);
+        $this->subQueryResolver->setFilter(null);
         
-        $ResolvedExpressions = $this->SubQueryResolver->WalkAll($Expressions);
-        
-        $this->SubQueryResolver->SetFilter(null);
-        
-        return $ResolvedExpressions;
+        return $resolvedExpressions;
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Iterators;
 
@@ -11,60 +11,60 @@ namespace Pinq\Iterators;
  */
 class FlatteningIterator extends IteratorIterator
 {
-    private $Count = 0;
+    private $count = 0;
+    
     /**
      * @var \Iterator
      */
-    protected $CurrentIterator;
+    protected $currentIterator;
     
-    public function __construct(\Traversable $Iterator)
+    public function __construct(\Traversable $iterator)
     {
-        parent::__construct($Iterator);
-        $this->CurrentIterator = new \ArrayIterator([]);
+        parent::__construct($iterator);
+        $this->currentIterator = new \ArrayIterator([]);
     }
-    
     
     public function current()
     {
-        return $this->CurrentIterator->current();
+        return $this->currentIterator->current();
     }
-
+    
     public function key()
     {
-        return $this->Count;
+        return $this->count;
     }
-
+    
     public function next()
     {
-        $this->Count++;
-        $this->CurrentIterator->next();
+        $this->count++;
+        $this->currentIterator->next();
     }
     
     public function valid()
     {
-        while(!$this->CurrentIterator->valid()) {
+        while (!$this->currentIterator->valid()) {
             parent::next();
             
-            if(!parent::valid()) {
+            if (!parent::valid()) {
                 return false;
             }
             
-            $this->LoadCurrentIterator();
+            $this->loadCurrentIterator();
         }
         
         return true;
     }
     
-    private function LoadCurrentIterator() {
-        $this->CurrentIterator = \Pinq\Utilities::ToIterator(parent::current());
-        
-        $this->CurrentIterator->rewind();
+    private function loadCurrentIterator()
+    {
+        $this->currentIterator = \Pinq\Utilities::toIterator(parent::current());
+        $this->currentIterator->rewind();
     }
     
     public function rewind()
     {
-        $this->Count = 0;
+        $this->count = 0;
         parent::rewind();
-        $this->LoadCurrentIterator();
+        $this->loadCurrentIterator();
     }
 }

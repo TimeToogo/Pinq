@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -14,85 +14,80 @@ class IndexExpression extends TraversalExpression
     /**
      * @var Expression
      */
-    private $IndexExpression;
-
-    public function __construct(Expression $ValueExpression, Expression $IndexExpression)
+    private $indexExpression;
+    
+    public function __construct(Expression $valueExpression, Expression $indexExpression)
     {
-        parent::__construct($ValueExpression);
-
-        $this->IndexExpression = $IndexExpression;
+        parent::__construct($valueExpression);
+        $this->indexExpression = $indexExpression;
     }
-
+    
     /**
      * @return Expression
      */
-    public function GetIndexExpression()
+    public function getIndexExpression()
     {
-        return $this->IndexExpression;
+        return $this->indexExpression;
     }
-
-    public function Traverse(ExpressionWalker $Walker)
+    
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkIndex($this);
+        return $walker->walkIndex($this);
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
-        $ValueExpression = $this->ValueExpression->Simplify();
-        $IndexExpression = $this->IndexExpression->Simplify();
-
-        if ($ValueExpression instanceof ValueExpression
-                && $IndexExpression instanceof ValueExpression) {
-            $Value = $ValueExpression->GetValue();
-            $Index = $IndexExpression->GetValue();
-
-            return Expression::Value($Value[$Index]);
+        $valueExpression = $this->valueExpression->simplify();
+        $indexExpression = $this->indexExpression->simplify();
+        
+        if ($valueExpression instanceof ValueExpression && $indexExpression instanceof ValueExpression) {
+            $value = $valueExpression->getValue();
+            $index = $indexExpression->getValue();
+            
+            return Expression::value($value[$index]);
         }
-
-        return $this->Update(
-                $ValueExpression,
-                $this->IndexExpression);
+        
+        return $this->update($valueExpression, $this->indexExpression);
     }
-
+    
     /**
      * @return self
      */
-    public function Update(Expression $ValueExpression, Expression $IndexExpression)
+    public function update(Expression $valueExpression, Expression $indexExpression)
     {
-        if ($this->ValueExpression === $ValueExpression
-                && $this->IndexExpression === $IndexExpression) {
+        if ($this->valueExpression === $valueExpression && $this->indexExpression === $indexExpression) {
             return $this;
         }
-
-        return new self($ValueExpression, $IndexExpression);
-    }
-
-    protected function UpdateValueExpression(Expression $ValueExpression)
-    {
-        return new self($ValueExpression, $this->IndexExpression);
-    }
-
-    protected function CompileCode(&$Code)
-    {
-        $this->ValueExpression->CompileCode($Code);
-        $Code .= '[';
-        $this->IndexExpression->CompileCode($Code);
-        $Code .= ']';
+        
+        return new self($valueExpression, $indexExpression);
     }
     
-    public function DataToSerialize()
+    protected function updateValueExpression(Expression $valueExpression)
     {
-        return $this->IndexExpression;
+        return new self($valueExpression, $this->indexExpression);
     }
     
-    public function UnserializedData($Data)
+    protected function compileCode(&$code)
     {
-        $this->IndexExpression = $Data;
+        $this->valueExpression->compileCode($code);
+        $code .= '[';
+        $this->indexExpression->compileCode($code);
+        $code .= ']';
+    }
+    
+    public function dataToSerialize()
+    {
+        return $this->indexExpression;
+    }
+    
+    public function unserializedData($data)
+    {
+        $this->indexExpression = $data;
     }
     
     public function __clone()
     {
-        $this->ValueExpression = clone $this->ValueExpression;
-        $this->IndexExpression = clone $this->IndexExpression;
+        $this->valueExpression = clone $this->valueExpression;
+        $this->indexExpression = clone $this->indexExpression;
     }
 }

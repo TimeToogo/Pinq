@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions\Walkers;
 
-use \Pinq\Expressions as O;
+use Pinq\Expressions as O;
 
 /**
  * Locates and stores all unresolved variables
@@ -14,79 +14,78 @@ class UnresolvedVariableFinder extends O\ExpressionWalker
     /**
      * @var string[] 
      */
-    private $VariablesToIgnore = [];
+    private $variablesToIgnore = [];
     
     /**
      * @var string[] 
      */
-    private $UnresolvedVariables = [];
+    private $unresolvedVariables = [];
     
     /**
      * @return void
      */
-    public function ResetUnresolvedVariables()
+    public function resetUnresolvedVariables()
     {
-        $this->UnresolvedVariables = [];
+        $this->unresolvedVariables = [];
     }
-
+    
     /**
      * The unresolved variables
      * 
      * @return string[]
      */
-    public function GetUnresolvedVariables()
+    public function getUnresolvedVariables()
     {
-        return $this->UnresolvedVariables;
+        return $this->unresolvedVariables;
     }
     
-    public function WalkAssignment(O\AssignmentExpression $Expression)
+    public function walkAssignment(O\AssignmentExpression $expression)
     {
-        $AssignToExpression = $Expression->GetAssignToExpression();
+        $assignToExpression = $expression->getAssignToExpression();
         
         //Ignore variable if making assignment
-        if($AssignToExpression instanceof O\VariableExpression 
-                && in_array($Expression->GetOperator(), [O\Operators\Assignment::Equal, O\Operators\Assignment::EqualReference])) {
-            $this->Walk($AssignToExpression->GetNameExpression());
+        if ($assignToExpression instanceof O\VariableExpression && in_array($expression->getOperator(), [O\Operators\Assignment::EQUAL, O\Operators\Assignment::EQUAL_REFERENCE])) {
+            $this->walk($assignToExpression->getNameExpression());
         }
         else {
-            $this->Walk($AssignToExpression);
+            $this->walk($assignToExpression);
         }
         
-        $AssignmentValueExpression = $Expression->GetAssignmentValueExpression();
-        $this->Walk($AssignmentValueExpression);
+        $assignmentValueExpression = $expression->getAssignmentValueExpression();
+        $this->walk($assignmentValueExpression);
         
-        return $Expression;
+        return $expression;
     }
     
-    public function WalkClosure(O\ClosureExpression $Expression)
+    public function walkClosure(O\ClosureExpression $expression)
     {
-        foreach($Expression->GetUsedVariableNames() as $UsedVariableName) {
-            $this->WalkVariable(O\Expression::Variable(O\Expression::Value($UsedVariableName)));
+        foreach ($expression->getUsedVariableNames() as $usedVariableName) {
+            $this->walkVariable(O\Expression::variable(O\Expression::value($usedVariableName)));
         }
         
-        $OriginalVariablesToIgnore = $this->VariablesToIgnore;
-        $this->VariablesToIgnore = array_map(function ($I) { return $I->GetName(); }, $Expression->GetParameterExpressions());
+        $originalVariablesToIgnore = $this->variablesToIgnore;
+        $this->variablesToIgnore = array_map(function ($i) {
+            return $i->getName();
+        }, $expression->getParameterExpressions());
+        $this->walkAll($expression->getBodyExpressions());
+        $this->variablesToIgnore = $originalVariablesToIgnore;
         
-        $this->WalkAll($Expression->GetBodyExpressions());
-        
-        $this->VariablesToIgnore = $OriginalVariablesToIgnore;
-        
-        return $Expression;
+        return $expression;
     }
     
-    public function WalkVariable(O\VariableExpression $Expression)
+    public function walkVariable(O\VariableExpression $expression)
     {
-        $NameExpression = $Expression->GetNameExpression();
-        $VariableName = $NameExpression instanceof O\ValueExpression ? $NameExpression->GetValue() : $NameExpression->Compile();
-        $this->AddUnresolvedVariable($VariableName);
+        $nameExpression = $expression->getNameExpression();
+        $variableName = $nameExpression instanceof O\ValueExpression ? $nameExpression->getValue() : $nameExpression->compile();
+        $this->addUnresolvedVariable($variableName);
         
-        return $Expression;
+        return $expression;
     }
     
-    private function AddUnresolvedVariable($VariableName)
+    private function addUnresolvedVariable($variableName)
     {
-        if (!in_array($VariableName, $this->UnresolvedVariables) && !in_array($VariableName, $this->VariablesToIgnore)) {
-            $this->UnresolvedVariables[] = $VariableName;
+        if (!in_array($variableName, $this->unresolvedVariables) && !in_array($variableName, $this->variablesToIgnore)) {
+            $this->unresolvedVariables[] = $variableName;
         }
     }
 }

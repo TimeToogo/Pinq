@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions\Operators;
 
@@ -10,16 +10,15 @@ namespace Pinq\Expressions\Operators;
 final class Unary
 {
     //Arithmetic
-    const Plus = '+%s';//Usless
-    const Negation = '-%s';
-    const Increment = '%s++';
-    const Decrement = '%s--';
-    const PreIncrement = '++%s';
-    const PreDecrement = '--%s';
-
+    const PLUS = '+%s';
+    //Usless
+    const NEGATION = '-%s';
+    const INCREMENT = '%s++';
+    const DECREMENT = '%s--';
+    const PRE_INCREMENT = '++%s';
+    const PRE_DECREMENT = '--%s';
     //Bitwise
-    const BitwiseNot = '~%s';
-
+    const BITWISE_NOT = '~%s';
     //Logical
-    const Not = '!%s';
+    const NOT = '!%s';
 }

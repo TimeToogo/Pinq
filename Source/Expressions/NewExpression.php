@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -14,88 +14,89 @@ class NewExpression extends Expression
     /**
      * @var Expression
      */
-    private $ClassTypeExpression;
+    private $classTypeExpression;
     
     /**
      * @var Expression[]
      */
-    private $ArgumentExpressions;
-
-    public function __construct(Expression $ClassTypeExpression, array $ArgumentExpressions = [])
+    private $argumentExpressions;
+    
+    public function __construct(Expression $classTypeExpression, array $argumentExpressions = [])
     {
-        $this->ClassTypeExpression = $ClassTypeExpression;
-        $this->ArgumentExpressions = $ArgumentExpressions;
+        $this->classTypeExpression = $classTypeExpression;
+        $this->argumentExpressions = $argumentExpressions;
     }
-
+    
     /**
      * @return Expression
      */
-    public function GetClassTypeExpression()
+    public function getClassTypeExpression()
     {
-        return $this->ClassTypeExpression;
+        return $this->classTypeExpression;
     }
-
+    
     /**
      * @return Expression[]
      */
-    public function GetArgumentExpressions()
+    public function getArgumentExpressions()
     {
-        return $this->ArgumentExpressions;
+        return $this->argumentExpressions;
     }
-
-    public function Traverse(ExpressionWalker $Walker)
+    
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkNew($this);
+        return $walker->walkNew($this);
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
         //TODO: white list of deterministic classes to instanstiate
-        return $this->Update(
-                $this->ClassTypeExpression->Simplify(),
-                self::SimplifyAll($this->ArgumentExpressions));
+        return $this->update(
+                $this->classTypeExpression->simplify(),
+                self::simplifyAll($this->argumentExpressions));
     }
-
+    
     /**
      * @return self
      */
-    public function Update(Expression $ClassTypeExpression, array $ArgumentExpressions = [])
+    public function update(Expression $classTypeExpression, array $argumentExpressions = [])
     {
-        if ($this->ClassTypeExpression === $ClassTypeExpression
-                && $this->ArgumentExpressions === $ArgumentExpressions) {
+        if ($this->classTypeExpression === $classTypeExpression && $this->argumentExpressions === $argumentExpressions) {
             return $this;
         }
-
-        return new self($ClassTypeExpression, $ArgumentExpressions);
+        
+        return new self($classTypeExpression, $argumentExpressions);
     }
-
-    protected function CompileCode(&$Code)
+    
+    protected function compileCode(&$code)
     {
-        $Code .= 'new ';
-        if ($this->ClassTypeExpression instanceof ValueExpression) {
-            $Code .= $this->ClassTypeExpression->GetValue();
-        } 
-        else {
-            $this->ClassTypeExpression->CompileCode($Code);
+        $code .= 'new ';
+        
+        if ($this->classTypeExpression instanceof ValueExpression) {
+            $code .= $this->classTypeExpression->getValue();
         }
-        $Code .= '(';
-        $Code .= implode(',', self::CompileAll($this->ArgumentExpressions));
-        $Code .= ')';
+        else {
+            $this->classTypeExpression->compileCode($code);
+        }
+        
+        $code .= '(';
+        $code .= implode(',', self::compileAll($this->argumentExpressions));
+        $code .= ')';
     }
     
     public function serialize()
     {
-        return serialize([$this->ClassTypeExpression, $this->ArgumentExpressions]);
+        return serialize([$this->classTypeExpression, $this->argumentExpressions]);
     }
     
-    public function unserialize($Serialized)
+    public function unserialize($serialized)
     {
-        list($this->ClassTypeExpression, $this->ArgumentExpressions) = unserialize($Serialized);
+        list($this->classTypeExpression, $this->argumentExpressions) = unserialize($serialized);
     }
     
     public function __clone()
     {
-        $this->ClassTypeExpression = clone $this->ClassTypeExpression;
-        $this->ArgumentExpressions = self::CloneAll($this->ArgumentExpressions);
+        $this->classTypeExpression = clone $this->classTypeExpression;
+        $this->argumentExpressions = self::cloneAll($this->argumentExpressions);
     }
 }

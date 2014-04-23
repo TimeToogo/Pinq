@@ -1,31 +1,32 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Collection;
 
-class CustomException extends \Exception { const CustomExceptionType = __CLASS__; }
+class CustomException extends \Exception
+{
+    const CUSTOM_EXCEPTION_TYPE = __CLASS__;
+}
 
 abstract class CollectionTest extends \Pinq\Tests\Integration\DataTest
 {
-    final protected function AssertThatExecutionIsNotDeferred(callable $CollectionOperation) 
+    protected final function assertThatExecutionIsNotDeferred(callable $collectionOperation)
     {
-        $Exception = new CustomException();
-        
-        
-        $ThowingFunction = function () use ($Exception) { throw $Exception; };
+        $exception = new CustomException();
+        $thowingFunction = 
+                function () use($exception) {
+                    throw $exception;
+                };
         
         try {
-            $CollectionOperation($ThowingFunction);
+            $collectionOperation($thowingFunction);
         }
-        catch (CustomException $ThrownException) {
-            $this->assertSame($Exception, $ThrownException);
+        catch (CustomException $thrownException) {
+            $this->assertSame($exception, $thrownException);
         }
     }
     
-    final protected function ImplementationsFor(array $Data)
+    protected final function implementationsFor(array $data)
     {
-        return [
-            [new \Pinq\Collection($Data), $Data],
-            [(new \Pinq\Collection($Data))->AsRepository(), $Data],
-        ];
+        return [[new \Pinq\Collection($data), $data], [(new \Pinq\Collection($data))->asRepository(), $data]];
     }
 }

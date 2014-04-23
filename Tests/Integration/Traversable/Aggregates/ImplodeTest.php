@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Traversable\Aggregates;
 
@@ -7,16 +7,16 @@ class ImplodeTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     /**
      * @dataProvider EmptyData
      */
-    public function testImplodeEmptyReturnsEmptyString(\Pinq\ITraversable $Traversable, array $Data)
+    public function testImplodeEmptyReturnsEmptyString(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertSame('', $Traversable->Implode(','));
+        $this->assertSame('', $traversable->implode(','));
     }
     
     /**
      * @dataProvider Everything
      */
-    public function testImplodeOperatesCorrectly(\Pinq\ITraversable $Traversable, array $Data)
+    public function testImplodeOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals(implode(',', $Data), $Traversable->Implode(','));
+        $this->assertEquals(implode(',', $data), $traversable->implode(','));
     }
 }

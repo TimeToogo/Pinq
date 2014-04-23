@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Providers;
 
-use \Pinq\Queries;
+use Pinq\Queries;
 
 /**
  * Base class for the repository provider, with default functionality
@@ -12,21 +12,21 @@ use \Pinq\Queries;
  */
 abstract class RepositoryProvider extends QueryProvider implements IRepositoryProvider
 {
-    public function CreateRepository(Queries\IScope $Scope = null)
+    public function createRepository(Queries\IScope $scope = null)
     {
-        return new \Pinq\Repository($this, $Scope);
+        return new \Pinq\Repository($this, $scope);
     }
-
-    public function Execute(Queries\IOperationQuery $Query)
+    
+    public function execute(Queries\IOperationQuery $query)
     {
-        $this->LoadOperationEvaluatorVisitor($Query->GetScope())->Visit($Query->GetOperation());
+        $this->loadOperationEvaluatorVisitor($query->getScope())->visit($query->getOperation());
     }
+    
     /**
      * This should be implemented such that it returns an operation visitor
      * which will execute the supplied operation query
      * 
      * @return Queries\Operations\OperationVisitor
      */
-    protected abstract function LoadOperationEvaluatorVisitor(Queries\IScope $Scope);
-
+    protected abstract function loadOperationEvaluatorVisitor(Queries\IScope $scope);
 }

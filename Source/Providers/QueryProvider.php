@@ -1,9 +1,9 @@
-<?php
+<?php 
 
 namespace Pinq\Providers;
 
-use \Pinq\Queries;
-use \Pinq\Parsing\IFunctionToExpressionTreeConverter;
+use Pinq\Queries;
+use Pinq\Parsing\IFunctionToExpressionTreeConverter;
 
 /**
  * Base class for the query provider, with default functionality
@@ -13,36 +13,39 @@ use \Pinq\Parsing\IFunctionToExpressionTreeConverter;
  */
 abstract class QueryProvider implements IQueryProvider
 {
-    
     /**
      * @var IFunctionToExpressionTreeConverter 
      */
-    private $FunctionConverter;
+    private $functionConverter;
     
-    public function __construct(\Pinq\Caching\IFunctionCache $FunctionCache = null)
+    public function __construct(\Pinq\Caching\IFunctionCache $functionCache = null)
     {
-        $this->FunctionConverter = new \Pinq\Parsing\FunctionToExpressionTreeConverter(new \Pinq\Parsing\PHPParser\Parser(), $FunctionCache);
-    }
-    
-    public function GetFunctionToExpressionTreeConverter()
-    {
-        return $this->FunctionConverter;
-    }
-
-    public function CreateQueryable(Queries\IScope $Scope = null)
-    {
-        return new \Pinq\Queryable($this, $Scope);
+        $this->functionConverter = 
+                new \Pinq\Parsing\FunctionToExpressionTreeConverter(
+                        new \Pinq\Parsing\PHPParser\Parser(),
+                        $functionCache);
     }
     
-    public function Load(Queries\IRequestQuery $Query)
+    public function getFunctionToExpressionTreeConverter()
     {
-        return $this->LoadRequestEvaluatorVisitor($Query->GetScope())->Visit($Query->GetRequest());
+        return $this->functionConverter;
     }
+    
+    public function createQueryable(Queries\IScope $scope = null)
+    {
+        return new \Pinq\Queryable($this, $scope);
+    }
+    
+    public function load(Queries\IRequestQuery $query)
+    {
+        return $this->loadRequestEvaluatorVisitor($query->getScope())->visit($query->getRequest());
+    }
+    
     /**
      * This should be implemented such that it returns an request visitor
      * which will load the request query
      * 
      * @return Queries\Requests\RequestVisitor
      */
-    protected abstract function LoadRequestEvaluatorVisitor(Queries\IScope $Scope);
+    protected abstract function loadRequestEvaluatorVisitor(Queries\IScope $scope);
 }

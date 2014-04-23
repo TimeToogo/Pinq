@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Iterators;
 
@@ -8,14 +8,14 @@ namespace Pinq\Iterators;
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class UniqueIterator extends OperationIterator
-{    
-    public function __construct(\Traversable $Iterator)
+{
+    public function __construct(\Traversable $iterator)
     {
-        parent::__construct($Iterator, new \ArrayIterator());
+        parent::__construct($iterator, new \ArrayIterator());
     }
     
-    protected function SetFilter($Value, Utilities\Set $SeenValues)
+    protected function setFilter($value, Utilities\Set $seenValues)
     {
-        return $SeenValues->Add($Value);
+        return $seenValues->add($value);
     }
 }

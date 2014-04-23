@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq;
 
-use \Pinq\Queries;
+use Pinq\Queries;
 
 /**
  * Implements the result API for a join / group join queryable.
@@ -14,31 +14,29 @@ class JoiningToQueryable implements IJoiningToTraversable
     /**
      * @var Providers\IQueryProvider
      */
-    private $Provider;
+    private $provider;
     
     /**
      * @var Queries\IScope
      */
-    private $Scope;
+    private $scope;
     
     /**
      * @var callable
      */
-    private $ConstructSegmentFunction;
+    private $constructSegmentFunction;
     
-    public function __construct(
-            Providers\IQueryProvider $Provider, 
-            Queries\IScope $Scope,
-            callable $ConstructSegmentFunction)
+    public function __construct(Providers\IQueryProvider $provider, Queries\IScope $scope, callable $constructSegmentFunction)
     {
-        $this->Provider = $Provider;
-        $this->Scope = $Scope;
-        $this->ConstructSegmentFunction = $ConstructSegmentFunction;
+        $this->provider = $provider;
+        $this->scope = $scope;
+        $this->constructSegmentFunction = $constructSegmentFunction;
     }
-
-    public function To(callable $JoinFunction)
+    
+    public function to(callable $joinFunction)
     {
-        $ConstructSegmentFunction = $this->ConstructSegmentFunction;
-        return $this->Provider->CreateQueryable($this->Scope->Append($ConstructSegmentFunction($JoinFunction)));
+        $constructSegmentFunction = $this->constructSegmentFunction;
+        
+        return $this->provider->createQueryable($this->scope->append($constructSegmentFunction($joinFunction)));
     }
 }

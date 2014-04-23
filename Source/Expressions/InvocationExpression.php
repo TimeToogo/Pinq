@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -14,88 +14,84 @@ class InvocationExpression extends TraversalExpression
     /**
      * @var Expression[]
      */
-    private $ArgumentExpressions;
-
-    public function __construct(Expression $ValueExpression, array $ArgumentExpressions)
+    private $argumentExpressions;
+    
+    public function __construct(Expression $valueExpression, array $argumentExpressions)
     {
-        parent::__construct($ValueExpression);
-
-        $this->ArgumentExpressions = $ArgumentExpressions;
+        parent::__construct($valueExpression);
+        $this->argumentExpressions = $argumentExpressions;
     }
-
+    
     /**
      * @return Expression[]
      */
-    public function GetArgumentExpressions()
+    public function getArgumentExpressions()
     {
-        return $this->ArgumentExpressions;
+        return $this->argumentExpressions;
     }
-
-    public function Traverse(ExpressionWalker $Walker)
+    
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkInvocation($this);
+        return $walker->walkInvocation($this);
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
-        $ValueExpression = $this->ValueExpression->Simplify();
-        $ArgumentExpressions = self::SimplifyAll($this->ArgumentExpressions);
+        $valueExpression = $this->valueExpression->simplify();
+        $argumentExpressions = self::simplifyAll($this->argumentExpressions);
         
-        if($ValueExpression instanceof ValueExpression
-                && self::AllOfType($ArgumentExpressions, ValueExpression::GetType())) {
-            $ObjectValue = $ValueExpression->GetValue();
-            $ArgumentValues = [];
-            foreach ($ArgumentExpressions as $ArgumentExpression) {
-                $ArgumentValues[] = $ArgumentExpression->GetValue();
+        if ($valueExpression instanceof ValueExpression && self::allOfType($argumentExpressions, ValueExpression::getType())) {
+            $objectValue = $valueExpression->getValue();
+            $argumentValues = [];
+            
+            foreach ($argumentExpressions as $argumentExpression) {
+                $argumentValues[] = $argumentExpression->getValue();
             }
-
-            return Expression::Value(call_user_func_array($ObjectValue, $ArgumentValues));
+            
+            return Expression::value(call_user_func_array($objectValue, $argumentValues));
         }
-
-        return $this->Update(
-                $ValueExpression,
-                $ArgumentExpressions);
+        
+        return $this->update($valueExpression, $argumentExpressions);
     }
-
+    
     /**
      * @return self
      */
-    public function Update(Expression $ValueExpression, array $ArgumentExpressions)
+    public function update(Expression $valueExpression, array $argumentExpressions)
     {
-        if ($this->ValueExpression === $ValueExpression
-                && $this->ArgumentExpressions === $ArgumentExpressions) {
+        if ($this->valueExpression === $valueExpression && $this->argumentExpressions === $argumentExpressions) {
             return $this;
         }
-
-        return new self($ValueExpression, $ArgumentExpressions);
-    }
-
-    protected function UpdateValueExpression(Expression $ValueExpression)
-    {
-        return new self($ValueExpression, $this->ArgumentExpressions);
-    }
-
-    protected function CompileCode(&$Code)
-    {
-        $this->ValueExpression->CompileCode($Code);
-        $Code .= '(';
-        $Code .= implode(',', self::CompileAll($this->ArgumentExpressions));
-        $Code .= ')';
+        
+        return new self($valueExpression, $argumentExpressions);
     }
     
-    public function DataToSerialize()
+    protected function updateValueExpression(Expression $valueExpression)
     {
-        return $this->ArgumentExpressions;
+        return new self($valueExpression, $this->argumentExpressions);
     }
     
-    public function UnserializedData($Data)
+    protected function compileCode(&$code)
     {
-        $this->ArgumentExpressions = $Data;
+        $this->valueExpression->compileCode($code);
+        $code .= '(';
+        $code .= implode(',', self::compileAll($this->argumentExpressions));
+        $code .= ')';
+    }
+    
+    public function dataToSerialize()
+    {
+        return $this->argumentExpressions;
+    }
+    
+    public function unserializedData($data)
+    {
+        $this->argumentExpressions = $data;
     }
     
     public function __clone()
     {
-        $this->ValueExpression = clone $this->ValueExpression;
-        $this->ArgumentExpressions = self::CloneAll($this->ArgumentExpressions);
+        $this->valueExpression = clone $this->valueExpression;
+        $this->argumentExpressions = self::cloneAll($this->argumentExpressions);
     }
 }

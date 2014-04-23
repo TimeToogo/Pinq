@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Queries;
 
@@ -13,25 +13,25 @@ interface IScope extends \IteratorAggregate
     /**
      * @return ISegment[]
      */
-    public function GetSegments();
+    public function getSegments();
     
     /**
      * @return boolean
      */
-    public function IsEmpty();
+    public function isEmpty();
     
     /**
      * @return IScope
      */
-    public function Append(ISegment $Segment);
+    public function append(ISegment $segment);
     
     /**
      * @return IScope
      */
-    public function Update(array $Segments);
+    public function update(array $segments);
     
     /**
      * @return IScope
      */
-    public function UpdateLast(ISegment $Segment);
+    public function updateLast(ISegment $segment);
 }

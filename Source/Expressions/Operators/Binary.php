@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions\Operators;
 
@@ -10,34 +10,30 @@ namespace Pinq\Expressions\Operators;
 final class Binary
 {
     //Arthmetic
-    const Addition = '+';
-    const Subtraction = '-';
-    const Multiplication = '*';
-    const Division = '/';
-    const Modulus = '%';
-
+    const ADDITION = '+';
+    const SUBTRACTION = '-';
+    const MULTIPLICATION = '*';
+    const DIVISION = '/';
+    const MODULUS = '%';
     //Bitwise
-    const BitwiseAnd = '&';
-    const BitwiseOr = '|';
-    const BitwiseXor = '^';
-    const ShiftLeft = '<<';
-    const ShiftRight = '>>';
-
+    const BITWISE_AND = '&';
+    const BITWISE_OR = '|';
+    const BITWISE_XOR = '^';
+    const SHIFT_LEFT = '<<';
+    const SHIFT_RIGHT = '>>';
     //Logical
-    const LogicalAnd = '&&';
-    const LogicalOr = '||';
-    const Equality = '==';
-    const Identity = '===';
-    const Inequality = '!=';
-    const NotIdentical = '!==';
-    const LessThan = '<';
-    const LessThanOrEqualTo = '<=';
-    const GreaterThan = '>';
-    const GreaterThanOrEqualTo = '>=';
-
+    const LOGICAL_AND = '&&';
+    const LOGICAL_OR = '||';
+    const EQUALITY = '==';
+    const IDENTITY = '===';
+    const INEQUALITY = '!=';
+    const NOT_IDENTICAL = '!==';
+    const LESS_THAN = '<';
+    const LESS_THAN_OR_EQUAL_TO = '<=';
+    const GREATER_THAN = '>';
+    const GREATER_THAN_OR_EQUAL_TO = '>=';
     //String
-    const Concatenation = '.';
-
+    const CONCATENATION = '.';
     //Type
-    const IsInstanceOf = 'instanceof';
+    const IS_INSTANCE_OF = 'instanceof';
 }

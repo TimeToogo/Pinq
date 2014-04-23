@@ -1,8 +1,8 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Request query for a custom aggregate using the supplied function
@@ -14,29 +14,28 @@ class Aggregate extends Request
     /**
      * @var FunctionExpressionTree
      */
-    private $FunctionExpressionTree;
-
-    public function __construct(FunctionExpressionTree $FunctionExpressionTree)
+    private $functionExpressionTree;
+    
+    public function __construct(FunctionExpressionTree $functionExpressionTree)
     {
-        $this->FunctionExpressionTree = $FunctionExpressionTree;
+        $this->functionExpressionTree = $functionExpressionTree;
     }
     
-    public function GetType()
+    public function getType()
     {
-        return self::Aggregate;
+        return self::AGGREGATE;
     }
-
+    
     /**
      * @return FunctionExpressionTree
      */
-    public function GetFunctionExpressionTree()
+    public function getFunctionExpressionTree()
     {
-        return $this->FunctionExpressionTree;
+        return $this->functionExpressionTree;
     }
-
-    public function Traverse(RequestVisitor $Visitor)
+    
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitAggregate($this);
+        return $visitor->visitAggregate($this);
     }
-
 }

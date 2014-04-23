@@ -1,8 +1,8 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Segments; 
+namespace Pinq\Queries\Segments;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Query segment for ordering the values with the supplied functions
@@ -15,66 +15,65 @@ class OrderBy extends Segment
     /**
      * @var FunctionExpressionTree[]
      */
-    private $FunctionExpressionTrees;
-
+    private $functionExpressionTrees;
+    
     /**
      * @var bool[]
      */
-    private $IsAscendingArray;
-
-    public function __construct(array $FunctionExpressionTrees, array $IsAscendingArray)
+    private $isAscendingArray;
+    
+    public function __construct(array $functionExpressionTrees, array $isAscendingArray)
     {
-        if (array_keys($FunctionExpressionTrees) !== array_keys($IsAscendingArray)) {
+        if (array_keys($functionExpressionTrees) !== array_keys($isAscendingArray)) {
             throw new \Pinq\PinqException('Cannot construct order by: expression tree array and is asceding array keys do not match');
         }
-
-        $this->FunctionExpressionTrees = $FunctionExpressionTrees;
-        $this->IsAscendingArray = $IsAscendingArray;
+        
+        $this->functionExpressionTrees = $functionExpressionTrees;
+        $this->isAscendingArray = $isAscendingArray;
     }
-
-    public function GetType()
+    
+    public function getType()
     {
-        return self::OrderBy;
+        return self::ORDER_BY;
     }
-
-    public function Traverse(SegmentWalker $Walker)
+    
+    public function traverse(SegmentWalker $walker)
     {
-        return $Walker->WalkOrderBy($this);
+        return $walker->walkOrderBy($this);
     }
-
+    
     /**
      * @return FunctionExpressionTree[]
      */
-    public function GetFunctionExpressionTrees()
+    public function getFunctionExpressionTrees()
     {
-        return $this->FunctionExpressionTrees;
+        return $this->functionExpressionTrees;
     }
-
+    
     /**
      * @return bool[]
      */
-    public function GetIsAscendingArray()
+    public function getIsAscendingArray()
     {
-        return $this->IsAscendingArray;
+        return $this->isAscendingArray;
     }
     
     /**
-     * @param boolean $IsAscending
+     * @param boolean $isAscending
      */
-    public function ThenBy(FunctionExpressionTree $FunctionExpressionTree, $IsAscending) 
+    public function thenBy(FunctionExpressionTree $functionExpressionTree, $isAscending)
     {
         return new self(
-                array_merge($this->FunctionExpressionTrees, [$FunctionExpressionTree]),
-                array_merge($this->IsAscendingArray, [$IsAscending]));
+                array_merge($this->functionExpressionTrees, [$functionExpressionTree]),
+                array_merge($this->isAscendingArray, [$isAscending]));
     }
     
-    public function Update(array $FunctionExpressionTrees, array $IsAscendingArray)
+    public function update(array $functionExpressionTrees, array $isAscendingArray)
     {
-        if($this->FunctionExpressionTrees === $FunctionExpressionTrees
-                && $this->IsAscendingArray === $IsAscendingArray) {
+        if ($this->functionExpressionTrees === $functionExpressionTrees && $this->isAscendingArray === $isAscendingArray) {
             return $this;
         }
         
-        return new self($FunctionExpressionTrees, $IsAscendingArray);
+        return new self($functionExpressionTrees, $isAscendingArray);
     }
 }

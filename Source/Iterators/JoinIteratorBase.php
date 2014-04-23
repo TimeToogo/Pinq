@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Iterators;
 
@@ -12,75 +12,73 @@ abstract class JoinIteratorBase implements \Iterator
     /**
      * @var int
      */
-    private $Count = 0;
+    private $count = 0;
     
     /**
      * @var boolean
      */
-    protected $IsInitialized = false;
+    protected $isInitialized = false;
     
     /**
      * @var \Iterator
      */
-    protected $OuterIterator;
+    protected $outerIterator;
     
     /**
      * @var \Iterator
      */
-    protected $InnerIterator;
+    protected $innerIterator;
+    
     /**
      * @var mixed
      */
-    private $CurrentOuterValue = null;
+    private $currentOuterValue = null;
     
     /**
      * @var \Iterator
      */
-    private $CurrentInnerGroupIterator;
+    private $currentInnerGroupIterator;
     
     /**
      * @var callable
      */
-    protected $JoiningFunction;    
+    protected $joiningFunction;
     
-    public function __construct(
-            \Traversable $OuterIterator,
-            \Traversable $InnerIterator,
-            callable $JoiningFunction)
+    public function __construct(\Traversable $outerIterator, \Traversable $innerIterator, callable $joiningFunction)
     {
-        $this->OuterIterator = \Pinq\Utilities::ToIterator($OuterIterator);
-        $this->InnerIterator = \Pinq\Utilities::ToIterator($InnerIterator);
-        $this->JoiningFunction = $JoiningFunction;
+        $this->outerIterator = \Pinq\Utilities::toIterator($outerIterator);
+        $this->innerIterator = \Pinq\Utilities::toIterator($innerIterator);
+        $this->joiningFunction = $joiningFunction;
     }
     
-    final public function key()
+    public final function key()
     {
-        return $this->Count;
+        return $this->count;
     }
     
-    final public function current()
+    public final function current()
     {
-        $JoiningFunction = $this->JoiningFunction;
+        $joiningFunction = $this->joiningFunction;
         
-        return $JoiningFunction($this->CurrentOuterValue, $this->CurrentInnerGroupIterator->current());
-    }
-
-    final public function next()
-    {
-        $this->CurrentInnerGroupIterator->next();
-        $this->Count++;
+        return $joiningFunction($this->currentOuterValue, $this->currentInnerGroupIterator->current());
     }
     
-    final public function valid()
+    public final function next()
     {
-        while(!$this->CurrentInnerGroupIterator->valid()) {
-            if(!$this->OuterIterator->valid()) {
+        $this->currentInnerGroupIterator->next();
+        $this->count++;
+    }
+    
+    public final function valid()
+    {
+        while (!$this->currentInnerGroupIterator->valid()) {
+            if (!$this->outerIterator->valid()) {
                 return false;
             }
             
-            $this->CurrentOuterValue = $this->OuterIterator->current();
-            $this->CurrentInnerGroupIterator = $this->GetInnerGroupIterator($this->CurrentOuterValue);
-            $this->OuterIterator->next();
+            $this->currentOuterValue = $this->outerIterator->current();
+            $this->currentInnerGroupIterator = $this->getInnerGroupIterator($this->currentOuterValue);
+            $this->outerIterator->next();
         }
         
         return true;
@@ -89,19 +87,19 @@ abstract class JoinIteratorBase implements \Iterator
     /**
      * @return \Iterator
      */
-    protected abstract function GetInnerGroupIterator($OuterValue);
-    
+    protected abstract function getInnerGroupIterator($outerValue);
     
     public function rewind()
     {
-        if(!$this->IsInitialized) {
-            $this->Initialize();
-            $this->IsInitialized = true;
+        if (!$this->isInitialized) {
+            $this->initialize();
+            $this->isInitialized = true;
         }
-        $this->CurrentOuterValue = null;
-        $this->CurrentInnerGroupIterator = new \ArrayIterator();
-        $this->Count = 0;
+        
+        $this->currentOuterValue = null;
+        $this->currentInnerGroupIterator = new \ArrayIterator();
+        $this->count = 0;
     }
     
-    protected abstract function Initialize();
+    protected abstract function initialize();
 }

@@ -1,30 +1,34 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Traversable;
 
 class SelectTest extends TraversableTest
 {
-    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
-        return $Traversable->Select(function () { return []; });
+        return $traversable->select(function () {
+            return [];
+        });
     }
     
     /**
      * @dataProvider Everything
      */
-    public function testThatExecutionIsDeferred(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->AssertThatExecutionIsDeferred([$Traversable, 'Select']);
+        $this->assertThatExecutionIsDeferred([$traversable, 'Select']);
     }
     
     /**
      * @dataProvider AssocOneToTen
      */
-    public function testThatSelectNumbersMapsCorrectlyAndPreservesKeys(\Pinq\ITraversable $Values, array $Data)
+    public function testThatSelectNumbersMapsCorrectlyAndPreservesKeys(\Pinq\ITraversable $values, array $data)
     {
-        $Multiply = function ($I) { return $I * 10; };
-        $MultipliedValues = $Values->Select($Multiply);
-        
-        $this->AssertMatches($MultipliedValues, array_map($Multiply, $Data));
+        $multiply = 
+                function ($i) {
+                    return $i * 10;
+                };
+        $multipliedValues = $values->select($multiply);
+        $this->assertMatches($multipliedValues, array_map($multiply, $data));
     }
 }

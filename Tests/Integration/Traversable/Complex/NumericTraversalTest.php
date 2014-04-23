@@ -1,95 +1,114 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Traversable\Complex;
 
 class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
 {
-    public function OneToAHundred()
+    public function oneToAHundred()
     {
-        return $this->GetImplementations(range(1, 100));
+        return $this->getImplementations(range(1, 100));
     }
     
     /**
      * @dataProvider OneToAHundred
      */
-    public function testOrderByTensThenDescending(\Pinq\ITraversable $Traversable, array $Data)
+    public function testOrderByTensThenDescending(\Pinq\ITraversable $traversable, array $data)
     {
-        $Traversable = $Traversable
-                ->OrderByAscending(function ($I) { return (int)($I / 10); })
-                ->ThenByDescending(function ($I) { return $I; });
-
-        $EquivalentArray = [];
-        $Array = [];
-        foreach ($Data as $Key => $Value) {
-            if ($Value % 10 === 0) {
-                $EquivalentArray += array_reverse($Array, true);
-                $Array = [];
+        $traversable = 
+                $traversable->orderByAscending(function ($i) {
+                    return (int) ($i / 10);
+                })->thenByDescending(function ($i) {
+                    return $i;
+                });
+        $equivalentArray = [];
+        $array = [];
+        
+        foreach ($data as $key => $value) {
+            if ($value % 10 === 0) {
+                $equivalentArray += array_reverse($array, true);
+                $array = [];
             }
-            $Array[$Key] = $Value;
+            
+            $array[$key] = $value;
         }
-        $EquivalentArray += array_reverse($Array, true);
-
-        $this->AssertMatches($Traversable, $EquivalentArray);
+        
+        $equivalentArray += array_reverse($array, true);
+        $this->assertMatches($traversable, $equivalentArray);
     }
-
+    
     /**
      * @dataProvider OneToAHundred
      */
-    public function testSimpleAggregation(\Pinq\ITraversable $Traversable, array $Data)
+    public function testSimpleAggregation(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertSame(array_sum($Data), $Traversable->Sum());
-        $this->assertSame(array_sum($Data) / count($Data), $Traversable->Average());
+        $this->assertSame(array_sum($data), $traversable->sum());
+        $this->assertSame(
+                array_sum($data) / count($data),
+                $traversable->average());
     }
-
+    
     /**
      * @dataProvider OneToAHundred
      */
-    public function testComplexAggregationQuery(\Pinq\ITraversable $Traversable, array $Data)
+    public function testComplexAggregationQuery(\Pinq\ITraversable $traversable, array $data)
     {
-        $Traversable = $Traversable
-                ->Where(function ($I) { return $I % 2 === 0; })
-                ->OrderByAscending(function ($I) { return -$I; })
-                ->GroupBy(function ($I) { return $I % 7; })
-                ->Where(function (\Pinq\ITraversable $I) { return $I->Count() % 2 === 0; })
-                ->Select(function (\Pinq\ITraversable $Numbers) {
-                    return [
-                        'First' => $Numbers->First(),
-                        'Average' => $Numbers->Average(),
-                        'Count' => $Numbers->Count(),
-                        'Numbers' => $Numbers->AsArray(),
-                    ];
-                })
-                ->IndexBy(function (array $Values) { return implode(',', $Values['Numbers']); });
-
-        $NewData = array_filter($Data, function ($I) { return $I % 2 === 0; });
-        $NewData = array_reverse($NewData, true);
-        $Aggregates = [];
-        foreach ($NewData as $Key => $Value) {
-            $AggregateKey = array_search($Value % 7, array_map(function ($I) { return $I['Key']; }, $Aggregates));
-            if ($AggregateKey === false) {
-                $AggregateKey = count($Aggregates) + 1;
-                $Aggregates[$AggregateKey] = [
-                    'Key' => $Value % 7,
-                    'First' => $Value,
+        $traversable = 
+                $traversable->where(function ($i) {
+                    return $i % 2 === 0;
+                })->orderByAscending(function ($i) {
+                    return -$i;
+                })->groupBy(function ($i) {
+                    return $i % 7;
+                })->where(function (\Pinq\ITraversable $i) {
+                    return $i->count() % 2 === 0;
+                })->select(function (\Pinq\ITraversable $numbers) {
+                    return ['First' => $numbers->first(), 'Average' => $numbers->average(), 'Count' => $numbers->count(), 'Numbers' => $numbers->asArray()];
+                })->indexBy(function (array $values) {
+                    return implode(',', $values['Numbers']);
+                });
+        $newData = 
+                array_filter($data, function ($i) {
+                    return $i % 2 === 0;
+                });
+        $newData = array_reverse($newData, true);
+        $aggregates = [];
+        
+        foreach ($newData as $key => $value) {
+            $aggregateKey = 
+                    array_search($value % 7, array_map(function ($i) {
+                        return $i['Key'];
+                    }, $aggregates));
+            
+            if ($aggregateKey === false) {
+                $aggregateKey = count($aggregates) + 1;
+                $aggregates[$aggregateKey] = [
+                    'Key' => $value % 7,
+                    'First' => $value,
                     'Average' => null,
                     'Count' => 0,
-                    'Numbers' => [],
+                    'Numbers' => []
                 ];
             }
-
-            $Aggregates[$AggregateKey]['Numbers'][$Key] = $Value;
-            $Aggregates[$AggregateKey]['Count']++;
+            
+            $aggregates[$aggregateKey]['Numbers'][$key] = $value;
+            $aggregates[$aggregateKey]['Count']++;
         }
-        $IndexedAggregates = [];
-        foreach ($Aggregates as $Key => &$Value) {
-            if ($Value['Count'] % 2 !== 0) {
+        
+        $indexedAggregates = [];
+        
+        foreach ($aggregates as $key => &$value) {
+            if ($value['Count'] % 2 !== 0) {
                 continue;
             }
-            unset($Value['Key']);
-            $Value['Average'] = array_sum($Value['Numbers']) / $Value['Count'];
-            $IndexedAggregates[implode(',', $Value['Numbers'])] =& $Value;
+            
+            unset($value['Key']);
+            $value['Average'] = array_sum($value['Numbers']) / $value['Count'];
+            $indexedAggregates[implode(',', $value['Numbers'])] =& $value;
         }
-
-        $this->AssertMatches($Traversable, $IndexedAggregates, 'Complex Aggregate');
+        
+        $this->assertMatches(
+                $traversable,
+                $indexedAggregates,
+                'Complex Aggregate');
     }
 }

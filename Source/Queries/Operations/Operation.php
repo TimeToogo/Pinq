@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Operations; 
+namespace Pinq\Queries\Operations;
 
 /**
  * Base operation query class
@@ -11,5 +11,5 @@ namespace Pinq\Queries\Operations;
  */
 abstract class Operation implements \Pinq\Queries\IOperation
 {
-   
+    
 }

@@ -1,8 +1,8 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Segments; 
+namespace Pinq\Queries\Segments;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Base class for a join query segment with the joined values and the 
@@ -17,48 +17,48 @@ abstract class JoinBase extends Segment
      * 
      * @var array|\Traversable
      */
-    protected $Values;
+    protected $values;
     
     /**
      * @var boolean
      */
-    protected $IsGroupJoin;
+    protected $isGroupJoin;
     
     /**
      * The function for selecting the resulting values of the join
      * 
      * @var FunctionExpressionTree
      */
-    protected $JoiningFunction;
-
-    public function __construct($Values, $IsGroupJoin, FunctionExpressionTree $JoiningFunction)
+    protected $joiningFunction;
+    
+    public function __construct($values, $isGroupJoin, FunctionExpressionTree $joiningFunction)
     {
-        $this->Values = $Values;
-        $this->IsGroupJoin = $IsGroupJoin;
-        $this->JoiningFunction = $JoiningFunction;
+        $this->values = $values;
+        $this->isGroupJoin = $isGroupJoin;
+        $this->joiningFunction = $joiningFunction;
     }
     
     /**
      * @return array|\Traversable
      */
-    final public function GetValues()
+    public final function getValues()
     {
-        return $this->Values;
+        return $this->values;
     }
     
     /**
      * @return boolean
      */
-    final public function IsGroupJoin()
+    public final function isGroupJoin()
     {
-        return $this->IsGroupJoin;
+        return $this->isGroupJoin;
     }
     
     /**
      * @return FunctionExpressionTree
      */
-    final public function GetJoiningFunctionExpressionTree()
+    public final function getJoiningFunctionExpressionTree()
     {
-        return $this->JoiningFunction;
+        return $this->joiningFunction;
     }
 }

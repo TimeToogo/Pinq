@@ -1,8 +1,8 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Segments; 
+namespace Pinq\Queries\Segments;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Base class for a query segment with an function
@@ -14,26 +14,27 @@ abstract class ExpressionSegment extends Segment
     /**
      * @var FunctionExpressionTree
      */
-    private $FunctionExpressionTree;
-
-    final public function __construct(FunctionExpressionTree $FunctionExpressionTree)
+    private $functionExpressionTree;
+    
+    public final function __construct(FunctionExpressionTree $functionExpressionTree)
     {
-        $this->FunctionExpressionTree = $FunctionExpressionTree;
+        $this->functionExpressionTree = $functionExpressionTree;
     }
-
+    
     /**
      * @return FunctionExpressionTree
      */
-    public function GetFunctionExpressionTree()
+    public function getFunctionExpressionTree()
     {
-        return $this->FunctionExpressionTree;
+        return $this->functionExpressionTree;
     }
     
-    public function Update(\Pinq\FunctionExpressionTree $FunctionExpressionTree) {
-        if($this->FunctionExpressionTree === $FunctionExpressionTree) {
+    public function update(\Pinq\FunctionExpressionTree $functionExpressionTree)
+    {
+        if ($this->functionExpressionTree === $functionExpressionTree) {
             return $this;
         }
         
-        return new static($FunctionExpressionTree);
+        return new static($functionExpressionTree);
     }
 }

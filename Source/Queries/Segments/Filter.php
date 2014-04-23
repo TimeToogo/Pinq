@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Segments; 
+namespace Pinq\Queries\Segments;
 
 /**
  * Query segment for filtering the values based on the supplied function
@@ -9,13 +9,13 @@ namespace Pinq\Queries\Segments;
  */
 class Filter extends ExpressionSegment
 {
-    public function GetType()
+    public function getType()
     {
-        return self::Filter;
+        return self::FILTER;
     }
-
-    public function Traverse(SegmentWalker $Walker)
+    
+    public function traverse(SegmentWalker $walker)
     {
-        return $Walker->WalkFilter($this);
+        return $walker->walkFilter($this);
     }
 }

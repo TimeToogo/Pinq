@@ -1,13 +1,13 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Providers;
 
-use \Pinq\Queries;
-use \Pinq\Queries\Requests;
+use Pinq\Queries;
+use Pinq\Queries\Requests;
 
 class CachingRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
 {
-    public function RequestsToCache()
+    public function requestsToCache()
     {
         return [
             [new Requests\Values(), 'VisitValues'],
@@ -25,32 +25,23 @@ class CachingRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
             [new Requests\Last(), 'VisitLast'],
             [new Requests\Maximum(), 'VisitMaximum'],
             [new Requests\Minimum(), 'VisitMinimum'],
-            [new Requests\Sum(), 'VisitSum'],
+            [new Requests\Sum(), 'VisitSum']
         ];
     }
     
     /**
      * @dataProvider RequestsToCache
      */
-    public function testThatWillCallTheInnerEvaluatorOnceAndCacheTheResult(Queries\IRequest $Request, $CalledMethod)
+    public function testThatWillCallTheInnerEvaluatorOnceAndCacheTheResult(Queries\IRequest $request, $calledMethod)
     {
-        $InnerRequestEvaluatorMock = $this->getMock('\Pinq\Queries\Requests\RequestVisitor');
-        
-        $ReturnValue = new \stdClass();
-        $InnerRequestEvaluatorMock
-                ->expects($this->once())
-                ->method($CalledMethod)
-                ->with($Request)
-                ->will($this->returnValue($ReturnValue));
-        
-        $CachingRequestEvaluator =  new \Pinq\Providers\Caching\RequestEvaluator($InnerRequestEvaluatorMock);
-                
-        $FirstReturn = $CachingRequestEvaluator->Visit($Request);
-        
+        $innerRequestEvaluatorMock = $this->getMock('\\Pinq\\Queries\\Requests\\RequestVisitor');
+        $returnValue = new \stdClass();
+        $innerRequestEvaluatorMock->expects($this->once())->method($calledMethod)->with($request)->will($this->returnValue($returnValue));
+        $cachingRequestEvaluator = new \Pinq\Providers\Caching\RequestEvaluator($innerRequestEvaluatorMock);
+        $firstReturn = $cachingRequestEvaluator->visit($request);
         //Inner evaluator should not be called a second time and result should be cached
-        $SecondReturn = $CachingRequestEvaluator->Visit($Request);
-        
-        $this->assertSame($ReturnValue, $FirstReturn);
-        $this->assertSame($ReturnValue, $SecondReturn);
+        $secondReturn = $cachingRequestEvaluator->visit($request);
+        $this->assertSame($returnValue, $firstReturn);
+        $this->assertSame($returnValue, $secondReturn);
     }
 }

@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Providers\Traversable;
 
-use \Pinq\Queries;
+use Pinq\Queries;
 
 /**
  * Query provider for evalating query of the supplied traversable instance,
@@ -12,22 +12,22 @@ use \Pinq\Queries;
  */
 class Provider extends \Pinq\Providers\QueryProvider
 {
-    private $ScopeEvaluator;
-    protected $Traversable;
-
-    public function __construct(\Pinq\ITraversable $Traversable)
+    private $scopeEvaluator;
+    
+    protected $traversable;
+    
+    public function __construct(\Pinq\ITraversable $traversable)
     {
         parent::__construct();
-        $this->ScopeEvaluator = new ScopeEvaluator();
-        $this->Traversable = $Traversable;
+        $this->scopeEvaluator = new ScopeEvaluator();
+        $this->traversable = $traversable;
     }
     
-    
-    protected function LoadRequestEvaluatorVisitor(Queries\IScope $Scope)
+    protected function loadRequestEvaluatorVisitor(Queries\IScope $scope)
     {
-        $this->ScopeEvaluator->SetTraversable($this->Traversable);
-        $this->ScopeEvaluator->Walk($Scope);
-
-        return new RequestEvaluator($this->ScopeEvaluator->GetTraversable());
+        $this->scopeEvaluator->setTraversable($this->traversable);
+        $this->scopeEvaluator->walk($scope);
+        
+        return new RequestEvaluator($this->scopeEvaluator->getTraversable());
     }
 }

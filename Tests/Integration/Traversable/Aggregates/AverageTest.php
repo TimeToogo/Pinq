@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Traversable\Aggregates;
 
@@ -7,8 +7,10 @@ class AverageTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatAverageOperatesCorrectly(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatAverageOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals(empty($Data) ? null : (array_sum($Data) / count($Data)), $Traversable->Average());
+        $this->assertEquals(
+                empty($data) ? null : array_sum($data) / count($data),
+                $traversable->average());
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Parsing;
 
@@ -10,28 +10,31 @@ namespace Pinq\Parsing;
  */
 final class Reflection
 {
-    private function __construct() {}
+    private function __construct()
+    {
+        
+    }
     
     /**
-     * @param callable $Function
+     * @param callable $function
      * @return \ReflectionFunctionAbstract
      */
-    final public static function FromCallable(callable $Function)
+    public static final function fromCallable(callable $function)
     {
-        if (is_array($Function)) {
-            return new \ReflectionMethod($Function[0], $Function[1]);
-        } 
-        else if ($Function instanceof \Closure) {
-            return new \ReflectionFunction($Function);
-        } 
-        else if (is_object($Function)) {
-            return new \ReflectionMethod($Function, '__invoke');
-        } 
+        if (is_array($function)) {
+            return new \ReflectionMethod($function[0], $function[1]);
+        }
+        else if ($function instanceof \Closure) {
+            return new \ReflectionFunction($function);
+        }
+        else if (is_object($function)) {
+            return new \ReflectionMethod($function, '__invoke');
+        }
         else {
-            $Name = null;
-            is_callable($Function, false, $Name);
-
-            return new \ReflectionFunction($Name);
+            $name = null;
+            is_callable($function, false, $name);
+            
+            return new \ReflectionFunction($name);
         }
     }
 }

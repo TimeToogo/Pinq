@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq;
 
@@ -12,8 +12,8 @@ interface IGroupedTraversable extends ITraversable
     /**
      * Subsequently groups values according the supplied function. (Uses strict equality '===')
      *
-     * @param  callable $Function
+     * @param  callable $function
      * @return IGroupedTraversable
      */
-    public function AndBy(callable $Function);
+    public function andBy(callable $function);
 }

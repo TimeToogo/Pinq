@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Iterators\Utilities;
 
@@ -26,11 +26,11 @@ class Dictionary implements \IteratorAggregate
     /**
      * @var array
      */
-    private $Storage;
+    private $storage;
     
     public function __construct()
     {
-        $this->Storage = [
+        $this->storage = [
             'array' => [],
             'boolean' => [],
             'integer' => [],
@@ -38,150 +38,176 @@ class Dictionary implements \IteratorAggregate
             'string' => [],
             'object' => new \SplObjectStorage(),
             'resource' => [],
-            'unknown type' => [],
+            'unknown type' => []
         ];
     }
     
-    public function Get($Key)
+    public function get($key)
     {
-        if($Key === null) {
-            return $this->Storage['NULL'];
+        if ($key === null) {
+            return $this->storage['NULL'];
         }
         
-        $Type = gettype($Key);
-        $TypeStorage =& $this->Storage[$Type];
-        switch ($Type) {
+        $type = gettype($key);
+        $typeStorage =& $this->storage[$type];
+        switch ($type) {
+            
             case 'string':
+            
             case 'integer':
+            
             case 'boolean':
+            
             case 'object':
-                return isset($TypeStorage[$Key]) ? $TypeStorage[$Key] : null;
-                
+                return isset($typeStorage[$key]) ? $typeStorage[$key] : null;
+            
             case 'double':
-                $StringKey = (string)$Key;
-                return isset($TypeStorage[$StringKey]) ? $TypeStorage[$StringKey] : null;
+                $stringKey = (string) $key;
                 
+                return isset($typeStorage[$stringKey]) ? $typeStorage[$stringKey] : null;
+            
             case 'resource':
-                $StringKey = (string)$Key;
-                return isset($TypeStorage[$StringKey][1]) ? $TypeStorage[$StringKey][1] : null;
+                $stringKey = (string) $key;
+                
+                return isset($typeStorage[$stringKey][1]) ? $typeStorage[$stringKey][1] : null;
             
             case 'array':
+            
             case 'unknown type':
-                foreach ($TypeStorage as $KeyValuePair) {
-                    if($KeyValuePair[0] === $Key) {
-                        return $KeyValuePair[1];
+                foreach ($typeStorage as $keyValuePair) {
+                    if ($keyValuePair[0] === $key) {
+                        return $keyValuePair[1];
                     }
                 }
+                
                 return null;
         }
     }
     
-    public function Contains($Key) 
+    public function contains($key)
     {
-        if($Key === null) {
-            return array_key_exists('NULL', $this->Storage);
+        if ($key === null) {
+            return array_key_exists('NULL', $this->storage);
         }
         
-        $Type = gettype($Key);
-        $TypeStorage =& $this->Storage[$Type];
-        switch ($Type) {
+        $type = gettype($key);
+        $typeStorage =& $this->storage[$type];
+        switch ($type) {
+            
             case 'string':
+            
             case 'integer':
+            
             case 'boolean':
+            
             case 'object':
-                return isset($TypeStorage[$Key]);
-                
+                return isset($typeStorage[$key]);
+            
             case 'double':
+            
             case 'resource':
-                return isset($TypeStorage[(string)$Key]);
+                return isset($typeStorage[(string) $key]);
             
             case 'array':
+            
             case 'unknown type':
-                foreach ($TypeStorage as $KeyValuePair) {
-                    if($KeyValuePair[0] === $Key) {
+                foreach ($typeStorage as $keyValuePair) {
+                    if ($keyValuePair[0] === $key) {
                         return true;
                     }
                 }
+                
                 return false;
         }
     }
-
-    public function Set($Key, $Value) 
+    
+    public function set($key, $value)
     {
-        $Type = gettype($Key);
-        $TypeStorage =& $this->Storage[$Type];
-        switch ($Type) {
+        $type = gettype($key);
+        $typeStorage =& $this->storage[$type];
+        switch ($type) {
+            
             case 'string':
+            
             case 'integer':
+            
             case 'boolean':
+            
             case 'object':
-                $TypeStorage[$Key] = $Value;
+                $typeStorage[$key] = $value;
                 break;
             
             case 'double':
-                $TypeStorage[(string)$Key] = $Value;
+                $typeStorage[(string) $key] = $value;
                 break;
             
             case 'NULL':
-                $TypeStorage = $Value;
+                $typeStorage = $value;
                 break;
-                
+            
             case 'resource':
-                $TypeStorage[(string)$Key] = [$Key, $Value];
+                $typeStorage[(string) $key] = [$key, $value];
                 break;
             
             case 'array':
+            
             case 'unknown type':
-                $TypeStorage[] = [$Key, $Value];
+                $typeStorage[] = [$key, $value];
                 break;
         }
     }
     
-    public function AddRange($Values) 
+    public function addRange($values)
     {
-        foreach ($Values as $Key => $Value) {
-            $this->Set($Key, $Value);
+        foreach ($values as $key => $value) {
+            $this->set($key, $value);
         }
     }
     
-    public function Remove($Key) 
+    public function remove($key)
     {
-        $Type = gettype($Key);
-        $TypeStorage =& $this->Storage[$Type];
-        switch ($Type) {
+        $type = gettype($key);
+        $typeStorage =& $this->storage[$type];
+        switch ($type) {
             
             case 'string':
+            
             case 'integer':
+            
             case 'boolean':
+            
             case 'object':
-                unset($TypeStorage[$Key]);
+                unset($typeStorage[$key]);
                 break;
             
             case 'double':
+            
             case 'resource':
-                unset($TypeStorage[(string)$Key]);
+                unset($typeStorage[(string) $key]);
                 break;
             
             case 'NULL':
-                unset($this->Storage['NULL']);
+                unset($this->storage['NULL']);
                 break;
-                
+            
             case 'array':
+            
             case 'unknown type':
-                foreach ($TypeStorage as $StorageKey => $KeyValuePair) {
-                    if($KeyValuePair[0] === $Key) {
-                        unset($TypeStorage[$StorageKey]);
+                foreach ($typeStorage as $storageKey => $keyValuePair) {
+                    if ($keyValuePair[0] === $key) {
+                        unset($typeStorage[$storageKey]);
                         break;
                     }
                 }
+                
                 break;
         }
     }
     
-    public function RemoveRange($Keys) 
+    public function removeRange($keys)
     {
-        foreach ($Keys as $Key) {
-            $this->Remove($Key);
+        foreach ($keys as $key) {
+            $this->remove($key);
         }
     }
     
@@ -195,16 +221,8 @@ class Dictionary implements \IteratorAggregate
      */
     public function getIterator()
     {
-        return new \ArrayIterator(array_values(array_merge(
-                array_map('strval', array_keys($this->Storage['string'])),
-                array_keys($this->Storage['integer']),
-                array_map(function ($I) { return (bool)$I; }, array_keys($this->Storage['boolean'])),
-                array_map('doubleval', array_keys($this->Storage['double'])),
-                iterator_to_array($this->Storage['object'], false),
-                array_key_exists('NULL', $this->Storage) ? [null] : [],
-                array_map('reset', $this->Storage['resource']),
-                array_map('reset', $this->Storage['array']),
-                array_map('reset', $this->Storage['unknown type'])
-            )));
+        return new \ArrayIterator(array_values(array_merge(array_map('strval', array_keys($this->storage['string'])), array_keys($this->storage['integer']), array_map(function ($i) {
+            return (bool) $i;
+        }, array_keys($this->storage['boolean'])), array_map('doubleval', array_keys($this->storage['double'])), iterator_to_array($this->storage['object'], false), array_key_exists('NULL', $this->storage) ? [null] : [], array_map('reset', $this->storage['resource']), array_map('reset', $this->storage['array']), array_map('reset', $this->storage['unknown type']))));
     }
 }

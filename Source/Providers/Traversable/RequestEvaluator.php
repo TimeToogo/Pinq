@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Providers\Traversable;
 
-use \Pinq\Queries\Requests;
+use Pinq\Queries\Requests;
 
 /**
  * Request evaluator for performing queries on the supplied traversable instance.
@@ -14,92 +14,92 @@ class RequestEvaluator extends Requests\RequestVisitor
     /**
      * @var \Pinq\ITraversable
      */
-    private $Traversable;
+    private $traversable;
     
-    public function __construct(\Pinq\ITraversable $Traversable)
+    public function __construct(\Pinq\ITraversable $traversable)
     {
-        $this->Traversable = $Traversable;
-    }
-
-    public function VisitValues(Requests\Values $Request)
-    {
-        return $this->Traversable->getIterator();
-    }
-
-    public function VisitCount(Requests\Count $Request)
-    {
-        return $this->Traversable->Count();
-    }
-
-    public function VisitExists(Requests\Exists $Request)
-    {
-        return $this->Traversable->Exists();
-    }
-
-    public function VisitFirst(Requests\First $Request)
-    {
-        return $this->Traversable->First();
-    }
-
-    public function VisitLast(Requests\Last $Request)
-    {
-        return $this->Traversable->Last();
-    }
-
-    public function VisitContains(Requests\Contains $Request)
-    {
-        return $this->Traversable->Contains($Request->GetValue());
-    }
-
-    public function VisitGetIndex(Requests\GetIndex $Request)
-    {
-        return $this->Traversable[$Request->GetIndex()];
-    }
-
-    public function VisitIssetIndex(Requests\IssetIndex $Request)
-    {
-        return isset($this->Traversable[$Request->GetIndex()]);
+        $this->traversable = $traversable;
     }
     
-    public function VisitAggregate(Requests\Aggregate $Request)
+    public function visitValues(Requests\Values $request)
     {
-        return $this->Traversable->Aggregate($Request->GetFunctionExpressionTree());
+        return $this->traversable->getIterator();
     }
-
-    public function VisitMaximum(Requests\Maximum $Request)
+    
+    public function visitCount(Requests\Count $request)
     {
-        return $this->Traversable->Maximum($Request->GetFunctionExpressionTree());
+        return $this->traversable->count();
     }
-
-    public function VisitMinimum(Requests\Minimum $Request)
+    
+    public function visitExists(Requests\Exists $request)
     {
-        return $this->Traversable->Minimum($Request->GetFunctionExpressionTree());
+        return $this->traversable->exists();
     }
-
-    public function VisitSum(Requests\Sum $Request)
+    
+    public function visitFirst(Requests\First $request)
     {
-        return $this->Traversable->Sum($Request->GetFunctionExpressionTree());
+        return $this->traversable->first();
     }
-
-    public function VisitAverage(Requests\Average $Request)
+    
+    public function visitLast(Requests\Last $request)
     {
-        return $this->Traversable->Average($Request->GetFunctionExpressionTree());
+        return $this->traversable->last();
     }
-
-    public function VisitAll(Requests\All $Request)
+    
+    public function visitContains(Requests\Contains $request)
     {
-        return $this->Traversable->All($Request->GetFunctionExpressionTree());
+        return $this->traversable->contains($request->getValue());
     }
-
-    public function VisitAny(Requests\Any $Request)
+    
+    public function visitGetIndex(Requests\GetIndex $request)
     {
-        return $this->Traversable->Any($Request->GetFunctionExpressionTree());
+        return $this->traversable[$request->getIndex()];
     }
-
-    public function VisitImplode(Requests\Implode $Request)
+    
+    public function visitIssetIndex(Requests\IssetIndex $request)
     {
-        return $this->Traversable->Implode(
-                $Request->GetDelimiter(),
-                $Request->GetFunctionExpressionTree());
+        return isset($this->traversable[$request->getIndex()]);
+    }
+    
+    public function visitAggregate(Requests\Aggregate $request)
+    {
+        return $this->traversable->aggregate($request->getFunctionExpressionTree());
+    }
+    
+    public function visitMaximum(Requests\Maximum $request)
+    {
+        return $this->traversable->maximum($request->getFunctionExpressionTree());
+    }
+    
+    public function visitMinimum(Requests\Minimum $request)
+    {
+        return $this->traversable->minimum($request->getFunctionExpressionTree());
+    }
+    
+    public function visitSum(Requests\Sum $request)
+    {
+        return $this->traversable->sum($request->getFunctionExpressionTree());
+    }
+    
+    public function visitAverage(Requests\Average $request)
+    {
+        return $this->traversable->average($request->getFunctionExpressionTree());
+    }
+    
+    public function visitAll(Requests\All $request)
+    {
+        return $this->traversable->all($request->getFunctionExpressionTree());
+    }
+    
+    public function visitAny(Requests\Any $request)
+    {
+        return $this->traversable->any($request->getFunctionExpressionTree());
+    }
+    
+    public function visitImplode(Requests\Implode $request)
+    {
+        return $this->traversable->implode(
+                $request->getDelimiter(),
+                $request->getFunctionExpressionTree());
     }
 }

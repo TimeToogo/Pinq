@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Operations; 
+namespace Pinq\Queries\Operations;
 
 /**
  * Base class for an operation query for with a range of values
@@ -9,15 +9,15 @@ namespace Pinq\Queries\Operations;
  */
 abstract class ValuesOperation extends Operation
 {
-    private $Values;
+    private $values;
     
-    public function __construct($Values)
+    public function __construct($values)
     {
-        $this->Values = $Values;
+        $this->values = $values;
     }
     
-    public function GetValues()
+    public function getValues()
     {
-        return $this->Values;
+        return $this->values;
     }
 }

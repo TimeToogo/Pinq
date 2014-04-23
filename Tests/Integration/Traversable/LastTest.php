@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Traversable;
 
@@ -7,16 +7,16 @@ class LastTest extends TraversableTest
     /**
      * @dataProvider OneToTen
      */
-    public function testThatFirstReturnsTheFirstValue(\Pinq\ITraversable $Numbers, array $Data)
+    public function testThatFirstReturnsTheFirstValue(\Pinq\ITraversable $numbers, array $data)
     {
-        $this->assertEquals(end($Data), $Numbers->Last());
+        $this->assertEquals(end($data), $numbers->last());
     }
     
     /**
      * @dataProvider EmptyData
      */
-    public function testThatFirstReturnsNullWhenThereAreNoValues(\Pinq\ITraversable $Empty)
+    public function testThatFirstReturnsNullWhenThereAreNoValues(\Pinq\ITraversable $empty)
     {
-        $this->assertEquals(null, $Empty->First());
+        $this->assertEquals(null, $empty->first());
     }
 }

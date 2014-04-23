@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -11,158 +11,267 @@ namespace Pinq\Expressions;
  */
 class ExpressionVisitor extends ExpressionWalker
 {
-    final public function WalkArray(ArrayExpression $Expression)
+    public final function walkArray(ArrayExpression $expression)
     {
-        $this->VisitArray($Expression);
-        return $Expression;
+        $this->visitArray($expression);
+        
+        return $expression;
     }
-    protected function VisitArray(ArrayExpression $Expression) {}
-
-    final public function WalkAssignment(AssignmentExpression $Expression)
-    {
-        $this->VisitAssignment($Expression);
-        return $Expression;
-    }
-    protected function VisitAssignment(AssignmentExpression $Expression) {}
-
-    final public function WalkBinaryOperation(BinaryOperationExpression $Expression)
-    {
-        $this->VisitBinaryOperation($Expression);
-        return $Expression;
-    }
-    protected function VisitBinaryOperation(BinaryOperationExpression $Expression) {}
-
-    final public function WalkCast(CastExpression $Expression)
-    {
-        $this->VisitCast($Expression);
-        return $Expression;
-    }
-    protected function VisitCast(CastExpression $Expression) {}
-
-    final public function WalkClosure(ClosureExpression $Expression)
-    {
-        $this->VisitClosure($Expression);
-        return $Expression;
-    }
-    protected function VisitClosure(ClosureExpression $Expression) {}
     
-    final public function WalkParameter(ParameterExpression $Expression)
+    protected function visitArray(ArrayExpression $expression)
     {
-        $this->VisitParameter($Expression);
-        return $Expression;
+        
     }
-    protected function VisitParameter(ParameterExpression $Expression) {}
-
-    final public function WalkEmpty(EmptyExpression $Expression)
-    {
-        $this->VisitEmpty($Expression);
-        return $Expression;
-    }
-    protected function VisitEmpty(EmptyExpression $Expression) {}
     
-    final public function WalkIsset(IssetExpression $Expression)
+    public final function walkAssignment(AssignmentExpression $expression)
     {
-        $this->VisitIsset($Expression);
-        return $Expression;
+        $this->visitAssignment($expression);
+        
+        return $expression;
     }
-    protected function VisitIsset(IssetExpression $Expression) {}
-
-    final public function WalkField(FieldExpression $Expression)
-    {
-        $this->VisitField($Expression);
-        return $Expression;
-    }
-    protected function VisitField(FieldExpression $Expression) {}
-
-    final public function WalkFunctionCall(FunctionCallExpression $Expression)
-    {
-        $this->VisitFunctionCall($Expression);
-        return $Expression;
-    }
-    protected function VisitFunctionCall(FunctionCallExpression $Expression) {}
-
-    final public function WalkIndex(IndexExpression $Expression)
-    {
-        $this->VisitIndex($Expression);
-        return $Expression;
-    }
-    protected function VisitIndex(IndexExpression $Expression) {}
-
-    final public function WalkInvocation(InvocationExpression $Expression)
-    {
-        $this->VisitInvocation($Expression);
-        return $Expression;
-    }
-    protected function VisitInvocation(InvocationExpression $Expression) {}
-
-    final public function WalkMethodCall(MethodCallExpression $Expression)
-    {
-        $this->VisitMethodCall($Expression);
-        return $Expression;
-    }
-    protected function VisitMethodCall(MethodCallExpression $Expression) {}
-
-    final public function WalkNew(NewExpression $Expression)
-    {
-        $this->VisitNew($Expression);
-        return $Expression;
-    }
-    protected function VisitNew(NewExpression $Expression) {}
-
-    final public function WalkReturn(ReturnExpression $Expression)
-    {
-        $this->VisitReturn($Expression);
-        return $Expression;
-    }
-    protected function VisitReturn(ReturnExpression $Expression) {}
-
-    public function WalkThrow(ThrowExpression $Expression)
-    {
-        $this->VisitThrow($Expression);
-        return $Expression;
-    }
-    protected function VisitThrow(ThrowExpression $Expression) {}
     
-    final public function WalkStaticMethodCall(StaticMethodCallExpression $Expression)
+    protected function visitAssignment(AssignmentExpression $expression)
     {
-        $this->VisitStaticMethodCall($Expression);
-        return $Expression;
+        
     }
-    protected function VisitStaticMethodCall(StaticMethodCallExpression $Expression) {}
-
-    final public function WalkSubQuery(SubQueryExpression $Expression)
+    
+    public final function walkBinaryOperation(BinaryOperationExpression $expression)
     {
-        $this->VisitSubQuery($Expression);
-        return $Expression;
+        $this->visitBinaryOperation($expression);
+        
+        return $expression;
     }
-    protected function VisitSubQuery(SubQueryExpression $Expression) {}
-
-    final public function WalkTernary(TernaryExpression $Expression)
+    
+    protected function visitBinaryOperation(BinaryOperationExpression $expression)
     {
-        $this->VisitTernary($Expression);
-        return $Expression;
+        
     }
-    protected function VisitTernary(TernaryExpression $Expression) {}
-
-    final public function WalkUnaryOperation(UnaryOperationExpression $Expression)
+    
+    public final function walkCast(CastExpression $expression)
     {
-        $this->VisitUnaryOperation($Expression);
-        return $Expression;
+        $this->visitCast($expression);
+        
+        return $expression;
     }
-    protected function VisitUnaryOperation(UnaryOperationExpression $Expression) {}
-
-    final public function WalkValue(ValueExpression $Expression)
+    
+    protected function visitCast(CastExpression $expression)
     {
-        $this->VisitValue($Expression);
-        return $Expression;
+        
     }
-    protected function VisitValue(ValueExpression $Expression) {}
-
-    final public function WalkVariable(VariableExpression $Expression)
+    
+    public final function walkClosure(ClosureExpression $expression)
     {
-        $this->VisitVariable($Expression);
-        return $Expression;
+        $this->visitClosure($expression);
+        
+        return $expression;
     }
-    protected function VisitVariable(VariableExpression $Expression) {}
-
+    
+    protected function visitClosure(ClosureExpression $expression)
+    {
+        
+    }
+    
+    public final function walkParameter(ParameterExpression $expression)
+    {
+        $this->visitParameter($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitParameter(ParameterExpression $expression)
+    {
+        
+    }
+    
+    public final function walkEmpty(EmptyExpression $expression)
+    {
+        $this->visitEmpty($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitEmpty(EmptyExpression $expression)
+    {
+        
+    }
+    
+    public final function walkIsset(IssetExpression $expression)
+    {
+        $this->visitIsset($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitIsset(IssetExpression $expression)
+    {
+        
+    }
+    
+    public final function walkField(FieldExpression $expression)
+    {
+        $this->visitField($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitField(FieldExpression $expression)
+    {
+        
+    }
+    
+    public final function walkFunctionCall(FunctionCallExpression $expression)
+    {
+        $this->visitFunctionCall($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitFunctionCall(FunctionCallExpression $expression)
+    {
+        
+    }
+    
+    public final function walkIndex(IndexExpression $expression)
+    {
+        $this->visitIndex($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitIndex(IndexExpression $expression)
+    {
+        
+    }
+    
+    public final function walkInvocation(InvocationExpression $expression)
+    {
+        $this->visitInvocation($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitInvocation(InvocationExpression $expression)
+    {
+        
+    }
+    
+    public final function walkMethodCall(MethodCallExpression $expression)
+    {
+        $this->visitMethodCall($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitMethodCall(MethodCallExpression $expression)
+    {
+        
+    }
+    
+    public final function walkNew(NewExpression $expression)
+    {
+        $this->visitNew($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitNew(NewExpression $expression)
+    {
+        
+    }
+    
+    public final function walkReturn(ReturnExpression $expression)
+    {
+        $this->visitReturn($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitReturn(ReturnExpression $expression)
+    {
+        
+    }
+    
+    public function walkThrow(ThrowExpression $expression)
+    {
+        $this->visitThrow($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitThrow(ThrowExpression $expression)
+    {
+        
+    }
+    
+    public final function walkStaticMethodCall(StaticMethodCallExpression $expression)
+    {
+        $this->visitStaticMethodCall($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitStaticMethodCall(StaticMethodCallExpression $expression)
+    {
+        
+    }
+    
+    public final function walkSubQuery(SubQueryExpression $expression)
+    {
+        $this->visitSubQuery($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitSubQuery(SubQueryExpression $expression)
+    {
+        
+    }
+    
+    public final function walkTernary(TernaryExpression $expression)
+    {
+        $this->visitTernary($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitTernary(TernaryExpression $expression)
+    {
+        
+    }
+    
+    public final function walkUnaryOperation(UnaryOperationExpression $expression)
+    {
+        $this->visitUnaryOperation($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitUnaryOperation(UnaryOperationExpression $expression)
+    {
+        
+    }
+    
+    public final function walkValue(ValueExpression $expression)
+    {
+        $this->visitValue($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitValue(ValueExpression $expression)
+    {
+        
+    }
+    
+    public final function walkVariable(VariableExpression $expression)
+    {
+        $this->visitVariable($expression);
+        
+        return $expression;
+    }
+    
+    protected function visitVariable(VariableExpression $expression)
+    {
+        
+    }
 }

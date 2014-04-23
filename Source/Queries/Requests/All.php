@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Request query for a boolean of whether all the values satify the 
@@ -10,13 +10,13 @@ namespace Pinq\Queries\Requests;
  */
 class All extends ProjectionRequest
 {
-    public function GetType()
+    public function getType()
     {
-        return self::All;
+        return self::ALL;
     }
-
-    public function Traverse(RequestVisitor $Visitor)
+    
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitAll($this);
+        return $visitor->visitAll($this);
     }
 }

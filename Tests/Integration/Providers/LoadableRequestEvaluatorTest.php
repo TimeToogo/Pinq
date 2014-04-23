@@ -1,13 +1,13 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Providers;
 
-use \Pinq\Queries;
-use \Pinq\Queries\Requests;
+use Pinq\Queries;
+use Pinq\Queries\Requests;
 
 class LoadableRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
 {
-    public function RequestsToLoad()
+    public function requestsToLoad()
     {
         return [
             [new Requests\Values(), 'LoadValues', []],
@@ -25,39 +25,28 @@ class LoadableRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
             [new Requests\Last(), 'LoadLast'],
             [new Requests\Maximum(), 'LoadMaximum'],
             [new Requests\Minimum(), 'LoadMinimum'],
-            [new Requests\Sum(), 'LoadSum'],
+            [new Requests\Sum(), 'LoadSum']
         ];
     }
     
     /**
      * @dataProvider RequestsToLoad
      */
-    public function testThatWillCallTheLoadMethodButNotWhenLoaded(Queries\IRequest $Request, $LoadMethod, $ReturnValue = null)
+    public function testThatWillCallTheLoadMethodButNotWhenLoaded(Queries\IRequest $request, $loadMethod, $returnValue = null)
     {
-        $RequestEvaluatorMock = $this->getMockForAbstractClass('\Pinq\Providers\Loadable\RequestEvaluator');
+        $requestEvaluatorMock = $this->getMockForAbstractClass('\\Pinq\\Providers\\Loadable\\RequestEvaluator');
+        $methodMock = $requestEvaluatorMock->expects($this->once())->method($loadMethod)->with($this->equalTo($request));
         
-        $MethodMock = $RequestEvaluatorMock
-                ->expects($this->once())
-                ->method($LoadMethod)
-                ->with($this->equalTo($Request));
-        
-        if($MethodMock !== null) {
-            $MethodMock->will($this->returnValue($ReturnValue));
+        if ($methodMock !== null) {
+            $methodMock->will($this->returnValue($returnValue));
         }
         
-        $LoadValuesRequest = new Requests\Values();
-        $RequestEvaluatorMock
-                ->expects($this->once())
-                ->method('LoadValues')
-                ->with($this->equalTo($LoadValuesRequest))
-                ->will($this->returnValue($ReturnValue ?: [null]));
-        
-        $RequestEvaluatorMock->Visit($Request);
-        
+        $loadValuesRequest = new Requests\Values();
+        $requestEvaluatorMock->expects($this->once())->method('LoadValues')->with($this->equalTo($loadValuesRequest))->will($this->returnValue($returnValue ?: [null]));
+        $requestEvaluatorMock->visit($request);
         //Load values
-        $RequestEvaluatorMock->Visit($LoadValuesRequest);
-        
+        $requestEvaluatorMock->visit($loadValuesRequest);
         //Should not be called a second time
-        $RequestEvaluatorMock->Visit($Request);
+        $requestEvaluatorMock->visit($request);
     }
 }

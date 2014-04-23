@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq;
 
@@ -9,97 +9,96 @@ namespace Pinq;
  */
 class Collection extends Traversable implements ICollection
 {
-    public function __construct($Values = [])
+    public function __construct($values = [])
     {
-        parent::__construct($Values);
+        parent::__construct($values);
     }
     
-    public function AsCollection()
+    public function asCollection()
     {
         return $this;
     }
     
-    public function AsRepository()
+    public function asRepository()
     {
-        return (new Providers\Collection\Provider($this))->CreateRepository();
+        return (new Providers\Collection\Provider($this))->createRepository();
     }
     
-    public function Clear()
+    public function clear()
     {
-        $this->ValuesIterator = new \EmptyIterator();
+        $this->valuesIterator = new \EmptyIterator();
     }
     
-    public function Apply(callable $Function)
+    public function apply(callable $function)
     {
-        $Array = $this->AsArray();
+        $array = $this->asArray();
         
         //Fix for being unable to pass a variable number of args by ref
-        if($Function instanceof FunctionExpressionTree) {
-            $Function = $Function->GetCompiledFunction();
+        if ($function instanceof FunctionExpressionTree) {
+            $function = $function->getCompiledFunction();
         }
         
-        array_walk($Array, $Function);
-        
-        $this->ValuesIterator = new \ArrayIterator($Array);
+        array_walk($array, $function);
+        $this->valuesIterator = new \ArrayIterator($array);
     }
     
-    public function AddRange($Values)
+    public function addRange($values)
     {
-        if(!Utilities::IsIterable($Values)) {
-            throw PinqException::InvalidIterable(__METHOD__, $Values);
+        if (!Utilities::isIterable($values)) {
+            throw PinqException::invalidIterable(__METHOD__, $values);
         }
         
-        $FlattenedIterator = new Iterators\FlatteningIterator(new \ArrayIterator([$this->ValuesIterator, Utilities::ToIterator($Values)]));
-        
-        $this->ValuesIterator = new \ArrayIterator(Utilities::ToArray($FlattenedIterator));
+        $flattenedIterator = new Iterators\FlatteningIterator(new \ArrayIterator([$this->valuesIterator, Utilities::toIterator($values)]));
+        $this->valuesIterator = new \ArrayIterator(Utilities::toArray($flattenedIterator));
     }
-
-    public function RemoveRange($Values)
+    
+    public function removeRange($values)
     {
-        if(!Utilities::IsIterable($Values)) {
-            throw PinqException::InvalidIterable(__METHOD__, $Values);
+        if (!Utilities::isIterable($values)) {
+            throw PinqException::invalidIterable(__METHOD__, $values);
         }
         
-        $ExceptIterator = new Iterators\ExceptIterator($this->ValuesIterator, Utilities::ToIterator($Values));
-        
-        $this->ValuesIterator = new \ArrayIterator(Utilities::ToArray($ExceptIterator));
+        $exceptIterator = 
+                new Iterators\ExceptIterator(
+                        $this->valuesIterator,
+                        Utilities::toIterator($values));
+        $this->valuesIterator = new \ArrayIterator(Utilities::toArray($exceptIterator));
     }
-
-    public function RemoveWhere(callable $Predicate)
+    
+    public function removeWhere(callable $predicate)
     {
-        $Array = $this->AsArray();
-        foreach ($Array as $Key => $Value) {
-            if($Predicate($Value, $Key)) {
-                unset($Array[$Key]);
+        $array = $this->asArray();
+        
+        foreach ($array as $key => $value) {
+            if ($predicate($value, $key)) {
+                unset($array[$key]);
             }
         }
         
-        $this->ValuesIterator = new \ArrayIterator($Array);
+        $this->valuesIterator = new \ArrayIterator($array);
     }
-
-    public function offsetSet($Index, $Value)
+    
+    public function offsetSet($index, $value)
     {
-        if($this->ValuesIterator instanceof \ArrayAccess) {
-            $this->ValuesIterator->offsetSet($Index, $Value);
+        if ($this->valuesIterator instanceof \ArrayAccess) {
+            $this->valuesIterator->offsetSet($index, $value);
         }
         else {
-            $Array = $this->AsArray();
-            $Array[$Index] = $Value;
-
-            $this->ValuesIterator = new \ArrayIterator($Array);
+            $array = $this->asArray();
+            $array[$index] = $value;
+            $this->valuesIterator = new \ArrayIterator($array);
         }
     }
-
-    public function offsetUnset($Index)
+    
+    public function offsetUnset($index)
     {
-        if($this->ValuesIterator instanceof \ArrayAccess) {
-            $this->ValuesIterator->offsetUnset($Index);
+        if ($this->valuesIterator instanceof \ArrayAccess) {
+            $this->valuesIterator->offsetUnset($index);
         }
         else {
-            $Array = $this->AsArray();
-            unset($Array[$Index]);
-
-            $this->ValuesIterator = new \ArrayIterator($Array);
+            $array = $this->asArray();
+            unset($array[$index]);
+            $this->valuesIterator = new \ArrayIterator($array);
         }
     }
 }

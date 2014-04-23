@@ -1,8 +1,8 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Segments; 
+namespace Pinq\Queries\Segments;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Query segment for grouping the values base on the supplied 
@@ -15,39 +15,39 @@ class GroupBy extends Segment
     /**
      * @var FunctionExpressionTree[]
      */
-    private $FunctionExpressionTrees;
-
-    public function __construct(array $FunctionExpressionTrees)
+    private $functionExpressionTrees;
+    
+    public function __construct(array $functionExpressionTrees)
     {
-        $this->FunctionExpressionTrees = $FunctionExpressionTrees;
-    }
-
-    public function GetType()
-    {
-        return self::GroupBy;
+        $this->functionExpressionTrees = $functionExpressionTrees;
     }
     
-    public function GetFunctionExpressionTrees()
+    public function getType()
     {
-        return $this->FunctionExpressionTrees;
+        return self::GROUP_BY;
     }
     
-    public function Traverse(SegmentWalker $Walker)
+    public function getFunctionExpressionTrees()
     {
-        return $Walker->WalkGroupBy($this);
+        return $this->functionExpressionTrees;
     }
     
-    public function AndBy(FunctionExpressionTree $FunctionExpressionTree) 
+    public function traverse(SegmentWalker $walker)
     {
-        return new self(array_merge($this->FunctionExpressionTrees, [$FunctionExpressionTree]));
+        return $walker->walkGroupBy($this);
     }
     
-    public function Update(array $FunctionExpressionTrees)
+    public function andBy(FunctionExpressionTree $functionExpressionTree)
     {
-        if($this->FunctionExpressionTrees === $FunctionExpressionTrees) {
+        return new self(array_merge($this->functionExpressionTrees, [$functionExpressionTree]));
+    }
+    
+    public function update(array $functionExpressionTrees)
+    {
+        if ($this->functionExpressionTrees === $functionExpressionTrees) {
             return $this;
         }
         
-        return new self($FunctionExpressionTrees);
+        return new self($functionExpressionTrees);
     }
 }

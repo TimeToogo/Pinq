@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Caching;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Cache implementation for storing the serialized expression trees
@@ -12,112 +12,125 @@ use \Pinq\FunctionExpressionTree;
  */
 class CSVFileFunctionCache implements IFunctionCache
 {
-    const CSVDelimiter = ',';
-    const CSVSeperator = '|';
+    const CSV_DELIMITER = ',';
+    const CSV_SEPERATOR = '|';
     
     /**
      * @var string
      */
-    private $FileName;
+    private $fileName;
     
     /**
      * @var \SplFileObject
      */
-    private $FileHandle;
+    private $fileHandle;
     
     /**
      * @var array|null
      */
-    private $FileData;
+    private $fileData;
     
-    public function __construct($FileName)
+    public function __construct($fileName)
     {
-        $this->FileName = $FileName;
+        $this->fileName = $fileName;
+        
         try {
-            $this->FileHandle = new \SplFileObject($FileName, 'c+');
-            $this->FileHandle->setFlags(\SplFileObject::READ_CSV);
-            $this->FileHandle->setCsvControl(self::CSVDelimiter, self::CSVSeperator);
-        }
+            $this->fileHandle = new \SplFileObject($fileName, 'c+');
+            $this->fileHandle->setFlags(\SplFileObject::READ_CSV);
+            $this->fileHandle->setCsvControl(
+                    self::CSV_DELIMITER,
+                    self::CSV_SEPERATOR);
+        } 
         catch (\Exception $Exception) {
-            throw new \Pinq\PinqException('Invalid cache file: %s is not readable with the message, "%s"', $FileName, $Exception->getMessage());
+            throw new \Pinq\PinqException(
+                    'Invalid cache file: %s is not readable with the message, "%s"',
+                    $fileName,
+                    $exception->getMessage());
         }
         
-        $this->FileName = $FileName;
+        $this->fileName = $fileName;
     }
     
-    private function &GetFileData()
+    private function &getFileData()
     {
-        if($this->FileData === null) {
-            $this->FileData = [];
-            foreach ($this->FileHandle as $Row) {
-                if(count($Row) < 2) {
+        if ($this->fileData === null) {
+            $this->fileData = [];
+            
+            foreach ($this->fileHandle as $row) {
+                if (count($row) < 2) {
                     continue;
                 }
-                list($FunctionHash, $SerializedExpressionTree) = $Row;
-                $this->FileData[$FunctionHash] = $SerializedExpressionTree;
+                
+                list($functionHash, $serializedExpressionTree) = $row;
+                $this->fileData[$functionHash] = $serializedExpressionTree;
             }
         }
         
-        return $this->FileData;
+        return $this->fileData;
     }
     
-    public function Save($FunctionHash, FunctionExpressionTree $FunctionExpressionTree)
+    public function save($functionHash, FunctionExpressionTree $functionExpressionTree)
     {
-        $FileData =& $this->GetFileData();
+        $fileData =& $this->getFileData();
+        $serializedFunctionExpressionTree = serialize($functionExpressionTree);
         
-        $SerializedFunctionExpressionTree = serialize($FunctionExpressionTree);
-        if(isset($FileData[$FunctionHash])) {
-            if($FileData[$FunctionHash] === $SerializedFunctionExpressionTree) {
+        if (isset($fileData[$functionHash])) {
+            if ($fileData[$functionHash] === $serializedFunctionExpressionTree) {
                 return;
             }
         }
         
-        $FileData[$FunctionHash] = $SerializedFunctionExpressionTree;
-        $this->FlushFileData();
+        $fileData[$functionHash] = $serializedFunctionExpressionTree;
+        $this->flushFileData();
     }
-
-    public function TryGet($FunctionHash)
+    
+    public function tryGet($functionHash)
     {
-        $FileData = $this->GetFileData();
-        if(!isset($FileData[$FunctionHash])) {
+        $fileData = $this->getFileData();
+        
+        if (!isset($fileData[$functionHash])) {
             return null;
         }
         
-        return unserialize($FileData[$FunctionHash]);
-    }
-
-    public function Clear()
-    {
-        $this->FileData = [];
-        $this->FlushFileData();
-    }
-
-    public function Remove($FunctionHash)
-    {
-        $FileData =& $this->GetFileData();
-        if(!isset($FileData[$FunctionHash])) {
-            return;
-        }
-        unset($FileData[$FunctionHash]);
-        
-        $this->FlushFileData();
+        return unserialize($fileData[$functionHash]);
     }
     
-    private function FlushFileData()
+    public function clear()
     {
-        $FileHandle = $this->FileHandle;
-        if ($FileHandle->flock(LOCK_EX)) {
-            $FileHandle->fseek(0, SEEK_SET);
-            $FileHandle->ftruncate(0);
-            foreach($this->GetFileData() as $Signature => $SerializedExpressionTree) {
-                $FileHandle->fputcsv([$Signature, $SerializedExpressionTree]);
+        $this->fileData = [];
+        $this->flushFileData();
+    }
+    
+    public function remove($functionHash)
+    {
+        $fileData =& $this->getFileData();
+        
+        if (!isset($fileData[$functionHash])) {
+            return;
+        }
+        
+        unset($fileData[$functionHash]);
+        $this->flushFileData();
+    }
+    
+    private function flushFileData()
+    {
+        $fileHandle = $this->fileHandle;
+        
+        if ($fileHandle->flock(LOCK_EX)) {
+            $fileHandle->fseek(0, SEEK_SET);
+            $fileHandle->ftruncate(0);
+            
+            foreach ($this->getFileData() as $signature => $serializedExpressionTree) {
+                $fileHandle->fputcsv([$signature, $serializedExpressionTree]);
             }
-            $FileHandle->flock(LOCK_UN);
+            
+            $fileHandle->flock(LOCK_UN);
         }
     }
     
     public function __destruct()
     {
-        $this->FileHandle = null;
+        $this->fileHandle = null;
     }
 }

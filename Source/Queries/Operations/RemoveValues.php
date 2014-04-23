@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Operations; 
+namespace Pinq\Queries\Operations;
 
 /**
  * Operation query for removing a range of values to the source
@@ -9,14 +9,13 @@ namespace Pinq\Queries\Operations;
  */
 class RemoveValues extends ValuesOperation
 {
-    public function GetType()
+    public function getType()
     {
-        return self::RemoveValues;
+        return self::REMOVE_VALUES;
     }
-
-    public function Traverse(OperationVisitor $Visitor)
+    
+    public function traverse(OperationVisitor $visitor)
     {
-        return $Visitor->VisitRemoveValues($this);
+        return $visitor->visitRemoveValues($this);
     }
-
 }

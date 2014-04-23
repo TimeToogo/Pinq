@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Iterators;
 
@@ -9,8 +9,8 @@ namespace Pinq\Iterators;
  */
 class EqualityJoinIterator extends EqualityJoinIteratorBase
 {
-    protected function GetInnerGroupValueIterator(array $InnerGroup)
+    protected function getInnerGroupValueIterator(array $innerGroup)
     {
-        return new \ArrayIterator($InnerGroup);
+        return new \ArrayIterator($innerGroup);
     }
 }

@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Request query for a value at the specified index
@@ -9,14 +9,13 @@ namespace Pinq\Queries\Requests;
  */
 class GetIndex extends IndexRequest
 {
-    public function GetType()
+    public function getType()
     {
-        return self::GetIndex;
+        return self::GET_INDEX;
     }
-
-    public function Traverse(RequestVisitor $Visitor)
+    
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitGetIndex($this);
+        return $visitor->visitGetIndex($this);
     }
-
 }

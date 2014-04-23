@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Queries\Segments;
 
@@ -9,14 +9,13 @@ namespace Pinq\Queries\Segments;
  */
 class IndexBy extends ExpressionSegment
 {
-    public function GetType()
+    public function getType()
     {
-        return self::IndexBy;
+        return self::INDEX_BY;
     }
-
-    public function Traverse(SegmentWalker $Walker)
+    
+    public function traverse(SegmentWalker $walker)
     {
-        return $Walker->WalkIndexBy($this);
+        return $walker->walkIndexBy($this);
     }
-
 }

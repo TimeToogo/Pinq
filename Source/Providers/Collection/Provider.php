@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Providers\Collection;
 
-use \Pinq\Queries;
+use Pinq\Queries;
 
 /**
  * Repository provider for evalating query of the supplied collection instance,
@@ -12,29 +12,35 @@ use \Pinq\Queries;
  */
 class Provider extends \Pinq\Providers\RepositoryProvider
 {
-    private $Collection;
-    private $TraversableProvider;
-    private $ScopeEvaluator;
+    private $collection;
     
-    public function __construct(\Pinq\ICollection $Collection)
+    private $traversableProvider;
+    
+    private $scopeEvaluator;
+    
+    public function __construct(\Pinq\ICollection $collection)
     {
         parent::__construct();
-        $this->Collection = $Collection;
-        $this->ScopeEvaluator = new \Pinq\Providers\Traversable\ScopeEvaluator();
-        $this->TraversableProvider = new \Pinq\Providers\Traversable\Provider($Collection);
+        $this->collection = $collection;
+        $this->scopeEvaluator = new \Pinq\Providers\Traversable\ScopeEvaluator();
+        $this->traversableProvider = new \Pinq\Providers\Traversable\Provider($collection);
     }
     
-    protected function LoadOperationEvaluatorVisitor(Queries\IScope $Scope)
+    protected function loadOperationEvaluatorVisitor(Queries\IScope $scope)
     {
-        $this->ScopeEvaluator->SetTraversable($this->Collection);
-        $this->ScopeEvaluator->Walk($Scope);
-
-        return new OperationEvaluator($this->ScopeEvaluator->GetTraversable()->AsCollection());
+        $this->scopeEvaluator->setTraversable($this->collection);
+        $this->scopeEvaluator->walk($scope);
+        
+        return new OperationEvaluator($this->scopeEvaluator->getTraversable()->asCollection());
     }
     
-    public function Load(Queries\IRequestQuery $Query)
+    public function load(Queries\IRequestQuery $query)
     {
-        return $this->TraversableProvider->Load($Query);
+        return $this->traversableProvider->load($query);
     }
-    protected function LoadRequestEvaluatorVisitor(Queries\IScope $Scope) {}
+    
+    protected function loadRequestEvaluatorVisitor(Queries\IScope $scope)
+    {
+        
+    }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -14,96 +14,94 @@ class AssignmentExpression extends Expression
     /**
      * @var Expression
      */
-    private $AssignToExpression;
+    private $assignToExpression;
     
     /**
      * @var int
      */
-    private $Operator;
+    private $operator;
     
     /**
      * @var Expression
      */
-    private $AssignmentValueExpression;
+    private $assignmentValueExpression;
     
-    public function __construct(Expression $AssignToExpression, $Operator, Expression $AssignmentValueExpression)
+    public function __construct(Expression $assignToExpression, $operator, Expression $assignmentValueExpression)
     {
-        $this->AssignToExpression = $AssignToExpression;
-        $this->Operator = $Operator;
-        $this->AssignmentValueExpression = $AssignmentValueExpression;
+        $this->assignToExpression = $assignToExpression;
+        $this->operator = $operator;
+        $this->assignmentValueExpression = $assignmentValueExpression;
     }
-
+    
     /**
      * @return Expression
      */
-    public function GetAssignToExpression()
+    public function getAssignToExpression()
     {
-        return $this->AssignToExpression;
+        return $this->assignToExpression;
     }
-
+    
     /**
      * @return string The assignment operator
      */
-    public function GetOperator()
+    public function getOperator()
     {
-        return $this->Operator;
+        return $this->operator;
     }
-
+    
     /**
      * @return Expression
      */
-    public function GetAssignmentValueExpression()
+    public function getAssignmentValueExpression()
     {
-        return $this->AssignmentValueExpression;
+        return $this->assignmentValueExpression;
     }
-
-    public function Traverse(ExpressionWalker $Walker)
+    
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkAssignment($this);
+        return $walker->walkAssignment($this);
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
-        return $this->Update(
-                $this->AssignToExpression->Simplify(),
-                $this->Operator,
-                $this->AssignmentValueExpression->Simplify());
+        return $this->update(
+                $this->assignToExpression->simplify(),
+                $this->operator,
+                $this->assignmentValueExpression->simplify());
     }
-
+    
     /**
      * @return self
      */
-    public function Update(Expression $AssignToExpression, $Operator, Expression $AssignmentValueExpression)
+    public function update(Expression $assignToExpression, $operator, Expression $assignmentValueExpression)
     {
-        if ($this->AssignToExpression === $AssignToExpression
-                && $this->Operator === $Operator
-                && $this->AssignmentValueExpression === $AssignmentValueExpression) {
+        if ($this->assignToExpression === $assignToExpression && $this->operator === $operator && $this->assignmentValueExpression === $assignmentValueExpression) {
             return $this;
         }
-
-        return new self($AssignToExpression, $Operator, $AssignmentValueExpression);
+        
+        return new self($assignToExpression, $operator, $assignmentValueExpression);
     }
-
-    protected function CompileCode(&$Code)
+    
+    protected function compileCode(&$code)
     {
-        $this->AssignToExpression->CompileCode($Code);
-        $Code .= ' ' .  $this->Operator . ' ';
-        $this->AssignmentValueExpression->CompileCode($Code);
+        $this->assignToExpression->compileCode($code);
+        $code .= ' ' . $this->operator . ' ';
+        $this->assignmentValueExpression->compileCode($code);
     }
     
     public function serialize()
     {
-        return serialize([$this->AssignToExpression, $this->Operator, $this->AssignmentValueExpression]);
+        return serialize([$this->assignToExpression, $this->operator, $this->assignmentValueExpression]);
     }
     
-    public function unserialize($Serialized)
+    public function unserialize($serialized)
     {
-        list($this->AssignToExpression, $this->Operator, $this->AssignmentValueExpression) = unserialize($Serialized);
+        list($this->assignToExpression, $this->operator, $this->assignmentValueExpression) = unserialize($serialized);
     }
     
     public function __clone()
     {
-        $this->AssignToExpression = clone $this->AssignToExpression;
-        $this->AssignmentValueExpression = clone $this->AssignmentValueExpression;
+        $this->assignToExpression = clone $this->assignToExpression;
+        $this->assignmentValueExpression = clone $this->assignmentValueExpression;
     }
 }

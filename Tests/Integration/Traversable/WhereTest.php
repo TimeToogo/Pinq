@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Traversable;
 
@@ -7,47 +7,52 @@ class WhereTest extends TraversableTest
     /**
      * @dataProvider Everything
      */
-    public function testThatExecutionIsDeferred(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->AssertThatExecutionIsDeferred([$Traversable, 'Where']);
+        $this->assertThatExecutionIsDeferred([$traversable, 'Where']);
     }
     
     /**
      * @dataProvider AssocOneToTen
      */
-    public function testThatWhereTrueDoesNotFilterAnyData(\Pinq\ITraversable $Numbers, array $Data)
+    public function testThatWhereTrueDoesNotFilterAnyData(\Pinq\ITraversable $numbers, array $data)
     {
-        $AllNumbers = $Numbers->Where(function () { return true; });
-        
-        $this->AssertMatches($AllNumbers, $Data);
+        $allNumbers = 
+                $numbers->where(function () {
+                    return true;
+                });
+        $this->assertMatches($allNumbers, $data);
     }
     
     /**
      * @dataProvider AssocOneToTen
      */
-    public function testThatWhereFalseFiltersAllItems(\Pinq\ITraversable $Numbers, array $Data)
+    public function testThatWhereFalseFiltersAllItems(\Pinq\ITraversable $numbers, array $data)
     {
-        $NoNumbers = $Numbers->Where(function () { return false; });
-        
-        $this->AssertMatches($NoNumbers, []);
+        $noNumbers = 
+                $numbers->where(function () {
+                    return false;
+                });
+        $this->assertMatches($noNumbers, []);
     }
-        
     
     /**
      * @dataProvider AssocOneToTen
      */
-    public function testThatElementsAreFilteredFromTraversableAndPreserveKeys(\Pinq\ITraversable $Numbers, array $Data)
+    public function testThatElementsAreFilteredFromTraversableAndPreserveKeys(\Pinq\ITraversable $numbers, array $data)
     {
-        $Predicate = function ($I) { return $I % 2 === 0; };
+        $predicate = 
+                function ($i) {
+                    return $i % 2 === 0;
+                };
+        $evenNumbers = $numbers->where($predicate);
         
-        $EvenNumbers = $Numbers->Where($Predicate);
-        
-        foreach($Data as $Key => $Value) {
-            if(!($Predicate($Value))) {
-                unset($Data[$Key]);
+        foreach ($data as $key => $value) {
+            if (!$predicate($value)) {
+                unset($data[$key]);
             }
         }
         
-        $this->AssertMatches($EvenNumbers, $Data);
+        $this->assertMatches($evenNumbers, $data);
     }
 }

@@ -1,38 +1,47 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Traversable;
 
 class IndexByTest extends TraversableTest
 {
-    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
-        return $Traversable->IndexBy(function () {});
+        return $traversable->indexBy(function () {
+            
+        });
     }
     
     /**
      * @dataProvider Everything
      */
-    public function testThatExecutionIsDeferred(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->AssertThatExecutionIsDeferred([$Traversable, 'IndexBy']);
+        $this->assertThatExecutionIsDeferred([$traversable, 'IndexBy']);
     }
     
     /**
      * @dataProvider AssocOneToTen
      */
-    public function testThatIndexByElementIndexesCorrectly(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatIndexByElementIndexesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $IndexedElements = $Traversable->IndexBy(function ($I) { return $I; });
-        
-        $this->AssertMatches($IndexedElements, array_combine($Data, $Data));
+        $indexedElements = 
+                $traversable->indexBy(function ($i) {
+                    return $i;
+                });
+        $this->assertMatches($indexedElements, array_combine($data, $data));
     }
+    
     /**
      * @dataProvider Everything
      */
-    public function testThatIndexByNullReturnsLastArrayWithLastElement(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatIndexByNullReturnsLastArrayWithLastElement(\Pinq\ITraversable $traversable, array $data)
     {
-        $IndexedElements = $Traversable->IndexBy(function () { return null; });
-        
-        $this->AssertMatches($IndexedElements, empty($Data) ? [] : [null => end($Data)]);
+        $indexedElements = 
+                $traversable->indexBy(function () {
+                    return null;
+                });
+        $this->assertMatches(
+                $indexedElements,
+                empty($data) ? [] : [null => end($data)]);
     }
 }

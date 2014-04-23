@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Caching;
 
-use \Pinq\FunctionExpressionTree;
+use Pinq\FunctionExpressionTree;
 
 /**
  * Adapter class for a cache that implements \ArrayAccess
@@ -10,43 +10,44 @@ use \Pinq\FunctionExpressionTree;
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 class ArrayAccessCache implements IFunctionCache
-{    
+{
     /**
      * The cache object implementing array access
      * 
      * @var \ArrayAccess 
      */
-    private $ArrayAccess;
+    private $arrayAccess;
     
-    public function __construct(\ArrayAccess $InnerCache)
+    public function __construct(\ArrayAccess $innerCache)
     {
-        $this->ArrayAccess = $InnerCache;
-    }
-
-    public function Save($FunctionHash, FunctionExpressionTree $FunctionExpressionTree)
-    {
-        $this->ArrayAccess[$FunctionHash] = clone $FunctionExpressionTree;
-    }
-
-    public function TryGet($FunctionHash)
-    {
-        return isset($this->ArrayAccess[$FunctionHash]) ? clone $this->ArrayAccess[$FunctionHash] : null;
+        $this->arrayAccess = $innerCache;
     }
     
-    public function Remove($FunctionHash)
+    public function save($functionHash, FunctionExpressionTree $functionExpressionTree)
     {
-        unset($this->ArrayAccess[$FunctionHash]);
+        $this->arrayAccess[$functionHash] = clone $functionExpressionTree;
     }
-
-    public function Clear()
+    
+    public function tryGet($functionHash)
     {
-        if(method_exists($this->ArrayAccess, 'Clear')) {
-            $this->ArrayAccess->Clear();
+        return isset($this->arrayAccess[$functionHash]) ? clone $this->arrayAccess[$functionHash] : null;
+    }
+    
+    public function remove($functionHash)
+    {
+        unset($this->arrayAccess[$functionHash]);
+    }
+    
+    public function clear()
+    {
+        if (method_exists($this->arrayAccess, 'Clear')) {
+            $this->arrayAccess->clear();
         }
-        else if ($this->ArrayAccess instanceof \Traversable) {
-            $Keys = array_keys(iterator_to_array($this->ArrayAccess, true));
-            foreach($Keys as $Key) {
-                unset($this->ArrayAccess[$Key]);
+        else if ($this->arrayAccess instanceof \Traversable) {
+            $keys = array_keys(iterator_to_array($this->arrayAccess, true));
+            
+            foreach ($keys as $key) {
+                unset($this->arrayAccess[$key]);
             }
         }
     }

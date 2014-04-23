@@ -1,23 +1,22 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Utilities;
 
-use \Pinq\Iterators\Utilities\Dictionary;
+use Pinq\Iterators\Utilities\Dictionary;
 
 class DictionaryTest extends \Pinq\Tests\PinqTestCase
 {
     /**
      * @var Dictionary
      */
-    private $Dictionary;
+    private $dictionary;
     
     protected function setUp()
     {
-        $this->Dictionary = new Dictionary();
+        $this->dictionary = new Dictionary();
     }
     
-    
-    public function DictionaryKeyValues()
+    public function dictionaryKeyValues()
     {
         return [
             ['String'],
@@ -27,105 +26,95 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
             [true],
             [null],
             [new \stdClass()],
-            [[1,new \stdClass(),3]],
-            [fopen('php://memory', 'r+')],
+            [[1, new \stdClass(), 3]],
+            [fopen('php://memory', 'r+')]
         ];
     }
     
     /**
      * @dataProvider DictionaryKeyValues
      */
-    public function testThatDictionarySupportsKeyTypes($Key)
+    public function testThatDictionarySupportsKeyTypes($key)
     {
-        $this->Dictionary->Set($Key, true);
+        $this->dictionary->set($key, true);
     }
     
     /**
      * @dataProvider DictionaryKeyValues
      */
-    public function testThatDictionaryContainsReturnsTrueForSetKeys($Key)
+    public function testThatDictionaryContainsReturnsTrueForSetKeys($key)
     {
-        $this->Dictionary->Set($Key, true);
-        
-        $this->assertTrue($this->Dictionary->Contains($Key), 'The dictionary should return true for the set key');
+        $this->dictionary->set($key, true);
+        $this->assertTrue(
+                $this->dictionary->contains($key),
+                'The dictionary should return true for the set key');
     }
     
     /**
      * @dataProvider DictionaryKeyValues
      */
-    public function testThatDictionaryContainsReturnsFalseForRemovedKeys($Key)
+    public function testThatDictionaryContainsReturnsFalseForRemovedKeys($key)
     {
-        $this->Dictionary->Set($Key, true);
-        
-        $this->Dictionary->Remove($Key);
-        
-        $this->assertFalse($this->Dictionary->Contains($Key), 'The dictionary should return false for the removed key');
+        $this->dictionary->set($key, true);
+        $this->dictionary->remove($key);
+        $this->assertFalse(
+                $this->dictionary->contains($key),
+                'The dictionary should return false for the removed key');
     }
     
     /**
      * @dataProvider DictionaryKeyValues
      */
-    public function testThatDictionaryGetReturnsSetValue($Key)
+    public function testThatDictionaryGetReturnsSetValue($key)
     {
-        $Value = new \stdClass();
-        $this->Dictionary->Set($Key, $Value);
-        
-        $this->assertSame($Value, $this->Dictionary->Get($Key), 'The dictionary should return the same value as set');
+        $value = new \stdClass();
+        $this->dictionary->set($key, $value);
+        $this->assertSame(
+                $value,
+                $this->dictionary->get($key),
+                'The dictionary should return the same value as set');
     }
     
     public function testAddRangeAddsAllKeyValuePairs()
     {
-        $Instance = new \stdClass();
-        $Range = [
-            'string' => $Instance,
-            5 => 'foo',
-            'bar' => 5.42
-        ];
-        $this->Dictionary->AddRange($Range);
-        
-        $this->assertSame($Instance, $this->Dictionary->Get('string'));
-        $this->assertSame('foo', $this->Dictionary->Get(5));
-        $this->assertSame(5.42, $this->Dictionary->Get('bar'));
-    }
-   
-    public function testRemoveRangeRemovesAllKeyValuePairs()
-    {
-        $Instance = new \stdClass();
-        $Range = [
-            'string' => $Instance,
-            5 => 'foo',
-            'bar' => 5.42
-        ];
-        $this->Dictionary->AddRange($Range);
-        $this->Dictionary->RemoveRange(array_keys($Range));
-        
-        $this->assertFalse($this->Dictionary->Contains('string'));
-        $this->assertFalse($this->Dictionary->Contains(5));
-        $this->assertFalse($this->Dictionary->Contains('bar'));
+        $instance = new \stdClass();
+        $range = ['string' => $instance, 5 => 'foo', 'bar' => 5.42];
+        $this->dictionary->addRange($range);
+        $this->assertSame($instance, $this->dictionary->get('string'));
+        $this->assertSame('foo', $this->dictionary->get(5));
+        $this->assertSame(5.42, $this->dictionary->get('bar'));
     }
     
+    public function testRemoveRangeRemovesAllKeyValuePairs()
+    {
+        $instance = new \stdClass();
+        $range = ['string' => $instance, 5 => 'foo', 'bar' => 5.42];
+        $this->dictionary->addRange($range);
+        $this->dictionary->removeRange(array_keys($range));
+        $this->assertFalse($this->dictionary->contains('string'));
+        $this->assertFalse($this->dictionary->contains(5));
+        $this->assertFalse($this->dictionary->contains('bar'));
+    }
     
     public function testGetReturnsNullForUnsetKey()
     {
-        $this->Dictionary->Set('boo', 'bar');
-        
-        $this->assertFalse($this->Dictionary->Contains(5));
-        $this->assertNull($this->Dictionary->Get(5));
-    }    
+        $this->dictionary->set('boo', 'bar');
+        $this->assertFalse($this->dictionary->contains(5));
+        $this->assertNull($this->dictionary->get(5));
+    }
     
     public function testThatDictionarySupportsAndPerformsIterationOfKeys()
     {
-        $DictionaryKeys = array_map('reset', $this->DictionaryKeyValues());
-        foreach($DictionaryKeys as $Index => $Key) {
-            $this->Dictionary->Set($Key, $Index);
+        $dictionaryKeys = array_map('reset', $this->dictionaryKeyValues());
+        
+        foreach ($dictionaryKeys as $index => $key) {
+            $this->dictionary->set($key, $index);
         }
         
-        foreach ($this->Dictionary as $Key) {
-            
-            $this->assertTrue(in_array($Key, $DictionaryKeys, true));
-            
-            $Index = array_search($Key, $DictionaryKeys, true);
-            $this->assertSame($Index, $this->Dictionary->Get($Key));
+        foreach ($this->dictionary as $key) {
+            $this->assertTrue(in_array($key, $dictionaryKeys, true));
+            $index = array_search($key, $dictionaryKeys, true);
+            $this->assertSame($index, $this->dictionary->get($key));
         }
     }
 }

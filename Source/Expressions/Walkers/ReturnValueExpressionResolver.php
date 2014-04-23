@@ -1,9 +1,9 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions\Walkers;
 
-use \Pinq\Expressions as O;
-use \Pinq\Expressions\Operators;
+use Pinq\Expressions as O;
+use Pinq\Expressions\Operators;
 
 /**
  * Resolves and stores the expression of the return statements in an expression tree.
@@ -20,116 +20,112 @@ class ReturnValueExpressionResolver extends O\ExpressionWalker
     /**
      * @var array<string, O\Expression>
      */
-    private $VariableExpressionMap = [];
+    private $variableExpressionMap = [];
     
     /**
      * @var VariableResolver
      */
-    private $VariableResolver;
+    private $variableResolver;
     
     /**
      * @var O\Expression[]
      */
-    private $ReturnValueExpressions = [];
+    private $returnValueExpressions = [];
     
     public function __construct()
     {
-        $this->VariableResolver = new VariableResolver();
+        $this->variableResolver = new VariableResolver();
     }
     
     /**
      * @return O\Expression[]
      */
-    public function GetResolvedReturnValueExpression()
+    public function getResolvedReturnValueExpression()
     {
-        return $this->ReturnValueExpressions;
-    }
-
-    public function ResetReturnExpressions()
-    {
-        $this->VariableExpressionMap = [];
-        $this->ReturnValueExpressions = [];
-    }
-
-    private static $AssignmentToBinaryOperator = [
-        Operators\Assignment::Addition => Operators\Binary::Addition,
-        Operators\Assignment::BitwiseAnd => Operators\Binary::BitwiseAnd,
-        Operators\Assignment::BitwiseOr => Operators\Binary::BitwiseOr,
-        Operators\Assignment::BitwiseXor => Operators\Binary::BitwiseXor,
-        Operators\Assignment::Concatenate => Operators\Binary::Concatenation,
-        Operators\Assignment::Division => Operators\Binary::Division,
-        Operators\Assignment::Modulus => Operators\Binary::Modulus,
-        Operators\Assignment::Multiplication => Operators\Binary::Multiplication,
-        Operators\Assignment::ShiftLeft => Operators\Binary::ShiftLeft,
-        Operators\Assignment::ShiftRight => Operators\Binary::ShiftRight,
-        Operators\Assignment::Subtraction => Operators\Binary::Subtraction,
-    ];
-
-    /**
-     * @param string $AssignmentOperator
-     */
-    private function AssignmentToBinaryOperator($AssignmentOperator)
-    {
-        return isset(self::$AssignmentToBinaryOperator[$AssignmentOperator]) ?
-                self::$AssignmentToBinaryOperator[$AssignmentOperator] : null;
+        return $this->returnValueExpressions;
     }
     
-    private function ResolveVariables(O\Expression $Expression) 
+    public function resetReturnExpressions()
     {
-        $this->VariableResolver->SetVariableExpressionMap($this->VariableExpressionMap);
-        return $this->VariableResolver->Walk($Expression);
+        $this->variableExpressionMap = [];
+        $this->returnValueExpressions = [];
     }
-
+    
+    private static $assignmentToBinaryOperator = [
+        Operators\Assignment::ADDITION => Operators\Binary::ADDITION,
+        Operators\Assignment::BITWISE_AND => Operators\Binary::BITWISE_AND,
+        Operators\Assignment::BITWISE_OR => Operators\Binary::BITWISE_OR,
+        Operators\Assignment::BITWISE_XOR => Operators\Binary::BITWISE_XOR,
+        Operators\Assignment::CONCATENATE => Operators\Binary::CONCATENATION,
+        Operators\Assignment::DIVISION => Operators\Binary::DIVISION,
+        Operators\Assignment::MODULUS => Operators\Binary::MODULUS,
+        Operators\Assignment::MULTIPLICATION => Operators\Binary::MULTIPLICATION,
+        Operators\Assignment::SHIFT_LEFT => Operators\Binary::SHIFT_LEFT,
+        Operators\Assignment::SHIFT_RIGHT => Operators\Binary::SHIFT_RIGHT,
+        Operators\Assignment::SUBTRACTION => Operators\Binary::SUBTRACTION
+    ];
+    
+    /**
+     * @param string $assignmentOperator
+     */
+    private function assignmentToBinaryOperator($assignmentOperator)
+    {
+        return isset(self::$assignmentToBinaryOperator[$assignmentOperator]) ? self::$assignmentToBinaryOperator[$assignmentOperator] : null;
+    }
+    
+    private function resolveVariables(O\Expression $expression)
+    {
+        $this->variableResolver->setVariableExpressionMap($this->variableExpressionMap);
+        
+        return $this->variableResolver->walk($expression);
+    }
+    
     /*
      * Convert any assignments to the equivalent binary expression and stores the value expression.
      */
-    public function WalkAssignment(O\AssignmentExpression $Expression)
+    public function walkAssignment(O\AssignmentExpression $expression)
     {
-        $AssignToExpression = $this->Walk($this->ResolveVariables($Expression->GetAssignToExpression()))->Simplify();
-        $AssignmentOperator = $Expression->GetOperator();
-        $AssignmentValueExpression = $this->Walk($this->ResolveVariables($Expression->GetAssignmentValueExpression()));
-
-        if($AssignToExpression instanceof O\VariableExpression
-                && $AssignToExpression->GetNameExpression() instanceof O\ValueExpression) {
-            $AssignmentName = $AssignToExpression->GetNameExpression()->GetValue();
-            $BinaryOperator = $this->AssignmentToBinaryOperator($AssignmentOperator);
-
-            if ($BinaryOperator !== null) {
-                $CurrentValueExpression = isset($this->VariableExpressionMap[$AssignmentName]) ?
-                        $this->VariableExpressionMap[$AssignmentName] : $AssignToExpression;
-
-                $VariableValueExpression =
-                        O\Expression::BinaryOperation(
-                                $CurrentValueExpression,
-                                $BinaryOperator,
-                                $AssignmentValueExpression);
-
-            } 
-            else {
-                $VariableValueExpression = $AssignmentValueExpression;
+        $assignToExpression = $this->walk($this->resolveVariables($expression->getAssignToExpression()))->simplify();
+        $assignmentOperator = $expression->getOperator();
+        $assignmentValueExpression = $this->walk($this->resolveVariables($expression->getAssignmentValueExpression()));
+        
+        if ($assignToExpression instanceof O\VariableExpression && $assignToExpression->getNameExpression() instanceof O\ValueExpression) {
+            $assignmentName = $assignToExpression->getNameExpression()->getValue();
+            $binaryOperator = $this->assignmentToBinaryOperator($assignmentOperator);
+            
+            if ($binaryOperator !== null) {
+                $currentValueExpression = isset($this->variableExpressionMap[$assignmentName]) ? $this->variableExpressionMap[$assignmentName] : $assignToExpression;
+                $variableValueExpression = 
+                        O\Expression::binaryOperation(
+                                $currentValueExpression,
+                                $binaryOperator,
+                                $assignmentValueExpression);
             }
-
-            $this->VariableExpressionMap[$AssignmentName] = $VariableValueExpression;
+            else {
+                $variableValueExpression = $assignmentValueExpression;
+            }
+            
+            $this->variableExpressionMap[$assignmentName] = $variableValueExpression;
         }
         
-        return $Expression;
+        return $expression;
     }
     
-    public function WalkClosure(O\ClosureExpression $Expression)
+    public function walkClosure(O\ClosureExpression $expression)
     {
         //Ignore closures
-        return $Expression;
+        return $expression;
     }
     
-    public function WalkReturn(O\ReturnExpression $ReturnExpression)
+    public function walkReturn(O\ReturnExpression $returnExpression)
     {
-        if($ReturnExpression->HasValueExpression()) {
-            $this->ReturnValueExpressions[] = $this->ResolveVariables($ReturnExpression->GetValueExpression())->Simplify();
+        if ($returnExpression->hasValueExpression()) {
+            $this->returnValueExpressions[] = $this->resolveVariables($returnExpression->getValueExpression())->simplify();
         }
         else {
-            $this->ReturnValueExpressions[] = O\Expression::Value(null);
+            $this->returnValueExpressions[] = O\Expression::value(null);
         }
         
-        return $ReturnExpression;
+        return $returnExpression;
     }
 }

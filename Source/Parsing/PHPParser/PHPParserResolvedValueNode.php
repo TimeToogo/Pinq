@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Parsing\PHPParser;
 
@@ -11,12 +11,8 @@ namespace Pinq\Parsing\PHPParser;
  */
 class PHPParserResolvedValueNode extends \PHPParser_Node_Expr
 {
-    public function __construct(&$Value)
+    public function __construct(&$value)
     {
-        parent::__construct(
-                [
-                    'Value' => &$Value
-                ],
-                []);
+        parent::__construct(['value' => &$value], []);
     }
 }

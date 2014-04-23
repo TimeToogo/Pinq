@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Queries;
 
@@ -15,5 +15,5 @@ interface IQuery
      * 
      * @return IScope
      */
-    public function GetScope();
+    public function getScope();
 }

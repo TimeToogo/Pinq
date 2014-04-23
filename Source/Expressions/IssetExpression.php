@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -14,81 +14,85 @@ class IssetExpression extends Expression
     /**
      * @var Expression[]
      */
-    private $ValueExpressions;
+    private $valueExpressions;
     
-    public function __construct(array $ValueExpressions)
+    public function __construct(array $valueExpressions)
     {
-        if(count($ValueExpressions) === 0) {
-            throw new \Pinq\PinqException('Invalid amount of value expressions for %s: must be greater than 0', __CLASS__);
+        if (count($valueExpressions) === 0) {
+            throw new \Pinq\PinqException(
+                    'Invalid amount of value expressions for %s: must be greater than 0',
+                    __CLASS__);
         }
-        $this->ValueExpressions = $ValueExpressions;
+        
+        $this->valueExpressions = $valueExpressions;
     }
-
+    
     /**
      * @return Expression[]
      */
-    public function GetValueExpressions()
+    public function getValueExpressions()
     {
-        return $this->ValueExpressions;
+        return $this->valueExpressions;
     }
-
-    public function Traverse(ExpressionWalker $Walker)
+    
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkIsset($this);
+        return $walker->walkIsset($this);
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
-        $ValueExpressions = self::SimplifyAll($this->ValueExpressions);
+        $valueExpressions = self::simplifyAll($this->valueExpressions);
         
-        foreach($ValueExpressions as $Key => $ValueExpression) {
-            $IsConstantValue = $ValueExpression instanceof ValueExpression;
+        foreach ($valueExpressions as $key => $valueExpression) {
+            $isConstantValue = $valueExpression instanceof ValueExpression;
             
-            if($IsConstantValue && $ValueExpression->GetValue() === null) {
-                return Expression::Value(false);
+            if ($isConstantValue && $valueExpression->getValue() === null) {
+                return Expression::value(false);
             }
-            else if($IsConstantValue) {
-                unset($ValueExpressions[$Key]);
+            else if ($isConstantValue) {
+                unset($valueExpressions[$key]);
             }
-        }
-        if(self::AllOfType($ValueExpressions, ValueExpression::GetType())) {
-            return Expression::Value(true);
         }
         
-        return $this->Update($ValueExpressions);
+        if (self::allOfType($valueExpressions, ValueExpression::getType())) {
+            return Expression::value(true);
+        }
+        
+        return $this->update($valueExpressions);
     }
-
+    
     /**
      * @return self
      */
-    public function Update(array $ValueExpressions)
+    public function update(array $valueExpressions)
     {
-        if ($this->ValueExpressions === $ValueExpressions) {
+        if ($this->valueExpressions === $valueExpressions) {
             return $this;
         }
-
-        return new self($ValueExpressions);
+        
+        return new self($valueExpressions);
     }
-
-    protected function CompileCode(&$Code)
+    
+    protected function compileCode(&$code)
     {
-        $Code .= 'isset(';
-        $Code .= implode(',', self::CompileAll($this->ValueExpressions));
-        $Code .= ')';
+        $code .= 'isset(';
+        $code .= implode(',', self::compileAll($this->valueExpressions));
+        $code .= ')';
     }
     
     public function serialize()
     {
-        return serialize($this->ValueExpressions);
+        return serialize($this->valueExpressions);
     }
     
-    public function unserialize($Serialized)
+    public function unserialize($serialized)
     {
-        $this->ValueExpressions = unserialize($Serialized);
+        $this->valueExpressions = unserialize($serialized);
     }
     
     public function __clone()
     {
-        $this->ValueExpressions = self::CloneAll($this->ValueExpressions);
+        $this->valueExpressions = self::cloneAll($this->valueExpressions);
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Iterators;
 
@@ -9,10 +9,10 @@ namespace Pinq\Iterators;
  */
 class CustomGroupJoinIterator extends CustomJoinIteratorBase
 {
-    protected function GetInnerGroupValuesIterator(callable $InnerValueFilterFunction)
+    protected function getInnerGroupValuesIterator(callable $innerValueFilterFunction)
     {
-        $GroupTraversable = new \Pinq\Traversable(array_filter($this->InnerValues, $InnerValueFilterFunction));
+        $groupTraversable = new \Pinq\Traversable(array_filter($this->innerValues, $innerValueFilterFunction));
         
-        return new \ArrayIterator([$GroupTraversable]);
+        return new \ArrayIterator([$groupTraversable]);
     }
 }

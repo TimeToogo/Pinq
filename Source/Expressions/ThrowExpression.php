@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -14,61 +14,61 @@ class ThrowExpression extends Expression
     /**
      * @var Expression
      */
-    private $ExceptionExpression;
-
-    public function __construct(Expression $ExceptionExpression)
+    private $exceptionExpression;
+    
+    public function __construct(Expression $exceptionExpression)
     {
-        $this->ExceptionExpression = $ExceptionExpression;
+        $this->exceptionExpression = $exceptionExpression;
     }
-
+    
     /**
      * @return Expression
      */
-    public function GetExceptionExpression()
+    public function getExceptionExpression()
     {
-        return $this->ExceptionExpression;
+        return $this->exceptionExpression;
     }
-
-    public function Traverse(ExpressionWalker $Walker)
+    
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkThrow($this);
+        return $walker->walkThrow($this);
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
-        return $this->Update($this->ExceptionExpression->Simplify());
+        return $this->update($this->exceptionExpression->simplify());
     }
-
+    
     /**
      * @return self
      */
-    public function Update(Expression $ExceptionExpression)
+    public function update(Expression $exceptionExpression)
     {
-        if ($this->ExceptionExpression === $ExceptionExpression) {
+        if ($this->exceptionExpression === $exceptionExpression) {
             return $this;
         }
-
-        return new self($ExceptionExpression);
-    }
-
-    protected function CompileCode(&$Code)
-    {
-        $Code .= 'throw ';
-        $this->ExceptionExpression->CompileCode($Code);
-    }
         
-    public function serialize()
-    {
-        return serialize($this->ExceptionExpression);
+        return new self($exceptionExpression);
     }
     
-    public function unserialize($Serialized)
+    protected function compileCode(&$code)
     {
-        $this->ExceptionExpression = unserialize($Serialized);
+        $code .= 'throw ';
+        $this->exceptionExpression->compileCode($code);
+    }
+    
+    public function serialize()
+    {
+        return serialize($this->exceptionExpression);
+    }
+    
+    public function unserialize($serialized)
+    {
+        $this->exceptionExpression = unserialize($serialized);
     }
     
     public function __clone()
     {
-        $this->ExceptionExpression = clone $this->ExceptionExpression;
+        $this->exceptionExpression = clone $this->exceptionExpression;
     }
 }

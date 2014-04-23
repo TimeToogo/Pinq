@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq;
 
@@ -14,5 +14,5 @@ interface IRepository extends IQueryable, ICollection
      * 
      * @return Providers\IRepositoryProvider
      */
-    public function GetProvider();
+    public function getProvider();
 }

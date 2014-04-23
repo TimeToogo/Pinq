@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Base class for a request query
@@ -11,5 +11,5 @@ namespace Pinq\Queries\Requests;
  */
 abstract class Request implements \Pinq\Queries\IRequest
 {
-   
+    
 }

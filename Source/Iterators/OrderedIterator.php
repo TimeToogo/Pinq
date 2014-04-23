@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Iterators;
 
@@ -13,84 +13,83 @@ class OrderedIterator extends LazyIterator
     /**
      * @var callable[]
      */
-    private $OrderByFunctions = [];
+    private $orderByFunctions = [];
     
     /**
      * @var boolean[]
      */
-    private $IsAscendingArray = [];
+    private $isAscendingArray = [];
     
-    public function __construct(\Traversable $Iterator, callable $OrderByFunction, $IsAscending)
+    public function __construct(\Traversable $iterator, callable $orderByFunction, $isAscending)
     {
-        parent::__construct($Iterator);
-        $this->OrderByFunctions[] = $OrderByFunction;
-        $this->IsAscendingArray[] = $IsAscending;
+        parent::__construct($iterator);
+        $this->orderByFunctions[] = $orderByFunction;
+        $this->isAscendingArray[] = $isAscending;
     }
     
     /**
-     * @param boolean $IsAscending
+     * @param boolean $isAscending
      * @return OrderedIterator
      */
-    public function ThenOrderBy(callable $OrderByFunction, $IsAscending)
+    public function thenOrderBy(callable $orderByFunction, $isAscending)
     {
-        $Copy = new self($this->Iterator, $OrderByFunction, $IsAscending);
+        $copy = new self($this->iterator, $orderByFunction, $isAscending);
+        $copy->orderByFunctions = $this->orderByFunctions;
+        $copy->isAscendingArray = $this->isAscendingArray;
+        $copy->orderByFunctions[] = $orderByFunction;
+        $copy->isAscendingArray[] = $isAscending;
         
-        $Copy->OrderByFunctions = $this->OrderByFunctions;
-        $Copy->IsAscendingArray = $this->IsAscendingArray;
-        
-        $Copy->OrderByFunctions[] = $OrderByFunction;
-        $Copy->IsAscendingArray[] = $IsAscending;
-        
-        return $Copy;
+        return $copy;
     }
     
-    protected function InitializeIterator(\Traversable $InnerIterator)
+    protected function initializeIterator(\Traversable $innerIterator)
     {
-        $Array = \Pinq\Utilities::ToArray($InnerIterator);
+        $array = \Pinq\Utilities::toArray($innerIterator);
+        $multisortArguments = [];
         
-        $MultisortArguments = [];
-        foreach ($this->OrderByFunctions as $Key => $OrderFunction) {
-            $OrderColumnValues = array_map($OrderFunction, $Array);
-
-            $MultisortArguments[] =& $OrderColumnValues;
-            $MultisortArguments[] = $this->IsAscendingArray[$Key] ? SORT_ASC : SORT_DESC;
-            $MultisortArguments[] = SORT_REGULAR;
-            
-            unset($OrderColumnValues);
+        foreach ($this->orderByFunctions as $key => $orderFunction) {
+            $orderColumnValues = array_map($orderFunction, $array);
+            $multisortArguments[] =& $orderColumnValues;
+            $multisortArguments[] = $this->isAscendingArray[$key] ? SORT_ASC : SORT_DESC;
+            $multisortArguments[] = SORT_REGULAR;
+            unset($orderColumnValues);
         }
-
-        self::MultisortPreserveKeys($MultisortArguments, $Array);
-
-        return new \ArrayIterator($Array);
+        
+        self::multisortPreserveKeys($multisortArguments, $array);
+        
+        return new \ArrayIterator($array);
     }
     
-    private static function MultisortPreserveKeys(array $OrderArguments, array &$ArrayToSort)
+    private static function multisortPreserveKeys(array $orderArguments, array &$arrayToSort)
     {
-        $StringKeysArray = [];
-        foreach ($ArrayToSort as $Key => $Value) {
-            $StringKeysArray['a' . $Key] = $Value;
+        $stringKeysArray = [];
+        
+        foreach ($arrayToSort as $key => $value) {
+            $stringKeysArray['a' . $key] = $value;
         }
         
-        if(!defined('HHVM_VERSION')) {
-            $OrderArguments[] =& $StringKeysArray;
-            call_user_func_array('array_multisort', $OrderArguments);
+        if (!defined('HHVM_VERSION')) {
+            $orderArguments[] =& $stringKeysArray;
+            call_user_func_array('array_multisort', $orderArguments);
         }
         else {
             //HHVM Compatibility: hhvm array_multisort wants all argument by ref?
-            $ReferencedOrderArguments = [];
-            foreach($OrderArguments as $Key => &$OrderArgument) {
-                $ReferencedOrderArguments[$Key] =& $OrderArgument;
-            }
-            $ReferencedOrderArguments[] =& $StringKeysArray;
+            $referencedOrderArguments = [];
             
-            call_user_func_array('array_multisort', $ReferencedOrderArguments);
+            foreach ($orderArguments as $key => &$orderArgument) {
+                $referencedOrderArguments[$key] =& $orderArgument;
+            }
+            
+            $referencedOrderArguments[] =& $stringKeysArray;
+            call_user_func_array('array_multisort', $referencedOrderArguments);
         }
         
-        $UnserializedKeyArray = [];
-        foreach ($StringKeysArray as $Key => $Value) {
-            $UnserializedKeyArray[substr($Key, 1)] = $Value;
+        $unserializedKeyArray = [];
+        
+        foreach ($stringKeysArray as $key => $value) {
+            $unserializedKeyArray[substr($key, 1)] = $value;
         }
         
-        $ArrayToSort = $UnserializedKeyArray;
+        $arrayToSort = $unserializedKeyArray;
     }
 }

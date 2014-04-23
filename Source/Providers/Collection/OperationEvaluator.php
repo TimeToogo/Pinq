@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace Pinq\Providers\Collection;
 
-use \Pinq\Queries\Operations;
+use Pinq\Queries\Operations;
 
 /**
  * Evaluates the operations on the supplied collection instance
@@ -14,45 +14,45 @@ class OperationEvaluator extends Operations\OperationVisitor
     /**
      * @var \Pinq\ICollection
      */
-    private $Collection;
+    private $collection;
     
-    public function __construct(\Pinq\ICollection $Collection)
+    public function __construct(\Pinq\ICollection $collection)
     {
-        $this->Collection = $Collection;
+        $this->collection = $collection;
     }
     
-    public function VisitApply(Operations\Apply $Operation)
+    public function visitApply(Operations\Apply $operation)
     {
-        $this->Collection->Apply($Operation->GetFunctionExpressionTree());
+        $this->collection->apply($operation->getFunctionExpressionTree());
     }
-
-    public function VisitAddValues(Operations\AddValues $Operation)
+    
+    public function visitAddValues(Operations\AddValues $operation)
     {
-        $this->Collection->AddRange($Operation->GetValues());
+        $this->collection->addRange($operation->getValues());
     }
-
-    public function VisitRemoveValues(Operations\RemoveValues $Operation)
+    
+    public function visitRemoveValues(Operations\RemoveValues $operation)
     {
-        $this->Collection->RemoveRange($Operation->GetValues());
+        $this->collection->removeRange($operation->getValues());
     }
-
-    public function VisitRemoveWhere(Operations\RemoveWhere $Operation)
+    
+    public function visitRemoveWhere(Operations\RemoveWhere $operation)
     {
-        $this->Collection->RemoveWhere($Operation->GetFunctionExpressionTree());
+        $this->collection->removeWhere($operation->getFunctionExpressionTree());
     }
-    public function VisitClear(Operations\Clear $Operation)
+    
+    public function visitClear(Operations\Clear $operation)
     {
-        $this->Collection->Clear();
+        $this->collection->clear();
     }
-
-    public function VisitSetIndex(Operations\SetIndex $Operation)
+    
+    public function visitSetIndex(Operations\SetIndex $operation)
     {
-        $this->Collection[$Operation->GetIndex()] = $Operation->GetValue();
+        $this->collection[$operation->getIndex()] = $operation->getValue();
     }
-
-    public function VisitUnsetIndex(Operations\UnsetIndex $Operation)
+    
+    public function visitUnsetIndex(Operations\UnsetIndex $operation)
     {
-        unset($this->Collection[$Operation->GetIndex()]);
+        unset($this->collection[$operation->getIndex()]);
     }
-
 }

@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries\Requests; 
+namespace Pinq\Queries\Requests;
 
 /**
  * Request query for a boolean of whether the supplied value
@@ -10,25 +10,25 @@ namespace Pinq\Queries\Requests;
  */
 class Contains extends Request
 {
-    private $Value;
+    private $value;
     
-    public function __construct($Value)
+    public function __construct($value)
     {
-        $this->Value = $Value;
+        $this->value = $value;
     }
     
-    public function GetType()
+    public function getType()
     {
-        return self::Contains;
+        return self::CONTAINS;
     }
     
-    public function GetValue()
+    public function getValue()
     {
-        return $this->Value;
+        return $this->value;
     }
-
-    public function Traverse(RequestVisitor $Visitor)
+    
+    public function traverse(RequestVisitor $visitor)
     {
-        return $Visitor->VisitContains($this);
+        return $visitor->visitContains($this);
     }
 }

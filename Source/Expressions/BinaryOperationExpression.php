@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Expressions;
 
@@ -15,160 +15,157 @@ class BinaryOperationExpression extends Expression
     /**
      * @var Expression
      */
-    private $LeftOperandExpression;
+    private $leftOperandExpression;
     
     /**
      * @var int
      */
-    private $Operator;
+    private $operator;
     
     /**
      * @var Expression
      */
-    private $RightOperandExpression;
+    private $rightOperandExpression;
     
-    public function __construct(Expression $LeftOperandExpression, $Operator, Expression $RightOperandExpression)
+    public function __construct(Expression $leftOperandExpression, $operator, Expression $rightOperandExpression)
     {
-        $this->LeftOperandExpression = $LeftOperandExpression;
-        $this->Operator = $Operator;
-        $this->RightOperandExpression = $RightOperandExpression;
+        $this->leftOperandExpression = $leftOperandExpression;
+        $this->operator = $operator;
+        $this->rightOperandExpression = $rightOperandExpression;
     }
-
+    
     /**
      * @return string The binary operator
      */
-    public function GetOperator()
+    public function getOperator()
     {
-        return $this->Operator;
+        return $this->operator;
     }
-
+    
     /**
      * @return Expression
      */
-    public function GetLeftOperandExpression()
+    public function getLeftOperandExpression()
     {
-        return $this->LeftOperandExpression;
+        return $this->leftOperandExpression;
     }
-
+    
     /**
      * @return Expression
      */
-    public function GetRightOperandExpression()
+    public function getRightOperandExpression()
     {
-        return $this->RightOperandExpression;
+        return $this->rightOperandExpression;
     }
-
-    public function Traverse(ExpressionWalker $Walker)
+    
+    public function traverse(ExpressionWalker $walker)
     {
-        return $Walker->WalkBinaryOperation($this);
+        return $walker->walkBinaryOperation($this);
     }
-
-    public function Simplify()
+    
+    public function simplify()
     {
-        $Left = $this->LeftOperandExpression->Simplify();
-        $Right = $this->RightOperandExpression->Simplify();
-
-        if ($Left instanceof ValueExpression && $Right instanceof ValueExpression) {
-            return Expression::Value(self::DoBinaryOperation($Left->GetValue(), $this->Operator, $Right->GetValue()));
-        } 
-        else if ($Left instanceof ValueExpression || $Right instanceof ValueExpression) {
-            $ValueExpression = $Left instanceof ValueExpression ?
-                    $Left : $Right;
-            $OtherExpression = $Left instanceof ValueExpression ?
-                    $Right : $Left;
-
-            $Value = $ValueExpression->GetValue();
-            if ($this->Operator === Operators\Binary::LogicalOr && $Value == true) {
-                return Expression::Value(true);
-            } 
-            else if ($this->Operator === Operators\Binary::LogicalOr && $Value == false) {
-                return $OtherExpression;
-            } 
-            else if ($this->Operator === Operators\Binary::LogicalAnd && $Value == false) {
-                return Expression::Value(false);
-            } 
-            else if ($this->Operator === Operators\Binary::LogicalAnd && $Value == true) {
-                return $OtherExpression;
+        $left = $this->leftOperandExpression->simplify();
+        $right = $this->rightOperandExpression->simplify();
+        
+        if ($left instanceof ValueExpression && $right instanceof ValueExpression) {
+            return Expression::value(self::doBinaryOperation(
+                    $left->getValue(),
+                    $this->operator,
+                    $right->getValue()));
+        }
+        else if ($left instanceof ValueExpression || $right instanceof ValueExpression) {
+            $valueExpression = $left instanceof ValueExpression ? $left : $right;
+            $otherExpression = $left instanceof ValueExpression ? $right : $left;
+            $value = $valueExpression->getValue();
+            
+            if ($this->operator === Operators\Binary::LOGICAL_OR && $value == true) {
+                return Expression::value(true);
+            }
+            else if ($this->operator === Operators\Binary::LOGICAL_OR && $value == false) {
+                return $otherExpression;
+            }
+            else if ($this->operator === Operators\Binary::LOGICAL_AND && $value == false) {
+                return Expression::value(false);
+            }
+            else if ($this->operator === Operators\Binary::LOGICAL_AND && $value == true) {
+                return $otherExpression;
             }
         }
-
-        return $this->Update(
-                $Left,
-                $this->Operator,
-                $Right);
+        
+        return $this->update($left, $this->operator, $right);
     }
-
-    private static $BinaryOperations;
-    private static function DoBinaryOperation($Left, $Operator, $Right)
+    
+    private static $binaryOperations;
+    
+    private static function doBinaryOperation($left, $operator, $right)
     {
-        if (self::$BinaryOperations === null) {
-            self::$BinaryOperations = [
-                Operators\Binary::BitwiseAnd =>             function ($L, $R) { return $L & $R; },
-                Operators\Binary::BitwiseOr =>              function ($L, $R) { return $L | $R; },
-                Operators\Binary::BitwiseXor =>             function ($L, $R) { return $L ^ $R; },
-                Operators\Binary::ShiftLeft =>              function ($L, $R) { return $L << $R; },
-                Operators\Binary::ShiftRight =>             function ($L, $R) { return $L >> $R; },
-                Operators\Binary::LogicalAnd =>             function ($L, $R) { return $L && $R; },
-                Operators\Binary::LogicalOr =>              function ($L, $R) { return $L || $R; },
-                Operators\Binary::Addition =>               function ($L, $R) { return $L + $R; },
-                Operators\Binary::Subtraction =>            function ($L, $R) { return $L - $R; },
-                Operators\Binary::Multiplication =>         function ($L, $R) { return $L * $R; },
-                Operators\Binary::Division =>               function ($L, $R) { return $L / $R; },
-                Operators\Binary::Modulus =>                function ($L, $R) { return $L % $R; },
-                Operators\Binary::Concatenation =>          function ($L, $R) { return $L . $R; },
-                Operators\Binary::IsInstanceOf =>           function ($L, $R) { return $L instanceof $R; },
-                Operators\Binary::Equality =>               function ($L, $R) { return $L == $R; },
-                Operators\Binary::Identity =>               function ($L, $R) { return $L === $R; },
-                Operators\Binary::Inequality =>             function ($L, $R) { return $L != $R; },
-                Operators\Binary::NotIdentical =>           function ($L, $R) { return $L !== $R; },
-                Operators\Binary::LessThan =>               function ($L, $R) { return $L < $R; },
-                Operators\Binary::LessThanOrEqualTo =>      function ($L, $R) { return $L <= $R; },
-                Operators\Binary::GreaterThan =>            function ($L, $R) { return $L > $R; },
-                Operators\Binary::GreaterThanOrEqualTo =>   function ($L, $R) { return $L >= $R; },
+        if (self::$binaryOperations === null) {
+            self::$binaryOperations = [
+                Operators\Binary::BITWISE_AND => function ($l, $r) { return $l & $r; },
+                Operators\Binary::BITWISE_OR => function ($l, $r) { return $l | $r; },
+                Operators\Binary::BITWISE_XOR => function ($l, $r) { return $l ^ $r; },
+                Operators\Binary::SHIFT_LEFT => function ($l, $r) { return $l << $r; },
+                Operators\Binary::SHIFT_RIGHT => function ($l, $r) { return $l >> $r; },
+                Operators\Binary::LOGICAL_AND => function ($l, $r) { return $l && $r; },
+                Operators\Binary::LOGICAL_OR => function ($l, $r) { return $l || $r; },
+                Operators\Binary::ADDITION => function ($l, $r) { return $l + $r; },
+                Operators\Binary::SUBTRACTION => function ($l, $r) { return $l - $r; },
+                Operators\Binary::MULTIPLICATION => function ($l, $r) { return $l * $r; },
+                Operators\Binary::DIVISION => function ($l, $r) { return $l / $r; },
+                Operators\Binary::MODULUS => function ($l, $r) { return $l % $r; },
+                Operators\Binary::CONCATENATION => function ($l, $r) { return $l . $r; },
+                Operators\Binary::IS_INSTANCE_OF => function ($l, $r) { return $l instanceof $r; },
+                Operators\Binary::EQUALITY => function ($l, $r) { return $l == $r; },
+                Operators\Binary::IDENTITY => function ($l, $r) { return $l === $r; },
+                Operators\Binary::INEQUALITY => function ($l, $r) { return $l != $r; },
+                Operators\Binary::NOT_IDENTICAL => function ($l, $r) { return $l !== $r; },
+                Operators\Binary::LESS_THAN => function ($l, $r) { return $l < $r; },
+                Operators\Binary::LESS_THAN_OR_EQUAL_TO => function ($l, $r) { return $l <= $r; },
+                Operators\Binary::GREATER_THAN => function ($l, $r) { return $l > $r; },
+                Operators\Binary::GREATER_THAN_OR_EQUAL_TO => function ($l, $r) { return $l >= $r; }
             ];
         }
-
-        $Operation = self::$BinaryOperations[$Operator];
-
-        return $Operation($Left, $Right);
+        
+        $operation = self::$binaryOperations[$operator];
+        
+        return $operation($left, $right);
     }
-
+    
     /**
      * @return self
      */
-    public function Update(Expression $LeftOperandExpression, $Operator, Expression $RightOperandExpression)
+    public function update(Expression $leftOperandExpression, $operator, Expression $rightOperandExpression)
     {
-        if ($this->LeftOperandExpression === $LeftOperandExpression
-                && $this->Operator === $Operator
-                && $this->RightOperandExpression === $RightOperandExpression) {
+        if ($this->leftOperandExpression === $leftOperandExpression && $this->operator === $operator && $this->rightOperandExpression === $rightOperandExpression) {
             return $this;
         }
-
-        return new self($LeftOperandExpression, $Operator, $RightOperandExpression);
+        
+        return new self($leftOperandExpression, $operator, $rightOperandExpression);
     }
-
-    protected function CompileCode(&$Code)
+    
+    protected function compileCode(&$code)
     {
-        $Code .= '(';
-        $this->LeftOperandExpression->CompileCode($Code);
-        $Code .= ' ' .  $this->Operator . ' ';
-        $this->RightOperandExpression->CompileCode($Code);
-        $Code .= ')';
+        $code .= '(';
+        $this->leftOperandExpression->compileCode($code);
+        $code .= ' ' . $this->operator . ' ';
+        $this->rightOperandExpression->compileCode($code);
+        $code .= ')';
     }
     
     public function serialize()
     {
-        return serialize([$this->LeftOperandExpression, $this->Operator, $this->RightOperandExpression]);
+        return serialize([$this->leftOperandExpression, $this->operator, $this->rightOperandExpression]);
     }
     
-    public function unserialize($Serialized)
+    public function unserialize($serialized)
     {
-        list($this->LeftOperandExpression, $this->Operator, $this->RightOperandExpression) = unserialize($Serialized);
+        list($this->leftOperandExpression, $this->operator, $this->rightOperandExpression) = unserialize($serialized);
     }
     
     public function __clone()
     {
-        $this->LeftOperandExpression = clone $this->LeftOperandExpression;
-        $this->RightOperandExpression = clone $this->RightOperandExpression;
+        $this->leftOperandExpression = clone $this->leftOperandExpression;
+        $this->rightOperandExpression = clone $this->rightOperandExpression;
     }
 }

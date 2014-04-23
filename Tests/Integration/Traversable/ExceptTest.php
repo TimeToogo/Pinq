@@ -1,65 +1,59 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Traversable;
 
 class ExceptTest extends TraversableTest
 {
-    protected function TestReturnsNewInstance(\Pinq\ITraversable $Traversable)
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
-        return $Traversable->Except([]);
+        return $traversable->except([]);
     }
     
     /**
      * @dataProvider Everything
      */
-    public function testThatExceptWithSelfReturnsAnEmptyArray(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExceptWithSelfReturnsAnEmptyArray(\Pinq\ITraversable $traversable, array $data)
     {
-        $Except = $Traversable->Except($Traversable);
-        
-        $this->AssertMatches($Except, []);
+        $except = $traversable->except($traversable);
+        $this->assertMatches($except, []);
     }
     
     /**
      * @dataProvider Everything
      */
-    public function testThatExceptWithEmptyReturnsSameAsTheOriginal(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExceptWithEmptyReturnsSameAsTheOriginal(\Pinq\ITraversable $traversable, array $data)
     {
-        $Except = $Traversable->Except(new \Pinq\Traversable());
-        
-        $this->AssertMatches($Except, $Data);
+        $except = $traversable->except(new \Pinq\Traversable());
+        $this->assertMatches($except, $data);
     }
     
     /**
      * @dataProvider OneToTen
      */
-    public function testThatExceptWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExceptWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $traversable, array $data)
     {
-        $OtherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
-        $Except = $Traversable->Except($OtherData);
-        
-        $this->AssertMatches($Except, array_diff($Data, $OtherData));
+        $otherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
+        $except = $traversable->except($otherData);
+        $this->assertMatches($except, array_diff($data, $otherData));
     }
     
     /**
      * @dataProvider OneToTen
      */
-    public function testThatExceptWithDuplicateKeysPreservesTheOriginalValues(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExceptWithDuplicateKeysPreservesTheOriginalValues(\Pinq\ITraversable $traversable, array $data)
     {
-        $OtherData = [0 => 'test', 2 => 0.01, 5 => 4, 'test' => 1];
-        $Except = $Traversable->Except($OtherData);
-        
-        $this->AssertMatches($Except, array_diff($Data, $OtherData));
+        $otherData = [0 => 'test', 2 => 0.01, 5 => 4, 'test' => 1];
+        $except = $traversable->except($otherData);
+        $this->assertMatches($except, array_diff($data, $otherData));
     }
     
     /**
      * @dataProvider AssocOneToTen
      */
-    public function testThatExceptUsesStrictEquality(\Pinq\ITraversable $Traversable, array $Data)
+    public function testThatExceptUsesStrictEquality(\Pinq\ITraversable $traversable, array $data)
     {
-        $CastToStringValues = array_map('strval', $Data);
-        
-        $Except = $Traversable->Except($CastToStringValues);
-        
-        $this->AssertMatches($Except, $Data);
+        $castToStringValues = array_map('strval', $data);
+        $except = $traversable->except($castToStringValues);
+        $this->assertMatches($except, $data);
     }
 }

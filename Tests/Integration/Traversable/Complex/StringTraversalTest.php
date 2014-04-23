@@ -1,94 +1,123 @@
-<?php
+<?php 
 
 namespace Pinq\Tests\Integration\Traversable\Complex;
 
 class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
 {
-    public function SomeStrings()
+    public function someStrings()
     {
-        return $this->ImplementationsFor(['Foo', 'Bar', 'Test', 'Pinq', 'Data', 'Lorem Ipsum', 'Dallas']);
+        return $this->implementationsFor([
+            'Foo',
+            'Bar',
+            'Test',
+            'Pinq',
+            'Data',
+            'Lorem Ipsum',
+            'Dallas'
+        ]);
     }
-
+    
     /**
      * @dataProvider SomeStrings
      */
-    public function testOrderingMultiple(\Pinq\ITraversable $Traversable, array $Data)
+    public function testOrderingMultiple(\Pinq\ITraversable $traversable, array $data)
     {
-        $Traversable = $Traversable
-                ->OrderByAscending(function ($I) { return $I[0]; })
-                ->ThenByDescending(function ($I) { return $I[2]; });
-
-        $this->AssertMatches($Traversable, [1 => 'Bar', 4 => 'Data', 6 => 'Dallas', 0 => 'Foo', 5 => 'Lorem Ipsum', 3 => 'Pinq', 2 => 'Test']);
+        $traversable = 
+                $traversable->orderByAscending(function ($i) {
+                    return $i[0];
+                })->thenByDescending(function ($i) {
+                    return $i[2];
+                });
+        $this->assertMatches(
+                $traversable,
+                [
+                    1 => 'Bar',
+                    4 => 'Data',
+                    6 => 'Dallas',
+                    0 => 'Foo',
+                    5 => 'Lorem Ipsum',
+                    3 => 'Pinq',
+                    2 => 'Test'
+                ]);
     }
     
-    public function PHPDocExample()
+    public function pHPDocExample()
     {
-        return $this->ImplementationsFor([
-                0 => ['volume' => 67, 'edition' => 2],
-                1 => ['volume' => 86, 'edition' => 1],
-                2 => ['volume' => 85, 'edition' => 6],
-                3 => ['volume' => 98, 'edition' => 2],
-                4 => ['volume' => 86, 'edition' => 6],
-                5 => ['volume' => 67, 'edition' => 7]
+        return $this->implementationsFor([
+            0 => ['volume' => 67, 'edition' => 2],
+            1 => ['volume' => 86, 'edition' => 1],
+            2 => ['volume' => 85, 'edition' => 6],
+            3 => ['volume' => 98, 'edition' => 2],
+            4 => ['volume' => 86, 'edition' => 6],
+            5 => ['volume' => 67, 'edition' => 7]
         ]);
     }
     
     /**
      * @dataProvider PHPDocExample
      */
-    public function testOrderingMultiplePHPDocExampleButPreservesKeys(\Pinq\ITraversable $Traversable, array $Data)
+    public function testOrderingMultiplePHPDocExampleButPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {
-        $Traversable = $Traversable
-                ->OrderByDescending(function ($I) { return $I['volume']; })
-                ->ThenByAscending(function ($I) { return $I['edition']; });
-
-        $this->AssertMatches($Traversable,  [
-            3 => ['volume' => 98, 'edition' => 2], 
-            1 => ['volume' => 86, 'edition' => 1], 
-            4 => ['volume' => 86, 'edition' => 6], 
-            2 => ['volume' => 85, 'edition' => 6], 
-            0 => ['volume' => 67, 'edition' => 2], 
-            5 => ['volume' => 67, 'edition' => 7]
-        ]);
+        $traversable = 
+                $traversable->orderByDescending(function ($i) {
+                    return $i['volume'];
+                })->thenByAscending(function ($i) {
+                    return $i['edition'];
+                });
+        $this->assertMatches(
+                $traversable,
+                [
+                    3 => ['volume' => 98, 'edition' => 2],
+                    1 => ['volume' => 86, 'edition' => 1],
+                    4 => ['volume' => 86, 'edition' => 6],
+                    2 => ['volume' => 85, 'edition' => 6],
+                    0 => ['volume' => 67, 'edition' => 2],
+                    5 => ['volume' => 67, 'edition' => 7]
+                ]);
     }
-
+    
     /**
      * @dataProvider SomeStrings
      */
-    public function testSelectManyQuery(\Pinq\ITraversable $Traversable, array $Data)
+    public function testSelectManyQuery(\Pinq\ITraversable $traversable, array $data)
     {
-        $String = $Traversable
-                ->SelectMany('str_split')
-                ->Select(function ($Char) {
-                    return ++$Char;
-                })
-                ->Implode('');
-
-        $TrueString = '';
-        foreach ($Data as $I) {
-            foreach (str_split($I) as $Char) {
-                $TrueString .= ++$Char;
+        $string = 
+                $traversable->selectMany('str_split')->select(function ($char) {
+                    return ++$char;
+                })->implode('');
+        $trueString = '';
+        
+        foreach ($data as $i) {
+            foreach (str_split($i) as $char) {
+                $trueString .= ++$char;
             }
         }
-
-        $this->assertEquals($TrueString, $String);
+        
+        $this->assertEquals($trueString, $string);
     }
-
+    
     /**
      * @dataProvider SomeStrings
      */
-    public function testAggregateValuesString(\Pinq\ITraversable $Traversable, array $Data)
+    public function testAggregateValuesString(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals(true, $Traversable->All(), 'All');
-
-        $this->assertEquals(true, $Traversable->Any(), 'Any');
-
-        $this->assertEquals(array_sum(array_map('strlen', $Data)) / count($Data), $Traversable->Average('strlen'), 'Average string length');
-
-        $this->assertEquals(array_sum(array_map('strlen', $Data)), $Traversable->Sum('strlen'), 'Sum string length');
-
-        $this->assertEquals(array_unique($Data), $Traversable->Unique()->AsArray(), 'Unique');
-
-        $this->assertEquals(implode('- -- -', $Data), $Traversable->Implode('- -- -'), 'String implode');
+        $this->assertEquals(true, $traversable->all(), 'All');
+        $this->assertEquals(true, $traversable->any(), 'Any');
+        $this->assertEquals(
+                array_sum(array_map('strlen', $data)) / count($data),
+                $traversable->average('strlen'),
+                'Average string length');
+        $this->assertEquals(
+                array_sum(array_map('strlen', $data)),
+                $traversable->sum('strlen'),
+                'Sum string length');
+        $this->assertEquals(
+                array_unique($data),
+                $traversable->unique()->asArray(),
+                'Unique');
+        $this->assertEquals(
+                implode('- -- -', $data),
+                $traversable->implode('- -- -'),
+                'String implode');
     }
 }

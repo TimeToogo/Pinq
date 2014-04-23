@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Pinq\Tests;
 
@@ -7,20 +7,16 @@ namespace Pinq\Tests;
  */
 class PinqTestCase extends \PHPUnit_Framework_TestCase
 {
-    const TestNamespace = __NAMESPACE__;
-
-    const RootNamespace = '\\Pinq\\';
-
-    final protected function getMockWithoutConstructor($ClassName)
+    const TEST_NAMESPACE = __NAMESPACE__;
+    const ROOT_NAMESPACE = '\\Pinq\\';
+    
+    protected final function getMockWithoutConstructor($className)
     {
-        return $this->getMockBuilder($ClassName)
-                ->disableOriginalConstructor()
-                ->getMock();
+        return $this->getMockBuilder($className)->disableOriginalConstructor()->getMock();
     }
-    final protected function getAbstractMockWithoutConstructor($ClassName)
+    
+    protected final function getAbstractMockWithoutConstructor($className)
     {
-        return $this->getMockBuilder($ClassName)
-                ->disableOriginalConstructor()
-                ->getMockForAbstractClass();
+        return $this->getMockBuilder($className)->disableOriginalConstructor()->getMockForAbstractClass();
     }
 }

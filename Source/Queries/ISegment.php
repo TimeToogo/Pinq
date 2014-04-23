@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace Pinq\Queries; 
+namespace Pinq\Queries;
 
 /**
  * The interface for a query segment, one of the const types, they
@@ -14,25 +14,25 @@ namespace Pinq\Queries;
  */
 interface ISegment
 {
-    const Filter = 0;
-    const OrderBy = 1;
-    const Range = 2;
-    const GroupBy = 3;
-    const Join = 4;
-    const EqualityJoin = 5;
-    const Select = 6;
-    const SelectMany = 7;
-    const Operate = 8;
-    const Unique = 9;
-    const IndexBy = 10;
-
+    const FILTER = 0;
+    const ORDER_BY = 1;
+    const RANGE = 2;
+    const GROUP_BY = 3;
+    const JOIN = 4;
+    const EQUALITY_JOIN = 5;
+    const SELECT = 6;
+    const SELECT_MANY = 7;
+    const OPERATE = 8;
+    const UNIQUE = 9;
+    const INDEX_BY = 10;
+    
     /**
      * @return int The query type
      */
-    public function GetType();
-
+    public function getType();
+    
     /**
      * @return ISegment
      */
-    public function Traverse(Segments\SegmentWalker $Walker);
+    public function traverse(Segments\SegmentWalker $walker);
 }
