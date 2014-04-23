@@ -40,7 +40,7 @@ class CSVFileFunctionCache implements IFunctionCache
             $this->fileHandle->setCsvControl(
                     self::CSV_DELIMITER,
                     self::CSV_SEPERATOR);
-        } catch (\Exception $Exception) {
+        } catch (\Exception $exception) {
             throw new \Pinq\PinqException(
                     'Invalid cache file: %s is not readable with the message, "%s"',
                     $fileName,
