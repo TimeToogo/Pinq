@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\PinqException.php",
-    "hash": "71c01c238b417756a70fff1dec903e6fa2201a5c",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\PinqException.php",
+    "hash": "0425eed327fc407603d3b63420cc39ed89bd02bb",
     "parent": "Exception",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "MessageFormat": {
-                    "name": "MessageFormat",
+                "messageFormat": {
+                    "name": "messageFormat",
                     "line": 16,
                     "short_desc": "",
                     "long_desc": null,
@@ -90,9 +90,9 @@
                 }
             }
         },
-        "Construct": {
-            "name": "Construct",
-            "line": 28,
+        "construct": {
+            "name": "construct",
+            "line": 27,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -109,9 +109,9 @@
 
             ],
             "parameters": {
-                "Parameters": {
-                    "name": "Parameters",
-                    "line": 28,
+                "parameters": {
+                    "name": "parameters",
+                    "line": 27,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -129,9 +129,9 @@
                 }
             }
         },
-        "InvalidIterable": {
-            "name": "InvalidIterable",
-            "line": 40,
+        "invalidIterable": {
+            "name": "invalidIterable",
+            "line": 39,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -148,9 +148,9 @@
 
             ],
             "parameters": {
-                "Method": {
-                    "name": "Method",
-                    "line": 40,
+                "method": {
+                    "name": "method",
+                    "line": 39,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -161,9 +161,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Value": {
-                    "name": "Value",
-                    "line": 40,
+                "value": {
+                    "name": "value",
+                    "line": 39,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -176,9 +176,9 @@
                 }
             }
         },
-        "NotSupported": {
-            "name": "NotSupported",
-            "line": 48,
+        "notSupported": {
+            "name": "notSupported",
+            "line": 47,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -195,9 +195,9 @@
 
             ],
             "parameters": {
-                "Method": {
-                    "name": "Method",
-                    "line": 48,
+                "method": {
+                    "name": "method",
+                    "line": 47,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,

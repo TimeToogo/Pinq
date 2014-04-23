@@ -1,7 +1,7 @@
 {
     "name": "Pinq\\Queries\\Requests\\Implode",
     "line": 13,
-    "short_desc": "Request query for a string of all the projected values  concatenated by the specified delimiter",
+    "short_desc": "Request query for a string of all the projected values concatenated by the specified delimiter",
     "long_desc": "",
     "hint": null,
     "tags": {
@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries\\Requests",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Requests\\Implode.php",
-    "hash": "6ab313f7a87174d686b25feccbcb648cd9dceb45",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\Requests\\Implode.php",
+    "hash": "5eea8afc6466cba3484c296010e51c299af6e08a",
     "parent": "Pinq\\Queries\\Requests\\ProjectionRequest",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
                 "\"1\" @param tags are defined by \"2\" are expected"
             ],
             "parameters": {
-                "Delimiter": {
-                    "name": "Delimiter",
+                "delimiter": {
+                    "name": "delimiter",
                     "line": 23,
                     "short_desc": null,
                     "long_desc": null,
@@ -65,8 +65,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "FunctionExpressionTree": {
-                    "name": "FunctionExpressionTree",
+                "functionExpressionTree": {
+                    "name": "functionExpressionTree",
                     "line": 23,
                     "short_desc": null,
                     "long_desc": null,
@@ -85,8 +85,8 @@
                 }
             }
         },
-        "GetType": {
-            "name": "GetType",
+        "getType": {
+            "name": "getType",
             "line": 29,
             "short_desc": "",
             "long_desc": "",
@@ -112,8 +112,8 @@
 
             ]
         },
-        "GetDelimiter": {
-            "name": "GetDelimiter",
+        "getDelimiter": {
+            "name": "getDelimiter",
             "line": 37,
             "short_desc": "",
             "long_desc": "",
@@ -139,8 +139,8 @@
 
             ]
         },
-        "Traverse": {
-            "name": "Traverse",
+        "traverse": {
+            "name": "traverse",
             "line": 42,
             "short_desc": "",
             "long_desc": "",
@@ -163,8 +163,8 @@
 
             ],
             "parameters": {
-                "Visitor": {
-                    "name": "Visitor",
+                "visitor": {
+                    "name": "visitor",
                     "line": 42,
                     "short_desc": null,
                     "long_desc": null,

@@ -43,7 +43,7 @@
                     int
                 </td>
                 <td class="last">
-                    <a href="#method_Count">Count</a>()
+                    <a href="#method_count">count</a>()
                     <p>Returns the amount of the values.</p>
                 </td>
                 <td></td>
@@ -53,7 +53,7 @@
                     boolean
                 </td>
                 <td class="last">
-                    <a href="#method_Exists">Exists</a>()
+                    <a href="#method_exists">exists</a>()
                     <p>Returns whether any values exist.</p>
                 </td>
                 <td></td>
@@ -63,7 +63,7 @@
                     mixed
                 </td>
                 <td class="last">
-                    <a href="#method_Aggregate">Aggregate</a>(callable $Function)
+                    <a href="#method_aggregate">aggregate</a>(callable $function)
                     <p>Aggregates the values with the supplied function</p>
                 </td>
                 <td></td>
@@ -73,7 +73,7 @@
                     mixed
                 </td>
                 <td class="last">
-                    <a href="#method_Maximum">Maximum</a>(callable $Function = null)
+                    <a href="#method_maximum">maximum</a>(callable $function = null)
                     <p>Returns the maximum value.</p>
                 </td>
                 <td></td>
@@ -83,7 +83,7 @@
                     mixed
                 </td>
                 <td class="last">
-                    <a href="#method_Minimum">Minimum</a>(callable $Function = null)
+                    <a href="#method_minimum">minimum</a>(callable $function = null)
                     <p>Returns the maximum value.</p>
                 </td>
                 <td></td>
@@ -93,7 +93,7 @@
                     int|null
                 </td>
                 <td class="last">
-                    <a href="#method_Sum">Sum</a>(callable $Function = null)
+                    <a href="#method_sum">sum</a>(callable $function = null)
                     <p>Returns the sum of the values.</p>
                 </td>
                 <td></td>
@@ -103,7 +103,7 @@
                     double|null
                 </td>
                 <td class="last">
-                    <a href="#method_Average">Average</a>(callable $Function = null)
+                    <a href="#method_average">average</a>(callable $function = null)
                     <p>Returns the average of the values.</p>
                 </td>
                 <td></td>
@@ -113,7 +113,7 @@
                     bool
                 </td>
                 <td class="last">
-                    <a href="#method_All">All</a>(callable $Function = null)
+                    <a href="#method_all">all</a>(callable $function = null)
                     <p>Returns a boolean of if all the values evaluate to true</p>
                 </td>
                 <td></td>
@@ -123,7 +123,7 @@
                     bool
                 </td>
                 <td class="last">
-                    <a href="#method_Any">Any</a>(callable $Function = null)
+                    <a href="#method_any">any</a>(callable $function = null)
                     <p>Returns a boolean of if any of the values evaluate to true</p>
                 </td>
                 <td></td>
@@ -133,7 +133,7 @@
                     string
                 </td>
                 <td class="last">
-                    <a href="#method_Implode">Implode</a>(string $Delimiter, callable $Function = null)
+                    <a href="#method_implode">implode</a>(string $delimiter, callable $function = null)
                     <p>Returns a string of all the values concatented by the delimiter</p>
                 </td>
                 <td></td>
@@ -143,10 +143,10 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method_Count">
-        <div class="location">at line 19</div>
+                        <h3 id="method_count">
+        <div class="location">at line 18</div>
         <code>            public            int
-    <strong>Count</strong>()</code>
+    <strong>count</strong>()</code>
     </h3>
     <div class="details">
         <p>Returns the amount of the values.</p>
@@ -169,10 +169,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Exists">
-        <div class="location">at line 26</div>
+                <h3 id="method_exists">
+        <div class="location">at line 25</div>
         <code>            public            boolean
-    <strong>Exists</strong>()</code>
+    <strong>exists</strong>()</code>
     </h3>
     <div class="details">
         <p>Returns whether any values exist.</p>
@@ -195,10 +195,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Aggregate">
-        <div class="location">at line 34</div>
+                <h3 id="method_aggregate">
+        <div class="location">at line 33</div>
         <code>            public            mixed
-    <strong>Aggregate</strong>(callable $Function)</code>
+    <strong>aggregate</strong>(callable $function)</code>
     </h3>
     <div class="details">
         <p>Aggregates the values with the supplied function</p>
@@ -210,7 +210,7 @@
                     <table>
                     <tr>
                 <td>callable</td>
-                <td>$Function</td>
+                <td>$function</td>
                 <td>The aggregate function</td>
             </tr>
             </table>
@@ -231,10 +231,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Maximum">
-        <div class="location">at line 42</div>
+                <h3 id="method_maximum">
+        <div class="location">at line 41</div>
         <code>            public            mixed
-    <strong>Maximum</strong>(callable $Function = null)</code>
+    <strong>maximum</strong>(callable $function = null)</code>
     </h3>
     <div class="details">
         <p>Returns the maximum value.</p>
@@ -246,7 +246,7 @@
                     <table>
                     <tr>
                 <td>callable</td>
-                <td>$Function</td>
+                <td>$function</td>
                 <td>The function which will return the values</td>
             </tr>
             </table>
@@ -267,10 +267,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Minimum">
-        <div class="location">at line 51</div>
+                <h3 id="method_minimum">
+        <div class="location">at line 49</div>
         <code>            public            mixed
-    <strong>Minimum</strong>(callable $Function = null)</code>
+    <strong>minimum</strong>(callable $function = null)</code>
     </h3>
     <div class="details">
         <p>Returns the maximum value.</p>
@@ -282,7 +282,7 @@
                     <table>
                     <tr>
                 <td>callable</td>
-                <td>$Function</td>
+                <td>$function</td>
                 <td>The function which will return the values</td>
             </tr>
             </table>
@@ -303,10 +303,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Sum">
-        <div class="location">at line 59</div>
+                <h3 id="method_sum">
+        <div class="location">at line 57</div>
         <code>            public            int|null
-    <strong>Sum</strong>(callable $Function = null)</code>
+    <strong>sum</strong>(callable $function = null)</code>
     </h3>
     <div class="details">
         <p>Returns the sum of the values.</p>
@@ -318,7 +318,7 @@
                     <table>
                     <tr>
                 <td>callable</td>
-                <td>$Function</td>
+                <td>$function</td>
                 <td>The function which will return the values</td>
             </tr>
             </table>
@@ -339,10 +339,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Average">
-        <div class="location">at line 68</div>
+                <h3 id="method_average">
+        <div class="location">at line 65</div>
         <code>            public            double|null
-    <strong>Average</strong>(callable $Function = null)</code>
+    <strong>average</strong>(callable $function = null)</code>
     </h3>
     <div class="details">
         <p>Returns the average of the values.</p>
@@ -354,7 +354,7 @@
                     <table>
                     <tr>
                 <td>callable</td>
-                <td>$Function</td>
+                <td>$function</td>
                 <td>The function which will return the values</td>
             </tr>
             </table>
@@ -375,10 +375,10 @@
                     </div>
     </div>
 
-                <h3 id="method_All">
-        <div class="location">at line 77</div>
+                <h3 id="method_all">
+        <div class="location">at line 73</div>
         <code>            public            bool
-    <strong>All</strong>(callable $Function = null)</code>
+    <strong>all</strong>(callable $function = null)</code>
     </h3>
     <div class="details">
         <p>Returns a boolean of if all the values evaluate to true</p>
@@ -390,7 +390,7 @@
                     <table>
                     <tr>
                 <td>callable</td>
-                <td>$Function</td>
+                <td>$function</td>
                 <td>The function which will return the values</td>
             </tr>
             </table>
@@ -411,10 +411,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Any">
-        <div class="location">at line 85</div>
+                <h3 id="method_any">
+        <div class="location">at line 81</div>
         <code>            public            bool
-    <strong>Any</strong>(callable $Function = null)</code>
+    <strong>any</strong>(callable $function = null)</code>
     </h3>
     <div class="details">
         <p>Returns a boolean of if any of the values evaluate to true</p>
@@ -426,7 +426,7 @@
                     <table>
                     <tr>
                 <td>callable</td>
-                <td>$Function</td>
+                <td>$function</td>
                 <td>The function which will return the values</td>
             </tr>
             </table>
@@ -447,10 +447,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Implode">
-        <div class="location">at line 94</div>
+                <h3 id="method_implode">
+        <div class="location">at line 90</div>
         <code>            public            string
-    <strong>Implode</strong>(string $Delimiter, callable $Function = null)</code>
+    <strong>implode</strong>(string $delimiter, callable $function = null)</code>
     </h3>
     <div class="details">
         <p>Returns a string of all the values concatented by the delimiter</p>
@@ -462,12 +462,12 @@
                     <table>
                     <tr>
                 <td>string</td>
-                <td>$Delimiter</td>
+                <td>$delimiter</td>
                 <td>The string to delimit the values by</td>
             </tr>
                     <tr>
                 <td>callable</td>
-                <td>$Function</td>
+                <td>$function</td>
                 <td>The function which will return the values</td>
             </tr>
             </table>

@@ -35,9 +35,9 @@ Supported Expressions:
     - `array('foo', 'bar', 'baz')`
 
  - **`AssignmentExpression`**
-    - `$I = 5`
-    - `$I += 5`
-    - `$I /= 5`...
+    - `$i = 5`
+    - `$i += 5`
+    - `$i /= 5`...
 
  - **`BinaryOperationExpression`** 
     - `3 + 5`
@@ -45,61 +45,61 @@ Supported Expressions:
     - `'foo' . 'bar'`...
 
  - **`CastExpression`** 
-    - `(int)$I`
-    - `(string)$I`...
+    - `(int)$i`
+    - `(string)$i`...
 
  - **`ClosureExpression`** 
-    - `function ($I) {...}`
+    - `function ($i) {...}`
 
  - **`EmptyExpression`** 
-    - `empty($I)`
+    - `empty($i)`
 
  - **`FieldExpression`** 
-    - `$I->Field`
+    - `$i->field`
 
  - **`FunctionCallExpression`** 
-    - `strlen($I)`
+    - `strlen($i)`
 
  - **`IndexExpression`** 
-    - `$I[3]`
+    - `$i[3]`
 
  - **`InvocationExpression`** 
-    - `$I()`
+    - `$i()`
 
  - **`IssetExpression`** 
-    - `isset($I)`
+    - `isset($i)`
  - **`MethodCallExpression`** 
-    - `$I->Method()`
+    - `$i->method()`
 
  - **`NewExpression`** 
     - `new \stdClass()`
     - `new \DateTime()`
 
  - **`ParameterExpression`**
-    - `function ($I) ...`
-    - `function (\stdClass &$I = null) ...`
+    - `function ($i) ...`
+    - `function (\stdClass &$i = null) ...`
 
  - **`ReturnExpression`** 
-    - `return $I`
+    - `return $i`
 
  - **`StaticMethodCallExpression`** 
-    - `Object::Method()`
+    - `Object::method()`
 
  - **`SubQueryExpression`**
-    - `$Traversable->Where(function ($I) { return $I > 5; })->Average()`
+    - `$Traversable->where(function ($i) { return $i > 5; })->average()`
 
  - **`TernaryExpression`** 
-    - `$I === true ? 1 : -1`
+    - `$i === true ? 1 : -1`
 
  - **`ThrowExpression`** 
-    - `throw $I`
+    - `throw $i`
 
  - **`UnaryOperationExpression`** 
-    - `-$I`
-    - `$I++`
-    - `!$I`
-    - `--$I`
-    - `~$I`...
+    - `-$i`
+    - `$i++`
+    - `!$i`
+    - `--$i`
+    - `~$i`...
 
  - **`ValueExpression`** 
     - `4`
@@ -109,15 +109,15 @@ Supported Expressions:
     - `true`...
 
  - **`VariableExpression`** 
-    - `$I`
+    - `$i`
 
 The Expression class
 ====================
 This class is the base for all expression classes. All expressions provide the following API:
 
- - `Simplify` - Simplifies the expression if possible
- - `Traverse` - Passes itself to the respective method on the supplied `ExpressionWalker`
- - `Compile` - Compiles to a string of valid PHP code
+ - `simplify` - Simplifies the expression if possible
+ - `traverse` - Passes itself to the respective method on the supplied `ExpressionWalker`
+ - `compile` - Compiles to a string of valid PHP code
  - `__clone` - Expressions support `clone` and should create a deep clone of the entire expression tree
 
 It also contains a set of static factory methods for all the concrete expression types.
@@ -130,35 +130,35 @@ When querying an implementation of `IQueryable` or `IRepository`, all supplied f
 converted to instances of the `FunctionExpressionTree` class. This class hold information about the
 parameters and body of the function. It has the following API:
 
- - `GetCompiledFunction` - Gets the compiled function, this can be invoked just as any other function
- - `GetExpressions` - Returns the body expressions of the function
- - `GetFirstResolvedReturnValueExpression` - Returns the first return value expression, it resolves all variables in the expression tree to that containing only the parameters and constant values
- - `GetParameterExpressions` - Returns the parameter expressions
- - `Simplify` - Simplify all that can be simplified, `3 + 5` -> `8`
- - `HasUnresolvedVariables` - If the function contains variables that are not defined
- - `GetUnresolvedVariables` - Returns the names of all unresolved variables
- - `ResolveVariables` - Resolves the variables by name to their respective values
- - `Walk` - Walk the body expressions with the supplied `ExpressionWalker`
+ - `getCompiledFunction` - Gets the compiled function, this can be invoked just as any other function
+ - `getExpressions` - Returns the body expressions of the function
+ - `getFirstResolvedReturnValueExpression` - Returns the first return value expression, it resolves all variables in the expression tree to that containing only the parameters and constant values
+ - `getParameterExpressions` - Returns the parameter expressions
+ - `simplify` - Simplify all that can be simplified, `3 + 5` -> `8`
+ - `hasUnresolvedVariables` - If the function contains variables that are not defined
+ - `getUnresolvedVariables` - Returns the names of all unresolved variables
+ - `resolveVariables` - Resolves the variables by name to their respective values
+ - `walk` - Walk the body expressions with the supplied `ExpressionWalker`
 
 Modifying an expression tree
 ===============================
 
 To modify an expression tree, `ExpressionWalker`, This is designed to traverse an entire expression tree,
 contains a set of overridable methods, one for each type of expression. These can be 
-implemented to handle and `Update` any type of expression as desired.
+implemented to handle and `update` any type of expression as desired.
 
 **Example**
 
-This expression walker will replace every variale's name with `'foo'`
+This expression walker will replace every variable's name with `'foo'`
 
 {% highlight php startinline %}
 use \Pinq\Expressions as O;
 
 class VariableNameReplacer extends O\ExpressionWalker
 {
-    public function WalkVariable(O\VariableExpression $Expression)
+    public function walkVariable(O\VariableExpression $expression)
     {
-        return $Expression->Update(O\Expression::Value('foo'));
+        return $expression->update(O\Expression::value('foo'));
     }
 }
 {% endhighlight %}

@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Caching",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Caching\\Provider.php",
-    "hash": "3625092f76e80857175b9e9d83711e89761b4cc1",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Caching\\Provider.php",
+    "hash": "e91931f75344f561f2ca1b494a588b8f8477c08d",
     "parent": null,
     "modifiers": 32,
     "is_trait": false,
@@ -33,9 +33,9 @@
 
     ],
     "methods": {
-        "SetDevelopmentMode": {
-            "name": "SetDevelopmentMode",
-            "line": 54,
+        "setDevelopmentMode": {
+            "name": "setDevelopmentMode",
+            "line": 57,
             "short_desc": "If set to true, the cache will be cleared when needed.",
             "long_desc": "",
             "hint": [
@@ -57,9 +57,9 @@
 
             ],
             "parameters": {
-                "TrueOrFalse": {
-                    "name": "TrueOrFalse",
-                    "line": 54,
+                "trueOrFalse": {
+                    "name": "trueOrFalse",
+                    "line": 57,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -77,9 +77,9 @@
                 }
             }
         },
-        "GetCache": {
-            "name": "GetCache",
-            "line": 64,
+        "getCache": {
+            "name": "getCache",
+            "line": 67,
             "short_desc": "Returns the configured cache implementation",
             "long_desc": "",
             "hint": [
@@ -104,9 +104,9 @@
 
             ]
         },
-        "SetFileCache": {
-            "name": "SetFileCache",
-            "line": 75,
+        "setFileCache": {
+            "name": "setFileCache",
+            "line": 78,
             "short_desc": "Uses the supplied file to store the parsed functions",
             "long_desc": "",
             "hint": [
@@ -128,9 +128,9 @@
 
             ],
             "parameters": {
-                "FileName": {
-                    "name": "FileName",
-                    "line": 75,
+                "fileName": {
+                    "name": "fileName",
+                    "line": 78,
                     "short_desc": "The file to cache the data",
                     "long_desc": null,
                     "hint": [
@@ -148,9 +148,9 @@
                 }
             }
         },
-        "SetDirectoryCache": {
-            "name": "SetDirectoryCache",
-            "line": 88,
+        "setDirectoryCache": {
+            "name": "setDirectoryCache",
+            "line": 91,
             "short_desc": "Uses the supplied directory to store the parsed functions",
             "long_desc": "",
             "hint": [
@@ -172,9 +172,9 @@
 
             ],
             "parameters": {
-                "Directory": {
-                    "name": "Directory",
-                    "line": 88,
+                "directory": {
+                    "name": "directory",
+                    "line": 91,
                     "short_desc": "The directory to cache the data",
                     "long_desc": null,
                     "hint": [
@@ -190,9 +190,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "FileExtension": {
-                    "name": "FileExtension",
-                    "line": 88,
+                "fileExtension": {
+                    "name": "fileExtension",
+                    "line": 91,
                     "short_desc": "The file extension for every cache file",
                     "long_desc": null,
                     "hint": [
@@ -205,14 +205,14 @@
 
                     ],
                     "modifiers": "",
-                    "default": "DirectoryFunctionCache::DefaultExtension",
+                    "default": "DirectoryFunctionCache::DEFAULT_EXTENSION",
                     "is_by_ref": false
                 }
             }
         },
-        "SetDoctrineCache": {
-            "name": "SetDoctrineCache",
-            "line": 100,
+        "setDoctrineCache": {
+            "name": "setDoctrineCache",
+            "line": 103,
             "short_desc": "Uses the supplied doctrine cache to store the parsed functions",
             "long_desc": "",
             "hint": [
@@ -234,9 +234,9 @@
 
             ],
             "parameters": {
-                "Cache": {
-                    "name": "Cache",
-                    "line": 100,
+                "cache": {
+                    "name": "cache",
+                    "line": 103,
                     "short_desc": "The doctrine cache",
                     "long_desc": null,
                     "hint": [
@@ -254,9 +254,9 @@
                 }
             }
         },
-        "SetArrayAccessCache": {
-            "name": "SetArrayAccessCache",
-            "line": 112,
+        "setArrayAccessCache": {
+            "name": "setArrayAccessCache",
+            "line": 115,
             "short_desc": "Uses the supplied array access cache to store the parsed functions",
             "long_desc": "",
             "hint": [
@@ -278,9 +278,9 @@
 
             ],
             "parameters": {
-                "Cache": {
-                    "name": "Cache",
-                    "line": 112,
+                "cache": {
+                    "name": "cache",
+                    "line": 115,
                     "short_desc": "The array access cache",
                     "long_desc": null,
                     "hint": [
@@ -298,9 +298,9 @@
                 }
             }
         },
-        "SetCustomCache": {
-            "name": "SetCustomCache",
-            "line": 124,
+        "setCustomCache": {
+            "name": "setCustomCache",
+            "line": 127,
             "short_desc": "Uses the supplied cache to store the parsed functions",
             "long_desc": "",
             "hint": [
@@ -322,9 +322,9 @@
 
             ],
             "parameters": {
-                "Cache": {
-                    "name": "Cache",
-                    "line": 124,
+                "cache": {
+                    "name": "cache",
+                    "line": 127,
                     "short_desc": "The cache implementations",
                     "long_desc": null,
                     "hint": [
@@ -342,9 +342,9 @@
                 }
             }
         },
-        "RemoveCache": {
-            "name": "RemoveCache",
-            "line": 135,
+        "removeCache": {
+            "name": "removeCache",
+            "line": 138,
             "short_desc": "Removes the configured cache implementation",
             "long_desc": "",
             "hint": [

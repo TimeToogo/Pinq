@@ -1,8 +1,8 @@
 {
     "name": "Pinq\\Queries\\Operations\\Operation",
     "line": 12,
-    "short_desc": "Base operation query class  Currently here just for convenient namespace usage",
-    "long_desc": "",
+    "short_desc": "Base operation query class",
+    "long_desc": "Currently here just for convenient namespace usage",
     "hint": null,
     "tags": {
         "author": [
@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries\\Operations",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Operations\\Operation.php",
-    "hash": "ac6587c5dc5217e5af5e79633eac8c3f7ab395a7",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\Operations\\Operation.php",
+    "hash": "399e1581c699d2ab4c57fbf07c27563299b41b4f",
     "parent": null,
     "modifiers": 16,
     "is_trait": false,

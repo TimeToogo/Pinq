@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries\\Segments",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Segments\\Operation.php",
-    "hash": "c621bd55cb65ce85d41e0c055f5c7ac5d8c83bf1",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\Segments\\Operation.php",
+    "hash": "f393bbc101148e988c0ceaf1baea0b3c95ca6497",
     "parent": "Pinq\\Queries\\Segments\\Segment",
     "modifiers": 0,
     "is_trait": false,
@@ -35,7 +35,7 @@
     "methods": {
         "__construct": {
             "name": "__construct",
-            "line": 30,
+            "line": 29,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -52,9 +52,9 @@
 
             ],
             "parameters": {
-                "OperationType": {
-                    "name": "OperationType",
-                    "line": 30,
+                "operationType": {
+                    "name": "operationType",
+                    "line": 29,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -65,9 +65,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Values": {
-                    "name": "Values",
-                    "line": 30,
+                "values": {
+                    "name": "values",
+                    "line": 29,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -80,9 +80,9 @@
                 }
             }
         },
-        "IsValid": {
-            "name": "IsValid",
-            "line": 42,
+        "isValid": {
+            "name": "isValid",
+            "line": 43,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -99,9 +99,9 @@
 
             ],
             "parameters": {
-                "OperationType": {
-                    "name": "OperationType",
-                    "line": 42,
+                "operationType": {
+                    "name": "operationType",
+                    "line": 43,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -114,9 +114,9 @@
                 }
             }
         },
-        "GetType": {
-            "name": "GetType",
-            "line": 47,
+        "getType": {
+            "name": "getType",
+            "line": 55,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -141,9 +141,9 @@
 
             ]
         },
-        "Traverse": {
-            "name": "Traverse",
-            "line": 52,
+        "traverse": {
+            "name": "traverse",
+            "line": 60,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -165,9 +165,9 @@
 
             ],
             "parameters": {
-                "Walker": {
-                    "name": "Walker",
-                    "line": 52,
+                "walker": {
+                    "name": "walker",
+                    "line": 60,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -185,9 +185,9 @@
                 }
             }
         },
-        "GetOperationType": {
-            "name": "GetOperationType",
-            "line": 60,
+        "getOperationType": {
+            "name": "getOperationType",
+            "line": 68,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -212,9 +212,9 @@
 
             ]
         },
-        "GetTraversable": {
-            "name": "GetTraversable",
-            "line": 68,
+        "getTraversable": {
+            "name": "getTraversable",
+            "line": 76,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -245,39 +245,39 @@
         }
     },
     "constants": {
-        "Union": {
-            "name": "Union",
+        "UNION": {
+            "name": "UNION",
             "line": 12,
             "short_desc": "",
             "long_desc": ""
         },
-        "Intersect": {
-            "name": "Intersect",
+        "INTERSECT": {
+            "name": "INTERSECT",
             "line": 13,
             "short_desc": "",
             "long_desc": ""
         },
-        "Difference": {
-            "name": "Difference",
+        "DIFFERENCE": {
+            "name": "DIFFERENCE",
             "line": 14,
             "short_desc": "",
             "long_desc": ""
         },
-        "Append": {
-            "name": "Append",
+        "APPEND": {
+            "name": "APPEND",
+            "line": 15,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "WHERE_IN": {
+            "name": "WHERE_IN",
             "line": 16,
             "short_desc": "",
             "long_desc": ""
         },
-        "WhereIn": {
-            "name": "WhereIn",
+        "EXCEPT": {
+            "name": "EXCEPT",
             "line": 17,
-            "short_desc": "",
-            "long_desc": ""
-        },
-        "Except": {
-            "name": "Except",
-            "line": 18,
             "short_desc": "",
             "long_desc": ""
         }

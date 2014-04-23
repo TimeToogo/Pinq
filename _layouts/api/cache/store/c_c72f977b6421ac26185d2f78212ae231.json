@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\JoiningToQueryable.php",
-    "hash": "7005eda8c57e0e3458b5be7cf997ed483664c586",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\JoiningToQueryable.php",
+    "hash": "c1ec007034768966009c046a9358175accc80975",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -52,9 +52,9 @@
 
             ],
             "parameters": {
-                "Provider": {
-                    "name": "Provider",
-                    "line": 30,
+                "provider": {
+                    "name": "provider",
+                    "line": 29,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -70,9 +70,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Scope": {
-                    "name": "Scope",
-                    "line": 31,
+                "scope": {
+                    "name": "scope",
+                    "line": 29,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -88,9 +88,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "ConstructSegmentFunction": {
-                    "name": "ConstructSegmentFunction",
-                    "line": 32,
+                "constructSegmentFunction": {
+                    "name": "constructSegmentFunction",
+                    "line": 29,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -108,9 +108,9 @@
                 }
             }
         },
-        "To": {
-            "name": "To",
-            "line": 39,
+        "to": {
+            "name": "to",
+            "line": 36,
             "short_desc": "Returns the appropriate values according to the supplied join function.",
             "long_desc": "Both values will be passed as arguments to the supplied function.",
             "hint": [
@@ -132,9 +132,9 @@
 
             ],
             "parameters": {
-                "JoinFunction": {
-                    "name": "JoinFunction",
-                    "line": 39,
+                "joinFunction": {
+                    "name": "joinFunction",
+                    "line": 36,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [

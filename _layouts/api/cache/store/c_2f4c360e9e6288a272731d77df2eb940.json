@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\JoiningOnTraversable.php",
-    "hash": "bbd4b864e60db6e4e2cb9a0bdb877d1af53df9d1",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\JoiningOnTraversable.php",
+    "hash": "6a264e2dfb1ac22e9173b77ecd53c927a024b801",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
                 "\"1\" @param tags are defined by \"3\" are expected"
             ],
             "parameters": {
-                "OuterValues": {
-                    "name": "OuterValues",
+                "outerValues": {
+                    "name": "outerValues",
                     "line": 30,
                     "short_desc": null,
                     "long_desc": null,
@@ -70,8 +70,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "InnerValues": {
-                    "name": "InnerValues",
+                "innerValues": {
+                    "name": "innerValues",
                     "line": 30,
                     "short_desc": null,
                     "long_desc": null,
@@ -88,8 +88,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "IsGroupJoin": {
-                    "name": "IsGroupJoin",
+                "isGroupJoin": {
+                    "name": "isGroupJoin",
                     "line": 30,
                     "short_desc": null,
                     "long_desc": null,
@@ -103,8 +103,8 @@
                 }
             }
         },
-        "On": {
-            "name": "On",
+        "on": {
+            "name": "on",
             "line": 37,
             "short_desc": "Filters the join values according to the supplied function.",
             "long_desc": "Both values will be passed as arguments to the supplied function.",
@@ -127,8 +127,8 @@
 
             ],
             "parameters": {
-                "JoiningOnFunction": {
-                    "name": "JoiningOnFunction",
+                "joiningOnFunction": {
+                    "name": "joiningOnFunction",
                     "line": 37,
                     "short_desc": null,
                     "long_desc": null,
@@ -147,9 +147,9 @@
                 }
             }
         },
-        "OnEquality": {
-            "name": "OnEquality",
-            "line": 57,
+        "onEquality": {
+            "name": "onEquality",
+            "line": 56,
             "short_desc": "Filters the join values via strict equality (===) on the outer and inner keys according to the supplied key functions.",
             "long_desc": "",
             "hint": [
@@ -171,9 +171,9 @@
 
             ],
             "parameters": {
-                "OuterKeyFunction": {
-                    "name": "OuterKeyFunction",
-                    "line": 57,
+                "outerKeyFunction": {
+                    "name": "outerKeyFunction",
+                    "line": 56,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -189,9 +189,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "InnerKeyFunction": {
-                    "name": "InnerKeyFunction",
-                    "line": 57,
+                "innerKeyFunction": {
+                    "name": "innerKeyFunction",
+                    "line": 56,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [

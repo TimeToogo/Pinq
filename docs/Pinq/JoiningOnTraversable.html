@@ -43,7 +43,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(<a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a> $OuterValues, <a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a> $InnerValues, $IsGroupJoin)
+                    <a href="#method___construct">__construct</a>(<a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a> $outerValues, <a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a> $innerValues, $isGroupJoin)
                     <p>
 </p>
                 </td>
@@ -54,7 +54,7 @@
                     <a href="../Pinq/IJoiningToTraversable.html"><abbr title="Pinq\IJoiningToTraversable">IJoiningToTraversable</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_On">On</a>(callable $JoiningOnFunction)
+                    <a href="#method_on">on</a>(callable $joiningOnFunction)
                     <p>Filters the join values according to the supplied function.</p>
                 </td>
                 <td></td>
@@ -64,7 +64,7 @@
                     <a href="../Pinq/IJoiningToTraversable.html"><abbr title="Pinq\IJoiningToTraversable">IJoiningToTraversable</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_OnEquality">OnEquality</a>(callable $OuterKeyFunction, callable $InnerKeyFunction)
+                    <a href="#method_onEquality">onEquality</a>(callable $outerKeyFunction, callable $innerKeyFunction)
                     <p>Filters the join values via strict equality (===) on the outer and inner keys according to the supplied key functions.</p>
                 </td>
                 <td></td>
@@ -77,7 +77,7 @@
                         <h3 id="method___construct">
         <div class="location">at line 30</div>
         <code>            public            
-    <strong>__construct</strong>(<a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a> $OuterValues, <a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a> $InnerValues, $IsGroupJoin)</code>
+    <strong>__construct</strong>(<a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a> $outerValues, <a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a> $innerValues, $isGroupJoin)</code>
     </h3>
     <div class="details">
         <p>
@@ -90,19 +90,19 @@
                     <table>
                     <tr>
                 <td><a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a></td>
-                <td>$OuterValues</td>
+                <td>$outerValues</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a></td>
-                <td>$InnerValues</td>
+                <td>$innerValues</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td></td>
-                <td>$IsGroupJoin</td>
+                <td>$isGroupJoin</td>
                 <td>
 </td>
             </tr>
@@ -114,10 +114,10 @@
                     </div>
     </div>
 
-                <h3 id="method_On">
+                <h3 id="method_on">
         <div class="location">at line 37</div>
         <code>            public            <a href="../Pinq/IJoiningToTraversable.html"><abbr title="Pinq\IJoiningToTraversable">IJoiningToTraversable</abbr></a>
-    <strong>On</strong>(callable $JoiningOnFunction)</code>
+    <strong>on</strong>(callable $joiningOnFunction)</code>
     </h3>
     <div class="details">
         <p>Filters the join values according to the supplied function.</p>
@@ -128,7 +128,7 @@
                     <table>
                     <tr>
                 <td>callable</td>
-                <td>$JoiningOnFunction</td>
+                <td>$joiningOnFunction</td>
                 <td>
 </td>
             </tr>
@@ -150,10 +150,10 @@
                     </div>
     </div>
 
-                <h3 id="method_OnEquality">
-        <div class="location">at line 57</div>
+                <h3 id="method_onEquality">
+        <div class="location">at line 56</div>
         <code>            public            <a href="../Pinq/IJoiningToTraversable.html"><abbr title="Pinq\IJoiningToTraversable">IJoiningToTraversable</abbr></a>
-    <strong>OnEquality</strong>(callable $OuterKeyFunction, callable $InnerKeyFunction)</code>
+    <strong>onEquality</strong>(callable $outerKeyFunction, callable $innerKeyFunction)</code>
     </h3>
     <div class="details">
         <p>Filters the join values via strict equality (===) on the outer and inner keys according to the supplied key functions.</p>
@@ -165,13 +165,13 @@
                     <table>
                     <tr>
                 <td>callable</td>
-                <td>$OuterKeyFunction</td>
+                <td>$outerKeyFunction</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td>callable</td>
-                <td>$InnerKeyFunction</td>
+                <td>$innerKeyFunction</td>
                 <td>
 </td>
             </tr>

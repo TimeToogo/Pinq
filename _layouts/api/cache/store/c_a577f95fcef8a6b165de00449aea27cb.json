@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\IOrderedTraversable.php",
-    "hash": "ab73cb7717a23e25577b14cd4c025964b99f0b19",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\IOrderedTraversable.php",
+    "hash": "7041d301df97ca55ce0ff38aa2eaa23f04c3f4f2",
     "parent": null,
     "modifiers": null,
     "is_trait": false,
@@ -33,8 +33,8 @@
 
     ],
     "methods": {
-        "ThenBy": {
-            "name": "ThenBy",
+        "thenBy": {
+            "name": "thenBy",
             "line": 20,
             "short_desc": "Subsequently orders the results using the supplied function according to the supplied direction",
             "long_desc": "",
@@ -57,8 +57,8 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
+                "function": {
+                    "name": "function",
                     "line": 20,
                     "short_desc": "",
                     "long_desc": null,
@@ -75,8 +75,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Direction": {
-                    "name": "Direction",
+                "direction": {
+                    "name": "direction",
                     "line": 20,
                     "short_desc": "",
                     "long_desc": null,
@@ -95,8 +95,8 @@
                 }
             }
         },
-        "ThenByAscending": {
-            "name": "ThenByAscending",
+        "thenByAscending": {
+            "name": "thenByAscending",
             "line": 28,
             "short_desc": "Subsequently orders the results using the supplied function ascendingly",
             "long_desc": "",
@@ -119,8 +119,8 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
+                "function": {
+                    "name": "function",
                     "line": 28,
                     "short_desc": "",
                     "long_desc": null,
@@ -139,8 +139,8 @@
                 }
             }
         },
-        "ThenByDescending": {
-            "name": "ThenByDescending",
+        "thenByDescending": {
+            "name": "thenByDescending",
             "line": 36,
             "short_desc": "Subsequently orders the results using the supplied function descendingly",
             "long_desc": "",
@@ -163,8 +163,8 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
+                "function": {
+                    "name": "function",
                     "line": 36,
                     "short_desc": "",
                     "long_desc": null,

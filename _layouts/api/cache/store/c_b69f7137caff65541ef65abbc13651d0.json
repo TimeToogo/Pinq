@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Collection.php",
-    "hash": "8c1440085e2b08154835d4a51b7346b5290bffa0",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Collection.php",
+    "hash": "2fb7cacd620c92c69b275676f5df7e8e2cd0f9fd",
     "parent": "Pinq\\Traversable",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
+                "values": {
+                    "name": "values",
                     "line": 12,
                     "short_desc": null,
                     "long_desc": null,
@@ -67,8 +67,8 @@
                 }
             }
         },
-        "AsCollection": {
-            "name": "AsCollection",
+        "asCollection": {
+            "name": "asCollection",
             "line": 17,
             "short_desc": "Returns the values as a collection.",
             "long_desc": "If the implementation is queryable the following operations will\nbe performed in memory.",
@@ -94,8 +94,8 @@
 
             ]
         },
-        "AsRepository": {
-            "name": "AsRepository",
+        "asRepository": {
+            "name": "asRepository",
             "line": 22,
             "short_desc": "Returns the values as a repository.",
             "long_desc": "",
@@ -121,8 +121,8 @@
 
             ]
         },
-        "Clear": {
-            "name": "Clear",
+        "clear": {
+            "name": "clear",
             "line": 27,
             "short_desc": "Removes all the values.",
             "long_desc": "",
@@ -148,8 +148,8 @@
 
             ]
         },
-        "Apply": {
-            "name": "Apply",
+        "apply": {
+            "name": "apply",
             "line": 32,
             "short_desc": "Applies the function the list of values",
             "long_desc": "",
@@ -172,8 +172,8 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
+                "function": {
+                    "name": "function",
                     "line": 32,
                     "short_desc": "",
                     "long_desc": null,
@@ -192,9 +192,9 @@
                 }
             }
         },
-        "AddRange": {
-            "name": "AddRange",
-            "line": 46,
+        "addRange": {
+            "name": "addRange",
+            "line": 45,
             "short_desc": "Adds a range of values to the collection.",
             "long_desc": "The collection will be reindexed.",
             "hint": [
@@ -216,9 +216,9 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
-                    "line": 46,
+                "values": {
+                    "name": "values",
+                    "line": 45,
                     "short_desc": "The values to add",
                     "long_desc": null,
                     "hint": [
@@ -240,9 +240,9 @@
                 }
             }
         },
-        "RemoveRange": {
-            "name": "RemoveRange",
-            "line": 57,
+        "removeRange": {
+            "name": "removeRange",
+            "line": 55,
             "short_desc": "Removes a range of values from the collection",
             "long_desc": "",
             "hint": [
@@ -264,9 +264,9 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
-                    "line": 57,
+                "values": {
+                    "name": "values",
+                    "line": 55,
                     "short_desc": "The values to remove",
                     "long_desc": null,
                     "hint": [
@@ -288,8 +288,8 @@
                 }
             }
         },
-        "RemoveWhere": {
-            "name": "RemoveWhere",
+        "removeWhere": {
+            "name": "removeWhere",
             "line": 68,
             "short_desc": "Removes all the values matched by the predicate",
             "long_desc": "",
@@ -312,8 +312,8 @@
 
             ],
             "parameters": {
-                "Predicate": {
-                    "name": "Predicate",
+                "predicate": {
+                    "name": "predicate",
                     "line": 68,
                     "short_desc": "",
                     "long_desc": null,
@@ -334,7 +334,7 @@
         },
         "offsetSet": {
             "name": "offsetSet",
-            "line": 80,
+            "line": 81,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -351,9 +351,9 @@
 
             ],
             "parameters": {
-                "Index": {
-                    "name": "Index",
-                    "line": 80,
+                "index": {
+                    "name": "index",
+                    "line": 81,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -364,9 +364,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Value": {
-                    "name": "Value",
-                    "line": 80,
+                "value": {
+                    "name": "value",
+                    "line": 81,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -381,7 +381,7 @@
         },
         "offsetUnset": {
             "name": "offsetUnset",
-            "line": 93,
+            "line": 92,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -398,9 +398,9 @@
 
             ],
             "parameters": {
-                "Index": {
-                    "name": "Index",
-                    "line": 93,
+                "index": {
+                    "name": "index",
+                    "line": 92,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,

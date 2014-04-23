@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\RequestQuery.php",
-    "hash": "1fad15ea894e052226fc5be125616c10df49e964",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\RequestQuery.php",
+    "hash": "1293f2a8ff8405e46b1cdd345124da39a164789d",
     "parent": "Pinq\\Queries\\Query",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Scope": {
-                    "name": "Scope",
+                "scope": {
+                    "name": "scope",
                     "line": 17,
                     "short_desc": null,
                     "long_desc": null,
@@ -70,8 +70,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Request": {
-                    "name": "Request",
+                "request": {
+                    "name": "request",
                     "line": 17,
                     "short_desc": null,
                     "long_desc": null,
@@ -90,8 +90,8 @@
                 }
             }
         },
-        "GetRequest": {
-            "name": "GetRequest",
+        "getRequest": {
+            "name": "getRequest",
             "line": 23,
             "short_desc": "",
             "long_desc": "",

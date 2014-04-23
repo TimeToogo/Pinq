@@ -1,7 +1,7 @@
 {
     "name": "Pinq\\Parsing\\InvalidFunctionException",
     "line": 11,
-    "short_desc": "Exception for errors while converting a function into  an expression tree",
+    "short_desc": "Exception for errors while converting a function into an expression tree",
     "long_desc": "",
     "hint": null,
     "tags": {
@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Parsing",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Parsing\\InvalidFunctionException.php",
-    "hash": "ccbb56b8df19b12c72c76af08172f49a44b0a9fe",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Parsing\\InvalidFunctionException.php",
+    "hash": "6ae4d85ea25a18f04b322a5fc88e15193a39bc92",
     "parent": "Pinq\\PinqException",
     "modifiers": 0,
     "is_trait": false,
@@ -33,8 +33,8 @@
 
     ],
     "methods": {
-        "InvalidFunctionMessage": {
-            "name": "InvalidFunctionMessage",
+        "invalidFunctionMessage": {
+            "name": "invalidFunctionMessage",
             "line": 18,
             "short_desc": "",
             "long_desc": "",
@@ -57,8 +57,8 @@
 
             ],
             "parameters": {
-                "MessageFormat": {
-                    "name": "MessageFormat",
+                "messageFormat": {
+                    "name": "messageFormat",
                     "line": 18,
                     "short_desc": "",
                     "long_desc": null,
@@ -75,8 +75,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Reflection": {
-                    "name": "Reflection",
+                "reflection": {
+                    "name": "reflection",
                     "line": 18,
                     "short_desc": "",
                     "long_desc": null,
@@ -95,8 +95,8 @@
                 }
             }
         },
-        "MustContainValidReturnExpression": {
-            "name": "MustContainValidReturnExpression",
+        "mustContainValidReturnExpression": {
+            "name": "mustContainValidReturnExpression",
             "line": 33,
             "short_desc": "",
             "long_desc": "",
@@ -119,8 +119,8 @@
 
             ],
             "parameters": {
-                "Reflection": {
-                    "name": "Reflection",
+                "reflection": {
+                    "name": "reflection",
                     "line": 33,
                     "short_desc": "",
                     "long_desc": null,

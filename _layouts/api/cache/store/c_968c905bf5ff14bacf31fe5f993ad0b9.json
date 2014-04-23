@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions\\Operators",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\Operators\\Cast.php",
-    "hash": "325ee11b8ca6250b320ac64e0a2d50257d029b7d",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\Operators\\Cast.php",
+    "hash": "ad02f53dbc7e505ab9b39e45e173d50df19ae816",
     "parent": null,
     "modifiers": 32,
     "is_trait": false,
@@ -36,38 +36,38 @@
 
     ],
     "constants": {
-        "ArrayCast": {
-            "name": "ArrayCast",
+        "ARRAY_CAST": {
+            "name": "ARRAY_CAST",
             "line": 12,
             "short_desc": "",
             "long_desc": ""
         },
-        "Boolean": {
-            "name": "Boolean",
+        "BOOLEAN": {
+            "name": "BOOLEAN",
             "line": 13,
             "short_desc": "",
             "long_desc": ""
         },
-        "Double": {
-            "name": "Double",
+        "DOUBLE": {
+            "name": "DOUBLE",
             "line": 14,
             "short_desc": "",
             "long_desc": ""
         },
-        "Integer": {
-            "name": "Integer",
+        "INTEGER": {
+            "name": "INTEGER",
             "line": 15,
             "short_desc": "",
             "long_desc": ""
         },
-        "Object": {
-            "name": "Object",
+        "OBJECT": {
+            "name": "OBJECT",
             "line": 16,
             "short_desc": "",
             "long_desc": ""
         },
-        "String": {
-            "name": "String",
+        "STRING": {
+            "name": "STRING",
             "line": 17,
             "short_desc": "",
             "long_desc": ""

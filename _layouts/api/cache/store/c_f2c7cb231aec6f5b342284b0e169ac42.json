@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\BinaryOperationExpression.php",
-    "hash": "bb9adbd848fe4f776935cba82765b42a433f95ca",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\BinaryOperationExpression.php",
+    "hash": "d53eec5d40a2705fd7f4269638c02992f9008722",
     "parent": "Pinq\\Expressions\\Expression",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "LeftOperandExpression": {
-                    "name": "LeftOperandExpression",
+                "leftOperandExpression": {
+                    "name": "leftOperandExpression",
                     "line": 30,
                     "short_desc": null,
                     "long_desc": null,
@@ -70,8 +70,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Operator": {
-                    "name": "Operator",
+                "operator": {
+                    "name": "operator",
                     "line": 30,
                     "short_desc": null,
                     "long_desc": null,
@@ -83,8 +83,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "RightOperandExpression": {
-                    "name": "RightOperandExpression",
+                "rightOperandExpression": {
+                    "name": "rightOperandExpression",
                     "line": 30,
                     "short_desc": null,
                     "long_desc": null,
@@ -103,8 +103,8 @@
                 }
             }
         },
-        "GetOperator": {
-            "name": "GetOperator",
+        "getOperator": {
+            "name": "getOperator",
             "line": 40,
             "short_desc": "",
             "long_desc": "",
@@ -130,8 +130,8 @@
 
             ]
         },
-        "GetLeftOperandExpression": {
-            "name": "GetLeftOperandExpression",
+        "getLeftOperandExpression": {
+            "name": "getLeftOperandExpression",
             "line": 48,
             "short_desc": "",
             "long_desc": "",
@@ -157,8 +157,8 @@
 
             ]
         },
-        "GetRightOperandExpression": {
-            "name": "GetRightOperandExpression",
+        "getRightOperandExpression": {
+            "name": "getRightOperandExpression",
             "line": 56,
             "short_desc": "",
             "long_desc": "",
@@ -184,8 +184,8 @@
 
             ]
         },
-        "Traverse": {
-            "name": "Traverse",
+        "traverse": {
+            "name": "traverse",
             "line": 61,
             "short_desc": "",
             "long_desc": "",
@@ -208,8 +208,8 @@
 
             ],
             "parameters": {
-                "Walker": {
-                    "name": "Walker",
+                "walker": {
+                    "name": "walker",
                     "line": 61,
                     "short_desc": null,
                     "long_desc": null,
@@ -228,8 +228,8 @@
                 }
             }
         },
-        "Simplify": {
-            "name": "Simplify",
+        "simplify": {
+            "name": "simplify",
             "line": 66,
             "short_desc": "",
             "long_desc": "",
@@ -255,9 +255,9 @@
 
             ]
         },
-        "Update": {
-            "name": "Update",
-            "line": 139,
+        "update": {
+            "name": "update",
+            "line": 134,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -279,9 +279,9 @@
 
             ],
             "parameters": {
-                "LeftOperandExpression": {
-                    "name": "LeftOperandExpression",
-                    "line": 139,
+                "leftOperandExpression": {
+                    "name": "leftOperandExpression",
+                    "line": 134,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -297,9 +297,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Operator": {
-                    "name": "Operator",
-                    "line": 139,
+                "operator": {
+                    "name": "operator",
+                    "line": 134,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -310,9 +310,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "RightOperandExpression": {
-                    "name": "RightOperandExpression",
-                    "line": 139,
+                "rightOperandExpression": {
+                    "name": "rightOperandExpression",
+                    "line": 134,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -332,7 +332,7 @@
         },
         "serialize": {
             "name": "serialize",
-            "line": 159,
+            "line": 152,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -354,7 +354,7 @@
         },
         "unserialize": {
             "name": "unserialize",
-            "line": 164,
+            "line": 157,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -371,9 +371,9 @@
 
             ],
             "parameters": {
-                "Serialized": {
-                    "name": "Serialized",
-                    "line": 164,
+                "serialized": {
+                    "name": "serialized",
+                    "line": 157,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -388,7 +388,7 @@
         },
         "__clone": {
             "name": "__clone",
-            "line": 169,
+            "line": 162,
             "short_desc": "",
             "long_desc": "",
             "hint": null,

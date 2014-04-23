@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Iterators",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Iterators\\EqualityJoinIterator.php",
-    "hash": "78708f50e502df20d4d1f83e9463be6a9fdf1d58",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Iterators\\EqualityJoinIterator.php",
+    "hash": "e01ca61ed7f6a88872f2c341336b0074f7a1024c",
     "parent": "Pinq\\Iterators\\EqualityJoinIteratorBase",
     "modifiers": 0,
     "is_trait": false,

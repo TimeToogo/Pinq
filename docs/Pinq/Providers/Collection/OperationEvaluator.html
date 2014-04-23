@@ -42,29 +42,18 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_Visit">Visit</a>(<a href="../../../Pinq/Queries/IOperation.html"><abbr title="Pinq\Queries\IOperation">IOperation</abbr></a> $Operation)
+                    <a href="#method_visit">visit</a>(<a href="../../../Pinq/Queries/IOperation.html"><abbr title="Pinq\Queries\IOperation">IOperation</abbr></a> $operation)
                     <p>
 </p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Operations/OperationVisitor.html#method_Visit"><abbr title="Pinq\Queries\Operations\OperationVisitor">OperationVisitor</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Operations/OperationVisitor.html#method_visit"><abbr title="Pinq\Queries\Operations\OperationVisitor">OperationVisitor</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitApply">VisitApply</a>(<abbr title="Pinq\Providers\Collection\Operations\Apply">Apply</abbr> $Operation)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_VisitAddValues">VisitAddValues</a>(<abbr title="Pinq\Providers\Collection\Operations\AddValues">AddValues</abbr> $Operation)
+                    <a href="#method_visitApply">visitApply</a>(<abbr title="Pinq\Providers\Collection\Operations\Apply">Apply</abbr> $operation)
                     <p>
 </p>
                 </td>
@@ -75,7 +64,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitRemoveValues">VisitRemoveValues</a>(<abbr title="Pinq\Providers\Collection\Operations\RemoveValues">RemoveValues</abbr> $Operation)
+                    <a href="#method_visitAddValues">visitAddValues</a>(<abbr title="Pinq\Providers\Collection\Operations\AddValues">AddValues</abbr> $operation)
                     <p>
 </p>
                 </td>
@@ -86,7 +75,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitRemoveWhere">VisitRemoveWhere</a>(<abbr title="Pinq\Providers\Collection\Operations\RemoveWhere">RemoveWhere</abbr> $Operation)
+                    <a href="#method_visitRemoveValues">visitRemoveValues</a>(<abbr title="Pinq\Providers\Collection\Operations\RemoveValues">RemoveValues</abbr> $operation)
                     <p>
 </p>
                 </td>
@@ -97,7 +86,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitClear">VisitClear</a>(<abbr title="Pinq\Providers\Collection\Operations\Clear">Clear</abbr> $Operation)
+                    <a href="#method_visitRemoveWhere">visitRemoveWhere</a>(<abbr title="Pinq\Providers\Collection\Operations\RemoveWhere">RemoveWhere</abbr> $operation)
                     <p>
 </p>
                 </td>
@@ -108,7 +97,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitUnsetIndex">VisitUnsetIndex</a>(<abbr title="Pinq\Providers\Collection\Operations\UnsetIndex">UnsetIndex</abbr> $Operation)
+                    <a href="#method_visitClear">visitClear</a>(<abbr title="Pinq\Providers\Collection\Operations\Clear">Clear</abbr> $operation)
                     <p>
 </p>
                 </td>
@@ -119,7 +108,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitSetIndex">VisitSetIndex</a>(<abbr title="Pinq\Providers\Collection\Operations\SetIndex">SetIndex</abbr> $Operation)
+                    <a href="#method_visitUnsetIndex">visitUnsetIndex</a>(<abbr title="Pinq\Providers\Collection\Operations\UnsetIndex">UnsetIndex</abbr> $operation)
                     <p>
 </p>
                 </td>
@@ -130,7 +119,18 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(<abbr title="Pinq\Providers\Collection\Pinq\ICollection">ICollection</abbr> $Collection)
+                    <a href="#method_visitSetIndex">visitSetIndex</a>(<abbr title="Pinq\Providers\Collection\Operations\SetIndex">SetIndex</abbr> $operation)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<abbr title="Pinq\Providers\Collection\Pinq\ICollection">ICollection</abbr> $collection)
                     <p>
 </p>
                 </td>
@@ -141,10 +141,10 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method_Visit">
-        <div class="location">in <a href="../../../Pinq/Queries/Operations/OperationVisitor.html#method_Visit"><abbr title="Pinq\Queries\Operations\OperationVisitor">OperationVisitor</abbr></a> at line 21</div>
+                        <h3 id="method_visit">
+        <div class="location">in <a href="../../../Pinq/Queries/Operations/OperationVisitor.html#method_visit"><abbr title="Pinq\Queries\Operations\OperationVisitor">OperationVisitor</abbr></a> at line 21</div>
         <code>final            public            
-    <strong>Visit</strong>(<a href="../../../Pinq/Queries/IOperation.html"><abbr title="Pinq\Queries\IOperation">IOperation</abbr></a> $Operation)</code>
+    <strong>visit</strong>(<a href="../../../Pinq/Queries/IOperation.html"><abbr title="Pinq\Queries\IOperation">IOperation</abbr></a> $operation)</code>
     </h3>
     <div class="details">
         <p>
@@ -157,7 +157,7 @@
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/IOperation.html"><abbr title="Pinq\Queries\IOperation">IOperation</abbr></a></td>
-                <td>$Operation</td>
+                <td>$operation</td>
                 <td>The returned value</td>
             </tr>
             </table>
@@ -168,10 +168,10 @@
                     </div>
     </div>
 
-                <h3 id="method_VisitApply">
+                <h3 id="method_visitApply">
         <div class="location">at line 24</div>
         <code>            public            
-    <strong>VisitApply</strong>(<abbr title="Pinq\Providers\Collection\Operations\Apply">Apply</abbr> $Operation)</code>
+    <strong>visitApply</strong>(<abbr title="Pinq\Providers\Collection\Operations\Apply">Apply</abbr> $operation)</code>
     </h3>
     <div class="details">
         <p>
@@ -184,7 +184,7 @@
                     <table>
                     <tr>
                 <td><abbr title="Pinq\Providers\Collection\Operations\Apply">Apply</abbr></td>
-                <td>$Operation</td>
+                <td>$operation</td>
                 <td>
 </td>
             </tr>
@@ -196,10 +196,10 @@
                     </div>
     </div>
 
-                <h3 id="method_VisitAddValues">
+                <h3 id="method_visitAddValues">
         <div class="location">at line 29</div>
         <code>            public            
-    <strong>VisitAddValues</strong>(<abbr title="Pinq\Providers\Collection\Operations\AddValues">AddValues</abbr> $Operation)</code>
+    <strong>visitAddValues</strong>(<abbr title="Pinq\Providers\Collection\Operations\AddValues">AddValues</abbr> $operation)</code>
     </h3>
     <div class="details">
         <p>
@@ -212,7 +212,7 @@
                     <table>
                     <tr>
                 <td><abbr title="Pinq\Providers\Collection\Operations\AddValues">AddValues</abbr></td>
-                <td>$Operation</td>
+                <td>$operation</td>
                 <td>
 </td>
             </tr>
@@ -224,10 +224,10 @@
                     </div>
     </div>
 
-                <h3 id="method_VisitRemoveValues">
+                <h3 id="method_visitRemoveValues">
         <div class="location">at line 34</div>
         <code>            public            
-    <strong>VisitRemoveValues</strong>(<abbr title="Pinq\Providers\Collection\Operations\RemoveValues">RemoveValues</abbr> $Operation)</code>
+    <strong>visitRemoveValues</strong>(<abbr title="Pinq\Providers\Collection\Operations\RemoveValues">RemoveValues</abbr> $operation)</code>
     </h3>
     <div class="details">
         <p>
@@ -240,7 +240,7 @@
                     <table>
                     <tr>
                 <td><abbr title="Pinq\Providers\Collection\Operations\RemoveValues">RemoveValues</abbr></td>
-                <td>$Operation</td>
+                <td>$operation</td>
                 <td>
 </td>
             </tr>
@@ -252,10 +252,10 @@
                     </div>
     </div>
 
-                <h3 id="method_VisitRemoveWhere">
+                <h3 id="method_visitRemoveWhere">
         <div class="location">at line 39</div>
         <code>            public            
-    <strong>VisitRemoveWhere</strong>(<abbr title="Pinq\Providers\Collection\Operations\RemoveWhere">RemoveWhere</abbr> $Operation)</code>
+    <strong>visitRemoveWhere</strong>(<abbr title="Pinq\Providers\Collection\Operations\RemoveWhere">RemoveWhere</abbr> $operation)</code>
     </h3>
     <div class="details">
         <p>
@@ -268,7 +268,7 @@
                     <table>
                     <tr>
                 <td><abbr title="Pinq\Providers\Collection\Operations\RemoveWhere">RemoveWhere</abbr></td>
-                <td>$Operation</td>
+                <td>$operation</td>
                 <td>
 </td>
             </tr>
@@ -280,10 +280,10 @@
                     </div>
     </div>
 
-                <h3 id="method_VisitClear">
-        <div class="location">at line 43</div>
+                <h3 id="method_visitClear">
+        <div class="location">at line 44</div>
         <code>            public            
-    <strong>VisitClear</strong>(<abbr title="Pinq\Providers\Collection\Operations\Clear">Clear</abbr> $Operation)</code>
+    <strong>visitClear</strong>(<abbr title="Pinq\Providers\Collection\Operations\Clear">Clear</abbr> $operation)</code>
     </h3>
     <div class="details">
         <p>
@@ -296,7 +296,7 @@
                     <table>
                     <tr>
                 <td><abbr title="Pinq\Providers\Collection\Operations\Clear">Clear</abbr></td>
-                <td>$Operation</td>
+                <td>$operation</td>
                 <td>
 </td>
             </tr>
@@ -308,10 +308,10 @@
                     </div>
     </div>
 
-                <h3 id="method_VisitUnsetIndex">
-        <div class="location">at line 53</div>
+                <h3 id="method_visitUnsetIndex">
+        <div class="location">at line 54</div>
         <code>            public            
-    <strong>VisitUnsetIndex</strong>(<abbr title="Pinq\Providers\Collection\Operations\UnsetIndex">UnsetIndex</abbr> $Operation)</code>
+    <strong>visitUnsetIndex</strong>(<abbr title="Pinq\Providers\Collection\Operations\UnsetIndex">UnsetIndex</abbr> $operation)</code>
     </h3>
     <div class="details">
         <p>
@@ -324,7 +324,7 @@
                     <table>
                     <tr>
                 <td><abbr title="Pinq\Providers\Collection\Operations\UnsetIndex">UnsetIndex</abbr></td>
-                <td>$Operation</td>
+                <td>$operation</td>
                 <td>
 </td>
             </tr>
@@ -336,10 +336,10 @@
                     </div>
     </div>
 
-                <h3 id="method_VisitSetIndex">
-        <div class="location">at line 48</div>
+                <h3 id="method_visitSetIndex">
+        <div class="location">at line 49</div>
         <code>            public            
-    <strong>VisitSetIndex</strong>(<abbr title="Pinq\Providers\Collection\Operations\SetIndex">SetIndex</abbr> $Operation)</code>
+    <strong>visitSetIndex</strong>(<abbr title="Pinq\Providers\Collection\Operations\SetIndex">SetIndex</abbr> $operation)</code>
     </h3>
     <div class="details">
         <p>
@@ -352,7 +352,7 @@
                     <table>
                     <tr>
                 <td><abbr title="Pinq\Providers\Collection\Operations\SetIndex">SetIndex</abbr></td>
-                <td>$Operation</td>
+                <td>$operation</td>
                 <td>
 </td>
             </tr>
@@ -367,7 +367,7 @@
                 <h3 id="method___construct">
         <div class="location">at line 19</div>
         <code>            public            
-    <strong>__construct</strong>(<abbr title="Pinq\Providers\Collection\Pinq\ICollection">ICollection</abbr> $Collection)</code>
+    <strong>__construct</strong>(<abbr title="Pinq\Providers\Collection\Pinq\ICollection">ICollection</abbr> $collection)</code>
     </h3>
     <div class="details">
         <p>
@@ -380,7 +380,7 @@
                     <table>
                     <tr>
                 <td><abbr title="Pinq\Providers\Collection\Pinq\ICollection">ICollection</abbr></td>
-                <td>$Collection</td>
+                <td>$collection</td>
                 <td>
 </td>
             </tr>

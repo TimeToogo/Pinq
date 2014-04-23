@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions\\Walkers",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\Walkers\\ValueUnresolver.php",
-    "hash": "d3795e6270f33842e87395d2d3d53610bde77a27",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\Walkers\\ValueUnresolver.php",
+    "hash": "28d87d76e9dc3f353f563e21e1f01ed0133d3fb7",
     "parent": "Pinq\\Expressions\\ExpressionWalker",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "ValueFilterFunction": {
-                    "name": "ValueFilterFunction",
+                "valueFilterFunction": {
+                    "name": "valueFilterFunction",
                     "line": 42,
                     "short_desc": null,
                     "long_desc": null,
@@ -72,8 +72,8 @@
                 }
             }
         },
-        "GetVariableNameValueMap": {
-            "name": "GetVariableNameValueMap",
+        "getVariableNameValueMap": {
+            "name": "getVariableNameValueMap",
             "line": 52,
             "short_desc": "Returns the variable value map",
             "long_desc": "",
@@ -99,8 +99,8 @@
 
             ]
         },
-        "ResetVariableNameValueMap": {
-            "name": "ResetVariableNameValueMap",
+        "resetVariableNameValueMap": {
+            "name": "resetVariableNameValueMap",
             "line": 60,
             "short_desc": "",
             "long_desc": "",
@@ -126,8 +126,8 @@
 
             ]
         },
-        "SetValueFilter": {
-            "name": "SetValueFilter",
+        "setValueFilter": {
+            "name": "setValueFilter",
             "line": 71,
             "short_desc": "Sets the function to filter which values should not be inlined",
             "long_desc": "",
@@ -145,8 +145,8 @@
 
             ],
             "parameters": {
-                "ValueFilterFunction": {
-                    "name": "ValueFilterFunction",
+                "valueFilterFunction": {
+                    "name": "valueFilterFunction",
                     "line": 71,
                     "short_desc": "The filter function",
                     "long_desc": null,
@@ -165,10 +165,10 @@
                 }
             }
         },
-        "WalkClosure": {
-            "name": "WalkClosure",
+        "walkClosure": {
+            "name": "walkClosure",
             "line": 87,
-            "short_desc": "",
+            "short_desc": "Walks the and finds any values in the body then adds them as used variables",
             "long_desc": "",
             "hint": [
                 [
@@ -189,8 +189,8 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
+                "expression": {
+                    "name": "expression",
                     "line": 87,
                     "short_desc": null,
                     "long_desc": null,
@@ -209,8 +209,8 @@
                 }
             }
         },
-        "WalkValue": {
-            "name": "WalkValue",
+        "walkValue": {
+            "name": "walkValue",
             "line": 97,
             "short_desc": "",
             "long_desc": "",
@@ -228,8 +228,8 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
+                "expression": {
+                    "name": "expression",
                     "line": 97,
                     "short_desc": null,
                     "long_desc": null,

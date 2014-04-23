@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries\\Requests",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Requests\\Contains.php",
-    "hash": "84fa335ed46019cbbef1150716af5065924fa261",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\Requests\\Contains.php",
+    "hash": "3fc615938dc95c7b269d61f48eb0782eca8cb457",
     "parent": "Pinq\\Queries\\Requests\\Request",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Value": {
-                    "name": "Value",
+                "value": {
+                    "name": "value",
                     "line": 15,
                     "short_desc": null,
                     "long_desc": null,
@@ -67,8 +67,8 @@
                 }
             }
         },
-        "GetType": {
-            "name": "GetType",
+        "getType": {
+            "name": "getType",
             "line": 20,
             "short_desc": "",
             "long_desc": "",
@@ -94,8 +94,8 @@
 
             ]
         },
-        "GetValue": {
-            "name": "GetValue",
+        "getValue": {
+            "name": "getValue",
             "line": 25,
             "short_desc": "",
             "long_desc": "",
@@ -116,8 +116,8 @@
 
             ]
         },
-        "Traverse": {
-            "name": "Traverse",
+        "traverse": {
+            "name": "traverse",
             "line": 30,
             "short_desc": "",
             "long_desc": "",
@@ -140,8 +140,8 @@
 
             ],
             "parameters": {
-                "Visitor": {
-                    "name": "Visitor",
+                "visitor": {
+                    "name": "visitor",
                     "line": 30,
                     "short_desc": null,
                     "long_desc": null,

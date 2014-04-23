@@ -1,7 +1,7 @@
 {
     "name": "Pinq\\ICollection",
     "line": 11,
-    "short_desc": "The collection API, along with traversable query API,  a collection's values are mutable, they can be added, removed and altered.",
+    "short_desc": "The collection API, along with traversable query API, a collection's values are mutable, they can be added, removed and altered.",
     "long_desc": "",
     "hint": null,
     "tags": {
@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\ICollection.php",
-    "hash": "b4effa177003fb9a834ac314d1eec033baee16a9",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\ICollection.php",
+    "hash": "0a936a86b5c998da63a5d8cdd486473afd199a61",
     "parent": null,
     "modifiers": null,
     "is_trait": false,
@@ -33,8 +33,8 @@
 
     ],
     "methods": {
-        "Apply": {
-            "name": "Apply",
+        "apply": {
+            "name": "apply",
             "line": 19,
             "short_desc": "Applies the function the list of values",
             "long_desc": "",
@@ -57,8 +57,8 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
+                "function": {
+                    "name": "function",
                     "line": 19,
                     "short_desc": "",
                     "long_desc": null,
@@ -77,8 +77,8 @@
                 }
             }
         },
-        "AddRange": {
-            "name": "AddRange",
+        "addRange": {
+            "name": "addRange",
             "line": 28,
             "short_desc": "Adds a range of values to the collection.",
             "long_desc": "The collection will be reindexed.",
@@ -101,8 +101,8 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
+                "values": {
+                    "name": "values",
                     "line": 28,
                     "short_desc": "The values to add",
                     "long_desc": null,
@@ -125,8 +125,8 @@
                 }
             }
         },
-        "RemoveRange": {
-            "name": "RemoveRange",
+        "removeRange": {
+            "name": "removeRange",
             "line": 36,
             "short_desc": "Removes a range of values from the collection",
             "long_desc": "",
@@ -149,8 +149,8 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
+                "values": {
+                    "name": "values",
                     "line": 36,
                     "short_desc": "The values to remove",
                     "long_desc": null,
@@ -173,8 +173,8 @@
                 }
             }
         },
-        "RemoveWhere": {
-            "name": "RemoveWhere",
+        "removeWhere": {
+            "name": "removeWhere",
             "line": 44,
             "short_desc": "Removes all the values matched by the predicate",
             "long_desc": "",
@@ -197,8 +197,8 @@
 
             ],
             "parameters": {
-                "Predicate": {
-                    "name": "Predicate",
+                "predicate": {
+                    "name": "predicate",
                     "line": 44,
                     "short_desc": "",
                     "long_desc": null,
@@ -217,8 +217,8 @@
                 }
             }
         },
-        "Clear": {
-            "name": "Clear",
+        "clear": {
+            "name": "clear",
             "line": 51,
             "short_desc": "Removes all the values.",
             "long_desc": "",

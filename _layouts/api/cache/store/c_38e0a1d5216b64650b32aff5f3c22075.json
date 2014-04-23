@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries\\Operations",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Operations\\SetIndex.php",
-    "hash": "20c46bdc1e8e474ec086f32541c5ae5d601605f5",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\Operations\\SetIndex.php",
+    "hash": "17ab59fa0f5b2137808b93bb46855f28b72c23b4",
     "parent": "Pinq\\Queries\\Operations\\IndexOperation",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Index": {
-                    "name": "Index",
+                "index": {
+                    "name": "index",
                     "line": 14,
                     "short_desc": null,
                     "long_desc": null,
@@ -65,8 +65,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Value": {
-                    "name": "Value",
+                "value": {
+                    "name": "value",
                     "line": 14,
                     "short_desc": null,
                     "long_desc": null,
@@ -80,8 +80,8 @@
                 }
             }
         },
-        "GetType": {
-            "name": "GetType",
+        "getType": {
+            "name": "getType",
             "line": 20,
             "short_desc": "",
             "long_desc": "",
@@ -107,8 +107,8 @@
 
             ]
         },
-        "GetValue": {
-            "name": "GetValue",
+        "getValue": {
+            "name": "getValue",
             "line": 25,
             "short_desc": "",
             "long_desc": "",
@@ -129,8 +129,8 @@
 
             ]
         },
-        "Traverse": {
-            "name": "Traverse",
+        "traverse": {
+            "name": "traverse",
             "line": 30,
             "short_desc": "",
             "long_desc": "",
@@ -153,8 +153,8 @@
 
             ],
             "parameters": {
-                "Visitor": {
-                    "name": "Visitor",
+                "visitor": {
+                    "name": "visitor",
                     "line": 30,
                     "short_desc": null,
                     "long_desc": null,

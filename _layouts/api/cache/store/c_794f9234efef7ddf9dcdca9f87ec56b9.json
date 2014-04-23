@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Traversable.php",
-    "hash": "0c32c48278d6bb1dd3d891380c41e9f46d859c52",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Traversable.php",
+    "hash": "2727a1282e30458b320de5f055cc21665ffd3592",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -53,8 +53,8 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
+                "values": {
+                    "name": "values",
                     "line": 20,
                     "short_desc": null,
                     "long_desc": null,
@@ -68,8 +68,8 @@
                 }
             }
         },
-        "From": {
-            "name": "From",
+        "from": {
+            "name": "from",
             "line": 31,
             "short_desc": "Constructs a new traversable object from the supplied values",
             "long_desc": "",
@@ -92,8 +92,8 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
+                "values": {
+                    "name": "values",
                     "line": 31,
                     "short_desc": "The values",
                     "long_desc": null,
@@ -138,8 +138,8 @@
 
             ]
         },
-        "AsArray": {
-            "name": "AsArray",
+        "asArray": {
+            "name": "asArray",
             "line": 41,
             "short_desc": "Returns the values as an array",
             "long_desc": "",
@@ -165,8 +165,8 @@
 
             ]
         },
-        "AsTraversable": {
-            "name": "AsTraversable",
+        "asTraversable": {
+            "name": "asTraversable",
             "line": 49,
             "short_desc": "Returns the values as a traversable.",
             "long_desc": "If the implementation is queryable the following operations will\nbe performed in memory.",
@@ -192,8 +192,8 @@
 
             ]
         },
-        "AsCollection": {
-            "name": "AsCollection",
+        "asCollection": {
+            "name": "asCollection",
             "line": 54,
             "short_desc": "Returns the values as a collection.",
             "long_desc": "If the implementation is queryable the following operations will\nbe performed in memory.",
@@ -219,8 +219,8 @@
 
             ]
         },
-        "AsQueryable": {
-            "name": "AsQueryable",
+        "asQueryable": {
+            "name": "asQueryable",
             "line": 59,
             "short_desc": "Returns the values as a queryable.",
             "long_desc": "",
@@ -246,8 +246,8 @@
 
             ]
         },
-        "AsRepository": {
-            "name": "AsRepository",
+        "asRepository": {
+            "name": "asRepository",
             "line": 64,
             "short_desc": "Returns the values as a repository.",
             "long_desc": "",
@@ -314,8 +314,8 @@
 
             ],
             "parameters": {
-                "Serialized": {
-                    "name": "Serialized",
+                "serialized": {
+                    "name": "serialized",
                     "line": 74,
                     "short_desc": null,
                     "long_desc": null,
@@ -329,8 +329,8 @@
                 }
             }
         },
-        "First": {
-            "name": "First",
+        "first": {
+            "name": "first",
             "line": 81,
             "short_desc": "Returns the first value, null if empty",
             "long_desc": "",
@@ -356,9 +356,9 @@
 
             ]
         },
-        "Last": {
-            "name": "Last",
-            "line": 89,
+        "last": {
+            "name": "last",
+            "line": 90,
             "short_desc": "Returns the last value, null if empty",
             "long_desc": "",
             "hint": [
@@ -383,9 +383,9 @@
 
             ]
         },
-        "Where": {
-            "name": "Where",
-            "line": 93,
+        "where": {
+            "name": "where",
+            "line": 97,
             "short_desc": "Filters the values by a supplied predicate.",
             "long_desc": "",
             "hint": [
@@ -407,9 +407,9 @@
 
             ],
             "parameters": {
-                "Predicate": {
-                    "name": "Predicate",
-                    "line": 93,
+                "predicate": {
+                    "name": "predicate",
+                    "line": 97,
                     "short_desc": "The predicate function",
                     "long_desc": null,
                     "hint": [
@@ -427,9 +427,9 @@
                 }
             }
         },
-        "OrderByAscending": {
-            "name": "OrderByAscending",
-            "line": 98,
+        "orderByAscending": {
+            "name": "orderByAscending",
+            "line": 102,
             "short_desc": "Orders the values mapped from the supplied function ascendingly",
             "long_desc": "Example function:",
             "hint": [
@@ -451,9 +451,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 98,
+                "function": {
+                    "name": "function",
+                    "line": 102,
                     "short_desc": "The mapping function",
                     "long_desc": null,
                     "hint": [
@@ -471,9 +471,9 @@
                 }
             }
         },
-        "OrderByDescending": {
-            "name": "OrderByDescending",
-            "line": 103,
+        "orderByDescending": {
+            "name": "orderByDescending",
+            "line": 107,
             "short_desc": "Orders the values mapped from the supplied function descendingly",
             "long_desc": "Example expression function:",
             "hint": [
@@ -495,9 +495,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 103,
+                "function": {
+                    "name": "function",
+                    "line": 107,
                     "short_desc": "The mapping function",
                     "long_desc": null,
                     "hint": [
@@ -515,9 +515,9 @@
                 }
             }
         },
-        "OrderBy": {
-            "name": "OrderBy",
-            "line": 108,
+        "orderBy": {
+            "name": "orderBy",
+            "line": 112,
             "short_desc": "Orders the values mapped from the supplied function according the supplied direction.",
             "long_desc": "",
             "hint": [
@@ -539,9 +539,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 108,
+                "function": {
+                    "name": "function",
+                    "line": 112,
                     "short_desc": "The projection function",
                     "long_desc": null,
                     "hint": [
@@ -557,9 +557,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Direction": {
-                    "name": "Direction",
-                    "line": 108,
+                "direction": {
+                    "name": "direction",
+                    "line": 112,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -577,9 +577,9 @@
                 }
             }
         },
-        "Skip": {
-            "name": "Skip",
-            "line": 113,
+        "skip": {
+            "name": "skip",
+            "line": 117,
             "short_desc": "Skip the amount of values from the start.",
             "long_desc": "",
             "hint": [
@@ -601,9 +601,9 @@
 
             ],
             "parameters": {
-                "Amount": {
-                    "name": "Amount",
-                    "line": 113,
+                "amount": {
+                    "name": "amount",
+                    "line": 117,
                     "short_desc": "The amount of values to skip, must be > 0",
                     "long_desc": null,
                     "hint": [
@@ -621,9 +621,9 @@
                 }
             }
         },
-        "Take": {
-            "name": "Take",
-            "line": 118,
+        "take": {
+            "name": "take",
+            "line": 122,
             "short_desc": "Limits the amount of values by the supplied amount",
             "long_desc": "",
             "hint": [
@@ -645,9 +645,9 @@
 
             ],
             "parameters": {
-                "Amount": {
-                    "name": "Amount",
-                    "line": 118,
+                "amount": {
+                    "name": "amount",
+                    "line": 122,
                     "short_desc": "The amount of values to retrieve, must be > 0 or null if all",
                     "long_desc": null,
                     "hint": [
@@ -669,9 +669,9 @@
                 }
             }
         },
-        "Slice": {
-            "name": "Slice",
-            "line": 123,
+        "slice": {
+            "name": "slice",
+            "line": 127,
             "short_desc": "Retrieve a slice of the values",
             "long_desc": "",
             "hint": [
@@ -693,9 +693,9 @@
 
             ],
             "parameters": {
-                "Start": {
-                    "name": "Start",
-                    "line": 123,
+                "start": {
+                    "name": "start",
+                    "line": 127,
                     "short_desc": "The amount of values to skip",
                     "long_desc": null,
                     "hint": [
@@ -711,9 +711,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Amount": {
-                    "name": "Amount",
-                    "line": 123,
+                "amount": {
+                    "name": "amount",
+                    "line": 127,
                     "short_desc": "The amount of values to retrieve",
                     "long_desc": null,
                     "hint": [
@@ -735,9 +735,9 @@
                 }
             }
         },
-        "IndexBy": {
-            "name": "IndexBy",
-            "line": 128,
+        "indexBy": {
+            "name": "indexBy",
+            "line": 132,
             "short_desc": "Index the values according to the supplied mapping function.",
             "long_desc": "",
             "hint": [
@@ -759,9 +759,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 128,
+                "function": {
+                    "name": "function",
+                    "line": 132,
                     "short_desc": "The projection function",
                     "long_desc": null,
                     "hint": [
@@ -779,9 +779,9 @@
                 }
             }
         },
-        "GroupBy": {
-            "name": "GroupBy",
-            "line": 133,
+        "groupBy": {
+            "name": "groupBy",
+            "line": 140,
             "short_desc": "Groups values according the supplied function.",
             "long_desc": "(Uses strict equality '===')\nThe values will be grouped into instances of ITraversable.",
             "hint": [
@@ -803,9 +803,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 133,
+                "function": {
+                    "name": "function",
+                    "line": 140,
                     "short_desc": "The grouping function",
                     "long_desc": null,
                     "hint": [
@@ -823,9 +823,9 @@
                 }
             }
         },
-        "Join": {
-            "name": "Join",
-            "line": 138,
+        "join": {
+            "name": "join",
+            "line": 145,
             "short_desc": "Matches the original values with the supplied values according to the supplied function.",
             "long_desc": "",
             "hint": [
@@ -847,9 +847,9 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
-                    "line": 138,
+                "values": {
+                    "name": "values",
+                    "line": 145,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -871,9 +871,9 @@
                 }
             }
         },
-        "GroupJoin": {
-            "name": "GroupJoin",
-            "line": 143,
+        "groupJoin": {
+            "name": "groupJoin",
+            "line": 153,
             "short_desc": "Matches the original values with the supplied values according to the supplied functions then groups the values.",
             "long_desc": "",
             "hint": [
@@ -895,9 +895,9 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
-                    "line": 143,
+                "values": {
+                    "name": "values",
+                    "line": 153,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -919,9 +919,9 @@
                 }
             }
         },
-        "Unique": {
-            "name": "Unique",
-            "line": 148,
+        "unique": {
+            "name": "unique",
+            "line": 161,
             "short_desc": "Only return unique values.",
             "long_desc": "(Uses strict equality '===')",
             "hint": [
@@ -946,9 +946,9 @@
 
             ]
         },
-        "Select": {
-            "name": "Select",
-            "line": 153,
+        "select": {
+            "name": "select",
+            "line": 166,
             "short_desc": "Returns the values mapped by the supplied function.",
             "long_desc": "",
             "hint": [
@@ -970,9 +970,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 153,
+                "function": {
+                    "name": "function",
+                    "line": 166,
                     "short_desc": "The function returning the data to select",
                     "long_desc": null,
                     "hint": [
@@ -990,10 +990,10 @@
                 }
             }
         },
-        "SelectMany": {
-            "name": "SelectMany",
-            "line": 158,
-            "short_desc": "Returns the values mapped by the supplied function and then flattens  the values into a single traversable.",
+        "selectMany": {
+            "name": "selectMany",
+            "line": 174,
+            "short_desc": "Returns the values mapped by the supplied function and then flattens the values into a single traversable.",
             "long_desc": "Keys will be reindexed.",
             "hint": [
                 [
@@ -1014,9 +1014,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 158,
+                "function": {
+                    "name": "function",
+                    "line": 174,
                     "short_desc": "The function returning the data to select",
                     "long_desc": null,
                     "hint": [
@@ -1034,10 +1034,10 @@
                 }
             }
         },
-        "Union": {
-            "name": "Union",
-            "line": 169,
-            "short_desc": "Returns unique results present in both the original and supplied values,  keys will be reindexed.",
+        "union": {
+            "name": "union",
+            "line": 189,
+            "short_desc": "Returns unique results present in both the original and supplied values, keys will be reindexed.",
             "long_desc": "(Uses strict equality '===')",
             "hint": [
                 [
@@ -1058,9 +1058,9 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
-                    "line": 169,
+                "values": {
+                    "name": "values",
+                    "line": 189,
                     "short_desc": "The values to union",
                     "long_desc": null,
                     "hint": [
@@ -1082,9 +1082,9 @@
                 }
             }
         },
-        "Intersect": {
-            "name": "Intersect",
-            "line": 174,
+        "intersect": {
+            "name": "intersect",
+            "line": 196,
             "short_desc": "Returns unique values the are present in the original and supplied values.",
             "long_desc": "(Uses strict equality '===')",
             "hint": [
@@ -1106,9 +1106,9 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
-                    "line": 174,
+                "values": {
+                    "name": "values",
+                    "line": 196,
                     "short_desc": "The values to intersect with",
                     "long_desc": null,
                     "hint": [
@@ -1130,9 +1130,9 @@
                 }
             }
         },
-        "Difference": {
-            "name": "Difference",
-            "line": 179,
+        "difference": {
+            "name": "difference",
+            "line": 203,
             "short_desc": "Removes unique values from the original not present in the supplied values.",
             "long_desc": "(Uses strict equality '===')",
             "hint": [
@@ -1154,9 +1154,9 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
-                    "line": 179,
+                "values": {
+                    "name": "values",
+                    "line": 203,
                     "short_desc": "The values to remove",
                     "long_desc": null,
                     "hint": [
@@ -1178,9 +1178,9 @@
                 }
             }
         },
-        "Append": {
-            "name": "Append",
-            "line": 188,
+        "append": {
+            "name": "append",
+            "line": 214,
             "short_desc": "Returns values from the original and supplied values, keys will be reindexed.",
             "long_desc": "",
             "hint": [
@@ -1202,9 +1202,9 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
-                    "line": 188,
+                "values": {
+                    "name": "values",
+                    "line": 214,
                     "short_desc": "The values to append",
                     "long_desc": null,
                     "hint": [
@@ -1226,9 +1226,9 @@
                 }
             }
         },
-        "WhereIn": {
-            "name": "WhereIn",
-            "line": 193,
+        "whereIn": {
+            "name": "whereIn",
+            "line": 219,
             "short_desc": "Returns all values from the original present in the supplied values.",
             "long_desc": "(Uses strict equality '===')",
             "hint": [
@@ -1250,9 +1250,9 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
-                    "line": 193,
+                "values": {
+                    "name": "values",
+                    "line": 219,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -1274,9 +1274,9 @@
                 }
             }
         },
-        "Except": {
-            "name": "Except",
-            "line": 198,
+        "except": {
+            "name": "except",
+            "line": 226,
             "short_desc": "Returns values all values from the original not present in the supplied values.",
             "long_desc": "(Uses strict equality '===')",
             "hint": [
@@ -1298,9 +1298,9 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
-                    "line": 198,
+                "values": {
+                    "name": "values",
+                    "line": 226,
                     "short_desc": "The values to union",
                     "long_desc": null,
                     "hint": [
@@ -1324,7 +1324,7 @@
         },
         "offsetExists": {
             "name": "offsetExists",
-            "line": 207,
+            "line": 237,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -1341,9 +1341,9 @@
 
             ],
             "parameters": {
-                "Index": {
-                    "name": "Index",
-                    "line": 207,
+                "index": {
+                    "name": "index",
+                    "line": 237,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -1358,7 +1358,7 @@
         },
         "offsetGet": {
             "name": "offsetGet",
-            "line": 213,
+            "line": 242,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -1375,9 +1375,9 @@
 
             ],
             "parameters": {
-                "Index": {
-                    "name": "Index",
-                    "line": 213,
+                "index": {
+                    "name": "index",
+                    "line": 242,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -1392,7 +1392,7 @@
         },
         "offsetSet": {
             "name": "offsetSet",
-            "line": 219,
+            "line": 247,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -1409,9 +1409,9 @@
 
             ],
             "parameters": {
-                "Index": {
-                    "name": "Index",
-                    "line": 219,
+                "index": {
+                    "name": "index",
+                    "line": 247,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -1422,9 +1422,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Value": {
-                    "name": "Value",
-                    "line": 219,
+                "value": {
+                    "name": "value",
+                    "line": 247,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -1439,7 +1439,7 @@
         },
         "offsetUnset": {
             "name": "offsetUnset",
-            "line": 224,
+            "line": 252,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -1456,9 +1456,9 @@
 
             ],
             "parameters": {
-                "Index": {
-                    "name": "Index",
-                    "line": 224,
+                "index": {
+                    "name": "index",
+                    "line": 252,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -1471,9 +1471,9 @@
                 }
             }
         },
-        "Count": {
-            "name": "Count",
-            "line": 233,
+        "count": {
+            "name": "count",
+            "line": 261,
             "short_desc": "Returns the amount of the values.",
             "long_desc": "",
             "hint": [
@@ -1498,9 +1498,9 @@
 
             ]
         },
-        "Exists": {
-            "name": "Exists",
-            "line": 239,
+        "exists": {
+            "name": "exists",
+            "line": 266,
             "short_desc": "Returns whether any values exist.",
             "long_desc": "",
             "hint": [
@@ -1525,9 +1525,9 @@
 
             ]
         },
-        "Contains": {
-            "name": "Contains",
-            "line": 248,
+        "contains": {
+            "name": "contains",
+            "line": 275,
             "short_desc": "Returns whether the supplied value is contained within the aggregate",
             "long_desc": "",
             "hint": [
@@ -1549,9 +1549,9 @@
 
             ],
             "parameters": {
-                "Value": {
-                    "name": "Value",
-                    "line": 248,
+                "value": {
+                    "name": "value",
+                    "line": 275,
                     "short_desc": "The value to check for",
                     "long_desc": null,
                     "hint": [
@@ -1569,9 +1569,9 @@
                 }
             }
         },
-        "Aggregate": {
-            "name": "Aggregate",
-            "line": 259,
+        "aggregate": {
+            "name": "aggregate",
+            "line": 286,
             "short_desc": "Aggregates the values with the supplied function",
             "long_desc": "",
             "hint": [
@@ -1593,9 +1593,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 259,
+                "function": {
+                    "name": "function",
+                    "line": 286,
                     "short_desc": "The aggregate function",
                     "long_desc": null,
                     "hint": [
@@ -1613,9 +1613,9 @@
                 }
             }
         },
-        "Maximum": {
-            "name": "Maximum",
-            "line": 285,
+        "maximum": {
+            "name": "maximum",
+            "line": 313,
             "short_desc": "Returns the maximum value.",
             "long_desc": "",
             "hint": [
@@ -1637,9 +1637,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 285,
+                "function": {
+                    "name": "function",
+                    "line": 313,
                     "short_desc": "The function which will return the values",
                     "long_desc": null,
                     "hint": [
@@ -1657,9 +1657,9 @@
                 }
             }
         },
-        "Minimum": {
-            "name": "Minimum",
-            "line": 291,
+        "minimum": {
+            "name": "minimum",
+            "line": 320,
             "short_desc": "Returns the maximum value.",
             "long_desc": "",
             "hint": [
@@ -1681,9 +1681,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 291,
+                "function": {
+                    "name": "function",
+                    "line": 320,
                     "short_desc": "The function which will return the values",
                     "long_desc": null,
                     "hint": [
@@ -1701,9 +1701,9 @@
                 }
             }
         },
-        "Sum": {
-            "name": "Sum",
-            "line": 297,
+        "sum": {
+            "name": "sum",
+            "line": 327,
             "short_desc": "Returns the sum of the values.",
             "long_desc": "",
             "hint": [
@@ -1729,9 +1729,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 297,
+                "function": {
+                    "name": "function",
+                    "line": 327,
                     "short_desc": "The function which will return the values",
                     "long_desc": null,
                     "hint": [
@@ -1749,9 +1749,9 @@
                 }
             }
         },
-        "Average": {
-            "name": "Average",
-            "line": 303,
+        "average": {
+            "name": "average",
+            "line": 334,
             "short_desc": "Returns the average of the values.",
             "long_desc": "",
             "hint": [
@@ -1777,9 +1777,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 303,
+                "function": {
+                    "name": "function",
+                    "line": 334,
                     "short_desc": "The function which will return the values",
                     "long_desc": null,
                     "hint": [
@@ -1797,9 +1797,9 @@
                 }
             }
         },
-        "All": {
-            "name": "All",
-            "line": 309,
+        "all": {
+            "name": "all",
+            "line": 341,
             "short_desc": "Returns a boolean of if all the values evaluate to true",
             "long_desc": "",
             "hint": [
@@ -1821,9 +1821,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 309,
+                "function": {
+                    "name": "function",
+                    "line": 341,
                     "short_desc": "The function which will return the values",
                     "long_desc": null,
                     "hint": [
@@ -1841,9 +1841,9 @@
                 }
             }
         },
-        "Any": {
-            "name": "Any",
-            "line": 320,
+        "any": {
+            "name": "any",
+            "line": 352,
             "short_desc": "Returns a boolean of if any of the values evaluate to true",
             "long_desc": "",
             "hint": [
@@ -1865,9 +1865,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 320,
+                "function": {
+                    "name": "function",
+                    "line": 352,
                     "short_desc": "The function which will return the values",
                     "long_desc": null,
                     "hint": [
@@ -1885,9 +1885,9 @@
                 }
             }
         },
-        "Implode": {
-            "name": "Implode",
-            "line": 331,
+        "implode": {
+            "name": "implode",
+            "line": 363,
             "short_desc": "Returns a string of all the values concatented by the delimiter",
             "long_desc": "",
             "hint": [
@@ -1909,9 +1909,9 @@
 
             ],
             "parameters": {
-                "Delimiter": {
-                    "name": "Delimiter",
-                    "line": 331,
+                "delimiter": {
+                    "name": "delimiter",
+                    "line": 363,
                     "short_desc": "The string to delimit the values by",
                     "long_desc": null,
                     "hint": [
@@ -1927,9 +1927,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Function": {
-                    "name": "Function",
-                    "line": 331,
+                "function": {
+                    "name": "function",
+                    "line": 363,
                     "short_desc": "The function which will return the values",
                     "long_desc": null,
                     "hint": [

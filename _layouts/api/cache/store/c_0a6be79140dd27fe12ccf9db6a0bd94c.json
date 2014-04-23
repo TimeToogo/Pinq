@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Iterators",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Iterators\\IteratorIterator.php",
-    "hash": "19a6b72575bbb985c6f6ce2180165b89aeed2018",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Iterators\\IteratorIterator.php",
+    "hash": "b5d061d0db02efee5d20385400d33ad5580aea1c",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Iterator": {
-                    "name": "Iterator",
+                "iterator": {
+                    "name": "iterator",
                     "line": 19,
                     "short_desc": null,
                     "long_desc": null,
@@ -72,9 +72,9 @@
                 }
             }
         },
-        "GetInnerIterator": {
-            "name": "GetInnerIterator",
-            "line": 32,
+        "getInnerIterator": {
+            "name": "getInnerIterator",
+            "line": 30,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -96,7 +96,7 @@
         },
         "current": {
             "name": "current",
-            "line": 37,
+            "line": 35,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -118,7 +118,7 @@
         },
         "key": {
             "name": "key",
-            "line": 42,
+            "line": 40,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -140,7 +140,7 @@
         },
         "next": {
             "name": "next",
-            "line": 47,
+            "line": 45,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -162,7 +162,7 @@
         },
         "rewind": {
             "name": "rewind",
-            "line": 52,
+            "line": 50,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -184,7 +184,7 @@
         },
         "valid": {
             "name": "valid",
-            "line": 57,
+            "line": 55,
             "short_desc": "",
             "long_desc": "",
             "hint": null,

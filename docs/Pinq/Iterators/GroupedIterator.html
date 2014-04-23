@@ -42,7 +42,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(<abbr title="Pinq\Iterators\Traversable">Traversable</abbr> $Iterator, callable $GroupByFunction)
+                    <a href="#method___construct">__construct</a>(<abbr title="Pinq\Iterators\Traversable">Traversable</abbr> $iterator, callable $groupByFunction)
                     <p>
 </p>
                 </td>
@@ -53,11 +53,11 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_GetInnerIterator">GetInnerIterator</a>()
+                    <a href="#method_getInnerIterator">getInnerIterator</a>()
                     <p>
 </p>
                 </td>
-                <td><small>from&nbsp;<a href="../../Pinq/Iterators/LazyIterator.html#method_GetInnerIterator"><abbr title="Pinq\Iterators\LazyIterator">LazyIterator</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../Pinq/Iterators/LazyIterator.html#method_getInnerIterator"><abbr title="Pinq\Iterators\LazyIterator">LazyIterator</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -119,7 +119,7 @@
                     <a href="../../Pinq/Iterators/GroupedIterator.html"><abbr title="Pinq\Iterators\GroupedIterator">GroupedIterator</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_AndGroupBy">AndGroupBy</a>(callable $GroupByFunctions)
+                    <a href="#method_andGroupBy">andGroupBy</a>(callable $groupByFunctions)
                     <p>
 </p>
                 </td>
@@ -133,7 +133,7 @@
                         <h3 id="method___construct">
         <div class="location">at line 17</div>
         <code>            public            
-    <strong>__construct</strong>(<abbr title="Pinq\Iterators\Traversable">Traversable</abbr> $Iterator, callable $GroupByFunction)</code>
+    <strong>__construct</strong>(<abbr title="Pinq\Iterators\Traversable">Traversable</abbr> $iterator, callable $groupByFunction)</code>
     </h3>
     <div class="details">
         <p>
@@ -146,13 +146,13 @@
                     <table>
                     <tr>
                 <td><abbr title="Pinq\Iterators\Traversable">Traversable</abbr></td>
-                <td>$Iterator</td>
+                <td>$iterator</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td>callable</td>
-                <td>$GroupByFunction</td>
+                <td>$groupByFunction</td>
                 <td>
 </td>
             </tr>
@@ -164,10 +164,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetInnerIterator">
-        <div class="location">in <a href="../../Pinq/Iterators/LazyIterator.html#method_GetInnerIterator"><abbr title="Pinq\Iterators\LazyIterator">LazyIterator</abbr></a> at line 35</div>
+                <h3 id="method_getInnerIterator">
+        <div class="location">in <a href="../../Pinq/Iterators/LazyIterator.html#method_getInnerIterator"><abbr title="Pinq\Iterators\LazyIterator">LazyIterator</abbr></a> at line 37</div>
         <code>            public            
-    <strong>GetInnerIterator</strong>()</code>
+    <strong>getInnerIterator</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -182,7 +182,7 @@
     </div>
 
                 <h3 id="method_current">
-        <div class="location">in <a href="../../Pinq/Iterators/LazyIterator.html#method_current"><abbr title="Pinq\Iterators\LazyIterator">LazyIterator</abbr></a> at line 43</div>
+        <div class="location">in <a href="../../Pinq/Iterators/LazyIterator.html#method_current"><abbr title="Pinq\Iterators\LazyIterator">LazyIterator</abbr></a> at line 46</div>
         <code>            public            
     <strong>current</strong>()</code>
     </h3>
@@ -199,7 +199,7 @@
     </div>
 
                 <h3 id="method_key">
-        <div class="location">in <a href="../../Pinq/Iterators/LazyIterator.html#method_key"><abbr title="Pinq\Iterators\LazyIterator">LazyIterator</abbr></a> at line 51</div>
+        <div class="location">in <a href="../../Pinq/Iterators/LazyIterator.html#method_key"><abbr title="Pinq\Iterators\LazyIterator">LazyIterator</abbr></a> at line 55</div>
         <code>            public            
     <strong>key</strong>()</code>
     </h3>
@@ -216,7 +216,7 @@
     </div>
 
                 <h3 id="method_next">
-        <div class="location">in <a href="../../Pinq/Iterators/LazyIterator.html#method_next"><abbr title="Pinq\Iterators\LazyIterator">LazyIterator</abbr></a> at line 59</div>
+        <div class="location">in <a href="../../Pinq/Iterators/LazyIterator.html#method_next"><abbr title="Pinq\Iterators\LazyIterator">LazyIterator</abbr></a> at line 64</div>
         <code>            public            
     <strong>next</strong>()</code>
     </h3>
@@ -233,7 +233,7 @@
     </div>
 
                 <h3 id="method_rewind">
-        <div class="location">in <a href="../../Pinq/Iterators/LazyIterator.html#method_rewind"><abbr title="Pinq\Iterators\LazyIterator">LazyIterator</abbr></a> at line 67</div>
+        <div class="location">in <a href="../../Pinq/Iterators/LazyIterator.html#method_rewind"><abbr title="Pinq\Iterators\LazyIterator">LazyIterator</abbr></a> at line 73</div>
         <code>            public            
     <strong>rewind</strong>()</code>
     </h3>
@@ -250,7 +250,7 @@
     </div>
 
                 <h3 id="method_valid">
-        <div class="location">in <a href="../../Pinq/Iterators/IteratorIterator.html#method_valid"><abbr title="Pinq\Iterators\IteratorIterator">IteratorIterator</abbr></a> at line 57</div>
+        <div class="location">in <a href="../../Pinq/Iterators/IteratorIterator.html#method_valid"><abbr title="Pinq\Iterators\IteratorIterator">IteratorIterator</abbr></a> at line 55</div>
         <code>            public            
     <strong>valid</strong>()</code>
     </h3>
@@ -266,10 +266,10 @@
                     </div>
     </div>
 
-                <h3 id="method_AndGroupBy">
+                <h3 id="method_andGroupBy">
         <div class="location">at line 26</div>
         <code>            public            <a href="../../Pinq/Iterators/GroupedIterator.html"><abbr title="Pinq\Iterators\GroupedIterator">GroupedIterator</abbr></a>
-    <strong>AndGroupBy</strong>(callable $GroupByFunctions)</code>
+    <strong>andGroupBy</strong>(callable $groupByFunctions)</code>
     </h3>
     <div class="details">
         <p>
@@ -282,7 +282,7 @@
                     <table>
                     <tr>
                 <td>callable</td>
-                <td>$GroupByFunctions</td>
+                <td>$groupByFunctions</td>
                 <td>
 </td>
             </tr>

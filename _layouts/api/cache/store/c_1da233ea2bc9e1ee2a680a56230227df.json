@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Parsing",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Parsing\\Reflection.php",
-    "hash": "3daa68f85c212c6e5d3bf62d857ff2ce7a1e16ce",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Parsing\\Reflection.php",
+    "hash": "dba5307e5d3fcf04cb1dde193b9e82748291245a",
     "parent": null,
     "modifiers": 32,
     "is_trait": false,
@@ -33,9 +33,9 @@
 
     ],
     "methods": {
-        "FromCallable": {
-            "name": "FromCallable",
-            "line": 19,
+        "fromCallable": {
+            "name": "fromCallable",
+            "line": 22,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -57,9 +57,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 19,
+                "function": {
+                    "name": "function",
+                    "line": 22,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [

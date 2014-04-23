@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\Expression.php",
-    "hash": "f3d745f225ddd7ff4a0bff1398175450932496a8",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\Expression.php",
+    "hash": "647d5bf7e8df2aafe25d065dc857b499036c0427",
     "parent": null,
     "modifiers": 16,
     "is_trait": false,
@@ -33,8 +33,8 @@
 
     ],
     "methods": {
-        "GetType": {
-            "name": "GetType",
+        "getType": {
+            "name": "getType",
             "line": 12,
             "short_desc": "",
             "long_desc": "",
@@ -55,8 +55,8 @@
 
             ]
         },
-        "Traverse": {
-            "name": "Traverse",
+        "traverse": {
+            "name": "traverse",
             "line": 20,
             "short_desc": "",
             "long_desc": "",
@@ -79,8 +79,8 @@
 
             ],
             "parameters": {
-                "Walker": {
-                    "name": "Walker",
+                "walker": {
+                    "name": "walker",
                     "line": 20,
                     "short_desc": null,
                     "long_desc": null,
@@ -99,8 +99,8 @@
                 }
             }
         },
-        "Simplify": {
-            "name": "Simplify",
+        "simplify": {
+            "name": "simplify",
             "line": 25,
             "short_desc": "",
             "long_desc": "",
@@ -126,8 +126,8 @@
 
             ]
         },
-        "SimplifyAll": {
-            "name": "SimplifyAll",
+        "simplifyAll": {
+            "name": "simplifyAll",
             "line": 30,
             "short_desc": "",
             "long_desc": "",
@@ -150,8 +150,8 @@
 
             ],
             "parameters": {
-                "Expressions": {
-                    "name": "Expressions",
+                "expressions": {
+                    "name": "expressions",
                     "line": 30,
                     "short_desc": null,
                     "long_desc": null,
@@ -170,9 +170,9 @@
                 }
             }
         },
-        "Compile": {
-            "name": "Compile",
-            "line": 45,
+        "compile": {
+            "name": "compile",
+            "line": 46,
             "short_desc": "Compiles into equivalent PHP code",
             "long_desc": "",
             "hint": [
@@ -199,7 +199,7 @@
         },
         "__toString": {
             "name": "__toString",
-            "line": 54,
+            "line": 56,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -219,9 +219,9 @@
 
             ]
         },
-        "CompileAll": {
-            "name": "CompileAll",
-            "line": 62,
+        "compileAll": {
+            "name": "compileAll",
+            "line": 64,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -243,9 +243,9 @@
 
             ],
             "parameters": {
-                "Expressions": {
-                    "name": "Expressions",
-                    "line": 62,
+                "expressions": {
+                    "name": "expressions",
+                    "line": 64,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -265,7 +265,7 @@
         },
         "__clone": {
             "name": "__clone",
-            "line": 83,
+            "line": 88,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -285,9 +285,9 @@
 
             ]
         },
-        "CloneAll": {
-            "name": "CloneAll",
-            "line": 88,
+        "cloneAll": {
+            "name": "cloneAll",
+            "line": 93,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -309,9 +309,9 @@
 
             ],
             "parameters": {
-                "Expressions": {
-                    "name": "Expressions",
-                    "line": 88,
+                "expressions": {
+                    "name": "expressions",
+                    "line": 93,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -329,9 +329,9 @@
                 }
             }
         },
-        "Assign": {
-            "name": "Assign",
-            "line": 98,
+        "assign": {
+            "name": "assign",
+            "line": 104,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -353,9 +353,9 @@
 
             ],
             "parameters": {
-                "AssignToValueExpression": {
-                    "name": "AssignToValueExpression",
-                    "line": 99,
+                "assignToValueExpression": {
+                    "name": "assignToValueExpression",
+                    "line": 104,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -371,9 +371,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "AssignmentOperator": {
-                    "name": "AssignmentOperator",
-                    "line": 100,
+                "assignmentOperator": {
+                    "name": "assignmentOperator",
+                    "line": 104,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -384,9 +384,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "AssignmentValueExpression": {
-                    "name": "AssignmentValueExpression",
-                    "line": 101,
+                "assignmentValueExpression": {
+                    "name": "assignmentValueExpression",
+                    "line": 104,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -404,9 +404,9 @@
                 }
             }
         },
-        "BinaryOperation": {
-            "name": "BinaryOperation",
-            "line": 108,
+        "binaryOperation": {
+            "name": "binaryOperation",
+            "line": 115,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -428,9 +428,9 @@
 
             ],
             "parameters": {
-                "LeftOperandExpression": {
-                    "name": "LeftOperandExpression",
-                    "line": 108,
+                "leftOperandExpression": {
+                    "name": "leftOperandExpression",
+                    "line": 115,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -446,9 +446,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Operator": {
-                    "name": "Operator",
-                    "line": 108,
+                "operator": {
+                    "name": "operator",
+                    "line": 115,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -459,9 +459,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "RightOperandExpression": {
-                    "name": "RightOperandExpression",
-                    "line": 108,
+                "rightOperandExpression": {
+                    "name": "rightOperandExpression",
+                    "line": 115,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -479,9 +479,9 @@
                 }
             }
         },
-        "UnaryOperation": {
-            "name": "UnaryOperation",
-            "line": 116,
+        "unaryOperation": {
+            "name": "unaryOperation",
+            "line": 126,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -503,9 +503,9 @@
 
             ],
             "parameters": {
-                "UnaryOperator": {
-                    "name": "UnaryOperator",
-                    "line": 116,
+                "unaryOperator": {
+                    "name": "unaryOperator",
+                    "line": 126,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -516,9 +516,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "OperandExpression": {
-                    "name": "OperandExpression",
-                    "line": 116,
+                "operandExpression": {
+                    "name": "operandExpression",
+                    "line": 126,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -536,9 +536,9 @@
                 }
             }
         },
-        "NewExpression": {
-            "name": "NewExpression",
-            "line": 124,
+        "newExpression": {
+            "name": "newExpression",
+            "line": 134,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -560,9 +560,9 @@
 
             ],
             "parameters": {
-                "ClassTypeExpression": {
-                    "name": "ClassTypeExpression",
-                    "line": 124,
+                "classTypeExpression": {
+                    "name": "classTypeExpression",
+                    "line": 134,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -578,9 +578,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "ArgumentValueExpressions": {
-                    "name": "ArgumentValueExpressions",
-                    "line": 124,
+                "argumentValueExpressions": {
+                    "name": "argumentValueExpressions",
+                    "line": 134,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -598,9 +598,9 @@
                 }
             }
         },
-        "MethodCall": {
-            "name": "MethodCall",
-            "line": 132,
+        "methodCall": {
+            "name": "methodCall",
+            "line": 142,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -622,9 +622,9 @@
 
             ],
             "parameters": {
-                "ValueExpression": {
-                    "name": "ValueExpression",
-                    "line": 132,
+                "valueExpression": {
+                    "name": "valueExpression",
+                    "line": 142,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -640,9 +640,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "NameExpression": {
-                    "name": "NameExpression",
-                    "line": 132,
+                "nameExpression": {
+                    "name": "nameExpression",
+                    "line": 142,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -658,9 +658,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "ArgumentValueExpressions": {
-                    "name": "ArgumentValueExpressions",
-                    "line": 132,
+                "argumentValueExpressions": {
+                    "name": "argumentValueExpressions",
+                    "line": 142,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -678,9 +678,9 @@
                 }
             }
         },
-        "Field": {
-            "name": "Field",
-            "line": 140,
+        "field": {
+            "name": "field",
+            "line": 153,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -702,9 +702,9 @@
 
             ],
             "parameters": {
-                "ValueExpression": {
-                    "name": "ValueExpression",
-                    "line": 140,
+                "valueExpression": {
+                    "name": "valueExpression",
+                    "line": 153,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -720,9 +720,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "NameExpression": {
-                    "name": "NameExpression",
-                    "line": 140,
+                "nameExpression": {
+                    "name": "nameExpression",
+                    "line": 153,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -740,9 +740,9 @@
                 }
             }
         },
-        "Index": {
-            "name": "Index",
-            "line": 148,
+        "index": {
+            "name": "index",
+            "line": 161,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -764,9 +764,9 @@
 
             ],
             "parameters": {
-                "ValueExpression": {
-                    "name": "ValueExpression",
-                    "line": 148,
+                "valueExpression": {
+                    "name": "valueExpression",
+                    "line": 161,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -782,9 +782,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "IndexExpression": {
-                    "name": "IndexExpression",
-                    "line": 148,
+                "indexExpression": {
+                    "name": "indexExpression",
+                    "line": 161,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -802,9 +802,9 @@
                 }
             }
         },
-        "Invocation": {
-            "name": "Invocation",
-            "line": 156,
+        "invocation": {
+            "name": "invocation",
+            "line": 169,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -826,9 +826,9 @@
 
             ],
             "parameters": {
-                "ValueExpression": {
-                    "name": "ValueExpression",
-                    "line": 156,
+                "valueExpression": {
+                    "name": "valueExpression",
+                    "line": 169,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -844,9 +844,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "ArgumentExpressions": {
-                    "name": "ArgumentExpressions",
-                    "line": 156,
+                "argumentExpressions": {
+                    "name": "argumentExpressions",
+                    "line": 169,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -864,9 +864,9 @@
                 }
             }
         },
-        "Cast": {
-            "name": "Cast",
-            "line": 164,
+        "cast": {
+            "name": "cast",
+            "line": 177,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -888,9 +888,9 @@
 
             ],
             "parameters": {
-                "CastType": {
-                    "name": "CastType",
-                    "line": 164,
+                "castType": {
+                    "name": "castType",
+                    "line": 177,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -901,9 +901,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "CastValueExpression": {
-                    "name": "CastValueExpression",
-                    "line": 164,
+                "castValueExpression": {
+                    "name": "castValueExpression",
+                    "line": 177,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -921,9 +921,9 @@
                 }
             }
         },
-        "EmptyExpression": {
-            "name": "EmptyExpression",
-            "line": 172,
+        "emptyExpression": {
+            "name": "emptyExpression",
+            "line": 185,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -945,9 +945,9 @@
 
             ],
             "parameters": {
-                "ValueExpression": {
-                    "name": "ValueExpression",
-                    "line": 172,
+                "valueExpression": {
+                    "name": "valueExpression",
+                    "line": 185,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -965,9 +965,9 @@
                 }
             }
         },
-        "IssetExpression": {
-            "name": "IssetExpression",
-            "line": 180,
+        "issetExpression": {
+            "name": "issetExpression",
+            "line": 193,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -989,9 +989,9 @@
 
             ],
             "parameters": {
-                "ValueExpressions": {
-                    "name": "ValueExpressions",
-                    "line": 180,
+                "valueExpressions": {
+                    "name": "valueExpressions",
+                    "line": 193,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1009,9 +1009,9 @@
                 }
             }
         },
-        "FunctionCall": {
-            "name": "FunctionCall",
-            "line": 188,
+        "functionCall": {
+            "name": "functionCall",
+            "line": 201,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -1033,9 +1033,9 @@
 
             ],
             "parameters": {
-                "NameExpression": {
-                    "name": "NameExpression",
-                    "line": 188,
+                "nameExpression": {
+                    "name": "nameExpression",
+                    "line": 201,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1051,9 +1051,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "ArgumentValueExpressions": {
-                    "name": "ArgumentValueExpressions",
-                    "line": 188,
+                "argumentValueExpressions": {
+                    "name": "argumentValueExpressions",
+                    "line": 201,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1071,9 +1071,9 @@
                 }
             }
         },
-        "StaticMethodCall": {
-            "name": "StaticMethodCall",
-            "line": 196,
+        "staticMethodCall": {
+            "name": "staticMethodCall",
+            "line": 209,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -1095,9 +1095,9 @@
 
             ],
             "parameters": {
-                "ClassExpression": {
-                    "name": "ClassExpression",
-                    "line": 196,
+                "classExpression": {
+                    "name": "classExpression",
+                    "line": 209,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1113,9 +1113,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "NameExpression": {
-                    "name": "NameExpression",
-                    "line": 196,
+                "nameExpression": {
+                    "name": "nameExpression",
+                    "line": 209,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1131,9 +1131,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "ArgumentValueExpressions": {
-                    "name": "ArgumentValueExpressions",
-                    "line": 196,
+                "argumentValueExpressions": {
+                    "name": "argumentValueExpressions",
+                    "line": 209,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1151,9 +1151,9 @@
                 }
             }
         },
-        "Ternary": {
-            "name": "Ternary",
-            "line": 204,
+        "ternary": {
+            "name": "ternary",
+            "line": 220,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -1175,9 +1175,9 @@
 
             ],
             "parameters": {
-                "ConditionExpression": {
-                    "name": "ConditionExpression",
-                    "line": 205,
+                "conditionExpression": {
+                    "name": "conditionExpression",
+                    "line": 220,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1193,9 +1193,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "IfTrueExpression": {
-                    "name": "IfTrueExpression",
-                    "line": 206,
+                "ifTrueExpression": {
+                    "name": "ifTrueExpression",
+                    "line": 220,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1211,9 +1211,9 @@
                     "default": "null",
                     "is_by_ref": false
                 },
-                "IfFalseExpression": {
-                    "name": "IfFalseExpression",
-                    "line": 207,
+                "ifFalseExpression": {
+                    "name": "ifFalseExpression",
+                    "line": 220,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1231,9 +1231,9 @@
                 }
             }
         },
-        "ReturnExpression": {
-            "name": "ReturnExpression",
-            "line": 214,
+        "returnExpression": {
+            "name": "returnExpression",
+            "line": 231,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -1255,9 +1255,9 @@
 
             ],
             "parameters": {
-                "ValueExpression": {
-                    "name": "ValueExpression",
-                    "line": 214,
+                "valueExpression": {
+                    "name": "valueExpression",
+                    "line": 231,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1275,9 +1275,9 @@
                 }
             }
         },
-        "ThrowExpression": {
-            "name": "ThrowExpression",
-            "line": 222,
+        "throwExpression": {
+            "name": "throwExpression",
+            "line": 239,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -1299,9 +1299,9 @@
 
             ],
             "parameters": {
-                "ExceptionExpression": {
-                    "name": "ExceptionExpression",
-                    "line": 222,
+                "exceptionExpression": {
+                    "name": "exceptionExpression",
+                    "line": 239,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1319,9 +1319,9 @@
                 }
             }
         },
-        "Parameter": {
-            "name": "Parameter",
-            "line": 231,
+        "parameter": {
+            "name": "parameter",
+            "line": 248,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -1343,9 +1343,9 @@
                 "\"1\" @param tags are defined by \"5\" are expected"
             ],
             "parameters": {
-                "Name": {
-                    "name": "Name",
-                    "line": 231,
+                "name": {
+                    "name": "name",
+                    "line": 248,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -1356,9 +1356,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "TypeHint": {
-                    "name": "TypeHint",
-                    "line": 231,
+                "typeHint": {
+                    "name": "typeHint",
+                    "line": 248,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -1369,9 +1369,9 @@
                     "default": "null",
                     "is_by_ref": false
                 },
-                "HasDefaultValue": {
-                    "name": "HasDefaultValue",
-                    "line": 231,
+                "hasDefaultValue": {
+                    "name": "hasDefaultValue",
+                    "line": 248,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -1382,9 +1382,9 @@
                     "default": "false",
                     "is_by_ref": false
                 },
-                "DefaultValue": {
-                    "name": "DefaultValue",
-                    "line": 231,
+                "defaultValue": {
+                    "name": "defaultValue",
+                    "line": 248,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -1395,9 +1395,9 @@
                     "default": "null",
                     "is_by_ref": false
                 },
-                "IsPassedByReference": {
-                    "name": "IsPassedByReference",
-                    "line": 231,
+                "isPassedByReference": {
+                    "name": "isPassedByReference",
+                    "line": 248,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -1410,9 +1410,9 @@
                 }
             }
         },
-        "Value": {
-            "name": "Value",
-            "line": 239,
+        "value": {
+            "name": "value",
+            "line": 261,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -1434,9 +1434,9 @@
 
             ],
             "parameters": {
-                "Value": {
-                    "name": "Value",
-                    "line": 239,
+                "value": {
+                    "name": "value",
+                    "line": 261,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -1449,9 +1449,9 @@
                 }
             }
         },
-        "Variable": {
-            "name": "Variable",
-            "line": 247,
+        "variable": {
+            "name": "variable",
+            "line": 269,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -1473,9 +1473,9 @@
 
             ],
             "parameters": {
-                "NameExpression": {
-                    "name": "NameExpression",
-                    "line": 247,
+                "nameExpression": {
+                    "name": "nameExpression",
+                    "line": 269,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1493,9 +1493,9 @@
                 }
             }
         },
-        "ArrayExpression": {
-            "name": "ArrayExpression",
-            "line": 255,
+        "arrayExpression": {
+            "name": "arrayExpression",
+            "line": 277,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -1517,9 +1517,9 @@
 
             ],
             "parameters": {
-                "KeyExpressions": {
-                    "name": "KeyExpressions",
-                    "line": 255,
+                "keyExpressions": {
+                    "name": "keyExpressions",
+                    "line": 277,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1535,9 +1535,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "ValueExpressions": {
-                    "name": "ValueExpressions",
-                    "line": 255,
+                "valueExpressions": {
+                    "name": "valueExpressions",
+                    "line": 277,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1555,9 +1555,9 @@
                 }
             }
         },
-        "Closure": {
-            "name": "Closure",
-            "line": 263,
+        "closure": {
+            "name": "closure",
+            "line": 285,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -1579,9 +1579,9 @@
 
             ],
             "parameters": {
-                "ParameterExpressions": {
-                    "name": "ParameterExpressions",
-                    "line": 263,
+                "parameterExpressions": {
+                    "name": "parameterExpressions",
+                    "line": 285,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1597,9 +1597,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "UsedVariables": {
-                    "name": "UsedVariables",
-                    "line": 263,
+                "usedVariables": {
+                    "name": "usedVariables",
+                    "line": 285,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1615,9 +1615,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "BodyExpressions": {
-                    "name": "BodyExpressions",
-                    "line": 263,
+                "bodyExpressions": {
+                    "name": "bodyExpressions",
+                    "line": 285,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1635,9 +1635,9 @@
                 }
             }
         },
-        "SubQuery": {
-            "name": "SubQuery",
-            "line": 271,
+        "subQuery": {
+            "name": "subQuery",
+            "line": 296,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -1659,9 +1659,9 @@
 
             ],
             "parameters": {
-                "ValueExpression": {
-                    "name": "ValueExpression",
-                    "line": 271,
+                "valueExpression": {
+                    "name": "valueExpression",
+                    "line": 296,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1677,9 +1677,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "RequestQuery": {
-                    "name": "RequestQuery",
-                    "line": 271,
+                "requestQuery": {
+                    "name": "requestQuery",
+                    "line": 296,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -1695,9 +1695,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "OriginalExpression": {
-                    "name": "OriginalExpression",
-                    "line": 271,
+                "originalExpression": {
+                    "name": "originalExpression",
+                    "line": 296,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

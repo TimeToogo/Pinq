@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries\\Segments",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Segments\\EqualityJoin.php",
-    "hash": "05c978eb779cad4f1457d1988dcd402588142da1",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\Segments\\EqualityJoin.php",
+    "hash": "288b2cadab4377d802f78f71d679ae5096946552",
     "parent": "Pinq\\Queries\\Segments\\JoinBase",
     "modifiers": 0,
     "is_trait": false,
@@ -52,9 +52,9 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
-                    "line": 30,
+                "values": {
+                    "name": "values",
+                    "line": 29,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -65,9 +65,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "IsGroupJoin": {
-                    "name": "IsGroupJoin",
-                    "line": 31,
+                "isGroupJoin": {
+                    "name": "isGroupJoin",
+                    "line": 29,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -78,9 +78,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "OuterKeyFunction": {
-                    "name": "OuterKeyFunction",
-                    "line": 32,
+                "outerKeyFunction": {
+                    "name": "outerKeyFunction",
+                    "line": 29,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -96,9 +96,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "InnerKeyFunction": {
-                    "name": "InnerKeyFunction",
-                    "line": 33,
+                "innerKeyFunction": {
+                    "name": "innerKeyFunction",
+                    "line": 29,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -114,9 +114,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "JoiningFunction": {
-                    "name": "JoiningFunction",
-                    "line": 34,
+                "joiningFunction": {
+                    "name": "joiningFunction",
+                    "line": 29,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -134,9 +134,9 @@
                 }
             }
         },
-        "GetType": {
-            "name": "GetType",
-            "line": 41,
+        "getType": {
+            "name": "getType",
+            "line": 36,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -161,9 +161,9 @@
 
             ]
         },
-        "Traverse": {
-            "name": "Traverse",
-            "line": 46,
+        "traverse": {
+            "name": "traverse",
+            "line": 41,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -185,9 +185,9 @@
 
             ],
             "parameters": {
-                "Walker": {
-                    "name": "Walker",
-                    "line": 46,
+                "walker": {
+                    "name": "walker",
+                    "line": 41,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -205,9 +205,9 @@
                 }
             }
         },
-        "GetOuterKeyFunctionExpressionTree": {
-            "name": "GetOuterKeyFunctionExpressionTree",
-            "line": 54,
+        "getOuterKeyFunctionExpressionTree": {
+            "name": "getOuterKeyFunctionExpressionTree",
+            "line": 49,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -232,36 +232,36 @@
 
             ]
         },
-        "GetInnerKeyFunctionExpressionTree": {
-            "name": "GetInnerKeyFunctionExpressionTree",
+        "getInnerKeyFunctionExpressionTree": {
+            "name": "getInnerKeyFunctionExpressionTree",
+            "line": 57,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Pinq\\FunctionExpressionTree",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": [
+
+            ]
+        },
+        "update": {
+            "name": "update",
             "line": 62,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": [
-                [
-                    "Pinq\\FunctionExpressionTree",
-                    false
-                ]
-            ],
-            "hint_desc": "",
-            "tags": [
-
-            ],
-            "modifiers": "1",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": [
-
-            ]
-        },
-        "Update": {
-            "name": "Update",
-            "line": 67,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -278,9 +278,9 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
-                    "line": 68,
+                "values": {
+                    "name": "values",
+                    "line": 62,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -291,9 +291,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "IsGroupJoin": {
-                    "name": "IsGroupJoin",
-                    "line": 69,
+                "isGroupJoin": {
+                    "name": "isGroupJoin",
+                    "line": 62,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -304,9 +304,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "OuterKeyFunction": {
-                    "name": "OuterKeyFunction",
-                    "line": 70,
+                "outerKeyFunction": {
+                    "name": "outerKeyFunction",
+                    "line": 62,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -322,9 +322,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "InnerKeyFunction": {
-                    "name": "InnerKeyFunction",
-                    "line": 71,
+                "innerKeyFunction": {
+                    "name": "innerKeyFunction",
+                    "line": 62,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -340,9 +340,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "JoiningFunction": {
-                    "name": "JoiningFunction",
-                    "line": 72,
+                "joiningFunction": {
+                    "name": "joiningFunction",
+                    "line": 62,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

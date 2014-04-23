@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Caching",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Caching\\CSVFileFunctionCache.php",
-    "hash": "3afeae6e3a61a861f7887f0154cdf194a882b158",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Caching\\CSVFileFunctionCache.php",
+    "hash": "848afbb3070304b7076fb869e1a4debb21d17ea3",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "FileName": {
-                    "name": "FileName",
+                "fileName": {
+                    "name": "fileName",
                     "line": 33,
                     "short_desc": null,
                     "long_desc": null,
@@ -67,9 +67,9 @@
                 }
             }
         },
-        "Save": {
-            "name": "Save",
-            "line": 64,
+        "save": {
+            "name": "save",
+            "line": 71,
             "short_desc": "Save the supplied expression tree of the functiom to the cache",
             "long_desc": "",
             "hint": [
@@ -91,9 +91,9 @@
 
             ],
             "parameters": {
-                "FunctionHash": {
-                    "name": "FunctionHash",
-                    "line": 64,
+                "functionHash": {
+                    "name": "functionHash",
+                    "line": 71,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -109,9 +109,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "FunctionExpressionTree": {
-                    "name": "FunctionExpressionTree",
-                    "line": 64,
+                "functionExpressionTree": {
+                    "name": "functionExpressionTree",
+                    "line": 71,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -129,9 +129,9 @@
                 }
             }
         },
-        "TryGet": {
-            "name": "TryGet",
-            "line": 79,
+        "tryGet": {
+            "name": "tryGet",
+            "line": 86,
             "short_desc": "Attempt to get the cached expression tree of the supplied function reflection",
             "long_desc": "",
             "hint": [
@@ -157,9 +157,9 @@
 
             ],
             "parameters": {
-                "FunctionHash": {
-                    "name": "FunctionHash",
-                    "line": 79,
+                "functionHash": {
+                    "name": "functionHash",
+                    "line": 86,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -177,9 +177,9 @@
                 }
             }
         },
-        "Clear": {
-            "name": "Clear",
-            "line": 89,
+        "clear": {
+            "name": "clear",
+            "line": 97,
             "short_desc": "Clears all cached function for the supplied function reflection.",
             "long_desc": "",
             "hint": [
@@ -204,9 +204,9 @@
 
             ]
         },
-        "Remove": {
-            "name": "Remove",
-            "line": 95,
+        "remove": {
+            "name": "remove",
+            "line": 103,
             "short_desc": "Removes the cached expression tree for the supplied function reflection",
             "long_desc": "",
             "hint": [
@@ -228,9 +228,9 @@
 
             ],
             "parameters": {
-                "FunctionHash": {
-                    "name": "FunctionHash",
-                    "line": 95,
+                "functionHash": {
+                    "name": "functionHash",
+                    "line": 103,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -250,7 +250,7 @@
         },
         "__destruct": {
             "name": "__destruct",
-            "line": 119,
+            "line": 131,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -272,14 +272,14 @@
         }
     },
     "constants": {
-        "CSVDelimiter": {
-            "name": "CSVDelimiter",
+        "CSV_DELIMITER": {
+            "name": "CSV_DELIMITER",
             "line": 15,
             "short_desc": "",
             "long_desc": ""
         },
-        "CSVSeperator": {
-            "name": "CSVSeperator",
+        "CSV_SEPERATOR": {
+            "name": "CSV_SEPERATOR",
             "line": 16,
             "short_desc": "",
             "long_desc": ""

@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions\\Walkers",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\Walkers\\UnresolvedVariableFinder.php",
-    "hash": "58b64cb0df356eabe14da6a0e0c60ef46c4caf4c",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\Walkers\\UnresolvedVariableFinder.php",
+    "hash": "9fda583747eea8162a02680da453737e5dee2d43",
     "parent": "Pinq\\Expressions\\ExpressionWalker",
     "modifiers": 0,
     "is_trait": false,
@@ -33,8 +33,8 @@
 
     ],
     "methods": {
-        "ResetUnresolvedVariables": {
-            "name": "ResetUnresolvedVariables",
+        "resetUnresolvedVariables": {
+            "name": "resetUnresolvedVariables",
             "line": 27,
             "short_desc": "",
             "long_desc": "",
@@ -60,8 +60,8 @@
 
             ]
         },
-        "GetUnresolvedVariables": {
-            "name": "GetUnresolvedVariables",
+        "getUnresolvedVariables": {
+            "name": "getUnresolvedVariables",
             "line": 37,
             "short_desc": "The unresolved variables",
             "long_desc": "",
@@ -87,8 +87,8 @@
 
             ]
         },
-        "WalkAssignment": {
-            "name": "WalkAssignment",
+        "walkAssignment": {
+            "name": "walkAssignment",
             "line": 42,
             "short_desc": "",
             "long_desc": "",
@@ -106,8 +106,8 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
+                "expression": {
+                    "name": "expression",
                     "line": 42,
                     "short_desc": null,
                     "long_desc": null,
@@ -126,9 +126,9 @@
                 }
             }
         },
-        "WalkClosure": {
-            "name": "WalkClosure",
-            "line": 61,
+        "walkClosure": {
+            "name": "walkClosure",
+            "line": 59,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -145,9 +145,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 61,
+                "expression": {
+                    "name": "expression",
+                    "line": 59,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -165,9 +165,9 @@
                 }
             }
         },
-        "WalkVariable": {
-            "name": "WalkVariable",
-            "line": 77,
+        "walkVariable": {
+            "name": "walkVariable",
+            "line": 75,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -184,9 +184,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 77,
+                "expression": {
+                    "name": "expression",
+                    "line": 75,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

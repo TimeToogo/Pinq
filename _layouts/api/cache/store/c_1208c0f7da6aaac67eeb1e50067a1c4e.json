@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\MethodCallExpression.php",
-    "hash": "da4fb30b4da92ce81406cf4f1d032be85be73849",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\MethodCallExpression.php",
+    "hash": "47fea8f0c7252953cf961c6519698c1f4c298d3e",
     "parent": "Pinq\\Expressions\\ObjectOperationExpression",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "ObjectValueExpression": {
-                    "name": "ObjectValueExpression",
+                "objectValueExpression": {
+                    "name": "objectValueExpression",
                     "line": 24,
                     "short_desc": null,
                     "long_desc": null,
@@ -70,8 +70,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "NameExpression": {
-                    "name": "NameExpression",
+                "nameExpression": {
+                    "name": "nameExpression",
                     "line": 24,
                     "short_desc": null,
                     "long_desc": null,
@@ -88,8 +88,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "ArgumentExpressions": {
-                    "name": "ArgumentExpressions",
+                "argumentExpressions": {
+                    "name": "argumentExpressions",
                     "line": 24,
                     "short_desc": null,
                     "long_desc": null,
@@ -108,9 +108,9 @@
                 }
             }
         },
-        "GetNameExpression": {
-            "name": "GetNameExpression",
-            "line": 35,
+        "getNameExpression": {
+            "name": "getNameExpression",
+            "line": 34,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -135,9 +135,9 @@
 
             ]
         },
-        "GetArgumentExpressions": {
-            "name": "GetArgumentExpressions",
-            "line": 43,
+        "getArgumentExpressions": {
+            "name": "getArgumentExpressions",
+            "line": 42,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -162,9 +162,9 @@
 
             ]
         },
-        "Traverse": {
-            "name": "Traverse",
-            "line": 48,
+        "traverse": {
+            "name": "traverse",
+            "line": 47,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -186,9 +186,9 @@
 
             ],
             "parameters": {
-                "Walker": {
-                    "name": "Walker",
-                    "line": 48,
+                "walker": {
+                    "name": "walker",
+                    "line": 47,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -206,9 +206,9 @@
                 }
             }
         },
-        "Simplify": {
-            "name": "Simplify",
-            "line": 53,
+        "simplify": {
+            "name": "simplify",
+            "line": 52,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -233,9 +233,9 @@
 
             ]
         },
-        "Update": {
-            "name": "Update",
-            "line": 82,
+        "update": {
+            "name": "update",
+            "line": 79,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -257,9 +257,9 @@
 
             ],
             "parameters": {
-                "ObjectValueExpression": {
-                    "name": "ObjectValueExpression",
-                    "line": 82,
+                "objectValueExpression": {
+                    "name": "objectValueExpression",
+                    "line": 79,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -275,9 +275,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "NameExpression": {
-                    "name": "NameExpression",
-                    "line": 82,
+                "nameExpression": {
+                    "name": "nameExpression",
+                    "line": 79,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -293,9 +293,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "ArgumentExpressions": {
-                    "name": "ArgumentExpressions",
-                    "line": 82,
+                "argumentExpressions": {
+                    "name": "argumentExpressions",
+                    "line": 79,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -313,9 +313,9 @@
                 }
             }
         },
-        "DataToSerialize": {
-            "name": "DataToSerialize",
-            "line": 115,
+        "dataToSerialize": {
+            "name": "dataToSerialize",
+            "line": 117,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -335,9 +335,9 @@
 
             ]
         },
-        "UnserializedData": {
-            "name": "UnserializedData",
-            "line": 120,
+        "unserializedData": {
+            "name": "unserializedData",
+            "line": 122,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -354,9 +354,9 @@
 
             ],
             "parameters": {
-                "Data": {
-                    "name": "Data",
-                    "line": 120,
+                "data": {
+                    "name": "data",
+                    "line": 122,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -371,7 +371,7 @@
         },
         "__clone": {
             "name": "__clone",
-            "line": 125,
+            "line": 127,
             "short_desc": "",
             "long_desc": "",
             "hint": null,

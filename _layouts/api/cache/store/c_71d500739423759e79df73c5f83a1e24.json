@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Providers\\Loadable",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Providers\\Loadable\\RequestEvaluator.php",
-    "hash": "43aab16df354907a5e987d68fd7c9580e17e69ed",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Providers\\Loadable\\RequestEvaluator.php",
+    "hash": "42b716153f8e0c6b28f69e549b38378097286dd0",
     "parent": "Pinq\\Queries\\Requests\\RequestVisitor",
     "modifiers": 16,
     "is_trait": false,
@@ -57,8 +57,8 @@
 
             ]
         },
-        "VisitValues": {
-            "name": "VisitValues",
+        "visitValues": {
+            "name": "visitValues",
             "line": 32,
             "short_desc": "",
             "long_desc": "",
@@ -76,8 +76,8 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
+                "request": {
+                    "name": "request",
                     "line": 32,
                     "short_desc": null,
                     "long_desc": null,
@@ -96,9 +96,9 @@
                 }
             }
         },
-        "VisitFirst": {
-            "name": "VisitFirst",
-            "line": 44,
+        "visitFirst": {
+            "name": "visitFirst",
+            "line": 45,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -115,9 +115,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 44,
+                "request": {
+                    "name": "request",
+                    "line": 45,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -135,8 +135,8 @@
                 }
             }
         },
-        "VisitLast": {
-            "name": "VisitLast",
+        "visitLast": {
+            "name": "visitLast",
             "line": 52,
             "short_desc": "",
             "long_desc": "",
@@ -154,8 +154,8 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
+                "request": {
+                    "name": "request",
                     "line": 52,
                     "short_desc": null,
                     "long_desc": null,
@@ -174,9 +174,9 @@
                 }
             }
         },
-        "VisitCount": {
-            "name": "VisitCount",
-            "line": 60,
+        "visitCount": {
+            "name": "visitCount",
+            "line": 59,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -193,9 +193,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 60,
+                "request": {
+                    "name": "request",
+                    "line": 59,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -213,9 +213,9 @@
                 }
             }
         },
-        "VisitExists": {
-            "name": "VisitExists",
-            "line": 68,
+        "visitExists": {
+            "name": "visitExists",
+            "line": 66,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -232,9 +232,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 68,
+                "request": {
+                    "name": "request",
+                    "line": 66,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -252,9 +252,9 @@
                 }
             }
         },
-        "VisitContains": {
-            "name": "VisitContains",
-            "line": 76,
+        "visitContains": {
+            "name": "visitContains",
+            "line": 73,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -271,9 +271,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 76,
+                "request": {
+                    "name": "request",
+                    "line": 73,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -291,9 +291,9 @@
                 }
             }
         },
-        "VisitAggregate": {
-            "name": "VisitAggregate",
-            "line": 84,
+        "visitAggregate": {
+            "name": "visitAggregate",
+            "line": 80,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -310,9 +310,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 84,
+                "request": {
+                    "name": "request",
+                    "line": 80,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -330,9 +330,9 @@
                 }
             }
         },
-        "VisitMaximum": {
-            "name": "VisitMaximum",
-            "line": 92,
+        "visitMaximum": {
+            "name": "visitMaximum",
+            "line": 87,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -349,9 +349,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 92,
+                "request": {
+                    "name": "request",
+                    "line": 87,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -369,9 +369,9 @@
                 }
             }
         },
-        "VisitMinimum": {
-            "name": "VisitMinimum",
-            "line": 100,
+        "visitMinimum": {
+            "name": "visitMinimum",
+            "line": 94,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -388,9 +388,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 100,
+                "request": {
+                    "name": "request",
+                    "line": 94,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -408,9 +408,9 @@
                 }
             }
         },
-        "VisitGetIndex": {
-            "name": "VisitGetIndex",
-            "line": 108,
+        "visitGetIndex": {
+            "name": "visitGetIndex",
+            "line": 101,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -427,9 +427,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 108,
+                "request": {
+                    "name": "request",
+                    "line": 101,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -447,9 +447,9 @@
                 }
             }
         },
-        "VisitIssetIndex": {
-            "name": "VisitIssetIndex",
-            "line": 116,
+        "visitIssetIndex": {
+            "name": "visitIssetIndex",
+            "line": 108,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -466,9 +466,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 116,
+                "request": {
+                    "name": "request",
+                    "line": 108,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -486,9 +486,9 @@
                 }
             }
         },
-        "VisitSum": {
-            "name": "VisitSum",
-            "line": 124,
+        "visitSum": {
+            "name": "visitSum",
+            "line": 115,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -505,9 +505,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 124,
+                "request": {
+                    "name": "request",
+                    "line": 115,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -525,9 +525,9 @@
                 }
             }
         },
-        "VisitAverage": {
-            "name": "VisitAverage",
-            "line": 132,
+        "visitAverage": {
+            "name": "visitAverage",
+            "line": 122,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -544,9 +544,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 132,
+                "request": {
+                    "name": "request",
+                    "line": 122,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -564,9 +564,9 @@
                 }
             }
         },
-        "VisitAll": {
-            "name": "VisitAll",
-            "line": 140,
+        "visitAll": {
+            "name": "visitAll",
+            "line": 129,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -583,9 +583,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 140,
+                "request": {
+                    "name": "request",
+                    "line": 129,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -603,9 +603,9 @@
                 }
             }
         },
-        "VisitAny": {
-            "name": "VisitAny",
-            "line": 148,
+        "visitAny": {
+            "name": "visitAny",
+            "line": 136,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -622,9 +622,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 148,
+                "request": {
+                    "name": "request",
+                    "line": 136,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -642,9 +642,9 @@
                 }
             }
         },
-        "VisitImplode": {
-            "name": "VisitImplode",
-            "line": 156,
+        "visitImplode": {
+            "name": "visitImplode",
+            "line": 143,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -661,9 +661,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 156,
+                "request": {
+                    "name": "request",
+                    "line": 143,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

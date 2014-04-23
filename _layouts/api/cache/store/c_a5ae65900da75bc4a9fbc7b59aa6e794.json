@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Iterators",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Iterators\\ExceptIterator.php",
-    "hash": "72ab0a126668dd2f7486d87ec55adc7d53365406",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Iterators\\ExceptIterator.php",
+    "hash": "ef8355042c10bf452da52e999e5e839c7b58ea50",
     "parent": "Pinq\\Iterators\\OperationIterator",
     "modifiers": 0,
     "is_trait": false,

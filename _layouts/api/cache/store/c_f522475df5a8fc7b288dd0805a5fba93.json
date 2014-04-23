@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\AssignmentExpression.php",
-    "hash": "9b352f200946cd6853247b382f7ac5d15ce6f9eb",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\AssignmentExpression.php",
+    "hash": "535f167b5800182e3a375401f467ab65d0107118",
     "parent": "Pinq\\Expressions\\Expression",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "AssignToExpression": {
-                    "name": "AssignToExpression",
+                "assignToExpression": {
+                    "name": "assignToExpression",
                     "line": 29,
                     "short_desc": null,
                     "long_desc": null,
@@ -70,8 +70,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Operator": {
-                    "name": "Operator",
+                "operator": {
+                    "name": "operator",
                     "line": 29,
                     "short_desc": null,
                     "long_desc": null,
@@ -83,8 +83,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "AssignmentValueExpression": {
-                    "name": "AssignmentValueExpression",
+                "assignmentValueExpression": {
+                    "name": "assignmentValueExpression",
                     "line": 29,
                     "short_desc": null,
                     "long_desc": null,
@@ -103,8 +103,8 @@
                 }
             }
         },
-        "GetAssignToExpression": {
-            "name": "GetAssignToExpression",
+        "getAssignToExpression": {
+            "name": "getAssignToExpression",
             "line": 39,
             "short_desc": "",
             "long_desc": "",
@@ -130,8 +130,8 @@
 
             ]
         },
-        "GetOperator": {
-            "name": "GetOperator",
+        "getOperator": {
+            "name": "getOperator",
             "line": 47,
             "short_desc": "",
             "long_desc": "",
@@ -157,8 +157,8 @@
 
             ]
         },
-        "GetAssignmentValueExpression": {
-            "name": "GetAssignmentValueExpression",
+        "getAssignmentValueExpression": {
+            "name": "getAssignmentValueExpression",
             "line": 55,
             "short_desc": "",
             "long_desc": "",
@@ -184,8 +184,8 @@
 
             ]
         },
-        "Traverse": {
-            "name": "Traverse",
+        "traverse": {
+            "name": "traverse",
             "line": 60,
             "short_desc": "",
             "long_desc": "",
@@ -208,8 +208,8 @@
 
             ],
             "parameters": {
-                "Walker": {
-                    "name": "Walker",
+                "walker": {
+                    "name": "walker",
                     "line": 60,
                     "short_desc": null,
                     "long_desc": null,
@@ -228,8 +228,8 @@
                 }
             }
         },
-        "Simplify": {
-            "name": "Simplify",
+        "simplify": {
+            "name": "simplify",
             "line": 65,
             "short_desc": "",
             "long_desc": "",
@@ -255,8 +255,8 @@
 
             ]
         },
-        "Update": {
-            "name": "Update",
+        "update": {
+            "name": "update",
             "line": 76,
             "short_desc": "",
             "long_desc": "",
@@ -279,8 +279,8 @@
 
             ],
             "parameters": {
-                "AssignToExpression": {
-                    "name": "AssignToExpression",
+                "assignToExpression": {
+                    "name": "assignToExpression",
                     "line": 76,
                     "short_desc": null,
                     "long_desc": null,
@@ -297,8 +297,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Operator": {
-                    "name": "Operator",
+                "operator": {
+                    "name": "operator",
                     "line": 76,
                     "short_desc": null,
                     "long_desc": null,
@@ -310,8 +310,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "AssignmentValueExpression": {
-                    "name": "AssignmentValueExpression",
+                "assignmentValueExpression": {
+                    "name": "assignmentValueExpression",
                     "line": 76,
                     "short_desc": null,
                     "long_desc": null,
@@ -332,7 +332,7 @@
         },
         "serialize": {
             "name": "serialize",
-            "line": 94,
+            "line": 92,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -354,7 +354,7 @@
         },
         "unserialize": {
             "name": "unserialize",
-            "line": 99,
+            "line": 97,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -371,9 +371,9 @@
 
             ],
             "parameters": {
-                "Serialized": {
-                    "name": "Serialized",
-                    "line": 99,
+                "serialized": {
+                    "name": "serialized",
+                    "line": 97,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -388,7 +388,7 @@
         },
         "__clone": {
             "name": "__clone",
-            "line": 104,
+            "line": 102,
             "short_desc": "",
             "long_desc": "",
             "hint": null,

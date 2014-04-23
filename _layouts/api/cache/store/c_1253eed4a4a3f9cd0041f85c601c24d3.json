@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\JoiningOnQueryable.php",
-    "hash": "426f14c89e7fed1de0775b82604f5a1ac94db524",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\JoiningOnQueryable.php",
+    "hash": "915d1c0bc2520532628f413afe0fcf46a9f81504",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -53,9 +53,9 @@
                 "\"1\" @param tags are defined by \"4\" are expected"
             ],
             "parameters": {
-                "Provider": {
-                    "name": "Provider",
-                    "line": 39,
+                "provider": {
+                    "name": "provider",
+                    "line": 38,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -71,9 +71,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Scope": {
-                    "name": "Scope",
-                    "line": 40,
+                "scope": {
+                    "name": "scope",
+                    "line": 38,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -89,9 +89,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "InnerValues": {
-                    "name": "InnerValues",
-                    "line": 41,
+                "innerValues": {
+                    "name": "innerValues",
+                    "line": 38,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -102,9 +102,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "IsGroupJoin": {
-                    "name": "IsGroupJoin",
-                    "line": 42,
+                "isGroupJoin": {
+                    "name": "isGroupJoin",
+                    "line": 38,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -117,9 +117,9 @@
                 }
             }
         },
-        "On": {
-            "name": "On",
-            "line": 51,
+        "on": {
+            "name": "on",
+            "line": 46,
             "short_desc": "Filters the join values according to the supplied function.",
             "long_desc": "Both values will be passed as arguments to the supplied function.",
             "hint": [
@@ -141,9 +141,9 @@
 
             ],
             "parameters": {
-                "JoiningOnFunction": {
-                    "name": "JoiningOnFunction",
-                    "line": 51,
+                "joiningOnFunction": {
+                    "name": "joiningOnFunction",
+                    "line": 46,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -161,9 +161,9 @@
                 }
             }
         },
-        "OnEquality": {
-            "name": "OnEquality",
-            "line": 66,
+        "onEquality": {
+            "name": "onEquality",
+            "line": 62,
             "short_desc": "Filters the join values via strict equality (===) on the outer and inner keys according to the supplied key functions.",
             "long_desc": "",
             "hint": [
@@ -185,9 +185,9 @@
 
             ],
             "parameters": {
-                "OuterKeyFunction": {
-                    "name": "OuterKeyFunction",
-                    "line": 66,
+                "outerKeyFunction": {
+                    "name": "outerKeyFunction",
+                    "line": 62,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -203,9 +203,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "InnerKeyFunction": {
-                    "name": "InnerKeyFunction",
-                    "line": 66,
+                "innerKeyFunction": {
+                    "name": "innerKeyFunction",
+                    "line": 62,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [

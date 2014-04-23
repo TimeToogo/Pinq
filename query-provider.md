@@ -18,19 +18,19 @@ The goal of this will be making a query provider capable of executing:
 
 {% highlight php startinline %}
 $MyQueryableArray
-        ->Where(function ($Number)  { return $Number > 5; })
-        ->Select(function ($Number)  { return $Number * 10; })
-        ->Sum();
+        ->where(function ($number)  { return $number > 5; })
+        ->select(function ($number)  { return $number * 10; })
+        ->sum();
 {% endhighlight %}
 
 To implement a `IQueryProvider` one must understand the how the query will be represented, a query is represented in two parts:
 
  - **IScope** - This contains many `ISegment`, each segment represents one or more methods calls
-    from the `IQueryable` implementation. For example the `->Where(...)` would become a `Filter`
-    segment and the proceeding `->Select(...)` would become a `Select` segment. 
+    from the `IQueryable` implementation. For example the `->where(...)` would become a `Filter`
+    segment and the proceeding `->select(...)` would become a `Select` segment. 
  
- - **IRequest** - This represents the actual data requested, in this case `->Sum()`  so a `Sum`
-    request, but it could be the underlying values (`->AsArray()`), a different aggregate (`->Count()`, ...) etc.
+ - **IRequest** - This represents the actual data requested, in this case `->sum()`  so a `Sum`
+    request, but it could be the underlying values (`->asArray()`), a different aggregate (`->count()`, ...) etc.
 
 **Steps**
 
@@ -48,99 +48,102 @@ use \Pinq\FunctionExpressionTree;
  */
 class ExpressionTreeEvaluator extends O\ExpressionVisitor
 {
-    private $Array;
-    private $MappedReturnedValues;
+    private $array;
+    private $mappedReturnedValues;
     
-    public function __construct(array $Array)
+    public function __construct(array $array)
     {
-        $this->Array = $Array;
+        $this->array = $array;
     }
     
     /**
      * Nice static method to easily evaluate the return expression against the array
      */
-    public static function EvaluateReturn(FunctionExpressionTree $ExpressionTree, array $Array) {
-        $Evaluator = new self($Array);
+    public static function evaluateReturn(FunctionExpressionTree $expressionTree, array $array) {
+        $evaluator = new self($array);
         
-        $Evaluator->Walk($ExpressionTree->GetFirstResolvedReturnValueExpression());
+        $evaluator->Walk($expressionTree->getFirstResolvedReturnValueExpression());
         
-        return $Evaluator->MappedReturnedValues;
+        return $evaluator->mappedReturnedValues;
     }
     
-    protected function VisitBinaryOperation(O\BinaryOperationExpression $Expression)
+    protected function visitBinaryOperation(O\BinaryOperationExpression $expression)
     {
         //Ignore the left operand, assume it is the value parameter for simplicity
         
-        $RightExpression = $Expression->GetRightOperandExpression();
+        $rightExpression = $expression->getRightOperandExpression();
         
-        if(!($RightExpression instanceof O\ValueExpression)) {
+        if(!($rightExpression instanceof O\ValueExpression)) {
             throw new \Exception('I need a constant value on the right side of the query expression');
         }
         
-        $RightValue = $RightExpression->GetValue();
+        $rightValue = $rightExpression->getValue();
         
-        switch ($Expression->GetOperator()) {
-            case O\Operators\Binary::GreaterThan:
-                $this->MappedReturnedValues = array_map(function ($I) use ($RightValue) { return $I > $RightValue; }, $this->Array);
+        switch ($expression->getOperator()) {
+            case O\Operators\Binary::GREATER_THAN:
+                $this->mappedReturnedValues = array_map(function ($i) use ($rightValue) { return $i > $rightValue; }, $this->array);
                 break;
             
-            case O\Operators\Binary::Multiplication:
-                $this->MappedReturnedValues = array_map(function ($I) use ($RightValue) { return $I * $RightValue; }, $this->Array);
+            case O\Operators\Binary::MULTIPLICATION:
+                $this->mappedReturnedValues = array_map(function ($i) use ($rightValue) { return $i * $rightValue; }, $this->array);
                 break;
 
             default:
-                throw new \Exception('I cannot do this operation: ' . $Expression->GetOperator());
+                throw new \Exception('I cannot do this operation: ' . $expression->getOperator());
         }
     }
 }
 {% endhighlight %}
 
- - For the second step we need the a class that will evaluate the query scope of the supplied array, this extends the `SegmentVisitor` and will evaluate the `->Where(...)->Select(...)` part of the query:
+ - For the second step we need the a class that will evaluate the query scope of the 
+   supplied array, this extends the `SegmentVisitor` and will evaluate the 
+   `->where(...)->select(...)` part of the query:
 
 {% highlight php startinline %}
 use \Pinq\Queries\Segments;
 
 /**
  * This is also the bare minimum.
- * Evaluating only 'Where' and 'Select' and ignoring the rest
+ * Evaluating only 'where' and 'select' and ignoring the rest
  */
 class QueryScopeEvaluator extends Segments\SegmentVisitor
 {
-    private $Array;
+    private $array;
     
-    public function __construct(array $Array)
+    public function __construct(array $array)
     {
-        $this->Array = $Array;
+        $this->array = $array;
     }
     
-    public function GetScopedArray()
+    public function getScopedArray()
     {
-        return $this->Array;
+        return $this->array;
     }
     
-    public function VisitFilter(Segments\Filter $Query)
+    public function VisitFilter(Segments\Filter $query)
     {
-        $MappedResults = ExpressionTreeEvaluator::EvaluateReturn($Query->GetFunctionExpressionTree(), $this->Array);
+        $mappedResults = ExpressionTreeEvaluator::EvaluateReturn($query->getFunctionExpressionTree(), $this->array);
         
-        foreach($MappedResults as $Key => $Value) {
+        foreach($mappedResults as $Key => $Value) {
             //Remove any values that returned false from the function
             if(!$Value) {
-                unset($this->Array[$Key]);
+                unset($this->array[$Key]);
             }
         }
     }
     
-    public function VisitSelect(Segments\Select $Query)
+    public function VisitSelect(Segments\Select $query)
     {
-        $MappedResults = ExpressionTreeEvaluator::EvaluateReturn($Query->GetFunctionExpressionTree(), $this->Array);
+        $mappedResults = ExpressionTreeEvaluator::EvaluateReturn($query->getFunctionExpressionTree(), $this->array);
         
         //Set the array to the projections from the function
-        $this->Array = $MappedResults;
+        $this->array = $mappedResults;
     }
 }
 {% endhighlight %}`
 
- - Now to evaluate the `->Sum()` aggregate value, extending the `RequestVisitor` class, this is responsible for evaluating all the aggregates and retrieving the values:
+ - Now to evaluate the `->sum()` aggregate value, extending the `RequestVisitor` class, 
+   this is responsible for evaluating all the aggregates and retrieving the values:
 
 {% highlight php startinline %}
 
@@ -148,41 +151,41 @@ use \Pinq\Queries\Requests;
 use \Pinq\FunctionExpressionTree;
 
 /**
- * This is also the bare minimum, evaluating only 'Sum'
+ * This is also the bare minimum, evaluating only 'sum'
  */
 class RequestEvaluator extends Requests\RequestVisitor
 {
-    private $Array;
+    private $array;
     
-    public function __construct(array $Array)
+    public function __construct(array $array)
     {
-        $this->Array = $Array;
+        $this->array = $array;
     }
     
-    public function VisitSum(Requests\Sum $Request)
+    public function visitSum(Requests\Sum $request)
     {
-        if(count($this->Array) === 0) {
+        if(count($this->array) === 0) {
             return null;
         }
         
         //BONUS: if average was called with a projection function we can evaluate that to
-        $ProjectedValues = $this->EvaluateProjection($Request);
+        $projectedValues = $this->evaluateProjection($request);
         
-        $Sum = 0;
-        foreach($ProjectedValues as $Value) {
-            $Sum += $Value;
+        $sum = 0;
+        foreach($projectedValues as $value) {
+            $sum += $value;
         }
         
-        return $Sum;
+        return $sum;
     }
     
-    private function EvaluateProjection(Requests\ProjectionRequest $Request) 
+    private function evaluateProjection(Requests\ProjectionRequest $request) 
     {
-        if($Request->HasFunctionExpressionTree()) {
-            return ExpressionTreeEvaluator::EvaluateReturn($Request->GetFunctionExpressionTree(), $this->Array);
+        if($request->hasFunctionExpressionTree()) {
+            return ExpressionTreeEvaluator::evaluateReturn($request->getFunctionExpressionTree(), $this->array);
         }
         else {
-            return $this->Array;
+            return $this->array;
         }
     }
 }
@@ -198,15 +201,15 @@ class ArrayQueryProvider extends Providers\QueryProvider
 {
     private $Array = [1,2,3,4,6,7,8,9,10];
     
-    protected function LoadRequestEvaluatorVisitor(Queries\IScope $Scope)
+    protected function loadRequestEvaluatorVisitor(Queries\IScope $scope)
     {
-        //Evaluate the query scope: ->Where(...)->Select(...)
-        $ScopedEvaluator = new QueryScopeEvaluator($this->Array);
-        $ScopedEvaluator->Walk($Scope);
-        $ScopedArray = $ScopedEvaluator->GetScopedArray();
+        //Evaluate the query scope: ->where(...)->select(...)
+        $scopedEvaluator = new QueryScopeEvaluator($this->array);
+        $scopedEvaluator->walk($scope);
+        $scopedArray = $scopedEvaluator->getScopedArray();
         
-        //Return the request evaluator, it will be called and evaluate the ->Sum() query
-        return new RequestEvaluator($ScopedArray);
+        //Return the request evaluator, it will be called and evaluate the ->sum() query
+        return new RequestEvaluator($scopedArray);
     }
 }
 {% endhighlight %}
@@ -229,9 +232,9 @@ Finally, we can see the action:
 $MyQueryableArray = new ArrayQueryable();
 
 echo $MyQueryableArray
-        ->Where(function ($Number)  { return $Number > 5; })
-        ->Select(function ($Number)  { return $Number * 10; })
-        ->Sum();
+        ->where(function ($number)  { return $number > 5; })
+        ->select(function ($number)  { return $number * 10; })
+        ->sum();
 //Echos: 400
 {% endhighlight %}
 

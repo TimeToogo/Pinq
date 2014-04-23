@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\IRepository.php",
-    "hash": "3cde4b1fa8060dd5d0fe095a887229bb4dc449bf",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\IRepository.php",
+    "hash": "3aaa7a32f5fdce4f3c15f892d0cc9740f832774b",
     "parent": null,
     "modifiers": null,
     "is_trait": false,
@@ -34,10 +34,10 @@
 
     ],
     "methods": {
-        "GetProvider": {
-            "name": "GetProvider",
+        "getProvider": {
+            "name": "getProvider",
             "line": 17,
-            "short_desc": "The query provider for the implementation.",
+            "short_desc": "The repository provider for the implementation.",
             "long_desc": "",
             "hint": [
                 [

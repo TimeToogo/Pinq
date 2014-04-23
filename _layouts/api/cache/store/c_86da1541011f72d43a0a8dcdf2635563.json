@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Providers\\Collection",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Providers\\Collection\\Provider.php",
-    "hash": "0b741a98900647acec36fcd92d9a28cdfb995a0e",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Providers\\Collection\\Provider.php",
+    "hash": "9de4463dd69296739771f7bdae0ff364706624a8",
     "parent": "Pinq\\Providers\\RepositoryProvider",
     "modifiers": 0,
     "is_trait": false,
@@ -35,7 +35,7 @@
     "methods": {
         "__construct": {
             "name": "__construct",
-            "line": 19,
+            "line": 21,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -52,9 +52,9 @@
 
             ],
             "parameters": {
-                "Collection": {
-                    "name": "Collection",
-                    "line": 19,
+                "collection": {
+                    "name": "collection",
+                    "line": 21,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -72,9 +72,9 @@
                 }
             }
         },
-        "Load": {
-            "name": "Load",
-            "line": 35,
+        "load": {
+            "name": "load",
+            "line": 37,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -96,9 +96,9 @@
 
             ],
             "parameters": {
-                "Query": {
-                    "name": "Query",
-                    "line": 35,
+                "query": {
+                    "name": "query",
+                    "line": 37,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Scope.php",
-    "hash": "b4ca9901f4eb45b1994409881fd02679a0e72895",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\Scope.php",
+    "hash": "296ce7a1c3695ef982133c452a1400313ff39b30",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Segments": {
-                    "name": "Segments",
+                "segments": {
+                    "name": "segments",
                     "line": 17,
                     "short_desc": null,
                     "long_desc": null,
@@ -94,8 +94,8 @@
 
             ]
         },
-        "GetSegments": {
-            "name": "GetSegments",
+        "getSegments": {
+            "name": "getSegments",
             "line": 30,
             "short_desc": "",
             "long_desc": "",
@@ -121,8 +121,8 @@
 
             ]
         },
-        "IsEmpty": {
-            "name": "IsEmpty",
+        "isEmpty": {
+            "name": "isEmpty",
             "line": 35,
             "short_desc": "",
             "long_desc": "",
@@ -148,8 +148,8 @@
 
             ]
         },
-        "Append": {
-            "name": "Append",
+        "append": {
+            "name": "append",
             "line": 40,
             "short_desc": "",
             "long_desc": "",
@@ -172,8 +172,8 @@
 
             ],
             "parameters": {
-                "Query": {
-                    "name": "Query",
+                "query": {
+                    "name": "query",
                     "line": 40,
                     "short_desc": null,
                     "long_desc": null,
@@ -192,8 +192,8 @@
                 }
             }
         },
-        "Update": {
-            "name": "Update",
+        "update": {
+            "name": "update",
             "line": 45,
             "short_desc": "",
             "long_desc": "",
@@ -216,8 +216,8 @@
 
             ],
             "parameters": {
-                "Segments": {
-                    "name": "Segments",
+                "segments": {
+                    "name": "segments",
                     "line": 45,
                     "short_desc": null,
                     "long_desc": null,
@@ -236,8 +236,8 @@
                 }
             }
         },
-        "UpdateLast": {
-            "name": "UpdateLast",
+        "updateLast": {
+            "name": "updateLast",
             "line": 54,
             "short_desc": "",
             "long_desc": "",
@@ -260,8 +260,8 @@
 
             ],
             "parameters": {
-                "Segment": {
-                    "name": "Segment",
+                "segment": {
+                    "name": "segment",
                     "line": 54,
                     "short_desc": null,
                     "long_desc": null,

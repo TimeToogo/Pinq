@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Iterators",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Iterators\\OperationIterator.php",
-    "hash": "3c0ed64b8b1e79356f8e7584d37eadb06330b13a",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Iterators\\OperationIterator.php",
+    "hash": "44b7d600dfa39fce80c42d7227f96a519f3cb929",
     "parent": "Pinq\\Iterators\\IteratorIterator",
     "modifiers": 16,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Iterator": {
-                    "name": "Iterator",
+                "iterator": {
+                    "name": "iterator",
                     "line": 23,
                     "short_desc": null,
                     "long_desc": null,
@@ -70,8 +70,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "OtherIterator": {
-                    "name": "OtherIterator",
+                "otherIterator": {
+                    "name": "otherIterator",
                     "line": 23,
                     "short_desc": null,
                     "long_desc": null,
@@ -114,7 +114,7 @@
         },
         "rewind": {
             "name": "rewind",
-            "line": 43,
+            "line": 44,
             "short_desc": "",
             "long_desc": "",
             "hint": null,

@@ -1,7 +1,7 @@
 {
     "name": "Pinq\\Queries\\Segments\\JoinBase",
     "line": 13,
-    "short_desc": "Base class for a join query segment with the joined values and the  resulting value function",
+    "short_desc": "Base class for a join query segment with the joined values and the resulting value function",
     "long_desc": "",
     "hint": null,
     "tags": {
@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries\\Segments",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Segments\\JoinBase.php",
-    "hash": "749b4e3df653f459e43b4a07eab1840aeb35e1e9",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\Segments\\JoinBase.php",
+    "hash": "c52ba245d5b7d14534904cdc408d99b4da0d0aee",
     "parent": "Pinq\\Queries\\Segments\\Segment",
     "modifiers": 16,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Values": {
-                    "name": "Values",
+                "values": {
+                    "name": "values",
                     "line": 34,
                     "short_desc": null,
                     "long_desc": null,
@@ -65,8 +65,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "IsGroupJoin": {
-                    "name": "IsGroupJoin",
+                "isGroupJoin": {
+                    "name": "isGroupJoin",
                     "line": 34,
                     "short_desc": null,
                     "long_desc": null,
@@ -78,8 +78,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "JoiningFunction": {
-                    "name": "JoiningFunction",
+                "joiningFunction": {
+                    "name": "joiningFunction",
                     "line": 34,
                     "short_desc": null,
                     "long_desc": null,
@@ -98,8 +98,8 @@
                 }
             }
         },
-        "GetValues": {
-            "name": "GetValues",
+        "getValues": {
+            "name": "getValues",
             "line": 44,
             "short_desc": "",
             "long_desc": "",
@@ -129,8 +129,8 @@
 
             ]
         },
-        "IsGroupJoin": {
-            "name": "IsGroupJoin",
+        "isGroupJoin": {
+            "name": "isGroupJoin",
             "line": 52,
             "short_desc": "",
             "long_desc": "",
@@ -156,8 +156,8 @@
 
             ]
         },
-        "GetJoiningFunctionExpressionTree": {
-            "name": "GetJoiningFunctionExpressionTree",
+        "getJoiningFunctionExpressionTree": {
+            "name": "getJoiningFunctionExpressionTree",
             "line": 60,
             "short_desc": "",
             "long_desc": "",

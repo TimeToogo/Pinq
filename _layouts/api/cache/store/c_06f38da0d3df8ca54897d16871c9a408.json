@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Parsing\\PHPParser",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Parsing\\PHPParser\\AST.php",
-    "hash": "07e521c746a89d6b6c4d1bf8708985bf392fbe24",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Parsing\\PHPParser\\AST.php",
+    "hash": "fea36ce9ebd713f312dd73bcd839b69918e51a46",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -55,8 +55,8 @@
 
             ],
             "parameters": {
-                "Nodes": {
-                    "name": "Nodes",
+                "nodes": {
+                    "name": "nodes",
                     "line": 28,
                     "short_desc": null,
                     "long_desc": null,
@@ -75,9 +75,9 @@
                 }
             }
         },
-        "GetExpressions": {
-            "name": "GetExpressions",
-            "line": 60,
+        "getExpressions": {
+            "name": "getExpressions",
+            "line": 59,
             "short_desc": "Parses the nodes into the equivalent expression tree",
             "long_desc": "",
             "hint": [
@@ -102,8 +102,8 @@
 
             ]
         },
-        "ParseNameNode": {
-            "name": "ParseNameNode",
+        "parseNameNode": {
+            "name": "parseNameNode",
             "line": 112,
             "short_desc": "",
             "long_desc": "",
@@ -126,8 +126,8 @@
 
             ],
             "parameters": {
-                "Node": {
-                    "name": "Node",
+                "node": {
+                    "name": "node",
                     "line": 112,
                     "short_desc": null,
                     "long_desc": null,
@@ -141,9 +141,9 @@
                 }
             }
         },
-        "ParseExpressionNode": {
-            "name": "ParseExpressionNode",
-            "line": 125,
+        "parseExpressionNode": {
+            "name": "parseExpressionNode",
+            "line": 124,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -160,9 +160,9 @@
 
             ],
             "parameters": {
-                "Node": {
-                    "name": "Node",
-                    "line": 125,
+                "node": {
+                    "name": "node",
+                    "line": 124,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

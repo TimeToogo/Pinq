@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions\\Operators",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\Operators\\Binary.php",
-    "hash": "7a0871c1168113402a6dad37ae6727f201342c92",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\Operators\\Binary.php",
+    "hash": "46f7d6d8f9b2d47fd32dcf4eb6428c9d977e1d65",
     "parent": null,
     "modifiers": 32,
     "is_trait": false,
@@ -36,135 +36,135 @@
 
     ],
     "constants": {
-        "Addition": {
-            "name": "Addition",
+        "ADDITION": {
+            "name": "ADDITION",
             "line": 13,
             "short_desc": "",
             "long_desc": ""
         },
-        "Subtraction": {
-            "name": "Subtraction",
+        "SUBTRACTION": {
+            "name": "SUBTRACTION",
             "line": 14,
             "short_desc": "",
             "long_desc": ""
         },
-        "Multiplication": {
-            "name": "Multiplication",
+        "MULTIPLICATION": {
+            "name": "MULTIPLICATION",
             "line": 15,
             "short_desc": "",
             "long_desc": ""
         },
-        "Division": {
-            "name": "Division",
+        "DIVISION": {
+            "name": "DIVISION",
             "line": 16,
             "short_desc": "",
             "long_desc": ""
         },
-        "Modulus": {
-            "name": "Modulus",
+        "MODULUS": {
+            "name": "MODULUS",
             "line": 17,
             "short_desc": "",
             "long_desc": ""
         },
-        "BitwiseAnd": {
-            "name": "BitwiseAnd",
+        "BITWISE_AND": {
+            "name": "BITWISE_AND",
+            "line": 19,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "BITWISE_OR": {
+            "name": "BITWISE_OR",
             "line": 20,
             "short_desc": "",
             "long_desc": ""
         },
-        "BitwiseOr": {
-            "name": "BitwiseOr",
+        "BITWISE_XOR": {
+            "name": "BITWISE_XOR",
             "line": 21,
             "short_desc": "",
             "long_desc": ""
         },
-        "BitwiseXor": {
-            "name": "BitwiseXor",
+        "SHIFT_LEFT": {
+            "name": "SHIFT_LEFT",
             "line": 22,
             "short_desc": "",
             "long_desc": ""
         },
-        "ShiftLeft": {
-            "name": "ShiftLeft",
+        "SHIFT_RIGHT": {
+            "name": "SHIFT_RIGHT",
             "line": 23,
             "short_desc": "",
             "long_desc": ""
         },
-        "ShiftRight": {
-            "name": "ShiftRight",
-            "line": 24,
+        "LOGICAL_AND": {
+            "name": "LOGICAL_AND",
+            "line": 25,
             "short_desc": "",
             "long_desc": ""
         },
-        "LogicalAnd": {
-            "name": "LogicalAnd",
+        "LOGICAL_OR": {
+            "name": "LOGICAL_OR",
+            "line": 26,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "EQUALITY": {
+            "name": "EQUALITY",
             "line": 27,
             "short_desc": "",
             "long_desc": ""
         },
-        "LogicalOr": {
-            "name": "LogicalOr",
+        "IDENTITY": {
+            "name": "IDENTITY",
             "line": 28,
             "short_desc": "",
             "long_desc": ""
         },
-        "Equality": {
-            "name": "Equality",
+        "INEQUALITY": {
+            "name": "INEQUALITY",
             "line": 29,
             "short_desc": "",
             "long_desc": ""
         },
-        "Identity": {
-            "name": "Identity",
+        "NOT_IDENTICAL": {
+            "name": "NOT_IDENTICAL",
             "line": 30,
             "short_desc": "",
             "long_desc": ""
         },
-        "Inequality": {
-            "name": "Inequality",
+        "LESS_THAN": {
+            "name": "LESS_THAN",
             "line": 31,
             "short_desc": "",
             "long_desc": ""
         },
-        "NotIdentical": {
-            "name": "NotIdentical",
+        "LESS_THAN_OR_EQUAL_TO": {
+            "name": "LESS_THAN_OR_EQUAL_TO",
             "line": 32,
             "short_desc": "",
             "long_desc": ""
         },
-        "LessThan": {
-            "name": "LessThan",
+        "GREATER_THAN": {
+            "name": "GREATER_THAN",
             "line": 33,
             "short_desc": "",
             "long_desc": ""
         },
-        "LessThanOrEqualTo": {
-            "name": "LessThanOrEqualTo",
+        "GREATER_THAN_OR_EQUAL_TO": {
+            "name": "GREATER_THAN_OR_EQUAL_TO",
             "line": 34,
             "short_desc": "",
             "long_desc": ""
         },
-        "GreaterThan": {
-            "name": "GreaterThan",
-            "line": 35,
-            "short_desc": "",
-            "long_desc": ""
-        },
-        "GreaterThanOrEqualTo": {
-            "name": "GreaterThanOrEqualTo",
+        "CONCATENATION": {
+            "name": "CONCATENATION",
             "line": 36,
             "short_desc": "",
             "long_desc": ""
         },
-        "Concatenation": {
-            "name": "Concatenation",
-            "line": 39,
-            "short_desc": "",
-            "long_desc": ""
-        },
-        "IsInstanceOf": {
-            "name": "IsInstanceOf",
-            "line": 42,
+        "IS_INSTANCE_OF": {
+            "name": "IS_INSTANCE_OF",
+            "line": 38,
             "short_desc": "",
             "long_desc": ""
         }

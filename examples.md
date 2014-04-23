@@ -12,22 +12,22 @@ Here are some examples demonstrating the functionality of the query API:
 {% highlight php startinline %}
 use Pinq\ITraversable, Pinq\Traversable;
 
-$Numbers = Traversable::From(range(1, 100));
-$Strings = Traversable::From(['foo', 'bar', 'baz', 'tear', 'cow', 'tripod', 'whisky', 'sand', 'which']);
+$numbers = Traversable::from(range(1, 100));
+$strings = Traversable::from(['foo', 'bar', 'baz', 'tear', 'cow', 'tripod', 'whisky', 'sand', 'which']);
 {% endhighlight %}
 
 **Filtering**
 
 {% highlight php startinline %}
-foreach($Numbers->Where(function ($I) { return $I % 2 === 0; }) as $Number) {
+foreach($numbers->where(function ($i) { return $i % 2 === 0; }) as $number) {
     //2, 4, 6, 8...
 }
 
-foreach($Numbers->Where(function ($I) { return $I % 2 === 1; }) as $Number) {
+foreach($numbers->where(function ($i) { return $i % 2 === 1; }) as $number) {
     //1, 3, 5, 7....
 }
 
-foreach($Strings->Where(function ($I) { return strpos($I, 'w') === 0; })) as $String) {
+foreach($strings->where(function ($i) { return strpos($i, 'w') === 0; })) as $string) {
     //'whiskey', 'which'
 }
 {% endhighlight %}
@@ -36,13 +36,13 @@ foreach($Strings->Where(function ($I) { return strpos($I, 'w') === 0; })) as $St
 
 {% highlight php startinline %}
 
-foreach($Numbers->OrderByAscending(function ($I) { return -$I; }) as $Number) {
+foreach($numbers->orderByAscending(function ($i) { return -$i; }) as $number) {
     //100, 99, 98, 97, 96...
 }
 
-foreach($Strings
-        ->OrderByAscending(function ($I) { return $I[0]; })
-        ->ThenByDescending(function ($I) { return $I[2]; }) as $String) {
+foreach($strings
+        ->orderByAscending(function ($i) { return $i[0]; })
+        ->thenByDescending(function ($i) { return $i[2]; }) as $string) {
     //'baz', 'bar', 'cow', 'foo'...
 }
 {% endhighlight %}
@@ -51,11 +51,11 @@ foreach($Strings
 
 {% highlight php startinline %}
 
-foreach($Numbers->GroupBy(function ($I) { return $I % 2; }) as $Group) {
+foreach($numbers->groupBy(function ($i) { return $i % 2; }) as $group) {
     //Traversable: [1, 3, 5, 7...], Traversable: [2, 4, 6, 8...]
 }
 
-foreach($Strings->GroupBy(function ($I) { return $I[0]; }) as $String) {
+foreach($strings->groupBy(function ($i) { return $i[0]; }) as $string) {
     //Traversable: ['foo'], Traversable: ['bar', 'baz'], Traversable: ['tear', 'tripod']...
 }
 
@@ -65,24 +65,24 @@ foreach($Strings->GroupBy(function ($I) { return $I[0]; }) as $String) {
 
 {% highlight php startinline %}
 
-foreach($Numbers
-        ->Join(range(10, 20))
-        ->OnEquality(function ($Outer) { return $Outer * 2; }, function ($Inner) { return $Inner; })
-        ->To(function($Outer, $Inner) { return $Outer . ':' . $Inner; }) as $Joined) {
+foreach($numbers
+        ->join(range(10, 20))
+        ->onEquality(function ($outer) { return $outer * 2; }, function ($inner) { return $inner; })
+        ->to(function($outer, $inner) { return $outer . ':' . $inner; }) as $joined) {
     //'5:10', '6:12', '7:14', '8:16', '9:18', '10:20'
 }
 
-foreach($Numbers
-        ->GroupJoin($Strings)
-        ->OnEquality(function ($Outer) { return $Outer; }, 'strlen')
-        ->To(function($Outer, \Pinq\ITraversable $InnerGroup) { return $Outer . ':' . $InnerGroup->Implode('|'); }) as $Joined) {
+foreach($numbers
+        ->groupJoin($strings)
+        ->onEquality(function ($outer) { return $outer; }, 'strlen')
+        ->to(function($outer, \Pinq\ITraversable $innerGroup) { return $outer . ':' . $innerGroup->implode('|'); }) as $joined) {
     //'1:', '2:', '3:foo|bar|baz|cow', '4:tear|sand', '5:which', '6:tripod|whisky', '7:'...
 }
 
-foreach($Numbers
-        ->GroupJoin($Numbers)
-        ->On(function ($Outer, $Inner) { return $Outer >= $Inner; })
-        ->To(function($Outer, \Pinq\ITraversable $InnerGroup) { return $Outer . ':' . $InnerGroup->Implode('|'); }) as $Joined) {
+foreach($numbers
+        ->groupJoin($numbers)
+        ->on(function ($outer, $inner) { return $outer >= $inner; })
+        ->to(function($outer, \Pinq\ITraversable $innerGroup) { return $outer . ':' . $innerGroup->implode('|'); }) as $joined) {
     //'1:1', '2:1|2', '3:1|2|3', '4:1|2|3|4', '5:1|2|3|4|5'...
 }
 
@@ -92,15 +92,15 @@ foreach($Numbers
 
 {% highlight php startinline %}
 
-foreach($Numbers->Select(function ($I) { return $I * 10; }) as $Number) {
+foreach($numbers->select(function ($i) { return $i * 10; }) as $number) {
     //10, 20, 30, 40...
 }
 
-foreach($Strings->Select(function ($I) { return $I . '-poo'; }) as $String) {
+foreach($strings->select(function ($i) { return $i . '-poo'; }) as $string) {
     //'foo-poo', 'bar-poo', 'baz-poo', 'tear-poo'...
 }
 
-foreach($Strings->Select('strlen') as $Length) {
+foreach($strings->select('strlen') as $length) {
     //3, 3, 3, 4...
 }
 
@@ -110,7 +110,7 @@ foreach($Strings->Select('strlen') as $Length) {
 
 {% highlight php startinline %}
 
-foreach($Strings->SelectMany('str_split') as $Character) {
+foreach($strings->selectMany('str_split') as $character) {
     //'f', 'o', 'o', 'b', 'a'...
 }
 
@@ -120,28 +120,28 @@ foreach($Strings->SelectMany('str_split') as $Character) {
 
 {% highlight php startinline %}
 
-$Numbers->Aggregate(function ($I, $K) { return $I * $K }); //100! (1 * 2 * 3 * 4...)
+$numbers->aggregate(function ($i, $k) { return $i * $k }); //100! (1 * 2 * 3 * 4...)
 
-$Numbers->Count(); //100
+$numbers->count(); //100
 
-$Numbers->Exists(); //true
+$numbers->exists(); //true
 
-$Numbers->Sum(); //5050 (1 + 2 + 3 + 4...)
+$numbers->sum(); //5050 (1 + 2 + 3 + 4...)
 
-$Numbers->Average(); //50.5
+$numbers->average(); //50.5
 
-$Numbers->Maximum(); //100
+$numbers->maximum(); //100
 
-$Numbers->Implode('-'); //'1-2-3-4-5-6...'
+$numbers->implode('-'); //'1-2-3-4-5-6...'
 
 
-$Strings->Implode(''); //'foobarbaztear...'
+$strings->implode(''); //'foobarbaztear...'
 
-$Strings->All(function ($I) { return strlen($I) >= 3; }); //true
+$strings->all(function ($i) { return strlen($i) >= 3; }); //true
 
-$Strings->Any(function ($I) { return strpos($I, 'z') !== false; }); //false
+$strings->any(function ($i) { return strpos($i, 'z') !== false; }); //false
 
-$Strings->Average('strlen'); //4.111...
+$strings->average('strlen'); //4.111...
 
 {% endhighlight %}
 
@@ -149,17 +149,17 @@ $Strings->Average('strlen'); //4.111...
 
 {% highlight php startinline %}
 
-$NumberData = $Numbers
-        ->Where(function ($I) { return $I % 2 === 0; }) //Only even values
-        ->OrderByDescending(function ($I) { return $I; }) //Order from largest to smallest
-        ->GroupBy(function ($I) { return $I % 7; }) //Put into seven groups
-        ->Where(function (ITraversable $I) { return $I->Count() % 2 === 0; }) //Only groups with an even amount of values
-        ->Select(function (ITraversable $Numbers) {
+$numberData = $numbers
+        ->where(function ($i) { return $i % 2 === 0; }) //Only even values
+        ->orderByDescending(function ($i) { return $i; }) //Order from largest to smallest
+        ->groupBy(function ($i) { return $i % 7; }) //Put into seven groups
+        ->where(function (ITraversable $i) { return $i->count() % 2 === 0; }) //Only groups with an even amount of values
+        ->select(function (ITraversable $numbers) {
             return [
-                'First' => $Numbers->First(),
-                'Average' => $Numbers->Average(),
-                'Count' => $Numbers->Count(),
-                'Numbers' => $Numbers->AsArray(),
+                'First' => $numbers->first(),
+                'Average' => $numbers->average(),
+                'Count' => $numbers->count(),
+                'numbers' => $numbers->asArray(),
             ];
         });
 

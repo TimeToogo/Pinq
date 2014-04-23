@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Iterators",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Iterators\\IntersectionIterator.php",
-    "hash": "9bd92121c2fc73c19aca755285e3b3e9331dd506",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Iterators\\IntersectionIterator.php",
+    "hash": "e4ef46b795bd1f4c9623dbf971ae58f4cdec1ef9",
     "parent": "Pinq\\Iterators\\OperationIterator",
     "modifiers": 0,
     "is_trait": false,

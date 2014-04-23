@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Providers",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Providers\\QueryProvider.php",
-    "hash": "c02241b9d1c44ddee5388b482494e1a39c6facfd",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Providers\\QueryProvider.php",
+    "hash": "8760d3595cb3eac2e28b63f466ea06626e97095d",
     "parent": null,
     "modifiers": 16,
     "is_trait": false,
@@ -36,7 +36,7 @@
     "methods": {
         "__construct": {
             "name": "__construct",
-            "line": 22,
+            "line": 21,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -53,9 +53,9 @@
 
             ],
             "parameters": {
-                "FunctionCache": {
-                    "name": "FunctionCache",
-                    "line": 22,
+                "functionCache": {
+                    "name": "functionCache",
+                    "line": 21,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -73,9 +73,9 @@
                 }
             }
         },
-        "GetFunctionToExpressionTreeConverter": {
-            "name": "GetFunctionToExpressionTreeConverter",
-            "line": 27,
+        "getFunctionToExpressionTreeConverter": {
+            "name": "getFunctionToExpressionTreeConverter",
+            "line": 29,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -100,9 +100,9 @@
 
             ]
         },
-        "CreateQueryable": {
-            "name": "CreateQueryable",
-            "line": 32,
+        "createQueryable": {
+            "name": "createQueryable",
+            "line": 34,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -124,9 +124,9 @@
 
             ],
             "parameters": {
-                "Scope": {
-                    "name": "Scope",
-                    "line": 32,
+                "scope": {
+                    "name": "scope",
+                    "line": 34,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -144,9 +144,9 @@
                 }
             }
         },
-        "Load": {
-            "name": "Load",
-            "line": 37,
+        "load": {
+            "name": "load",
+            "line": 39,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -168,9 +168,9 @@
 
             ],
             "parameters": {
-                "Query": {
-                    "name": "Query",
-                    "line": 37,
+                "query": {
+                    "name": "query",
+                    "line": 39,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries\\Segments",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Segments\\Range.php",
-    "hash": "cb3a7fc349f2a921d43408f2b24024e6852282e7",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\Segments\\Range.php",
+    "hash": "3824bc264865b8cc1cb3b085e56b4ce66440b183",
     "parent": "Pinq\\Queries\\Segments\\Segment",
     "modifiers": 0,
     "is_trait": false,
@@ -35,7 +35,7 @@
     "methods": {
         "__construct": {
             "name": "__construct",
-            "line": 15,
+            "line": 16,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -52,9 +52,9 @@
 
             ],
             "parameters": {
-                "RangeStart": {
-                    "name": "RangeStart",
-                    "line": 15,
+                "rangeStart": {
+                    "name": "rangeStart",
+                    "line": 16,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -65,9 +65,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "RangeAmount": {
-                    "name": "RangeAmount",
-                    "line": 15,
+                "rangeAmount": {
+                    "name": "rangeAmount",
+                    "line": 16,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -80,9 +80,9 @@
                 }
             }
         },
-        "GetType": {
-            "name": "GetType",
-            "line": 21,
+        "getType": {
+            "name": "getType",
+            "line": 22,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -107,9 +107,9 @@
 
             ]
         },
-        "Traverse": {
-            "name": "Traverse",
-            "line": 26,
+        "traverse": {
+            "name": "traverse",
+            "line": 27,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -131,9 +131,9 @@
 
             ],
             "parameters": {
-                "Walker": {
-                    "name": "Walker",
-                    "line": 26,
+                "walker": {
+                    "name": "walker",
+                    "line": 27,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -151,9 +151,9 @@
                 }
             }
         },
-        "GetRangeStart": {
-            "name": "GetRangeStart",
-            "line": 34,
+        "getRangeStart": {
+            "name": "getRangeStart",
+            "line": 35,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -178,9 +178,9 @@
 
             ]
         },
-        "GetRangeAmount": {
-            "name": "GetRangeAmount",
-            "line": 42,
+        "getRangeAmount": {
+            "name": "getRangeAmount",
+            "line": 43,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -209,9 +209,9 @@
 
             ]
         },
-        "Update": {
-            "name": "Update",
-            "line": 47,
+        "update": {
+            "name": "update",
+            "line": 48,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -228,9 +228,9 @@
 
             ],
             "parameters": {
-                "RangeStart": {
-                    "name": "RangeStart",
-                    "line": 47,
+                "rangeStart": {
+                    "name": "rangeStart",
+                    "line": 48,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -241,9 +241,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "RangeAmount": {
-                    "name": "RangeAmount",
-                    "line": 47,
+                "rangeAmount": {
+                    "name": "rangeAmount",
+                    "line": 48,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,

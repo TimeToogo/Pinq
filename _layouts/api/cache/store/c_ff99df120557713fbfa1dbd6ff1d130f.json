@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Providers\\Collection",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Providers\\Collection\\OperationEvaluator.php",
-    "hash": "cf808cfe2ad3032f323dcd2b98bad937e7115585",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Providers\\Collection\\OperationEvaluator.php",
+    "hash": "b0f22e856fdcb40f08ca7342af88f577d45b63b0",
     "parent": "Pinq\\Queries\\Operations\\OperationVisitor",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Collection": {
-                    "name": "Collection",
+                "collection": {
+                    "name": "collection",
                     "line": 19,
                     "short_desc": null,
                     "long_desc": null,
@@ -72,8 +72,8 @@
                 }
             }
         },
-        "VisitApply": {
-            "name": "VisitApply",
+        "visitApply": {
+            "name": "visitApply",
             "line": 24,
             "short_desc": "",
             "long_desc": "",
@@ -91,8 +91,8 @@
 
             ],
             "parameters": {
-                "Operation": {
-                    "name": "Operation",
+                "operation": {
+                    "name": "operation",
                     "line": 24,
                     "short_desc": null,
                     "long_desc": null,
@@ -111,8 +111,8 @@
                 }
             }
         },
-        "VisitAddValues": {
-            "name": "VisitAddValues",
+        "visitAddValues": {
+            "name": "visitAddValues",
             "line": 29,
             "short_desc": "",
             "long_desc": "",
@@ -130,8 +130,8 @@
 
             ],
             "parameters": {
-                "Operation": {
-                    "name": "Operation",
+                "operation": {
+                    "name": "operation",
                     "line": 29,
                     "short_desc": null,
                     "long_desc": null,
@@ -150,8 +150,8 @@
                 }
             }
         },
-        "VisitRemoveValues": {
-            "name": "VisitRemoveValues",
+        "visitRemoveValues": {
+            "name": "visitRemoveValues",
             "line": 34,
             "short_desc": "",
             "long_desc": "",
@@ -169,8 +169,8 @@
 
             ],
             "parameters": {
-                "Operation": {
-                    "name": "Operation",
+                "operation": {
+                    "name": "operation",
                     "line": 34,
                     "short_desc": null,
                     "long_desc": null,
@@ -189,8 +189,8 @@
                 }
             }
         },
-        "VisitRemoveWhere": {
-            "name": "VisitRemoveWhere",
+        "visitRemoveWhere": {
+            "name": "visitRemoveWhere",
             "line": 39,
             "short_desc": "",
             "long_desc": "",
@@ -208,8 +208,8 @@
 
             ],
             "parameters": {
-                "Operation": {
-                    "name": "Operation",
+                "operation": {
+                    "name": "operation",
                     "line": 39,
                     "short_desc": null,
                     "long_desc": null,
@@ -228,9 +228,9 @@
                 }
             }
         },
-        "VisitClear": {
-            "name": "VisitClear",
-            "line": 43,
+        "visitClear": {
+            "name": "visitClear",
+            "line": 44,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -247,9 +247,9 @@
 
             ],
             "parameters": {
-                "Operation": {
-                    "name": "Operation",
-                    "line": 43,
+                "operation": {
+                    "name": "operation",
+                    "line": 44,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -267,9 +267,9 @@
                 }
             }
         },
-        "VisitSetIndex": {
-            "name": "VisitSetIndex",
-            "line": 48,
+        "visitSetIndex": {
+            "name": "visitSetIndex",
+            "line": 49,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -286,9 +286,9 @@
 
             ],
             "parameters": {
-                "Operation": {
-                    "name": "Operation",
-                    "line": 48,
+                "operation": {
+                    "name": "operation",
+                    "line": 49,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -306,9 +306,9 @@
                 }
             }
         },
-        "VisitUnsetIndex": {
-            "name": "VisitUnsetIndex",
-            "line": 53,
+        "visitUnsetIndex": {
+            "name": "visitUnsetIndex",
+            "line": 54,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -325,9 +325,9 @@
 
             ],
             "parameters": {
-                "Operation": {
-                    "name": "Operation",
-                    "line": 53,
+                "operation": {
+                    "name": "operation",
+                    "line": 54,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

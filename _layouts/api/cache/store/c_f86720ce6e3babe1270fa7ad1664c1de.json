@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\VariableExpression.php",
-    "hash": "9405adf956622884ee4282c48dd364de1b8f6240",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\VariableExpression.php",
+    "hash": "f92872cb1c5736a204b83bf423c1d531e7fd7e37",
     "parent": "Pinq\\Expressions\\Expression",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "NameExpression": {
-                    "name": "NameExpression",
+                "nameExpression": {
+                    "name": "nameExpression",
                     "line": 19,
                     "short_desc": null,
                     "long_desc": null,
@@ -72,8 +72,8 @@
                 }
             }
         },
-        "Traverse": {
-            "name": "Traverse",
+        "traverse": {
+            "name": "traverse",
             "line": 24,
             "short_desc": "",
             "long_desc": "",
@@ -96,8 +96,8 @@
 
             ],
             "parameters": {
-                "Walker": {
-                    "name": "Walker",
+                "walker": {
+                    "name": "walker",
                     "line": 24,
                     "short_desc": null,
                     "long_desc": null,
@@ -116,8 +116,8 @@
                 }
             }
         },
-        "Simplify": {
-            "name": "Simplify",
+        "simplify": {
+            "name": "simplify",
             "line": 29,
             "short_desc": "",
             "long_desc": "",
@@ -143,8 +143,8 @@
 
             ]
         },
-        "GetNameExpression": {
-            "name": "GetNameExpression",
+        "getNameExpression": {
+            "name": "getNameExpression",
             "line": 37,
             "short_desc": "",
             "long_desc": "",
@@ -170,8 +170,8 @@
 
             ]
         },
-        "Update": {
-            "name": "Update",
+        "update": {
+            "name": "update",
             "line": 42,
             "short_desc": "",
             "long_desc": "",
@@ -189,8 +189,8 @@
 
             ],
             "parameters": {
-                "NameExpression": {
-                    "name": "NameExpression",
+                "nameExpression": {
+                    "name": "nameExpression",
                     "line": 42,
                     "short_desc": null,
                     "long_desc": null,
@@ -211,7 +211,7 @@
         },
         "serialize": {
             "name": "serialize",
-            "line": 63,
+            "line": 62,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -233,7 +233,7 @@
         },
         "unserialize": {
             "name": "unserialize",
-            "line": 68,
+            "line": 67,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -250,9 +250,9 @@
 
             ],
             "parameters": {
-                "Serialized": {
-                    "name": "Serialized",
-                    "line": 68,
+                "serialized": {
+                    "name": "serialized",
+                    "line": 67,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -267,7 +267,7 @@
         },
         "__clone": {
             "name": "__clone",
-            "line": 73,
+            "line": 72,
             "short_desc": "",
             "long_desc": "",
             "hint": null,

@@ -27,7 +27,7 @@
     <strong>GroupBy</strong>        extends <a href="../../../Pinq/Queries/Segments/Segment.html"><abbr title="Pinq\Queries\Segments\Segment">Segment</abbr></a></p>
 
             <div class="description">
-            <p>Query segment for grouping the values base on the supplied  grouping functions.</p>
+            <p>Query segment for grouping the values base on the supplied grouping functions.</p>
             <p>
 </p>
         </div>
@@ -42,7 +42,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(array $FunctionExpressionTrees)
+                    <a href="#method___construct">__construct</a>(array $functionExpressionTrees)
                     <p>
 </p>
                 </td>
@@ -53,7 +53,7 @@
                     int
                 </td>
                 <td class="last">
-                    <a href="#method_GetType">GetType</a>()
+                    <a href="#method_getType">getType</a>()
                     <p>
 </p>
                 </td>
@@ -64,7 +64,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_GetFunctionExpressionTrees">GetFunctionExpressionTrees</a>()
+                    <a href="#method_getFunctionExpressionTrees">getFunctionExpressionTrees</a>()
                     <p>
 </p>
                 </td>
@@ -75,7 +75,7 @@
                     <a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_Traverse">Traverse</a>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $Walker)
+                    <a href="#method_traverse">traverse</a>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $walker)
                     <p>
 </p>
                 </td>
@@ -86,7 +86,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_AndBy">AndBy</a>(<a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $FunctionExpressionTree)
+                    <a href="#method_andBy">andBy</a>(<a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $functionExpressionTree)
                     <p>
 </p>
                 </td>
@@ -97,7 +97,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_Update">Update</a>(array $FunctionExpressionTrees)
+                    <a href="#method_update">update</a>(array $functionExpressionTrees)
                     <p>
 </p>
                 </td>
@@ -111,7 +111,7 @@
                         <h3 id="method___construct">
         <div class="location">at line 20</div>
         <code>            public            
-    <strong>__construct</strong>(array $FunctionExpressionTrees)</code>
+    <strong>__construct</strong>(array $functionExpressionTrees)</code>
     </h3>
     <div class="details">
         <p>
@@ -124,7 +124,7 @@
                     <table>
                     <tr>
                 <td>array</td>
-                <td>$FunctionExpressionTrees</td>
+                <td>$functionExpressionTrees</td>
                 <td>
 </td>
             </tr>
@@ -136,10 +136,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetType">
+                <h3 id="method_getType">
         <div class="location">at line 25</div>
         <code>            public            int
-    <strong>GetType</strong>()</code>
+    <strong>getType</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -162,10 +162,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetFunctionExpressionTrees">
+                <h3 id="method_getFunctionExpressionTrees">
         <div class="location">at line 30</div>
         <code>            public            
-    <strong>GetFunctionExpressionTrees</strong>()</code>
+    <strong>getFunctionExpressionTrees</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -179,10 +179,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Traverse">
+                <h3 id="method_traverse">
         <div class="location">at line 35</div>
         <code>            public            <a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
-    <strong>Traverse</strong>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $Walker)</code>
+    <strong>traverse</strong>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $walker)</code>
     </h3>
     <div class="details">
         <p>
@@ -195,7 +195,7 @@
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a></td>
-                <td>$Walker</td>
+                <td>$walker</td>
                 <td>
 </td>
             </tr>
@@ -217,10 +217,10 @@
                     </div>
     </div>
 
-                <h3 id="method_AndBy">
+                <h3 id="method_andBy">
         <div class="location">at line 40</div>
         <code>            public            
-    <strong>AndBy</strong>(<a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $FunctionExpressionTree)</code>
+    <strong>andBy</strong>(<a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $functionExpressionTree)</code>
     </h3>
     <div class="details">
         <p>
@@ -233,7 +233,7 @@
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
-                <td>$FunctionExpressionTree</td>
+                <td>$functionExpressionTree</td>
                 <td>
 </td>
             </tr>
@@ -245,10 +245,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Update">
+                <h3 id="method_update">
         <div class="location">at line 45</div>
         <code>            public            
-    <strong>Update</strong>(array $FunctionExpressionTrees)</code>
+    <strong>update</strong>(array $functionExpressionTrees)</code>
     </h3>
     <div class="details">
         <p>
@@ -261,7 +261,7 @@
                     <table>
                     <tr>
                 <td>array</td>
-                <td>$FunctionExpressionTrees</td>
+                <td>$functionExpressionTrees</td>
                 <td>
 </td>
             </tr>

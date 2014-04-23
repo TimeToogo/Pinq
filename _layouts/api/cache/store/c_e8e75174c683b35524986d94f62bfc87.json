@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Iterators",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Iterators\\GroupedIterator.php",
-    "hash": "7c4c634aa199ab01da6c5697e2131a0a0893e79a",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Iterators\\GroupedIterator.php",
+    "hash": "44c76529a281e61beb40d87a3ba0a5bbbe3b5a03",
     "parent": "Pinq\\Iterators\\LazyIterator",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Iterator": {
-                    "name": "Iterator",
+                "iterator": {
+                    "name": "iterator",
                     "line": 17,
                     "short_desc": null,
                     "long_desc": null,
@@ -70,8 +70,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "GroupByFunction": {
-                    "name": "GroupByFunction",
+                "groupByFunction": {
+                    "name": "groupByFunction",
                     "line": 17,
                     "short_desc": null,
                     "long_desc": null,
@@ -90,8 +90,8 @@
                 }
             }
         },
-        "AndGroupBy": {
-            "name": "AndGroupBy",
+        "andGroupBy": {
+            "name": "andGroupBy",
             "line": 26,
             "short_desc": "",
             "long_desc": "",
@@ -114,8 +114,8 @@
 
             ],
             "parameters": {
-                "GroupByFunctions": {
-                    "name": "GroupByFunctions",
+                "groupByFunctions": {
+                    "name": "groupByFunctions",
                     "line": 26,
                     "short_desc": null,
                     "long_desc": null,

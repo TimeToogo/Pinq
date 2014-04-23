@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries\\Requests",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Requests\\IndexRequest.php",
-    "hash": "22fde56548e570933ca637b56a9cc692cef0ff9b",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\Requests\\IndexRequest.php",
+    "hash": "99b4c811c87e9acb460d90f11f09a4ceff7f90ba",
     "parent": "Pinq\\Queries\\Requests\\Request",
     "modifiers": 16,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Index": {
-                    "name": "Index",
+                "index": {
+                    "name": "index",
                     "line": 17,
                     "short_desc": null,
                     "long_desc": null,
@@ -67,8 +67,8 @@
                 }
             }
         },
-        "GetIndex": {
-            "name": "GetIndex",
+        "getIndex": {
+            "name": "getIndex",
             "line": 22,
             "short_desc": "",
             "long_desc": "",

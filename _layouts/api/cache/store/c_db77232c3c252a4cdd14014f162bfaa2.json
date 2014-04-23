@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Utilities.php",
-    "hash": "b7077d78469cdb1953ba5a009ee36315e8eaf301",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Utilities.php",
+    "hash": "4acfa760af08d49178820758ae8f5f4acb0a8b60",
     "parent": null,
     "modifiers": 32,
     "is_trait": false,
@@ -33,9 +33,9 @@
 
     ],
     "methods": {
-        "GetTypeOrClass": {
-            "name": "GetTypeOrClass",
-            "line": 22,
+        "getTypeOrClass": {
+            "name": "getTypeOrClass",
+            "line": 25,
             "short_desc": "Returns the type or class of the supplied function",
             "long_desc": "",
             "hint": [
@@ -57,9 +57,9 @@
 
             ],
             "parameters": {
-                "Value": {
-                    "name": "Value",
-                    "line": 22,
+                "value": {
+                    "name": "value",
+                    "line": 25,
                     "short_desc": "The value",
                     "long_desc": null,
                     "hint": [
@@ -77,9 +77,9 @@
                 }
             }
         },
-        "IsIterable": {
-            "name": "IsIterable",
-            "line": 33,
+        "isIterable": {
+            "name": "isIterable",
+            "line": 36,
             "short_desc": "Returns whether the value is iterable",
             "long_desc": "",
             "hint": [
@@ -101,9 +101,9 @@
 
             ],
             "parameters": {
-                "Value": {
-                    "name": "Value",
-                    "line": 33,
+                "value": {
+                    "name": "value",
+                    "line": 36,
                     "short_desc": "The value",
                     "long_desc": null,
                     "hint": [
@@ -121,9 +121,9 @@
                 }
             }
         },
-        "ToArray": {
-            "name": "ToArray",
-            "line": 44,
+        "toArray": {
+            "name": "toArray",
+            "line": 47,
             "short_desc": "Returns the iterator as an array",
             "long_desc": "",
             "hint": [
@@ -145,9 +145,9 @@
 
             ],
             "parameters": {
-                "Iterator": {
-                    "name": "Iterator",
-                    "line": 44,
+                "iterator": {
+                    "name": "iterator",
+                    "line": 47,
                     "short_desc": "The iterator value",
                     "long_desc": null,
                     "hint": [
@@ -165,9 +165,9 @@
                 }
             }
         },
-        "ToIterator": {
-            "name": "ToIterator",
-            "line": 77,
+        "toIterator": {
+            "name": "toIterator",
+            "line": 80,
             "short_desc": "Returns the values as an iterator",
             "long_desc": "",
             "hint": [
@@ -192,9 +192,9 @@
 
             ],
             "parameters": {
-                "TraversableOrArray": {
-                    "name": "TraversableOrArray",
-                    "line": 77,
+                "traversableOrArray": {
+                    "name": "traversableOrArray",
+                    "line": 80,
                     "short_desc": "The value",
                     "long_desc": null,
                     "hint": [
@@ -216,8 +216,8 @@
                 }
             }
         },
-        "IsNormalSyntaxName": {
-            "name": "IsNormalSyntaxName",
+        "isNormalSyntaxName": {
+            "name": "isNormalSyntaxName",
             "line": 108,
             "short_desc": "Returns whether the supplied name is cosidered normal name syntax and can be used plainly in code.",
             "long_desc": "Example:\n'foo' -> yes: $foo\n'foo bar' -> no: ${'foo bar'}",
@@ -240,8 +240,8 @@
 
             ],
             "parameters": {
-                "Name": {
-                    "name": "Name",
+                "name": {
+                    "name": "name",
                     "line": 108,
                     "short_desc": "The field, function, method or variable name",
                     "long_desc": null,

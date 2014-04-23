@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Providers\\Traversable",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Providers\\Traversable\\Provider.php",
-    "hash": "f06d2b5f63404366178953f16d0fa4d572bb02fa",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Providers\\Traversable\\Provider.php",
+    "hash": "daee27178db25f147dcccd9579fe688a2612e6aa",
     "parent": "Pinq\\Providers\\QueryProvider",
     "modifiers": 0,
     "is_trait": false,
@@ -35,7 +35,7 @@
     "methods": {
         "__construct": {
             "name": "__construct",
-            "line": 18,
+            "line": 19,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -52,9 +52,9 @@
 
             ],
             "parameters": {
-                "Traversable": {
-                    "name": "Traversable",
-                    "line": 18,
+                "traversable": {
+                    "name": "traversable",
+                    "line": 19,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

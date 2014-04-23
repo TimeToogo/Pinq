@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\ExpressionVisitor.php",
-    "hash": "4d01ede96da5f89d4ed6a8e8b875a363434e0124",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\ExpressionVisitor.php",
+    "hash": "a8dbd131bb51717c34761fa34d7dbd100a804f33",
     "parent": "Pinq\\Expressions\\ExpressionWalker",
     "modifiers": 0,
     "is_trait": false,
@@ -33,8 +33,8 @@
 
     ],
     "methods": {
-        "WalkArray": {
-            "name": "WalkArray",
+        "walkArray": {
+            "name": "walkArray",
             "line": 14,
             "short_desc": "",
             "long_desc": "",
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
+                "expression": {
+                    "name": "expression",
                     "line": 14,
                     "short_desc": null,
                     "long_desc": null,
@@ -72,9 +72,9 @@
                 }
             }
         },
-        "WalkAssignment": {
-            "name": "WalkAssignment",
-            "line": 21,
+        "walkAssignment": {
+            "name": "walkAssignment",
+            "line": 26,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -91,9 +91,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 21,
+                "expression": {
+                    "name": "expression",
+                    "line": 26,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -111,9 +111,9 @@
                 }
             }
         },
-        "WalkBinaryOperation": {
-            "name": "WalkBinaryOperation",
-            "line": 28,
+        "walkBinaryOperation": {
+            "name": "walkBinaryOperation",
+            "line": 38,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -130,9 +130,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 28,
+                "expression": {
+                    "name": "expression",
+                    "line": 38,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -150,9 +150,9 @@
                 }
             }
         },
-        "WalkCast": {
-            "name": "WalkCast",
-            "line": 35,
+        "walkCast": {
+            "name": "walkCast",
+            "line": 50,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -169,9 +169,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 35,
+                "expression": {
+                    "name": "expression",
+                    "line": 50,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -189,9 +189,9 @@
                 }
             }
         },
-        "WalkClosure": {
-            "name": "WalkClosure",
-            "line": 42,
+        "walkClosure": {
+            "name": "walkClosure",
+            "line": 62,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -208,9 +208,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 42,
+                "expression": {
+                    "name": "expression",
+                    "line": 62,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -228,9 +228,9 @@
                 }
             }
         },
-        "WalkParameter": {
-            "name": "WalkParameter",
-            "line": 49,
+        "walkParameter": {
+            "name": "walkParameter",
+            "line": 74,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -247,9 +247,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 49,
+                "expression": {
+                    "name": "expression",
+                    "line": 74,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -267,9 +267,9 @@
                 }
             }
         },
-        "WalkEmpty": {
-            "name": "WalkEmpty",
-            "line": 56,
+        "walkEmpty": {
+            "name": "walkEmpty",
+            "line": 86,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -286,9 +286,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 56,
+                "expression": {
+                    "name": "expression",
+                    "line": 86,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -306,203 +306,8 @@
                 }
             }
         },
-        "WalkIsset": {
-            "name": "WalkIsset",
-            "line": 63,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "33",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 63,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Expressions\\IssetExpression",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "IssetExpression",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "WalkField": {
-            "name": "WalkField",
-            "line": 70,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "33",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 70,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Expressions\\FieldExpression",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "FieldExpression",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "WalkFunctionCall": {
-            "name": "WalkFunctionCall",
-            "line": 77,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "33",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 77,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Expressions\\FunctionCallExpression",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "FunctionCallExpression",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "WalkIndex": {
-            "name": "WalkIndex",
-            "line": 84,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "33",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 84,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Expressions\\IndexExpression",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "IndexExpression",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "WalkInvocation": {
-            "name": "WalkInvocation",
-            "line": 91,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "33",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 91,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Expressions\\InvocationExpression",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "InvocationExpression",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "WalkMethodCall": {
-            "name": "WalkMethodCall",
+        "walkIsset": {
+            "name": "walkIsset",
             "line": 98,
             "short_desc": "",
             "long_desc": "",
@@ -520,9 +325,204 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
+                "expression": {
+                    "name": "expression",
                     "line": 98,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\IssetExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "IssetExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "walkField": {
+            "name": "walkField",
+            "line": 110,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "33",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "expression": {
+                    "name": "expression",
+                    "line": 110,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\FieldExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "FieldExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "walkFunctionCall": {
+            "name": "walkFunctionCall",
+            "line": 122,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "33",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "expression": {
+                    "name": "expression",
+                    "line": 122,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\FunctionCallExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "FunctionCallExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "walkIndex": {
+            "name": "walkIndex",
+            "line": 134,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "33",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "expression": {
+                    "name": "expression",
+                    "line": 134,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\IndexExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "IndexExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "walkInvocation": {
+            "name": "walkInvocation",
+            "line": 146,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "33",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "expression": {
+                    "name": "expression",
+                    "line": 146,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Expressions\\InvocationExpression",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "InvocationExpression",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "walkMethodCall": {
+            "name": "walkMethodCall",
+            "line": 158,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "33",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "expression": {
+                    "name": "expression",
+                    "line": 158,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -540,9 +540,9 @@
                 }
             }
         },
-        "WalkNew": {
-            "name": "WalkNew",
-            "line": 105,
+        "walkNew": {
+            "name": "walkNew",
+            "line": 170,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -559,9 +559,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 105,
+                "expression": {
+                    "name": "expression",
+                    "line": 170,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -579,9 +579,9 @@
                 }
             }
         },
-        "WalkReturn": {
-            "name": "WalkReturn",
-            "line": 112,
+        "walkReturn": {
+            "name": "walkReturn",
+            "line": 182,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -598,9 +598,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 112,
+                "expression": {
+                    "name": "expression",
+                    "line": 182,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -618,9 +618,9 @@
                 }
             }
         },
-        "WalkThrow": {
-            "name": "WalkThrow",
-            "line": 119,
+        "walkThrow": {
+            "name": "walkThrow",
+            "line": 194,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -637,9 +637,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 119,
+                "expression": {
+                    "name": "expression",
+                    "line": 194,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -657,9 +657,9 @@
                 }
             }
         },
-        "WalkStaticMethodCall": {
-            "name": "WalkStaticMethodCall",
-            "line": 126,
+        "walkStaticMethodCall": {
+            "name": "walkStaticMethodCall",
+            "line": 206,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -676,9 +676,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 126,
+                "expression": {
+                    "name": "expression",
+                    "line": 206,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -696,9 +696,9 @@
                 }
             }
         },
-        "WalkSubQuery": {
-            "name": "WalkSubQuery",
-            "line": 133,
+        "walkSubQuery": {
+            "name": "walkSubQuery",
+            "line": 218,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -715,9 +715,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 133,
+                "expression": {
+                    "name": "expression",
+                    "line": 218,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -735,9 +735,9 @@
                 }
             }
         },
-        "WalkTernary": {
-            "name": "WalkTernary",
-            "line": 140,
+        "walkTernary": {
+            "name": "walkTernary",
+            "line": 230,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -754,9 +754,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 140,
+                "expression": {
+                    "name": "expression",
+                    "line": 230,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -774,9 +774,9 @@
                 }
             }
         },
-        "WalkUnaryOperation": {
-            "name": "WalkUnaryOperation",
-            "line": 147,
+        "walkUnaryOperation": {
+            "name": "walkUnaryOperation",
+            "line": 242,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -793,9 +793,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 147,
+                "expression": {
+                    "name": "expression",
+                    "line": 242,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -813,9 +813,9 @@
                 }
             }
         },
-        "WalkValue": {
-            "name": "WalkValue",
-            "line": 154,
+        "walkValue": {
+            "name": "walkValue",
+            "line": 254,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -832,9 +832,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 154,
+                "expression": {
+                    "name": "expression",
+                    "line": 254,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -852,9 +852,9 @@
                 }
             }
         },
-        "WalkVariable": {
-            "name": "WalkVariable",
-            "line": 161,
+        "walkVariable": {
+            "name": "walkVariable",
+            "line": 266,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -871,9 +871,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 161,
+                "expression": {
+                    "name": "expression",
+                    "line": 266,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

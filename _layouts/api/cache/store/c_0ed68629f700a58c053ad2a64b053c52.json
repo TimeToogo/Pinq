@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Providers",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Providers\\IRepositoryProvider.php",
-    "hash": "99e8590c47d27ea169ecdf451e8f07d7d2702420",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Providers\\IRepositoryProvider.php",
+    "hash": "826e60029967a39b4b32b5f6ef1427d3fb493368",
     "parent": null,
     "modifiers": null,
     "is_trait": false,
@@ -33,8 +33,8 @@
 
     ],
     "methods": {
-        "CreateRepository": {
-            "name": "CreateRepository",
+        "createRepository": {
+            "name": "createRepository",
             "line": 19,
             "short_desc": "",
             "long_desc": "",
@@ -57,8 +57,8 @@
 
             ],
             "parameters": {
-                "Scope": {
-                    "name": "Scope",
+                "scope": {
+                    "name": "scope",
                     "line": 19,
                     "short_desc": null,
                     "long_desc": null,
@@ -77,8 +77,8 @@
                 }
             }
         },
-        "Execute": {
-            "name": "Execute",
+        "execute": {
+            "name": "execute",
             "line": 24,
             "short_desc": "",
             "long_desc": "",
@@ -101,8 +101,8 @@
 
             ],
             "parameters": {
-                "Query": {
-                    "name": "Query",
+                "query": {
+                    "name": "query",
                     "line": 24,
                     "short_desc": null,
                     "long_desc": null,

@@ -37,7 +37,7 @@
 
             <table>
                     <tr>
-                <td>DefaultExtension</td>
+                <td>DEFAULT_EXTENSION</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -57,7 +57,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>($Directory, $FileExtension = self::DefaultExtension)
+                    <a href="#method___construct">__construct</a>($directory, $fileExtension = self::DEFAULT_EXTENSION)
                     <p>
 </p>
                 </td>
@@ -68,7 +68,7 @@
                     void
                 </td>
                 <td class="last">
-                    <a href="#method_Save">Save</a>(string $FunctionHash, <a href="../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $FunctionExpressionTree)
+                    <a href="#method_save">save</a>(string $functionHash, <a href="../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $functionExpressionTree)
                     <p>Save the supplied expression tree of the functiom to the cache</p>
                 </td>
                 <td></td>
@@ -78,7 +78,7 @@
                     <a href="../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>|null
                 </td>
                 <td class="last">
-                    <a href="#method_TryGet">TryGet</a>(string $FunctionHash)
+                    <a href="#method_tryGet">tryGet</a>(string $functionHash)
                     <p>Attempt to get the cached expression tree of the supplied function reflection</p>
                 </td>
                 <td></td>
@@ -88,7 +88,7 @@
                     void
                 </td>
                 <td class="last">
-                    <a href="#method_Clear">Clear</a>()
+                    <a href="#method_clear">clear</a>()
                     <p>Clears all cached function for the supplied function reflection.</p>
                 </td>
                 <td></td>
@@ -98,7 +98,7 @@
                     void
                 </td>
                 <td class="last">
-                    <a href="#method_Remove">Remove</a>(string $FunctionHash)
+                    <a href="#method_remove">remove</a>(string $functionHash)
                     <p>Removes the cached expression tree for the supplied function reflection</p>
                 </td>
                 <td></td>
@@ -111,7 +111,7 @@
                         <h3 id="method___construct">
         <div class="location">at line 31</div>
         <code>            public            
-    <strong>__construct</strong>($Directory, $FileExtension = self::DefaultExtension)</code>
+    <strong>__construct</strong>($directory, $fileExtension = self::DEFAULT_EXTENSION)</code>
     </h3>
     <div class="details">
         <p>
@@ -124,13 +124,13 @@
                     <table>
                     <tr>
                 <td></td>
-                <td>$Directory</td>
+                <td>$directory</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td></td>
-                <td>$FileExtension</td>
+                <td>$fileExtension</td>
                 <td>
 </td>
             </tr>
@@ -142,10 +142,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Save">
-        <div class="location">at line 53</div>
+                <h3 id="method_save">
+        <div class="location">at line 55</div>
         <code>            public            void
-    <strong>Save</strong>(string $FunctionHash, <a href="../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $FunctionExpressionTree)</code>
+    <strong>save</strong>(string $functionHash, <a href="../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $functionExpressionTree)</code>
     </h3>
     <div class="details">
         <p>Save the supplied expression tree of the functiom to the cache</p>
@@ -157,13 +157,13 @@
                     <table>
                     <tr>
                 <td>string</td>
-                <td>$FunctionHash</td>
+                <td>$functionHash</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
-                <td>$FunctionExpressionTree</td>
+                <td>$functionExpressionTree</td>
                 <td>
 </td>
             </tr>
@@ -185,10 +185,10 @@
                     </div>
     </div>
 
-                <h3 id="method_TryGet">
-        <div class="location">at line 58</div>
+                <h3 id="method_tryGet">
+        <div class="location">at line 60</div>
         <code>            public            <a href="../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>|null
-    <strong>TryGet</strong>(string $FunctionHash)</code>
+    <strong>tryGet</strong>(string $functionHash)</code>
     </h3>
     <div class="details">
         <p>Attempt to get the cached expression tree of the supplied function reflection</p>
@@ -200,7 +200,7 @@
                     <table>
                     <tr>
                 <td>string</td>
-                <td>$FunctionHash</td>
+                <td>$functionHash</td>
                 <td>
 </td>
             </tr>
@@ -222,10 +222,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Clear">
-        <div class="location">at line 68</div>
+                <h3 id="method_clear">
+        <div class="location">at line 71</div>
         <code>            public            void
-    <strong>Clear</strong>()</code>
+    <strong>clear</strong>()</code>
     </h3>
     <div class="details">
         <p>Clears all cached function for the supplied function reflection.</p>
@@ -248,10 +248,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Remove">
-        <div class="location">at line 75</div>
+                <h3 id="method_remove">
+        <div class="location">at line 78</div>
         <code>            public            void
-    <strong>Remove</strong>(string $FunctionHash)</code>
+    <strong>remove</strong>(string $functionHash)</code>
     </h3>
     <div class="details">
         <p>Removes the cached expression tree for the supplied function reflection</p>
@@ -263,7 +263,7 @@
                     <table>
                     <tr>
                 <td>string</td>
-                <td>$FunctionHash</td>
+                <td>$functionHash</td>
                 <td>
 </td>
             </tr>

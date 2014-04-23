@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Iterators",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Iterators\\UniqueIterator.php",
-    "hash": "f3ece25dcdbf8b31430fc9ecca4599c6e8861167",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Iterators\\UniqueIterator.php",
+    "hash": "3f211c440a9f368a78a794e2b377399bdf8bb1ea",
     "parent": "Pinq\\Iterators\\OperationIterator",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Iterator": {
-                    "name": "Iterator",
+                "iterator": {
+                    "name": "iterator",
                     "line": 12,
                     "short_desc": null,
                     "long_desc": null,

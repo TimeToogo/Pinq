@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries\\Requests",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Requests\\RequestVisitor.php",
-    "hash": "279d29f835b78f9a9dba2aa2d5554b07840a4a96",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\Requests\\RequestVisitor.php",
+    "hash": "37b2ffc0e3817b3962c4d2cdfac8635733daca47",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -33,8 +33,8 @@
 
     ],
     "methods": {
-        "Visit": {
-            "name": "Visit",
+        "visit": {
+            "name": "visit",
             "line": 21,
             "short_desc": "",
             "long_desc": "",
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
+                "request": {
+                    "name": "request",
                     "line": 21,
                     "short_desc": "The returned value",
                     "long_desc": null,
@@ -72,8 +72,8 @@
                 }
             }
         },
-        "VisitValues": {
-            "name": "VisitValues",
+        "visitValues": {
+            "name": "visitValues",
             "line": 26,
             "short_desc": "",
             "long_desc": "",
@@ -91,8 +91,8 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
+                "request": {
+                    "name": "request",
                     "line": 26,
                     "short_desc": null,
                     "long_desc": null,
@@ -111,9 +111,9 @@
                 }
             }
         },
-        "VisitCount": {
-            "name": "VisitCount",
-            "line": 28,
+        "visitCount": {
+            "name": "visitCount",
+            "line": 31,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -130,9 +130,9 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 28,
+                "request": {
+                    "name": "request",
+                    "line": 31,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -150,125 +150,8 @@
                 }
             }
         },
-        "VisitExists": {
-            "name": "VisitExists",
-            "line": 30,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "1",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 30,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Queries\\Requests\\Exists",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "Exists",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "VisitFirst": {
-            "name": "VisitFirst",
-            "line": 32,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "1",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 32,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Queries\\Requests\\First",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "First",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "VisitLast": {
-            "name": "VisitLast",
-            "line": 34,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "1",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 34,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Queries\\Requests\\Last",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "Last",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "VisitContains": {
-            "name": "VisitContains",
+        "visitExists": {
+            "name": "visitExists",
             "line": 36,
             "short_desc": "",
             "long_desc": "",
@@ -286,29 +169,29 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
+                "request": {
+                    "name": "request",
                     "line": 36,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
                         [
-                            "Pinq\\Queries\\Requests\\Contains",
+                            "Pinq\\Queries\\Requests\\Exists",
                             false
                         ]
                     ],
                     "tags": [
 
                     ],
-                    "modifiers": "Contains",
+                    "modifiers": "Exists",
                     "default": null,
                     "is_by_ref": false
                 }
             }
         },
-        "VisitAggregate": {
-            "name": "VisitAggregate",
-            "line": 38,
+        "visitFirst": {
+            "name": "visitFirst",
+            "line": 41,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -325,145 +208,28 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 38,
+                "request": {
+                    "name": "request",
+                    "line": 41,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
                         [
-                            "Pinq\\Queries\\Requests\\Aggregate",
+                            "Pinq\\Queries\\Requests\\First",
                             false
                         ]
                     ],
                     "tags": [
 
                     ],
-                    "modifiers": "Aggregate",
+                    "modifiers": "First",
                     "default": null,
                     "is_by_ref": false
                 }
             }
         },
-        "VisitMaximum": {
-            "name": "VisitMaximum",
-            "line": 40,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "1",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 40,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Queries\\Requests\\Maximum",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "Maximum",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "VisitMinimum": {
-            "name": "VisitMinimum",
-            "line": 42,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "1",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 42,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Queries\\Requests\\Minimum",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "Minimum",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "VisitSum": {
-            "name": "VisitSum",
-            "line": 44,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "1",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 44,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Queries\\Requests\\Sum",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "Sum",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "VisitAverage": {
-            "name": "VisitAverage",
+        "visitLast": {
+            "name": "visitLast",
             "line": 46,
             "short_desc": "",
             "long_desc": "",
@@ -481,29 +247,29 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
+                "request": {
+                    "name": "request",
                     "line": 46,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
                         [
-                            "Pinq\\Queries\\Requests\\Average",
+                            "Pinq\\Queries\\Requests\\Last",
                             false
                         ]
                     ],
                     "tags": [
 
                     ],
-                    "modifiers": "Average",
+                    "modifiers": "Last",
                     "default": null,
                     "is_by_ref": false
                 }
             }
         },
-        "VisitAll": {
-            "name": "VisitAll",
-            "line": 48,
+        "visitContains": {
+            "name": "visitContains",
+            "line": 51,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -520,145 +286,28 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 48,
+                "request": {
+                    "name": "request",
+                    "line": 51,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
                         [
-                            "Pinq\\Queries\\Requests\\All",
+                            "Pinq\\Queries\\Requests\\Contains",
                             false
                         ]
                     ],
                     "tags": [
 
                     ],
-                    "modifiers": "All",
+                    "modifiers": "Contains",
                     "default": null,
                     "is_by_ref": false
                 }
             }
         },
-        "VisitAny": {
-            "name": "VisitAny",
-            "line": 50,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "1",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 50,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Queries\\Requests\\Any",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "Any",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "VisitImplode": {
-            "name": "VisitImplode",
-            "line": 52,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "1",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 52,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Queries\\Requests\\Implode",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "Implode",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "VisitGetIndex": {
-            "name": "VisitGetIndex",
-            "line": 54,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "1",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Request": {
-                    "name": "Request",
-                    "line": 54,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": [
-                        [
-                            "Pinq\\Queries\\Requests\\GetIndex",
-                            false
-                        ]
-                    ],
-                    "tags": [
-
-                    ],
-                    "modifiers": "GetIndex",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "VisitIssetIndex": {
-            "name": "VisitIssetIndex",
+        "visitAggregate": {
+            "name": "visitAggregate",
             "line": 56,
             "short_desc": "",
             "long_desc": "",
@@ -676,9 +325,360 @@
 
             ],
             "parameters": {
-                "Request": {
-                    "name": "Request",
+                "request": {
+                    "name": "request",
                     "line": 56,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Queries\\Requests\\Aggregate",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Aggregate",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "visitMaximum": {
+            "name": "visitMaximum",
+            "line": 61,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 61,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Queries\\Requests\\Maximum",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Maximum",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "visitMinimum": {
+            "name": "visitMinimum",
+            "line": 66,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 66,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Queries\\Requests\\Minimum",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Minimum",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "visitSum": {
+            "name": "visitSum",
+            "line": 71,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 71,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Queries\\Requests\\Sum",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Sum",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "visitAverage": {
+            "name": "visitAverage",
+            "line": 76,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 76,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Queries\\Requests\\Average",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Average",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "visitAll": {
+            "name": "visitAll",
+            "line": 81,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 81,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Queries\\Requests\\All",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "All",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "visitAny": {
+            "name": "visitAny",
+            "line": 86,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 86,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Queries\\Requests\\Any",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Any",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "visitImplode": {
+            "name": "visitImplode",
+            "line": 91,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 91,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Queries\\Requests\\Implode",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "Implode",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "visitGetIndex": {
+            "name": "visitGetIndex",
+            "line": 96,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 96,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Pinq\\Queries\\Requests\\GetIndex",
+                            false
+                        ]
+                    ],
+                    "tags": [
+
+                    ],
+                    "modifiers": "GetIndex",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "visitIssetIndex": {
+            "name": "visitIssetIndex",
+            "line": 101,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 101,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

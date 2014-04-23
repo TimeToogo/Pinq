@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Direction.php",
-    "hash": "e8168adf06ea714bf1fe56862ca9748fc13c6e23",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Direction.php",
+    "hash": "23f444ba82ed4b38f1c91f6d85ac2ed0d0cf1578",
     "parent": null,
     "modifiers": 32,
     "is_trait": false,
@@ -36,15 +36,15 @@
 
     ],
     "constants": {
-        "Ascending": {
-            "name": "Ascending",
-            "line": 14,
+        "ASCENDING": {
+            "name": "ASCENDING",
+            "line": 17,
             "short_desc": "",
             "long_desc": ""
         },
-        "Descending": {
-            "name": "Descending",
-            "line": 15,
+        "DESCENDING": {
+            "name": "DESCENDING",
+            "line": 18,
             "short_desc": "",
             "long_desc": ""
         }

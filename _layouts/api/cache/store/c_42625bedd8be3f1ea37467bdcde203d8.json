@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Queries\\Requests",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Queries\\Requests\\GetIndex.php",
-    "hash": "4a4f836d548e076fd918d44217f8c1242bcc36c4",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Queries\\Requests\\GetIndex.php",
+    "hash": "4e341f5433810b264815b02f1c91749ede428e62",
     "parent": "Pinq\\Queries\\Requests\\IndexRequest",
     "modifiers": 0,
     "is_trait": false,
@@ -33,8 +33,8 @@
 
     ],
     "methods": {
-        "GetType": {
-            "name": "GetType",
+        "getType": {
+            "name": "getType",
             "line": 12,
             "short_desc": "",
             "long_desc": "",
@@ -60,8 +60,8 @@
 
             ]
         },
-        "Traverse": {
-            "name": "Traverse",
+        "traverse": {
+            "name": "traverse",
             "line": 17,
             "short_desc": "",
             "long_desc": "",
@@ -84,8 +84,8 @@
 
             ],
             "parameters": {
-                "Visitor": {
-                    "name": "Visitor",
+                "visitor": {
+                    "name": "visitor",
                     "line": 17,
                     "short_desc": null,
                     "long_desc": null,

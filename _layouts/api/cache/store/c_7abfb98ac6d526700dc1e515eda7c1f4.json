@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions\\Walkers",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\Walkers\\SubQueryResolver.php",
-    "hash": "b412696a348e68030d014ea5aa08a68e6d6eb5b8",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\Walkers\\SubQueryResolver.php",
+    "hash": "6d7de4cd5208ff89459934104ca27ab8dc4ace71",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -34,8 +34,8 @@
 
     ],
     "methods": {
-        "CreateQueryable": {
-            "name": "CreateQueryable",
+        "createQueryable": {
+            "name": "createQueryable",
             "line": 31,
             "short_desc": "",
             "long_desc": "",
@@ -58,8 +58,8 @@
 
             ],
             "parameters": {
-                "Scope": {
-                    "name": "Scope",
+                "scope": {
+                    "name": "scope",
                     "line": 31,
                     "short_desc": null,
                     "long_desc": null,
@@ -78,8 +78,8 @@
                 }
             }
         },
-        "GetFunctionToExpressionTreeConverter": {
-            "name": "GetFunctionToExpressionTreeConverter",
+        "getFunctionToExpressionTreeConverter": {
+            "name": "getFunctionToExpressionTreeConverter",
             "line": 36,
             "short_desc": "",
             "long_desc": "",
@@ -105,8 +105,8 @@
 
             ]
         },
-        "Load": {
-            "name": "Load",
+        "load": {
+            "name": "load",
             "line": 41,
             "short_desc": "",
             "long_desc": "",
@@ -129,8 +129,8 @@
 
             ],
             "parameters": {
-                "Query": {
-                    "name": "Query",
+                "query": {
+                    "name": "query",
                     "line": 41,
                     "short_desc": null,
                     "long_desc": null,
@@ -149,8 +149,8 @@
                 }
             }
         },
-        "GetAndResetQuery": {
-            "name": "GetAndResetQuery",
+        "getAndResetQuery": {
+            "name": "getAndResetQuery",
             "line": 55,
             "short_desc": "",
             "long_desc": "",

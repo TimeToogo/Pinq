@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Iterators",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Iterators\\FilterIterator.php",
-    "hash": "95c25ae3cdb34d4e39adc09cf5043f2bd3a1e492",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Iterators\\FilterIterator.php",
+    "hash": "9cc73aba68ab5b5a2804563765a254114576ae9b",
     "parent": "Pinq\\Iterators\\IteratorIterator",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Iterator": {
-                    "name": "Iterator",
+                "iterator": {
+                    "name": "iterator",
                     "line": 17,
                     "short_desc": null,
                     "long_desc": null,
@@ -70,8 +70,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Filter": {
-                    "name": "Filter",
+                "filter": {
+                    "name": "filter",
                     "line": 17,
                     "short_desc": null,
                     "long_desc": null,

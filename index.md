@@ -16,17 +16,17 @@ The following shows an example query using the Pinq library:
 
 {% highlight php startinline %}
 
-$YoungPeopleDetails = $People
-        ->Where(function ($Row) { return $Row['Age'] <= 50; })
-        ->OrderByAscending(function ($Row) { return $Row['FirstName']; })
-        ->ThenByAscending(function ($Row) { return $Row['LastName']; })
-        ->Take(50)
-        ->IndexBy(function ($Row) { return $Row['PhoneNumber']; })
-        ->Select(function ($Row) { 
+$youngPeopleDetails = $people
+        ->where(function ($row) { return $row['age'] <= 50; })
+        ->orderByAscending(function ($row) { return $row['firstName']; })
+        ->thenByAscending(function ($row) { return $row['lastName']; })
+        ->take(50)
+        ->indexBy(function ($row) { return $row['phoneNumber']; })
+        ->select(function ($row) { 
             return [
-                'FullName' => $Row['FirstName'] . ' ' . $Row['LastName'],
-                'Address' => $Row['Address'],
-                'DateOfBirth' => $Row['DateOfBirth'],
+                'fullName' => $row['firstName'] . ' ' . $row['lastName'],
+                'address' => $row['address'],
+                'dateOfBirth' => $row['dateOfBirth'],
             ]; 
         })
 
@@ -60,7 +60,7 @@ Add the package to your composer.json:
 ```json
 {
     "require": {
-        "timetoogo/pinq": "~1.0"
+        "timetoogo/pinq": "~2.0"
     }
 }
 ```

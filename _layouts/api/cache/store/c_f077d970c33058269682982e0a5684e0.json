@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\ExpressionWalker.php",
-    "hash": "15af4d02123adfb5dce38bdde4eb30fb5456ef94",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\ExpressionWalker.php",
+    "hash": "412698a05f0884c47bb962579cf05ce757ee643a",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -33,8 +33,8 @@
 
     ],
     "methods": {
-        "Walk": {
-            "name": "Walk",
+        "walk": {
+            "name": "walk",
             "line": 15,
             "short_desc": "",
             "long_desc": "",
@@ -61,8 +61,8 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
+                "expression": {
+                    "name": "expression",
                     "line": 15,
                     "short_desc": null,
                     "long_desc": null,
@@ -81,8 +81,8 @@
                 }
             }
         },
-        "WalkAll": {
-            "name": "WalkAll",
+        "walkAll": {
+            "name": "walkAll",
             "line": 23,
             "short_desc": "",
             "long_desc": "",
@@ -105,8 +105,8 @@
 
             ],
             "parameters": {
-                "Expressions": {
-                    "name": "Expressions",
+                "expressions": {
+                    "name": "expressions",
                     "line": 23,
                     "short_desc": null,
                     "long_desc": null,
@@ -125,9 +125,9 @@
                 }
             }
         },
-        "WalkArray": {
-            "name": "WalkArray",
-            "line": 33,
+        "walkArray": {
+            "name": "walkArray",
+            "line": 34,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -144,9 +144,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 33,
+                "expression": {
+                    "name": "expression",
+                    "line": 34,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -164,9 +164,9 @@
                 }
             }
         },
-        "WalkAssignment": {
-            "name": "WalkAssignment",
-            "line": 40,
+        "walkAssignment": {
+            "name": "walkAssignment",
+            "line": 41,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -183,9 +183,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 40,
+                "expression": {
+                    "name": "expression",
+                    "line": 41,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -203,9 +203,9 @@
                 }
             }
         },
-        "WalkBinaryOperation": {
-            "name": "WalkBinaryOperation",
-            "line": 48,
+        "walkBinaryOperation": {
+            "name": "walkBinaryOperation",
+            "line": 49,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -222,9 +222,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 48,
+                "expression": {
+                    "name": "expression",
+                    "line": 49,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -242,9 +242,9 @@
                 }
             }
         },
-        "WalkUnaryOperation": {
-            "name": "WalkUnaryOperation",
-            "line": 56,
+        "walkUnaryOperation": {
+            "name": "walkUnaryOperation",
+            "line": 57,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -261,9 +261,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 56,
+                "expression": {
+                    "name": "expression",
+                    "line": 57,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -281,9 +281,9 @@
                 }
             }
         },
-        "WalkCast": {
-            "name": "WalkCast",
-            "line": 63,
+        "walkCast": {
+            "name": "walkCast",
+            "line": 64,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -300,9 +300,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 63,
+                "expression": {
+                    "name": "expression",
+                    "line": 64,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -320,9 +320,9 @@
                 }
             }
         },
-        "WalkEmpty": {
-            "name": "WalkEmpty",
-            "line": 70,
+        "walkEmpty": {
+            "name": "walkEmpty",
+            "line": 71,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -339,9 +339,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 70,
+                "expression": {
+                    "name": "expression",
+                    "line": 71,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -359,8 +359,8 @@
                 }
             }
         },
-        "WalkIsset": {
-            "name": "WalkIsset",
+        "walkIsset": {
+            "name": "walkIsset",
             "line": 76,
             "short_desc": "",
             "long_desc": "",
@@ -378,8 +378,8 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
+                "expression": {
+                    "name": "expression",
                     "line": 76,
                     "short_desc": null,
                     "long_desc": null,
@@ -398,9 +398,9 @@
                 }
             }
         },
-        "WalkField": {
-            "name": "WalkField",
-            "line": 82,
+        "walkField": {
+            "name": "walkField",
+            "line": 81,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -417,9 +417,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 82,
+                "expression": {
+                    "name": "expression",
+                    "line": 81,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -437,9 +437,9 @@
                 }
             }
         },
-        "WalkMethodCall": {
-            "name": "WalkMethodCall",
-            "line": 89,
+        "walkMethodCall": {
+            "name": "walkMethodCall",
+            "line": 88,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -456,9 +456,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 89,
+                "expression": {
+                    "name": "expression",
+                    "line": 88,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -476,9 +476,9 @@
                 }
             }
         },
-        "WalkIndex": {
-            "name": "WalkIndex",
-            "line": 97,
+        "walkIndex": {
+            "name": "walkIndex",
+            "line": 96,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -495,9 +495,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 97,
+                "expression": {
+                    "name": "expression",
+                    "line": 96,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -515,9 +515,9 @@
                 }
             }
         },
-        "WalkInvocation": {
-            "name": "WalkInvocation",
-            "line": 104,
+        "walkInvocation": {
+            "name": "walkInvocation",
+            "line": 103,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -534,9 +534,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 104,
+                "expression": {
+                    "name": "expression",
+                    "line": 103,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -554,9 +554,9 @@
                 }
             }
         },
-        "WalkFunctionCall": {
-            "name": "WalkFunctionCall",
-            "line": 111,
+        "walkFunctionCall": {
+            "name": "walkFunctionCall",
+            "line": 110,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -573,9 +573,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 111,
+                "expression": {
+                    "name": "expression",
+                    "line": 110,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -593,9 +593,9 @@
                 }
             }
         },
-        "WalkStaticMethodCall": {
-            "name": "WalkStaticMethodCall",
-            "line": 118,
+        "walkStaticMethodCall": {
+            "name": "walkStaticMethodCall",
+            "line": 117,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -612,9 +612,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 118,
+                "expression": {
+                    "name": "expression",
+                    "line": 117,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -632,9 +632,9 @@
                 }
             }
         },
-        "WalkNew": {
-            "name": "WalkNew",
-            "line": 126,
+        "walkNew": {
+            "name": "walkNew",
+            "line": 125,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -651,9 +651,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 126,
+                "expression": {
+                    "name": "expression",
+                    "line": 125,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -671,9 +671,9 @@
                 }
             }
         },
-        "WalkReturn": {
-            "name": "WalkReturn",
-            "line": 133,
+        "walkReturn": {
+            "name": "walkReturn",
+            "line": 132,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -690,9 +690,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 133,
+                "expression": {
+                    "name": "expression",
+                    "line": 132,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -710,9 +710,9 @@
                 }
             }
         },
-        "WalkThrow": {
-            "name": "WalkThrow",
-            "line": 139,
+        "walkThrow": {
+            "name": "walkThrow",
+            "line": 137,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -729,9 +729,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 139,
+                "expression": {
+                    "name": "expression",
+                    "line": 137,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -749,9 +749,9 @@
                 }
             }
         },
-        "WalkParameter": {
-            "name": "WalkParameter",
-            "line": 145,
+        "walkParameter": {
+            "name": "walkParameter",
+            "line": 142,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -768,9 +768,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 145,
+                "expression": {
+                    "name": "expression",
+                    "line": 142,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -788,9 +788,9 @@
                 }
             }
         },
-        "WalkTernary": {
-            "name": "WalkTernary",
-            "line": 150,
+        "walkTernary": {
+            "name": "walkTernary",
+            "line": 147,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -807,9 +807,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 150,
+                "expression": {
+                    "name": "expression",
+                    "line": 147,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -827,9 +827,9 @@
                 }
             }
         },
-        "WalkVariable": {
-            "name": "WalkVariable",
-            "line": 158,
+        "walkVariable": {
+            "name": "walkVariable",
+            "line": 155,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -846,9 +846,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 158,
+                "expression": {
+                    "name": "expression",
+                    "line": 155,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -866,9 +866,9 @@
                 }
             }
         },
-        "WalkValue": {
-            "name": "WalkValue",
-            "line": 164,
+        "walkValue": {
+            "name": "walkValue",
+            "line": 160,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -885,9 +885,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 164,
+                "expression": {
+                    "name": "expression",
+                    "line": 160,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -905,9 +905,9 @@
                 }
             }
         },
-        "WalkSubQuery": {
-            "name": "WalkSubQuery",
-            "line": 169,
+        "walkSubQuery": {
+            "name": "walkSubQuery",
+            "line": 165,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -924,9 +924,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 169,
+                "expression": {
+                    "name": "expression",
+                    "line": 165,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -944,9 +944,9 @@
                 }
             }
         },
-        "WalkClosure": {
-            "name": "WalkClosure",
-            "line": 174,
+        "walkClosure": {
+            "name": "walkClosure",
+            "line": 170,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -963,9 +963,9 @@
 
             ],
             "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 174,
+                "expression": {
+                    "name": "expression",
+                    "line": 170,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

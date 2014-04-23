@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Iterators",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Iterators\\JoinIteratorBase.php",
-    "hash": "0d097c479082bcf033f01c14cde432ff96c81107",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Iterators\\JoinIteratorBase.php",
+    "hash": "2c2e825196c68061aef892fa6409f460fcc78e72",
     "parent": null,
     "modifiers": 16,
     "is_trait": false,
@@ -35,7 +35,7 @@
     "methods": {
         "__construct": {
             "name": "__construct",
-            "line": 46,
+            "line": 47,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "OuterIterator": {
-                    "name": "OuterIterator",
+                "outerIterator": {
+                    "name": "outerIterator",
                     "line": 47,
                     "short_desc": null,
                     "long_desc": null,
@@ -70,9 +70,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "InnerIterator": {
-                    "name": "InnerIterator",
-                    "line": 48,
+                "innerIterator": {
+                    "name": "innerIterator",
+                    "line": 47,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -88,9 +88,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "JoiningFunction": {
-                    "name": "JoiningFunction",
-                    "line": 49,
+                "joiningFunction": {
+                    "name": "joiningFunction",
+                    "line": 47,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -110,7 +110,7 @@
         },
         "key": {
             "name": "key",
-            "line": 56,
+            "line": 54,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -132,7 +132,7 @@
         },
         "current": {
             "name": "current",
-            "line": 61,
+            "line": 59,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -154,7 +154,7 @@
         },
         "next": {
             "name": "next",
-            "line": 68,
+            "line": 66,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -176,7 +176,7 @@
         },
         "valid": {
             "name": "valid",
-            "line": 74,
+            "line": 72,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -198,7 +198,7 @@
         },
         "rewind": {
             "name": "rewind",
-            "line": 95,
+            "line": 92,
             "short_desc": "",
             "long_desc": "",
             "hint": null,

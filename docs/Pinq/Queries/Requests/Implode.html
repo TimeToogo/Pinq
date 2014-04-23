@@ -27,7 +27,7 @@
     <strong>Implode</strong>        extends <a href="../../../Pinq/Queries/Requests/ProjectionRequest.html"><abbr title="Pinq\Queries\Requests\ProjectionRequest">ProjectionRequest</abbr></a></p>
 
             <div class="description">
-            <p>Request query for a string of all the projected values  concatenated by the specified delimiter</p>
+            <p>Request query for a string of all the projected values concatenated by the specified delimiter</p>
             <p>
 </p>
         </div>
@@ -42,7 +42,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>($Delimiter, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $FunctionExpressionTree = null)
+                    <a href="#method___construct">__construct</a>($delimiter, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $functionExpressionTree = null)
                     <p>
 </p>
                 </td>
@@ -53,29 +53,29 @@
                     boolean
                 </td>
                 <td class="last">
-                    <a href="#method_HasFunctionExpressionTree">HasFunctionExpressionTree</a>()
+                    <a href="#method_hasFunctionExpressionTree">hasFunctionExpressionTree</a>()
                     <p>
 </p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Requests/ProjectionRequest.html#method_HasFunctionExpressionTree"><abbr title="Pinq\Queries\Requests\ProjectionRequest">ProjectionRequest</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Requests/ProjectionRequest.html#method_hasFunctionExpressionTree"><abbr title="Pinq\Queries\Requests\ProjectionRequest">ProjectionRequest</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
                     <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>|null
                 </td>
                 <td class="last">
-                    <a href="#method_GetFunctionExpressionTree">GetFunctionExpressionTree</a>()
+                    <a href="#method_getFunctionExpressionTree">getFunctionExpressionTree</a>()
                     <p>
 </p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Requests/ProjectionRequest.html#method_GetFunctionExpressionTree"><abbr title="Pinq\Queries\Requests\ProjectionRequest">ProjectionRequest</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Requests/ProjectionRequest.html#method_getFunctionExpressionTree"><abbr title="Pinq\Queries\Requests\ProjectionRequest">ProjectionRequest</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
                     int
                 </td>
                 <td class="last">
-                    <a href="#method_GetType">GetType</a>()
+                    <a href="#method_getType">getType</a>()
                     <p>
 </p>
                 </td>
@@ -86,7 +86,7 @@
                     string
                 </td>
                 <td class="last">
-                    <a href="#method_GetDelimiter">GetDelimiter</a>()
+                    <a href="#method_getDelimiter">getDelimiter</a>()
                     <p>
 </p>
                 </td>
@@ -97,7 +97,7 @@
                     mixed
                 </td>
                 <td class="last">
-                    <a href="#method_Traverse">Traverse</a>(<a href="../../../Pinq/Queries/Requests/RequestVisitor.html"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a> $Visitor)
+                    <a href="#method_traverse">traverse</a>(<a href="../../../Pinq/Queries/Requests/RequestVisitor.html"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a> $visitor)
                     <p>
 </p>
                 </td>
@@ -111,7 +111,7 @@
                         <h3 id="method___construct">
         <div class="location">at line 23</div>
         <code>            public            
-    <strong>__construct</strong>($Delimiter, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $FunctionExpressionTree = null)</code>
+    <strong>__construct</strong>($delimiter, <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $functionExpressionTree = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -124,13 +124,13 @@
                     <table>
                     <tr>
                 <td></td>
-                <td>$Delimiter</td>
+                <td>$delimiter</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
-                <td>$FunctionExpressionTree</td>
+                <td>$functionExpressionTree</td>
                 <td>
 </td>
             </tr>
@@ -142,10 +142,10 @@
                     </div>
     </div>
 
-                <h3 id="method_HasFunctionExpressionTree">
-        <div class="location">in <a href="../../../Pinq/Queries/Requests/ProjectionRequest.html#method_HasFunctionExpressionTree"><abbr title="Pinq\Queries\Requests\ProjectionRequest">ProjectionRequest</abbr></a> at line 28</div>
+                <h3 id="method_hasFunctionExpressionTree">
+        <div class="location">in <a href="../../../Pinq/Queries/Requests/ProjectionRequest.html#method_hasFunctionExpressionTree"><abbr title="Pinq\Queries\Requests\ProjectionRequest">ProjectionRequest</abbr></a> at line 28</div>
         <code>            public            boolean
-    <strong>HasFunctionExpressionTree</strong>()</code>
+    <strong>hasFunctionExpressionTree</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -169,10 +169,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetFunctionExpressionTree">
-        <div class="location">in <a href="../../../Pinq/Queries/Requests/ProjectionRequest.html#method_GetFunctionExpressionTree"><abbr title="Pinq\Queries\Requests\ProjectionRequest">ProjectionRequest</abbr></a> at line 36</div>
+                <h3 id="method_getFunctionExpressionTree">
+        <div class="location">in <a href="../../../Pinq/Queries/Requests/ProjectionRequest.html#method_getFunctionExpressionTree"><abbr title="Pinq\Queries\Requests\ProjectionRequest">ProjectionRequest</abbr></a> at line 36</div>
         <code>            public            <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>|null
-    <strong>GetFunctionExpressionTree</strong>()</code>
+    <strong>getFunctionExpressionTree</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -196,10 +196,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetType">
+                <h3 id="method_getType">
         <div class="location">at line 29</div>
         <code>            public            int
-    <strong>GetType</strong>()</code>
+    <strong>getType</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -223,10 +223,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetDelimiter">
+                <h3 id="method_getDelimiter">
         <div class="location">at line 37</div>
         <code>            public            string
-    <strong>GetDelimiter</strong>()</code>
+    <strong>getDelimiter</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -250,10 +250,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Traverse">
+                <h3 id="method_traverse">
         <div class="location">at line 42</div>
         <code>            public            mixed
-    <strong>Traverse</strong>(<a href="../../../Pinq/Queries/Requests/RequestVisitor.html"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a> $Visitor)</code>
+    <strong>traverse</strong>(<a href="../../../Pinq/Queries/Requests/RequestVisitor.html"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a> $visitor)</code>
     </h3>
     <div class="details">
         <p>
@@ -266,7 +266,7 @@
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/RequestVisitor.html"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a></td>
-                <td>$Visitor</td>
+                <td>$visitor</td>
                 <td>
 </td>
             </tr>

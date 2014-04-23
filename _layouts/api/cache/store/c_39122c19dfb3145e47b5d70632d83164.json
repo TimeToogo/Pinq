@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Iterators",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Iterators\\UnionIterator.php",
-    "hash": "c4b34dc136c07a185ad2641ca8d236ac551b6fe6",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Iterators\\UnionIterator.php",
+    "hash": "e9db4f682f97618ed33f8e2cdfc1378534483aed",
     "parent": "Pinq\\Iterators\\FlatteningIterator",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "Iterator": {
-                    "name": "Iterator",
+                "iterator": {
+                    "name": "iterator",
                     "line": 22,
                     "short_desc": null,
                     "long_desc": null,
@@ -70,8 +70,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "OtherIterator": {
-                    "name": "OtherIterator",
+                "otherIterator": {
+                    "name": "otherIterator",
                     "line": 22,
                     "short_desc": null,
                     "long_desc": null,

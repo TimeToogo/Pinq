@@ -1,6 +1,6 @@
 {
     "name": "Pinq\\Caching\\NullCache",
-    "line": 148,
+    "line": 151,
     "short_desc": "Used if no cache is configure, it will be wrapped in a second level cache so no need to do anything",
     "long_desc": "",
     "hint": null,
@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Caching",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Caching\\Provider.php",
-    "hash": "3625092f76e80857175b9e9d83711e89761b4cc1",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Caching\\Provider.php",
+    "hash": "e91931f75344f561f2ca1b494a588b8f8477c08d",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -33,9 +33,9 @@
 
     ],
     "methods": {
-        "TryGet": {
-            "name": "TryGet",
-            "line": 149,
+        "tryGet": {
+            "name": "tryGet",
+            "line": 153,
             "short_desc": "Attempt to get the cached expression tree of the supplied function reflection",
             "long_desc": "",
             "hint": [
@@ -61,9 +61,9 @@
 
             ],
             "parameters": {
-                "FunctionHash": {
-                    "name": "FunctionHash",
-                    "line": 149,
+                "functionHash": {
+                    "name": "functionHash",
+                    "line": 153,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -81,9 +81,9 @@
                 }
             }
         },
-        "Save": {
-            "name": "Save",
-            "line": 150,
+        "save": {
+            "name": "save",
+            "line": 158,
             "short_desc": "Save the supplied expression tree of the functiom to the cache",
             "long_desc": "",
             "hint": [
@@ -105,9 +105,9 @@
 
             ],
             "parameters": {
-                "FunctionHash": {
-                    "name": "FunctionHash",
-                    "line": 150,
+                "functionHash": {
+                    "name": "functionHash",
+                    "line": 158,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -123,9 +123,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "FunctionExpressionTree": {
-                    "name": "FunctionExpressionTree",
-                    "line": 150,
+                "functionExpressionTree": {
+                    "name": "functionExpressionTree",
+                    "line": 158,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [
@@ -143,9 +143,9 @@
                 }
             }
         },
-        "Clear": {
-            "name": "Clear",
-            "line": 151,
+        "clear": {
+            "name": "clear",
+            "line": 163,
             "short_desc": "Clears all cached function for the supplied function reflection.",
             "long_desc": "",
             "hint": [
@@ -170,9 +170,9 @@
 
             ]
         },
-        "Remove": {
-            "name": "Remove",
-            "line": 152,
+        "remove": {
+            "name": "remove",
+            "line": 168,
             "short_desc": "Removes the cached expression tree for the supplied function reflection",
             "long_desc": "",
             "hint": [
@@ -194,9 +194,9 @@
 
             ],
             "parameters": {
-                "FunctionHash": {
-                    "name": "FunctionHash",
-                    "line": 152,
+                "functionHash": {
+                    "name": "functionHash",
+                    "line": 168,
                     "short_desc": "",
                     "long_desc": null,
                     "hint": [

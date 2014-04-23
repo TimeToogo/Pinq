@@ -36,7 +36,7 @@
 
             <table>
                     <tr>
-                <td>Union</td>
+                <td>UNION</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -45,7 +45,7 @@
                 </td>
             </tr>
                     <tr>
-                <td>Intersect</td>
+                <td>INTERSECT</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -54,7 +54,7 @@
                 </td>
             </tr>
                     <tr>
-                <td>Difference</td>
+                <td>DIFFERENCE</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -63,7 +63,7 @@
                 </td>
             </tr>
                     <tr>
-                <td>Append</td>
+                <td>APPEND</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -72,7 +72,7 @@
                 </td>
             </tr>
                     <tr>
-                <td>WhereIn</td>
+                <td>WHERE_IN</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -81,7 +81,7 @@
                 </td>
             </tr>
                     <tr>
-                <td>Except</td>
+                <td>EXCEPT</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -101,7 +101,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>($OperationType, $Values)
+                    <a href="#method___construct">__construct</a>($operationType, $values)
                     <p>
 </p>
                 </td>
@@ -112,7 +112,7 @@
                     static&nbsp;
                 </td>
                 <td class="last">
-                    <a href="#method_IsValid">IsValid</a>($OperationType)
+                    <a href="#method_isValid">isValid</a>($operationType)
                     <p>
 </p>
                 </td>
@@ -123,7 +123,7 @@
                     int
                 </td>
                 <td class="last">
-                    <a href="#method_GetType">GetType</a>()
+                    <a href="#method_getType">getType</a>()
                     <p>
 </p>
                 </td>
@@ -134,7 +134,7 @@
                     <a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_Traverse">Traverse</a>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $Walker)
+                    <a href="#method_traverse">traverse</a>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $walker)
                     <p>
 </p>
                 </td>
@@ -145,7 +145,7 @@
                     int
                 </td>
                 <td class="last">
-                    <a href="#method_GetOperationType">GetOperationType</a>()
+                    <a href="#method_getOperationType">getOperationType</a>()
                     <p>
 </p>
                 </td>
@@ -156,7 +156,7 @@
                     <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>|array
                 </td>
                 <td class="last">
-                    <a href="#method_GetTraversable">GetTraversable</a>()
+                    <a href="#method_getTraversable">getTraversable</a>()
                     <p>
 </p>
                 </td>
@@ -168,9 +168,9 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 30</div>
+        <div class="location">at line 29</div>
         <code>            public            
-    <strong>__construct</strong>($OperationType, $Values)</code>
+    <strong>__construct</strong>($operationType, $values)</code>
     </h3>
     <div class="details">
         <p>
@@ -183,13 +183,13 @@
                     <table>
                     <tr>
                 <td></td>
-                <td>$OperationType</td>
+                <td>$operationType</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td></td>
-                <td>$Values</td>
+                <td>$values</td>
                 <td>
 </td>
             </tr>
@@ -201,10 +201,10 @@
                     </div>
     </div>
 
-                <h3 id="method_IsValid">
-        <div class="location">at line 42</div>
+                <h3 id="method_isValid">
+        <div class="location">at line 43</div>
         <code>final        static    public            
-    <strong>IsValid</strong>($OperationType)</code>
+    <strong>isValid</strong>($operationType)</code>
     </h3>
     <div class="details">
         <p>
@@ -217,7 +217,7 @@
                     <table>
                     <tr>
                 <td></td>
-                <td>$OperationType</td>
+                <td>$operationType</td>
                 <td>
 </td>
             </tr>
@@ -229,10 +229,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetType">
-        <div class="location">at line 47</div>
+                <h3 id="method_getType">
+        <div class="location">at line 55</div>
         <code>            public            int
-    <strong>GetType</strong>()</code>
+    <strong>getType</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -255,10 +255,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Traverse">
-        <div class="location">at line 52</div>
+                <h3 id="method_traverse">
+        <div class="location">at line 60</div>
         <code>            public            <a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
-    <strong>Traverse</strong>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $Walker)</code>
+    <strong>traverse</strong>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $walker)</code>
     </h3>
     <div class="details">
         <p>
@@ -271,7 +271,7 @@
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a></td>
-                <td>$Walker</td>
+                <td>$walker</td>
                 <td>
 </td>
             </tr>
@@ -293,10 +293,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetOperationType">
-        <div class="location">at line 60</div>
+                <h3 id="method_getOperationType">
+        <div class="location">at line 68</div>
         <code>            public            int
-    <strong>GetOperationType</strong>()</code>
+    <strong>getOperationType</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -320,10 +320,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetTraversable">
-        <div class="location">at line 68</div>
+                <h3 id="method_getTraversable">
+        <div class="location">at line 76</div>
         <code>            public            <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>|array
-    <strong>GetTraversable</strong>()</code>
+    <strong>getTraversable</strong>()</code>
     </h3>
     <div class="details">
         <p>

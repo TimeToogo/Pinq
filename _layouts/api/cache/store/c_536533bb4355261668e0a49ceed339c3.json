@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq\\Expressions",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\Expressions\\ThrowExpression.php",
-    "hash": "4c5f6093b23fe9c473af8a9e2465b3dbf20f6aa8",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\Expressions\\ThrowExpression.php",
+    "hash": "219887b792d4a964613329e5613d6ad49ca4edb6",
     "parent": "Pinq\\Expressions\\Expression",
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "ExceptionExpression": {
-                    "name": "ExceptionExpression",
+                "exceptionExpression": {
+                    "name": "exceptionExpression",
                     "line": 19,
                     "short_desc": null,
                     "long_desc": null,
@@ -72,8 +72,8 @@
                 }
             }
         },
-        "GetExceptionExpression": {
-            "name": "GetExceptionExpression",
+        "getExceptionExpression": {
+            "name": "getExceptionExpression",
             "line": 27,
             "short_desc": "",
             "long_desc": "",
@@ -99,8 +99,8 @@
 
             ]
         },
-        "Traverse": {
-            "name": "Traverse",
+        "traverse": {
+            "name": "traverse",
             "line": 32,
             "short_desc": "",
             "long_desc": "",
@@ -123,8 +123,8 @@
 
             ],
             "parameters": {
-                "Walker": {
-                    "name": "Walker",
+                "walker": {
+                    "name": "walker",
                     "line": 32,
                     "short_desc": null,
                     "long_desc": null,
@@ -143,8 +143,8 @@
                 }
             }
         },
-        "Simplify": {
-            "name": "Simplify",
+        "simplify": {
+            "name": "simplify",
             "line": 37,
             "short_desc": "",
             "long_desc": "",
@@ -170,8 +170,8 @@
 
             ]
         },
-        "Update": {
-            "name": "Update",
+        "update": {
+            "name": "update",
             "line": 45,
             "short_desc": "",
             "long_desc": "",
@@ -194,8 +194,8 @@
 
             ],
             "parameters": {
-                "ExceptionExpression": {
-                    "name": "ExceptionExpression",
+                "exceptionExpression": {
+                    "name": "exceptionExpression",
                     "line": 45,
                     "short_desc": null,
                     "long_desc": null,
@@ -255,8 +255,8 @@
 
             ],
             "parameters": {
-                "Serialized": {
-                    "name": "Serialized",
+                "serialized": {
+                    "name": "serialized",
                     "line": 65,
                     "short_desc": null,
                     "long_desc": null,

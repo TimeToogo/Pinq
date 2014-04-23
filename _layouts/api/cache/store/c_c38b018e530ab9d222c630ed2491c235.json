@@ -14,8 +14,8 @@
         ]
     },
     "namespace": "Pinq",
-    "file": "C:\\Program Files (x86)\\Apache 2.4\\htdocs\\Pinq\\docs\\builder\/pinq\/Source\\FunctionExpressionTree.php",
-    "hash": "e06ff17f6e0a64340dbfa6d81c9b0ccf025a6abc",
+    "file": "C:\\Program Files\\Apache Software Foundation\\Apache2.4\\htdocs\\PinqSite\\_layouts\\api\/pinq\/Source\\FunctionExpressionTree.php",
+    "hash": "cf6732fc81c9ca7ef03b72e85574f62f36609174",
     "parent": null,
     "modifiers": 0,
     "is_trait": false,
@@ -52,8 +52,8 @@
 
             ],
             "parameters": {
-                "OriginalFunction": {
-                    "name": "OriginalFunction",
+                "originalFunction": {
+                    "name": "originalFunction",
                     "line": 90,
                     "short_desc": null,
                     "long_desc": null,
@@ -70,8 +70,8 @@
                     "default": "null",
                     "is_by_ref": false
                 },
-                "ParameterExpressions": {
-                    "name": "ParameterExpressions",
+                "parameterExpressions": {
+                    "name": "parameterExpressions",
                     "line": 90,
                     "short_desc": null,
                     "long_desc": null,
@@ -88,8 +88,8 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "Expressions": {
-                    "name": "Expressions",
+                "expressions": {
+                    "name": "expressions",
                     "line": 90,
                     "short_desc": null,
                     "long_desc": null,
@@ -108,8 +108,42 @@
                 }
             }
         },
-        "IsNotScalar": {
-            "name": "IsNotScalar",
+        "isNotScalar": {
+            "name": "isNotScalar",
+            "line": 103,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [
+
+            ],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [
+
+            ],
+            "errors": [
+
+            ],
+            "parameters": {
+                "value": {
+                    "name": "value",
+                    "line": 103,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [
+
+                    ],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "fromClosureExpression": {
+            "name": "fromClosureExpression",
             "line": 108,
             "short_desc": "",
             "long_desc": "",
@@ -127,43 +161,9 @@
 
             ],
             "parameters": {
-                "Value": {
-                    "name": "Value",
+                "expression": {
+                    "name": "expression",
                     "line": 108,
-                    "short_desc": null,
-                    "long_desc": null,
-                    "hint": null,
-                    "tags": [
-
-                    ],
-                    "modifiers": "",
-                    "default": null,
-                    "is_by_ref": false
-                }
-            }
-        },
-        "FromClosureExpression": {
-            "name": "FromClosureExpression",
-            "line": 113,
-            "short_desc": "",
-            "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
-            "tags": [
-
-            ],
-            "modifiers": "9",
-            "is_by_ref": "",
-            "exceptions": [
-
-            ],
-            "errors": [
-
-            ],
-            "parameters": {
-                "Expression": {
-                    "name": "Expression",
-                    "line": 113,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -179,9 +179,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "OriginalFunction": {
-                    "name": "OriginalFunction",
-                    "line": 113,
+                "originalFunction": {
+                    "name": "originalFunction",
+                    "line": 108,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -199,9 +199,9 @@
                 }
             }
         },
-        "SetCompiledFunction": {
-            "name": "SetCompiledFunction",
-            "line": 121,
+        "setCompiledFunction": {
+            "name": "setCompiledFunction",
+            "line": 116,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -218,9 +218,9 @@
 
             ],
             "parameters": {
-                "Function": {
-                    "name": "Function",
-                    "line": 121,
+                "function": {
+                    "name": "function",
+                    "line": 116,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -238,9 +238,9 @@
                 }
             }
         },
-        "GetCompiledCode": {
-            "name": "GetCompiledCode",
-            "line": 128,
+        "getCompiledCode": {
+            "name": "getCompiledCode",
+            "line": 124,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -265,9 +265,9 @@
 
             ]
         },
-        "GetCompiledFunction": {
-            "name": "GetCompiledFunction",
-            "line": 137,
+        "getCompiledFunction": {
+            "name": "getCompiledFunction",
+            "line": 134,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -294,7 +294,7 @@
         },
         "serialize": {
             "name": "serialize",
-            "line": 142,
+            "line": 139,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -316,7 +316,7 @@
         },
         "unserialize": {
             "name": "unserialize",
-            "line": 156,
+            "line": 151,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -333,9 +333,9 @@
 
             ],
             "parameters": {
-                "Serialized": {
-                    "name": "Serialized",
-                    "line": 156,
+                "serialized": {
+                    "name": "serialized",
+                    "line": 151,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -350,7 +350,7 @@
         },
         "__clone": {
             "name": "__clone",
-            "line": 165,
+            "line": 160,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -372,7 +372,7 @@
         },
         "__invoke": {
             "name": "__invoke",
-            "line": 185,
+            "line": 184,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -392,9 +392,9 @@
 
             ]
         },
-        "GetExpressions": {
-            "name": "GetExpressions",
-            "line": 231,
+        "getExpressions": {
+            "name": "getExpressions",
+            "line": 234,
             "short_desc": "Gets the body expressions",
             "long_desc": "",
             "hint": [
@@ -419,9 +419,9 @@
 
             ]
         },
-        "HasReturnExpression": {
-            "name": "HasReturnExpression",
-            "line": 239,
+        "hasReturnExpression": {
+            "name": "hasReturnExpression",
+            "line": 242,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -446,9 +446,9 @@
 
             ]
         },
-        "GetFirstResolvedReturnValueExpression": {
-            "name": "GetFirstResolvedReturnValueExpression",
-            "line": 248,
+        "getFirstResolvedReturnValueExpression": {
+            "name": "getFirstResolvedReturnValueExpression",
+            "line": 251,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -476,9 +476,9 @@
 
             ]
         },
-        "GetParameterExpressions": {
-            "name": "GetParameterExpressions",
-            "line": 259,
+        "getParameterExpressions": {
+            "name": "getParameterExpressions",
+            "line": 263,
             "short_desc": "",
             "long_desc": "",
             "hint": [
@@ -503,9 +503,9 @@
 
             ]
         },
-        "Walk": {
-            "name": "Walk",
-            "line": 264,
+        "walk": {
+            "name": "walk",
+            "line": 268,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -522,9 +522,9 @@
 
             ],
             "parameters": {
-                "ExpressionWalker": {
-                    "name": "ExpressionWalker",
-                    "line": 264,
+                "expressionWalker": {
+                    "name": "expressionWalker",
+                    "line": 268,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -542,9 +542,9 @@
                 }
             }
         },
-        "Simplify": {
-            "name": "Simplify",
-            "line": 271,
+        "simplify": {
+            "name": "simplify",
+            "line": 275,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -564,9 +564,9 @@
 
             ]
         },
-        "HasUnresolvedVariables": {
-            "name": "HasUnresolvedVariables",
-            "line": 278,
+        "hasUnresolvedVariables": {
+            "name": "hasUnresolvedVariables",
+            "line": 282,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -586,9 +586,9 @@
 
             ]
         },
-        "GetUnresolvedVariables": {
-            "name": "GetUnresolvedVariables",
-            "line": 283,
+        "getUnresolvedVariables": {
+            "name": "getUnresolvedVariables",
+            "line": 287,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -608,9 +608,9 @@
 
             ]
         },
-        "ResolveVariables": {
-            "name": "ResolveVariables",
-            "line": 288,
+        "resolveVariables": {
+            "name": "resolveVariables",
+            "line": 292,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -627,9 +627,9 @@
 
             ],
             "parameters": {
-                "VariableValueMap": {
-                    "name": "VariableValueMap",
-                    "line": 288,
+                "variableValueMap": {
+                    "name": "variableValueMap",
+                    "line": 292,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -645,9 +645,9 @@
                     "default": null,
                     "is_by_ref": false
                 },
-                "VariableExpressionMap": {
-                    "name": "VariableExpressionMap",
-                    "line": 288,
+                "variableExpressionMap": {
+                    "name": "variableExpressionMap",
+                    "line": 292,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -665,9 +665,9 @@
                 }
             }
         },
-        "ResolveVariablesToExpressions": {
-            "name": "ResolveVariablesToExpressions",
-            "line": 297,
+        "resolveVariablesToExpressions": {
+            "name": "resolveVariablesToExpressions",
+            "line": 301,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -684,9 +684,9 @@
 
             ],
             "parameters": {
-                "VariableExpressionMap": {
-                    "name": "VariableExpressionMap",
-                    "line": 297,
+                "variableExpressionMap": {
+                    "name": "variableExpressionMap",
+                    "line": 301,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -704,9 +704,9 @@
                 }
             }
         },
-        "SetQueryableExpressions": {
-            "name": "SetQueryableExpressions",
-            "line": 303,
+        "setQueryableExpressions": {
+            "name": "setQueryableExpressions",
+            "line": 307,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -723,9 +723,9 @@
 
             ],
             "parameters": {
-                "Expressions": {
-                    "name": "Expressions",
-                    "line": 303,
+                "expressions": {
+                    "name": "expressions",
+                    "line": 307,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
