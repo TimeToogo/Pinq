@@ -248,7 +248,7 @@ class AST
     {
         return Expression::parameter(
                 $node->name,
-                $node->type === null ? null : (string) $node,
+                $node->type === null ? null : (string)$node,
                 $node->default !== null,
                 $node->default === null ? null : $this->parseNode($node->default),
                 $node->byRef);

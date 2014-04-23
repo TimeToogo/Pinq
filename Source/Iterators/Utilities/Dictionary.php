@@ -53,21 +53,18 @@ class Dictionary implements \IteratorAggregate
         switch ($type) {
             
             case 'string':
-            
             case 'integer':
-            
             case 'boolean':
-            
             case 'object':
                 return isset($typeStorage[$key]) ? $typeStorage[$key] : null;
             
             case 'double':
-                $stringKey = (string) $key;
+                $stringKey = (string)$key;
                 
                 return isset($typeStorage[$stringKey]) ? $typeStorage[$stringKey] : null;
             
             case 'resource':
-                $stringKey = (string) $key;
+                $stringKey = (string)$key;
                 
                 return isset($typeStorage[$stringKey][1]) ? $typeStorage[$stringKey][1] : null;
             
@@ -95,18 +92,15 @@ class Dictionary implements \IteratorAggregate
         switch ($type) {
             
             case 'string':
-            
             case 'integer':
-            
             case 'boolean':
-            
             case 'object':
                 return isset($typeStorage[$key]);
             
             case 'double':
             
             case 'resource':
-                return isset($typeStorage[(string) $key]);
+                return isset($typeStorage[(string)$key]);
             
             case 'array':
             
@@ -128,17 +122,14 @@ class Dictionary implements \IteratorAggregate
         switch ($type) {
             
             case 'string':
-            
             case 'integer':
-            
             case 'boolean':
-            
             case 'object':
                 $typeStorage[$key] = $value;
                 break;
             
             case 'double':
-                $typeStorage[(string) $key] = $value;
+                $typeStorage[(string)$key] = $value;
                 break;
             
             case 'NULL':
@@ -146,7 +137,7 @@ class Dictionary implements \IteratorAggregate
                 break;
             
             case 'resource':
-                $typeStorage[(string) $key] = [$key, $value];
+                $typeStorage[(string)$key] = [$key, $value];
                 break;
             
             case 'array':
@@ -171,11 +162,8 @@ class Dictionary implements \IteratorAggregate
         switch ($type) {
             
             case 'string':
-            
             case 'integer':
-            
             case 'boolean':
-            
             case 'object':
                 unset($typeStorage[$key]);
                 break;
@@ -183,7 +171,7 @@ class Dictionary implements \IteratorAggregate
             case 'double':
             
             case 'resource':
-                unset($typeStorage[(string) $key]);
+                unset($typeStorage[(string)$key]);
                 break;
             
             case 'NULL':
@@ -221,8 +209,15 @@ class Dictionary implements \IteratorAggregate
      */
     public function getIterator()
     {
-        return new \ArrayIterator(array_values(array_merge(array_map('strval', array_keys($this->storage['string'])), array_keys($this->storage['integer']), array_map(function ($i) {
-            return (bool) $i;
-        }, array_keys($this->storage['boolean'])), array_map('doubleval', array_keys($this->storage['double'])), iterator_to_array($this->storage['object'], false), array_key_exists('NULL', $this->storage) ? [null] : [], array_map('reset', $this->storage['resource']), array_map('reset', $this->storage['array']), array_map('reset', $this->storage['unknown type']))));
+        return new \ArrayIterator(array_values(array_merge(
+                array_map('strval', array_keys($this->storage['string'])), 
+                array_keys($this->storage['integer']), 
+                array_map(function ($i) { return (bool)$i; }, array_keys($this->storage['boolean'])), 
+                array_map('doubleval', array_keys($this->storage['double'])), 
+                iterator_to_array($this->storage['object'], false), 
+                array_key_exists('NULL', $this->storage) ? [null] : [], 
+                array_map('reset', $this->storage['resource']), 
+                array_map('reset', $this->storage['array']), 
+                array_map('reset', $this->storage['unknown type']))));
     }
 }

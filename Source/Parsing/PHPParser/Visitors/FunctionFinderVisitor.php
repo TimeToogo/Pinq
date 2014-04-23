@@ -149,7 +149,7 @@ class FunctionFinderVisitor extends \PHPParser_NodeVisitorAbstract
     public function enterNode(\PHPParser_Node $node)
     {
         if ($node instanceof \PHPParser_Node_Stmt_Namespace) {
-            $this->currentNamespace = (string) $node->name;
+            $this->currentNamespace = (string)$node->name;
         }
         
         if ($node instanceof \PHPParser_Node_Stmt_Class) {

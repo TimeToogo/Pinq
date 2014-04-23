@@ -39,7 +39,7 @@ class ConstantValueNodeReplacerVisitor extends \PHPParser_NodeVisitorAbstract
                 break;
             
             case $node instanceof \PHPParser_Node_Expr_ConstFetch:
-                $value = constant((string) $node->name);
+                $value = constant((string)$node->name);
                 break;
             
             case $node instanceof \PHPParser_Node_Expr_ClassConstFetch:
@@ -47,7 +47,7 @@ class ConstantValueNodeReplacerVisitor extends \PHPParser_NodeVisitorAbstract
                     return;
                 }
                 
-                $value = constant((string) $node->class . '::' . $node->name);
+                $value = constant((string)$node->class . '::' . $node->name);
                 break;
             
             case $node instanceof \PHPParser_Node_Expr_StaticPropertyFetch:
@@ -57,7 +57,7 @@ class ConstantValueNodeReplacerVisitor extends \PHPParser_NodeVisitorAbstract
                     return;
                 }
                 
-                $className = (string) $node->class;
+                $className = (string)$node->class;
                 $value = $className::${$node->name};
                 break;
             

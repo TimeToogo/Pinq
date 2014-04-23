@@ -93,7 +93,7 @@ class ComplexParserTest extends ParserTest
     {
         $function = 
                 function () {
-                    (double) (object) (bool) (int) (string) $i;
+                    (double) (object) (bool) (int) (string)$i;
                 };
         $this->assertParsedAs(
                 $function,
