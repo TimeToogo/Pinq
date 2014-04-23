@@ -5,7 +5,7 @@ namespace Pinq\Parsing\PHPParser;
 /**
  * Placeholder node for a resolved value
  *
- * @property mixed $Value The resolved value
+ * @property mixed $value The resolved value
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
