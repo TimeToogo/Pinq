@@ -34,7 +34,7 @@ $youngPeopleDetails = $people
 
 The beauty of Pinq is as follows, the above query may be executing against a set of arrays or
 possibly against database table. Pinq blurs the lines between in-memory and external data-source,
-using the to most powerful and natural language available to PHP developers: ... PHP.
+using the most powerful and natural language available to PHP developers: ... PHP.
 
 Why Pinq?
 =========
