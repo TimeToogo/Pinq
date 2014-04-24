@@ -25,7 +25,7 @@ class OrderBy extends Segment
     public function __construct(array $functionExpressionTrees, array $isAscendingArray)
     {
         if (array_keys($functionExpressionTrees) !== array_keys($isAscendingArray)) {
-            throw new \Pinq\PinqException('Cannot construct order by: expression tree array and is asceding array keys do not match');
+            throw new \Pinq\PinqException('Cannot construct %s: $functionExpressionTrees and $isAscendingArray keys do not match', __CLASS__);
         }
 
         $this->functionExpressionTrees = $functionExpressionTrees;
