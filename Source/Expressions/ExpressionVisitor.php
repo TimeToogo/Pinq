@@ -191,7 +191,7 @@ class ExpressionVisitor extends ExpressionWalker
 
     }
 
-    public function walkThrow(ThrowExpression $expression)
+    final public function walkThrow(ThrowExpression $expression)
     {
         $this->visitThrow($expression);
 
