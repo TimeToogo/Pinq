@@ -42,7 +42,7 @@ abstract class RequestEvaluator extends Requests\RequestVisitor
         return $this->loadedRequestEvaluator;
     }
     
-    public function visitValues(Requests\Values $request)
+    final public function visitValues(Requests\Values $request)
     {
         if (!$this->isLoaded) {
             $traversable = new \Pinq\Traversable($this->loadValues($request));
