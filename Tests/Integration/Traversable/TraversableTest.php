@@ -35,7 +35,7 @@ abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     final public function testThatReturnsNewInstance(\Pinq\ITraversable $traversable, array $data)
     {

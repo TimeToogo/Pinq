@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable;
 class FirstTest extends TraversableTest
 {
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testThatFirstReturnsTheFirstValue(\Pinq\ITraversable $numbers, array $data)
     {
@@ -13,7 +13,7 @@ class FirstTest extends TraversableTest
     }
 
     /**
-     * @dataProvider EmptyData
+     * @dataProvider emptyData
      */
     public function testThatFirstReturnsNullWhenThereAreNoValues(\Pinq\ITraversable $empty)
     {

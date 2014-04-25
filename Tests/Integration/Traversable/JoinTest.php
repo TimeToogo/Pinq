@@ -14,7 +14,7 @@ class JoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
@@ -28,7 +28,7 @@ class JoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testJoinOnTrueProducesACartesianProduct(\Pinq\ITraversable $traversable, array $data)
     {
@@ -50,7 +50,7 @@ class JoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testJoinOnFalseProducesEmpty(\Pinq\ITraversable $traversable, array $data)
     {
@@ -64,7 +64,7 @@ class JoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testJoinOnProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
@@ -78,7 +78,7 @@ class JoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testJoinOnEqualityProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
@@ -92,7 +92,7 @@ class JoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testJoinWithTransformProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {

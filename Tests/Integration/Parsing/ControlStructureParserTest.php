@@ -7,7 +7,7 @@ use Pinq\Parsing;
 class ControlStructureParserTest extends ParserTest
 {
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithIfStatement()
@@ -24,7 +24,7 @@ class ControlStructureParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithForLoop()
@@ -39,7 +39,7 @@ class ControlStructureParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithForeachLoop()
@@ -54,7 +54,7 @@ class ControlStructureParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithWhileLoop()
@@ -69,7 +69,7 @@ class ControlStructureParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithDoWhileLoop()
@@ -84,7 +84,7 @@ class ControlStructureParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithGotoStatement()
@@ -98,7 +98,7 @@ class ControlStructureParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithSwitchStatement()
@@ -113,7 +113,7 @@ class ControlStructureParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithTryCatchStatement()

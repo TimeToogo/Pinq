@@ -12,7 +12,7 @@ class GroupByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
@@ -20,7 +20,7 @@ class GroupByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatGroupByElementReturnsITraversables(\Pinq\ITraversable $traversable, array $data)
     {
@@ -35,7 +35,7 @@ class GroupByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      * @depends testThatGroupByElementReturnsITraversables
      */
     public function testThatGroupByMultipleTest(\Pinq\ITraversable $traversable, array $data)
@@ -52,7 +52,7 @@ class GroupByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      * @depends testThatGroupByElementReturnsITraversables
      */
     public function testThatGroupByGroupsTheElementsCorrectlyAndPreservesKeys(\Pinq\ITraversable $traversable, array $data)

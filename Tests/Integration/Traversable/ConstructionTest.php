@@ -10,7 +10,7 @@ class ConstructionTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatTraversableReturnsEquivalentArrayAsSupplied(\Pinq\ITraversable $traversable, array $data)
     {

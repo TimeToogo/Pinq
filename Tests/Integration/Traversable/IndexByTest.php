@@ -12,7 +12,7 @@ class IndexByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
@@ -20,7 +20,7 @@ class IndexByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatIndexByElementIndexesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
@@ -30,7 +30,7 @@ class IndexByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatIndexByNullReturnsLastArrayWithLastElement(\Pinq\ITraversable $traversable, array $data)
     {

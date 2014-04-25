@@ -12,7 +12,7 @@ class SelectManyTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
@@ -20,7 +20,7 @@ class SelectManyTest extends TraversableTest
     }
 
     /**
-     * @dataProvider TenRandomStrings
+     * @dataProvider tenRandomStrings
      */
     public function testThatSelectManyFlattensCorrectlyAndIgnoresKeys(\Pinq\ITraversable $values, array $data)
     {

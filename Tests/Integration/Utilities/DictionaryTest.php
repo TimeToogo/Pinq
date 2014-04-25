@@ -32,7 +32,7 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
     }
 
     /**
-     * @dataProvider DictionaryKeyValues
+     * @dataProvider dictionaryKeyValues
      */
     public function testThatDictionarySupportsKeyTypes($key)
     {
@@ -40,7 +40,7 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
     }
 
     /**
-     * @dataProvider DictionaryKeyValues
+     * @dataProvider dictionaryKeyValues
      */
     public function testThatDictionaryContainsReturnsTrueForSetKeys($key)
     {
@@ -52,7 +52,7 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
     }
 
     /**
-     * @dataProvider DictionaryKeyValues
+     * @dataProvider dictionaryKeyValues
      */
     public function testThatDictionaryContainsReturnsFalseForRemovedKeys($key)
     {
@@ -65,7 +65,7 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
     }
 
     /**
-     * @dataProvider DictionaryKeyValues
+     * @dataProvider dictionaryKeyValues
      */
     public function testThatDictionaryGetReturnsSetValue($key)
     {

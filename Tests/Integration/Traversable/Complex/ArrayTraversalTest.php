@@ -21,7 +21,7 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
     }
 
     /**
-     * @dataProvider People
+     * @dataProvider people
      */
     public function testOrderByMultipleColumns(\Pinq\ITraversable $traversable, array $data)
     {
@@ -36,7 +36,7 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
     }
 
     /**
-     * @dataProvider People
+     * @dataProvider people
      */
     public function testWhereCondition(\Pinq\ITraversable $traversable, array $data)
     {
@@ -50,7 +50,7 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
     }
 
     /**
-     * @dataProvider People
+     * @dataProvider people
      */
     public function testGroupJoinToSelfWithCondition(\Pinq\ITraversable $traversable, array $data)
     {
@@ -74,7 +74,7 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
     }
 
     /**
-     * @dataProvider People
+     * @dataProvider people
      */
     public function testGroupMultipleGroupBy(\Pinq\ITraversable $traversable, array $data)
     {

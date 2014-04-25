@@ -10,7 +10,7 @@ class GroupJoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
@@ -24,7 +24,7 @@ class GroupJoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testGroupJoinOnTrueProducesTheCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
@@ -44,7 +44,7 @@ class GroupJoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testGroupJoinOnFalseProducesEmptyLeftJoin(\Pinq\ITraversable $traversable, array $data)
     {
@@ -64,7 +64,7 @@ class GroupJoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testGroupJoinProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
@@ -79,7 +79,7 @@ class GroupJoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testGroupJoinOnEqualityProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
@@ -92,7 +92,7 @@ class GroupJoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testGroupJoinWithStringsProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
@@ -120,7 +120,7 @@ class GroupJoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testGroupJoinWithGreaterThanProducesCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {

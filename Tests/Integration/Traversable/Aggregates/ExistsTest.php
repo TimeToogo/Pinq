@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable\Aggregates;
 class ExistsTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatCountReturnsWhetherItHasAnyElements(\Pinq\ITraversable $traversable, array $data)
     {

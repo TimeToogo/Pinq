@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable;
 class UnsupportedTest extends TraversableTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatSetIndexThrowsAndException(\Pinq\ITraversable $traversable, array $data)
     {
@@ -16,7 +16,7 @@ class UnsupportedTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatUnsetIndexThrowsAndException(\Pinq\ITraversable $traversable, array $data)
     {

@@ -53,7 +53,7 @@ class ExpressionVisitorTest extends ExpressionTest
     }
 
     /**
-     * @dataProvider ExpressionsToVisit
+     * @dataProvider expressionsToVisit
      * @covers \Pinq\Expressions\ExpressionVisitor
      */
     public function testExpressionVisitorVisitsTheCorrectMethod(O\Expression $expression, $method)

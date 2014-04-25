@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Collection;
 class RemoveWhereTest extends CollectionTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatExecutionIsNotDeferred(\Pinq\ICollection $collection, array $data)
     {
@@ -15,7 +15,7 @@ class RemoveWhereTest extends CollectionTest
     }
 
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatRemoveWhereRemovesItemsWhereTheFunctionReturnsTrueAndPreservesKeys(\Pinq\ICollection $numbers, array $data)
     {
@@ -36,7 +36,7 @@ class RemoveWhereTest extends CollectionTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatRemoveWhereTrueRemovesAllItems(\Pinq\ICollection $collection, array $data)
     {
@@ -46,7 +46,7 @@ class RemoveWhereTest extends CollectionTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatRemoveWhereFalseRemovesNoItems(\Pinq\ICollection $collection, array $data)
     {

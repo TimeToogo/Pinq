@@ -7,7 +7,7 @@ use Pinq\Expressions as O;
 class ComplexParserTest extends ParserTest
 {
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testNestedVariableOperations()
     {
@@ -33,7 +33,7 @@ class ComplexParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testParenthesisedNestedVariableOperations()
     {
@@ -59,7 +59,7 @@ class ComplexParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testNestedUnaryOperators()
     {
@@ -87,7 +87,7 @@ class ComplexParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testNestedCastOperators()
     {
@@ -109,7 +109,7 @@ class ComplexParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testNestedVariableTraversal()
     {
@@ -127,7 +127,7 @@ class ComplexParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testNestedClosures()
     {

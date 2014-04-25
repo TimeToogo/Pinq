@@ -7,7 +7,7 @@ use Pinq\Expressions as O;
 class BasicConverterTest extends ConverterTest
 {
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testEmptyFunction()
     {
@@ -17,7 +17,7 @@ class BasicConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testConstantReturnValueFunctions()
     {
@@ -42,7 +42,7 @@ class BasicConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testBinaryOperations()
     {
@@ -71,7 +71,7 @@ class BasicConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testUnaryOperations()
     {
@@ -88,7 +88,7 @@ class BasicConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testCastOperations()
     {
@@ -103,7 +103,7 @@ class BasicConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testLanguageConstructs()
     {
@@ -114,7 +114,7 @@ class BasicConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testTernary()
     {
@@ -124,7 +124,7 @@ class BasicConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testObjectMethodCall()
     {
@@ -144,7 +144,7 @@ class BasicConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testObjectField()
     {
@@ -168,7 +168,7 @@ class BasicConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testValueIndex()
     {
@@ -192,7 +192,7 @@ class BasicConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testFunctionCall()
     {
@@ -211,7 +211,7 @@ class BasicConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testInternalFunction()
     {
@@ -229,7 +229,7 @@ class BasicConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testStaticMethodCall()
     {

@@ -10,7 +10,7 @@ class SliceTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatSkipRemovesCorrectAmountOfElementsFromTheStartAndPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {
@@ -22,7 +22,7 @@ class SliceTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatTakeGetsTheCorrectAmountOfElementsFromTheStartAndPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {
@@ -34,7 +34,7 @@ class SliceTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatTakeZeroReturnsEmptyArray(\Pinq\ITraversable $traversable, array $data)
     {
@@ -44,7 +44,7 @@ class SliceTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatSkipZeroReturnsOriginalArray(\Pinq\ITraversable $traversable, array $data)
     {
@@ -54,7 +54,7 @@ class SliceTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatSlicingReturnsTheCorrectSegmentOfDataAndPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {

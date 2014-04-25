@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable\Aggregates;
 class MaximumTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatMaximumOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {

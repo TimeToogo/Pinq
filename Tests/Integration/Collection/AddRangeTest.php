@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Collection;
 class AddRangeTest extends CollectionTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatAddRangeAddAllValuesToCollection(\Pinq\ICollection $collection, array $data)
     {
@@ -16,7 +16,7 @@ class AddRangeTest extends CollectionTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatAddRangeReindexesCollection(\Pinq\ICollection $collection, array $data)
     {
@@ -31,7 +31,7 @@ class AddRangeTest extends CollectionTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      * @expectedException \Pinq\PinqException
      */
     public function testThatInvalidValueThrowsExceptionWhenCallingAddRange(\Pinq\ICollection $collection, array $data)

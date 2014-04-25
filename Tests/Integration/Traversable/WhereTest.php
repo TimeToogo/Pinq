@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable;
 class WhereTest extends TraversableTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
@@ -13,7 +13,7 @@ class WhereTest extends TraversableTest
     }
 
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatWhereTrueDoesNotFilterAnyData(\Pinq\ITraversable $numbers, array $data)
     {
@@ -23,7 +23,7 @@ class WhereTest extends TraversableTest
     }
 
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatWhereFalseFiltersAllItems(\Pinq\ITraversable $numbers, array $data)
     {
@@ -33,7 +33,7 @@ class WhereTest extends TraversableTest
     }
 
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatElementsAreFilteredFromTraversableAndPreserveKeys(\Pinq\ITraversable $numbers, array $data)
     {

@@ -10,7 +10,7 @@ class AppendTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatAppendWithSelfReturnsMergedDataWithReindexedKeys(\Pinq\ITraversable $traversable, array $data)
     {
@@ -22,7 +22,7 @@ class AppendTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatAppendtWithEmptyReturnsSameAsTheOriginalButReindexedKeys(\Pinq\ITraversable $traversable, array $data)
     {

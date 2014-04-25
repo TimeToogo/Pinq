@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable\Aggregates;
 class AggregateTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
 {
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatAggregateOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
@@ -20,7 +20,7 @@ class AggregateTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     }
 
     /**
-     * @dataProvider TenRandomStrings
+     * @dataProvider tenRandomStrings
      */
     public function testThatAggregateOperatesCorrectlyWithStrings(\Pinq\ITraversable $traversable, array $data)
     {
@@ -35,7 +35,7 @@ class AggregateTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     }
 
     /**
-     * @dataProvider EmptyData
+     * @dataProvider emptyData
      */
     public function testThatAggregateOnEmptyReturnsNull(\Pinq\ITraversable $traversable, array $data)
     {

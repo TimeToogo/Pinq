@@ -13,7 +13,7 @@ class DateTimeTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversa
     }
 
     /**
-     * @dataProvider DateTimes
+     * @dataProvider dateTimes
      */
     public function testWeekendDateFilter(\Pinq\ITraversable $traversable, array $data)
     {
@@ -30,7 +30,7 @@ class DateTimeTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversa
     }
 
     /**
-     * @dataProvider DateTimes
+     * @dataProvider dateTimes
      */
     public function testAggregateValues(\Pinq\ITraversable $traversable, array $data)
     {

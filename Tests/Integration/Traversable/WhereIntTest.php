@@ -10,7 +10,7 @@ class WhereIntTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatWhereInWithSelfReturnsAllValues(\Pinq\ITraversable $traversable, array $data)
     {
@@ -20,7 +20,7 @@ class WhereIntTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatWhereInWithEmptyReturnsEmpty(\Pinq\ITraversable $traversable, array $data)
     {
@@ -30,7 +30,7 @@ class WhereIntTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testThatWhereInWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $traversable, array $data)
     {
@@ -42,7 +42,7 @@ class WhereIntTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testThatWhereInUsesStrictEquality(\Pinq\ITraversable $traversable, array $data)
     {

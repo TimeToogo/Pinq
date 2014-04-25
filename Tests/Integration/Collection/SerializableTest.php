@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Collection;
 class SerializableTest extends CollectionTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatCollectionIsSerializable(\Pinq\ICollection $collection, array $data)
     {
@@ -18,7 +18,7 @@ class SerializableTest extends CollectionTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatCollectionIsSerializableAfterQueries(\Pinq\ICollection $collection, array $data)
     {

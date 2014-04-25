@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable;
 class IssetIndexTest extends TraversableTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatIssetOnValidIndexesReturnTrue(\Pinq\ITraversable $traversable, array $data)
     {
@@ -15,7 +15,7 @@ class IssetIndexTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatIssetOnInvalidIndexesReturnFalse(\Pinq\ITraversable $traversable, array $data)
     {

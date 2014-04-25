@@ -8,7 +8,7 @@ use Pinq\Queries;
 class ComplexConverterTest extends ConverterTest
 {
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testDefaultOrderOfBinaryOperationFunction()
     {
@@ -22,7 +22,7 @@ class ComplexConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testUsedVariableResolution()
     {
@@ -37,7 +37,7 @@ class ComplexConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testNestedClosureUsedVariableResolution()
     {
@@ -57,7 +57,7 @@ class ComplexConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testVariableReturnValueResolution()
     {
@@ -71,7 +71,7 @@ class ComplexConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testNestedClosure()
     {
@@ -90,7 +90,7 @@ class ComplexConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testOperationsReturnValueResolution()
     {
@@ -114,7 +114,7 @@ class ComplexConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testComplexReturnValueResolution()
     {
@@ -142,7 +142,7 @@ class ComplexConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testComplexReturnValueResolutionWithVariableVariables()
     {
@@ -178,7 +178,7 @@ class ComplexConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testThatResolvesSubQueries()
     {
@@ -248,7 +248,7 @@ class ComplexConverterTest extends ConverterTest
 
     /** ---- Some code from the wild ---- **/
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      * @source http://stackoverflow.com/questions/2510434/format-bytes-to-kilobytes-megabytes-gigabytes
      */
     public function testFileSizeFormatter()

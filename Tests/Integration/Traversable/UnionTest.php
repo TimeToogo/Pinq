@@ -10,7 +10,7 @@ class UnionTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatUnionWithSelfReturnsUniqueReindexedValues(\Pinq\ITraversable $traversable, array $data)
     {
@@ -20,7 +20,7 @@ class UnionTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatUnionWithEmptyReturnsUniqueReindexedValues(\Pinq\ITraversable $traversable, array $data)
     {
@@ -30,7 +30,7 @@ class UnionTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTenTwice
+     * @dataProvider oneToTenTwice
      */
     public function testThatUnionRemovesDuplicateValues(\Pinq\ITraversable $traversable, array $data)
     {
@@ -40,7 +40,7 @@ class UnionTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testThatUnionUsesStrictEquality(\Pinq\ITraversable $traversable, array $data)
     {

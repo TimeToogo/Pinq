@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Collection;
 class ApplyTest extends CollectionTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatExecutionIsNotDeferred(\Pinq\ICollection $collection, array $data)
     {
@@ -15,7 +15,7 @@ class ApplyTest extends CollectionTest
     }
 
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatCollectionApplyOperatesOnTheSameCollection(\Pinq\ICollection $collection, array $data)
     {

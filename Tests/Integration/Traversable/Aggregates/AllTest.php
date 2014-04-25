@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable\Aggregates;
 class AllTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
 {
     /**
-     * @dataProvider EmptyData
+     * @dataProvider emptyData
      */
     public function testThatAllReturnsTrueIfEmpty(\Pinq\ITraversable $traversable, array $data)
     {
@@ -23,7 +23,7 @@ class AllTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     }
 
     /**
-     * @dataProvider FalseyValues
+     * @dataProvider falseyValues
      */
     public function testThatAllReturnsFalseIfThereIsAFalsyValue(\Pinq\ITraversable $traversable, array $data)
     {
@@ -31,7 +31,7 @@ class AllTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatAllOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {

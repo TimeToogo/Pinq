@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Collection;
 class SetIndexTest extends CollectionTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatSetingAnIndexWillOverrideTheElementInTheCollection(\Pinq\ICollection $collection, array $data)
     {

@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Collection;
 class RemoveRangeTest extends CollectionTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatRemoveRangeRemovesAllValuesFromCollection(\Pinq\ICollection $collection, array $data)
     {
@@ -14,7 +14,7 @@ class RemoveRangeTest extends CollectionTest
     }
 
     /**
-     * @dataProvider OneToTenTwice
+     * @dataProvider oneToTenTwice
      */
     public function testThatRemoveRangeWillRemovesIdenticalValuesFromCollectionAndPreserveKeys(\Pinq\ICollection $collection, array $data)
     {
@@ -30,7 +30,7 @@ class RemoveRangeTest extends CollectionTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      * @expectedException \Pinq\PinqException
      */
     public function testThatInvalidValueThrowsExceptionWhenCallingRemoveRange(\Pinq\ICollection $collection, array $data)

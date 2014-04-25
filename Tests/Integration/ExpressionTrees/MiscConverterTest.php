@@ -7,7 +7,7 @@ use Pinq\Expressions as O;
 class MiscConverterTest extends ConverterTest
 {
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testParameterExpressions()
     {
@@ -45,7 +45,7 @@ class MiscConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testUnresolvedVariables()
     {
@@ -69,7 +69,7 @@ class MiscConverterTest extends ConverterTest
     }
 
     /**
-     * @dataProvider Converters
+     * @dataProvider converters
      */
     public function testUnresolvedVariableInNestedClosure()
     {

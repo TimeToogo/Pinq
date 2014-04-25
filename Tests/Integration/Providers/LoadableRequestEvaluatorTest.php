@@ -30,7 +30,7 @@ class LoadableRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
     }
 
     /**
-     * @dataProvider RequestsToLoad
+     * @dataProvider requestsToLoad
      */
     public function testThatWillCallTheLoadMethodButNotWhenLoaded(Queries\IRequest $request, $loadMethod, $returnValue = null)
     {

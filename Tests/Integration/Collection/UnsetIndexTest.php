@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Collection;
 class UnsetIndexTest extends CollectionTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatUnsetingAnIndexWillRemoveTheElementFromTheCollection(\Pinq\ICollection $collection, array $data)
     {

@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable;
 class GetIndexTest extends TraversableTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatIndexReturnsCorrectValue(\Pinq\ITraversable $traversable, array $data)
     {

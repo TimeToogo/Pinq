@@ -10,7 +10,7 @@ class ExceptTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatExceptWithSelfReturnsAnEmptyArray(\Pinq\ITraversable $traversable, array $data)
     {
@@ -20,7 +20,7 @@ class ExceptTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatExceptWithEmptyReturnsSameAsTheOriginal(\Pinq\ITraversable $traversable, array $data)
     {
@@ -30,7 +30,7 @@ class ExceptTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testThatExceptWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $traversable, array $data)
     {
@@ -41,7 +41,7 @@ class ExceptTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testThatExceptWithDuplicateKeysPreservesTheOriginalValues(\Pinq\ITraversable $traversable, array $data)
     {
@@ -52,7 +52,7 @@ class ExceptTest extends TraversableTest
     }
 
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatExceptUsesStrictEquality(\Pinq\ITraversable $traversable, array $data)
     {

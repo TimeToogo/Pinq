@@ -10,7 +10,7 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
     }
 
     /**
-     * @dataProvider OneToAHundred
+     * @dataProvider oneToAHundred
      */
     public function testOrderByTensThenDescending(\Pinq\ITraversable $traversable, array $data)
     {
@@ -35,7 +35,7 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
     }
 
     /**
-     * @dataProvider OneToAHundred
+     * @dataProvider oneToAHundred
      */
     public function testSimpleAggregation(\Pinq\ITraversable $traversable, array $data)
     {
@@ -45,7 +45,7 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
     }
 
     /**
-     * @dataProvider OneToAHundred
+     * @dataProvider oneToAHundred
      */
     public function testComplexAggregationQuery(\Pinq\ITraversable $traversable, array $data)
     {

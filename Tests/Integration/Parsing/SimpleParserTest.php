@@ -8,7 +8,7 @@ use Pinq\Expressions as O;
 class SimpleParserTest extends ParserTest
 {
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testEmptyFunction()
     {
@@ -18,7 +18,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testValue()
     {
@@ -30,7 +30,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testReturnStatment()
     {
@@ -42,7 +42,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testThrowNewExceptionStatment()
     {
@@ -54,7 +54,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testReturnValueStatment()
     {
@@ -76,7 +76,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testVariable()
     {
@@ -88,7 +88,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testEmpty()
     {
@@ -100,7 +100,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testIsset()
     {
@@ -112,7 +112,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testFunctionCall()
     {
@@ -124,7 +124,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testStaticMethodCall()
     {
@@ -138,7 +138,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testArray()
     {
@@ -152,7 +152,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      * @expectedException \Pinq\Parsing\InvalidFunctionException
      */
     public function testInternalFunctionIsRejected(IParser $parser)
@@ -161,7 +161,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      * @expectedException \Pinq\Parsing\InvalidFunctionException
      */
     public function testEvaledFunctionIsRejected(IParser $parser)
@@ -172,7 +172,7 @@ class SimpleParserTest extends ParserTest
 
     // <editor-fold defaultstate="collapsed" desc="Value traversals">
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testField()
     {
@@ -186,7 +186,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testMethodCall()
     {
@@ -200,7 +200,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testIndex()
     {
@@ -214,7 +214,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testInvocation()
     {
@@ -226,7 +226,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testTernary()
     {
@@ -245,7 +245,7 @@ class SimpleParserTest extends ParserTest
     // <editor-fold defaultstate="collapsed" desc="Binary Operators">
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     private function assertBinaryOperation(callable $function, $left, $operator, $right)
     {
@@ -258,7 +258,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testMathBinaryOperations()
     {
@@ -270,7 +270,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testLogicalBinaryOperations()
     {
@@ -279,7 +279,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testComparisonBinaryOperations()
     {
@@ -294,7 +294,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testBitwiseBinaryOperations()
     {
@@ -306,7 +306,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testStringBinaryOperations()
     {
@@ -318,7 +318,7 @@ class SimpleParserTest extends ParserTest
     // <editor-fold defaultstate="collapsed" desc="Unary Operators">
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     private function assertUnaryOperation(callable $function, $operator, $operandName)
     {
@@ -330,7 +330,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testMathUnaryOperations()
     {
@@ -343,7 +343,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testBitwiseUnaryOperations()
     {
@@ -356,7 +356,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testLogicalUnaryOperations()
     {
@@ -373,7 +373,7 @@ class SimpleParserTest extends ParserTest
     // <editor-fold defaultstate="collapsed" desc="Assignment Operators">
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     private function assertAssignment(callable $function, $assignToName, $operator, $assigmentName)
     {
@@ -386,7 +386,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testNormalAssignmentOperations()
     {
@@ -395,7 +395,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function tesMathAssignmentOperations()
     {
@@ -407,7 +407,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function tesBitwiseAssignmentOperations()
     {
@@ -419,7 +419,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testStringAssignmentOperations()
     {
@@ -431,7 +431,7 @@ class SimpleParserTest extends ParserTest
     // <editor-fold defaultstate="collapsed" desc="Cast Operators">
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     private function assertCast(callable $function, $typeOperator, $castName)
     {
@@ -443,7 +443,7 @@ class SimpleParserTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testCastOperators()
     {

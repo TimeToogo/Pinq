@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable;
 class SerializableTest extends TraversableTest
 {
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatCollectionIsSerializable(\Pinq\ITraversable $traversable, array $data)
     {
@@ -18,7 +18,7 @@ class SerializableTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatCollectionIsSerializableAfterQueries(\Pinq\ITraversable $traversable, array $data)
     {

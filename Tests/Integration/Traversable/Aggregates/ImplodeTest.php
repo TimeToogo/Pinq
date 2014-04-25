@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable\Aggregates;
 class ImplodeTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
 {
     /**
-     * @dataProvider EmptyData
+     * @dataProvider emptyData
      */
     public function testImplodeEmptyReturnsEmptyString(\Pinq\ITraversable $traversable, array $data)
     {
@@ -13,7 +13,7 @@ class ImplodeTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testImplodeOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {

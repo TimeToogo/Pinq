@@ -10,7 +10,7 @@ class IntersectTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatIntersectWithSelfReturnsUniqueValues(\Pinq\ITraversable $traversable, array $data)
     {
@@ -20,7 +20,7 @@ class IntersectTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatIntersectWithEmptyReturnsEmpty(\Pinq\ITraversable $traversable, array $data)
     {
@@ -30,7 +30,7 @@ class IntersectTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testThatIntersectionWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $traversable, array $data)
     {
@@ -43,7 +43,7 @@ class IntersectTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testThatIntersectUsesStrictEquality(\Pinq\ITraversable $traversable, array $data)
     {

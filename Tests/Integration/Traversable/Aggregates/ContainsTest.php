@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable\Aggregates;
 class ContainsTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
 {
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatContainsReturnsTrueForAContainedElement(\Pinq\ITraversable $traversable, array $data)
     {
@@ -15,7 +15,7 @@ class ContainsTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     }
 
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatContainsReturnsWhetherItContainsAnIdenticalElement(\Pinq\ITraversable $traversable, array $data)
     {

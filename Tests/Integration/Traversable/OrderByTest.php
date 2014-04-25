@@ -12,7 +12,7 @@ class OrderByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
@@ -21,7 +21,7 @@ class OrderByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatMultipleExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
@@ -31,7 +31,7 @@ class OrderByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatOrderByNegatingNumbersIsEquivalentToArrayReverse(\Pinq\ITraversable $numbers, array $data)
     {
@@ -41,7 +41,7 @@ class OrderByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatDescendingNegatingNumbersIsEquivalentToOriginal(\Pinq\ITraversable $numbers, array $data)
     {

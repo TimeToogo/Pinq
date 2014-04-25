@@ -23,7 +23,7 @@ class Test
 class FunctionTypesTest extends ParserTest
 {
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testClosure()
     {
@@ -35,7 +35,7 @@ class FunctionTypesTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testFunction()
     {
@@ -45,7 +45,7 @@ class FunctionTypesTest extends ParserTest
     }
 
     /**
-     * @dataProvider Parsers
+     * @dataProvider parsers
      */
     public function testMethod()
     {

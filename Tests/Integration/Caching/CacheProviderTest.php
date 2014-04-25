@@ -32,7 +32,7 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
     }
 
     /**
-     * @dataProvider Caches
+     * @dataProvider caches
      */
     public function testThatProviderWillReturnTheSecondLevelCacheWithTheCorrectInnerCache($method, $cache, $assertSameCache)
     {

@@ -10,7 +10,7 @@ class DifferenceTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatDifferenceWithSelfReturnsAnEmptyArray(\Pinq\ITraversable $traversable, array $data)
     {
@@ -20,7 +20,7 @@ class DifferenceTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatDifferenceWithEmptyReturnsSameAsTheOriginal(\Pinq\ITraversable $traversable, array $data)
     {
@@ -30,7 +30,7 @@ class DifferenceTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testThatDifferenceWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $traversable, array $data)
     {
@@ -41,7 +41,7 @@ class DifferenceTest extends TraversableTest
     }
 
     /**
-     * @dataProvider OneToTen
+     * @dataProvider oneToTen
      */
     public function testThatDifferenceWithDuplicateKeysPreservesTheOriginalValues(\Pinq\ITraversable $traversable, array $data)
     {

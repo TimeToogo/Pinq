@@ -30,7 +30,7 @@ class CachingRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
     }
 
     /**
-     * @dataProvider RequestsToCache
+     * @dataProvider requestsToCache
      */
     public function testThatWillCallTheInnerEvaluatorOnceAndCacheTheResult(Queries\IRequest $request, $calledMethod)
     {

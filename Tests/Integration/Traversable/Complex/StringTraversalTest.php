@@ -18,7 +18,7 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
     }
 
     /**
-     * @dataProvider SomeStrings
+     * @dataProvider someStrings
      */
     public function testOrderingMultiple(\Pinq\ITraversable $traversable, array $data)
     {
@@ -73,7 +73,7 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
     }
 
     /**
-     * @dataProvider SomeStrings
+     * @dataProvider someStrings
      */
     public function testSelectManyQuery(\Pinq\ITraversable $traversable, array $data)
     {
@@ -94,7 +94,7 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
     }
 
     /**
-     * @dataProvider SomeStrings
+     * @dataProvider someStrings
      */
     public function testAggregateValuesString(\Pinq\ITraversable $traversable, array $data)
     {

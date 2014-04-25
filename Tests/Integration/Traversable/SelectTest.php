@@ -12,7 +12,7 @@ class SelectTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Everything
+     * @dataProvider everything
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
@@ -20,7 +20,7 @@ class SelectTest extends TraversableTest
     }
 
     /**
-     * @dataProvider AssocOneToTen
+     * @dataProvider assocOneToTen
      */
     public function testThatSelectNumbersMapsCorrectlyAndPreservesKeys(\Pinq\ITraversable $values, array $data)
     {
