@@ -36,6 +36,34 @@ class Scope implements IScope
     {
         return empty($this->segments);
     }
+    
+    public function isSubscopeOf(IScope $scope)
+    {
+        $currentSegments = array_values($this->segments);
+        $otherSegments = array_values($scope->getSegments());
+        
+        if(count($currentSegments) <= count($otherSegments)) {
+            return false;
+        }
+        
+        foreach($otherSegments as $key => $otherSegment) {
+            if($otherSegment != $currentSegments[$key]) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    public function getSubscopeOf(IScope $scope)
+    {
+        if(!$this->isSubscopeOf($scope)) {
+            throw new \Pinq\PinqException(
+                    'Cannot retrieve subscope: scope is not a subscope the supplied scope');
+        }
+        
+        return new self(array_slice($this->segments, count($scope->getSegments())));
+    }
 
     public function append(ISegment $query)
     {

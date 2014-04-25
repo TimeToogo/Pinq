@@ -21,6 +21,17 @@ interface IScope extends \IteratorAggregate
     public function isEmpty();
 
     /**
+     * @return boolean
+     */
+    public function isSubscopeOf(IScope $scope);
+
+    /**
+     * @return IScope
+     * @throws Pinq\PinqException
+     */
+    public function getSubscopeOf(IScope $scope);
+
+    /**
      * @return IScope
      */
     public function append(ISegment $segment);

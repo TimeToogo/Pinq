@@ -26,9 +26,22 @@ abstract class RequestEvaluator extends Requests\RequestVisitor
 
     public function __construct()
     {
-
+        
     }
 
+    public function isLoaded()
+    {
+        return $this->isLoaded;
+    }
+    
+    /**
+     * @return Traversable\RequestEvaluator|null
+     */
+    public function getLoadedRequestEvaluator()
+    {
+        return $this->loadedRequestEvaluator;
+    }
+    
     public function visitValues(Requests\Values $request)
     {
         if (!$this->isLoaded) {

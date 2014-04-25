@@ -15,10 +15,18 @@ class RequestEvaluator extends Requests\RequestVisitor
      * @var \Pinq\ITraversable
      */
     private $traversable;
-
+    
     public function __construct(\Pinq\ITraversable $traversable)
     {
         $this->traversable = $traversable;
+    }
+    
+    /**
+     * @return \Pinq\ITraversable
+     */
+    public function getTraversable()
+    {
+        return $this->traversable;
     }
 
     public function visitValues(Requests\Values $request)

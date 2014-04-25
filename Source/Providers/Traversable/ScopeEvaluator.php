@@ -15,12 +15,17 @@ class ScopeEvaluator extends Segments\SegmentVisitor
      * @var \Pinq\ITraversable
      */
     protected $traversable;
-
+    
+    public function __construct(\Pinq\ITraversable $traversable = null)
+    {
+        $this->traversable = $traversable;
+    }
+    
     final public function setTraversable(\Pinq\ITraversable $traversable)
     {
         $this->traversable = $traversable;
     }
-
+    
     /**
      * @return \Pinq\ITraversable
      */
