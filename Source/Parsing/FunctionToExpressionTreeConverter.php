@@ -125,18 +125,20 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
 
     private function internalFunctionExpressions(\ReflectionFunctionAbstract $reflection)
     {
-        $hasUnavailableDefaultValue = false;
+        $hasUnavailableDefaultValueOrIsVariadic = false;
         $argumentExpressions = [];
 
         foreach ($reflection->getParameters() as $parameter) {
-            if ($parameter->isOptional() && !$parameter->isDefaultValueAvailable()) {
-                $hasUnavailableDefaultValue = true;
+            if (($parameter->isOptional() && !$parameter->isDefaultValueAvailable())
+                   || $parameter->getName() === '...') {
+                $hasUnavailableDefaultValueOrIsVariadic = true;
+                break;
             }
 
             $argumentExpressions[] = O\Expression::variable(O\Expression::value($parameter->getName()));
         }
 
-        if (!$hasUnavailableDefaultValue) {
+        if (!$hasUnavailableDefaultValueOrIsVariadic) {
             return [O\Expression::returnExpression(O\Expression::functionCall(
                     O\Expression::value($reflection->getName()),
                     $argumentExpressions))];
@@ -152,7 +154,10 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
         $parameterExpressions = [];
 
         foreach ($reflection->getParameters() as $parameter) {
-            $parameterExpressions[] = $this->getParameterExpression($parameter);
+            //Ignore variadic parameter
+            if($parameter->getName() !== '...') {
+                $parameterExpressions[] = $this->getParameterExpression($parameter);
+            }
         }
 
         return $parameterExpressions;

@@ -213,24 +213,6 @@ class BasicConverterTest extends ConverterTest
     /**
      * @dataProvider converters
      */
-    public function testInternalFunction()
-    {
-        $valueSet = [
-            [''],
-            ['1'],
-            ['test'],
-            ['fooo'],
-            ['geges ges  gse e'],
-            ['striiiiiiiiiiing']
-        ];
-
-        $this->assertConvertsAndRecompilesCorrectly('strlen', $valueSet);
-        $this->assertConvertsAndRecompilesCorrectly('str_split', $valueSet);
-    }
-
-    /**
-     * @dataProvider converters
-     */
     public function testStaticMethodCall()
     {
         $valueSet = [[range(0, 10)], [range(-100, 100)], [[1, '2', 3, '4', 5, '6', 7, '8', 9, '0']]];

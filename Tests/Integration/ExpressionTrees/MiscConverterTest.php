@@ -89,4 +89,36 @@ class MiscConverterTest extends ConverterTest
                 },
                 ['bar']);
     }
+
+    /**
+     * @dataProvider converters
+     */
+    public function testInternalFunction()
+    {
+        $valueSet = [
+            [''],
+            ['1'],
+            ['test'],
+            ['fooo'],
+            ['geges ges  gse e'],
+            ['striiiiiiiiiiing']
+        ];
+
+        $this->assertConvertsAndRecompilesCorrectly('strlen', $valueSet);
+        $this->assertConvertsAndRecompilesCorrectly('str_split', $valueSet);
+    }
+
+    /**
+     * @dataProvider converters
+     */
+    public function testVariadicInternalFunction()
+    {
+        $valueSet = [
+            [[1], [2], [3]], 
+            [[1, 3], [2, 5], [6, 3]],
+            [['test' => 5], ['foo' => 'bar'], ['baz' => 'boron']],
+        ];
+
+        $this->assertConvertsAndRecompilesCorrectly('array_merge', $valueSet);
+    }
 }
