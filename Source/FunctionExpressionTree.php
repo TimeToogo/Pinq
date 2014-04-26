@@ -245,7 +245,7 @@ class FunctionExpressionTree implements \Serializable
     }
 
     /**
-     * @return O\ReturnExpression
+     * @return O\Expression
      * @throws Parsing\InvalidFunctionException
      */
     final public function getFirstResolvedReturnValueExpression()
