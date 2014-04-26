@@ -7,9 +7,21 @@ use Pinq\Queries\Requests;
 use Pinq\Providers\Traversable;
 
 /**
- * Base request evaluator for request evaluator in which the values
- * can be loaded and once loaded, the requests can be performed in memory.
+ * Base request evaluator for request evaluator. If the values
+ * have been loaded, all following requests will be performed in memory
+ * throw the Traversable\RequestEvaluator.
  *
+ * <code>
+ * $someRows = $queryable->where(function ($row) { return $row['id'] <= 50; });
+ * 
+ * foreach($someRows as $row) {
+ *     //This will load the rows (Values request)
+ * }
+ *
+ * //This will be evaluated in memory (Maximum request)
+ * $maxId = $someRows->maximum(function ($row) { return $row['id']; });
+ * </code>
+ * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 abstract class RequestEvaluator extends Requests\RequestVisitor
@@ -52,7 +64,10 @@ abstract class RequestEvaluator extends Requests\RequestVisitor
 
         return $this->loadedRequestEvaluator->visitValues($request);
     }
-
+    
+    /**
+     * @return \Iterator
+     */
     abstract protected function loadValues(Requests\Values $request);
 
     final public function visitFirst(Requests\First $request)

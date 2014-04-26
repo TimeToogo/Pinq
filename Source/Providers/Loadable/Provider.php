@@ -6,18 +6,18 @@ use Pinq\Queries;
 
 /**
  * Query provider which will cache the requested value scopes
- * and if a loaded parent scope is present, the subscope will be
- * evaluating in memory using the Traversable\Provider.
+ * and if a loaded parent scope is available, the subscope will be
+ * evaluated in memory using the Traversable\Provider.
  * 
  * <code>
  * $someRows = $queryable->where(function ($row) { return $row['id'] <= 50; });
  * 
  * foreach($someRows as $row) {
- *     //This will load the rows, (Values request)
+ *     //This will load the rows
  * }
  *
  * //This will be evaluated in memory
- * $maxId = $someRows->maximum(function ($row) { return $row['id']; });
+ * $maxId = $someRows->where(function ($row) { return $row['isActive'] === true; });
  * </code>
  * 
  *
