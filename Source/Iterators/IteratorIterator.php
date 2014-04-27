@@ -18,13 +18,7 @@ class IteratorIterator implements \Iterator
 
     public function __construct(\Traversable $iterator)
     {
-        if ($iterator instanceof \IteratorAggregate) {
-            $this->iterator = $iterator->getIterator();
-        } elseif ($iterator instanceof \Iterator) {
-            $this->iterator = $iterator;
-        } else {
-            $this->iterator = new \Pinq\Iterators\IteratorIterator($iterator);
-        }
+        $this->iterator = \Pinq\Utilities::toIterator($iterator);
     }
 
     public function getInnerIterator()
