@@ -87,8 +87,8 @@ class AST
 
             case $node instanceof \PHPParser_Node_Expr:
                 return $this->parseExpressionNode($node);
+            
             //Irrelavent node, no call time pass by ref anymore
-
             case $node instanceof \PHPParser_Node_Arg:
                 return $this->parseNode($node->value);
 
@@ -254,6 +254,7 @@ class AST
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Statement node parsers">
     private function parseStatmentNode(\PHPParser_Node_Stmt $node)
     {
@@ -296,6 +297,7 @@ class AST
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Operater node maps">
     /**
      * @param string $nodeType

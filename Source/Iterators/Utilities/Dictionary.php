@@ -69,7 +69,6 @@ class Dictionary implements \IteratorAggregate
                 return isset($typeStorage[$stringKey][1]) ? $typeStorage[$stringKey][1] : null;
 
             case 'array':
-
             case 'unknown type':
                 foreach ($typeStorage as $keyValuePair) {
                     if ($keyValuePair[0] === $key) {
@@ -98,12 +97,10 @@ class Dictionary implements \IteratorAggregate
                 return isset($typeStorage[$key]);
 
             case 'double':
-
             case 'resource':
                 return isset($typeStorage[(string)$key]);
 
             case 'array':
-
             case 'unknown type':
                 foreach ($typeStorage as $keyValuePair) {
                     if ($keyValuePair[0] === $key) {
@@ -141,7 +138,6 @@ class Dictionary implements \IteratorAggregate
                 break;
 
             case 'array':
-
             case 'unknown type':
                 $typeStorage[] = [$key, $value];
                 break;
@@ -169,7 +165,6 @@ class Dictionary implements \IteratorAggregate
                 break;
 
             case 'double':
-
             case 'resource':
                 unset($typeStorage[(string)$key]);
                 break;
@@ -179,7 +174,6 @@ class Dictionary implements \IteratorAggregate
                 break;
 
             case 'array':
-
             case 'unknown type':
                 foreach ($typeStorage as $storageKey => $keyValuePair) {
                     if ($keyValuePair[0] === $key) {
