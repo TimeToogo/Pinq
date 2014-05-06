@@ -4,7 +4,7 @@ namespace Pinq;
 
 /**
  * The standard traversable class, fully implements the traversable API
- * using iterator to achieve lazy evaluation
+ * using iterators to achieve lazy evaluation
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
