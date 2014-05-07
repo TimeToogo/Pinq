@@ -127,10 +127,10 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
     {
         $hasUnavailableDefaultValueOrIsVariadic = false;
         $argumentExpressions = [];
-
+        
         foreach ($reflection->getParameters() as $parameter) {
             if (($parameter->isOptional() && !$parameter->isDefaultValueAvailable())
-                   || $parameter->getName() === '...') {
+                   || self::isVariadic($parameter)) {
                 $hasUnavailableDefaultValueOrIsVariadic = true;
                 break;
             }
@@ -155,12 +155,22 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
 
         foreach ($reflection->getParameters() as $parameter) {
             //Ignore variadic parameter
-            if($parameter->getName() !== '...') {
+            if(!self::isVariadic($parameter)) {
                 $parameterExpressions[] = $this->getParameterExpression($parameter);
             }
         }
 
         return $parameterExpressions;
+    }
+    
+    private static $supportsVariadicParameters = null;
+    private static function isVariadic(\ReflectionParameter $parameter)
+    {
+        if(self::$supportsVariadicParameters === null) {
+            self::$supportsVariadicParameters = method_exists('\ReflectionParameter', 'isVariadic');
+        }
+        
+        return $parameter->getName() === '...' || (self::$supportsVariadicParameters && $parameter->isVariadic());
     }
 
     private function getParameterExpression(\ReflectionParameter $parameter)
