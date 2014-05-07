@@ -253,14 +253,21 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
         return $this->newSegment(new Segments\Range($start, $amount));
     }
 
+    public function orderBy(callable $function, $direction)
+    {
+        return $this->newSegment(new Segments\OrderBy(
+                [$this->convert($function)],
+                [$direction !== Direction::DESCENDING]));
+    }
+
     public function orderByAscending(callable $function)
     {
-        return $this->newSegment(new Segments\OrderBy([$function], [true]));
+        return $this->newSegment(new Segments\OrderBy([$this->convert($function)], [true]));
     }
 
     public function orderByDescending(callable $function)
     {
-        return $this->newSegment(new Segments\OrderBy([$function], [false]));
+        return $this->newSegment(new Segments\OrderBy([$this->convert($function)], [false]));
     }
 
     private function validateOrderBy()
@@ -294,13 +301,6 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
     public function thenByDescending(callable $function)
     {
         return $this->updateLastSegment($this->validateOrderBy()->thenBy($this->convert($function), false));
-    }
-
-    public function orderBy(callable $function, $direction)
-    {
-        return $this->newSegment(new Segments\OrderBy(
-                [$function],
-                [$direction !== Direction::DESCENDING]));
     }
 
     public function unique()
