@@ -95,8 +95,9 @@ abstract class JoinIteratorBase implements \Iterator
             $this->initialize();
             $this->isInitialized = true;
         }
-
+        
         $this->currentOuterValue = null;
+        $this->outerIterator->rewind();
         $this->currentInnerGroupIterator = new \ArrayIterator();
         $this->count = 0;
     }

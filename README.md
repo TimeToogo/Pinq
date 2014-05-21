@@ -10,7 +10,7 @@ Add package to your composer.json:
 ```json
 {
     "require": {
-        "timetoogo/pinq": "~2.0"
+        "timetoogo/pinq": "~2.1"
     }
 }
 ```

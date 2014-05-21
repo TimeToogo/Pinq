@@ -52,6 +52,27 @@ class JoinTest extends TraversableTest
     /**
      * @dataProvider everything
      */
+    public function testJoinWillRewindCorrectly(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable =
+                $traversable->join([0 => 0])->on(function () {
+                    return true;
+                })->to(function ($outerValue, $innerValue) {
+                    return $outerValue;
+                });
+        
+        for ($count = 0; $count < 2; $count++) {
+            $newData = [];
+            foreach ($traversable as $value) {
+                $newData[] = $value;
+            }
+            $this->assertSame(array_values($data), $newData);
+        }
+    }
+
+    /**
+     * @dataProvider everything
+     */
     public function testJoinOnFalseProducesEmpty(\Pinq\ITraversable $traversable, array $data)
     {
         $traversable = $traversable
