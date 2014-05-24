@@ -60,21 +60,15 @@ class Lookup
     /**
      * Returns all the groups as an array
      *
-     * @return array[]
+     * @return \ArrayObject[]
      */
     public function asArray()
     {
-        $groups = [];
-
-        foreach ($this->dictionary as $key) {
-            $groups[] = $this->dictionary->get($key);
-        }
-
-        return $groups;
+        return $this->dictionary->values();
     }
 
     /**
-     * Returns whether there is a specified group
+     * Returns whether there is a specified group for the given key
      *
      * @param mixed $key
      * @return boolean

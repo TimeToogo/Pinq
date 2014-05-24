@@ -18,6 +18,9 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
 
     public function dictionaryKeyValues()
     {
+        $unknownType = fopen('php://memory', 'r+');
+        fclose($unknownType);
+        
         return [
             ['String'],
             [42],
@@ -27,7 +30,8 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
             [null],
             [new \stdClass()],
             [[1, new \stdClass(), 3]],
-            [fopen('php://memory', 'r+')]
+            [fopen('php://memory', 'r+')],
+            [$unknownType],
         ];
     }
 
@@ -122,5 +126,21 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
             $index = array_search($key, $dictionaryKeys, true);
             $this->assertSame($index, $this->dictionary->get($key));
         }
+    }
+
+    public function testThatDictionaryReturnsAllValuesOfKeyTypes()
+    {
+        $dictionaryKeys = array_map('reset', $this->dictionaryKeyValues());
+        
+        $values = [];
+        foreach ($dictionaryKeys as $index => $key) {
+            $this->dictionary->set($key, $index);
+            $values[] = $index;
+        }
+        
+        $dictionaryValues = $this->dictionary->values();
+        sort($values);
+        sort($dictionaryValues);
+        $this->assertSame($values, $dictionaryValues);
     }
 }

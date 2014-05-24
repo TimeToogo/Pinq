@@ -41,6 +41,23 @@ class Dictionary implements \IteratorAggregate
             'unknown type' => []
         ];
     }
+    
+    private static function arrayIdentityHash(array $array)
+    {
+        array_walk_recursive($array, function (&$value) {
+            switch (gettype($value)) {
+                case 'object':
+                    $value = (object)['o' => spl_object_hash($value)];
+                    break;
+                
+                case 'resource':
+                    $value = (object)['o' => (string)$value];
+                    break;
+            }
+        });
+        
+        return md5(serialize($array));
+    }
 
     public function get($key)
     {
@@ -64,19 +81,15 @@ class Dictionary implements \IteratorAggregate
                 return isset($typeStorage[$stringKey]) ? $typeStorage[$stringKey] : null;
 
             case 'resource':
+            case 'unknown type':
                 $stringKey = (string)$key;
 
                 return isset($typeStorage[$stringKey][1]) ? $typeStorage[$stringKey][1] : null;
 
             case 'array':
-            case 'unknown type':
-                foreach ($typeStorage as $keyValuePair) {
-                    if ($keyValuePair[0] === $key) {
-                        return $keyValuePair[1];
-                    }
-                }
-
-                return null;
+                $identityKey = self::arrayIdentityHash($key);
+                
+                return isset($typeStorage[$identityKey]) ? $typeStorage[$identityKey][1] : null;
         }
     }
 
@@ -98,17 +111,11 @@ class Dictionary implements \IteratorAggregate
 
             case 'double':
             case 'resource':
+            case 'unknown type':
                 return isset($typeStorage[(string)$key]);
 
             case 'array':
-            case 'unknown type':
-                foreach ($typeStorage as $keyValuePair) {
-                    if ($keyValuePair[0] === $key) {
-                        return true;
-                    }
-                }
-
-                return false;
+                return isset($typeStorage[self::arrayIdentityHash($key)]);
         }
     }
 
@@ -134,12 +141,12 @@ class Dictionary implements \IteratorAggregate
                 break;
 
             case 'resource':
+            case 'unknown type':
                 $typeStorage[(string)$key] = [$key, $value];
                 break;
 
             case 'array':
-            case 'unknown type':
-                $typeStorage[] = [$key, $value];
+                $typeStorage[self::arrayIdentityHash($key)] = [$key, $value];
                 break;
         }
     }
@@ -166,6 +173,7 @@ class Dictionary implements \IteratorAggregate
 
             case 'double':
             case 'resource':
+            case 'unknown type':
                 unset($typeStorage[(string)$key]);
                 break;
 
@@ -174,14 +182,7 @@ class Dictionary implements \IteratorAggregate
                 break;
 
             case 'array':
-            case 'unknown type':
-                foreach ($typeStorage as $storageKey => $keyValuePair) {
-                    if ($keyValuePair[0] === $key) {
-                        unset($typeStorage[$storageKey]);
-                        break;
-                    }
-                }
-
+                unset($typeStorage[self::arrayIdentityHash($key)]);
                 break;
         }
     }
@@ -192,10 +193,43 @@ class Dictionary implements \IteratorAggregate
             $this->remove($key);
         }
     }
+    
+    /**
+     * Returns all the values in the dictionary as an array.
+     *
+     * @return array
+     */
+    public function values()
+    {
+        $values = [];
+        
+        //Stored as plain value
+        foreach(['string', 'integer', 'boolean', 'double'] as $storageKey) {
+            foreach($this->storage[$storageKey] as $value) {
+                $values[] = $value;
+            }
+        }
+        
+        $objectKeyStorage = $this->storage['object'];
+        foreach($objectKeyStorage as $object) {
+            $values[] = $objectKeyStorage[$object];
+        }
+        
+        $values[] = $this->storage['NULL'];
+        
+        //Stored as tuple
+        foreach(['resource', 'unknown type', 'array'] as $storageKey) {
+            foreach($this->storage[$storageKey] as $value) {
+                $values[] = $value[1];
+            }
+        }
+        
+        return $values;
+    }
 
     /**
      * This will return an iterator for all the keys in the dictionary.
-     * ->Get($Key) can be called to retrieve the value.
+     * ->get($key) can be called to retrieve the value.
      * This is due to PHP limiting the types of values allowed to be returned
      * as an iterator key.
      *
@@ -203,6 +237,7 @@ class Dictionary implements \IteratorAggregate
      */
     public function getIterator()
     {
+        $firstIndex = function ($value) { return $value[0]; };
         return new \ArrayIterator(array_values(array_merge(
                 array_map('strval', array_keys($this->storage['string'])),
                 array_keys($this->storage['integer']),
@@ -210,8 +245,8 @@ class Dictionary implements \IteratorAggregate
                 array_map('doubleval', array_keys($this->storage['double'])),
                 iterator_to_array($this->storage['object'], false),
                 array_key_exists('NULL', $this->storage) ? [null] : [],
-                array_map('reset', $this->storage['resource']),
-                array_map('reset', $this->storage['array']),
-                array_map('reset', $this->storage['unknown type']))));
+                array_map($firstIndex, $this->storage['resource']),
+                array_map($firstIndex, $this->storage['array']),
+                array_map($firstIndex, $this->storage['unknown type']))));
     }
 }
