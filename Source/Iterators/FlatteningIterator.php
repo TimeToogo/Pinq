@@ -57,7 +57,8 @@ class FlatteningIterator extends IteratorIterator
 
     private function loadCurrentIterator()
     {
-        $this->currentIterator = \Pinq\Utilities::toIterator(parent::current());
+        $this->currentIterator = 
+                parent::valid() ? \Pinq\Utilities::toIterator(parent::current()) : new \EmptyIterator();
         $this->currentIterator->rewind();
     }
 

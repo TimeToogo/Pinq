@@ -18,6 +18,14 @@ class IndexByTest extends TraversableTest
     {
         $this->assertThatExecutionIsDeferred([$traversable, 'indexBy']);
     }
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
+    {
+        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'indexBy'], $data);
+    }
 
     /**
      * @dataProvider assocOneToTen

@@ -23,7 +23,7 @@ class OrderedIterator extends LazyIterator
     public function __construct(\Traversable $iterator, callable $orderByFunction, $isAscending)
     {
         parent::__construct($iterator);
-        $this->orderByFunctions[] = $orderByFunction;
+        $this->orderByFunctions[] = Utilities\Functions::allowExcessiveArguments($orderByFunction);
         $this->isAscendingArray[] = $isAscending;
     }
 
@@ -36,7 +36,7 @@ class OrderedIterator extends LazyIterator
         $copy = new self($this->iterator, $orderByFunction, $isAscending);
         $copy->orderByFunctions = $this->orderByFunctions;
         $copy->isAscendingArray = $this->isAscendingArray;
-        $copy->orderByFunctions[] = $orderByFunction;
+        $copy->orderByFunctions[] = Utilities\Functions::allowExcessiveArguments($orderByFunction);
         $copy->isAscendingArray[] = $isAscending;
 
         return $copy;
@@ -47,10 +47,13 @@ class OrderedIterator extends LazyIterator
         $array = \Pinq\Utilities::toArray($innerIterator);
         $multisortArguments = [];
 
-        foreach ($this->orderByFunctions as $key => $orderFunction) {
-            $orderColumnValues = array_map($orderFunction, $array);
+        foreach ($this->orderByFunctions as $functionKey => $orderFunction) {
+            $orderColumnValues = [];
+            foreach($array as $key => $value) {
+                $orderColumnValues[$key] = $orderFunction($value, $key);
+            }
             $multisortArguments[] =& $orderColumnValues;
-            $multisortArguments[] = $this->isAscendingArray[$key] ? SORT_ASC : SORT_DESC;
+            $multisortArguments[] = $this->isAscendingArray[$functionKey] ? SORT_ASC : SORT_DESC;
             $multisortArguments[] = SORT_REGULAR;
             unset($orderColumnValues);
         }

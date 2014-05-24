@@ -19,6 +19,15 @@ class OrderByTest extends TraversableTest
         $this->assertThatExecutionIsDeferred([$traversable, 'orderByAscending']);
         $this->assertThatExecutionIsDeferred([$traversable, 'orderByDescending']);
     }
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
+    {
+        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'orderByAscending'], $data);
+        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'orderByDescending'], $data);
+    }
 
     /**
      * @dataProvider everything
@@ -36,7 +45,7 @@ class OrderByTest extends TraversableTest
     public function testThatOrderByNegatingNumbersIsEquivalentToArrayReverse(\Pinq\ITraversable $numbers, array $data)
     {
         $reversedNumbers = $numbers->orderByAscending(function ($i) { return -$i; });
-
+        
         $this->assertMatches($reversedNumbers, array_reverse($data, true));
     }
 
@@ -92,7 +101,7 @@ class OrderByTest extends TraversableTest
     {
         $orderedNames = $names
                 ->orderByAscending(function ($i) { return $i[0]; })
-                ->thenByAscending('strlen');
+                ->thenByAscending(function ($i) { return strlen($i); });
 
         $this->assertMatchesValues(
                 $orderedNames,
@@ -114,7 +123,7 @@ class OrderByTest extends TraversableTest
     {
         $orderedNames = $names
                 ->orderByDescending(function ($i) { return $i[0]; })
-                ->thenByDescending('strlen');
+                ->thenByDescending(function ($i) { return strlen($i); });
 
         $this->assertMatchesValues(
                 $orderedNames,

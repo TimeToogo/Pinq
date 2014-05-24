@@ -22,6 +22,14 @@ class GroupByTest extends TraversableTest
     /**
      * @dataProvider everything
      */
+    public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
+    {
+        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'groupBy'], $data);
+    }
+
+    /**
+     * @dataProvider everything
+     */
     public function testThatGroupByElementReturnsITraversables(\Pinq\ITraversable $traversable, array $data)
     {
         $groups =

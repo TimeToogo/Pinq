@@ -306,7 +306,13 @@ class Traversable implements \Pinq\ITraversable, \Serializable
         if ($function === null) {
             return $this->asArray();
         } else {
-            return array_map($function, $this->asArray());
+            $mappedArray = [];
+            $function = Iterators\Utilities\Functions::allowExcessiveArguments($function);
+            foreach($this->asArray() as $key => $value) {
+                $mappedArray[$key] = $function($value, $key);
+            }
+            
+            return $mappedArray;
         }
     }
 

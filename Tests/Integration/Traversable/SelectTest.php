@@ -18,6 +18,14 @@ class SelectTest extends TraversableTest
     {
         $this->assertThatExecutionIsDeferred([$traversable, 'select']);
     }
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
+    {
+        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'select'], $data);
+    }
 
     /**
      * @dataProvider assocOneToTen

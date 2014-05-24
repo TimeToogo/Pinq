@@ -18,18 +18,25 @@ class SelectManyTest extends TraversableTest
     {
         $this->assertThatExecutionIsDeferred([$traversable, 'selectMany']);
     }
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
+    {
+        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'selectMany'], $data, []);
+    }
 
     /**
      * @dataProvider tenRandomStrings
      */
     public function testThatSelectManyFlattensCorrectlyAndIgnoresKeys(\Pinq\ITraversable $values, array $data)
     {
-        $toCharacters = 'str_split';
-        $characters = $values->selectMany($toCharacters);
+        $characters = $values->selectMany(function ($i) { return str_split($i); });
 
         $this->assertMatches(
                 $characters,
-                array_values(self::flattenArrays(array_map($toCharacters, $data))));
+                array_values(self::flattenArrays(array_map('str_split', $data))));
     }
 
     private static function flattenArrays(array $arrays)

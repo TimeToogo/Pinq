@@ -16,12 +16,16 @@ abstract class CollectionTest extends \Pinq\Tests\Integration\DataTest
                 function () use ($exception) {
                     throw $exception;
                 };
-
+                
+        $thrown = false;
         try {
             $collectionOperation($thowingFunction);
         } catch (CustomException $thrownException) {
+            $thrown = true;
             $this->assertSame($exception, $thrownException);
         }
+        
+        $this->assertTrue($thrown, 'Should have thrown an exeption');
     }
 
     final protected function implementationsFor(array $data)

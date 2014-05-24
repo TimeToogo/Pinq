@@ -4,7 +4,7 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class AppendTest extends TraversableTest
 {
-    protected function _tesstReturnsNewInstance(\Pinq\ITraversable $traversable)
+    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
     {
         return $traversable->append([]);
     }
@@ -15,7 +15,7 @@ class AppendTest extends TraversableTest
     public function testThatAppendWithSelfReturnsMergedDataWithReindexedKeys(\Pinq\ITraversable $traversable, array $data)
     {
         $appended = $traversable->append($traversable);
-
+        
         $this->assertMatches(
                 $appended,
                 array_merge(array_values($data), array_values($data)));

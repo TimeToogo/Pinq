@@ -31,8 +31,8 @@ abstract class EqualityJoinIteratorBase extends JoinIteratorBase
     public function __construct(\Traversable $outerIterator, \Traversable $innerIterator, callable $outerKeyFunction, callable $innerKeyFunction, callable $joiningFunction)
     {
         parent::__construct($outerIterator, $innerIterator, $joiningFunction);
-        $this->outerKeyFunction = $outerKeyFunction;
-        $this->innerKeyFunction = $innerKeyFunction;
+        $this->outerKeyFunction = Utilities\Functions::allowExcessiveArguments($outerKeyFunction);
+        $this->innerKeyFunction = Utilities\Functions::allowExcessiveArguments($innerKeyFunction);
     }
 
     final protected function initialize()
@@ -43,13 +43,13 @@ abstract class EqualityJoinIteratorBase extends JoinIteratorBase
                         $this->innerIterator);
     }
 
-    final protected function getInnerGroupIterator($outerValue)
+    final protected function getInnerGroupIterator($outerValue, $outerKey)
     {
-        $outerKeyFunction = $this->outerKeyFunction;
-        $outerKey = $outerKeyFunction($outerValue);
+        $outerEqualityValueFunction = $this->outerKeyFunction;
+        $outerEqualityValue = $outerEqualityValueFunction($outerValue, $outerKey);
 
-        if ($this->innerKeyLookup->contains($outerKey)) {
-            $currentInnerGroup = $this->innerKeyLookup->get($outerKey);
+        if ($this->innerKeyLookup->contains($outerEqualityValue)) {
+            $currentInnerGroup = $this->innerKeyLookup->get($outerEqualityValue);
         } else {
             $currentInnerGroup = [];
         }

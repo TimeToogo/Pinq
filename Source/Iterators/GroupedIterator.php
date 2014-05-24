@@ -17,7 +17,7 @@ class GroupedIterator extends LazyIterator
     public function __construct(\Traversable $iterator, callable $groupByFunction)
     {
         parent::__construct($iterator);
-        $this->groupByFunctions[] = $groupByFunction;
+        $this->groupByFunctions[] = Utilities\Functions::allowExcessiveArguments($groupByFunction);
     }
 
     /**
@@ -27,7 +27,7 @@ class GroupedIterator extends LazyIterator
     {
         $copy = new self($this->iterator, $groupByFunctions);
         $copy->groupByFunctions = $this->groupByFunctions;
-        $copy->groupByFunctions[] = $groupByFunctions;
+        $copy->groupByFunctions[] = Utilities\Functions::allowExcessiveArguments($groupByFunctions);
 
         return $copy;
     }
@@ -37,10 +37,14 @@ class GroupedIterator extends LazyIterator
         if (count($this->groupByFunctions) === 1) {
             $groupByFunction = $this->groupByFunctions[0];
         } else {
-            $groupByFunction = function ($value) {
-                return array_map(function ($i) use ($value) {
-                    return $i($value);
-                }, $this->groupByFunctions);
+            $groupByFunctions = $this->groupByFunctions;
+            $groupByFunction = function ($value, $key) use ($groupByFunctions) {
+                $groupByValue = [];
+                foreach($groupByFunctions as $key => $groupByFunction) {
+                    $groupByValue[$key] = $groupByFunction($value, $key);
+                }
+                
+                return $groupByValue;
             };
         }
 

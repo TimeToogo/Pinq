@@ -29,7 +29,7 @@ abstract class OperationIterator extends IteratorIterator
     final public function valid()
     {
         while (parent::valid()) {
-            if ($this->setFilter(parent::current(), $this->otherValues)) {
+            if ($this->setFilter($this->current(), $this->otherValues)) {
                 return true;
             }
 

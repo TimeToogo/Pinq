@@ -10,7 +10,7 @@ class RemoveWhereTest extends CollectionTest
     public function testThatExecutionIsNotDeferred(\Pinq\ICollection $collection, array $data)
     {
         if (count($data) > 0) {
-            $this->assertThatExecutionIsNotDeferred([$collection, 'RemoveWhere']);
+            $this->assertThatExecutionIsNotDeferred([$collection, 'removeWhere']);
         }
     }
 
@@ -20,14 +20,14 @@ class RemoveWhereTest extends CollectionTest
     public function testThatRemoveWhereRemovesItemsWhereTheFunctionReturnsTrueAndPreservesKeys(\Pinq\ICollection $numbers, array $data)
     {
         $predicate =
-                function ($i) {
+                function ($i, $k) {
                     return $i % 2 === 0;
                 };
 
         $numbers->removeWhere($predicate);
 
         foreach ($data as $key => $value) {
-            if ($predicate($value)) {
+            if ($predicate($value, $key)) {
                 unset($data[$key]);
             }
         }

@@ -24,7 +24,7 @@ abstract class CustomJoinIteratorBase extends JoinIteratorBase
     public function __construct(\Traversable $outerIterator, \Traversable $innerIterator, callable $joinOnFunction, callable $joiningFunction)
     {
         parent::__construct($outerIterator, $innerIterator, $joiningFunction);
-        $this->joinOnFunction = $joinOnFunction;
+        $this->joinOnFunction = Utilities\Functions::allowExcessiveArguments($joinOnFunction);
     }
 
     final protected function initialize()
@@ -32,11 +32,11 @@ abstract class CustomJoinIteratorBase extends JoinIteratorBase
         $this->innerValues = \Pinq\Utilities::toArray($this->innerIterator);
     }
 
-    final protected function getInnerGroupIterator($outerValue)
+    final protected function getInnerGroupIterator($outerValue, $outerKey)
     {
         $joinOnFunction = $this->joinOnFunction;
-        $innerValueFilterFunction = function ($innerValue) use ($outerValue, $joinOnFunction) {
-            return $joinOnFunction($outerValue, $innerValue);
+        $innerValueFilterFunction = function ($innerValue, $innerKey) use ($outerValue, $outerKey, $joinOnFunction) {
+            return $joinOnFunction($outerValue, $innerValue, $outerKey, $innerKey);
         };
 
         return $this->getInnerGroupValuesIterator($innerValueFilterFunction);

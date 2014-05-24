@@ -26,7 +26,10 @@ class Lookup
         $groupKeys = [];
         $lookup = new self();
         $values = \Pinq\Utilities::toArray($values);
-        $groupByValues = array_map($groupingFunction, $values);
+        $groupByValues = [];
+        foreach ($values as $key => $value) {
+            $groupByValues[$key] = $groupingFunction($value, $key);
+        }
 
         foreach ($groupByValues as $valueKey => $groupKey) {
             if ($lookup->dictionary->contains($groupKey)) {

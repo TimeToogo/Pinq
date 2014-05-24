@@ -8,6 +8,7 @@ class GroupJoinTest extends TraversableTest
     {
         return $traversable->groupJoin([])->on(function ($i) { })->to(function ($k) { });
     }
+    
 
     /**
      * @dataProvider everything
@@ -21,6 +22,44 @@ class GroupJoinTest extends TraversableTest
         $this->assertThatExecutionIsDeferred(function (callable $function) use ($traversable) {
             return $traversable->groupJoin([])->onEquality($function, $function)->to($function);
         });
+    }
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testCalledWithCorrectValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable
+                ->groupJoin([0 => 0])
+                ->on(function ($outer, $inner, $outerKey, $innerKey) use ($data) {
+                    $this->assertSame($data[$outerKey], $outer);
+                    $this->assertSame($inner, 0);
+                    $this->assertSame($innerKey, 0);
+                    return true;
+                })->to(function ($outer, \Pinq\ITraversable $group, $outerKey, $groupKey) use ($data) {
+                    $this->assertSame($data[$outerKey], $outer);
+                    $this->assertSame($group->asArray(), [0 => 0]);
+                    $this->assertSame($groupKey, 0);
+                })
+                ->asArray();
+        
+        $traversable
+                ->groupJoin([0 => 0])
+                ->onEquality(
+                function ($outer, $outerKey) use ($data) {
+                    $this->assertSame($data[$outerKey], $outer);
+                    return 1;
+                },
+                function ($inner, $innerKey) {
+                    $this->assertSame($inner, 0);
+                    $this->assertSame($innerKey, 0);
+                    return 1;
+                })->to(function ($outer, \Pinq\ITraversable $group, $outerKey, $groupKey) use ($data) {
+                    $this->assertSame($data[$outerKey], $outer);
+                    $this->assertSame($group->asArray(), [0 => 0]);
+                    $this->assertSame($groupKey, 0);
+                })
+                ->asArray();
     }
 
     /**

@@ -11,7 +11,8 @@ class CustomGroupJoinIterator extends CustomJoinIteratorBase
 {
     protected function getInnerGroupValuesIterator(callable $innerValueFilterFunction)
     {
-        $groupTraversable = new \Pinq\Traversable(array_filter($this->innerValues, $innerValueFilterFunction));
+        $groupTraversable = new \Pinq\Traversable(
+                new FilterIterator(new \ArrayIterator($this->innerValues), $innerValueFilterFunction));
 
         return new \ArrayIterator([$groupTraversable]);
     }

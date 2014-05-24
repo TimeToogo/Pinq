@@ -33,6 +33,20 @@ abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
             $this->assertSame($exception, $thrownException);
         }
     }
+    
+    final protected function assertThatCalledWithValueAndKeyParameters(callable $traversableQuery, array $data, $returnValue = null)
+    {
+        reset($data);
+        $traversable = $traversableQuery(function ($value, $key) use (&$data, $returnValue) {
+            $this->assertSame(current($data), $value, 'value must match');
+            $this->assertSame(key($data), $key, 'key must match');
+            next($data);
+            
+            return $returnValue;
+        });
+        
+        $traversable->asArray();
+    }
 
     /**
      * @dataProvider everything

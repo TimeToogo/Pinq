@@ -17,7 +17,7 @@ class FilterIterator extends IteratorIterator
     public function __construct(\Traversable $iterator, callable $filter)
     {
         parent::__construct($iterator);
-        $this->filter = $filter;
+        $this->filter = Utilities\Functions::allowExcessiveArguments($filter);
     }
 
     public function valid()
@@ -25,9 +25,7 @@ class FilterIterator extends IteratorIterator
         $filter = $this->filter;
 
         while (parent::valid()) {
-            $currentValue = self::current();
-
-            if ($filter($currentValue)) {
+            if ($filter($this->current(), $this->key())) {
                 return true;
             }
 

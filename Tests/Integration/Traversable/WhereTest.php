@@ -11,6 +11,14 @@ class WhereTest extends TraversableTest
     {
         $this->assertThatExecutionIsDeferred([$traversable, 'where']);
     }
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
+    {
+        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'where'], $data);
+    }
 
     /**
      * @dataProvider assocOneToTen

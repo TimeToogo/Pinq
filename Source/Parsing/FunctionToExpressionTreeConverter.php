@@ -65,9 +65,6 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
             $this->cache->save($fullFunctionHash, $expressionTree);
         }
 
-        //Set the compiled function with the original to prevent having to eval
-        $expressionTree->setCompiledFunction($function);
-
         if ($expressionTree->hasUnresolvedVariables()) {
             /*
              * Simplify and resolve any remaining expressions that could not be resolved due
@@ -79,13 +76,20 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
                     []);
         }
 
+        //Set the compiled function with the original to prevent having to eval
+        $expressionTree->setCompiledFunction($function);
+
         return $expressionTree;
     }
 
     protected function getKnownVariables(\ReflectionFunctionAbstract $reflection, callable $function)
     {
         //ReflectionFunction::getStaticVariables() returns the used variables for closures
-        $knownVariables = $reflection->getStaticVariables();
+        $knownVariables = [];
+        //Foreach to remove references
+        foreach($reflection->getStaticVariables() as $name => $value) {
+            $knownVariables[$name] = $value;
+        }
 
         //HHVM Compatibility: hhvm does not support ReflectionFunctionAbstract::getClosureThis
         if ($function instanceof \Closure && !defined('HHVM_VERSION')) {
@@ -114,35 +118,45 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
      */
     final protected function getFunctionExpressionTree(\ReflectionFunctionAbstract $reflection, callable $function = null)
     {
-        $parameterExpressions = $this->getParameterExpressions($reflection);
-        $bodyExpressions = $reflection->isUserDefined() ? $this->parser->parse($reflection) : $this->internalFunctionExpressions($reflection);
-
+        if($reflection->isUserDefined()) {
+            $parameterExpressions = $this->getParameterExpressions($reflection);
+            $bodyExpressions = $this->parser->parse($reflection);
+        } else {
+            $parameterExpressions = [];
+            $bodyExpressions = $this->internalFunctionExpressions($reflection, $parameterExpressions);
+        }
+        
         return new \Pinq\FunctionExpressionTree(
                 $function,
                 $parameterExpressions,
                 $bodyExpressions);
     }
 
-    private function internalFunctionExpressions(\ReflectionFunctionAbstract $reflection)
+    private function internalFunctionExpressions(\ReflectionFunctionAbstract $reflection, array &$parameterExpressions = [])
     {
         $hasUnavailableDefaultValueOrIsVariadic = false;
-        $argumentExpressions = [];
+        $parameterValueExpressions = [];
         
-        foreach ($reflection->getParameters() as $parameter) {
-            if (($parameter->isOptional() && !$parameter->isDefaultValueAvailable())
-                   || self::isVariadic($parameter)) {
-                $hasUnavailableDefaultValueOrIsVariadic = true;
-                break;
-            }
+        if(Reflection::isVariadic($reflection)) {
+            $hasUnavailableDefaultValueOrIsVariadic = true;
+        } else {
+            foreach ($reflection->getParameters() as $parameter) {
+                if (($parameter->isOptional() && !$parameter->isDefaultValueAvailable())) {
+                    $hasUnavailableDefaultValueOrIsVariadic = true;
+                    break;
+                }
 
-            $argumentExpressions[] = O\Expression::variable(O\Expression::value($parameter->getName()));
+                $parameterExpressions[] = $this->getParameterExpression($parameter);
+                $parameterValueExpressions[] = O\Expression::variable(O\Expression::value($parameter->getName()));
+            }
         }
 
         if (!$hasUnavailableDefaultValueOrIsVariadic) {
             return [O\Expression::returnExpression(O\Expression::functionCall(
                     O\Expression::value($reflection->getName()),
-                    $argumentExpressions))];
+                    $parameterValueExpressions))];
         } else {
+            $parameterExpressions = [];
             return [O\Expression::returnExpression(O\Expression::functionCall(
                     O\Expression::value('call_user_func_array'),
                     [O\Expression::value($reflection->getName()), O\Expression::functionCall(O\Expression::value('func_get_args'))]))];
@@ -154,24 +168,12 @@ class FunctionToExpressionTreeConverter implements IFunctionToExpressionTreeConv
         $parameterExpressions = [];
 
         foreach ($reflection->getParameters() as $parameter) {
-            //Ignore variadic parameter
-            if(!self::isVariadic($parameter)) {
-                $parameterExpressions[] = $this->getParameterExpression($parameter);
-            }
+            $parameterExpressions[] = $this->getParameterExpression($parameter);
         }
 
         return $parameterExpressions;
     }
     
-    private static $supportsVariadicParameters = null;
-    private static function isVariadic(\ReflectionParameter $parameter)
-    {
-        if(self::$supportsVariadicParameters === null) {
-            self::$supportsVariadicParameters = method_exists('\ReflectionParameter', 'isVariadic');
-        }
-        
-        return $parameter->getName() === '...' || (self::$supportsVariadicParameters && $parameter->isVariadic());
-    }
 
     private function getParameterExpression(\ReflectionParameter $parameter)
     {

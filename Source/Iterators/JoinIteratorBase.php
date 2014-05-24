@@ -35,6 +35,11 @@ abstract class JoinIteratorBase implements \Iterator
     private $currentOuterValue = null;
 
     /**
+     * @var mixed
+     */
+    private $currentOuterKey = null;
+
+    /**
      * @var \Iterator
      */
     private $currentInnerGroupIterator;
@@ -48,7 +53,7 @@ abstract class JoinIteratorBase implements \Iterator
     {
         $this->outerIterator = \Pinq\Utilities::toIterator($outerIterator);
         $this->innerIterator = \Pinq\Utilities::toIterator($innerIterator);
-        $this->joiningFunction = $joiningFunction;
+        $this->joiningFunction = Utilities\Functions::allowExcessiveArguments($joiningFunction);
     }
 
     final public function key()
@@ -60,7 +65,11 @@ abstract class JoinIteratorBase implements \Iterator
     {
         $joiningFunction = $this->joiningFunction;
 
-        return $joiningFunction($this->currentOuterValue, $this->currentInnerGroupIterator->current());
+        return $joiningFunction(
+                $this->currentOuterValue, 
+                $this->currentInnerGroupIterator->current(),
+                $this->currentOuterKey,
+                $this->currentInnerGroupIterator->key());
     }
 
     final public function next()
@@ -77,7 +86,8 @@ abstract class JoinIteratorBase implements \Iterator
             }
 
             $this->currentOuterValue = $this->outerIterator->current();
-            $this->currentInnerGroupIterator = $this->getInnerGroupIterator($this->currentOuterValue);
+            $this->currentOuterKey = $this->outerIterator->key();
+            $this->currentInnerGroupIterator = $this->getInnerGroupIterator($this->currentOuterValue, $this->currentOuterKey);
             $this->outerIterator->next();
         }
 
@@ -87,7 +97,7 @@ abstract class JoinIteratorBase implements \Iterator
     /**
      * @return \Iterator
      */
-    abstract protected function getInnerGroupIterator($outerValue);
+    abstract protected function getInnerGroupIterator($outerValue, $outerKey);
 
     public function rewind()
     {

@@ -34,4 +34,26 @@ final class Reflection
             return new \ReflectionFunction($name);
         }
     }
+    
+    private static $supportsVariadicParameters = null;
+    
+    /**
+     * @param \ReflectionFunction $function
+     * @return boolean
+     */
+    public static function isVariadic(\ReflectionFunction $function)
+    {
+        if(self::$supportsVariadicParameters === null) {
+            self::$supportsVariadicParameters = method_exists('\ReflectionParameter', 'isVariadic');
+        }
+        
+        foreach($function->getParameters() as $parameter) {
+            if($parameter->getName() === '...' || 
+                    (self::$supportsVariadicParameters && $parameter->isVariadic())) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }

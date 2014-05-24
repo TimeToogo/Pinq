@@ -22,21 +22,23 @@ class ProjectionIterator extends IteratorIterator
     public function __construct(\Traversable $iterator, callable $keyProjectionFunction = null, callable $valueProjectionFunction = null)
     {
         parent::__construct($iterator);
-        $this->keyProjectionFunction = $keyProjectionFunction;
-        $this->valueProjectionFunction = $valueProjectionFunction;
+        $this->keyProjectionFunction = $keyProjectionFunction === null ? 
+                null : Utilities\Functions::allowExcessiveArguments($keyProjectionFunction);
+        $this->valueProjectionFunction = $valueProjectionFunction === null ?
+                null : Utilities\Functions::allowExcessiveArguments($valueProjectionFunction);
     }
 
     public function key()
     {
         $function = $this->keyProjectionFunction;
 
-        return $function === null ? parent::key() : $function(parent::current());
+        return $function === null ? parent::key() : $function(parent::current(), parent::key());
     }
 
     public function current()
     {
         $function = $this->valueProjectionFunction;
 
-        return $function === null ? parent::current() : $function(parent::current());
+        return $function === null ? parent::current() : $function(parent::current(), parent::key());
     }
 }
