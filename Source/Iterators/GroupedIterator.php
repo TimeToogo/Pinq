@@ -44,7 +44,7 @@ class GroupedIterator extends LazyIterator
             $groupByFunction = $this->groupByFunctions[0];
         } else {
             $groupByFunctions = $this->groupByFunctions;
-            $groupByFunction = function ($value, $key) use ($groupByFunctions) {
+            $groupByFunction = function ($value) use ($groupByFunctions) {
                 $groupByValue = [];
                 foreach($groupByFunctions as $key => $groupByFunction) {
                     $groupByValue[$key] = $groupByFunction($value, $key);
