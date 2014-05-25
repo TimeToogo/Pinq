@@ -61,13 +61,10 @@ class GroupedIterator extends LazyIterator
                         $innerIterator,
                         $groupKeys);
         
-        $groups = [];
-        
         $traversableFactory = $this->traversableFactory;
-        foreach ($groupKeys as $groupKey) {
-            $groups[] = $traversableFactory($groupLookup->get($groupKey));
-        }
-
-        return new \ArrayIterator($groups);
+        return new ProjectionIterator(
+                $groupLookup->getIterator(), 
+                null, 
+                function ($group) use ($traversableFactory) { return $traversableFactory($group); });
     }
 }

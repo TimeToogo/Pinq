@@ -54,13 +54,34 @@ class GroupByTest extends TraversableTest
     public function testThatGroupByMultipleTest(\Pinq\ITraversable $traversable, array $data)
     {
         $groups = $traversable
-                ->groupBy(function ($i) { return [$i % 2 === 0, $i % 3 === 0]; })->asArray();
+                ->groupBy(function ($i) { return [$i % 2 === 0, $i % 3 === 0]; })
+                ->asArray();
 
         $this->assertCount(4, $groups);
         $this->assertMatchesValues($groups[0], [1, 5, 7]);
         $this->assertMatchesValues($groups[1], [2, 4, 8, 10]);
         $this->assertMatchesValues($groups[2], [3, 9]);
         $this->assertMatchesValues($groups[3], [6]);
+    }
+    
+    public function names()
+    {
+        return $this->implementationsFor(['andrew', 'sandy', 'tucker', 'tom', 'sandra', 'daniel']);
+    }
+    
+    /**
+     * @dataProvider names
+     */
+    public function testThatGroupByImplicitlyIndexesTheGroupsByTheirKey(\Pinq\ITraversable $traversable, array $data)
+    {
+        $groups = $traversable
+                ->groupBy(function ($i) { return $i[0]; })->asArray();
+
+        $this->assertCount(4, $groups);
+        $this->assertMatchesValues($groups['a'], ['andrew']);
+        $this->assertMatchesValues($groups['s'], ['sandy', 'sandra']);
+        $this->assertMatchesValues($groups['t'], ['tucker', 'tom']);
+        $this->assertMatchesValues($groups['d'], ['daniel']);
     }
 
     /**

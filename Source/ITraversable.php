@@ -19,7 +19,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
 
     /**
      * Returns the values as an array.
-     * Only valid array keys (string or int) will be used,
+     * Only valid array scalar keys (or null) will be used, 
      * all others will be reindexed numerically.
      *
      * @return array
@@ -140,6 +140,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     /**
      * Groups values according the supplied function. (Uses strict equality '===')
      * The values will be grouped into instances of the traversable.
+     * This implicitly index each group by the group key returned from the supplied function.
      *
      * @param  callable   $function The grouping function
      * @return ITraversable

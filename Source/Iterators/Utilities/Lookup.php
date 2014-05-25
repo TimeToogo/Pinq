@@ -7,7 +7,7 @@ namespace Pinq\Iterators\Utilities;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class Lookup
+class Lookup implements \IteratorAggregate
 {
     /**
      * The dictionary containing the keyed groups
@@ -80,6 +80,11 @@ class Lookup
 
     public function getIterator()
     {
-        return $this->dictionary->getIterator();
+        $dictionary = $this->dictionary;
+        
+        return new \Pinq\Iterators\ProjectionIterator(
+                $dictionary->getIterator(), 
+                function ($key) { return $key; }, 
+                function ($key) use($dictionary) { return $dictionary->get($key); });
     }
 }

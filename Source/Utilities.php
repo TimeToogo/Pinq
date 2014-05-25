@@ -2,8 +2,6 @@
 
 namespace Pinq;
 
-DEFINE('IS_PHP_55', version_compare(PHP_VERSION, '5.5', '>='));
-
 /**
  * General utility class providing common and misc behaviour
  *
@@ -39,7 +37,7 @@ final class Utilities
     }
 
     /**
-     * Returns the iterator as an array
+     * Returns the iterator as an array.
      *
      * @param \Traversable $iterator The iterator value
      * @return array
@@ -51,20 +49,18 @@ final class Utilities
         }
 
         $array = [];
+        $iterator = self::toIterator($iterator);
+        //Does not support returning custom keys
+        $iterator->rewind();
 
-        if (IS_PHP_55) {
-            foreach ($iterator as $key => $value) {
-                $array[$key] = $value;
+        while ($iterator->valid()) {
+            $key = $iterator->key();
+            if($key === null || is_scalar($key)) {
+                $array[$key] = $iterator->current();
+            } else {
+                $array[] = $iterator->current();
             }
-        } else {
-            $iterator = self::toIterator($iterator);
-            //Does not support returning custom keys
-            $iterator->rewind();
-
-            while ($iterator->valid()) {
-                $array[$iterator->key()] = $iterator->current();
-                $iterator->next();
-            }
+            $iterator->next();
         }
 
         return $array;
