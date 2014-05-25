@@ -7,7 +7,7 @@ namespace Pinq;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class Collection extends Traversable implements ICollection
+class Collection extends Traversable implements ICollection, Interfaces\IOrderedCollection
 {
     public function __construct($values = [])
     {

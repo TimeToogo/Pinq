@@ -9,9 +9,26 @@ namespace Pinq\Iterators;
  */
 class CustomGroupJoinIterator extends CustomJoinIteratorBase
 {
+    /**
+     * @var callable
+     */
+    private $traversableFactory;
+    
+    public function __construct(
+            \Traversable $outerIterator, 
+            \Traversable $innerIterator,
+            callable $joinOnFunction,
+            callable $joiningFunction,
+            callable $traversableFactory = null)
+    {
+        parent::__construct($outerIterator, $innerIterator, $joinOnFunction, $joiningFunction);
+        $this->traversableFactory = $traversableFactory ?: \Pinq\Traversable::factory();
+    }
+    
     protected function getInnerGroupValuesIterator(callable $innerValueFilterFunction)
     {
-        $groupTraversable = new \Pinq\Traversable(
+        $traversableFactory = $this->traversableFactory;
+        $groupTraversable = $traversableFactory(
                 new FilterIterator(new \ArrayIterator($this->innerValues), $innerValueFilterFunction));
 
         return new \ArrayIterator([$groupTraversable]);

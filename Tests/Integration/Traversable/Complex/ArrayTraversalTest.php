@@ -79,10 +79,9 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
     public function testGroupMultipleGroupBy(\Pinq\ITraversable $traversable, array $data)
     {
         $joinedLastNames = $traversable
-                ->groupBy(function ($i) { return $i['Sex']; })
-                ->andBy(function ($i) { return floor($i['Age'] / 10); })
-                ->orderByAscending(function (\Pinq\ITraversable $group) { return $group->first()['Age']; })
-                ->thenByAscending(function (\Pinq\ITraversable $group) { return $group->first()['Sex']; })
+                ->groupBy(function ($i) { return ['sex' => $i['Sex'], 'age' => floor($i['Age'] / 10)]; })
+                ->orderByAscending(function (\Pinq\ITraversable $group, $key) { return $group->first()['Age']; })
+                ->thenByAscending(function (\Pinq\ITraversable $group, $key) { return $group->first()['Sex']; })
                 ->select(function (\Pinq\ITraversable $group) {
                     $ageGroup = floor($group->first()['Age'] / 10) * 10 . '+';
                     $sex = $group->first()['Sex'];

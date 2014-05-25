@@ -9,8 +9,8 @@ class ScopeTest extends \Pinq\Tests\PinqTestCase
     public function queryables()
     {
         return [
-            [(new \Pinq\Traversable())->asQueryable()],
-            [(new \Pinq\Traversable())->asRepository()],
+            [(new \Pinq\Providers\Traversable\Provider(new \Pinq\Traversable()))->createQueryable()],
+            [(new \Pinq\Providers\Collection\Provider(new \Pinq\Collection()))->createRepository()],
         ];
     }
     
@@ -19,8 +19,8 @@ class ScopeTest extends \Pinq\Tests\PinqTestCase
      */
     public function testThatSubscopeReturnsTrueForSubscopedQueries(\Pinq\IQueryable $queryable)
     {
-        $scopedQueryable = $queryable->where(function ($i) { return $i > 5; })->asQueryable();
-        $subscopedQueryable = $scopedQueryable->slice(0, 10)->asQueryable();
+        $scopedQueryable = $queryable->where(function ($i) { return $i > 5; });
+        $subscopedQueryable = $scopedQueryable->slice(0, 10);
         
         $this->assertTrue($subscopedQueryable->getScope()->isSubscopeOf($scopedQueryable->getScope()));
     }
@@ -31,8 +31,8 @@ class ScopeTest extends \Pinq\Tests\PinqTestCase
     public function testThatSubscopeReturnsTrueForMatchingSubscopeQueries(\Pinq\IQueryable $queryable)
     {
         $function = function ($i) { return $i > 5; };
-        $scopedQueryable = $queryable->where($function)->asQueryable();
-        $subscopedQueryable = $queryable->where($function)->slice(0, 10)->asQueryable();
+        $scopedQueryable = $queryable->where($function);
+        $subscopedQueryable = $queryable->where($function)->slice(0, 10);
         
         $this->assertTrue($subscopedQueryable->getScope()->isSubscopeOf($scopedQueryable->getScope()));
     }
@@ -43,8 +43,8 @@ class ScopeTest extends \Pinq\Tests\PinqTestCase
     public function testThatSubscopeReturnsFalseForEqualSubscopeQueries(\Pinq\IQueryable $queryable)
     {
         $function = function ($i) { return $i > 5; };
-        $scopedQueryable = $queryable->where($function)->asQueryable();
-        $nonSubscopedQueryable = $queryable->where($function)->asQueryable();
+        $scopedQueryable = $queryable->where($function);
+        $nonSubscopedQueryable = $queryable->where($function);
         
         $this->assertFalse($nonSubscopedQueryable->getScope()->isSubscopeOf($scopedQueryable->getScope()));
     }
@@ -54,8 +54,8 @@ class ScopeTest extends \Pinq\Tests\PinqTestCase
      */
     public function testThatSubscopeReturnsFalseForNonSubscopeQueries(\Pinq\IQueryable $queryable)
     {
-        $scopedQueryable = $queryable->where(function ($i) { return $i > 5; })->asQueryable();
-        $nonSubscopedQueryable = $queryable->where(function ($i) { return $i < 5; })->asQueryable();
+        $scopedQueryable = $queryable->where(function ($i) { return $i > 5; });
+        $nonSubscopedQueryable = $queryable->where(function ($i) { return $i < 5; });
         
         $this->assertFalse($nonSubscopedQueryable->getScope()->isSubscopeOf($scopedQueryable->getScope()));
     }
@@ -66,8 +66,8 @@ class ScopeTest extends \Pinq\Tests\PinqTestCase
      */
     public function testThatGetSubscopeThrowsExceptionForNonSubscopeQueries(\Pinq\IQueryable $queryable)
     {
-        $scopedQueryable = $queryable->where(function ($i) { return $i > 5; })->asQueryable();
-        $nonSubscopedQueryable = $queryable->where(function ($i) { return $i < 5; })->asQueryable();
+        $scopedQueryable = $queryable->where(function ($i) { return $i > 5; });
+        $nonSubscopedQueryable = $queryable->where(function ($i) { return $i < 5; });
         
         $nonSubscopedQueryable->getScope()->getSubscopeOf($scopedQueryable->getScope());
     }
@@ -77,8 +77,8 @@ class ScopeTest extends \Pinq\Tests\PinqTestCase
      */
     public function testThatGetSubscopeReturnsTheCorrectScopeForSubscopedQueries(\Pinq\IQueryable $queryable)
     {
-        $scopedQueryable = $queryable->where(function ($i) { return $i > 5; })->asQueryable();
-        $subscopedQueryable = $scopedQueryable->slice(0, 10)->asQueryable();
+        $scopedQueryable = $queryable->where(function ($i) { return $i > 5; });
+        $subscopedQueryable = $scopedQueryable->slice(0, 10);
         
         $this->assertEquals(
                 $subscopedQueryable->getScope()->getSubscopeOf($scopedQueryable->getScope()),

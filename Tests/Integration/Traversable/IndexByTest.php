@@ -4,7 +4,7 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class IndexByTest extends TraversableTest
 {
-    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
+    protected function _testReturnsNewInstanceOfSameType(\Pinq\ITraversable $traversable)
     {
         return $traversable->indexBy(function () {
 

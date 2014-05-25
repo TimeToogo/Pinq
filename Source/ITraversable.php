@@ -2,6 +2,9 @@
 
 namespace Pinq;
 
+use Pinq\Interfaces\IJoiningOnTraversable;
+use Pinq\Interfaces\IOrderedTraversable;
+
 /**
  * The root interface providing a fluent query API for a range of values.
  *
@@ -15,7 +18,9 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     const ITRAVERSABLE_TYPE = __CLASS__;
 
     /**
-     * Returns the values as an array
+     * Returns the values as an array.
+     * Only valid array keys (string or int) will be used,
+     * all others will be reindexed numerically.
      *
      * @return array
      */
@@ -38,20 +43,6 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * @return ICollection
      */
     public function asCollection();
-
-    /**
-     * Returns the values as a queryable.
-     *
-     * @return IQueryable
-     */
-    public function asQueryable();
-
-    /**
-     * Returns the values as a repository.
-     *
-     * @return IQueryable
-     */
-    public function asRepository();
 
     /**
      * Returns the first value, null if empty
@@ -148,10 +139,10 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
 
     /**
      * Groups values according the supplied function. (Uses strict equality '===')
-     * The values will be grouped into instances of ITraversable.
+     * The values will be grouped into instances of the traversable.
      *
      * @param  callable   $function The grouping function
-     * @return IGroupedTraversable
+     * @return ITraversable
      */
     public function groupBy(callable $function);
 

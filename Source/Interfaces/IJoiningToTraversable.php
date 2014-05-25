@@ -1,10 +1,10 @@
 <?php
 
-namespace Pinq;
+namespace Pinq\Interfaces;
 
 /**
  * This API required to combine the filtered joined values into
- * the the elements of the resulting traversable
+ * the the elements of the resulting ITraversable
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */

@@ -10,7 +10,7 @@ use Pinq\Queries\Operations;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class Repository extends Queryable implements IRepository
+class Repository extends Queryable implements IRepository, Interfaces\IOrderedRepository
 {
     /**
      * The repository provider for the current instance
@@ -24,16 +24,39 @@ class Repository extends Queryable implements IRepository
         parent::__construct($provider, $scope);
     }
 
-    public function asRepository()
+    /**
+     * {@inheritDoc}
+     * @return IRepository
+     */
+    protected function newSegment(Queries\ISegment $segment)
     {
-        return $this;
+        return $this->provider->createRepository($this->scope->append($segment));
     }
+
+    /**
+     * {@inheritDoc}
+     * @return IRepository
+     */
+    protected function updateLastSegment(Queries\ISegment $segment)
+    {
+        return $this->provider->createRepository($this->scope->updateLast($segment));
+    }
+
+    public function join($values)
+    {
+        return new Connectors\JoiningOnRepository($this->provider, $this->scope, $values, false);
+    }
+
+    public function groupJoin($values)
+    {
+        return new Connectors\JoiningOnRepository($this->provider, $this->scope, $values, true);
+    }    
 
     /**
      * Executes the supplied operation query on the underlying repository provider
      *
      * @param Queries\IOperation $operation The operation query to execute
-     * @return voide
+     * @return void
      */
     private function executeQuery(Queries\IOperation $operation)
     {

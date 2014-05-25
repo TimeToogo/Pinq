@@ -10,7 +10,7 @@ class ClearTest extends CollectionTest
     public function testThatClearRemovesAllItems(\Pinq\ICollection $collection, array $data)
     {
         $collection->clear();
-
+        
         $this->assertMatchesValues($collection, []);
     }
 }

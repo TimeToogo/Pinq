@@ -1,9 +1,11 @@
 <?php
 
-namespace Pinq;
+namespace Pinq\Interfaces;
+
+use Pinq\ITraversable;
 
 /**
- * The API for subsequent orderings of a traversable query
+ * The API for subsequent orderings of a ITraversable
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */

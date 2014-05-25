@@ -8,7 +8,7 @@ namespace Pinq;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class Traversable implements \Pinq\ITraversable, \Serializable
+class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Serializable
 {
     /**
      * The current iterator for the traversable
@@ -33,6 +33,16 @@ class Traversable implements \Pinq\ITraversable, \Serializable
         return new static($values);
     }
 
+    /**
+     * Returns a callable for the the traversable constructor
+     *
+     * @return callable
+     */
+    public static function factory()
+    {
+        return [get_called_class(), 'from'];
+    }
+
     final public function getIterator()
     {
         return $this->valuesIterator;
@@ -54,16 +64,6 @@ class Traversable implements \Pinq\ITraversable, \Serializable
     public function asCollection()
     {
         return new Collection($this->valuesIterator);
-    }
-
-    public function asQueryable()
-    {
-        return (new Providers\Traversable\Provider($this))->createQueryable();
-    }
-
-    public function asRepository()
-    {
-        return (new Collection($this->valuesIterator))->asRepository();
     }
 
     public function serialize()
@@ -96,42 +96,79 @@ class Traversable implements \Pinq\ITraversable, \Serializable
 
     public function where(callable $predicate)
     {
-        return new self(new Iterators\FilterIterator($this->valuesIterator, $predicate));
+        return static::from(new Iterators\FilterIterator($this->valuesIterator, $predicate));
     }
 
     public function orderByAscending(callable $function)
     {
-        return new OrderedTraversable(new Iterators\OrderedIterator($this->valuesIterator, $function, true));
+        return static::from(new Iterators\OrderedIterator($this->valuesIterator, $function, true));
     }
 
     public function orderByDescending(callable $function)
     {
-        return new OrderedTraversable(new Iterators\OrderedIterator($this->valuesIterator, $function, false));
+        return static::from(new Iterators\OrderedIterator($this->valuesIterator, $function, false));
     }
 
     public function orderBy(callable $function, $direction)
     {
         return $direction === Direction::DESCENDING ? $this->orderByDescending($function) : $this->orderByAscending($function);
     }
+    
+    /**
+     * Verifies that the traversable is ordered.
+     * 
+     * @param string $method The called method name
+     * @return Iterators\OrderedIterator
+     * @throws PinqException
+     */
+    private function validateIsOrdered($method)
+    {
+        if (!($this->valuesIterator instanceof Iterators\OrderedIterator)) {
+            throw new PinqException(
+                    'Invalid call to %s: %s::%s must be called first.',
+                    $method,
+                    __CLASS__,
+                    'orderBy');
+        }
+
+        return $this->valuesIterator;
+    }
+    
+    public function thenBy(callable $function, $direction)
+    {
+        return static::from($this->validateIsOrdered(__METHOD__)->thenOrderBy(
+                $function,
+                $direction !== Direction::DESCENDING));
+    }
+
+    public function thenByAscending(callable $function)
+    {
+        return static::from($this->validateIsOrdered(__METHOD__)->thenOrderBy($function, true));
+    }
+
+    public function thenByDescending(callable $function)
+    {
+        return static::from($this->validateIsOrdered(__METHOD__)->thenOrderBy($function, false));
+    }
 
     public function skip($amount)
     {
-        return new self(new Iterators\RangeIterator($this->valuesIterator, $amount, null));
+        return static::from(new Iterators\RangeIterator($this->valuesIterator, $amount, null));
     }
 
     public function take($amount)
     {
-        return new self(new Iterators\RangeIterator($this->valuesIterator, 0, $amount));
+        return static::from(new Iterators\RangeIterator($this->valuesIterator, 0, $amount));
     }
 
     public function slice($start, $amount)
     {
-        return new self(new Iterators\RangeIterator($this->valuesIterator, $start, $amount));
+        return static::from(new Iterators\RangeIterator($this->valuesIterator, $start, $amount));
     }
 
     public function indexBy(callable $function)
     {
-        return new self(new Iterators\ProjectionIterator(
+        return static::from(new Iterators\ProjectionIterator(
                 $this->valuesIterator,
                 $function,
                 null));
@@ -139,33 +176,35 @@ class Traversable implements \Pinq\ITraversable, \Serializable
 
     public function groupBy(callable $function)
     {
-        return new GroupedTraversable(new Iterators\GroupedIterator($this->valuesIterator, $function));
+        return static::from(new Iterators\GroupedIterator($this->valuesIterator, $function, static::factory()));
     }
 
     public function join($values)
     {
-        return new JoiningOnTraversable(
+        return new Connectors\JoiningOnTraversable(
                 $this->valuesIterator,
                 Utilities::toIterator($values),
-                false);
+                false,
+                static::factory());
     }
 
     public function groupJoin($values)
     {
-        return new JoiningOnTraversable(
+        return new Connectors\JoiningOnTraversable(
                 $this->valuesIterator,
                 Utilities::toIterator($values),
-                true);
+                true,
+                static::factory());
     }
 
     public function unique()
     {
-        return new self(new Iterators\UniqueIterator($this->valuesIterator));
+        return static::from(new Iterators\UniqueIterator($this->valuesIterator));
     }
 
     public function select(callable $function)
     {
-        return new self(new Iterators\ProjectionIterator(
+        return static::from(new Iterators\ProjectionIterator(
                 $this->valuesIterator,
                 null,
                 $function));
@@ -179,7 +218,7 @@ class Traversable implements \Pinq\ITraversable, \Serializable
                         null,
                         $function);
 
-        return new self(new Iterators\FlatteningIterator($projectionIterator));
+        return static::from(new Iterators\FlatteningIterator($projectionIterator));
     }
 
     // </editor-fold>
@@ -188,21 +227,21 @@ class Traversable implements \Pinq\ITraversable, \Serializable
 
     public function union($values)
     {
-        return new self(new Iterators\UnionIterator(
+        return static::from(new Iterators\UnionIterator(
                 $this->valuesIterator,
                 Utilities::toIterator($values)));
     }
 
     public function intersect($values)
     {
-        return new self(new Iterators\IntersectionIterator(
+        return static::from(new Iterators\IntersectionIterator(
                 $this->valuesIterator,
                 Utilities::toIterator($values)));
     }
 
     public function difference($values)
     {
-        return new self(new Iterators\DifferenceIterator(
+        return static::from(new Iterators\DifferenceIterator(
                 $this->valuesIterator,
                 Utilities::toIterator($values)));
     }
@@ -213,19 +252,19 @@ class Traversable implements \Pinq\ITraversable, \Serializable
 
     public function append($values)
     {
-        return new self(new Iterators\FlatteningIterator(new \ArrayIterator([$this->valuesIterator, Utilities::toIterator($values)])));
+        return static::from(new Iterators\FlatteningIterator(new \ArrayIterator([$this->valuesIterator, Utilities::toIterator($values)])));
     }
 
     public function whereIn($values)
     {
-        return new self(new Iterators\WhereInIterator(
+        return static::from(new Iterators\WhereInIterator(
                 $this->valuesIterator,
                 Utilities::toIterator($values)));
     }
 
     public function except($values)
     {
-        return new self(new Iterators\ExceptIterator(
+        return static::from(new Iterators\ExceptIterator(
                 $this->valuesIterator,
                 Utilities::toIterator($values)));
     }

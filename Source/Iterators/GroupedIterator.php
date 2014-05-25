@@ -13,11 +13,17 @@ class GroupedIterator extends LazyIterator
      * @var callable[]
      */
     private $groupByFunctions = [];
+    
+    /**
+     * @var callable
+     */
+    private $traversableFactory;
 
-    public function __construct(\Traversable $iterator, callable $groupByFunction)
+    public function __construct(\Traversable $iterator, callable $groupByFunction, callable $traversableFactory = null)
     {
         parent::__construct($iterator);
         $this->groupByFunctions[] = Utilities\Functions::allowExcessiveArguments($groupByFunction);
+        $this->traversableFactory = $traversableFactory ?: \Pinq\Traversable::factory();
     }
 
     /**
@@ -54,10 +60,12 @@ class GroupedIterator extends LazyIterator
                         $groupByFunction,
                         $innerIterator,
                         $groupKeys);
+        
         $groups = [];
-
+        
+        $traversableFactory = $this->traversableFactory;
         foreach ($groupKeys as $groupKey) {
-            $groups[] = new \Pinq\Traversable($groupLookup->get($groupKey));
+            $groups[] = $traversableFactory($groupLookup->get($groupKey));
         }
 
         return new \ArrayIterator($groups);

@@ -4,7 +4,7 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class GroupByTest extends TraversableTest
 {
-    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
+    protected function _testReturnsNewInstanceOfSameType(\Pinq\ITraversable $traversable)
     {
         return $traversable->groupBy(function () {
 
@@ -30,7 +30,7 @@ class GroupByTest extends TraversableTest
     /**
      * @dataProvider everything
      */
-    public function testThatGroupByElementReturnsITraversables(\Pinq\ITraversable $traversable, array $data)
+    public function testThatGroupByElementReturnsCorrectTraversableType(\Pinq\ITraversable $traversable, array $data)
     {
         $groups =
                 $traversable->groupBy(function ($i) {
@@ -38,19 +38,23 @@ class GroupByTest extends TraversableTest
                 });
 
         foreach ($groups as $group) {
-            $this->assertInstanceOf(\Pinq\ITraversable::ITRAVERSABLE_TYPE, $group);
+            if($traversable instanceof \Pinq\IQueryable) {
+                $this->assertInstanceOf(\Pinq\ITraversable::ITRAVERSABLE_TYPE, $group);
+            } else if ($traversable instanceof \Pinq\IRepository) {
+                $this->assertInstanceOf(\Pinq\IRepository::IREPOSITORY_TYPE, $group);
+            } else { 
+                $this->assertInstanceOf(get_class($traversable), $group);
+            }
         }
     }
 
     /**
      * @dataProvider oneToTen
-     * @depends testThatGroupByElementReturnsITraversables
      */
     public function testThatGroupByMultipleTest(\Pinq\ITraversable $traversable, array $data)
     {
         $groups = $traversable
-                ->groupBy(function ($i) { return $i % 2 === 0; })
-                ->andBy(function ($i) { return $i % 3 === 0; })->asArray();
+                ->groupBy(function ($i) { return [$i % 2 === 0, $i % 3 === 0]; })->asArray();
 
         $this->assertCount(4, $groups);
         $this->assertMatchesValues($groups[0], [1, 5, 7]);
@@ -61,7 +65,6 @@ class GroupByTest extends TraversableTest
 
     /**
      * @dataProvider assocOneToTen
-     * @depends testThatGroupByElementReturnsITraversables
      */
     public function testThatGroupByGroupsTheElementsCorrectlyAndPreservesKeys(\Pinq\ITraversable $traversable, array $data)
     {

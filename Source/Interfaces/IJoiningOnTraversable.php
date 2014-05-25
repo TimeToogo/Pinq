@@ -1,9 +1,9 @@
 <?php
 
-namespace Pinq;
+namespace Pinq\Interfaces;
 
 /**
- * This API for the filter options available to a joining traversable
+ * This API for the filter options available to a joining ITraversable
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */

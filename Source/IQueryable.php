@@ -2,6 +2,9 @@
 
 namespace Pinq;
 
+use Pinq\Interfaces\IJoiningOnQueryable;
+use Pinq\Interfaces\IOrderedQueryable;
+
 /**
  * The queryable provides the traversable query API, on an exteral query provider.
  * Supplied functions are converted to expression trees and are used to execute
@@ -19,11 +22,131 @@ interface IQueryable extends ITraversable
      * @return Providers\IQueryProvider
      */
     public function getProvider();
-
+    
     /**
      * The current query scope.
      *
      * @return Queries\IScope
      */
     public function getScope();
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function where(callable $predicate);
+
+    /**
+     * {@inheritDoc}
+     * @return IOrderedQueryable
+     */
+    public function orderBy(callable $function, $direction);
+
+    /**
+     * {@inheritDoc}
+     * @return IOrderedQueryable
+     */
+    public function orderByAscending(callable $function);
+
+    /**
+     * {@inheritDoc}
+     * @return IOrderedQueryable
+     */
+    public function orderByDescending(callable $function);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function skip($amount);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function take($amount);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function slice($start, $amount);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function indexBy(callable $function);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function groupBy(callable $function);
+
+    /**
+     * {@inheritDoc}
+     * @return IJoiningOnQueryable
+     */
+    public function join($values);
+
+    /**
+     * {@inheritDoc}
+     * @return IJoiningOnQueryable
+     */
+    public function groupJoin($values);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function unique();
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function select(callable $function);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function selectMany(callable $function);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function append($values);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function whereIn($values);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function except($values);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function union($values);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function intersect($values);
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function difference($values);
 }

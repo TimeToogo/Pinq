@@ -4,11 +4,19 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class UniqueTest extends TraversableTest
 {
-    protected function _testReturnsNewInstance(\Pinq\ITraversable $traversable)
+    protected function _testReturnsNewInstanceOfSameType(\Pinq\ITraversable $traversable)
     {
         return $traversable->unique();
     }
-
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testReturnsOriginalType(\Pinq\ITraversable $traversable, array $data)
+    {
+        $this->assertReturnsOriginalType($traversable, 'whereIn', []);
+    }
+    
     public function notUniqueData()
     {
         $nonUnique = [

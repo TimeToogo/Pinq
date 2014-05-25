@@ -9,8 +9,31 @@ namespace Pinq\Iterators;
  */
 class EqualityGroupJoinIterator extends EqualityJoinIteratorBase
 {
+    /**
+     * @var callable
+     */
+    private $traversableFactory;
+    public function __construct(
+            \Traversable $outerIterator, 
+            \Traversable $innerIterator, 
+            callable $outerKeyFunction, 
+            callable $innerKeyFunction, 
+            callable $joiningFunction,
+            callable $traversableFactory = null)
+    {
+        parent::__construct(
+                $outerIterator, 
+                $innerIterator, 
+                $outerKeyFunction, 
+                $innerKeyFunction, 
+                $joiningFunction);
+        
+        $this->traversableFactory = $traversableFactory ?: \Pinq\Traversable::factory();
+    }
+    
     protected function getInnerGroupValueIterator(array $innerGroup)
     {
-        return new \ArrayIterator([new \Pinq\Traversable($innerGroup)]);
+        $traversableFactory = $this->traversableFactory;
+        return new \ArrayIterator([$traversableFactory($innerGroup)]);
     }
 }

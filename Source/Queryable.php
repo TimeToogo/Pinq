@@ -11,7 +11,7 @@ use Pinq\Queries\Segments;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
+class Queryable implements IQueryable, Interfaces\IOrderedQueryable
 {
     /**
      * The query provider implementation for this queryable
@@ -55,7 +55,7 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
      * @param Queries\ISegment $segment The new segment
      * @return IQueryable
      */
-    final protected function newSegment(Queries\ISegment $segment)
+    protected function newSegment(Queries\ISegment $segment)
     {
         return $this->provider->createQueryable($this->scope->append($segment));
     }
@@ -67,7 +67,7 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
      * @param Queries\ISegment $segment The new segment
      * @return IQueryable
      */
-    final protected function updateLastSegment(Queries\ISegment $segment)
+    protected function updateLastSegment(Queries\ISegment $segment)
     {
         return $this->provider->createQueryable($this->scope->updateLast($segment));
     }
@@ -119,20 +119,6 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
         return new Collection($this->getIterator());
     }
 
-    public function asQueryable()
-    {
-        return $this;
-    }
-
-    public function asRepository()
-    {
-        if ($this->provider instanceof Providers\IRepositoryProvider) {
-            return $this->provider->createRepository($this->scope);
-        } else {
-            return (new Collection($this->getIterator()))->asRepository();
-        }
-    }
-
     final public function getIterator()
     {
         $this->load();
@@ -182,30 +168,14 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
         return $this->newSegment(new Segments\GroupBy([$this->convert($function)]));
     }
 
-    public function andBy(callable $function)
-    {
-        $segments = $this->scope->getSegments();
-        $lastSegment = end($segments);
-
-        if (!$lastSegment instanceof Segments\GroupBy) {
-            throw new PinqException(
-                    'Invalid call to %s: %s::%s must be called first',
-                    __METHOD__,
-                    __CLASS__,
-                    'GroupBy');
-        }
-
-        return $this->updateLastSegment($lastSegment->andBy($this->convert($function)));
-    }
-
     public function join($values)
     {
-        return new JoiningOnQueryable($this->provider, $this->scope, $values, false);
+        return new Connectors\JoiningOnQueryable($this->provider, $this->scope, $values, false);
     }
 
     public function groupJoin($values)
     {
-        return new JoiningOnQueryable($this->provider, $this->scope, $values, true);
+        return new Connectors\JoiningOnQueryable($this->provider, $this->scope, $values, true);
     }
 
     public function union($values)
@@ -270,7 +240,7 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
         return $this->newSegment(new Segments\OrderBy([$this->convert($function)], [false]));
     }
 
-    private function validateOrderBy()
+    private function validateOrderBy($method)
     {
         $segments = $this->scope->getSegments();
         $lastSegment = end($segments);
@@ -278,9 +248,9 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
         if (!$lastSegment instanceof Segments\OrderBy) {
             throw new PinqException(
                     'Invalid call to %s: %s::%s must be called first',
-                    __METHOD__,
+                    $method,
                     __CLASS__,
-                    'OrderBy');
+                    'orderBy');
         }
 
         return $lastSegment;
@@ -288,19 +258,19 @@ class Queryable implements IQueryable, IOrderedTraversable, IGroupedTraversable
 
     public function thenBy(callable $function, $direction)
     {
-        return $this->updateLastSegment($this->validateOrderBy()->thenBy(
+        return $this->updateLastSegment($this->validateOrderBy(__METHOD__)->thenBy(
                 $this->convert($function),
                 $direction !== Direction::DESCENDING));
     }
 
     public function thenByAscending(callable $function)
     {
-        return $this->updateLastSegment($this->validateOrderBy()->thenBy($this->convert($function), true));
+        return $this->updateLastSegment($this->validateOrderBy(__METHOD__)->thenBy($this->convert($function), true));
     }
 
     public function thenByDescending(callable $function)
     {
-        return $this->updateLastSegment($this->validateOrderBy()->thenBy($this->convert($function), false));
+        return $this->updateLastSegment($this->validateOrderBy(__METHOD__)->thenBy($this->convert($function), false));
     }
 
     public function unique()

@@ -2,6 +2,9 @@
 
 namespace Pinq;
 
+use Pinq\Interfaces\IJoiningOnCollection;
+use Pinq\Interfaces\IOrderedCollection;
+
 /**
  * The collection API, along with traversable query API,
  * a collection's values are mutable, they can be added, removed and altered.
@@ -10,6 +13,8 @@ namespace Pinq;
  */
 interface ICollection extends ITraversable
 {
+    const ICOLLECTION_TYPE = __CLASS__;
+    
     /**
      * Applies the function the list of values
      *
@@ -49,4 +54,124 @@ interface ICollection extends ITraversable
      * @return void
      */
     public function clear();
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function where(callable $predicate);
+
+    /**
+     * {@inheritDoc}
+     * @return IOrderedCollection
+     */
+    public function orderBy(callable $function, $direction);
+
+    /**
+     * {@inheritDoc}
+     * @return IOrderedCollection
+     */
+    public function orderByAscending(callable $function);
+
+    /**
+     * {@inheritDoc}
+     * @return IOrderedCollection
+     */
+    public function orderByDescending(callable $function);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function skip($amount);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function take($amount);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function slice($start, $amount);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function indexBy(callable $function);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function groupBy(callable $function);
+
+    /**
+     * {@inheritDoc}
+     * @return IJoiningOnCollection
+     */
+    public function join($values);
+
+    /**
+     * {@inheritDoc}
+     * @return IJoiningOnCollection
+     */
+    public function groupJoin($values);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function unique();
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function select(callable $function);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function selectMany(callable $function);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function append($values);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function whereIn($values);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function except($values);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function union($values);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function intersect($values);
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function difference($values);
 }
