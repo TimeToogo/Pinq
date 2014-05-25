@@ -38,10 +38,10 @@ final class Reflection
     private static $supportsVariadicParameters = null;
     
     /**
-     * @param \ReflectionFunction $function
+     * @param \ReflectionFunctionAbstract $function
      * @return boolean
      */
-    public static function isVariadic(\ReflectionFunction $function)
+    public static function isVariadic(\ReflectionFunctionAbstract $function)
     {
         if(self::$supportsVariadicParameters === null) {
             self::$supportsVariadicParameters = method_exists('\ReflectionParameter', 'isVariadic');
