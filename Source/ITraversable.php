@@ -28,8 +28,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
 
     /**
      * Returns the values as a traversable.
-     * If the implementation is queryable the following operations will
-     * be performed in memory.
+     * The following queries will be performed in memory.
      *
      * @return ITraversable
      */
@@ -37,8 +36,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
 
     /**
      * Returns the values as a collection.
-     * If the implementation is queryable the following operations will
-     * be performed in memory.
+     * The following queries will be performed in memory.
      *
      * @return ICollection
      */
