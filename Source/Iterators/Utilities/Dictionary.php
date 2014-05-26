@@ -52,6 +52,7 @@ class Dictionary implements \IteratorAggregate
                     break;
                 
                 case 'resource':
+                case 'unknown type':
                     $value = (object)['r' => (string)$value];
                     break;
             }

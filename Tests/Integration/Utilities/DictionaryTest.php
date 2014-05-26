@@ -28,7 +28,7 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
             [false],
             [true],
             [null],
-            [new \stdClass()],
+            'instance' => [new \stdClass()],
             [[1, new \stdClass(), 3]],
             [fopen('php://memory', 'r+')],
             [$unknownType],
@@ -168,4 +168,52 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
         sort($dictionaryValues);
         $this->assertSame($values, $dictionaryValues);
     }
+
+    public function testThatDictionaryUsesArrayIdentity()
+    {
+        $keys = [
+            'ints' => [1, 2, 3],
+            'reversedInts' => [3, 2, 1],
+            'intsWithArray' => [1, 2, [3]],
+            'intsWithString' => [1, '2', 3],
+            'instance1' => [1, 2, new \stdClass()],
+            'instance2' => [1, 2, new \stdClass()],
+            'resource1' => [fopen('php://memory', 'r+'), 2, 3],
+            'resource2' => [fopen('php://memory', 'r+'), 2, 3],
+        ];
+
+        foreach ($keys as $name => $key) {
+            $this->dictionary->set($key, $name);
+        }
+
+        foreach ($keys as $name => $key) {
+            $this->assertSame($name, $this->dictionary->get($key));
+        }
+        
+        
+        $array = array_map('reset', $this->dictionaryKeyValues());
+        $identicalArray = $array;
+        
+        $originalInstance = $array['instance'];
+        
+        $nonIdenticalArray = $array;
+        $nonIdenticalArray['instance'] = new \stdClass();
+        
+        $anotherIdenticalArray = $nonIdenticalArray;
+        $anotherIdenticalArray['instance'] = $originalInstance;
+        
+        $instance = new \stdClass();
+        
+        $this->dictionary->set($array, $instance);
+        
+        $this->assertTrue($this->dictionary->contains($identicalArray));
+        $this->assertSame($instance, $this->dictionary->get($identicalArray));
+        
+        $this->assertFalse($this->dictionary->contains($nonIdenticalArray));
+        $this->assertNull($this->dictionary->get($nonIdenticalArray));
+        
+        $this->assertTrue($this->dictionary->contains($anotherIdenticalArray));
+        $this->assertSame($instance, $this->dictionary->get($anotherIdenticalArray));
+    }
+    
 }
