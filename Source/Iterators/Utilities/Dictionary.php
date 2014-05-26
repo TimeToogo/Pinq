@@ -45,13 +45,14 @@ class Dictionary implements \IteratorAggregate
     private static function arrayIdentityHash(array $array)
     {
         array_walk_recursive($array, function (&$value) {
+            //Cast identifier to object so it is impossible to collide with other types of values
             switch (gettype($value)) {
                 case 'object':
                     $value = (object)['o' => spl_object_hash($value)];
                     break;
                 
                 case 'resource':
-                    $value = (object)['o' => (string)$value];
+                    $value = (object)['r' => (string)$value];
                     break;
             }
         });
