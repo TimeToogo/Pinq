@@ -71,6 +71,31 @@ class DictionaryTest extends \Pinq\Tests\PinqTestCase
     /**
      * @dataProvider dictionaryKeyValues
      */
+    public function testThatDictionaryGetReturnsNullForRemovedKeys($key)
+    {
+        $this->dictionary->set($key, true);
+        $this->dictionary->remove($key);
+
+        $this->assertNull(
+                $this->dictionary->get($key),
+                'The dictionary should return null for the removed key');
+    }
+
+    /**
+     * @dataProvider dictionaryKeyValues
+     */
+    public function testThatDictionaryContainsReturnsTrueForNullValueKeys($key)
+    {
+        $this->dictionary->set($key, null);
+
+        $this->assertTrue(
+                $this->dictionary->contains($key),
+                'The dictionary should return true for the null valued keys');
+    }
+
+    /**
+     * @dataProvider dictionaryKeyValues
+     */
     public function testThatDictionaryGetReturnsSetValue($key)
     {
         $value = new \stdClass();

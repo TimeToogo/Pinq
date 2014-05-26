@@ -63,7 +63,7 @@ class Dictionary implements \IteratorAggregate
     public function get($key)
     {
         if ($key === null) {
-            return $this->storage['NULL'];
+            return isset($this->storage['NULL']) ? $this->storage['NULL'] : null;
         }
 
         $type = gettype($key);
@@ -97,7 +97,7 @@ class Dictionary implements \IteratorAggregate
     public function contains($key)
     {
         if ($key === null) {
-            return array_key_exists('NULL', $this->storage);
+            return isset($this->storage['NULL']) || array_key_exists('NULL', $this->storage);
         }
 
         $type = gettype($key);
@@ -106,17 +106,25 @@ class Dictionary implements \IteratorAggregate
 
             case 'string':
             case 'integer':
+                return isset($typeStorage[$key]) || array_key_exists($key, $typeStorage);
+                
             case 'boolean':
+                return isset($typeStorage[$key]) || array_key_exists((int)$key, $typeStorage);
+                
             case 'object':
                 return isset($typeStorage[$key]);
 
             case 'double':
             case 'resource':
             case 'unknown type':
-                return isset($typeStorage[(string)$key]);
+                $stringKey = (string)$key;
+                
+                return isset($typeStorage[$stringKey]) || array_key_exists($stringKey, $typeStorage);
 
             case 'array':
-                return isset($typeStorage[self::arrayIdentityHash($key)]);
+                $identityHash = self::arrayIdentityHash($key);
+                
+                return isset($typeStorage[$identityHash]) || array_key_exists($identityHash, $typeStorage);
         }
     }
 
