@@ -34,8 +34,15 @@ class ExpressionWalker
     public function walkArray(ArrayExpression $expression)
     {
         return $expression->update(
-                $this->walkAll($expression->getKeyExpressions()),
-                $this->walkAll($expression->getValueExpressions()));
+                $this->walkAll($expression->getItemExpressions()));
+    }
+
+    public function walkArrayItem(ArrayItemExpression $expression)
+    {
+        return $expression->update(
+                $this->walk($expression->getKeyExpression()),
+                $this->walk($expression->getValueExpression()),
+                $expression->isReference());
     }
 
     public function walkAssignment(AssignmentExpression $expression)

@@ -274,9 +274,17 @@ abstract class Expression implements \Serializable
     /**
      * @return ArrayExpression
      */
-    final public static function arrayExpression(array $keyExpressions, array $valueExpressions)
+    final public static function arrayExpression(array $itemExpressions)
     {
-        return new ArrayExpression($keyExpressions, $valueExpressions);
+        return new ArrayExpression($itemExpressions);
+    }
+    
+    /**
+     * @return ArrayItemExpression
+     */
+    final public static function arrayItem(Expression $keyExpression = null, Expression $valueExpression, $isReference)
+    {
+        return new ArrayItemExpression($keyExpression, $valueExpression, $isReference);
     }
 
     /**

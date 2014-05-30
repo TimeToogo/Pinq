@@ -11,6 +11,7 @@ dev-master
  - Moved/Implemented Necessary interfaces (IOrdered*, IJoiningOn*, IJoiningTo*) with covariant 
    return types under Pinq\Interfaces namespace.
  - Traversable/Collection are now extendable.
+ - Refactored ArrayExpression by creating ArrayItemExpression representing each element
 
 2.1.1 (22/5/14)
 ===============

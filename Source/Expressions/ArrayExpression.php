@@ -12,45 +12,21 @@ namespace Pinq\Expressions;
 class ArrayExpression extends Expression
 {
     /**
-     * @var Expression[]
+     * @var ArrayItemExpression[]
      */
-    private $keyExpressions;
+    private $itemExpressions;
 
-    /**
-     * @var Expression[]
-     */
-    private $valueExpressions;
-
-    public function __construct(array $keyExpressions, array $valueExpressions)
+    public function __construct(array $itemExpressions)
     {
-        ksort($keyExpressions);
-        ksort($valueExpressions);
-
-        if (array_keys($keyExpressions) !== array_keys($valueExpressions)) {
-            throw new \Pinq\PinqException(
-                    'The supplied key expression array keys must match the keys of the value expression array: (%s) !== (%s)',
-                    implode(', ', array_keys($keyExpressions)),
-                    implode(', ', array_keys($valueExpressions)));
-        }
-
-        $this->keyExpressions = $keyExpressions;
-        $this->valueExpressions = $valueExpressions;
+        $this->itemExpressions = $itemExpressions;
     }
 
     /**
-     * @return Expression|null[]
+     * @return ArrayItemExpression[]
      */
-    public function getKeyExpressions()
+    public function getItemExpressions()
     {
-        return $this->keyExpressions;
-    }
-
-    /**
-     * @return Expression[]
-     */
-    public function getValueExpressions()
-    {
-        return $this->valueExpressions;
+        return $this->itemExpressions;
     }
 
     public function traverse(ExpressionWalker $walker)
@@ -60,41 +36,38 @@ class ArrayExpression extends Expression
 
     public function simplify()
     {
-        $keyExpressions = [];
-
-        foreach ($this->keyExpressions as $key => $keyExpression) {
-            $keyExpressions[$key] = $keyExpression === null ? null : $keyExpression->simplify();
-        }
-
-        $valueExpressions = self::simplifyAll($this->valueExpressions);
-
-        if (self::allOfType($keyExpressions, ValueExpression::getType(), true) && self::allOfType($valueExpressions, ValueExpression::getType())) {
-            $resolvedArray = [];
-
-            foreach ($keyExpressions as $valueKey => $keyExpression) {
-                if ($keyExpression === null) {
-                    $resolvedArray[] = $valueExpressions[$valueKey]->getValue();
-                } else {
-                    $resolvedArray[$keyExpression->getValue()] = $valueExpressions[$valueKey]->getValue();
-                }
+        $itemExpressions = self::simplifyAll($this->itemExpressions);
+        
+        $resolvedArray = [];
+        foreach ($itemExpressions as $itemExpression) {
+            $keyExpression = $itemExpression->getKeyExpression();
+            $valueExpression = $itemExpression->getValueExpression();
+            
+            if(($keyExpression !== null && !($valueExpression instanceof ValueExpression))
+                || !($valueExpression instanceof ValueExpression)) {
+                return $this->update($itemExpressions);
             }
-
-            return Expression::value($resolvedArray);
+            
+            if($keyExpression === null) {
+                $resolvedArray[] = $valueExpression->getValue();
+            } else {
+                $resolvedArray[$keyExpression->getValue()] = $valueExpression->getValue();
+            }
         }
-
-        return $this->update($keyExpressions, $valueExpressions);
+        
+        return Expression::value($resolvedArray);
     }
 
     /**
      * @return self
      */
-    public function update(array $keyExpressions, array $valueExpressions)
+    public function update(array $itemExpressions)
     {
-        if ($this->valueExpressions === $valueExpressions && $this->keyExpressions === $keyExpressions) {
+        if ($this->itemExpressions === $itemExpressions) {
             return $this;
         }
 
-        return new self($keyExpressions, $valueExpressions);
+        return new self($itemExpressions);
     }
 
     protected function compileCode(&$code)
@@ -102,19 +75,14 @@ class ArrayExpression extends Expression
         $code .= '[';
         $first = true;
 
-        foreach ($this->keyExpressions as $key => $keyExpression) {
+        foreach ($this->itemExpressions as $itemExpression) {
             if ($first) {
                 $first = false;
             } else {
                 $code .= ', ';
             }
-
-            if ($keyExpression !== null) {
-                $keyExpression->compileCode($code);
-                $code .= ' => ';
-            }
-
-            $this->valueExpressions[$key]->compileCode($code);
+            
+            $itemExpression->compileCode($code);
         }
 
         $code .= ']';
@@ -122,17 +90,16 @@ class ArrayExpression extends Expression
 
     public function serialize()
     {
-        return serialize([$this->keyExpressions, $this->valueExpressions]);
+        return serialize([$this->itemExpressions]);
     }
 
     public function unserialize($serialized)
     {
-        list($this->keyExpressions, $this->valueExpressions) = unserialize($serialized);
+        list($this->itemExpressions) = unserialize($serialized);
     }
 
     public function __clone()
     {
-        $this->keyExpressions = self::cloneAll($this->keyExpressions);
-        $this->valueExpressions = self::cloneAll($this->valueExpressions);
+        $this->itemExpressions = self::cloneAll($this->itemExpressions);
     }
 }

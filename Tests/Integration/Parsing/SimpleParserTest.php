@@ -147,8 +147,7 @@ class SimpleParserTest extends ParserTest
                     [1 => 2];
                 },
                 [O\Expression::arrayExpression(
-                        [O\Expression::value(1)],
-                        [O\Expression::value(2)])]);
+                        [O\Expression::arrayItem(O\Expression::value(1), O\Expression::value(2), false)])]);
     }
 
     /**

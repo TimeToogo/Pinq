@@ -9,7 +9,8 @@ class ExpressionVisitorTest extends ExpressionTest
     public function expressionsToVisit()
     {
         return [
-            [O\Expression::arrayExpression([], []), 'visitArray'],
+            [O\Expression::arrayExpression([]), 'visitArray'],
+            [O\Expression::arrayItem(null, O\Expression::value(0), false), 'visitArrayItem'],
             [O\Expression::assign(
                     O\Expression::value(0),
                     O\Operators\Assignment::EQUAL,

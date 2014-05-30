@@ -33,9 +33,13 @@ class BasicConverterTest extends ConverterTest
 
         $this->assertConvertsAndRecompilesCorrectly(function () { return null; }, [], O\Expression::value(null));
 
-        $this->assertConvertsAndRecompilesCorrectly(function () { return [1, 5, 57, 4 => 3, 'tset' => 'ftest']; }, [], O\Expression::arrayExpression(
-                        [null, null, null, O\Expression::value(4), O\Expression::value('tset')],
-                        [O\Expression::value(1), O\Expression::value(5), O\Expression::value(57), O\Expression::value(3), O\Expression::value('ftest')]));
+        $this->assertConvertsAndRecompilesCorrectly(function () { return [1, 5, 57, 4 => 3, 'tset' => 'ftest', true => &$foo]; }, [], O\Expression::arrayExpression(
+                        [O\Expression::arrayItem(null, O\Expression::value(1), false),
+                            O\Expression::arrayItem(null, O\Expression::value(5), false),
+                            O\Expression::arrayItem(null, O\Expression::value(57), false),
+                            O\Expression::arrayItem(O\Expression::value(4), O\Expression::value(3), false),
+                            O\Expression::arrayItem(O\Expression::value('tset'), O\Expression::value('ftest'), false),
+                            O\Expression::arrayItem(O\Expression::value(true), O\Expression::variable(O\Expression::value('foo')), true)]));
 
         $this->assertConvertsAndRecompilesCorrectly(function () { return new \stdClass(); }, [], O\Expression::newExpression(O\Expression::value('stdClass')));
 

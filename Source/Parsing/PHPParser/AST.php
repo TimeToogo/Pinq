@@ -189,16 +189,17 @@ class AST
 
     private function parseArrayNode(\PHPParser_Node_Expr_Array $node)
     {
-        $keyExpressions = [];
-        $valueExpressions = [];
+        $itemExpressions = [];
 
-        foreach ($node->items as $key => $item) {
+        foreach ($node->items as $item) {
             //Keys must match
-            $keyExpressions[$key] = $item->key === null ? null : $this->parseNode($item->key);
-            $valueExpressions[$key] = $this->parseNode($item->value);
+            $itemExpressions[] = Expression::arrayItem(
+                $item->key === null ? null : $this->parseNode($item->key), 
+                $this->parseNode($item->value), 
+                $item->byRef);
         }
 
-        return Expression::arrayExpression($keyExpressions, $valueExpressions);
+        return Expression::arrayExpression($itemExpressions);
     }
 
     private function parseFunctionCallNode(\PHPParser_Node_Expr_FuncCall $node)

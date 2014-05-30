@@ -22,6 +22,18 @@ class ExpressionVisitor extends ExpressionWalker
     {
 
     }
+    
+    final public function walkArrayItem(ArrayItemExpression $expression)
+    {
+        $this->visitArrayItem($expression);
+
+        return $expression;
+    }
+
+    protected function visitArrayItem(ArrayItemExpression $expression)
+    {
+
+    }
 
     final public function walkAssignment(AssignmentExpression $expression)
     {
