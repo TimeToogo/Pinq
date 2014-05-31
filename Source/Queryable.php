@@ -226,18 +226,25 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
     public function orderBy(callable $function, $direction)
     {
         return $this->newSegment(new Segments\OrderBy(
-                [$this->convert($function)],
-                [$direction !== Direction::DESCENDING]));
+                [new Segments\OrderFunction(
+                        $this->convert($function), 
+                        $direction !== Direction::DESCENDING)]));
     }
 
     public function orderByAscending(callable $function)
     {
-        return $this->newSegment(new Segments\OrderBy([$this->convert($function)], [true]));
+        return $this->newSegment(new Segments\OrderBy(
+                [new Segments\OrderFunction(
+                            $this->convert($function), 
+                            true)]));
     }
 
     public function orderByDescending(callable $function)
     {
-        return $this->newSegment(new Segments\OrderBy([$this->convert($function)], [false]));
+        return $this->newSegment(new Segments\OrderBy(
+                [new Segments\OrderFunction(
+                            $this->convert($function), 
+                            false)]));
     }
 
     private function validateOrderBy($method)
@@ -265,12 +272,14 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
 
     public function thenByAscending(callable $function)
     {
-        return $this->updateLastSegment($this->validateOrderBy(__METHOD__)->thenBy($this->convert($function), true));
+        return $this->updateLastSegment($this->validateOrderBy(__METHOD__)
+                ->thenBy($this->convert($function), true));
     }
 
     public function thenByDescending(callable $function)
     {
-        return $this->updateLastSegment($this->validateOrderBy(__METHOD__)->thenBy($this->convert($function), false));
+        return $this->updateLastSegment($this->validateOrderBy(__METHOD__)
+                ->thenBy($this->convert($function), false));
     }
 
     public function unique()

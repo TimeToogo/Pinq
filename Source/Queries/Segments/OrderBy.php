@@ -13,23 +13,13 @@ use Pinq\FunctionExpressionTree;
 class OrderBy extends Segment
 {
     /**
-     * @var FunctionExpressionTree[]
+     * @var OrderFunction[]
      */
-    private $functionExpressionTrees;
+    private $orderFunctions;
 
-    /**
-     * @var bool[]
-     */
-    private $isAscendingArray;
-
-    public function __construct(array $functionExpressionTrees, array $isAscendingArray)
+    public function __construct(array $orderFunctions)
     {
-        if (array_keys($functionExpressionTrees) !== array_keys($isAscendingArray)) {
-            throw new \Pinq\PinqException('Cannot construct %s: $functionExpressionTrees and $isAscendingArray keys do not match', __CLASS__);
-        }
-
-        $this->functionExpressionTrees = $functionExpressionTrees;
-        $this->isAscendingArray = $isAscendingArray;
+        $this->orderFunctions = $orderFunctions;
     }
 
     public function getType()
@@ -43,37 +33,29 @@ class OrderBy extends Segment
     }
 
     /**
-     * @return FunctionExpressionTree[]
+     * @return OrderFunction[]
      */
-    public function getFunctionExpressionTrees()
+    public function getOrderFunctions()
     {
-        return $this->functionExpressionTrees;
+        return $this->orderFunctions;
     }
 
     /**
-     * @return bool[]
-     */
-    public function getIsAscendingArray()
-    {
-        return $this->isAscendingArray;
-    }
-
-    /**
+     * @param FunctionExpressionTree $functionExpressionTree
      * @param boolean $isAscending
      */
     public function thenBy(FunctionExpressionTree $functionExpressionTree, $isAscending)
     {
         return new self(
-                array_merge($this->functionExpressionTrees, [$functionExpressionTree]),
-                array_merge($this->isAscendingArray, [$isAscending]));
+                array_merge($this->orderFunctions, [new OrderFunction($functionExpressionTree, $isAscending)]));
     }
 
-    public function update(array $functionExpressionTrees, array $isAscendingArray)
+    public function update(array $orderFunctions)
     {
-        if ($this->functionExpressionTrees === $functionExpressionTrees && $this->isAscendingArray === $isAscendingArray) {
+        if ($this->orderFunctions === $orderFunctions) {
             return $this;
         }
 
-        return new self($functionExpressionTrees, $isAscendingArray);
+        return new self($orderFunctions);
     }
 }

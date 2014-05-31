@@ -64,17 +64,16 @@ class ScopeEvaluator extends Segments\SegmentVisitor
 
     public function visitOrderBy(Segments\OrderBy $query)
     {
-        $isAscendingArray = $query->getIsAscendingArray();
         $first = true;
 
-        foreach ($query->getFunctionExpressionTrees() as $key => $functionExpressionTree) {
-            $direction = $isAscendingArray[$key] ? \Pinq\Direction::ASCENDING : \Pinq\Direction::DESCENDING;
+        foreach ($query->getOrderFunctions() as $orderFunction) {
+            $direction = $orderFunction->isAscending() ? \Pinq\Direction::ASCENDING : \Pinq\Direction::DESCENDING;
 
             if ($first) {
-                $this->traversable = $this->traversable->orderBy($functionExpressionTree, $direction);
+                $this->traversable = $this->traversable->orderBy($orderFunction->getFunctionExpressionTree(), $direction);
                 $first = false;
             } else {
-                $this->traversable = $this->traversable->thenBy($functionExpressionTree, $direction);
+                $this->traversable = $this->traversable->thenBy($orderFunction->getFunctionExpressionTree(), $direction);
             }
         }
     }
