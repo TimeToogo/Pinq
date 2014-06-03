@@ -36,22 +36,4 @@ class FilterIterator extends IteratorIterator
         
         return false;
     }
-    
-    protected function fetchInner(\Iterator $iterator, &$key, &$value)
-    {
-        $filter = $this->filter;
-        
-        while(parent::fetchInner($iterator, $key, $value)) {
-            $keyCopy = $key;
-            $valueCopy = $value;
-            
-            if ($filter($valueCopy, $keyCopy)) {
-                return true;
-            }
-            
-            $iterator->next();
-        }
-        
-        return false;
-    }
 }

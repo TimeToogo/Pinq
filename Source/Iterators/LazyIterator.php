@@ -13,7 +13,7 @@ abstract class LazyIterator extends IteratorIterator
     /**
      * @var \Traversable
      */
-    protected $iterator;
+    protected $originalIterator;
 
     /**
      * @var boolean
@@ -22,12 +22,12 @@ abstract class LazyIterator extends IteratorIterator
 
     public function __construct(\Traversable $iterator)
     {
-        $this->iterator = $iterator;
+        $this->originalIterator = $iterator;
     }
 
     private function initialize()
     {
-        $iterator = $this->initializeIterator($this->iterator) ?: $this->iterator;
+        $iterator = $this->initializeIterator($this->originalIterator) ?: $this->iterator;
         parent::__construct($iterator);
         $this->isInitialized = true;
     }

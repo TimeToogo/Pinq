@@ -30,17 +30,17 @@ abstract class JoinIteratorBase extends Iterator implements \Iterator
     protected $currentOuterValue;
 
     /**
-     * @var Pinq\IIterator
+     * @var \Pinq\IIterator
      */
     protected $outerIterator;
 
     /**
-     * @var Pinq\IIterator
+     * @var \Pinq\IIterator
      */
     protected $innerIterator;
 
     /**
-     * @var Pinq\IIterator
+     * @var \Pinq\IIterator
      */
     private $currentInnerGroupIterator;
 

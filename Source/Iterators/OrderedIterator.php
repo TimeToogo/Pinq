@@ -33,7 +33,7 @@ class OrderedIterator extends LazyIterator
      */
     public function thenOrderBy(callable $orderByFunction, $isAscending)
     {
-        $copy = new self($this->iterator, $orderByFunction, $isAscending);
+        $copy = new self($this->originalIterator, $orderByFunction, $isAscending);
         $copy->orderByFunctions = $this->orderByFunctions;
         $copy->isAscendingArray = $this->isAscendingArray;
         $copy->orderByFunctions[] = Utilities\Functions::allowExcessiveArguments($orderByFunction);
