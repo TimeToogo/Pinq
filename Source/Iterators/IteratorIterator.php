@@ -10,7 +10,7 @@ namespace Pinq\Iterators;
 abstract class IteratorIterator extends Iterator implements \Iterator
 {
     /**
-     * @var Pinq\IIterator
+     * @var \Pinq\IIterator
      */
     protected $iterator;
 
