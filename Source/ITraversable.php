@@ -6,7 +6,7 @@ use Pinq\Interfaces\IJoiningOnTraversable;
 use Pinq\Interfaces\IOrderedTraversable;
 
 /**
- * The root interface providing a fluent query API for a range of values.
+ * The root interface providing a fluent query API for a range of key value pairs.
  *
  * Query calls must be immutable and return a new instance with every query call.
  * Queries should also be executed lazily upon iteration.
