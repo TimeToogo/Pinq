@@ -73,7 +73,7 @@ class Operation extends Segment
     /**
      * @return \Traversable|array
      */
-    public function getTraversable()
+    public function getValues()
     {
         return $this->values;
     }

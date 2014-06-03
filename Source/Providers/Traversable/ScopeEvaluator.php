@@ -130,31 +130,31 @@ class ScopeEvaluator extends Segments\SegmentVisitor
 
     public function visitOperation(Segments\Operation $query)
     {
-        $otherTraversable = $query->getTraversable();
+        $otherValues = $query->getValues();
         switch ($query->getOperationType()) {
 
             case Segments\Operation::UNION:
-                $this->traversable = $this->traversable->union($otherTraversable);
+                $this->traversable = $this->traversable->union($otherValues);
                 break;
 
             case Segments\Operation::INTERSECT:
-                $this->traversable = $this->traversable->intersect($otherTraversable);
+                $this->traversable = $this->traversable->intersect($otherValues);
                 break;
 
             case Segments\Operation::DIFFERENCE:
-                $this->traversable = $this->traversable->difference($otherTraversable);
+                $this->traversable = $this->traversable->difference($otherValues);
                 break;
 
             case Segments\Operation::APPEND:
-                $this->traversable = $this->traversable->append($otherTraversable);
+                $this->traversable = $this->traversable->append($otherValues);
                 break;
 
             case Segments\Operation::WHERE_IN:
-                $this->traversable = $this->traversable->whereIn($otherTraversable);
+                $this->traversable = $this->traversable->whereIn($otherValues);
                 break;
 
             case Segments\Operation::EXCEPT:
-                $this->traversable = $this->traversable->except($otherTraversable);
+                $this->traversable = $this->traversable->except($otherValues);
                 break;
         }
     }
