@@ -17,7 +17,24 @@ class FilterIterator extends IteratorIterator
     public function __construct(\Traversable $iterator, callable $filter)
     {
         parent::__construct($iterator);
+        
         $this->filter = Utilities\Functions::allowExcessiveArguments($filter);
+    }
+    
+    protected function doFetch(&$key, &$value)
+    {
+        $filter = $this->filter;
+        
+        while($this->iterator->fetch($key, $value)) {
+            $keyCopy = $key;
+            $valueCopy = $value;
+            
+            if ($filter($valueCopy, $keyCopy)) {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     protected function fetchInner(\Iterator $iterator, &$key, &$value)

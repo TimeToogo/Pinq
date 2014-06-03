@@ -3,75 +3,98 @@
 namespace Pinq\Iterators;
 
 /**
- * Base class for iterators, simplifies value fetching / validating into a single step.
+ * Base class for iterators
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-abstract class Iterator implements \Iterator
+abstract class Iterator implements \Pinq\IIterator
 {
     /**
      * @var mixed
      */
-    protected $key;
+    private $key;
 
     /**
      * @var mixed
      */
-    protected $value;
+    private $value;
 
     /**
      * @var boolean
      */
-    protected $valid = false;
+    private $valid = false;
+
+    /**
+     * @var boolean
+     */
+    private $requiresFirstFetch = false;
 
     final public function valid()
     {
+        if($this->requiresFirstFetch) {
+            $this->fetchInternal();
+        }
+        
         return $this->valid;
     }
 
     final public function key()
     {
+        if($this->requiresFirstFetch) {
+            $this->fetchInternal();
+        }
+        
         return $this->key;
     }
 
     final public function current()
     {
+        if($this->requiresFirstFetch) {
+            $this->fetchInternal();
+        }
+        
         return $this->value;
-    }
-    
-    private function invalidate()
-    {
-        $this->valid = false;
-        $this->key = null;
-        $this->value = null;
     }
 
     final public function rewind()
     {
-        $this->invalidate();
-        $this->onRewind();
-        $this->valid = $this->fetch($this->key, $this->value);
+        $this->valid = false;
+        $this->doRewind();
+        $this->requiresFirstFetch = true;
     }
     
-    protected function onRewind()
+    protected function doRewind()
     {
         
     }
 
     final public function next()
     {
-        $this->invalidate();
-        $this->onNext();
-        $this->valid = $this->fetch($this->key, $this->value);
-    }
-    
-    protected function onNext()
-    {
+        if($this->requiresFirstFetch) {
+            $this->fetchInternal();
+        }
         
+        $this->fetchInternal();
     }
     
-    /**
-     * @return boolean
-     */
-    protected abstract function fetch(&$key, &$value);
+    private function fetchInternal()
+    {
+        $this->requiresFirstFetch = false;
+        $this->valid = $this->doFetch($this->key, $this->value);
+    }
+    
+    final public function fetch(&$key, &$value)
+    {
+        $this->requiresFirstFetch = false;
+        if($this->valid = $this->doFetch($key, $value)) {
+            $this->key = $key;
+            $this->value = $value;
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
+    protected abstract function doFetch(&$key, &$value);
 }

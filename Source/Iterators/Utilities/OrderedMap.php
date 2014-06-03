@@ -11,7 +11,7 @@ namespace Pinq\Iterators\Utilities;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class OrderedMap implements \Iterator, \ArrayAccess, \Countable
+class OrderedMap extends \Pinq\Iterators\Iterator implements \Pinq\IIterator, \ArrayAccess, \Countable
 {
     /**
      * @var array
@@ -49,9 +49,8 @@ class OrderedMap implements \Iterator, \ArrayAccess, \Countable
             $iterator = \Pinq\Utilities::toIterator($values);
 
             $iterator->rewind();
-            while($iterator->valid()) {
-                $this->set($iterator->key(), $iterator->current());
-                $iterator->next();
+            while($iterator->fetch($key, $value)) {
+                $this->set($key, $value);
             }
         }
     }
@@ -267,28 +266,21 @@ class OrderedMap implements \Iterator, \ArrayAccess, \Countable
     {
         return $this->remove($offset);
     }
-
-    public function key()
+    
+    protected function doFetch(&$key, &$value)
     {
-        return $this->keys[$this->position];
+        if(isset($this->keys[$this->position]) || array_key_exists($this->position, $this->keys)) {
+            $key = $this->keys[$this->position];
+            $value = $this->values[$this->position];
+            $this->position++;
+            
+            return true;
+        }
+        
+        return false;
     }
 
-    public function current()
-    {
-        return $this->values[$this->position];
-    }
-
-    public function next()
-    {
-        $this->position++;
-    }
-
-    public function valid()
-    {
-        return isset($this->keys[$this->position]) || array_key_exists($this->position, $this->keys);
-    }
-
-    public function rewind()
+    public function doRewind()
     {
         $this->position = 0;
     }

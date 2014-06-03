@@ -11,7 +11,7 @@ class UniqueIterator extends OperationIterator
 {
     public function __construct(\Traversable $iterator)
     {
-        parent::__construct($iterator, new \EmptyIterator());
+        parent::__construct($iterator, new EmptyIterator());
     }
 
     protected function setFilter($key, $value, Utilities\Set $seenValues)

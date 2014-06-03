@@ -22,25 +22,16 @@ class ProjectionIterator extends IteratorIterator
     public function __construct(\Traversable $iterator, callable $keyProjectionFunction = null, callable $valueProjectionFunction = null)
     {
         parent::__construct($iterator);
+        
         $this->keyProjectionFunction = $keyProjectionFunction === null ? 
                 null : Utilities\Functions::allowExcessiveArguments($keyProjectionFunction);
         $this->valueProjectionFunction = $valueProjectionFunction === null ?
                 null : Utilities\Functions::allowExcessiveArguments($valueProjectionFunction);
     }
     
-    public function isArrayCompatible()
+    protected function doFetch(&$key, &$value)
     {
-        return $this->keyProjectionFunction === null && parent::isArrayCompatible();
-    }
-    
-    public function requiresKeyMapping()
-    {
-        return $this->keyProjectionFunction !== null || parent::requiresKeyMapping();
-    }
-    
-    protected function fetchInner(\Iterator $iterator, &$key, &$value)
-    {
-        if(parent::fetchInner($iterator, $key, $value)) {
+        if($this->iterator->fetch($key, $value)) {
             $keyFunction = $this->keyProjectionFunction;
             $valueFunction = $this->valueProjectionFunction;
             

@@ -44,18 +44,30 @@ final class Utilities
      */
     public static function toArray(\Traversable $iterator)
     {
-        if ($iterator instanceof \ArrayIterator || $iterator instanceof \ArrayObject) {
+        if ($iterator instanceof \ArrayIterator 
+                || $iterator instanceof \ArrayObject
+                || $iterator instanceof Iterators\ArrayIterator) {
             return $iterator->getArrayCopy();
         }
         
-        return iterator_to_array(new Iterators\ArrayCompatibleIterator($iterator), true);
+        $iterator = self::toIterator($iterator);
+        
+        $array = [];
+        $arrayIterator = new Iterators\ArrayCompatibleIterator($iterator);
+        
+        $arrayIterator->rewind();
+        while($arrayIterator->fetch($key, $value)) {
+            $array[$key] = $value;
+        }
+        
+        return $array;
     }
 
     /**
      * Returns the values as an iterator
      *
      * @param array|\Traversable $traversableOrArray The value
-     * @return \Iterator
+     * @return IIterator
      * @throws PinqException If the value is not a array nor \Traversable
      */
     public static function toIterator($traversableOrArray)
@@ -64,14 +76,14 @@ final class Utilities
             throw PinqException::invalidIterable(__METHOD__, $traversableOrArray);
         }
         
-        if ($traversableOrArray instanceof \Iterator) {
+        if ($traversableOrArray instanceof IIterator) {
             return $traversableOrArray;
         } elseif ($traversableOrArray instanceof \IteratorAggregate) {
-            return $traversableOrArray->getIterator();
+            return self::toIterator($traversableOrArray->getIterator());
         } elseif ($traversableOrArray instanceof \Traversable) {
-            return new \IteratorIterator($traversableOrArray);
+            return new Iterators\IteratorAdapter($traversableOrArray);
         } else {
-            return new \ArrayIterator($traversableOrArray);
+            return new Iterators\ArrayIterator($traversableOrArray);
         }
     }
 
@@ -79,16 +91,16 @@ final class Utilities
      * Iterates the elements with the supplied function.
      * Returning false will break the iteration loop.
      * 
-     * @param \Iterator $iterator
+     * @param IIterator $iterator
      * @param callable $function
      * @return void
      */
-    public static function iteratorWalk(\Iterator $iterator, callable $function)
+    public static function iteratorWalk(IIterator $iterator, callable $function)
     {
         $iterator->rewind();
-        while ($iterator->valid() 
-                && $function($iterator->current(), $iterator->key()) !== false) {
-            $iterator->next();
+        while ($iterator->fetch($key, $value) 
+                && $function($value, $key) !== false) {
+            
         }
     }
 

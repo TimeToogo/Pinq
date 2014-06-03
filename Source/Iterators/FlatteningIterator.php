@@ -17,58 +17,39 @@ class FlatteningIterator extends Iterator
     private $count = 0;
 
     /**
-     * @var \Iterator
+     * @var Pinq\IIterator
      */
-    protected $iterator;
+    protected $outerIterator;
 
     /**
-     * @var \Iterator
+     * @var Pinq\IIterator
      */
-    protected $currentIterator;
+    protected $innerIterator;
 
     public function __construct(\Traversable $iterator)
     {
-        $this->iterator = \Pinq\Utilities::toIterator($iterator);
-        $this->currentIterator = new \EmptyIterator();
-    }
-    
-    public function isArrayCompatible()
-    {
-        return true;
-    }
-    
-    public function requiresKeyMapping()
-    {
-        return false;
+        $this->outerIterator = \Pinq\Utilities::toIterator($iterator);
+        $this->innerIterator = new EmptyIterator();
     }
 
-    public function onRewind()
+    public function doRewind()
     {
         $this->count = 0;
-        $this->iterator->rewind();
+        $this->outerIterator->rewind();
     }
     
-    protected function onNext()
+    protected function doFetch(&$key, &$value)
     {
-        $this->count++;
-        $this->currentIterator->next();
-    }
-    
-    protected function fetch(&$key, &$value)
-    {
-        while (!$this->currentIterator->valid()) {
-            if (!$this->iterator->valid()) {
+        while (!$this->innerIterator->fetch($innerKey, $value)) {
+            if (!$this->outerIterator->fetch($outerKey, $outerValue)) {
                 return false;
             }
 
-            $this->currentIterator = \Pinq\Utilities::toIterator($this->iterator->current());
-            $this->currentIterator->rewind();
-            
-            $this->iterator->next();
+            $this->innerIterator = \Pinq\Utilities::toIterator($outerValue);
+            $this->innerIterator->rewind();
         }
         
-        $key = $this->count;
-        $value = $this->currentIterator->current();
+        $key = $this->count++;
 
         return true;
     }

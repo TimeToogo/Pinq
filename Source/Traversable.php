@@ -13,7 +13,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
     /**
      * The current iterator for the traversable
      *
-     * @var \Iterator
+     * @var IIterator
      */
     protected $valuesIterator;
     
@@ -50,7 +50,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     public function asArray()
     {
-        return Utilities::toArray($this->valuesIterator);
+        return Utilities::toArray($this->toOrderedMap());
     }
     
     public function getTrueIterator()
@@ -298,7 +298,10 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     public function append($values)
     {
-        return static::from(new Iterators\FlatteningIterator(new \ArrayIterator([$this->valuesIterator, Utilities::toIterator($values)])));
+        return static::from(new Iterators\FlatteningIterator(
+                new Iterators\ArrayIterator([
+                    $this->valuesIterator, 
+                    Utilities::toIterator($values)])));
     }
 
     public function whereIn($values)

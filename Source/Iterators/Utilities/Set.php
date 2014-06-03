@@ -106,6 +106,6 @@ class Set implements \IteratorAggregate
 
     public function getIterator()
     {
-        return new \ArrayIterator($this->map->keys());
+        return new \Pinq\Iterators\ArrayIterator($this->map->keys());
     }
 }

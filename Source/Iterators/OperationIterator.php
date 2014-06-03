@@ -25,25 +25,23 @@ abstract class OperationIterator extends IteratorIterator
         parent::__construct($iterator);
         $this->otherIterator = $otherIterator;
     }
-    
-    protected function fetchInner(\Iterator $iterator, &$key, &$value)
+
+    final public function doRewind()
     {
-        while (parent::fetchInner($iterator, $key, $value)) {
-            if ($this->setFilter($key, $value, $this->otherValues)) {
+        $this->otherValues = new Utilities\Set($this->otherIterator);
+        parent::doRewind();
+    }
+    
+    protected function doFetch(&$key, &$value)
+    {
+        while($this->iterator->fetch($key, $value)) {
+            if($this->setFilter($key, $value, $this->otherValues)) {
                 return true;
             }
-
-            $iterator->next();
         }
-
+        
         return false;
     }
 
     abstract protected function setFilter($key, $value, Utilities\Set $otherValues);
-
-    final public function onRewind()
-    {
-        $this->otherValues = new Utilities\Set($this->otherIterator);
-        parent::onRewind();
-    }
 }

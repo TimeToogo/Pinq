@@ -16,23 +16,21 @@ class UnionIterator extends FlatteningIterator
 
     public function __construct(\Traversable $iterator, \Traversable $otherIterator)
     {
-        parent::__construct(new \ArrayIterator([$iterator, $otherIterator]));
+        parent::__construct(new ArrayIterator([$iterator, $otherIterator]));
     }
 
-    public function onRewind()
+    public function doRewind()
     {
         $this->seenValues = new Utilities\Set();
-        parent::onRewind();
+        parent::doRewind();
     }
     
-    protected function fetch(&$key, &$value)
+    protected function doFetch(&$key, &$value)
     {
-        while (parent::fetch($key, $value)) {
+        while (parent::doFetch($key, $value)) {
             if ($this->seenValues->add($value)) {
                 return true;
             }
-            
-            $this->currentIterator->next();
         }
 
         return false;

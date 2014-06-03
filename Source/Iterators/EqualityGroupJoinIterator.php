@@ -35,6 +35,6 @@ class EqualityGroupJoinIterator extends EqualityJoinIteratorBase
     protected function getInnerGroupValueIterator(Utilities\OrderedMap $innerGroup)
     {
         $traversableFactory = $this->traversableFactory;
-        return new \ArrayIterator([$traversableFactory($innerGroup)]);
+        return new ArrayIterator([$traversableFactory($innerGroup)]);
     }
 }

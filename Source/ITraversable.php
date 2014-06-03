@@ -55,7 +55,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Returns an array compatable iterator for the elements.
      * Non scalar keys will be numerically reindexed.
      *
-     * @return \Iterator
+     * @return IIterator
      */
     public function getIterator();
     
@@ -63,7 +63,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Returns an iterator for all the elements.
      * All keys types will remain unaltered.
      *
-     * @return \Iterator
+     * @return IIterator
      */
     public function getTrueIterator();
 

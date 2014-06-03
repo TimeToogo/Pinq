@@ -9,7 +9,7 @@ class LoadableProviderTest extends \Pinq\Tests\PinqTestCase
 {
     public function testThatWillCacheParentScopeAndEvaluateSubscopeInMemory()
     {
-        $values = new \ArrayIterator(range(1, 10));
+        $values = new \Pinq\Iterators\ArrayIterator(range(1, 10));
         
         $requestEvaluatorMock = $this->getMockForAbstractClass('\\Pinq\\Providers\\Loadable\\RequestEvaluator');
         

@@ -58,11 +58,12 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
 
         $flattenedIterator = 
                 new Iterators\FlatteningIterator(
-                        new \ArrayIterator([
+                        new Iterators\ArrayIterator([
                                 $this->valuesIterator, 
                                 Utilities::toIterator($values)]));
         
-        $this->updateValues(new \ArrayIterator(Utilities::toArray($flattenedIterator)));
+        $this->valuesIterator = $flattenedIterator;
+        $this->toOrderedMap();
     }
 
     public function removeRange($values)

@@ -31,33 +31,26 @@ class RangeIterator extends IteratorIterator
         $this->endPosition = $rangeAmount === null ? null : $startAmount + $rangeAmount;
     }
     
-    public function onRewind()
+    public function doRewind()
     {
         $this->position = 0;
-        parent::onRewind();
+        parent::doRewind();
     }
     
-    public function onNext()
+    protected function doFetch(&$key, &$value)
     {
-        parent::onNext();
-        $this->position++;
-    }
-    
-    protected function fetchInner(\Iterator $iterator, &$key, &$value)
-    {
-        while ($this->position < $this->startPosition) {
-            if (!$iterator->valid()) {
+        while ($this->iterator->fetch($key, $value)) {
+            if($this->endPosition !== null && $this->position >= $this->endPosition) {
                 return false;
+            } elseif ($this->position >= $this->startPosition) {
+                $this->position++;
+                return true;
+            } else {
+                $this->position++;
             }
-
-            $iterator->next();
-            $this->position++;
+            
         }
-
-        if ($this->endPosition !== null && $this->position >= $this->endPosition) {
-            return false;
-        }
-
-        return parent::fetchInner($iterator, $key, $value);
+        
+        return false;
     }
 }

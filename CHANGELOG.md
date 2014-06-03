@@ -1,21 +1,21 @@
 dev-master
 ==========
- - Pass indexes to functions with the respective value as second parameter while
+ - Pass values to query functions with their associated key as second parameter while
    maintaining support for single parameter internal functions
  - Proper support for non scalar keys:
     - Restructed conversion to array with ArrayCompatibleIterator, numerically reindexing all non scalar keys
+    - Refactored Iterators\Utilities\*
     - Added ITraversable::iterate to iterate all unaltered values and keys
     - Added ITraversable::keys select the keys and ITraversable::reindex to reindex the values by their 0-based position
     - Added ITraversable::getTrueIterator to get the iterator for all values and unaltered keys
- - Refactored iterator structure, simplifying Iterator::next and Iterator::valid into Iterator::fetch
- - Removed IGroupedTraversable, use ITraversable::groupBy returning an array instead
- - ITraversable::groupBy implicitly indexes the value by the group key
- - Iterators\Utilities\Dictionary support array as keys with identity hash
+ - Refactored iterator structure, simplifying native Iterator API while incurring a nice performance improvement
  - Removed ITraversable::asQueryable, ITraversable::asRepository, updated interfaces annotations
    with covariant return types. ITraversable, ICollection, IQueryable, IRepository should all return
    their respective types for each query method.
  - Moved/Implemented Necessary interfaces (IOrdered*, IJoiningOn*, IJoiningTo*) with covariant 
    return types under Pinq\Interfaces namespace.
+ - Removed IGroupedTraversable, use ITraversable::groupBy returning an array instead
+ - ITraversable::groupBy implicitly indexes each group by the group key
  - Traversable/Collection are now extendable.
  - Refactored ArrayExpression by creating ArrayItemExpression representing each element
  - Refactored OrderBy query segment by representing each function and direction as an OrderedFunction class
