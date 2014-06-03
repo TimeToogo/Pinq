@@ -24,7 +24,7 @@ class SelectManyTest extends TraversableTest
      */
     public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'selectMany'], $data, []);
+        $this->assertThatCalledWithValueAndKeyParametersOnceForEachElementInOrder([$traversable, 'selectMany'], $data, []);
     }
 
     /**

@@ -144,4 +144,28 @@ class SegmentVisitor extends SegmentWalker
     {
 
     }
+
+    public function walkKeys(Keys $query)
+    {
+        $this->visitKeys($query);
+
+        return $query;
+    }
+
+    protected function visitKeys(Keys $query)
+    {
+
+    }
+
+    public function walkReindex(Reindex $query)
+    {
+        $this->visitReindex($query);
+
+        return $query;
+    }
+
+    protected function visitReindex(Reindex $query)
+    {
+
+    }
 }

@@ -107,6 +107,18 @@ interface ICollection extends ITraversable
      * {@inheritDoc}
      * @return ICollection
      */
+    public function keys();
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function reindex();
+
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
     public function groupBy(callable $function);
 
     /**

@@ -24,7 +24,7 @@ class SelectTest extends TraversableTest
      */
     public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'select'], $data);
+        $this->assertThatCalledWithValueAndKeyParametersOnceForEachElementInOrder([$traversable, 'select'], $data);
     }
 
     /**

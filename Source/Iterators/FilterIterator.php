@@ -19,19 +19,22 @@ class FilterIterator extends IteratorIterator
         parent::__construct($iterator);
         $this->filter = Utilities\Functions::allowExcessiveArguments($filter);
     }
-
-    public function valid()
+    
+    protected function fetchInner(\Iterator $iterator, &$key, &$value)
     {
         $filter = $this->filter;
-
-        while (parent::valid()) {
-            if ($filter($this->current(), $this->key())) {
+        
+        while(parent::fetchInner($iterator, $key, $value)) {
+            $keyCopy = $key;
+            $valueCopy = $value;
+            
+            if ($filter($valueCopy, $keyCopy)) {
                 return true;
             }
-
-            parent::next();
+            
+            $iterator->next();
         }
-
+        
         return false;
     }
 }

@@ -9,7 +9,7 @@ namespace Pinq\Iterators;
  */
 class IntersectionIterator extends OperationIterator
 {
-    protected function setFilter($value, Utilities\Set $otherValues)
+    protected function setFilter($key, $value, Utilities\Set $otherValues)
     {
         return $otherValues->remove($value);
     }

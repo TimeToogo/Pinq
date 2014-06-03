@@ -30,6 +30,9 @@ abstract class CollectionTest extends \Pinq\Tests\Integration\DataTest
 
     final protected function implementationsFor(array $data)
     {
-        return [[new \Pinq\Collection($data), $data], [(new \Pinq\Collection($data))->asRepository(), $data]];
+        return [
+            [new \Pinq\Collection($data), $data], 
+            [(new \Pinq\Providers\Collection\Provider(new \Pinq\Collection($data)))->createRepository(), $data]
+        ];
     }
 }

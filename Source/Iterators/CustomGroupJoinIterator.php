@@ -22,6 +22,7 @@ class CustomGroupJoinIterator extends CustomJoinIteratorBase
             callable $traversableFactory = null)
     {
         parent::__construct($outerIterator, $innerIterator, $joinOnFunction, $joiningFunction);
+        
         $this->traversableFactory = $traversableFactory ?: \Pinq\Traversable::factory();
     }
     
@@ -29,7 +30,7 @@ class CustomGroupJoinIterator extends CustomJoinIteratorBase
     {
         $traversableFactory = $this->traversableFactory;
         $groupTraversable = $traversableFactory(
-                new FilterIterator(new \ArrayIterator($this->innerValues), $innerValueFilterFunction));
+                new FilterIterator($this->innerValues, $innerValueFilterFunction));
 
         return new \ArrayIterator([$groupTraversable]);
     }

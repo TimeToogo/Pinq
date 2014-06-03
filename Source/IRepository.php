@@ -73,6 +73,18 @@ interface IRepository extends IQueryable, ICollection
      * {@inheritDoc}
      * @return IRepository
      */
+    public function keys();
+
+    /**
+     * {@inheritDoc}
+     * @return IRepository
+     */
+    public function reindex();
+
+    /**
+     * {@inheritDoc}
+     * @return IRepository
+     */
     public function groupBy(callable $function);
 
     /**

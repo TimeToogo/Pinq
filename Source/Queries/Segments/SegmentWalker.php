@@ -82,4 +82,14 @@ class SegmentWalker
     {
         return $query;
     }
+    
+    public function walkKeys(Keys $query)
+    {
+        return $query;
+    }
+    
+    public function walkReindex(Reindex $query)
+    {
+        return $query;
+    }
 }

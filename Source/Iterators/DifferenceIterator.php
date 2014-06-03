@@ -9,7 +9,7 @@ namespace Pinq\Iterators;
  */
 class DifferenceIterator extends OperationIterator
 {
-    protected function setFilter($value, Utilities\Set $otherValues)
+    protected function setFilter($key, $value, Utilities\Set $otherValues)
     {
         return $otherValues->add($value);
     }

@@ -9,8 +9,8 @@ namespace Pinq\Iterators;
  */
 class EqualityJoinIterator extends EqualityJoinIteratorBase
 {
-    protected function getInnerGroupValueIterator(array $innerGroup)
+    protected function getInnerGroupValueIterator(Utilities\OrderedMap $innerGroup)
     {
-        return new \ArrayIterator($innerGroup);
+        return $innerGroup;
     }
 }

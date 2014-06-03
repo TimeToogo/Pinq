@@ -12,17 +12,23 @@ class Set implements \IteratorAggregate
     /**
      * The dictionary containing the unique values as keys
      *
-     * @var Dictionary<mixed, true>
+     * @var OrderedMap
      */
-    private $dictionary;
+    private $map;
 
     public function __construct($values = null)
     {
-        $this->dictionary = new Dictionary();
-
-        if ($values !== null) {
-            $this->addRange($values);
-        }
+        $this->map = new OrderedMap(
+                $values === null ?
+                null :
+                new \Pinq\Iterators\ProjectionIterator(
+                        $values,
+                        function ($value) {
+                            return $value;
+                        },
+                        function () {
+                            return true;
+                        }));
     }
 
     /**
@@ -33,7 +39,7 @@ class Set implements \IteratorAggregate
      */
     public function contains($value)
     {
-        return $this->dictionary->contains($value);
+        return $this->map->contains($value);
     }
 
     /**
@@ -45,11 +51,11 @@ class Set implements \IteratorAggregate
      */
     public function add($value)
     {
-        if ($this->dictionary->contains($value)) {
+        if ($this->map->contains($value)) {
             return false;
         }
 
-        $this->dictionary->set($value, true);
+        $this->map->set($value, true);
 
         return true;
     }
@@ -63,7 +69,7 @@ class Set implements \IteratorAggregate
     public function addRange($values)
     {
         foreach ($values as $value) {
-            $this->dictionary->set($value, true);
+            $this->map->set($value, true);
         }
     }
 
@@ -76,11 +82,11 @@ class Set implements \IteratorAggregate
      */
     public function remove($value)
     {
-        if (!$this->dictionary->contains($value)) {
+        if (!$this->map->contains($value)) {
             return false;
         }
 
-        $this->dictionary->remove($value);
+        $this->map->remove($value);
 
         return true;
     }
@@ -94,12 +100,12 @@ class Set implements \IteratorAggregate
     public function removeRange($values)
     {
         foreach ($values as $value) {
-            $this->dictionary->remove($value);
+            $this->map->remove($value);
         }
     }
 
     public function getIterator()
     {
-        return $this->dictionary->getIterator();
+        return new \ArrayIterator($this->map->keys());
     }
 }

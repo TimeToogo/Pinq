@@ -13,6 +13,7 @@ class EqualityGroupJoinIterator extends EqualityJoinIteratorBase
      * @var callable
      */
     private $traversableFactory;
+    
     public function __construct(
             \Traversable $outerIterator, 
             \Traversable $innerIterator, 
@@ -31,7 +32,7 @@ class EqualityGroupJoinIterator extends EqualityJoinIteratorBase
         $this->traversableFactory = $traversableFactory ?: \Pinq\Traversable::factory();
     }
     
-    protected function getInnerGroupValueIterator(array $innerGroup)
+    protected function getInnerGroupValueIterator(Utilities\OrderedMap $innerGroup)
     {
         $traversableFactory = $this->traversableFactory;
         return new \ArrayIterator([$traversableFactory($innerGroup)]);

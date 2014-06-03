@@ -23,46 +23,41 @@ class RangeIterator extends IteratorIterator
      * @var int|null
      */
     private $endPosition;
-
-    /**
-     * @param integer $startAmount
-     * @param null|integer $rangeAmount
-     */
+    
     public function __construct(\Traversable $iterator, $startAmount, $rangeAmount)
     {
         parent::__construct($iterator);
         $this->startPosition = $startAmount;
         $this->endPosition = $rangeAmount === null ? null : $startAmount + $rangeAmount;
     }
-
-    public function next()
-    {
-        $this->position++;
-
-        return parent::next();
-    }
-
-    public function rewind()
+    
+    public function onRewind()
     {
         $this->position = 0;
-
-        return parent::rewind();
+        parent::onRewind();
     }
-
-    public function valid()
+    
+    public function onNext()
+    {
+        parent::onNext();
+        $this->position++;
+    }
+    
+    protected function fetchInner(\Iterator $iterator, &$key, &$value)
     {
         while ($this->position < $this->startPosition) {
-            if (!parent::valid()) {
+            if (!$iterator->valid()) {
                 return false;
             }
 
-            $this->next();
+            $iterator->next();
+            $this->position++;
         }
 
         if ($this->endPosition !== null && $this->position >= $this->endPosition) {
             return false;
         }
 
-        return parent::valid();
+        return parent::fetchInner($iterator, $key, $value);
     }
 }

@@ -17,7 +17,7 @@ class WhereTest extends TraversableTest
      */
     public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'where'], $data);
+        $this->assertThatCalledWithValueAndKeyParametersOnceForEachElementInOrder([$traversable, 'where'], $data);
     }
 
     /**

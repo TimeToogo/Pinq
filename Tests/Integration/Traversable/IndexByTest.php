@@ -24,7 +24,7 @@ class IndexByTest extends TraversableTest
      */
     public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'indexBy'], $data);
+        $this->assertThatCalledWithValueAndKeyParametersOnceForEachElementInOrder([$traversable, 'indexBy'], $data);
     }
 
     /**
@@ -40,7 +40,7 @@ class IndexByTest extends TraversableTest
     /**
      * @dataProvider everything
      */
-    public function testThatIndexByNullReturnsLastArrayWithLastElement(\Pinq\ITraversable $traversable, array $data)
+    public function testThatIndexByNullReturnsArrayWithLastElement(\Pinq\ITraversable $traversable, array $data)
     {
         $indexedElements = $traversable->indexBy(function () { return null; });
 

@@ -16,7 +16,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
      * @var \Iterator
      */
     protected $valuesIterator;
-
+    
     public function __construct($values = [])
     {
         $this->valuesIterator = Utilities::toIterator($values);
@@ -45,15 +45,17 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     final public function getIterator()
     {
-        return $this->valuesIterator;
+        return new Iterators\ArrayCompatibleIterator($this->valuesIterator);
     }
 
     public function asArray()
     {
-        $array = Utilities::toArray($this->valuesIterator);
-        $this->valuesIterator = new \ArrayIterator($array);
-
-        return $array;
+        return Utilities::toArray($this->valuesIterator);
+    }
+    
+    public function getTrueIterator()
+    {
+        return $this->valuesIterator;
     }
 
     public function asTraversable()
@@ -65,15 +67,32 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
     {
         return new Collection($this->valuesIterator);
     }
+    
+    /**
+     * @return Iterators\Utilities\OrderedMap
+     */
+    final protected function toOrderedMap()
+    {
+        if(!($this->valuesIterator instanceof Iterators\Utilities\OrderedMap)) {
+            $this->valuesIterator = new Iterators\Utilities\OrderedMap($this->valuesIterator);
+        }
+        
+        return $this->valuesIterator;
+    }
+    
+    public function iterate(callable $function)
+    {
+        Utilities::iteratorWalk($this->valuesIterator, $function);
+    }
 
     public function serialize()
     {
-        return serialize($this->asArray());
+        return serialize($this->toOrderedMap());
     }
 
     public function unserialize($serialized)
     {
-        $this->valuesIterator = new \ArrayIterator(unserialize($serialized));
+        $this->valuesIterator = unserialize($serialized);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Querying">
@@ -123,7 +142,8 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
      */
     private function validateIsOrdered($method)
     {
-        if (!($this->valuesIterator instanceof Iterators\OrderedIterator)) {
+        $innerIterator = $this->valuesIterator;
+        if (!($innerIterator instanceof Iterators\OrderedIterator)) {
             throw new PinqException(
                     'Invalid call to %s: %s::%s must be called first.',
                     $method,
@@ -131,7 +151,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
                     'orderBy');
         }
 
-        return $this->valuesIterator;
+        return $innerIterator;
     }
     
     public function thenBy(callable $function, $direction)
@@ -171,6 +191,32 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
         return static::from(new Iterators\ProjectionIterator(
                 $this->valuesIterator,
                 $function,
+                null));
+    }
+    
+    private function reindexer()
+    {
+        $count = 0;
+        return function () use (&$count) {
+            return $count++;
+        };
+    }
+    
+    public function keys()
+    {
+        return static::from(new Iterators\ProjectionIterator(
+                $this->valuesIterator, 
+                $this->reindexer(), 
+                function ($value, $key) {
+                    return $key;
+                }));
+    }
+    
+    public function reindex()
+    {
+        return static::from(new Iterators\ProjectionIterator(
+                $this->valuesIterator, 
+                $this->reindexer(), 
                 null));
     }
 
@@ -248,7 +294,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Operations">
+    // <editor-fold defaultstate="collapsed" desc="Multiset Operations">
 
     public function append($values)
     {
@@ -275,12 +321,12 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     public function offsetExists($index)
     {
-        return $this->valuesIterator instanceof \ArrayAccess ? $this->valuesIterator->offsetExists($index) : isset($this->asArray()[$index]);
+        return $this->toOrderedMap()->offsetExists($index);
     }
 
     public function offsetGet($index)
     {
-        return $this->valuesIterator instanceof \ArrayAccess ? $this->valuesIterator->offsetGet($index) : $this->asArray()[$index];
+        return $this->toOrderedMap()->offsetGet($index);
     }
 
     public function offsetSet($index, $value)
@@ -299,7 +345,8 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     public function count()
     {
-        return $this->valuesIterator instanceof \Countable ? $this->valuesIterator->count() : count($this->asArray());
+        return $this->valuesIterator instanceof \Countable ? 
+                $this->valuesIterator->count() : $this->toOrderedMap()->count();
     }
 
     public function exists()
@@ -347,9 +394,10 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
         } else {
             $mappedArray = [];
             $function = Iterators\Utilities\Functions::allowExcessiveArguments($function);
-            foreach($this->asArray() as $key => $value) {
-                $mappedArray[$key] = $function($value, $key);
-            }
+            
+            $this->iterate(function ($value, $key) use($function, &$mappedArray) {
+                $mappedArray[] = $function($value, $key);
+            });
             
             return $mappedArray;
         }

@@ -19,31 +19,31 @@ abstract class OperationIterator extends IteratorIterator
      * @var Utilities\Set
      */
     private $otherValues;
-
+    
     public function __construct(\Traversable $iterator, \Traversable $otherIterator)
     {
         parent::__construct($iterator);
         $this->otherIterator = $otherIterator;
     }
-
-    final public function valid()
+    
+    protected function fetchInner(\Iterator $iterator, &$key, &$value)
     {
-        while (parent::valid()) {
-            if ($this->setFilter($this->current(), $this->otherValues)) {
+        while (parent::fetchInner($iterator, $key, $value)) {
+            if ($this->setFilter($key, $value, $this->otherValues)) {
                 return true;
             }
 
-            parent::next();
+            $iterator->next();
         }
 
         return false;
     }
 
-    abstract protected function setFilter($value, Utilities\Set $otherValues);
+    abstract protected function setFilter($key, $value, Utilities\Set $otherValues);
 
-    final public function rewind()
+    final public function onRewind()
     {
         $this->otherValues = new Utilities\Set($this->otherIterator);
-        parent::rewind();
+        parent::onRewind();
     }
 }

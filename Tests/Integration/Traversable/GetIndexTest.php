@@ -10,7 +10,54 @@ class GetIndexTest extends TraversableTest
     public function testThatIndexReturnsCorrectValue(\Pinq\ITraversable $traversable, array $data)
     {
         foreach ($data as $key => $value) {
-            $this->assertEquals($value, $traversable[$key]);
+            $this->assertSame($value, $traversable[$key]);
+        }
+    }
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testThatIndexesSupportObjectKeys(\Pinq\ITraversable $traversable, array $data)
+    {
+        //Collect object references
+        $instances = [];
+        
+        $traversable = $traversable->indexBy(function ($value, $key) use (&$instances) {
+            $instances[$key] = (object)['bar' => $key];
+            
+            return $instances[$key];
+        });
+        
+        //Load instance keys
+        $traversable->asArray();
+        
+        foreach ($data as $key => $value) {
+            //Not should be using object identity (reference type)
+            $this->assertFalse(isset($traversable[(object)['bar' => $key]]));
+            
+            $this->assertTrue(isset($traversable[$instances[$key]]));
+            $this->assertSame($value, $traversable[$instances[$key]]);
+        }
+    }
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testThatIndexesSupportArrayKeys(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable = $traversable->indexBy(function ($value, $key) {
+            return ['foo' => $key, 2 => 3];
+        });
+        
+        foreach ($data as $key => $value) {
+            //Arrays are value types, no reference required
+            $this->assertTrue(isset($traversable[['foo' => $key, 2 => 3]]));
+            $this->assertSame($value, $traversable[['foo' => $key, 2 => 3]]);
+            
+            $this->assertFalse(isset($traversable[['foo' => $key, 2 => '3']]), 
+                    'Should be using strict equality for arrays (order matters)');
+            $this->assertFalse(isset($traversable[[2 => 3, 'foo' => $key]]), 
+                    'Should be using strict equality for arrays (order matters)');
         }
     }
 }

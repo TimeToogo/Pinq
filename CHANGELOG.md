@@ -2,6 +2,12 @@ dev-master
 ==========
  - Pass indexes to functions with the respective value as second parameter while
    maintaining support for single parameter internal functions
+ - Proper support for non scalar keys:
+    - Restructed conversion to array with ArrayCompatibleIterator, numerically reindexing all non scalar keys
+    - Added ITraversable::iterate to iterate all unaltered values and keys
+    - Added ITraversable::keys select the keys and ITraversable::reindex to reindex the values by their 0-based position
+    - Added ITraversable::getTrueIterator to get the iterator for all values and unaltered keys
+ - Refactored iterator structure, simplifying Iterator::next and Iterator::valid into Iterator::fetch
  - Removed IGroupedTraversable, use ITraversable::groupBy returning an array instead
  - ITraversable::groupBy implicitly indexes the value by the group key
  - Iterators\Utilities\Dictionary support array as keys with identity hash
@@ -12,6 +18,8 @@ dev-master
    return types under Pinq\Interfaces namespace.
  - Traversable/Collection are now extendable.
  - Refactored ArrayExpression by creating ArrayItemExpression representing each element
+ - Refactored OrderBy query segment by representing each function and direction as an OrderedFunction class
+ - 
 
 2.1.1 (22/5/14)
 ===============

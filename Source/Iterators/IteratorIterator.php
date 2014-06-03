@@ -4,15 +4,13 @@ namespace Pinq\Iterators;
 
 /**
  * Base class for wrapper iterators.
- * The native implemenation was producing some weird results, I think it is
- * related to http://blog.ircmaxell.com/2011/10/iteratoriterator-php-inconsistencies.html
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class IteratorIterator implements \Iterator
+class IteratorIterator extends Iterator implements \Iterator
 {
     /**
-     * @var \Iterator
+     * @var Iterator
      */
     private $iterator;
 
@@ -21,33 +19,35 @@ class IteratorIterator implements \Iterator
         $this->iterator = \Pinq\Utilities::toIterator($iterator);
     }
 
-    public function getInnerIterator()
+    final public function getInnerIterator()
     {
         return $this->iterator;
     }
 
-    public function current()
+    public function onRewind()
     {
-        return $this->iterator->current();
+        $this->iterator->rewind();
     }
 
-    public function key()
+    public function onNext()
     {
-        return $this->iterator->key();
+        $this->iterator->next();
     }
-
-    public function next()
+    
+    final protected function fetch(&$key, &$value)
     {
-        return $this->iterator->next();
+        return $this->fetchInner($this->iterator, $key, $value);
     }
-
-    public function rewind()
+    
+    protected function fetchInner(\Iterator $iterator, &$key, &$value)
     {
-        return $this->iterator->rewind();
-    }
-
-    public function valid()
-    {
-        return $this->iterator->valid();
+        $valid = $iterator->valid();
+        
+        if($valid) {
+            $key = $iterator->key();
+            $value = $iterator->current();
+        }
+        
+        return $valid;
     }
 }

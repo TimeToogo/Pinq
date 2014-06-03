@@ -9,9 +9,17 @@ namespace Pinq\Iterators;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class FlatteningIterator extends IteratorIterator
+class FlatteningIterator extends Iterator
 {
+    /**
+     * @var int
+     */
     private $count = 0;
+
+    /**
+     * @var \Iterator
+     */
+    protected $iterator;
 
     /**
      * @var \Iterator
@@ -20,52 +28,48 @@ class FlatteningIterator extends IteratorIterator
 
     public function __construct(\Traversable $iterator)
     {
-        parent::__construct($iterator);
-        $this->currentIterator = new \ArrayIterator([]);
+        $this->iterator = \Pinq\Utilities::toIterator($iterator);
+        $this->currentIterator = new \EmptyIterator();
     }
-
-    public function current()
+    
+    public function isArrayCompatible()
     {
-        return $this->currentIterator->current();
+        return true;
     }
-
-    public function key()
+    
+    public function requiresKeyMapping()
     {
-        return $this->count;
+        return false;
     }
 
-    public function next()
+    public function onRewind()
+    {
+        $this->count = 0;
+        $this->iterator->rewind();
+    }
+    
+    protected function onNext()
     {
         $this->count++;
         $this->currentIterator->next();
     }
-
-    public function valid()
+    
+    protected function fetch(&$key, &$value)
     {
         while (!$this->currentIterator->valid()) {
-            parent::next();
-
-            if (!parent::valid()) {
+            if (!$this->iterator->valid()) {
                 return false;
             }
 
-            $this->loadCurrentIterator();
+            $this->currentIterator = \Pinq\Utilities::toIterator($this->iterator->current());
+            $this->currentIterator->rewind();
+            
+            $this->iterator->next();
         }
+        
+        $key = $this->count;
+        $value = $this->currentIterator->current();
 
         return true;
-    }
-
-    private function loadCurrentIterator()
-    {
-        $this->currentIterator = 
-                parent::valid() ? \Pinq\Utilities::toIterator(parent::current()) : new \EmptyIterator();
-        $this->currentIterator->rewind();
-    }
-
-    public function rewind()
-    {
-        $this->count = 0;
-        parent::rewind();
-        $this->loadCurrentIterator();
     }
 }

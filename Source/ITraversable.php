@@ -43,6 +43,31 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     public function asCollection();
 
     /**
+     * Iterates the elements with the supplied function.
+     * Returning false will break the iteration loop
+     *
+     * @param callable $function The iteration function, parameters are passed as ($value, $key)
+     * @return void
+     */
+    public function iterate(callable $function);
+
+    /**
+     * Returns an array compatable iterator for the elements.
+     * Non scalar keys will be numerically reindexed.
+     *
+     * @return \Iterator
+     */
+    public function getIterator();
+    
+    /**
+     * Returns an iterator for all the elements.
+     * All keys types will remain unaltered.
+     *
+     * @return \Iterator
+     */
+    public function getTrueIterator();
+
+    /**
      * Returns the first value, null if empty
      *
      * @return mixed The first value
@@ -119,7 +144,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     public function take($amount);
 
     /**
-     * Retrieve a slice of the values
+     * Retrieve a slice of the values.
      *
      * @param  int        $start  The amount of values to skip
      * @param  int|null   $amount The amount of values to retrieve
@@ -129,11 +154,26 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
 
     /**
      * Index the values according to the supplied mapping function.
+     * All duplicate indexes will return the first associated value.
      *
      * @param  callable   $function The projection function
      * @return ITraversable
      */
     public function indexBy(callable $function);
+
+    /**
+     * Selects the keys (numerically indexed by their 0-based position).
+     *
+     * @return ITraversable
+     */
+    public function keys();
+
+    /**
+     * Reindexes the values (numerically reindexed by their 0-based position).
+     *
+     * @return ITraversable
+     */
+    public function reindex();
 
     /**
      * Groups values according the supplied function. (Uses strict equality '===')

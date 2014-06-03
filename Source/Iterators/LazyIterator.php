@@ -33,49 +33,13 @@ abstract class LazyIterator extends IteratorIterator
     }
 
     abstract protected function initializeIterator(\Traversable $innerIterator);
-
-    public function getInnerIterator()
+    
+    public function onRewind()
     {
         if (!$this->isInitialized) {
             $this->initialize();
         }
-
-        return parent::getInnerIterator();
-    }
-
-    public function current()
-    {
-        if (!$this->isInitialized) {
-            $this->initialize();
-        }
-
-        return parent::current();
-    }
-
-    public function key()
-    {
-        if (!$this->isInitialized) {
-            $this->initialize();
-        }
-
-        return parent::key();
-    }
-
-    public function next()
-    {
-        if (!$this->isInitialized) {
-            $this->initialize();
-        }
-
-        return parent::next();
-    }
-
-    public function rewind()
-    {
-        if (!$this->isInitialized) {
-            $this->initialize();
-        }
-
-        return parent::rewind();
+        
+        parent::onRewind();
     }
 }

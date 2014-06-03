@@ -25,8 +25,8 @@ class OrderByTest extends TraversableTest
      */
     public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'orderByAscending'], $data);
-        $this->assertThatCalledWithValueAndKeyParameters([$traversable, 'orderByDescending'], $data);
+        $this->assertThatCalledWithValueAndKeyParametersOnceForEachElementInOrder([$traversable, 'orderByAscending'], $data);
+        $this->assertThatCalledWithValueAndKeyParametersOnceForEachElementInOrder([$traversable, 'orderByDescending'], $data);
     }
 
     /**
@@ -225,5 +225,45 @@ class OrderByTest extends TraversableTest
         $this->assertSame(
                 $orderedNames->asArray(),
                 $otherOrderedNames->asArray());
+    }
+
+    public function dates()
+    {
+        return $this->getImplementations([
+            new \DateTime('2000-1-1'),
+            new \DateTime('2001-1-1'),
+            new \DateTime('2002-1-1'),
+            new \DateTime('2003-1-1'),
+            new \DateTime('2004-1-1'),
+            new \DateTime('2005-1-1'),
+        ]);
+    }
+
+    /**
+     * @dataProvider dates
+     */
+    public function testThatOrderByOrdersDatesCorrectly(\Pinq\ITraversable $dates, array $data)
+    {
+        $years = $dates
+                ->orderByAscending(function (\DateTime $date) { return $date; })
+                ->select(function (\DateTime $date) { return $date->format('Y'); })
+                ->implode(':');
+                
+        $this->assertSame('2000:2001:2002:2003:2004:2005', $years);
+    }
+
+    /**
+     * @dataProvider dates
+     */
+    public function testThatOrderByMaintainsNonScalarKeys(\Pinq\ITraversable $dates, array $data)
+    {
+        $years = $dates
+                ->indexBy(function (\DateTime $date) { return $date; })
+                ->select(function (\DateTime $date) { return (int)$date->format('Y'); })
+                ->orderByDescending(function ($year, \DateTime $date) { return $year; })
+                ->select(function ($year, \DateTime $date) { return $date->format('Y'); })
+                ->implode(':');
+                
+        $this->assertSame('2005:2004:2003:2002:2001:2000', $years);
     }
 }

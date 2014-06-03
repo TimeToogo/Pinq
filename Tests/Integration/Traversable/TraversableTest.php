@@ -34,7 +34,7 @@ abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
         }
     }
     
-    final protected function assertThatCalledWithValueAndKeyParameters(callable $traversableQuery, array $data, $returnValue = null)
+    final protected function assertThatCalledWithValueAndKeyParametersOnceForEachElementInOrder(callable $traversableQuery, array $data, $returnValue = null)
     {
         reset($data);
         $traversable = $traversableQuery(function ($value, $key) use (&$data, $returnValue) {

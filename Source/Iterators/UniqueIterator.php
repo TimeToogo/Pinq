@@ -11,10 +11,10 @@ class UniqueIterator extends OperationIterator
 {
     public function __construct(\Traversable $iterator)
     {
-        parent::__construct($iterator, new \ArrayIterator());
+        parent::__construct($iterator, new \EmptyIterator());
     }
 
-    protected function setFilter($value, Utilities\Set $seenValues)
+    protected function setFilter($key, $value, Utilities\Set $seenValues)
     {
         return $seenValues->add($value);
     }

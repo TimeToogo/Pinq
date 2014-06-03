@@ -44,23 +44,29 @@ class OrderedIterator extends LazyIterator
 
     protected function initializeIterator(\Traversable $innerIterator)
     {
-        $array = \Pinq\Utilities::toArray($innerIterator);
+        $map = new Utilities\OrderedMap($innerIterator);
+        
+        $keys = $map->keys();
+        $values = $map->values();
+        
         $multisortArguments = [];
 
         foreach ($this->orderByFunctions as $functionKey => $orderFunction) {
-            $orderColumnValues = [];
-            foreach($array as $key => $value) {
-                $orderColumnValues[$key] = $orderFunction($value, $key);
-            }
+            $orderColumnValues = $map->mapToArray($orderFunction);
+            
             $multisortArguments[] =& $orderColumnValues;
             $multisortArguments[] = $this->isAscendingArray[$functionKey] ? SORT_ASC : SORT_DESC;
             $multisortArguments[] = SORT_REGULAR;
             unset($orderColumnValues);
         }
 
-        self::multisortPreserveKeys($multisortArguments, $array);
+        $orderedValues = self::multisortPreserveKeys($multisortArguments, $values);
+        $orderedKeys = [];
+        foreach($orderedValues as $position => $value) {
+            $orderedKeys[$position] = $keys[$position];
+        }
 
-        return new \ArrayIterator($array);
+        return Utilities\OrderedMap::from($orderedKeys, $orderedValues);
     }
 
     private static function multisortPreserveKeys(array $orderArguments, array &$arrayToSort)
@@ -92,6 +98,6 @@ class OrderedIterator extends LazyIterator
             $unserializedKeyArray[substr($key, 1)] = $value;
         }
 
-        $arrayToSort = $unserializedKeyArray;
+        return $unserializedKeyArray;
     }
 }

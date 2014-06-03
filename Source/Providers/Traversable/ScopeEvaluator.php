@@ -117,6 +117,16 @@ class ScopeEvaluator extends Segments\SegmentVisitor
     {
         $this->traversable = $this->traversable->indexBy($query->getFunctionExpressionTree());
     }
+    
+    protected function visitKeys(Segments\Keys $query)
+    {
+        $this->traversable = $this->traversable->keys();
+    }
+    
+    protected function visitReindex(Segments\Reindex $query)
+    {
+        $this->traversable = $this->traversable->reindex();
+    }
 
     public function visitOperation(Segments\Operation $query)
     {

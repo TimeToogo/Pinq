@@ -12,7 +12,7 @@ class CustomJoinIterator extends CustomJoinIteratorBase
     protected function getInnerGroupValuesIterator(callable $innerValueFilterFunction)
     {
         return new FilterIterator(
-                new \ArrayIterator($this->innerValues),
+                $this->innerValues,
                 $innerValueFilterFunction);
     }
 }

@@ -82,6 +82,18 @@ interface IQueryable extends ITraversable
      * {@inheritDoc}
      * @return IQueryable
      */
+    public function keys();
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function reindex();
+
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
     public function groupBy(callable $function);
 
     /**

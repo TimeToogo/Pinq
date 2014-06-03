@@ -7,7 +7,7 @@ namespace Pinq\Iterators;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-abstract class JoinIteratorBase implements \Iterator
+abstract class JoinIteratorBase extends Iterator implements \Iterator
 {
     /**
      * @var int
@@ -49,6 +49,11 @@ abstract class JoinIteratorBase implements \Iterator
      */
     protected $joiningFunction;
 
+    /**
+     * @var mixed
+     */
+    protected $value;
+
     public function __construct(\Traversable $outerIterator, \Traversable $innerIterator, callable $joiningFunction)
     {
         $this->outerIterator = \Pinq\Utilities::toIterator($outerIterator);
@@ -56,50 +61,7 @@ abstract class JoinIteratorBase implements \Iterator
         $this->joiningFunction = Utilities\Functions::allowExcessiveArguments($joiningFunction);
     }
 
-    final public function key()
-    {
-        return $this->count;
-    }
-
-    final public function current()
-    {
-        $joiningFunction = $this->joiningFunction;
-
-        return $joiningFunction(
-                $this->currentOuterValue, 
-                $this->currentInnerGroupIterator->current(),
-                $this->currentOuterKey,
-                $this->currentInnerGroupIterator->key());
-    }
-
-    final public function next()
-    {
-        $this->currentInnerGroupIterator->next();
-        $this->count++;
-    }
-
-    final public function valid()
-    {
-        while (!$this->currentInnerGroupIterator->valid()) {
-            if (!$this->outerIterator->valid()) {
-                return false;
-            }
-
-            $this->currentOuterValue = $this->outerIterator->current();
-            $this->currentOuterKey = $this->outerIterator->key();
-            $this->currentInnerGroupIterator = $this->getInnerGroupIterator($this->currentOuterValue, $this->currentOuterKey);
-            $this->outerIterator->next();
-        }
-
-        return true;
-    }
-
-    /**
-     * @return \Iterator
-     */
-    abstract protected function getInnerGroupIterator($outerValue, $outerKey);
-
-    public function rewind()
+    public function onRewind()
     {
         if (!$this->isInitialized) {
             $this->initialize();
@@ -108,9 +70,46 @@ abstract class JoinIteratorBase implements \Iterator
         
         $this->currentOuterValue = null;
         $this->outerIterator->rewind();
-        $this->currentInnerGroupIterator = new \ArrayIterator();
+        $this->currentInnerGroupIterator = new \EmptyIterator();
         $this->count = 0;
     }
 
     abstract protected function initialize();
+
+    final public function onNext()
+    {
+        $this->currentInnerGroupIterator->next();
+        $this->count++;
+    }
+    
+    protected function fetch(&$key, &$value)
+    {
+        while (!$this->currentInnerGroupIterator->valid()) {
+            if (!$this->outerIterator->valid()) {
+                return false;
+            }
+
+            $this->currentOuterKey = $this->outerIterator->key();
+            $this->currentOuterValue = $this->outerIterator->current();
+            $this->currentInnerGroupIterator = $this->getInnerGroupIterator($this->currentOuterValue, $this->currentOuterKey);
+            $this->currentInnerGroupIterator->rewind();
+            $this->outerIterator->next();
+        }
+        
+        $joiningFunction = $this->joiningFunction;
+        
+        $key = $this->count;
+        $value = $joiningFunction(
+                $this->currentOuterValue, 
+                $this->currentInnerGroupIterator->current(),
+                $this->currentOuterKey,
+                $this->currentInnerGroupIterator->key());
+        
+        return true;
+    }
+
+    /**
+     * @return \Iterator
+     */
+    abstract protected function getInnerGroupIterator($outerValue, $outerKey);
 }

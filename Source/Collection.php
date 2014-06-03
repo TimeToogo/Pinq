@@ -18,28 +18,36 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
     {
         return $this;
     }
-
-    public function asRepository()
+    
+    private function updateValues(\Iterator $values = null)
     {
-        return (new Providers\Collection\Provider($this))->createRepository();
+        $this->valuesIterator = $values instanceof Iterators\Utilities\OrderedMap ? 
+                $values : new Iterators\Utilities\OrderedMap($values);
     }
 
     public function clear()
     {
-        $this->valuesIterator = new \EmptyIterator();
+        $this->updateValues(new \EmptyIterator());
     }
 
     public function apply(callable $function)
     {
-        $array = $this->asArray();
-
         //Fix for being unable to pass a variable number of args by ref
         if ($function instanceof FunctionExpressionTree) {
             $function = $function->getCompiledFunction();
         }
+        
+        $function = Iterators\Utilities\Functions::allowExcessiveArguments($function);
+        
+        $values = [];
+        
+        $orderedMap = $this->toOrderedMap();
+        $this->iterate(function ($value, $key) use (&$values, $function) {
+            $function($value, $key);
+            $values[] = $value;
+        });
 
-        array_walk($array, $function);
-        $this->valuesIterator = new \ArrayIterator($array);
+        $this->valuesIterator = Iterators\Utilities\OrderedMap::from($orderedMap->keys(), $values);
     }
 
     public function addRange($values)
@@ -48,8 +56,13 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
             throw PinqException::invalidIterable(__METHOD__, $values);
         }
 
-        $flattenedIterator = new Iterators\FlatteningIterator(new \ArrayIterator([$this->valuesIterator, Utilities::toIterator($values)]));
-        $this->valuesIterator = new \ArrayIterator(Utilities::toArray($flattenedIterator));
+        $flattenedIterator = 
+                new Iterators\FlatteningIterator(
+                        new \ArrayIterator([
+                                $this->valuesIterator, 
+                                Utilities::toIterator($values)]));
+        
+        $this->updateValues(new \ArrayIterator(Utilities::toArray($flattenedIterator)));
     }
 
     public function removeRange($values)
@@ -57,46 +70,35 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
         if (!Utilities::isIterable($values)) {
             throw PinqException::invalidIterable(__METHOD__, $values);
         }
-
-        $exceptIterator =
+        
+        $this->updateValues(
                 new Iterators\ExceptIterator(
                         $this->valuesIterator,
-                        Utilities::toIterator($values));
-        $this->valuesIterator = new \ArrayIterator(Utilities::toArray($exceptIterator));
+                        Utilities::toIterator($values)));
     }
 
     public function removeWhere(callable $predicate)
     {
-        $array = $this->asArray();
-
-        foreach ($array as $key => $value) {
-            if ($predicate($value, $key)) {
-                unset($array[$key]);
+        $keys = [];
+        $values = [];
+        
+        $this->iterate(function ($value, $key) use (&$values, &$keys, $predicate) {
+            if(!$predicate($value, $key)) {
+                $values[] = $value;
+                $keys[] = $key;
             }
-        }
+        });
 
-        $this->valuesIterator = new \ArrayIterator($array);
+        $this->valuesIterator = Iterators\Utilities\OrderedMap::from($keys, $values);
     }
 
     public function offsetSet($index, $value)
     {
-        if ($this->valuesIterator instanceof \ArrayAccess) {
-            $this->valuesIterator->offsetSet($index, $value);
-        } else {
-            $array = $this->asArray();
-            $array[$index] = $value;
-            $this->valuesIterator = new \ArrayIterator($array);
-        }
+        $this->toOrderedMap()->offsetSet($index, $value);
     }
 
     public function offsetUnset($index)
     {
-        if ($this->valuesIterator instanceof \ArrayAccess) {
-            $this->valuesIterator->offsetUnset($index);
-        } else {
-            $array = $this->asArray();
-            unset($array[$index]);
-            $this->valuesIterator = new \ArrayIterator($array);
-        }
+        $this->toOrderedMap()->offsetUnset($index);
     }
 }

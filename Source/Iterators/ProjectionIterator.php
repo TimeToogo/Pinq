@@ -27,18 +27,43 @@ class ProjectionIterator extends IteratorIterator
         $this->valueProjectionFunction = $valueProjectionFunction === null ?
                 null : Utilities\Functions::allowExcessiveArguments($valueProjectionFunction);
     }
-
-    public function key()
+    
+    public function isArrayCompatible()
     {
-        $function = $this->keyProjectionFunction;
-
-        return $function === null ? parent::key() : $function(parent::current(), parent::key());
+        return $this->keyProjectionFunction === null && parent::isArrayCompatible();
     }
-
-    public function current()
+    
+    public function requiresKeyMapping()
     {
-        $function = $this->valueProjectionFunction;
+        return $this->keyProjectionFunction !== null || parent::requiresKeyMapping();
+    }
+    
+    protected function fetchInner(\Iterator $iterator, &$key, &$value)
+    {
+        if(parent::fetchInner($iterator, $key, $value)) {
+            $keyFunction = $this->keyProjectionFunction;
+            $valueFunction = $this->valueProjectionFunction;
+            
+            $keyCopy = $key;
+            $valueCopy = $value;
+            
+            if($keyFunction !== null) {
+                $keyCopyForKey = $keyCopy;
+                $valueCopyForKey = $valueCopy;
 
-        return $function === null ? parent::current() : $function(parent::current(), parent::key());
+                $key = $keyFunction($valueCopyForKey, $keyCopyForKey);
+            }
+            
+            if($valueFunction !== null) {
+                $keyCopyForValue = $keyCopy;
+                $valueCopyForValue = $valueCopy;
+
+                $value = $valueFunction($valueCopyForValue, $keyCopyForValue);
+            }
+            
+            return true;
+        }
+        
+        return false;
     }
 }

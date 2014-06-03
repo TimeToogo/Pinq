@@ -10,11 +10,6 @@ namespace Pinq\Iterators;
 class UnionIterator extends FlatteningIterator
 {
     /**
-     * @var int
-     */
-    private $count = 0;
-
-    /**
      * @var Utilities\Set
      */
     private $seenValues;
@@ -22,35 +17,22 @@ class UnionIterator extends FlatteningIterator
     public function __construct(\Traversable $iterator, \Traversable $otherIterator)
     {
         parent::__construct(new \ArrayIterator([$iterator, $otherIterator]));
-        $this->seenValues = new Utilities\Set();
     }
 
-    public function key()
-    {
-        return $this->count;
-    }
-
-    public function rewind()
+    public function onRewind()
     {
         $this->seenValues = new Utilities\Set();
-        $this->count = 0;
-        parent::rewind();
+        parent::onRewind();
     }
-
-    public function next()
+    
+    protected function fetch(&$key, &$value)
     {
-        $this->count++;
-        parent::next();
-    }
-
-    public function valid()
-    {
-        while (parent::valid()) {
-            if ($this->seenValues->add(parent::current())) {
+        while (parent::fetch($key, $value)) {
+            if ($this->seenValues->add($value)) {
                 return true;
             }
-
-            parent::next();
+            
+            $this->currentIterator->next();
         }
 
         return false;

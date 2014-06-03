@@ -17,7 +17,7 @@ abstract class CustomJoinIteratorBase extends JoinIteratorBase
     protected $joinOnFunction;
 
     /**
-     * @var array
+     * @var Utilities\OrderedMap
      */
     protected $innerValues;
 
@@ -29,7 +29,7 @@ abstract class CustomJoinIteratorBase extends JoinIteratorBase
 
     final protected function initialize()
     {
-        $this->innerValues = \Pinq\Utilities::toArray($this->innerIterator);
+        $this->innerValues = new Utilities\OrderedMap($this->innerIterator);
     }
 
     final protected function getInnerGroupIterator($outerValue, $outerKey)

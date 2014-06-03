@@ -47,23 +47,8 @@ final class Utilities
         if ($iterator instanceof \ArrayIterator || $iterator instanceof \ArrayObject) {
             return $iterator->getArrayCopy();
         }
-
-        $array = [];
-        $iterator = self::toIterator($iterator);
-        //Does not support returning custom keys
-        $iterator->rewind();
-
-        while ($iterator->valid()) {
-            $key = $iterator->key();
-            if($key === null || is_scalar($key)) {
-                $array[$key] = $iterator->current();
-            } else {
-                $array[] = $iterator->current();
-            }
-            $iterator->next();
-        }
-
-        return $array;
+        
+        return iterator_to_array(new Iterators\ArrayCompatibleIterator($iterator), true);
     }
 
     /**
@@ -78,7 +63,7 @@ final class Utilities
         if (!self::isIterable($traversableOrArray)) {
             throw PinqException::invalidIterable(__METHOD__, $traversableOrArray);
         }
-
+        
         if ($traversableOrArray instanceof \Iterator) {
             return $traversableOrArray;
         } elseif ($traversableOrArray instanceof \IteratorAggregate) {
@@ -87,6 +72,23 @@ final class Utilities
             return new \IteratorIterator($traversableOrArray);
         } else {
             return new \ArrayIterator($traversableOrArray);
+        }
+    }
+
+    /**
+     * Iterates the elements with the supplied function.
+     * Returning false will break the iteration loop.
+     * 
+     * @param \Iterator $iterator
+     * @param callable $function
+     * @return void
+     */
+    public static function iteratorWalk(\Iterator $iterator, callable $function)
+    {
+        $iterator->rewind();
+        while ($iterator->valid() 
+                && $function($iterator->current(), $iterator->key()) !== false) {
+            $iterator->next();
         }
     }
 

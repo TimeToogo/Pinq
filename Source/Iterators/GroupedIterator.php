@@ -54,17 +54,14 @@ class GroupedIterator extends LazyIterator
             };
         }
 
-        $groupKeys = [];
-        $groupLookup =
-                Utilities\Lookup::fromGroupingFunction(
+        $groupedMap =
+                Utilities\GroupedMap::fromFunction(
                         $groupByFunction,
-                        $innerIterator,
-                        $groupKeys);
+                        $innerIterator);
         
-        $traversableFactory = $this->traversableFactory;
         return new ProjectionIterator(
-                $groupLookup->getIterator(), 
+                $groupedMap, 
                 null, 
-                function ($group) use ($traversableFactory) { return $traversableFactory($group); });
+                $this->traversableFactory);
     }
 }

@@ -24,9 +24,9 @@ abstract class EqualityJoinIteratorBase extends JoinIteratorBase
     private $innerKeyFunction;
 
     /**
-     * @var Utilities\Lookup
+     * @var Utilities\GroupedMap
      */
-    private $innerKeyLookup;
+    private $innerKeyGroups;
 
     public function __construct(\Traversable $outerIterator, \Traversable $innerIterator, callable $outerKeyFunction, callable $innerKeyFunction, callable $joiningFunction)
     {
@@ -37,8 +37,8 @@ abstract class EqualityJoinIteratorBase extends JoinIteratorBase
 
     final protected function initialize()
     {
-        $this->innerKeyLookup =
-                Utilities\Lookup::fromGroupingFunction(
+        $this->innerKeyGroups =
+                Utilities\GroupedMap::fromFunction(
                         $this->innerKeyFunction,
                         $this->innerIterator);
     }
@@ -48,14 +48,14 @@ abstract class EqualityJoinIteratorBase extends JoinIteratorBase
         $outerEqualityValueFunction = $this->outerKeyFunction;
         $outerEqualityValue = $outerEqualityValueFunction($outerValue, $outerKey);
 
-        if ($this->innerKeyLookup->contains($outerEqualityValue)) {
-            $currentInnerGroup = $this->innerKeyLookup->get($outerEqualityValue);
+        if ($this->innerKeyGroups->contains($outerEqualityValue)) {
+            $currentInnerGroup = $this->innerKeyGroups->get($outerEqualityValue);
         } else {
-            $currentInnerGroup = [];
+            $currentInnerGroup = new Utilities\OrderedMap();
         }
 
         return $this->getInnerGroupValueIterator($currentInnerGroup);
     }
 
-    abstract protected function getInnerGroupValueIterator(array $innerGroup);
+    abstract protected function getInnerGroupValueIterator(Utilities\OrderedMap $innerGroup);
 }

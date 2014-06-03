@@ -21,7 +21,7 @@ class RemoveRangeTest extends CollectionTest
         $collection->removeRange([1, '2']);
 
         foreach ($data as $key => $value) {
-            if ($value === 1) {
+            if ($value === 1 || $value === '2') {
                 unset($data[$key]);
             }
         }

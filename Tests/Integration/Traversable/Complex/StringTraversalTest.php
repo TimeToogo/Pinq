@@ -77,16 +77,20 @@ class StringTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversabl
      */
     public function testSelectManyQuery(\Pinq\ITraversable $traversable, array $data)
     {
+        foreach($traversable->selectMany(function ($i) { return str_split($i); })->getTrueIterator() as $value) {
+            
+        }
+        
         $string = $traversable
                 ->selectMany(function ($i) { return str_split($i); })
-                ->select(function ($char) { return ++$char; })
+                ->select(function ($char) { return $char; })
                 ->implode('');
 
         $trueString = '';
 
         foreach ($data as $i) {
             foreach (str_split($i) as $char) {
-                $trueString .= ++$char;
+                $trueString .= $char;
             }
         }
 

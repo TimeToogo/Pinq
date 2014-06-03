@@ -15,19 +15,29 @@ class Provider extends \Pinq\Providers\QueryProvider
     private $scopeEvaluator;
 
     protected $traversable;
+    
+    /**
+     * @var \SplObjectStorage
+     */
+    protected $traversableCache;
 
     public function __construct(\Pinq\ITraversable $traversable)
     {
         parent::__construct();
         $this->scopeEvaluator = new ScopeEvaluator();
+        $this->traversableCache = new \SplObjectStorage();
         $this->traversable = $traversable;
     }
 
     protected function loadRequestEvaluatorVisitor(Queries\IScope $scope)
     {
-        $this->scopeEvaluator->setTraversable($this->traversable);
-        $this->scopeEvaluator->walk($scope);
+        if(!isset($this->traversableCache[$scope])) {
+            $this->scopeEvaluator->setTraversable($this->traversable);
+            $this->scopeEvaluator->walk($scope);
+            
+            $this->traversableCache[$scope] = $this->scopeEvaluator->getTraversable();
+        }
 
-        return new RequestEvaluator($this->scopeEvaluator->getTraversable());
+        return new RequestEvaluator($this->traversableCache[$scope]);
     }
 }

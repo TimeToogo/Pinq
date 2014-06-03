@@ -31,7 +31,7 @@ class RequestEvaluator extends Requests\RequestVisitor
 
     public function visitValues(Requests\Values $request)
     {
-        return $this->traversable->getIterator();
+        return $this->traversable->getTrueIterator();
     }
 
     public function visitCount(Requests\Count $request)

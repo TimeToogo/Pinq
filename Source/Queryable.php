@@ -25,7 +25,7 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
      *
      * @var Parsing\IFunctionToExpressionTreeConverter
      */
-    protected $functiontConverter;
+    protected $functionConverter;
 
     /**
      * The query scope of this instance
@@ -44,7 +44,7 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
     public function __construct(Providers\IQueryProvider $provider, Queries\IScope $scope = null)
     {
         $this->provider = $provider;
-        $this->functiontConverter = $provider->getFunctionToExpressionTreeConverter();
+        $this->functionConverter = $provider->getFunctionToExpressionTreeConverter();
         $this->scope = $scope ?: new Queries\Scope([]);
     }
 
@@ -95,16 +95,25 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
         }
     }
 
+    final public function getIterator()
+    {
+        $this->load();
+
+        return new Iterators\ArrayCompatibleIterator($this->valuesIterator);
+    }
+
     final public function asArray()
     {
         $this->load();
-        $values = Utilities::toArray($this->valuesIterator);
-
-        if (!$this->valuesIterator instanceof \ArrayIterator) {
-            $this->valuesIterator = new \ArrayIterator($values);
-        }
-
-        return $values;
+        
+        return Utilities::toArray($this->valuesIterator);
+    }
+    
+    public function getTrueIterator()
+    {
+        $this->load();
+        
+        return $this->valuesIterator;
     }
 
     public function asTraversable()
@@ -118,12 +127,12 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
     {
         return new Collection($this->getIterator());
     }
-
-    final public function getIterator()
+    
+    public function iterate(callable $function)
     {
         $this->load();
-
-        return $this->valuesIterator;
+        
+        Utilities::iteratorWalk($this->valuesIterator, $function);
     }
 
     final public function getProvider()
@@ -138,7 +147,7 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
 
     final protected function convert(callable $function = null)
     {
-        return $function === null ? null : $this->functiontConverter->convert($function);
+        return $function === null ? null : $this->functionConverter->convert($function);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Query segments">
@@ -156,6 +165,16 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
     public function indexBy(callable $function)
     {
         return $this->newSegment(new Segments\IndexBy($this->convert($function)));
+    }
+    
+    public function keys()
+    {
+        return $this->newSegment(new Segments\Keys());
+    }
+    
+    public function reindex()
+    {
+        return $this->newSegment(new Segments\Reindex());
     }
 
     public function where(callable $predicate)

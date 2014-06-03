@@ -25,6 +25,8 @@ interface ISegment
     const OPERATE = 8;
     const UNIQUE = 9;
     const INDEX_BY = 10;
+    const KEYS = 1;
+    const REINDEX = 2;
 
     /**
      * @return int The query type

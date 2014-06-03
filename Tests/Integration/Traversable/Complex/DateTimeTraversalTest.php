@@ -32,6 +32,33 @@ class DateTimeTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversa
     /**
      * @dataProvider dateTimes
      */
+    public function testGroupByDayOfWeekWithNonScalarKeys(\Pinq\ITraversable $traversable, array $data)
+    {
+        $datesGroupedByDayOfWeek = $traversable
+                ->indexBy(function (\DateTime $date) { return $date; })
+                ->select(function (\DateTime $date) { return $date->format('Y-m-d'); })
+                ->groupBy(function ($string, \DateTime $date) { return $date->format('l'); })
+                ->select(function (\Pinq\ITraversable $dateGroup) {
+                    return $dateGroup->keys()->asArray();
+                })
+                ->asArray();
+        
+        $expectedDatesGroupedByDayOfWeek = [];
+        foreach($data as $date) {
+            $dayOfWeek = $date->format('l');
+            if(!isset($expectedDatesGroupedByDayOfWeek[$dayOfWeek])) {
+                $expectedDatesGroupedByDayOfWeek[$dayOfWeek] = [];
+            }
+            
+            $expectedDatesGroupedByDayOfWeek[$dayOfWeek][] = $date;
+        }
+        
+        $this->assertSame($expectedDatesGroupedByDayOfWeek, $datesGroupedByDayOfWeek);
+    }
+
+    /**
+     * @dataProvider dateTimes
+     */
     public function testAggregateValues(\Pinq\ITraversable $traversable, array $data)
     {
         $this->assertEquals(true, $traversable->all(), 'All');

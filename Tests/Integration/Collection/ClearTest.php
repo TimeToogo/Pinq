@@ -11,6 +11,7 @@ class ClearTest extends CollectionTest
     {
         $collection->clear();
         
+        $this->assertCount(0, $collection);
         $this->assertMatchesValues($collection, []);
     }
 }
