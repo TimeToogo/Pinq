@@ -57,6 +57,27 @@ class IterationTest extends TraversableTest
     /**
      * @dataProvider everything
      */
+    public function testThatIdenticalNonScalarKeysMapToTheSameScalarKey(\Pinq\ITraversable $traversable, array $data)
+    {
+        foreach([new \stdClass(), [], [1], fopen('php://input', 'r')] as $identicalNonScalar) {
+            $withNonScalarKeys = $traversable
+                    ->indexBy(function () use ($identicalNonScalar) { return $identicalNonScalar; });
+                    
+            $this->assertSame(empty($data) ? [] : [0 => end($data)], $withNonScalarKeys->asArray());
+            
+            if(is_object($identicalNonScalar) && !($traversable instanceof \Pinq\IQueryable)) {
+                //No longer identical, should map to individual keys
+                $withNonScalarKeys = $traversable
+                        ->indexBy(function () use ($identicalNonScalar) { return clone $identicalNonScalar; });
+                
+                $this->assertSame(array_values($data), $withNonScalarKeys->asArray());
+            }
+        }
+    }
+    
+    /**
+     * @dataProvider everything
+     */
     public function testThatNonScalarKeysAreReindexedWhenConvertingToArrayOrIteratingButNotForIterateMethodOrTrueIterator(\Pinq\ITraversable $traversable, array $data)
     {
         $nonScalarKeys = [
