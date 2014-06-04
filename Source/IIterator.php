@@ -25,7 +25,7 @@ namespace Pinq;
  * </code>
  * 
  * The iterators included in this library implement this interface
- * while maintaining compatability with the native interface.
+ * while maintaining compatibility with the native interface.
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
