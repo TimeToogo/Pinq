@@ -2,7 +2,7 @@
 <phpunit
     bootstrap="Tests/TestBootstrapper.php"
     colors="true"
-    stopOnFailure="true">
+    stopOnFailure="false">
 
     <testsuites>
       <testsuite name="Entirety">
