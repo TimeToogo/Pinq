@@ -36,16 +36,6 @@ abstract class Iterator implements IIterator
         
     }
     
-    final protected function createMap(\Traversable $values = null)
-    {
-        return new OrderedMap($values);
-    }
-    
-    final protected function createSet(\Traversable $values = null)
-    {
-        return new Set($values);
-    }
-    
     final public function valid()
     {
         if($this->requiresFirstFetch) {
