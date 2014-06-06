@@ -2,7 +2,7 @@
 
 namespace Pinq\Tests\Integration\Caching;
 
-use Pinq\Caching\CSVFileFunctionCache;
+use Pinq\Caching\CSVFileCache;
 
 class CSVFileCacheTest extends CacheTest
 {
@@ -16,7 +16,7 @@ class CSVFileCacheTest extends CacheTest
 
     protected function setUp()
     {
-        $this->cache = new CSVFileFunctionCache(self::$cacheFilePath);
+        $this->cache = new CSVFileCache(self::$cacheFilePath);
     }
 
     protected function tearDown()

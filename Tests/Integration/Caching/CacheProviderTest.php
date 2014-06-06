@@ -18,47 +18,47 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
 
         $this->assertInstanceOf(
                 'Pinq\\Caching\\NullCache',
-                $cacheImplementation->getInnerCache());
+                $cacheImplementation->getCacheAdapter());
     }
 
     public function caches()
     {
         return [
-            ['SetCustomCache', $this->getMock('Pinq\\Caching\\IFunctionCache'), true],
-            ['SetArrayAccessCache', new \ArrayObject(), 'Pinq\\Caching\\ArrayAccessCache'],
-            ['SetFileCache', 'php://memory', 'Pinq\\Caching\\CSVFileFunctionCache'],
-            ['SetDirectoryCache', __DIR__, 'Pinq\\Caching\\DirectoryFunctionCache']
+            ['setCustomCache', $this->getMock('Pinq\\Caching\\ICacheAdapter'), true],
+            ['setArrayAccessCache', new \ArrayObject(), 'Pinq\\Caching\\ArrayAccessCacheAdapter'],
+            ['setFileCache', 'php://memory', 'Pinq\\Caching\\CSVFileCache'],
+            ['setDirectoryCache', __DIR__, 'Pinq\\Caching\\DirectoryCache']
         ];
     }
 
     /**
      * @dataProvider caches
      */
-    public function testThatProviderWillReturnTheSecondLevelCacheWithTheCorrectInnerCache($method, $cache, $assertSameCache)
+    public function testThatProviderWillReturnTheFunctionCacheWithTheCorrectInnerCache($method, $cache, $assertSameCache)
     {
         Caching\Provider::$method($cache);
         $cacheImplementation = Caching\Provider::getCache();
 
         $this->assertInstanceOf(
-                'Pinq\\Caching\\SecondLevelFunctionCache',
+                'Pinq\\Caching\\IFunctionCache',
                 $cacheImplementation);
 
         if ($assertSameCache === true) {
-            $this->assertSame($cache, $cacheImplementation->getInnerCache());
+            $this->assertSame($cache, $cacheImplementation->getCacheAdapter());
         } elseif (is_string($assertSameCache)) {
             $this->assertInstanceOf(
                     $assertSameCache,
-                    $cacheImplementation->getInnerCache());
+                    $cacheImplementation->getCacheAdapter());
         }
     }
 
     public function testThatDevelopmentModeWillClearTheCacheOnce()
     {
-        $functionCacheMock = $this->getMock('Pinq\\Caching\\IFunctionCache');
+        $functionCacheMock = $this->getMock('Pinq\\Caching\\ICacheAdapter');
 
         $functionCacheMock
                 ->expects($this->once())
-                ->method('Clear');
+                ->method('clear');
 
         Caching\Provider::setCustomCache($functionCacheMock);
         Caching\Provider::setDevelopmentMode(true);

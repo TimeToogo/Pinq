@@ -2,12 +2,12 @@
 
 namespace Pinq\Tests\Integration\Caching;
 
-use Pinq\Caching\ArrayAccessCache;
+use Pinq\Caching\ArrayAccessCacheAdapter;
 
 class ArrayAcessCacheTest extends CacheTest
 {
     protected function setUp()
     {
-        $this->cache = new ArrayAccessCache(new \ArrayObject());
+        $this->cache = new ArrayAccessCacheAdapter(new \ArrayObject());
     }
 }

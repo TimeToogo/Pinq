@@ -10,7 +10,7 @@ use Pinq\FunctionExpressionTree;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class CSVFileFunctionCache implements IFunctionCache
+class CSVFileCache implements ICacheAdapter
 {
     const CSV_DELIMITER = ',';
     const CSV_SEPERATOR = '|';
@@ -60,55 +60,62 @@ class CSVFileFunctionCache implements IFunctionCache
                     continue;
                 }
 
-                list($functionHash, $serializedExpressionTree) = $row;
-                $this->fileData[$functionHash] = $serializedExpressionTree;
+                list($key, $serializedExpressionTree) = $row;
+                $this->fileData[$key] = $serializedExpressionTree;
             }
         }
 
         return $this->fileData;
     }
 
-    public function save($functionHash, FunctionExpressionTree $functionExpressionTree)
+    public function save($key, $value)
     {
         $fileData =& $this->getFileData();
-        $serializedFunctionExpressionTree = serialize($functionExpressionTree);
+        $serializedFunctionExpressionTree = serialize($value);
 
-        if (isset($fileData[$functionHash])) {
-            if ($fileData[$functionHash] === $serializedFunctionExpressionTree) {
+        if (isset($fileData[$key])) {
+            if ($fileData[$key] === $serializedFunctionExpressionTree) {
                 return;
             }
         }
 
-        $fileData[$functionHash] = $serializedFunctionExpressionTree;
+        $fileData[$key] = $serializedFunctionExpressionTree;
         $this->flushFileData();
     }
-
-    public function tryGet($functionHash)
+    
+    public function contains($key)
     {
         $fileData = $this->getFileData();
 
-        if (!isset($fileData[$functionHash])) {
+        return isset($fileData[$key]);
+    }
+
+    public function tryGet($key)
+    {
+        $fileData = $this->getFileData();
+
+        if (!isset($fileData[$key])) {
             return null;
         }
 
-        return unserialize($fileData[$functionHash]);
+        return unserialize($fileData[$key]);
+    }
+
+    public function remove($key)
+    {
+        $fileData =& $this->getFileData();
+
+        if (!isset($fileData[$key])) {
+            return;
+        }
+
+        unset($fileData[$key]);
+        $this->flushFileData();
     }
 
     public function clear()
     {
         $this->fileData = [];
-        $this->flushFileData();
-    }
-
-    public function remove($functionHash)
-    {
-        $fileData =& $this->getFileData();
-
-        if (!isset($fileData[$functionHash])) {
-            return;
-        }
-
-        unset($fileData[$functionHash]);
         $this->flushFileData();
     }
 

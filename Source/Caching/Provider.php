@@ -27,12 +27,12 @@ final class Provider
     private static $hasBeenCleared = false;
 
     /**
-     * @var IFunctionCache|null
+     * @var ICacheAdapter|null
      */
     private static $cacheImplementation;
 
     /**
-     * @return IFunctionCache
+     * @return ICacheAdapter
      */
     private static function getImplementation()
     {
@@ -66,7 +66,7 @@ final class Provider
      */
     public static function getCache()
     {
-        return new SecondLevelFunctionCache(self::getImplementation());
+        return new FunctionCache(self::getImplementation());
     }
 
     /**
@@ -77,7 +77,7 @@ final class Provider
      */
     public static function setFileCache($fileName)
     {
-        self::$cacheImplementation = new CSVFileFunctionCache($fileName);
+        self::$cacheImplementation = new CSVFileCache($fileName);
         self::$hasBeenCleared = false;
     }
 
@@ -88,9 +88,9 @@ final class Provider
      * @param string $fileExtension The file extension for every cache file
      * @return void
      */
-    public static function setDirectoryCache($directory, $fileExtension = DirectoryFunctionCache::DEFAULT_EXTENSION)
+    public static function setDirectoryCache($directory, $fileExtension = DirectoryCache::DEFAULT_EXTENSION)
     {
-        self::$cacheImplementation = new DirectoryFunctionCache($directory, $fileExtension);
+        self::$cacheImplementation = new DirectoryCache($directory, $fileExtension);
         self::$hasBeenCleared = false;
     }
 
@@ -102,7 +102,7 @@ final class Provider
      */
     public static function setDoctrineCache(\Doctrine\Common\Cache\Cache $cache)
     {
-        self::$cacheImplementation = new DoctrineFunctionCache($cache);
+        self::$cacheImplementation = new DoctrineCacheAdapter($cache);
         self::$hasBeenCleared = false;
     }
 
@@ -114,7 +114,7 @@ final class Provider
      */
     public static function setArrayAccessCache(\ArrayAccess $cache)
     {
-        self::$cacheImplementation = new ArrayAccessCache($cache);
+        self::$cacheImplementation = new ArrayAccessCacheAdapter($cache);
         self::$hasBeenCleared = false;
     }
 
@@ -124,7 +124,7 @@ final class Provider
      * @param IFunctionCache $cache The cache implementations
      * @return void
      */
-    public static function setCustomCache(IFunctionCache $cache)
+    public static function setCustomCache(ICacheAdapter $cache)
     {
         self::$cacheImplementation = $cache;
         self::$hasBeenCleared = false;
@@ -139,34 +139,5 @@ final class Provider
     {
         self::$cacheImplementation = null;
         self::$hasBeenCleared = false;
-    }
-}
-
-/**
- * Used if no cache is configure, it will be wrapped in a
- * second level cache so no need to do anything
- *
- * @author Elliot Levin <elliot@aanet.com.au>
- */
-class NullCache implements IFunctionCache
-{
-    public function tryGet($functionHash)
-    {
-        return null;
-    }
-
-    public function save($functionHash, FunctionExpressionTree $functionExpressionTree)
-    {
-
-    }
-
-    public function clear()
-    {
-
-    }
-
-    public function remove($functionHash)
-    {
-
     }
 }

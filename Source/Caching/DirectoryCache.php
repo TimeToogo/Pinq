@@ -2,15 +2,13 @@
 
 namespace Pinq\Caching;
 
-use Pinq\FunctionExpressionTree;
-
 /**
  * Cache implementation for storing the serialized expression trees
  * each in their own file in the specified directory
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class DirectoryFunctionCache implements IFunctionCache
+class DirectoryCache implements ICacheAdapter
 {
     const DEFAULT_EXTENSION = '.cached';
 
@@ -47,19 +45,24 @@ class DirectoryFunctionCache implements IFunctionCache
         return $this->directory . DIRECTORY_SEPARATOR . $fileName . $this->fileExtension;
     }
 
-    private function getSignaturePath($functionHash)
+    private function getKeyFilePath($key)
     {
-        return $this->getCacheFilePath(md5($functionHash));
+        return $this->getCacheFilePath(md5($key));
     }
 
-    public function save($functionHash, FunctionExpressionTree $functionExpressionTree)
+    public function save($key, $value)
     {
-        file_put_contents($this->getSignaturePath($functionHash), serialize($functionExpressionTree));
+        file_put_contents($this->getKeyFilePath($key), serialize($value));
+    }
+    
+    public function contains($key)
+    {
+        return is_readable($this->getKeyFilePath($key));
     }
 
-    public function tryGet($functionHash)
+    public function tryGet($key)
     {
-        $filePath = $this->getSignaturePath($functionHash);
+        $filePath = $this->getKeyFilePath($key);
 
         if (!is_readable($filePath)) {
             return null;
@@ -75,8 +78,8 @@ class DirectoryFunctionCache implements IFunctionCache
         }
     }
 
-    public function remove($functionHash)
+    public function remove($key)
     {
-        unlink($this->getSignaturePath($functionHash));
+        unlink($this->getKeyFilePath($key));
     }
 }

@@ -3,7 +3,6 @@
 namespace Pinq\Caching;
 
 use Doctrine\Common\Cache\Cache;
-use Pinq\FunctionExpressionTree;
 
 /**
  * Adapter class for a doctring cache component that implements
@@ -11,7 +10,7 @@ use Pinq\FunctionExpressionTree;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class DoctrineFunctionCache implements IFunctionCache
+class DoctrineCacheAdapter implements ICacheAdapter
 {
     /**
      * The doctrine cache implementation
@@ -25,29 +24,33 @@ class DoctrineFunctionCache implements IFunctionCache
         $this->doctrineCache = $doctrineCache;
     }
 
-    public function save($functionHash, FunctionExpressionTree $functionExpressionTree)
+    public function save($key, $value)
     {
-        $this->doctrineCache->save(
-                $functionHash,
-                clone $functionExpressionTree);
+        $this->doctrineCache->save($key, $value);
     }
 
-    public function tryGet($functionHash)
+    public function tryGet($key)
     {
-        $result = $this->doctrineCache->fetch($functionHash);
+        $result = $this->doctrineCache->fetch($key);
 
         return $result === false ? null : $result;
     }
 
-    public function remove($functionHash)
+    public function contains($key)
     {
-        $this->doctrineCache->delete($functionHash);
+        return $this->doctrineCache->contains($key);
     }
 
+    public function remove($key)
+    {
+        $this->doctrineCache->delete($key);
+    }
+    
     public function clear()
     {
         if ($this->doctrineCache instanceof \Doctrine\Common\Cache\CacheProvider) {
             $this->doctrineCache->deleteAll();
         }
     }
+
 }

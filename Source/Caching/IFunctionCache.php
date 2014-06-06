@@ -13,6 +13,13 @@ use Pinq\FunctionExpressionTree;
 interface IFunctionCache
 {
     /**
+     * Returns the underlying cache implementation.
+     * 
+     * @return ICacheAdapter
+     */
+    public function getCacheAdapter();
+    
+    /**
      * Save the supplied expression tree of the functiom to the cache
      *
      * @param string $functionHash

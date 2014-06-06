@@ -2,7 +2,7 @@
 
 namespace Pinq\Tests\Integration\Caching;
 
-use Pinq\Caching\DirectoryFunctionCache;
+use Pinq\Caching\DirectoryCache;
 
 class DirectoryCacheTest extends CacheTest
 {
@@ -16,7 +16,7 @@ class DirectoryCacheTest extends CacheTest
 
     protected function setUp()
     {
-        $this->cache = new DirectoryFunctionCache(self::$cacheDirectoryPath);
+        $this->cache = new DirectoryCache(self::$cacheDirectoryPath);
     }
 
     protected function tearDown()
