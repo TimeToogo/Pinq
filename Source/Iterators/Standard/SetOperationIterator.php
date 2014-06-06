@@ -14,7 +14,7 @@ class SetOperationIterator extends IteratorIterator
 {
     use Common\SetOperations\SetOperationIterator;
     
-    public function __construct(\Traversable $iterator, ISetFilter $setFilter)
+    public function __construct(IIterator $iterator, ISetFilter $setFilter)
     {
         parent::__construct($iterator);
         self::__constructIterator($setFilter);

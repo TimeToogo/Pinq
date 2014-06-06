@@ -130,18 +130,18 @@ class IteratorScheme extends Common\IteratorScheme
     {
         return new JoinIterator(
                 $innerValuesJoiner, 
-                $outerIterator, 
-                $innerIterator, 
+                $this->adapter($outerIterator), 
+                $this->adapter($innerIterator), 
                 $joiningFunction);
     }
     
     protected function setOperationIterator(\Traversable $iterator, Common\SetOperations\ISetFilter $setFilter)
     {
-        return new SetOperationIterator($iterator, $setFilter);
+        return new SetOperationIterator($this->adapter($iterator), $setFilter);
     }
     
     protected function flattenedIteratorsIterator(\Traversable $iteratorsIterator)
     {
-        return new FlatteningIterator($iteratorsIterator);
+        return new FlatteningIterator($this->adapter($iteratorsIterator));
     }
 }

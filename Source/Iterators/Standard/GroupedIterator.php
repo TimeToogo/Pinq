@@ -13,7 +13,7 @@ class GroupedIterator extends LazyIterator
 {
     use Common\GroupedIterator;
 
-    public function __construct(\Traversable $iterator, callable $groupKeyFunction, callable $traversableFactory)
+    public function __construct(IIterator $iterator, callable $groupKeyFunction, callable $traversableFactory)
     {
         parent::__construct($iterator);
         self::__constructIterator($groupKeyFunction, $traversableFactory);
