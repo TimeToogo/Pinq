@@ -2,6 +2,8 @@
 
 namespace Pinq\Interfaces;
 
+use Pinq\IQueryable;
+
 /**
  * This API required to combine the filtered joined values into
  * the the elements of the resulting ICollection
