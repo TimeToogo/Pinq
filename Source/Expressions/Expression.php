@@ -97,7 +97,24 @@ abstract class Expression implements \Serializable
         }, $expressions);
     }
 
+    /**
+     * Returns whether the supplied name is cosidered normal name syntax
+     * and can be used plainly in code.
+     *
+     * Example:
+     * 'foo' -> yes: $foo
+     * 'foo bar' -> no: ${'foo bar'}
+     *
+     * @param string $name The field, function, method or variable name
+     * @return boolean
+     */
+    protected static function isNormalSyntaxName($name)
+    {
+        return (bool)preg_match('/[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*/', $name);
+    }
+
     // <editor-fold desc="Factory Methods">
+    
     /**
      * @return AssignmentExpression
      */
@@ -304,8 +321,8 @@ abstract class Expression implements \Serializable
     final public static function subQuery(Expression $valueExpression, \Pinq\Queries\IRequestQuery $requestQuery, TraversalExpression $originalExpression)
     {
         return new SubQueryExpression(
-                $valueExpression,
-                $requestQuery,
-                $originalExpression);
+                $valueExpression,                 $requestQuery,                 $originalExpression);
     }
+
+    // </editor-fold>
 }

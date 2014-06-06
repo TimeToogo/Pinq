@@ -50,7 +50,7 @@ class VariableExpression extends Expression
 
     protected function compileCode(&$code)
     {
-        if ($this->nameExpression instanceof ValueExpression && \Pinq\Utilities::isNormalSyntaxName($this->nameExpression->getValue())) {
+        if ($this->nameExpression instanceof ValueExpression && self::isNormalSyntaxName($this->nameExpression->getValue())) {
             $code .= '$' . $this->nameExpression->getValue();
         } else {
             $code .= '${';

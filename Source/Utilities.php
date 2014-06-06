@@ -103,20 +103,4 @@ final class Utilities
             
         }
     }
-
-    /**
-     * Returns whether the supplied name is cosidered normal name syntax
-     * and can be used plainly in code.
-     *
-     * Example:
-     * 'foo' -> yes: $foo
-     * 'foo bar' -> no: ${'foo bar'}
-     *
-     * @param string $name The field, function, method or variable name
-     * @return boolean
-     */
-    public static function isNormalSyntaxName($name)
-    {
-        return (bool)preg_match('/[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*/', $name);
-    }
 }
