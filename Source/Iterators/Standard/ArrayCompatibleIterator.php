@@ -19,7 +19,7 @@ class ArrayCompatibleIterator extends IteratorIterator
     private $maxKey = 0;
     
     /**
-     * @var Common\OrderedMap
+     * @var OrderedMap
      */
     private $nonScalarKeyMap;
     
