@@ -4,7 +4,7 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class SelectTest extends TraversableTest
 {
-    protected function _testReturnsNewInstanceOfSameType(\Pinq\ITraversable $traversable)
+    protected function _testReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable)
     {
         return $traversable->select(function () {
             return [];
@@ -12,7 +12,7 @@ class SelectTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider theImplementations
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {

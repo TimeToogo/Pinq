@@ -4,13 +4,13 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class ReindexTest extends TraversableTest
 {
-    protected function _testReturnsNewInstanceOfSameType(\Pinq\ITraversable $traversable)
+    protected function _testReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable)
     {
         return $traversable->reindex();
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider theImplementations
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {

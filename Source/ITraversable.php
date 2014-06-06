@@ -2,6 +2,7 @@
 
 namespace Pinq;
 
+use Pinq\Iterators\IIteratorScheme;
 use Pinq\Interfaces\IJoiningOnTraversable;
 use Pinq\Interfaces\IOrderedTraversable;
 
@@ -55,7 +56,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Returns an array compatable iterator for the elements.
      * Non scalar keys will be numerically reindexed.
      *
-     * @return IIterator
+     * @return \Traversable
      */
     public function getIterator();
     
@@ -63,9 +64,16 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Returns an iterator for all the elements.
      * All keys types will remain unaltered.
      *
-     * @return IIterator
+     * @return \Traversable
      */
     public function getTrueIterator();
+
+    /**
+     * Returns the underlying iterator scheme used by the implementation.
+     *
+     * @return IIteratorScheme
+     */
+    public function getIteratorScheme();
 
     /**
      * Returns the first value, null if empty

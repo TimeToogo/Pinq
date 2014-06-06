@@ -3,6 +3,7 @@
 namespace Pinq\Providers\Traversable;
 
 use Pinq\Queries;
+use Pinq\Iterators\IIteratorScheme;
 
 /**
  * Query provider for evaluating query of the supplied traversable instance,
@@ -12,8 +13,14 @@ use Pinq\Queries;
  */
 class Provider extends \Pinq\Providers\QueryProvider
 {
-    private $scopeEvaluator;
-
+    /**
+     * @var ScopeEvaluator
+     */
+    protected $scopeEvaluator;
+    
+    /**
+     * @var \Pinq\ITraversable
+     */
     protected $traversable;
     
     /**
@@ -23,7 +30,8 @@ class Provider extends \Pinq\Providers\QueryProvider
 
     public function __construct(\Pinq\ITraversable $traversable)
     {
-        parent::__construct();
+        parent::__construct(null, null, $traversable->getIteratorScheme());
+        
         $this->scopeEvaluator = new ScopeEvaluator();
         $this->traversableCache = new \SplObjectStorage();
         $this->traversable = $traversable;

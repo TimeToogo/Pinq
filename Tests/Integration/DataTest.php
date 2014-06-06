@@ -42,6 +42,11 @@ abstract class DataTest extends \Pinq\Tests\PinqTestCase
         return $this->getImplementations([]);
     }
 
+    public function theImplementations()
+    {
+        return $this->getImplementations([1, 2, 3]);
+    }
+
     public function oneToTen()
     {
         return $this->getImplementations(range(1, 10));

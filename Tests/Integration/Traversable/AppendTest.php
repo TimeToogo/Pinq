@@ -4,7 +4,7 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class AppendTest extends TraversableTest
 {
-    protected function _testReturnsNewInstanceOfSameType(\Pinq\ITraversable $traversable)
+    protected function _testReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable)
     {
         return $traversable->append([]);
     }

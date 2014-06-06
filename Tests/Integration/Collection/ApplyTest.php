@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Collection;
 class ApplyTest extends CollectionTest
 {
     /**
-     * @dataProvider everything
+     * @dataProvider theImplementations
      */
     public function testThatExecutionIsNotDeferred(\Pinq\ICollection $collection, array $data)
     {

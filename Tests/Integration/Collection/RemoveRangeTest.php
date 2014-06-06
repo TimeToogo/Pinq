@@ -3,7 +3,7 @@
 namespace Pinq\Tests\Integration\Collection;
 
 class RemoveRangeTest extends CollectionTest
-{
+{    
     /**
      * @dataProvider everything
      */

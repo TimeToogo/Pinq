@@ -4,14 +4,14 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class GroupJoinTest extends TraversableTest
 {
-    protected function _testReturnsNewInstanceOfSameType(\Pinq\ITraversable $traversable)
+    protected function _testReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable)
     {
         return $traversable->groupJoin([])->on(function ($i) { })->to(function ($k) { });
     }
     
 
     /**
-     * @dataProvider everything
+     * @dataProvider theImplementations
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
@@ -48,16 +48,16 @@ class GroupJoinTest extends TraversableTest
                 ->onEquality(
                 function ($outer, $outerKey) use ($data) {
                     $this->assertSame($data[$outerKey], $outer);
-                    return 1;
+                    return 'group Key';
                 },
                 function ($inner, $innerKey) {
                     $this->assertSame($inner, 0);
                     $this->assertSame($innerKey, 0);
-                    return 1;
+                    return 'group Key';
                 })->to(function ($outer, \Pinq\ITraversable $group, $outerKey, $groupKey) use ($data) {
                     $this->assertSame($data[$outerKey], $outer);
                     $this->assertSame($group->asArray(), [0 => 0]);
-                    $this->assertSame($groupKey, 0);
+                    $this->assertSame($groupKey, 'group Key');
                 })
                 ->asArray();
     }

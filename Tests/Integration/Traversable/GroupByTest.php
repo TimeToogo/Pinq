@@ -4,7 +4,7 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class GroupByTest extends TraversableTest
 {
-    protected function _testReturnsNewInstanceOfSameType(\Pinq\ITraversable $traversable)
+    protected function _testReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable)
     {
         return $traversable->groupBy(function () {
 
@@ -12,7 +12,7 @@ class GroupByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider theImplementations
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
@@ -39,7 +39,7 @@ class GroupByTest extends TraversableTest
 
         foreach ($groups as $group) {
             if($traversable instanceof \Pinq\IQueryable) {
-                $this->assertInstanceOf(\Pinq\ITraversable::ITRAVERSABLE_TYPE, $group);
+                $this->assertInstanceOf(\Pinq\IQueryable::ITRAVERSABLE_TYPE, $group);
             } else if ($traversable instanceof \Pinq\IRepository) {
                 $this->assertInstanceOf(\Pinq\IRepository::IREPOSITORY_TYPE, $group);
             } else { 

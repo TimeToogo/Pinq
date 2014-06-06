@@ -4,6 +4,7 @@ namespace Pinq;
 
 use Pinq\Queries;
 use Pinq\Queries\Operations;
+use Pinq\Iterators\IIteratorScheme;
 
 /**
  * The standard repository class, fully implements the repository API
@@ -19,9 +20,9 @@ class Repository extends Queryable implements IRepository, Interfaces\IOrderedRe
      */
     protected $provider;
 
-    public function __construct(Providers\IRepositoryProvider $provider, Queries\IScope $scope = null)
+    public function __construct(Providers\IRepositoryProvider $provider, Queries\IScope $scope = null, IIteratorScheme $scheme = null)
     {
-        parent::__construct($provider, $scope);
+        parent::__construct($provider, $scope, $scheme);
     }
 
     /**

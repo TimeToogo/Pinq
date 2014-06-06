@@ -2,20 +2,36 @@
 <phpunit
     bootstrap="Tests/TestBootstrapper.php"
     colors="true"
-    stopOnFailure="false">
+    stopOnFailure="true">
 
     <testsuites>
       <testsuite name="Entirety">
-        <directory>./Tests/</directory>
+        <directory>./Tests/Integration/</directory>
+      </testsuite>
+      <testsuite name="Caching">
+        <directory>./Tests/Integration/Caching/</directory>
+      </testsuite>
+      <testsuite name="Functions">
+        <directory>./Tests/Integration/ExpressionTrees/</directory>
+        <directory>./Tests/Integration/Expressions/</directory>
+        <directory>./Tests/Integration/Parsing/</directory>
+      </testsuite>
+      <testsuite name="Providers">
+        <directory>./Tests/Integration/Providers/</directory>
+        <directory>./Tests/Integration/Queries/</directory>
+      </testsuite>
+      <testsuite name="API">
+        <directory>./Tests/Integration/Traversable/</directory>
+        <directory>./Tests/Integration/Collection/</directory>
       </testsuite>
     </testsuites>
     
     <filter>
         <whitelist>
             <directory suffix=".php">./Source/</directory>
-            <exclude>
-                <directory>./vendor/</directory>
-            </exclude>
         </whitelist>
+        <blacklist>
+            <directory>./vendor/</directory>
+        </blacklist>
     </filter>   
 </phpunit>

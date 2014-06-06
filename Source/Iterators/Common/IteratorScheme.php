@@ -1,0 +1,164 @@
+<?php
+
+namespace Pinq\Iterators\Common;
+
+use Pinq\Iterators\IIteratorScheme;
+
+/**
+ * Supplies common implementation for an iterator scheme
+ *
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
+abstract class IteratorScheme implements IIteratorScheme
+{
+    public function toIterator($traversableOrArray)
+    {
+        $isArray = is_array($traversableOrArray);
+        if(!$isArray && !($traversableOrArray instanceof \Traversable)) {
+            throw \Pinq\PinqException::invalidIterable(__METHOD__, $traversableOrArray);
+        }
+        
+        if($isArray) {
+            return $this->arrayIterator($traversableOrArray);
+        } else {
+            return $this->adapterIterator($traversableOrArray);
+        }
+    }
+    
+    /**
+     * @return \Traversable
+     */
+    abstract protected function adapterIterator(\Traversable $iterator);
+    
+    final public function customJoinIterator(
+            \Traversable $outerIterator, 
+            \Traversable $innerIterator, 
+            callable $joinOnFunction, 
+            callable $joiningFunction)
+    {
+        return $this->joinIterator(
+                new Joins\CustomValuesJoiner(
+                        $this, 
+                        $joinOnFunction),
+                $outerIterator, 
+                $innerIterator, 
+                $joiningFunction);
+    }
+
+    final public function equalityJoinIterator(
+            \Traversable $outerIterator, 
+            \Traversable $innerIterator, 
+            callable $outerKeyFunction, 
+            callable $innerKeyFunction, 
+            callable $joiningFunction)
+    {
+        return $this->joinIterator(
+                new Joins\EqualityValuesJoiner(
+                        $this, 
+                        $outerKeyFunction, 
+                        $innerKeyFunction),
+                $outerIterator, 
+                $innerIterator, 
+                $joiningFunction);
+    }
+
+    final public function customGroupJoinIterator(
+            \Traversable $outerIterator, 
+            \Traversable $innerIterator, 
+            callable $joinOnFunction, 
+            callable $joiningFunction, 
+            callable $traversableFactory)
+    {
+        return $this->joinIterator(
+                new Joins\CustomValuesGroupJoiner(
+                        $this, 
+                        $joinOnFunction, 
+                        $traversableFactory),
+                $outerIterator, 
+                $innerIterator, 
+                $joiningFunction);
+    }
+
+    final public function equalityGroupJoinIterator(
+            \Traversable $outerIterator, 
+            \Traversable $innerIterator, 
+            callable $outerKeyFunction, 
+            callable $innerKeyFunction, 
+            callable $joiningFunction, 
+            callable $traversableFactory)
+    {
+        return $this->joinIterator(
+                new Joins\EqualityValuesGroupJoiner(
+                        $this, 
+                        $outerKeyFunction, 
+                        $innerKeyFunction, 
+                        $traversableFactory),
+                $outerIterator, 
+                $innerIterator, 
+                $joiningFunction);
+    }
+    
+    abstract protected function joinIterator(
+            Joins\IInnerValuesJoiner $innerValuesJoiner, 
+            \Traversable $outerIterator, 
+            \Traversable $innerIterator, 
+            callable $joiningFunction);
+    
+    final public function flattenedIterator(\Traversable $iterator)
+    {
+        return $this->flattenedIteratorsIterator(
+                $this->projectionIterator(
+                        $iterator, 
+                        null, 
+                        [$this, 'toIterator']));
+    }
+    
+    abstract protected function flattenedIteratorsIterator(\Traversable $iteratorsIterator);
+    
+    final public function appendIterator(\Traversable $iterator, \Traversable $otherIterator)
+    {
+        return $this->flattenedIterator($this->arrayIterator([$iterator, $otherIterator]));
+    }
+    
+    final public function unionIterator(\Traversable $iterator, \Traversable $otherIterator)
+    {
+        return $this->uniqueIterator($this->appendIterator($iterator, $otherIterator));
+    }
+
+    final public function uniqueIterator(\Traversable $iterator)
+    {
+        return $this->setOperationIterator(
+                $iterator, 
+                new SetOperations\UniqueFilter($this));
+    }
+
+    final public function whereInIterator(\Traversable $iterator, \Traversable $otherIterator)
+    {
+        return $this->setOperationIterator(
+                $iterator, 
+                new SetOperations\WhereInFilter($this, $otherIterator));
+    }
+
+    final public function exceptIterator(\Traversable $iterator, \Traversable $otherIterator)
+    {
+        return $this->setOperationIterator(
+                $iterator, 
+                new SetOperations\ExceptFilter($this, $otherIterator));
+    }
+
+    final public function intersectionIterator(\Traversable $iterator, \Traversable $otherIterator)
+    {
+        return $this->setOperationIterator(
+                $iterator, 
+                new SetOperations\IntersectionFilter($this, $otherIterator));
+    }
+    
+    final public function differenceIterator(\Traversable $iterator, \Traversable $otherIterator)
+    {
+        return $this->setOperationIterator(
+                $iterator, 
+                new SetOperations\DifferenceFilter($this, $otherIterator));
+    }
+    
+    abstract protected function setOperationIterator(\Traversable $iterator, SetOperations\ISetFilter $setFilter);
+}

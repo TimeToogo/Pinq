@@ -3,24 +3,25 @@ dev-master
  - Pass values to query functions with their associated key as second parameter while
    maintaining support for single parameter internal functions
  - Proper support for non scalar keys:
-    - Restructed conversion to array with ArrayCompatibleIterator, numerically reindexing all non scalar keys
-    - Refactored Iterators\Utilities\*
-    - Added ITraversable::iterate to iterate all unaltered values and keys
-    - Added ITraversable::keys select the keys and ITraversable::reindex to reindex the values by their 0-based position
-    - Added ITraversable::getTrueIterator to get the iterator for all values and unaltered keys
- - Refactored iterator structure, simplifying native Iterator API while incurring a nice performance improvement
- - Removed ITraversable::asQueryable, ITraversable::asRepository, updated interfaces annotations
-   with covariant return types. ITraversable, ICollection, IQueryable, IRepository should all return
+    - Added `ITraversable::iterate` to iterate all unaltered values and keys
+    - Added `ITraversable::keys` select the keys and `ITraversable::reindex` to reindex the values by their 0-based position
+    - Added `ITraversable::getTrueIterator` to get the iterator for all values and unaltered keys
+ - Refactored iterator structure:
+    - Abstracted iterator implementations under `Iterators\IIteratorScheme`.
+    - Now supports generators for performance improvement and reduced memory usage for >= PHP 5.5.0
+    - Will fall back to iterators for <= PHP 5.5.0
+        - Native iterators have also been improved with regards to performance.
+ - Removed `ITraversable::asQueryable`, `ITraversable::asRepository`, updated interfaces annotations
+   with covariant return types. `ITraversable`, `ICollection, `IQueryable`, `IRepository` should all return
    their respective types for each query method.
- - Moved/Implemented Necessary interfaces (IOrdered*, IJoiningOn*, IJoiningTo*) with covariant 
-   return types under Pinq\Interfaces namespace.
- - Removed IGroupedTraversable, use ITraversable::groupBy returning an array instead
- - ITraversable::groupBy implicitly indexes each group by the group key
- - Traversable/Collection are now extendable.
- - Refactored ArrayExpression by creating ArrayItemExpression representing each element
- - Refactored OrderBy query segment by representing each function and direction as an OrderedFunction class
- - Renamed Queries\Segments\Operation::getTraversable to getValues
- - 
+ - Moved/Implemented Necessary interfaces (`IOrdered*`, `IJoiningOn*`, `IJoiningTo*`) with covariant 
+   return types under `Interfaces` namespace.
+ - Removed `IGroupedTraversable`, use `ITraversable::groupBy` returning an array instead
+ - `ITraversable::groupBy` implicitly indexes each group by the group key
+ - `Traversable`/`Collection` are now extendable.
+ - Refactored `ArrayExpression` by creating `ArrayItemExpression` representing each element.
+ - Refactored `OrderBy` query segment by representing each function and direction as an `OrderedFunction` class.
+ - Renamed `Queries\Segments\Operation::getTraversable` to `getValues`
 
 2.1.1 (22/5/14)
 ===============
@@ -28,8 +29,8 @@ dev-master
 
 2.1.0 (7/5/14)
 ==============
- - Added Providers\Loadable\Provider. Performs queries in memory if the appropriate data has already been loaded
- - Fix orderBy[Ascending|Descending] on Queryable not converting function to an expression tree
+ - Added `Providers\Loadable\Provider`. Performs queries in memory if the appropriate data has already been loaded
+ - Fix `orderBy[Ascending|Descending]` on `Queryable` not converting function to an expression tree
  - Fix for internal variadic function parsing
  - Various docblock and formatting updates
 

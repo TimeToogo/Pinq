@@ -5,6 +5,7 @@ namespace Pinq;
 use Pinq\Queries;
 use Pinq\Queries\Requests;
 use Pinq\Queries\Segments;
+use Pinq\Iterators\IIteratorScheme;
 
 /**
  * The standard queryable class, fully implements the queryable API
@@ -13,6 +14,13 @@ use Pinq\Queries\Segments;
  */
 class Queryable implements IQueryable, Interfaces\IOrderedQueryable
 {
+    /**
+     * The iterator context for the queryable
+     *
+     * @var IIteratorScheme     
+     */
+    protected $scheme;
+    
     /**
      * The query provider implementation for this queryable
      *
@@ -41,11 +49,12 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
      */
     protected $valuesIterator = null;
 
-    public function __construct(Providers\IQueryProvider $provider, Queries\IScope $scope = null)
+    public function __construct(Providers\IQueryProvider $provider, Queries\IScope $scope = null, IIteratorScheme $scheme = null)
     {
         $this->provider = $provider;
         $this->functionConverter = $provider->getFunctionToExpressionTreeConverter();
         $this->scope = $scope ?: new Queries\Scope([]);
+        $this->scheme = $scheme ?: Iterators\SchemeProvider::getDefault();
     }
 
     /**
@@ -91,22 +100,22 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
     private function load()
     {
         if ($this->valuesIterator === null) {
-            $this->valuesIterator = $this->loadQuery(new Requests\Values());
+            $this->valuesIterator = $this->scheme->toIterator($this->loadQuery(new Requests\Values()));
         }
-    }
-
-    final public function getIterator()
-    {
-        $this->load();
-
-        return new Iterators\ArrayCompatibleIterator($this->valuesIterator);
     }
 
     final public function asArray()
     {
         $this->load();
         
-        return Utilities::toArray($this->valuesIterator);
+        return $this->scheme->toArray($this->valuesIterator);
+    }
+
+    final public function getIterator()
+    {
+        $this->load();
+
+        return $this->scheme->arrayCompatibleIterator($this->valuesIterator);
     }
     
     public function getTrueIterator()
@@ -114,6 +123,11 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
         $this->load();
         
         return $this->valuesIterator;
+    }
+    
+    public function getIteratorScheme()
+    {
+        return $this->scheme;
     }
 
     public function asTraversable()
@@ -125,14 +139,16 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
 
     public function asCollection()
     {
-        return new Collection($this->getIterator());
+        $this->load();
+        
+        return new Collection($this->valuesIterator);
     }
     
     public function iterate(callable $function)
     {
         $this->load();
         
-        Utilities::iteratorWalk($this->valuesIterator, $function);
+        $this->scheme->walk($this->valuesIterator, $function);
     }
 
     final public function getProvider()

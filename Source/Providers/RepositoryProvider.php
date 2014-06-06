@@ -14,7 +14,7 @@ abstract class RepositoryProvider extends QueryProvider implements IRepositoryPr
 {
     public function createRepository(Queries\IScope $scope = null)
     {
-        return new \Pinq\Repository($this, $scope);
+        return new \Pinq\Repository($this, $scope, $this->scheme);
     }
 
     public function execute(Queries\IOperationQuery $query)

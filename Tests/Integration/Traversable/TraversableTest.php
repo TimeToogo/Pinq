@@ -47,21 +47,16 @@ abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
         
         $traversable->asArray();
     }
-    
-    final protected function assertReturnsOriginalType(\Pinq\ITraversable $traversable, $queryMethod, $argument)
-    {
-        $originalType = get_class($traversable);
-        
-        $this->assertSame($originalType, get_class($traversable->$queryMethod($argument)));
-    }
 
     /**
-     * @dataProvider everything
+     * @dataProvider theImplementations
      */
-    final public function testThatReturnsNewInstanceOfSameType(\Pinq\ITraversable $traversable, array $data)
+    final public function testThatReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable, array $data)
     {
         $originalType = get_class($traversable);
-        $returnedTraversable = $this->_testReturnsNewInstanceOfSameType($traversable);
+        $originalScheme = $traversable->getIteratorScheme();
+        
+        $returnedTraversable = $this->_testReturnsNewInstanceOfSameTypeWithSameScheme($traversable);
 
         if ($returnedTraversable === self::$instance) {
             return;
@@ -72,11 +67,12 @@ abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
                 $returnedTraversable);
         $this->assertNotSame($traversable, $returnedTraversable);
         $this->assertSame($originalType, get_class($returnedTraversable));
+        $this->assertSame($originalScheme, $returnedTraversable->getIteratorScheme());
     }
 
     private static $instance;
 
-    protected function _testReturnsNewInstanceOfSameType(\Pinq\ITraversable $traversable)
+    protected function _testReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable)
     {
         if (self::$instance === null) {
             self::$instance = new \stdClass();
@@ -87,11 +83,17 @@ abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
 
     final protected function implementationsFor(array $data)
     {
-        return [
-            [new \Pinq\Traversable($data), $data], 
-            [new \Pinq\Collection($data), $data], 
-            [(new \Pinq\Providers\Traversable\Provider(new \Pinq\Traversable($data)))->createQueryable(), $data],
-            [(new \Pinq\Providers\Collection\Provider(new \Pinq\Collection($data)))->createRepository(), $data],
-        ];
+        $implementations = [];
+        foreach(\Pinq\Iterators\SchemeProvider::getAvailableSchemes() as $scheme) {
+            $implementations = array_merge($implementations, [
+                [new \Pinq\Traversable($data, $scheme), $data], 
+                [new \Pinq\Traversable($data, $scheme), $data], 
+                [new \Pinq\Collection($data, $scheme), $data], 
+                [(new \Pinq\Providers\Traversable\Provider(new \Pinq\Traversable($data, $scheme)))->createQueryable(), $data],
+                [(new \Pinq\Providers\Collection\Provider(new \Pinq\Collection($data, $scheme)))->createRepository(), $data],
+            ]);
+        }
+        
+        return $implementations;
     }
 }

@@ -32,7 +32,7 @@ class GetIndexTest extends TraversableTest
         $traversable->asArray();
         
         foreach ($data as $key => $value) {
-            //Not should be using object identity (reference type)
+            //Should be using object identity (reference type) 
             $this->assertFalse(isset($traversable[(object)['bar' => $key]]));
             
             $this->assertTrue(isset($traversable[$instances[$key]]));

@@ -4,7 +4,7 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class JoinTest extends TraversableTest
 {
-    protected function _testReturnsNewInstanceOfSameType(\Pinq\ITraversable $traversable)
+    protected function _testReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable)
     {
         return $traversable->join([])->on(function ($i) {
 
@@ -14,7 +14,7 @@ class JoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider theImplementations
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {

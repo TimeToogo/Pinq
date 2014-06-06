@@ -9,7 +9,7 @@ class LoadableProviderTest extends \Pinq\Tests\PinqTestCase
 {
     public function testThatWillCacheParentScopeAndEvaluateSubscopeInMemory()
     {
-        $values = new \Pinq\Iterators\ArrayIterator(range(1, 10));
+        $values = new \ArrayIterator(range(1, 10));
         
         $requestEvaluatorMock = $this->getMockForAbstractClass('\\Pinq\\Providers\\Loadable\\RequestEvaluator');
         
@@ -28,7 +28,7 @@ class LoadableProviderTest extends \Pinq\Tests\PinqTestCase
         //Load values request to force load
         $unscopedValues = $queryProviderMock->load(new Queries\RequestQuery(new Queries\Scope([]), new Requests\Values()));
         
-        $this->assertSame($values, $unscopedValues);
+        $this->assertSame($values, $unscopedValues instanceof \OuterIterator ? $unscopedValues->getInnerIterator() : $unscopedValues);
         
         //Evaluate a sub request, should not call loadRequestEvaluator again but evaluate with a traversable provider
         $subscopeValues = $queryProviderMock->load(new Queries\RequestQuery(new Queries\Scope([new Queries\Segments\Range(5, null)]), new Requests\Values()));

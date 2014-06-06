@@ -3,6 +3,7 @@
 namespace Pinq\Providers\Collection;
 
 use Pinq\Queries;
+use \Pinq\Providers;
 
 /**
  * Repository provider for evalating query of the supplied collection instance,
@@ -12,18 +13,28 @@ use Pinq\Queries;
  */
 class Provider extends \Pinq\Providers\RepositoryProvider
 {
-    private $collection;
+    /**
+     * @var \Pinq\ICollection
+     */
+    protected $collection;
 
-    private $traversableProvider;
-
-    private $scopeEvaluator;
+    /**
+     * @var Providers\Traversable\Provider
+     */
+    protected $traversableProvider;
+    
+    /**
+     * @var Providers\Traversable\ScopeEvaluator
+     */
+    protected $scopeEvaluator;
 
     public function __construct(\Pinq\ICollection $collection)
     {
-        parent::__construct();
+        parent::__construct(null, null, $collection->getIteratorScheme());
+        
         $this->collection = $collection;
-        $this->scopeEvaluator = new \Pinq\Providers\Traversable\ScopeEvaluator();
-        $this->traversableProvider = new \Pinq\Providers\Traversable\Provider($collection);
+        $this->traversableProvider = new Providers\Traversable\Provider($collection);
+        $this->scopeEvaluator = new Providers\Traversable\ScopeEvaluator();
     }
 
     protected function loadOperationEvaluatorVisitor(Queries\IScope $scope)

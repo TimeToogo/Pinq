@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Traversable;
 class WhereTest extends TraversableTest
 {
     /**
-     * @dataProvider everything
+     * @dataProvider theImplementations
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {

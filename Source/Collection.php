@@ -2,6 +2,8 @@
 
 namespace Pinq;
 
+use Pinq\Iterators\IIteratorScheme;
+
 /**
  * The standard collection class, fully implements the collection API
  *
@@ -9,9 +11,9 @@ namespace Pinq;
  */
 class Collection extends Traversable implements ICollection, Interfaces\IOrderedCollection
 {
-    public function __construct($values = [])
+    public function __construct($values = array(), Iterators\IIteratorScheme $scheme = null)
     {
-        parent::__construct($values);
+        parent::__construct($values, $scheme);
     }
 
     public function asCollection()
@@ -19,15 +21,14 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
         return $this;
     }
     
-    private function updateValues(\Iterator $values = null)
+    private function updateValues(\Traversable $values)
     {
-        $this->valuesIterator = $values instanceof Iterators\Utilities\OrderedMap ? 
-                $values : new Iterators\Utilities\OrderedMap($values);
+        $this->valuesIterator = $this->scheme->createOrderedMap($values);
     }
 
     public function clear()
     {
-        $this->updateValues(new \EmptyIterator());
+        $this->valuesIterator = $this->scheme->createOrderedMap();
     }
 
     public function apply(callable $function)
@@ -37,7 +38,7 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
             $function = $function->getCompiledFunction();
         }
         
-        $function = Iterators\Utilities\Functions::allowExcessiveArguments($function);
+        $function = Iterators\Common\Functions::allowExcessiveArguments($function);
         
         $values = [];
         
@@ -47,35 +48,21 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
             $values[] = $value;
         });
 
-        $this->valuesIterator = Iterators\Utilities\OrderedMap::from($orderedMap->keys(), $values);
+        $this->valuesIterator = $this->scheme->createOrderedMapFrom($orderedMap->keys(), $values);
     }
 
     public function addRange($values)
     {
-        if (!Utilities::isIterable($values)) {
-            throw PinqException::invalidIterable(__METHOD__, $values);
-        }
-
-        $flattenedIterator = 
-                new Iterators\FlatteningIterator(
-                        new Iterators\ArrayIterator([
-                                $this->valuesIterator, 
-                                Utilities::toIterator($values)]));
-        
-        $this->valuesIterator = $flattenedIterator;
-        $this->toOrderedMap();
+        $this->updateValues($this->scheme->appendIterator(
+                $this->valuesIterator, 
+                $this->scheme->toIterator($values)));
     }
 
     public function removeRange($values)
     {
-        if (!Utilities::isIterable($values)) {
-            throw PinqException::invalidIterable(__METHOD__, $values);
-        }
-        
-        $this->updateValues(
-                new Iterators\ExceptIterator(
-                        $this->valuesIterator,
-                        Utilities::toIterator($values)));
+        $this->updateValues($this->scheme->exceptIterator(
+                $this->valuesIterator,
+                $this->scheme->toIterator($values)));
     }
 
     public function removeWhere(callable $predicate)
@@ -90,7 +77,7 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
             }
         });
 
-        $this->valuesIterator = Iterators\Utilities\OrderedMap::from($keys, $values);
+        $this->valuesIterator = $this->scheme->createOrderedMapFrom($keys, $values);
     }
 
     public function offsetSet($index, $value)

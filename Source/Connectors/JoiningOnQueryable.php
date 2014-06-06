@@ -59,7 +59,10 @@ class JoiningOnQueryable implements Interfaces\IJoiningOnQueryable, Interfaces\I
     {
         return new JoiningToConnector(
                 function (callable $joiningFunction) use ($joiningOnFunction) {
-                    return $this->createQueryableWithJoin($this->createJoinSegment($joiningOnFunction, $joiningFunction));
+                    return $this->createQueryableWithJoin(
+                            $this->createJoinSegment(
+                                    $joiningOnFunction, 
+                                    $joiningFunction));
                 });
     }
     
@@ -78,7 +81,11 @@ class JoiningOnQueryable implements Interfaces\IJoiningOnQueryable, Interfaces\I
     {
         return new JoiningToConnector(
                 function (callable $joiningFunction) use ($outerKeyFunction, $innerKeyFunction) {
-                    return $this->createQueryableWithJoin($this->createEqualityJoinSegment($outerKeyFunction, $innerKeyFunction, $joiningFunction));
+                    return $this->createQueryableWithJoin(
+                            $this->createEqualityJoinSegment(
+                                    $outerKeyFunction, 
+                                    $innerKeyFunction, 
+                                    $joiningFunction));
                 });
     }
     

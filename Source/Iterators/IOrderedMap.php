@@ -1,0 +1,108 @@
+<?php
+
+namespace Pinq\Iterators;
+
+
+/**
+ * Interface for an ordered map, like an array on steroids,
+ * this class supports any type of key associated with any 
+ * type of value.
+ * 
+ * @author Elliot Levin <elliot@aanet.com.au>
+ */
+interface IOrderedMap extends \Traversable, \ArrayAccess, \Countable
+{
+    /**
+     * Returns all the keys from the map as an array.
+     * Indexed by their 0-based position.
+     *
+     * @return array
+     */
+    public function keys();
+    
+    /**
+     * Returns all the values from the map as an array.
+     * Indexed by their 0-based position.
+     *
+     * @return array
+     */
+    public function values();
+    
+    /**
+     * Maps the keys / values of the dictionary to new dictionary.
+     *
+     * @return IOrderedMap
+     */
+    public function map(callable $function);
+    
+    /**
+     * Groups the keys / values using the supplied function
+     * into new ordered map.
+     * 
+     * @param callable $groupKeyFunction
+     * @return OrderedMap
+     */
+    public function groupBy(callable $groupKeyFunction);
+    
+    /**
+     * Creates a new ordered map with the keys and values
+     * sorted according the the supplied functions and order
+     * directions.
+     * 
+     * @param callable[] $orderFunctions
+     * @param boolean[] $isAscending
+     * @return OrderedMap
+     */
+    public function multisort(array $orderFunctions, array $isAscending);
+    
+    /**
+     * Returns the value associated with the supplied key or null
+     * if it does not exist.
+     * 
+     * @param mixed $key
+     * @return mixed
+     */
+    public function get($key);
+    
+    /**
+     * Returns whether their is value associated with the supplied key.
+     * 
+     * @param mixed $key
+     * @return boolean
+     */
+    public function contains($key);
+
+    /**
+     * Sets the supplied key to the supplied value
+     * 
+     * @param mixed $key
+     * @param mixed $value
+     * @return void
+     */
+    public function set($key, $value);
+
+    /**
+     * Sets the supplied key to the supplied value if there
+     * is not previously set
+     * 
+     * @param mixed $key
+     * @param mixed $value
+     * @return boolean Whether the key was set to the value or false if already exists
+     */
+    public function setIfNotContained($key, $value);
+    
+    /**
+     * Removes all keys and values from the map/
+     * 
+     * @return void
+     */
+    public function clear();
+    
+    /**
+     * Removes the associated value (if exists) with the supplied key
+     * 
+     * @param mixed $key
+     * @return boolean Whether the key was succefully remove or false if does not exist
+     */
+    public function remove($key);
+}

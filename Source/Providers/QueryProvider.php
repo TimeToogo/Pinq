@@ -3,6 +3,7 @@
 namespace Pinq\Providers;
 
 use Pinq\Queries;
+use Pinq\Iterators\IIteratorScheme;
 use Pinq\Parsing\IFunctionToExpressionTreeConverter;
 
 /**
@@ -14,18 +15,39 @@ use Pinq\Parsing\IFunctionToExpressionTreeConverter;
 abstract class QueryProvider implements IQueryProvider
 {
     /**
+     * @var IIteratorScheme
+     */
+    protected $scheme;
+    
+    /**
      * @var IFunctionToExpressionTreeConverter
      */
-    private $functionConverter;
+    protected $functionConverter;
 
-    public function __construct(\Pinq\Caching\IFunctionCache $functionCache = null)
+    public function __construct(
+            \Pinq\Caching\IFunctionCache $functionCache = null, 
+            IFunctionToExpressionTreeConverter $functionConverter = null,
+            IIteratorScheme $scheme = null)
     {
-        $this->functionConverter =
+        $this->functionConverter = $functionConverter ?: 
                 new \Pinq\Parsing\FunctionToExpressionTreeConverter(
                         new \Pinq\Parsing\PHPParser\Parser(),
                         $functionCache);
+        
+        $this->scheme = $scheme ?: \Pinq\Iterators\SchemeProvider::getDefault();
     }
 
+    /**
+     * @return IIteratorScheme
+     */
+    public function getIteratorScheme()
+    {
+        return $this->scheme;
+    }
+    
+    /**
+     * @return IFunctionToExpressionTreeConverter
+     */
     public function getFunctionToExpressionTreeConverter()
     {
         return $this->functionConverter;
@@ -33,7 +55,7 @@ abstract class QueryProvider implements IQueryProvider
 
     public function createQueryable(Queries\IScope $scope = null)
     {
-        return new \Pinq\Queryable($this, $scope);
+        return new \Pinq\Queryable($this, $scope, $this->scheme);
     }
 
     public function load(Queries\IRequestQuery $query)

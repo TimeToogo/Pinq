@@ -27,12 +27,17 @@ abstract class CollectionTest extends \Pinq\Tests\Integration\DataTest
         
         $this->assertTrue($thrown, 'Should have thrown an exeption');
     }
-
+    
     final protected function implementationsFor(array $data)
     {
-        return [
-            [new \Pinq\Collection($data), $data], 
-            [(new \Pinq\Providers\Collection\Provider(new \Pinq\Collection($data)))->createRepository(), $data]
-        ];
+        $implementations = [];
+        foreach(\Pinq\Iterators\SchemeProvider::getAvailableSchemes() as $scheme) {
+            $implementations = array_merge($implementations, [
+                [new \Pinq\Collection($data, $scheme), $data], 
+                [(new \Pinq\Providers\Collection\Provider(new \Pinq\Collection($data, $scheme)))->createRepository(), $data]
+            ]);
+        }
+        
+        return $implementations;
     }
 }

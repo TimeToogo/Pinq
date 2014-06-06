@@ -3,7 +3,7 @@
 namespace Pinq\Connectors;
 
 use Pinq\Interfaces;
-use Pinq\Iterators;
+use Pinq\Iterators\IIteratorScheme;
 
 /**
  * Implements the filtering API for a join / group join traversable.
@@ -12,6 +12,11 @@ use Pinq\Iterators;
  */
 class JoiningOnTraversable implements Interfaces\IJoiningOnTraversable, Interfaces\IJoiningOnCollection
 {
+    /**
+     * @var IIteratorScheme     
+     */
+    private $scheme;
+    
     /**
      * @var \Traversable
      */
@@ -36,8 +41,9 @@ class JoiningOnTraversable implements Interfaces\IJoiningOnTraversable, Interfac
     /**
      * @param boolean $isGroupJoin
      */
-    public function __construct(\Traversable $outerValues, \Traversable $innerValues, $isGroupJoin, callable $traversableFactory)
+    public function __construct(IIteratorScheme $scheme, \Traversable $outerValues, \Traversable $innerValues, $isGroupJoin, callable $traversableFactory)
     {
+        $this->scheme = $scheme;
         $this->outerValues = $outerValues;
         $this->innerValues = $innerValues;
         $this->isGroupJoin = $isGroupJoin;
@@ -53,13 +59,14 @@ class JoiningOnTraversable implements Interfaces\IJoiningOnTraversable, Interfac
     {
         return function (callable $joiningFunction) use ($joiningOnFunction) {
             if ($this->isGroupJoin) {
-                $iterator = new Iterators\CustomGroupJoinIterator(
+                $iterator = $this->scheme->customGroupJoinIterator(
                         $this->outerValues,
                         $this->innerValues,
                         $joiningOnFunction,
-                        $joiningFunction);
+                        $joiningFunction,
+                        $this->traversableFactory);
             } else {
-                $iterator = new Iterators\CustomJoinIterator(
+                $iterator = $this->scheme->customJoinIterator(
                         $this->outerValues,
                         $this->innerValues,
                         $joiningOnFunction,
@@ -80,14 +87,15 @@ class JoiningOnTraversable implements Interfaces\IJoiningOnTraversable, Interfac
     {
         return function (callable $joiningFunction) use ($outerKeyFunction, $innerKeyFunction) {
             if ($this->isGroupJoin) {
-                $iterator = new Iterators\EqualityGroupJoinIterator(
+                $iterator = $this->scheme->equalityGroupJoinIterator(
                         $this->outerValues,
                         $this->innerValues,
                         $outerKeyFunction,
                         $innerKeyFunction,
-                        $joiningFunction);
+                        $joiningFunction,
+                        $this->traversableFactory);
             } else {
-                $iterator = new Iterators\EqualityJoinIterator(
+                $iterator = $this->scheme->equalityJoinIterator(
                         $this->outerValues,
                         $this->innerValues,
                         $outerKeyFunction,
