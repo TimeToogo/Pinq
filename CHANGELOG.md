@@ -20,7 +20,8 @@ dev-master
  - `ITraversable::groupBy` implicitly indexes each group by the group key
  - `Traversable`/`Collection` are now extendable.
  - Refactored `ArrayExpression` by creating `ArrayItemExpression` representing each element.
- - Refactored `OrderBy` query segment by representing each function and direction as an `OrderedFunction` class.
+ - Refactored `Queries\Segments\OrderBy` query segment by representing each 
+   function and direction as an `Queries\Segments\OrderFunction` class.
  - Renamed `Queries\Segments\Operation::getTraversable` to `getValues`
 
 2.1.1 (22/5/14)
