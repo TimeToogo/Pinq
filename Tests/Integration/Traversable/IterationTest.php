@@ -136,9 +136,12 @@ class IterationTest extends TraversableTest
         
         $withNonScalarKeys->iterate($assertCorrectKeyValuePair);
         
-        $trueIterator = $withNonScalarKeys->getTrueIterator();
-        foreach ($trueIterator as $key => $value) {
-            $assertCorrectKeyValuePair($value, $key);
+        $trueIterator = new \IteratorIterator($withNonScalarKeys->getTrueIterator());
+        
+        $trueIterator->rewind();
+        while ($trueIterator->valid()) {
+            $assertCorrectKeyValuePair($trueIterator->current(), $trueIterator->key());
+            $trueIterator->next();
         }
     }
 }
