@@ -138,6 +138,8 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     public function last()
     {
+        $value = null;
+        
         foreach($this->toOrderedMap() as $value) {
             
         }
