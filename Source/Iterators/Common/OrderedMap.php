@@ -132,6 +132,8 @@ trait OrderedMap
         $positionKeyIdentityMap = [];
         $populatePositionMap = true;
         
+        $multisortArguments = [];
+        
         foreach($orderByFunctions as $key => $function) {
             $orderByValues = [];
             
