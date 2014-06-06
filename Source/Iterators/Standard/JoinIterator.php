@@ -57,7 +57,7 @@ class JoinIterator extends Iterator
 
     public function doRewind()
     {
-        $this->initialize();
+        $this->initialize($this->innerIterator);
         $this->outerIterator->rewind();
         $this->currentInnerGroupIterator = new EmptyIterator();
         $this->count = 0;

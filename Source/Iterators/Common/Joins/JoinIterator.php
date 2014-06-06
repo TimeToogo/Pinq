@@ -32,10 +32,10 @@ trait JoinIterator
         $this->joiningFunction = Common\Functions::allowExcessiveArguments($joiningFunction);
     }
     
-    final protected function initialize()
+    final protected function initialize(\Traversable $innerIterator)
     {
         if (!$this->isInitialized) {
-            $this->innerValuesJoiner->initialize($this->innerIterator);
+            $this->innerValuesJoiner->initialize($innerIterator);
             $this->isInitialized = true;
         }
     }

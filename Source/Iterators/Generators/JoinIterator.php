@@ -34,7 +34,7 @@ class JoinIterator extends Generator
     
     public function getIterator()
     {
-        $this->initialize();
+        $this->initialize($this->innerIterator);
         
         $joiningFunction = $this->joiningFunction;
         
