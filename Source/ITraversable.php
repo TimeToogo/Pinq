@@ -186,7 +186,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     /**
      * Groups values according the supplied function. (Uses strict equality '===')
      * The values will be grouped into instances of the traversable.
-     * This implicitly index each group by the group key returned from the supplied function.
+     * This will implicitly index each group by the group key returned from the supplied function.
      *
      * @param  callable   $function The grouping function
      * @return ITraversable
