@@ -195,7 +195,8 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     public function groupBy(callable $function);
 
     /**
-     * Matches the original values with the supplied values according to the supplied function.
+     * Matches the values with the supplied values according to the supplied filter 
+     * then maps the results into as according to the supplied function.
      *
      * @param  array|\Traversable   $values
      * @return IJoiningOnTraversable
@@ -203,8 +204,9 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     public function join($values);
 
     /**
-     * Matches the original values with the supplied values according to the supplied functions
-     * then groups the values.
+     * Matches the values with the supplied values according to the supplied filter, 
+     * groups the the joined values for every original and then maps into as 
+     * according to the supplied function.
      *
      * @param  array|\Traversable   $values
      * @return IJoiningOnTraversable

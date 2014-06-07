@@ -56,17 +56,17 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
     {
         $joinedlastNames = $traversable
                 ->groupJoin($traversable)
-                        ->onEquality(
-                                function ($outer) { return $outer['firstName'][0]; }, 
-                                function ($inner) { return $inner['lastName'][0]; })
-                        ->to(function ($person, \Pinq\ITraversable $joinedPeople) {
-                            return $person['firstName'] . '{' .
-                                    $joinedPeople->implode(
-                                            ',',
-                                            function ($person) {
-                                                return $person['lastName'];
-                                            }) . '}';
-                        })
+                    ->onEquality(
+                            function ($outer) { return $outer['firstName'][0]; }, 
+                            function ($inner) { return $inner['lastName'][0]; })
+                    ->to(function ($person, \Pinq\ITraversable $joinedPeople) {
+                        return $person['firstName'] . '{' .
+                                $joinedPeople->implode(
+                                        ',',
+                                        function ($person) {
+                                            return $person['lastName'];
+                                        }) . '}';
+                    })
                 ->implode(':');
 
         $this->assertEquals(

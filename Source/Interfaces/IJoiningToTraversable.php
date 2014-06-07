@@ -14,7 +14,8 @@ interface IJoiningToTraversable
 {
     /**
      * Returns the appropriate values according to the supplied join function.
-     * Both values will be passed as arguments to the supplied function.
+     * Both values and keys will be passed as arguments to the supplied function
+     * as (outerValue, innerValue, outerKey, innerKey).
      *
      * @param callable $joinFunction
      * @return ITraversable
