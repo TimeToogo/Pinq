@@ -16,7 +16,7 @@ class ReindexedIterator extends IteratorIterator
      */
     private $index = 0;
     
-    public function __construct(\Traversable $iterator)
+    public function __construct(IIterator $iterator)
     {
         parent::__construct($iterator);
     }
