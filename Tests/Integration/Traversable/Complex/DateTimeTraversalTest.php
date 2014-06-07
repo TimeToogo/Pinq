@@ -32,7 +32,7 @@ class DateTimeTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversa
     /**
      * @dataProvider dateTimes
      */
-    public function testGroupByDayOfWeekWithNonScalarKeys(\Pinq\ITraversable $traversable, array $data)
+    public function testGroupByDayOfWeekWithDateTimeKeys(\Pinq\ITraversable $traversable, array $data)
     {
         $datesGroupedByDayOfWeek = $traversable
                 ->indexBy(function (\DateTime $date) { return $date; })
