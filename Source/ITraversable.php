@@ -20,7 +20,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
 
     /**
      * Returns the values as an array.
-     * Only valid array scalar keys (or null) will be used, 
+     * Only valid array keys (strings or integers) will be used, 
      * all others will be reindexed numerically.
      *
      * @return array
@@ -54,7 +54,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
 
     /**
      * Returns an array compatable iterator for the elements.
-     * Non scalar keys will be numerically reindexed.
+     * Non string or integer keys will be numerically reindexed.
      *
      * @return \Traversable
      */
@@ -162,7 +162,8 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
 
     /**
      * Index the values according to the supplied mapping function.
-     * All duplicate indexes will return the first associated value.
+     * All duplicate indexes will be associated with the first value
+     * for that index.
      *
      * @param  callable   $function The projection function
      * @return ITraversable
@@ -170,14 +171,14 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     public function indexBy(callable $function);
 
     /**
-     * Selects the keys (numerically indexed by their 0-based position).
+     * Selects the keys as the values (indexed by their 0-based position).
      *
      * @return ITraversable
      */
     public function keys();
 
     /**
-     * Reindexes the values (numerically reindexed by their 0-based position).
+     * Indexes the values by their 0-based position.
      *
      * @return ITraversable
      */

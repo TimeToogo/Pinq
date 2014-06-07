@@ -40,12 +40,28 @@ class IndexByTest extends TraversableTest
     /**
      * @dataProvider everything
      */
-    public function testThatIndexByNullReturnsArrayWithLastElement(\Pinq\ITraversable $traversable, array $data)
+    public function testThatIndexByNullReturnsArrayWithFirstAssociatedValue(\Pinq\ITraversable $traversable, array $data)
     {
         $indexedElements = $traversable->indexBy(function () { return null; });
 
         $this->assertMatches(
                 $indexedElements,
-                empty($data) ? [] : [null => end($data)]);
+                empty($data) ? [] : [0 => reset($data)]);
+    }
+
+    /**
+     * @dataProvider everything
+     */
+    public function testThatIndexByDuplicateKeyWithForeachOnlyReturnsFirstAssociatedValue(\Pinq\ITraversable $traversable, array $data)
+    {
+        $indexedElements = $traversable->indexBy(function () { return null; });
+        
+        $first = true;
+        foreach($indexedElements as $key => $element) {
+            $this->assertSame($key, 0);
+            $this->assertSame(reset($data), $element);
+            $this->assertTrue($first);
+            $first = false;
+        }
     }
 }

@@ -131,6 +131,13 @@ abstract class IteratorScheme implements IIteratorScheme
                 $iterator, 
                 new SetOperations\UniqueFilter($this));
     }
+    
+    final public function uniqueKeyIterator(\Traversable $iterator)
+    {
+        return $this->setOperationIterator(
+                $iterator, 
+                new SetOperations\UniqueKeyFilter($this));
+    }
 
     final public function whereInIterator(\Traversable $iterator, \Traversable $otherIterator)
     {

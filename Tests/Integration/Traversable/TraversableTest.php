@@ -87,7 +87,6 @@ abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
         foreach(\Pinq\Iterators\SchemeProvider::getAvailableSchemes() as $scheme) {
             $implementations = array_merge($implementations, [
                 [new \Pinq\Traversable($data, $scheme), $data], 
-                [new \Pinq\Traversable($data, $scheme), $data], 
                 [new \Pinq\Collection($data, $scheme), $data], 
                 [(new \Pinq\Providers\Traversable\Provider(new \Pinq\Traversable($data, $scheme)))->createQueryable(), $data],
                 [(new \Pinq\Providers\Collection\Provider(new \Pinq\Collection($data, $scheme)))->createRepository(), $data],

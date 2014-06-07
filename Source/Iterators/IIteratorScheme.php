@@ -51,7 +51,8 @@ interface IIteratorScheme
     
     /**
      * Safely converts the supplied iterator to an array.
-     * Non scalar keys will be reindexed to respective incremented integers.
+     * Non integer or string keys will be reindexed to 
+     * respective incremented integers.
      * 
      * @return array
      */
@@ -74,7 +75,7 @@ interface IIteratorScheme
     public function arrayIterator(array $array);
     
     /**
-     * Returns an iterator which will map any non scalar keys
+     * Returns an iterator which will map any non integer or string keys
      * to incrementing integers.
      * 
      * @param \Traversable  $iterator
@@ -149,6 +150,15 @@ interface IIteratorScheme
             \Traversable $iterator, 
             callable $keyProjectionFunction = null, 
             callable $valueProjectionFunction = null);
+
+    /**
+     * Returns an iterator which will return only the first associated value
+     * for any key.
+     * 
+     * @param \Traversable  $iterator
+     * @return \Traversable
+     */
+    public function uniqueKeyIterator(\Traversable $iterator);
 
     /**
      * Returns an iterator which will return the outer elements joined

@@ -12,19 +12,20 @@ use Pinq\Iterators\IOrderedMap;
  */
 trait ArrayCompatibleIterator
 {
-    protected function makeKeyCompatible(&$key, &$maxKey, IOrderedMap $nonScalarKeyMap)
+    protected function makeKeyCompatible(&$key, &$maxKey, IOrderedMap $incompatibleKeyMap)
     {
-        if($key === null || is_scalar($key)) {
+        if(is_int($key) || is_string($key)) {
+            //Integer strings like "123" get auto cast to integers when set as array keys
             $intKey = (int)$key;
             if((string)$intKey === (string)$key && $intKey >= $maxKey) {
                 $maxKey = $intKey + 1;
             }
-        } elseif($nonScalarKeyMap->contains($key)) {
-            $key = $nonScalarKeyMap->get($key);
-        } else{
+        } elseif($incompatibleKeyMap->contains($key)) {
+            $key = $incompatibleKeyMap->get($key);
+        } else {
             $originalKey = $key;
             $key = $maxKey++;
-            $nonScalarKeyMap->set($originalKey, $key);
+            $incompatibleKeyMap->set($originalKey, $key);
         }
     }
 }

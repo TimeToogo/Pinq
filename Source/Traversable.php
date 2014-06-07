@@ -222,10 +222,11 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     public function indexBy(callable $function)
     {
-        return $this->newSelf($this->scheme->projectionIterator(
-                $this->valuesIterator,
-                $function,
-                null));
+        return $this->newSelf($this->scheme->uniqueKeyIterator(
+                $this->scheme->projectionIterator(
+                        $this->valuesIterator,
+                        $function,
+                        null)));
     }
     
     private function reindexer()
