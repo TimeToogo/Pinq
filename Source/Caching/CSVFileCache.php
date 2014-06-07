@@ -37,9 +37,7 @@ class CSVFileCache implements ICacheAdapter
         try {
             $this->fileHandle = new \SplFileObject($fileName, 'c+');
             $this->fileHandle->setFlags(\SplFileObject::READ_CSV);
-            $this->fileHandle->setCsvControl(
-                    self::CSV_DELIMITER,
-                    self::CSV_SEPERATOR);
+            $this->fileHandle->setCsvControl(self::CSV_DELIMITER, self::CSV_SEPERATOR);
         } catch (\Exception $exception) {
             throw new \Pinq\PinqException(
                     'Invalid cache file: %s is not readable with the message, "%s"',
@@ -71,15 +69,15 @@ class CSVFileCache implements ICacheAdapter
     public function save($key, $value)
     {
         $fileData =& $this->getFileData();
-        $serializedFunctionExpressionTree = serialize($value);
+        $serializedValue = serialize($value);
 
         if (isset($fileData[$key])) {
-            if ($fileData[$key] === $serializedFunctionExpressionTree) {
+            if ($fileData[$key] === $serializedValue) {
                 return;
             }
         }
 
-        $fileData[$key] = $serializedFunctionExpressionTree;
+        $fileData[$key] = $serializedValue;
         $this->flushFileData();
     }
     
@@ -127,8 +125,8 @@ class CSVFileCache implements ICacheAdapter
             $fileHandle->fseek(0, SEEK_SET);
             $fileHandle->ftruncate(0);
 
-            foreach ($this->getFileData() as $signature => $serializedExpressionTree) {
-                $fileHandle->fputcsv([$signature, $serializedExpressionTree]);
+            foreach ($this->getFileData() as $signature => $serializedValue) {
+                $fileHandle->fputcsv([$signature, $serializedValue]);
             }
 
             $fileHandle->flock(LOCK_UN);
