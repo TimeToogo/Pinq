@@ -62,6 +62,16 @@ final class Provider
     /**
      * Returns the configured cache implementation
      *
+     * @return ICacheAdater
+     */
+    public static function getCacheAdapter()
+    {
+        return self::getImplementation();
+    }
+
+    /**
+     * Returns a function cache with the underlying configured implementation
+     *
      * @return IFunctionCache
      */
     public static function getCache()
