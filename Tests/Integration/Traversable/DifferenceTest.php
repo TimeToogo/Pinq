@@ -24,7 +24,7 @@ class DifferenceTest extends TraversableTest
      */
     public function testThatDifferenceWithEmptyReturnsSameAsTheOriginal(\Pinq\ITraversable $traversable, array $data)
     {
-        $intersection = $traversable->difference(new \Pinq\Traversable());
+        $intersection = $traversable->difference([]);
 
         $this->assertMatches($intersection, array_unique($data));
     }

@@ -86,7 +86,20 @@ abstract class DataTest extends \Pinq\Tests\PinqTestCase
 
     final protected function assertMatches(\Pinq\ITraversable $traversable, array $array, $message = '')
     {
-        $this->assertSame($array, $traversable->asArray(), $message);
+        $firstIterationArray = [];
+        foreach($traversable as $key => $value) {
+            $firstIterationArray[$key] = $value;
+        }
+        $secondIterationArray = [];
+        foreach($traversable as $key => $value) {
+            $secondIterationArray[$key] = $value;
+        }
+        
+        $explicitArray = $traversable->asArray();
+        
+        $this->assertSame($array, $firstIterationArray, $message);
+        $this->assertSame($array, $secondIterationArray, $message);
+        $this->assertSame($array, $explicitArray, $message);
     }
 
     final protected function assertMatchesValues(\Pinq\ITraversable $traversable, array $array, $message = '')

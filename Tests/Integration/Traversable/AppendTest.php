@@ -26,7 +26,7 @@ class AppendTest extends TraversableTest
      */
     public function testThatAppendtWithEmptyReturnsSameAsTheOriginalButReindexedKeys(\Pinq\ITraversable $traversable, array $data)
     {
-        $appendedWithTraversable = $traversable->append(new \Pinq\Traversable());
+        $appendedWithTraversable = $traversable->append([]);
         $appendedWithArray = $traversable->append([]);
         $appendedWithIterator = $traversable->append(new \ArrayObject([]));
 

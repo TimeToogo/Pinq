@@ -229,30 +229,20 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
                         null)));
     }
     
-    private function reindexer()
-    {
-        $count = 0;
-        return function () use (&$count) {
-            return $count++;
-        };
-    }
-    
     public function keys()
     {
-        return $this->newSelf($this->scheme->projectionIterator(
-                $this->valuesIterator, 
-                $this->reindexer(), 
-                function ($value, $key) {
-                    return $key;
-                }));
+        return $this->newSelf($this->scheme->reindexerIterator(
+                $this->scheme->projectionIterator(
+                        $this->valuesIterator, 
+                        null, 
+                        function ($value, $key) {
+                            return $key;
+                        })));
     }
     
     public function reindex()
     {
-        return $this->newSelf($this->scheme->projectionIterator(
-                $this->valuesIterator, 
-                $this->reindexer(), 
-                null));
+        return $this->newSelf($this->scheme->reindexerIterator($this->valuesIterator));
     }
 
     public function groupBy(callable $function)

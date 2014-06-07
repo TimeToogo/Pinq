@@ -36,6 +36,6 @@ class ReindexTest extends TraversableTest
                 ->indexBy(function () { return new \stdClass(); })
                 ->reindex();
 
-        $this->assertMatches($values->reindex(), array_values($data));
+        $this->assertMatches($values, array_values($data));
     }
 }

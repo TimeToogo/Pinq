@@ -24,7 +24,7 @@ class WhereIntTest extends TraversableTest
      */
     public function testThatWhereInWithEmptyReturnsEmpty(\Pinq\ITraversable $traversable, array $data)
     {
-        $values = $traversable->whereIn(new \Pinq\Traversable());
+        $values = $traversable->whereIn([]);
 
         $this->assertMatches($values, []);
     }
@@ -35,8 +35,7 @@ class WhereIntTest extends TraversableTest
     public function testThatWhereInWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $traversable, array $data)
     {
         $otherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
-        $valuesWithSomeMatchingValues = new \Pinq\Traversable($otherData);
-        $values = $traversable->whereIn($valuesWithSomeMatchingValues);
+        $values = $traversable->whereIn($otherData);
 
         $this->assertMatches($values, array_intersect($data, $otherData));
     }

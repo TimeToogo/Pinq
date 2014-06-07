@@ -24,7 +24,7 @@ class UnionTest extends TraversableTest
      */
     public function testThatUnionWithEmptyReturnsUniqueReindexedValues(\Pinq\ITraversable $traversable, array $data)
     {
-        $unioned = $traversable->union(new \Pinq\Traversable());
+        $unioned = $traversable->union([]);
 
         $this->assertMatches($unioned, array_values(array_unique($data)));
     }
@@ -34,7 +34,7 @@ class UnionTest extends TraversableTest
      */
     public function testThatUnionRemovesDuplicateValues(\Pinq\ITraversable $traversable, array $data)
     {
-        $unioned = $traversable->union(new \Pinq\Traversable());
+        $unioned = $traversable->union([]);
 
         $this->assertMatches($unioned, array_values(array_unique($data)));
     }

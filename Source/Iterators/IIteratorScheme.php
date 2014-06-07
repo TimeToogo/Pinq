@@ -152,6 +152,15 @@ interface IIteratorScheme
             callable $valueProjectionFunction = null);
 
     /**
+     * Returns an iterator which will return the map the keys
+     * to 0-based incrementing integers
+     * 
+     * @param \Traversable  $iterator
+     * @return \Traversable
+     */
+    public function reindexerIterator(\Traversable $iterator);
+
+    /**
      * Returns an iterator which will return only the first associated value
      * for any key.
      * 

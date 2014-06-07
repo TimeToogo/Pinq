@@ -35,7 +35,7 @@ class IntersectTest extends TraversableTest
     public function testThatIntersectionWithDuplicateValuesPreservesTheOriginalKeys(\Pinq\ITraversable $traversable, array $data)
     {
         $otherData = ['test' => 1, 'anotherkey' => 3, 1000 => 5];
-        $intersection = $traversable->intersect($otherData);
+        $intersection = $traversable->intersect(new \Pinq\Traversable($otherData));
 
         $this->assertMatches(
                 $intersection,

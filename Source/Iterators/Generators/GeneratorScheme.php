@@ -90,6 +90,11 @@ class GeneratorScheme extends Common\IteratorScheme
                 $valueProjectionFunction);
     }
     
+    public function reindexerIterator(\Traversable $iterator)
+    {
+        return new ReindexedIterator($iterator);
+    }
+    
     protected function joinIterator(
             Common\Joins\IInnerValuesJoiner $innerValuesJoiner, 
             \Traversable $outerIterator, 

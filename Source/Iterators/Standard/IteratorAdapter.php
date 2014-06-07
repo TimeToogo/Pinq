@@ -14,7 +14,7 @@ class IteratorAdapter extends Iterator implements \OuterIterator
     /**
      * @var \Iterator
      */
-    private $iterator;
+    protected $iterator;
 
     public function __construct(\Traversable $iterator)
     {

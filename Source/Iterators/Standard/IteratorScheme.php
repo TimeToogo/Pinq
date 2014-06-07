@@ -72,7 +72,15 @@ class IteratorScheme extends Common\IteratorScheme
     
     public function adapterIterator(\Traversable $iterator)
     {
-        return $iterator instanceof IIterator ? $iterator : new IteratorAdapter($iterator);
+        if($iterator instanceof IIterator) {
+            return $iterator;
+        } elseif($iterator instanceof \Pinq\Iterators\Generators\IGenerator) {
+            return new GeneratorAdapter($iterator); 
+        } elseif($iterator instanceof \IteratorAggregate) {
+            return $this->adapterIterator($iterator->getIterator());
+        } else {
+            return  new IteratorAdapter($iterator);
+        }
     }
 
     public function arrayIterator(array $array)
@@ -99,6 +107,11 @@ class IteratorScheme extends Common\IteratorScheme
                 $this->adapter($iterator), 
                 $keyProjectionFunction, 
                 $valueProjectionFunction);
+    }
+    
+    public function reindexerIterator(\Traversable $iterator)
+    {
+        return new ReindexedIterator($iterator);
     }
 
     public function rangeIterator(\Traversable $iterator, $start, $amount)

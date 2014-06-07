@@ -24,7 +24,7 @@ class ExceptTest extends TraversableTest
      */
     public function testThatExceptWithEmptyReturnsSameAsTheOriginal(\Pinq\ITraversable $traversable, array $data)
     {
-        $except = $traversable->except(new \Pinq\Traversable());
+        $except = $traversable->except([]);
 
         $this->assertMatches($except, $data);
     }

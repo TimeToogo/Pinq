@@ -24,7 +24,7 @@ class KeysTest extends TraversableTest
      */
     public function testThatKeysReturnsTheKeysOfTheValues(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertSame($traversable->keys()->asArray(), array_keys($data));
+        $this->assertMatches($traversable->keys(), array_keys($data));
     }
 
     /**
