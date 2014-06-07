@@ -2,8 +2,6 @@
 
 namespace Pinq\Caching;
 
-use Pinq\FunctionExpressionTree;
-
 /**
  * Static provider to configure and retrieve the cache implementation
  *

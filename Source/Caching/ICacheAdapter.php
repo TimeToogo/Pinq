@@ -2,8 +2,6 @@
 
 namespace Pinq\Caching;
 
-use Pinq\FunctionExpressionTree;
-
 /**
  * The API for a cache implementation that can persist in memory variables
  * to be accessed later.

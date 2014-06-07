@@ -2,8 +2,6 @@
 
 namespace Pinq\Caching;
 
-use Pinq\FunctionExpressionTree;
-
 /**
  * Adapter class for a cache that implements \ArrayAccess
  *

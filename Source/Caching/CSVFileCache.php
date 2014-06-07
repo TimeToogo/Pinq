@@ -2,8 +2,6 @@
 
 namespace Pinq\Caching;
 
-use Pinq\FunctionExpressionTree;
-
 /**
  * Cache implementation for storing the serialized expression trees
  * in a single file in a csv format, not very good for concurrency
