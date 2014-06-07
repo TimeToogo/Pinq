@@ -76,15 +76,15 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
     /**
      * @dataProvider people
      */
-    public function testGroupMultipleGroupBy(\Pinq\ITraversable $traversable, array $data)
+    public function testGroupByWithArrayKey(\Pinq\ITraversable $traversable, array $data)
     {
         $joinedLastNames = $traversable
-                ->groupBy(function ($i) { return ['sex' => $i['Sex'], 'age' => floor($i['Age'] / 10)]; })
-                ->orderByAscending(function (\Pinq\ITraversable $group, $key) { return $group->first()['Age']; })
-                ->thenByAscending(function (\Pinq\ITraversable $group, $key) { return $group->first()['Sex']; })
-                ->select(function (\Pinq\ITraversable $group) {
-                    $ageGroup = floor($group->first()['Age'] / 10) * 10 . '+';
-                    $sex = $group->first()['Sex'];
+                ->groupBy(function ($i) { return ['sex' => $i['Sex'], 'ageGroup' => floor($i['Age'] / 10) * 10]; })
+                ->orderByAscending(function (\Pinq\ITraversable $group, $key) { return $key['ageGroup']; })
+                ->thenByAscending(function (\Pinq\ITraversable $group, $key) { return $key['sex']; })
+                ->select(function (\Pinq\ITraversable $group, $key) {
+                    $ageGroup = $key['ageGroup'] . '+';
+                    $sex = $key['sex'];
 
                     return sprintf('%s(%s){%s}', $ageGroup, $sex, $group->implode(',', function ($i) {
                         return $i['FirstName'];
@@ -93,7 +93,7 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
                 ->implode(':');
 
         $this->assertEquals(
-                '20+(Male){Alex,Dave}:20+(Female){Casy}:30+(Female){Zoe,Sandy,Beth}:30+(Male){Daniel}:' .
+                '20+(Female){Casy}:20+(Male){Alex,Dave}:30+(Female){Zoe,Sandy,Beth}:30+(Male){Daniel}:' .
                 '40+(Male){Hugo}:50+(Male){Daniel}:60+(Male){David}',
                 $joinedLastNames);
     }
