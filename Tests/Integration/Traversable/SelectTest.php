@@ -53,6 +53,22 @@ class SelectTest extends TraversableTest
     /**
      * @dataProvider padStrings
      */
+    public function testThatSelectSupportsInternalFunctionsWithOneParameter(\Pinq\ITraversable $values, array $data)
+    {
+        //Signature: strlen($string)
+        $paddedValues = $values->select('strlen');
+        //Ensure that even though the key will be the second parameter, it does not trigger an error.
+        
+        $this->assertMatches($paddedValues, [
+            5   => 3, 
+            10  => 5, 
+            20  => 11,
+        ]);
+    }
+
+    /**
+     * @dataProvider padStrings
+     */
     public function testThatSelectUsesDefaultToValuesForUnsuppliedArgumentsToInternalFunctions(\Pinq\ITraversable $values, array $data)
     {
         //Signature: str_pad($input, $pad_length, $pad_string = " ", $pad_type = STR_PAD_RIGHT)
