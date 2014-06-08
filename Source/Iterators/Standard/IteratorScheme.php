@@ -111,7 +111,7 @@ class IteratorScheme extends Common\IteratorScheme
     
     public function reindexerIterator(\Traversable $iterator)
     {
-        return new ReindexedIterator($iterator);
+        return new ReindexedIterator($this->adapter($iterator));
     }
 
     public function rangeIterator(\Traversable $iterator, $start, $amount)
