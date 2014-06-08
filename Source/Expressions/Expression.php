@@ -112,6 +112,17 @@ abstract class Expression implements \Serializable
     {
         return (bool)preg_match('/[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*/', $name);
     }
+    
+    /**
+     * Returns whether the expression is equivalent to the supplied expression.
+     * 
+     * @param Expression $expression
+     * @return boolean
+     */
+    public function equals(Expression $expression)
+    {
+        return $this == $expression;
+    }
 
     // <editor-fold desc="Factory Methods">
     

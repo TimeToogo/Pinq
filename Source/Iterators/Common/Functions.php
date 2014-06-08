@@ -42,6 +42,23 @@ final class Functions
         }
         
         $numberOfArguments = $reflection->getNumberOfParameters();
+        
+        $argumentLimiter = function () use ($function, $numberOfArguments) { 
+            return call_user_func_array($function, array_slice(func_get_args(), 0, $numberOfArguments));
+        };
+        
+        /*
+         * If there are default values, just use the default closure to 
+         * ensure correct default values are used for unsupplied arguments.
+         */
+        if($numberOfArguments !== $reflection->getNumberOfRequiredParameters()) {
+            return $argumentLimiter;
+        }
+        
+        /*
+         * Micro-optimization: provide simple wrappers for internal functions
+         * with simple signatures rather than the more costly argument array splicing.
+         */
         switch($numberOfArguments) {
             case 0:
                 return function () use ($function) { return $function(); }; 
@@ -57,11 +74,9 @@ final class Functions
                 
             case 4:
                 return function ($a, $b, $c, $d) use ($function) { return $function($a, $b, $c, $d); }; 
-                
+            
             default:
-                return function () use ($function, $numberOfArguments) { 
-                    return call_user_func_array($function, array_slice(func_get_args(), 0, $numberOfArguments));
-                }; 
+                return $argumentLimiter; 
         }
     }
 }
