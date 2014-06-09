@@ -14,16 +14,9 @@ class Set extends Iterator implements ISet
 {
     use Common\Set;
     
-    /**
-     * @var int 
-     */
-    private $position = 0;
-    
     public function __construct(IIterator $values = null)
     {
         parent::__construct();
-        
-        $this->map = new OrderedMap();
         
         if($values !== null) {
             $values->rewind();
@@ -35,13 +28,11 @@ class Set extends Iterator implements ISet
     
     protected function doRewind()
     {
-        $this->position = 0;
-        $this->map->rewind();
+        reset($this->values);
     }
     
     protected function doFetch(&$key, &$value)
     {
-        $key = $this->position++;
-        return $this->map->fetch($value, $null);
+        return false !== (list($key, $value) = each($this->values));
     }
 }

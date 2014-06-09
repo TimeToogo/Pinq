@@ -69,7 +69,7 @@ trait OrderedMap
         $map->length = $length;
         
         foreach($map->keys as $position => $key) {
-            $map->keyIdentityPositionMap[self::identityHash($key)] = $position;
+            $map->keyIdentityPositionMap[Identity::hash($key)] = $position;
         }
         $map->loadLargestIntKey();
         
@@ -181,42 +181,6 @@ trait OrderedMap
         return $this->length;
     }
     
-    private static function identityHash($value)
-    {
-        $type = gettype($value);
-        
-        $typeIdentifier = $type[0];
-        switch ($type) {
-
-            case 'string':
-            case 'integer':
-            case 'boolean':
-            case 'double':
-            case 'resource':
-            case 'unknown type':
-                return $typeIdentifier . $value;
-                
-            case 'NULL':
-                return 'N';
-                
-            case 'object':
-                return 'o' . spl_object_hash($value);
-                
-            case 'array':
-                return self::arrayIdentityHash($value);
-        }
-    }
-    
-    protected static function arrayIdentityHash(array $array)
-    {
-        array_walk_recursive($array, function (&$value) {
-            $value = self::identityHash($value);
-        });
-        
-        $hashData = serialize($array);
-        return 'a' . (strlen($hashData) > 32 ? md5($hashData) : $hashData);
-    }
-    
     private function loadLargestIntKey()
     {
         $this->largestIntKey = -1;
@@ -232,7 +196,7 @@ trait OrderedMap
      */
     public function get($key)
     {
-        $identityHash = self::identityHash($key);
+        $identityHash = Identity::hash($key);
         
         return isset($this->keyIdentityPositionMap[$identityHash]) ? $this->values[$this->keyIdentityPositionMap[$identityHash]] : null;
     }
@@ -242,7 +206,7 @@ trait OrderedMap
      */
     public function contains($key)
     {
-        return isset($this->keyIdentityPositionMap[self::identityHash($key)]);
+        return isset($this->keyIdentityPositionMap[Identity::hash($key)]);
     }
 
     /**
@@ -250,7 +214,7 @@ trait OrderedMap
      */
     public function set($key, $value)
     {
-        $this->setInternal($key, $value, self::identityHash($key));
+        $this->setInternal($key, $value, Identity::hash($key));
     }
 
     /**
@@ -258,7 +222,7 @@ trait OrderedMap
      */
     public function setIfNotContained($key, $value)
     {
-        $identityHash = self::identityHash($key);
+        $identityHash = Identity::hash($key);
         
         if(!isset($this->keyIdentityPositionMap[$identityHash])) {
             $this->setInternal($key, $value, $identityHash);
@@ -290,7 +254,7 @@ trait OrderedMap
      */
     public function remove($key)
     {
-        $identityHash = self::identityHash($key);
+        $identityHash = Identity::hash($key);
         
         if(isset($this->keyIdentityPositionMap[$identityHash])) {
             $position = $this->keyIdentityPositionMap[$identityHash];

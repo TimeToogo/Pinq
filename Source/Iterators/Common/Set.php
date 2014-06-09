@@ -13,16 +13,23 @@ use Pinq\Iterators\IOrderedMap;
 trait Set
 {
     /**
-     * The map containing the unique values as keys
+     * The array containing the values keyed by their identity hash.
      *
-     * @var IOrderedMap
+     * @var array
      */
-    protected $map;
+    protected $values = [];
+    
+    /**
+     * The amount of values in the set.
+     *
+     * @var int
+     */
+    protected $length = 0;
     
     
     public function count()
     {
-        return $this->map->count();
+        return $this->length;
     }
 
     /**
@@ -30,7 +37,8 @@ trait Set
      */
     public function clear()
     {
-        $this->map->clear();
+        $this->values = [];
+        $this->length = 0;
     }
 
     /**
@@ -38,7 +46,7 @@ trait Set
      */
     public function contains($value)
     {
-        return $this->map->contains($value);
+        return isset($this->values[Identity::hash($value)]);
     }
 
     /**
@@ -46,7 +54,15 @@ trait Set
      */
     public function add($value)
     {
-        return $this->map->setIfNotContained($value, true);
+        $identityHash = Identity::hash($value);
+        
+        if(array_key_exists($identityHash, $this->values)) {
+            return false;
+        }
+        
+        $this->values[$identityHash] = $value;
+        $this->length++;
+        return true;
     }
 
     /**
@@ -54,6 +70,14 @@ trait Set
      */
     public function remove($value)
     {
-        return $this->map->remove($value);
+        $identityHash = Identity::hash($value);
+        
+        if(!array_key_exists($identityHash, $this->values)) {
+            return false;
+        }
+        
+        unset($this->values[$identityHash]);
+        $this->length--;
+        return true;
     }
 }

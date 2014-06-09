@@ -12,7 +12,7 @@ trait ArrayIterator
     /**
      * @var array
      */
-    private $array;
+    protected $array;
 
     public function __constructIterator(array $array)
     {

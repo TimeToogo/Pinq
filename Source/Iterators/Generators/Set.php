@@ -18,8 +18,6 @@ class Set extends Generator implements ISet
     {
         parent::__construct();
         
-        $this->map = new OrderedMap();
-        
         if($values !== null) {
             foreach($values as $value) {
                 $this->add($value);
@@ -29,8 +27,8 @@ class Set extends Generator implements ISet
     
     public function getIterator()
     {
-        foreach($this->map->keys() as $key) {
-            yield $key;
+        foreach($this->values as $value) {
+            yield $value;
         }
     }
 }
