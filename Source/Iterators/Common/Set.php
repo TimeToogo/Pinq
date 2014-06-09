@@ -56,7 +56,7 @@ trait Set
     {
         $identityHash = Identity::hash($value);
         
-        if(array_key_exists($identityHash, $this->values)) {
+        if(isset($this->values[$identityHash]) || array_key_exists($identityHash, $this->values)) {
             return false;
         }
         
@@ -72,7 +72,7 @@ trait Set
     {
         $identityHash = Identity::hash($value);
         
-        if(!array_key_exists($identityHash, $this->values)) {
+        if(!isset($this->values[$identityHash]) && !array_key_exists($identityHash, $this->values)) {
             return false;
         }
         
