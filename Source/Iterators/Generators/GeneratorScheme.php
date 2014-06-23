@@ -19,17 +19,17 @@ class GeneratorScheme extends Common\IteratorScheme
     
     public function createOrderedMap(\Traversable $iterator = null)
     {
-        return new OrderedMap($iterator);
+        return new OrderedMap($iterator === null ? null : $this->adapter($iterator));
     }
     
     public function createSet(\Traversable $iterator = null)
     {
-        return new Set($iterator);
+        return new Set($iterator === null ? null : $this->adapter($iterator));
     }
 
     public function walk(\Traversable $iterator, callable $function)
     {
-        foreach($iterator as $key => &$value) {
+        foreach($this->adapter($iterator) as $key => &$value) {
             if($function($value, $key) === false) {
                 break;
             }
@@ -50,13 +50,29 @@ class GeneratorScheme extends Common\IteratorScheme
     
     public function arrayCompatibleIterator(\Traversable $iterator)
     {
-        return new ArrayCompatibleIterator($iterator);
+        return new ArrayCompatibleIterator($this->adapter($iterator));
+    }
+    
+    /**
+     * @param \Traversable $iterator
+     * @return IGenerator
+     */
+    public static function adapter(\Traversable $iterator)
+    {
+        if($iterator instanceof IGenerator) {
+            return $iterator;
+        } elseif($iterator instanceof Pinq\Iterators\Standard\IIterator) {
+            return new IIteratorAdapter($iterator);
+        } elseif($iterator instanceof \IteratorAggregate) {
+            return static::adapter($iterator->getIterator());
+        } else {
+            return new IteratorAdapter($iterator);
+        }
     }
     
     protected function adapterIterator(\Traversable $iterator)
     {
-        //No adapter needed, PHP 5.5 supports foreach of non scalar keys
-        return $iterator;
+        return static::adapter($iterator);
     }
     
     public function arrayIterator(array $array)
@@ -71,7 +87,7 @@ class GeneratorScheme extends Common\IteratorScheme
 
     public function filterIterator(\Traversable $iterator, callable $predicate)
     {
-        return new FilterIterator($iterator, $predicate);
+        return new FilterIterator($this->adapter($iterator), $predicate);
     }
 
     public function projectionIterator(
@@ -80,29 +96,34 @@ class GeneratorScheme extends Common\IteratorScheme
             callable $valueProjectionFunction = null)
     {
         return new ProjectionIterator(
-                $iterator, 
+                $this->adapter($iterator), 
                 $keyProjectionFunction, 
                 $valueProjectionFunction);
     }
     
     public function reindexerIterator(\Traversable $iterator)
     {
-        return new ReindexedIterator($iterator);
+        return new ReindexedIterator($this->adapter($iterator));
     }
     
     public function joinIterator(\Traversable $outerIterator, \Traversable $innerIterator)
     {
-        return new UnfilteredJoinIterator($outerIterator, $innerIterator);
+        return new UnfilteredJoinIterator(
+                $this->adapter($outerIterator), 
+                $this->adapter($innerIterator));
     }
     
     public function groupJoinIterator(\Traversable $outerIterator, \Traversable $innerIterator, callable $traversableFactory)
     {
-        return new UnfilteredGroupJoinIterator($outerIterator, $innerIterator, $traversableFactory);
+        return new UnfilteredGroupJoinIterator(
+                $this->adapter($outerIterator), 
+                $this->adapter($innerIterator), 
+                $traversableFactory);
     }
 
     public function rangeIterator(\Traversable $iterator, $start, $amount)
     {
-        return new RangeIterator($iterator, $start, $amount);
+        return new RangeIterator($this->adapter($iterator), $start, $amount);
     }
     
     public function groupedIterator(
@@ -111,23 +132,26 @@ class GeneratorScheme extends Common\IteratorScheme
             callable $traversableFactory)
     {
         return new GroupedIterator(
-                $iterator, 
+                $this->adapter($iterator), 
                 $groupKeyFunction, 
                 $traversableFactory);
     }
 
     public function orderedIterator(\Traversable $iterator, callable $function, $isAscending)
     {
-        return new OrderedIterator($iterator, $function, $isAscending);
+        return new OrderedIterator(
+                $this->adapter($iterator), 
+                $function, 
+                $isAscending);
     }
     
     protected function setOperationIterator(\Traversable $iterator, Common\SetOperations\ISetFilter $setFilter)
     {
-        return new SetOperationIterator($iterator, $setFilter);
+        return new SetOperationIterator($this->adapter($iterator), $setFilter);
     }
     
     protected function flattenedIteratorsIterator(\Traversable $iteratorsIterator)
     {
-        return new FlatteningIterator($iteratorsIterator);
+        return new FlatteningIterator($this->adapter($iteratorsIterator));
     }
 }

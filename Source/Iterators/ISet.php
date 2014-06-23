@@ -26,6 +26,15 @@ interface ISet extends \Countable, \Traversable
      * @return boolean Whether the value was successfully added
      */
     public function add($value);
+
+    /**
+     * Attempts to add the value by reference to the set, will fail 
+     * if the value is already contained in the set.
+     *
+     * @param mixed $value
+     * @return boolean Whether the value was successfully added
+     */
+    public function addRef(&$value);
     
     /**
      * Removes all values from the set.

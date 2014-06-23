@@ -13,13 +13,13 @@ class GroupedIterator extends LazyGenerator
 {
     use Common\GroupedIterator;
 
-    public function __construct(\Traversable $iterator, callable $groupByFunction, callable $traversableFactory)
+    public function __construct(IGenerator $iterator, callable $groupByFunction, callable $traversableFactory)
     {
         parent::__construct($iterator);
         self::__constructIterator($groupByFunction, $traversableFactory);
     }
 
-    protected function initializeGenerator(\Traversable $innerIterator)
+    protected function initializeGenerator(IGenerator $innerIterator)
     {
         $groupedMap = (new OrderedMap($innerIterator))->groupBy($this->groupKeyFunction);
         

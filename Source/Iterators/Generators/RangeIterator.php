@@ -13,13 +13,13 @@ class RangeIterator extends IteratorGenerator
 {
     use Common\RangeIterator;
     
-    public function __construct(\Traversable $iterator, $startAmount, $rangeAmount)
+    public function __construct(IGenerator $iterator, $startAmount, $rangeAmount)
     {
         parent::__construct($iterator);
         self::__constructIterator($startAmount, $rangeAmount);
     }
     
-    protected function &iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(IGenerator $iterator)
     {
         $start = $this->startPosition;
         $end = $this->endPosition;

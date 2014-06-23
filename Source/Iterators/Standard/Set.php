@@ -19,7 +19,7 @@ class Set implements  \IteratorAggregate, ISet
         if($values !== null) {
             $values->rewind();
             while ($element = $values->fetch()) {
-                $this->add($element[1]);
+                $this->addRef($element[1]);
             }
         }
     }

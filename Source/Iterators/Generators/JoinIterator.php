@@ -15,16 +15,16 @@ abstract class JoinIterator extends IteratorGenerator implements IJoinToIterator
     use Common\JoinIterator;
     
     /**
-     * @var \Traversable
+     * @var IGenerator
      */
     protected $outerIterator;
 
     /**
-     * @var \Traversable
+     * @var IGenerator
      */
     protected $innerIterator;
 
-    public function __construct(\Traversable $outerIterator, \Traversable $innerIterator)
+    public function __construct(IGenerator $outerIterator, IGenerator $innerIterator)
     {
         parent::__construct($outerIterator);
         self::__constructIterator();
@@ -32,7 +32,7 @@ abstract class JoinIterator extends IteratorGenerator implements IJoinToIterator
         $this->innerIterator = $innerIterator;
     }
     
-    final protected function &iteratorGenerator(\Traversable $iterator)
+    final protected function &iteratorGenerator(IGenerator $iterator)
     {
         $generator = $this->joinGenerator($iterator, $this->innerIterator, $this->projectionFunction);
         
@@ -43,7 +43,7 @@ abstract class JoinIterator extends IteratorGenerator implements IJoinToIterator
     }
     
     abstract protected function joinGenerator(
-            \Traversable $outerIterator, 
-            \Traversable $innerIterator,
+            IGenerator $outerIterator, 
+            IGenerator $innerIterator,
             callable $projectionFunction);
 }

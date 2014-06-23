@@ -14,8 +14,8 @@ class JoinOnEqualityIterator extends JoinIterator
     use Common\JoinOnEqualityIterator;
     
     public function __construct(
-            \Traversable $outerIterator,
-            \Traversable $innerIterator, 
+            IGenerator $outerIterator,
+            IGenerator $innerIterator, 
             callable $outerKeyFunction, 
             callable $innerKeyFunction)
     {
@@ -24,8 +24,8 @@ class JoinOnEqualityIterator extends JoinIterator
     }
     
     protected function joinGenerator(
-            \Traversable $outerIterator, 
-            \Traversable $innerIterator, 
+            IGenerator $outerIterator, 
+            IGenerator $innerIterator, 
             callable $projectionFunction)
     {
         $outerKeyFunction = $this->outerKeyFunction;

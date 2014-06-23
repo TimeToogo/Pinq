@@ -12,11 +12,11 @@ use Pinq\Iterators\IWrapperIterator;
 abstract class IteratorGenerator extends Generator implements IWrapperIterator
 {
     /**
-     * @var \Traversable
+     * @var IGenerator
      */
     protected $iterator;
 
-    public function __construct(\Traversable $iterator)
+    public function __construct(IGenerator $iterator)
     {
         parent::__construct();
         $this->iterator = $iterator;
@@ -30,7 +30,7 @@ abstract class IteratorGenerator extends Generator implements IWrapperIterator
     final public function updateSourceIterator(\Traversable $sourceIterator)
     {
         $clone = clone $this;
-        $clone->iterator = $sourceIterator;
+        $clone->iterator = GeneratorScheme::adapter($sourceIterator);
         
         return $clone;
     }
@@ -40,5 +40,5 @@ abstract class IteratorGenerator extends Generator implements IWrapperIterator
         return $this->iteratorGenerator($this->iterator);
     }
     
-    abstract protected function &iteratorGenerator(\Traversable $iterator);
+    abstract protected function &iteratorGenerator(IGenerator $iterator);
 }

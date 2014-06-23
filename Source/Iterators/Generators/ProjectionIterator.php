@@ -13,13 +13,13 @@ class ProjectionIterator extends IteratorGenerator
 {
     use Common\ProjectionIterator;
 
-    public function __construct(\Traversable $iterator, callable $keyProjectionFunction = null, callable $valueProjectionFunction = null)
+    public function __construct(IGenerator $iterator, callable $keyProjectionFunction = null, callable $valueProjectionFunction = null)
     {
         parent::__construct($iterator);
         self::__constructIterator($keyProjectionFunction, $valueProjectionFunction);
     }
     
-    protected function &iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(IGenerator $iterator)
     {
         foreach($iterator as $key => &$value) {
             $element = $this->projectElement($key, $value);

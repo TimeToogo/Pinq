@@ -32,8 +32,8 @@ class UnfilteredGroupJoinIterator extends GroupJoinIterator implements IJoinIter
     }
     
     protected function joinGenerator(
-            \Traversable $outerIterator, 
-            \Traversable $innerIterator, 
+            IGenerator $outerIterator, 
+            IGenerator $innerIterator, 
             callable $projectionFunction)
     {
         $traversableFactory = $this->traversableFactory;

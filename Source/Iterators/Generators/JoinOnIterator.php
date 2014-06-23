@@ -13,15 +13,15 @@ class JoinOnIterator extends JoinIterator
 {
     use Common\JoinOnIterator;
     
-    public function __construct(\Traversable $outerIterator, \Traversable $innerIterator, callable $filter)
+    public function __construct(IGenerator $outerIterator, IGenerator $innerIterator, callable $filter)
     {
         parent::__construct($outerIterator, $innerIterator);
         self::__constructJoinOnIterator($filter);
     }
     
     protected function joinGenerator(
-            \Traversable $outerIterator, 
-            \Traversable $innerIterator, 
+            IGenerator $outerIterator, 
+            IGenerator $innerIterator, 
             callable $projectionFunction)
     {
         $filter = $this->filter;

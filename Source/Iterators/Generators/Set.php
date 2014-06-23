@@ -14,13 +14,13 @@ class Set extends Generator implements ISet
 {
     use Common\Set;
     
-    public function __construct(\Traversable $values = null)
+    public function __construct(IGenerator $values = null)
     {
         parent::__construct();
         
         if($values !== null) {
-            foreach($values as $value) {
-                $this->add($value);
+            foreach($values as &$value) {
+                $this->addRef($value);
             }
         }
     }

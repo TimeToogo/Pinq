@@ -13,13 +13,13 @@ class FilterIterator extends IteratorGenerator
 {
     use Common\FilterIterator;
 
-    public function __construct(\Traversable $iterator, callable $filter)
+    public function __construct(IGenerator $iterator, callable $filter)
     {
         parent::__construct($iterator);
         self::__constructIterator($filter);
     }
     
-    protected function &iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(IGenerator $iterator)
     {
         $filter = $this->filter;
         

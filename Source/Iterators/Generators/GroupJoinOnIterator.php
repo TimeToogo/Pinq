@@ -14,8 +14,8 @@ class GroupJoinOnIterator extends GroupJoinIterator
     use Common\JoinOnIterator;
     
     public function __construct(
-            \Traversable $outerIterator, 
-            \Traversable $innerIterator, 
+            IGenerator $outerIterator, 
+            IGenerator $innerIterator, 
             callable $traversableFactory, 
             callable $filter)
     {
@@ -24,8 +24,8 @@ class GroupJoinOnIterator extends GroupJoinIterator
     }
     
     protected function joinGenerator(
-            \Traversable $outerIterator, 
-            \Traversable $innerIterator, 
+            IGenerator $outerIterator, 
+            IGenerator $innerIterator, 
             callable $projectionFunction)
     {
         $filter = $this->filter;

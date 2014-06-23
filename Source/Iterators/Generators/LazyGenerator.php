@@ -9,12 +9,12 @@ namespace Pinq\Iterators\Generators;
  */
 abstract class LazyGenerator extends IteratorGenerator
 {
-    public function __construct(\Traversable $iterator)
+    public function __construct(IGenerator $iterator)
     {
         parent::__construct($iterator);
     }
     
-    final protected function &iteratorGenerator(\Traversable $iterator)
+    final protected function &iteratorGenerator(IGenerator $iterator)
     {
         $loadedIterator = $this->initializeGenerator($iterator);
         
@@ -26,5 +26,5 @@ abstract class LazyGenerator extends IteratorGenerator
     /**
      * @return \Traversable
      */
-    abstract protected function initializeGenerator(\Traversable $innerIterator);
+    abstract protected function initializeGenerator(IGenerator $innerIterator);
 }

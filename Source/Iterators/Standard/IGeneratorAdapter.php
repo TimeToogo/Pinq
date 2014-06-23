@@ -11,7 +11,7 @@ use Pinq\Iterators\Generators\IGenerator;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class GeneratorAdapter extends IteratorAdapter
+class IGeneratorAdapter extends IteratorAdapter
 {
     /**
      * @var IGenerator

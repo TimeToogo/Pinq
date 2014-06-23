@@ -8,6 +8,7 @@ namespace Pinq\Iterators\Generators;
  * overhead of a wrapper iterato. This is accomplished by means of 
  * calling the generator function on every call to the 
  * IteratorAggregate::getIterator which is called on every foreach loop. 
+ * The IGenerator class is able to be used with foreach-by-ref.
  * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */

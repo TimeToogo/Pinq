@@ -30,8 +30,8 @@ class UnfilteredJoinIterator extends JoinIterator implements IJoinIterator
     }
     
     protected function joinGenerator(
-            \Traversable $outerIterator, 
-            \Traversable $innerIterator, 
+            IGenerator $outerIterator, 
+            IGenerator $innerIterator, 
             callable $projectionFunction)
     {
         $innerIterator = new OrderedMap($this->innerIterator);

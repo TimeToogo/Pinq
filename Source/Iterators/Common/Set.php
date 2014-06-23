@@ -54,13 +54,21 @@ trait Set
      */
     public function add($value)
     {
+        return $this->addRef($value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addRef(&$value)
+    {
         $identityHash = Identity::hash($value);
         
         if(isset($this->values[$identityHash]) || array_key_exists($identityHash, $this->values)) {
             return false;
         }
         
-        $this->values[$identityHash] = $value;
+        $this->values[$identityHash] =& $value;
         $this->length++;
         return true;
     }

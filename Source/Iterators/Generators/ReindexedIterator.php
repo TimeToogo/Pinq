@@ -11,12 +11,12 @@ use Pinq\Iterators\Common;
  */
 class ReindexedIterator extends IteratorGenerator
 {
-    public function __construct(\Traversable $iterator)
+    public function __construct(IGenerator $iterator)
     {
         parent::__construct($iterator);
     }
 
-    protected function &iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(IGenerator $iterator)
     {
         foreach($iterator as &$value) {
             yield $value;

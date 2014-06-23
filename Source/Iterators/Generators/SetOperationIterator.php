@@ -14,13 +14,13 @@ class SetOperationIterator extends IteratorGenerator
 {
     use Common\SetOperations\SetOperationIterator;
     
-    public function __construct(\Traversable $iterator, ISetFilter $setFilter)
+    public function __construct(IGenerator $iterator, ISetFilter $setFilter)
     {
         parent::__construct($iterator);
         self::__constructIterator($setFilter);
     }
     
-    protected function &iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(IGenerator $iterator)
     {
         $this->setFilter->initialize();
         

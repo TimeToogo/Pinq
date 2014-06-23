@@ -9,25 +9,14 @@ use Pinq\Iterators\Common;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class IteratorAdapter extends Iterator implements \OuterIterator
+class IteratorAdapter extends Iterator implements \Pinq\Iterators\IAdapterIterator
 {
-    /**
-     * @var \Iterator
-     */
-    protected $iterator;
+    use Common\AdapterIterator;
 
     public function __construct(\Traversable $iterator)
     {
         parent::__construct();
-        $this->iterator = $iterator instanceof \Iterator ? $iterator : new \IteratorIterator($iterator);
-    }
-    
-    /**
-     * @return \Iterator
-     */
-    final public function getInnerIterator()
-    {
-        return $this->iterator;
+        self::__constructIterator($iterator);
     }
 
     public function doRewind()

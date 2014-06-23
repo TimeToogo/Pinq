@@ -25,6 +25,8 @@ class OrderedMap extends Generator implements IOrderedMap
     
     public function setAll(\Traversable $elements)
     {
+        $elements = GeneratorScheme::adapter($elements);
+        
         foreach($elements as $key => &$value) {
             $this->setRef($key, $value);
         }

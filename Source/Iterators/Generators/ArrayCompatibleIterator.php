@@ -13,12 +13,12 @@ class ArrayCompatibleIterator extends IteratorGenerator
 {
     use Common\ArrayCompatibleIterator;
     
-    public function __construct(\Traversable $iterator)
+    public function __construct(IGenerator $iterator)
     {
         parent::__construct($iterator);
     }
     
-    protected function &iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(IGenerator $iterator)
     {
         $maxKey = 0;
         $nonScalarKeyMap = new OrderedMap();

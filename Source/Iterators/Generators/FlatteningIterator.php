@@ -11,9 +11,11 @@ use Pinq\Iterators\Common;
  */
 class FlatteningIterator extends IteratorGenerator
 {
-    protected function &iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(IGenerator $iterator)
     {
         foreach($iterator as $innerIterator) {
+            $innerIterator = GeneratorScheme::adapter($innerIterator);
+            
             foreach($innerIterator as &$value) {
                 yield $value;
             }

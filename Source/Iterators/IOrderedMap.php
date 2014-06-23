@@ -99,6 +99,15 @@ interface IOrderedMap extends \Traversable, \ArrayAccess, \Countable
     public function set($key, $value);
 
     /**
+     * Sets the supplied key to the supplied value by reference.
+     * 
+     * @param mixed $key
+     * @param mixed $value
+     * @return void
+     */
+    public function setRef($key, &$value);
+
+    /**
      * Sets the supplied keys and values from the elements iterator.
      * 
      * @param \Traversable $elements
