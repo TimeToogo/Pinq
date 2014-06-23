@@ -30,19 +30,17 @@ class RangeIterator extends IteratorIterator
         parent::doRewind();
     }
     
-    protected function doFetch(&$key, &$value)
+    protected function doFetch()
     {
-        while ($this->iterator->fetch($key, $value)) {
+        while ($element = $this->iterator->fetch()) {
             if($this->endPosition !== null && $this->position >= $this->endPosition) {
-                return false;
+                return null;
             } elseif ($this->position >= $this->startPosition) {
                 $this->position++;
-                return true;
+                return $element;
             } else {
                 $this->position++;
             }
         }
-        
-        return false;
     }
 }

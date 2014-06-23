@@ -4,7 +4,7 @@ namespace Pinq\Iterators;
 
 /**
  * Interface for a factory for the required range of iterator classes
- * to fulfill the ITraversable iteraface.
+ * to fulfill the ITraversable interface.
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
@@ -21,15 +21,6 @@ interface IIteratorScheme
      * @return IOrderedMap
      */
     public function createOrderedMap(\Traversable $iterator = null);
-    
-    /**
-     * Creates an ordered map from the supplied array of keys and values.
-     * The key value pairs are associated by their order in their array.
-     * 
-     * @throws \Pinq\PinqException If the supplied arrays are not equal in length
-     * @return IOrderedMap
-     */
-    public function createOrderedMapFrom(array $keys, array $values);
     
     /**
      * Creates an set from the supplied iterator values.
@@ -79,7 +70,7 @@ interface IIteratorScheme
      * to incrementing integers.
      * 
      * @param \Traversable  $iterator
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function arrayCompatibleIterator(\Traversable $iterator);
 
@@ -96,7 +87,7 @@ interface IIteratorScheme
      * 
      * @param \Traversable  $iterator
      * @param callable      $predicate
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function filterIterator(\Traversable $iterator, callable $predicate);
 
@@ -119,7 +110,7 @@ interface IIteratorScheme
      * @param \Traversable  $iterator
      * @param callable      $groupKeyFunction
      * @param callable      $traversableFactory
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function groupedIterator(
             \Traversable $iterator, 
@@ -133,7 +124,7 @@ interface IIteratorScheme
      * @param \Traversable  $iterator
      * @param int           $start
      * @param int|null      $amount
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function rangeIterator(\Traversable $iterator, $start, $amount);
 
@@ -144,7 +135,7 @@ interface IIteratorScheme
      * @param \Traversable  $iterator
      * @param callable|null $keyProjectionFunction
      * @param callable|null $valueProjectionFunction
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function projectionIterator(
             \Traversable $iterator, 
@@ -156,7 +147,7 @@ interface IIteratorScheme
      * to 0-based incrementing integers
      * 
      * @param \Traversable  $iterator
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function reindexerIterator(\Traversable $iterator);
 
@@ -165,92 +156,35 @@ interface IIteratorScheme
      * for any key.
      * 
      * @param \Traversable  $iterator
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function uniqueKeyIterator(\Traversable $iterator);
 
     /**
      * Returns an iterator which will return the outer elements joined
-     * to the inner elements according to the supplied join on function.
-     * Each outer and inner element will be mapped to a value according to 
-     * the joining function.
+     * to the inner elements.
      * 
-     * \Traversable $outerIterator, 
-     * \Traversable $innerIterator,
-     * @param callable $joinOnFunction
-     * @param callable $joiningFunction
-     * @return \Traversable
+     * @param \Traversable $outerIterator
+     * @param \Traversable $innerIterator
+     * @return IJoinIterator
      */
-    public function customJoinIterator(
+    public function joinIterator(
             \Traversable $outerIterator, 
-            \Traversable $innerIterator,
-            callable $joinOnFunction,
-            callable $joiningFunction);
+            \Traversable $innerIterator);
 
     /**
      * Returns an iterator which will return the outer elements joined
-     * to the inner elements according to strict equality on the returned
-     * values for each inner and outer element. Each outer and inner element 
-     * will be mapped to a value according to the joining function.
+     * to the inner elements. All matched inner elements for each 
+     * outer element will be wrapped in a traversable implementation from the supplied factory. 
      * 
-     * \Traversable $outerIterator, 
-     * \Traversable $innerIterator,
-     * @param callable $outerKeyFunction
-     * @param callable $innerKeyFunction
-     * @param callable $joiningFunction
-     * @return \Traversable
-     */
-    public function equalityJoinIterator(
-            \Traversable $outerIterator, 
-            \Traversable $innerIterator,
-            callable $outerKeyFunction, 
-            callable $innerKeyFunction, 
-            callable $joiningFunction);
-
-    /**
-     * Returns an iterator which will return the outer elements joined
-     * to the inner elements according to the supplied join on function.
-     * All matched inner elements for each outer element will be wrapped 
-     * in a traversable implementation from the supplied factory. Each 
-     * outer element and inner group will be mapped to a value according to 
-     * the joining function.
-     * 
-     * \Traversable $outerIterator, 
-     * \Traversable $innerIterator,
-     * @param callable $joinOnFunction
-     * @param callable $joiningFunction
+     * @param \Traversable $outerIterator
+     * @param \Traversable $innerIterator
      * @param callable $traversableFactory
-     * @return \Traversable
+     * @return IJoinIterator
      */
-    public function customGroupJoinIterator(
+    public function groupJoinIterator(
             \Traversable $outerIterator, 
             \Traversable $innerIterator,
-            callable $joinOnFunction,
-            callable $joiningFunction,
-            callable $traversableFactory);
-
-    /**
-     * Returns an iterator which will return the outer elements joined
-     * to the inner elements according to strict equality on the returned
-     * values for each inner and outer element. All matched inner elements 
-     * for each outer element will be wrapped in a traversable implementation 
-     * from the supplied factory. Each outer element and inner group will 
-     * be mapped to a value according to the joining function.
-     * 
-     * \Traversable $outerIterator, 
-     * \Traversable $innerIterator,
-     * @param callable $outerKeyFunction
-     * @param callable $innerKeyFunction
-     * @param callable $joiningFunction
-     * @param callable $traversableFactory
-     * @return \Traversable
-     */
-    public function equalityGroupJoinIterator(
-            \Traversable $outerIterator, 
-            \Traversable $innerIterator,
-            callable $outerKeyFunction, 
-            callable $innerKeyFunction, 
-            callable $joiningFunction,
             callable $traversableFactory);
 
     /**
@@ -259,7 +193,7 @@ interface IIteratorScheme
      * if an invalid iterator is returned from the supplied iterator.
      * 
      * @param \Traversable  $iterator
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function flattenedIterator(\Traversable $iterator);
     
@@ -268,7 +202,7 @@ interface IIteratorScheme
      * strict equality.
      * 
      * @param \Traversable  $iterator
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function uniqueIterator(\Traversable $iterator);
 
@@ -278,7 +212,7 @@ interface IIteratorScheme
      * 
      * @param \Traversable  $iterator
      * @param \Traversable  $otherIterator
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function appendIterator(\Traversable $iterator, \Traversable $otherIterator);
 
@@ -288,7 +222,7 @@ interface IIteratorScheme
      * 
      * @param \Traversable  $iterator
      * @param \Traversable  $otherIterator
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function whereInIterator(\Traversable $iterator, \Traversable $otherIterator);
 
@@ -298,7 +232,7 @@ interface IIteratorScheme
      * 
      * @param \Traversable  $iterator
      * @param \Traversable  $otherIterator
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function exceptIterator(\Traversable $iterator, \Traversable $otherIterator);
 
@@ -308,7 +242,7 @@ interface IIteratorScheme
      * 
      * @param \Traversable  $iterator
      * @param \Traversable  $otherIterator
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function unionIterator(\Traversable $iterator, \Traversable $otherIterator);
 
@@ -318,7 +252,7 @@ interface IIteratorScheme
      * 
      * @param \Traversable  $iterator
      * @param \Traversable  $otherIterator
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function intersectionIterator(\Traversable $iterator, \Traversable $otherIterator);
 
@@ -328,7 +262,7 @@ interface IIteratorScheme
      * 
      * @param \Traversable  $iterator
      * @param \Traversable  $otherIterator
-     * @return \Traversable
+     * @return IWrapperIterator
      */
     public function differenceIterator(\Traversable $iterator, \Traversable $otherIterator);
 }

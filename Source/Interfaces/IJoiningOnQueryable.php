@@ -7,7 +7,7 @@ namespace Pinq\Interfaces;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-interface IJoiningOnQueryable extends IJoiningOnTraversable
+interface IJoiningOnQueryable extends IJoiningOnTraversable, IJoiningToQueryable
 {
     /**
      * {@inheritDoc}

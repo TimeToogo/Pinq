@@ -14,9 +14,9 @@ trait ArrayIterator
      */
     protected $array;
 
-    public function __constructIterator(array $array)
+    public function __constructIterator(array &$array)
     {
-        $this->array = $array;
+        $this->array =& $array;
     }
     
     /**

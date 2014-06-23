@@ -49,4 +49,18 @@ class UnionTest extends TraversableTest
 
         $this->assertMatches($unioned, array_merge($data, $otherData));
     }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatUnionMaintainsReferences(\Pinq\ITraversable $traversable)
+    {
+        $data = $this->makeRefs(range('a', 'f'));
+        
+        $traversable
+                ->union($data)
+                ->iterate(function (&$i) { $i = "$i-"; });
+        
+        $this->assertSame('a-b-c-d-e-f-', implode('', $data));
+    }
 }

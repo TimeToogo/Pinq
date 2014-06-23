@@ -36,11 +36,19 @@ interface IOrderedMap extends \Traversable, \ArrayAccess, \Countable
     public function map(callable $function);
     
     /**
+     * Walks the elements with the supplied function
+     * 
+     * @param callable $function
+     * @return void
+     */
+    public function walk(callable $function);
+    
+    /**
      * Groups the keys / values using the supplied function
      * into new ordered map.
      * 
      * @param callable $groupKeyFunction
-     * @return OrderedMap
+     * @return IOrderedMap
      */
     public function groupBy(callable $groupKeyFunction);
     
@@ -51,7 +59,7 @@ interface IOrderedMap extends \Traversable, \ArrayAccess, \Countable
      * 
      * @param callable[] $orderFunctions
      * @param boolean[] $isAscending
-     * @return OrderedMap
+     * @return IOrderedMap
      */
     public function multisort(array $orderFunctions, array $isAscending);
     
@@ -62,7 +70,16 @@ interface IOrderedMap extends \Traversable, \ArrayAccess, \Countable
      * @param mixed $key
      * @return mixed
      */
-    public function get($key);
+    public function &get($key);
+    
+    /**
+     * Returns the value associated with the supplied key or null
+     * if it does not exist.
+     * 
+     * @param mixed $key
+     * @return mixed
+     */
+    public function &offsetGet($key);
     
     /**
      * Returns whether their is value associated with the supplied key.
@@ -73,7 +90,7 @@ interface IOrderedMap extends \Traversable, \ArrayAccess, \Countable
     public function contains($key);
 
     /**
-     * Sets the supplied key to the supplied value
+     * Sets the supplied key to the supplied value.
      * 
      * @param mixed $key
      * @param mixed $value
@@ -82,27 +99,26 @@ interface IOrderedMap extends \Traversable, \ArrayAccess, \Countable
     public function set($key, $value);
 
     /**
-     * Sets the supplied key to the supplied value if there
-     * is not previously set
+     * Sets the supplied keys and values from the elements iterator.
      * 
-     * @param mixed $key
-     * @param mixed $value
-     * @return boolean Whether the key was set to the value or false if already exists
+     * @param \Traversable $elements
+     * @return void
      */
-    public function setIfNotContained($key, $value);
+    public function setAll(\Traversable $elements);
     
     /**
-     * Removes all keys and values from the map/
+     * Removes all keys and values from the map.
      * 
      * @return void
      */
     public function clear();
     
     /**
-     * Removes the associated value (if exists) with the supplied key
+     * Removes the element (if exists) with the supplied key.
      * 
      * @param mixed $key
      * @return boolean Whether the key was succefully remove or false if does not exist
      */
     public function remove($key);
+    
 }

@@ -26,15 +26,13 @@ class SetOperationIterator extends IteratorIterator
         parent::doRewind();
     }
     
-    protected function doFetch(&$key, &$value)
+    protected function doFetch()
     {
-        while($this->iterator->fetch($key, $value)) {
-            if($this->setFilter->filter($key, $value)) {
-                return true;
+        while($element = $this->iterator->fetch()) {
+            if($this->setFilter->filter($element[0], $element[1])) {
+                return $element;
             }
         }
-        
-        return false;
     }
 
 }

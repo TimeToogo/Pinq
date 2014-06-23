@@ -29,7 +29,7 @@ class SerializableTest extends TraversableTest
         $serializedTraversable = serialize($traversable);
         $unserializedTraversable = unserialize($serializedTraversable);
 
-        $this->assertEquals(
+        $this->assertSame(
                 $traversable->asArray(),
                 $unserializedTraversable->asArray());
     }

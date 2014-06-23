@@ -11,26 +11,93 @@ use Pinq\Iterators\IIteratorScheme;
  */
 class Collection extends Traversable implements ICollection, Interfaces\IOrderedCollection
 {
-    public function __construct($values = array(), Iterators\IIteratorScheme $scheme = null)
+    /**
+     * The source collection.
+     * 
+     * @var Collection|null
+     */
+    protected $source;
+    
+    public function __construct($values = [], IIteratorScheme $scheme = null, Collection $source = null)
     {
-        parent::__construct($values, $scheme);
-    }
-
-    public function asCollection()
-    {
-        return $this;
+        parent::__construct($values, $scheme, $source);
+        
+        if($source === null) {
+            $this->toOrderedMap();
+        }
     }
     
-    private function updateValues(\Traversable $values)
+    public function asTraversable()
     {
-        $this->valuesIterator = $this->scheme->createOrderedMap($values);
+        return new Traversable($this->elements, $this->scheme);
     }
-
+    
+    /**
+     * {@inheritDoc}
+     * @param Collection|null $source
+     */
+    public static function from($elements, Iterators\IIteratorScheme $scheme = null, Traversable $source = null)
+    {
+        if($source !== null && !($source instanceof Collection)) {
+            throw new PinqException(
+                    'Cannot construct %s: expecting source to be type %s or null, %s given',
+                    __CLASS__,
+                    __CLASS__,
+                    Utilities::getTypeOrClass($source));
+        }
+        
+        return new static($elements, $scheme, $source);
+    }
+    
+    private function updateElements(\Traversable $elements)
+    {
+        $collectionElements = $this->toOrderedMap();
+        
+        $loadedElements = $this->scheme->createOrderedMap($elements);
+        $collectionElements->clear();
+        $collectionElements->setAll($loadedElements);
+    }
+    
+    /**
+     * @return Iterators\IOrderedMap
+     */
+    protected function toOrderedMap()
+    {
+        $this->elements = $this->asOrderedMap();
+        
+        return $this->elements;
+    }
+    
     public function clear()
     {
-        $this->valuesIterator = $this->scheme->createOrderedMap();
+        if($this->source !== null) {
+            $this->source->removeRange($this->elements);
+        } else {
+            $this->updateElements($this->scheme->emptyIterator());
+        }
     }
-
+    
+    public function join($values)
+    {
+        return new Connectors\JoiningCollection(
+                $this, 
+                $this->scheme->joinIterator(
+                        $this->elements, 
+                        $this->scheme->toIterator($values)), 
+                    $this->scopedSelfFactory());
+    }
+    
+    public function groupJoin($values)
+    {
+        return new Connectors\JoiningCollection(
+                $this, 
+                $this->scheme->groupJoinIterator(
+                        $this->elements, 
+                        $this->scheme->toIterator($values),
+                        $this->scopedSelfFactory()), 
+                $this->scopedSelfFactory());
+    }
+    
     public function apply(callable $function)
     {
         //Fix for being unable to pass a variable number of args by ref
@@ -38,55 +105,72 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
             $function = $function->getCompiledFunction();
         }
         
-        $function = Iterators\Common\Functions::allowExcessiveArguments($function);
-        
-        $values = [];
-        
-        $orderedMap = $this->toOrderedMap();
-        $this->iterate(function ($value, $key) use (&$values, $function) {
-            $function($value, $key);
-            $values[] = $value;
-        });
-
-        $this->valuesIterator = $this->scheme->createOrderedMapFrom($orderedMap->keys(), $values);
+        if($this->source !== null) {
+            $this->scheme->walk($this->elements, $function);
+        } else {
+            $this->toOrderedMap()->walk($function);
+        }
     }
 
     public function addRange($values)
     {
-        $this->updateValues($this->scheme->appendIterator(
-                $this->valuesIterator, 
-                $this->scheme->toIterator($values)));
+        if($this->source !== null) {
+            $this->source->addRange($values);
+        } else {
+            $this->updateElements($this->scheme->appendIterator(
+                    $this->elements, 
+                    $this->scheme->toIterator($values)));
+        }
     }
-
+    
+    public function remove($value)
+    {
+        $this->removeRange([$value]);
+    }
+    
     public function removeRange($values)
     {
-        $this->updateValues($this->scheme->exceptIterator(
-                $this->valuesIterator,
-                $this->scheme->toIterator($values)));
+        if($this->source !== null) {
+            $this->source->removeRange($this->scheme->intersectionIterator(
+                    $this->elements,
+                    $this->scheme->toIterator($values)));
+        } else {
+            $this->updateElements($this->scheme->exceptIterator(
+                    $this->elements,
+                    $this->scheme->toIterator($values)));
+        }
     }
 
     public function removeWhere(callable $predicate)
     {
-        $keys = [];
-        $values = [];
+        $elementsToRemove = $this->scheme->createOrderedMap(
+                $this->scheme->filterIterator(
+                        $this->elements, 
+                        $predicate));
         
-        $this->iterate(function ($value, $key) use (&$values, &$keys, $predicate) {
-            if(!$predicate($value, $key)) {
-                $values[] = $value;
-                $keys[] = $key;
-            }
-        });
-
-        $this->valuesIterator = $this->scheme->createOrderedMapFrom($keys, $values);
+        $this->removeRange($elementsToRemove);
+    }
+    
+    public function offsetGet($key)
+    {
+        return $this->asOrderedMap()->offsetGet($key);
     }
 
     public function offsetSet($index, $value)
     {
-        $this->toOrderedMap()->offsetSet($index, $value);
+        if($this->source !== null) {
+            $this->source->offsetSet($index, $value);
+        } else {
+            $this->toOrderedMap()->offsetSet($index, $value);
+        }
     }
 
     public function offsetUnset($index)
     {
-        $this->toOrderedMap()->offsetUnset($index);
+        if($this->source !== null) {
+            $this->source->offsetUnset($index);
+        } else {
+            $this->toOrderedMap()->offsetUnset($index);
+        }
     }
 }

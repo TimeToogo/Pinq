@@ -17,7 +17,7 @@ class LoadableRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
             [new Requests\Average(), 'LoadAverage'],
             [new Requests\Contains(null), 'LoadContains'],
             [new Requests\Count(), 'LoadCount'],
-            [new Requests\Exists(), 'LoadExists'],
+            [new Requests\IsEmpty(), 'LoadIsEmpty'],
             [new Requests\First(), 'LoadFirst'],
             [new Requests\GetIndex(0), 'LoadGetIndex'],
             [new Requests\IssetIndex(0), 'LoadIssetIndex'],

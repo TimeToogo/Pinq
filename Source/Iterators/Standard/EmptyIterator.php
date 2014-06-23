@@ -9,8 +9,8 @@ namespace Pinq\Iterators\Standard;
  */
 class EmptyIterator extends Iterator
 {
-    protected function doFetch(&$key, &$value)
+    protected function doFetch()
     {
-        return false;
+        return null;
     }
 }

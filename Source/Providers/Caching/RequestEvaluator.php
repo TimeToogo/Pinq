@@ -50,7 +50,7 @@ class RequestEvaluator extends Requests\RequestVisitor
         return $this->cacheMethodResult(__FUNCTION__, $request);
     }
 
-    public function visitExists(Requests\Exists $request)
+    public function visitIsEmpty(Requests\IsEmpty $request)
     {
         return $this->cacheMethodResult(__FUNCTION__, $request);
     }

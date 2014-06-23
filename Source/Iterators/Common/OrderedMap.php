@@ -45,38 +45,6 @@ trait OrderedMap
     }
     
     /**
-     * Constructs an ordered dictionary from an array of keys and of values.
-     * The values of each array will be used and are associated by the order
-     * in the supplied array.
-     * 
-     * @return IOrderedMap
-     */
-    public static function from(array $keys, array $values)
-    {
-        $length = count($keys);
-        if($length !== count($values)) {
-            throw new \Pinq\PinqException(
-                    'Cannot construct %s: $values and $keys must contain an equal number of elements, got %d keys and %d values',
-                    __CLASS__,
-                    $length,
-                    count($values));
-        }
-        
-        $map = new self();
-        
-        $map->keys = array_values($keys);
-        $map->values = array_values($values);
-        $map->length = $length;
-        
-        foreach($map->keys as $position => $key) {
-            $map->keyIdentityPositionMap[Identity::hash($key)] = $position;
-        }
-        $map->loadLargestIntKey();
-        
-        return $map;
-    }
-    
-    /**
      * {@inheritDoc}
      */
     public function values()
@@ -89,13 +57,29 @@ trait OrderedMap
      */
     public function map(callable $function)
     {
+        $function = Functions::allowExcessiveArguments($function);
+        
         $clone = clone $this;
         
         foreach($clone->keyIdentityPositionMap as $position) {
-            $clone->values[$position] = $function($this->values[$position], $this->keys[$position]);
+            $keyCopy = $this->keys[$position];
+            $valueCopy = $this->values[$position];
+            $clone->values[$position] = $function($valueCopy, $keyCopy);
         }
         
         return $clone;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function walk(callable $function)
+    {
+        $function = Functions::allowExcessiveArguments($function);
+        
+        foreach($this->keys as $position => $key) {
+            $function($this->values[$position], $key);
+        }
     }
     
     /**
@@ -107,7 +91,7 @@ trait OrderedMap
         
         foreach($this->keyIdentityPositionMap as $identityHash => $position) {
             $keyCopy = $key = $this->keys[$position];
-            $valueCopy = $value = $this->values[$position];
+            $valueCopy = $value =& $this->values[$position];
             
             $groupKey = $groupKeyFunction($valueCopy, $keyCopy);
             
@@ -118,7 +102,7 @@ trait OrderedMap
                 $groupedMap->set($groupKey, $groupMap);
             }
             
-            $groupMap->setInternal($key, $value, $identityHash);
+            $groupMap->setInternal($key, $value, $identityHash, true);
         }
         
         return $groupedMap;
@@ -130,24 +114,17 @@ trait OrderedMap
     public function multisort(array $orderByFunctions, array $isAscending)
     {
         $positionKeyIdentityMap = [];
-        $populatePositionMap = true;
-        
         $multisortArguments = [];
+        
+        foreach($this->keyIdentityPositionMap as $keyIdentityHash => $position) {
+            $positionKeyIdentityMap['0' . $position] = $keyIdentityHash;
+        }
         
         foreach($orderByFunctions as $key => $function) {
             $orderByValues = [];
             
-            if($populatePositionMap) {
-                foreach($this->keyIdentityPositionMap as $keyIdentityHash => $position) {
-                    $stringPosition = '0' . $position;
-                    $positionKeyIdentityMap[$stringPosition] = $keyIdentityHash;
-                    $orderByValues[$stringPosition] = $function($this->values[$position], $this->keys[$position]);
-                }
-                $populatePositionMap = false;
-            } else {
-                foreach($this->keyIdentityPositionMap as $keyIdentityHash => $position) {
-                    $orderByValues['0' . $position] = $function($this->values[$position], $this->keys[$position]);
-                }
+            foreach($this->keyIdentityPositionMap as $position) {
+                $orderByValues['0' . $position] = $function($this->values[$position], $this->keys[$position]);
             }
             
             $multisortArguments[] =& $orderByValues;
@@ -162,13 +139,14 @@ trait OrderedMap
         call_user_func_array('array_multisort', $multisortArguments);
         
         $sortedMap = new self();
+        
         $newPosition = 0;
         foreach ($positionKeyIdentityMap as $stringPosition => $keyIdentityHash) {
             $originalPosition = (int)$stringPosition;
             
             $sortedMap->keyIdentityPositionMap[$keyIdentityHash] = $newPosition;
             $sortedMap->keys[$newPosition] = $this->keys[$originalPosition];
-            $sortedMap->values[$newPosition] = $this->values[$originalPosition];
+            $sortedMap->values[$newPosition] =& $this->values[$originalPosition];
             
             $newPosition++;
         }
@@ -194,11 +172,16 @@ trait OrderedMap
     /**
      * {@inheritDoc}
      */
-    public function get($key)
+    public function &get($key)
     {
         $identityHash = Identity::hash($key);
         
-        return isset($this->keyIdentityPositionMap[$identityHash]) ? $this->values[$this->keyIdentityPositionMap[$identityHash]] : null;
+        if(isset($this->keyIdentityPositionMap[$identityHash])) {
+            return $this->values[$this->keyIdentityPositionMap[$identityHash]];
+        } else {
+            $null = null;
+            return $null;
+        }
     }
 
     /**
@@ -220,20 +203,12 @@ trait OrderedMap
     /**
      * {@inheritDoc}
      */
-    public function setIfNotContained($key, $value)
+    public function setRef($key, &$value)
     {
-        $identityHash = Identity::hash($key);
-        
-        if(!isset($this->keyIdentityPositionMap[$identityHash])) {
-            $this->setInternal($key, $value, $identityHash);
-            
-            return true;
-        }
-        
-        return false;
+        $this->setInternal($key, $value, Identity::hash($key), true);
     }
     
-    final protected function setInternal($key, $value, $identityHash)
+    final protected function setInternal($key, &$value, $identityHash, $reference = false)
     {
         if(isset($this->keyIdentityPositionMap[$identityHash])) {
             $position = $this->keyIdentityPositionMap[$identityHash];
@@ -246,7 +221,11 @@ trait OrderedMap
         }
         
         $this->keys[$position] = $key;
-        $this->values[$position] = $value;
+        if($reference) {
+            $this->values[$position] =& $value;
+        } else {
+            $this->values[$position] = $value;
+        }
     }
     
     /**
@@ -259,7 +238,9 @@ trait OrderedMap
         if(isset($this->keyIdentityPositionMap[$identityHash])) {
             $position = $this->keyIdentityPositionMap[$identityHash];
             
-            unset($this->keys[$position], $this->values[$position], $this->keyIdentityPositionMap[$identityHash]);
+            unset($this->keys[$position], 
+                    $this->values[$position], 
+                    $this->keyIdentityPositionMap[$identityHash]);
             
             if($position !== $this->length) {
                 $this->keys = array_values($this->keys);
@@ -294,7 +275,7 @@ trait OrderedMap
         return $this->contains($offset);
     }
 
-    public function offsetGet($offset)
+    public function &offsetGet($offset)
     {
         return $this->get($offset);
     }

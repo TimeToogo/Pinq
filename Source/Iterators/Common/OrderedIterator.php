@@ -35,7 +35,7 @@ trait OrderedIterator
      */
     final public function thenOrderBy(callable $orderByFunction, $isAscending)
     {
-        $newOrderedIterator = new self($this->getInnerIterator(), function () {}, true);
+        $newOrderedIterator = new self($this->getSourceIterator(), function () {}, true);
         
         $newOrderedIterator->orderByFunctions = $this->orderByFunctions;
         $newOrderedIterator->isAscendingArray = $this->isAscendingArray;
@@ -48,7 +48,7 @@ trait OrderedIterator
     /**
      * @return \Traversable
      */
-    abstract protected function getInnerIterator();
+    abstract protected function getSourceIterator();
 
     final protected function sortMap(IOrderedMap $map)
     {

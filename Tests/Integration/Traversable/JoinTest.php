@@ -188,4 +188,21 @@ class JoinTest extends TraversableTest
                     '10:5',
                 ]);
     }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatJoinDoesNotMaintainProjectedReferences(\Pinq\ITraversable $traversable)
+    {
+        $data = $this->makeRefs(range(1, 20));
+        
+        $traversable
+                ->append($data)
+                ->join($traversable)
+                    ->on(function () { return true; })
+                    ->to(function & (&$i) { return $i; })
+                ->iterate(function (&$i) { $i = null; });
+                
+        $this->assertSame(range(1, 20), $data);
+    }
 }

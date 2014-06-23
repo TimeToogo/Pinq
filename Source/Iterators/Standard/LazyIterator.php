@@ -5,26 +5,21 @@ namespace Pinq\Iterators\Standard;
 use Pinq\Iterators\Common;
 
 /**
- * Base class for a lazy iterator, initialized upon first access.
+ * Base class for a lazy iterator, initialized upon rewind.
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
 abstract class LazyIterator extends IteratorIterator
 {
     /**
-     * @var boolean
+     * @var IIterator
      */
-    private $isInitialized = false;
+    private $originalIterator;
     
     public function __construct(IIterator $iterator)
     {
         parent::__construct($iterator);
-    }
-
-    private function initialize()
-    {
-        $this->iterator = $this->initializeIterator($this->iterator);
-        $this->isInitialized = true;
+        $this->originalIterator = $iterator;
     }
     
     /**
@@ -34,19 +29,13 @@ abstract class LazyIterator extends IteratorIterator
     
     public function doRewind()
     {
-        if (!$this->isInitialized) {
-            $this->initialize();
-        }
+        $this->iterator = $this->initializeIterator($this->originalIterator);
         
         parent::doRewind();
     }
     
-    protected function doFetch(&$key, &$value)
+    protected function doFetch()
     {
-        if (!$this->isInitialized) {
-            $this->initialize();
-        }
-        
-        return $this->iterator->fetch($key, $value);
+        return $this->iterator->fetch();
     }
 }

@@ -19,7 +19,7 @@ class RemoveRangeTest extends CollectionTest
     public function testThatRemoveRangeWillRemovesIdenticalValuesFromCollectionAndPreserveKeys(\Pinq\ICollection $collection, array $data)
     {
         $collection->removeRange([1, '2']);
-
+        
         foreach ($data as $key => $value) {
             if ($value === 1 || $value === '2') {
                 unset($data[$key]);

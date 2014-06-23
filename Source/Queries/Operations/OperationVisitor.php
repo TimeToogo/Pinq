@@ -28,6 +28,16 @@ class OperationVisitor
 
     }
 
+    public function visitJoinApply(JoinApply $operation)
+    {
+
+    }
+
+    public function visitEqualityJoinApply(EqualityJoinApply $operation)
+    {
+
+    }
+
     public function visitAddValues(AddValues $operation)
     {
 

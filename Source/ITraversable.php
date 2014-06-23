@@ -42,10 +42,25 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * @return ICollection
      */
     public function asCollection();
+    
+    /**
+     * Returns whether the traversable is the source of the elements.
+     *
+     * @return boolean
+     */
+    public function isSource();
+    
+    /**
+     * Returns the source traversable or itself if the current traversable 
+     * is the source.
+     *
+     * @return ITraversable
+     */
+    public function getSource();
 
     /**
      * Iterates the elements with the supplied function.
-     * Returning false will break the iteration loop
+     * Returning false will break the iteration loop.
      *
      * @param callable $function The iteration function, parameters are passed as ($value, $key)
      * @return void
@@ -283,7 +298,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     public function intersect($values);
 
     /**
-     * Removes unique values from the original not present in the supplied values.
+     * Returns unique values from the original not present in the supplied values.
      * (Uses strict equality '===')
      *
      * @param  array|\Traversable $values The values to remove

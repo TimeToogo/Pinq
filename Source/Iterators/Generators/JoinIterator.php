@@ -3,16 +3,16 @@
 namespace Pinq\Iterators\Generators;
 
 use Pinq\Iterators\Common;
-use Pinq\Iterators\Common\Joins\IInnerValuesJoiner;
+use Pinq\Iterators\IJoinToIterator;
 
 /**
  * Implementation of the join iterator using generators.
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class JoinIterator extends Generator
+abstract class JoinIterator extends IteratorGenerator implements IJoinToIterator
 {
-    use Common\Joins\JoinIterator;
+    use Common\JoinIterator;
     
     /**
      * @var \Traversable
@@ -24,24 +24,26 @@ class JoinIterator extends Generator
      */
     protected $innerIterator;
 
-    public function __construct(IInnerValuesJoiner $innerValuesJoiner, \Traversable $outerIterator, \Traversable $innerIterator, callable $joiningFunction)
+    public function __construct(\Traversable $outerIterator, \Traversable $innerIterator)
     {
-        parent::__construct();
-        self::__constructIterator($innerValuesJoiner, $joiningFunction);
-        $this->outerIterator = $outerIterator;
+        parent::__construct($outerIterator);
+        self::__constructIterator();
+        $this->outerIterator =& $this->iterator;
         $this->innerIterator = $innerIterator;
     }
     
-    public function getIterator()
+    final protected function &iteratorGenerator(\Traversable $iterator)
     {
-        $this->initialize($this->innerIterator);
+        $generator = $this->joinGenerator($iterator, $this->innerIterator, $this->projectionFunction);
         
-        $joiningFunction = $this->joiningFunction;
-        
-        foreach($this->outerIterator as $outerKey => $outerValue) {
-            foreach($this->innerValuesJoiner->getInnerGroupIterator($outerValue, $outerKey) as $innerKey => $innerValue) {
-                yield $joiningFunction($outerValue, $innerValue, $outerKey, $innerKey);
-            }
+        foreach($generator as $key => $value) {
+            yield $key => $value;
+            unset($value);
         }
     }
+    
+    abstract protected function joinGenerator(
+            \Traversable $outerIterator, 
+            \Traversable $innerIterator,
+            callable $projectionFunction);
 }

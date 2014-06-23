@@ -61,4 +61,15 @@ class ExceptTest extends TraversableTest
 
         $this->assertMatches($except, $data);
     }
+
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatDifferenceMaintainsReferences(\Pinq\ITraversable $traversable, array $data)
+    {
+        $ref = 5;
+        $traversable = $traversable->append([&$ref])->except($traversable);
+        
+        $this->assertReferenceEquals($ref, $traversable->asArray()[0]);
+    }
 }

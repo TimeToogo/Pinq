@@ -18,11 +18,11 @@ interface IAggregatable extends \Countable
     public function count();
 
     /**
-     * Returns whether any values exist.
+     * Returns whether any values are contained is the traversable.
      *
      * @return boolean
      */
-    public function exists();
+    public function isEmpty();
 
     /**
      * Aggregates the values with the supplied function

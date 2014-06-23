@@ -64,4 +64,19 @@ class IndexByTest extends TraversableTest
             $first = false;
         }
     }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatIndexByMaintainsReferences(\Pinq\ITraversable $traversable)
+    {
+        $data = $this->makeRefs(range('A', 'G', 2));
+        
+        $traversable
+                ->append($data)
+                ->indexBy(function ($i) { return $i . '-key'; })
+                ->iterate(function (&$i) { $i .= ':'; });
+                
+        $this->assertSame(['A:', 'C:', 'E:', 'G:'], $data);
+    }
 }

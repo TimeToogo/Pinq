@@ -22,11 +22,6 @@ class IteratorScheme extends Common\IteratorScheme
         return new OrderedMap($iterator == null ? null : $this->toIterator($iterator));
     }
     
-    public function createOrderedMapFrom(array $keys, array $values)
-    {
-        return OrderedMap::from($keys, $values);
-    }
-    
     public function createSet(\Traversable $iterator = null)
     {
         return new Set($iterator == null ? null : $this->toIterator($iterator));
@@ -37,8 +32,8 @@ class IteratorScheme extends Common\IteratorScheme
         $iterator = $this->adapter($iterator);
         $iterator->rewind();
         
-        while($iterator->fetch($key, $value)
-                && $function($value, $key) !== false) {
+        while(($element = $iterator->fetch()) 
+                && $function($element[1], $element[0]) !== false) {
             
         }
     }
@@ -49,8 +44,8 @@ class IteratorScheme extends Common\IteratorScheme
         $array = [];
         
         $iterator->rewind();
-        while($iterator->fetch($key, $value)) {
-            $array[$key] = $value;
+        while($element = $iterator->fetch()) {
+            $array[$element[0]] =& $element[1];
         }
         
         return $array;
@@ -60,9 +55,17 @@ class IteratorScheme extends Common\IteratorScheme
      * @param \Traversable $iterator
      * @return IIterator
      */
-    private function adapter(\Traversable $iterator)
+    public static function adapter(\Traversable $iterator)
     {
-        return $this->adapterIterator($iterator);
+        if($iterator instanceof IIterator) {
+            return $iterator;
+        } elseif($iterator instanceof \Pinq\Iterators\Generators\IGenerator) {
+            return new GeneratorAdapter($iterator); 
+        } elseif($iterator instanceof \IteratorAggregate) {
+            return static::adapter($iterator->getIterator());
+        } else {
+            return new IteratorAdapter($iterator);
+        }
     }
     
     public function arrayCompatibleIterator(\Traversable $iterator)
@@ -72,15 +75,7 @@ class IteratorScheme extends Common\IteratorScheme
     
     public function adapterIterator(\Traversable $iterator)
     {
-        if($iterator instanceof IIterator) {
-            return $iterator;
-        } elseif($iterator instanceof \Pinq\Iterators\Generators\IGenerator) {
-            return new GeneratorAdapter($iterator); 
-        } elseif($iterator instanceof \IteratorAggregate) {
-            return $this->adapterIterator($iterator->getIterator());
-        } else {
-            return  new IteratorAdapter($iterator);
-        }
+        return $this->adapter($iterator);
     }
 
     public function arrayIterator(array $array)
@@ -135,17 +130,19 @@ class IteratorScheme extends Common\IteratorScheme
         return new OrderedIterator($this->adapter($iterator), $function, $isAscending);
     }
     
-    protected function joinIterator(
-            Common\Joins\IInnerValuesJoiner $innerValuesJoiner, 
-            \Traversable $outerIterator, 
-            \Traversable $innerIterator, 
-            callable $joiningFunction)
+    public function joinIterator(\Traversable $outerIterator, \Traversable $innerIterator)
     {
-        return new JoinIterator(
-                $innerValuesJoiner, 
+        return new UnfilteredJoinIterator(
+                $this->adapter($outerIterator), 
+                $this->adapter($innerIterator));
+    }
+    
+    public function groupJoinIterator(\Traversable $outerIterator, \Traversable $innerIterator, callable $traversableFactory)
+    {
+        return new UnfilteredGroupJoinIterator(
                 $this->adapter($outerIterator), 
                 $this->adapter($innerIterator), 
-                $joiningFunction);
+                $traversableFactory);
     }
     
     protected function setOperationIterator(\Traversable $iterator, Common\SetOperations\ISetFilter $setFilter)

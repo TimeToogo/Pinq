@@ -91,12 +91,12 @@ abstract class RequestEvaluator extends Requests\RequestVisitor
 
     abstract protected function loadCount(Requests\Count $request);
 
-    final public function visitExists(Requests\Exists $request)
+    final public function visitIsEmpty(Requests\IsEmpty $request)
     {
-        return $this->isLoaded ? $this->loadedRequestEvaluator->visitExists($request) : $this->loadExists($request);
+        return $this->isLoaded ? $this->loadedRequestEvaluator->visitIsEmpty($request) : $this->loadIsEmpty($request);
     }
 
-    abstract protected function loadExists(Requests\Exists $request);
+    abstract protected function loadIsEmpty(Requests\IsEmpty $request);
 
     final public function visitContains(Requests\Contains $request)
     {

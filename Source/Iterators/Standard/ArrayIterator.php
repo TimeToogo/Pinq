@@ -24,8 +24,14 @@ class ArrayIterator extends Iterator
         reset($this->array);
     }
     
-    final protected function doFetch(&$key, &$value)
+    final protected function doFetch()
     {
-        return false !== (list($key, $value) = each($this->array));
+        $key = key($this->array);
+        if($key === null) {
+            return null;
+        }
+        next($this->array);
+        
+        return [$key, &$this->array[$key]];
     }
 }

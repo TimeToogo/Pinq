@@ -19,11 +19,11 @@ class FilterIterator extends IteratorGenerator
         self::__constructIterator($filter);
     }
     
-    protected function iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(\Traversable $iterator)
     {
         $filter = $this->filter;
         
-        foreach($iterator as $key => $value) {
+        foreach($iterator as $key => &$value) {
             $keyCopy = $key;
             $valueCopy = $value;
             

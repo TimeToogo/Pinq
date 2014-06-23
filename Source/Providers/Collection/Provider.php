@@ -39,10 +39,7 @@ class Provider extends \Pinq\Providers\RepositoryProvider
 
     protected function loadOperationEvaluatorVisitor(Queries\IScope $scope)
     {
-        $this->scopeEvaluator->setTraversable($this->collection);
-        $this->scopeEvaluator->walk($scope);
-
-        return new OperationEvaluator($this->scopeEvaluator->getTraversable()->asCollection());
+        return new OperationEvaluator($this->traversableProvider->evaluateScope($scope));
     }
 
     public function load(Queries\IRequestQuery $query)

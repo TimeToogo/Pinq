@@ -20,11 +20,11 @@ class SetOperationIterator extends IteratorGenerator
         self::__constructIterator($setFilter);
     }
     
-    protected function iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(\Traversable $iterator)
     {
         $this->setFilter->initialize();
         
-        foreach($iterator as $key => $value) {
+        foreach($iterator as $key => &$value) {
             if($this->setFilter->filter($key, $value)) {
                 yield $key => $value;
             }

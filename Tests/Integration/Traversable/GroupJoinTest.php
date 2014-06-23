@@ -4,6 +4,8 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class GroupJoinTest extends TraversableTest
 {
+    
+    
     protected function _testReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable)
     {
         return $traversable->groupJoin([])->on(function ($i) { })->to(function ($k) { });
@@ -15,6 +17,10 @@ class GroupJoinTest extends TraversableTest
      */
     public function testThatExecutionIsDeferred(\Pinq\ITraversable $traversable, array $data)
     {
+        $this->assertThatExecutionIsDeferred(function (callable $function) use ($traversable) {
+            return $traversable->groupJoin([])->to($function);
+        });
+        
         $this->assertThatExecutionIsDeferred(function (callable $function) use ($traversable) {
             return $traversable->groupJoin([])->on($function)->to($function);
         });
@@ -190,5 +196,62 @@ class GroupJoinTest extends TraversableTest
                     '9:1|2|3|4|5|6|7|8|9',
                     '10:1|2|3|4|5|6|7|8|9|10'
                 ]);
+    }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatGroupJoinDoesNotMaintainProjectedValueReferences(\Pinq\ITraversable $traversable)
+    {
+        $data = $this->makeRefs(range(1, 20));
+        
+        $traversable
+                ->append($data)
+                ->groupJoin($traversable)
+                    ->on(function () { return true; })
+                    ->to(function & (&$i) { return $i; })
+                ->iterate(function (&$i) { $i = null; });
+                
+        $this->assertSame(range(1, 20), $data);
+    }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatGroupJoinMaintainsGroupedDataReferences(\Pinq\ITraversable $traversable)
+    {
+        $joinData = $this->makeRefs(range(1, 100));
+        
+        $traversable
+                ->append(range(1, 100, 10))
+                ->groupJoin($joinData)
+                    ->on(function ($o, $i) { return (int)($o / 10) === (int)($i / 10); })
+                    ->to(function ($o, \Pinq\ITraversable $group) {
+                        return $group;
+                    })
+                [3]
+                ->iterate(function (&$i) { $i *= 10; });
+                
+        $this->assertSame(array_merge(range(1, 29), range(300, 390, 10), range(40, 100)), $joinData);
+    }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatGroupJoinOnEqualityMaintainsGroupedDataReferences(\Pinq\ITraversable $traversable)
+    {
+        $joinData = $this->makeRefs(range(1, 100));
+        
+        $traversable
+                ->append(range(1, 100, 10))
+                ->groupJoin($joinData)
+                    ->onEquality(function ($o) { return (int)($o / 10); }, function ($i) { return (int)($i / 10); })
+                    ->to(function ($o, \Pinq\ITraversable $group) {
+                        return $group;
+                    })
+                [3]
+                ->iterate(function (&$i) { $i *= 10; });
+                
+        $this->assertSame(array_merge(range(1, 29), range(300, 390, 10), range(40, 100)), $joinData);
     }
 }

@@ -35,19 +35,16 @@ class IteratorAdapter extends Iterator implements \OuterIterator
         $this->iterator->rewind();
     }
     
-    final protected function doFetch(&$key, &$value)
+    final protected function doFetch()
     {
         $iterator = $this->iterator;
         
         if($iterator->valid()) {
-            $key = $iterator->key();
-            $value = $iterator->current();
+            $element = [$iterator->key(), $iterator->current()];
             
             $iterator->next();
             
-            return true;
+            return $element;
         }
-        
-        return false;
     }
 }

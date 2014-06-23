@@ -3,30 +3,20 @@
 namespace Pinq\Iterators\Standard;
 
 use Pinq\Iterators\Common;
-use Pinq\Iterators\Common\Joins\IInnerValuesJoiner;
 
 /**
- * Implementation of the join iterator using the fetch method.
+ * Implementation of the join iterator using generators.
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class JoinIterator extends Iterator
+abstract class JoinIterator extends IteratorIterator
 {
-    use Common\Joins\JoinIterator;
+    use Common\JoinIterator;
     
     /**
      * @var int
      */
     private $count = 0;
-    /**
-     * @var mixed
-     */
-    protected $currentOuterKey;
-
-    /**
-     * @var mixed
-     */
-    protected $currentOuterValue;
 
     /**
      * @var IIterator
@@ -39,46 +29,69 @@ class JoinIterator extends Iterator
     protected $innerIterator;
 
     /**
+     * @var mixed
+     */
+    protected $outerKey;
+
+    /**
+     * @var mixed
+     */
+    protected $outerValue;
+    
+    /**
      * @var IIterator
      */
-    private $currentInnerGroupIterator;
-
-    public function __construct(
-            IInnerValuesJoiner $innerValuesJoiner,
-            IIterator $outerIterator,
-            IIterator $innerIterator,
-            callable $joiningFunction)
+    private $innerValuesIterator;
+    
+    public function __construct(IIterator $outerIterator, IIterator $innerIterator)
     {
-        parent::__construct();
-        self::__constructIterator($innerValuesJoiner, $joiningFunction);
-        $this->outerIterator = $outerIterator;
+        parent::__construct($outerIterator);
+        self::__constructIterator();
+        $this->outerIterator =& $this->iterator;
         $this->innerIterator = $innerIterator;
+        $this->innerValuesIterator = new EmptyIterator();
+    }
+    
+    public function walk(callable $function)
+    {
+        $this->rewind();
+        
+        while ($outerElement = $this->outerIterator->fetch()) {
+            $innerIterator = $this->getInnerValuesIterator($outerElement[0], $outerElement[1]);
+            $innerIterator->rewind();
+            
+            while($innerElement = $innerIterator->fetch()) {
+                $function($outerElement[1], $innerElement[1], $outerElement[0], $innerElement[0]);
+            }
+        }
     }
 
-    public function doRewind()
+    protected function doRewind()
     {
-        $this->initialize($this->innerIterator);
-        $this->outerIterator->rewind();
-        $this->currentInnerGroupIterator = new EmptyIterator();
+        parent::doRewind();
+        $this->innerValuesIterator = new EmptyIterator();
         $this->count = 0;
     }
     
-    protected function doFetch(&$key, &$value)
+    protected function doFetch()
     {
-        while (!$this->currentInnerGroupIterator->fetch($innerKey, $innerValue)) {
-            if (!$this->outerIterator->fetch($this->currentOuterKey, $this->currentOuterValue)) {
-                return false;
+        while ((list($innerKey, $innerValue) = $this->innerValuesIterator->fetch()) === null) {
+            if ((list($this->outerKey, $this->outerValue) = $this->outerIterator->fetch()) === null) {
+                return null;
             }
-
-            $this->currentInnerGroupIterator = $this->innerValuesJoiner->getInnerGroupIterator($this->currentOuterValue, $this->currentOuterKey);
-            $this->currentInnerGroupIterator->rewind();
+            
+            $this->innerValuesIterator = $this->getInnerValuesIterator($this->outerKey, $this->outerValue);
+            $this->innerValuesIterator->rewind();
         }
         
-        $joiningFunction = $this->joiningFunction;
+        $projectionFunction = $this->projectionFunction;
         
-        $key = $this->count++;
-        $value = $joiningFunction($this->currentOuterValue, $innerValue, $this->currentOuterKey, $innerKey);
-        
-        return true;
+        return [$this->count++,
+                $projectionFunction($this->outerValue, $innerValue, $this->outerKey, $innerKey)];
     }
+
+    /**
+     * @return IIterator
+     */
+    abstract protected function getInnerValuesIterator($outerKey, $outerValue);
 }

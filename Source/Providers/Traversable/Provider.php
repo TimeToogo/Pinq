@@ -36,8 +36,8 @@ class Provider extends \Pinq\Providers\QueryProvider
         $this->traversableCache = new \SplObjectStorage();
         $this->traversable = $traversable;
     }
-
-    protected function loadRequestEvaluatorVisitor(Queries\IScope $scope)
+    
+    public function evaluateScope(Queries\IScope $scope)
     {
         if(!isset($this->traversableCache[$scope])) {
             $this->scopeEvaluator->setTraversable($this->traversable);
@@ -45,7 +45,12 @@ class Provider extends \Pinq\Providers\QueryProvider
             
             $this->traversableCache[$scope] = $this->scopeEvaluator->getTraversable();
         }
+        
+        return $this->traversableCache[$scope];
+    }
 
-        return new RequestEvaluator($this->traversableCache[$scope]);
+    protected function loadRequestEvaluatorVisitor(Queries\IScope $scope)
+    {
+        return new RequestEvaluator($this->evaluateScope($scope));
     }
 }

@@ -19,12 +19,13 @@ class GetIndexTest extends TraversableTest
      */
     public function testThatIndexesSupportObjectKeys(\Pinq\ITraversable $traversable, array $data)
     {
-        //Collect object references
+        //Make object references
         $instances = [];
+        foreach($data as $key => $i) {
+            $instances[$key] = (object)['bar' => $key];
+        }
         
         $traversable = $traversable->indexBy(function ($value, $key) use (&$instances) {
-            $instances[$key] = (object)['bar' => $key];
-            
             return $instances[$key];
         });
         

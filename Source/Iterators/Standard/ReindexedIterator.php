@@ -27,14 +27,12 @@ class ReindexedIterator extends IteratorIterator
         parent::doRewind();
     }
 
-    protected function doFetch(&$key, &$value)
+    protected function doFetch()
     {
-        if($this->iterator->fetch($key, $value)) {
-            $key = $this->index++;
+        if($element = $this->iterator->fetch()) {
+            $element[0] = $this->index++;
             
-            return true;
+            return $element;
         }
-        
-        return false;
     }
 }

@@ -75,7 +75,8 @@ class GroupByTest extends TraversableTest
     public function testThatGroupByImplicitlyIndexesTheGroupsByTheirKey(\Pinq\ITraversable $traversable, array $data)
     {
         $groups = $traversable
-                ->groupBy(function ($i) { return $i[0]; })->asArray();
+                ->groupBy(function ($i) { return $i[0]; })
+                ->asArray();
 
         $this->assertCount(4, $groups);
         $this->assertMatchesValues($groups['a'], ['andrew']);
@@ -103,5 +104,37 @@ class GroupByTest extends TraversableTest
                     return !$isEven($i);
                 }));
         $this->assertMatches($even, array_filter($data, $isEven));
+    }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatGroupByMaintainsReferences(\Pinq\ITraversable $traversable, array $data)
+    {
+        $data = $this->makeRefs(range(1, 10));
+        
+        $traversable = $traversable
+                ->append($data)
+                ->groupBy(function ($i) { return $i % 2 === 0; })
+                [true]
+                ->iterate(function (&$i) { $i *= 10; });
+        
+        $this->assertSame($data, [1, 20, 3, 40, 5, 60, 7, 80, 9, 100]);
+    }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatGroupByMaintainsArrayReferences(\Pinq\ITraversable $traversable, array $data)
+    {
+        $data = $this->makeRefs([[1], [2], [1, 2], [3, 5], [4, 2]]);
+        
+        $traversable
+                ->append($data)
+                ->groupBy(function ($i) { return count($i); })
+                [2]
+                ->iterate(function (&$i) { $i['foo'] = $i[0]; });
+        
+        $this->assertSame([[1], [2], [1, 2, 'foo' => 1], [3, 5, 'foo' => 3], [4, 2, 'foo' => 4]], $data);
     }
 }

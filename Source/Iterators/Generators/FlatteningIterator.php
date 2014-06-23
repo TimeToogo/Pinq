@@ -11,10 +11,10 @@ use Pinq\Iterators\Common;
  */
 class FlatteningIterator extends IteratorGenerator
 {
-    protected function iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(\Traversable $iterator)
     {
         foreach($iterator as $innerIterator) {
-            foreach($innerIterator as $value) {
+            foreach($innerIterator as &$value) {
                 yield $value;
             }
         }

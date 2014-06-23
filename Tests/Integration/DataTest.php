@@ -83,6 +83,17 @@ abstract class DataTest extends \Pinq\Tests\PinqTestCase
 
         return $randomStrings;
     }
+    
+    final protected function makeRefs(array $array)
+    {
+        static $refs = [];
+        
+        foreach($array as $key => &$value) {
+            $refs[] =& $value;
+        }
+        
+        return $array;
+    }
 
     final protected function assertMatches(\Pinq\ITraversable $traversable, array $array, $message = '')
     {
@@ -104,9 +115,21 @@ abstract class DataTest extends \Pinq\Tests\PinqTestCase
 
     final protected function assertMatchesValues(\Pinq\ITraversable $traversable, array $array, $message = '')
     {
-        $this->assertSame(
-                array_values($array),
-                array_values($traversable->asArray()),
-                $message);
+        $firstIterationArray = [];
+        foreach($traversable as $key => $value) {
+            $firstIterationArray[] = $value;
+        }
+        $secondIterationArray = [];
+        foreach($traversable as $key => $value) {
+            $secondIterationArray[] = $value;
+        }
+        
+        $explicitArray = array_values($traversable->asArray());
+        
+        $array =  array_values($array);
+        
+        $this->assertSame($array, $firstIterationArray, $message);
+        $this->assertSame($array, $secondIterationArray, $message);
+        $this->assertSame($array, $explicitArray, $message);
     }
 }

@@ -39,9 +39,9 @@ class RequestEvaluator extends Requests\RequestVisitor
         return $this->traversable->count();
     }
 
-    public function visitExists(Requests\Exists $request)
+    public function visitIsEmpty(Requests\IsEmpty $request)
     {
-        return $this->traversable->exists();
+        return $this->traversable->isEmpty();
     }
 
     public function visitFirst(Requests\First $request)

@@ -18,12 +18,12 @@ class ArrayCompatibleIterator extends IteratorGenerator
         parent::__construct($iterator);
     }
     
-    protected function iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(\Traversable $iterator)
     {
         $maxKey = 0;
         $nonScalarKeyMap = new OrderedMap();
         
-        foreach($iterator as $key => $value) {
+        foreach($iterator as $key => &$value) {
             $this->makeKeyCompatible($key, $maxKey, $nonScalarKeyMap);
             
             yield $key => $value;

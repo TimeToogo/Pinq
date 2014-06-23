@@ -25,9 +25,9 @@ class Set extends Generator implements ISet
         }
     }
     
-    public function getIterator()
+    public function &getIterator()
     {
-        foreach($this->values as $value) {
+        foreach($this->values as &$value) {
             yield $value;
         }
     }

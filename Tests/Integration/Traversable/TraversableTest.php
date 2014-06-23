@@ -51,7 +51,7 @@ abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
     /**
      * @dataProvider theImplementations
      */
-    final public function testThatReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable, array $data)
+    final public function testThatReturnsNewInstanceOfCorrectTypeWithSameScheme(\Pinq\ITraversable $traversable, array $data)
     {
         $originalType = get_class($traversable);
         $originalScheme = $traversable->getIteratorScheme();
@@ -62,11 +62,16 @@ abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
             return;
         }
 
-        $this->assertInstanceOf(
-                \Pinq\ITraversable::ITRAVERSABLE_TYPE,
-                $returnedTraversable);
         $this->assertNotSame($traversable, $returnedTraversable);
-        $this->assertSame($originalType, get_class($returnedTraversable));
+        if($traversable instanceof \Pinq\IQueryable) {
+            $this->assertInstanceOf(
+                    \Pinq\IQueryable::IQUERYABLE_TYPE,
+                    $returnedTraversable);
+        } else {
+            $this->assertInstanceOf(
+                    \Pinq\IQueryable::ITRAVERSABLE_TYPE,
+                    $returnedTraversable);
+        }
         $this->assertSame($originalScheme, $returnedTraversable->getIteratorScheme());
     }
 

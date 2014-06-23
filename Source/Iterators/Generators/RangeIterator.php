@@ -19,14 +19,14 @@ class RangeIterator extends IteratorGenerator
         self::__constructIterator($startAmount, $rangeAmount);
     }
     
-    protected function iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(\Traversable $iterator)
     {
         $start = $this->startPosition;
         $end = $this->endPosition;
         
         $position = 0;
         
-        foreach($iterator as $key => $value) {
+        foreach($iterator as $key => &$value) {
             if($end !== null && $position >= $end) {
                 break;
             } elseif ($position >= $start) {

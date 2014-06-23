@@ -42,16 +42,22 @@ class Repository extends Queryable implements IRepository, Interfaces\IOrderedRe
     {
         return $this->provider->createRepository($this->scope->updateLast($segment));
     }
+    
+    public function getSource()
+    {
+        return $this->isSource() ? $this : $this->provider->createRepository();
+    }
 
     public function join($values)
     {
-        return new Connectors\JoiningOnRepository($this->provider, $this->scope, $values, false);
+        return new Connectors\JoiningRepository($this->provider, $this->scope, $values, false);
     }
 
     public function groupJoin($values)
     {
-        return new Connectors\JoiningOnRepository($this->provider, $this->scope, $values, true);
-    }    
+        return new Connectors\JoiningRepository($this->provider, $this->scope, $values, true);
+    }
+    
 
     /**
      * Executes the supplied operation query on the underlying repository provider
@@ -77,6 +83,12 @@ class Repository extends Queryable implements IRepository, Interfaces\IOrderedRe
     public function apply(callable $function)
     {
         $this->executeQuery(new Operations\Apply($this->convert($function)));
+        $this->valuesIterator = null;
+    }
+    
+    public function remove($value)
+    {
+        $this->executeQuery(new Operations\RemoveValues([$value]));
         $this->valuesIterator = null;
     }
 

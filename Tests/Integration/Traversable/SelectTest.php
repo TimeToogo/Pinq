@@ -81,4 +81,19 @@ class SelectTest extends TraversableTest
             20  => 'foo-bar-baz         ',
         ]);
     }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatSelectDoesNotMaintainReferences(\Pinq\ITraversable $traversable)
+    {
+        $data = $this->makeRefs(range('Z', 'A'));
+        
+        $traversable
+                ->append($data)
+                ->select(function & (&$i) { return $i; })
+                ->iterate(function (&$i) { $i .= $i; });
+                
+        $this->assertSame(range('Z', 'A'), $data);
+    }
 }

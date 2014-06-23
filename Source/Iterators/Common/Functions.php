@@ -57,7 +57,7 @@ final class Functions
         
         /*
          * Micro-optimization: provide simple wrappers for internal functions
-         * with simple signatures rather than the more costly argument array splicing.
+         * with simple signatures rather than the more costly argument array slicing.
          */
         switch($numberOfArguments) {
             case 0:

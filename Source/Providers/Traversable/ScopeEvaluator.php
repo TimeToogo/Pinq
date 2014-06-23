@@ -26,6 +26,14 @@ class ScopeEvaluator extends Segments\SegmentVisitor
         $this->traversable = $traversable;
     }
     
+    public static function evaluate(\Pinq\ITraversable $traversable, \Pinq\Queries\IScope $scope)
+    {
+        $evaluator = new self($traversable);
+        $evaluator->walk($scope);
+        
+        return $evaluator->traversable;
+    }
+    
     /**
      * @return \Pinq\ITraversable
      */
@@ -93,15 +101,23 @@ class ScopeEvaluator extends Segments\SegmentVisitor
 
     public function visitJoin(Segments\Join $query)
     {
-        $this->traversable = $this->getJoin($query)->on($query->getOnFunctionExpressionTree())->to($query->getJoiningFunctionExpressionTree());
+        $joininTraversable = $this->getJoin($query);
+        
+        if($query->hasOnFunctionExpressionTree()) {
+            $joininTraversable = $joininTraversable->on($query->getOnFunctionExpressionTree());
+        }
+        
+        $this->traversable = $joininTraversable->to($query->getJoiningFunctionExpressionTree());
     }
 
     public function visitEqualityJoin(Segments\EqualityJoin $query)
     {
         $this->traversable =
-                $this->getJoin($query)->onEquality(
+                $this->getJoin($query)
+                ->onEquality(
                         $query->getOuterKeyFunctionExpressionTree(),
-                        $query->getInnerKeyFunctionExpressionTree())->to($query->getJoiningFunctionExpressionTree());
+                        $query->getInnerKeyFunctionExpressionTree())
+                ->to($query->getJoiningFunctionExpressionTree());
     }
 
     private function getJoin(Segments\JoinBase $query)

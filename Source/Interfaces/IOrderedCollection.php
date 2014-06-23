@@ -9,7 +9,7 @@ use Pinq\ICollection;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-interface IOrderedCollection extends IOrderedTraversable, ICollection
+interface IOrderedCollection extends ICollection, IOrderedTraversable
 {
     /**
      * {@inheritDoc}

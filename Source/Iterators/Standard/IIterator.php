@@ -19,7 +19,16 @@ namespace Pinq\Iterators\Standard;
  * With Pinq extension:
  * <code>
  * $iterator->rewind();
- * while($iterator->fetch($key, $value)) {
+ * while(list($key, $value) = $iterator->fetch()) {
+ *     ...
+ * }
+ * </code>
+ * Or with value by reference:
+ * <code>
+ * $iterator->rewind();
+ * while($element = $iterator->fetch()) {
+ *     $key = $element[0];
+ *     $value =& $element[1];
  *     ...
  * }
  * </code>
@@ -34,13 +43,12 @@ interface IIterator extends \Iterator
     const IITERATOR_TYPE = __CLASS__;
     
     /**
-     * Returns whether the current position is valid and if so,
-     * sets the current key and value to the the respective parameters
-     * and advances the iterator to the next position.
+     * If the current position is valid, returns an array with
+     * index zero as the key and index one as the value and advances 
+     * the iterator to the next position or returns null if the current 
+     * position is invalid.
      * 
-     * @param mixed &$key The key variable reference
-     * @param mixed &$value The value variable reference
-     * @return boolean Whether the current position is valid
+     * @return array|null The element array or null if invalid position
      */
-    public function fetch(&$key, &$value);
+    public function fetch();
 }

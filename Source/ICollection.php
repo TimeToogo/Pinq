@@ -16,7 +16,7 @@ interface ICollection extends ITraversable
     const ICOLLECTION_TYPE = __CLASS__;
     
     /**
-     * Applies the function the list of values
+     * Walks the elements with the supplied function.
      *
      * @param  callable $function
      * @return void
@@ -33,7 +33,15 @@ interface ICollection extends ITraversable
     public function addRange($values);
 
     /**
-     * Removes a range of values from the collection
+     * Removes all occurances of the supplied value from the collection.
+     *
+     * @param  mixed $value The value to remove
+     * @return void
+     */
+    public function remove($value);
+
+    /**
+     * Removes all occurances of the supplied values from the collection.
      *
      * @param  array|\Traversable $values The values to remove
      * @return void
@@ -41,7 +49,7 @@ interface ICollection extends ITraversable
     public function removeRange($values);
 
     /**
-     * Removes all the values matched by the predicate
+     * Removes all the values matched by the predicate.
      *
      * @param  callable $predicate
      * @return void
@@ -54,6 +62,12 @@ interface ICollection extends ITraversable
      * @return void
      */
     public function clear();
+    
+    /**
+     * {@inheritDoc}
+     * @return ICollection
+     */
+    public function getSource();
 
     /**
      * {@inheritDoc}

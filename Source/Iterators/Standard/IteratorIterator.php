@@ -3,13 +3,14 @@
 namespace Pinq\Iterators\Standard;
 
 use Pinq\Iterators\Common;
+use Pinq\Iterators\IWrapperIterator;
 
 /**
  * Base class for wrapper iterators.
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-abstract class IteratorIterator extends Iterator implements \Iterator
+abstract class IteratorIterator extends Iterator implements IWrapperIterator
 {
     /**
      * @var IIterator
@@ -25,12 +26,23 @@ abstract class IteratorIterator extends Iterator implements \Iterator
     /**
      * @return IIterator
      */
-    final public function getInnerIterator()
+    final public function getSourceIterator()
     {
         return $this->iterator;
     }
+    
+    final public function updateSourceIterator(\Traversable $sourceIterator)
+    {
+        $sourceIterator = IteratorScheme::adapter($sourceIterator);
+        
+        $clone = clone $this;
+        $clone->iterator = $sourceIterator;
+        $clone->rewind();
+        
+        return $clone;
+    }
 
-    public function doRewind()
+    protected function doRewind()
     {
         $this->iterator->rewind();
     }

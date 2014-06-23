@@ -34,4 +34,15 @@ class AppendTest extends TraversableTest
         $this->assertMatches($appendedWithArray, array_values($data));
         $this->assertMatches($appendedWithIterator, array_values($data));
     }
+
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatAppendtMaintainsReferences(\Pinq\ITraversable $traversable, array $data)
+    {
+        $ref = 5;
+        $traversable = $traversable->append([&$ref]);
+        
+        $this->assertReferenceEquals($ref, $traversable->asArray()[0]);
+    }
 }

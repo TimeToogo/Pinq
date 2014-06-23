@@ -22,11 +22,6 @@ class GeneratorScheme extends Common\IteratorScheme
         return new OrderedMap($iterator);
     }
     
-    public function createOrderedMapFrom(array $keys, array $values)
-    {
-        return OrderedMap::from($keys, $values);
-    }
-    
     public function createSet(\Traversable $iterator = null)
     {
         return new Set($iterator);
@@ -34,7 +29,7 @@ class GeneratorScheme extends Common\IteratorScheme
 
     public function walk(\Traversable $iterator, callable $function)
     {
-        foreach($iterator as $key => $value) {
+        foreach($iterator as $key => &$value) {
             if($function($value, $key) === false) {
                 break;
             }
@@ -46,8 +41,8 @@ class GeneratorScheme extends Common\IteratorScheme
         $iterator = $this->arrayCompatibleIterator($iterator);
         $array = [];
         
-        foreach($iterator as $key => $value) {
-            $array[$key] = $value;
+        foreach($iterator as $key => &$value) {
+            $array[$key] =& $value;
         }
         
         return $array;
@@ -71,7 +66,7 @@ class GeneratorScheme extends Common\IteratorScheme
 
     public function emptyIterator()
     {
-        return new \EmptyIterator();
+        return new EmptyIterator();
     }
 
     public function filterIterator(\Traversable $iterator, callable $predicate)
@@ -95,17 +90,14 @@ class GeneratorScheme extends Common\IteratorScheme
         return new ReindexedIterator($iterator);
     }
     
-    protected function joinIterator(
-            Common\Joins\IInnerValuesJoiner $innerValuesJoiner, 
-            \Traversable $outerIterator, 
-            \Traversable $innerIterator, 
-            callable $joiningFunction)
+    public function joinIterator(\Traversable $outerIterator, \Traversable $innerIterator)
     {
-        return new JoinIterator(
-                $innerValuesJoiner, 
-                $outerIterator, 
-                $innerIterator, 
-                $joiningFunction);
+        return new UnfilteredJoinIterator($outerIterator, $innerIterator);
+    }
+    
+    public function groupJoinIterator(\Traversable $outerIterator, \Traversable $innerIterator, callable $traversableFactory)
+    {
+        return new UnfilteredGroupJoinIterator($outerIterator, $innerIterator, $traversableFactory);
     }
 
     public function rangeIterator(\Traversable $iterator, $start, $amount)

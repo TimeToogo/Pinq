@@ -20,7 +20,13 @@ interface IRepository extends IQueryable, ICollection
      * @return Providers\IRepositoryProvider
      */
     public function getProvider();
-
+    
+    /**
+     * {@inheritDoc}
+     * @return IRepository
+     */
+    public function getSource();
+    
     /**
      * {@inheritDoc}
      * @return IRepository

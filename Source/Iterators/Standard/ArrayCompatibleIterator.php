@@ -35,14 +35,13 @@ class ArrayCompatibleIterator extends IteratorIterator
         parent::doRewind();
     }
     
-    protected function doFetch(&$key, &$value) {
+    protected function doFetch() {
         
-        if($this->iterator->fetch($key, $value)) {
-            $this->makeKeyCompatible($key, $this->maxKey, $this->nonScalarKeyMap);
+        if($element = $this->iterator->fetch()) {
+            $keyCopy = $element[0];
+            $this->makeKeyCompatible($keyCopy, $this->maxKey, $this->nonScalarKeyMap);
             
-            return true;
+            return [$keyCopy, &$element[1]];
         }
-        
-        return false;
     }
 }

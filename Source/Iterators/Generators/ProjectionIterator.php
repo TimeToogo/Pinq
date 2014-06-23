@@ -19,12 +19,13 @@ class ProjectionIterator extends IteratorGenerator
         self::__constructIterator($keyProjectionFunction, $valueProjectionFunction);
     }
     
-    protected function iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(\Traversable $iterator)
     {
-        foreach($iterator as $key => $value) {
-            $this->projectKeyAndValue($key, $value);
+        foreach($iterator as $key => &$value) {
+            $element = $this->projectElement($key, $value);
             
-            yield $key => $value;
+            yield $element[0] => $element[1];
+            unset($value);
         }
     }
 }

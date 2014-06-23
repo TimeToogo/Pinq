@@ -43,4 +43,20 @@ class SelectManyTest extends TraversableTest
     {
         return call_user_func_array('array_merge', array_map('array_values', $arrays));
     }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatSelectManyMaintainsReferences(\Pinq\ITraversable $traversable)
+    {
+        $data = $this->makeRefs(range(100, 1, -1));
+        
+        $traversable
+                ->append($data)
+                ->groupBy(function ($i) { return $i % 3; })
+                ->selectMany(function (\Pinq\ITraversable $group) { return $group; })
+                ->iterate(function (&$i) { $i *= 10; });
+                
+        $this->assertSame(range(1000, 10, -10), $data);
+    }
 }

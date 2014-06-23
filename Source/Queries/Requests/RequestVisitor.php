@@ -33,7 +33,7 @@ class RequestVisitor
 
     }
 
-    public function visitExists(Exists $request)
+    public function visitIsEmpty(IsEmpty $request)
     {
 
     }

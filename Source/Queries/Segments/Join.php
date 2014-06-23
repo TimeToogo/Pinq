@@ -14,11 +14,11 @@ class Join extends JoinBase
     /**
      * The join filter expression tree
      *
-     * @var FunctionExpressionTree
+     * @var FunctionExpressionTree|null
      */
     private $onFunction;
 
-    public function __construct($values, $isGroupJoin, FunctionExpressionTree $onFunction, FunctionExpressionTree $joiningFunction)
+    public function __construct($values, $isGroupJoin, FunctionExpressionTree $onFunction = null, FunctionExpressionTree $joiningFunction)
     {
         parent::__construct($values, $isGroupJoin, $joiningFunction);
         $this->onFunction = $onFunction;
@@ -35,14 +35,22 @@ class Join extends JoinBase
     }
 
     /**
-     * @return FunctionExpressionTree
+     * @return boolean
+     */
+    public function hasOnFunctionExpressionTree()
+    {
+        return $this->onFunction !== null;
+    }
+
+    /**
+     * @return FunctionExpressionTree|null
      */
     public function getOnFunctionExpressionTree()
     {
         return $this->onFunction;
     }
 
-    public function update($values, $isGroupJoin, FunctionExpressionTree $onFunction, FunctionExpressionTree $joiningFunction)
+    public function update($values, $isGroupJoin, FunctionExpressionTree $onFunction = null, FunctionExpressionTree $joiningFunction)
     {
         if ($this->values === $values && $this->isGroupJoin === $isGroupJoin && $this->onFunction === $onFunction && ($this->joiningFunction = $joiningFunction)) {
             return $this;

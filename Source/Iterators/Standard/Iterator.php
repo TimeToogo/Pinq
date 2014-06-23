@@ -39,7 +39,7 @@ abstract class Iterator implements IIterator
     final public function valid()
     {
         if($this->requiresFirstFetch) {
-            $this->fetchInternal();
+            $this->fetch();
         }
         
         return $this->valid;
@@ -48,16 +48,16 @@ abstract class Iterator implements IIterator
     final public function key()
     {
         if($this->requiresFirstFetch) {
-            $this->fetchInternal();
+            $this->fetch();
         }
         
         return $this->key;
     }
 
-    final public function current()
+    final public function &current()
     {
         if($this->requiresFirstFetch) {
-            $this->fetchInternal();
+            $this->fetch();
         }
         
         return $this->value;
@@ -78,30 +78,25 @@ abstract class Iterator implements IIterator
     final public function next()
     {
         if($this->requiresFirstFetch) {
-            $this->fetchInternal();
+            $this->fetch();
         }
         
-        $this->fetchInternal();
+        $this->fetch();
     }
     
-    private function fetchInternal()
+    final public function fetch()
     {
         $this->requiresFirstFetch = false;
-        $this->valid = $this->doFetch($this->key, $this->value);
-    }
-    
-    final public function fetch(&$key, &$value)
-    {
-        $this->requiresFirstFetch = false;
-        if($this->valid = $this->doFetch($key, $value)) {
-            $this->key = $key;
-            $this->value = $value;
+        if($this->valid = (null !== ($element = $this->doFetch()))) {
+            $this->key = $element[0];
+            $this->value =& $element[1];
             
-            return true;
+            return $element;
         }
-        
-        return false;
     }
     
-    abstract protected function doFetch(&$key, &$value);
+    /**
+     * @return array|null
+     */
+    abstract protected function doFetch();
 }

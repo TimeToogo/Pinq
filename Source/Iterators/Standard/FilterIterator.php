@@ -19,19 +19,17 @@ class FilterIterator extends IteratorIterator
         self::__constructIterator($filter);
     }
     
-    protected function doFetch(&$key, &$value)
+    protected function doFetch()
     {
         $filter = $this->filter;
         
-        while($this->iterator->fetch($key, $value)) {
-            $keyCopy = $key;
-            $valueCopy = $value;
+        while($element = $this->iterator->fetch()) {
+            $keyCopy = $element[0];
+            $valueCopy = $element[1];
             
             if ($filter($valueCopy, $keyCopy)) {
-                return true;
+                return $element;
             }
         }
-        
-        return false;
     }
 }

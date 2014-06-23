@@ -19,4 +19,18 @@ class PinqTestCase extends \PHPUnit_Framework_TestCase
     {
         return $this->getMockBuilder($className)->disableOriginalConstructor()->getMockForAbstractClass();
     }
+
+    final protected function assertReferenceEquals(&$expectedRef, &$otherRef, $message = 'References must be equal')
+    {
+        $this->assertSame($expectedRef, $otherRef, $message);
+        
+        $originalValue = $expectedRef;
+        
+        $instance = new \stdClass();
+        $expectedRef = $instance;
+        
+        $this->assertSame($instance, $otherRef, $message);
+        
+        $expectedRef = $originalValue;
+    }
 }

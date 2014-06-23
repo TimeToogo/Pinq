@@ -42,7 +42,7 @@ final class SchemeProvider
         $schemes = self::getAvailableSchemes();
         if(empty($schemes)) {
             throw new \Pinq\PinqException(
-                    'Cannot get default iterator scheme: None are supported in the current PHP %s',
+                    'Cannot get default iterator scheme: None are supported in the PHP v%s',
                     PHP_VERSION);
         }
         

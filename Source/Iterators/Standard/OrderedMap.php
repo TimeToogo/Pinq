@@ -24,10 +24,17 @@ class OrderedMap extends Iterator implements IOrderedMap
         parent::__construct();
         
         if($iterator !== null) {
-            $iterator->rewind();
-            while ($iterator->fetch($key, $value)) {
-                $this->set($key, $value);
-            }
+            $this->setAll($iterator);
+        }
+    }
+    
+    public function setAll(\Traversable $elements)
+    {
+        $elements = IteratorScheme::adapter($elements);
+        
+        $elements->rewind();
+        while ($element = $elements->fetch()) {
+            $this->setRef($element[0], $element[1]);
         }
     }
     
@@ -36,16 +43,14 @@ class OrderedMap extends Iterator implements IOrderedMap
         $this->position = 0;
     }
     
-    protected function doFetch(&$key, &$value)
+    protected function doFetch()
     {
-        if(isset($this->keys[$this->position]) || array_key_exists($this->position, $this->keys)) {
-            $key = $this->keys[$this->position];
-            $value = $this->values[$this->position];
-            $this->position++;
+        $position =& $this->position;
+        if(isset($this->keys[$position]) || array_key_exists($position, $this->keys)) {
+            $element = [$this->keys[$position], &$this->values[$position]];
+            $position++;
             
-            return true;
+            return $element;
         }
-        
-        return false;
     }
 }

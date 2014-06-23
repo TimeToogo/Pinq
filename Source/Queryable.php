@@ -103,6 +103,16 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
             $this->valuesIterator = $this->scheme->toIterator($this->loadQuery(new Requests\Values()));
         }
     }
+    
+    public function isSource()
+    {
+        return $this->scope->isEmpty();
+    }
+    
+    public function getSource()
+    {
+        return $this->isSource() ? $this : $this->provider->createQueryable();
+    }
 
     final public function asArray()
     {
@@ -136,7 +146,7 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
 
         return new Traversable($this->valuesIterator);
     }
-
+    
     public function asCollection()
     {
         $this->load();
@@ -205,12 +215,12 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
 
     public function join($values)
     {
-        return new Connectors\JoiningOnQueryable($this->provider, $this->scope, $values, false);
+        return new Connectors\JoiningQueryable($this->provider, $this->scope, $values, false);
     }
 
     public function groupJoin($values)
     {
-        return new Connectors\JoiningOnQueryable($this->provider, $this->scope, $values, true);
+        return new Connectors\JoiningQueryable($this->provider, $this->scope, $values, true);
     }
 
     public function union($values)
@@ -361,9 +371,9 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
         return $this->loadQuery(new Requests\Count());
     }
 
-    public function exists()
+    public function isEmpty()
     {
-        return $this->loadQuery(new Requests\Exists());
+        return $this->loadQuery(new Requests\IsEmpty());
     }
 
     public function contains($value)

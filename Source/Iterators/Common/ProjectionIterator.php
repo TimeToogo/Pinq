@@ -27,7 +27,7 @@ trait ProjectionIterator
                 null : Functions::allowExcessiveArguments($valueProjectionFunction);
     }
     
-    final protected function projectKeyAndValue(&$key, &$value)
+    final protected function projectElement(&$key, &$value)
     {
         $keyProjectionFunction = $this->keyProjectionFunction;
         $valueProjectionFunction = $this->valueProjectionFunction;
@@ -39,14 +39,20 @@ trait ProjectionIterator
             $keyCopyForKey = $keyCopy;
             $valueCopyForKey = $valueCopy;
 
-            $key = $keyProjectionFunction($valueCopyForKey, $keyCopyForKey);
+            $keyProjection = $keyProjectionFunction($valueCopyForKey, $keyCopyForKey);
+        } else {
+            $keyProjection =& $key;
         }
 
         if($valueProjectionFunction !== null) {
             $keyCopyForValue = $keyCopy;
             $valueCopyForValue = $valueCopy;
 
-            $value = $valueProjectionFunction($valueCopyForValue, $keyCopyForValue);
+            $valueProjection = $valueProjectionFunction($valueCopyForValue, $keyCopyForValue);
+        } else {
+            $valueProjection =& $value;
         }
+        
+        return [&$keyProjection, &$valueProjection];
     }
 }

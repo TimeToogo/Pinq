@@ -16,9 +16,9 @@ class ReindexedIterator extends IteratorGenerator
         parent::__construct($iterator);
     }
 
-    protected function iteratorGenerator(\Traversable $iterator)
+    protected function &iteratorGenerator(\Traversable $iterator)
     {
-        foreach($iterator as $value) {
+        foreach($iterator as &$value) {
             yield $value;
         }
     }

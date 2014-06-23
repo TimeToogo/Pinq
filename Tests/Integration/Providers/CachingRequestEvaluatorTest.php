@@ -17,7 +17,7 @@ class CachingRequestEvaluatorTest extends \Pinq\Tests\PinqTestCase
             [new Requests\Average(), 'VisitAverage'],
             [new Requests\Contains(null), 'VisitContains'],
             [new Requests\Count(), 'VisitCount'],
-            [new Requests\Exists(), 'VisitExists'],
+            [new Requests\IsEmpty(), 'VisitIsEmpty'],
             [new Requests\First(), 'VisitFirst'],
             [new Requests\GetIndex(0), 'VisitGetIndex'],
             [new Requests\IssetIndex(0), 'VisitIssetIndex'],

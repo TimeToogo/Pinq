@@ -25,7 +25,33 @@ class OperationEvaluator extends Operations\OperationVisitor
     {
         $this->collection->apply($operation->getFunctionExpressionTree());
     }
-
+    
+    public function visitJoinApply(Operations\JoinApply $operation)
+    {
+        $joiningCollection = $this->getJoin($operation);
+        
+        if($operation->hasOnFunctionExpressionTree()) {
+            $joiningCollection->on($operation->getOnFunctionExpressionTree());
+        }
+        
+        $joiningCollection->apply($operation->getApplyFunctionExpressionTree());
+    }
+    
+    public function visitEqualityJoinApply(Operations\EqualityJoinApply $operation)
+    {
+        $this->getJoin($operation)
+                ->onEquality(
+                        $operation->getOuterKeyFunctionExpressionTree(), 
+                        $operation->getInnerKeyFunctionExpressionTree())
+                ->apply($operation->getApplyFunctionExpressionTree());
+    }
+    
+    private function getJoin(Operations\JoinApplyBase $operation)
+    {
+        return $operation->isGroupJoin() ? 
+                $this->collection->groupJoin($operation->getValues()) : $this->collection->join($operation->getValues());
+    }
+    
     public function visitAddValues(Operations\AddValues $operation)
     {
         $this->collection->addRange($operation->getValues());
@@ -40,7 +66,7 @@ class OperationEvaluator extends Operations\OperationVisitor
     {
         $this->collection->removeWhere($operation->getFunctionExpressionTree());
     }
-
+    
     public function visitClear(Operations\Clear $operation)
     {
         $this->collection->clear();

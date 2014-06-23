@@ -22,28 +22,40 @@ final class Identity
      */
     public static function hash($value)
     {
-        $type = gettype($value);
+        $typeIdentifier = gettype($value)[0];
         
-        $typeIdentifier = $type[0];
-        switch ($type) {
+        switch ($typeIdentifier) {
 
-            case 'string':
-            case 'integer':
-            case 'boolean':
-            case 'double':
-            case 'resource':
-            case 'unknown type':
+            case 's'://string
+                return 's' . (strlen($value) > 32 ? md5($value) : $value);
+                
+            case 'i'://integer
+            case 'b'://boolean
+            case 'd'://double
+            case 'r'://resource
+            case 'u'://unknown type
                 return $typeIdentifier . $value;
                 
-            case 'NULL':
+            case 'N'://NULL
                 return 'N';
                 
-            case 'object':
+            case 'o'://object
                 return 'o' . spl_object_hash($value);
                 
-            case 'array':
+            case 'a'://array
                 return self::arrayHash($value);
         }
+    }
+    
+    /**
+     * Returns an array of string representations of the supplied values
+     * 
+     * @param mixed[] $values
+     * @return string[]
+     */
+    public static function hashAll(array $values)
+    {
+        return array_map([__CLASS__, 'hash'], $values);
     }
     
     private static function arrayHash(array $array)
@@ -53,6 +65,6 @@ final class Identity
         });
         
         $hashData = serialize($array);
-        return 'a' . (strlen($hashData) > 32 ? md5($hashData) : $hashData);
+        return 'a' . md5($hashData);
     }
 }

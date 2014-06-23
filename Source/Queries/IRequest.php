@@ -12,7 +12,7 @@ interface IRequest
 {
     const VALUES = 0;
     const COUNT = 1;
-    const EXISTS = 2;
+    const IS_EMPTY = 2;
     const FIRST = 3;
     const LAST = 4;
     const CONTAINS = 5;

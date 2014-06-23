@@ -3,11 +3,11 @@
 namespace Pinq\Interfaces;
 
 /**
- * This API for the filter options available to a joining ITraversable
+ * This API for the filter options available to a joining ITraversable.
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-interface IJoiningOnTraversable
+interface IJoiningOnTraversable extends IJoiningToTraversable
 {
     /**
      * Filters the join values according to the supplied function.

@@ -29,6 +29,12 @@ interface IQueryable extends ITraversable
      * @return Queries\IScope
      */
     public function getScope();
+    
+    /**
+     * {@inheritDoc}
+     * @return IQueryable
+     */
+    public function getSource();
 
     /**
      * {@inheritDoc}

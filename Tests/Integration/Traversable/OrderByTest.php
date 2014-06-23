@@ -266,4 +266,20 @@ class OrderByTest extends TraversableTest
                 
         $this->assertSame('2005:2004:2003:2002:2001:2000', $years);
     }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatOrderByMaintainsReferences(\Pinq\ITraversable $traversable)
+    {
+        $data = $this->makeRefs(range(1, 100));
+        
+        $traversable
+                ->append($data)
+                ->orderByAscending(function ($i) { return (int)($i / 10); })
+                ->thenByDescending(function ($i) { return $i; })
+                ->iterate(function (&$i) { $i *= 10; });
+                
+        $this->assertSame(range(10, 1000, 10), $data);
+    }
 }

@@ -2,17 +2,19 @@
 
 namespace Pinq\Iterators\Generators;
 
+use Pinq\Iterators\IWrapperIterator;
+
 /**
  * Base class for wrapper generators.
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-abstract class IteratorGenerator extends Generator
+abstract class IteratorGenerator extends Generator implements IWrapperIterator
 {
     /**
      * @var \Traversable
      */
-    private $iterator;
+    protected $iterator;
 
     public function __construct(\Traversable $iterator)
     {
@@ -20,18 +22,23 @@ abstract class IteratorGenerator extends Generator
         $this->iterator = $iterator;
     }
     
-    /**
-     * @return \Traversable
-     */
-    final public function getInnerIterator()
+    final public function getSourceIterator()
     {
         return $this->iterator;
     }
     
-    final public function getIterator()
+    final public function updateSourceIterator(\Traversable $sourceIterator)
+    {
+        $clone = clone $this;
+        $clone->iterator = $sourceIterator;
+        
+        return $clone;
+    }
+    
+    final public function &getIterator()
     {
         return $this->iteratorGenerator($this->iterator);
     }
     
-    abstract protected function iteratorGenerator(\Traversable $iterator);
+    abstract protected function &iteratorGenerator(\Traversable $iterator);
 }

@@ -172,4 +172,18 @@ class IterationTest extends TraversableTest
             $trueIterator->next();
         }
     }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatInterationPassesReferences(\Pinq\ITraversable $traversable)
+    {
+        $data = $this->makeRefs(range('A', 'Z'));
+        
+        $traversable
+                ->append($data)
+                ->iterate(function (&$i) { $i = null; });
+                
+        $this->assertSame(array_fill_keys(range(0, 25), null), $data);
+    }
 }

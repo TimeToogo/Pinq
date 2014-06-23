@@ -11,10 +11,12 @@ namespace Pinq\Queries;
 interface IOperation
 {
     const APPLY = 0;
-    const REMOVE_VALUES = 1;
-    const ADD_VALUES = 2;
-    const CLEAR = 3;
-    const REMOVE_WHERE = 4;
+    const JOIN_APPLY = 1;
+    const EQUALITY_JOIN_APPLY = 2;
+    const REMOVE_VALUES = 3;
+    const ADD_VALUES = 4;
+    const CLEAR = 5;
+    const REMOVE_WHERE = 6;
     const SET_INDEX = 7;
     const UNSET_INDEX = 8;
 

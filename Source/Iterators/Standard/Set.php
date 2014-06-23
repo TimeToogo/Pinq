@@ -10,29 +10,22 @@ use Pinq\Iterators\Common;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class Set extends Iterator implements ISet
+class Set implements  \IteratorAggregate, ISet
 {
     use Common\Set;
     
     public function __construct(IIterator $values = null)
     {
-        parent::__construct();
-        
         if($values !== null) {
             $values->rewind();
-            while ($values->fetch($key, $value)) {
-                $this->add($value);
+            while ($element = $values->fetch()) {
+                $this->add($element[1]);
             }
         }
     }
     
-    protected function doRewind()
+    public function getIterator()
     {
-        reset($this->values);
-    }
-    
-    protected function doFetch(&$key, &$value)
-    {
-        return false !== (list($key, $value) = each($this->values));
+        return new ArrayIterator($this->values);
     }
 }

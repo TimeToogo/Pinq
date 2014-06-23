@@ -14,5 +14,8 @@ abstract class Generator implements IGenerator
         
     }
     
-    abstract public function getIterator();
+    /**
+     * {@inheritDoc}
+     */
+    abstract public function &getIterator();
 }

@@ -8,7 +8,7 @@ namespace Pinq\Iterators;
  * 
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-interface IOrderedIterator extends \Traversable
+interface IOrderedIterator extends IWrapperIterator
 {
     /**
      * Returns an iterator which will further sort the values according

@@ -31,36 +31,28 @@ class FlatteningIterator extends Iterator
     {
         parent::__construct();
         $this->outerIterator = $iterator;
-        $this->innerIterator = new EmptyIterator();
     }
 
     public function doRewind()
     {
         $this->count = 0;
         $this->outerIterator->rewind();
+        $this->innerIterator = new EmptyIterator();
     }
     
-    protected function doFetch(&$key, &$value)
+    protected function doFetch()
     {
-        while (!$this->innerIterator->fetch($innerKey, $value)) {
-            if (!$this->outerIterator->fetch($outerKey, $outerValue)) {
-                return false;
+        while (($innerElement = $this->innerIterator->fetch()) === null) {
+            if (($outerElement = $this->outerIterator->fetch()) === null) {
+                return null;
             }
             
-            if(!($outerValue instanceof IIterator)) {
-                throw new \Pinq\PinqException(
-                        '%s expects all returned value to be of type %s: %s given',
-                        __CLASS__,
-                        IIterator::IITERATOR_TYPE,
-                        \Pinq\Utilities::getTypeOrClass($outerValue));
-            }
+            $outerValue = IteratorScheme::adapter($outerElement[1]);
             
             $this->innerIterator = $outerValue;
             $this->innerIterator->rewind();
         }
         
-        $key = $this->count++;
-
-        return true;
+        return [$this->count++, &$innerElement[1]];
     }
 }

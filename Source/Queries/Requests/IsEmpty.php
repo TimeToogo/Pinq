@@ -8,15 +8,15 @@ namespace Pinq\Queries\Requests;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class Exists extends Request
+class IsEmpty extends Request
 {
     public function getType()
     {
-        return self::EXISTS;
+        return self::IS_EMPTY;
     }
 
     public function traverse(RequestVisitor $visitor)
     {
-        return $visitor->visitExists($this);
+        return $visitor->visitIsEmpty($this);
     }
 }

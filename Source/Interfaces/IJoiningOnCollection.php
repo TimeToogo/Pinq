@@ -7,7 +7,7 @@ namespace Pinq\Interfaces;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-interface IJoiningOnCollection extends IJoiningOnTraversable
+interface IJoiningOnCollection extends IJoiningOnTraversable, IJoiningToCollection
 {
     /**
      * {@inheritDoc}

@@ -51,4 +51,19 @@ class IntersectTest extends TraversableTest
 
         $this->assertMatches($insection, []);
     }
+    
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatIntersectMaintainsReferences(\Pinq\ITraversable $traversable)
+    {
+        $data = $this->makeRefs(range('A', 'Z', 2));//Every 2nd letter: A, C, E, G...
+        
+        $traversable
+                ->append($data)
+                ->intersect(range('A', 'Z', 3))//Intersect every 6th letter: A,G,M,Y
+                ->iterate(function (&$i) { $i .= ':'; });
+                
+        $this->assertSame(explode(' ', 'A: C E G: I K M: O Q S: U W Y:'), $data);
+    }
 }

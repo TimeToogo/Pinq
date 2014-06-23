@@ -50,4 +50,15 @@ class DifferenceTest extends TraversableTest
 
         $this->assertMatches($intersection, array_diff($data, $otherData));
     }
+
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatDifferenceMaintainsReferences(\Pinq\ITraversable $traversable, array $data)
+    {
+        $ref = 5;
+        $traversable = $traversable->append([&$ref])->difference($traversable);
+        
+        $this->assertReferenceEquals($ref, $traversable->asArray()[0]);
+    }
 }

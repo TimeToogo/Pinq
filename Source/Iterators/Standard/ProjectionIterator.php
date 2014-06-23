@@ -19,14 +19,10 @@ class ProjectionIterator extends IteratorIterator
         self::__constructIterator($keyProjectionFunction, $valueProjectionFunction);
     }
     
-    protected function doFetch(&$key, &$value)
+    protected function doFetch()
     {
-        if($this->iterator->fetch($key, $value)) {
-            $this->projectKeyAndValue($key, $value);
-            
-            return true;
+        if($element = $this->iterator->fetch()) {
+            return $this->projectElement($element[0], $element[1]);
         }
-        
-        return false;
     }
 }
