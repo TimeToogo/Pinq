@@ -135,6 +135,6 @@ class GroupByTest extends TraversableTest
                 [2]
                 ->iterate(function (&$i) { $i['foo'] = $i[0]; });
         
-        $this->assertSame([[1], [2], [1, 2, 'foo' => 1], [3, 5, 'foo' => 3], [4, 2, 'foo' => 4]], $data);
+        $this->assertSame($data, [[1], [2], [1, 2, 'foo' => 1], [3, 5, 'foo' => 3], [4, 2, 'foo' => 4]]);
     }
 }

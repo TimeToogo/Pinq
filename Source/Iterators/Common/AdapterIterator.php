@@ -15,7 +15,7 @@ trait AdapterIterator
     protected $source;
     
     /**
-     * @var \Itreartor
+     * @var \Iterator
      */
     protected $iterator;
 

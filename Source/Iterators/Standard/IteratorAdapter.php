@@ -21,6 +21,8 @@ class IteratorAdapter extends Iterator implements \Pinq\Iterators\IAdapterIterat
 
     public function doRewind()
     {
+        parent::doRewind();
+        
         $this->iterator->rewind();
     }
     

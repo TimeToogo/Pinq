@@ -9,21 +9,24 @@ use Pinq\Iterators\Standard\IIterator;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class IIteratorAdapter extends IteratorGenerator
+class IIteratorAdapter extends Generator
 {
+    /**
+     * @var IIterator 
+     */
+    private $iterator;
+
     public function __construct(IIterator $iterator)
     {
-        parent::__construct($iterator);
+        parent::__construct();
+        
+        $this->iterator = $iterator;
     }
     
-    protected function &iteratorGenerator(\Traversable $iterator)
+    public function &getIterator()
     {
-        if(!($iterator instanceof IIterator)) {
-            throw new \Pinq\PinqException('$iterator must be an instance of %s', IIterator::IITERATOR_TYPE);
-        }
-        
-        $iterator->rewind();
-        while($element = $iterator->fetch()) {
+        $this->iterator->rewind();
+        while($element = $this->iterator->fetch()) {
             yield $element[0] => $element[1];
         }
     }

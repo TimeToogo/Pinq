@@ -61,6 +61,8 @@ class IteratorScheme extends Common\IteratorScheme
             return $iterator;
         } elseif($iterator instanceof \Pinq\Iterators\Generators\IGenerator) {
             return new IGeneratorAdapter($iterator); 
+        } elseif($iterator instanceof \ArrayIterator) {
+            return new ArrayIteratorAdapter($iterator);
         } elseif($iterator instanceof \IteratorAggregate) {
             return static::adapter($iterator->getIterator());
         } else {
