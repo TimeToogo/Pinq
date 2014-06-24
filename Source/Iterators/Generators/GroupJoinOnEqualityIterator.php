@@ -24,37 +24,17 @@ class GroupJoinOnEqualityIterator extends GroupJoinIterator
         self::__constructJoinOnEqualityIterator($outerKeyFunction, $innerKeyFunction);
     }
     
-    protected function joinGenerator(
-            IGenerator $outerIterator, 
-            IGenerator $innerIterator, 
-            callable $projectionFunction)
+    protected function innerGenerator($outerKey, $outerValue)
     {
         $outerKeyFunction = $this->outerKeyFunction;
         $traversableFactory = $this->traversableFactory;
-        $innerGroups = (new OrderedMap($innerIterator))->groupBy($this->innerKeyFunction);
+        $groupKey = $outerKeyFunction($outerValue, $outerKey);
         
-        foreach($outerIterator as $outerKey => $outerValue) {
-            $groupKey = $outerKeyFunction($outerValue, $outerKey);
-            
-            $group = $traversableFactory($innerGroups->contains($groupKey) ? $innerGroups->get($groupKey) : []);
-            
-            yield $projectionFunction($outerValue, $group, $outerKey, $groupKey);
-        }
-    }
-    
-    public function walk(callable $function)
-    {
-        $outerIterator = $this->iterator;
-        $outerKeyFunction = $this->outerKeyFunction;
-        $traversableFactory = $this->traversableFactory;
         $innerGroups = (new OrderedMap($this->innerIterator))->groupBy($this->innerKeyFunction);
         
-        foreach($outerIterator as $outerKey => &$outerValue) {
-            $groupKey = $outerKeyFunction($outerValue, $outerKey);
-            
-            $group = $traversableFactory($innerGroups->contains($groupKey) ? $innerGroups->get($groupKey) : []);
-            
-            $function($outerValue, $group, $outerKey, $groupKey);
-        }
+        $traversableGroup = $traversableFactory($innerGroups->contains($groupKey) ? 
+                $innerGroups->get($groupKey) : []);
+        
+        return new ArrayIterator([$groupKey => $traversableGroup]);
     }
 }

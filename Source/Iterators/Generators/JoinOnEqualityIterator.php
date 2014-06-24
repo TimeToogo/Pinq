@@ -23,39 +23,13 @@ class JoinOnEqualityIterator extends JoinIterator
         self::__constructJoinOnEqualityIterator($outerKeyFunction, $innerKeyFunction);
     }
     
-    protected function joinGenerator(
-            IGenerator $outerIterator, 
-            IGenerator $innerIterator, 
-            callable $projectionFunction)
+    protected function innerGenerator($outerKey, $outerValue)
     {
         $outerKeyFunction = $this->outerKeyFunction;
-        $innerGroups = (new OrderedMap($innerIterator))->groupBy($this->innerKeyFunction);
-        
-        foreach($outerIterator as $outerKey => $outerValue) {
-            $groupKey = $outerKeyFunction($outerValue, $outerKey);
-            
-            if($innerGroups->contains($groupKey)) {
-                foreach($innerGroups->get($groupKey) as $innerKey => $innerValue) {
-                    yield $projectionFunction($outerValue, $innerValue, $outerKey, $innerKey);
-                }
-            }
-        }
-    }
-    
-    public function walk(callable $function)
-    {
-        $outerIterator = $this->iterator;
-        $outerKeyFunction = $this->outerKeyFunction;
+        $groupKey = $outerKeyFunction($outerValue, $outerKey);
         $innerGroups = (new OrderedMap($this->innerIterator))->groupBy($this->innerKeyFunction);
         
-        foreach($outerIterator as $outerKey => &$outerValue) {
-            $groupKey = $outerKeyFunction($outerValue, $outerKey);
-            
-            if($innerGroups->contains($groupKey)) {
-                foreach($innerGroups->get($groupKey) as $innerKey => &$innerValue) {
-                    $function($outerValue, $innerValue, $outerKey, $innerKey);
-                }
-            }
-        }
+        return $innerGroups->contains($groupKey) ? 
+                $innerGroups->get($groupKey) : new EmptyIterator();
     }
 }

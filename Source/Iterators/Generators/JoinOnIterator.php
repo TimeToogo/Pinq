@@ -19,38 +19,15 @@ class JoinOnIterator extends JoinIterator
         self::__constructJoinOnIterator($filter);
     }
     
-    protected function joinGenerator(
-            IGenerator $outerIterator, 
-            IGenerator $innerIterator, 
-            callable $projectionFunction)
+    protected function innerGenerator($outerKey, $outerValue)
     {
         $filter = $this->filter;
-        $innerElements = new OrderedMap($innerIterator);
+        $innerValues = new OrderedMap($this->innerIterator);
         
-        foreach($outerIterator as $outerKey => $outerValue) {
-            foreach($innerElements as $innerKey => $innerValue) {
-                if($filter($outerValue, $innerValue, $outerKey, $innerKey)) {
-                    yield $projectionFunction($outerValue, $innerValue, $outerKey, $innerKey);
-                }
-            }
-        }
-    }
-    
-    public function walk(callable $function)
-    {
-        $outerIterator = $this->iterator;
-        $filter = $this->filter;
-        $innerIterator = new OrderedMap($this->innerIterator);
-        
-        foreach($outerIterator as $outerKey => &$outerValue) {
-            $outerValueCopy = $outerValue;
-            foreach($innerIterator as $innerKey => &$innerValue) {
-                $innerValueCopy = $innerValue;
-                
-                if($filter($outerValueCopy, $innerValueCopy, $outerKey, $innerKey)) {
-                    $function($outerValue, $innerValue, $outerKey, $innerKey);
-                }
-            }
-        }
+        return new FilterIterator(
+                $innerValues,
+                function ($innerValue, $innerKey) use ($filter, $outerKey, $outerValue) {
+                    return $filter($outerValue, $innerValue, $outerKey, $innerKey);
+                });
     }
 }

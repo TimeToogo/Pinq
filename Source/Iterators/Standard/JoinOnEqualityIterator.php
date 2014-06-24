@@ -16,7 +16,7 @@ class JoinOnEqualityIterator extends JoinIterator
     /**
      * @var OrderedMap
      */
-    protected $innerValuesGroups;
+    protected $innerGroups;
     
     public function __construct(
             \Traversable $outerIterator,
@@ -30,7 +30,7 @@ class JoinOnEqualityIterator extends JoinIterator
     
     protected function doRewind()
     {
-        $this->innerValuesGroups = (new OrderedMap($this->innerIterator))->groupBy($this->innerKeyFunction);
+        $this->innerGroups = (new OrderedMap($this->innerIterator))->groupBy($this->innerKeyFunction);
         parent::doRewind();
     }
     
@@ -39,8 +39,8 @@ class JoinOnEqualityIterator extends JoinIterator
         $outerKeyFunction = $this->outerKeyFunction;
         $groupKey = $outerKeyFunction($outerValue, $outerKey);
         
-        return $this->innerValuesGroups->contains($groupKey) ? 
-                $this->innerValuesGroups->get($groupKey) : new EmptyIterator();
+        return $this->innerGroups->contains($groupKey) ? 
+                $this->innerGroups->get($groupKey) : new EmptyIterator();
     }
     
 }

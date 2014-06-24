@@ -29,29 +29,8 @@ class UnfilteredJoinIterator extends JoinIterator implements IJoinIterator
                 $innerKeyFunction);
     }
     
-    protected function joinGenerator(
-            IGenerator $outerIterator, 
-            IGenerator $innerIterator, 
-            callable $projectionFunction)
+    protected function innerGenerator($outerKey, $outerValue)
     {
-        $innerIterator = new OrderedMap($this->innerIterator);
-        
-        foreach($outerIterator as $outerKey => $outerValue) {
-            foreach($innerIterator as $innerKey => $innerValue) {
-                yield $projectionFunction($outerValue, $innerValue, $outerKey, $innerKey);
-            }
-        }
-    }
-    
-    public function walk(callable $function)
-    {
-        $outerIterator = $this->iterator;
-        $innerIterator = new OrderedMap($this->innerIterator);
-        
-        foreach($outerIterator as $outerKey => &$outerValue) {
-            foreach($innerIterator as $innerKey => &$innerValue) {
-                $function($outerValue, $innerValue, $outerKey, $innerKey);
-            }
-        }
+        return new OrderedMap($this->innerIterator);
     }
 }

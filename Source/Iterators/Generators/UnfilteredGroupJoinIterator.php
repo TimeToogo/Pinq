@@ -31,27 +31,11 @@ class UnfilteredGroupJoinIterator extends GroupJoinIterator implements IJoinIter
                 $innerKeyFunction);
     }
     
-    protected function joinGenerator(
-            IGenerator $outerIterator, 
-            IGenerator $innerIterator, 
-            callable $projectionFunction)
+    protected function innerGenerator($outerKey, $outerValue)
     {
-        $traversableFactory = $this->traversableFactory;
-        $innerGroup = $traversableFactory(new OrderedMap($innerIterator));
-        
-        foreach($outerIterator as $outerKey => $outerValue) {
-            yield $projectionFunction($outerValue, $innerGroup, $outerKey, 0);
-        }
-    }
-    
-    public function walk(callable $function)
-    {
-        $outerIterator = $this->iterator;
         $traversableFactory = $this->traversableFactory;
         $innerGroup = $traversableFactory(new OrderedMap($this->innerIterator));
         
-        foreach($outerIterator as $outerKey => &$outerValue) {
-            $function($outerValue, $innerGroup, $outerKey, 0);
-        }
+        return new ArrayIterator([0 => $innerGroup]);
     }
 }

@@ -23,41 +23,18 @@ class GroupJoinOnIterator extends GroupJoinIterator
         self::__constructJoinOnIterator($filter);
     }
     
-    protected function joinGenerator(
-            IGenerator $outerIterator, 
-            IGenerator $innerIterator, 
-            callable $projectionFunction)
+    protected function innerGenerator($outerKey, $outerValue)
     {
         $filter = $this->filter;
         $traversableFactory = $this->traversableFactory;
-        $innerElements = new OrderedMap($innerIterator);
+        $innerValues = new OrderedMap($this->innerIterator);
         
-        foreach($outerIterator as $outerKey => $outerValue) {
-            $innerGroup = $traversableFactory(new FilterIterator(
-                    $innerElements, 
-                    function ($innerValue, $innerKey) use ($filter, $outerKey, $outerValue) {
-                        return $filter($outerValue, $innerValue, $outerKey, $innerKey);
-                    }));
-            
-            yield $projectionFunction($outerValue, $innerGroup, $outerKey, 0);
-        }
-    }
-    
-    public function walk(callable $function)
-    {
-        $outerIterator = $this->iterator;
-        $filter = $this->filter;
-        $traversableFactory = $this->traversableFactory;
-        $innerElements = new OrderedMap($this->innerIterator);
+        $innerGroup = $traversableFactory(new FilterIterator(
+                $innerValues, 
+                function ($innerValue, $innerKey) use ($filter, $outerKey, $outerValue) {
+                    return $filter($outerValue, $innerValue, $outerKey, $innerKey);
+                }));
         
-        foreach($outerIterator as $outerKey => &$outerValue) {
-            $innerGroup = $traversableFactory(new FilterIterator(
-                    $innerElements, 
-                    function ($innerValue, $innerKey) use ($filter, $outerKey, $outerValue) {
-                        return $filter($outerValue, $innerValue, $outerKey, $innerKey);
-                    }));
-            
-            $function($outerValue, $innerGroup, $outerKey, 0);
-        }
+        return new ArrayIterator([0 => $innerGroup]);
     }
 }
