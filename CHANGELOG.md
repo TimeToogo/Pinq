@@ -15,16 +15,19 @@ dev-master
  - Implemented new `ITraversable` source semantics:
     - A source `ITraversable` is the instance containing the original underlying elements.
     - Added `ITraversable::isSource`, returns whether the instance is the source `ITraversable`.
+    
         ```php
         $elements = Traversable::from(range(1, 100));
         $elements->isSource(); //true
         $someElements = $elements->where(function ($i) { return $i > 50; });
         $someElements->isSource(); //false
         ```
+
     - Added `ITraversable::getSource`, returns the source `ITraversable` or itself if it is the source.
     - Removed unnecessary caching in `Traversable` queries.
         - `Traversable` can be used with nondeterministic/mutable sources and query parameters.
         - Because of this combined with covariant return types, `ICollection` has new and improved mutable query API:
+        
         ```php
         $collection = Collection::from(range(1, 10));
         $collection
