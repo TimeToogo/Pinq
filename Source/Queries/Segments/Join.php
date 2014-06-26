@@ -2,26 +2,29 @@
 
 namespace Pinq\Queries\Segments;
 
+use Pinq\Queries\Common\Join as CommonJoin;
 use Pinq\FunctionExpressionTree;
 
 /**
- * Query segment for a join filtered by the supplied function
+ * Base class for a join query segment with the joined values and the
+ * resulting value function
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class Join extends JoinBase
+class Join extends CommonJoin\Base implements \Pinq\Queries\ISegment
 {
     /**
-     * The join filter expression tree
+     * The function for selecting the resulting values of the join
      *
-     * @var FunctionExpressionTree|null
+     * @var FunctionExpressionTree
      */
-    private $onFunction;
+    protected $joiningFunction;
 
-    public function __construct($values, $isGroupJoin, FunctionExpressionTree $onFunction = null, FunctionExpressionTree $joiningFunction)
+    public function __construct($values, $isGroupJoin, CommonJoin\IFilter $filter = null, FunctionExpressionTree $joiningFunction)
     {
-        parent::__construct($values, $isGroupJoin, $joiningFunction);
-        $this->onFunction = $onFunction;
+        parent::__construct($values, $isGroupJoin, $filter);
+        
+        $this->joiningFunction = $joiningFunction;
     }
 
     public function getType()
@@ -29,33 +32,17 @@ class Join extends JoinBase
         return self::JOIN;
     }
 
+    /**
+     * @return FunctionExpressionTree
+     */
+    final public function getJoiningFunctionExpressionTree()
+    {
+        return $this->joiningFunction;
+    }
+    
     public function traverse(SegmentWalker $walker)
     {
-        return $walker->walkJoin($this);
+        $walker->walkJoin($this);
     }
 
-    /**
-     * @return boolean
-     */
-    public function hasOnFunctionExpressionTree()
-    {
-        return $this->onFunction !== null;
-    }
-
-    /**
-     * @return FunctionExpressionTree|null
-     */
-    public function getOnFunctionExpressionTree()
-    {
-        return $this->onFunction;
-    }
-
-    public function update($values, $isGroupJoin, FunctionExpressionTree $onFunction = null, FunctionExpressionTree $joiningFunction)
-    {
-        if ($this->values === $values && $this->isGroupJoin === $isGroupJoin && $this->onFunction === $onFunction && ($this->joiningFunction = $joiningFunction)) {
-            return $this;
-        }
-
-        return new self($values, $isGroupJoin, $onFunction, $joiningFunction);
-    }
 }

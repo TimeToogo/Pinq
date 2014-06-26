@@ -85,18 +85,6 @@ class SegmentVisitor extends SegmentWalker
 
     }
 
-    final public function walkEqualityJoin(EqualityJoin $query)
-    {
-        $this->visitEqualityJoin($query);
-
-        return $query;
-    }
-
-    public function visitEqualityJoin(EqualityJoin $query)
-    {
-
-    }
-
     final public function walkOrderBy(OrderBy $query)
     {
         $this->visitOrderBy($query);

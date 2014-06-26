@@ -52,6 +52,11 @@ dev-master
  - Refactored `Queries\Segments\OrderBy` query segment by representing each 
    function and direction as an `Queries\Segments\OrderFunction` class.
  - Renamed `Queries\Segments\Operation::getTraversable` to `getValues`
+ - Refactored `Join` query segments / operations.
+    - Refactored inheritance to compositon, extracted join filtering to interface `Queries\Common\Join\IFilter`.
+    - Created base class for query segment and operation: `Queries\Common\Join\Base`.
+    - Updated `Queries\Segments\Segment[Walker|Visitor]` and `Queries\Operation\Visitor` to match new structure.
+    - Hence updated `Providers\Traversable\ScopeEvaluator` and `Providers\Collection\OperationEvaluator`.
 
 2.1.1 (22/5/14)
 ===============

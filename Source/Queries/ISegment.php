@@ -19,14 +19,13 @@ interface ISegment
     const RANGE = 2;
     const GROUP_BY = 3;
     const JOIN = 4;
-    const EQUALITY_JOIN = 5;
-    const SELECT = 6;
-    const SELECT_MANY = 7;
-    const OPERATE = 8;
-    const UNIQUE = 9;
-    const INDEX_BY = 10;
-    const KEYS = 1;
-    const REINDEX = 2;
+    const SELECT = 5;
+    const SELECT_MANY = 6;
+    const OPERATE = 7;
+    const UNIQUE = 8;
+    const INDEX_BY = 9;
+    const KEYS = 10;
+    const REINDEX = 11;
 
     /**
      * @return int The query type

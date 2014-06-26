@@ -25,26 +25,12 @@ class JoiningRepository extends JoiningQueryable implements Interfaces\IJoiningO
     
     public function apply(callable $applyFunction)
     {
-        $joinFactory = $this->joinSegmentFactory;
-        $join = $joinFactory(function () {});
-        
-        if($join instanceof Queries\Segments\EqualityJoin) {
-            $this->provider->execute(new Queries\OperationQuery(
-                    $this->scope, 
-                    new Queries\Operations\EqualityJoinApply(
-                            $join->getValues(), 
-                            $join->isGroupJoin(),
-                            $join->getOuterKeyFunctionExpressionTree(),
-                            $join->getInnerKeyFunctionExpressionTree(),
-                            $this->provider->getFunctionToExpressionTreeConverter()->convert($applyFunction))));
-        } else {
-            $this->provider->execute(new Queries\OperationQuery(
-                    $this->scope, 
-                    new Queries\Operations\JoinApply(
-                            $join->getValues(), 
-                            $join->isGroupJoin(),
-                            $join->getOnFunctionExpressionTree(),
-                            $this->provider->getFunctionToExpressionTreeConverter()->convert($applyFunction))));
-        }
+        $this->provider->execute(new Queries\OperationQuery(
+                $this->scope,
+                new Queries\Operations\JoinApply(
+                        $this->innerValues, 
+                        $this->isGroupJoin,
+                        $this->filter,
+                        $this->functionConverter->convert($applyFunction))));
     }
 }

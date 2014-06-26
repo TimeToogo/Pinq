@@ -3,7 +3,7 @@
 namespace Pinq\Queries\Operations;
 
 use Pinq\FunctionExpressionTree;
-use Pinq\Queries\Segments\Join;
+use Pinq\Queries\Common\Join;
 
 /**
  * Operation query for applying the supplied function
@@ -11,44 +11,37 @@ use Pinq\Queries\Segments\Join;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class JoinApply extends JoinApplyBase
+class JoinApply extends Join\Base implements \Pinq\Queries\IOperation
 {
-   /**
-     * The join filter expression tree
+    /**
+     * The function for selecting the resulting values of the join
      *
-     * @var FunctionExpressionTree|null
+     * @var FunctionExpressionTree
      */
-    private $onFunction;
+    protected $applyFunction;
 
-    public function __construct($values, $isGroupJoin, FunctionExpressionTree $onFunction = null, FunctionExpressionTree $applyFunction)
+    public function __construct($values, $isGroupJoin, Join\IFilter $filter = null, FunctionExpressionTree $applyFunction)
     {
-        parent::__construct($values, $isGroupJoin, $applyFunction);
-        $this->onFunction = $onFunction;
+        parent::__construct($values, $isGroupJoin, $filter);
+        
+        $this->applyFunction = $applyFunction;
     }
     
     public function getType()
     {
         return self::JOIN_APPLY;
     }
-
+    
     /**
-     * @return boolean
+     * @return FunctionExpressionTree
      */
-    public function hasOnFunctionExpressionTree()
+    final public function getApplyFunctionExpressionTree()
     {
-        return $this->onFunction !== null;
-    }
-
-    /**
-     * @return FunctionExpressionTree|null
-     */
-    public function getOnFunctionExpressionTree()
-    {
-        return $this->onFunction;
+        return $this->applyFunction;
     }
     
     public function traverse(OperationVisitor $visitor)
     {
-        return $visitor->visitJoinApply($this);
+        $visitor->visitJoinApply($this);
     }
 }

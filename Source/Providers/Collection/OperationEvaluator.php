@@ -2,6 +2,7 @@
 
 namespace Pinq\Providers\Collection;
 
+use Pinq\Providers\Traversable;
 use Pinq\Queries\Operations;
 
 /**
@@ -28,28 +29,10 @@ class OperationEvaluator extends Operations\OperationVisitor
     
     public function visitJoinApply(Operations\JoinApply $operation)
     {
-        $joiningCollection = $this->getJoin($operation);
-        
-        if($operation->hasOnFunctionExpressionTree()) {
-            $joiningCollection->on($operation->getOnFunctionExpressionTree());
-        }
+        /* @var $joiningCollection \Pinq\Interfaces\IJoiningToCollection */
+        $joiningCollection = Traversable\ScopeEvaluator::evaluateJoin($this->collection, $operation);
         
         $joiningCollection->apply($operation->getApplyFunctionExpressionTree());
-    }
-    
-    public function visitEqualityJoinApply(Operations\EqualityJoinApply $operation)
-    {
-        $this->getJoin($operation)
-                ->onEquality(
-                        $operation->getOuterKeyFunctionExpressionTree(), 
-                        $operation->getInnerKeyFunctionExpressionTree())
-                ->apply($operation->getApplyFunctionExpressionTree());
-    }
-    
-    private function getJoin(Operations\JoinApplyBase $operation)
-    {
-        return $operation->isGroupJoin() ? 
-                $this->collection->groupJoin($operation->getValues()) : $this->collection->join($operation->getValues());
     }
     
     public function visitAddValues(Operations\AddValues $operation)

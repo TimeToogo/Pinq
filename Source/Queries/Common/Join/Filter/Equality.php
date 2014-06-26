@@ -1,17 +1,16 @@
 <?php
 
-namespace Pinq\Queries\Operations;
+namespace Pinq\Queries\Common\Join\Filter;
 
+use Pinq\Queries\Common\Join\IFilter;
 use Pinq\FunctionExpressionTree;
-use Pinq\Queries\Segments\EqualityJoin;
 
 /**
- * Operation query for applying the supplied function
- * to the source
+ * Equality join filter.
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class EqualityJoinApply extends JoinApplyBase
+class Equality implements IFilter
 {
     /**
      * The outer key selector function
@@ -27,16 +26,15 @@ class EqualityJoinApply extends JoinApplyBase
      */
     private $innerKeyFunction;
 
-    public function __construct($values, $isGroupJoin, FunctionExpressionTree $outerKeyFunction, FunctionExpressionTree $innerKeyFunction, FunctionExpressionTree $applyFunction)
+    public function __construct(FunctionExpressionTree $outerKeyFunction, FunctionExpressionTree $innerKeyFunction)
     {
-        parent::__construct($values, $isGroupJoin, $applyFunction);
         $this->outerKeyFunction = $outerKeyFunction;
         $this->innerKeyFunction = $innerKeyFunction;
     }
     
     public function getType()
     {
-        return self::EQUALITY_JOIN_APPLY;
+        return self::EQUALITY;
     }
 
     /**
@@ -53,10 +51,5 @@ class EqualityJoinApply extends JoinApplyBase
     public function getInnerKeyFunctionExpressionTree()
     {
         return $this->innerKeyFunction;
-    }
-
-    public function traverse(OperationVisitor $visitor)
-    {
-        return $visitor->visitEqualityJoinApply($this);
     }
 }

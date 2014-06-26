@@ -6,6 +6,8 @@ use Pinq\Interfaces;
 use Pinq\Queries;
 use Pinq\Queries\Segments;
 use Pinq\Providers;
+use Pinq\Parsing\IFunctionToExpressionTreeConverter;
+use Pinq\Queries\Common\Join;
 
 /**
  * Implements the filtering API for a join / group join queryable.
@@ -18,6 +20,11 @@ class JoiningQueryable implements Interfaces\IJoiningOnQueryable
      * @var Providers\IQueryProvider
      */
     protected $provider;
+    
+    /**
+     * @var IFunctionToExpressionTreeConverter
+     */
+    protected $functionConverter;
 
     /**
      * @var Queries\IScope
@@ -35,9 +42,9 @@ class JoiningQueryable implements Interfaces\IJoiningOnQueryable
     protected $isGroupJoin;
 
     /**
-     * @var callable|null
+     * @var Join\IFilter|null
      */
-    protected $joinSegmentFactory;
+    protected $filter;
 
     /**
      * @param boolean $isGroupJoin
@@ -45,67 +52,36 @@ class JoiningQueryable implements Interfaces\IJoiningOnQueryable
     public function __construct(Providers\IQueryProvider $provider, Queries\IScope $scope, $innerValues, $isGroupJoin)
     {
         $this->provider = $provider;
+        $this->functionConverter = $provider->getFunctionToExpressionTreeConverter();
         $this->scope = $scope;
         $this->innerValues = $innerValues;
         $this->isGroupJoin = $isGroupJoin;
-        $this->joinSegmentFactory = function (callable $joiningFunction)  {
-            return $this->createJoinSegment(
-                    null, 
-                    $joiningFunction);
-        };
     }
 
     public function on(callable $joiningOnFunction)
     {
-        $this->joinSegmentFactory = function (callable $joiningFunction) use ($joiningOnFunction) {
-            return $this->createJoinSegment(
-                    $joiningOnFunction, 
-                    $joiningFunction);
-        };
+        $this->filter = new Join\Filter\On($this->functionConverter->convert($joiningOnFunction));
         
         return $this;
     }
 
     public function onEquality(callable $outerKeyFunction, callable $innerKeyFunction)
     {
-        $this->joinSegmentFactory = function (callable $joiningFunction) use ($outerKeyFunction, $innerKeyFunction) {
-            return $this->createEqualityJoinSegment(
-                    $outerKeyFunction, 
-                    $innerKeyFunction, 
-                    $joiningFunction);
-        };
+        $this->filter = new Join\Filter\Equality(
+                $this->functionConverter->convert($outerKeyFunction), 
+                $this->functionConverter->convert($innerKeyFunction));
         
         return $this;
     }
     
     public function to(callable $joinFunction)
     {
-        $segmentFactory = $this->joinSegmentFactory;
-        
-        return $this->provider->createQueryable($this->scope->append($segmentFactory($joinFunction)));
-    }
-    
-    final protected function createJoinSegment(callable $joiningOnFunction = null, callable $joiningToFunction)
-    {
-        $functionConverter = $this->provider->getFunctionToExpressionTreeConverter();
-        
-        return new Segments\Join(
-            $this->innerValues,
-            $this->isGroupJoin,
-            $joiningOnFunction === null ? null : $functionConverter->convert($joiningOnFunction),
-            $functionConverter->convert($joiningToFunction));
-    }
-    
-    final protected function createEqualityJoinSegment(callable $outerKeyFunction, callable $innerKeyFunction, callable $joiningToFunction)
-    {
-        $functionConverter = $this->provider->getFunctionToExpressionTreeConverter();
-        
-        return new Segments\EqualityJoin(
-                $this->innerValues,
-                $this->isGroupJoin,
-                $functionConverter->convert($outerKeyFunction),
-                $functionConverter->convert($innerKeyFunction),
-                $functionConverter->convert($joiningToFunction));
+        return $this->provider->createQueryable($this->scope->append(
+                new Segments\Join(
+                        $this->innerValues, 
+                        $this->isGroupJoin, 
+                        $this->filter,
+                        $this->functionConverter->convert($joinFunction))));
     }
 
 }

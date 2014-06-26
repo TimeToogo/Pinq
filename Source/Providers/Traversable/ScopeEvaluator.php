@@ -2,6 +2,7 @@
 
 namespace Pinq\Providers\Traversable;
 
+use Pinq\Queries\Common;
 use Pinq\Queries\Segments;
 
 /**
@@ -98,35 +99,38 @@ class ScopeEvaluator extends Segments\SegmentVisitor
             }
         }
     }
+    
+    /**
+     * Evaluates the join segment values and filter upon the supplied traversable.
+     * 
+     * @param \Pinq\ITraversable $traversable
+     * @param Common\Join\Base $join
+     * @return \Pinq\Interfaces\IJoiningToTraversable
+     */
+    public static function evaluateJoin(\Pinq\ITraversable $traversable, Common\Join\Base $join)
+    {
+        $joiningTraversable = $join->isGroupJoin() ? 
+                $traversable->groupJoin($join->getValues()) : $traversable->join($join->getValues());
+        
+        if($join->hasFilter()) {
+            $filter = $join->getFilter();
+            
+            if($filter instanceof Common\Join\Filter\On) {
+                $joiningTraversable = $joiningTraversable->on($filter->getOnFunctionExpressionTree());
+            } elseif ($filter instanceof Common\Join\Filter\Equality) {
+                $joiningTraversable = $joiningTraversable->onEquality(
+                        $filter->getOuterKeyFunctionExpressionTree(), 
+                        $filter->getInnerKeyFunctionExpressionTree());
+            }
+        }
+        
+        return $joiningTraversable;
+    }
 
     public function visitJoin(Segments\Join $query)
     {
-        $joininTraversable = $this->getJoin($query);
-        
-        if($query->hasOnFunctionExpressionTree()) {
-            $joininTraversable = $joininTraversable->on($query->getOnFunctionExpressionTree());
-        }
-        
-        $this->traversable = $joininTraversable->to($query->getJoiningFunctionExpressionTree());
-    }
-
-    public function visitEqualityJoin(Segments\EqualityJoin $query)
-    {
-        $this->traversable =
-                $this->getJoin($query)
-                ->onEquality(
-                        $query->getOuterKeyFunctionExpressionTree(),
-                        $query->getInnerKeyFunctionExpressionTree())
+        $this->traversable = self::evaluateJoin($this->traversable, $query)
                 ->to($query->getJoiningFunctionExpressionTree());
-    }
-
-    private function getJoin(Segments\JoinBase $query)
-    {
-        if ($query->isGroupJoin()) {
-            return $this->traversable->groupJoin($query->getValues());
-        } else {
-            return $this->traversable->join($query->getValues());
-        }
     }
 
     protected function visitIndexBy(Segments\IndexBy $query)

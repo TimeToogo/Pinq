@@ -58,11 +58,6 @@ class SegmentWalker
         return $join;
     }
 
-    public function walkEqualityJoin(EqualityJoin $join)
-    {
-        return $join;
-    }
-
     public function walkOrderBy(OrderBy $query)
     {
         return $query;

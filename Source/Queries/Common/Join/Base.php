@@ -1,18 +1,17 @@
 <?php
 
-namespace Pinq\Queries\Segments;
+namespace Pinq\Queries\Common\Join;
 
 use Pinq\FunctionExpressionTree;
 
 /**
- * Base class for a join query segment with the joined values and the
- * resulting value function
+ * Base class for a join segment.
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-abstract class JoinBase extends Segment
+abstract class Base
 {
-    /**
+  /**
      * The values to join
      *
      * @var array|\Traversable
@@ -25,17 +24,17 @@ abstract class JoinBase extends Segment
     protected $isGroupJoin;
 
     /**
-     * The function for selecting the resulting values of the join
+     * The join filter.
      *
-     * @var FunctionExpressionTree
+     * @var IFilter|null
      */
-    protected $joiningFunction;
+    protected $filter;
 
-    public function __construct($values, $isGroupJoin, FunctionExpressionTree $joiningFunction)
+    public function __construct($values, $isGroupJoin, IFilter $filter = null)
     {
         $this->values = $values;
         $this->isGroupJoin = $isGroupJoin;
-        $this->joiningFunction = $joiningFunction;
+        $this->filter = $filter;
     }
 
     /**
@@ -55,10 +54,18 @@ abstract class JoinBase extends Segment
     }
 
     /**
-     * @return FunctionExpressionTree
+     * @return boolean
      */
-    final public function getJoiningFunctionExpressionTree()
+    final public function hasFilter()
     {
-        return $this->joiningFunction;
+        return $this->filter !== null;
+    }
+
+    /**
+     * @return IFilter|null
+     */
+    final public function getFilter()
+    {
+        return $this->filter;
     }
 }

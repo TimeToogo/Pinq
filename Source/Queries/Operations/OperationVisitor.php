@@ -33,11 +33,6 @@ class OperationVisitor
 
     }
 
-    public function visitEqualityJoinApply(EqualityJoinApply $operation)
-    {
-
-    }
-
     public function visitAddValues(AddValues $operation)
     {
 
