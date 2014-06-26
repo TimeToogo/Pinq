@@ -29,7 +29,8 @@ class GeneratorScheme extends Common\IteratorScheme
 
     public function walk(\Traversable $iterator, callable $function)
     {
-        foreach($this->adapter($iterator) as $key => &$value) {
+        $adapter = $this->adapter($iterator);
+        foreach($adapter as $key => &$value) {
             if($function($value, $key) === false) {
                 break;
             }
