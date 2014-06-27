@@ -15,7 +15,7 @@ final class On implements IFilter
    /**
      * The join filter expression tree
      *
-     * @var FunctionExpressionTree|null
+     * @var FunctionExpressionTree
      */
     private $onFunction;
 
