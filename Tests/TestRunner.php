@@ -22,6 +22,7 @@ class StreamingHTMLPrinter extends \PHPUnit_TextUI_ResultPrinter
     
     public function write($buffer)
     {
+        $buffer = htmlspecialchars($buffer);
         $originalBuffer = $buffer;
         $buffer = str_replace("\n", '<br>', $originalBuffer);
         
