@@ -19,8 +19,8 @@ class GroupJoinOnEqualityIterator extends GroupJoinIterator
     protected $innerGroups;
     
     public function __construct(
-            \Traversable $outerIterator,
-            \Traversable $innerIterator, 
+            IIterator $outerIterator,
+            IIterator $innerIterator, 
             callable $traversableFactory, 
             callable $outerKeyFunction, 
             callable $innerKeyFunction)
