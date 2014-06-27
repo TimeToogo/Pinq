@@ -5,6 +5,7 @@ namespace Pinq\Connectors;
 use Pinq\Interfaces;
 use Pinq\Iterators\IIteratorScheme;
 use Pinq\Iterators\IJoinIterator;
+use Pinq\Iterators\IJoinToIterator;
 
 /**
  * Implements the filtering API for a join / group join traversable.
@@ -19,7 +20,7 @@ class JoiningTraversable implements Interfaces\IJoiningOnTraversable
     protected $scheme;
     
     /**
-     * @var IJoinIterator
+     * @var IJoinIterator|IJoinToIterator
      */
     protected $joinInterator;
     
