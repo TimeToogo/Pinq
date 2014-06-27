@@ -13,7 +13,7 @@ abstract class GroupJoinIterator extends JoinIterator
 {
     use Common\GroupJoinIterator;
 
-    public function __construct(\Traversable $outerIterator, \Traversable $innerIterator, callable $traversableFactory)
+    public function __construct(IIterator $outerIterator, IIterator $innerIterator, callable $traversableFactory)
     {
         parent::__construct($outerIterator, $innerIterator);
         self::__constructGroupJoinIterator($traversableFactory);

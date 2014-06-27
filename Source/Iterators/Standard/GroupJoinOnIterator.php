@@ -19,8 +19,8 @@ class GroupJoinOnIterator extends GroupJoinIterator
     protected $innerValues;
     
     public function __construct(
-            \Traversable $outerIterator, 
-            \Traversable $innerIterator, 
+            IIterator $outerIterator, 
+            IIterator $innerIterator, 
             callable $traversableFactory, 
             callable $filter)
     {

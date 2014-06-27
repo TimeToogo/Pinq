@@ -18,7 +18,7 @@ class JoinOnIterator extends JoinIterator
      */
     protected $innerValues;
     
-    public function __construct(\Traversable $outerIterator, \Traversable $innerIterator, callable $filter)
+    public function __construct(IIterator $outerIterator, IIterator $innerIterator, callable $filter)
     {
         parent::__construct($outerIterator, $innerIterator);
         self::__constructJoinOnIterator($filter);
