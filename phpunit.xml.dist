@@ -34,5 +34,9 @@
         <blacklist>
             <directory>./vendor/</directory>
         </blacklist>
-    </filter>   
+    </filter>
+    
+    <listeners>
+        <listener class="Pinq\Tests\Timer" file="./Tests/TestTimer.php" />
+    </listeners>
 </phpunit>

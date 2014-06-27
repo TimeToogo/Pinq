@@ -71,8 +71,17 @@ class StreamingHTMLPrinter extends \PHPUnit_TextUI_ResultPrinter
         echo '<span class="result">';
         parent::printFooter($result);
         echo '</span>';
+        echo '<table class="timer">';
+        echo '<tr><th class="title" colspan="2">Long running tests</th></tr>';
+        echo '<tr><th>Test</th><th>Time</th></tr>';
+        foreach(Timer::getLongRunningTests(10) as $testName => $timeTaken) {
+            $timeTaken = round($timeTaken, 2) . 's';
+            echo "<tr><td>$testName</td><td>{$timeTaken}</td></td>";
+        }
+        echo '</table>';
     }
 }
+
 
 $argv = [
     '--configuration', '../phpunit.xml.dist',
@@ -103,6 +112,17 @@ $_SERVER['argv'] = $argv;
 }
 .result {
     font-size: 20px;
+}
+.timer {
+    width: 70%;
+    margin: auto;
+    margin-top: 30px;
+}
+.timer th:not(.title) {
+    text-align: left;
+}
+.timer td {
+    font-size: 12px;
 }
 </style>
 <pre id='output'>
