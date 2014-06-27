@@ -34,7 +34,7 @@ class UnfilteredGroupJoinIterator extends GroupJoinIterator implements IJoinIter
     protected function innerGenerator($outerKey, $outerValue)
     {
         $traversableFactory = $this->traversableFactory;
-        $innerGroup = $traversableFactory(new OrderedMap($this->innerIterator));
+        $innerGroup = $traversableFactory(new OrderedMap($this->defaultIterator($this->innerIterator)));
         
         return new ArrayIterator([0 => $innerGroup]);
     }

@@ -29,7 +29,7 @@ class UnfilteredJoinIterator extends JoinIterator implements IJoinIterator
     
     protected function doRewind()
     {
-        $this->innerValues = new OrderedMap($this->innerIterator);
+        $this->innerValues = new OrderedMap($this->defaultIterator($this->innerIterator));
         parent::doRewind();
     }
     

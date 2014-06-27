@@ -39,7 +39,7 @@ class UnfilteredGroupJoinIterator extends GroupJoinIterator implements IJoinIter
     protected function doRewind()
     {
         $traversableFactory = $this->traversableFactory;
-        $this->innerGroup = $traversableFactory(new OrderedMap($this->innerIterator));
+        $this->innerGroup = $traversableFactory(new OrderedMap($this->defaultIterator($this->innerIterator)));
         parent::doRewind();
     }
     

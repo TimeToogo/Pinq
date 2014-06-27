@@ -267,4 +267,30 @@ class JoinTest extends TraversableTest
             '10:<DEFAULT>'
         ]);
     }
+    
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatUnfilteredJoinToEmptyWithDefaultOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable = $traversable
+                ->join([])
+                    ->withDefault('<DEFAULT>')
+                    ->to(function ($outer, $inner) { 
+                        return $outer . ':' . $inner; 
+                    });
+                
+        $this->assertMatches($traversable, [
+            '1:<DEFAULT>', 
+            '2:<DEFAULT>', 
+            '3:<DEFAULT>',
+            '4:<DEFAULT>',
+            '5:<DEFAULT>', 
+            '6:<DEFAULT>', 
+            '7:<DEFAULT>',
+            '8:<DEFAULT>', 
+            '9:<DEFAULT>', 
+            '10:<DEFAULT>'
+        ]);
+    }
 }

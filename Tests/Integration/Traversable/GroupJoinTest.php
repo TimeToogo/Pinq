@@ -316,4 +316,30 @@ class GroupJoinTest extends TraversableTest
             '10:1,4,9,16,25,36,49,64,81,100',
         ]);
     }
+    
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatUnfilteredJoinToEmptyWithDefaultOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable = $traversable
+                ->groupJoin([])
+                    ->withDefault('<DEFAULT>')
+                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) { 
+                        return $outer . ':' . $innerGroup->implode(''); 
+                    });
+                
+        $this->assertMatches($traversable, [
+            '1:<DEFAULT>', 
+            '2:<DEFAULT>', 
+            '3:<DEFAULT>',
+            '4:<DEFAULT>',
+            '5:<DEFAULT>', 
+            '6:<DEFAULT>', 
+            '7:<DEFAULT>',
+            '8:<DEFAULT>', 
+            '9:<DEFAULT>', 
+            '10:<DEFAULT>'
+        ]);
+    }
 }

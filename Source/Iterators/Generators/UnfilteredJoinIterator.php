@@ -31,6 +31,6 @@ class UnfilteredJoinIterator extends JoinIterator implements IJoinIterator
     
     protected function innerGenerator($outerKey, $outerValue)
     {
-        return new OrderedMap($this->innerIterator);
+        return new OrderedMap($this->defaultIterator($this->innerIterator));
     }
 }
