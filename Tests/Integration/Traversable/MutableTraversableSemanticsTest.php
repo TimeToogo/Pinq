@@ -2,7 +2,7 @@
 
 namespace Pinq\Tests\Integration\Traversable;
 
-class MutableCollectionSemanticsTest extends TraversableTest
+class MutableTraversableSemanticsTest extends TraversableTest
 {
     /**
      * @dataProvider oneToTen
@@ -45,16 +45,16 @@ class MutableCollectionSemanticsTest extends TraversableTest
     public function testWithNonDeterministicQueryValuesAreNeverCached(\Pinq\ITraversable $traversable, array $data)
     {
         $query = $traversable
-                ->append(range(1, 1000))
+                ->append(range(1, 50))
                 //Random where condition
                 ->where(function ($i) { return (bool)mt_rand(0, 1); })
                 ->orderByDescending(function ($i) { return (int)($i / 10); })
                 ->thenByAscending(function ($i) { return $i; })
-                ->slice(0, 1000)
+                ->slice(0, 50)
                 ->select(function ($i) { return ++$i; })
                 ->groupBy(function ($i) { return $i % 3; })
                 ->selectMany(function (\Pinq\ITraversable $group) { return $group; })
-                ->difference(range(300, 600, 13))
+                ->difference(range(15, 30, 2))
                 ->groupJoin(range(2, 10))
                     ->on(function ($i, $d) { return $i % $d === 0; })
                     ->to(function ($i, \Pinq\ITraversable $factors) { 
