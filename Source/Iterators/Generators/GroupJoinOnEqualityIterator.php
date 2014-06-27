@@ -27,13 +27,13 @@ class GroupJoinOnEqualityIterator extends GroupJoinIterator
     protected function innerGenerator($outerKey, $outerValue)
     {
         $outerKeyFunction = $this->outerKeyFunction;
-        $traversableFactory = $this->traversableFactory;
         $groupKey = $outerKeyFunction($outerValue, $outerKey);
         
         $innerGroups = (new OrderedMap($this->innerIterator))->groupBy($this->innerKeyFunction);
         
-        $traversableGroup = $traversableFactory($innerGroups->contains($groupKey) ? 
-                $innerGroups->get($groupKey) : []);
+        $traversableGroup = $this->constructInnerGroup(
+                $this->defaultIterator($innerGroups->contains($groupKey) ? 
+                        $innerGroups->get($groupKey) : new EmptyIterator()));
         
         return new ArrayIterator([$groupKey => $traversableGroup]);
     }

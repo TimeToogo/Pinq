@@ -254,4 +254,66 @@ class GroupJoinTest extends TraversableTest
                 
         $this->assertSame(array_merge(range(1, 29), range(300, 390, 10), range(40, 100)), $joinData);
     }
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testThatGroupJoinWithDefaultWillSupplyDefaultElementWhenThereAreNoMatchingInnerElements(\Pinq\ITraversable $traversable, array $data)
+    {
+        $value = new \stdClass();
+        $key = new \stdClass();
+        
+        $traversable = $traversable
+                ->groupJoin(range(1, 10))
+                    ->on(function () { return false; })
+                    ->withDefault($value, $key)
+                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) use($key) { 
+                        return $innerGroup[$key]; 
+                    });
+                
+        $this->assertMatches($traversable, empty($data) ? [] : array_fill(0, count($data), $value));
+    }
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testThatGroupJoinWithDefaultDoesNotSupplyDefaultElementWhenThereAreMatchingInnerElements(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable = $traversable
+                ->groupJoin([1])
+                    ->on(function () { return true; })
+                    ->withDefault(null, null)
+                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) { 
+                        return $innerGroup->asArray(); 
+                    });
+                
+        $this->assertMatches($traversable, empty($data) ? [] : array_fill(0, count($data), [1]));
+    }
+    
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatGroupJoinWithDefaultOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable = $traversable
+                ->groupJoin([1, 4, 9, 16, 25, 36, 49, 64, 81, 100])
+                    ->on(function ($outer, $inner) { return $outer % 2 === 0 && $outer * $outer >= $inner; })
+                    ->withDefault('<ODD>')
+                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) { 
+                        return $outer . ':' . $innerGroup->implode(','); 
+                    });
+                
+        $this->assertMatches($traversable, [
+            '1:<ODD>',
+            '2:1,4',
+            '3:<ODD>',
+            '4:1,4,9,16',
+            '5:<ODD>',
+            '6:1,4,9,16,25,36',
+            '7:<ODD>',
+            '8:1,4,9,16,25,36,49,64',
+            '9:<ODD>',
+            '10:1,4,9,16,25,36,49,64,81,100',
+        ]);
+    }
 }

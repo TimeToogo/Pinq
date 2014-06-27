@@ -11,12 +11,27 @@ use Pinq\FunctionExpressionTree;
  */
 abstract class Base
 {
-  /**
-     * The values to join
+    /**
+     * The values to join.
      *
      * @var array|\Traversable
      */
     protected $values;
+    
+    /**
+     * @var boolean
+     */
+    protected $hasDefault = false;
+    
+    /**
+     * @var mixed
+     */
+    protected $defaultValue;
+    
+    /**
+     * @var mixed
+     */
+    protected $defaultKey;
 
     /**
      * @var boolean
@@ -30,11 +45,20 @@ abstract class Base
      */
     protected $filter;
 
-    public function __construct($values, $isGroupJoin, IFilter $filter = null)
+    public function __construct(
+            $values, 
+            $isGroupJoin, 
+            IFilter $filter = null, 
+            $hasDefault = false, 
+            $defaultValue = null, 
+            $defaultKey = null)
     {
         $this->values = $values;
         $this->isGroupJoin = $isGroupJoin;
         $this->filter = $filter;
+        $this->hasDefault = $hasDefault;
+        $this->defaultValue = $defaultValue;
+        $this->defaultKey = $defaultKey;
     }
 
     /**
@@ -67,5 +91,29 @@ abstract class Base
     final public function getFilter()
     {
         return $this->filter;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function hasDefault()
+    {
+        return $this->hasDefault;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefaultValue()
+    {
+        return $this->defaultValue;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefaultKey()
+    {
+        return $this->defaultKey;
     }
 }

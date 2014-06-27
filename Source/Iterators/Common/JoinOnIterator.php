@@ -18,4 +18,13 @@ trait JoinOnIterator
     {
         $this->filter = Functions::allowExcessiveArguments($filter);
     }
+    
+    final protected function innerElementFilter($outerKey, $outerValue)
+    {
+        $filter = $this->filter;
+        
+        return function ($innerValue, $innerKey) use ($filter, $outerKey, $outerValue) {
+            return $filter($outerValue, $innerValue, $outerKey, $innerKey);
+        };
+    }
 }

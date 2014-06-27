@@ -11,6 +11,16 @@ namespace Pinq\Iterators;
 interface IJoinToIterator extends IWrapperIterator
 {
     /**
+     * Returns a new join iterator that will join the supplied element if no
+     * matching inner elements are given.
+     * 
+     * @param mixed $value
+     * @param mixed $key
+     * @return IJoinToIterator
+     */
+    public function withDefault($value, $key = null);
+    
+    /**
      * Returns a new join iterator that will project the values with the supplied
      * function, called with the parameters ($outerValue, $innerValue, $outerKey, $innerKey).
      * 

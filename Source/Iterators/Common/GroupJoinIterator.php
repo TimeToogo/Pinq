@@ -18,4 +18,11 @@ trait GroupJoinIterator
     {
         $this->traversableFactory = $traversableFactory;
     }
+
+    protected function constructInnerGroup(\Traversable $innerElements)
+    {
+        $traversableFactory = $this->traversableFactory;
+        
+        return $traversableFactory($innerElements);
+    }
 }

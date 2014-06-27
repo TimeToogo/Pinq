@@ -54,6 +54,12 @@ abstract class JoinIterator extends IteratorGenerator implements IJoinToIterator
             }
         }
     }
+    
+    final protected function defaultIterator(IGenerator $iterator)
+    {
+        return $this->hasDefault ? 
+                new CoalesceIterator($iterator, $this->defaultValue, $this->defaultKey) : $iterator;
+    }
 
     /**
      * @return IGenerator

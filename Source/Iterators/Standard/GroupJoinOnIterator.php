@@ -36,16 +36,10 @@ class GroupJoinOnIterator extends GroupJoinIterator
 
     protected function getInnerValuesIterator($outerKey, $outerValue)
     {
-        $filter = $this->filter;
-        $traversableFactory = $this->traversableFactory;
-        
-        $innerGroup = $traversableFactory(new FilterIterator(
-                $this->innerValues, 
-                function ($innerValue, $innerKey) use ($filter, $outerKey, $outerValue) {
-                    return $filter($outerValue, $innerValue, $outerKey, $innerKey);
-                }));
-        
-        return new ArrayIterator([0 => $innerGroup]);
+        return new ArrayIterator([0 =>  $this->constructInnerGroup(
+                $this->defaultIterator(new FilterIterator(
+                        $this->innerValues, 
+                        $this->innerElementFilter($outerKey, $outerValue))))]);
     }
 
 }

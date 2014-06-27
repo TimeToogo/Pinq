@@ -149,4 +149,31 @@ class JoinApplyTest extends CollectionTest
             10 * 10,
         ]);
     }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatApplyJoinWithDefaultValueOperatedCorrectly(\Pinq\ICollection $collection, array $data)
+    {
+        $collection
+                ->join(range(-1, -10, -2))
+                ->on(function ($outer, $inner) { return -$outer === $inner; })
+                ->withDefault('<EVEN>')
+                ->apply(function (&$outer, $inner) {
+                    $outer .= ':' . $inner;
+                });
+        
+        $this->assertMatchesValues($collection, [
+            '1:-1',
+            '2:<EVEN>',
+            '3:-3',
+            '4:<EVEN>',
+            '5:-5',
+            '6:<EVEN>',
+            '7:-7',
+            '8:<EVEN>',
+            '9:-9',
+            '10:<EVEN>',
+        ]);
+    }
 }

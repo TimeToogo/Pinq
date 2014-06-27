@@ -45,6 +45,21 @@ class JoiningQueryable implements Interfaces\IJoiningOnQueryable
      * @var Join\IFilter|null
      */
     protected $filter;
+    
+    /**
+     * @var boolean
+     */
+    protected $hasDefault = false;
+    
+    /**
+     * @var mixed
+     */
+    protected $defaultValue;
+    
+    /**
+     * @var mixed
+     */
+    protected $defaultKey;
 
     /**
      * @param boolean $isGroupJoin
@@ -74,6 +89,15 @@ class JoiningQueryable implements Interfaces\IJoiningOnQueryable
         return $this;
     }
     
+    public function withDefault($value, $key = null)
+    {
+        $this->hasDefault = true;
+        $this->defaultValue = $value;
+        $this->defaultKey = $key;
+        
+        return $this;
+    }
+    
     public function to(callable $joinFunction)
     {
         return $this->provider->createQueryable($this->scope->append(
@@ -81,7 +105,10 @@ class JoiningQueryable implements Interfaces\IJoiningOnQueryable
                         $this->innerValues, 
                         $this->isGroupJoin, 
                         $this->filter,
-                        $this->functionConverter->convert($joinFunction))));
+                        $this->functionConverter->convert($joinFunction),
+                        $this->hasDefault,
+                        $this->defaultValue,
+                        $this->defaultKey)));
     }
 
 }

@@ -32,12 +32,8 @@ class JoinOnIterator extends JoinIterator
     
     protected function getInnerValuesIterator($outerKey, $outerValue)
     {
-        $filter = $this->filter;
-        
-        return new FilterIterator(
+        return $this->defaultIterator(new FilterIterator(
                 $this->innerValues,
-                function ($innerValue, $innerKey) use ($filter, $outerKey, $outerValue) {
-                    return $filter($outerValue, $innerValue, $outerKey, $innerKey);
-                });
+                $this->innerElementFilter($outerKey, $outerValue)));
     }
 }

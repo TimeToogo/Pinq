@@ -20,9 +20,16 @@ class JoinApply extends Join\Base implements \Pinq\Queries\IOperation
      */
     protected $applyFunction;
 
-    public function __construct($values, $isGroupJoin, Join\IFilter $filter = null, FunctionExpressionTree $applyFunction)
+    public function __construct(
+            $values, 
+            $isGroupJoin, 
+            Join\IFilter $filter = null, 
+            FunctionExpressionTree $applyFunction, 
+            $hasDefault = false, 
+            $defaultValue = null, 
+            $defaultKey = null)
     {
-        parent::__construct($values, $isGroupJoin, $filter);
+        parent::__construct($values, $isGroupJoin, $filter, $hasDefault, $defaultValue, $defaultKey);
         
         $this->applyFunction = $applyFunction;
     }

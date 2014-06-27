@@ -49,7 +49,14 @@ class JoiningTraversable implements Interfaces\IJoiningOnTraversable
         
         return $this;
     }
-
+    
+    public function withDefault($value, $key = null)
+    {
+        $this->joinInterator = $this->joinInterator->withDefault($value, $key);
+        
+        return $this;
+    }
+    
     public function to(callable $joinFunction)
     {
         $traversableFactory = $this->traversableFactory;

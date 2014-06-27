@@ -26,5 +26,4 @@ trait JoinOnEqualityIterator
         $this->outerKeyFunction = Functions::allowExcessiveArguments($outerKeyFunction);
         $this->innerKeyFunction = Functions::allowExcessiveArguments($innerKeyFunction);
     }
-    
 }

@@ -13,6 +13,16 @@ use Pinq\ITraversable;
 interface IJoiningToTraversable
 {
     /**
+     * Sets the default element value and key to be joined if no matching inner
+     * elements are found for any outer element.
+     *
+     * @param mixed $value
+     * @param mixed $key
+     * @return IJoiningToTraversable
+     */
+    public function withDefault($value, $key = null);
+    
+    /**
      * Returns the appropriate values according to the supplied join function.
      * Both the original and joined values and keys will be passed as arguments 
      * to the supplied function as (outerValue, innerValue, outerKey, innerKey).

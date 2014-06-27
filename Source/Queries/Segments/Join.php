@@ -20,9 +20,16 @@ class Join extends CommonJoin\Base implements \Pinq\Queries\ISegment
      */
     protected $joiningFunction;
 
-    public function __construct($values, $isGroupJoin, CommonJoin\IFilter $filter = null, FunctionExpressionTree $joiningFunction)
+    public function __construct(
+            $values, 
+            $isGroupJoin, 
+            CommonJoin\IFilter $filter = null, 
+            FunctionExpressionTree $joiningFunction,
+            $hasDefault = false, 
+            $defaultValue = null, 
+            $defaultKey = null)
     {
-        parent::__construct($values, $isGroupJoin, $filter);
+        parent::__construct($values, $isGroupJoin, $filter, $hasDefault, $defaultValue, $defaultKey);
         
         $this->joiningFunction = $joiningFunction;
     }

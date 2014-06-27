@@ -14,6 +14,12 @@ interface IJoiningToQueryable extends IJoiningToTraversable
 {
     /**
      * {@inheritDoc}
+     * @return IJoiningToQueryable
+     */
+    public function withDefault($value, $key = null);
+    
+    /**
+     * {@inheritDoc}
      * @return IQueryable
      */
     public function to(callable $joinFunction);

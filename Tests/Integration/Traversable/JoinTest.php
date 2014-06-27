@@ -205,4 +205,66 @@ class JoinTest extends TraversableTest
                 
         $this->assertSame(range(1, 20), $data);
     }
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testThatJoinWithDefaultWillSupplyDefaultElementWhenThereAreNoMatchingInnerElements(\Pinq\ITraversable $traversable, array $data)
+    {
+        $value = new \stdClass();
+        $key = new \stdClass();
+        
+        $traversable = $traversable
+                ->join(range(1, 10))
+                    ->on(function () { return false; })
+                    ->withDefault($value, $key)
+                    ->to(function ($outer, $inner, $outerKey, $innerKey) { 
+                        return [$inner, $innerKey]; 
+                    });
+                
+        $this->assertMatches($traversable, empty($data) ? [] : array_fill(0, count($data), [$value, $key]));
+    }
+    
+    /**
+     * @dataProvider everything
+     */
+    public function testThatJoinWithDefaultDoesNotSupplyDefaultElementWhenThereAreMatchingInnerElements(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable = $traversable
+                ->join([1])
+                    ->on(function () { return true; })
+                    ->withDefault(null, null)
+                    ->to(function ($outer, $inner, $outerKey, $innerKey) { 
+                        return $inner; 
+                    });
+                
+        $this->assertMatches($traversable, empty($data) ? [] : array_fill(0, count($data), 1));
+    }
+    
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatJoinWithDefaultOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable = $traversable
+                ->join([2, 4, 8, 10, 16, 18])
+                    ->on(function ($outer, $inner) { return $outer * 2 === $inner; })
+                    ->withDefault('<DEFAULT>')
+                    ->to(function ($outer, $inner) { 
+                        return $outer . ':' . $inner; 
+                    });
+                
+        $this->assertMatches($traversable, [
+            '1:2', 
+            '2:4', 
+            '3:<DEFAULT>',
+            '4:8',
+            '5:10', 
+            '6:<DEFAULT>', 
+            '7:<DEFAULT>',
+            '8:16', 
+            '9:18', 
+            '10:<DEFAULT>'
+        ]);
+    }
 }

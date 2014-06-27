@@ -13,6 +13,21 @@ trait JoinIterator
      * @var callable
      */
     protected $projectionFunction;
+    
+    /**
+     * @var boolean
+     */
+    protected $hasDefault = false;
+    
+    /**
+     * @var mixed
+     */
+    protected $defaultValue;
+    
+    /**
+     * @var mixed
+     */
+    protected $defaultKey;
 
     protected function __constructIterator()
     {
@@ -23,6 +38,16 @@ trait JoinIterator
     {
         $self = clone $this;
         $self->projectionFunction = Functions::allowExcessiveArguments($function);
+        
+        return $self;
+    }
+    
+    public function withDefault($value, $key = null)
+    {
+        $self = clone $this;
+        $self->hasDefault = true;
+        $self->defaultValue = $value;
+        $self->defaultKey = $key;
         
         return $self;
     }

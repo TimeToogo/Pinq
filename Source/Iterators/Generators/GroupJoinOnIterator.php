@@ -25,16 +25,11 @@ class GroupJoinOnIterator extends GroupJoinIterator
     
     protected function innerGenerator($outerKey, $outerValue)
     {
-        $filter = $this->filter;
-        $traversableFactory = $this->traversableFactory;
         $innerValues = new OrderedMap($this->innerIterator);
         
-        $innerGroup = $traversableFactory(new FilterIterator(
-                $innerValues, 
-                function ($innerValue, $innerKey) use ($filter, $outerKey, $outerValue) {
-                    return $filter($outerValue, $innerValue, $outerKey, $innerKey);
-                }));
-        
-        return new ArrayIterator([0 => $innerGroup]);
+        return new ArrayIterator([0 => $this->constructInnerGroup(
+                $this->defaultIterator(new FilterIterator(
+                        $innerValues, 
+                        $this->innerElementFilter($outerKey, $outerValue))))]);
     }
 }

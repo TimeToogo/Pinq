@@ -14,6 +14,12 @@ interface IJoiningToRepository extends IJoiningToCollection
 {
     /**
      * {@inheritDoc}
+     * @return IJoiningToRepository
+     */
+    public function withDefault($value, $key = null);
+    
+    /**
+     * {@inheritDoc}
      * @return IRepository
      */
     public function to(callable $joinFunction);

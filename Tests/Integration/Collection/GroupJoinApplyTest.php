@@ -122,4 +122,31 @@ class GroupJoinApplyTest extends CollectionTest
             10 * 10,
         ]);
     }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatApplyGroupJoinWithDefaultValueOperatedCorrectly(\Pinq\ICollection $collection, array $data)
+    {
+        $collection
+                ->groupJoin(range(1, 20, 2))
+                ->on(function ($outer, $inner) { return $outer % 3 !== 0 && $outer * 2 >= $inner; })
+                ->withDefault('<MUL3>')
+                ->apply(function (&$outer, \Pinq\ITraversable $innerGroup) {
+                    $outer .= ':' . $innerGroup->implode(',');
+                });
+        
+        $this->assertMatchesValues($collection, [
+            '1:1',
+            '2:1,3',
+            '3:<MUL3>',
+            '4:1,3,5,7',
+            '5:1,3,5,7,9',
+            '6:<MUL3>',
+            '7:1,3,5,7,9,11,13',
+            '8:1,3,5,7,9,11,13,15',
+            '9:<MUL3>',
+            '10:1,3,5,7,9,11,13,15,17,19',
+        ]);
+    }
 }

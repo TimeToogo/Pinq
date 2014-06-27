@@ -124,6 +124,12 @@ class ScopeEvaluator extends Segments\SegmentVisitor
             }
         }
         
+        if($join->hasDefault()) {
+            $joiningTraversable = $joiningTraversable->withDefault(
+                    $join->getDefaultValue(), 
+                    $join->getDefaultKey());
+        }
+        
         return $joiningTraversable;
     }
 

@@ -29,7 +29,7 @@ class JoinOnEqualityIterator extends JoinIterator
         $groupKey = $outerKeyFunction($outerValue, $outerKey);
         $innerGroups = (new OrderedMap($this->innerIterator))->groupBy($this->innerKeyFunction);
         
-        return $innerGroups->contains($groupKey) ? 
-                $innerGroups->get($groupKey) : new EmptyIterator();
+        return $this->defaultIterator($innerGroups->contains($groupKey) ? 
+                $innerGroups->get($groupKey) : new EmptyIterator());
     }
 }

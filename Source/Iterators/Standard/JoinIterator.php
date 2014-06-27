@@ -89,6 +89,12 @@ abstract class JoinIterator extends IteratorIterator
         return [$this->count++,
                 $projectionFunction($this->outerValue, $innerValue, $this->outerKey, $innerKey)];
     }
+    
+    final protected function defaultIterator(IIterator $iterator)
+    {
+        return $this->hasDefault ? 
+                new CoalesceIterator($iterator, $this->defaultValue, $this->defaultKey) : $iterator;
+    }
 
     /**
      * @return IIterator

@@ -39,8 +39,8 @@ class JoinOnEqualityIterator extends JoinIterator
         $outerKeyFunction = $this->outerKeyFunction;
         $groupKey = $outerKeyFunction($outerValue, $outerKey);
         
-        return $this->innerGroups->contains($groupKey) ? 
-                $this->innerGroups->get($groupKey) : new EmptyIterator();
+        return $this->defaultIterator($this->innerGroups->contains($groupKey) ? 
+                $this->innerGroups->get($groupKey) : new EmptyIterator());
     }
     
 }

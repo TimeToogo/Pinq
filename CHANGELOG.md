@@ -51,6 +51,19 @@ dev-master
  - Removed `IGroupedTraversable`, use `ITraversable::groupBy` returning an array instead
  - `ITraversable::groupBy` implicitly indexes each group by the group key
  - `Traversable`/`Collection` are now extendable.
+ - Implemented optional default value for `ITraversable::join`/`ITraversable::groupJoin`:
+
+        - ```php
+        Traversable::from(range(1, 6))
+            ->join(range(1, 20))
+            ->on(function ($outer, $inner) { return $outer % 2 === 0 && $outer * 2 === $inner; })
+            ->withDefault('<Odd>')
+            ->to(function ($outer, $inner) { 
+                return $outer . ':' . $inner;
+            });
+        ```
+        Will produce: `['1:<Odd>', '2:4', '3:<Odd>', '4:8', '5:<Odd>', '6:12']`
+
  - Refactored `ArrayExpression` by creating `ArrayItemExpression` representing each element.
  - Refactored `Queries\Segments\OrderBy` query segment by representing each 
    function and direction as an `Queries\Segments\OrderFunction` class.

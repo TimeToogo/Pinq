@@ -14,6 +14,12 @@ interface IJoiningToCollection extends IJoiningToTraversable
 {
     /**
      * {@inheritDoc}
+     * @return IJoiningToCollection
+     */
+    public function withDefault($value, $key = null);
+    
+    /**
+     * {@inheritDoc}
      * @return ICollection
      */
     public function to(callable $joinFunction);

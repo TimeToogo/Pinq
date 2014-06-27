@@ -31,6 +31,9 @@ class JoiningRepository extends JoiningQueryable implements Interfaces\IJoiningO
                         $this->innerValues, 
                         $this->isGroupJoin,
                         $this->filter,
-                        $this->functionConverter->convert($applyFunction))));
+                        $this->functionConverter->convert($applyFunction),
+                        $this->hasDefault,
+                        $this->defaultValue,
+                        $this->defaultKey)));
     }
 }

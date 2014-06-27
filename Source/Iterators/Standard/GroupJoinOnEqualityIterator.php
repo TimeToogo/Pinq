@@ -38,11 +38,11 @@ class GroupJoinOnEqualityIterator extends GroupJoinIterator
     protected function getInnerValuesIterator($outerKey, $outerValue)
     {
         $outerKeyFunction = $this->outerKeyFunction;
-        $traversableFactory = $this->traversableFactory;
         $groupKey = $outerKeyFunction($outerValue, $outerKey);
         
-        $traversableGroup = $traversableFactory($this->innerGroups->contains($groupKey) ? 
-                $this->innerGroups->get($groupKey) : []);
+        $traversableGroup = $this->constructInnerGroup(
+                $this->defaultIterator($this->innerGroups->contains($groupKey) ? 
+                        $this->innerGroups->get($groupKey) : new EmptyIterator()));
         
         return new ArrayIterator([$groupKey => $traversableGroup]);
     }

@@ -21,13 +21,10 @@ class JoinOnIterator extends JoinIterator
     
     protected function innerGenerator($outerKey, $outerValue)
     {
-        $filter = $this->filter;
         $innerValues = new OrderedMap($this->innerIterator);
         
-        return new FilterIterator(
+        return $this->defaultIterator(new FilterIterator(
                 $innerValues,
-                function ($innerValue, $innerKey) use ($filter, $outerKey, $outerValue) {
-                    return $filter($outerValue, $innerValue, $outerKey, $innerKey);
-                });
+                $this->innerElementFilter($outerKey, $outerValue)));
     }
 }
