@@ -43,11 +43,11 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
     protected $scope;
 
     /**
-     * The underlying values iterator if loaded
+     * The underlying elements iterator if loaded
      *
-     * @var \Iterator|null
+     * @var \Traversable|null
      */
-    protected $valuesIterator = null;
+    protected $elements = null;
 
     public function __construct(Providers\IQueryProvider $provider, Queries\IScope $scope = null, IIteratorScheme $scheme = null)
     {
@@ -99,8 +99,8 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
      */
     private function load()
     {
-        if ($this->valuesIterator === null) {
-            $this->valuesIterator = $this->scheme->toIterator($this->loadQuery(new Requests\Values()));
+        if ($this->elements === null) {
+            $this->elements = $this->scheme->toIterator($this->loadQuery(new Requests\Values()));
         }
     }
     
@@ -118,21 +118,21 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
     {
         $this->load();
         
-        return $this->scheme->toArray($this->valuesIterator);
+        return $this->scheme->toArray($this->elements);
     }
 
     final public function getIterator()
     {
         $this->load();
 
-        return $this->scheme->arrayCompatibleIterator($this->valuesIterator);
+        return $this->scheme->arrayCompatibleIterator($this->elements);
     }
     
     public function getTrueIterator()
     {
         $this->load();
         
-        return $this->valuesIterator;
+        return $this->elements;
     }
     
     public function getIteratorScheme()
@@ -144,21 +144,21 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
     {
         $this->load();
 
-        return new Traversable($this->valuesIterator);
+        return new Traversable($this->elements);
     }
     
     public function asCollection()
     {
         $this->load();
         
-        return new Collection($this->valuesIterator);
+        return new Collection($this->elements);
     }
     
     public function iterate(callable $function)
     {
         $this->load();
         
-        $this->scheme->walk($this->valuesIterator, $function);
+        $this->scheme->walk($this->elements, $function);
     }
 
     final public function getProvider()

@@ -77,19 +77,19 @@ class Repository extends Queryable implements IRepository, Interfaces\IOrderedRe
         }
 
         $this->executeQuery(new Operations\AddValues($values));
-        $this->valuesIterator = null;
+        $this->elements = null;
     }
 
     public function apply(callable $function)
     {
         $this->executeQuery(new Operations\Apply($this->convert($function)));
-        $this->valuesIterator = null;
+        $this->elements = null;
     }
     
     public function remove($value)
     {
         $this->executeQuery(new Operations\RemoveValues([$value]));
-        $this->valuesIterator = null;
+        $this->elements = null;
     }
 
     public function removeRange($values)
@@ -99,30 +99,30 @@ class Repository extends Queryable implements IRepository, Interfaces\IOrderedRe
         }
 
         $this->executeQuery(new Operations\RemoveValues($values));
-        $this->valuesIterator = null;
+        $this->elements = null;
     }
 
     public function removeWhere(callable $predicate)
     {
         $this->executeQuery(new Operations\RemoveWhere($this->convert($predicate)));
-        $this->valuesIterator = null;
+        $this->elements = null;
     }
 
     public function clear()
     {
         $this->executeQuery(new Operations\Clear());
-        $this->valuesIterator = null;
+        $this->elements = null;
     }
 
     public function offsetSet($index, $value)
     {
         $this->executeQuery(new Operations\SetIndex($index, $value));
-        $this->valuesIterator = null;
+        $this->elements = null;
     }
 
     public function offsetUnset($index)
     {
         $this->executeQuery(new Operations\UnsetIndex($index));
-        $this->valuesIterator = null;
+        $this->elements = null;
     }
 }
