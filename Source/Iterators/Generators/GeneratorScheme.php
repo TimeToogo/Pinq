@@ -62,7 +62,7 @@ class GeneratorScheme extends Common\IteratorScheme
     {
         if($iterator instanceof IGenerator) {
             return $iterator;
-        } elseif($iterator instanceof Pinq\Iterators\Standard\IIterator) {
+        } elseif($iterator instanceof \Pinq\Iterators\Standard\IIterator) {
             return new IIteratorAdapter($iterator);
         } elseif($iterator instanceof \ArrayIterator) {
             return new ArrayIteratorAdapter($iterator);
