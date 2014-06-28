@@ -31,6 +31,7 @@ $youngPeopleDetails = $people
         });
 ```
 
+[More examples](http://timetoogo.github.io/Pinq/examples.html)
 
 Installation
 ============
