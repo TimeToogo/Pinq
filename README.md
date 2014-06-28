@@ -26,7 +26,7 @@ $youngPeopleDetails = $people
                 'address' => $row['address'],
                 'dateOfBirth' => $row['dateOfBirth'],
             ]; 
-        })
+        });
 ```
 
 
