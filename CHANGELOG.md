@@ -48,8 +48,9 @@ dev-master
    their respective types for each query method.
  - Moved/Implemented Necessary interfaces (`IOrdered*`, `IJoiningOn*`, `IJoiningTo*`) with covariant 
    return types under `Interfaces` namespace.
- - Removed `IGroupedTraversable`, use `ITraversable::groupBy` returning an array instead
- - `ITraversable::groupBy` implicitly indexes each group by the group key
+ - Removed `IGroupedTraversable`, use `ITraversable::groupBy` returning an array instead.
+ - `ITraversable::groupBy` implicitly indexes each group by the group key.
+ - Renamed `ITraversable::exists` to `ITraversable::isEmpty`.
  - `Traversable`/`Collection` are now extendable.
  - Implemented optional default value for `ITraversable::join`/`ITraversable::groupJoin`:
 
