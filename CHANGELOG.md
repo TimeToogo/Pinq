@@ -1,7 +1,7 @@
 dev-master
 ==========
  - Pass values to query functions with their associated key as second parameter while
-   maintaining support for single parameter internal functions
+   maintaining support for single parameter internal functions.
  - Proper support for non scalar keys:
     - Non scalar keys will be automatically converted to integers when foreach'd or converted to an array.
     - Added `ITraversable::iterate` to iterate all unaltered values and keys
@@ -70,6 +70,9 @@ dev-master
  - Refactored `Queries\Segments\OrderBy` query segment by representing each 
    function and direction as an `Queries\Segments\OrderFunction` class.
  - Renamed `Queries\Segments\Operation::getTraversable` to `getValues`
+ - Refactored caching implementation:
+    - `Caching\IFunctionCache` now acts as a wrapper to `Caching\ICacheAdapter`.
+    - Any type of value can be cached and retrieved through the cache adapter.
  - Refactored `Join` query segments / operations.
     - Refactored inheritance to compositon, extracted join filtering to interface `Queries\Common\Join\IFilter`.
     - Created base class for query segment and operation: `Queries\Common\Join\Base`.
