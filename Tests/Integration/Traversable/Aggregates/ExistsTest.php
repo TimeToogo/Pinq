@@ -9,6 +9,6 @@ class IsEmptyTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
      */
     public function testThatCountReturnsWhetherItHasAnyElements(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals($traversable->isEmpty(), !empty($data));
+        $this->assertEquals($traversable->isEmpty(), empty($data));
     }
 }

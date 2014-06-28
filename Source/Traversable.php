@@ -448,10 +448,10 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
     public function isEmpty()
     {
         foreach ($this->elements as $value) {
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     public function contains($value)

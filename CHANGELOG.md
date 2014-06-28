@@ -50,7 +50,7 @@ dev-master
    return types under `Interfaces` namespace.
  - Removed `IGroupedTraversable`, use `ITraversable::groupBy` returning an array instead.
  - `ITraversable::groupBy` implicitly indexes each group by the group key.
- - Renamed `ITraversable::exists` to `ITraversable::isEmpty`.
+ - Changed `ITraversable::exists` to `ITraversable::isEmpty`.
  - `Traversable`/`Collection` are now extendable.
  - Implemented optional default value for `ITraversable::join`/`ITraversable::groupJoin`:
 
