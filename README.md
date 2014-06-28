@@ -7,7 +7,7 @@ PHP Integrated query - [Official site](http://timetoogo.github.io/Pinq/)
 What is Pinq?
 =============
 Based off the .NET's [Linq (Language integrated query)](http://msdn.microsoft.com/en-us/library/bb397926.aspx), 
-Pinq unifies querying across [arrays/iterators](http://timetoogo.github.io/Pinq/examples.html) and [external data sources](query-provider.html), 
+Pinq unifies querying across [arrays/iterators](http://timetoogo.github.io/Pinq/examples.html) and [external data sources](http://timetoogo.github.io/Pinq/query-provider.html), 
 in a single readable and concise [fluent API](http://timetoogo.github.io/Pinq/api.html).
 
 An example
