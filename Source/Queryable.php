@@ -12,7 +12,7 @@ use Pinq\Iterators\IIteratorScheme;
  *
  * @author Elliot Levin <elliot@aanet.com.au>
  */
-class Queryable implements IQueryable, Interfaces\IOrderedQueryable
+class Queryable implements IQueryable, Interfaces\IOrderedQueryable, \Serializable
 {
     /**
      * The iterator context for the queryable
@@ -152,6 +152,16 @@ class Queryable implements IQueryable, Interfaces\IOrderedQueryable
         $this->load();
         
         return new Collection($this->elements);
+    }
+    
+    public function serialize()
+    {
+        return serialize([$this->provider, $this->functionConverter, $this->scheme, $this->scope]);
+    }
+    
+    public function unserialize($data)
+    {
+        list($this->provider, $this->functionConverter, $this->scheme, $this->scope) = unserialize($data);
     }
     
     public function iterate(callable $function)
