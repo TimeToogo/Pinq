@@ -29,7 +29,7 @@ class DirectoryCache implements ICacheAdapter
     public function __construct($directory, $fileExtension = self::DEFAULT_EXTENSION)
     {
         if (!is_dir($directory)) {
-            if (!mkdir($directory, 511, true)) {
+            if (!mkdir($directory, 0777, true)) {
                 throw new \Pinq\PinqException(
                         'Invalid cache directory: %s does not exist and could not be created',
                         $directory);
