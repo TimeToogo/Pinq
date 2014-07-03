@@ -36,7 +36,7 @@ $youngPeopleDetails = $people
 Installation
 ============
 
-Pinq is compatible with >= PHP 5.4.0.
+Pinq is compatible with >= PHP 5.4.0
 
 Add package to your composer.json:
 ```json
