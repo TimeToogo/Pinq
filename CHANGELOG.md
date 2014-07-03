@@ -44,7 +44,7 @@ dev-master
                 ->removeRange(/* ... */);
         ```
  - Removed `ITraversable::asQueryable`, `ITraversable::asRepository`, updated interfaces annotations
-   with covariant return types. `ITraversable`, `ICollection, `IQueryable`, `IRepository` should all return
+   with covariant return types. `ITraversable`, `ICollection`, `IQueryable`, `IRepository` should all return
    their respective types for each query method.
  - Moved/Implemented Necessary interfaces (`IOrdered*`, `IJoiningOn*`, `IJoiningTo*`) with covariant 
    return types under `Interfaces` namespace.
