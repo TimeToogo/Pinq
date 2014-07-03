@@ -65,7 +65,8 @@ dev-master
         });
     ```
     Will produce: `['1:<Odd>', '2:4', '3:<Odd>', '4:8', '5:<Odd>', '6:12']`
-
+ 
+ - Made order by `Direction` constants interchangeable with native `SORT_ASC`/`SORT_DESC`.
  - Refactored `ArrayExpression` by creating `ArrayItemExpression` representing each element.
  - Refactored `Queries\Segments\OrderBy` query segment by representing each 
    function and direction as an `Queries\Segments\OrderFunction` class.
