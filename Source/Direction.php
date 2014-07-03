@@ -14,6 +14,6 @@ final class Direction
 
     }
 
-    const ASCENDING = 1;
-    const DESCENDING = 2;
+    const ASCENDING = SORT_ASC;
+    const DESCENDING = SORT_DESC;
 }
