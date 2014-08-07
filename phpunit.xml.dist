@@ -3,7 +3,7 @@
     bootstrap="Tests/TestBootstrapper.php"
     colors="true"
     backupGlobals="false"
-    stopOnFailure="true">
+    stopOnFailure="false">
 
     <testsuites>
       <testsuite name="Entirety">
@@ -23,6 +23,12 @@
       </testsuite>
       <testsuite name="API">
         <directory>./Tests/Integration/Traversable/</directory>
+        <directory>./Tests/Integration/Collection/</directory>
+      </testsuite>
+      <testsuite name="Traversable">
+        <directory>./Tests/Integration/Traversable/</directory>
+      </testsuite>
+      <testsuite name="Collection">
         <directory>./Tests/Integration/Collection/</directory>
       </testsuite>
     </testsuites>

@@ -7,54 +7,54 @@ namespace Pinq\Expressions;
  * 'test' => 4
  * </code>
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class ArrayItemExpression extends Expression
 {
     /**
      * @var Expression|null
      */
-    private $keyExpression;
+    private $key;
 
     /**
      * @var Expression
      */
-    private $valueExpression;
+    private $value;
 
     /**
      * @var boolean
      */
     private $isReference;
 
-    public function __construct(Expression $keyExpression = null, Expression $valueExpression, $isReference)
+    public function __construct(Expression $key = null, Expression $value, $isReference)
     {
-        $this->keyExpression = $keyExpression;
-        $this->valueExpression = $valueExpression;
+        $this->key         = $key;
+        $this->value       = $value;
         $this->isReference = $isReference;
     }
 
     /**
      * @return boolean
      */
-    public function hasKeyExpression()
+    public function hasKey()
     {
-        return $this->keyExpression !== null;
+        return $this->key !== null;
     }
 
     /**
      * @return Expression|null
      */
-    public function getKeyExpression()
+    public function getKey()
     {
-        return $this->keyExpression;
+        return $this->key;
     }
 
     /**
      * @return Expression
      */
-    public function getValueExpression()
+    public function getValue()
     {
-        return $this->valueExpression;
+        return $this->value;
     }
 
     /**
@@ -70,55 +70,52 @@ class ArrayItemExpression extends Expression
         return $walker->walkArrayItem($this);
     }
 
-    public function simplify()
-    {
-        $keyExpression = $this->keyExpression ? $this->keyExpression->simplify() : null;
-        $valueExpression = $this->valueExpression->simplify();
-
-        return $this->update($keyExpression, $valueExpression, $this->isReference);
-    }
-
     /**
+     * @param Expression $key
+     * @param Expression $value
+     * @param boolean    $isReference
+     *
      * @return self
      */
-    public function update(Expression $keyExpression = null, Expression $valueExpression, $isReference)
+    public function update(Expression $key = null, Expression $value, $isReference)
     {
-        if ($this->keyExpression === $keyExpression 
-            && $this->valueExpression === $valueExpression
-            && $this->isReference === $isReference) {
+        if ($this->key === $key
+                && $this->value === $value
+                && $this->isReference === $isReference
+        ) {
             return $this;
         }
 
-        return new self($keyExpression, $valueExpression, $isReference);
+        return new self($key, $value, $isReference);
     }
 
     protected function compileCode(&$code)
     {
-        if ($this->keyExpression !== null) {
-            $this->keyExpression->compileCode($code);
+        if ($this->key !== null) {
+            $this->key->compileCode($code);
             $code .= ' => ';
         }
-        
-        if($this->isReference) {
+
+        if ($this->isReference) {
             $code .= '&';
         }
-        
-        $this->valueExpression->compileCode($code);
+
+        $this->value->compileCode($code);
     }
 
     public function serialize()
     {
-        return serialize([$this->keyExpression, $this->valueExpression, $this->isReference]);
+        return serialize([$this->key, $this->value, $this->isReference]);
     }
 
     public function unserialize($serialized)
     {
-        list($this->keyExpression, $this->valueExpression, $this->isReference) = unserialize($serialized);
+        list($this->key, $this->value, $this->isReference) = unserialize($serialized);
     }
 
     public function __clone()
     {
-        $this->keyExpression = $this->keyExpression !== null ? clone $this->keyExpression : null;
-        $this->valueExpression = clone $this->valueExpression;
+        $this->key   = $this->key !== null ? clone $this->key : null;
+        $this->value = clone $this->value;
     }
 }

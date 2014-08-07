@@ -9,16 +9,17 @@ use Pinq\Interfaces\IOrderedCollection;
  * The collection API, along with traversable query API,
  * a collection's values are mutable, they can be added, removed and altered.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface ICollection extends ITraversable
 {
     const ICOLLECTION_TYPE = __CLASS__;
-    
+
     /**
      * Walks the elements with the supplied function.
      *
      * @param  callable $function
+     *
      * @return void
      */
     public function apply(callable $function);
@@ -28,22 +29,25 @@ interface ICollection extends ITraversable
      * The collection will be reindexed.
      *
      * @param  array|\Traversable $values The values to add
+     *
      * @return void
      */
     public function addRange($values);
 
     /**
-     * Removes all occurances of the supplied value from the collection.
+     * Removes all occurrences of the supplied value from the collection.
      *
      * @param  mixed $value The value to remove
+     *
      * @return void
      */
     public function remove($value);
 
     /**
-     * Removes all occurances of the supplied values from the collection.
+     * Removes all occurrences of the supplied values from the collection.
      *
      * @param  array|\Traversable $values The values to remove
+     *
      * @return void
      */
     public function removeRange($values);
@@ -52,6 +56,7 @@ interface ICollection extends ITraversable
      * Removes all the values matched by the predicate.
      *
      * @param  callable $predicate
+     *
      * @return void
      */
     public function removeWhere(callable $predicate);
@@ -62,7 +67,7 @@ interface ICollection extends ITraversable
      * @return void
      */
     public function clear();
-    
+
     /**
      * {@inheritDoc}
      * @return ICollection

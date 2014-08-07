@@ -5,7 +5,7 @@ namespace Pinq\Iterators\Standard;
 /**
  * Implementation of the empty iterator using the fetch method.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class EmptyIterator extends Iterator
 {

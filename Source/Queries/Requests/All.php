@@ -6,7 +6,7 @@ namespace Pinq\Queries\Requests;
  * Request query for a boolean of whether all the values satify the
  * supplied predicate function
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class All extends ProjectionRequest
 {

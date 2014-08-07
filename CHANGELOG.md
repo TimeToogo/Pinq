@@ -26,6 +26,7 @@ dev-master
     - Added `ITraversable::getSource`, returns the source `ITraversable` or itself if it is the source.
     - Removed unnecessary caching in `Traversable` queries.
         - `Traversable` can be used with nondeterministic/mutable sources and query parameters.
+        - `Traversable` classes can longer be serialized when queried with closures.
         - Because of this combined with covariant return types, `ICollection` has new and improved mutable query API:
         
         ```php
@@ -50,7 +51,7 @@ dev-master
    return types under `Interfaces` namespace.
  - Removed `IGroupedTraversable`, use `ITraversable::groupBy` returning an array instead.
  - `ITraversable::groupBy` implicitly indexes each group by the group key.
- - Changed `ITraversable::exists` to `ITraversable::isEmpty`.
+ - Changed `ITraversable::exists` in favour of `ITraversable::isEmpty`.
  - `Traversable`/`Collection` are now extendable.
  - Implemented optional default value for `ITraversable::join`/`ITraversable::groupJoin`:
     - The following join query:
@@ -67,18 +68,50 @@ dev-master
     Will produce: `['1:<Odd>', '2:4', '3:<Odd>', '4:8', '5:<Odd>', '6:12']`
  
  - Made order by `Direction` constants interchangeable with native `SORT_ASC`/`SORT_DESC`.
+ - Shorten expression getter names by removing redundant `...Expression`.
+ - Restructured expression simplification into an expression walker class.
+ - Restructured and improved function parsing
+    - New function reflection API
+    - Correctly handle resolving magic constants (`__DIR__`...) and scopes (`self::`...).
+    - Largely improved signature matching using all reflection data to resolve to the correct function.
+      Functions now have to be defined on the same line with identical signatures to cause an ambiguity.
+    - Fixed fully qualified namespace detection in AST parsing.
+    - Fixed case sensitivity issue with `self::` scopes in `PHPParser_NodeVisitor_NameResolver`.
+    - Upgraded to `nikic/php-parser` V0.9.5
+ - Improved query representations (`Queries` namespace)
+    - New builder API (under `Builders`) to build query objects from expression trees.
+      `Queryable`/`Repository` now only construct the query expression tree.
+      These classes parse the expression tree into the equivalent query structure.
+    - Query parameters are now externalized from the query object. Under a `IParameterRegistry` instance.
+    - New common `ISource` interface for a another sequence inside a query: `->intersect(...)`
+    - Removed `FunctionExpressionTree` in favour of dedicated function types (under `Queries\Functions` namespace)
+      for all types of functions in a query:
+        - `ElementProjection` - `->select(function ($value, $key) { return ... })`
+        - `ElementMutator` - `->apply(function (&$value, $key) { ... })`
+        - `ConnectorProjection` - `->join(...)->to(function ($outerValue, $innerValue, $outerKey, $innerKey) { return ... })`
+        - `ConnectorMutator` - `->join(...)->apply(function (&$outerValue, $innerValue, $outerKey, $innerKey) { ... })`
+        - `Aggregator` - `->aggregate(function (&aggregate, $value) { return ... })`
+    - New `ISourceInfo` to store source information of a `IQueryable`.
+    - Refactored `Segments\OrderBy` query segment by representing each
+      function and direction as an `Queries\Segments\OrderFunction` class.
+    - Renamed `Segments\Operation::getTraversable` to `getValues`
+    - Refactored `Join` query segments / operations.
+       - Refactored inheritance to composition, extracted join filtering to interface `Queries\Common\Join\IFilter`.
+       - Created base class for query segment and operation: `Queries\Common\Join\Base`.
+       - Updated `Segments\Segment[Walker|Visitor]` and `Operation\Visitor` to match new structure.
+       - Hence updated `Providers\Traversable\ScopeEvaluator` and `Providers\Collection\OperationEvaluator`.
+ - Removed obsolete query providers (`Loadable`, `Caching`).
+ - New structure of query providers
+    - `RepositoryProvider` decorates the `QueryProvider`
+    - New configuration classes (under `Configuration` namespace)
+    - Integrated with `Caching\IQueryCache` and `Queries\Builders\*`.
  - Refactored `ArrayExpression` by creating `ArrayItemExpression` representing each element.
- - Refactored `Queries\Segments\OrderBy` query segment by representing each 
-   function and direction as an `Queries\Segments\OrderFunction` class.
- - Renamed `Queries\Segments\Operation::getTraversable` to `getValues`
+ - Ensure PSR-2 code guidelines adherence.
+ - Fixed binary operation `instanceof` compilation bug with literal class names.
  - Refactored caching implementation:
     - `Caching\IFunctionCache` now acts as a wrapper to `Caching\ICacheAdapter`.
     - Any type of value can be cached and retrieved through the cache adapter.
- - Refactored `Join` query segments / operations.
-    - Refactored inheritance to compositon, extracted join filtering to interface `Queries\Common\Join\IFilter`.
-    - Created base class for query segment and operation: `Queries\Common\Join\Base`.
-    - Updated `Queries\Segments\Segment[Walker|Visitor]` and `Queries\Operation\Visitor` to match new structure.
-    - Hence updated `Providers\Traversable\ScopeEvaluator` and `Providers\Collection\OperationEvaluator`.
+    - Implemented namespacing api and `NamespacedCache`.
 
 2.1.1 (22/5/14)
 ===============

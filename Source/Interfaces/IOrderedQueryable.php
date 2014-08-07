@@ -7,7 +7,7 @@ use Pinq\IQueryable;
 /**
  * The API for subsequent orderings of a IQueryable
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IOrderedQueryable extends IOrderedTraversable, IQueryable
 {

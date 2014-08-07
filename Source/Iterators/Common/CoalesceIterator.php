@@ -5,7 +5,7 @@ namespace Pinq\Iterators\Common;
 /**
  * Common functionality for the coalesce iterator
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 trait CoalesceIterator
 {
@@ -13,7 +13,7 @@ trait CoalesceIterator
      * @var mixed
      */
     protected $defaultValue;
-    
+
     /**
      * @var mixed
      */
@@ -22,6 +22,6 @@ trait CoalesceIterator
     public function __constructIterator($defaultValue, $defaultKey)
     {
         $this->defaultValue = $defaultValue;
-        $this->defaultKey = $defaultKey;
+        $this->defaultKey   = $defaultKey;
     }
 }

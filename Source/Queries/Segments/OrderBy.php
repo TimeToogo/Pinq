@@ -2,24 +2,24 @@
 
 namespace Pinq\Queries\Segments;
 
-use Pinq\FunctionExpressionTree;
+use Pinq\Queries\Functions;
 
 /**
  * Query segment for ordering the values with the supplied functions
  * and order directions
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class OrderBy extends Segment
 {
     /**
-     * @var OrderFunction[]
+     * @var Ordering[]
      */
-    private $orderFunctions;
+    private $orderings;
 
-    public function __construct(array $orderFunctions)
+    public function __construct(array $orderings)
     {
-        $this->orderFunctions = $orderFunctions;
+        $this->orderings = $orderings;
     }
 
     public function getType()
@@ -27,35 +27,25 @@ class OrderBy extends Segment
         return self::ORDER_BY;
     }
 
-    public function traverse(SegmentWalker $walker)
+    public function traverse(SegmentVisitor $visitor)
     {
-        return $walker->walkOrderBy($this);
+        return $visitor->visitOrderBy($this);
     }
 
     /**
-     * @return OrderFunction[]
+     * @return Ordering[]
      */
-    public function getOrderFunctions()
+    public function getOrderings()
     {
-        return $this->orderFunctions;
+        return $this->orderings;
     }
 
-    /**
-     * @param FunctionExpressionTree $functionExpressionTree
-     * @param boolean $isAscending
-     */
-    public function thenBy(FunctionExpressionTree $functionExpressionTree, $isAscending)
+    public function update(array $orderings)
     {
-        return new self(
-                array_merge($this->orderFunctions, [new OrderFunction($functionExpressionTree, $isAscending)]));
-    }
-
-    public function update(array $orderFunctions)
-    {
-        if ($this->orderFunctions === $orderFunctions) {
+        if ($this->orderings === $orderings) {
             return $this;
         }
 
-        return new self($orderFunctions);
+        return new self($orderings);
     }
 }

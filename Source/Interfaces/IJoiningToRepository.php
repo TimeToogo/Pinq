@@ -8,7 +8,7 @@ use Pinq\IRepository;
  * This API required to combine the filtered joined values into
  * the the elements of the resulting repository.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IJoiningToRepository extends IJoiningToCollection
 {
@@ -17,13 +17,13 @@ interface IJoiningToRepository extends IJoiningToCollection
      * @return IJoiningToRepository
      */
     public function withDefault($value, $key = null);
-    
+
     /**
      * {@inheritDoc}
      * @return IRepository
      */
     public function to(callable $joinFunction);
-    
+
     /**
      * {@inheritDoc}
      * @return void

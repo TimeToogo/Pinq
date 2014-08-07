@@ -8,6 +8,6 @@ class ArrayAcessCacheTest extends CacheTest
 {
     protected function setUp()
     {
-        $this->cache = new ArrayAccessCacheAdapter(new \ArrayObject());
+        $this->cache = new ArrayAccessCacheAdapter(new ArrayAccessCacheImplementation());
     }
 }

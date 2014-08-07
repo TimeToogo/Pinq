@@ -5,17 +5,17 @@ namespace Pinq\Queries\Segments;
 /**
  * Query segment for retrieving the values mapped by the supplied function
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class Select extends ExpressionSegment
+class Select extends ProjectionSegment
 {
     public function getType()
     {
         return self::SELECT;
     }
 
-    public function traverse(SegmentWalker $walker)
+    public function traverse(SegmentVisitor $visitor)
     {
-        return $walker->walkSelect($this);
+        return $visitor->visitSelect($this);
     }
 }

@@ -5,7 +5,7 @@ namespace Pinq\Iterators\Common;
 /**
  * Common functionality for the projection iterator
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 trait ProjectionIterator
 {
@@ -19,24 +19,26 @@ trait ProjectionIterator
      */
     private $valueProjectionFunction;
 
-    protected function __constructIterator(callable $keyProjectionFunction = null, callable $valueProjectionFunction = null)
-    {
-        $this->keyProjectionFunction = $keyProjectionFunction === null ? 
+    protected function __constructIterator(
+            callable $keyProjectionFunction = null,
+            callable $valueProjectionFunction = null
+    ) {
+        $this->keyProjectionFunction   = $keyProjectionFunction === null ?
                 null : Functions::allowExcessiveArguments($keyProjectionFunction);
         $this->valueProjectionFunction = $valueProjectionFunction === null ?
                 null : Functions::allowExcessiveArguments($valueProjectionFunction);
     }
-    
+
     final protected function projectElement(&$key, &$value)
     {
-        $keyProjectionFunction = $this->keyProjectionFunction;
+        $keyProjectionFunction   = $this->keyProjectionFunction;
         $valueProjectionFunction = $this->valueProjectionFunction;
-        
-        $keyCopy = $key;
+
+        $keyCopy   = $key;
         $valueCopy = $value;
 
-        if($keyProjectionFunction !== null) {
-            $keyCopyForKey = $keyCopy;
+        if ($keyProjectionFunction !== null) {
+            $keyCopyForKey   = $keyCopy;
             $valueCopyForKey = $valueCopy;
 
             $keyProjection = $keyProjectionFunction($valueCopyForKey, $keyCopyForKey);
@@ -44,15 +46,15 @@ trait ProjectionIterator
             $keyProjection =& $key;
         }
 
-        if($valueProjectionFunction !== null) {
-            $keyCopyForValue = $keyCopy;
+        if ($valueProjectionFunction !== null) {
+            $keyCopyForValue   = $keyCopy;
             $valueCopyForValue = $valueCopy;
 
             $valueProjection = $valueProjectionFunction($valueCopyForValue, $keyCopyForValue);
         } else {
             $valueProjection =& $value;
         }
-        
+
         return [&$keyProjection, &$valueProjection];
     }
 }

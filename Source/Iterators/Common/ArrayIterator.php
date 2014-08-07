@@ -5,7 +5,7 @@ namespace Pinq\Iterators\Common;
 /**
  * Common functionality for the array iterator
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 trait ArrayIterator
 {
@@ -18,7 +18,7 @@ trait ArrayIterator
     {
         $this->array =& $array;
     }
-    
+
     /**
      * @return array
      */

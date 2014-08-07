@@ -3,12 +3,12 @@
 namespace Pinq\Expressions;
 
 /**
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 abstract class ObjectOperationExpression extends TraversalExpression
 {
-    public function __construct(Expression $objectValueExpression)
+    public function __construct(Expression $value)
     {
-        parent::__construct($objectValueExpression);
+        parent::__construct($value);
     }
 }

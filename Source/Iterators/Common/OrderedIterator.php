@@ -8,7 +8,7 @@ use Pinq\Iterators\IOrderedMap;
 /**
  * Common functionality for the ordered iterator
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 trait OrderedIterator
 {
@@ -27,24 +27,26 @@ trait OrderedIterator
         $this->orderByFunctions[] = Functions::allowExcessiveArguments($orderByFunction);
         $this->isAscendingArray[] = $isAscending;
     }
-    
+
     /**
      * @param callable $orderByFunction
-     * @param boolean $isAscending
+     * @param boolean  $isAscending
+     *
      * @return IOrderedIterator
      */
     final public function thenOrderBy(callable $orderByFunction, $isAscending)
     {
-        $newOrderedIterator = new self($this->getSourceIterator(), function () {}, true);
-        
-        $newOrderedIterator->orderByFunctions = $this->orderByFunctions;
-        $newOrderedIterator->isAscendingArray = $this->isAscendingArray;
+        $newOrderedIterator = new self($this->getSourceIterator(), function () {
+        }, true);
+
+        $newOrderedIterator->orderByFunctions   = $this->orderByFunctions;
+        $newOrderedIterator->isAscendingArray   = $this->isAscendingArray;
         $newOrderedIterator->orderByFunctions[] = Functions::allowExcessiveArguments($orderByFunction);
         $newOrderedIterator->isAscendingArray[] = $isAscending;
 
         return $newOrderedIterator;
     }
-    
+
     /**
      * @return \Traversable
      */

@@ -7,7 +7,7 @@ namespace Pinq\Expressions;
  * expression will be visisted, the subclass should implement such
  * that is visits all the appropriate expressions
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class ExpressionVisitor extends ExpressionWalker
 {
@@ -22,7 +22,7 @@ class ExpressionVisitor extends ExpressionWalker
     {
 
     }
-    
+
     final public function walkArrayItem(ArrayItemExpression $expression)
     {
         $this->visitArrayItem($expression);
@@ -83,6 +83,30 @@ class ExpressionVisitor extends ExpressionWalker
 
     }
 
+    public function walkConstant(ConstantExpression $expression)
+    {
+        $this->visitConstant($expression);
+
+        return $expression;
+    }
+
+    protected function visitConstant(ConstantExpression $expression)
+    {
+
+    }
+
+    public function walkClassConstant(ClassConstantExpression $expression)
+    {
+        $this->visitClassConstant($expression);
+
+        return $expression;
+    }
+
+    protected function visitClassConstant(ClassConstantExpression $expression)
+    {
+
+    }
+
     final public function walkParameter(ParameterExpression $expression)
     {
         $this->visitParameter($expression);
@@ -115,6 +139,18 @@ class ExpressionVisitor extends ExpressionWalker
     }
 
     protected function visitIsset(IssetExpression $expression)
+    {
+
+    }
+
+    final public function walkUnset(UnsetExpression $expression)
+    {
+        $this->visitUnset($expression);
+
+        return $expression;
+    }
+
+    protected function visitUnset(UnsetExpression $expression)
     {
 
     }
@@ -227,14 +263,14 @@ class ExpressionVisitor extends ExpressionWalker
 
     }
 
-    final public function walkSubQuery(SubQueryExpression $expression)
+    final public function walkStaticField(StaticFieldExpression $expression)
     {
-        $this->visitSubQuery($expression);
+        $this->visitStaticField($expression);
 
         return $expression;
     }
 
-    protected function visitSubQuery(SubQueryExpression $expression)
+    protected function visitStaticField(StaticFieldExpression $expression)
     {
 
     }

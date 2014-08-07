@@ -7,8 +7,7 @@ use Pinq\Iterators\Common;
 /**
  * Implementation of the flattening iterator using the fetch method.
  *
- *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class FlatteningIterator extends Iterator
 {
@@ -39,20 +38,20 @@ class FlatteningIterator extends Iterator
         $this->outerIterator->rewind();
         $this->innerIterator = new EmptyIterator();
     }
-    
+
     protected function doFetch()
     {
         while (($innerElement = $this->innerIterator->fetch()) === null) {
             if (($outerElement = $this->outerIterator->fetch()) === null) {
                 return null;
             }
-            
+
             $outerValue = IteratorScheme::adapter($outerElement[1]);
-            
+
             $this->innerIterator = $outerValue;
             $this->innerIterator->rewind();
         }
-        
+
         return [$this->count++, &$innerElement[1]];
     }
 }

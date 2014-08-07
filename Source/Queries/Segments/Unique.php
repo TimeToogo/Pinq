@@ -5,7 +5,7 @@ namespace Pinq\Queries\Segments;
 /**
  * Query segment for retrieving only unique values
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class Unique extends Segment
 {
@@ -14,13 +14,8 @@ class Unique extends Segment
         return self::UNIQUE;
     }
 
-    public function traverse(SegmentWalker $walker)
+    public function traverse(SegmentVisitor $visitor)
     {
-        return $walker->walkUnique($this);
-    }
-
-    public function update()
-    {
-        return $this;
+        return $visitor->visitUnique($this);
     }
 }

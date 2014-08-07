@@ -2,23 +2,23 @@
 
 namespace Pinq\Queries\Requests;
 
-use Pinq\FunctionExpressionTree;
+use Pinq\Queries\Functions;
 
 /**
  * Request query for a custom aggregate using the supplied function
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class Aggregate extends Request
 {
     /**
-     * @var FunctionExpressionTree
+     * @var Functions\Aggregator
      */
-    private $functionExpressionTree;
+    private $aggregatorFunction;
 
-    public function __construct(FunctionExpressionTree $functionExpressionTree)
+    public function __construct(Functions\Aggregator $aggregatorFunction)
     {
-        $this->functionExpressionTree = $functionExpressionTree;
+        $this->aggregatorFunction = $aggregatorFunction;
     }
 
     public function getType()
@@ -27,11 +27,11 @@ class Aggregate extends Request
     }
 
     /**
-     * @return FunctionExpressionTree
+     * @return Functions\Aggregator
      */
-    public function getFunctionExpressionTree()
+    public function getAggregatorFunction()
     {
-        return $this->functionExpressionTree;
+        return $this->aggregatorFunction;
     }
 
     public function traverse(RequestVisitor $visitor)

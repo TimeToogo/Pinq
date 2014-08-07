@@ -3,52 +3,54 @@
 namespace Pinq\Queries\Common\Join\Filter;
 
 use Pinq\Queries\Common\Join\IFilter;
-use Pinq\FunctionExpressionTree;
+use Pinq\Queries\Functions;
 
 /**
  * Equality join filter.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class Equality implements IFilter
 {
     /**
-     * The outer key selector function
+     * The outer key projection function.
      *
-     * @var FunctionExpressionTree
+     * @var Functions\ElementProjection
      */
     private $outerKeyFunction;
 
     /**
-     * The inner key selector function
+     * The inner key projection function.
      *
-     * @var FunctionExpressionTree
+     * @var Functions\ElementProjection
      */
     private $innerKeyFunction;
 
-    public function __construct(FunctionExpressionTree $outerKeyFunction, FunctionExpressionTree $innerKeyFunction)
-    {
+    public function __construct(
+            Functions\ElementProjection $outerKeyFunction,
+            Functions\ElementProjection $innerKeyFunction
+    ) {
         $this->outerKeyFunction = $outerKeyFunction;
         $this->innerKeyFunction = $innerKeyFunction;
     }
-    
+
     public function getType()
     {
         return self::EQUALITY;
     }
 
     /**
-     * @return FunctionExpressionTree
+     * @return Functions\ElementProjection
      */
-    public function getOuterKeyFunctionExpressionTree()
+    public function getOuterKeyFunction()
     {
         return $this->outerKeyFunction;
     }
 
     /**
-     * @return FunctionExpressionTree
+     * @return Functions\ElementProjection
      */
-    public function getInnerKeyFunctionExpressionTree()
+    public function getInnerKeyFunction()
     {
         return $this->innerKeyFunction;
     }

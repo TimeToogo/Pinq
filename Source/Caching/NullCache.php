@@ -5,14 +5,14 @@ namespace Pinq\Caching;
 /**
  * Null cache implementation. Used if no other cache is supplied.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class NullCache implements ICacheAdapter
+class NullCache extends CacheAdapter
 {
 
     public function save($key, $value)
     {
-        
+
     }
 
     public function tryGet($key)
@@ -27,11 +27,11 @@ class NullCache implements ICacheAdapter
 
     public function remove($key)
     {
-        
+
     }
-    
-    public function clear()
+
+    public function clear($namespace = null)
     {
-        
+
     }
 }

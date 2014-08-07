@@ -5,7 +5,7 @@ namespace Pinq\Interfaces;
 /**
  * This API for the filter options available to a joining ITraversable.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IJoiningOnTraversable extends IJoiningToTraversable
 {
@@ -15,6 +15,7 @@ interface IJoiningOnTraversable extends IJoiningToTraversable
      * as (outerValue, innerValue, outerKey, innerKey).
      *
      * @param  callable $function
+     *
      * @return IJoiningToTraversable
      */
     public function on(callable $function);
@@ -25,6 +26,7 @@ interface IJoiningOnTraversable extends IJoiningToTraversable
      *
      * @param  callable $outerKeyFunction
      * @param  callable $innerKeyFunction
+     *
      * @return IJoiningToTraversable
      */
     public function onEquality(callable $outerKeyFunction, callable $innerKeyFunction);

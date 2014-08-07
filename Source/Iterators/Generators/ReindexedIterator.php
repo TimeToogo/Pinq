@@ -7,7 +7,7 @@ use Pinq\Iterators\Common;
 /**
  * Implementation of the reindexer iterator using generators.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class ReindexedIterator extends IteratorGenerator
 {
@@ -18,7 +18,7 @@ class ReindexedIterator extends IteratorGenerator
 
     protected function &iteratorGenerator(IGenerator $iterator)
     {
-        foreach($iterator as &$value) {
+        foreach ($iterator as &$value) {
             yield $value;
         }
     }

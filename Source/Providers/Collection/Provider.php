@@ -2,53 +2,44 @@
 
 namespace Pinq\Providers\Collection;
 
+use Pinq\Expressions as O;
+use Pinq\ICollection;
+use Pinq\Providers\Traversable;
+use Pinq\Providers;
 use Pinq\Queries;
-use \Pinq\Providers;
 
 /**
  * Repository provider for evalating query of the supplied collection instance,
  * this is useful for mocking a repository against an in memory collection.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class Provider extends \Pinq\Providers\RepositoryProvider
+class Provider extends Providers\RepositoryProvider
 {
     /**
-     * @var \Pinq\ICollection
+     * @var Traversable\Provider
+     */
+    protected $queryProvider;
+
+    /**
+     * @var ICollection
      */
     protected $collection;
 
-    /**
-     * @var Providers\Traversable\Provider
-     */
-    protected $traversableProvider;
-    
-    /**
-     * @var Providers\Traversable\ScopeEvaluator
-     */
-    protected $scopeEvaluator;
-
-    public function __construct(\Pinq\ICollection $collection)
+    public function __construct(ICollection $collection)
     {
-        parent::__construct(null, null, $collection->getIteratorScheme());
-        
+        parent::__construct(new Traversable\SourceInfo($collection), new Traversable\Provider($collection));
+
+        $this->scheme     = $collection->getIteratorScheme();
         $this->collection = $collection;
-        $this->traversableProvider = new Providers\Traversable\Provider($collection);
-        $this->scopeEvaluator = new Providers\Traversable\ScopeEvaluator();
     }
 
-    protected function loadOperationEvaluatorVisitor(Queries\IScope $scope)
-    {
-        return new OperationEvaluator($this->traversableProvider->evaluateScope($scope));
-    }
+    protected function executeOperation(
+            Queries\IOperationQuery $query,
+            Queries\IResolvedParameterRegistry $resolvedParameters
+    ) {
+        $scopedCollection = $this->queryProvider->evaluateScope($query->getScope(), $resolvedParameters);
 
-    public function load(Queries\IRequestQuery $query)
-    {
-        return $this->traversableProvider->load($query);
-    }
-
-    protected function loadRequestEvaluatorVisitor(Queries\IScope $scope)
-    {
-
+        OperationEvaluator::evaluate($scopedCollection, $query->getOperation(), $resolvedParameters);
     }
 }

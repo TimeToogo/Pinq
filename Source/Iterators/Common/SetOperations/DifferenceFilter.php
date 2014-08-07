@@ -2,13 +2,10 @@
 
 namespace Pinq\Iterators\Common\SetOperations;
 
-use Pinq\Iterators\IIteratorScheme;
-use Pinq\Iterators\ISet;
-
 /**
  * Returns unique values present in the comparison values
- * 
- * @author Elliot Levin <elliot@aanet.com.au>
+ *
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class DifferenceFilter extends ComparisonFilter
 {

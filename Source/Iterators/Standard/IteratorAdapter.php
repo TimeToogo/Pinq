@@ -7,7 +7,7 @@ use Pinq\Iterators\Common;
 /**
  * Implementation of the adapter iterator using the fetch method.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class IteratorAdapter extends Iterator implements \Pinq\Iterators\IAdapterIterator
 {
@@ -22,19 +22,19 @@ class IteratorAdapter extends Iterator implements \Pinq\Iterators\IAdapterIterat
     public function doRewind()
     {
         parent::doRewind();
-        
+
         $this->iterator->rewind();
     }
-    
+
     final protected function doFetch()
     {
         $iterator = $this->iterator;
-        
-        if($iterator->valid()) {
+
+        if ($iterator->valid()) {
             $element = [$iterator->key(), $iterator->current()];
-            
+
             $iterator->next();
-            
+
             return $element;
         }
     }

@@ -8,7 +8,7 @@ use Pinq\Iterators\IJoinIterator;
 /**
  * Implementation of the join iterator using the fetch method.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class UnfilteredJoinIterator extends JoinIterator implements IJoinIterator
 {
@@ -16,7 +16,7 @@ class UnfilteredJoinIterator extends JoinIterator implements IJoinIterator
      * @var OrderedMap
      */
     protected $innerValues;
-    
+
     public function filterOn(callable $function)
     {
         return new JoinOnIterator($this->outerIterator, $this->innerIterator, $function);
@@ -26,13 +26,13 @@ class UnfilteredJoinIterator extends JoinIterator implements IJoinIterator
     {
         return new JoinOnEqualityIterator($this->outerIterator, $this->innerIterator, $outerKeyFunction, $innerKeyFunction);
     }
-    
+
     protected function doRewind()
     {
         $this->innerValues = new OrderedMap($this->defaultIterator($this->innerIterator));
         parent::doRewind();
     }
-    
+
     protected function getInnerValuesIterator($outerKey, $outerValue)
     {
         return $this->innerValues;

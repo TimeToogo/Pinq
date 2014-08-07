@@ -10,7 +10,7 @@ use Pinq\Interfaces\IOrderedQueryable;
  * Supplied functions are converted to expression trees and are used to execute
  * equivalent querys on the external source.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IQueryable extends ITraversable
 {
@@ -22,14 +22,21 @@ interface IQueryable extends ITraversable
      * @return Providers\IQueryProvider
      */
     public function getProvider();
-    
+
     /**
-     * The current query scope.
+     * Gets the expression representing the current query scope.
      *
-     * @return Queries\IScope
+     * @return Expressions\Expression
      */
-    public function getScope();
-    
+    public function getExpression();
+
+    /**
+     * Gets the source info.
+     *
+     * @return Queries\ISourceInfo
+     */
+    public function getSourceInfo();
+
     /**
      * {@inheritDoc}
      * @return IQueryable

@@ -4,11 +4,12 @@ namespace Pinq\Tests\Integration\Parsing;
 
 use Pinq\Parsing\IParser;
 use Pinq\Expressions as O;
+
 function TestFunction()
 {
     return 1.1;
 }
-define('TEST_FUNCTION', __NAMESPACE__ . '\\TestFunction');
+define('Pinq\\Tests\\Integration\\Parsing\\TEST_FUNCTION', __NAMESPACE__ . '\\TestFunction');
 
 class Test
 {

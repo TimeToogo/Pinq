@@ -2,51 +2,60 @@
 
 namespace Pinq\Queries\Operations;
 
-use Pinq\FunctionExpressionTree;
-use Pinq\Queries\Common\Join;
+use Pinq\Queries\Common;
+use Pinq\Queries\Functions;
 
 /**
  * Operation query for applying the supplied function
  * to the source
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class JoinApply extends Join\Base implements \Pinq\Queries\IOperation
+class JoinApply extends Operation implements \Pinq\Queries\IOperation
 {
+    /**
+     * The join options.
+     *
+     * @var Common\Join\Options
+     */
+    protected $options;
+
     /**
      * The function for selecting the resulting values of the join
      *
-     * @var FunctionExpressionTree
+     * @var Functions\ConnectorMutator
      */
-    protected $applyFunction;
+    protected $mutatorFunction;
 
     public function __construct(
-            $values, 
-            $isGroupJoin, 
-            Join\IFilter $filter = null, 
-            FunctionExpressionTree $applyFunction, 
-            $hasDefault = false, 
-            $defaultValue = null, 
-            $defaultKey = null)
-    {
-        parent::__construct($values, $isGroupJoin, $filter, $hasDefault, $defaultValue, $defaultKey);
-        
-        $this->applyFunction = $applyFunction;
+            Common\Join\Options $options,
+            Functions\ConnectorMutator $mutatorFunction
+    ) {
+        $this->options         = $options;
+        $this->mutatorFunction = $mutatorFunction;
     }
-    
+
     public function getType()
     {
         return self::JOIN_APPLY;
     }
-    
+
     /**
-     * @return FunctionExpressionTree
+     * @return Common\Join\Options
      */
-    final public function getApplyFunctionExpressionTree()
+    final public function getOptions()
     {
-        return $this->applyFunction;
+        return $this->options;
     }
-    
+
+    /**
+     * @return Functions\ConnectorMutator
+     */
+    final public function getMutatorFunction()
+    {
+        return $this->mutatorFunction;
+    }
+
     public function traverse(OperationVisitor $visitor)
     {
         $visitor->visitJoinApply($this);

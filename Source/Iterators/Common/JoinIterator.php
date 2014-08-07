@@ -5,7 +5,7 @@ namespace Pinq\Iterators\Common;
 /**
  * Common functionality for the join iterator
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 trait JoinIterator
 {
@@ -13,17 +13,17 @@ trait JoinIterator
      * @var callable
      */
     protected $projectionFunction;
-    
+
     /**
      * @var boolean
      */
     protected $hasDefault = false;
-    
+
     /**
      * @var mixed
      */
     protected $defaultValue;
-    
+
     /**
      * @var mixed
      */
@@ -31,24 +31,26 @@ trait JoinIterator
 
     protected function __constructIterator()
     {
-        $this->projectionFunction = function ($outerValue) { return $outerValue; };
+        $this->projectionFunction = function ($outerValue) {
+            return $outerValue;
+        };
     }
-    
+
     public function projectTo(callable $function)
     {
-        $self = clone $this;
+        $self                     = clone $this;
         $self->projectionFunction = Functions::allowExcessiveArguments($function);
-        
+
         return $self;
     }
-    
+
     public function withDefault($value, $key = null)
     {
-        $self = clone $this;
-        $self->hasDefault = true;
+        $self               = clone $this;
+        $self->hasDefault   = true;
         $self->defaultValue = $value;
-        $self->defaultKey = $key;
-        
+        $self->defaultKey   = $key;
+
         return $self;
     }
 }

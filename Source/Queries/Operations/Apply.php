@@ -2,15 +2,13 @@
 
 namespace Pinq\Queries\Operations;
 
-use Pinq\FunctionExpressionTree;
-
 /**
  * Operation query for applying the supplied function
  * to the source
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class Apply extends ExpressionOperation
+class Apply extends MutatorOperation
 {
     public function getType()
     {

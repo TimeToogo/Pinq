@@ -8,44 +8,45 @@ use Pinq\Iterators\IIteratorScheme;
  * The standard traversable class, fully implements the traversable API
  * using iterators to achieve lazy evaluation
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Serializable
+class Traversable implements ITraversable, Interfaces\IOrderedTraversable
 {
     /**
      * The iterator scheme used in the traversable instance.
      *
-     * @var IIteratorScheme     
+     * @var IIteratorScheme
      */
     protected $scheme;
-    
+
     /**
      * The source traversable.
      *
      * @var Traversable|null
      */
     protected $source;
-    
+
     /**
      * The element iterator for the traversable.
      *
      * @var \Traversable
      */
     protected $elements;
-    
+
     public function __construct($elements = [], IIteratorScheme $scheme = null, Traversable $source = null)
     {
-        $this->scheme = $scheme ?: Iterators\SchemeProvider::getDefault();
-        $this->source = $source;
+        $this->scheme   = $scheme ? : Iterators\SchemeProvider::getDefault();
+        $this->source   = $source;
         $this->elements = $this->scheme->toIterator($elements);
     }
 
     /**
      * Constructs a new traversable object from the supplied elements.
      *
-     * @param array|\Traversable $elements
+     * @param array|\Traversable   $elements
      * @param IIteratorScheme|null $scheme
-     * @param Traversable|null $source
+     * @param Traversable|null     $source
+     *
      * @return static
      */
     public static function from($elements, IIteratorScheme $scheme = null, Traversable $source = null)
@@ -57,7 +58,8 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
      * Returns a callable for the traversable constructor.
      *
      * @param IIteratorScheme|null $scheme
-     * @param Traversable|null $source
+     * @param Traversable|null     $source
+     *
      * @return callable
      */
     public static function factory(IIteratorScheme $scheme = null, Traversable $source = null)
@@ -65,14 +67,14 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
         //static:: doesn't work in closures?
         $static = get_called_class();
         return function ($elements) use ($static, $scheme, $source) {
-            return $static::from($elements, $scheme,$source);
+            return $static::from($elements, $scheme, $source);
         };
     }
-    
+
     /**
      * Returns a callable factory to construct an equivalent
      * instance with the supplied elements.
-     * 
+     *
      * @return callable
      */
     final protected function scopedSelfFactory()
@@ -81,27 +83,28 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
             return $this->constructScopedSelf($elements);
         };
     }
-    
+
     /**
      * Returns a new instance of the traversable with the scoped elements
      * and same scheme and source.
-     * 
+     *
      * @param array|\Traversable $elements
+     *
      * @return static
      */
     protected function constructScopedSelf($elements)
     {
-        return static::from($elements, $this->scheme, $this->source ?: $this);
+        return static::from($elements, $this->scheme, $this->source ? : $this);
     }
-    
+
     public function isSource()
     {
         return $this->source === null;
     }
-    
+
     public function getSource()
     {
-        return $this->source ?: $this;
+        return $this->source ? : $this;
     }
 
     public function asArray()
@@ -113,12 +116,12 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
     {
         return $this->scheme->arrayCompatibleIterator($this->getTrueIterator());
     }
-    
+
     public function getTrueIterator()
     {
         return $this->elements;
     }
-    
+
     public function getIteratorScheme()
     {
         return $this->scheme;
@@ -133,29 +136,19 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
     {
         return new Collection($this->elements, $this->scheme);
     }
-    
+
     /**
      * @return Iterators\IOrderedMap
      */
     protected function asOrderedMap()
     {
-        return $this->elements instanceof Iterators\IOrderedMap ? 
+        return $this->elements instanceof Iterators\IOrderedMap ?
                 $this->elements : $this->scheme->createOrderedMap($this->elements);
     }
-    
+
     public function iterate(callable $function)
     {
         $this->scheme->walk($this->elements, $function);
-    }
-
-    public function serialize()
-    {
-        return serialize([$this->scheme, $this->asOrderedMap()]);
-    }
-
-    public function unserialize($serialized)
-    {
-        list($this->scheme, $this->elements) = unserialize($serialized);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Querying">
@@ -172,11 +165,11 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
     public function last()
     {
         $value = null;
-        
-        foreach($this->elements as $value) {
-            
+
+        foreach ($this->elements as $value) {
+
         }
-        
+
         return $value;
     }
 
@@ -184,38 +177,45 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
     {
         return $this->constructScopedSelf(
                 $this->scheme->filterIterator(
-                        $this->elements, 
-                        $predicate));
+                        $this->elements,
+                        $predicate
+                )
+        );
     }
 
     public function orderByAscending(callable $function)
     {
         return $this->constructScopedSelf(
                 $this->scheme->orderedIterator(
-                        $this->elements, 
-                        $function, 
-                        true));
+                        $this->elements,
+                        $function,
+                        true
+                )
+        );
     }
 
     public function orderByDescending(callable $function)
     {
         return $this->constructScopedSelf(
                 $this->scheme->orderedIterator(
-                        $this->elements, 
-                        $function, 
-                        false));
+                        $this->elements,
+                        $function,
+                        false
+                )
+        );
     }
 
     public function orderBy(callable $function, $direction)
     {
-        return $direction === Direction::DESCENDING ? 
+        return $direction === Direction::DESCENDING ?
                 $this->orderByDescending($function) : $this->orderByAscending($function);
     }
-    
+
     /**
      * Verifies that the traversable is ordered.
-     * 
+     *
      * @param string $method The called method name
+     *
      * @return Iterators\IOrderedIterator
      * @throws PinqException
      */
@@ -232,26 +232,31 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
         return $innerIterator;
     }
-    
+
     public function thenBy(callable $function, $direction)
     {
-        return $this->constructScopedSelf($this->validateIsOrdered(__METHOD__)->thenOrderBy(
-                $function,
-                $direction !== Direction::DESCENDING));
+        return $this->constructScopedSelf(
+                $this->validateIsOrdered(__METHOD__)->thenOrderBy(
+                        $function,
+                        $direction !== Direction::DESCENDING
+                )
+        );
     }
 
     public function thenByAscending(callable $function)
     {
         return $this->constructScopedSelf(
                 $this->validateIsOrdered(__METHOD__)
-                        ->thenOrderBy($function, true));
+                        ->thenOrderBy($function, true)
+        );
     }
 
     public function thenByDescending(callable $function)
     {
         return $this->constructScopedSelf(
                 $this->validateIsOrdered(__METHOD__)
-                        ->thenOrderBy($function, false));
+                        ->thenOrderBy($function, false)
+        );
     }
 
     public function skip($amount)
@@ -260,7 +265,9 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
                 $this->scheme->rangeIterator(
                         $this->elements,
                         $amount,
-                        null));
+                        null
+                )
+        );
     }
 
     public function take($amount)
@@ -269,7 +276,9 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
                 $this->scheme->rangeIterator(
                         $this->elements,
                         0,
-                        $amount));
+                        $amount
+                )
+        );
     }
 
     public function slice($start, $amount)
@@ -278,62 +287,77 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
                 $this->scheme->rangeIterator(
                         $this->elements,
                         $start,
-                        $amount));
+                        $amount
+                )
+        );
     }
 
     public function indexBy(callable $function)
     {
-        return $this->constructScopedSelf($this->scheme->uniqueKeyIterator(
-                $this->scheme->projectionIterator(
-                        $this->elements,
-                        $function,
-                        null)));
+        return $this->constructScopedSelf(
+                $this->scheme->uniqueKeyIterator(
+                        $this->scheme->projectionIterator(
+                                $this->elements,
+                                $function,
+                                null
+                        )
+                )
+        );
     }
-    
+
     public function keys()
     {
-        return $this->constructScopedSelf($this->scheme->reindexerIterator(
-                $this->scheme->projectionIterator(
-                        $this->elements, 
-                        null, 
-                        function ($value, $key) {
-                            return $key;
-                        })));
+        return $this->constructScopedSelf(
+                $this->scheme->reindexerIterator(
+                        $this->scheme->projectionIterator(
+                                $this->elements,
+                                null,
+                                function ($value, $key) {
+                                    return $key;
+                                }
+                        )
+                )
+        );
     }
-    
+
     public function reindex()
     {
         return $this->constructScopedSelf(
-                $this->scheme->reindexerIterator($this->elements));
+                $this->scheme->reindexerIterator($this->elements)
+        );
     }
 
     public function groupBy(callable $function)
     {
         return $this->constructScopedSelf(
                 $this->scheme->groupedIterator(
-                        $this->elements, 
-                        $function, 
-                        $this->scopedSelfFactory()));
+                        $this->elements,
+                        $function,
+                        $this->scopedSelfFactory()
+                )
+        );
     }
-    
+
     public function join($values)
     {
         return new Connectors\JoiningTraversable(
-                $this->scheme, 
+                $this->scheme,
                 $this->scheme->joinIterator(
-                        $this->elements, 
-                        $this->scheme->toIterator($values)), 
+                        $this->elements,
+                        $this->scheme->toIterator($values)
+                ),
                 $this->scopedSelfFactory());
     }
-    
+
     public function groupJoin($values)
     {
         return new Connectors\JoiningTraversable(
-                $this->scheme, 
+                $this->scheme,
                 $this->scheme->groupJoinIterator(
-                        $this->elements, 
+                        $this->elements,
                         $this->scheme->toIterator($values),
-                        $this->scopedSelfFactory()), 
+                        $this->scopedSelfFactory()
+                ),
                 $this->scopedSelfFactory());
     }
 
@@ -344,10 +368,13 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     public function select(callable $function)
     {
-        return $this->constructScopedSelf($this->scheme->projectionIterator(
-                $this->elements,
-                null,
-                $function));
+        return $this->constructScopedSelf(
+                $this->scheme->projectionIterator(
+                        $this->elements,
+                        null,
+                        $function
+                )
+        );
     }
 
     public function selectMany(callable $function)
@@ -356,7 +383,8 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
                 $this->scheme->projectionIterator(
                         $this->elements,
                         null,
-                        $function);
+                        $function
+                );
 
         return $this->constructScopedSelf($this->scheme->flattenedIterator($projectionIterator));
     }
@@ -367,23 +395,32 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     public function union($values)
     {
-        return $this->constructScopedSelf($this->scheme->unionIterator(
-                $this->elements,
-                $this->scheme->toIterator($values)));
+        return $this->constructScopedSelf(
+                $this->scheme->unionIterator(
+                        $this->elements,
+                        $this->scheme->toIterator($values)
+                )
+        );
     }
 
     public function intersect($values)
     {
-        return $this->constructScopedSelf($this->scheme->intersectionIterator(
-                $this->elements,
-                $this->scheme->toIterator($values)));
+        return $this->constructScopedSelf(
+                $this->scheme->intersectionIterator(
+                        $this->elements,
+                        $this->scheme->toIterator($values)
+                )
+        );
     }
 
     public function difference($values)
     {
-        return $this->constructScopedSelf($this->scheme->differenceIterator(
-                $this->elements,
-                $this->scheme->toIterator($values)));
+        return $this->constructScopedSelf(
+                $this->scheme->differenceIterator(
+                        $this->elements,
+                        $this->scheme->toIterator($values)
+                )
+        );
     }
 
     // </editor-fold>
@@ -392,23 +429,32 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     public function append($values)
     {
-        return $this->constructScopedSelf($this->scheme->appendIterator(
-                    $this->elements, 
-                    $this->scheme->toIterator($values)));
+        return $this->constructScopedSelf(
+                $this->scheme->appendIterator(
+                        $this->elements,
+                        $this->scheme->toIterator($values)
+                )
+        );
     }
 
     public function whereIn($values)
     {
-        return $this->constructScopedSelf($this->scheme->whereInIterator(
-                $this->elements,
-                $this->scheme->toIterator($values)));
+        return $this->constructScopedSelf(
+                $this->scheme->whereInIterator(
+                        $this->elements,
+                        $this->scheme->toIterator($values)
+                )
+        );
     }
 
     public function except($values)
     {
-        return $this->constructScopedSelf($this->scheme->exceptIterator(
-                $this->elements,
-                $this->scheme->toIterator($values)));
+        return $this->constructScopedSelf(
+                $this->scheme->exceptIterator(
+                        $this->elements,
+                        $this->scheme->toIterator($values)
+                )
+        );
     }
 
     // </editor-fold>
@@ -441,7 +487,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     public function count()
     {
-        return $this->elements instanceof \Countable ? 
+        return $this->elements instanceof \Countable ?
                 $this->elements->count() : $this->asOrderedMap()->count();
     }
 
@@ -467,13 +513,13 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
 
     public function aggregate(callable $function)
     {
-        $hasValue = false;
+        $hasValue       = false;
         $aggregateValue = null;
 
         foreach ($this->asArray() as $value) {
             if (!$hasValue) {
                 $aggregateValue = $value;
-                $hasValue = true;
+                $hasValue       = true;
                 continue;
             }
 
@@ -488,10 +534,13 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
         if ($function === null) {
             return $this->asArray();
         } else {
-            return $this->scheme->toArray($this->scheme->projectionIterator(
-                    $this->asOrderedMap(), 
-                    null,
-                    $function));
+            return $this->scheme->toArray(
+                    $this->scheme->projectionIterator(
+                            $this->asOrderedMap(),
+                            null,
+                            $function
+                    )
+            );
         }
     }
 
@@ -501,9 +550,10 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable, \Seri
             return $this->elements;
         } else {
             return $this->scheme->projectionIterator(
-                    $this->elements, 
+                    $this->elements,
                     $function,
-                    null);
+                    null
+            );
         }
     }
 

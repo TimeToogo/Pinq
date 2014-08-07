@@ -5,18 +5,24 @@ namespace Pinq\Queries\Segments;
 /**
  * Query segment for retrieving the specified range of values
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class Range extends Segment
 {
-    private $rangeStart = 0;
+    /**
+     * @var string
+     */
+    private $startParameterId;
 
-    private $rangeAmount = 0;
+    /**
+     * @var string
+     */
+    private $amountParameterId;
 
-    public function __construct($rangeStart, $rangeAmount)
+    public function __construct($startParameterId, $amountParameterId)
     {
-        $this->rangeStart = $rangeStart;
-        $this->rangeAmount = $rangeAmount;
+        $this->startParameterId  = $startParameterId;
+        $this->amountParameterId = $amountParameterId;
     }
 
     public function getType()
@@ -24,33 +30,28 @@ class Range extends Segment
         return self::RANGE;
     }
 
-    public function traverse(SegmentWalker $walker)
+    public function traverse(SegmentVisitor $visitor)
     {
-        return $walker->walkRange($this);
+        return $visitor->visitRange($this);
     }
 
     /**
-     * @return int
+     * Gets the start parameter id.
+     *
+     * @return string
      */
-    public function getRangeStart()
+    public function getStartId()
     {
-        return $this->rangeStart;
+        return $this->startParameterId;
     }
 
     /**
-     * @return int|null
+     * Gets the amount parameter id.
+     *
+     * @return string
      */
-    public function getRangeAmount()
+    public function getAmountId()
     {
-        return $this->rangeAmount;
-    }
-
-    public function update($rangeStart, $rangeAmount)
-    {
-        if ($this->rangeStart === $rangeStart && $this->rangeAmount === $rangeAmount) {
-            return $this;
-        }
-
-        return new self($rangeStart, $rangeAmount);
+        return $this->amountParameterId;
     }
 }

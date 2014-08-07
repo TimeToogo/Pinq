@@ -7,7 +7,7 @@ use Pinq\Iterators\Common;
 /**
  * Implementation of the grouped iterator using the fetch method.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class GroupedIterator extends LazyIterator
 {
@@ -18,14 +18,14 @@ class GroupedIterator extends LazyIterator
         parent::__construct($iterator);
         self::__constructIterator($groupKeyFunction, $traversableFactory);
     }
-    
+
     protected function initializeIterator(IIterator $innerIterator)
     {
         $groupedMap = (new OrderedMap($innerIterator))->groupBy($this->groupKeyFunction);
-        
+
         return new ProjectionIterator(
-                $groupedMap, 
-                null, 
+                $groupedMap,
+                null,
                 $this->traversableFactory);
     }
 }

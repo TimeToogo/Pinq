@@ -2,35 +2,35 @@
 
 namespace Pinq\Queries\Segments;
 
-use Pinq\Queries\Common\Join as CommonJoin;
-use Pinq\FunctionExpressionTree;
+use Pinq\Queries\Common;
+use Pinq\Queries\Functions;
 
 /**
- * Base class for a join query segment with the joined values and the
- * resulting value function
+ * Query segment for joining values.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class Join extends CommonJoin\Base implements \Pinq\Queries\ISegment
+class Join implements \Pinq\Queries\ISegment
 {
+    /**
+     * The join options.
+     *
+     * @var Common\Join\Options
+     */
+    protected $options;
+
     /**
      * The function for selecting the resulting values of the join
      *
-     * @var FunctionExpressionTree
+     * @var Functions\ConnectorProjection
      */
     protected $joiningFunction;
 
     public function __construct(
-            $values, 
-            $isGroupJoin, 
-            CommonJoin\IFilter $filter = null, 
-            FunctionExpressionTree $joiningFunction,
-            $hasDefault = false, 
-            $defaultValue = null, 
-            $defaultKey = null)
-    {
-        parent::__construct($values, $isGroupJoin, $filter, $hasDefault, $defaultValue, $defaultKey);
-        
+            Common\Join\Options $options,
+            Functions\ConnectorProjection $joiningFunction
+    ) {
+        $this->options         = $options;
         $this->joiningFunction = $joiningFunction;
     }
 
@@ -40,16 +40,34 @@ class Join extends CommonJoin\Base implements \Pinq\Queries\ISegment
     }
 
     /**
-     * @return FunctionExpressionTree
+     * @return Common\Join\Options
      */
-    final public function getJoiningFunctionExpressionTree()
+    final public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @return Functions\ConnectorProjection
+     */
+    final public function getJoiningFunction()
     {
         return $this->joiningFunction;
     }
-    
-    public function traverse(SegmentWalker $walker)
+
+    public function traverse(SegmentVisitor $visitor)
     {
-        $walker->walkJoin($this);
+        return $visitor->visitJoin($this);
     }
 
+    public function update(
+            Common\Join\Options $options,
+            Functions\ConnectorProjection $joiningFunction
+    ) {
+        if ($this->options === $options && $joiningFunction === $this->joiningFunction) {
+            return $this;
+        }
+
+        return new self($options, $joiningFunction);
+    }
 }

@@ -7,7 +7,7 @@ use Pinq\Iterators\Common;
 /**
  * Implementation of the empty iterator using generators.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class EmptyIterator extends Generator
 {

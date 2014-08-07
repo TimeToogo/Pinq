@@ -7,34 +7,37 @@ use Pinq\Iterators\Common;
 /**
  * Implementation of the join iterator using generators.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class GroupJoinOnEqualityIterator extends GroupJoinIterator
 {
     use Common\JoinOnEqualityIterator;
-    
+
     public function __construct(
             IGenerator $outerIterator,
-            IGenerator $innerIterator, 
-            callable $traversableFactory, 
-            callable $outerKeyFunction, 
-            callable $innerKeyFunction)
-    {
+            IGenerator $innerIterator,
+            callable $traversableFactory,
+            callable $outerKeyFunction,
+            callable $innerKeyFunction
+    ) {
         parent::__construct($outerIterator, $innerIterator, $traversableFactory);
         self::__constructJoinOnEqualityIterator($outerKeyFunction, $innerKeyFunction);
     }
-    
+
     protected function innerGenerator($outerKey, $outerValue)
     {
         $outerKeyFunction = $this->outerKeyFunction;
-        $groupKey = $outerKeyFunction($outerValue, $outerKey);
-        
+        $groupKey         = $outerKeyFunction($outerValue, $outerKey);
+
         $innerGroups = (new OrderedMap($this->innerIterator))->groupBy($this->innerKeyFunction);
-        
+
         $traversableGroup = $this->constructInnerGroup(
-                $this->defaultIterator($innerGroups->contains($groupKey) ? 
-                        $innerGroups->get($groupKey) : new EmptyIterator()));
-        
+                $this->defaultIterator(
+                        $innerGroups->contains($groupKey) ?
+                                $innerGroups->get($groupKey) : new EmptyIterator()
+                )
+        );
+
         return new ArrayIterator([$groupKey => $traversableGroup]);
     }
 }

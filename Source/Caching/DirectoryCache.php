@@ -6,9 +6,9 @@ namespace Pinq\Caching;
  * Cache implementation for storing the serialized expression trees
  * each in their own file in the specified directory
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class DirectoryCache implements ICacheAdapter
+class DirectoryCache extends CacheAdapter
 {
     const DEFAULT_EXTENSION = '.cached';
 
@@ -20,7 +20,7 @@ class DirectoryCache implements ICacheAdapter
     private $directory;
 
     /**
-     * The exension to use for the stored files
+     * The extension to use for the stored files
      *
      * @var string
      */
@@ -36,8 +36,18 @@ class DirectoryCache implements ICacheAdapter
             }
         }
 
-        $this->directory = $directory;
+        $this->directory     = $directory;
         $this->fileExtension = $fileExtension;
+    }
+
+    public function save($key, $value)
+    {
+        file_put_contents($this->getKeyFilePath($key), serialize($value));
+    }
+
+    private function getKeyFilePath($key)
+    {
+        return $this->getCacheFilePath(bin2hex($key));
     }
 
     private function getCacheFilePath($fileName)
@@ -45,16 +55,6 @@ class DirectoryCache implements ICacheAdapter
         return $this->directory . DIRECTORY_SEPARATOR . $fileName . $this->fileExtension;
     }
 
-    private function getKeyFilePath($key)
-    {
-        return $this->getCacheFilePath(md5($key));
-    }
-
-    public function save($key, $value)
-    {
-        file_put_contents($this->getKeyFilePath($key), serialize($value));
-    }
-    
     public function contains($key)
     {
         return is_readable($this->getKeyFilePath($key));
@@ -71,9 +71,9 @@ class DirectoryCache implements ICacheAdapter
         return unserialize(file_get_contents($filePath));
     }
 
-    public function clear()
+    public function clear($namespace = null)
     {
-        foreach (glob($this->getCacheFilePath('*')) as $path) {
+        foreach (glob($this->getCacheFilePath(bin2hex($namespace) . '*')) as $path) {
             unlink($path);
         }
     }

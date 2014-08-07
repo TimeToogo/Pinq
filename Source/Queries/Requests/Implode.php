@@ -2,28 +2,26 @@
 
 namespace Pinq\Queries\Requests;
 
-use Pinq\FunctionExpressionTree;
+use Pinq\Queries\Functions;
 
 /**
  * Request query for a string of all the projected values
  * concatenated by the specified delimiter
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class Implode extends ProjectionRequest
 {
     /**
      * @var string
      */
-    private $delimiter;
+    private $delimiterId;
 
-    /**
-     * @param string $delimiter
-     */
-    public function __construct($delimiter, FunctionExpressionTree $functionExpressionTree = null)
+    public function __construct($delimiterId, Functions\ElementProjection $projectionFunction = null)
     {
-        parent::__construct($functionExpressionTree);
-        $this->delimiter = $delimiter;
+        parent::__construct($projectionFunction);
+
+        $this->delimiterId = $delimiterId;
     }
 
     public function getType()
@@ -32,11 +30,13 @@ class Implode extends ProjectionRequest
     }
 
     /**
+     * Gets the value parameter id.
+     *
      * @return string
      */
-    public function getDelimiter()
+    public function getDelimiterId()
     {
-        return $this->delimiter;
+        return $this->delimiterId;
     }
 
     public function traverse(RequestVisitor $visitor)

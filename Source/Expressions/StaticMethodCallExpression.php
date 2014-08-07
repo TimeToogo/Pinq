@@ -7,54 +7,41 @@ namespace Pinq\Expressions;
  * Class::Method('foo')
  * </code>
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class StaticMethodCallExpression extends Expression
+class StaticMethodCallExpression extends StaticClassExpression
 {
     /**
      * @var Expression
      */
-    private $classExpression;
-
-    /**
-     * @var Expression
-     */
-    private $nameExpression;
+    private $name;
 
     /**
      * @var Expression[]
      */
-    private $argumentExpressions;
+    private $arguments;
 
-    public function __construct(Expression $classExpression, Expression $nameExpression, array $argumentExpressions = [])
+    public function __construct(Expression $class, Expression $name, array $arguments = [])
     {
-        $this->classExpression = $classExpression;
-        $this->nameExpression = $nameExpression;
-        $this->argumentExpressions = $argumentExpressions;
+        parent::__construct($class);
+        $this->name      = $name;
+        $this->arguments = self::verifyAll($arguments);
     }
 
     /**
      * @return Expression
      */
-    public function getClassExpression()
+    public function getName()
     {
-        return $this->classExpression;
-    }
-
-    /**
-     * @return Expression
-     */
-    public function getNameExpression()
-    {
-        return $this->nameExpression;
+        return $this->name;
     }
 
     /**
      * @return Expression[]
      */
-    public function getArgumentExpressions()
+    public function getArguments()
     {
-        return $this->argumentExpressions;
+        return $this->arguments;
     }
 
     public function traverse(ExpressionWalker $walker)
@@ -62,61 +49,57 @@ class StaticMethodCallExpression extends Expression
         return $walker->walkStaticMethodCall($this);
     }
 
-    public function simplify()
-    {
-        return $this->update(
-                $this->classExpression->simplify(),
-                $this->nameExpression->simplify(),
-                self::simplifyAll($this->argumentExpressions));
-    }
-
     /**
+     * @param Expression   $class
+     * @param Expression   $name
+     * @param Expression[] $arguments
+     *
      * @return self
      */
-    public function update(Expression $classExpression, Expression $nameExpression, array $argumentExpressions = [])
+    public function update(Expression $class, Expression $name, array $arguments = [])
     {
-        if ($this->classExpression === $classExpression && $this->nameExpression === $nameExpression && $this->argumentExpressions === $argumentExpressions) {
+        if ($this->class === $class
+                && $this->name === $name
+                && $this->arguments === $arguments
+        ) {
             return $this;
         }
 
-        return new self($classExpression, $nameExpression, $argumentExpressions);
+        return new self($class, $name, $arguments);
     }
 
-    protected function compileCode(&$code)
+    protected function compileMember(&$code)
     {
-        if ($this->classExpression instanceof ValueExpression) {
-            $code .= $this->classExpression->getValue();
+        if ($this->name instanceof ValueExpression) {
+            $code .= $this->name->getValue();
         } else {
-            $this->classExpression->compileCode($code);
-        }
-
-        $code .= '::';
-
-        if ($this->nameExpression instanceof ValueExpression) {
-            $code .= $this->nameExpression->getValue();
-        } else {
-            $this->nameExpression->compileCode($code);
+            $this->name->compileCode($code);
         }
 
         $code .= '(';
-        $code .= implode(',', self::compileAll($this->argumentExpressions));
+        $code .= implode(',', self::compileAll($this->arguments));
         $code .= ')';
     }
 
-    public function serialize()
+    protected function updateClassValue(Expression $class)
     {
-        return serialize([$this->classExpression, $this->nameExpression, $this->argumentExpressions]);
+        return new self($class, $this->name, $this->arguments);
     }
 
-    public function unserialize($serialized)
+    protected function dataToSerialize()
     {
-        list($this->classExpression, $this->nameExpression, $this->argumentExpressions) = unserialize($serialized);
+        return [$this->name, $this->arguments];
+    }
+
+    protected function unserializeData($data)
+    {
+        list($this->name, $this->arguments) = $data;
     }
 
     public function __clone()
     {
-        $this->classExpression = clone $this->classExpression;
-        $this->nameExpression = clone $this->nameExpression;
-        $this->argumentExpressions = self::cloneAll($this->argumentExpressions);
+        $this->class     = clone $this->class;
+        $this->name      = clone $this->name;
+        $this->arguments = self::cloneAll($this->arguments);
     }
 }

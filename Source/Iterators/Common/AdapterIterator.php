@@ -5,7 +5,7 @@ namespace Pinq\Iterators\Common;
 /**
  * Common functionality for the adapeter iterator
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 trait AdapterIterator
 {
@@ -13,7 +13,7 @@ trait AdapterIterator
      * @var \Traversable
      */
     protected $source;
-    
+
     /**
      * @var \Iterator
      */
@@ -21,10 +21,10 @@ trait AdapterIterator
 
     public function __constructIterator(\Traversable $iterator)
     {
-        $this->source = $iterator;
+        $this->source   = $iterator;
         $this->iterator = $iterator instanceof \Iterator ? $iterator : new \IteratorIterator($iterator);
     }
-    
+
     /**
      * {@inheritDoc}
      */

@@ -7,7 +7,7 @@ use Pinq\IRepository;
 /**
  * The API for subsequent orderings of a IRepository
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IOrderedRepository extends IRepository, IOrderedCollection
 {

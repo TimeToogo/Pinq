@@ -15,7 +15,7 @@ class GetIndexTest extends TraversableTest
     }
     
     /**
-     * @dataProvider everything
+     * @dataProvider oneToTen
      */
     public function testThatIndexesSupportObjectKeys(\Pinq\ITraversable $traversable, array $data)
     {
@@ -42,7 +42,7 @@ class GetIndexTest extends TraversableTest
     }
     
     /**
-     * @dataProvider everything
+     * @dataProvider oneToTen
      */
     public function testThatIndexesSupportArrayKeys(\Pinq\ITraversable $traversable, array $data)
     {
@@ -54,9 +54,9 @@ class GetIndexTest extends TraversableTest
             //Arrays are value types, no reference required
             $this->assertTrue(isset($traversable[['foo' => $key, 2 => 3]]));
             $this->assertSame($value, $traversable[['foo' => $key, 2 => 3]]);
-            
-            $this->assertFalse(isset($traversable[['foo' => $key, 2 => '3']]), 
-                    'Should be using strict equality for arrays (order matters)');
+
+            $this->assertFalse(isset($traversable[['foo' => $key, 2 => '3']]),
+                'Should be using strict equality for arrays (order matters)');
             $this->assertFalse(isset($traversable[[2 => 3, 'foo' => $key]]), 
                     'Should be using strict equality for arrays (order matters)');
         }

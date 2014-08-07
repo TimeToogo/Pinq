@@ -9,7 +9,7 @@ use Pinq\Iterators\Generators\IGenerator;
  * This class providers interopability between the generator scheme and the standard
  * scheme.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class IGeneratorAdapter extends IteratorAdapter
 {
@@ -23,7 +23,7 @@ class IGeneratorAdapter extends IteratorAdapter
         parent::__construct($generator->getIterator());
         $this->generator = $generator;
     }
-    
+
     public function doRewind()
     {
         //IGenerator is an \IteratorAggregate and a new generator must be built for every rewind

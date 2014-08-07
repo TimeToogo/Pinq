@@ -8,7 +8,7 @@ use Pinq\Iterators\IOrderedIterator;
 /**
  * Implementation of the ordered iterator using the fetch method.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class OrderedIterator extends LazyIterator implements IOrderedIterator
 {
@@ -19,7 +19,7 @@ class OrderedIterator extends LazyIterator implements IOrderedIterator
         parent::__construct($iterator);
         self::__constructIterator($orderByFunction, $isAscending);
     }
-    
+
     protected function initializeIterator(IIterator $innerIterator)
     {
         return $this->sortMap(new OrderedMap($innerIterator));

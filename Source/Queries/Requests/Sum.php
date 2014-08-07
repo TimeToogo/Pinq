@@ -5,7 +5,7 @@ namespace Pinq\Queries\Requests;
 /**
  * Request query for a double of the sum of all the projected values
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class Sum extends ProjectionRequest
 {

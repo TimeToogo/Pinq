@@ -6,15 +6,18 @@ namespace Pinq\Queries\Requests;
  * Request query for a boolean of whether the supplied value
  * is contained within the scope
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class Contains extends Request
 {
-    private $value;
+    /**
+     * @var string
+     */
+    private $valueId;
 
-    public function __construct($value)
+    public function __construct($valueId)
     {
-        $this->value = $value;
+        $this->valueId = $valueId;
     }
 
     public function getType()
@@ -22,9 +25,14 @@ class Contains extends Request
         return self::CONTAINS;
     }
 
-    public function getValue()
+    /**
+     * Gets the value parameter id.
+     *
+     * @return string
+     */
+    public function getValueId()
     {
-        return $this->value;
+        return $this->valueId;
     }
 
     public function traverse(RequestVisitor $visitor)

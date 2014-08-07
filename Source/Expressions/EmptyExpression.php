@@ -7,26 +7,26 @@ namespace Pinq\Expressions;
  * empty($I)
  * </code>
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class EmptyExpression extends Expression
 {
     /**
      * @var Expression
      */
-    private $valueExpression;
+    private $value;
 
     public function __construct(Expression $valueExpression)
     {
-        $this->valueExpression = $valueExpression;
+        $this->value = $valueExpression;
     }
 
     /**
      * @return Expression
      */
-    public function getValueExpression()
+    public function getValue()
     {
-        return $this->valueExpression;
+        return $this->value;
     }
 
     public function traverse(ExpressionWalker $walker)
@@ -34,50 +34,39 @@ class EmptyExpression extends Expression
         return $walker->walkEmpty($this);
     }
 
-    public function simplify()
-    {
-        $valueExpression = $this->valueExpression->simplify();
-
-        if ($valueExpression instanceof ValueExpression) {
-            $value = $valueExpression->getValue();
-
-            return Expression::value(empty($value));
-        }
-
-        return $this->update($valueExpression);
-    }
-
     /**
+     * @param Expression $value
+     *
      * @return self
      */
-    public function update(Expression $valueExpression)
+    public function update(Expression $value)
     {
-        if ($this->valueExpression === $valueExpression) {
+        if ($this->value === $value) {
             return $this;
         }
 
-        return new self($valueExpression);
+        return new self($value);
     }
 
     protected function compileCode(&$code)
     {
         $code .= 'empty(';
-        $this->valueExpression->compileCode($code);
+        $this->value->compileCode($code);
         $code .= ')';
     }
 
     public function serialize()
     {
-        return serialize($this->valueExpression);
+        return serialize($this->value);
     }
 
     public function unserialize($serialized)
     {
-        $this->valueExpression = unserialize($serialized);
+        $this->value = unserialize($serialized);
     }
 
     public function __clone()
     {
-        $this->valueExpression = clone $this->valueExpression;
+        $this->value = clone $this->value;
     }
 }

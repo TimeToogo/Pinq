@@ -2,39 +2,39 @@
 
 namespace Pinq\Queries\Requests;
 
-use Pinq\FunctionExpressionTree;
+use Pinq\Queries\Functions;
 
 /**
- * Base class for a request which optionally projects the values with
- * the supplied function
+ * Base class for a request which optionally projects the elements with
+ * the supplied function.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 abstract class ProjectionRequest extends Request
 {
     /**
-     * @var FunctionExpressionTree|null
+     * @var Functions\ElementProjection|null
      */
-    private $functionExpressionTree;
+    private $projectionFunction;
 
-    public function __construct(FunctionExpressionTree $functionExpressionTree = null)
+    public function __construct(Functions\ElementProjection $projectionFunction = null)
     {
-        $this->functionExpressionTree = $functionExpressionTree;
+        $this->projectionFunction = $projectionFunction;
     }
 
     /**
      * @return boolean
      */
-    public function hasFunctionExpressionTree()
+    public function hasProjectionFunction()
     {
-        return $this->functionExpressionTree !== null;
+        return $this->projectionFunction !== null;
     }
 
     /**
-     * @return FunctionExpressionTree|null
+     * @return Functions\ElementProjection|null
      */
-    public function getFunctionExpressionTree()
+    public function getProjectionFunction()
     {
-        return $this->functionExpressionTree;
+        return $this->projectionFunction;
     }
 }

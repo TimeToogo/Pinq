@@ -41,6 +41,7 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
             $key = 'value' . $key;
             
             $this->cache->save($key, $value);
+            $this->assertTrue($this->cache->contains($key));
             $retrievedValue = $this->cache->tryGet($key);
 
             if(is_object($value)) {
@@ -54,6 +55,17 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
     public function testThatTryingToGetNonExistentExpressionTreeReturnsNull()
     {
         $this->assertNull($this->cache->tryGet('abcde34343'));
+    }
+
+    public function testThatCacheSupportsArbitraryKeys()
+    {
+        $this->cache->save('val-~!@#$%^&*()_+3412-931|\\9rnf2{].>}{P.p[]:"?/,<>ujsdsd', true);
+
+        $this->assertTrue($this->cache->contains('val-~!@#$%^&*()_+3412-931|\\9rnf2{].>}{P.p[]:"?/,<>ujsdsd'));
+
+        $this->cache->remove('val-~!@#$%^&*()_+3412-931|\\9rnf2{].>}{P.p[]:"?/,<>ujsdsd');
+
+        $this->assertFalse($this->cache->contains('val-~!@#$%^&*()_+3412-931|\\9rnf2{].>}{P.p[]:"?/,<>ujsdsd'));
     }
 
     public function testThatRemovedValueReturnsNull()
@@ -84,10 +96,35 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
     {
         $this->cache->save('value1', true);
         $this->cache->save('value2', [1,2,3]);
-        
+
         $this->cache->clear();
 
         $this->assertNull($this->cache->tryGet('value1'));
         $this->assertNull($this->cache->tryGet('value2'));
+    }
+
+    public function testThatClearingCacheWithNamespaceOnlyRemovesEntriesWithNamespacedPrefix()
+    {
+        $this->cache->save('name-foo', true);
+        $this->cache->save('name-bar', [1,2,3]);
+        $this->cache->save('car-three', [1,2,3]);
+
+        $this->cache->clear('name');
+
+        $this->assertFalse($this->cache->contains('name-foo'));
+        $this->assertFalse($this->cache->contains('name-bar'));
+        $this->assertTrue($this->cache->contains('car-three'));
+
+        $this->cache->clear('car');
+
+        $this->assertFalse($this->cache->contains('car-three'));
+    }
+
+    public function testThatForNamespaceReturnsNamespacedCacheWithNamespacePrefix()
+    {
+        $namespacedCache = $this->cache->forNamespace('foo-bar-');
+
+        $this->assertInstanceOf('\\Pinq\\Caching\\INamespacedCacheAdapter', $namespacedCache);
+        $this->assertNotSame(false, strpos($namespacedCache->getNamespace(), 'foo-bar-'));
     }
 }

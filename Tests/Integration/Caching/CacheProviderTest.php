@@ -34,7 +34,7 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
     /**
      * @dataProvider caches
      */
-    public function testThatProviderWillReturnTheFunctionCacheWithTheCorrectInnerCache($method, $cache, $assertSameCache)
+    public function testThatProviderWillReturnTheQueryCacheWithTheCorrectInnerCache($method, $cache, $assertSameCache)
     {
         Caching\Provider::$method($cache);
         
@@ -42,7 +42,7 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
         $cacheAdapter = Caching\Provider::getCacheAdapter();
 
         $this->assertInstanceOf(
-                'Pinq\\Caching\\IFunctionCache',
+                'Pinq\\Caching\\IQueryCache',
                 $functionCache);
 
         $this->assertInstanceOf(

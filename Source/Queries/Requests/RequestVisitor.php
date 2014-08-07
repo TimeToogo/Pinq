@@ -5,18 +5,19 @@ namespace Pinq\Queries\Requests;
 use Pinq\Queries\IRequest;
 
 /**
- * The operation visitor is a utility class that will visit any
+ * The request visitor is a utility class that will visit any
  * request in a respective method.
- *
  * This is used by the query providers to as to load the
  * supplied request query
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class RequestVisitor
 {
     /**
-     * @param mixed The returned value
+     * @param \Pinq\Queries\IRequest $request
+     *
+     * @return mixed
      */
     final public function visit(IRequest $request)
     {

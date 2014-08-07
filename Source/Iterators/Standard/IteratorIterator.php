@@ -8,7 +8,7 @@ use Pinq\Iterators\IWrapperIterator;
 /**
  * Base class for wrapper iterators.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 abstract class IteratorIterator extends Iterator implements IWrapperIterator
 {
@@ -22,7 +22,7 @@ abstract class IteratorIterator extends Iterator implements IWrapperIterator
         parent::__construct();
         $this->iterator = $iterator;
     }
-    
+
     /**
      * @return IIterator
      */
@@ -30,15 +30,15 @@ abstract class IteratorIterator extends Iterator implements IWrapperIterator
     {
         return $this->iterator;
     }
-    
+
     final public function updateSourceIterator(\Traversable $sourceIterator)
     {
         $sourceIterator = IteratorScheme::adapter($sourceIterator);
-        
-        $clone = clone $this;
+
+        $clone           = clone $this;
         $clone->iterator = $sourceIterator;
         $clone->rewind();
-        
+
         return $clone;
     }
 

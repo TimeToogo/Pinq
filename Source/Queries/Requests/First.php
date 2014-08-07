@@ -5,7 +5,7 @@ namespace Pinq\Queries\Requests;
 /**
  * Request query for a the first value in the scope
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class First extends Request
 {

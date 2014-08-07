@@ -2,12 +2,10 @@
 
 namespace Pinq\Iterators\Common;
 
-use Pinq\Iterators\IOrderedMap;
-
 /**
  * Contains the common functionality for the IOrderedMap implementation.
- * 
- * @author Elliot Levin <elliot@aanet.com.au>
+ *
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 trait OrderedMap
 {
@@ -15,7 +13,7 @@ trait OrderedMap
      * @var array
      */
     protected $keys = [];
-    
+
     /**
      * @var array
      */
@@ -35,7 +33,7 @@ trait OrderedMap
      * @var int
      */
     protected $largestIntKey = -1;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -43,7 +41,7 @@ trait OrderedMap
     {
         return $this->keys;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -51,119 +49,119 @@ trait OrderedMap
     {
         return $this->values;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function map(callable $function)
     {
         $function = Functions::allowExcessiveArguments($function);
-        
+
         $clone = clone $this;
-        
-        foreach($clone->keyIdentityPositionMap as $position) {
-            $keyCopy = $this->keys[$position];
-            $valueCopy = $this->values[$position];
+
+        foreach ($clone->keyIdentityPositionMap as $position) {
+            $keyCopy                  = $this->keys[$position];
+            $valueCopy                = $this->values[$position];
             $clone->values[$position] = $function($valueCopy, $keyCopy);
         }
-        
+
         return $clone;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function walk(callable $function)
     {
         $function = Functions::allowExcessiveArguments($function);
-        
-        foreach($this->keys as $position => $key) {
+
+        foreach ($this->keys as $position => $key) {
             $function($this->values[$position], $key);
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function groupBy(callable $groupKeyFunction)
     {
         $groupedMap = new self();
-        
-        foreach($this->keyIdentityPositionMap as $identityHash => $position) {
-            $keyCopy = $key = $this->keys[$position];
+
+        foreach ($this->keyIdentityPositionMap as $identityHash => $position) {
+            $keyCopy   = $key = $this->keys[$position];
             $valueCopy = $value =& $this->values[$position];
-            
+
             $groupKey = $groupKeyFunction($valueCopy, $keyCopy);
-            
-            if($groupedMap->contains($groupKey)) {
+
+            if ($groupedMap->contains($groupKey)) {
                 $groupMap = $groupedMap->get($groupKey);
             } else {
                 $groupMap = new self();
                 $groupedMap->set($groupKey, $groupMap);
             }
-            
+
             $groupMap->setInternal($key, $value, $identityHash, true);
         }
-        
+
         return $groupedMap;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function multisort(array $orderByFunctions, array $isAscending)
     {
         $positionKeyIdentityMap = [];
-        $multisortArguments = [];
-        
-        foreach($this->keyIdentityPositionMap as $keyIdentityHash => $position) {
+        $multisortArguments     = [];
+
+        foreach ($this->keyIdentityPositionMap as $keyIdentityHash => $position) {
             $positionKeyIdentityMap['0' . $position] = $keyIdentityHash;
         }
-        
-        foreach($orderByFunctions as $key => $function) {
+
+        foreach ($orderByFunctions as $key => $function) {
             $orderByValues = [];
-            
-            foreach($this->keyIdentityPositionMap as $position) {
+
+            foreach ($this->keyIdentityPositionMap as $position) {
                 $orderByValues['0' . $position] = $function($this->values[$position], $this->keys[$position]);
             }
-            
+
             $multisortArguments[] =& $orderByValues;
             $multisortArguments[] = $isAscending[$key] ? SORT_ASC : SORT_DESC;
             $multisortArguments[] = SORT_REGULAR;
-            
+
             unset($orderByValues);
         }
-        
+
         $multisortArguments[] =& $positionKeyIdentityMap;
-        
+
         call_user_func_array('array_multisort', $multisortArguments);
-        
+
         $sortedMap = new self();
-        
+
         $newPosition = 0;
         foreach ($positionKeyIdentityMap as $stringPosition => $keyIdentityHash) {
             $originalPosition = (int)$stringPosition;
-            
+
             $sortedMap->keyIdentityPositionMap[$keyIdentityHash] = $newPosition;
-            $sortedMap->keys[$newPosition] = $this->keys[$originalPosition];
-            $sortedMap->values[$newPosition] =& $this->values[$originalPosition];
-            
+            $sortedMap->keys[$newPosition]                       = $this->keys[$originalPosition];
+            $sortedMap->values[$newPosition]                     =& $this->values[$originalPosition];
+
             $newPosition++;
         }
-        
+
         return $sortedMap;
     }
-    
+
     public function count()
     {
         return $this->length;
     }
-    
+
     private function loadLargestIntKey()
     {
         $this->largestIntKey = -1;
-        foreach($this->keys as $key) {
-            if(is_int($key) && $key > $this->largestIntKey) {
+        foreach ($this->keys as $key) {
+            if (is_int($key) && $key > $this->largestIntKey) {
                 $this->largestIntKey = $key;
             }
         }
@@ -175,8 +173,8 @@ trait OrderedMap
     public function &get($key)
     {
         $identityHash = Identity::hash($key);
-        
-        if(isset($this->keyIdentityPositionMap[$identityHash])) {
+
+        if (isset($this->keyIdentityPositionMap[$identityHash])) {
             return $this->values[$this->keyIdentityPositionMap[$identityHash]];
         } else {
             $null = null;
@@ -207,69 +205,69 @@ trait OrderedMap
     {
         $this->setInternal($key, $value, Identity::hash($key), true);
     }
-    
+
     final protected function setInternal($key, &$value, $identityHash, $reference = false)
     {
-        if(isset($this->keyIdentityPositionMap[$identityHash])) {
+        if (isset($this->keyIdentityPositionMap[$identityHash])) {
             $position = $this->keyIdentityPositionMap[$identityHash];
         } else {
-            $position = $this->length++;
+            $position                                    = $this->length++;
             $this->keyIdentityPositionMap[$identityHash] = $position;
         }
-        if(is_int($key) && $key > $this->largestIntKey) {
+        if (is_int($key) && $key > $this->largestIntKey) {
             $this->largestIntKey = $key;
         }
-        
+
         $this->keys[$position] = $key;
-        if($reference) {
+        if ($reference) {
             $this->values[$position] =& $value;
         } else {
             $this->values[$position] = $value;
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function remove($key)
     {
         $identityHash = Identity::hash($key);
-        
-        if(isset($this->keyIdentityPositionMap[$identityHash])) {
+
+        if (isset($this->keyIdentityPositionMap[$identityHash])) {
             $position = $this->keyIdentityPositionMap[$identityHash];
-            
-            unset($this->keys[$position], 
-                    $this->values[$position], 
-                    $this->keyIdentityPositionMap[$identityHash]);
-            
-            if($position !== $this->length) {
-                $this->keys = array_values($this->keys);
+
+            unset($this->keys[$position],
+            $this->values[$position],
+            $this->keyIdentityPositionMap[$identityHash]);
+
+            if ($position !== $this->length) {
+                $this->keys   = array_values($this->keys);
                 $this->values = array_values($this->values);
             }
             $this->length--;
-            
-            if($key === $this->largestIntKey) {
+
+            if ($key === $this->largestIntKey) {
                 $this->loadLargestIntKey();
             }
-            
+
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function clear()
     {
         $this->keyIdentityPositionMap = [];
-        $this->keys = [];
-        $this->values = [];
-        $this->length = 0;
-        $this->largestIntKey = -1;
+        $this->keys                   = [];
+        $this->values                 = [];
+        $this->length                 = 0;
+        $this->largestIntKey          = -1;
     }
-    
+
     public function offsetExists($offset)
     {
         return $this->contains($offset);
@@ -279,10 +277,10 @@ trait OrderedMap
     {
         return $this->get($offset);
     }
-    
+
     public function offsetSet($offset, $value)
     {
-        if($offset === null) {
+        if ($offset === null) {
             $offset = ++$this->largestIntKey;
         }
         $this->set($offset, $value);

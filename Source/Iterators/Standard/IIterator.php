@@ -4,7 +4,6 @@ namespace Pinq\Iterators\Standard;
 
 /**
  * An extended \Iterator interface for simplicity and performance:
- * 
  * Native iterator code:
  * <code>
  * $iterator->rewind();
@@ -15,7 +14,6 @@ namespace Pinq\Iterators\Standard;
  *     $iterator->next();
  * }
  * </code>
- * 
  * With Pinq extension:
  * <code>
  * $iterator->rewind();
@@ -32,22 +30,21 @@ namespace Pinq\Iterators\Standard;
  *     ...
  * }
  * </code>
- * 
- * Iterators can implement this interface while maintaining 
+ * Iterators can implement this interface while maintaining
  * compatibility with the native API.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IIterator extends \Iterator
 {
     const IITERATOR_TYPE = __CLASS__;
-    
+
     /**
      * If the current position is valid, returns an array with
-     * index zero as the key and index one as the value and advances 
-     * the iterator to the next position or returns null if the current 
+     * index zero as the key and index one as the value and advances
+     * the iterator to the next position or returns null if the current
      * position is invalid.
-     * 
+     *
      * @return array|null The element array or null if invalid position
      */
     public function fetch();

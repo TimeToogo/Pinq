@@ -7,7 +7,7 @@ use Pinq\Iterators\Common;
 /**
  * Implementation of the coalesce using generators
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class CoalesceIterator extends IteratorGenerator
 {
@@ -18,16 +18,16 @@ class CoalesceIterator extends IteratorGenerator
         parent::__construct($iterator);
         self::__constructIterator($defaultValue, $defaultKey);
     }
-    
+
     protected function &iteratorGenerator(IGenerator $iterator)
     {
         $isEmpty = true;
-        foreach($iterator as $key => &$value) {
+        foreach ($iterator as $key => &$value) {
             yield $key => $value;
             $isEmpty = false;
         }
-        
-        if($isEmpty) {
+
+        if ($isEmpty) {
             yield $this->defaultKey => $this->defaultValue;
         }
     }

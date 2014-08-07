@@ -7,12 +7,12 @@ use Pinq\Iterators\Common;
 /**
  * Implementation of the coalesce using the fetch method
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class CoalesceIterator extends IteratorIterator
 {
     use Common\CoalesceIterator;
-    
+
     /**
      * @var boolean
      */
@@ -23,16 +23,16 @@ class CoalesceIterator extends IteratorIterator
         parent::__construct($iterator);
         self::__constructIterator($defaultValue, $defaultKey);
     }
-    
+
     protected function doRewind()
     {
         parent::doRewind();
         $this->isEmpty = true;
     }
-    
+
     protected function doFetch()
     {
-        if($element = $this->iterator->fetch()) {
+        if ($element = $this->iterator->fetch()) {
             $this->isEmpty = false;
             return $element;
         } elseif ($this->isEmpty) {

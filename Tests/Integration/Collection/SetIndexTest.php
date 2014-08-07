@@ -7,7 +7,7 @@ class SetIndexTest extends CollectionTest
     /**
      * @dataProvider everything
      */
-    public function testThatSetingAnIndexWillOverrideTheElementInTheCollection(\Pinq\ICollection $collection, array $data)
+    public function testThatSettingAnIndexWillOverrideTheElementInTheCollection(\Pinq\ICollection $collection, array $data)
     {
         reset($data);
         $key = key($data);

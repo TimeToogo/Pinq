@@ -5,7 +5,7 @@ namespace Pinq\Queries\Operations;
 /**
  * Operation query for removing a range of values to the source
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class RemoveValues extends ValuesOperation
 {

@@ -42,7 +42,12 @@ abstract class ParserTest extends \Pinq\Tests\PinqTestCase
 
         $this->assertEquals(
                 $expressions,
-                $this->currentImplementation->parse(is_array($function) ? new \ReflectionMethod($function[0], $function[1]) : new \ReflectionFunction($function)));
+                $this->currentImplementation->parse($this->currentImplementation->getReflection($function))->getBodyExpressions());
+    }
+    
+    final protected function assertReturn(callable $function, O\Expression $valueExpression)
+    {
+        return $this->assertParsedAs($function, [O\Expression::returnExpression($valueExpression)]);
     }
 
     protected static function variable($name)

@@ -2,6 +2,8 @@
 
 namespace Pinq\Tests\Integration\Traversable\Complex;
 
+use Pinq\IQueryable;
+
 class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
 {
     public function oneToAHundred()
@@ -104,6 +106,9 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
             $indexedAggregates[implode(',', $value['Numbers'])] =& $value;
         }
 
+        if($traversable instanceof IQueryable) {
+            $t = 5;
+        }
         $this->assertMatches(
                 $traversable,
                 $indexedAggregates,

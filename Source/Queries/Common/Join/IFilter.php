@@ -5,11 +5,11 @@ namespace Pinq\Queries\Common\Join;
 /**
  * Interface for a join filter.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IFilter
 {
-    const ON = 0;
+    const CUSTOM   = 0;
     const EQUALITY = 1;
 
     /**

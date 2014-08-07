@@ -7,26 +7,26 @@ namespace Pinq\Expressions;
  * [1, 2, 'test' => 4]
  * </code>
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class ArrayExpression extends Expression
 {
     /**
      * @var ArrayItemExpression[]
      */
-    private $itemExpressions;
+    private $items;
 
-    public function __construct(array $itemExpressions)
+    public function __construct(array $items)
     {
-        $this->itemExpressions = $itemExpressions;
+        $this->items = self::verifyAll($items, ArrayItemExpression::getType());
     }
 
     /**
      * @return ArrayItemExpression[]
      */
-    public function getItemExpressions()
+    public function getItems()
     {
-        return $this->itemExpressions;
+        return $this->items;
     }
 
     public function traverse(ExpressionWalker $walker)
@@ -34,40 +34,18 @@ class ArrayExpression extends Expression
         return $walker->walkArray($this);
     }
 
-    public function simplify()
-    {
-        $itemExpressions = self::simplifyAll($this->itemExpressions);
-        
-        $resolvedArray = [];
-        foreach ($itemExpressions as $itemExpression) {
-            $keyExpression = $itemExpression->getKeyExpression();
-            $valueExpression = $itemExpression->getValueExpression();
-            
-            if(($keyExpression !== null && !($valueExpression instanceof ValueExpression))
-                || !($valueExpression instanceof ValueExpression)) {
-                return $this->update($itemExpressions);
-            }
-            
-            if($keyExpression === null) {
-                $resolvedArray[] = $valueExpression->getValue();
-            } else {
-                $resolvedArray[$keyExpression->getValue()] = $valueExpression->getValue();
-            }
-        }
-        
-        return Expression::value($resolvedArray);
-    }
-
     /**
+     * @param ArrayItemExpression[] $items
+     *
      * @return self
      */
-    public function update(array $itemExpressions)
+    public function update(array $items)
     {
-        if ($this->itemExpressions === $itemExpressions) {
+        if ($this->items === $items) {
             return $this;
         }
 
-        return new self($itemExpressions);
+        return new self($items);
     }
 
     protected function compileCode(&$code)
@@ -75,13 +53,13 @@ class ArrayExpression extends Expression
         $code .= '[';
         $first = true;
 
-        foreach ($this->itemExpressions as $itemExpression) {
+        foreach ($this->items as $itemExpression) {
             if ($first) {
                 $first = false;
             } else {
                 $code .= ', ';
             }
-            
+
             $itemExpression->compileCode($code);
         }
 
@@ -90,16 +68,16 @@ class ArrayExpression extends Expression
 
     public function serialize()
     {
-        return serialize([$this->itemExpressions]);
+        return serialize([$this->items]);
     }
 
     public function unserialize($serialized)
     {
-        list($this->itemExpressions) = unserialize($serialized);
+        list($this->items) = unserialize($serialized);
     }
 
     public function __clone()
     {
-        $this->itemExpressions = self::cloneAll($this->itemExpressions);
+        $this->items = self::cloneAll($this->items);
     }
 }

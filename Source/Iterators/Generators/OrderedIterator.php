@@ -8,7 +8,7 @@ use Pinq\Iterators\IOrderedIterator;
 /**
  * Implementation of the ordered iterator using generators.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class OrderedIterator extends LazyGenerator implements IOrderedIterator
 {

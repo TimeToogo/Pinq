@@ -7,8 +7,7 @@ namespace Pinq\Expressions;
  * (string)$I
  * </code>
  *
- *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class CastExpression extends Expression
 {
@@ -20,12 +19,12 @@ class CastExpression extends Expression
     /**
      * @var Expression
      */
-    private $castValueExpression;
+    private $castValue;
 
-    public function __construct($castType, Expression $castValueExpression)
+    public function __construct($castType, Expression $castValue)
     {
-        $this->castType = $castType;
-        $this->castValueExpression = $castValueExpression;
+        $this->castType  = $castType;
+        $this->castValue = $castValue;
     }
 
     /**
@@ -39,9 +38,9 @@ class CastExpression extends Expression
     /**
      * @return Expression The expression which is cast
      */
-    public function getCastValueExpression()
+    public function getCastValue()
     {
-        return $this->castValueExpression;
+        return $this->castValue;
     }
 
     public function traverse(ExpressionWalker $walker)
@@ -49,66 +48,39 @@ class CastExpression extends Expression
         return $walker->walkCast($this);
     }
 
-    public function simplify()
-    {
-        $value = $this->castValueExpression->simplify();
-
-        if ($value instanceof ValueExpression) {
-            return Expression::value(self::castValue($this->castType, $value));
-        }
-
-        return $this->update($this->castType, $value);
-    }
-
-    private static $castTypeMap = [
-        Operators\Cast::ARRAY_CAST => 'array',
-        Operators\Cast::BOOLEAN => 'bool',
-        Operators\Cast::DOUBLE => 'double',
-        Operators\Cast::INTEGER => 'int',
-        Operators\Cast::STRING => 'string',
-        Operators\Cast::OBJECT => 'object'
-    ];
-
     /**
-     * @param ValueExpression $value
-     */
-    private static function castValue($castTypeOperator, $value)
-    {
-        settype($value, self::$castTypeMap[$castTypeOperator]);
-
-        return $value;
-    }
-
-    /**
+     * @param int        $castType
+     * @param Expression $castValue
+     *
      * @return self
      */
-    public function update($castType, Expression $castValueExpression)
+    public function update($castType, Expression $castValue)
     {
-        if ($this->castType === $castType && $this->castValueExpression === $castValueExpression) {
+        if ($this->castType === $castType && $this->castValue === $castValue) {
             return $this;
         }
 
-        return new self($castType, $castValueExpression);
+        return new self($castType, $castValue);
     }
 
     protected function compileCode(&$code)
     {
         $code .= $this->castType;
-        $this->castValueExpression->compileCode($code);
+        $this->castValue->compileCode($code);
     }
 
     public function serialize()
     {
-        return serialize([$this->castType, $this->castValueExpression]);
+        return serialize([$this->castType, $this->castValue]);
     }
 
     public function unserialize($serialized)
     {
-        list($this->castType, $this->castValueExpression) = unserialize($serialized);
+        list($this->castType, $this->castValue) = unserialize($serialized);
     }
 
     public function __clone()
     {
-        $this->castValueExpression = clone $this->castValueExpression;
+        $this->castValue = clone $this->castValue;
     }
 }

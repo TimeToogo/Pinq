@@ -2,31 +2,88 @@
 
 namespace Pinq\Providers;
 
+use Pinq\Expressions as O;
 use Pinq\Queries;
+use Pinq\Queries\Builders;
 
 /**
  * Base class for the repository provider, with default functionality
  * for request and optionary query evaluation.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class RepositoryProvider extends QueryProvider implements IRepositoryProvider
+abstract class RepositoryProvider extends ProviderBase implements IRepositoryProvider
 {
-    public function createRepository(Queries\IScope $scope = null)
-    {
-        return new \Pinq\Repository($this, $scope, $this->scheme);
+    /**
+     * @var Configuration\IRepositoryConfiguration
+     */
+    protected $configuration;
+
+    /**
+     * @var IQueryProvider
+     */
+    protected $queryProvider;
+
+    /**
+     * @var Builders\IOperationQueryBuilder
+     */
+    protected $operationQueryBuilder;
+
+    public function __construct(
+            Queries\ISourceInfo $sourceInfo,
+            IQueryProvider $queryProvider,
+            Configuration\IRepositoryConfiguration $configuration = null
+    ) {
+        parent::__construct($sourceInfo, $configuration ? : new Configuration\DefaultRepositoryConfiguration());
+
+        $this->queryProvider    = $queryProvider;
+        $this->operationQueryBuilder = $this->configuration->getOperationQueryBuilder();
     }
 
-    public function execute(Queries\IOperationQuery $query)
+    final public function getQueryProvider()
     {
-        $this->loadOperationEvaluatorVisitor($query->getScope())->visit($query->getOperation());
+        return $this->queryProvider;
+    }
+
+    final public function createQueryable(O\TraversalExpression $scopeExpression = null)
+    {
+        return $this->queryProvider->createQueryable($scopeExpression);
+    }
+
+    public function createRepository(O\TraversalExpression $scopeExpression = null)
+    {
+        return new \Pinq\Repository($this, $this->sourceInfo, $scopeExpression, $this->scheme);
+    }
+
+    final public function load(O\Expression $requestExpression)
+    {
+        return $this->queryProvider->load($requestExpression);
+    }
+
+    public function execute(O\Expression $operationExpression)
+    {
+        $resolution = $this->operationQueryBuilder->resolveOperation($operationExpression);
+        $queryHash  = $resolution->getHash();
+        $query      = $this->queryCache->tryGet($queryHash);
+
+        if (!($query instanceof Queries\IOperationQuery)) {
+            $query = $this->operationQueryBuilder->parseOperation($operationExpression);
+            $this->queryCache->save($queryHash, $query);
+        }
+
+        $resolvedParameters = $query->getParameters()->resolve($resolution);
+
+        $this->executeOperation($query, $resolvedParameters);
     }
 
     /**
-     * This should be implemented such that it returns an operation visitor
-     * which will execute the supplied operation query
+     * @param \Pinq\Queries\IOperationQuery            $operation
+     * @param \Pinq\Queries\IResolvedParameterRegistry $resolvedParameters
      *
-     * @return Queries\Operations\OperationVisitor
+     * @return void
      */
-    abstract protected function loadOperationEvaluatorVisitor(Queries\IScope $scope);
+    abstract protected function executeOperation(
+            Queries\IOperationQuery $operation,
+            Queries\IResolvedParameterRegistry $resolvedParameters
+    );
 }

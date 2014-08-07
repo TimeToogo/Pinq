@@ -6,28 +6,27 @@ namespace Pinq\Expressions;
  * <code>
  * $I[5]
  * </code>
- *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class IndexExpression extends TraversalExpression
 {
     /**
      * @var Expression
      */
-    private $indexExpression;
+    private $index;
 
-    public function __construct(Expression $valueExpression, Expression $indexExpression)
+    public function __construct(Expression $value, Expression $index)
     {
-        parent::__construct($valueExpression);
-        $this->indexExpression = $indexExpression;
+        parent::__construct($value);
+        $this->index = $index;
     }
 
     /**
      * @return Expression
      */
-    public function getIndexExpression()
+    public function getIndex()
     {
-        return $this->indexExpression;
+        return $this->index;
     }
 
     public function traverse(ExpressionWalker $walker)
@@ -35,59 +34,47 @@ class IndexExpression extends TraversalExpression
         return $walker->walkIndex($this);
     }
 
-    public function simplify()
-    {
-        $valueExpression = $this->valueExpression->simplify();
-        $indexExpression = $this->indexExpression->simplify();
-
-        if ($valueExpression instanceof ValueExpression && $indexExpression instanceof ValueExpression) {
-            $value = $valueExpression->getValue();
-            $index = $indexExpression->getValue();
-
-            return Expression::value($value[$index]);
-        }
-
-        return $this->update($valueExpression, $this->indexExpression);
-    }
-
     /**
+     * @param Expression $value
+     * @param Expression $index
+     *
      * @return self
      */
-    public function update(Expression $valueExpression, Expression $indexExpression)
+    public function update(Expression $value, Expression $index)
     {
-        if ($this->valueExpression === $valueExpression && $this->indexExpression === $indexExpression) {
+        if ($this->value === $value && $this->index === $index) {
             return $this;
         }
 
-        return new self($valueExpression, $indexExpression);
+        return new self($value, $index);
     }
 
-    protected function updateValueExpression(Expression $valueExpression)
+    protected function updateValueExpression(Expression $value)
     {
-        return new self($valueExpression, $this->indexExpression);
+        return new self($value, $this->index);
     }
 
     protected function compileCode(&$code)
     {
-        $this->valueExpression->compileCode($code);
+        $this->value->compileCode($code);
         $code .= '[';
-        $this->indexExpression->compileCode($code);
+        $this->index->compileCode($code);
         $code .= ']';
     }
 
     public function dataToSerialize()
     {
-        return $this->indexExpression;
+        return $this->index;
     }
 
-    public function unserializedData($data)
+    public function unserializeData($data)
     {
-        $this->indexExpression = $data;
+        $this->index = $data;
     }
 
     public function __clone()
     {
-        $this->valueExpression = clone $this->valueExpression;
-        $this->indexExpression = clone $this->indexExpression;
+        $this->value = clone $this->value;
+        $this->index = clone $this->index;
     }
 }

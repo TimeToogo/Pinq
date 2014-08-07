@@ -2,68 +2,65 @@
 
 namespace Pinq\Providers\Traversable;
 
+use Pinq\ITraversable;
+use Pinq\Queries;
 use Pinq\Queries\Common;
 use Pinq\Queries\Segments;
 
 /**
  * Evaluates the query scope against the supplied traversable
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class ScopeEvaluator extends Segments\SegmentVisitor
 {
     /**
-     * @var \Pinq\ITraversable
+     * @var ITraversable
      */
     protected $traversable;
-    
-    public function __construct(\Pinq\ITraversable $traversable = null)
-    {
-        $this->traversable = $traversable;
-    }
-    
-    final public function setTraversable(\Pinq\ITraversable $traversable)
-    {
-        $this->traversable = $traversable;
-    }
-    
-    public static function evaluate(\Pinq\ITraversable $traversable, \Pinq\Queries\IScope $scope)
-    {
-        $evaluator = new self($traversable);
-        $evaluator->walk($scope);
-        
-        return $evaluator->traversable;
-    }
-    
+
     /**
-     * @return \Pinq\ITraversable
+     * @var Queries\IResolvedParameterRegistry
      */
-    public function getTraversable()
-    {
-        return $this->traversable;
+    protected $resolvedParameters;
+
+    private function __construct(
+            ITraversable $traversable,
+            Queries\IResolvedParameterRegistry $resolvedParameters
+    ) {
+        $this->originalTraversable = $traversable;
+        $this->traversable         = $traversable;
+        $this->resolvedParameters  = $resolvedParameters;
     }
 
     public function visitFilter(Segments\Filter $query)
     {
-        $this->traversable = $this->traversable->where($query->getFunctionExpressionTree());
+        $this->traversable = $this->traversable->where(
+                $this->resolvedParameters[$query->getProjectionFunction()->getCallableId()]
+        );
     }
 
     public function visitRange(Segments\Range $query)
     {
         $this->traversable =
                 $this->traversable->slice(
-                        $query->getRangeStart(),
-                        $query->getRangeAmount());
+                        $this->resolvedParameters[$query->getStartId()],
+                        $this->resolvedParameters[$query->getAmountId()]
+                );
     }
 
     public function visitSelect(Segments\Select $query)
     {
-        $this->traversable = $this->traversable->select($query->getFunctionExpressionTree());
+        $this->traversable = $this->traversable->select(
+                $this->resolvedParameters[$query->getProjectionFunction()->getCallableId()]
+        );
     }
 
     public function visitSelectMany(Segments\SelectMany $query)
     {
-        $this->traversable = $this->traversable->selectMany($query->getFunctionExpressionTree());
+        $this->traversable = $this->traversable->selectMany(
+                $this->resolvedParameters[$query->getProjectionFunction()->getCallableId()]
+        );
     }
 
     public function visitUnique(Segments\Unique $query)
@@ -75,88 +72,133 @@ class ScopeEvaluator extends Segments\SegmentVisitor
     {
         $first = true;
 
-        foreach ($query->getOrderFunctions() as $orderFunction) {
-            $direction = $orderFunction->isAscending() ? \Pinq\Direction::ASCENDING : \Pinq\Direction::DESCENDING;
+        foreach ($query->getOrderings() as $orderFunction) {
+            $direction = $this->resolvedParameters[$orderFunction->getIsAscendingId(
+            )] ? \Pinq\Direction::ASCENDING : \Pinq\Direction::DESCENDING;
 
             if ($first) {
-                $this->traversable = $this->traversable->orderBy($orderFunction->getFunctionExpressionTree(), $direction);
-                $first = false;
+                $this->traversable = $this->traversable->orderBy(
+                        $this->resolvedParameters[$orderFunction->getProjectionFunction()->getCallableId()],
+                        $direction
+                );
+                $first             = false;
             } else {
-                $this->traversable = $this->traversable->thenBy($orderFunction->getFunctionExpressionTree(), $direction);
+                $this->traversable = $this->traversable->thenBy(
+                        $this->resolvedParameters[$orderFunction->getProjectionFunction()->getCallableId()],
+                        $direction
+                );
             }
         }
     }
 
     public function visitGroupBy(Segments\GroupBy $query)
     {
-        $first = true;
-
-        foreach ($query->getFunctionExpressionTrees() as $functionExpressionTree) {
-            $this->traversable = $first ? $this->traversable->groupBy($functionExpressionTree) : $this->traversable->andBy($functionExpressionTree);
-
-            if ($first) {
-                $first = false;
-            }
-        }
-    }
-    
-    /**
-     * Evaluates the join segment values and filter upon the supplied traversable.
-     * 
-     * @param \Pinq\ITraversable $traversable
-     * @param Common\Join\Base $join
-     * @return \Pinq\Interfaces\IJoiningToTraversable
-     */
-    public static function evaluateJoin(\Pinq\ITraversable $traversable, Common\Join\Base $join)
-    {
-        $joiningTraversable = $join->isGroupJoin() ? 
-                $traversable->groupJoin($join->getValues()) : $traversable->join($join->getValues());
-        
-        if($join->hasFilter()) {
-            $filter = $join->getFilter();
-            
-            if($filter instanceof Common\Join\Filter\On) {
-                $joiningTraversable = $joiningTraversable->on($filter->getOnFunctionExpressionTree());
-            } elseif ($filter instanceof Common\Join\Filter\Equality) {
-                $joiningTraversable = $joiningTraversable->onEquality(
-                        $filter->getOuterKeyFunctionExpressionTree(), 
-                        $filter->getInnerKeyFunctionExpressionTree());
-            }
-        }
-        
-        if($join->hasDefault()) {
-            $joiningTraversable = $joiningTraversable->withDefault(
-                    $join->getDefaultValue(), 
-                    $join->getDefaultKey());
-        }
-        
-        return $joiningTraversable;
+        $this->traversable = $this->traversable->groupBy(
+                $this->resolvedParameters[$query->getProjectionFunction()->getCallableId()]
+        );
     }
 
     public function visitJoin(Segments\Join $query)
     {
-        $this->traversable = self::evaluateJoin($this->traversable, $query)
-                ->to($query->getJoiningFunctionExpressionTree());
+        $this->traversable = self::evaluateJoinOptions(
+                $this->traversable,
+                $query->getOptions(),
+                $this->resolvedParameters
+        )
+                ->to($this->resolvedParameters[$query->getJoiningFunction()->getCallableId()]);
     }
 
-    protected function visitIndexBy(Segments\IndexBy $query)
-    {
-        $this->traversable = $this->traversable->indexBy($query->getFunctionExpressionTree());
+    /**
+     * Evaluates the join segment values and filter upon the supplied traversable.
+     *
+     * @param \Pinq\ITraversable                 $traversable
+     * @param Common\Join\Options                $join
+     * @param Queries\IResolvedParameterRegistry $resolvedParameters
+     *
+     * @return \Pinq\Interfaces\IJoiningToTraversable
+     */
+    public static function evaluateJoinOptions(
+            \Pinq\ITraversable $traversable,
+            Common\Join\Options $join,
+            Queries\IResolvedParameterRegistry $resolvedParameters
+    ) {
+        $values             = self::evaluateSource($join->getSource(), $resolvedParameters);
+        $joiningTraversable = $join->isGroupJoin() ? $traversable->groupJoin($values) : $traversable->join($values);
+
+        if ($join->hasFilter()) {
+            $filter = $join->getFilter();
+
+            if ($filter instanceof Common\Join\Filter\Custom) {
+                $joiningTraversable = $joiningTraversable->on(
+                        $resolvedParameters[$filter->getOnFunction()->getCallableId()]
+                );
+            } elseif ($filter instanceof Common\Join\Filter\Equality) {
+                $joiningTraversable = $joiningTraversable->onEquality(
+                        $resolvedParameters[$filter->getOuterKeyFunction()->getCallableId()],
+                        $resolvedParameters[$filter->getInnerKeyFunction()->getCallableId()]
+                );
+            }
+        }
+
+        if ($join->hasDefault()) {
+            $joiningTraversable = $joiningTraversable->withDefault(
+                    $resolvedParameters[$join->getDefaultValueId()],
+                    $resolvedParameters[$join->getDefaultKeyId()]
+            );
+        }
+
+        return $joiningTraversable;
     }
-    
-    protected function visitKeys(Segments\Keys $query)
+
+    public static function evaluateSource(
+            Common\ISource $source,
+            Queries\IResolvedParameterRegistry $resolvedParameters
+    ) {
+        if ($source instanceof Common\Source\ArrayOrIterator) {
+            return $resolvedParameters[$source->getId()];
+        } elseif ($source instanceof Common\Source\QueryScope) {
+            return self::evaluate($source->getScope(), $resolvedParameters);
+        }
+    }
+
+    public static function evaluate(
+            Queries\IScope $scope,
+            Queries\IResolvedParameterRegistry $resolvedParameters
+    ) {
+        $sourceInfo = $scope->getSourceInfo();
+        if (!($sourceInfo instanceof SourceInfo)) {
+            throw new \Pinq\PinqException(
+                    'Incompatible query source: expecting source info of type %s, %s given',
+                    SourceInfo::SOURCE_INFO_TYPE,
+                    get_class($sourceInfo));
+        }
+
+        $evaluator = new self($sourceInfo->getTraversable(), $resolvedParameters);
+        $evaluator->visit($scope);
+
+        return $evaluator->traversable;
+    }
+
+    public function visitIndexBy(Segments\IndexBy $query)
+    {
+        $this->traversable = $this->traversable->indexBy(
+                $this->resolvedParameters[$query->getProjectionFunction()->getCallableId()]
+        );
+    }
+
+    public function visitKeys(Segments\Keys $query)
     {
         $this->traversable = $this->traversable->keys();
     }
-    
-    protected function visitReindex(Segments\Reindex $query)
+
+    public function visitReindex(Segments\Reindex $query)
     {
         $this->traversable = $this->traversable->reindex();
     }
 
     public function visitOperation(Segments\Operation $query)
     {
-        $otherValues = $query->getValues();
+        $otherValues = self::evaluateSource($query->getSource(), $this->resolvedParameters);
         switch ($query->getOperationType()) {
 
             case Segments\Operation::UNION:

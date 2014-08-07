@@ -5,7 +5,7 @@ namespace Pinq;
 /**
  * General utility class providing common and misc behaviour
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 final class Utilities
 {
@@ -18,6 +18,7 @@ final class Utilities
      * Returns the type or class of the supplied function
      *
      * @param mixed $value The value
+     *
      * @return string The type or class
      */
     public static function getTypeOrClass($value)
@@ -29,6 +30,7 @@ final class Utilities
      * Returns whether the value is iterable
      *
      * @param mixed $value The value
+     *
      * @return boolean Whether the value is iterable
      */
     public static function isIterable($value)

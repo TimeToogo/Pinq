@@ -5,7 +5,7 @@ namespace Pinq;
 /**
  * Enum for ordering direction
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 final class Direction
 {
@@ -14,6 +14,6 @@ final class Direction
 
     }
 
-    const ASCENDING = SORT_ASC;
-    const DESCENDING = SORT_DESC;
+    const ASCENDING  = \SORT_ASC;
+    const DESCENDING = \SORT_DESC;
 }

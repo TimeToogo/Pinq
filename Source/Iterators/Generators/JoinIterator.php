@@ -8,12 +8,12 @@ use Pinq\Iterators\IJoinToIterator;
 /**
  * Implementation of the join iterator using generators.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 abstract class JoinIterator extends IteratorGenerator implements IJoinToIterator
 {
     use Common\JoinIterator;
-    
+
     /**
      * @var IGenerator
      */
@@ -31,33 +31,33 @@ abstract class JoinIterator extends IteratorGenerator implements IJoinToIterator
         $this->outerIterator =& $this->iterator;
         $this->innerIterator = $innerIterator;
     }
-    
+
     public function walk(callable $function)
     {
-        foreach($this->outerIterator as $outerKey => &$outerValue) {
-            foreach($this->innerGenerator($outerKey, $outerValue) as $innerKey => &$innerValue) {
+        foreach ($this->outerIterator as $outerKey => &$outerValue) {
+            foreach ($this->innerGenerator($outerKey, $outerValue) as $innerKey => &$innerValue) {
                 $function($outerValue, $innerValue, $outerKey, $innerKey);
             }
         }
     }
-    
+
     final protected function &iteratorGenerator(IGenerator $iterator)
     {
         $projectionFunction = $this->projectionFunction;
-        $count = 0;
-        
-        foreach($this->outerIterator as $outerKey => $outerValue) {
-            foreach($this->innerGenerator($outerKey, $outerValue) as $innerKey => $innerValue) {
+        $count              = 0;
+
+        foreach ($this->outerIterator as $outerKey => $outerValue) {
+            foreach ($this->innerGenerator($outerKey, $outerValue) as $innerKey => $innerValue) {
                 $value = $projectionFunction($outerValue, $innerValue, $outerKey, $innerKey);
                 yield $count++ => $value;
                 unset($value);
             }
         }
     }
-    
+
     final protected function defaultIterator(IGenerator $iterator)
     {
-        return $this->hasDefault ? 
+        return $this->hasDefault ?
                 new CoalesceIterator($iterator, $this->defaultValue, $this->defaultKey) : $iterator;
     }
 

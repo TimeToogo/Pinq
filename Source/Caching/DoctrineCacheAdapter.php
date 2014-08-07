@@ -5,12 +5,12 @@ namespace Pinq\Caching;
 use Doctrine\Common\Cache\Cache;
 
 /**
- * Adapter class for a doctring cache component that implements
+ * Adapter class for a doctrine cache component that implements
  * \Doctrine\Common\Cache\Cache
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class DoctrineCacheAdapter implements ICacheAdapter
+class DoctrineCacheAdapter extends CacheAdapter
 {
     /**
      * The doctrine cache implementation
@@ -31,9 +31,7 @@ class DoctrineCacheAdapter implements ICacheAdapter
 
     public function tryGet($key)
     {
-        $result = $this->doctrineCache->fetch($key);
-
-        return $result === false ? null : $result;
+        return $this->doctrineCache->contains($key) ? $this->doctrineCache->fetch($key) : null;
     }
 
     public function contains($key)
@@ -45,11 +43,16 @@ class DoctrineCacheAdapter implements ICacheAdapter
     {
         $this->doctrineCache->delete($key);
     }
-    
-    public function clear()
+
+    public function clear($namespace = null)
     {
-        if ($this->doctrineCache instanceof \Doctrine\Common\Cache\CacheProvider) {
+        if ($this->doctrineCache instanceof \Doctrine\Common\Cache\CacheProvider && $namespace === null) {
             $this->doctrineCache->deleteAll();
+        } else {
+            throw new \Pinq\PinqException(
+                    'Cannot clear cache %s: cache does not support %s',
+                    get_class($this->doctrineCache),
+                    $namespace === null ? ' clearing.' : ' namespaced clearing.');
         }
     }
 

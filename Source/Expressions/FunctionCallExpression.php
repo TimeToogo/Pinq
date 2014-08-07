@@ -7,40 +7,40 @@ namespace Pinq\Expressions;
  * strlen($I)
  * </code>
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class FunctionCallExpression extends Expression
 {
     /**
      * @var Expression
      */
-    private $nameExpression;
+    private $name;
 
     /**
      * @var Expression[]
      */
-    private $argumentExpressions;
+    private $arguments;
 
     public function __construct(Expression $nameExpression, array $argumentExpressions = [])
     {
-        $this->nameExpression = $nameExpression;
-        $this->argumentExpressions = $argumentExpressions;
+        $this->name      = $nameExpression;
+        $this->arguments = self::verifyAll($argumentExpressions);
     }
 
     /**
      * @return Expression
      */
-    public function getNameExpression()
+    public function getName()
     {
-        return $this->nameExpression;
+        return $this->name;
     }
 
     /**
      * @return Expression[]
      */
-    public function getArgumentExpressions()
+    public function getArguments()
     {
-        return $this->argumentExpressions;
+        return $this->arguments;
     }
 
     public function traverse(ExpressionWalker $walker)
@@ -48,52 +48,49 @@ class FunctionCallExpression extends Expression
         return $walker->walkFunctionCall($this);
     }
 
-    public function simplify()
-    {
-        //TODO: Add a whitelist of deteministic and side-effect free functions.
-        return $this->update(
-                $this->nameExpression->simplify(),
-                self::simplifyAll($this->argumentExpressions));
-    }
-
     /**
+     * @param Expression   $name
+     * @param Expression[] $arguments
+     *
      * @return self
      */
-    public function update(Expression $nameExpression, array $argumentExpressions = [])
+    public function update(Expression $name, array $arguments = [])
     {
-        if ($this->nameExpression === $nameExpression && $this->argumentExpressions === $argumentExpressions) {
+        if ($this->name === $name
+                && $this->arguments === $arguments
+        ) {
             return $this;
         }
 
-        return new self($nameExpression, $argumentExpressions);
+        return new self($name, $arguments);
     }
 
     protected function compileCode(&$code)
     {
-        if ($this->nameExpression instanceof ValueExpression) {
-            $code .= $this->nameExpression->getValue();
+        if ($this->name instanceof ValueExpression) {
+            $code .= $this->name->getValue();
         } else {
-            $this->nameExpression->compileCode($code);
+            $this->name->compileCode($code);
         }
 
         $code .= '(';
-        $code .= implode(',', self::compileAll($this->argumentExpressions));
+        $code .= implode(',', self::compileAll($this->arguments));
         $code .= ')';
     }
 
     public function serialize()
     {
-        return serialize([$this->nameExpression, $this->argumentExpressions]);
+        return serialize([$this->name, $this->arguments]);
     }
 
     public function unserialize($serialized)
     {
-        list($this->nameExpression, $this->argumentExpressions) = unserialize($serialized);
+        list($this->name, $this->arguments) = unserialize($serialized);
     }
 
     public function __clone()
     {
-        $this->nameExpression = clone $this->nameExpression;
-        $this->argumentExpressions = self::cloneAll($this->argumentExpressions);
+        $this->name      = clone $this->name;
+        $this->arguments = self::cloneAll($this->arguments);
     }
 }

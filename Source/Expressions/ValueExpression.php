@@ -7,7 +7,7 @@ namespace Pinq\Expressions;
  * 1, 'foo', [], null etc
  * </code>
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class ValueExpression extends Expression
 {
@@ -22,7 +22,7 @@ class ValueExpression extends Expression
     }
 
     /**
-     * @return mixed The resolved value
+     * @return mixed
      */
     public function getValue()
     {
@@ -34,12 +34,9 @@ class ValueExpression extends Expression
         return $walker->walkValue($this);
     }
 
-    public function simplify()
-    {
-        return $this;
-    }
-
     /**
+     * @param mixed $value
+     *
      * @return self
      */
     public function update($value)
@@ -53,23 +50,27 @@ class ValueExpression extends Expression
 
     protected function compileCode(&$code)
     {
-        if (is_scalar($this->value) || is_array($this->value) || is_object($this->value) && method_exists($this->value, '__set_state')) {
+        if (is_scalar($this->value)
+                || $this->value === null
+                || is_array($this->value)
+                || is_object($this->value) && method_exists($this->value, '__set_state')
+        ) {
             $code .= var_export($this->value, true);
         } elseif ($this->value instanceof \Closure) {
             throw new \Pinq\PinqException('Cannot compile value expression: value of type \\Closure cannot be serialzed');
         } else {
-            $code .= 'unserialize(\'' . serialize($this->value) . '\')';
+            $code .= 'unserialize(' . var_export(serialize($this->value), true) . ')';
         }
     }
 
     public function serialize()
     {
-        return serialize($this->value);
+        return serialize([$this->value]);
     }
 
     public function unserialize($serialized)
     {
-        $this->value = unserialize($serialized);
+        list($this->value) = unserialize($serialized);
     }
 
     public function __clone()

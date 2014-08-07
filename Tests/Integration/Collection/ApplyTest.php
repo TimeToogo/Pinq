@@ -52,4 +52,29 @@ class ApplyTest extends CollectionTest
             100
         ]);
     }
+    
+    public function arraysOfString()
+    {
+        return $this->getImplementations([
+            ['d', 'b', 'q', 'l'],
+            ['a', 'c', 'd', 'a'],
+            ['d', 'd', 'f', 'q'],
+            ['t', 'a', 'v', 'm'],
+        ]);
+    }
+
+    /**
+     * @dataProvider arraysOfString
+     */
+    public function testThatCollectionApplyWorks(\Pinq\ICollection $collection, array $data)
+    {
+        $collection->apply(function (&$i) { sort($i); });
+        
+        $this->assertMatches($collection, [
+            ['b', 'd', 'l', 'q'],
+            ['a', 'a', 'c', 'd'],
+            ['d', 'd', 'f', 'q'],
+            ['a', 'm', 't', 'v'],
+        ]);
+    }
 }

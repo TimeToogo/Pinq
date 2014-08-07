@@ -6,19 +6,18 @@ namespace Pinq\Expressions;
  * <code>
  * $I
  * </code>
- *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class VariableExpression extends Expression
 {
     /**
      * @var Expression
      */
-    private $nameExpression;
+    private $name;
 
-    public function __construct(Expression $nameExpression)
+    public function __construct(Expression $name)
     {
-        $this->nameExpression = $nameExpression;
+        $this->name = $name;
     }
 
     public function traverse(ExpressionWalker $walker)
@@ -26,51 +25,51 @@ class VariableExpression extends Expression
         return $walker->walkVariable($this);
     }
 
-    public function simplify()
-    {
-        return $this->update($this->nameExpression->simplify());
-    }
-
     /**
      * @return Expression
      */
-    public function getNameExpression()
+    public function getName()
     {
-        return $this->nameExpression;
+        return $this->name;
     }
 
-    public function update(Expression $nameExpression)
+    /**
+     * @param Expression $name
+     *
+     * @return self
+     */
+    public function update(Expression $name)
     {
-        if ($this->nameExpression === $nameExpression) {
+        if ($this->name === $name) {
             return $this;
         }
 
-        return new self($nameExpression);
+        return new self($name);
     }
 
     protected function compileCode(&$code)
     {
-        if ($this->nameExpression instanceof ValueExpression && self::isNormalSyntaxName($this->nameExpression->getValue())) {
-            $code .= '$' . $this->nameExpression->getValue();
+        if ($this->name instanceof ValueExpression && self::isNormalSyntaxName($this->name->getValue())) {
+            $code .= '$' . $this->name->getValue();
         } else {
             $code .= '${';
-            $this->nameExpression->compileCode($code);
+            $this->name->compileCode($code);
             $code .= '}';
         }
     }
 
     public function serialize()
     {
-        return serialize($this->nameExpression);
+        return serialize($this->name);
     }
 
     public function unserialize($serialized)
     {
-        $this->nameExpression = unserialize($serialized);
+        $this->name = unserialize($serialized);
     }
 
     public function __clone()
     {
-        $this->nameExpression = clone $this->nameExpression;
+        $this->name = clone $this->name;
     }
 }

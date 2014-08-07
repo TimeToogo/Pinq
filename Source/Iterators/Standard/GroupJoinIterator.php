@@ -7,7 +7,7 @@ use Pinq\Iterators\Common;
 /**
  * Implementation of the join iterator using the fetch method.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 abstract class GroupJoinIterator extends JoinIterator
 {

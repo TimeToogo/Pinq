@@ -6,9 +6,9 @@ namespace Pinq\Caching;
  * Cache implementation for storing the serialized expression trees
  * in a single file in a csv format, not very good for concurrency
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class CSVFileCache implements ICacheAdapter
+class CSVFileCache extends CacheAdapter
 {
     const CSV_DELIMITER = ',';
     const CSV_SEPERATOR = '|';
@@ -46,6 +46,21 @@ class CSVFileCache implements ICacheAdapter
         $this->fileName = $fileName;
     }
 
+    public function save($key, $value)
+    {
+        $fileData        =& $this->getFileData();
+        $serializedValue = serialize($value);
+
+        if (isset($fileData[$key])) {
+            if ($fileData[$key] === $serializedValue) {
+                return;
+            }
+        }
+
+        $fileData[$key] = $serializedValue;
+        $this->flushFileData();
+    }
+
     private function &getFileData()
     {
         if ($this->fileData === null) {
@@ -64,26 +79,27 @@ class CSVFileCache implements ICacheAdapter
         return $this->fileData;
     }
 
-    public function save($key, $value)
+    private function flushFileData()
     {
-        $fileData =& $this->getFileData();
-        $serializedValue = serialize($value);
+        $fileHandle = $this->fileHandle;
 
-        if (isset($fileData[$key])) {
-            if ($fileData[$key] === $serializedValue) {
-                return;
+        if ($fileHandle->flock(LOCK_EX)) {
+            $fileHandle->fseek(0, SEEK_SET);
+            $fileHandle->ftruncate(0);
+
+            foreach ($this->getFileData() as $signature => $serializedValue) {
+                $fileHandle->fputcsv([$signature, $serializedValue]);
             }
-        }
 
-        $fileData[$key] = $serializedValue;
-        $this->flushFileData();
+            $fileHandle->flock(LOCK_UN);
+        }
     }
-    
+
     public function contains($key)
     {
         $fileData = $this->getFileData();
 
-        return isset($fileData[$key]);
+        return array_key_exists($key, $fileData);
     }
 
     public function tryGet($key)
@@ -109,26 +125,20 @@ class CSVFileCache implements ICacheAdapter
         $this->flushFileData();
     }
 
-    public function clear()
+    public function clear($namespace = null)
     {
-        $this->fileData = [];
-        $this->flushFileData();
-    }
-
-    private function flushFileData()
-    {
-        $fileHandle = $this->fileHandle;
-
-        if ($fileHandle->flock(LOCK_EX)) {
-            $fileHandle->fseek(0, SEEK_SET);
-            $fileHandle->ftruncate(0);
-
-            foreach ($this->getFileData() as $signature => $serializedValue) {
-                $fileHandle->fputcsv([$signature, $serializedValue]);
+        if ($namespace === null) {
+            $this->fileData = [];
+        } else {
+            $fileData =&  $this->getFileData();
+            foreach ($fileData as $key => $value) {
+                if (strpos($key, $namespace) === 0) {
+                    unset($fileData[$key]);
+                }
             }
-
-            $fileHandle->flock(LOCK_UN);
         }
+
+        $this->flushFileData();
     }
 
     public function __destruct()

@@ -8,16 +8,16 @@ use Pinq\Iterators\IJoinIterator;
 /**
  * Implementation of the join iterator using generators.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class UnfilteredGroupJoinIterator extends GroupJoinIterator implements IJoinIterator
 {
     public function filterOn(callable $function)
     {
         return new GroupJoinOnIterator(
-                $this->outerIterator, 
-                $this->innerIterator, 
-                $this->traversableFactory, 
+                $this->outerIterator,
+                $this->innerIterator,
+                $this->traversableFactory,
                 $function);
     }
 
@@ -25,17 +25,17 @@ class UnfilteredGroupJoinIterator extends GroupJoinIterator implements IJoinIter
     {
         return new GroupJoinOnEqualityIterator(
                 $this->outerIterator,
-                $this->innerIterator, 
+                $this->innerIterator,
                 $this->traversableFactory,
-                $outerKeyFunction, 
+                $outerKeyFunction,
                 $innerKeyFunction);
     }
-    
+
     protected function innerGenerator($outerKey, $outerValue)
     {
         $traversableFactory = $this->traversableFactory;
-        $innerGroup = $traversableFactory(new OrderedMap($this->defaultIterator($this->innerIterator)));
-        
+        $innerGroup         = $traversableFactory(new OrderedMap($this->defaultIterator($this->innerIterator)));
+
         return new ArrayIterator([0 => $innerGroup]);
     }
 }

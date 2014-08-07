@@ -2,13 +2,10 @@
 
 namespace Pinq\Iterators\Common;
 
-use Pinq\Iterators\ISet;
-use Pinq\Iterators\IOrderedMap;
-
 /**
  * Contains the common functionality for a ISet implementation
- * 
- * @author Elliot Levin <elliot@aanet.com.au>
+ *
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 trait Set
 {
@@ -18,15 +15,15 @@ trait Set
      * @var array
      */
     protected $values = [];
-    
+
     /**
      * The amount of values in the set.
      *
      * @var int
      */
     protected $length = 0;
-    
-    
+
+
     public function count()
     {
         return $this->length;
@@ -63,11 +60,11 @@ trait Set
     public function addRef(&$value)
     {
         $identityHash = Identity::hash($value);
-        
-        if(isset($this->values[$identityHash]) || array_key_exists($identityHash, $this->values)) {
+
+        if (isset($this->values[$identityHash]) || array_key_exists($identityHash, $this->values)) {
             return false;
         }
-        
+
         $this->values[$identityHash] =& $value;
         $this->length++;
         return true;
@@ -79,11 +76,11 @@ trait Set
     public function remove($value)
     {
         $identityHash = Identity::hash($value);
-        
-        if(!isset($this->values[$identityHash]) && !array_key_exists($identityHash, $this->values)) {
+
+        if (!isset($this->values[$identityHash]) && !array_key_exists($identityHash, $this->values)) {
             return false;
         }
-        
+
         unset($this->values[$identityHash]);
         $this->length--;
         return true;

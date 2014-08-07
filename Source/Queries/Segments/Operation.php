@@ -2,19 +2,22 @@
 
 namespace Pinq\Queries\Segments;
 
+use Pinq\Queries;
+use Pinq\Queries\Common;
+
 /**
- * Query segment for a set/range operation
+ * Query segment for a set/multiset operation
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class Operation extends Segment
 {
-    const UNION = 1;
-    const INTERSECT = 2;
+    const UNION      = 1;
+    const INTERSECT  = 2;
     const DIFFERENCE = 3;
-    const APPEND = 4;
-    const WHERE_IN = 5;
-    const EXCEPT = 6;
+    const APPEND     = 4;
+    const WHERE_IN   = 5;
+    const EXCEPT     = 6;
 
     /**
      * @var int
@@ -22,44 +25,44 @@ class Operation extends Segment
     private $operationType;
 
     /**
-     * @var \Traversable|array
+     * @var Common\ISource
      */
-    private $values;
+    private $source;
 
-    public function __construct($operationType, $values)
+    public function __construct($operationType, Common\ISource $source)
     {
-        if (!\Pinq\Utilities::isIterable($values)) {
-            throw \Pinq\PinqException::invalidIterable(__METHOD__, $values);
-        }
-
         if (!self::isValid($operationType)) {
             throw new \Pinq\PinqException('Invalid operation type');
         }
 
         $this->operationType = $operationType;
-        $this->values = $values;
+        $this->source        = $source;
     }
 
     final public static function isValid($operationType)
     {
-        return in_array($operationType, [
-            self::UNION,
-            self::INTERSECT,
-            self::DIFFERENCE,
-            self::APPEND,
-            self::WHERE_IN,
-            self::EXCEPT
-        ]);
+        return in_array(
+                $operationType,
+                [
+                        self::UNION,
+                        self::INTERSECT,
+                        self::DIFFERENCE,
+                        self::APPEND,
+                        self::WHERE_IN,
+                        self::EXCEPT
+                ],
+                true
+        );
     }
 
     public function getType()
     {
-        return self::OPERATE;
+        return self::OPERATION;
     }
 
-    public function traverse(SegmentWalker $walker)
+    public function traverse(SegmentVisitor $visitor)
     {
-        return $walker->walkOperation($this);
+        return $visitor->visitOperation($this);
     }
 
     /**
@@ -71,10 +74,19 @@ class Operation extends Segment
     }
 
     /**
-     * @return \Traversable|array
+     * @return Common\ISource
      */
-    public function getValues()
+    public function getSource()
     {
-        return $this->values;
+        return $this->source;
+    }
+
+    public function update($operationType, Common\ISource $source)
+    {
+        if ($this->operationType === $operationType && $this->source === $source) {
+            return $this;
+        }
+
+        return new self($operationType, $source);
     }
 }

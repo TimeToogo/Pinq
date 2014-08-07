@@ -8,25 +8,25 @@ use Pinq\Interfaces\IOrderedRepository;
 /**
  * The repository provides the mutable collection API on a queryable.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IRepository extends IQueryable, ICollection
 {
     const IREPOSITORY_TYPE = __CLASS__;
-    
+
     /**
      * The repository provider for the implementation.
      *
      * @return Providers\IRepositoryProvider
      */
     public function getProvider();
-    
+
     /**
      * {@inheritDoc}
      * @return IRepository
      */
     public function getSource();
-    
+
     /**
      * {@inheritDoc}
      * @return IRepository

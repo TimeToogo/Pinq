@@ -7,7 +7,7 @@ use Pinq\Iterators\Common;
 /**
  * Implementation of the adapter iterator for standard iterators using the generator
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class IteratorAdapter extends Generator implements \Pinq\Iterators\IAdapterIterator
 {
@@ -18,10 +18,10 @@ class IteratorAdapter extends Generator implements \Pinq\Iterators\IAdapterItera
         parent::__construct();
         self::__constructIterator($iterator);
     }
-    
+
     public function &getIterator()
     {
-        foreach($this->iterator as $key => $value) {
+        foreach ($this->iterator as $key => $value) {
             yield $key => $value;
             unset($value);
         }

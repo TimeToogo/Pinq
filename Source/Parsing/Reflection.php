@@ -3,10 +3,10 @@
 namespace Pinq\Parsing;
 
 /**
- * Utility class for getting the reflection from any
- * type of callable.
+ * Utility class for getting the reflection from any type
+ * of callable.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 final class Reflection
 {
@@ -17,6 +17,7 @@ final class Reflection
 
     /**
      * @param callable $function
+     *
      * @return \ReflectionFunctionAbstract
      */
     final public static function fromCallable(callable $function)
@@ -34,26 +35,28 @@ final class Reflection
             return new \ReflectionFunction($name);
         }
     }
-    
+
     private static $supportsVariadicParameters = null;
-    
+
     /**
      * @param \ReflectionFunctionAbstract $function
+     *
      * @return boolean
      */
     public static function isVariadic(\ReflectionFunctionAbstract $function)
     {
-        if(self::$supportsVariadicParameters === null) {
+        if (self::$supportsVariadicParameters === null) {
             self::$supportsVariadicParameters = method_exists('\ReflectionParameter', 'isVariadic');
         }
-        
-        foreach($function->getParameters() as $parameter) {
-            if($parameter->getName() === '...' || 
-                    (self::$supportsVariadicParameters && $parameter->isVariadic())) {
+
+        foreach ($function->getParameters() as $parameter) {
+            if ($parameter->getName() === '...' ||
+                    (self::$supportsVariadicParameters && $parameter->isVariadic())
+            ) {
                 return true;
             }
         }
-        
+
         return false;
     }
 }

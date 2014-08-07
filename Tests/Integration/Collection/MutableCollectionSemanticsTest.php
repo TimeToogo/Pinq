@@ -69,9 +69,10 @@ class MutableCollectionSemanticsTest extends CollectionTest
      */
     public function testThatApplyUpdatesScopedValuesWithScopeRefreshing(\Pinq\ICollection $collection, array $data)
     {
-        $filteredScopeCollection = $collection->whereIn([1, 4, 7, 9, 10]);
-        $moreFilteredScopeCollection = $filteredScopeCollection->difference([4, 9]);
+        $filteredScopeCollection = $collection->whereIn([1, 4, 7, 9, 10]);//1, 4, 7, 9, 10
+        $moreFilteredScopeCollection = $filteredScopeCollection->difference([4, 9]);//1, 7, 10
         
+        //After apply: 1 -> 10, 7 -> 70, 10 -> 100, only 10 is still in the current scope.
         $moreFilteredScopeCollection->apply(function (&$i) { $i *= 10; });
         
         $this->assertMatchesValues($moreFilteredScopeCollection, [10]);

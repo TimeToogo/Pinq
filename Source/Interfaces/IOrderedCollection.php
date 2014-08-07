@@ -7,7 +7,7 @@ use Pinq\ICollection;
 /**
  * The API for subsequent orderings of a ICollection
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IOrderedCollection extends ICollection, IOrderedTraversable
 {

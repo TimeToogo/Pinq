@@ -81,7 +81,12 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
     public function testGroupByWithArrayKey(\Pinq\ITraversable $traversable, array $data)
     {
         $ageGroupData = $traversable
-                ->groupBy(function ($i) { return ['sex' => $i['sex'], 'ageGroup' => floor($i['age'] / 10) * 10]; })
+                ->groupBy(function ($i) { 
+                    return [
+                        'sex' => $i['sex'], 
+                        'ageGroup' => floor($i['age'] / 10) * 10
+                    ]; 
+                })
                 ->orderByAscending(function (\Pinq\ITraversable $group, $key) { return $key['ageGroup']; })
                 ->thenByAscending(function (\Pinq\ITraversable $group, $key) { return $key['sex']; })
                 ->select(function (\Pinq\ITraversable $group, $key) {

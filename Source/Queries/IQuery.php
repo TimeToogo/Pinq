@@ -3,15 +3,21 @@
 namespace Pinq\Queries;
 
 /**
- * Base interface for request / operation query types which
- * both act upon the supplied scope
+ * Base interface for request and operation queries.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IQuery
 {
     /**
-     * The query scope
+     * Gets the query parameter registry.
+     *
+     * @return IParameterRegistry
+     */
+    public function getParameters();
+
+    /**
+     * Gets the query scope.
      *
      * @return IScope
      */

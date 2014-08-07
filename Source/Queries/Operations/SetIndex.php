@@ -5,16 +5,19 @@ namespace Pinq\Queries\Operations;
 /**
  * Operation query for setting a specified index to a value
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class SetIndex extends IndexOperation
 {
-    private $value;
+    /**
+     * @var string
+     */
+    private $valueParameterId;
 
-    public function __construct($index, $value)
+    public function __construct($indexParameter, $valueParameterId)
     {
-        parent::__construct($index);
-        $this->value = $value;
+        parent::__construct($indexParameter);
+        $this->valueParameterId = $valueParameterId;
     }
 
     public function getType()
@@ -22,9 +25,14 @@ class SetIndex extends IndexOperation
         return self::SET_INDEX;
     }
 
-    public function getValue()
+    /**
+     * Gets the value parameter id.
+     *
+     * @return string
+     */
+    public function getValueId()
     {
-        return $this->value;
+        return $this->valueParameterId;
     }
 
     public function traverse(OperationVisitor $visitor)

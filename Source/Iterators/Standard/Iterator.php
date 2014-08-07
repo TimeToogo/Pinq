@@ -7,7 +7,7 @@ use Pinq\Iterators\Common;
 /**
  * Base class for iterators implementing the extended iterator interface.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 abstract class Iterator implements IIterator
 {
@@ -30,36 +30,36 @@ abstract class Iterator implements IIterator
      * @var boolean
      */
     private $requiresFirstFetch = false;
-    
+
     public function __construct()
     {
-        
+
     }
-    
+
     final public function valid()
     {
-        if($this->requiresFirstFetch) {
+        if ($this->requiresFirstFetch) {
             $this->fetch();
         }
-        
+
         return $this->valid;
     }
 
     final public function key()
     {
-        if($this->requiresFirstFetch) {
+        if ($this->requiresFirstFetch) {
             $this->fetch();
         }
-        
+
         return $this->key;
     }
 
     final public function &current()
     {
-        if($this->requiresFirstFetch) {
+        if ($this->requiresFirstFetch) {
             $this->fetch();
         }
-        
+
         return $this->value;
     }
 
@@ -69,32 +69,32 @@ abstract class Iterator implements IIterator
         $this->doRewind();
         $this->requiresFirstFetch = true;
     }
-    
+
     protected function doRewind()
     {
-        
+
     }
 
     final public function next()
     {
-        if($this->requiresFirstFetch) {
+        if ($this->requiresFirstFetch) {
             $this->fetch();
         }
-        
+
         $this->fetch();
     }
-    
+
     final public function fetch()
     {
         $this->requiresFirstFetch = false;
-        if($this->valid = (null !== ($element = $this->doFetch()))) {
-            $this->key = $element[0];
+        if ($this->valid = (null !== ($element = $this->doFetch()))) {
+            $this->key   = $element[0];
             $this->value =& $element[1];
-            
+
             return $element;
         }
     }
-    
+
     /**
      * @return array|null
      */

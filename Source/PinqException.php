@@ -5,13 +5,13 @@ namespace Pinq;
 /**
  * Base exception for all exception in the Pinq library
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class PinqException extends \Exception
 {
     /**
-     * @param type       $messageFormat
-     * @param mixed ... The values to interpole the message with
+     * @param string $messageFormat
+     * @param        mixed ... The values to interpole the message with
      */
     public function __construct($messageFormat = '', $_ = null)
     {
@@ -28,7 +28,7 @@ class PinqException extends \Exception
     {
         if ($parameters === 1) {
             $messageFormat = array_shift($messageFormat);
-            $message = $messageFormat;
+            $message       = $messageFormat;
         } else {
             $message = call_user_func_array('sprintf', $parameters);
         }

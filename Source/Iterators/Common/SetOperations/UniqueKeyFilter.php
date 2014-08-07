@@ -2,13 +2,10 @@
 
 namespace Pinq\Iterators\Common\SetOperations;
 
-use Pinq\Iterators\IIteratorScheme;
-use Pinq\Iterators\ISet;
-
 /**
  * Removes duplicate keys
- * 
- * @author Elliot Levin <elliot@aanet.com.au>
+ *
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class UniqueKeyFilter extends UniqueFilter
 {

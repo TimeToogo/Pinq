@@ -2,14 +2,15 @@
 
 namespace Pinq\Connectors;
 
+use Pinq\Expressions as O;
 use Pinq\Interfaces;
-use Pinq\Queries;
 use Pinq\Providers;
+use Pinq\Queries;
 
 /**
  * Implements the filtering API for a join / group join repository.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class JoiningRepository extends JoiningQueryable implements Interfaces\IJoiningOnRepository
 {
@@ -17,23 +18,14 @@ class JoiningRepository extends JoiningQueryable implements Interfaces\IJoiningO
      * @var Providers\IRepositoryProvider
      */
     protected $provider;
-    
-    public function __construct(Providers\IRepositoryProvider $provider, Queries\IScope $scope, $innerValues, $isGroupJoin)
+
+    public function __construct(Providers\IRepositoryProvider $provider, O\TraversalExpression $queryExpression)
     {
-        parent::__construct($provider, $scope, $innerValues, $isGroupJoin);
+        parent::__construct($provider, $queryExpression);
     }
-    
+
     public function apply(callable $applyFunction)
     {
-        $this->provider->execute(new Queries\OperationQuery(
-                $this->scope,
-                new Queries\Operations\JoinApply(
-                        $this->innerValues, 
-                        $this->isGroupJoin,
-                        $this->filter,
-                        $this->functionConverter->convert($applyFunction),
-                        $this->hasDefault,
-                        $this->defaultValue,
-                        $this->defaultKey)));
+        $this->provider->execute($this->newMethod(__FUNCTION__, [$applyFunction]));
     }
 }

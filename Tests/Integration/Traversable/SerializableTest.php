@@ -2,55 +2,49 @@
 
 namespace Pinq\Tests\Integration\Traversable;
 
+use Pinq\Traversable;
+
 class SerializableTest extends TraversableTest
 {
-    /**
-     * @dataProvider everything
-     */
-    public function testThatTraversableIsSerializable(\Pinq\ITraversable $traversable, array $data)
+    public function testThatTraversableIsSerializable()
     {
+        $traversable = new Traversable();
+        $unserializedTraversable = unserialize(serialize($traversable));
+
+        $this->assertEquals(
+                $traversable->asArray(),
+                $unserializedTraversable->asArray());
+    }
+    
+    public static function whereLessThanSix($value)
+    {
+        return $value < 6;
+    }
+
+    public function testThatCollectionIsSerializableAfterQueries()
+    {
+        $traversable = new Traversable(range(1, 10));
+        $traversable = $traversable
+                ->where([__CLASS__, 'whereLessThanSix']);
+        
         $serializedTraversable = serialize($traversable);
         $unserializedTraversable = unserialize($serializedTraversable);
-
+        
         $this->assertEquals(
                 $traversable->asArray(),
                 $unserializedTraversable->asArray());
     }
 
     /**
-     * @dataProvider everything
+     * @expectedException \Exception
+     * @expectedExceptionMessage Serialization of 'Closure' is not allowed
      */
-    public function testThatTraversableIsSerializableAfterQueries(\Pinq\ITraversable $traversable, array $data)
+    public function testThatTraversableIsNotSerializableAfterQueriesWithClosures()
     {
+        $traversable = new Traversable(range(1, 10));
         $traversable = $traversable
                 ->where(function ($i) { return $i !== false; });
                 
-        $serializedTraversable = serialize($traversable);
-        $unserializedTraversable = unserialize($serializedTraversable);
-
-        $this->assertSame(
-                $traversable->asArray(),
-                $unserializedTraversable->asArray());
-    }
-
-    /**
-     * @dataProvider theImplementations
-     */
-    public function testThatSerializedTraversableWillEvaluateElementsWithoutRegardForDeterministicness(\Pinq\ITraversable $traversable, array $data)
-    {
-        $traversable = $traversable
-                ->append(range(1, 100))
-                ->where(function ($i) { return $i !== false; })
-                ->orderByAscending(function () { return mt_rand(); });
-
-        $this->assertNotSame(
-                $traversable->asArray(),
-                $traversable->asArray());
-        
-        $serializedTraversable = unserialize(serialize($traversable));
-        
-        $this->assertSame(
-                $serializedTraversable->asArray(), 
-                $serializedTraversable->asArray());
+        serialize($traversable);
     }
 }

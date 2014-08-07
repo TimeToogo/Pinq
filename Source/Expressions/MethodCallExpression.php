@@ -4,44 +4,44 @@ namespace Pinq\Expressions;
 
 /**
  * <code>
- * $I->Method($One, true)
+ * $var->method($one, true)
  * </code>
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class MethodCallExpression extends ObjectOperationExpression
 {
     /**
      * @var Expression
      */
-    private $nameExpression;
+    private $name;
 
     /**
      * @var Expression[]
      */
-    private $argumentExpressions;
+    private $arguments;
 
-    public function __construct(Expression $objectValueExpression, Expression $nameExpression, array $argumentExpressions = [])
+    public function __construct(Expression $value, Expression $name, array $arguments = [])
     {
-        parent::__construct($objectValueExpression);
-        $this->nameExpression = $nameExpression;
-        $this->argumentExpressions = $argumentExpressions;
+        parent::__construct($value);
+        $this->name      = $name;
+        $this->arguments = $arguments;
     }
 
     /**
      * @return Expression
      */
-    public function getNameExpression()
+    public function getName()
     {
-        return $this->nameExpression;
+        return $this->name;
     }
 
     /**
      * @return Expression[]
      */
-    public function getArgumentExpressions()
+    public function getArguments()
     {
-        return $this->argumentExpressions;
+        return $this->arguments;
     }
 
     public function traverse(ExpressionWalker $walker)
@@ -49,85 +49,71 @@ class MethodCallExpression extends ObjectOperationExpression
         return $walker->walkMethodCall($this);
     }
 
-    public function simplify()
-    {
-        $valueExpression = $this->valueExpression->simplify();
-        $nameExpression = $this->nameExpression->simplify();
-        $argumentExpressions = self::simplifyAll($this->argumentExpressions);
-
-        if ($valueExpression instanceof ValueExpression && $nameExpression instanceof ValueExpression && self::allOfType($argumentExpressions, ValueExpression::getType())) {
-            $objectValue = $valueExpression->getValue();
-            $name = $nameExpression->getValue();
-            $argumentValues = [];
-
-            foreach ($argumentExpressions as $argumentExpression) {
-                $argumentValues[] = $argumentExpression->getValue();
-            }
-
-            return Expression::value(call_user_func_array([$objectValue, $name], $argumentValues));
-        }
-
-        return $this->update(
-                $valueExpression,
-                $this->nameExpression,
-                $argumentExpressions);
-    }
-
     /**
-     * @return self
+     * @param Expression   $value
+     * @param Expression   $name
+     * @param Expression[] $arguments
+     *
+     * @return MethodCallExpression|\self
      */
-    public function update(Expression $objectValueExpression, Expression $nameExpression, array $argumentExpressions)
-    {
-        if ($this->valueExpression === $objectValueExpression && $this->nameExpression === $nameExpression && $this->argumentExpressions === $argumentExpressions) {
+    public function update(
+            Expression $value,
+            Expression $name,
+            array $arguments
+    ) {
+        if ($this->value === $value
+                && $this->name === $name
+                && $this->arguments === $arguments
+        ) {
             return $this;
         }
 
         return new self(
-                $objectValueExpression,
-                $nameExpression,
-                $argumentExpressions);
+                $value,
+                $name,
+                $arguments);
     }
 
-    protected function updateValueExpression(Expression $valueExpression)
+    protected function updateValueExpression(Expression $value)
     {
         return new self(
-                $valueExpression,
-                $this->nameExpression,
-                $this->argumentExpressions);
+                $value,
+                $this->name,
+                $this->arguments);
     }
 
     protected function compileCode(&$code)
     {
-        $this->valueExpression->compileCode($code);
+        $this->value->compileCode($code);
         $code .= '->';
 
-        if ($this->nameExpression instanceof ValueExpression && self::isNormalSyntaxName($this->nameExpression->getValue())) {
-            $code .= $this->nameExpression->getValue();
+        if ($this->name instanceof ValueExpression && self::isNormalSyntaxName($this->name->getValue())) {
+            $code .= $this->name->getValue();
         } else {
             $code .= '{';
-            $this->nameExpression->compileCode($code);
+            $this->name->compileCode($code);
             $code .= '}';
         }
 
         $code .= '(';
-        $code .= implode(',', self::compileAll($this->argumentExpressions));
+        $code .= implode(',', self::compileAll($this->arguments));
         $code .= ')';
     }
 
     public function dataToSerialize()
     {
-        return [$this->nameExpression, $this->argumentExpressions];
+        return [$this->name, $this->arguments];
     }
 
-    public function unserializedData($data)
+    public function unserializeData($data)
     {
-        list($this->nameExpression, $this->argumentExpressions) = $data;
+        list($this->name, $this->arguments) = $data;
     }
 
     public function __clone()
     {
-        $this->valueExpression = clone $this->valueExpression;
-        $this->nameExpression = clone $this->nameExpression;
-        $this->argumentExpressions = self::cloneAll($this->argumentExpressions);
+        $this->value     = clone $this->value;
+        $this->name      = clone $this->name;
+        $this->arguments = self::cloneAll($this->arguments);
     }
 }

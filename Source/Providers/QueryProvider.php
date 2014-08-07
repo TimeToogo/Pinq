@@ -2,72 +2,60 @@
 
 namespace Pinq\Providers;
 
+use Pinq\Caching;
+use Pinq\Expressions as O;
+use Pinq\Queries\Builders;
 use Pinq\Queries;
-use Pinq\Iterators\IIteratorScheme;
-use Pinq\Parsing\IFunctionToExpressionTreeConverter;
 
 /**
  * Base class for the query provider, with default functionality
  * for the function to expression tree converter and request evaluation
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class QueryProvider implements IQueryProvider
+abstract class QueryProvider extends ProviderBase implements IQueryProvider
 {
     /**
-     * @var IIteratorScheme
+     * @var Builders\IRequestQueryBuilder
      */
-    protected $scheme;
-    
-    /**
-     * @var IFunctionToExpressionTreeConverter
-     */
-    protected $functionConverter;
+    protected $requestBuilder;
 
-    public function __construct(
-            \Pinq\Caching\IFunctionCache $functionCache = null, 
-            IFunctionToExpressionTreeConverter $functionConverter = null,
-            IIteratorScheme $scheme = null)
+    public function __construct(Queries\ISourceInfo $sourceInfo, Configuration\IQueryConfiguration $configuration = null)
     {
-        $this->functionConverter = $functionConverter ?: 
-                new \Pinq\Parsing\FunctionToExpressionTreeConverter(
-                        new \Pinq\Parsing\PHPParser\Parser(),
-                        $functionCache);
-        
-        $this->scheme = $scheme ?: \Pinq\Iterators\SchemeProvider::getDefault();
+        parent::__construct($sourceInfo, $configuration ? : new Configuration\DefaultQueryConfiguration());
+
+        $this->requestBuilder = $this->configuration->getRequestQueryBuilder();
     }
 
-    /**
-     * @return IIteratorScheme
-     */
-    public function getIteratorScheme()
+    public function createQueryable(O\TraversalExpression $scopeExpression = null)
     {
-        return $this->scheme;
-    }
-    
-    /**
-     * @return IFunctionToExpressionTreeConverter
-     */
-    public function getFunctionToExpressionTreeConverter()
-    {
-        return $this->functionConverter;
+        return new \Pinq\Queryable($this, $this->sourceInfo, $scopeExpression, $this->scheme);
     }
 
-    public function createQueryable(Queries\IScope $scope = null)
+    public function load(O\Expression $requestExpression)
     {
-        return new \Pinq\Queryable($this, $scope, $this->scheme);
-    }
+        $resolution = $this->requestBuilder->resolveRequest($requestExpression);
+        $queryHash  = $resolution->getHash();
+        $query      = $this->queryCache->tryGet($queryHash);
 
-    public function load(Queries\IRequestQuery $query)
-    {
-        return $this->loadRequestEvaluatorVisitor($query->getScope())->visit($query->getRequest());
+        if (!($query instanceof Queries\IRequestQuery)) {
+            $query = $this->requestBuilder->parseRequest($requestExpression);
+            $this->queryCache->save($queryHash, $query);
+        }
+
+        $resolvedParameters = $query->getParameters()->resolve($resolution);
+
+        return $this->loadRequest($query, $resolvedParameters);
     }
 
     /**
-     * This should be implemented such that it returns an request visitor
-     * which will load the request query
+     * @param Queries\IRequestQuery              $request
+     * @param Queries\IResolvedParameterRegistry $resolvedParameters
      *
-     * @return Queries\Requests\RequestVisitor
+     * @return mixed
      */
-    abstract protected function loadRequestEvaluatorVisitor(Queries\IScope $scope);
+    abstract protected function loadRequest(
+            Queries\IRequestQuery $request,
+            Queries\IResolvedParameterRegistry $resolvedParameters
+    );
 }

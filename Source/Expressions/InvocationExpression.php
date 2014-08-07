@@ -7,27 +7,27 @@ namespace Pinq\Expressions;
  * $I('foo')
  * </code>
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class InvocationExpression extends TraversalExpression
 {
     /**
      * @var Expression[]
      */
-    private $argumentExpressions;
+    private $arguments;
 
-    public function __construct(Expression $valueExpression, array $argumentExpressions)
+    public function __construct(Expression $value, array $arguments)
     {
-        parent::__construct($valueExpression);
-        $this->argumentExpressions = $argumentExpressions;
+        parent::__construct($value);
+        $this->arguments = self::verifyAll($arguments);
     }
 
     /**
      * @return Expression[]
      */
-    public function getArgumentExpressions()
+    public function getArguments()
     {
-        return $this->argumentExpressions;
+        return $this->arguments;
     }
 
     public function traverse(ExpressionWalker $walker)
@@ -35,63 +35,49 @@ class InvocationExpression extends TraversalExpression
         return $walker->walkInvocation($this);
     }
 
-    public function simplify()
-    {
-        $valueExpression = $this->valueExpression->simplify();
-        $argumentExpressions = self::simplifyAll($this->argumentExpressions);
-
-        if ($valueExpression instanceof ValueExpression && self::allOfType($argumentExpressions, ValueExpression::getType())) {
-            $objectValue = $valueExpression->getValue();
-            $argumentValues = [];
-
-            foreach ($argumentExpressions as $argumentExpression) {
-                $argumentValues[] = $argumentExpression->getValue();
-            }
-
-            return Expression::value(call_user_func_array($objectValue, $argumentValues));
-        }
-
-        return $this->update($valueExpression, $argumentExpressions);
-    }
-
     /**
+     * @param Expression   $value
+     * @param Expression[] $arguments
+     *
      * @return self
      */
-    public function update(Expression $valueExpression, array $argumentExpressions)
+    public function update(Expression $value, array $arguments)
     {
-        if ($this->valueExpression === $valueExpression && $this->argumentExpressions === $argumentExpressions) {
+        if ($this->value === $value
+                && $this->arguments === $arguments
+        ) {
             return $this;
         }
 
-        return new self($valueExpression, $argumentExpressions);
+        return new self($value, $arguments);
     }
 
-    protected function updateValueExpression(Expression $valueExpression)
+    protected function updateValueExpression(Expression $value)
     {
-        return new self($valueExpression, $this->argumentExpressions);
+        return new self($value, $this->arguments);
     }
 
     protected function compileCode(&$code)
     {
-        $this->valueExpression->compileCode($code);
+        $this->value->compileCode($code);
         $code .= '(';
-        $code .= implode(',', self::compileAll($this->argumentExpressions));
+        $code .= implode(',', self::compileAll($this->arguments));
         $code .= ')';
     }
 
     public function dataToSerialize()
     {
-        return $this->argumentExpressions;
+        return $this->arguments;
     }
 
-    public function unserializedData($data)
+    public function unserializeData($data)
     {
-        $this->argumentExpressions = $data;
+        $this->arguments = $data;
     }
 
     public function __clone()
     {
-        $this->valueExpression = clone $this->valueExpression;
-        $this->argumentExpressions = self::cloneAll($this->argumentExpressions);
+        $this->value     = clone $this->value;
+        $this->arguments = self::cloneAll($this->arguments);
     }
 }

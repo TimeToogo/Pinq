@@ -7,7 +7,7 @@ use Pinq\Iterators\IWrapperIterator;
 /**
  * Base class for wrapper generators.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 abstract class IteratorGenerator extends Generator implements IWrapperIterator
 {
@@ -21,24 +21,24 @@ abstract class IteratorGenerator extends Generator implements IWrapperIterator
         parent::__construct();
         $this->iterator = $iterator;
     }
-    
+
     final public function getSourceIterator()
     {
         return $this->iterator;
     }
-    
+
     final public function updateSourceIterator(\Traversable $sourceIterator)
     {
-        $clone = clone $this;
+        $clone           = clone $this;
         $clone->iterator = GeneratorScheme::adapter($sourceIterator);
-        
+
         return $clone;
     }
-    
+
     final public function &getIterator()
     {
         return $this->iteratorGenerator($this->iterator);
     }
-    
+
     abstract protected function &iteratorGenerator(IGenerator $iterator);
 }

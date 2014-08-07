@@ -2,28 +2,34 @@
 
 namespace Pinq\Providers;
 
+use Pinq\Expressions as O;
 use Pinq\Queries;
 
 /**
  * The query provider is used to by the IQueryable as the data source
  * in which the query requests are all loaded from
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IQueryProvider
 {
     /**
+     * @return Configuration\IQueryConfiguration
+     */
+    public function getConfiguration();
+
+    /**
+     * @param O\TraversalExpression $scopeExpression
+     *
      * @return \Pinq\IQueryable
      */
-    public function createQueryable(Queries\IScope $scope = null);
+    public function createQueryable(O\TraversalExpression $scopeExpression = null);
+
 
     /**
-     * @return \Pinq\Parsing\IFunctionToExpressionTreeConverter
-     */
-    public function getFunctionToExpressionTreeConverter();
-
-    /**
+     * @param O\Expression $requestExpression
+     *
      * @return mixed
      */
-    public function load(Queries\IRequestQuery $query);
+    public function load(O\Expression $requestExpression);
 }

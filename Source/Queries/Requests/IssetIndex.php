@@ -5,7 +5,7 @@ namespace Pinq\Queries\Requests;
 /**
  * Request query for a boolean of whether a specified index is set
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class IssetIndex extends IndexRequest
 {

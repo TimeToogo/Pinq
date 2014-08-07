@@ -5,22 +5,27 @@ namespace Pinq\Queries\Operations;
 /**
  * Base class for an operation query using a supplied index
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 abstract class IndexOperation extends Operation
 {
     /**
-     * @var mixed
+     * @var string
      */
-    private $index;
+    private $indexParameterId;
 
-    public function __construct($index)
+    public function __construct($indexParameterId)
     {
-        $this->index = $index;
+        $this->indexParameterId = $indexParameterId;
     }
 
-    final public function getIndex()
+    /**
+     * Gets the index parameter id.
+     *
+     * @return string
+     */
+    final public function getIndexId()
     {
-        return $this->index;
+        return $this->indexParameterId;
     }
 }

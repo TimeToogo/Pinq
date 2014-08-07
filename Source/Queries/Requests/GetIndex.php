@@ -5,7 +5,7 @@ namespace Pinq\Queries\Requests;
 /**
  * Request query for a value at the specified index
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class GetIndex extends IndexRequest
 {

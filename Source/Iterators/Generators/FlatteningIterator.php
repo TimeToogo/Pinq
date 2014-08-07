@@ -7,16 +7,16 @@ use Pinq\Iterators\Common;
 /**
  * Implementation of the flattened iterator using generators.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class FlatteningIterator extends IteratorGenerator
 {
     protected function &iteratorGenerator(IGenerator $iterator)
     {
-        foreach($iterator as $innerIterator) {
+        foreach ($iterator as $innerIterator) {
             $innerIterator = GeneratorScheme::adapter($innerIterator);
-            
-            foreach($innerIterator as &$value) {
+
+            foreach ($innerIterator as &$value) {
                 yield $value;
             }
         }

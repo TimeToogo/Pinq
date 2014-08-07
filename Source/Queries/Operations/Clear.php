@@ -5,7 +5,7 @@ namespace Pinq\Queries\Operations;
 /**
  * Operation query for clearing all values from the source
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class Clear extends Operation
 {

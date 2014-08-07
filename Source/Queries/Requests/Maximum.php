@@ -5,7 +5,7 @@ namespace Pinq\Queries\Requests;
 /**
  * Request query for the maximum projected value in the scope
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class Maximum extends ProjectionRequest
 {

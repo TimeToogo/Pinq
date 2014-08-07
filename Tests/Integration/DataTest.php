@@ -106,11 +106,18 @@ abstract class DataTest extends \Pinq\Tests\PinqTestCase
             $secondIterationArray[$key] = $value;
         }
         
+        //Ignore keys as may be incompatible with foreach
+        $trueIteratorArray = [];
+        foreach($traversable->getTrueIterator() as $value) {
+            $trueIteratorArray[] = $value;
+        }
+        
         $explicitArray = $traversable->asArray();
         
         $this->assertSame($array, $firstIterationArray, $message);
         $this->assertSame($array, $secondIterationArray, $message);
         $this->assertSame($array, $explicitArray, $message);
+        $this->assertSame(array_values($array), $trueIteratorArray, $message);
     }
 
     final protected function assertMatchesValues(\Pinq\ITraversable $traversable, array $array, $message = '')
@@ -123,7 +130,7 @@ abstract class DataTest extends \Pinq\Tests\PinqTestCase
         foreach($traversable as $key => $value) {
             $secondIterationArray[] = $value;
         }
-        
+
         $explicitArray = array_values($traversable->asArray());
         
         $array =  array_values($array);

@@ -8,24 +8,24 @@ use Pinq\Iterators\Common\SetOperations\ISetFilter;
 /**
  * Implementation of the set operation iterator using generators.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class SetOperationIterator extends IteratorGenerator
 {
     use Common\SetOperations\SetOperationIterator;
-    
+
     public function __construct(IGenerator $iterator, ISetFilter $setFilter)
     {
         parent::__construct($iterator);
         self::__constructIterator($setFilter);
     }
-    
+
     protected function &iteratorGenerator(IGenerator $iterator)
     {
         $this->setFilter->initialize();
-        
-        foreach($iterator as $key => &$value) {
-            if($this->setFilter->filter($key, $value)) {
+
+        foreach ($iterator as $key => &$value) {
+            if ($this->setFilter->filter($key, $value)) {
                 yield $key => $value;
             }
         }

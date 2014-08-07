@@ -6,7 +6,7 @@ namespace Pinq\Queries\Segments;
  * Query segment for selecting the keys as the values,
  * indexed by their 0-based position
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class Keys extends Segment
 {
@@ -15,8 +15,8 @@ class Keys extends Segment
         return self::KEYS;
     }
 
-    public function traverse(SegmentWalker $walker)
+    public function traverse(SegmentVisitor $visitor)
     {
-        return $walker->walkKeys($this);
+        return $visitor->visitKeys($this);
     }
 }

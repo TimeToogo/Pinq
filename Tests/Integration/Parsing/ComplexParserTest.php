@@ -133,18 +133,68 @@ class ComplexParserTest extends ParserTest
     {
         $function =
                 function () {
-                    return function ($foo) {
+                    return static function & ($foo) {
                         $foo->bar += 5;
                     };
                 };
         $this->assertParsedAs(
                 $function,
                 [O\Expression::returnExpression(O\Expression::closure(
+                        true,
+                        true,
                         [O\Expression::parameter('foo')],
                         [],
                         [O\Expression::assign(
                                 O\Expression::field(self::variable('foo'), O\Expression::value('bar')),
                                 O\Operators\Assignment::ADDITION,
                                 O\Expression::value(5))]))]);
+    }
+
+    /**
+     * @dataProvider parsers
+     */
+    public function testThatChainedMethodCalls()
+    {
+        $this->assertReturn(
+                function (\Pinq\ITraversable $traversable) {
+                    return $traversable->asArray();
+                },
+                O\Expression::methodCall(
+                        O\Expression::variable(O\Expression::value('traversable')),
+                        O\Expression::value('asArray')));
+
+
+        $this->assertReturn(
+                function (\Pinq\ITraversable $traversable) {
+                    return $traversable
+                            ->where(function ($i) { return $i > 0; })
+                            ->all(function ($i) { return $i % 2 === 0; });
+                },
+                O\Expression::methodCall(
+                        O\Expression::methodCall(
+                                O\Expression::variable(O\Expression::value('traversable')),
+                                O\Expression::value('where'),
+                                [O\Expression::closure(
+                                        false,
+                                        false,
+                                        [O\Expression::parameter('i')],
+                                        [],
+                                        [O\Expression::returnExpression(O\Expression::binaryOperation(
+                                                O\Expression::variable(O\Expression::value('i')),
+                                                O\Operators\Binary::GREATER_THAN,
+                                                O\Expression::value(0)))])]),
+                        O\Expression::value('all'),
+                        [O\Expression::closure(
+                                false,
+                                false,
+                                [O\Expression::parameter('i')],
+                                [],
+                                [O\Expression::returnExpression(O\Expression::binaryOperation(
+                                        O\Expression::binaryOperation(
+                                                O\Expression::variable(O\Expression::value('i')),
+                                                O\Operators\Binary::MODULUS,
+                                                O\Expression::value(2)),
+                                        O\Operators\Binary::IDENTITY,
+                                        O\Expression::value(0)))])]));
     }
 }

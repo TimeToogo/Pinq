@@ -8,7 +8,7 @@ use Pinq\Iterators\IJoinIterator;
 /**
  * Implementation of the join iterator using the fetch method.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class UnfilteredGroupJoinIterator extends GroupJoinIterator implements IJoinIterator
 {
@@ -16,13 +16,13 @@ class UnfilteredGroupJoinIterator extends GroupJoinIterator implements IJoinIter
      * @var \Pinq\ITraversable
      */
     protected $innerGroup;
-    
+
     public function filterOn(callable $function)
     {
         return new GroupJoinOnIterator(
-                $this->outerIterator, 
-                $this->innerIterator, 
-                $this->traversableFactory, 
+                $this->outerIterator,
+                $this->innerIterator,
+                $this->traversableFactory,
                 $function);
     }
 
@@ -30,19 +30,19 @@ class UnfilteredGroupJoinIterator extends GroupJoinIterator implements IJoinIter
     {
         return new GroupJoinOnEqualityIterator(
                 $this->outerIterator,
-                $this->innerIterator, 
+                $this->innerIterator,
                 $this->traversableFactory,
-                $outerKeyFunction, 
+                $outerKeyFunction,
                 $innerKeyFunction);
     }
-    
+
     protected function doRewind()
     {
         $traversableFactory = $this->traversableFactory;
-        $this->innerGroup = $traversableFactory(new OrderedMap($this->defaultIterator($this->innerIterator)));
+        $this->innerGroup   = $traversableFactory(new OrderedMap($this->defaultIterator($this->innerIterator)));
         parent::doRewind();
     }
-    
+
     protected function getInnerValuesIterator($outerKey, $outerValue)
     {
         return new ArrayIterator([0 => $this->innerGroup]);

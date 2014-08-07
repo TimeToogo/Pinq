@@ -5,22 +5,22 @@ namespace Pinq\Queries\Requests;
 /**
  * Base class for a request with a specified index
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 abstract class IndexRequest extends Request
 {
     /**
-     * @var mixed
+     * @var string
      */
-    private $index;
+    private $indexParameter;
 
-    public function __construct($index)
+    public function __construct($indexParameter)
     {
-        $this->index = $index;
+        $this->indexParameter = $indexParameter;
     }
 
-    final public function getIndex()
+    final public function getIndexParameter()
     {
-        return $this->index;
+        return $this->indexParameter;
     }
 }

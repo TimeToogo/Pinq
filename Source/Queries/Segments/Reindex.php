@@ -6,7 +6,7 @@ namespace Pinq\Queries\Segments;
  * Query segment for numerically reindexing the values by their
  * 0-based position
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class Reindex extends Segment
 {
@@ -15,8 +15,8 @@ class Reindex extends Segment
         return self::REINDEX;
     }
 
-    public function traverse(SegmentWalker $walker)
+    public function traverse(SegmentVisitor $visitor)
     {
-        return $walker->walkReindex($this);
+        return $visitor->visitReindex($this);
     }
 }

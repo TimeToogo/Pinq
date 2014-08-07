@@ -5,17 +5,17 @@ namespace Pinq\Queries\Segments;
 /**
  * Query segment for indexing the values by the supplied function
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class IndexBy extends ExpressionSegment
+class IndexBy extends ProjectionSegment
 {
     public function getType()
     {
         return self::INDEX_BY;
     }
 
-    public function traverse(SegmentWalker $walker)
+    public function traverse(SegmentVisitor $visitor)
     {
-        return $walker->walkIndexBy($this);
+        return $visitor->visitIndexBy($this);
     }
 }

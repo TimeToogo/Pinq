@@ -5,7 +5,7 @@ namespace Pinq\Iterators\Generators;
 /**
  * Base class for a lazy generator, initialized upon rewind.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 abstract class LazyGenerator extends IteratorGenerator
 {
@@ -13,16 +13,16 @@ abstract class LazyGenerator extends IteratorGenerator
     {
         parent::__construct($iterator);
     }
-    
+
     final protected function &iteratorGenerator(IGenerator $iterator)
     {
         $loadedIterator = $this->initializeGenerator($iterator);
-        
-        foreach($loadedIterator as $key => &$value) {
+
+        foreach ($loadedIterator as $key => &$value) {
             yield $key => $value;
         }
     }
-    
+
     /**
      * @return \Traversable
      */

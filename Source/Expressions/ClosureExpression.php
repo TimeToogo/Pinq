@@ -7,14 +7,24 @@ namespace Pinq\Expressions;
  * function ($I) { return $I + 5; }
  * </code>
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class ClosureExpression extends Expression
 {
     /**
+     * @var boolean
+     */
+    private $returnsReference;
+
+    /**
+     * @var boolean
+     */
+    private $isStatic;
+
+    /**
      * @var ParameterExpression[]
      */
-    private $parameterExpressions;
+    private $parameters;
 
     /**
      * @var string[]
@@ -26,23 +36,42 @@ class ClosureExpression extends Expression
      */
     private $bodyExpressions;
 
-    public function __construct(array $parameterExpressions, array $usedVariables, array $bodyExpressions)
-    {
-        if (in_array(null, $parameterExpressions)) {
-            throw new \Exception();
-        }
+    public function __construct(
+            $returnsReference,
+            $isStatic,
+            array $parameterExpressions,
+            array $usedVariables,
+            array $bodyExpressions
+    ) {
+        $this->returnsReference = $returnsReference;
+        $this->isStatic         = $isStatic;
+        $this->parameters       = self::verifyAll($parameterExpressions, ParameterExpression::getType());
+        $this->usedVariables    = $usedVariables;
+        $this->bodyExpressions  = self::verifyAll($bodyExpressions);
+    }
 
-        $this->parameterExpressions = $parameterExpressions;
-        $this->usedVariables = $usedVariables;
-        $this->bodyExpressions = $bodyExpressions;
+    /**
+     * @return boolean
+     */
+    public function returnsReference()
+    {
+        return $this->returnsReference;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isStatic()
+    {
+        return $this->isStatic;
     }
 
     /**
      * @return ParameterExpression[]
      */
-    public function getParameterExpressions()
+    public function getParameters()
     {
-        return $this->parameterExpressions;
+        return $this->parameters;
     }
 
     /**
@@ -66,29 +95,53 @@ class ClosureExpression extends Expression
         return $walker->walkClosure($this);
     }
 
-    public function simplify()
-    {
-        return $this->update(
-                self::simplifyAll($this->parameterExpressions),
-                $this->usedVariables,
-                self::simplifyAll($this->bodyExpressions));
-    }
-
-    public function update(array $parameterExpressions, array $usedVariables, array $bodyExpressions)
-    {
-        if ($this->parameterExpressions === $parameterExpressions && $this->usedVariables === $usedVariables && $this->bodyExpressions === $bodyExpressions) {
+    /**
+     * @param boolean               $returnsReference
+     * @param boolean               $isStatic
+     * @param ParameterExpression[] $parameterExpressions
+     * @param string[]              $usedVariables
+     * @param Expression[]          $bodyExpressions
+     *
+     * @return self
+     */
+    public function update(
+            $returnsReference,
+            $isStatic,
+            array $parameterExpressions,
+            array $usedVariables,
+            array $bodyExpressions
+    ) {
+        if ($this->returnsReference === $returnsReference
+                && $this->isStatic === $isStatic
+                && $this->parameters === $parameterExpressions
+                && $this->usedVariables === $usedVariables
+                && $this->bodyExpressions === $bodyExpressions
+        ) {
             return $this;
         }
 
-        return new self($parameterExpressions, $usedVariables, $bodyExpressions);
+        return new self(
+                $returnsReference,
+                $isStatic,
+                $parameterExpressions,
+                $usedVariables,
+                $bodyExpressions);
     }
 
     protected function compileCode(&$code)
     {
-        $code .= 'function (';
+        if ($this->isStatic) {
+            $code .= 'static ';
+        }
+        $code .= 'function ';
 
-        if (!empty($this->parameterExpressions)) {
-            $code .= implode(',', self::compileAll($this->parameterExpressions));
+        if ($this->returnsReference) {
+            $code .= '& ';
+        }
+
+        $code .= '(';
+        if (!empty($this->parameters)) {
+            $code .= implode(',', self::compileAll($this->parameters));
         }
 
         $code .= ')';
@@ -111,17 +164,30 @@ class ClosureExpression extends Expression
 
     public function serialize()
     {
-        return serialize([$this->parameterExpressions, $this->usedVariables, $this->bodyExpressions]);
+        return serialize(
+                [
+                        $this->returnsReference,
+                        $this->isStatic,
+                        $this->parameters,
+                        $this->usedVariables,
+                        $this->bodyExpressions
+                ]
+        );
     }
 
     public function unserialize($serialized)
     {
-        list($this->parameterExpressions, $this->usedVariables, $this->bodyExpressions) = unserialize($serialized);
+        list(
+                $this->returnsReference,
+                $this->isStatic,
+                $this->parameters,
+                $this->usedVariables,
+                $this->bodyExpressions) = unserialize($serialized);
     }
 
     public function __clone()
     {
-        $this->parameterExpressions = self::cloneAll($this->parameterExpressions);
+        $this->parameters      = self::cloneAll($this->parameters);
         $this->bodyExpressions = self::cloneAll($this->bodyExpressions);
     }
 }

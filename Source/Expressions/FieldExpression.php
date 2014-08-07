@@ -7,27 +7,27 @@ namespace Pinq\Expressions;
  * $I->Field
  * </code>
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class FieldExpression extends ObjectOperationExpression
 {
     /**
      * @var Expression
      */
-    private $nameExpression;
+    private $name;
 
-    public function __construct(Expression $objectValueExpression, Expression $nameExpression)
+    public function __construct(Expression $value, Expression $name)
     {
-        parent::__construct($objectValueExpression);
-        $this->nameExpression = $nameExpression;
+        parent::__construct($value);
+        $this->name = $name;
     }
 
     /**
      * @return Expression
      */
-    public function getNameExpression()
+    public function getName()
     {
-        return $this->nameExpression;
+        return $this->name;
     }
 
     public function traverse(ExpressionWalker $walker)
@@ -35,65 +35,57 @@ class FieldExpression extends ObjectOperationExpression
         return $walker->walkField($this);
     }
 
-    public function simplify()
-    {
-        $valueExpression = $this->valueExpression->simplify();
-        $nameExpression = $this->nameExpression->simplify();
-
-        if ($valueExpression instanceof ValueExpression && $nameExpression instanceof ValueExpression) {
-            $value = $valueExpression->getValue();
-            $name = $nameExpression->getValue();
-
-            return Expression::value($value->{$name});
-        }
-
-        return $this->update($valueExpression, $this->nameExpression);
-    }
-
     /**
+     * @param Expression $value
+     * @param Expression $name
+     *
      * @return self
      */
-    public function update(Expression $objectValueExpression, Expression $nameExpression)
+    public function update(Expression $value, Expression $name)
     {
-        if ($this->valueExpression === $objectValueExpression && $this->nameExpression === $nameExpression) {
+        if ($this->value === $value
+                && $this->name === $name
+        ) {
             return $this;
         }
 
-        return new self($objectValueExpression, $nameExpression);
+        return new self($value, $name);
     }
 
-    protected function updateValueExpression(Expression $valueExpression)
+    protected function updateValueExpression(Expression $value)
     {
-        return new self($valueExpression, $this->nameExpression);
+        return new self($value, $this->name);
     }
 
     protected function compileCode(&$code)
     {
-        $this->valueExpression->compileCode($code);
+        $this->value->compileCode($code);
         $code .= '->';
 
-        if ($this->nameExpression instanceof ValueExpression && self::isNormalSyntaxName($this->nameExpression->getValue())) {
-            $code .= $this->nameExpression->getValue();
+        if ($this->name instanceof ValueExpression
+                && self::isNormalSyntaxName($this->name->getValue())
+        ) {
+            $code .= $this->name->getValue();
         } else {
             $code .= '{';
-            $this->nameExpression->compileCode($code);
+            $this->name->compileCode($code);
             $code .= '}';
         }
     }
 
     public function dataToSerialize()
     {
-        return $this->nameExpression;
+        return $this->name;
     }
 
-    public function unserializedData($data)
+    public function unserializeData($data)
     {
-        $this->nameExpression = $data;
+        $this->name = $data;
     }
 
     public function __clone()
     {
-        $this->valueExpression = clone $this->valueExpression;
-        $this->nameExpression = clone $this->nameExpression;
+        $this->value = clone $this->value;
+        $this->name  = clone $this->name;
     }
 }

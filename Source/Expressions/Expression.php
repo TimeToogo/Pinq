@@ -2,44 +2,195 @@
 
 namespace Pinq\Expressions;
 
+use Pinq\Parsing\IFunctionScope;
+use Pinq\Utilities;
+
 /**
  * The base class for object expressions.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 abstract class Expression implements \Serializable
 {
+    const EXPRESSION_TYPE = __CLASS__;
+
     final public static function getType()
     {
         return get_called_class();
     }
 
     /**
+     * @param Expression[]        $expressions
+     * @param IFunctionScope|null $scope
+     * @param string|null         $resolutionNamespace
+     *
+     * @return Expression[]
+     */
+    final public static function simplifyAll(
+            array $expressions,
+            IFunctionScope $scope = null,
+            $resolutionNamespace = null
+    ) {
+        $simplifier = new Walkers\ExpressionSimplifier($scope, $resolutionNamespace);
+
+        return $simplifier->walkAll($expressions);
+    }
+
+    /**
+     * Returns whether the supplied name is cosidered normal name syntax
+     * and can be used plainly in code.
+     * Example:
+     * 'foo' -> yes: $foo
+     * 'foo bar' -> no: ${'foo bar'}
+     *
+     * @param string $name The field, function, method or variable name
+     *
+     * @return boolean
+     */
+    final protected static function isNormalSyntaxName($name)
+    {
+        return (bool)preg_match('/[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*/', $name);
+    }
+
+    /**
+     * Verifies the supplied array only contains expressions
+     * of the supplied type.
+     *
+     * @param mixed[] $expressions
+     * @param string  $type
+     *
+     * @return Expression[]
+     * @throws \Pinq\PinqException If the array contains invalid expressions.
+     */
+    final protected static function verifyAll(array $expressions, $type = __CLASS__)
+    {
+        foreach ($expressions as $key => $expression) {
+            if (!($expression instanceof $type)) {
+                throw new \Pinq\PinqException(
+                        'Invalid array of expressions: invalid expression of type %s at index %s, expecting %s',
+                        \Pinq\Utilities::getTypeOrClass($expression),
+                        $key,
+                        $type);
+            }
+        }
+
+        return $expressions;
+    }
+
+    /**
+     * @param ExpressionWalker $walker
+     *
      * @return Expression
      */
     abstract public function traverse(ExpressionWalker $walker);
 
     /**
-     * @return Expression
+     * Resolves and simplifies the expression tree and returns the
+     * resulting value.
+     *
+     * @param IFunctionScope|null $scope
+     * @param string|null         $resolutionNamespace
+     *
+     * @return mixed
+     * @throws \Pinq\PinqException If the expression tree cannot be fully resolved.
      */
-    abstract public function simplify();
-
-    /**
-     * @return Expression[]
-     */
-    final public static function simplifyAll(array $expressions)
+    final public function simplifyToValue(IFunctionScope $scope = null, $resolutionNamespace = null)
     {
-        $reducedExpressions = [];
+        $simplifiedExpression = $this->simplify($scope, $resolutionNamespace);
 
-        foreach ($expressions as $key => $expression) {
-            $reducedExpressions[$key] = $expression->simplify();
+        if (!($simplifiedExpression instanceof ValueExpression)) {
+            throw new \Pinq\PinqException(
+                    'Cannot simplify expression tree to value: Expression %s simplified to %s, but still containes unresolvable expressions',
+                    $this->compileDebug(),
+                    $simplifiedExpression->compileDebug());
         }
 
-        return $reducedExpressions;
+        return $simplifiedExpression->getValue();
+    }
+
+    /**
+     * Simplifies the expression tree in the supplied class scope.
+     * Example:
+     * <code>
+     * -2 + 4
+     * </code>
+     * Will become:
+     * <code>
+     * 2
+     * </code>
+     *
+     * @param IFunctionScope|null $scope
+     * @param string|null         $resolutionNamespace
+     *
+     * @return Expression
+     */
+    final public function simplify(IFunctionScope $scope = null, $resolutionNamespace = null)
+    {
+        $simplifier = new Walkers\ExpressionSimplifier($scope, $resolutionNamespace);
+
+        return $simplifier->walk($this);
+    }
+
+    /**
+     * Returns a value hash for the expression.
+     *
+     * @return string
+     */
+    final public function hash()
+    {
+        return md5($this->compile());
+    }
+
+    final public function __toString()
+    {
+        return $this->compile();
+    }
+
+    abstract public function __clone();
+
+    /**
+     * Returns whether the expression is equivalent to the supplied expression.
+     *
+     * @param Expression $expression
+     *
+     * @return boolean
+     */
+    public function equals(Expression $expression)
+    {
+        return $this == $expression;
+    }
+
+    /**
+     * Returns a value hash for the supplied expressions.
+     *
+     * @param Expression[]  $expressions
+     *
+     * @return string
+     */
+    final public static function hashAll(array $expressions)
+    {
+        return md5(implode('~', self::compileAll($expressions)));
     }
 
     /**
      * Compiles into equivalent PHP code
+     *
+     * @param Expression[] $expressions
+     *
+     * @return string[]
+     */
+    final public static function compileAll(array $expressions)
+    {
+        return array_map(
+                function (Expression $expression) {
+                    return $expression->compile();
+                },
+                $expressions
+        );
+    }
+
+    /**
+     * Compiles the expression tree into equivalent PHP code
      *
      * @return string
      */
@@ -51,28 +202,35 @@ abstract class Expression implements \Serializable
         return $code;
     }
 
+    /**
+     * Compiles the expression tree into debug code.
+     *
+     * @return string
+     */
+    final public function compileDebug()
+    {
+        return (new DynamicExpressionWalker([
+                ValueExpression::getType() => function (ValueExpression $expression) {
+                    $value = $expression->getValue();
+                    return !is_scalar($value) && $value !== null ?
+                            Expression::constant('{' . Utilities::getTypeOrClass($expression->getValue()) . '}') : $expression;
+                }]))
+                ->walk($this)
+                ->compile();
+    }
+
     abstract protected function compileCode(&$code);
 
-    final public function __toString()
-    {
-        return $this->compile();
-    }
-
     /**
-     * @return string[]
-     */
-    final public static function compileAll(array $expressions)
-    {
-        return array_map(function (self $expression) {
-            return $expression->compile();
-        }, $expressions);
-    }
-
-    /**
-     * @param string $type
+     * Returns whether the expressions are all of the supplied type.
+     *
+     * @param Expression[] $expressions
+     * @param string       $type
+     * @param boolean      $allowNull
+     *
      * @return boolean
      */
-    final protected static function allOfType(array $expressions, $type, $allowNull = false)
+    final public static function allOfType(array $expressions, $type, $allowNull = false)
     {
         foreach ($expressions as $expression) {
             if ($expression instanceof $type || $expression === null && $allowNull) {
@@ -85,205 +243,262 @@ abstract class Expression implements \Serializable
         return true;
     }
 
-    abstract public function __clone();
-
     /**
-     * @return array
+     * @param Expression|null[] $expressions
+     *
+     * @return Expression|null[]
      */
     final public static function cloneAll(array $expressions)
     {
-        return array_map(function (self $expression = null) {
-            return $expression === null ? null : clone $expression;
-        }, $expressions);
+        return array_map(
+                function (self $expression = null) {
+                    return $expression === null ? null : clone $expression;
+                },
+                $expressions
+        );
     }
 
     /**
-     * Returns whether the supplied name is cosidered normal name syntax
-     * and can be used plainly in code.
+     * @param Expression $assignToValue
+     * @param int        $assignmentOperator
+     * @param Expression $assignmentValue
      *
-     * Example:
-     * 'foo' -> yes: $foo
-     * 'foo bar' -> no: ${'foo bar'}
-     *
-     * @param string $name The field, function, method or variable name
-     * @return boolean
+     * @return AssignmentExpression
      */
-    protected static function isNormalSyntaxName($name)
+    final public static function assign(Expression $assignToValue, $assignmentOperator, Expression $assignmentValue)
     {
-        return (bool)preg_match('/[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*/', $name);
+        return new AssignmentExpression(
+                $assignToValue,
+                $assignmentOperator,
+                $assignmentValue);
     }
-    
+
     /**
-     * Returns whether the expression is equivalent to the supplied expression.
-     * 
-     * @param Expression $expression
-     * @return boolean
+     * @param Expression $leftOperand
+     * @param int        $operator
+     * @param Expression $rightOperand
+     *
+     * @return BinaryOperationExpression
      */
-    public function equals(Expression $expression)
+    final public static function binaryOperation(Expression $leftOperand, $operator, Expression $rightOperand)
     {
-        return $this == $expression;
+        return new BinaryOperationExpression(
+                $leftOperand,
+                $operator,
+                $rightOperand);
+    }
+
+    /**
+     * @param int        $unaryOperator
+     * @param Expression $operand
+     *
+     * @return UnaryOperationExpression
+     */
+    final public static function unaryOperation($unaryOperator, Expression $operand)
+    {
+        return new UnaryOperationExpression($unaryOperator, $operand);
+    }
+
+    /**
+     * @param Expression   $classType
+     * @param Expression[] $arguments
+     *
+     * @return NewExpression
+     */
+    final public static function newExpression(Expression $classType, array $arguments = [])
+    {
+        return new NewExpression($classType, $arguments);
+    }
+
+    /**
+     * @param Expression   $value
+     * @param Expression   $name
+     * @param Expression[] $arguments
+     *
+     * @return MethodCallExpression
+     */
+    final public static function methodCall(Expression $value, Expression $name, array $arguments = [])
+    {
+        return new MethodCallExpression(
+                $value,
+                $name,
+                $arguments);
+    }
+
+    /**
+     * @param Expression $value
+     * @param Expression $name
+     *
+     * @return FieldExpression
+     */
+    final public static function field(Expression $value, Expression $name)
+    {
+        return new FieldExpression($value, $name);
+    }
+
+    /**
+     * @param Expression $value
+     * @param Expression $index
+     *
+     * @return IndexExpression
+     */
+    final public static function index(Expression $value, Expression $index)
+    {
+        return new IndexExpression($value, $index);
+    }
+
+    /**
+     * @param Expression   $valueExpression
+     * @param Expression[] $arguments
+     *
+     * @return InvocationExpression
+     */
+    final public static function invocation(Expression $valueExpression, array $arguments = [])
+    {
+        return new InvocationExpression($valueExpression, $arguments);
+    }
+
+    /**
+     * @param int        $castType
+     * @param Expression $castValue
+     *
+     * @return CastExpression
+     */
+    final public static function cast($castType, Expression $castValue)
+    {
+        return new CastExpression($castType, $castValue);
     }
 
     // <editor-fold desc="Factory Methods">
-    
-    /**
-     * @return AssignmentExpression
-     */
-    final public static function assign(Expression $assignToValueExpression, $assignmentOperator, Expression $assignmentValueExpression)
-    {
-        return new AssignmentExpression(
-                $assignToValueExpression,
-                $assignmentOperator,
-                $assignmentValueExpression);
-    }
 
     /**
-     * @return BinaryOperationExpression
-     */
-    final public static function binaryOperation(Expression $leftOperandExpression, $operator, Expression $rightOperandExpression)
-    {
-        return new BinaryOperationExpression(
-                $leftOperandExpression,
-                $operator,
-                $rightOperandExpression);
-    }
-
-    /**
-     * @return UnaryOperationExpression
-     */
-    final public static function unaryOperation($unaryOperator, Expression $operandExpression)
-    {
-        return new UnaryOperationExpression($unaryOperator, $operandExpression);
-    }
-
-    /**
-     * @return NewExpression
-     */
-    final public static function newExpression(Expression $classTypeExpression, array $argumentValueExpressions = [])
-    {
-        return new NewExpression($classTypeExpression, $argumentValueExpressions);
-    }
-
-    /**
-     * @return MethodCallExpression
-     */
-    final public static function methodCall(Expression $valueExpression, Expression $nameExpression, array $argumentValueExpressions = [])
-    {
-        return new MethodCallExpression(
-                $valueExpression,
-                $nameExpression,
-                $argumentValueExpressions);
-    }
-
-    /**
-     * @return FieldExpression
-     */
-    final public static function field(Expression $valueExpression, Expression $nameExpression)
-    {
-        return new FieldExpression($valueExpression, $nameExpression);
-    }
-
-    /**
-     * @return IndexExpression
-     */
-    final public static function index(Expression $valueExpression, Expression $indexExpression)
-    {
-        return new IndexExpression($valueExpression, $indexExpression);
-    }
-
-    /**
-     * @return InvocationExpression
-     */
-    final public static function invocation(Expression $valueExpression, array $argumentExpressions = [])
-    {
-        return new InvocationExpression($valueExpression, $argumentExpressions);
-    }
-
-    /**
-     * @return CastExpression
-     */
-    final public static function cast($castType, Expression $castValueExpression)
-    {
-        return new CastExpression($castType, $castValueExpression);
-    }
-
-    /**
+     * @param Expression $value
+     *
      * @return EmptyExpression
      */
-    final public static function emptyExpression(Expression $valueExpression)
+    final public static function emptyExpression(Expression $value)
     {
-        return new EmptyExpression($valueExpression);
+        return new EmptyExpression($value);
     }
 
     /**
+     * @param Expression[] $values
+     *
      * @return IssetExpression
      */
-    final public static function issetExpression(array $valueExpressions)
+    final public static function issetExpression(array $values)
     {
-        return new IssetExpression($valueExpressions);
+        return new IssetExpression($values);
     }
 
     /**
+     * @param Expression[] $values
+     *
+     * @return UnsetExpression
+     */
+    final public static function unsetExpression(array $values)
+    {
+        return new UnsetExpression($values);
+    }
+
+    /**
+     * @param Expression   $name
+     * @param Expression[] $arguments
+     *
      * @return FunctionCallExpression
      */
-    final public static function functionCall(Expression $nameExpression, array $argumentValueExpressions = [])
+    final public static function functionCall(Expression $name, array $arguments = [])
     {
-        return new FunctionCallExpression($nameExpression, $argumentValueExpressions);
+        return new FunctionCallExpression($name, $arguments);
     }
 
     /**
+     * @param Expression   $class
+     * @param Expression   $name
+     * @param Expression[] $arguments
+     *
      * @return StaticMethodCallExpression
      */
-    final public static function staticMethodCall(Expression $classExpression, Expression $nameExpression, array $argumentValueExpressions = [])
+    final public static function staticMethodCall(Expression $class, Expression $name, array $arguments = [])
     {
         return new StaticMethodCallExpression(
-                $classExpression,
-                $nameExpression,
-                $argumentValueExpressions);
+                $class,
+                $name,
+                $arguments);
     }
 
     /**
+     * @param Expression $class
+     * @param Expression $name
+     *
+     * @return StaticFieldExpression
+     */
+    final public static function staticField(Expression $class, Expression $name)
+    {
+        return new StaticFieldExpression(
+                $class,
+                $name);
+    }
+
+    /**
+     * @param Expression $condition
+     * @param Expression $ifTrue
+     * @param Expression $ifFalse
+     *
      * @return TernaryExpression
      */
-    final public static function ternary(Expression $conditionExpression, Expression $ifTrueExpression = null, Expression $ifFalseExpression)
+    final public static function ternary(Expression $condition, Expression $ifTrue = null, Expression $ifFalse)
     {
         return new TernaryExpression(
-                $conditionExpression,
-                $ifTrueExpression,
-                $ifFalseExpression);
+                $condition,
+                $ifTrue,
+                $ifFalse);
     }
 
     /**
+     * @param Expression|null $value
+     *
      * @return ReturnExpression
      */
-    final public static function returnExpression(Expression $valueExpression = null)
+    final public static function returnExpression(Expression $value = null)
     {
-        return new ReturnExpression($valueExpression);
+        return new ReturnExpression($value);
     }
 
     /**
+     * @param Expression $exception
+     *
      * @return ThrowExpression
      */
-    final public static function throwExpression(Expression $exceptionExpression)
+    final public static function throwExpression(Expression $exception)
     {
-        return new ThrowExpression($exceptionExpression);
+        return new ThrowExpression($exception);
     }
 
     /**
-     * @param string $name
+     * @param string      $name
+     * @param string|null $typeHint
+     * @param Expression  $defaultValue
+     * @param boolean     $isPassedByReference
+     *
      * @return ParameterExpression
      */
-    final public static function parameter($name, $typeHint = null, $hasDefaultValue = false, $defaultValue = null, $isPassedByReference = false)
-    {
+    final public static function parameter(
+            $name,
+            $typeHint = null,
+            Expression $defaultValue = null,
+            $isPassedByReference = false
+    ) {
         return new ParameterExpression(
                 $name,
                 $typeHint,
-                $hasDefaultValue,
                 $defaultValue,
                 $isPassedByReference);
     }
 
     /**
+     * @param mixed $value
+     *
      * @return ValueExpression
      */
     final public static function value($value)
@@ -292,47 +507,80 @@ abstract class Expression implements \Serializable
     }
 
     /**
+     * @param string $name
+     *
+     * @return ConstantExpression
+     */
+    final public static function constant($name)
+    {
+        return new ConstantExpression($name);
+    }
+
+    /**
+     * @param Expression $class
+     * @param string     $name
+     *
+     * @return ClassConstantExpression
+     */
+    final public static function classConstant(Expression $class, $name)
+    {
+        return new ClassConstantExpression($class, $name);
+    }
+
+    /**
+     * @param Expression $name
+     *
      * @return VariableExpression
      */
-    final public static function variable(Expression $nameExpression)
+    final public static function variable(Expression $name)
     {
-        return new VariableExpression($nameExpression);
+        return new VariableExpression($name);
     }
 
     /**
+     * @param ArrayItemExpression[] $items
+     *
      * @return ArrayExpression
      */
-    final public static function arrayExpression(array $itemExpressions)
+    final public static function arrayExpression(array $items)
     {
-        return new ArrayExpression($itemExpressions);
-    }
-    
-    /**
-     * @return ArrayItemExpression
-     */
-    final public static function arrayItem(Expression $keyExpression = null, Expression $valueExpression, $isReference)
-    {
-        return new ArrayItemExpression($keyExpression, $valueExpression, $isReference);
+        return new ArrayExpression($items);
     }
 
     /**
+     * @param Expression $key
+     * @param Expression $value
+     * @param boolean    $isReference
+     *
+     * @return ArrayItemExpression
+     */
+    final public static function arrayItem(Expression $key = null, Expression $value, $isReference = false)
+    {
+        return new ArrayItemExpression($key, $value, $isReference);
+    }
+
+    /**
+     * @param boolean      $returnsReference
+     * @param boolean      $isStatic
+     * @param Expression[] $parameterExpressions
+     * @param string[]     $usedVariables
+     * @param Expression[] $bodyExpressions
+     *
      * @return ClosureExpression
      */
-    final public static function closure(array $parameterExpressions, array $usedVariables, array $bodyExpressions)
-    {
+    final public static function closure(
+            $returnsReference,
+            $isStatic,
+            array $parameterExpressions,
+            array $usedVariables,
+            array $bodyExpressions
+    ) {
         return new ClosureExpression(
+                $returnsReference,
+                $isStatic,
                 $parameterExpressions,
                 $usedVariables,
                 $bodyExpressions);
-    }
-
-    /**
-     * @return SubQueryExpression
-     */
-    final public static function subQuery(Expression $valueExpression, \Pinq\Queries\IRequestQuery $requestQuery, TraversalExpression $originalExpression)
-    {
-        return new SubQueryExpression(
-                $valueExpression,                 $requestQuery,                 $originalExpression);
     }
 
     // </editor-fold>

@@ -12,22 +12,22 @@ abstract class TraversableTest extends \Pinq\Tests\Integration\DataTest
     final protected function assertThatExecutionIsDeferred(callable $traversableQuery)
     {
         $exception = new CustomException();
-        $thowingFunction =
+        $throwingFunction =
                 function () use ($exception) {
                     throw $exception;
                 };
 
         try {
-            $traversable = $traversableQuery($thowingFunction);
+            $traversable = $traversableQuery($throwingFunction);
         } catch (CustomException $thrownException) {
             $this->assertFalse(
                     true,
-                    'Traversable query method should not have thrown exception');
+                    'Traversable query method should not have thrown the exception');
         }
 
         try {
             foreach ($traversable as $key => $value) {
-                $this->assertFalse(true, 'Iteration should have thrown an exception');
+                $this->assertFalse(true, 'Iteration should caused the exception to be thrown');
             }
         } catch (CustomException $thrownException) {
             $this->assertSame($exception, $thrownException);

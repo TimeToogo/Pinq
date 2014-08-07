@@ -5,7 +5,7 @@ namespace Pinq\Iterators\Common;
 /**
  * Common functionality for the group join iterator
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 trait GroupJoinIterator
 {
@@ -22,7 +22,7 @@ trait GroupJoinIterator
     protected function constructInnerGroup(\Traversable $innerElements)
     {
         $traversableFactory = $this->traversableFactory;
-        
+
         return $traversableFactory($innerElements);
     }
 }

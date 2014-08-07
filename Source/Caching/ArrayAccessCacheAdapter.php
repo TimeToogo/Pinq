@@ -5,9 +5,9 @@ namespace Pinq\Caching;
 /**
  * Adapter class for a cache that implements \ArrayAccess
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class ArrayAccessCacheAdapter implements ICacheAdapter
+class ArrayAccessCacheAdapter extends CacheAdapter
 {
     /**
      * The cache object implementing array access
@@ -25,7 +25,7 @@ class ArrayAccessCacheAdapter implements ICacheAdapter
     {
         $this->arrayAccess[$key] = $value;
     }
-    
+
     public function contains($key)
     {
         return isset($this->arrayAccess[$key]);
@@ -41,7 +41,7 @@ class ArrayAccessCacheAdapter implements ICacheAdapter
         unset($this->arrayAccess[$key]);
     }
 
-    public function clear()
+    public function clear($namespace = null)
     {
         if (method_exists($this->arrayAccess, 'clear')) {
             $this->arrayAccess->clear();
@@ -49,8 +49,14 @@ class ArrayAccessCacheAdapter implements ICacheAdapter
             $keys = array_keys(iterator_to_array($this->arrayAccess, true));
 
             foreach ($keys as $key) {
-                unset($this->arrayAccess[$key]);
+                if ($namespace === null || strpos($key, $namespace) === 0) {
+                    unset($this->arrayAccess[$key]);
+                }
             }
+        } else {
+            throw new \Pinq\PinqException(
+                    'Cannot clear cache %s: does not support clearing',
+                    get_class($this->arrayAccess));
         }
     }
 }

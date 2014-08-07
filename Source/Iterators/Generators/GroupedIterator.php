@@ -7,7 +7,7 @@ use Pinq\Iterators\Common;
 /**
  * Implementation of the grouped iterator using generators.
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class GroupedIterator extends LazyGenerator
 {
@@ -22,10 +22,10 @@ class GroupedIterator extends LazyGenerator
     protected function initializeGenerator(IGenerator $innerIterator)
     {
         $groupedMap = (new OrderedMap($innerIterator))->groupBy($this->groupKeyFunction);
-        
+
         return new ProjectionIterator(
-                $groupedMap, 
-                null, 
+                $groupedMap,
+                null,
                 $this->traversableFactory);
     }
 }

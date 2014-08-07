@@ -5,29 +5,49 @@ namespace Pinq\Caching;
 /**
  * Static provider to configure and retrieve the cache implementation
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 final class Provider
 {
+    /**
+     * @var boolean
+     */
+    private static $isDevelopmentMode = false;
+    /**
+     * @var boolean
+     */
+    private static $hasBeenCleared = false;
+    /**
+     * @var ICacheAdapter|null
+     */
+    private static $cacheImplementation;
+
     private function __construct()
     {
 
     }
 
     /**
-     * @var boolean
+     * If set to true, the cache will be cleared when needed.
+     *
+     * @param boolean $isDevelopmentMode
+     *
+     * @return void
      */
-    private static $isDevelopmentMode = false;
+    public static function setDevelopmentMode($isDevelopmentMode)
+    {
+        self::$isDevelopmentMode = $isDevelopmentMode;
+    }
 
     /**
-     * @var boolean
+     * Returns the configured cache implementation
+     *
+     * @return ICacheAdapter
      */
-    private static $hasBeenCleared = false;
-
-    /**
-     * @var ICacheAdapter|null
-     */
-    private static $cacheImplementation;
+    public static function getCacheAdapter()
+    {
+        return self::getImplementation();
+    }
 
     /**
      * @return ICacheAdapter
@@ -47,105 +67,89 @@ final class Provider
     }
 
     /**
-     * If set to true, the cache will be cleared when needed.
+     * Returns a query cache with the configured adapter.
      *
-     * @param boolean $trueOrFalse
-     * @return void
-     */
-    public static function setDevelopmentMode($trueOrFalse)
-    {
-        self::$isDevelopmentMode = $trueOrFalse;
-    }
-
-    /**
-     * Returns the configured cache implementation
-     *
-     * @return ICacheAdater
-     */
-    public static function getCacheAdapter()
-    {
-        return self::getImplementation();
-    }
-
-    /**
-     * Returns a function cache with the underlying configured implementation
-     *
-     * @return IFunctionCache
+     * @return IQueryCache
      */
     public static function getCache()
     {
-        return new FunctionCache(self::getImplementation());
+        return new QueryCache(self::getImplementation());
     }
 
     /**
-     * Uses the supplied file to store the parsed functions
+     * Uses the supplied file to store the parsed queries.
      *
      * @param string $fileName The file to cache the data
+     *
      * @return void
      */
     public static function setFileCache($fileName)
     {
         self::$cacheImplementation = new CSVFileCache($fileName);
-        self::$hasBeenCleared = false;
+        self::$hasBeenCleared      = false;
     }
 
     /**
-     * Uses the supplied directory to store the parsed functions
+     * Uses the supplied directory to store the parsed queries.
      *
-     * @param string $directory The directory to cache the data
+     * @param string $directory     The directory to cache the data
      * @param string $fileExtension The file extension for every cache file
+     *
      * @return void
      */
     public static function setDirectoryCache($directory, $fileExtension = DirectoryCache::DEFAULT_EXTENSION)
     {
         self::$cacheImplementation = new DirectoryCache($directory, $fileExtension);
-        self::$hasBeenCleared = false;
+        self::$hasBeenCleared      = false;
     }
 
     /**
-     * Uses the supplied doctrine cache to store the parsed functions
+     * Uses the supplied doctrine cache to store the parsed queries.
      *
      * @param \Doctrine\Common\Cache\Cache $cache The doctrine cache
+     *
      * @return void
      */
     public static function setDoctrineCache(\Doctrine\Common\Cache\Cache $cache)
     {
         self::$cacheImplementation = new DoctrineCacheAdapter($cache);
-        self::$hasBeenCleared = false;
+        self::$hasBeenCleared      = false;
     }
 
     /**
-     * Uses the supplied array access cache to store the parsed functions
+     * Uses the supplied array access cache to store the parsed queries.
      *
      * @param \ArrayAccess $cache The array access cache
+     *
      * @return void
      */
     public static function setArrayAccessCache(\ArrayAccess $cache)
     {
         self::$cacheImplementation = new ArrayAccessCacheAdapter($cache);
-        self::$hasBeenCleared = false;
+        self::$hasBeenCleared      = false;
     }
 
     /**
-     * Uses the supplied cache to store the parsed functions
+     * Uses the supplied cache to store the parsed queries.
      *
-     * @param IFunctionCache $cache The cache implementations
+     * @param ICacheAdapter $cache The cache implementations
+     *
      * @return void
      */
     public static function setCustomCache(ICacheAdapter $cache)
     {
         self::$cacheImplementation = $cache;
-        self::$hasBeenCleared = false;
+        self::$hasBeenCleared      = false;
     }
 
     /**
-     * Removes the configured cache implementation
+     * Removes the configured cache implementation.
      *
      * @return void
      */
     public static function removeCache()
     {
         self::$cacheImplementation = null;
-        self::$hasBeenCleared = false;
+        self::$hasBeenCleared      = false;
     }
 }

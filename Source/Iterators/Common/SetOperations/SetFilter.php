@@ -7,21 +7,21 @@ use Pinq\Iterators\ISet;
 
 /**
  * Removes duplicate values
- * 
- * @author Elliot Levin <elliot@aanet.com.au>
+ *
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 abstract class SetFilter implements ISetFilter
 {
     /**
-     * @var IIteratorScheme 
+     * @var IIteratorScheme
      */
     protected $scheme;
-    
+
     /**
-     * @var ISet 
+     * @var ISet
      */
     protected $set;
-    
+
     public function __construct(IIteratorScheme $scheme)
     {
         $this->scheme = $scheme;

@@ -5,17 +5,17 @@ namespace Pinq\Queries\Segments;
 /**
  * Query segment for filtering the values based on the supplied function
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class Filter extends ExpressionSegment
+class Filter extends ProjectionSegment
 {
     public function getType()
     {
         return self::FILTER;
     }
 
-    public function traverse(SegmentWalker $walker)
+    public function traverse(SegmentVisitor $visitor)
     {
-        return $walker->walkFilter($this);
+        return $visitor->visitFilter($this);
     }
 }

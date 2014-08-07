@@ -7,34 +7,34 @@ namespace Pinq\Expressions;
  * return true
  * </code>
  *
- * @author Elliot Levin <elliot@aanet.com.au>
+ * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class ReturnExpression extends Expression
 {
     /**
-     * @var Expression
+     * @var Expression|null
      */
-    private $returnValueExpression;
+    private $value;
 
-    public function __construct(Expression $returnValueExpression = null)
+    public function __construct(Expression $value = null)
     {
-        $this->returnValueExpression = $returnValueExpression;
+        $this->value = $value;
     }
 
     /**
      * @return boolean
      */
-    public function hasValueExpression()
+    public function hasValue()
     {
-        return $this->returnValueExpression !== null;
+        return $this->value !== null;
     }
 
     /**
      * @return Expression|null
      */
-    public function getValueExpression()
+    public function getValue()
     {
-        return $this->returnValueExpression;
+        return $this->value;
     }
 
     public function traverse(ExpressionWalker $walker)
@@ -42,44 +42,41 @@ class ReturnExpression extends Expression
         return $walker->walkReturn($this);
     }
 
-    public function simplify()
-    {
-        return $this->update($this->returnValueExpression->simplify());
-    }
-
     /**
+     * @param Expression $value
+     *
      * @return self
      */
-    public function update(Expression $returnValueExpression = null)
+    public function update(Expression $value = null)
     {
-        if ($this->returnValueExpression === $returnValueExpression) {
+        if ($this->value === $value) {
             return $this;
         }
 
-        return new self($returnValueExpression);
+        return new self($value);
     }
 
     protected function compileCode(&$code)
     {
         $code .= 'return ';
 
-        if ($this->returnValueExpression !== null) {
-            $this->returnValueExpression->compileCode($code);
+        if ($this->value !== null) {
+            $this->value->compileCode($code);
         }
     }
 
     public function serialize()
     {
-        return serialize($this->returnValueExpression);
+        return serialize($this->value);
     }
 
     public function unserialize($serialized)
     {
-        $this->returnValueExpression = unserialize($serialized);
+        $this->value = unserialize($serialized);
     }
 
     public function __clone()
     {
-        $this->returnValueExpression = clone $this->returnValueExpression;
+        $this->value = clone $this->value;
     }
 }
