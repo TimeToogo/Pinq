@@ -3,13 +3,28 @@
 namespace Pinq\Providers\Utilities;
 
 use Pinq\Expressions as O;
+use Pinq\PinqException;
 use Pinq\Traversable;
 
 /**
+ * Implementation of the query results collection that will
+ * cache the query results and is able to evaluate queries in memory
+ * when applicable parent values are loaded:
+ *
+ * <code>
+ * $someRows = $queryable->where(function ($row) { return $row['id'] <= 50; });
+ *
+ * foreach($someRows as $row) {
+ *     //This will load the values
+ * }
+ *
+ * //This should be evaluated in memory
+ * $filteredRows = $someRows->where(function ($row) { return $row['isActive'] === true; });
+ * </code>
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class QueryResultCollection
+class QueryResultCollection implements IQueryResultCollection
 {
     /**
      * @var \SplObjectStorage
@@ -27,9 +42,50 @@ class QueryResultCollection
         $this->traversableFactory = $traversableFactory ? : Traversable::factory();
     }
 
+    public function optimizeQuery(O\Expression $queryExpression)
+    {
+        //Converts all values requests (->asArray(), ->asIterator(), ->asCollection(), ->asTraversable())
+        //to ->asTrueIterator() such that the true underlying values are retrieved
+        //and hence can be cached as a Traversable instance such that any queries
+        //on scoped values can be evaluated in memory using the traversable implementation.
+        if ($queryExpression instanceof O\MethodCallExpression) {
+            $nameExpression = $queryExpression->getName();
+            if ($nameExpression instanceof O\ValueExpression) {
+                switch (strtolower($nameExpression->getValue())) {
+                    case 'asarray':
+                    case 'asiterator':
+                    case 'ascollection':
+                    case 'astraversable':
+                        return $queryExpression->update(
+                                $queryExpression->getValue(),
+                                O\Expression::value('getTrueIterator'),
+                                $queryExpression->getArguments());
+                }
+            }
+        }
+
+        return $queryExpression;
+    }
+
+    protected function removeGetTrueIteratorCall(O\Expression $queryExpression)
+    {
+        //Removes the ->getTrueIterator() method call expression so when
+        //searching for applicable results the expression will be a common ancestor
+        if ($queryExpression instanceof O\MethodCallExpression) {
+            $nameExpression = $queryExpression->getName();
+            if ($nameExpression instanceof O\ValueExpression) {
+                if (strtolower($nameExpression->getValue()) === 'gettrueiterator') {
+                    return $queryExpression->getValue();
+                }
+            }
+        }
+
+        return $queryExpression;
+    }
+
     public function saveResults(O\Expression $expression, $results)
     {
-        $this->storage->attach($expression, $results);
+        $this->storage->attach($this->removeGetTrueIteratorCall($expression), $results);
     }
 
     public function clearResults()
@@ -37,25 +93,22 @@ class QueryResultCollection
         $this->storage = new \SplObjectStorage();
     }
 
-    public function removeResults(O\Expression $expression)
+    public function removeResults(O\Expression $queryExpression)
     {
-        unset($this->storage[$expression]);
+        unset($this->storage[$queryExpression]);
     }
 
-    public function tryComputeResults(O\Expression $expression, &$results)
+    public function tryComputeResults(O\Expression $queryExpression, &$results)
     {
-        if (isset($this->storage[$expression])) {
-            $results = $this->storage[$expression];
+        if (isset($this->storage[$queryExpression])) {
+            $results = $this->storage[$queryExpression];
             return true;
         }
 
-        return $this->computeResults($expression, $results);
-    }
-
-    protected function computeResults(O\Expression $expression, &$results)
-    {
         $foundApplicableResults = false;
 
+        //Searches the query expression tree and checks if any parent expressions have saved results
+        //If so, the expression tree is updated with a Traversable implementation with the saved results
         $applicableScopeFinder =
                 function (O\Expression $expression, O\ExpressionWalker $self) use (&$foundApplicableResults) {
                     if (isset($this->storage[$expression])) {
@@ -76,10 +129,23 @@ class QueryResultCollection
                 O\ValueExpression::getType()     => $applicableScopeFinder
         ]);
 
-        $remainingScopeExpression = $traversalWalker->walk($expression);
+        $remainingQueryExpression = $traversalWalker->walk($queryExpression);
 
-        $results = $foundApplicableResults ? $remainingScopeExpression->simplifyToValue() : null;
+        //If found applicable results, execute the updated expression tree against the Traversable
+        //implementation to compute the result of the query.
+        $results = $foundApplicableResults ? $remainingQueryExpression->simplifyToValue() : null;
         return $foundApplicableResults;
+    }
+
+    public function computeResults(O\Expression $expression)
+    {
+        if ($this->tryComputeResults($expression, $results)) {
+            return $results;
+        }
+
+        throw new PinqException(
+                'Could not compute query results: no applicable saved results found for query expression %s',
+                $expression->compileDebug());
     }
 
     protected function newTraversable($values)

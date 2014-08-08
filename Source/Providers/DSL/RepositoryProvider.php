@@ -57,7 +57,7 @@ abstract class RepositoryProvider extends Providers\RepositoryProvider
         return $this->compilerConfiguration;
     }
 
-    public function execute(O\Expression $operationExpression)
+    public function executeOperationExpression(O\Expression $operationExpression)
     {
         $resolution    = $this->operationQueryBuilder->resolveOperation($operationExpression);
         $queryHash     = $resolution->getHash();
@@ -106,7 +106,7 @@ abstract class RepositoryProvider extends Providers\RepositoryProvider
             Queries\IOperationQuery $operation,
             Queries\IResolvedParameterRegistry $resolvedParameters
     ) {
-        //Overrides parent::execute
+        //Overrides parent::executeOperationExpression
         throw \Pinq\PinqException::notSupported(__METHOD__);
     }
 }

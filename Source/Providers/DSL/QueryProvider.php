@@ -53,7 +53,7 @@ abstract class QueryProvider extends \Pinq\Providers\QueryProvider
         return $this->compilerConfiguration;
     }
 
-    public function load(O\Expression $requestExpression)
+    public function loadRequestExpression(O\Expression $requestExpression)
     {
         $resolution    = $this->requestBuilder->resolveRequest($requestExpression);
         $queryHash     = $resolution->getHash();
@@ -102,7 +102,7 @@ abstract class QueryProvider extends \Pinq\Providers\QueryProvider
             Queries\IRequestQuery $request,
             Queries\IResolvedParameterRegistry $resolvedParameters
     ) {
-        //Due to overriding parent::load, this should never be called.
+        //Due to overriding parent::loadRequestExpression, this should never be called.
         throw \Pinq\PinqException::notSupported(__METHOD__);
     }
 }

@@ -19,12 +19,16 @@ interface IQueryProvider
     public function getConfiguration();
 
     /**
+     * @return Utilities\IQueryResultCollection|null
+     */
+    public function getQueryResultCollection();
+
+    /**
      * @param O\TraversalExpression $scopeExpression
      *
      * @return \Pinq\IQueryable
      */
     public function createQueryable(O\TraversalExpression $scopeExpression = null);
-
 
     /**
      * @param O\Expression $requestExpression

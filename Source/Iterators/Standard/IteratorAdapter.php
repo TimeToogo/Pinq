@@ -26,7 +26,7 @@ class IteratorAdapter extends Iterator implements \Pinq\Iterators\IAdapterIterat
         $this->iterator->rewind();
     }
 
-    final protected function doFetch()
+    protected function doFetch()
     {
         $iterator = $this->iterator;
 

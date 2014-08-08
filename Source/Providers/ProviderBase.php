@@ -33,13 +33,17 @@ abstract class ProviderBase implements IQueryProvider
      */
     protected $scheme;
 
+    /**
+     * @var Utilities\IQueryResultCollection|null
+     */
+    protected $queryResultCollection;
 
     public function __construct(Queries\ISourceInfo $sourceInfo, Configuration\IQueryConfiguration $configuration)
     {
-        $this->sourceInfo    = $sourceInfo;
-        $this->configuration = $configuration;
-        $this->queryCache    = $configuration->getQueryCache();
-        $this->scheme        = $configuration->getIteratorScheme();
+        $this->sourceInfo            = $sourceInfo;
+        $this->configuration         = $configuration;
+        $this->queryCache            = $configuration->getQueryCache();
+        $this->scheme                = $configuration->getIteratorScheme();
     }
 
     final public function getConfiguration()

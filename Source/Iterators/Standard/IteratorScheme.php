@@ -19,12 +19,12 @@ class IteratorScheme extends Common\IteratorScheme
 
     public function createOrderedMap(\Traversable $iterator = null)
     {
-        return new OrderedMap($iterator == null ? null : $this->toIterator($iterator));
+        return new OrderedMap($iterator === null ? null : $this->toIterator($iterator));
     }
 
     public function createSet(\Traversable $iterator = null)
     {
-        return new Set($iterator == null ? null : $this->toIterator($iterator));
+        return new Set($iterator === null ? null : $this->toIterator($iterator));
     }
 
     public function walk(\Traversable $iterator, callable $function)

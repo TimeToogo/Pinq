@@ -5,7 +5,9 @@ namespace Pinq\Providers\Configuration;
 use Pinq\Caching;
 use Pinq\Iterators;
 use Pinq\Parsing;
+use Pinq\Providers\Utilities;
 use Pinq\Queries\Builders;
+use Pinq\Traversable;
 
 /**
  * Implementation of the query configuration using standard
@@ -40,13 +42,19 @@ class DefaultQueryConfiguration implements IQueryConfiguration
      */
     protected $requestQueryBuilder;
 
+    /**
+     * @var boolean
+     */
+    protected $shouldUseQueryResultCaching;
+
     public function __construct()
     {
-        $this->iteratorScheme      = $this->buildIteratorScheme();
-        $this->queryCache          = $this->buildQueryCache();
-        $this->functionInterpreter = $this->buildFunctionInterpreter();
-        $this->scopeBuilder        = $this->buildScopeQueryBuilder();
-        $this->requestQueryBuilder = $this->buildRequestQueryBuilder();
+        $this->iteratorScheme              = $this->buildIteratorScheme();
+        $this->queryCache                  = $this->buildQueryCache();
+        $this->functionInterpreter         = $this->buildFunctionInterpreter();
+        $this->scopeBuilder                = $this->buildScopeQueryBuilder();
+        $this->requestQueryBuilder         = $this->buildRequestQueryBuilder();
+        $this->shouldUseQueryResultCaching = $this->shouldUseQueryResultCaching();
     }
 
     protected function buildIteratorScheme()
@@ -74,17 +82,32 @@ class DefaultQueryConfiguration implements IQueryConfiguration
         return new Builders\ScopeBuilder($this->functionInterpreter);
     }
 
-    final public function getIteratorScheme()
+    protected function shouldUseQueryResultCaching()
+    {
+        return false;
+    }
+
+    protected function buildQueryResultCollection()
+    {
+        return new Utilities\QueryResultCollection(Traversable::factory($this->buildIteratorScheme()));
+    }
+
+    final public function getQueryResultCollection()
+    {
+        return $this->shouldUseQueryResultCaching ? $this->buildQueryResultCollection() : null;
+    }
+
+    public function getIteratorScheme()
     {
         return $this->iteratorScheme;
     }
 
-    final public function getQueryCache()
+    public function getQueryCache()
     {
         return $this->queryCache;
     }
 
-    final public function getRequestQueryBuilder()
+    public function getRequestQueryBuilder()
     {
         return $this->requestQueryBuilder;
     }

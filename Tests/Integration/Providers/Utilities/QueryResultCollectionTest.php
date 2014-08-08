@@ -5,6 +5,7 @@ namespace Pinq\Tests\Integration\Providers\Utilities;
 use Pinq\Expressions as O;
 use Pinq\IQueryable;
 use Pinq\ITraversable;
+use Pinq\PinqException;
 use Pinq\Providers\Traversable;
 use Pinq\Providers\Utilities\QueryResultCollection;
 use Pinq\Tests\PinqTestCase;
@@ -31,17 +32,24 @@ class QueryResultCollectionTest extends PinqTestCase
     {
         $this->assertTrue($this->queryResultsCollection->tryComputeResults($expression, $computedResults));
         $this->assertSame($result, $computedResults);
+        $this->assertSame($result, $this->queryResultsCollection->computeResults($expression));
     }
 
     protected function assertCannotComputesResult(O\Expression $expression)
     {
         $this->assertFalse($this->queryResultsCollection->tryComputeResults($expression, $computedResults));
         $this->assertNull($computedResults);
+
+        try {
+            $this->queryResultsCollection->computeResults($expression);
+            $this->assertTrue(false, 'Should have thrown an exception');
+        } catch (PinqException $exception) {
+        }
     }
 
     public function testCachesSavedResults()
     {
-        $instance         = new \stdClass();
+        $instance = new \stdClass();
         $sourceExpression = $this->queryable->getExpression();
 
         $this->queryResultsCollection->saveResults($sourceExpression, $instance);
@@ -71,8 +79,14 @@ class QueryResultCollectionTest extends PinqTestCase
 
     public function testRemovesCorrectSavedResults()
     {
-        $this->queryResultsCollection->saveResults($takeExpression = $this->queryable->take(1)->getExpression(), ['take']);
-        $this->queryResultsCollection->saveResults($keysExpression = $this->queryable->keys()->getExpression(), ['keys']);
+        $this->queryResultsCollection->saveResults(
+                $takeExpression = $this->queryable->take(1)->getExpression(),
+                ['take']
+        );
+        $this->queryResultsCollection->saveResults(
+                $keysExpression = $this->queryable->keys()->getExpression(),
+                ['keys']
+        );
 
 
         $this->assertComputesResult($takeExpression, ['take']);
@@ -86,6 +100,18 @@ class QueryResultCollectionTest extends PinqTestCase
         $this->queryResultsCollection->removeResults($takeExpression);
 
         $this->assertCannotComputesResult($takeExpression);
+    }
+
+    public function testOptimizeQueryReturnsExpression()
+    {
+        $this->assertInstanceOf(
+                O\Expression::getType(),
+                $this->queryResultsCollection->optimizeQuery($this->queryable->getExpression())
+        );
+        $this->assertInstanceOf(
+                O\Expression::getType(),
+                $this->queryResultsCollection->optimizeQuery($this->queryable->take(1)->select('strlen')->getExpression())
+        );
     }
 
     public function testCannotComputeWithUnapplicableSavedResults()

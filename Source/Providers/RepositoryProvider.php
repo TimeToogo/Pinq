@@ -3,12 +3,11 @@
 namespace Pinq\Providers;
 
 use Pinq\Expressions as O;
-use Pinq\Queries;
 use Pinq\Queries\Builders;
+use Pinq\Queries;
 
 /**
- * Base class for the repository provider, with default functionality
- * for request and optionary query evaluation.
+ * Base class for the repository provider.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
@@ -36,13 +35,19 @@ abstract class RepositoryProvider extends ProviderBase implements IRepositoryPro
     ) {
         parent::__construct($sourceInfo, $configuration ? : new Configuration\DefaultRepositoryConfiguration());
 
-        $this->queryProvider    = $queryProvider;
+        $this->queryProvider         = $queryProvider;
+        $this->queryResultCollection = $queryProvider->getQueryResultCollection();
         $this->operationQueryBuilder = $this->configuration->getOperationQueryBuilder();
     }
 
     final public function getQueryProvider()
     {
         return $this->queryProvider;
+    }
+
+    final public function getQueryResultCollection()
+    {
+        return $this->queryResultCollection;
     }
 
     final public function createQueryable(O\TraversalExpression $scopeExpression = null)
@@ -61,6 +66,14 @@ abstract class RepositoryProvider extends ProviderBase implements IRepositoryPro
     }
 
     public function execute(O\Expression $operationExpression)
+    {
+        $this->executeOperationExpression($operationExpression);
+        if($this->queryResultCollection !== null) {
+            $this->queryResultCollection->clearResults();
+        }
+    }
+
+    protected function executeOperationExpression(O\Expression $operationExpression)
     {
         $resolution = $this->operationQueryBuilder->resolveOperation($operationExpression);
         $queryHash  = $resolution->getHash();
