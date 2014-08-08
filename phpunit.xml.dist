@@ -3,7 +3,7 @@
     bootstrap="Tests/TestBootstrapper.php"
     colors="true"
     backupGlobals="false"
-    stopOnFailure="true">
+    stopOnFailure="false">
 
     <testsuites>
       <testsuite name="Entirety">
