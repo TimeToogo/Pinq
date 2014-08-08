@@ -144,7 +144,7 @@ class QueryResultCollection implements IQueryResultCollection
         }
 
         throw new PinqException(
-                'Could not compute query results: no applicable saved results found for query expression %s',
+                'Could not compute query results: no applicable saved results found for the query expression, %s',
                 $expression->compileDebug());
     }
 
