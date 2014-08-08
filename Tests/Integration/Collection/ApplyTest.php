@@ -69,12 +69,24 @@ class ApplyTest extends CollectionTest
     public function testThatCollectionApplyWorks(\Pinq\ICollection $collection, array $data)
     {
         $collection->apply(function (&$i) { sort($i); });
-        
+
         $this->assertMatches($collection, [
             ['b', 'd', 'l', 'q'],
             ['a', 'a', 'c', 'd'],
             ['d', 'd', 'f', 'q'],
             ['a', 'm', 't', 'v'],
         ]);
+    }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testApplyDoesNotWorkAfterProjection(\Pinq\ICollection $collection, array $data)
+    {
+        $projectedCollection = $collection->select(function ($i) { return $i; });
+        $projectedCollection->apply(function (&$i) { $i *= 10; });
+
+        $this->assertMatches($collection, range(1, 10));
+        $this->assertMatches($projectedCollection, range(1, 10));
     }
 }

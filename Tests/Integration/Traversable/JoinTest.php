@@ -267,7 +267,7 @@ class JoinTest extends TraversableTest
             '10:<DEFAULT>'
         ]);
     }
-    
+
     /**
      * @dataProvider oneToTen
      */
@@ -275,22 +275,75 @@ class JoinTest extends TraversableTest
     {
         $traversable = $traversable
                 ->join([])
-                    ->withDefault('<DEFAULT>')
-                    ->to(function ($outer, $inner) { 
-                        return $outer . ':' . $inner; 
-                    });
-                
+                ->withDefault('<DEFAULT>')
+                ->to(function ($outer, $inner) {
+                            return $outer . ':' . $inner;
+                        });
+
         $this->assertMatches($traversable, [
-            '1:<DEFAULT>', 
-            '2:<DEFAULT>', 
+            '1:<DEFAULT>',
+            '2:<DEFAULT>',
             '3:<DEFAULT>',
             '4:<DEFAULT>',
-            '5:<DEFAULT>', 
-            '6:<DEFAULT>', 
+            '5:<DEFAULT>',
+            '6:<DEFAULT>',
             '7:<DEFAULT>',
-            '8:<DEFAULT>', 
-            '9:<DEFAULT>', 
+            '8:<DEFAULT>',
+            '9:<DEFAULT>',
             '10:<DEFAULT>'
+        ]);
+    }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatOnEqualityWillNotMatchNulls(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable = $traversable
+                ->join($traversable)
+                ->onEquality(
+                        function ($i) { return $i % 2 === 0 ? $i : null; },
+                        function ($i) { return $i % 2 === 0 ? $i : null; })
+                ->to(function ($outer, $inner) {
+                        return $outer . ':' . $inner;
+                    });
+
+        $this->assertMatches($traversable, [
+            '2:2',
+            '4:4',
+            '6:6',
+            '8:8',
+            '10:10'
+        ]);
+    }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatOnEqualityWillNotMatchNullsAndUseDefault(\Pinq\ITraversable $traversable, array $data)
+    {
+
+        $traversable = $traversable
+                ->join($traversable)
+                ->onEquality(
+                        function ($i) { return $i % 2 === 0 ? $i : null; },
+                        function ($i) { return $i % 2 === 0 ? $i : null; })
+                ->withDefault('<DEFAULT>')
+                ->to(function ($outer, $inner) {
+                            return $outer . ':' . $inner;
+                        });
+
+        $this->assertMatches($traversable, [
+            '1:<DEFAULT>',
+            '2:2',
+            '3:<DEFAULT>',
+            '4:4',
+            '5:<DEFAULT>',
+            '6:6',
+            '7:<DEFAULT>',
+            '8:8',
+            '9:<DEFAULT>',
+            '10:10'
         ]);
     }
 }

@@ -176,4 +176,61 @@ class JoinApplyTest extends CollectionTest
             '10:<EVEN>',
         ]);
     }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatOnEqualityWillNotMatchNulls(\Pinq\ICollection $collection, array $data)
+    {
+        $collection
+                ->join($collection)
+                ->onEquality(
+                        function ($i) { return $i % 2 === 0 ? $i : null; },
+                        function ($i) { return $i % 2 === 0 ? $i : null; })
+                ->apply(function (&$outer, $inner) {
+                    $outer .= ':' . $inner;
+                });
+
+        $this->assertMatches($collection, [
+            1,
+            '2:2',
+            3,
+            '4:4',
+            5,
+            '6:6',
+            7,
+            '8:8',
+            9,
+            '10:10'
+        ]);
+    }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatOnEqualityWillNotMatchNullsAndUseDefault(\Pinq\ICollection $collection, array $data)
+    {
+        $collection
+                ->groupJoin($collection)
+                ->onEquality(
+                        function ($i) { return $i % 2 === 0 ? $i : null; },
+                        function ($i) { return $i % 2 === 0 ? $i : null; })
+                ->withDefault('<DEFAULT>')
+                ->apply(function (&$outer, \Pinq\ITraversable $innerGroup) {
+                    $outer .= ':' . $innerGroup->implode('-');
+                });
+
+        $this->assertMatches($collection, [
+            '1:<DEFAULT>',
+            '2:2',
+            '3:<DEFAULT>',
+            '4:4',
+            '5:<DEFAULT>',
+            '6:6',
+            '7:<DEFAULT>',
+            '8:8',
+            '9:<DEFAULT>',
+            '10:10'
+        ]);
+    }
 }

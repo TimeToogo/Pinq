@@ -53,6 +53,7 @@ dev-master
  - `ITraversable::groupBy` implicitly indexes each group by the group key.
  - Changed `ITraversable::exists` in favour of `ITraversable::isEmpty`.
  - `Traversable`/`Collection` are now extendable.
+ - `IJoiningOnTraversable::onEquality` will not match `null`s as equal as in C#.
  - Implemented optional default value for `ITraversable::join`/`ITraversable::groupJoin`:
     - The following join query:
     

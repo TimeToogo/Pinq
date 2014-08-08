@@ -21,8 +21,8 @@ interface IJoiningOnTraversable extends IJoiningToTraversable
     public function on(callable $function);
 
     /**
-     * Filters the join values via strict equality (===) on the outer and inner keys
-     * according to the supplied key functions.
+     * Filters the join values via strict equality (===) between the outer and inner keys
+     * according to the supplied key functions. Note that null keys are ignored.
      *
      * @param  callable $outerKeyFunction
      * @param  callable $innerKeyFunction

@@ -33,7 +33,7 @@ class GroupJoinOnEqualityIterator extends GroupJoinIterator
 
         $traversableGroup = $this->constructInnerGroup(
                 $this->defaultIterator(
-                        $innerGroups->contains($groupKey) ?
+                        $innerGroups->contains($groupKey) && $groupKey !== null ?
                                 $innerGroups->get($groupKey) : new EmptyIterator()
                 )
         );

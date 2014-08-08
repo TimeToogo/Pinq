@@ -342,4 +342,62 @@ class GroupJoinTest extends TraversableTest
             '10:<DEFAULT>'
         ]);
     }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatOnEqualityWillNotMatchNulls(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable = $traversable
+                ->groupJoin($traversable)
+                ->onEquality(
+                        function ($i) { return $i % 2 === 0 ? $i : null; },
+                        function ($i) { return $i % 2 === 0 ? $i : null; })
+                ->to(function ($outer, \Pinq\ITraversable $innerGroup) {
+                    return $outer . ':' . $innerGroup->implode('-');
+                });
+
+        $this->assertMatches($traversable, [
+            '1:',
+            '2:2',
+            '3:',
+            '4:4',
+            '5:',
+            '6:6',
+            '7:',
+            '8:8',
+            '9:',
+            '10:10'
+        ]);
+    }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatOnEqualityWillNotMatchNullsAndUseDefault(\Pinq\ITraversable $traversable, array $data)
+    {
+
+        $traversable = $traversable
+                ->groupJoin($traversable)
+                ->onEquality(
+                        function ($i) { return $i % 2 === 0 ? $i : null; },
+                        function ($i) { return $i % 2 === 0 ? $i : null; })
+                ->withDefault('<DEFAULT>')
+                ->to(function ($outer, \Pinq\ITraversable $innerGroup) {
+                    return $outer . ':' . $innerGroup->implode('-');
+                });
+
+        $this->assertMatches($traversable, [
+            '1:<DEFAULT>',
+            '2:2',
+            '3:<DEFAULT>',
+            '4:4',
+            '5:<DEFAULT>',
+            '6:6',
+            '7:<DEFAULT>',
+            '8:8',
+            '9:<DEFAULT>',
+            '10:10'
+        ]);
+    }
 }

@@ -62,6 +62,9 @@ abstract class JoinIterator extends IteratorGenerator implements IJoinToIterator
     }
 
     /**
+     * @param mixed $outerKey
+     * @param mixed $outerValue
+     *
      * @return IGenerator
      */
     abstract protected function innerGenerator($outerKey, $outerValue);

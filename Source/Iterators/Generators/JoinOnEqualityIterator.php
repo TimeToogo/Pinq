@@ -30,7 +30,7 @@ class JoinOnEqualityIterator extends JoinIterator
         $innerGroups      = (new OrderedMap($this->innerIterator))->groupBy($this->innerKeyFunction);
 
         return $this->defaultIterator(
-                $innerGroups->contains($groupKey) ?
+                $innerGroups->contains($groupKey) && $groupKey !== null ?
                         $innerGroups->get($groupKey) : new EmptyIterator()
         );
     }
