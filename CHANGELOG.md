@@ -86,11 +86,11 @@ dev-master
     - New common `ISource` interface for a another sequence inside a query: `->intersect(...)`
     - Removed `FunctionExpressionTree` in favour of dedicated function types (under `Queries\Functions` namespace)
       for all types of functions in a query:
-        - `ElementProjection` - `->select(function ($value, $key) { return ... })`
-        - `ElementMutator` - `->apply(function (&$value, $key) { ... })`
-        - `ConnectorProjection` - `->join(...)->to(function ($outerValue, $innerValue, $outerKey, $innerKey) { return ... })`
-        - `ConnectorMutator` - `->join(...)->apply(function (&$outerValue, $innerValue, $outerKey, $innerKey) { ... })`
-        - `Aggregator` - `->aggregate(function (&aggregate, $value) { return ... })`
+        - `ElementProjection`: `->select(function ($value, $key) { return ... })`
+        - `ElementMutator`: `->apply(function (&$value, $key) { ... })`
+        - `ConnectorProjection`: `->join(...)->to(function ($outerValue, $innerValue, $outerKey, $innerKey) { return ... })`
+        - `ConnectorMutator`: `->join(...)->apply(function (&$outerValue, $innerValue, $outerKey, $innerKey) { ... })`
+        - `Aggregator`: `->aggregate(function (&aggregate, $value) { return ... })`
     - New `ISourceInfo` to store source information of a `IQueryable`.
     - Refactored `Segments\OrderBy` query segment by representing each
       function and direction as an `Queries\Segments\OrderFunction` class.
@@ -110,7 +110,7 @@ dev-master
  - Ensure PSR-2 code guidelines adherence.
  - Fixed binary operation `instanceof` compilation bug with literal class names.
  - Refactored caching implementation:
-    - `Caching\IFunctionCache` now acts as a wrapper to `Caching\ICacheAdapter`.
+    - `Caching\IQueryCache` now acts as a wrapper to `Caching\ICacheAdapter`.
     - Any type of value can be cached and retrieved through the cache adapter.
     - Implemented namespacing api and `NamespacedCache`.
 
