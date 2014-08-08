@@ -68,8 +68,10 @@ dev-master
     ```
     Will produce: `['1:<Odd>', '2:4', '3:<Odd>', '4:8', '5:<Odd>', '6:12']`
  - Added `join(...)->apply(...)` operation for `ICollection`/`IRepository`
+ - Added `ICollection::remove` to remove all occurrences of the supplied value from the collection.
  - Made order by `Direction` constants interchangeable with native `SORT_ASC`/`SORT_DESC`.
  - Shorten expression getter names by removing redundant `...Expression`.
+ - New expression classes: `UnsetExpression`, `StaticFieldExpression`, `ConstantExpression`, `ClassConstantExpression`
  - Restructured expression simplification into an expression walker class.
  - Restructured and improved function parsing
     - New function reflection API
