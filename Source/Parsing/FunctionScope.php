@@ -51,11 +51,13 @@ class FunctionScope implements IFunctionScope
     public static function fromReflection(\ReflectionFunctionAbstract $reflection, callable $callable)
     {
         if (is_array($callable) && is_object($callable[0])) {
+            /** @var $reflection \ReflectionMethod */
             $thisObject = $callable[0];
-            $scopeType  = get_class($callable[0]);
+            $scopeType  = $reflection->getDeclaringClass()->getName();
         } elseif (is_object($callable) && !($callable instanceof \Closure)) {
+            /** @var $reflection \ReflectionMethod */
             $thisObject = $callable;
-            $scopeType  = get_class($callable);
+            $scopeType  = $reflection->getDeclaringClass()->getName();
         } elseif ($reflection->isClosure()) {
             $thisObject = $reflection->getClosureThis();
             $scopeClass = $reflection->getClosureScopeClass();

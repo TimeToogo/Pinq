@@ -20,6 +20,11 @@ class ScopedStaticVariableInvokableObject
     }
 }
 
+class ExtendedScopedStaticVariableInvokableObject extends ScopedStaticVariableInvokableObject
+{
+
+}
+
 class ScopedMethodCallInvokableObject
 {
     public function __invoke()
@@ -31,6 +36,11 @@ class ScopedMethodCallInvokableObject
     {
         return true;
     }
+}
+
+class ExtendedScopedMethodCallInvokableObject extends ScopedMethodCallInvokableObject
+{
+
 }
 
 class ExpressionSimplificationTest extends InterpreterTest
@@ -748,7 +758,9 @@ class ExpressionSimplificationTest extends InterpreterTest
     public function testInvokableObjectWorksWithScope()
     {
         $this->assertSimplifiesTo(new ScopedStaticVariableInvokableObject(), true);
+        $this->assertSimplifiesTo(new ExtendedScopedMethodCallInvokableObject(), true);
         $this->assertSimplifiesTo(new ScopedMethodCallInvokableObject(), true);
+        $this->assertSimplifiesTo(new ExtendedScopedMethodCallInvokableObject(), true);
     }
 
     private static $scopeForMethod = true;
