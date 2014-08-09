@@ -93,7 +93,7 @@ dev-master
         - `ElementMutator`: `->apply(function (&$value, $key) { ... })`
         - `ConnectorProjection`: `->join(...)->to(function ($outerValue, $innerValue, $outerKey, $innerKey) { return ... })`
         - `ConnectorMutator`: `->join(...)->apply(function (&$outerValue, $innerValue, $outerKey, $innerKey) { ... })`
-        - `Aggregator`: `->aggregate(function (&aggregate, $value) { return ... })`
+        - `Aggregator`: `->aggregate(function ($aggregate, $value) { return ... })`
     - New `ISourceInfo` to store source information of a `IQueryable`.
     - Refactored `Segments\OrderBy` query segment by representing each
       function and direction as an `Queries\Segments\OrderFunction` class.
