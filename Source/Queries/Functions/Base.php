@@ -145,7 +145,7 @@ abstract class Base implements \Serializable
     }
 
     /**
-     * Gets an array containing the parameter ids and keys with their
+     * Gets an array containing the parameter ids as keys with their
      * respective scoped variable name as the value.
      *
      * @return array<string, string>
