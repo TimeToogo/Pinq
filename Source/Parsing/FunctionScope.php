@@ -52,7 +52,10 @@ class FunctionScope implements IFunctionScope
     {
         if (is_array($callable) && is_object($callable[0])) {
             $thisObject = $callable[0];
-            $scopeType  = null;
+            $scopeType  = get_class($callable[0]);
+        } elseif (is_object($callable) && !($callable instanceof \Closure)) {
+            $thisObject = $callable;
+            $scopeType  = get_class($callable);
         } elseif ($reflection->isClosure()) {
             $thisObject = $reflection->getClosureThis();
             $scopeClass = $reflection->getClosureScopeClass();

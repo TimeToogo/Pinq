@@ -10,6 +10,29 @@ function get_called_class()
     return 'global override';
 }
 
+class ScopedStaticVariableInvokableObject
+{
+    private static $scopedField = true;
+
+    public function __invoke()
+    {
+        self::$scopedField;
+    }
+}
+
+class ScopedMethodCallInvokableObject
+{
+    public function __invoke()
+    {
+        $this->privateMethod();
+    }
+
+    private function privateMethod()
+    {
+        return true;
+    }
+}
+
 class ExpressionSimplificationTest extends InterpreterTest
 {
     public static $field;
@@ -708,14 +731,58 @@ class ExpressionSimplificationTest extends InterpreterTest
         
         $this->assertSimplifiesTo(function () { $GLOBALS['__testInvocable'](); }, 'foo-bar-quz');
     }
-    
+
     /**
      * @dataProvider interpreters
      */
     public function testNonSimplifyableInvocation()
     {
-        $this->assertSimplifiesTo(function () { $var(); }, 
+        $this->assertSimplifiesTo(function () { $var(); },
                 O\Expression::invocation(
                         O\Expression::variable(O\Expression::value('var'))));
+    }
+
+    /**
+     * @dataProvider interpreters
+     */
+    public function testInvokableObjectWorksWithScope()
+    {
+        $this->assertSimplifiesTo(new ScopedStaticVariableInvokableObject(), true);
+        $this->assertSimplifiesTo(new ScopedMethodCallInvokableObject(), true);
+    }
+
+    private static $scopeForMethod = true;
+
+    /**
+     * @dataProvider interpreters
+     */
+    public function methodWithScopedStaticVariable()
+    {
+        self::$scopeForMethod;
+    }
+
+    /**
+     * @dataProvider interpreters
+     */
+    public function methodWithScopedStaticMethodCall()
+    {
+        $this->privateMethodCall();
+    }
+
+    /**
+     * @dataProvider interpreters
+     */
+    public function privateMethodCall()
+    {
+        return true;
+    }
+
+    /**
+     * @dataProvider interpreters
+     */
+    public function testMethodWorksWithScope()
+    {
+        $this->assertSimplifiesTo([$this, 'methodWithScopedStaticVariable'], true);
+        $this->assertSimplifiesTo([$this, 'methodWithScopedStaticMethodCall'], true);
     }
 }

@@ -21,6 +21,14 @@ class Test
     }
 }
 
+class InvokableObject
+{
+    public function __invoke()
+    {
+        return 1.1;
+    }
+}
+
 class FunctionTypesTest extends ParserTest
 {
     /**
@@ -52,6 +60,16 @@ class FunctionTypesTest extends ParserTest
     {
         $this->assertParsedAs(
                 Test::$method,
+                [O\Expression::returnExpression(O\Expression::value(1.1))]);
+    }
+
+    /**
+     * @dataProvider parsers
+     */
+    public function testInvokableObject()
+    {
+        $this->assertParsedAs(
+                new InvokableObject(),
                 [O\Expression::returnExpression(O\Expression::value(1.1))]);
     }
 }

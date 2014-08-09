@@ -518,7 +518,10 @@ class ExpressionSimplifier extends O\ExpressionWalker
         $nameExpression = $this->walk($expression->getName());
 
         if ($nameExpression instanceof O\ValueExpression) {
-            if ($this->tryGetIfSuperGlobal($nameExpression->getValue(), $result)) {
+            $name = $nameExpression->getValue();
+            if($name === 'this' && $this->scope->hasThis()) {
+                return O\Expression::value($this->scope->getThis());
+            } elseif ($this->tryGetIfSuperGlobal($name, $result)) {
                 return O\Expression::value($result);
             }
         }
