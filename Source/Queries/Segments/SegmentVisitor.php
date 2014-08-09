@@ -27,7 +27,7 @@ class SegmentVisitor
 
     public function visitOperation(Operation $query)
     {
-        $query->getSource()->visit($this);
+
     }
 
     public function visitRange(Range $query)
@@ -52,7 +52,7 @@ class SegmentVisitor
 
     public function visitJoin(Join $query)
     {
-        $query->getOptions()->getSource()->visit($this);
+
     }
 
     public function visitOrderBy(OrderBy $query)
