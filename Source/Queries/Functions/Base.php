@@ -97,6 +97,8 @@ abstract class Base implements \Serializable
     }
 
     /**
+     * Gets the parameter id of the callable for the function.
+     *
      * @return string
      */
     final public function getCallableId()
@@ -109,7 +111,7 @@ abstract class Base implements \Serializable
      *
      * @return string|null
      */
-    public function hashScopeType()
+    public function hasScopeType()
     {
         return $this->scopeType !== null;
     }
@@ -137,12 +139,15 @@ abstract class Base implements \Serializable
     {
         if ($this->isInternal()) {
             throw new \Pinq\PinqException(
-                    'Cannot get body expressions from %s: function is internal.',
+                    'Cannot get body expressions from %s: function is not user defined.',
                     get_class($this));
         }
     }
 
     /**
+     * Gets an array containing the parameter ids and keys with their
+     * respective scoped variable name as the value.
+     *
      * @return array<string, string>
      */
     public function getParameterScopedVariableMap()
@@ -187,8 +192,10 @@ abstract class Base implements \Serializable
     }
 
     /**
+     * Gets the body expressions of the function
+     *
      * @return O\Expression[]
-     * @throws \Pinq\PinqException
+     * @throws \Pinq\PinqException if the function is internal
      */
     final public function getBodyExpressions()
     {
@@ -197,8 +204,10 @@ abstract class Base implements \Serializable
     }
 
     /**
+     * Gets amount of body expressions of the function
+     *
      * @return int
-     * @throws \Pinq\PinqException
+     * @throws \Pinq\PinqException if the function is internal
      */
     final public function countBodyExpressions()
     {
