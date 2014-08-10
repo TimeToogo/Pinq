@@ -3,6 +3,7 @@
 namespace Pinq\Queries\Functions\Parameters;
 
 use Pinq\Expressions as O;
+use Pinq\Parsing\IFunctionScope;
 
 /**
  * Base class for the structure of parameters of a function.
@@ -20,6 +21,11 @@ abstract class Base implements \Countable
      * @var O\ParameterExpression[]
      */
     protected $unusedExpressions;
+
+    /**
+     * @var O\ParameterExpression[]
+     */
+    protected $requiredUnusedExpressions = [];
 
     /**
      * @var boolean
@@ -42,6 +48,7 @@ abstract class Base implements \Countable
             } else {
                 $defaultExpression                 = null;
                 $this->hasRequiredUnusedParameters = true;
+                $this->requiredUnusedExpressions[] = $parameter;
             }
 
             $this->unusedParameterDefaultMap[$parameter->getName()] = $defaultExpression;
@@ -64,7 +71,7 @@ abstract class Base implements \Countable
     }
 
     /**
-     * Whether there are any unused paramaters.
+     * Whether there are any unused parameters.
      *
      * @return boolean
      */
@@ -74,13 +81,23 @@ abstract class Base implements \Countable
     }
 
     /**
-     * Whether there is an unused parameter without a default value.
+     * Whether there is an unused parameters without a default value.
      *
      * @return boolean
      */
     public function hasRequiredUnusedParameters()
     {
         return $this->hasRequiredUnusedParameters;
+    }
+
+    /**
+     * Gets any unused parameters without a default value.
+     *
+     * @return boolean
+     */
+    public function getRequiredUnusedParameters()
+    {
+        return $this->requiredUnusedExpressions;
     }
 
     /**
@@ -94,15 +111,38 @@ abstract class Base implements \Countable
     }
 
     /**
-     * Returns an array containing default value expressions indexed
-     * by their respective unused parameter name.
+     * Returns an array containing default value expressions indexed by their
+     * respective unused parameter name.
      * This is useful as it will introduce variables in the scope of the
      * function that may be validly used.
+
      *
-     * @return array<string, O\Expression>
+*@return array<string, O\Expression>
      */
     public function getUnusedParameterDefaultMap()
     {
         return $this->unusedParameterDefaultMap;
+    }
+
+    /**
+     * Returns an array containing default values indexed by their
+     * respective unused parameter name.
+     *
+     * @param IFunctionScope $scope
+     * @param string|null    $resolutionNamespace
+     *
+     * @return array<string, mixed>
+     */
+    public function getUnusedParameterDefaultValueMap(IFunctionScope $scope = null, $resolutionNamespace = null)
+    {
+        $defaultValueMap = [];
+        foreach($this->unusedParameterDefaultMap as $name => $defaultValueExpression) {
+            if($defaultValueExpression !== null) {
+                /** @var $defaultValueExpression O\Expression */
+                $defaultValueMap[$name] = $defaultValueExpression->simplifyToValue($scope, $resolutionNamespace);
+            }
+        }
+
+        return $defaultValueMap;
     }
 }

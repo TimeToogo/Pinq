@@ -12,7 +12,7 @@ use Pinq\Expressions as O;
  */
 class ConnectorProjection extends ProjectionBase
 {
-    public function getParameterStructure(array $parameterExpressions)
+    protected function getParameterStructure(array $parameterExpressions)
     {
         return new Parameters\OuterInnerValueKey($parameterExpressions);
     }

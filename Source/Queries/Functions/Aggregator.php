@@ -11,7 +11,7 @@ use Pinq\Expressions as O;
  */
 class Aggregator extends Base
 {
-    public function getParameterStructure(array $parameterExpressions)
+    protected function getParameterStructure(array $parameterExpressions)
     {
         return new Parameters\AggregateValues($parameterExpressions);
     }

@@ -69,7 +69,7 @@ abstract class Base implements \Serializable
      *
      * @return Parameters\Base
      */
-    abstract function getParameterStructure(array $parameterExpressions);
+    abstract protected function getParameterStructure(array $parameterExpressions);
 
     /**
      * Gets a callable factory for the function structure.
@@ -135,12 +135,13 @@ abstract class Base implements \Serializable
         return $this->bodyExpressions === null;
     }
 
-    final protected function verifyNotInternal()
+    final protected function verifyNotInternal($method)
     {
         if ($this->isInternal()) {
             throw new \Pinq\PinqException(
-                    'Cannot get body expressions from %s: function is not user defined.',
-                    get_class($this));
+                    'Invalid call to %s::%s: function is not user defined.',
+                    get_class($this),
+                    $method);
         }
     }
 
@@ -192,27 +193,61 @@ abstract class Base implements \Serializable
     }
 
     /**
-     * Gets the body expressions of the function
+     * Gets the body expressions of the function.
      *
      * @return O\Expression[]
      * @throws \Pinq\PinqException if the function is internal
      */
     final public function getBodyExpressions()
     {
-        $this->verifyNotInternal();
+        $this->verifyNotInternal(__FUNCTION__);
         return $this->bodyExpressions;
     }
 
     /**
-     * Gets amount of body expressions of the function
+     * Gets the body expressions of the function before and including
+     * the first return statement.
+     *
+     * @return O\Expression[]
+     * @throws \Pinq\PinqException if the function is internal
+     */
+    final public function getBodyExpressionsUntilReturn()
+    {
+        $this->verifyNotInternal(__FUNCTION__);
+        $expressions = [];
+        foreach($this->bodyExpressions as $expression) {
+            $expressions[] = $expression;
+            if($expression instanceof O\ReturnExpression) {
+                break;
+            }
+        }
+
+        return $expressions;
+    }
+
+    /**
+     * Gets amount of body expressions of the function.
      *
      * @return int
      * @throws \Pinq\PinqException if the function is internal
      */
     final public function countBodyExpressions()
     {
-        $this->verifyNotInternal();
+        $this->verifyNotInternal(__FUNCTION__);
         return count($this->bodyExpressions);
+    }
+
+    /**
+     * Gets amount of body expressions of the function before and including
+     * the first return statement.
+     *
+     * @return int
+     * @throws \Pinq\PinqException if the function is internal
+     */
+    final public function countBodyExpressionsUntilReturn()
+    {
+        $this->verifyNotInternal(__FUNCTION__);
+        return count($this->getBodyExpressionsUntilReturn());
     }
 
     /**

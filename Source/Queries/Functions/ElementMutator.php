@@ -12,7 +12,7 @@ use Pinq\Expressions as O;
  */
 class ElementMutator extends MutatorBase
 {
-    public function getParameterStructure(array $parameterExpressions)
+    protected function getParameterStructure(array $parameterExpressions)
     {
         return new Parameters\ValueKey($parameterExpressions);
     }

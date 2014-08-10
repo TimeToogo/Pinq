@@ -12,16 +12,18 @@ use Pinq\Expressions as O;
  */
 class ElementProjection extends ProjectionBase
 {
-    public function getParameterStructure(array $parameterExpressions)
+    protected function getParameterStructure(array $parameterExpressions)
     {
         return new Parameters\ValueKey($parameterExpressions);
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @return Parameters\ValueKey
      */
     public function getParameters()
     {
-        return parent::getParameters();
+        return $t = parent::getParameters();
     }
 }
