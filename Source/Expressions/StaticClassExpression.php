@@ -48,7 +48,7 @@ abstract class StaticClassExpression extends Expression
     protected function compileType(&$code, Expression $typeExpression)
     {
         if ($typeExpression instanceof ValueExpression) {
-            $code .= $this->class->getValue();
+            $code .= $typeExpression->getValue();
         } else {
             $typeExpression->compileCode($code);
         }

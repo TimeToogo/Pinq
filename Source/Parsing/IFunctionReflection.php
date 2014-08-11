@@ -43,10 +43,19 @@ interface IFunctionReflection extends ILocatedFunction
     public function resolveMagic(IFunctionDeclaration $functionDeclaration);
 
     /**
-     * Gets a globally unique hash of the funcion based on its
+     * Gets a globally unique hash of the function based on its
      * signature, location and class scope.
      *
      * @return string
      */
     public function getGlobalHash();
+
+    /**
+     * Gets an evaluation context for the same context as the function.
+     *
+     * @param mixed $argumentsMap
+     *
+     * @return O\IEvaluationContext
+     */
+    public function asEvaluationContext(array $argumentsMap = []);
 }

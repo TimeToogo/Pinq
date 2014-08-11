@@ -1,6 +1,8 @@
 <?php
+
 namespace Pinq\Queries\Builders;
 
+use Pinq\Expressions as O;
 
 /**
  * Implementation of the scope builder.
@@ -27,12 +29,12 @@ interface IScopeBuilder extends IQueryBuilder
      * Builds a scope interpreter with the supplied interpretation.
      *
      * @param Interpretations\IScopeInterpretation $interpretation
-     * @param string|null                          $closureScopeType
+     * @param O\IEvaluationContext                 $evaluationContext
      *
      * @return IScopeInterpreter
      */
     public function buildScopeInterpreter(
             Interpretations\IScopeInterpretation $interpretation,
-            $closureScopeType = null
+            O\IEvaluationContext $evaluationContext = null
     );
 }

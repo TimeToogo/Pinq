@@ -60,13 +60,13 @@ class NewExpression extends StaticClassExpression
 
     protected function compileCode(&$code)
     {
-        $code .= 'new ';
+        $code .= '(new ';
 
         $this->compileType($code, $this->class);
 
         $code .= '(';
         $code .= implode(',', self::compileAll($this->arguments));
-        $code .= ')';
+        $code .= '))';
     }
 
     protected function dataToSerialize()

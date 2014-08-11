@@ -20,6 +20,20 @@ class VariableExpression extends Expression
         $this->name = $name;
     }
 
+    public function simplifyToValue(IEvaluationContext $context = null)
+    {
+        if($context !== null && $this->name instanceof ValueExpression) {
+            $name = $this->name->getValue();
+            $variableValueMap = $context->getVariableValueMap();
+            if(array_key_exists($name, $variableValueMap)) {
+                return $variableValueMap[$name];
+            }
+        }
+
+        return parent::simplifyToValue($context);
+    }
+
+
     public function traverse(ExpressionWalker $walker)
     {
         return $walker->walkVariable($this);

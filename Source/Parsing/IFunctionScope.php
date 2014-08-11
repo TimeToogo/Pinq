@@ -46,4 +46,14 @@ interface IFunctionScope
      * @return array<string, mixed>
      */
     public function getVariableValueMap();
+
+    /**
+     * Gets an equivalent evaluation context for the function scope.
+     *
+     * @param mixed $argumentMap
+     * @param string|null $namespace
+     *
+     * @return O\IEvaluationContext
+     */
+    public function asEvaluationContext(array $argumentMap = [], $namespace = null);
 }

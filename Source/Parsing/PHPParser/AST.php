@@ -72,7 +72,7 @@ class AST
     {
         switch (true) {
             case $node instanceof \PHPParser_Node_Stmt:
-                return $this->parseStatmentNode($node);
+                return $this->parseStatementNode($node);
 
             case $node instanceof \PHPParser_Node_Expr:
                 return $this->parseExpressionNode($node);
@@ -80,7 +80,7 @@ class AST
             case $node instanceof \PHPParser_Node_Param:
                 return $this->parseParameterNode($node);
 
-            //Irrelavent node, no call time pass by ref anymore
+            //Irrelevant node, no call time pass by ref anymore
             case $node instanceof \PHPParser_Node_Arg:
                 return $this->parseNode($node->value);
 
@@ -97,9 +97,7 @@ class AST
     final public function parseNameNode($node)
     {
         if ($node instanceof \PHPParser_Node_Name) {
-            $nameValue = ($node->isFullyQualified() ? '\\' : '') . (string)$node;
-
-            return Expression::value($nameValue);
+            return Expression::value(($node->isFullyQualified() ? '\\' : '') . (string)$node);
         } elseif (is_string($node)) {
             return Expression::value($node);
         }
@@ -109,9 +107,18 @@ class AST
 
     private function parseParameterNode(\PHPParser_Node_Param $node)
     {
+        $type = $node->type;
+        if ($type !== null) {
+            $type = (string)$type;
+            $lowerType = strtolower($type);
+            if ($type[0] !== '\\' && $lowerType !== 'array' && $lowerType !== 'callable') {
+                $type = '\\' . $type;
+            }
+        }
+
         return Expression::parameter(
                 $node->name,
-                $node->type === null ? null : (string)$node->type,
+                $type,
                 $node->default === null ? null : $this->parseNode($node->default),
                 $node->byRef
         );
@@ -256,12 +263,10 @@ class AST
             $parameterExpressions[] = $this->parseParameterNode($parameterNode);
         }
 
-        $usedVariables   = array_map(
-                function (\PHPParser_Node_Expr_ClosureUse $node) {
-                    return $node->var;
-                },
-                $node->uses
-        );
+        $usedVariables   = [];
+        foreach($node->uses as $usedVariable) {
+            $usedVariables[] =  Expression::closureUsedVariable($usedVariable->var, $usedVariable->byRef);
+        }
         $bodyExpressions = $this->parseNodes($node->stmts);
 
         return Expression::closure(
@@ -314,7 +319,7 @@ class AST
 
     // <editor-fold defaultstate="collapsed" desc="Statement node parsers">
 
-    private function parseStatmentNode(\PHPParser_Node_Stmt $node)
+    private function parseStatementNode(\PHPParser_Node_Stmt $node)
     {
         switch (true) {
 
@@ -328,7 +333,7 @@ class AST
                 return Expression::unsetExpression($this->parseNodes($node->vars));
 
             default:
-                $this->verifiyNotControlStructure($node);
+                $this->verifyNotControlStructure($node);
                 throw new ASTException(
                         'Cannot parse AST with unknown statement node: %s',
                         get_class($node));
@@ -346,7 +351,7 @@ class AST
             'While'    => ASTException::WHILE_LOOP
     ];
 
-    private function verifiyNotControlStructure(\PHPParser_Node_Stmt $node)
+    private function verifyNotControlStructure(\PHPParser_Node_Stmt $node)
     {
         $nodeType = str_replace('PHPParser_Node_Stmt_', '', get_class($node));
 
@@ -360,7 +365,7 @@ class AST
 
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Operater node maps">
+    // <editor-fold defaultstate="collapsed" desc="Operator node maps">
 
     private function parseOperatorNode(\PHPParser_Node_Expr $node, $nodeType)
     {

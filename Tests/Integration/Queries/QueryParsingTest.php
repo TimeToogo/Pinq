@@ -210,6 +210,7 @@ class QueryParsingTest extends QueryBuildingTest
                         new Q\Functions\Aggregator(
                                 $this->parameter(),
                                 self::SCOPE_TYPE,
+                                self::SCOPE_NAMESPACE,
                                 [$this->parameter() => 'this'],
                                 [O\Expression::parameter('a'), O\Expression::parameter('s')],
                                 [
@@ -267,6 +268,7 @@ class QueryParsingTest extends QueryBuildingTest
                         new Q\Functions\ElementMutator(
                                 $this->parameter(),
                                 self::SCOPE_TYPE,
+                                self::SCOPE_NAMESPACE,
                                 [$this->parameter() => 'this'],
                                 [O\Expression::parameter('i', null, null, true)],
                                 [
@@ -302,6 +304,7 @@ class QueryParsingTest extends QueryBuildingTest
                         new Q\Functions\ElementProjection(
                                 $this->parameter(),
                                 self::SCOPE_TYPE,
+                                self::SCOPE_NAMESPACE,
                                 [$this->parameter() => 'this'],
                                 [],
                                 [O\Expression::returnExpression(O\Expression::constant('true'))]))
@@ -328,12 +331,14 @@ class QueryParsingTest extends QueryBuildingTest
                                 new Q\Functions\ConnectorProjection(
                                         $this->parameter(),
                                         self::SCOPE_TYPE,
+                                        self::SCOPE_NAMESPACE,
                                         [$this->parameter() => 'this'],
                                         [],
                                         [O\Expression::returnExpression(O\Expression::constant('true'))]))),
                 new Q\Functions\ConnectorMutator(
                         $this->parameter(),
                         self::SCOPE_TYPE,
+                        self::SCOPE_NAMESPACE,
                         [$this->parameter() => 'this'],
                         [O\Expression::parameter('o', null, null, true), O\Expression::parameter('i')],
                         [
@@ -352,6 +357,7 @@ class QueryParsingTest extends QueryBuildingTest
                         new Q\Functions\ElementProjection(
                                 $this->parameter(),
                                 self::SCOPE_TYPE,
+                                self::SCOPE_NAMESPACE,
                                 [$this->parameter() => 'this'],
                                 [],
                                 [O\Expression::returnExpression(O\Expression::constant('true'))]))]);
@@ -359,8 +365,10 @@ class QueryParsingTest extends QueryBuildingTest
 
     protected function selfProjection($variableName = 'i')
     {
-        return new Q\Functions\ElementProjection($this->parameter(),
+        return new Q\Functions\ElementProjection(
+                $this->parameter(),
                 self::SCOPE_TYPE,
+                self::SCOPE_NAMESPACE,
                 [$this->parameter() => 'this'],
                 [O\Expression::parameter($variableName)],
                 [O\Expression::returnExpression(O\Expression::variable(O\Expression::value($variableName)))]);
@@ -437,6 +445,7 @@ class QueryParsingTest extends QueryBuildingTest
         return new Q\Functions\ConnectorProjection(
                 $this->parameter(),
                 self::SCOPE_TYPE,
+                self::SCOPE_NAMESPACE,
                 [$this->parameter() => 'this'],
                 [O\Expression::parameter('o'), O\Expression::parameter('i')],
                 [
@@ -464,6 +473,7 @@ class QueryParsingTest extends QueryBuildingTest
                                 new Q\Functions\ConnectorProjection(
                                         $this->parameter(),
                                         self::SCOPE_TYPE,
+                                        self::SCOPE_NAMESPACE,
                                         [$this->parameter() => 'this'],
                                         [O\Expression::parameter('o'), O\Expression::parameter('i')],
                                         [O\Expression::returnExpression(
@@ -600,6 +610,7 @@ class QueryParsingTest extends QueryBuildingTest
                         new Q\Functions\ElementProjection(
                                 $this->parameter(),
                                 self::SCOPE_TYPE,
+                                self::SCOPE_NAMESPACE,
                                 [$this->parameter() => 'this'],
                                 [],
                                 [O\Expression::returnExpression(O\Expression::constant('true'))]))]))]);
@@ -630,31 +641,12 @@ class QueryParsingTest extends QueryBuildingTest
         )]))]);
     }
 
-    /** @return self */
-    private function getThis()
-    {
-        return $this;
-    }
-
-    protected function nestedOperationsQueryWithRequiredSimplification()
-    {
-        $this->assertRequestIsCorrect(
-                function (IQueryable $queryable) {
-                    return $queryable
-                            ->whereIn($this->getThis()->getThis()->queryable->keys());
-                },
-                $this->scopeRequest([new Q\Segments\Operation(
-                         Q\Segments\Operation::WHERE_IN,
-                         $this->scopeSource([
-                             new Q\Segments\Keys()
-                         ]))]));
-    }
-
     protected function indexProjection($index, $variableName = 'row')
     {
         return new Q\Functions\ElementProjection(
                 $this->parameter(),
                 self::SCOPE_TYPE,
+                self::SCOPE_NAMESPACE,
                 [$this->parameter() => 'this'],
                 [O\Expression::parameter($variableName)],
                 [
@@ -675,6 +667,7 @@ class QueryParsingTest extends QueryBuildingTest
                         new Q\Segments\Filter(new Q\Functions\ElementProjection(
                                 $this->parameter(),
                                 self::SCOPE_TYPE,
+                                self::SCOPE_NAMESPACE,
                                 [$this->parameter() => 'this'],
                                 [O\Expression::parameter('row')],
                                 [O\Expression::returnExpression(
@@ -693,6 +686,7 @@ class QueryParsingTest extends QueryBuildingTest
                         new Q\Segments\Select(new Q\Functions\ElementProjection(
                                 $this->parameter(),
                                 self::SCOPE_TYPE,
+                                self::SCOPE_NAMESPACE,
                                 [$this->parameter() => 'this'],
                                 [O\Expression::parameter('row')],
                                 [O\Expression::returnExpression(
@@ -717,5 +711,28 @@ class QueryParsingTest extends QueryBuildingTest
                                         ))]))
                 ]
         );
+    }
+
+    /** @return self */
+    private function getThis()
+    {
+        return $this;
+    }
+
+    /**
+     * @dataProvider allImplementations
+     */
+    public function testNestedOperationsQueryWithRequiredSimplificationInScope()
+    {
+        $this->assertRequestIsCorrect(
+                function (IQueryable $queryable) {
+                    return $queryable
+                            ->whereIn($this->getThis()->getThis()->queryable->keys());
+                },
+                $this->scopeRequest([new Q\Segments\Operation(
+                                Q\Segments\Operation::WHERE_IN,
+                                $this->scopeSource([
+                                                new Q\Segments\Keys()
+                                        ]))]));
     }
 }

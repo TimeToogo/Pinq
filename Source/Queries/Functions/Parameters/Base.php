@@ -3,7 +3,6 @@
 namespace Pinq\Queries\Functions\Parameters;
 
 use Pinq\Expressions as O;
-use Pinq\Parsing\IFunctionScope;
 
 /**
  * Base class for the structure of parameters of a function.
@@ -115,34 +114,11 @@ abstract class Base implements \Countable
      * respective unused parameter name.
      * This is useful as it will introduce variables in the scope of the
      * function that may be validly used.
-
      *
-*@return array<string, O\Expression>
+     * @return array<string, O\Expression>
      */
     public function getUnusedParameterDefaultMap()
     {
         return $this->unusedParameterDefaultMap;
-    }
-
-    /**
-     * Returns an array containing default values indexed by their
-     * respective unused parameter name.
-     *
-     * @param IFunctionScope $scope
-     * @param string|null    $resolutionNamespace
-     *
-     * @return array<string, mixed>
-     */
-    public function getUnusedParameterDefaultValueMap(IFunctionScope $scope = null, $resolutionNamespace = null)
-    {
-        $defaultValueMap = [];
-        foreach($this->unusedParameterDefaultMap as $name => $defaultValueExpression) {
-            if($defaultValueExpression !== null) {
-                /** @var $defaultValueExpression O\Expression */
-                $defaultValueMap[$name] = $defaultValueExpression->simplifyToValue($scope, $resolutionNamespace);
-            }
-        }
-
-        return $defaultValueMap;
     }
 }

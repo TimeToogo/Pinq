@@ -133,7 +133,7 @@ class ComplexParserTest extends ParserTest
     {
         $function =
                 function () {
-                    return static function & ($foo) {
+                    return static function & ($foo) use ($foo, &$bar) {
                         $foo->bar += 5;
                     };
                 };
@@ -143,7 +143,7 @@ class ComplexParserTest extends ParserTest
                         true,
                         true,
                         [O\Expression::parameter('foo')],
-                        [],
+                        [O\Expression::closureUsedVariable('foo'), O\Expression::closureUsedVariable('bar', true)],
                         [O\Expression::assign(
                                 O\Expression::field(self::variable('foo'), O\Expression::value('bar')),
                                 O\Operators\Assignment::ADDITION,

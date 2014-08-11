@@ -2,7 +2,7 @@
 
 namespace Pinq\Expressions;
 
-use Pinq\Parsing\IFunctionScope;
+use Pinq\PinqException;
 use Pinq\Utilities;
 
 /**
@@ -20,24 +20,25 @@ abstract class Expression implements \Serializable
     }
 
     /**
-     * @param Expression[]        $expressions
-     * @param IFunctionScope|null $scope
-     * @param string|null         $resolutionNamespace
+     * @param Expression[]       $expressions
+     * @param IEvaluationContext $context
      *
      * @return Expression[]
      */
     final public static function simplifyAll(
             array $expressions,
-            IFunctionScope $scope = null,
-            $resolutionNamespace = null
+            IEvaluationContext $context = null
     ) {
-        $simplifier = new Walkers\ExpressionSimplifier($scope, $resolutionNamespace);
+        $simplifiedExpressions = [];
+        foreach ($expressions as $expression) {
+            $simplifiedExpressions[] = $expression->simplify($context);
+        }
 
-        return $simplifier->walkAll($expressions);
+        return $simplifiedExpressions;
     }
 
     /**
-     * Returns whether the supplied name is cosidered normal name syntax
+     * Returns whether the supplied name is considered normal name syntax
      * and can be used plainly in code.
      * Example:
      * 'foo' -> yes: $foo
@@ -85,31 +86,20 @@ abstract class Expression implements \Serializable
     abstract public function traverse(ExpressionWalker $walker);
 
     /**
-     * Resolves and simplifies the expression tree and returns the
-     * resulting value.
+     * Evaluates the expression tree in the supplied context
+     * and returns the resulting value.
      *
-     * @param IFunctionScope|null $scope
-     * @param string|null         $resolutionNamespace
+     * @param IEvaluationContext|null $context
      *
      * @return mixed
-     * @throws \Pinq\PinqException If the expression tree cannot be fully resolved.
      */
-    final public function simplifyToValue(IFunctionScope $scope = null, $resolutionNamespace = null)
+    public function simplifyToValue(IEvaluationContext $context = null)
     {
-        $simplifiedExpression = $this->simplify($scope, $resolutionNamespace);
-
-        if (!($simplifiedExpression instanceof ValueExpression)) {
-            throw new \Pinq\PinqException(
-                    'Cannot simplify expression tree to value: Expression %s simplified to %s, but still containes unresolvable expressions',
-                    $this->compileDebug(),
-                    $simplifiedExpression->compileDebug());
-        }
-
-        return $simplifiedExpression->getValue();
+        return ExpressionEvaluator::evaluate([Expression::returnExpression($this)], $context);
     }
 
     /**
-     * Simplifies the expression tree in the supplied class scope.
+     * Simplifies the expression tree in the supplied context.
      * Example:
      * <code>
      * -2 + 4
@@ -119,16 +109,20 @@ abstract class Expression implements \Serializable
      * 2
      * </code>
      *
-     * @param IFunctionScope|null $scope
-     * @param string|null         $resolutionNamespace
+     * @param IEvaluationContext|null $context
      *
      * @return Expression
      */
-    final public function simplify(IFunctionScope $scope = null, $resolutionNamespace = null)
+    public function simplify(IEvaluationContext $context = null)
     {
-        $simplifier = new Walkers\ExpressionSimplifier($scope, $resolutionNamespace);
+        return Expression::value($this->simplifyToValue($context));
+    }
 
-        return $simplifier->walk($this);
+    final protected static function cannotSimplifyToValue()
+    {
+        return new PinqException(
+                'Cannot simply expression of type %s to value.',
+                get_called_class());
     }
 
     /**
@@ -163,7 +157,7 @@ abstract class Expression implements \Serializable
     /**
      * Returns a value hash for the supplied expressions.
      *
-     * @param Expression[]  $expressions
+     * @param Expression[] $expressions
      *
      * @return string
      */
@@ -190,7 +184,7 @@ abstract class Expression implements \Serializable
     }
 
     /**
-     * Compiles the expression tree into equivalent PHP code
+     * Compiles the expression tree into equivalent PHP code.
      *
      * @return string
      */
@@ -210,11 +204,15 @@ abstract class Expression implements \Serializable
     final public function compileDebug()
     {
         return (new DynamicExpressionWalker([
-                ValueExpression::getType() => function (ValueExpression $expression) {
-                    $value = $expression->getValue();
-                    return !is_scalar($value) && $value !== null ?
-                            Expression::constant('{' . Utilities::getTypeOrClass($expression->getValue()) . '}') : $expression;
-                }]))
+                ValueExpression::getType() =>
+                        function (ValueExpression $expression) {
+                            $value = $expression->getValue();
+                            return !is_scalar($value) && $value !== null ?
+                                    Expression::constant(
+                                            '{' . Utilities::getTypeOrClass($expression->getValue()) . '}'
+                                    ) : $expression;
+                        }
+        ]))
                 ->walk($this)
                 ->compile();
     }
@@ -560,11 +558,11 @@ abstract class Expression implements \Serializable
     }
 
     /**
-     * @param boolean      $returnsReference
-     * @param boolean      $isStatic
-     * @param Expression[] $parameterExpressions
-     * @param string[]     $usedVariables
-     * @param Expression[] $bodyExpressions
+     * @param boolean                         $returnsReference
+     * @param boolean                         $isStatic
+     * @param ParameterExpression[]           $parameterExpressions
+     * @param ClosureUsedVariableExpression[] $usedVariables
+     * @param Expression[]                    $bodyExpressions
      *
      * @return ClosureExpression
      */
@@ -581,6 +579,16 @@ abstract class Expression implements \Serializable
                 $parameterExpressions,
                 $usedVariables,
                 $bodyExpressions);
+    }
+
+    /**
+     * @param string $name
+     * @param boolean $isReference
+     *
+     * @return ClosureUsedVariableExpression
+     */
+    final public static function closureUsedVariable($name, $isReference = false) {
+        return new ClosureUsedVariableExpression($name, $isReference);
     }
 
     // </editor-fold>

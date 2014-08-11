@@ -17,20 +17,20 @@ class ClosureExpressionFunction extends BaseFunction
     private $expression;
 
     /**
+     * @var O\IEvaluationContext|null
+     */
+    private $evaluationContext;
+
+    /**
      * @var callable|null
      */
     private $callable;
 
-    /**
-     * @var string|null
-     */
-    private $scopeType;
-
-    public function __construct($id, O\ClosureExpression $expression, $scopeType = null)
+    public function __construct($id, O\ClosureExpression $expression, O\IEvaluationContext $evaluationContext = null)
     {
         parent::__construct($id);
-        $this->expression = $expression;
-        $this->scopeType  = $scopeType;
+        $this->expression        = $expression;
+        $this->evaluationContext = $evaluationContext;
     }
 
     public function getType()
@@ -49,26 +49,23 @@ class ClosureExpressionFunction extends BaseFunction
     /**
      * @return boolean
      */
-    public function hasScopeType()
+    public function hasEvaluationContext()
     {
-        return $this->scopeType !== null;
+        return $this->evaluationContext !== null;
     }
 
     /**
-     * @return string|null
+     * @return O\IEvaluationContext|null
      */
-    public function getScopeType()
+    public function getEvaluationContext()
     {
-        return $this->scopeType;
+        return $this->evaluationContext;
     }
 
     public function getCallable()
     {
         if ($this->callable === null) {
-            $this->callable = eval('return ' . $this->expression->compile() . ';');
-            if ($this->scopeType !== null) {
-                $this->callable = \Closure::bind($this->callable, null, $this->scopeType);
-            }
+            $this->callable = $this->expression->simplifyToValue($this->evaluationContext);
         }
 
         return $this->callable;

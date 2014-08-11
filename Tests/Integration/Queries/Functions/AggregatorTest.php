@@ -22,6 +22,7 @@ class AggregatorTest extends FunctionTest
         $function = $this->buildFunction(
                 '',
                 null,
+                null,
                 [],
                 [O\Expression::parameter('aggregate'), O\Expression::parameter('value')]
         );
@@ -34,7 +35,7 @@ class AggregatorTest extends FunctionTest
         $this->assertSame([], $function->getParameters()->getRequiredUnusedParameters());
         $this->assertSame([], $function->getParameters()->getUnused());
         $this->assertSame([], $function->getParameters()->getUnusedParameterDefaultMap());
-        $this->assertSame([], $function->getParameters()->getUnusedParameterDefaultValueMap());
+        $this->assertSame([], $function->getUnusedParameterDefaultValueMap());
     }
 }
  

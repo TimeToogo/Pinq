@@ -3,10 +3,10 @@
 namespace Pinq\Queries\Builders\Interpretations;
 
 use Pinq\Parsing\IFunctionInterpreter;
-use Pinq\Queries;
 use Pinq\Queries\Builders\Functions\CallableFunction;
 use Pinq\Queries\Builders\Functions\ClosureExpressionFunction;
 use Pinq\Queries\Builders\Functions\IFunction;
+use Pinq\Queries;
 
 /**
  * Base class for query expression parsing.
@@ -46,13 +46,18 @@ class BaseParser extends BaseInterpretation implements IQueryParser
         if ($function instanceof CallableFunction) {
             $reflection           = $this->functionInterpreter->getReflection($function->getCallable());
             $scopeType            = $reflection->getScope()->getScopeType();
+            $namespace            = $reflection->getInnerReflection()->getNamespaceName() ? : null;
             $parameterExpressions = $reflection->getSignature()->getParameterExpressions();
             $scopedVariableNames  = $reflection->getSignature()->isStatic() ? [] : ['this'];
-            $scopedVariableNames  = array_merge($scopedVariableNames, $reflection->getSignature()->getScopedVariableNames() ?: []);
+            $scopedVariableNames  = array_merge(
+                    $scopedVariableNames,
+                    $reflection->getSignature()->getScopedVariableNames() ? : []
+            );
             $bodyExpressions      = $reflection->getInnerReflection()->isUserDefined()
                     ? $this->functionInterpreter->getStructure($reflection)->getBodyExpressions() : null;
         } elseif ($function instanceof ClosureExpressionFunction) {
-            $scopeType            = $function->getScopeType();
+            $scopeType            = $function->getEvaluationContext()->getScopeType();
+            $namespace            = $function->getEvaluationContext()->getNamespace();
             $expression           = $function->getExpression();
             $parameterExpressions = $expression->getParameters();
             $bodyExpressions      = $expression->getBodyExpressions();
@@ -66,6 +71,7 @@ class BaseParser extends BaseInterpretation implements IQueryParser
         return $factory(
                 $this->requireParameter($this->getFunctionCallableParameter($function)),
                 $scopeType,
+                $namespace,
                 $this->requireFunctionScope($function, $scopedVariableNames),
                 $parameterExpressions,
                 $bodyExpressions

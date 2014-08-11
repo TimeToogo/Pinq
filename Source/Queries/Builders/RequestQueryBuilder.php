@@ -12,12 +12,14 @@ use Pinq\Queries;
  */
 class RequestQueryBuilder extends QueryBuilder implements IRequestQueryBuilder
 {
-    final public function parseRequest(O\Expression $expression, $closureScopeType = null)
-    {
+    final public function parseRequest(
+            O\Expression $expression,
+            O\IEvaluationContext $evaluationContext = null
+    ) {
         $scopeParser   = $this->scopeBuilder->buildScopeParser();
         $requestParser = $this->buildRequestParser();
 
-        $this->interpretRequestQuery($expression, $scopeParser, $requestParser, $closureScopeType);
+        $this->interpretRequestQuery($expression, $scopeParser, $requestParser, $evaluationContext);
 
         return $this->buildRequestQuery(
                 $scopeParser->getScope(),
@@ -55,13 +57,16 @@ class RequestQueryBuilder extends QueryBuilder implements IRequestQueryBuilder
             O\Expression $expression,
             Interpretations\IScopeInterpretation $scopeInterpretation,
             Interpretations\IRequestInterpretation $requestInterpretation,
-            $closureScopeType = null
+            O\IEvaluationContext $evaluationContext = null
     ) {
-        $scopeInterpreter        = $this->scopeBuilder->buildScopeInterpreter($scopeInterpretation, $closureScopeType);
+        $scopeInterpreter        = $this->scopeBuilder->buildScopeInterpreter(
+                $scopeInterpretation,
+                $evaluationContext
+        );
         $requestQueryInterpreter = $this->buildRequestQueryInterpreter(
                 $requestInterpretation,
                 $scopeInterpreter,
-                $closureScopeType
+                $evaluationContext
         );
 
         $requestQueryInterpreter->interpret($expression);
@@ -70,16 +75,16 @@ class RequestQueryBuilder extends QueryBuilder implements IRequestQueryBuilder
     /**
      * @param Interpretations\IRequestInterpretation $requestInterpretation
      * @param IScopeInterpreter                      $scopeInterpreter
-     * @param string|null                            $closureScopeType
+     * @param O\IEvaluationContext                   $evaluationContext
      *
      * @return IRequestQueryInterpreter
      */
     protected function buildRequestQueryInterpreter(
             Interpretations\IRequestInterpretation $requestInterpretation,
             IScopeInterpreter $scopeInterpreter,
-            $closureScopeType = null
+            O\IEvaluationContext $evaluationContext = null
     ) {
-        return new RequestQueryInterpreter($requestInterpretation, $scopeInterpreter, $closureScopeType);
+        return new RequestQueryInterpreter($requestInterpretation, $scopeInterpreter, $evaluationContext);
     }
 
     /**

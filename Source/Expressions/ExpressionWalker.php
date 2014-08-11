@@ -240,8 +240,13 @@ class ExpressionWalker
                 $expression->returnsReference(),
                 $expression->isStatic(),
                 $this->walkAll($expression->getParameters()),
-                $expression->getUsedVariableNames(),
+                $this->walkAll($expression->getUsedVariables()),
                 $this->walkAll($expression->getBodyExpressions())
         );
+    }
+
+    public function walkClosureUsedVariable(ClosureUsedVariableExpression $expression)
+    {
+        return $expression;
     }
 }

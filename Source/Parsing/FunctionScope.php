@@ -2,8 +2,10 @@
 
 namespace Pinq\Parsing;
 
+use Pinq\Expressions as O;
+
 /**
- * Implementation of the function scope inteface.
+ * Implementation of the function scope interface.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
@@ -34,9 +36,9 @@ class FunctionScope implements IFunctionScope
             $scopeType,
             array $variableValueMap
     ) {
-        $this->thisObject       = $thisObject;
-        $this->thisType         = $thisObject !== null ? get_class($thisObject) : null;
-        $this->scopeType        = $scopeType;
+        $this->thisObject = $thisObject;
+        $this->thisType = $thisObject !== null ? get_class($thisObject) : null;
+        $this->scopeType = $scopeType;
         $this->variableValueMap = $variableValueMap;
     }
 
@@ -44,7 +46,7 @@ class FunctionScope implements IFunctionScope
      * Creates a function scope instance from the supplied reflection and callable.
      *
      * @param \ReflectionFunctionAbstract $reflection
-     * @param callable                    $callable
+     * @param callable $callable
      *
      * @return self
      */
@@ -53,18 +55,18 @@ class FunctionScope implements IFunctionScope
         if (is_array($callable) && is_object($callable[0])) {
             /** @var $reflection \ReflectionMethod */
             $thisObject = $callable[0];
-            $scopeType  = $reflection->getDeclaringClass()->getName();
+            $scopeType = $reflection->getDeclaringClass()->getName();
         } elseif (is_object($callable) && !($callable instanceof \Closure)) {
             /** @var $reflection \ReflectionMethod */
             $thisObject = $callable;
-            $scopeType  = $reflection->getDeclaringClass()->getName();
+            $scopeType = $reflection->getDeclaringClass()->getName();
         } elseif ($reflection->isClosure()) {
             $thisObject = $reflection->getClosureThis();
             $scopeClass = $reflection->getClosureScopeClass();
-            $scopeType  = $scopeClass === null ? null : $scopeClass->getName();
+            $scopeType = $scopeClass === null ? null : $scopeClass->getName();
         } else {
             $thisObject = null;
-            $scopeType  = null;
+            $scopeType = null;
         }
         $variableValueMap = $reflection->getStaticVariables();
 
@@ -94,5 +96,16 @@ class FunctionScope implements IFunctionScope
     public function getVariableValueMap()
     {
         return $this->variableValueMap;
+    }
+
+    public function asEvaluationContext(array $argumentsMap = [], $namespace = null)
+    {
+        return new O\EvaluationContext(
+                $namespace,
+                $this->scopeType,
+                $this->thisObject,
+                //Used variables take precedence over arguments: http://3v4l.org/V4LSE
+                $this->variableValueMap + $argumentsMap
+        );
     }
 }

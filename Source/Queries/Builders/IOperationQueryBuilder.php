@@ -14,12 +14,15 @@ interface IOperationQueryBuilder extends IQueryBuilder
     /**
      * Parses the supplied expression into a operation query template.
      *
-     * @param O\Expression $expression
-     * @param string|null  $closureScopeType
+     * @param O\Expression              $expression
+     * @param O\IEvaluationContext|null $evaluationContext
      *
      * @return Queries\IOperationQuery
      */
-    public function parseOperation(O\Expression $expression, $closureScopeType = null);
+    public function parseOperation(
+            O\Expression $expression,
+            O\IEvaluationContext $evaluationContext = null
+    );
 
     /**
      * Resolves the query requirements from the supplied expression.

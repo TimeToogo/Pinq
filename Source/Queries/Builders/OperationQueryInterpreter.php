@@ -3,9 +3,9 @@
 namespace Pinq\Queries\Builders;
 
 use Pinq\Expressions as O;
+use Pinq\Queries;
 use Pinq\Queries\Builders\Interpretations\IOperationInterpretation;
 use Pinq\Queries\Common;
-use Pinq\Queries;
 
 class OperationQueryInterpreter extends QueryInterpreter implements IOperationQueryInterpreter
 {
@@ -14,9 +14,12 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
      */
     protected $interpretation;
 
-    public function __construct(IOperationInterpretation $interpretation, IScopeInterpreter $scopeInterpreter, $closureScopeType = null)
-    {
-        parent::__construct('operation', $scopeInterpreter, $closureScopeType);
+    public function __construct(
+            IOperationInterpretation $interpretation,
+            IScopeInterpreter $scopeInterpreter,
+            O\IEvaluationContext $evaluationContext = null
+    ) {
+        parent::__construct('operation', $scopeInterpreter, $evaluationContext);
 
         $this->interpretation = $interpretation;
     }
@@ -60,8 +63,8 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
 
     final protected function visitJoinApply(O\MethodCallExpression $expression)
     {
-        $applyFunction      = $this->getFunctionAt($this->getId('apply-function'), 0, $expression);
-        $expression         = $this->getSourceMethodCall($expression);
+        $applyFunction = $this->getFunctionAt($this->getId('apply-function'), 0, $expression);
+        $expression = $this->getSourceMethodCall($expression);
         $optionsInterpreter = $this->scopeInterpreter->buildJoinOptionsInterpreter($this->getId('join-apply'));
         $optionsInterpreter->interpretJoinOptions($expression, $sourceExpression);
         $this->interpretation->interpretJoinApply(

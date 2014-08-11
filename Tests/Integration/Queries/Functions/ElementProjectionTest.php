@@ -22,6 +22,7 @@ class ElementProjectionTest extends ProjectionBaseTest
         $function = $this->buildFunction(
                 '',
                 null,
+                null,
                 [],
                 [O\Expression::parameter('value'), O\Expression::parameter('key')]
         );
@@ -34,7 +35,7 @@ class ElementProjectionTest extends ProjectionBaseTest
         $this->assertSame([], $function->getParameters()->getRequiredUnusedParameters());
         $this->assertSame([], $function->getParameters()->getUnused());
         $this->assertSame([], $function->getParameters()->getUnusedParameterDefaultMap());
-        $this->assertSame([], $function->getParameters()->getUnusedParameterDefaultValueMap());
+        $this->assertSame([], $function->getUnusedParameterDefaultValueMap());
     }
 
     public function testEmptyParameters()
@@ -50,7 +51,7 @@ class ElementProjectionTest extends ProjectionBaseTest
         $this->assertSame([], $function->getParameters()->getRequiredUnusedParameters());
         $this->assertSame([], $function->getParameters()->getUnused());
         $this->assertSame([], $function->getParameters()->getUnusedParameterDefaultMap());
-        $this->assertSame([], $function->getParameters()->getUnusedParameterDefaultValueMap());
+        $this->assertSame([], $function->getUnusedParameterDefaultValueMap());
     }
 
     public function testRequiredExcessiveParameters()
@@ -58,6 +59,7 @@ class ElementProjectionTest extends ProjectionBaseTest
         /** @var $function Functions\ElementProjection */
         $function = $this->buildFunction(
                 '',
+                null,
                 null,
                 [],
                 [
@@ -83,7 +85,7 @@ class ElementProjectionTest extends ProjectionBaseTest
         );
         $this->assertEquals(
                 [],
-                $function->getParameters()->getUnusedParameterDefaultValueMap()
+                $function->getUnusedParameterDefaultValueMap()
         );
     }
 
@@ -92,6 +94,7 @@ class ElementProjectionTest extends ProjectionBaseTest
         /** @var $function Functions\ElementProjection */
         $function = $this->buildFunction(
                 '',
+                null,
                 null,
                 [],
                 [
@@ -117,7 +120,52 @@ class ElementProjectionTest extends ProjectionBaseTest
         );
         $this->assertEquals(
                 ['excessive1' => [true], 'excessive2' => [false]],
-                $function->getParameters()->getUnusedParameterDefaultValueMap()
+                $function->getUnusedParameterDefaultValueMap()
+        );
+    }
+
+    public function testFunctionWithDefaultRelativeConstant()
+    {
+        /** @var $function Functions\ElementProjection */
+        $function = $this->buildFunction(
+                '',
+                null,
+                __NAMESPACE__,
+                [],
+                [
+                        O\Expression::parameter('value'),
+                        O\Expression::parameter('key'),
+                        O\Expression::parameter('excessive1', null, O\Expression::constant('__RELATIVE_CONSTANT')),
+                        O\Expression::parameter('excessive2', null, O\Expression::value([false]))
+                ]
+        );
+
+        $this->assertSame(false, $function->getParameters()->hasRequiredUnusedParameters());
+        $this->assertEquals([], $function->getParameters()->getRequiredUnusedParameters());
+        $this->assertEquals(
+                [
+                        O\Expression::parameter('excessive1', null, O\Expression::constant('__RELATIVE_CONSTANT')),
+                        O\Expression::parameter('excessive2', null, O\Expression::value([false]))
+                ],
+                $function->getParameters()->getUnused()
+        );
+
+        $this->assertEquals(
+                ['excessive1' => O\Expression::constant('__RELATIVE_CONSTANT'), 'excessive2' => O\Expression::value([false])],
+                $function->getParameters()->getUnusedParameterDefaultMap()
+        );
+
+        define('__RELATIVE_CONSTANT', 'in global namespace');
+        $this->assertEquals(
+                ['excessive1' => 'in global namespace', 'excessive2' => [false]],
+                $function->getUnusedParameterDefaultValueMap()
+        );
+
+        //Should take precedence
+        define(__NAMESPACE__ . '\\__RELATIVE_CONSTANT', 'in relative namespace');
+        $this->assertEquals(
+                ['excessive1' => 'in relative namespace', 'excessive2' => [false]],
+                $function->getUnusedParameterDefaultValueMap()
         );
     }
 }

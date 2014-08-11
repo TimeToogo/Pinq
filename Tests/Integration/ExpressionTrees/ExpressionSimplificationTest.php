@@ -85,11 +85,12 @@ class ExpressionSimplificationTest extends InterpreterTest
         
         $bodyExpressions = $structure->getBodyExpressions();
         $this->assertCount(1, $bodyExpressions);
-        
+
+        $evaluationContext = $reflection->getScope()->asEvaluationContext([], $namespace);
         if($value instanceof O\Expression) {
-            $simplifiedValue = $bodyExpressions[0]->simplify($reflection->getScope(), $namespace);
+            $simplifiedValue = $bodyExpressions[0]->simplify($evaluationContext);
         } else {
-            $simplifiedValue = $bodyExpressions[0]->simplifyToValue($reflection->getScope(), $namespace);
+            $simplifiedValue = $bodyExpressions[0]->simplifyToValue($evaluationContext);
         }
         
         if($useNativeEquals) {
@@ -129,13 +130,10 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableBinaryOperators()
+    public function testUsedVariableBinaryOperators()
     {
-        $this->assertSimplifiesTo(function () { $var + 1; }, 
-                O\Expression::binaryOperation(
-                        O\Expression::variable(O\Expression::value('var')),
-                        O\Operators\Binary::ADDITION, 
-                        O\Expression::value(1)));
+        $var = -1;
+        $this->assertSimplifiesTo(function () use ($var) { $var + 1; }, 0);
     }
 
     /**
@@ -152,12 +150,10 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableUnaryOperator()
+    public function testUsedVariableUnaryOperator()
     {
-        $this->assertSimplifiesTo(function () { !$var; }, 
-                O\Expression::unaryOperation(
-                        O\Operators\Unary::NOT,
-                        O\Expression::variable(O\Expression::value('var'))));
+        $var = true;
+        $this->assertSimplifiesTo(function () use ($var) { !$var; }, false);
     }
 
     /**
@@ -176,12 +172,10 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableCastOperator()
+    public function testUsedVariableCastOperator()
     {
-        $this->assertSimplifiesTo(function () { (bool)$var; }, 
-                O\Expression::cast(
-                        O\Operators\Cast::BOOLEAN,
-                        O\Expression::variable(O\Expression::value('var'))));
+        $var = 'hi';
+        $this->assertSimplifiesTo(function () use ($var) { (bool)$var; }, true);
     }
     
     /**
@@ -210,13 +204,15 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableArrayDeclaration()
+    public function testUsedVariableArrayDeclaration()
     {
-        $this->assertSimplifiesTo(function () { ['foo' => 1.2, $bar => 'ttt']; }, 
-                O\Expression::arrayExpression([
-                    O\Expression::arrayItem(O\Expression::value('foo'), O\Expression::value(1.2), false),
-                    O\Expression::arrayItem(O\Expression::variable(O\Expression::value('bar')), O\Expression::value('ttt'), false),
-                ]));
+        $var = 'foo';
+        $this->assertSimplifiesTo(
+                function () use ($var) {
+                    ['foo' => 1.2, $var => 'ttt'];
+                },
+                ['foo' => 1.2, $var => 'ttt']
+        );
     }
     
     /**
@@ -233,13 +229,10 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableTernary()
+    public function testUsedVariableTernary()
     {
-        $this->assertSimplifiesTo(function () { $var ? 'left' : 'right'; }, 
-                O\Expression::ternary(
-                        O\Expression::variable(O\Expression::value('var')),
-                        O\Expression::value('left'),
-                        O\Expression::value('right')));
+        $var = 'foo';
+        $this->assertSimplifiesTo(function () use ($var) { $var ? 'left' : 'right'; }, 'left');
     }
     
     /**
@@ -269,10 +262,8 @@ class ExpressionSimplificationTest extends InterpreterTest
      */
     public function testNonSimplifyableFunctionCalls()
     {
-        $this->assertSimplifiesTo(function () { sqrt($var); }, 
-                O\Expression::functionCall(
-                        O\Expression::value('sqrt'), 
-                        [O\Expression::variable(O\Expression::value('var'))]));
+        $var = 25;
+        $this->assertSimplifiesTo(function () use ($var) { sqrt($var); }, 5);
     }
     
     /**
@@ -293,12 +284,11 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableStaticField()
+    public function testUsedVariableStaticField()
     {
-        $this->assertSimplifiesTo(function () { $var::$field; }, 
-                O\Expression::staticField(
-                        O\Expression::variable(O\Expression::value('var')), 
-                        O\Expression::value('field')));
+        self::$field = [1, 23, 3];
+        $var = __CLASS__;
+        $this->assertSimplifiesTo(function () use ($var) { $var::$field; }, [1, 23, 3]);
     }
     
     public static function method()
@@ -324,12 +314,10 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableStaticMethod()
+    public function testUsedVariableStaticMethod()
     {
-        $this->assertSimplifiesTo(function () { $var::method(); }, 
-                O\Expression::staticMethodCall(
-                        O\Expression::variable(O\Expression::value('var')), 
-                        O\Expression::value('method')));
+        $var = __CLASS__;
+        $this->assertSimplifiesTo(function () use ($var) { $var::method(); }, 'STATIC METHOD');
     }
     
     /**
@@ -343,16 +331,17 @@ class ExpressionSimplificationTest extends InterpreterTest
         $this->assertSimplifiesTo(function () { self::$field->foobar; }, 123);
         $this->assertSimplifiesTo(function () { self::$privateField->private; }, 'posh');
     }
+
+    protected $instanceField = 'foo-bar';
     
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableFields()
+    public function testUsedVariableFields()
     {
-        $this->assertSimplifiesTo(function () { $var->field; }, 
-                O\Expression::field(
-                        O\Expression::variable(O\Expression::value('var')), 
-                        O\Expression::value('field')));
+        $var = $this;
+        $this->assertSimplifiesTo(function () use ($var) { $var->instanceField; }, 'foo-bar');
+        $this->assertSimplifiesTo(function () { $this->instanceField; }, 'foo-bar');
     }
     
     /**
@@ -370,12 +359,10 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableMethods()
+    public function testUsedVariableMethods()
     {
-        $this->assertSimplifiesTo(function () { $var->method(); }, 
-                O\Expression::methodCall(
-                        O\Expression::variable(O\Expression::value('var')), 
-                        O\Expression::value('method')));
+        $var = $this;
+        $this->assertSimplifiesTo(function () use ($var) { $var->method(); }, 'STATIC METHOD');
     }
     
     /**
@@ -393,12 +380,10 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableIndexers()
+    public function testUsedVariableIndexers()
     {
-        $this->assertSimplifiesTo(function () { $var['index']; }, 
-                O\Expression::index(
-                        O\Expression::variable(O\Expression::value('var')), 
-                        O\Expression::value('index')));
+        $var = ['index' => 'foo'];
+        $this->assertSimplifiesTo(function () use ($var) { $var['index']; }, 'foo');
     }
     
     /**
@@ -414,11 +399,10 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableNew()
+    public function testUsedVariableNew()
     {
-        $this->assertSimplifiesTo(function () { new $var(); }, 
-                O\Expression::newExpression(
-                        O\Expression::variable(O\Expression::value('var'))));
+        $var = 'stdClass';
+        $this->assertSimplifiesTo(function () use ($var) { new $var(); }, new \stdClass());
     }
     
     /**
@@ -481,12 +465,10 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableClassConstants()
+    public function testUsedVariableClassConstants()
     {
-        $this->assertSimplifiesTo(function () { $var::CONSTANT; }, 
-                O\Expression::classConstant(
-                        O\Expression::variable(O\Expression::value('var')),
-                        'CONSTANT'));
+        $var = __CLASS__;
+        $this->assertSimplifiesTo(function () use ($var) { $var::FOO_BAR_CONST; }, self::FOO_BAR_CONST);
     }
     
     /**
@@ -596,11 +578,14 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableIsset()
+    public function testUsedVariableIsset()
     {
-        $this->assertSimplifiesTo(function () { isset($var); }, 
-                O\Expression::issetExpression([
-                    O\Expression::variable(O\Expression::value('var'))]));
+
+        $this->assertSimplifiesTo(function () { isset($var); }, false);
+        $var = null;
+        $this->assertSimplifiesTo(function () use ($var) { isset($var); }, false);
+        $var = 1;
+        $this->assertSimplifiesTo(function () use ($var) { isset($var); }, true);
     }
     
     /**
@@ -681,11 +666,11 @@ class ExpressionSimplificationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableEmpty()
+    public function testUsedVariableEmpty()
     {
-        $this->assertSimplifiesTo(function () { empty($var); }, 
-                O\Expression::emptyExpression(
-                    O\Expression::variable(O\Expression::value('var'))));
+        $this->assertSimplifiesTo(function () { empty($var); }, true);
+        $var = [1];
+        $this->assertSimplifiesTo(function () use ($var) { empty($var); }, false);
     }
     
     /**
@@ -737,19 +722,18 @@ class ExpressionSimplificationTest extends InterpreterTest
      */
     public function testInvocation()
     {
-        $GLOBALS['__testInvocable'] = function () { return 'foo-bar-quz'; };
+        $GLOBALS['__testInvokable'] = function () { return 'foo-bar-quz'; };
         
-        $this->assertSimplifiesTo(function () { $GLOBALS['__testInvocable'](); }, 'foo-bar-quz');
+        $this->assertSimplifiesTo(function () { $GLOBALS['__testInvokable'](); }, 'foo-bar-quz');
     }
 
     /**
      * @dataProvider interpreters
      */
-    public function testNonSimplifyableInvocation()
+    public function testUsedVariableInvocation()
     {
-        $this->assertSimplifiesTo(function () { $var(); },
-                O\Expression::invocation(
-                        O\Expression::variable(O\Expression::value('var'))));
+        $var = function () { return 'value'; };
+        $this->assertSimplifiesTo(function () use ($var) { $var(); }, 'value');
     }
 
     /**
@@ -796,5 +780,15 @@ class ExpressionSimplificationTest extends InterpreterTest
     {
         $this->assertSimplifiesTo([$this, 'methodWithScopedStaticVariable'], true);
         $this->assertSimplifiesTo([$this, 'methodWithScopedStaticMethodCall'], true);
+    }
+
+    /**
+     * @dataProvider interpreters
+     */
+    public function testClosureUsedVariableReference()
+    {
+        $ref = true;
+        $this->assertSimplifiesTo(function () use (&$ref) { $ref = false; }, false);
+        $this->assertFalse($ref);
     }
 }

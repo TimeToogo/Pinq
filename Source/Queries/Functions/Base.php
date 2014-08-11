@@ -3,6 +3,7 @@
 namespace Pinq\Queries\Functions;
 
 use Pinq\Expressions as O;
+use Pinq\Queries\IResolvedParameterRegistry;
 
 /**
  * Base class of a function structure.
@@ -20,6 +21,11 @@ abstract class Base implements \Serializable
      * @var string|null
      */
     protected $scopeType;
+
+    /**
+     * @var string|null
+     */
+    protected $namespace;
 
     /**
      * Array containing the scoped variable names of the function indexed
@@ -46,15 +52,17 @@ abstract class Base implements \Serializable
     final public function __construct(
             $callableId,
             $scopeType,
+            $namespace,
             array $parameterScopedVariableMap,
             array $parameterExpressions,
             array $bodyExpressions = null
     ) {
-        $this->callableId                 = $callableId;
-        $this->scopeType                  = $scopeType;
+        $this->callableId = $callableId;
+        $this->scopeType = $scopeType;
+        $this->namespace = $namespace;
         $this->parameterScopedVariableMap = $parameterScopedVariableMap;
-        $this->parameters                 = $this->getParameterStructure($parameterExpressions);
-        $this->bodyExpressions            = $bodyExpressions;
+        $this->parameters = $this->getParameterStructure($parameterExpressions);
+        $this->bodyExpressions = $bodyExpressions;
 
         $this->initialize();
     }
@@ -83,6 +91,7 @@ abstract class Base implements \Serializable
         return function (
                 $callableParameter,
                 $scopeType,
+                $namespace,
                 array $parameterScopedVariableMap,
                 array $parameterExpressions,
                 array $bodyExpressions = null
@@ -90,6 +99,7 @@ abstract class Base implements \Serializable
             return new $static(
                     $callableParameter,
                     $scopeType,
+                    $namespace,
                     $parameterScopedVariableMap,
                     $parameterExpressions,
                     $bodyExpressions);
@@ -109,7 +119,7 @@ abstract class Base implements \Serializable
     /**
      * Whether the function has a scoped type.
      *
-     * @return string|null
+     * @return boolean
      */
     public function hasScopeType()
     {
@@ -125,6 +135,27 @@ abstract class Base implements \Serializable
     public function getScopeType()
     {
         return $this->scopeType;
+    }
+
+    /**
+     * Whether the function is defined in a namespace.
+     *
+     * @return boolean
+     */
+    public function hasNamespace()
+    {
+        return $this->namespace !== null;
+    }
+
+    /**
+     * Gets the namespace the function was defined in.
+     * Null if was defined in the global namespace.
+     *
+     * @return string|null
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
     }
 
     /**
@@ -162,6 +193,7 @@ abstract class Base implements \Serializable
                 [
                         $this->callableId,
                         $this->scopeType,
+                        $this->namespace,
                         $this->parameterScopedVariableMap,
                         $this->parameters,
                         $this->bodyExpressions,
@@ -180,6 +212,7 @@ abstract class Base implements \Serializable
         list(
                 $this->callableId,
                 $this->scopeType,
+                $this->namespace,
                 $this->parameterScopedVariableMap,
                 $this->parameters,
                 $this->bodyExpressions,
@@ -215,9 +248,9 @@ abstract class Base implements \Serializable
     {
         $this->verifyNotInternal(__FUNCTION__);
         $expressions = [];
-        foreach($this->bodyExpressions as $expression) {
+        foreach ($this->bodyExpressions as $expression) {
             $expressions[] = $expression;
-            if($expression instanceof O\ReturnExpression) {
+            if ($expression instanceof O\ReturnExpression) {
                 break;
             }
         }
@@ -256,5 +289,49 @@ abstract class Base implements \Serializable
     public function getParameters()
     {
         return $this->parameters;
+    }
+
+    /**
+     * Gets an array containing default values indexed by their
+     * respective unused parameter name.
+     * This is useful as it will introduce variables in the scope of the
+     * function that may be validly used.
+     *
+     * @return array<string, mixed>
+     */
+    public function getUnusedParameterDefaultValueMap()
+    {
+        $defaultValueMap = [];
+        foreach ($this->parameters->getUnusedParameterDefaultMap() as $name => $defaultValueExpression) {
+            if ($defaultValueExpression !== null) {
+                /** @var $defaultValueExpression O\Expression */
+                $defaultValueMap[$name] = $defaultValueExpression->simplifyToValue(
+                        O\EvaluationContext::staticContext($this->namespace, $this->scopeType)
+                );
+            }
+        }
+
+        return $defaultValueMap;
+    }
+
+    /**
+     * Gets an evaluation context for function with the resolved parameters.
+     *
+     * @param IResolvedParameterRegistry $parameters
+     * @return O\IEvaluationContext
+     */
+    public function getEvaluationContext(IResolvedParameterRegistry $parameters)
+    {
+        $thisObject = null;
+        $variableValueMap = [];
+        foreach($this->parameterScopedVariableMap as $parameter => $variableName) {
+            if($variableName === 'this') {
+                $thisObject = $parameters[$parameter];
+            } else {
+                $variableValueMap[$variableName] = $parameters[$parameter];
+            }
+        }
+
+        return new O\EvaluationContext($this->namespace, $this->scopeType, $thisObject, $variableValueMap);
     }
 }

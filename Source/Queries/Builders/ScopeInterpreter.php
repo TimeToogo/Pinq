@@ -44,10 +44,10 @@ class ScopeInterpreter extends ExpressionInterpreter implements IScopeInterprete
 
     public function __construct(
             IScopeInterpretation $interpretation,
-            $closureScopeType = null,
+            O\IEvaluationContext $evaluationContext = null,
             $idPrefix = 'scope'
     ) {
-        parent::__construct($idPrefix, $closureScopeType);
+        parent::__construct($idPrefix, $evaluationContext);
         $this->interpretation = $interpretation;
     }
 
@@ -316,7 +316,7 @@ class ScopeInterpreter extends ExpressionInterpreter implements IScopeInterprete
                 $segmentId,
                 $this->interpretation->buildJoinOptionsInterpretation(),
                 $this->buildSourceInterpreter($segmentId),
-                $this->closureScopeType
+                $this->evaluationContext
         );
     }
 
@@ -325,8 +325,11 @@ class ScopeInterpreter extends ExpressionInterpreter implements IScopeInterprete
         return new SourceInterpreter(
                 $segmentId,
                 $this->interpretation->buildSourceInterpretation(),
-                new static($this->interpretation->buildScopeInterpretation(), $this->closureScopeType, "$segmentId-scope"),
-                $this->closureScopeType
+                new static(
+                        $this->interpretation->buildScopeInterpretation(),
+                        $this->evaluationContext,
+                        "$segmentId-scope"),
+            $this->evaluationContext
         );
     }
 

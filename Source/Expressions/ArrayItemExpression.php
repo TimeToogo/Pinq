@@ -33,6 +33,16 @@ class ArrayItemExpression extends Expression
         $this->isReference = $isReference;
     }
 
+    public function simplify(IEvaluationContext $context = null)
+    {
+        return $this->update(
+                $this->key === null ? null : $this->key->simplify($context),
+                $this->value->simplify($context),
+                $this->isReference
+        );
+    }
+
+
     /**
      * @return boolean
      */

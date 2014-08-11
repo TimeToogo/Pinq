@@ -29,6 +29,7 @@ class DynamicExpressionWalkerTest extends ExpressionTest
                     O\Expression::value(0))],
             [O\Expression::cast(O\Operators\Cast::STRING, O\Expression::value(0))],
             [O\Expression::closure(false, false, [], [], [])],
+            [O\Expression::closureUsedVariable('var')],
             [O\Expression::emptyExpression(O\Expression::value(0))],
             [O\Expression::field(O\Expression::value(0), O\Expression::value(0))],
             [O\Expression::functionCall(O\Expression::value(0))],

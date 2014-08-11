@@ -4,6 +4,7 @@ namespace Pinq\Tests\Integration\Queries\Functions;
 
 use Pinq\Expressions as O;
 use Pinq\Queries\Functions;
+use Pinq\Queries\ResolvedParameterRegistry;
 use Pinq\Tests\PinqTestCase;
 
 abstract class FunctionTest extends PinqTestCase
@@ -16,6 +17,7 @@ abstract class FunctionTest extends PinqTestCase
     /**
      * @param string $callableParameter
      * @param string $scopeType
+     * @param string $namespace
      * @param array  $parameterScopedVariableMap
      * @param array  $parameterExpressions
      * @param array  $bodyExpressions
@@ -25,6 +27,7 @@ abstract class FunctionTest extends PinqTestCase
     protected function buildFunction(
             $callableParameter,
             $scopeType = null,
+            $namespace = null,
             array $parameterScopedVariableMap = [],
             array $parameterExpressions = [],
             array $bodyExpressions = null
@@ -34,6 +37,7 @@ abstract class FunctionTest extends PinqTestCase
         return $factory(
                 $callableParameter,
                 $scopeType,
+                $namespace,
                 $parameterScopedVariableMap,
                 $parameterExpressions,
                 $bodyExpressions
@@ -42,12 +46,12 @@ abstract class FunctionTest extends PinqTestCase
 
     protected function emptyFunction()
     {
-        return $this->buildFunction('CALLABLE!!', null, [], [], []);
+        return $this->buildFunction('CALLABLE!!', null, null, [], [], []);
     }
 
     protected function internalFunction()
     {
-        return $this->buildFunction('CALLABLE!!', null, [], [O\Expression::parameter('str')], null);
+        return $this->buildFunction('CALLABLE!!', null, null, [], [O\Expression::parameter('str')], null);
     }
 
     protected function functionWithReturnStatement()
@@ -55,6 +59,7 @@ abstract class FunctionTest extends PinqTestCase
         return $this->buildFunction(
                 '',
                 __CLASS__,
+                __NAMESPACE__,
                 ['param' => 'scope'],
                 [O\Expression::parameter('foo')],
                 [
@@ -74,12 +79,18 @@ abstract class FunctionTest extends PinqTestCase
         $this->assertSame(0, $function->getParameters()->count());
         $this->assertEquals([], $function->getParameters()->getAll());
         $this->assertEquals([], $function->getParameterScopedVariableMap());
-        $this->assertSame(null, $function->getScopeType());
         $this->assertSame(false, $function->hasScopeType());
+        $this->assertSame(null, $function->getScopeType());
+        $this->assertSame(false, $function->hasNamespace());
+        $this->assertSame(null, $function->getNamespace());
         $this->assertSame(0, $function->countBodyExpressions());
         $this->assertSame(0, $function->countBodyExpressionsUntilReturn());
         $this->assertEquals([], $function->getBodyExpressions());
         $this->assertEquals([], $function->getBodyExpressionsUntilReturn());
+        $this->assertEquals(
+                O\EvaluationContext::globalScope(),
+                $function->getEvaluationContext(ResolvedParameterRegistry::none())
+        );
     }
 
     public function testFunctionWithReturnStatement()
@@ -90,8 +101,10 @@ abstract class FunctionTest extends PinqTestCase
         $this->assertSame(1, $function->getParameters()->count());
         $this->assertEquals([O\Expression::parameter('foo')], $function->getParameters()->getAll());
         $this->assertEquals(['param' => 'scope'], $function->getParameterScopedVariableMap());
-        $this->assertSame(__CLASS__, $function->getScopeType());
         $this->assertSame(true, $function->hasScopeType());
+        $this->assertSame(__CLASS__, $function->getScopeType());
+        $this->assertSame(true, $function->hasNamespace());
+        $this->assertSame(__NAMESPACE__, $function->getNamespace());
         $this->assertSame(4, $function->countBodyExpressions());
         $this->assertSame(2, $function->countBodyExpressionsUntilReturn());
         $this->assertEquals(
@@ -110,6 +123,10 @@ abstract class FunctionTest extends PinqTestCase
                 ],
                 $function->getBodyExpressionsUntilReturn()
         );
+        $this->assertEquals(
+                new O\EvaluationContext(__NAMESPACE__, __CLASS__, null, ['scope' => 'value']),
+                $function->getEvaluationContext(new ResolvedParameterRegistry(['param' => 'value']))
+        );
     }
 
     /**
@@ -121,6 +138,18 @@ abstract class FunctionTest extends PinqTestCase
 
         $this->assertTrue($function->isInternal());
         $function->getBodyExpressions();
+    }
+
+    public function testSerialization()
+    {
+        $function = $this->internalFunction();
+        $this->assertEquals($function, unserialize(serialize($function)));
+
+        $function = $this->emptyFunction();
+        $this->assertEquals($function, unserialize(serialize($function)));
+
+        $function = $this->functionWithReturnStatement();
+        $this->assertEquals($function, unserialize(serialize($function)));
     }
 }
  

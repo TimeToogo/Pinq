@@ -35,6 +35,7 @@ abstract class InterpreterTest extends \Pinq\Tests\PinqTestCase
     }
 
     /**
+     * @throws \Exception
      * @return IFunctionInterpreter
      */
     final protected function verifyImplementation()
@@ -42,21 +43,21 @@ abstract class InterpreterTest extends \Pinq\Tests\PinqTestCase
         if ($this->currentImplementation === null) {
             throw new \Exception('Please remember to use the @dataProvider annotation to test all the implementations.');
         }
-        
+
         return $this->currentImplementation;
     }
 
     final protected function assertRecompilesCorrectly(
             callable $function,
             array $argumentSets = null,
-            O\Expression $returnExpression = null, 
+            O\Expression $returnExpression = null,
             $verifySerialization = true)
     {
         $interpreter = $this->verifyImplementation();
-        
+
         $reflection = $interpreter->getReflection($function);
         $structure = $interpreter->getStructure($reflection);
-        $recompiledFunction = $this->recompile($reflection, $structure, $closure);
+        $recompiledFunction = $this->recompile($reflection, $structure, $closureExpression);
 
         if (empty($argumentSets)) {
             $argumentSets = [[]];
@@ -70,11 +71,11 @@ abstract class InterpreterTest extends \Pinq\Tests\PinqTestCase
                     $expectedReturn,
                     $actualReturn,
                     'Should return equivalent results for arguments: ' .
-                            implode(', ', 
+                            implode(', ',
                                     array_map(
-                                            function ($i) {return var_export($i, true); }, 
+                                            function ($i) {return var_export($i, true); },
                                             $argumentSet))
-                    . '|code: ' . $closure->compileDebug());
+                    . '|code: ' . $closureExpression->compileDebug());
         }
 
         if ($returnExpression !== null) {
@@ -87,25 +88,19 @@ abstract class InterpreterTest extends \Pinq\Tests\PinqTestCase
             $this->assertSerializesAndUnserializedCorrectly($structure);
         }
     }
-    
-    private function recompile(Parsing\IFunctionReflection $reflection, Parsing\IFunctionStructure $structure, &$closure = null)
+
+    private function recompile(Parsing\IFunctionReflection $reflection, Parsing\IFunctionStructure $structure, &$closureExpression = null)
     {
         $signature = $reflection->getSignature();
-        
-        $closure = $closureExpression = O\Expression::closure(
-                $signature->returnsReference(), 
-                $reflection->getInnerReflection()->getClosureScopeClass() === null, 
-                $signature->getParameterExpressions(), 
-                $signature->getScopedVariableNames() ?: [],
-                $structure->getBodyExpressions());
-        
-        $__compiledCode__       = $closureExpression->compile();
-        $__scopedVariables__    = $reflection->getScope()->getVariableValueMap();
-        
-        unset($closureExpression, $reflection, $reflection, $structure);
-        
-        extract($__scopedVariables__);
-        return eval("return $__compiledCode__;");
+        $usedVariables = array_map(function ($name) { return O\Expression::closureUsedVariable($name); }, $signature->getScopedVariableNames() ?: []);
+        $closureExpression = O\Expression::closure(
+            $signature->returnsReference(),
+            $reflection->getInnerReflection()->getClosureScopeClass() === null,
+            $signature->getParameterExpressions(),
+            $usedVariables,
+            $structure->getBodyExpressions());
+
+        return $closureExpression->simplifyToValue($reflection->asEvaluationContext());
     }
 
     private function assertSerializesAndUnserializedCorrectly(Parsing\IFunctionStructure $function)
@@ -118,11 +113,11 @@ abstract class InterpreterTest extends \Pinq\Tests\PinqTestCase
     final protected function assertScopedVariables(callable $function, array $variableValueMap, $removeThis = true)
     {
         $this->verifyImplementation();
-        
+
 
         $reflection = $this->currentImplementation->getReflection($function);
         $scopedVariables = $reflection->getScope()->getVariableValueMap();
-        
+
         if($removeThis) {
             unset($scopedVariables['this'], $variableValueMap['this']);
         }
@@ -132,7 +127,7 @@ abstract class InterpreterTest extends \Pinq\Tests\PinqTestCase
                 $variableValueMap);
     }
 
-    final protected function assertParametersAre(callable $function, array $parameterExpresssions)
+    final protected function assertParametersAre(callable $function, array $parameterExpressions)
     {
         $this->verifyImplementation();
 
@@ -140,6 +135,6 @@ abstract class InterpreterTest extends \Pinq\Tests\PinqTestCase
 
         $this->assertEquals(
                 $reflection->getSignature()->getParameterExpressions(),
-                $parameterExpresssions);
+                $parameterExpressions);
     }
 }

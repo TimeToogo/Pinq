@@ -83,6 +83,18 @@ class ExpressionVisitor extends ExpressionWalker
 
     }
 
+    final public function walkClosureUsedVariable(ClosureUsedVariableExpression $expression)
+    {
+        $this->visitClosureUsedVariable($expression);
+
+        return $expression;
+    }
+
+    protected function visitClosureUsedVariable(ClosureUsedVariableExpression $expression)
+    {
+
+    }
+
     public function walkConstant(ConstantExpression $expression)
     {
         $this->visitConstant($expression);

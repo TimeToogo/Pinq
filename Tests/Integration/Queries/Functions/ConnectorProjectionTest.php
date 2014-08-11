@@ -22,6 +22,7 @@ class ConnectorProjectionTest extends ProjectionBaseTest
         $function = $this->buildFunction(
                 '',
                 null,
+                null,
                 [],
                 [
                         O\Expression::parameter('outer-value'),
@@ -43,7 +44,7 @@ class ConnectorProjectionTest extends ProjectionBaseTest
         $this->assertSame([], $function->getParameters()->getRequiredUnusedParameters());
         $this->assertSame([], $function->getParameters()->getUnused());
         $this->assertSame([], $function->getParameters()->getUnusedParameterDefaultMap());
-        $this->assertSame([], $function->getParameters()->getUnusedParameterDefaultValueMap());
+        $this->assertSame([], $function->getUnusedParameterDefaultValueMap());
     }
 }
  

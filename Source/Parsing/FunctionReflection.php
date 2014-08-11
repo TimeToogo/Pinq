@@ -5,7 +5,7 @@ namespace Pinq\Parsing;
 use Pinq\Expressions as O;
 
 /**
- * Implementation of the function reflection inteface.
+ * Implementation of the function reflection interface.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
@@ -147,18 +147,23 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
         $declarationType = $declaration->getClass() ? : $declaration->getTrait();
         $selfConstant    = $declarationType !== null ?
                 ($declaration->getNamespace() !== null ? $declaration->getNamespace() . '\\' : '') . $declarationType : null;
-        $staticType      = $this->scope->getThisType() ? : $selfType;
+        $staticType      = $this->scope->hasThis() ? $this->scope->getThisType() : $selfType;
         $staticConstant  = $staticType;
         $parentType      = get_parent_class($selfType) ? : null;
         $parentConstant  = $parentType;
 
         return new MagicScopes(
-                $selfType, //self::
-                $selfConstant, //self::class
-                $staticType, //static::
-                $staticConstant, //static::class
-                $parentType, //parent::
-                $parentConstant); //parent::class
+                $this->fullyQualify($selfType),     //self::
+                $selfConstant,                      //self::class
+                $this->fullyQualify($staticType),   //static::
+                $staticConstant,                    //static::class
+                $this->fullyQualify($parentType),   //parent::
+                $parentConstant);                   //parent::class
+    }
+
+    protected function fullyQualify($type)
+    {
+        return $type[0] !== '\\' ? '\\' . $type : $type;
     }
 
 
@@ -180,5 +185,10 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
     public function getGlobalHash()
     {
         return $this->globalHash;
+    }
+
+    public function asEvaluationContext(array $argumentsMap = [])
+    {
+        return $this->scope->asEvaluationContext($argumentsMap, $this->innerReflection->getNamespaceName() ? : null);
     }
 }

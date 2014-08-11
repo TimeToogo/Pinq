@@ -24,34 +24,18 @@ final class Unary
 
     private static $unaryOperations;
 
-    public static function doUnaryOperation($operator, $value)
+    public static function doUnaryOperation($operator, &$value)
     {
         if (self::$unaryOperations === null) {
             self::$unaryOperations = [
-                    self::BITWISE_NOT   => function ($i) {
-                                return ~$i;
-                            },
-                    self::NOT           => function ($i) {
-                                return !$i;
-                            },
-                    self::INCREMENT     => function ($i) {
-                                return $i++;
-                            },
-                    self::DECREMENT     => function ($i) {
-                                return $i--;
-                            },
-                    self::PRE_INCREMENT => function ($i) {
-                                return ++$i;
-                            },
-                    self::PRE_DECREMENT => function ($i) {
-                                return --$i;
-                            },
-                    self::NEGATION      => function ($i) {
-                                return -$i;
-                            },
-                    self::PLUS          => function ($i) {
-                                return +$i;
-                            },
+                    self::BITWISE_NOT   => function (&$i) { return ~$i; },
+                    self::NOT           => function (&$i) { return !$i; },
+                    self::INCREMENT     => function (&$i) { return $i++; },
+                    self::DECREMENT     => function (&$i) { return $i--; },
+                    self::PRE_INCREMENT => function (&$i) { return ++$i; },
+                    self::PRE_DECREMENT => function (&$i) { return --$i; },
+                    self::NEGATION      => function (&$i) { return -$i; },
+                    self::PLUS          => function (&$i) { return +$i; },
             ];
         }
 

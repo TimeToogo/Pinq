@@ -3,9 +3,9 @@
 namespace Pinq\Queries\Builders;
 
 use Pinq\Expressions as O;
+use Pinq\Queries;
 use Pinq\Queries\Builders\Interpretations\IRequestInterpretation;
 use Pinq\Queries\Common;
-use Pinq\Queries;
 
 class RequestQueryInterpreter extends QueryInterpreter implements IRequestQueryInterpreter
 {
@@ -14,9 +14,12 @@ class RequestQueryInterpreter extends QueryInterpreter implements IRequestQueryI
      */
     protected $interpretation;
 
-    public function __construct(IRequestInterpretation $interpretation, IScopeInterpreter $scopeInterpreter, $closureScopeType = null)
-    {
-        parent::__construct('request', $scopeInterpreter, $closureScopeType);
+    public function __construct(
+            IRequestInterpretation $interpretation,
+            IScopeInterpreter $scopeInterpreter,
+            O\IEvaluationContext $evaluationContext = null
+    ) {
+        parent::__construct('request', $scopeInterpreter, $evaluationContext);
 
         $this->interpretation = $interpretation;
     }

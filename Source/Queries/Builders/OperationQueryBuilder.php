@@ -12,12 +12,19 @@ use Pinq\Queries;
  */
 class OperationQueryBuilder extends QueryBuilder implements IOperationQueryBuilder
 {
-    final public function parseOperation(O\Expression $expression, $closureScopeType = null)
-    {
+    final public function parseOperation(
+            O\Expression $expression,
+            O\IEvaluationContext $evaluationContext = null
+    ) {
         $scopeParser     = $this->scopeBuilder->buildScopeParser();
         $operationParser = $this->buildOperationParser();
 
-        $this->interpretOperationQuery($expression, $scopeParser, $operationParser, $closureScopeType);
+        $this->interpretOperationQuery(
+                $expression,
+                $scopeParser,
+                $operationParser,
+                $evaluationContext
+        );
 
         return $this->buildOperationQuery(
                 $scopeParser->getScope(),
@@ -55,13 +62,19 @@ class OperationQueryBuilder extends QueryBuilder implements IOperationQueryBuild
             O\Expression $expression,
             Interpretations\IScopeInterpretation $scopeInterpretation,
             Interpretations\IOperationInterpretation $operationInterpretation,
-            $closureScopeType = null
+            $closureScopeType = null,
+            $closureNamespace = null
     ) {
-        $scopeInterpreter          = $this->scopeBuilder->buildScopeInterpreter($scopeInterpretation, $closureScopeType);
+        $scopeInterpreter          = $this->scopeBuilder->buildScopeInterpreter(
+                $scopeInterpretation,
+                $closureScopeType,
+                $closureNamespace
+        );
         $operationQueryInterpreter = $this->buildOperationQueryInterpreter(
                 $operationInterpretation,
                 $scopeInterpreter,
-                $closureScopeType
+                $closureScopeType,
+                $closureNamespace
         );
 
         $operationQueryInterpreter->interpret($expression);
@@ -71,15 +84,17 @@ class OperationQueryBuilder extends QueryBuilder implements IOperationQueryBuild
      * @param Interpretations\IOperationInterpretation $operationInterpretation
      * @param IScopeInterpreter                        $scopeInterpreter
      * @param string|null                              $closureScopeType
+     * @param string|null                              $closureNamespace
      *
      * @return IOperationQueryInterpreter
      */
     protected function buildOperationQueryInterpreter(
             Interpretations\IOperationInterpretation $operationInterpretation,
             IScopeInterpreter $scopeInterpreter,
-            $closureScopeType = null
+            $closureScopeType = null,
+            $closureNamespace = null
     ) {
-        return new OperationQueryInterpreter($operationInterpretation, $scopeInterpreter, $closureScopeType);
+        return new OperationQueryInterpreter($operationInterpretation, $scopeInterpreter, $closureScopeType, $closureNamespace);
     }
 
     /**

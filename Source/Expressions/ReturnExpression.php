@@ -2,6 +2,8 @@
 
 namespace Pinq\Expressions;
 
+use Pinq\Expressions\Walkers\ExpressionSimplifier;
+
 /**
  * <code>
  * return true
@@ -19,6 +21,16 @@ class ReturnExpression extends Expression
     public function __construct(Expression $value = null)
     {
         $this->value = $value;
+    }
+
+    public function simplifyToValue(IEvaluationContext $context = null)
+    {
+        throw static::cannotSimplifyToValue();
+    }
+
+    public function simplify(IEvaluationContext $context = null)
+    {
+        return $this->value === null ? $this : $this->update($this->value->simplify($context));
     }
 
     /**

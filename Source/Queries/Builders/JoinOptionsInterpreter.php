@@ -24,9 +24,10 @@ class JoinOptionsInterpreter extends ExpressionInterpreter implements IJoinOptio
             $segmentId,
             IJoinOptionsInterpretation $interpretation,
             ISourceInterpreter $sourceInterpreter,
-            $closureScopeType = null
+            $closureScopeType = null,
+            $closureNamespace = null
     ) {
-        parent::__construct($segmentId, $closureScopeType);
+        parent::__construct($segmentId, $closureScopeType, $closureNamespace);
         $this->interpretation    = $interpretation;
         $this->sourceInterpreter = $sourceInterpreter;
     }

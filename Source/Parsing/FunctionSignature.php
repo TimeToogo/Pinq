@@ -86,7 +86,7 @@ class FunctionSignature extends MagicResolvable implements IFunctionSignature
                         $polymorphModifier,
                         $isStatic,
                         $name,
-                        O\Expression::hashAll(O\Expression::simplifyAll($parameterExpressions)),
+                        O\Expression::hashAll($parameterExpressions),
                         $scopedVariableNames !== null ? implode('|', $scopedVariableNames) : '',
                 ]
         );
@@ -101,7 +101,7 @@ class FunctionSignature extends MagicResolvable implements IFunctionSignature
                 $this->polymorphModifier,
                 $this->isStatic,
                 $this->name,
-                $resolvedExpressions,
+                O\Expression::simplifyAll($resolvedExpressions),
                 $this->scopedVariableNames);
     }
 
@@ -260,6 +260,7 @@ class FunctionSignature extends MagicResolvable implements IFunctionSignature
             $typeHint = 'callable';
         } elseif ($parameter->getClass() !== null) {
             $typeHint = $parameter->getClass()->getName();
+            $typeHint = $typeHint[0] === '\\' ? $typeHint : '\\' . $typeHint;
         }
 
         return O\Expression::parameter(

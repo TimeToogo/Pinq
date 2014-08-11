@@ -12,6 +12,7 @@ abstract class ProjectionBaseTest extends FunctionTest
         return $this->buildFunction(
                 '',
                 __CLASS__,
+                __NAMESPACE__,
                 ['param' => 'scope'],
                 [O\Expression::parameter('foo')],
                 [

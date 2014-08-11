@@ -12,6 +12,7 @@ abstract class MutatorBaseTest extends FunctionTest
         return $this->buildFunction(
                 '',
                 __CLASS__,
+                __NAMESPACE__,
                 [],
                 [O\Expression::parameter('true', null, null, true)],
                 []

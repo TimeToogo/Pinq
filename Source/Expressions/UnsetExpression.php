@@ -11,6 +11,11 @@ namespace Pinq\Expressions;
  */
 class UnsetExpression extends VariadicLanguageConstructExpression
 {
+    public function simplifyToValue(IEvaluationContext $context = null)
+    {
+        throw static::cannotSimplifyToValue();
+    }
+
     public function traverse(ExpressionWalker $walker)
     {
         return $walker->walkUnset($this);

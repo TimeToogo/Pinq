@@ -4,7 +4,12 @@ namespace Pinq\Tests\Integration\ExpressionTrees;
 
 use Pinq\Expressions as O;
 
-class MiscIntepreterTest extends InterpreterTest
+class ParameterClassTest
+{
+
+}
+
+class MiscInterpreterTest extends InterpreterTest
 {
     /**
      * @dataProvider interpreters
@@ -29,7 +34,23 @@ class MiscIntepreterTest extends InterpreterTest
 
         $this->assertParametersAre(
                 function (\DateTime $i) { },
-                [O\Expression::parameter('i', 'DateTime')]);
+                [O\Expression::parameter('i', '\\DateTime')]);
+
+        $this->assertParametersAre(
+                function (self $i) { },
+                [O\Expression::parameter('i', '\\' . __CLASS__)]);
+
+        $this->assertParametersAre(
+                function (MiscInterpreterTest $i) { },
+                [O\Expression::parameter('i', '\\' . __CLASS__)]);
+
+        $this->assertParametersAre(
+                function (ParameterClassTest $i) { },
+                [O\Expression::parameter('i', '\\' . __NAMESPACE__ . '\\ParameterClassTest')]);
+
+        $this->assertParametersAre(
+                function (namespace\ParameterClassTest $i) { },
+                [O\Expression::parameter('i', '\\' . __NAMESPACE__ . '\\ParameterClassTest')]);
 
         $this->assertParametersAre(
                 function (&$i) { },
@@ -37,17 +58,17 @@ class MiscIntepreterTest extends InterpreterTest
 
         $this->assertParametersAre(
                 function (\stdClass &$i = null, array $array = ['foo']) { },
-                [O\Expression::parameter('i', 'stdClass', O\Expression::value(null), true), O\Expression::parameter('array', 'array', O\Expression::value(['foo']))]);
+                [O\Expression::parameter('i', '\\stdClass', O\Expression::value(null), true), O\Expression::parameter('array', 'array', O\Expression::value(['foo']))]);
 
         $this->assertParametersAre(
                 function (callable &$v = null) { },
                 [O\Expression::parameter('v', 'callable', O\Expression::value(null), true)]);
-                
+
         $this->assertParametersAre(
                 function ($v = [1,2,3, 'test' => 'foo', [2 => 'boo', '']]) { },
                 [O\Expression::parameter('v', null, O\Expression::value([1,2,3, 'test' => 'foo', [2 => 'boo', '']]))]);
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -60,7 +81,7 @@ class MiscIntepreterTest extends InterpreterTest
 
     /**
      * @dataProvider interpreters
-     * @expectedException Pinq\Parsing\InvalidFunctionException
+     * @expectedException \Pinq\Parsing\InvalidFunctionException
      */
     public function testInternalFunction()
     {
@@ -79,12 +100,12 @@ class MiscIntepreterTest extends InterpreterTest
 
     /**
      * @dataProvider interpreters
-     * @expectedException Pinq\Parsing\InvalidFunctionException
+     * @expectedException \Pinq\Parsing\InvalidFunctionException
      */
     public function testVariadicInternalFunction()
     {
         $valueSet = [
-            [[1], [2], [3]], 
+            [[1], [2], [3]],
             [[1, 3], [2, 5], [6, 3]],
             [['test' => 5], ['foo' => 'bar'], ['baz' => 'boron']],
         ];

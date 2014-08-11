@@ -27,9 +27,14 @@ class ClosureExpression extends Expression
     private $parameters;
 
     /**
-     * @var string[]
+     * @var ClosureUsedVariableExpression[]
      */
     private $usedVariables;
+
+    /**
+     * @var string[]
+     */
+    private $usedVariableNames = [];
 
     /**
      * @var Expression[]
@@ -46,8 +51,12 @@ class ClosureExpression extends Expression
         $this->returnsReference = $returnsReference;
         $this->isStatic         = $isStatic;
         $this->parameters       = self::verifyAll($parameterExpressions, ParameterExpression::getType());
-        $this->usedVariables    = $usedVariables;
+        $this->usedVariables    = self::verifyAll($usedVariables, ClosureUsedVariableExpression::getType());
         $this->bodyExpressions  = self::verifyAll($bodyExpressions);
+
+        foreach ($this->usedVariables as $usedVariable) {
+            $this->usedVariableNames[] = $usedVariable->getName();
+        }
     }
 
     /**
@@ -79,6 +88,14 @@ class ClosureExpression extends Expression
      */
     public function getUsedVariableNames()
     {
+        return $this->usedVariableNames;
+    }
+
+    /**
+     * @return ClosureUsedVariableExpression[]
+     */
+    public function getUsedVariables()
+    {
         return $this->usedVariables;
     }
 
@@ -96,11 +113,11 @@ class ClosureExpression extends Expression
     }
 
     /**
-     * @param boolean               $returnsReference
-     * @param boolean               $isStatic
-     * @param ParameterExpression[] $parameterExpressions
-     * @param string[]              $usedVariables
-     * @param Expression[]          $bodyExpressions
+     * @param boolean                         $returnsReference
+     * @param boolean                         $isStatic
+     * @param ParameterExpression[]           $parameterExpressions
+     * @param ClosureUsedVariableExpression[] $usedVariables
+     * @param Expression[]                    $bodyExpressions
      *
      * @return self
      */
@@ -148,7 +165,7 @@ class ClosureExpression extends Expression
 
         if (!empty($this->usedVariables)) {
             $code .= 'use (';
-            $code .= '$' . implode(', $', $this->usedVariables);
+            $code .= implode(',', self::compileAll($this->usedVariables));
             $code .= ')';
         }
 
@@ -170,6 +187,7 @@ class ClosureExpression extends Expression
                         $this->isStatic,
                         $this->parameters,
                         $this->usedVariables,
+                        $this->usedVariableNames,
                         $this->bodyExpressions
                 ]
         );
@@ -182,6 +200,7 @@ class ClosureExpression extends Expression
                 $this->isStatic,
                 $this->parameters,
                 $this->usedVariables,
+                $this->usedVariableNames,
                 $this->bodyExpressions) = unserialize($serialized);
     }
 
@@ -189,5 +208,6 @@ class ClosureExpression extends Expression
     {
         $this->parameters      = self::cloneAll($this->parameters);
         $this->bodyExpressions = self::cloneAll($this->bodyExpressions);
+        $this->usedVariables   = self::cloneAll($this->usedVariables);
     }
 }

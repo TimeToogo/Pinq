@@ -17,14 +17,19 @@ abstract class ExpressionInterpreter
     protected $idPrefix;
 
     /**
+     * @var O\IEvaluationContext|null
+     */
+    protected $evaluationContext;
+
+    /**
      * @var string|null
      */
-    protected $closureScopeType;
+    protected $closureNamespace;
 
-    public function __construct($idPrefix, $closureScopeType = null)
+    public function __construct($idPrefix, O\IEvaluationContext $evaluationContext = null)
     {
-        $this->idPrefix         = $idPrefix;
-        $this->closureScopeType = $closureScopeType;
+        $this->idPrefix          = $idPrefix;
+        $this->evaluationContext = $evaluationContext;
     }
 
     final protected function getId($id)
@@ -37,7 +42,8 @@ abstract class ExpressionInterpreter
         if ($expression instanceof O\ValueExpression) {
             return new Functions\CallableFunction($this->getId($id), $expression->getValue());
         } elseif ($expression instanceof O\ClosureExpression) {
-            return new Functions\ClosureExpressionFunction($this->getId($id), $expression, $this->closureScopeType);
+            return new Functions\ClosureExpressionFunction(
+                    $this->getId($id), $expression, $this->evaluationContext);
         } else {
             throw new \Pinq\PinqException(
                     'Cannot get function from expression: expecting %s, %s given',
@@ -89,7 +95,7 @@ abstract class ExpressionInterpreter
             return $default;
         }
 
-        return $argumentExpression->simplifyToValue();
+        return $argumentExpression->simplifyToValue($this->evaluationContext);
     }
 
     final protected function getArgumentAt($index, O\MethodCallExpression $methodExpression)

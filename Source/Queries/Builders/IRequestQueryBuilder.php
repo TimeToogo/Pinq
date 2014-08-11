@@ -14,12 +14,15 @@ interface IRequestQueryBuilder extends IQueryBuilder
     /**
      * Parses the supplied expression into a request query template.
      *
-     * @param O\Expression $expression
-     * @param string|null  $closureScopeType
+     * @param O\Expression              $expression
+     * @param O\IEvaluationContext|null $evaluationContext
      *
      * @return Queries\IRequestQuery
      */
-    public function parseRequest(O\Expression $expression, $closureScopeType = null);
+    public function parseRequest(
+            O\Expression $expression,
+            O\IEvaluationContext $evaluationContext = null
+    );
 
     /**
      * Resolves the query requirements from the supplied expression.

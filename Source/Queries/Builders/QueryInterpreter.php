@@ -3,7 +3,6 @@
 namespace Pinq\Queries\Builders;
 
 use Pinq\Expressions as O;
-use Pinq\Queries\Builders\Interpretations\IScopeInterpretation;
 
 /**
  * Base class for query interpreters.
@@ -17,9 +16,13 @@ abstract class QueryInterpreter extends ExpressionInterpreter implements IQueryI
      */
     protected $scopeInterpreter;
 
-    public function __construct($idPrefix, IScopeInterpreter $scopeInterpreter, $closureScopeType = null)
-    {
-        parent::__construct($idPrefix, $closureScopeType);
+    public function __construct(
+            $idPrefix,
+            IScopeInterpreter $scopeInterpreter,
+            $closureScopeType = null,
+            $closureNamespace = null
+    ) {
+        parent::__construct($idPrefix, $closureScopeType, $closureNamespace);
         $this->scopeInterpreter = $scopeInterpreter;
     }
 

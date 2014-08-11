@@ -43,6 +43,21 @@ class ParameterExpression extends Expression
         $this->isPassedByReference = $isPassedByReference;
     }
 
+    public function simplifyToValue(IEvaluationContext $context = null)
+    {
+        throw static::cannotSimplifyToValue();
+    }
+
+    public function simplify(IEvaluationContext $context = null)
+    {
+        return $this->update(
+                $this->name,
+                $this->typeHint,
+                $this->defaultValue === null ? null : $this->defaultValue->simplify($context),
+                $this->isPassedByReference
+        );
+    }
+
     public function traverse(ExpressionWalker $walker)
     {
         return $walker->walkParameter($this);

@@ -13,6 +13,7 @@ use Pinq\Queries as Q;
 abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
 {
     const SCOPE_TYPE = __CLASS__;
+    const SCOPE_NAMESPACE = __NAMESPACE__;
 
     /**
      * @var Parsing\IFunctionInterpreter
@@ -87,7 +88,7 @@ abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
             $this->assertRequestQueryMatches($request, $correctValue);
         }
 
-        $request = $requestBuilder->parseRequest($this->parseQueryExpression($requestFunction, $scopeType), $scopeType);
+        $request = $requestBuilder->parseRequest($this->parseQueryExpression($requestFunction, $evaluationContext), $evaluationContext);
         $this->assertRequestQueryMatches($request, $correctValue);
     }
 
@@ -97,35 +98,45 @@ abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
     {
         $operationBuilder = $this->repository->getProvider()->getConfiguration()->getOperationQueryBuilder();
 
-        $operation = $operationBuilder->parseOperation($this->parseQueryExpression($operationFunction, $scopeType), $scopeType);
+        $operation = $operationBuilder->parseOperation($this->parseQueryExpression($operationFunction, $evaluationContext), $evaluationContext);
         $this->assertOperationQueryMatches($operation, $correctValue);
     }
 
     abstract protected function assertOperationQueryMatches(Q\IOperationQuery $operationQuery, $correctValue);
 
-    protected function parseQueryExpression(callable $queryFunction, &$scopeType = null)
+    protected function parseQueryExpression(callable $queryFunction, O\IEvaluationContext &$evaluationContext = null)
     {
-        $reflection  = $this->functionInterpreter->getReflection($queryFunction);
-        $scopeType   = $reflection->getScope()->getScopeType();
-        $function    = $this->functionInterpreter->getStructure($reflection);
-        $expressions = $function->getBodyExpressions();
+        $reflection        = $this->functionInterpreter->getReflection($queryFunction);
+        $evaluationContext = $reflection->asEvaluationContext();
+        $function          = $this->functionInterpreter->getStructure($reflection);
+        $expressions       = $function->getBodyExpressions();
         $this->assertCount(1, $expressions);
 
-        //Replace any variable with the queryable value
-        $variableReplacer = new O\DynamicExpressionWalker([
-                O\VariableExpression::getType() => function (O\VariableExpression $expression) {
-                            return O\Expression::value($this->queryable);
-                        },
-                //Ignore closures
-                O\ClosureExpression::getType() => function ($closure) { return $closure; }
-        ]);
+        //Resolve the parameter variable with the queryable value and $this
+        $parameterName = $reflection->getSignature()->getParameterExpressions()[0]->getName();
 
-        $resolvedExpression =  $variableReplacer->walk($expressions[0]);
+        $expression =  $expressions[0];
+        foreach([$parameterName => $this->queryable, 'this' => $this] as $variable => $value) {
+            $variableReplacer = new O\DynamicExpressionWalker([
+                    O\VariableExpression::getType() => function (O\VariableExpression $expression) use ($variable, &$value) {
+                                if($expression->getName() instanceof O\ValueExpression
+                                        && $expression->getName()->getValue() === $variable) {
+                                    return O\Expression::value($value);
+                                } else {
+                                    return $expression;
+                                }
+                            },
+                    //Ignore closures
+                    O\ClosureExpression::getType() => function ($closure) { return $closure; }
+            ]);
 
-        if($resolvedExpression instanceof O\ReturnExpression) {
-            return $resolvedExpression->getValue();
+            $expression = $variableReplacer->walk($expression);
+        }
+
+        if($expression instanceof O\ReturnExpression) {
+            return $expression->getValue();
         } else {
-            return $resolvedExpression;
+            return $expression;
         }
     }
 
