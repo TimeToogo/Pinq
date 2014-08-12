@@ -9,7 +9,7 @@ use Pinq\Expressions as O;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class Aggregator extends Base
+class Aggregator extends FunctionBase
 {
     protected function getParameterStructure(array $parameterExpressions)
     {

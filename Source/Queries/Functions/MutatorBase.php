@@ -9,7 +9,7 @@ use Pinq\Expressions as O;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class MutatorBase extends Base
+abstract class MutatorBase extends FunctionBase
 {
     /**
      * @var boolean

@@ -35,7 +35,7 @@ class CompiledQuery implements Compilation\ICompiledRequest, Compilation\ICompil
         $this->english .= $english . PHP_EOL;
     }
 
-    public function appendFunction(Queries\Functions\Base $function)
+    public function appendFunction(Queries\Functions\FunctionBase $function)
     {
         if ($function->isInternal()) {
             throw new Exception('Internal functions are not supported');

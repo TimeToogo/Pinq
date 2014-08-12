@@ -22,7 +22,7 @@ abstract class FunctionTest extends PinqTestCase
      * @param array  $parameterExpressions
      * @param array  $bodyExpressions
      *
-     * @return Functions\Base
+     * @return Functions\FunctionBase
      */
     protected function buildFunction(
             $callableParameter,

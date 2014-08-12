@@ -9,7 +9,7 @@ use Pinq\Expressions as O;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class ProjectionBase extends Base
+abstract class ProjectionBase extends FunctionBase
 {
     /**
      * @var O\ReturnExpression|null

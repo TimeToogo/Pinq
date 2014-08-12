@@ -10,7 +10,7 @@ use Pinq\Queries\IResolvedParameterRegistry;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class Base implements \Serializable
+abstract class FunctionBase implements \Serializable
 {
     /**
      * @var string
