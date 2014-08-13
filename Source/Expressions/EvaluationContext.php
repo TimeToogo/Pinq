@@ -27,25 +27,25 @@ class EvaluationContext implements IEvaluationContext
     /**
      * @var array<string, mixed>
      */
-    protected $variableValueMap;
+    protected $variableTable;
 
-    public function __construct($namespace, $scopeType, $thisObject = null, array $variableValueMap = [])
+    public function __construct($namespace, $scopeType, $thisObject = null, array $variableTable = [])
     {
         $this->namespace        = $namespace;
         $this->scopeType        = $scopeType;
         $this->thisObject       = $thisObject;
-        $this->variableValueMap = $variableValueMap;
+        $this->variableTable = $variableTable;
     }
 
     /**
      * @param object|null $thisObject
-     * @param array       $variableValueMap
+     * @param array       $variableTable
      *
      * @return IEvaluationContext
      */
-    public static function globalScope($thisObject = null, $variableValueMap = [])
+    public static function globalScope($thisObject = null, $variableTable = [])
     {
-        return new self(null, null, $thisObject, $variableValueMap);
+        return new self(null, null, $thisObject, $variableTable);
     }
 
     /**
@@ -79,9 +79,9 @@ class EvaluationContext implements IEvaluationContext
         return $this->scopeType;
     }
 
-    public function getVariableValueMap()
+    public function getVariableTable()
     {
-        return $this->variableValueMap;
+        return $this->variableTable;
     }
 
     public function hasThis()
@@ -92,5 +92,14 @@ class EvaluationContext implements IEvaluationContext
     public function getThis()
     {
         return $this->thisObject;
+    }
+
+    public function withVariableTable(array $variableTable)
+    {
+        if($this->variableTable === $variableTable) {
+            return $this;
+        }
+
+        return new self($this->namespace, $this->scopeType, $this->thisObject, $variableTable);
     }
 }

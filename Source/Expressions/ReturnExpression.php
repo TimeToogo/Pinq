@@ -23,9 +23,9 @@ class ReturnExpression extends Expression
         $this->value = $value;
     }
 
-    public function simplifyToValue(IEvaluationContext $context = null)
+    public function asEvaluator(IEvaluationContext $context = null)
     {
-        throw static::cannotSimplifyToValue();
+        throw static::cannotEvaluate();
     }
 
     public function simplify(IEvaluationContext $context = null)

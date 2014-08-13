@@ -116,7 +116,7 @@ abstract class InterpreterTest extends \Pinq\Tests\PinqTestCase
 
 
         $reflection = $this->currentImplementation->getReflection($function);
-        $scopedVariables = $reflection->getScope()->getVariableValueMap();
+        $scopedVariables = $reflection->getScope()->getVariableTable();
 
         if($removeThis) {
             unset($scopedVariables['this'], $variableValueMap['this']);

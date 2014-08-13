@@ -45,7 +45,7 @@ interface IFunctionScope
      *
      * @return array<string, mixed>
      */
-    public function getVariableValueMap();
+    public function getVariableTable();
 
     /**
      * Gets an equivalent evaluation context for the function scope.

@@ -57,12 +57,12 @@ abstract class FunctionBase implements \Serializable
             array $parameterExpressions,
             array $bodyExpressions = null
     ) {
-        $this->callableId = $callableId;
-        $this->scopeType = $scopeType;
-        $this->namespace = $namespace;
+        $this->callableId                 = $callableId;
+        $this->scopeType                  = $scopeType;
+        $this->namespace                  = $namespace;
         $this->parameterScopedVariableMap = $parameterScopedVariableMap;
-        $this->parameters = $this->getParameterStructure($parameterExpressions);
-        $this->bodyExpressions = $bodyExpressions;
+        $this->parameters                 = $this->getParameterStructure($parameterExpressions);
+        $this->bodyExpressions            = $bodyExpressions;
 
         $this->initialize();
     }
@@ -317,18 +317,21 @@ abstract class FunctionBase implements \Serializable
     /**
      * Gets an evaluation context for function with the resolved parameters.
      *
-     * @param IResolvedParameterRegistry $parameters
+     * @param IResolvedParameterRegistry|null $parameters
+     *
      * @return O\IEvaluationContext
      */
-    public function getEvaluationContext(IResolvedParameterRegistry $parameters)
+    public function getEvaluationContext(IResolvedParameterRegistry $parameters = null)
     {
-        $thisObject = null;
+        $thisObject       = null;
         $variableValueMap = [];
-        foreach($this->parameterScopedVariableMap as $parameter => $variableName) {
-            if($variableName === 'this') {
-                $thisObject = $parameters[$parameter];
-            } else {
-                $variableValueMap[$variableName] = $parameters[$parameter];
+        if ($parameters !== null) {
+            foreach ($this->parameterScopedVariableMap as $parameter => $variableName) {
+                if ($variableName === 'this') {
+                    $thisObject = $parameters[$parameter];
+                } else {
+                    $variableValueMap[$variableName] = $parameters[$parameter];
+                }
             }
         }
 

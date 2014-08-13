@@ -56,5 +56,14 @@ interface IEvaluationContext
      *
      * @return array<string, mixed>
      */
-    public function getVariableValueMap();
+    public function getVariableTable();
+
+    /**
+     * Returns a new evaluation context with the variable value map.
+     *
+     * @param array<string, mixed> $variableValueMap
+     *
+     * @return IEvaluationContext
+     */
+    public function withVariableTable(array $variableTable);
 }

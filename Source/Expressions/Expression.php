@@ -86,6 +86,26 @@ abstract class Expression implements \Serializable
     abstract public function traverse(ExpressionWalker $walker);
 
     /**
+     * Creates an expression evaluator for the expression with
+     * the supplied context.
+     *
+     * @param IEvaluationContext|null $context
+     *
+     * @return IEvaluator
+     */
+    public function asEvaluator(IEvaluationContext $context = null)
+    {
+        return CompiledEvaluator::fromExpressions([Expression::returnExpression($this)], $context);
+    }
+
+    final protected static function cannotEvaluate()
+    {
+        return new PinqException(
+                'Cannot evaluate expression of type %s',
+                get_called_class());
+    }
+
+    /**
      * Evaluates the expression tree in the supplied context
      * and returns the resulting value.
      *
@@ -95,7 +115,7 @@ abstract class Expression implements \Serializable
      */
     public function simplifyToValue(IEvaluationContext $context = null)
     {
-        return ExpressionEvaluator::evaluate([Expression::returnExpression($this)], $context);
+        return $this->asEvaluator($context)->evaluate();
     }
 
     /**
@@ -116,13 +136,6 @@ abstract class Expression implements \Serializable
     public function simplify(IEvaluationContext $context = null)
     {
         return Expression::value($this->simplifyToValue($context));
-    }
-
-    final protected static function cannotSimplifyToValue()
-    {
-        return new PinqException(
-                'Cannot simply expression of type %s to value.',
-                get_called_class());
     }
 
     /**

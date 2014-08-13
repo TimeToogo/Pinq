@@ -3,6 +3,7 @@
 namespace Pinq\Expressions;
 
 use Pinq\PinqException;
+use Pinq\Utilities;
 
 /**
  * <code>
@@ -18,31 +19,14 @@ class ValueExpression extends Expression
      */
     private $value;
 
-    /**
-     * @var \SplObjectStorage
-     * @readOnly
-     */
-    private static $nonScalarValueExpressionAccess = [];
-
     public function __construct($value)
     {
         $this->value = $value;
-        $this->initializeValue();
     }
 
-    public static function __nonScalarValue__($hash)
+    public function asEvaluator(IEvaluationContext $context = null)
     {
-        return self::$nonScalarValueExpressionAccess[$hash];
-    }
-
-    protected function initializeValue()
-    {
-        self::$nonScalarValueExpressionAccess[spl_object_hash($this)] = $this->value;
-    }
-
-    public function __destruct()
-    {
-        unset(self::$nonScalarValueExpressionAccess[spl_object_hash($this)]);
+        return new StaticValueEvaluator($this->value, $context);
     }
 
     public function simplifyToValue(IEvaluationContext $context = null)
@@ -84,24 +68,40 @@ class ValueExpression extends Expression
 
     protected function compileCode(&$code)
     {
-        if (is_scalar($this->value) || $this->value === null || (is_array($this->value) && $this->isScalarArray($this->value))) {
+        if (self::isValueType($this->value)) {
             $code .= var_export($this->value, true);
         } else {
-            $code .= '\\' . __CLASS__ . '::__nonScalarValue__(' . var_export(spl_object_hash($this), true) . ')';
+            throw new PinqException(
+                    'Cannot compile %s to code: value must be a value type (scalar or array of scalars), currently %s',
+                    get_class($this),
+                    Utilities::getTypeOrClass($this->value));
         }
     }
 
-    protected function isScalarArray(array $array)
+    /**
+     * Returns whether the supplied value is a value type.
+     *
+     * @param mixed $value
+     *
+     * @return bool
+     */
+    public static function isValueType($value)
     {
-        $isScalar = true;
-        array_walk_recursive($array,
-                function ($value) use ($isScalar) {
-                    if($isScalar && !(is_scalar($value) || $value === null)) {
-                        $isScalar = false;
-                    }
-                });
+        if(is_scalar($value) || $value === null) {
+            return true;
+        } elseif (is_array($value)) {
+            $isScalar = true;
+            array_walk_recursive($value,
+                    function ($value) use (&$isScalar) {
+                        if($isScalar && !(is_scalar($value) || $value === null)) {
+                            $isScalar = false;
+                        }
+                    });
 
-        return $isScalar;
+            return $isScalar;
+        } else {
+            return false;
+        }
     }
 
     public function serialize()
@@ -112,7 +112,6 @@ class ValueExpression extends Expression
     public function unserialize($serialized)
     {
         list($this->value) = unserialize($serialized);
-        $this->initializeValue();
     }
 
     public function __clone()

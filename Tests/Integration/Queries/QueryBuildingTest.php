@@ -56,22 +56,22 @@ abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
 
     final public function queryables()
     {
-        return array_map(
-                function (Providers\IQueryProvider $provider) {
-                    return [$provider->createQueryable()];
-                },
-                $this->queryProviders()
-        );
+        $queryables = [];
+        foreach ($this->queryProviders() as $provider) {
+            $queryables[] = [$provider->createQueryable()];
+        }
+
+        return $queryables;
     }
 
     final public function repositories()
     {
-        return array_map(
-                function (Providers\IRepositoryProvider $provider) {
-                    return [$provider->createRepository()];
-                },
-                $this->repositoryProviders()
-        );
+        $repositories = [];
+        foreach ($this->repositoryProviders() as $provider) {
+            $repositories[] = [$provider->createRepository()];
+        }
+
+        return $repositories;
     }
 
     final public function allImplementations()

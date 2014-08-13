@@ -84,7 +84,7 @@ class BaseResolver extends BaseInterpretation implements IQueryResolver
             $this->resolveParameter($this->getFunctionScopedVariableParameter($function, 'this'), $reflection->getScope()->getThis());
         }
 
-        $variableValueMap = $reflection->getScope()->getVariableValueMap();
+        $variableValueMap = $reflection->getScope()->getVariableTable();
         foreach ($variableValueMap as $variableName => $value) {
             $this->resolveParameter($this->getFunctionScopedVariableParameter($function, $variableName), $value);
         }

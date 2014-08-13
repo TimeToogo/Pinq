@@ -93,7 +93,7 @@ class FunctionScope implements IFunctionScope
         return $this->scopeType;
     }
 
-    public function getVariableValueMap()
+    public function getVariableTable()
     {
         return $this->variableValueMap;
     }
