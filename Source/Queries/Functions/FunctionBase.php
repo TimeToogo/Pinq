@@ -323,8 +323,8 @@ abstract class FunctionBase implements \Serializable
      */
     public function getEvaluationContext(IResolvedParameterRegistry $parameters = null)
     {
-        $thisObject       = null;
-        $variableTable    = [];
+        $thisObject     = null;
+        $variableTable  = array_fill_keys($this->parameterScopedVariableMap, null);
         if ($parameters !== null) {
             foreach ($this->parameterScopedVariableMap as $parameter => $variableName) {
                 if ($variableName === 'this') {
