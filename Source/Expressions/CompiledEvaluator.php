@@ -80,12 +80,12 @@ PHP;
 
     public function serialize()
     {
-        return serialize([$this->code, $this->context, $this->extraVariables]);
+        return serialize([$this->code, $this->context, $this->requiredVariables, $this->extraVariables]);
     }
 
     public function unserialize($serialized)
     {
-        list($this->code, $this->context, $this->extraVariables) = unserialize($serialized);
+        list($this->code, $this->context, $this->requiredVariables, $this->extraVariables) = unserialize($serialized);
         $this->initializeEvaluator();
     }
 
