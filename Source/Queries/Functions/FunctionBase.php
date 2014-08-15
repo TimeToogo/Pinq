@@ -324,17 +324,17 @@ abstract class FunctionBase implements \Serializable
     public function getEvaluationContext(IResolvedParameterRegistry $parameters = null)
     {
         $thisObject       = null;
-        $variableValueMap = [];
+        $variableTable    = [];
         if ($parameters !== null) {
             foreach ($this->parameterScopedVariableMap as $parameter => $variableName) {
                 if ($variableName === 'this') {
                     $thisObject = $parameters[$parameter];
                 } else {
-                    $variableValueMap[$variableName] = $parameters[$parameter];
+                    $variableTable[$variableName] = $parameters[$parameter];
                 }
             }
         }
 
-        return new O\EvaluationContext($this->namespace, $this->scopeType, $thisObject, $variableValueMap);
+        return new O\EvaluationContext($this->namespace, $this->scopeType, $thisObject, $variableTable);
     }
 }
