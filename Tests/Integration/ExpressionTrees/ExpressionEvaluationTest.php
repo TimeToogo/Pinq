@@ -828,4 +828,17 @@ class ExpressionEvaluationTest extends InterpreterTest
         $this->assertEvaluatesTo(function () use (&$ref) { $ref = false; }, false);
         $this->assertFalse($ref);
     }
+
+    public function testWithSpecialVariableNames()
+    {
+        $this->assertSame(
+                '1,2,3',
+                O\CompiledEvaluator::fromExpressions(
+                        [O\Expression::returnExpression(
+                                O\Expression::variable(O\Expression::value('a special var--'))
+                        )],
+                        O\EvaluationContext::globalScope(null, ['a special var--' => '1,2,3'])
+                )->evaluate()
+        );
+    }
 }

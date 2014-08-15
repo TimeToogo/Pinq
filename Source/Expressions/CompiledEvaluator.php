@@ -61,7 +61,13 @@ class CompiledEvaluator extends Evaluator implements \Serializable
                         }
         ]))->walkAll($expressions);
 
-        $bodyCode = "extract($$contextParameterName, \\EXTR_REFS);";
+        $bodyCode = '';
+        foreach ($evaluator->extraVariables + $variableTable as $variable => $value) {
+            $variableName = Expression::value($variable);
+            $variableCode = Expression::variable($variableName)->compile();
+            $bodyCode .= "$variableCode =& $$contextParameterName" . '[' . $variableName->compile() . '];';
+        }
+
         $bodyCode .= "unset($$contextParameterName);";
         $bodyCode .= implode(';', Expression::compileAll($expressions)) . ';';
         $evaluator->code = <<<PHP
