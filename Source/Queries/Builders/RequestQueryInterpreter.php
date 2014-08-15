@@ -90,7 +90,7 @@ class RequestQueryInterpreter extends QueryInterpreter implements IRequestQueryI
             $this->interpretation->interpretOffsetGet(
                     $requestId,
                     $indexId,
-                    $this->getValue($expression->getIndex(), 'index value must be constant, %s given')
+                    $this->getValue($expression->getIndex())
             );
         } else {
             throw new \Pinq\PinqException(
@@ -108,7 +108,7 @@ class RequestQueryInterpreter extends QueryInterpreter implements IRequestQueryI
         $indexId   = $this->getId('offset-exists-index');
 
         if ($expression instanceof O\MethodCallExpression) {
-            $this->interpretation->interpretOffsetGet($requestId, $indexId, $this->getArgumentValueAt(0, $expression));
+            $this->interpretation->interpretOffsetExists($requestId, $indexId, $this->getArgumentValueAt(0, $expression));
             $this->interpretSourceAsScope($expression);
             return;
         } elseif ($expression instanceof O\IssetExpression) {
@@ -118,7 +118,7 @@ class RequestQueryInterpreter extends QueryInterpreter implements IRequestQueryI
                 $this->interpretation->interpretOffsetExists(
                         $requestId,
                         $indexId,
-                        $this->getValue($issetArguments[0]->getIndex(), 'index value must be constant, %s given')
+                        $this->getValue($issetArguments[0]->getIndex())
                 );
                 $this->interpretSourceAsScope($issetArguments[0]);
                 return;

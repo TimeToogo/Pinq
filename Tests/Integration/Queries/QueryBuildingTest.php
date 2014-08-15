@@ -247,6 +247,14 @@ abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
                 $this->offsetGetQuery(),
                 true
         );
+
+        $this->assertRequestIsCorrect(
+                function (IQueryable $queryable) {
+                    $queryable->offsetGet(0);
+                },
+                $this->offsetGetQuery(),
+                true
+        );
     }
 
     abstract protected function offsetGetQuery();
@@ -259,6 +267,14 @@ abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
         $this->assertRequestIsCorrect(
                 function (IQueryable $queryable) {
                     isset($queryable[0]);
+                },
+                $this->offsetIssetQuery(),
+                true
+        );
+
+        $this->assertRequestIsCorrect(
+                function (IQueryable $queryable) {
+                    $queryable->offsetExists(0);
                 },
                 $this->offsetIssetQuery(),
                 true
@@ -466,6 +482,50 @@ abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
     }
 
     abstract protected function implodeQuery();
+
+    /**
+     * @dataProvider repositories
+     */
+    public function testSetIndex()
+    {
+        $this->assertOperationIsCorrect(
+                function (IRepository $repository) {
+                    $repository[0] = true;
+                },
+                $this->setIndexQuery()
+        );
+
+        $this->assertOperationIsCorrect(
+                function (IRepository $repository) {
+                    $repository->offsetSet(0, true);
+                },
+                $this->setIndexQuery()
+        );
+    }
+
+    abstract protected function setIndexQuery();
+
+    /**
+     * @dataProvider repositories
+     */
+    public function testUnsetIndex()
+    {
+        $this->assertOperationIsCorrect(
+                function (IRepository $repository) {
+                    unset($repository[0]);
+                },
+                $this->unsetIndexQuery()
+        );
+
+        $this->assertOperationIsCorrect(
+                function (IRepository $repository) {
+                    $repository->offsetUnset(0);
+                },
+                $this->unsetIndexQuery()
+        );
+    }
+
+    abstract protected function unsetIndexQuery();
 
     /**
      * @dataProvider repositories

@@ -121,23 +121,11 @@ abstract class ExpressionInterpreter
 
     final protected function getMethodName(O\MethodCallExpression $methodExpression)
     {
-        return $this->getValue(
-                $methodExpression->getName(),
-                'Cannot get method name: must be a constant value, %s given'
-        );
+        return $this->getValue($methodExpression->getName());
     }
 
-    final protected function getValue(
-            O\Expression $expression,
-            $invalidMessageFormat = 'Could not get values from type %s'
-    ) {
-        if (!($expression instanceof O\ValueExpression)) {
-            throw new \Pinq\PinqException(
-                    $invalidMessageFormat,
-                    get_class($expression));
-        }
-
-        return $expression->getValue();
+    final protected function getValue(O\Expression $expression) {
+        return $expression->simplifyToValue($this->evaluationContext);
     }
 
     /**

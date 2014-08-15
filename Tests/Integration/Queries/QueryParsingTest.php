@@ -260,6 +260,16 @@ class QueryParsingTest extends QueryBuildingTest
         return $this->request([], new Q\Requests\Implode($this->parameter()));
     }
 
+    protected function setIndexQuery()
+    {
+        return $this->operation([], new Q\Operations\SetIndex($this->parameter(), $this->parameter()));
+    }
+
+    protected function unsetIndexQuery()
+    {
+        return $this->operation([], new Q\Operations\UnsetIndex($this->parameter()));
+    }
+
     protected function applyQuery()
     {
         return $this->operation(

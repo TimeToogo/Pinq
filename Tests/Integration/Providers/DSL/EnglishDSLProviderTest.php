@@ -151,6 +151,20 @@ Get as a delimited string
 ENG;
     }
 
+    protected function setIndexQuery()
+    {
+        return <<<'ENG'
+Set the index
+ENG;
+    }
+
+    protected function unsetIndexQuery()
+    {
+        return <<<'ENG'
+Remove the index
+ENG;
+    }
+
     protected function applyQuery()
     {
         return <<<'ENG'

@@ -34,7 +34,7 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
         if ($expression instanceof O\MethodCallExpression) {
             $this->{'visit' . $this->getMethodName($expression)}($expression);
         } elseif ($expression instanceof O\AssignmentExpression
-                && $expression->getAssignmentValue() instanceof O\IndexExpression
+                && $expression->getAssignTo() instanceof O\IndexExpression
         ) {
             $this->{'visitOffsetSet'}($expression);
         } elseif ($expression instanceof O\UnsetExpression) {
@@ -149,12 +149,9 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
                 $this->interpretation->interpretOffsetSet(
                         $operationId,
                         $indexId,
-                        $this->getValue($assignTo->getIndex(), 'index value must be constant, %s given'),
+                        $this->getValue($assignTo->getIndex()),
                         $valueId,
-                        $this->getValue(
-                                $expression->getAssignmentValue(),
-                                'assignment value must be constant, %s given'
-                        )
+                        $this->getValue($expression->getAssignmentValue())
                 );
                 $this->interpretSourceAsScope($assignTo);
                 return;
