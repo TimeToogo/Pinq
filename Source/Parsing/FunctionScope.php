@@ -68,9 +68,9 @@ class FunctionScope implements IFunctionScope
             $thisObject = null;
             $scopeType = null;
         }
-        $variableValueMap = $reflection->getStaticVariables();
+        $variableTable = $reflection->getStaticVariables();
 
-        return new self($thisObject, $scopeType, $variableValueMap);
+        return new self($thisObject, $scopeType, $variableTable);
     }
 
     public function hasThis()
