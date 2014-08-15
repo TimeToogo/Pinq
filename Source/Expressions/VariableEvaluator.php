@@ -22,7 +22,7 @@ class VariableEvaluator extends Evaluator
         $this->name = $name;
     }
 
-    public function doEvaluation(array $variableTable)
+    protected function doEvaluation(array $variableTable)
     {
         $variableTable += [
                 'GLOBALS'  => &$GLOBALS,

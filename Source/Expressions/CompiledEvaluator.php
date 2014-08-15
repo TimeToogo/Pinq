@@ -114,7 +114,7 @@ PHP;
         return $this->code;
     }
 
-    public function doEvaluation(array $variableTable)
+    protected function doEvaluation(array $variableTable)
     {
         $evaluator = $this->compiledEvaluator;
 

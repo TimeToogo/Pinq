@@ -22,7 +22,7 @@ class StaticValueEvaluator extends Evaluator
         $this->value = $value;
     }
 
-    public function doEvaluation(array $variableTable)
+    protected function doEvaluation(array $variableTable)
     {
         return $this->value;
     }
