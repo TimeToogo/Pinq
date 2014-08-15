@@ -52,7 +52,7 @@ abstract class IteratorScheme implements IIteratorScheme
 
     final public function unionIterator(\Traversable $iterator, \Traversable $otherIterator)
     {
-        return $this->uniqueIterator($this->appendIterator($iterator, $otherIterator));
+        return $this->reindexerIterator($this->uniqueIterator($this->appendIterator($iterator, $otherIterator)));
     }
 
     final public function uniqueIterator(\Traversable $iterator)
