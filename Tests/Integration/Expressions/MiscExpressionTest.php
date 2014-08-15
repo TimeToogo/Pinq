@@ -15,6 +15,7 @@ class MiscExpressionTest extends ExpressionTest
                 )
         );
     }
+
     public function testVariableSuperGlobalExpressionSimplifiesCorrectly()
     {
         $this->assertEquals(
@@ -22,6 +23,34 @@ class MiscExpressionTest extends ExpressionTest
                 O\Expression::variable(O\Expression::value('_POST'))->simplify(
                         O\EvaluationContext::globalScope()
                 )
+        );
+    }
+
+    public function testVariablesCompileCorrectly()
+    {
+        $this->assertEquals(
+                O\Expression::variable(O\Expression::value('var'))->compile(),
+                '$var'
+        );
+
+        $this->assertEquals(
+                O\Expression::variable(O\Expression::value('var1'))->compile(),
+                '$var1'
+        );
+
+        $this->assertEquals(
+                O\Expression::variable(O\Expression::value('var bar'))->compile(),
+                '${\'var bar\'}'
+        );
+
+        $this->assertEquals(
+                O\Expression::variable(O\Expression::value('var-bar'))->compile(),
+                '${\'var-bar\'}'
+        );
+
+        $this->assertEquals(
+                O\Expression::variable(O\Expression::value('1var'))->compile(),
+                '${\'1var\'}'
         );
     }
 }
