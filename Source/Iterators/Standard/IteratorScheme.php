@@ -12,7 +12,7 @@ use Pinq\Iterators\Common;
  */
 class IteratorScheme extends Common\IteratorScheme
 {
-    public static function compatiableWith($phpVersion)
+    public static function compatibleWith($phpVersion)
     {
         return version_compare($phpVersion, '5.4.0', '>=');
     }

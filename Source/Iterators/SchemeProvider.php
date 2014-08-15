@@ -21,11 +21,11 @@ final class SchemeProvider
     {
         if (self::$schemesInPriorityOrder === null) {
 
-            if (Generators\GeneratorScheme::compatiableWith(PHP_VERSION)) {
+            if (Generators\GeneratorScheme::compatibleWith(PHP_VERSION)) {
                 self::$schemesInPriorityOrder[] = new Generators\GeneratorScheme();
             }
 
-            if (Standard\IteratorScheme::compatiableWith(PHP_VERSION)) {
+            if (Standard\IteratorScheme::compatibleWith(PHP_VERSION)) {
                 self::$schemesInPriorityOrder[] = new Standard\IteratorScheme();
             }
         }

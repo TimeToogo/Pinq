@@ -12,9 +12,11 @@ use Pinq\Iterators\Common;
  */
 class GeneratorScheme extends Common\IteratorScheme
 {
-    public static function compatiableWith($phpVersion)
+    public static function compatibleWith($phpVersion)
     {
-        return version_compare($phpVersion, '5.5.0', '>=');
+        return version_compare($phpVersion, '5.5.0', '>=')
+                && strpos($phpVersion, 'hhvm') === false
+                && strpos($phpVersion, 'hiphop') === false;
     }
 
     public function createOrderedMap(\Traversable $iterator = null)
