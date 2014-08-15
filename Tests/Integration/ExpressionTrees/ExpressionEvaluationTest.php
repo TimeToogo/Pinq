@@ -289,9 +289,9 @@ class ExpressionEvaluationTest extends InterpreterTest
     public function testFunctionCallsNamespaceResolution()
     {
         //Use relative function defined at the top of this file
-        $this->assertEvaluatesTo(function () { get_called_class(); }, 'global override');
+        $this->assertSerializedEvaluatesTo(static function () { get_called_class(); }, 'global override');
         //Test falls back to non global function
-        $this->assertEvaluatesTo(function () { get_called_class(); }, \get_called_class(), false, __NAMESPACE__ . '__');
+        $this->assertSerializedEvaluatesTo(static function () { get_called_class(); }, \get_called_class(), false, __NAMESPACE__ . '__');
     }
 
     /**
@@ -311,11 +311,11 @@ class ExpressionEvaluationTest extends InterpreterTest
         self::$privateField = 'I AM PRIVATE';
         self::$field = [1, 2, 3];
 
-        $this->assertEvaluatesTo(function () { ExpressionEvaluationTest::$field; }, [1,2,3]);
+        $this->assertSerializedEvaluatesTo(static function () { ExpressionEvaluationTest::$field; }, [1,2,3]);
         //Ensure resolves scope
-        $this->assertEvaluatesTo(function () { self::$field; }, [1,2,3]);
+        $this->assertSerializedEvaluatesTo(static function () { self::$field; }, [1,2,3]);
         //Ensure scope allows correct access
-        $this->assertEvaluatesTo(function () { self::$privateField; }, 'I AM PRIVATE');
+        $this->assertSerializedEvaluatesTo(static function () { self::$privateField; }, 'I AM PRIVATE');
     }
 
     /**
