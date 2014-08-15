@@ -4,7 +4,7 @@ namespace Pinq\Expressions;
 
 /**
  * Implementation of the expression evaluator using a variable
- * from the variable table.
+ * from the variable table or from the standard superglobals.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
