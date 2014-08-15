@@ -20,7 +20,7 @@ class WhereIntTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testThatWhereInWithEmptyReturnsEmpty(\Pinq\ITraversable $traversable, array $data)
     {

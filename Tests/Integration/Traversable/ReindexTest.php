@@ -28,7 +28,7 @@ class ReindexTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testThatKeysSupportNonScalarKeys(\Pinq\ITraversable $traversable, array $data)
     {

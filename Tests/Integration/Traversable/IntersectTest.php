@@ -10,7 +10,7 @@ class IntersectTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocStrings
      */
     public function testThatIntersectWithSelfReturnsUniqueValues(\Pinq\ITraversable $traversable, array $data)
     {

@@ -10,7 +10,7 @@ class UnionTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocStrings
      */
     public function testThatUnionWithSelfReturnsUniqueReindexedValues(\Pinq\ITraversable $traversable, array $data)
     {
@@ -20,7 +20,7 @@ class UnionTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocStrings
      */
     public function testThatUnionWithEmptyReturnsUniqueReindexedValues(\Pinq\ITraversable $traversable, array $data)
     {

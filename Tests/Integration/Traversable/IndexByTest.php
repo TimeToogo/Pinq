@@ -20,7 +20,7 @@ class IndexByTest extends TraversableTest
     }
     
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
     {

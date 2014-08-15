@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Collection;
 class AddRangeTest extends CollectionTest
 {
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testThatAddRangeAddAllValuesToCollection(\Pinq\ICollection $collection, array $data)
     {
@@ -16,7 +16,7 @@ class AddRangeTest extends CollectionTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testThatAddRangeReindexesCollection(\Pinq\ICollection $collection, array $data)
     {

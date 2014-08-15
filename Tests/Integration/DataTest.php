@@ -23,11 +23,12 @@ abstract class DataTest extends \Pinq\Tests\PinqTestCase
     {
         $data = [];
         $dataProviders = [
-            'EmptyData',
-            'OneToTen',
-            'OneToTenTwice',
-            'AssocOneToTen',
-            'TenRandomStrings'
+            'emptyData',
+            'oneToTen',
+            'oneToTenTwice',
+            'assocOneToTen',
+            'tenRandomStrings',
+            'assocMixedValues'
         ];
 
         foreach ($dataProviders as $provider) {
@@ -59,7 +60,40 @@ abstract class DataTest extends \Pinq\Tests\PinqTestCase
 
     public function assocOneToTen()
     {
-        return $this->getImplementations(array_combine($this->randomStrings(10), range(1, 10)));
+        return $this->getImplementations(array_combine(range('A', 'J'), range(1, 10)));
+    }
+
+    public function assocMixedValues()
+    {
+        return $this->getImplementations([
+                        8       => [5 => '1'],
+                        'One'   => 'Unit',
+                        'Two'   => 'Ten',
+                        5       => 'foobarbaz',
+                        'Three' => 'Hundred',
+                        ' -- '  => true,
+                        'Four'  => 'Thousand',
+                        'Five'  => 'Million',
+                        9293    => 9.977464,
+                        'Six'   => 'Billion',
+                        -1001   => null,
+                        'Seven' => 'Trillion',
+                        0       => [1, 2, 3]
+                ]);
+    }
+
+    public function assocStrings()
+    {
+        return $this->getImplementations([
+                        'foo'       => 'bar',
+                        'quz'       => 'quack',
+                        '2-'        => 'abcdef',
+                        '--'        => 'AQWS',
+                        '-~sdsds~-' => 'bar',
+                        '~!'        => 'My name is',
+                        '$09876'    => 'Mr....',
+                        '-A1231A-'  => 'Bar',
+                ]);
     }
 
     public function tenRandomStrings()

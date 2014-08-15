@@ -21,12 +21,14 @@ class OrderByTest extends TraversableTest
     }
     
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testCalledWithValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
     {
         $this->assertThatCalledWithValueAndKeyParametersOnceForEachElementInOrder([$traversable, 'orderByAscending'], $data);
         $this->assertThatCalledWithValueAndKeyParametersOnceForEachElementInOrder([$traversable, 'orderByDescending'], $data);
+        $this->assertThatCalledWithValueAndKeyParametersOnceForEachElementInOrder([$traversable->orderByAscending(function ($i) { return $i; }), 'thenByAscending'], $data);
+        $this->assertThatCalledWithValueAndKeyParametersOnceForEachElementInOrder([$traversable->orderByAscending(function ($i) { return $i; }), 'thenByDescending'], $data);
     }
 
     /**
@@ -73,7 +75,7 @@ class OrderByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Names
+     * @dataProvider names
      */
     public function testThatOrderStringsByMultipleCharsOrdersCorrectly(\Pinq\ITraversable $names, array $data)
     {
@@ -95,7 +97,7 @@ class OrderByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Names
+     * @dataProvider names
      */
     public function testThatOrderStringsCharsAndLengthCharsOrdersCorrectly(\Pinq\ITraversable $names, array $data)
     {
@@ -117,7 +119,7 @@ class OrderByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Names
+     * @dataProvider names
      */
     public function testThatOrderStringsCharsAndLengthCharsDescendingOrdersCorrectly(\Pinq\ITraversable $names, array $data)
     {
@@ -139,7 +141,7 @@ class OrderByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Names
+     * @dataProvider names
      */
     public function testThatOrderByAscendingIsEquivalentToOrderByWithAscendingDirection(\Pinq\ITraversable $names, array $data)
     {
@@ -157,7 +159,7 @@ class OrderByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Names
+     * @dataProvider names
      */
     public function testThatOrderByDescendingIsEquivalentToOrderByWithDescendingDirection(\Pinq\ITraversable $names, array $data)
     {
@@ -175,7 +177,7 @@ class OrderByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Names
+     * @dataProvider names
      */
     public function testThatThenByAscendingIsEquivalentToThenByWithAscendingDirection(\Pinq\ITraversable $names, array $data)
     {
@@ -201,7 +203,7 @@ class OrderByTest extends TraversableTest
     }
 
     /**
-     * @dataProvider Names
+     * @dataProvider names
      */
     public function testThatThenByDescendingIsEquivalentToThenByWithDescendingDirection(\Pinq\ITraversable $names, array $data)
     {

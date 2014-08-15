@@ -13,7 +13,7 @@ class ImplodeTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocTenRandomStrings
      */
     public function testImplodeOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {

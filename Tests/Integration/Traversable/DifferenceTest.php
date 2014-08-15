@@ -20,7 +20,7 @@ class DifferenceTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocStrings
      */
     public function testThatDifferenceWithEmptyReturnsSameAsTheOriginal(\Pinq\ITraversable $traversable, array $data)
     {

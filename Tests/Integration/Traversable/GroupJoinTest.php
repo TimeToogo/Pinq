@@ -31,7 +31,7 @@ class GroupJoinTest extends TraversableTest
     }
     
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testCalledWithCorrectValueAndKeyParameters(\Pinq\ITraversable $traversable, array $data)
     {
@@ -71,7 +71,7 @@ class GroupJoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testGroupJoinOnTrueProducesTheCorrectResult(\Pinq\ITraversable $traversable, array $data)
     {
@@ -92,7 +92,7 @@ class GroupJoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testGroupJoinOnFalseProducesEmptyLeftJoin(\Pinq\ITraversable $traversable, array $data)
     {

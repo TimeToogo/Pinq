@@ -27,7 +27,7 @@ class JoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testJoinOnTrueProducesACartesianProduct(\Pinq\ITraversable $traversable, array $data)
     {
@@ -48,7 +48,7 @@ class JoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testJoinWillRewindCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
@@ -67,7 +67,7 @@ class JoinTest extends TraversableTest
     }
 
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testJoinOnFalseProducesEmpty(\Pinq\ITraversable $traversable, array $data)
     {
@@ -207,7 +207,7 @@ class JoinTest extends TraversableTest
     }
     
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testThatJoinWithDefaultWillSupplyDefaultElementWhenThereAreNoMatchingInnerElements(\Pinq\ITraversable $traversable, array $data)
     {
@@ -226,7 +226,7 @@ class JoinTest extends TraversableTest
     }
     
     /**
-     * @dataProvider everything
+     * @dataProvider assocMixedValues
      */
     public function testThatJoinWithDefaultDoesNotSupplyDefaultElementWhenThereAreMatchingInnerElements(\Pinq\ITraversable $traversable, array $data)
     {

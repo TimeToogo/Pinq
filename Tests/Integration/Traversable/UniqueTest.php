@@ -48,7 +48,14 @@ class UniqueTest extends TraversableTest
     {
         $uniqueValues = $values->unique();
 
-        $this->assertMatches($uniqueValues, array_unique($data, SORT_REGULAR));
+        $uniqueData = [];
+        foreach($data as $key => $value) {
+            if(!in_array($value, $uniqueData, true)) {
+                $uniqueData[$key] = $value;
+            }
+        }
+
+        $this->assertMatches($uniqueValues, $uniqueData);
     }
 
     /**
@@ -74,8 +81,15 @@ class UniqueTest extends TraversableTest
     {
         $uniqueValuesArray = $values->unique()->asArray();
 
+        $uniqueData = [];
+        foreach($data as $key => $value) {
+            if(!in_array($value, $uniqueData, true)) {
+                $uniqueData[$key] = $value;
+            }
+        }
+
         $this->assertSame(
-                array_keys(array_unique($data, SORT_REGULAR)),
+                array_keys($uniqueData),
                 array_keys($uniqueValuesArray));
     }
     
