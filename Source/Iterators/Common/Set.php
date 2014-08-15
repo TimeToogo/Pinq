@@ -43,7 +43,7 @@ trait Set
      */
     public function contains($value)
     {
-        return isset($this->values[Identity::hash($value)]);
+        return $value === null ? array_key_exists(Identity::hash(null), $this->values) : isset($this->values[Identity::hash($value)]);
     }
 
     /**

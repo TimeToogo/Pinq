@@ -25,7 +25,7 @@ class SetTest extends \Pinq\Tests\PinqTestCase
     public function testThatSetCanAddValue(ISet $set)
     {
         $count = 0;
-        foreach([1, 'abc', [122], new \stdClass()] as $value) {
+        foreach([null, 1, 'abc', [122], new \stdClass()] as $value) {
             $this->assertTrue($set->add($value));
             $this->assertTrue($set->contains($value));
             $count++;
