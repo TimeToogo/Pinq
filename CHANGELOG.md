@@ -117,6 +117,8 @@ dev-master
     - `Caching\IQueryCache` now acts as a wrapper to `Caching\ICacheAdapter`.
     - Any type of value can be cached and retrieved through the cache adapter.
     - Implemented namespacing api and `NamespacedCache`.
+ - Fixed issue with `ITraversable::union` not reindexing keys.
+ - Fixed issue with `Iterators\Common\Set` not detecting null values.
 
 2.1.1 (22/5/14)
 ===============
