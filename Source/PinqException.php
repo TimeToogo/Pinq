@@ -11,7 +11,7 @@ class PinqException extends \Exception
 {
     /**
      * @param string $messageFormat
-     * @param        mixed ... The values to interpole the message with
+     * @param mixed  $_ The values to interpolate the message with
      */
     public function __construct($messageFormat = '', $_ = null)
     {
