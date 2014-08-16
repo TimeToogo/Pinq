@@ -133,7 +133,7 @@ class QueryResultCollection implements IQueryResultCollection
 
         //If found applicable results, execute the updated expression tree against the Traversable
         //implementation to compute the result of the query.
-        $results = $foundApplicableResults ? $remainingQueryExpression->simplifyToValue() : null;
+        $results = $foundApplicableResults ? $remainingQueryExpression->evaluate() : null;
         return $foundApplicableResults;
     }
 

@@ -95,7 +95,7 @@ abstract class ExpressionInterpreter
             return $default;
         }
 
-        return $argumentExpression->simplifyToValue($this->evaluationContext);
+        return $argumentExpression->evaluate($this->evaluationContext);
     }
 
     final protected function getArgumentAt($index, O\MethodCallExpression $methodExpression)
@@ -125,7 +125,7 @@ abstract class ExpressionInterpreter
     }
 
     final protected function getValue(O\Expression $expression) {
-        return $expression->simplifyToValue($this->evaluationContext);
+        return $expression->evaluate($this->evaluationContext);
     }
 
     /**

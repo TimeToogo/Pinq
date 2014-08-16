@@ -58,7 +58,7 @@ class SourceInterpreter extends ExpressionInterpreter implements ISourceInterpre
                             if($isQueryScope) {
                                 return $expression;
                             } else {
-                                return $self->walk(O\Expression::value($expression->simplifyToValue($this->evaluationContext)));
+                                return $self->walk(O\Expression::value($expression->evaluate($this->evaluationContext)));
                             }
                         },
                 O\ValueExpression::getType() =>
@@ -77,7 +77,7 @@ class SourceInterpreter extends ExpressionInterpreter implements ISourceInterpre
             $this->interpretation->interpretQueryScope($this->getId('source-scope'), $this->scopeInterpreter->getInterpretation());
         } else {
             /** @var $expression O\ValueExpression */
-            $this->interpretation->interpretArrayOrIterator($this->getId('source-iterator'), $expression->simplifyToValue($this->evaluationContext));
+            $this->interpretation->interpretArrayOrIterator($this->getId('source-iterator'), $expression->evaluate($this->evaluationContext));
         }
     }
 }

@@ -113,7 +113,7 @@ abstract class Expression implements \Serializable
      *
      * @return mixed
      */
-    public function simplifyToValue(IEvaluationContext $context = null)
+    public function evaluate(IEvaluationContext $context = null)
     {
         return $this->asEvaluator($context)->evaluate();
     }
@@ -135,7 +135,7 @@ abstract class Expression implements \Serializable
      */
     public function simplify(IEvaluationContext $context = null)
     {
-        return Expression::value($this->simplifyToValue($context));
+        return Expression::value($this->evaluate($context));
     }
 
     /**

@@ -29,7 +29,7 @@ class ValueExpression extends Expression
         return new StaticValueEvaluator($this->value, $context);
     }
 
-    public function simplifyToValue(IEvaluationContext $context = null)
+    public function evaluate(IEvaluationContext $context = null)
     {
         return $this->value;
     }

@@ -65,7 +65,7 @@ class ClosureExpressionFunction extends BaseFunction
     public function getCallable()
     {
         if ($this->callable === null) {
-            $this->callable = $this->expression->simplifyToValue($this->evaluationContext);
+            $this->callable = $this->expression->evaluate($this->evaluationContext);
         }
 
         return $this->callable;

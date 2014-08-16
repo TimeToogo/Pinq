@@ -100,7 +100,7 @@ abstract class InterpreterTest extends \Pinq\Tests\PinqTestCase
             $usedVariables,
             $structure->getBodyExpressions());
 
-        return $closureExpression->simplifyToValue($reflection->asEvaluationContext());
+        return $closureExpression->evaluate($reflection->asEvaluationContext());
     }
 
     private function assertSerializesAndUnserializedCorrectly(Parsing\IFunctionStructure $function)

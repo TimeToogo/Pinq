@@ -305,7 +305,7 @@ abstract class FunctionBase implements \Serializable
         foreach ($this->parameters->getUnusedParameterDefaultMap() as $name => $defaultValueExpression) {
             if ($defaultValueExpression !== null) {
                 /** @var $defaultValueExpression O\Expression */
-                $defaultValueMap[$name] = $defaultValueExpression->simplifyToValue(
+                $defaultValueMap[$name] = $defaultValueExpression->evaluate(
                         O\EvaluationContext::staticContext($this->namespace, $this->scopeType)
                 );
             }
