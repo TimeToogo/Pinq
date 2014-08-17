@@ -14,7 +14,7 @@ class Sum extends ProjectionRequest
         return self::SUM;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitSum($this);
     }

@@ -14,7 +14,7 @@ class First extends Request
         return self::FIRST;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitFirst($this);
     }

@@ -14,7 +14,7 @@ class Minimum extends ProjectionRequest
         return self::MINIMUM;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitMinimum($this);
     }

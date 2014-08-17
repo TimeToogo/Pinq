@@ -15,7 +15,7 @@ class Average extends ProjectionRequest
         return self::AVERAGE;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitAverage($this);
     }

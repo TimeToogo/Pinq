@@ -15,7 +15,7 @@ class IsEmpty extends Request
         return self::IS_EMPTY;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitIsEmpty($this);
     }

@@ -40,7 +40,7 @@ class Values extends Request
         return $this->valuesType;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitValues($this);
     }

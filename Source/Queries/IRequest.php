@@ -2,6 +2,8 @@
 
 namespace Pinq\Queries;
 
+use Pinq\Queries\Requests\IRequestVisitor;
+
 /**
  * The interface for a request query, one of the const types, they
  * are all implemented as their own class in Requests namespace.
@@ -35,5 +37,5 @@ interface IRequest
     /**
      * @return mixed
      */
-    public function traverse(Requests\RequestVisitor $visitor);
+    public function traverse(IRequestVisitor $visitor);
 }

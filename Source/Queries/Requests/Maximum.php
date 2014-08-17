@@ -14,7 +14,7 @@ class Maximum extends ProjectionRequest
         return self::MAXIMUM;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitMaximum($this);
     }

@@ -39,7 +39,7 @@ class Implode extends ProjectionRequest
         return $this->delimiterId;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitImplode($this);
     }

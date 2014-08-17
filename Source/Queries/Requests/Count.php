@@ -14,7 +14,7 @@ class Count extends Request
         return self::COUNT;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitCount($this);
     }

@@ -14,7 +14,7 @@ class IssetIndex extends IndexRequest
         return self::ISSET_INDEX;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitIssetIndex($this);
     }

@@ -14,7 +14,7 @@ class GetIndex extends IndexRequest
         return self::GET_INDEX;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitGetIndex($this);
     }

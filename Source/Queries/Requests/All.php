@@ -15,7 +15,7 @@ class All extends ProjectionRequest
         return self::ALL;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitAll($this);
     }

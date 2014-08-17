@@ -35,7 +35,7 @@ class Contains extends Request
         return $this->valueId;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitContains($this);
     }

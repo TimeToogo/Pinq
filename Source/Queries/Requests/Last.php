@@ -14,7 +14,7 @@ class Last extends Request
         return self::LAST;
     }
 
-    public function traverse(RequestVisitor $visitor)
+    public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitLast($this);
     }
