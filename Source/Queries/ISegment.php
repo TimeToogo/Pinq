@@ -2,6 +2,8 @@
 
 namespace Pinq\Queries;
 
+use Pinq\Queries\Segments\ISegmentVisitor;
+
 /**
  * The interface for a query segment, one of the const types, they
  * are all implemented as their own class class in Segments namespace.
@@ -34,5 +36,5 @@ interface ISegment
     /**
      * @return ISegment
      */
-    public function traverse(Segments\SegmentVisitor $visitor);
+    public function traverse(ISegmentVisitor $visitor);
 }

@@ -3,6 +3,7 @@
 namespace Pinq\Queries\Common;
 
 use Pinq\Queries\Segments;
+use Pinq\Queries\Segments\ISegmentVisitor;
 
 /**
  * Interface for a source of values.
@@ -20,9 +21,9 @@ interface ISource
     public function getType();
 
     /**
-     * @param Segments\SegmentVisitor $visitor
+     * @param ISegmentVisitor $visitor
      *
      * @return ISource
      */
-    public function visit(Segments\SegmentVisitor $visitor);
+    public function visit(ISegmentVisitor $visitor);
 }

@@ -30,7 +30,7 @@ class Range extends Segment
         return self::RANGE;
     }
 
-    public function traverse(SegmentVisitor $visitor)
+    public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitRange($this);
     }

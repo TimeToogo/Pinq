@@ -2,6 +2,9 @@
 
 namespace Pinq\Queries;
 
+use Pinq\Queries\Segments\ISegmentVisitor;
+use Pinq\Queries\Segments\ISegmentVisitor;
+
 /**
  * The query scope. This contains many query segments which
  * in order represent the scope of the query to be loaded/executed.
@@ -26,9 +29,9 @@ interface IScope
     public function isEmpty();
 
     /**
-     * @param Segments\SegmentVisitor $visitor
+     * @param ISegmentVisitor $visitor
      *
      * @return void
      */
-    public function visit(Segments\SegmentVisitor $visitor);
+    public function visit(ISegmentVisitor $visitor);
 }

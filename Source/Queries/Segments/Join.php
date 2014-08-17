@@ -55,7 +55,7 @@ class Join implements \Pinq\Queries\ISegment
         return $this->joiningFunction;
     }
 
-    public function traverse(SegmentVisitor $visitor)
+    public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitJoin($this);
     }

@@ -60,7 +60,7 @@ class Operation extends Segment
         return self::OPERATION;
     }
 
-    public function traverse(SegmentVisitor $visitor)
+    public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitOperation($this);
     }

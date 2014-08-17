@@ -27,7 +27,7 @@ class OrderBy extends Segment
         return self::ORDER_BY;
     }
 
-    public function traverse(SegmentVisitor $visitor)
+    public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitOrderBy($this);
     }

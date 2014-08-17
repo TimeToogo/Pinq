@@ -15,7 +15,7 @@ class SelectMany extends ProjectionSegment
         return self::SELECT_MANY;
     }
 
-    public function traverse(SegmentVisitor $visitor)
+    public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitSelectMany($this);
     }

@@ -2,6 +2,8 @@
 
 namespace Pinq\Queries;
 
+use Pinq\Queries\Segments\ISegmentVisitor;
+
 /**
  * Implementation of the IScope
  *
@@ -40,7 +42,7 @@ class Scope implements IScope
         return empty($this->segments);
     }
 
-    public function visit(Segments\SegmentVisitor $visitor)
+    public function visit(ISegmentVisitor $visitor)
     {
         $visitor->visit($this);
     }

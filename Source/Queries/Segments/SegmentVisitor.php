@@ -11,7 +11,7 @@ use Pinq\Queries\IScope;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class SegmentVisitor
+class SegmentVisitor implements ISegmentVisitor
 {
     /**
      * @param IScope $scope

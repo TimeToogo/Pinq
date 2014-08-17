@@ -15,7 +15,7 @@ class GroupBy extends ProjectionSegment
         return self::GROUP_BY;
     }
 
-    public function traverse(SegmentVisitor $visitor)
+    public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitGroupBy($this);
     }

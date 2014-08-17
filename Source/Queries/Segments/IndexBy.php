@@ -14,7 +14,7 @@ class IndexBy extends ProjectionSegment
         return self::INDEX_BY;
     }
 
-    public function traverse(SegmentVisitor $visitor)
+    public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitIndexBy($this);
     }

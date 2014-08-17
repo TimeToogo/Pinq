@@ -14,7 +14,7 @@ class Unique extends Segment
         return self::UNIQUE;
     }
 
-    public function traverse(SegmentVisitor $visitor)
+    public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitUnique($this);
     }

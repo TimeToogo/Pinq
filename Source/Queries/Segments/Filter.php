@@ -14,7 +14,7 @@ class Filter extends ProjectionSegment
         return self::FILTER;
     }
 
-    public function traverse(SegmentVisitor $visitor)
+    public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitFilter($this);
     }

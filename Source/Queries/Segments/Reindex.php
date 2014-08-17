@@ -15,7 +15,7 @@ class Reindex extends Segment
         return self::REINDEX;
     }
 
-    public function traverse(SegmentVisitor $visitor)
+    public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitReindex($this);
     }

@@ -14,7 +14,7 @@ class Select extends ProjectionSegment
         return self::SELECT;
     }
 
-    public function traverse(SegmentVisitor $visitor)
+    public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitSelect($this);
     }

@@ -15,7 +15,7 @@ class Keys extends Segment
         return self::KEYS;
     }
 
-    public function traverse(SegmentVisitor $visitor)
+    public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitKeys($this);
     }
