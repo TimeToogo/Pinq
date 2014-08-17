@@ -48,4 +48,23 @@ class Scope implements IScope
             $segment->traverse($visitor);
         }
     }
+
+    public function update(ISourceInfo $sourceInfo, array $segments)
+    {
+        if($this->sourceInfo === $sourceInfo && $this->segments === $segments) {
+            return $this;
+        }
+
+        return new self($sourceInfo, $segments);
+    }
+
+    public function updateSource(ISourceInfo $sourceInfo)
+    {
+        return $this->update($sourceInfo, $this->segments);
+    }
+
+    public function updateSegments(array $segments)
+    {
+        return $this->update($this->sourceInfo, $segments);
+    }
 }

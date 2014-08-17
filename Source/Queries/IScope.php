@@ -3,7 +3,6 @@
 namespace Pinq\Queries;
 
 use Pinq\Queries\Segments\ISegmentVisitor;
-use Pinq\Queries\Segments\ISegmentVisitor;
 
 /**
  * The query scope. This contains many query segments which
@@ -34,4 +33,26 @@ interface IScope
      * @return void
      */
     public function visit(ISegmentVisitor $visitor);
+
+    /**
+     * @param ISourceInfo $sourceInfo
+     * @param ISegment[]  $segments
+     *
+     * @return IScope
+     */
+    public function update(ISourceInfo $sourceInfo, array $segments);
+
+    /**
+     * @param ISourceInfo $sourceInfo
+     *
+     * @return IScope
+     */
+    public function updateSource(ISourceInfo $sourceInfo);
+
+    /**
+     * @param ISegment[] $segments
+     *
+     * @return IScope
+     */
+    public function updateSegments(array $segments);
 }
