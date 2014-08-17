@@ -3,7 +3,6 @@
 namespace Pinq\Queries;
 
 use Pinq\Queries\Operations\IOperationVisitor;
-use Pinq\Queries\Operations\IOperationVisitor;
 
 /**
  * The interface for a operation query, one of the const types, they
