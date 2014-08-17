@@ -9,27 +9,27 @@ namespace Pinq\Queries\Segments;
  */
 interface ISegmentVisitor
 {
-    public function visitIndexBy(IndexBy $query);
+    public function visitIndexBy(IndexBy $segment);
 
-    public function visitSelect(Select $query);
+    public function visitSelect(Select $segment);
 
-    public function visitKeys(Keys $query);
+    public function visitKeys(Keys $segment);
 
-    public function visitOperation(Operation $query);
+    public function visitOperation(Operation $segment);
 
-    public function visitRange(Range $query);
+    public function visitRange(Range $segment);
 
-    public function visitOrderBy(OrderBy $query);
+    public function visitOrderBy(OrderBy $segment);
 
-    public function visitGroupBy(GroupBy $query);
+    public function visitGroupBy(GroupBy $segment);
 
-    public function visitSelectMany(SelectMany $query);
+    public function visitSelectMany(SelectMany $segment);
 
-    public function visitFilter(Filter $query);
+    public function visitFilter(Filter $segment);
 
-    public function visitUnique(Unique $query);
+    public function visitUnique(Unique $segment);
 
-    public function visitJoin(Join $query);
+    public function visitJoin(Join $segment);
 
-    public function visitReindex(Reindex $query);
+    public function visitReindex(Reindex $segment);
 }

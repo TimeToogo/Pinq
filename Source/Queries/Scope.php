@@ -44,6 +44,8 @@ class Scope implements IScope
 
     public function visit(ISegmentVisitor $visitor)
     {
-        $visitor->visit($this);
+        foreach($this->segments as $segment) {
+            $segment->traverse($visitor);
+        }
     }
 }

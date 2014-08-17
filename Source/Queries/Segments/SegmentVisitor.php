@@ -20,67 +20,65 @@ class SegmentVisitor implements ISegmentVisitor
      */
     final public function visit(IScope $scope)
     {
-        foreach ($scope->getSegments() as $query) {
-            $query->traverse($this);
-        }
+        $scope->visit($this);
     }
 
-    public function visitOperation(Operation $query)
+    public function visitOperation(Operation $segment)
     {
 
     }
 
-    public function visitRange(Range $query)
+    public function visitRange(Range $segment)
     {
 
     }
 
-    public function visitUnique(Unique $query)
+    public function visitUnique(Unique $segment)
     {
 
     }
 
-    public function visitFilter(Filter $query)
+    public function visitFilter(Filter $segment)
     {
 
     }
 
-    public function visitGroupBy(GroupBy $query)
+    public function visitGroupBy(GroupBy $segment)
     {
 
     }
 
-    public function visitJoin(Join $query)
+    public function visitJoin(Join $segment)
     {
 
     }
 
-    public function visitOrderBy(OrderBy $query)
+    public function visitOrderBy(OrderBy $segment)
     {
 
     }
 
-    public function visitSelect(Select $query)
+    public function visitSelect(Select $segment)
     {
 
     }
 
-    public function visitSelectMany(SelectMany $query)
+    public function visitSelectMany(SelectMany $segment)
     {
 
     }
 
-    public function visitIndexBy(IndexBy $query)
+    public function visitIndexBy(IndexBy $segment)
     {
 
     }
 
-    public function visitKeys(Keys $query)
+    public function visitKeys(Keys $segment)
     {
 
     }
 
-    public function visitReindex(Reindex $query)
+    public function visitReindex(Reindex $segment)
     {
 
     }
