@@ -1,6 +1,6 @@
 <?php
-namespace Pinq\Expressions;
 
+namespace Pinq\Expressions;
 
 /**
  * Interface of the expression evaluation.
@@ -25,11 +25,12 @@ interface IEvaluator
 
     /**
      * Evaluates the expression under the context and returns the returned value.
-     * The default variable table from the context can be overridden in the first parameter.
+     * The default variables from the context can be overridden in the first parameter.
      *
      * @param array|null $variableTable
      *
      * @return mixed
+     * @throws \Pinq\PinqException if invalid variables are supplied in the variable table.
      */
     public function evaluate(array $variableTable = null);
 }

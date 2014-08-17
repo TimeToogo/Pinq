@@ -40,13 +40,14 @@ abstract class Evaluator implements IEvaluator
     public function evaluate(array $variableTable = null)
     {
         //Loose equality: order is irrelevant
-        if ($variableTable !== null && array_keys($variableTable) != $this->requiredVariables) {
+        if ($variableTable !== null && count(array_diff(array_keys($variableTable), $this->requiredVariables)) > 0) {
             throw new PinqException(
                     'Cannot evaluate expression: supplied variable table is invalid, variable names do not match the required variable names');
         }
 
         $contextVariableTable = $this->context->getVariableTable() ? : [];
-        return $this->doEvaluation($variableTable === null ? $contextVariableTable : $variableTable);
+        $customVariableTable = $variableTable ? : [];
+        return $this->doEvaluation($customVariableTable + $contextVariableTable);
     }
 
     protected abstract function doEvaluation(array $variableTable);
