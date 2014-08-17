@@ -25,7 +25,7 @@ class ResolvedParameterRegistry implements IResolvedParameterRegistry
     }
 
     /**
-     * Returns and empty resolved parameter registry.
+     * Returns an empty resolved parameter registry.
      *
      * @return ResolvedParameterRegistry
      */
