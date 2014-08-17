@@ -71,7 +71,6 @@ dev-master
  - Added `ICollection::remove` to remove all occurrences of the supplied value from the collection.
  - Made order by `Direction` constants interchangeable with native `SORT_ASC`/`SORT_DESC`.
  - Shorten expression getter names by removing redundant `...Expression`.
- - New expression classes: `UnsetExpression`, `StaticFieldExpression`, `ConstantExpression`, `ClassConstantExpression`
  - Restructured and improved function parsing
     - New function reflection API
     - Correctly handle resolving magic constants (`__DIR__`...) and scopes (`self::`...).
@@ -108,9 +107,10 @@ dev-master
     - `RepositoryProvider` decorates the `QueryProvider`
     - New configuration classes (under `Configuration` namespace)
     - Integrated with `Caching\IQueryCache` and `Queries\Builders\*`.
+ - New expression classes: `UnsetExpression`, `StaticFieldExpression`, `ConstantExpression`, `ClassConstantExpression`
  - Refactored `ArrayExpression` by creating `ArrayItemExpression` representing each element.
- - Refactored `ClosureUsedVariableExpression` by creating `ClosureExpression` representing each used variable and supports references.
- - Updated expression simplification to use compilation + `eval` with an `IEvaluationContext`, integrated into reflection and query api.
+ - Refactored `ClosureExpression` by creating `ClosureUsedVariableExpression` representing each used variable and supports references.
+ - Updated expression simplification to use compilation + `eval` with an `IEvaluationContext`, integrated into reflection and query API.
  - Ensure PSR-2 code guidelines adherence.
  - Fixed binary operation `instanceof` compilation bug with literal class names.
  - Refactored caching implementation:
