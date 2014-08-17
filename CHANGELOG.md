@@ -98,14 +98,13 @@ dev-master
     - Renamed `Segments\Operation::getTraversable` to `getValues`
     - Refactored `Join` query segments / operations.
        - Refactored inheritance to composition, extracted join filtering to interface `Queries\Common\Join\IFilter`.
-       - Created base class for query segment and operation: `Queries\Common\Join\SourceBase`.
-       - Updated `Segments\Segment[Walker|Visitor]` and `Operation\Visitor` to match new structure.
-       - Hence updated `Providers\Traversable\ScopeEvaluator` and `Providers\Collection\OperationEvaluator`.
+       - Created class containing common join options: `Queries\Common\Join\Options`.
+    - Extracted interfaces from `Request`/`Operation`/`Segment` visitor classes.
  - Removed obsolete query providers (`Loadable`, `Caching`) in favour of a new integrated helper `Providers\Utilities\IQueryResultCollection`
  - Implemented new DSL query provider under `Providers\DSL`.
  - New structure of query providers
     - `RepositoryProvider` decorates the `QueryProvider`
-    - New configuration classes (under `Configuration` namespace)
+    - New configuration classes (under `Providers\Configuration` namespace)
     - Integrated with `Caching\IQueryCache` and `Queries\Builders\*`.
  - New expression classes: `UnsetExpression`, `StaticFieldExpression`, `ConstantExpression`, `ClassConstantExpression`
  - Refactored `ArrayExpression` by creating `ArrayItemExpression` representing each element.
