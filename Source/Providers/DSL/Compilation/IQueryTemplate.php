@@ -19,11 +19,11 @@ interface IQueryTemplate
     public function getParameters();
 
     /**
-     * Gets the parameter names which affect the structure of the compiled query.
+     * Gets the parameters which affect the structure of the compiled query.
      *
-     * @return string[]
+     * @return ParameterCollection
      */
-    public function getStructuralParameterNames();
+    public function getStructuralParameters();
 
     /**
      * Returns a unique string representing the compiled query structure.

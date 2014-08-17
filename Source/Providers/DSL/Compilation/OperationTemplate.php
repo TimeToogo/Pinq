@@ -11,8 +11,5 @@ use Pinq\Queries;
  */
 class OperationTemplate extends QueryTemplate implements IOperationTemplate
 {
-    public function __construct(Queries\IParameterRegistry $parameters, array $structuralParameterNames)
-    {
-        parent::__construct($parameters, $structuralParameterNames);
-    }
+
 }

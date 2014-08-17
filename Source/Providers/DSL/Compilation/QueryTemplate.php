@@ -17,18 +17,16 @@ abstract class QueryTemplate implements IQueryTemplate
     protected $parameters;
 
     /**
-     * The parameter names of the query which affect the structure
-     * of the compiled query.
+     * The parameters of the query which affect the structure of the compiled query.
      *
-     * @var string[]
+     * @var ParameterCollection
      */
-    protected $structuralParameterNames;
+    protected $structuralParameters;
 
-    public function __construct(Queries\IParameterRegistry $parameters, array $structuralParameterNames)
+    public function __construct(Queries\IParameterRegistry $parameters, ParameterCollection $structuralParameters)
     {
         $this->parameters = $parameters;
-        $this->structuralParameterNames = $structuralParameterNames;
-        sort($this->structuralParameterNames, SORT_STRING);
+        $this->structuralParameters = $structuralParameters;
     }
 
     final public function getParameters()
@@ -36,24 +34,21 @@ abstract class QueryTemplate implements IQueryTemplate
         return $this->parameters;
     }
 
-    final public function getStructuralParameterNames()
+    final public function getStructuralParameters()
     {
-        return $this->structuralParameterNames;
+        return $this->structuralParameters;
     }
 
     public function getCompiledQueryHash(Queries\IResolvedParameterRegistry $parameters)
     {
-        $structuralParameterValues = [];
-
-        foreach($this->structuralParameterNames as $parameter) {
-            $structuralParameterValues[$parameter] = $parameters[$parameter];
-        }
+        $structuralParameterValues = $this->structuralParameters->resolveParameters($parameters);
 
         return $this->getStructuralParameterHash($structuralParameterValues);
     }
 
     protected function getStructuralParameterHash(array $structuralParameters)
     {
+        ksort($structuralParameters, \SORT_STRING);
         return md5(serialize($structuralParameters));
     }
 }

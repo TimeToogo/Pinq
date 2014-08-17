@@ -24,6 +24,14 @@ class ParameterCollection
     }
 
     /**
+     * @return ParameterCollection
+     */
+    public static function none()
+    {
+        return new self();
+    }
+
+    /**
      * Adds an expression parameter to the collection with the supplied context.
      *
      * @param string            $name

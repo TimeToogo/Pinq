@@ -18,7 +18,7 @@ abstract class StaticQueryTemplate extends QueryTemplate implements IStaticQuery
 
     public function __construct(Queries\IParameterRegistry $parameters, ICompiledQuery $compiledQuery)
     {
-        parent::__construct($parameters, []);
+        parent::__construct($parameters, ParameterCollection::none());
 
         $this->compiledQuery = $compiledQuery;
     }
