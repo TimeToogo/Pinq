@@ -35,6 +35,8 @@ interface IRequest
     public function getType();
 
     /**
+     * @param Requests\IRequestVisitor $visitor
+     *
      * @return mixed
      */
     public function traverse(IRequestVisitor $visitor);

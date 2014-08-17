@@ -28,6 +28,8 @@ interface IOperation
     public function getType();
 
     /**
+     * @param Operations\IOperationVisitor $visitor
+     *
      * @return mixed
      */
     public function traverse(IOperationVisitor $visitor);
