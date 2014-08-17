@@ -3,8 +3,8 @@
 namespace Pinq\Queries\Requests;
 
 /**
- * Request query for a boolean of whether any of the values satify the
- * supplied predicate function
+ * Request query for a boolean of whether any of the values satisfy the
+ * supplied predicate function or are truthy if no function is supplied.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
