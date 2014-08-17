@@ -1,6 +1,6 @@
 dev-master
 ==========
- - Pass values to query functions with their associated key as second parameter while
+ - Query functions are passed each value with their associated key as second parameter while
    maintaining support for single parameter internal functions.
  - Proper support for non scalar keys:
     - Non scalar keys will be automatically converted to integers when foreach'd or converted to an array.
