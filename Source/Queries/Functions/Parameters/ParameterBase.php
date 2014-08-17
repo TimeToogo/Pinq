@@ -9,7 +9,7 @@ use Pinq\Expressions as O;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class Base implements \Countable
+abstract class ParameterBase implements \Countable
 {
     /**
      * @var O\ParameterExpression[]

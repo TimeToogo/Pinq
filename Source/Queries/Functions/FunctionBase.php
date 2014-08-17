@@ -38,7 +38,7 @@ abstract class FunctionBase implements \Serializable
     /**
      * The structure of the function's parameters
      *
-     * @var Parameters\Base
+     * @var Parameters\ParameterBase
      */
     protected $parameters;
 
@@ -75,7 +75,7 @@ abstract class FunctionBase implements \Serializable
     /**
      * @param O\ParameterExpression[] $parameterExpressions
      *
-     * @return Parameters\Base
+     * @return Parameters\ParameterBase
      */
     abstract protected function getParameterStructure(array $parameterExpressions);
 
@@ -284,7 +284,7 @@ abstract class FunctionBase implements \Serializable
     }
 
     /**
-     * @return Parameters\Base
+     * @return Parameters\ParameterBase
      */
     public function getParameters()
     {

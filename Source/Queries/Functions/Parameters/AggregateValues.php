@@ -10,7 +10,7 @@ use Pinq\Expressions as O;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class AggregateValues extends Base
+class AggregateValues extends ParameterBase
 {
     /**
      * @var O\ParameterExpression|null

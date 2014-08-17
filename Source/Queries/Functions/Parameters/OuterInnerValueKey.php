@@ -10,7 +10,7 @@ use Pinq\Expressions as O;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class OuterInnerValueKey extends Base
+class OuterInnerValueKey extends ParameterBase
 {
     /**
      * @var O\ParameterExpression|null
