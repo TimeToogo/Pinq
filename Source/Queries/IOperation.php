@@ -2,6 +2,9 @@
 
 namespace Pinq\Queries;
 
+use Pinq\Queries\Operations\IOperationVisitor;
+use Pinq\Queries\Operations\IOperationVisitor;
+
 /**
  * The interface for a operation query, one of the const types, they
  * are all implemented as their own class in Operations namespace.
@@ -25,7 +28,7 @@ interface IOperation
     public function getType();
 
     /**
-     * @return void
+     * @return mixed
      */
-    public function traverse(Operations\OperationVisitor $visitor);
+    public function traverse(IOperationVisitor $visitor);
 }

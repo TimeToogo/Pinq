@@ -56,7 +56,7 @@ class JoinApply extends Operation implements \Pinq\Queries\IOperation
         return $this->mutatorFunction;
     }
 
-    public function traverse(OperationVisitor $visitor)
+    public function traverse(IOperationVisitor $visitor)
     {
         $visitor->visitJoinApply($this);
     }

@@ -15,7 +15,7 @@ class Apply extends MutatorOperation
         return self::APPLY;
     }
 
-    public function traverse(OperationVisitor $visitor)
+    public function traverse(IOperationVisitor $visitor)
     {
         return $visitor->visitApply($this);
     }

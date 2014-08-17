@@ -14,7 +14,7 @@ class Clear extends Operation
         return self::CLEAR;
     }
 
-    public function traverse(OperationVisitor $visitor)
+    public function traverse(IOperationVisitor $visitor)
     {
         return $visitor->visitClear($this);
     }

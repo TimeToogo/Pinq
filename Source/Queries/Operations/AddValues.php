@@ -14,7 +14,7 @@ class AddValues extends ValuesOperation
         return self::ADD_VALUES;
     }
 
-    public function traverse(OperationVisitor $visitor)
+    public function traverse(IOperationVisitor $visitor)
     {
         return $visitor->visitAddValues($this);
     }

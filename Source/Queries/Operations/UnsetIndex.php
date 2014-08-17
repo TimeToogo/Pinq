@@ -14,7 +14,7 @@ class UnsetIndex extends IndexOperation
         return self::UNSET_INDEX;
     }
 
-    public function traverse(OperationVisitor $visitor)
+    public function traverse(IOperationVisitor $visitor)
     {
         return $visitor->visitUnsetIndex($this);
     }

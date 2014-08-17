@@ -34,7 +34,7 @@ class RemoveWhere extends Operation
         return self::REMOVE_WHERE;
     }
 
-    public function traverse(OperationVisitor $visitor)
+    public function traverse(IOperationVisitor $visitor)
     {
         return $visitor->visitRemoveWhere($this);
     }

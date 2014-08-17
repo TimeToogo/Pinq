@@ -14,7 +14,7 @@ class RemoveValues extends ValuesOperation
         return self::REMOVE_VALUES;
     }
 
-    public function traverse(OperationVisitor $visitor)
+    public function traverse(IOperationVisitor $visitor)
     {
         return $visitor->visitRemoveValues($this);
     }

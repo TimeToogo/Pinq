@@ -35,7 +35,7 @@ class SetIndex extends IndexOperation
         return $this->valueParameterId;
     }
 
-    public function traverse(OperationVisitor $visitor)
+    public function traverse(IOperationVisitor $visitor)
     {
         return $visitor->visitSetIndex($this);
     }
