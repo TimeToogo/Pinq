@@ -3,8 +3,8 @@
 namespace Pinq\Tests\Integration\Queries\Functions;
 
 use Pinq\Expressions as O;
-use Pinq\Queries\Functions;
 use Pinq\Queries\Functions\Parameters;
+use Pinq\Queries\Functions;
 
 class ElementProjectionTest extends ProjectionBaseTest
 {
@@ -87,6 +87,10 @@ class ElementProjectionTest extends ProjectionBaseTest
                 [],
                 $function->getUnusedParameterDefaultValueMap()
         );
+        $this->assertEquals(
+                [],
+                $function->getEvaluationContext()->getVariableTable()
+        );
     }
 
     public function testExcessiveParametersWithDefault()
@@ -122,6 +126,10 @@ class ElementProjectionTest extends ProjectionBaseTest
                 ['excessive1' => [true], 'excessive2' => [false]],
                 $function->getUnusedParameterDefaultValueMap()
         );
+        $this->assertEquals(
+                ['excessive1' => [true], 'excessive2' => [false]],
+                $function->getEvaluationContext()->getVariableTable()
+        );
     }
 
     public function testFunctionWithDefaultRelativeConstant()
@@ -151,7 +159,10 @@ class ElementProjectionTest extends ProjectionBaseTest
         );
 
         $this->assertEquals(
-                ['excessive1' => O\Expression::constant('__RELATIVE_CONSTANT'), 'excessive2' => O\Expression::value([false])],
+                [
+                        'excessive1' => O\Expression::constant('__RELATIVE_CONSTANT'),
+                        'excessive2' => O\Expression::value([false])
+                ],
                 $function->getParameters()->getUnusedParameterDefaultMap()
         );
 

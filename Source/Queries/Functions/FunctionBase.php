@@ -334,6 +334,7 @@ abstract class FunctionBase implements \Serializable
                 }
             }
         }
+        $variableTable = $variableTable + $this->getUnusedParameterDefaultValueMap();
 
         return new O\EvaluationContext($this->namespace, $this->scopeType, $thisObject, $variableTable);
     }
