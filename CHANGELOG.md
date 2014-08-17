@@ -99,7 +99,7 @@ dev-master
     - Renamed `Segments\Operation::getTraversable` to `getValues`
     - Refactored `Join` query segments / operations.
        - Refactored inheritance to composition, extracted join filtering to interface `Queries\Common\Join\IFilter`.
-       - Created base class for query segment and operation: `Queries\Common\Join\Base`.
+       - Created base class for query segment and operation: `Queries\Common\Join\SourceBase`.
        - Updated `Segments\Segment[Walker|Visitor]` and `Operation\Visitor` to match new structure.
        - Hence updated `Providers\Traversable\ScopeEvaluator` and `Providers\Collection\OperationEvaluator`.
  - Removed obsolete query providers (`Loadable`, `Caching`) in favour of a new integrated helper `Providers\Utilities\IQueryResultCollection`

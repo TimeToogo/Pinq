@@ -7,7 +7,7 @@ namespace Pinq\Queries\Common\Source;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class ArrayOrIterator extends Base
+class ArrayOrIterator extends SourceBase
 {
     /**
      * @var string

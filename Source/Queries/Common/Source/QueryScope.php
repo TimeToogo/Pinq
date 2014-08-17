@@ -4,13 +4,14 @@ namespace Pinq\Queries\Common\Source;
 
 use Pinq\Queries;
 use Pinq\Queries\Segments;
+use Pinq\Queries\Segments\ISegmentVisitor;
 
 /**
  * Query scope value source.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class QueryScope extends Base
+class QueryScope extends SourceBase
 {
     /**
      * @var Queries\IScope
@@ -35,7 +36,7 @@ class QueryScope extends Base
         return $this->scope;
     }
 
-    public function visit(Segments\SegmentVisitor $visitor)
+    public function visit(ISegmentVisitor $visitor)
     {
         $visitor->visit($this->scope);
     }
