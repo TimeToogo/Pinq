@@ -5,10 +5,10 @@ namespace Pinq\Providers\DSL;
 use Pinq\Caching\ICacheAdapter;
 use Pinq\Expressions as O;
 use Pinq\Providers\Configuration;
-use Pinq\Providers;
 use Pinq\Providers\DSL\Compilation\ICompiledOperation;
 use Pinq\Providers\DSL\Compilation\IOperationTemplate;
 use Pinq\Providers\DSL\Compilation\IStaticOperationTemplate;
+use Pinq\Providers;
 use Pinq\Queries;
 
 /**
@@ -64,15 +64,18 @@ abstract class RepositoryProvider extends Providers\RepositoryProvider
         $queryTemplate = $this->compiledQueryCache->tryGet($queryHash);
 
         if (!($queryTemplate instanceof Compilation\IOperationTemplate)) {
-            $operationQuery = $this->operationQueryBuilder->parseOperation($operationExpression);
+            $operationQuery     = $this->operationQueryBuilder->parseOperation($operationExpression);
             $resolvedParameters = $operationQuery->getParameters()->resolve($resolution);
-            $queryTemplate  = $this->operationCompiler->createOperationTemplate($operationQuery, $resolvedParameters);
+            $queryTemplate      = $this->operationCompiler->createOperationTemplate(
+                    $operationQuery,
+                    $resolvedParameters
+            );
             $this->compiledQueryCache->save($queryHash, $queryTemplate);
         } else {
             $resolvedParameters = $queryTemplate->getParameters()->resolve($resolution);
         }
 
-        $compiledQuery      = $this->getCompiledQuery($queryHash, $queryTemplate, $resolvedParameters);
+        $compiledQuery = $this->getCompiledQuery($queryHash, $queryTemplate, $resolvedParameters);
 
         return $this->executeCompiledOperation($compiledQuery, $resolvedParameters);
     }

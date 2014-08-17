@@ -5,9 +5,10 @@ namespace Pinq\Providers\DSL;
 use Pinq\Caching;
 use Pinq\Expressions as O;
 use Pinq\Providers\Configuration;
-use Pinq\Providers\DSL\Compilation\ICompiledQuery;
+use Pinq\Providers\DSL\Compilation\ICompiledRequest;
 use Pinq\Providers\DSL\Compilation\IRequestTemplate;
 use Pinq\Providers\DSL\Compilation\IStaticQueryTemplate;
+use Pinq\Providers;
 use Pinq\Queries;
 
 /**
@@ -16,7 +17,7 @@ use Pinq\Queries;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class QueryProvider extends \Pinq\Providers\QueryProvider
+abstract class QueryProvider extends Providers\QueryProvider
 {
     /**
      * @var IQueryCompilerConfiguration
@@ -62,13 +63,16 @@ abstract class QueryProvider extends \Pinq\Providers\QueryProvider
         if (!($queryTemplate instanceof Compilation\IRequestTemplate)) {
             $requestQuery       = $this->requestBuilder->parseRequest($requestExpression);
             $resolvedParameters = $requestQuery->getParameters()->resolve($resolution);
-            $queryTemplate = $this->requestQueryCompiler->createRequestTemplate($requestQuery, $resolvedParameters);
+            $queryTemplate      = $this->requestQueryCompiler->createRequestTemplate(
+                    $requestQuery,
+                    $resolvedParameters
+            );
             $this->compiledQueryCache->save($queryHash, $queryTemplate);
         } else {
             $resolvedParameters = $queryTemplate->getParameters()->resolve($resolution);
         }
 
-        $compiledQuery      = $this->getCompiledQuery($queryHash, $queryTemplate, $resolvedParameters);
+        $compiledQuery = $this->getCompiledQuery($queryHash, $queryTemplate, $resolvedParameters);
 
         return $this->loadCompiledRequest($compiledQuery, $resolvedParameters);
     }
@@ -84,7 +88,7 @@ abstract class QueryProvider extends \Pinq\Providers\QueryProvider
             $compiledQueryHash = $queryHash . '-' . $template->getCompiledQueryHash($parameters);
             $compiledQuery     = $this->compiledQueryCache->tryGet($compiledQueryHash);
 
-            if (!($compiledQuery instanceof ICompiledQuery)) {
+            if (!($compiledQuery instanceof ICompiledRequest)) {
                 $compiledQuery = $this->requestQueryCompiler->compileRequestQuery($template, $parameters);
                 $this->compiledQueryCache->save($compiledQueryHash, $compiledQuery);
             }
