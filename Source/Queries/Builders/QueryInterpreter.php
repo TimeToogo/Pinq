@@ -19,10 +19,9 @@ abstract class QueryInterpreter extends ExpressionInterpreter implements IQueryI
     public function __construct(
             $idPrefix,
             IScopeInterpreter $scopeInterpreter,
-            $closureScopeType = null,
-            $closureNamespace = null
+            O\IEvaluationContext $evaluationContext = null
     ) {
-        parent::__construct($idPrefix, $closureScopeType, $closureNamespace);
+        parent::__construct($idPrefix, $evaluationContext);
         $this->scopeInterpreter = $scopeInterpreter;
     }
 

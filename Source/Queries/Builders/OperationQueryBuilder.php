@@ -62,19 +62,16 @@ class OperationQueryBuilder extends QueryBuilder implements IOperationQueryBuild
             O\Expression $expression,
             Interpretations\IScopeInterpretation $scopeInterpretation,
             Interpretations\IOperationInterpretation $operationInterpretation,
-            $closureScopeType = null,
-            $closureNamespace = null
+            O\IEvaluationContext $evaluationContext = null
     ) {
         $scopeInterpreter          = $this->scopeBuilder->buildScopeInterpreter(
                 $scopeInterpretation,
-                $closureScopeType,
-                $closureNamespace
+                $evaluationContext
         );
         $operationQueryInterpreter = $this->buildOperationQueryInterpreter(
                 $operationInterpretation,
                 $scopeInterpreter,
-                $closureScopeType,
-                $closureNamespace
+                $evaluationContext
         );
 
         $operationQueryInterpreter->interpret($expression);
@@ -83,18 +80,16 @@ class OperationQueryBuilder extends QueryBuilder implements IOperationQueryBuild
     /**
      * @param Interpretations\IOperationInterpretation $operationInterpretation
      * @param IScopeInterpreter                        $scopeInterpreter
-     * @param string|null                              $closureScopeType
-     * @param string|null                              $closureNamespace
+     * @param O\IEvaluationContext                     $evaluationContext
      *
      * @return IOperationQueryInterpreter
      */
     protected function buildOperationQueryInterpreter(
             Interpretations\IOperationInterpretation $operationInterpretation,
             IScopeInterpreter $scopeInterpreter,
-            $closureScopeType = null,
-            $closureNamespace = null
+            O\IEvaluationContext $evaluationContext = null
     ) {
-        return new OperationQueryInterpreter($operationInterpretation, $scopeInterpreter, $closureScopeType, $closureNamespace);
+        return new OperationQueryInterpreter($operationInterpretation, $scopeInterpreter, $evaluationContext);
     }
 
     /**

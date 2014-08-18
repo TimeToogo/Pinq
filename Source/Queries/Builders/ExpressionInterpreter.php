@@ -21,11 +21,6 @@ abstract class ExpressionInterpreter
      */
     protected $evaluationContext;
 
-    /**
-     * @var string|null
-     */
-    protected $closureNamespace;
-
     public function __construct($idPrefix, O\IEvaluationContext $evaluationContext = null)
     {
         $this->idPrefix          = $idPrefix;
