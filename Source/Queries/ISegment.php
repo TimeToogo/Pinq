@@ -34,6 +34,8 @@ interface ISegment
     public function getType();
 
     /**
+     * @param Segments\ISegmentVisitor $visitor
+     *
      * @return ISegment
      */
     public function traverse(ISegmentVisitor $visitor);
