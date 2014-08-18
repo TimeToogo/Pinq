@@ -92,7 +92,7 @@ abstract class ParameterBase implements \Countable
     /**
      * Gets any unused parameters without a default value.
      *
-     * @return boolean
+     * @return O\ParameterExpression[]
      */
     public function getRequiredUnusedParameters()
     {
