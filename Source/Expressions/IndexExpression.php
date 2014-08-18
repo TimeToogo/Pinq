@@ -11,18 +11,26 @@ namespace Pinq\Expressions;
 class IndexExpression extends TraversalExpression
 {
     /**
-     * @var Expression
+     * @var Expression|null
      */
     private $index;
 
-    public function __construct(Expression $value, Expression $index)
+    public function __construct(Expression $value, Expression $index = null)
     {
         parent::__construct($value);
         $this->index = $index;
     }
 
     /**
-     * @return Expression
+     * @return boolean
+     */
+    public function hasIndex()
+    {
+        return $this->index !== null;
+    }
+
+    /**
+     * @return Expression|null
      */
     public function getIndex()
     {
@@ -35,12 +43,12 @@ class IndexExpression extends TraversalExpression
     }
 
     /**
-     * @param Expression $value
-     * @param Expression $index
+     * @param Expression      $value
+     * @param Expression|null $index
      *
      * @return self
      */
-    public function update(Expression $value, Expression $index)
+    public function update(Expression $value, Expression $index = null)
     {
         if ($this->value === $value && $this->index === $index) {
             return $this;
@@ -58,7 +66,9 @@ class IndexExpression extends TraversalExpression
     {
         $this->value->compileCode($code);
         $code .= '[';
-        $this->index->compileCode($code);
+        if ($this->index !== null) {
+            $this->index->compileCode($code);
+        }
         $code .= ']';
     }
 
@@ -75,6 +85,6 @@ class IndexExpression extends TraversalExpression
     public function __clone()
     {
         $this->value = clone $this->value;
-        $this->index = clone $this->index;
+        $this->index = $this->index !== null ? clone $this->index : null;
     }
 }

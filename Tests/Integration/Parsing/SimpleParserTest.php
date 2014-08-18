@@ -273,6 +273,19 @@ class SimpleParserTest extends ParserTest
                 [O\Expression::index(
                         O\Expression::variable(O\Expression::value('i')),
                         O\Expression::value(0))]);
+
+        $this->assertParsedAs(
+                function () {
+                    //Must use write context
+                    f($i[]);
+                },
+                [
+                        O\Expression::functionCall(
+                                O\Expression::value('f'),
+                                [O\Expression::index(O\Expression::variable(O\Expression::value('i')))]
+                        )
+                ]
+        );
     }
 
     /**

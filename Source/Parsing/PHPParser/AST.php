@@ -169,7 +169,7 @@ class AST
             case $node instanceof \PHPParser_Node_Expr_ArrayDimFetch:
                 return Expression::index(
                         $this->parseNode($node->var),
-                        $node->dim === null ? Expression::value(null) : $this->parseNode($node->dim)
+                        $node->dim === null ? null : $this->parseNode($node->dim)
                 );
 
             case $node instanceof \PHPParser_Node_Expr_ConstFetch:

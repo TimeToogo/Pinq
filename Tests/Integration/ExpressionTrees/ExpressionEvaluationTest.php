@@ -841,4 +841,17 @@ class ExpressionEvaluationTest extends InterpreterTest
                 )->evaluate()
         );
     }
+
+    /**
+     * @dataProvider interpreters
+     */
+    public function testBlankIndex()
+    {
+        $ref = [];
+        $this->assertEvaluatesTo(function () use (&$ref) { $ref[] = 76; }, 76);
+        $this->assertEquals([76], $ref);
+        $ref = [];
+        $this->assertEvaluatesTo(function () use (&$ref) { $ref[][][] = 75; }, 75);
+        $this->assertEquals([[[75]]], $ref);
+    }
 }

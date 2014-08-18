@@ -348,12 +348,12 @@ abstract class Expression implements \Serializable
     }
 
     /**
-     * @param Expression $value
-     * @param Expression $index
+     * @param Expression      $value
+     * @param Expression|null $index
      *
      * @return IndexExpression
      */
-    final public static function index(Expression $value, Expression $index)
+    final public static function index(Expression $value, Expression $index = null)
     {
         return new IndexExpression($value, $index);
     }
