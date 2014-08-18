@@ -97,10 +97,10 @@ class ParameterExpression extends Expression
     }
 
     /**
-     * @param string      $name
-     * @param string|null $typeHint
-     * @param Expression||null $defaultValue
-     * @param boolean     $isPassedByReference
+     * @param string          $name
+     * @param string|null     $typeHint
+     * @param Expression|null $defaultValue
+     * @param boolean         $isPassedByReference
      *
      * @return self
      */
