@@ -5,7 +5,7 @@ namespace Pinq\Queries\Functions;
 use Pinq\Expressions as O;
 
 /**
- * Structure of a function that recieves a outer and inner value and key
+ * Structure of a function that receives a outer and inner value and key
  * and mutates the outer value parameter.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>

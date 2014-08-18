@@ -323,8 +323,8 @@ abstract class FunctionBase implements \Serializable
      */
     public function getEvaluationContext(IResolvedParameterRegistry $parameters = null)
     {
-        $thisObject     = null;
-        $variableTable  = array_fill_keys($this->parameterScopedVariableMap, null);
+        $thisObject    = null;
+        $variableTable = array_fill_keys($this->parameterScopedVariableMap, null);
         if ($parameters !== null) {
             foreach ($this->parameterScopedVariableMap as $parameter => $variableName) {
                 if ($variableName === 'this') {
@@ -337,5 +337,55 @@ abstract class FunctionBase implements \Serializable
         $variableTable = $variableTable + $this->getUnusedParameterDefaultValueMap();
 
         return new O\EvaluationContext($this->namespace, $this->scopeType, $thisObject, $variableTable);
+    }
+
+    /**
+     * @param string|null             $scopeType
+     * @param string|null             $namespace
+     * @param string[]                $parameterScopedVariableMap
+     * @param O\ParameterExpression[] $parameterExpressions
+     * @param O\Expression[]|null     $bodyExpressions
+     *
+     * @return static
+     */
+    public function update(
+            $scopeType,
+            $namespace,
+            array $parameterScopedVariableMap,
+            array $parameterExpressions,
+            array $bodyExpressions = null
+    ) {
+        if ($this->scopeType === $scopeType
+                && $this->namespace === $namespace
+                && $this->parameterScopedVariableMap === $parameterScopedVariableMap
+                && $this->parameters->getAll() === $parameterExpressions
+                && $this->bodyExpressions === $bodyExpressions
+        ) {
+            return $this;
+        }
+
+        return new static(
+                $this->callableId,
+                $scopeType,
+                $namespace,
+                $parameterScopedVariableMap,
+                $parameterExpressions,
+                $bodyExpressions);
+    }
+
+    /**
+     * @param O\Expression[]|null $bodyExpressions
+     *
+     * @return static
+     */
+    public function updateBody(array $bodyExpressions = null)
+    {
+        return $this->update(
+                $this->scopeType,
+                $this->namespace,
+                $this->parameterScopedVariableMap,
+                $this->parameters->getAll(),
+                $bodyExpressions
+        );
     }
 }
