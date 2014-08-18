@@ -560,6 +560,21 @@ abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
     /**
      * @dataProvider repositories
      */
+    public function testAdd()
+    {
+        $this->assertOperationIsCorrect(
+                function (IRepository $repository) {
+                    $repository[] = null;
+                },
+                $this->addQuery()
+        );
+    }
+
+    abstract protected function addQuery();
+
+    /**
+     * @dataProvider repositories
+     */
     public function testRemoveRange()
     {
         $this->assertOperationIsCorrect(

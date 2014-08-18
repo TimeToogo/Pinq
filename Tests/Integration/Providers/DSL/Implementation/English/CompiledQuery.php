@@ -76,7 +76,9 @@ class CompiledQuery implements Compilation\ICompiledRequest, Compilation\ICompil
     ) {
         if ($source instanceof Queries\Common\Source\ArrayOrIterator) {
             $this->append('[array or iterator]');
-        } elseif ($source instanceof Queries\Common\Source\QueryScope) {
+        } elseif ($source instanceof Queries\Common\Source\SingleValue) {
+            $this->append('[single value]');
+        }elseif ($source instanceof Queries\Common\Source\QueryScope) {
             $compilation = $scopeCompiler->createCompiledScopeQuery($source->getScope(), $parameters);
 
             $this->appendLine('[');

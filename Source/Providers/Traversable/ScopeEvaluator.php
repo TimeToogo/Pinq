@@ -156,6 +156,8 @@ class ScopeEvaluator extends Segments\SegmentVisitor
     ) {
         if ($source instanceof Common\Source\ArrayOrIterator) {
             return $resolvedParameters[$source->getId()];
+        } elseif ($source instanceof Common\Source\SingleValue) {
+            return [$resolvedParameters[$source->getId()]];
         } elseif ($source instanceof Common\Source\QueryScope) {
             return self::evaluate($source->getScope(), $resolvedParameters);
         }

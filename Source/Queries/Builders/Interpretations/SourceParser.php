@@ -26,6 +26,11 @@ class SourceParser extends BaseParser implements ISourceParser
         $this->source = new Source\ArrayOrIterator($this->requireParameter($sourceId));
     }
 
+    public function interpretSingleValue($sourceId, $value)
+    {
+        $this->source = new Source\SingleValue($this->requireParameter($sourceId));
+    }
+
     public function interpretQueryScope($sourceId, IScopeInterpretation $scopeInterpretation)
     {
         /* @var $scopeInterpretation IScopeParser */

@@ -15,5 +15,7 @@ interface ISourceInterpretation
 {
     public function interpretArrayOrIterator($sourceId, $arrayOrIterator);
 
+    public function interpretSingleValue($sourceId, $value);
+
     public function interpretQueryScope($sourceId, IScopeInterpretation $scopeInterpretation);
 }

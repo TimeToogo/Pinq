@@ -20,6 +20,11 @@ class SourceResolver extends BaseResolver implements ISourceResolver
         $this->resolveParameter($sourceId, $arrayOrIterator);
     }
 
+    public function interpretSingleValue($sourceId, $value)
+    {
+        $this->resolveParameter($sourceId, $value);
+    }
+
     public function interpretQueryScope($sourceId, IScopeInterpretation $scopeInterpretation)
     {
         //Scope will already be resolved from the scope interpretation

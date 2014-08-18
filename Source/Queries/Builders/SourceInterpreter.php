@@ -76,7 +76,6 @@ class SourceInterpreter extends ExpressionInterpreter implements ISourceInterpre
             $this->scopeInterpreter->interpretScope($expression);
             $this->interpretation->interpretQueryScope($this->getId('source-scope'), $this->scopeInterpreter->getInterpretation());
         } else {
-            /** @var $expression O\ValueExpression */
             $this->interpretation->interpretArrayOrIterator($this->getId('source-iterator'), $expression->evaluate($this->evaluationContext));
         }
     }

@@ -34,14 +34,35 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
         if ($expression instanceof O\MethodCallExpression) {
             $this->{'visit' . $this->getMethodName($expression)}($expression);
         } elseif ($expression instanceof O\AssignmentExpression
-                && $expression->getAssignTo() instanceof O\IndexExpression
+                && ($assignTo = $expression->getAssignTo()) instanceof O\IndexExpression
         ) {
-            $this->{'visitOffsetSet'}($expression);
+            /** @var $assignTo O\IndexExpression */
+            if(!$assignTo->hasIndex() || $this->getValue($assignTo->getIndex()) === null) {
+                $this->{'visitAdd'}($expression);
+            } else {
+                $this->{'visitOffsetSet'}($expression);
+            }
         } elseif ($expression instanceof O\UnsetExpression) {
             $this->{'visitOffsetUnset'}($expression);
         } else {
             $this->scopeInterpreter->interpretScope($expression);
         }
+    }
+
+    final protected function interpretSource($id, O\Expression $expression)
+    {
+        $sourceInterpreter = $this->scopeInterpreter->buildSourceInterpreter($id);
+        $sourceInterpreter->interpretSource($expression);
+
+        return $sourceInterpreter->getInterpretation();
+    }
+
+    final protected function interpretSingleValueSource($sourceId, $value)
+    {
+        $sourceInterpretation = $this->scopeInterpreter->buildSourceInterpreter('')->getInterpretation();
+        $sourceInterpretation->interpretSingleValue($sourceId, $value);
+
+        return $sourceInterpretation;
     }
 
     final protected function visitApply(O\MethodCallExpression $expression)
@@ -76,6 +97,18 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
         $this->interpretSourceAsScope($sourceExpression);
     }
 
+    final protected function visitAdd(O\AssignmentExpression $expression)
+    {
+        $this->interpretation->interpretAddRange(
+                $this->getId('add-value'),
+                $this->interpretSingleValueSource($this->getId('add-value-source'), $this->getValue($expression->getAssignmentValue()))
+        );
+
+        /** @var $assignTo O\IndexExpression */
+        $assignTo = $expression->getAssignTo();
+        $this->interpretSourceAsScope($assignTo);
+    }
+
     final protected function visitAddRange(O\MethodCallExpression $expression)
     {
         $this->interpretation->interpretAddRange(
@@ -85,12 +118,13 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
         $this->interpretSourceAsScope($expression);
     }
 
-    final protected function interpretSource($id, O\Expression $expression)
+    final protected function visitRemove(O\MethodCallExpression $expression)
     {
-        $sourceInterpreter = $this->scopeInterpreter->buildSourceInterpreter($id);
-        $sourceInterpreter->interpretSource($expression);
-
-        return $sourceInterpreter->getInterpretation();
+        $this->interpretation->interpretRemoveRange(
+                $this->getId('remove-value'),
+                $this->interpretSingleValueSource($this->getId('remove-value-source'), $this->getArgumentValueAt(0, $expression))
+        );
+        $this->interpretSourceAsScope($expression);
     }
 
     final protected function visitRemoveRange(O\MethodCallExpression $expression)
@@ -98,16 +132,6 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
         $this->interpretation->interpretRemoveRange(
                 $this->getId('remove-range'),
                 $this->interpretSource($this->getId('remove-range-source'), $this->getArgumentAt(0, $expression))
-        );
-        $this->interpretSourceAsScope($expression);
-    }
-
-    final protected function visitRemove(O\MethodCallExpression $expression)
-    {
-        $this->interpretation->interpretRemove(
-                $this->getId('remove'),
-                $this->getId('remove-value'),
-                $this->getArgumentValueAt(0, $expression)
         );
         $this->interpretSourceAsScope($expression);
     }
@@ -129,39 +153,36 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
 
     final protected function visitOffsetSet(O\Expression $expression)
     {
-        $operationId = $this->getId('offset-set');
-        $indexId     = $this->getId('set-index');
-        $valueId     = $this->getId('set-value');
         if ($expression instanceof O\MethodCallExpression) {
-            $this->interpretation->interpretOffsetSet(
-                    $operationId,
-                    $indexId,
-                    $this->getArgumentValueAt(0, $expression),
-                    $valueId,
-                    $this->getArgumentValueAt(1, $expression)
-            );
-            $this->interpretSourceAsScope($expression);
-            return;
+            $index = $this->getArgumentValueAt(0, $expression);
+            $value = $this->getArgumentValueAt(1, $expression);
+            $sourceExpression = $expression;
         } elseif ($expression instanceof O\AssignmentExpression) {
-            $assignTo = $expression->getAssignTo();
-
-            if ($assignTo instanceof O\IndexExpression) {
-                $this->interpretation->interpretOffsetSet(
-                        $operationId,
-                        $indexId,
-                        $this->getValue($assignTo->getIndex()),
-                        $valueId,
-                        $this->getValue($expression->getAssignmentValue())
-                );
-                $this->interpretSourceAsScope($assignTo);
-                return;
+            $sourceExpression = $expression->getAssignTo();
+            if ($sourceExpression instanceof O\IndexExpression) {
+                $index = $this->getValue($sourceExpression->getIndex());
+                $value = $this->getValue($expression->getAssignmentValue());
+            } else {
+                throw new \Pinq\PinqException(
+                        'Cannot interpret set index operation: invalid source expression type, expecting %s, %s given',
+                        O\IndexExpression::getType(),
+                        $expression->getType());
             }
+        } else {
+            throw new \Pinq\PinqException(
+                    'Cannot interpret set index operation: invalid expression type, expecting %s, %s given',
+                    O\MethodCallExpression::getType() . ' or ' . O\AssignmentExpression::getType(),
+                    $expression->getType());
         }
 
-        throw new \Pinq\PinqException(
-                'Cannot interpret offset set operation: invalid expression type, expecting %s, %s given',
-                O\MethodCallExpression::getType() . ' or ' . O\AssignmentExpression::getType(),
-                $expression->getType());
+        $this->interpretation->interpretOffsetSet(
+                $this->getId('offset-set'),
+                $this->getId('set-index'),
+                $index,
+                $this->getId('set-value'),
+                $value
+        );
+        $this->interpretSourceAsScope($sourceExpression);
     }
 
     final protected function visitOffsetUnset(O\Expression $expression)

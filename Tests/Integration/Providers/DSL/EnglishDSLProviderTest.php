@@ -179,6 +179,13 @@ Add the following values: [array or iterator]
 ENG;
     }
 
+    protected function addQuery()
+    {
+        return <<<'ENG'
+Add the following values: [single value]
+ENG;
+    }
+
     protected function removeRangeQuery()
     {
         return <<<'ENG'
@@ -196,7 +203,7 @@ ENG;
     protected function removeQuery()
     {
         return <<<'ENG'
-Remove the following values: [array or iterator]
+Remove the following values: [single value]
 ENG;
     }
 

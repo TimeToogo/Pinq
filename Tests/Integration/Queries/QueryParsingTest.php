@@ -291,19 +291,29 @@ class QueryParsingTest extends QueryBuildingTest
         );
     }
 
-    protected function valueSource()
+    protected function sequenceSource()
     {
         return new Q\Common\Source\ArrayOrIterator($this->parameter());
     }
 
+    protected function singleValueSource()
+    {
+        return new Q\Common\Source\SingleValue($this->parameter());
+    }
+
     protected function addRangeQuery()
     {
-        return $this->operation([], new Q\Operations\AddValues($this->valueSource()));
+        return $this->operation([], new Q\Operations\AddValues($this->sequenceSource()));
+    }
+
+    protected function addQuery()
+    {
+        return $this->operation([], new Q\Operations\AddValues($this->singleValueSource()));
     }
 
     protected function removeRangeQuery()
     {
-        return $this->operation([], new Q\Operations\RemoveValues($this->valueSource()));
+        return $this->operation([], new Q\Operations\RemoveValues($this->sequenceSource()));
     }
 
     protected function removeWhereQuery()
@@ -323,7 +333,7 @@ class QueryParsingTest extends QueryBuildingTest
 
     protected function removeQuery()
     {
-        return $this->operation([], new Q\Operations\RemoveValues($this->valueSource()));
+        return $this->operation([], new Q\Operations\RemoveValues($this->singleValueSource()));
     }
 
     protected function clearQuery()
@@ -335,7 +345,7 @@ class QueryParsingTest extends QueryBuildingTest
     {
         return $this->operation([], new Q\Operations\JoinApply(
                 new Q\Common\Join\Options(
-                        $this->valueSource(),
+                        $this->sequenceSource(),
                         false,
                         new Q\Common\Join\Filter\Custom(
                                 new Q\Functions\ConnectorProjection(
@@ -469,7 +479,7 @@ class QueryParsingTest extends QueryBuildingTest
     protected function unfilteredJoinQuery()
     {
         return $this->scopeRequest([new Q\Segments\Join(
-                new Q\Common\Join\Options($this->valueSource(), false),
+                new Q\Common\Join\Options($this->sequenceSource(), false),
                 $this->arrayConnectorProjection())]);
     }
 
@@ -477,7 +487,7 @@ class QueryParsingTest extends QueryBuildingTest
     {
         return $this->scopeRequest([new Q\Segments\Join(
                 new Q\Common\Join\Options(
-                        $this->valueSource(),
+                        $this->sequenceSource(),
                         false,
                         new Q\Common\Join\Filter\Custom(
                                 new Q\Functions\ConnectorProjection(
@@ -498,7 +508,7 @@ class QueryParsingTest extends QueryBuildingTest
     {
         return $this->scopeRequest([new Q\Segments\Join(
                 new Q\Common\Join\Options(
-                        $this->valueSource(),
+                        $this->sequenceSource(),
                         false,
                         new Q\Common\Join\Filter\Equality(
                                 $this->selfProjection('o'),
@@ -510,7 +520,7 @@ class QueryParsingTest extends QueryBuildingTest
     {
         return $this->scopeRequest([new Q\Segments\Join(
                 new Q\Common\Join\Options(
-                        $this->valueSource(),
+                        $this->sequenceSource(),
                         false,
                         null,
                         true,
@@ -523,7 +533,7 @@ class QueryParsingTest extends QueryBuildingTest
     {
         return $this->scopeRequest([new Q\Segments\Join(
                 new Q\Common\Join\Options(
-                        $this->valueSource(),
+                        $this->sequenceSource(),
                         false,
                         null,
                         true,
@@ -550,7 +560,7 @@ class QueryParsingTest extends QueryBuildingTest
     {
         return $this->scopeRequest([new Q\Segments\Join(
                 new Q\Common\Join\Options(
-                        $this->valueSource(),
+                        $this->sequenceSource(),
                         true),
                 $this->arrayConnectorProjection())]);
     }
@@ -574,42 +584,42 @@ class QueryParsingTest extends QueryBuildingTest
     {
         return $this->scopeRequest([new Q\Segments\Operation(
                 Q\Segments\Operation::APPEND,
-                $this->valueSource())]);
+                $this->sequenceSource())]);
     }
 
     protected function whereInQuery()
     {
         return $this->scopeRequest([new Q\Segments\Operation(
                 Q\Segments\Operation::WHERE_IN,
-                $this->valueSource())]);
+                $this->sequenceSource())]);
     }
 
     protected function exceptQuery()
     {
         return $this->scopeRequest([new Q\Segments\Operation(
                 Q\Segments\Operation::EXCEPT,
-                $this->valueSource())]);
+                $this->sequenceSource())]);
     }
 
     protected function unionQuery()
     {
         return $this->scopeRequest([new Q\Segments\Operation(
                 Q\Segments\Operation::UNION,
-                $this->valueSource())]);
+                $this->sequenceSource())]);
     }
 
     protected function intersectQuery()
     {
         return $this->scopeRequest([new Q\Segments\Operation(
                 Q\Segments\Operation::INTERSECT,
-                $this->valueSource())]);
+                $this->sequenceSource())]);
     }
 
     protected function differenceQuery()
     {
         return $this->scopeRequest([new Q\Segments\Operation(
                 Q\Segments\Operation::DIFFERENCE,
-                $this->valueSource())]);
+                $this->sequenceSource())]);
     }
 
     protected function intersectWithFilteredSubScopeQuery()
