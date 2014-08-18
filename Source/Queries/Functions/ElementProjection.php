@@ -24,6 +24,6 @@ class ElementProjection extends ProjectionBase
      */
     public function getParameters()
     {
-        return $t = parent::getParameters();
+        return parent::getParameters();
     }
 }
