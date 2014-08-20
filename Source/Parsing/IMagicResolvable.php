@@ -2,8 +2,6 @@
 
 namespace Pinq\Parsing;
 
-use Pinq\Expressions as O;
-
 /**
  * Interface containing the nessecary methods to resolve any magic
  * constants/scopes of the contained expressions.

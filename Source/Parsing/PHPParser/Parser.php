@@ -77,8 +77,8 @@ class Parser extends ParserBase
     }
 
     /**
-     * @param                      array <array<LocatedFunctionNode>> $locatedFunctionNodes
-     * @param  IFunctionReflection $reflection
+     * @param array <array<LocatedFunctionNode>> $locatedFunctionNodes
+     * @param IFunctionReflection                $reflection
      *
      * @throws \Pinq\Parsing\InvalidFunctionException
      * @return LocatedFunctionNode
@@ -106,7 +106,7 @@ class Parser extends ParserBase
         $fullyMatchedFunctions      = [];
 
         foreach ($matchedFunctionsByLocation as $matchedFunction) {
-            //Determine and resolve magic constants/scopes with the function reflection of which 
+            //Determine and resolve magic constants/scopes with the function reflection of which
             //we are searching
             $magicData                        = $reflection->resolveMagic($matchedFunction->getDeclaration());
             $resolvedMatchedFunctionSignature = $matchedFunction->getSignature()->resolveMagic($magicData);

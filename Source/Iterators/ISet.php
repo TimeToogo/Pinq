@@ -2,7 +2,6 @@
 
 namespace Pinq\Iterators;
 
-
 /**
  * Interface for an range of unique values.
  *

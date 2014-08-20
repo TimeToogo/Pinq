@@ -2,8 +2,6 @@
 
 namespace Pinq\Parsing;
 
-use Pinq\Expressions as O;
-
 /**
  * Implementation of the function reflection interface.
  *
@@ -90,7 +88,7 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
         $reflection      = $this->innerReflection;
         $__FILE__        = $this->location->getFilePath();
         $__DIR__         = dirname($__FILE__);
-        $__NAMESPACE__   = $declaration->getNamespace() ? : '';
+        $__NAMESPACE__   = $declaration->getNamespace() ?: '';
         $__TRAIT__       = '';
         $namespacePrefix = $__NAMESPACE__ === '' ? '' : $__NAMESPACE__ . '\\';
 
@@ -101,7 +99,7 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
             $__TRAIT__       = $namespacePrefix . $declaration->getTrait();
             $declarationType = $__TRAIT__;
 
-            //If the function is method declared within a trait the __CLASS__ constant 
+            //If the function is method declared within a trait the __CLASS__ constant
             //is programmed to be the class in which the trait is used in: https://bugs.php.net/bug.php?id=55214&edit=1
             //ReflectionMethod::getDeclaringClass() will resolve this.
             if ($reflection instanceof \ReflectionMethod) {
@@ -110,7 +108,7 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
             //If the function is a closure declared in a trait, __CLASS__ will resolve to
             //the scoped class e.g. get_called_class().
             elseif ($reflection->isClosure()) {
-                $__CLASS__ = $this->scope->getScopeType() ? : '';
+                $__CLASS__ = $this->scope->getScopeType() ?: '';
             }
         } else {
             $__CLASS__       = '';
@@ -144,12 +142,12 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
     private function resolveMagicScopes(IFunctionDeclaration $declaration)
     {
         $selfType        = $this->scope->getScopeType();
-        $declarationType = $declaration->getClass() ? : $declaration->getTrait();
+        $declarationType = $declaration->getClass() ?: $declaration->getTrait();
         $selfConstant    = $declarationType !== null ?
                 ($declaration->getNamespace() !== null ? $declaration->getNamespace() . '\\' : '') . $declarationType : null;
         $staticType      = $this->scope->hasThis() ? $this->scope->getThisType() : $selfType;
         $staticConstant  = $staticType;
-        $parentType      = get_parent_class($selfType) ? : null;
+        $parentType      = get_parent_class($selfType) ?: null;
         $parentConstant  = $parentType;
 
         return new MagicScopes(
@@ -165,7 +163,6 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
     {
         return $type[0] !== '\\' ? '\\' . $type : $type;
     }
-
 
     public function getCallable()
     {
@@ -189,6 +186,6 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
 
     public function asEvaluationContext(array $argumentsMap = [])
     {
-        return $this->scope->asEvaluationContext($argumentsMap, $this->innerReflection->getNamespaceName() ? : null);
+        return $this->scope->asEvaluationContext($argumentsMap, $this->innerReflection->getNamespaceName() ?: null);
     }
 }

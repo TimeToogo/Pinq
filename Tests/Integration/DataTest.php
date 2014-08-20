@@ -117,37 +117,37 @@ abstract class DataTest extends \Pinq\Tests\PinqTestCase
 
         return $randomStrings;
     }
-    
+
     final protected function makeRefs(array $array)
     {
         static $refs = [];
-        
-        foreach($array as $key => &$value) {
+
+        foreach ($array as $key => &$value) {
             $refs[] =& $value;
         }
-        
+
         return $array;
     }
 
     final protected function assertMatches(\Pinq\ITraversable $traversable, array $array, $message = '')
     {
         $firstIterationArray = [];
-        foreach($traversable as $key => $value) {
+        foreach ($traversable as $key => $value) {
             $firstIterationArray[$key] = $value;
         }
         $secondIterationArray = [];
-        foreach($traversable as $key => $value) {
+        foreach ($traversable as $key => $value) {
             $secondIterationArray[$key] = $value;
         }
-        
+
         //Ignore keys as may be incompatible with foreach
         $trueIteratorArray = [];
-        foreach($traversable->getTrueIterator() as $value) {
+        foreach ($traversable->getTrueIterator() as $value) {
             $trueIteratorArray[] = $value;
         }
-        
+
         $explicitArray = $traversable->asArray();
-        
+
         $this->assertSame($array, $firstIterationArray, $message);
         $this->assertSame($array, $secondIterationArray, $message);
         $this->assertSame($array, $explicitArray, $message);
@@ -157,18 +157,18 @@ abstract class DataTest extends \Pinq\Tests\PinqTestCase
     final protected function assertMatchesValues(\Pinq\ITraversable $traversable, array $array, $message = '')
     {
         $firstIterationArray = [];
-        foreach($traversable as $key => $value) {
+        foreach ($traversable as $key => $value) {
             $firstIterationArray[] = $value;
         }
         $secondIterationArray = [];
-        foreach($traversable as $key => $value) {
+        foreach ($traversable as $key => $value) {
             $secondIterationArray[] = $value;
         }
 
         $explicitArray = array_values($traversable->asArray());
-        
+
         $array =  array_values($array);
-        
+
         $this->assertSame($array, $firstIterationArray, $message);
         $this->assertSame($array, $secondIterationArray, $message);
         $this->assertSame($array, $explicitArray, $message);

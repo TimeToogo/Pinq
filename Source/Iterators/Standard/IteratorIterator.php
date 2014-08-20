@@ -2,7 +2,6 @@
 
 namespace Pinq\Iterators\Standard;
 
-use Pinq\Iterators\Common;
 use Pinq\Iterators\IWrapperIterator;
 
 /**

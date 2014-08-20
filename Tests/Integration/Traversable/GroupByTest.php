@@ -38,11 +38,11 @@ class GroupByTest extends TraversableTest
                 });
 
         foreach ($groups as $group) {
-            if($traversable instanceof \Pinq\IQueryable) {
+            if ($traversable instanceof \Pinq\IQueryable) {
                 $this->assertInstanceOf(\Pinq\IQueryable::ITRAVERSABLE_TYPE, $group);
-            } else if ($traversable instanceof \Pinq\IRepository) {
+            } elseif ($traversable instanceof \Pinq\IRepository) {
                 $this->assertInstanceOf(\Pinq\IRepository::IREPOSITORY_TYPE, $group);
-            } else { 
+            } else {
                 $this->assertInstanceOf(get_class($traversable), $group);
             }
         }
@@ -63,12 +63,12 @@ class GroupByTest extends TraversableTest
         $this->assertMatchesValues($groups[2], [3, 9]);
         $this->assertMatchesValues($groups[3], [6]);
     }
-    
+
     public function names()
     {
         return $this->implementationsFor(['andrew', 'sandy', 'tucker', 'tom', 'sandra', 'daniel']);
     }
-    
+
     /**
      * @dataProvider names
      */
@@ -105,36 +105,36 @@ class GroupByTest extends TraversableTest
                 }));
         $this->assertMatches($even, array_filter($data, $isEven));
     }
-    
+
     /**
      * @dataProvider emptyData
      */
     public function testThatGroupByMaintainsReferences(\Pinq\ITraversable $traversable, array $data)
     {
         $data = $this->makeRefs(range(1, 10));
-        
+
         $traversable = $traversable
                 ->append($data)
                 ->groupBy(function ($i) { return $i % 2 === 0; })
                 [true]
                 ->iterate(function (&$i) { $i *= 10; });
-        
+
         $this->assertSame($data, [1, 20, 3, 40, 5, 60, 7, 80, 9, 100]);
     }
-    
+
     /**
      * @dataProvider emptyData
      */
     public function testThatGroupByMaintainsArrayReferences(\Pinq\ITraversable $traversable, array $data)
     {
         $data = $this->makeRefs([[1], [2], [1, 2], [3, 5], [4, 2]]);
-        
+
         $traversable
                 ->append($data)
                 ->groupBy(function ($i) { return count($i); })
                 [2]
                 ->iterate(function (&$i) { $i['foo'] = $i[0]; });
-        
+
         $this->assertSame($data, [[1], [2], [1, 2, 'foo' => 1], [3, 5, 'foo' => 3], [4, 2, 'foo' => 4]]);
     }
 }

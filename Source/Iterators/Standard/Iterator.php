@@ -2,8 +2,6 @@
 
 namespace Pinq\Iterators\Standard;
 
-use Pinq\Iterators\Common;
-
 /**
  * Base class for iterators implementing the extended iterator interface.
  *

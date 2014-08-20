@@ -50,4 +50,4 @@ interface IRequestInterpretation
     public function interpretAny($requestId, IFunction $projection = null);
 
     public function interpretImplode($requestId, $delimiterId, $delimiter, IFunction $projection = null);
-} 
+}

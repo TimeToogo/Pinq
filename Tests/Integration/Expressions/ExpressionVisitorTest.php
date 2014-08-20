@@ -68,7 +68,7 @@ class ExpressionVisitorTest extends ExpressionTest
                 ->expects($this->once())
                 ->method($method)
                 ->with($this->equalTo($expression));
-        
+
         $expressionVisitorMock->walk($expression);
     }
 }

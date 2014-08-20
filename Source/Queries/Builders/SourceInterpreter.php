@@ -5,8 +5,6 @@ namespace Pinq\Queries\Builders;
 use Pinq\Expressions as O;
 use Pinq\IQueryable;
 use Pinq\Queries\Builders\Interpretations\ISourceInterpretation;
-use Pinq\Queries\Common;
-use Pinq\Queries\Segments;
 use Pinq\Queries;
 
 /**
@@ -55,7 +53,7 @@ class SourceInterpreter extends ExpressionInterpreter implements ISourceInterpre
                         function (O\TraversalExpression $expression, O\ExpressionWalker $self) use (&$isQueryScope) {
                             $expression = $expression->updateValue($self->walk($expression->getValue()));
 
-                            if($isQueryScope) {
+                            if ($isQueryScope) {
                                 return $expression;
                             } else {
                                 return $self->walk(O\Expression::value($expression->evaluate($this->evaluationContext)));
@@ -63,9 +61,10 @@ class SourceInterpreter extends ExpressionInterpreter implements ISourceInterpre
                         },
                 O\ValueExpression::getType() =>
                         function (O\ValueExpression $expression) use (&$isQueryScope) {
-                            if($expression->getValue() instanceof IQueryable) {
+                            if ($expression->getValue() instanceof IQueryable) {
                                 $isQueryScope = true;
                             }
+
                             return $expression;
                         }
         ]);

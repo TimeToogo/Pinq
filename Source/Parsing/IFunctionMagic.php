@@ -2,8 +2,6 @@
 
 namespace Pinq\Parsing;
 
-use Pinq\Expressions as O;
-
 /**
  * Interface containing the structural information of a function.
  *

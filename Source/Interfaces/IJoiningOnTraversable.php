@@ -14,7 +14,7 @@ interface IJoiningOnTraversable extends IJoiningToTraversable
      * Both values and keys will be passed as arguments to the supplied function
      * as (outerValue, innerValue, outerKey, innerKey).
      *
-     * @param  callable $function
+     * @param callable $function
      *
      * @return IJoiningToTraversable
      */
@@ -24,8 +24,8 @@ interface IJoiningOnTraversable extends IJoiningToTraversable
      * Filters the join values via strict equality (===) between the outer and inner keys
      * according to the supplied key functions. Note that null keys are ignored.
      *
-     * @param  callable $outerKeyFunction
-     * @param  callable $innerKeyFunction
+     * @param callable $outerKeyFunction
+     * @param callable $innerKeyFunction
      *
      * @return IJoiningToTraversable
      */

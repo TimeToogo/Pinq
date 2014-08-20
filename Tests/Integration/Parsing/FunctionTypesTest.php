@@ -2,7 +2,6 @@
 
 namespace Pinq\Tests\Integration\Parsing;
 
-use Pinq\Parsing\IParser;
 use Pinq\Expressions as O;
 
 function TestFunction()

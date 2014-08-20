@@ -87,13 +87,13 @@ class ValueExpression extends Expression
      */
     public static function isValueType($value)
     {
-        if(is_scalar($value) || $value === null) {
+        if (is_scalar($value) || $value === null) {
             return true;
         } elseif (is_array($value)) {
             $isScalar = true;
             array_walk_recursive($value,
                     function ($value) use (&$isScalar) {
-                        if($isScalar && !(is_scalar($value) || $value === null)) {
+                        if ($isScalar && !(is_scalar($value) || $value === null)) {
                             $isScalar = false;
                         }
                     });

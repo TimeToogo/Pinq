@@ -106,7 +106,7 @@ class NumericTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversab
             $indexedAggregates[implode(',', $value['Numbers'])] =& $value;
         }
 
-        if($traversable instanceof IQueryable) {
+        if ($traversable instanceof IQueryable) {
             $t = 5;
         }
         $this->assertMatches(

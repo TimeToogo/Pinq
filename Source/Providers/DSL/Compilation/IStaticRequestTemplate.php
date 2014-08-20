@@ -2,8 +2,6 @@
 
 namespace Pinq\Providers\DSL\Compilation;
 
-use Pinq\Queries;
-
 /**
  * Interface for a compiled request query.
  *

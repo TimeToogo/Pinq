@@ -15,7 +15,7 @@ abstract class ParserTest extends \Pinq\Tests\PinqTestCase
      */
     private $currentImplementation;
 
-    public function __construct($name = NULL, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
         $this->implementations = $this->implementations();
@@ -44,7 +44,7 @@ abstract class ParserTest extends \Pinq\Tests\PinqTestCase
                 $expressions,
                 $this->currentImplementation->parse($this->currentImplementation->getReflection($function))->getBodyExpressions());
     }
-    
+
     final protected function assertReturn(callable $function, O\Expression $valueExpression)
     {
         return $this->assertParsedAs($function, [O\Expression::returnExpression($valueExpression)]);

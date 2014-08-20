@@ -2,8 +2,6 @@
 
 namespace Pinq\Providers\DSL\Compilation;
 
-use Pinq\Queries;
-
 /**
  * Interface for a request / operation query that contains no
  * structural parameters and hence stores the fully compiled query.

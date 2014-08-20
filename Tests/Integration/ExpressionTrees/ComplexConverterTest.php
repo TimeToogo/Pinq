@@ -2,9 +2,6 @@
 
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
-use Pinq\Expressions as O;
-use Pinq\Queries;
-
 class ComplexConverterTest extends InterpreterTest
 {
     /**
@@ -61,7 +58,7 @@ class ComplexConverterTest extends InterpreterTest
      */
     public function testVariableReturnValueResolution()
     {
-        foreach([1, null, 'test', false, new \stdClass(), [1234567890, 'tests', new \stdClass(), function () {}]] as $value) {
+        foreach ([1, null, 'test', false, new \stdClass(), [1234567890, 'tests', new \stdClass(), function () {}]] as $value) {
             $this->assertScopedVariables(
                     function () use ($value) {
                         return $value;
@@ -106,7 +103,6 @@ class ComplexConverterTest extends InterpreterTest
             // Uncomment one of the following alternatives
             // $bytes /= pow(1024, $pow);
             // $bytes /= (1 << (10 * $pow));
-
             return round($bytes, $precision) . ' ' . $units[$pow];
         };
 

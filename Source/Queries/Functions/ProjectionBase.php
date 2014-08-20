@@ -50,6 +50,7 @@ abstract class ProjectionBase extends FunctionBase
     final public function hasReturnExpression()
     {
         $this->verifyNotInternal(__FUNCTION__);
+
         return $this->returnExpression !== null;
     }
 
@@ -59,6 +60,7 @@ abstract class ProjectionBase extends FunctionBase
     final public function getReturnExpression()
     {
         $this->verifyNotInternal(__FUNCTION__);
+
         return $this->returnExpression;
     }
 
@@ -68,6 +70,7 @@ abstract class ProjectionBase extends FunctionBase
     final public function hasReturnValueExpression()
     {
         $this->verifyNotInternal(__FUNCTION__);
+
         return $this->returnValueExpression !== null;
     }
 
@@ -77,6 +80,7 @@ abstract class ProjectionBase extends FunctionBase
     final public function getReturnValueExpression()
     {
         $this->verifyNotInternal(__FUNCTION__);
+
         return $this->returnValueExpression;
     }
 }

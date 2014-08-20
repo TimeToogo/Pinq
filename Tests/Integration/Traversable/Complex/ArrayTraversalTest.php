@@ -57,7 +57,7 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
         $joinedlastNames = $traversable
                 ->groupJoin($traversable)
                     ->onEquality(
-                            function ($outer) { return $outer['firstName'][0]; }, 
+                            function ($outer) { return $outer['firstName'][0]; },
                             function ($inner) { return $inner['lastName'][0]; })
                     ->to(function ($person, \Pinq\ITraversable $joinedPeople) {
                         return $person['firstName'] . '{' .
@@ -81,11 +81,11 @@ class ArrayTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversable
     public function testGroupByWithArrayKey(\Pinq\ITraversable $traversable, array $data)
     {
         $ageGroupData = $traversable
-                ->groupBy(function ($i) { 
+                ->groupBy(function ($i) {
                     return [
-                        'sex' => $i['sex'], 
+                        'sex' => $i['sex'],
                         'ageGroup' => floor($i['age'] / 10) * 10
-                    ]; 
+                    ];
                 })
                 ->orderByAscending(function (\Pinq\ITraversable $group, $key) { return $key['ageGroup']; })
                 ->thenByAscending(function (\Pinq\ITraversable $group, $key) { return $key['sex']; })

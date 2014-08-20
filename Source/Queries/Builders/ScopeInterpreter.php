@@ -7,7 +7,6 @@ use Pinq\IQueryable;
 use Pinq\PinqException;
 use Pinq\Queries;
 use Pinq\Queries\Builders\Interpretations\IScopeInterpretation;
-use Pinq\Queries\Common;
 use Pinq\Queries\Segments;
 use Pinq\Utilities;
 
@@ -70,13 +69,13 @@ class ScopeInterpreter extends ExpressionInterpreter implements IScopeInterprete
     {
         if ($expression instanceof O\ValueExpression) {
             $queryable = $expression->getValue();
-            if(!($queryable instanceof IQueryable)) {
+            if (!($queryable instanceof IQueryable)) {
                 throw new PinqException('Invalid scope expression: must originate from %s, %s given',
                         IQueryable::IQUERYABLE_TYPE,
                         Utilities::getTypeOrClass($queryable));
             }
 
-            if($queryable->isSource()) {
+            if ($queryable->isSource()) {
                 $this->addSegment(
                         function () use ($queryable) {
                             $this->interpretation->interpretScopeSource($queryable);

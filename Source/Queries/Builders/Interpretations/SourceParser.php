@@ -2,11 +2,8 @@
 
 namespace Pinq\Queries\Builders\Interpretations;
 
-use Pinq\Expressions as O;
 use Pinq\Queries\Common\ISource;
 use Pinq\Queries\Common\Source;
-use Pinq\Queries\Functions;
-use Pinq\Queries\Segments;
 use Pinq\Queries;
 
 class SourceParser extends BaseParser implements ISourceParser

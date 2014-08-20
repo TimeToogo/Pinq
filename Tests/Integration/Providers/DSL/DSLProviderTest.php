@@ -2,10 +2,8 @@
 
 namespace Pinq\Tests\Integration\Providers\DSL;
 
-use Pinq\Parsing;
 use Pinq\Providers;
 use Pinq\Queries;
-use Pinq\Queries\Requests;
 use Pinq\Tests\PinqTestCase;
 
 class DSLProviderTest extends PinqTestCase
@@ -39,7 +37,6 @@ class DSLProviderTest extends PinqTestCase
                         )
                 )
                 ->will($this->returnValue(null));
-
 
         $configurationMock = $this->getMockBuilder('Pinq\\Providers\\DSL\\QueryCompilerConfiguration')
                 ->setMethods(['buildCompiledQueryCache'])
@@ -102,7 +99,6 @@ class DSLProviderTest extends PinqTestCase
                         )
                 )
                 ->will($this->returnValue(null));
-
 
         $configurationMock = $this->getMockBuilder('Pinq\\Providers\\DSL\\RepositoryCompilerConfiguration')
                 ->setMethods(['buildCompiledQueryCache'])

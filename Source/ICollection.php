@@ -18,7 +18,7 @@ interface ICollection extends ITraversable
     /**
      * Walks the elements with the supplied function.
      *
-     * @param  callable $function
+     * @param callable $function
      *
      * @return void
      */
@@ -28,7 +28,7 @@ interface ICollection extends ITraversable
      * Adds a range of values to the collection.
      * The collection will be reindexed.
      *
-     * @param  array|\Traversable $values The values to add
+     * @param array|\Traversable $values The values to add
      *
      * @return void
      */
@@ -37,7 +37,7 @@ interface ICollection extends ITraversable
     /**
      * Removes all occurrences of the supplied value from the collection.
      *
-     * @param  mixed $value The value to remove
+     * @param mixed $value The value to remove
      *
      * @return void
      */
@@ -46,7 +46,7 @@ interface ICollection extends ITraversable
     /**
      * Removes all occurrences of the supplied values from the collection.
      *
-     * @param  array|\Traversable $values The values to remove
+     * @param array|\Traversable $values The values to remove
      *
      * @return void
      */
@@ -55,7 +55,7 @@ interface ICollection extends ITraversable
     /**
      * Removes all the values matched by the predicate.
      *
-     * @param  callable $predicate
+     * @param callable $predicate
      *
      * @return void
      */

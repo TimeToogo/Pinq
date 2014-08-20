@@ -7,7 +7,7 @@ namespace Pinq\Iterators\Standard;
  * Native iterator code:
  * <code>
  * $iterator->rewind();
- * while($iterator->valid()) {
+ * while ($iterator->valid()) {
  *     $key = $iterator->key();
  *     $value = $iterator->current();
  *     ...
@@ -17,14 +17,14 @@ namespace Pinq\Iterators\Standard;
  * With Pinq extension:
  * <code>
  * $iterator->rewind();
- * while(list($key, $value) = $iterator->fetch()) {
+ * while (list($key, $value) = $iterator->fetch()) {
  *     ...
  * }
  * </code>
  * Or with value by reference:
  * <code>
  * $iterator->rewind();
- * while($element = $iterator->fetch()) {
+ * while ($element = $iterator->fetch()) {
  *     $key = $element[0];
  *     $value =& $element[1];
  *     ...

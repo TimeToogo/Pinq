@@ -2,8 +2,6 @@
 
 namespace Pinq\Iterators\Generators;
 
-use Pinq\Iterators\Common;
-
 /**
  * Implementation of the flattened iterator using generators.
  *

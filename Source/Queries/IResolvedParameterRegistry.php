@@ -2,8 +2,6 @@
 
 namespace Pinq\Queries;
 
-use Pinq\Expressions as O;
-
 /**
  * Interface for a resolved parameter registry.
  *

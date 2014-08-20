@@ -2,7 +2,6 @@
 
 namespace Pinq\Queries\Builders\Interpretations;
 
-use Pinq\Expressions as O;
 use Pinq\Parsing\IFunctionInterpreter;
 use Pinq\Queries;
 use Pinq\Queries\Builders\Functions\IFunction;
@@ -27,7 +26,7 @@ class RequestParser extends BaseParser implements IRequestParser
 
     public function getRequest()
     {
-        return $this->request ? : new Requests\Values(Requests\Values::AS_SELF);
+        return $this->request ?: new Requests\Values(Requests\Values::AS_SELF);
     }
 
     public function interpretGetIterator($requestId)

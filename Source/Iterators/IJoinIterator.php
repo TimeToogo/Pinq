@@ -2,7 +2,6 @@
 
 namespace Pinq\Iterators;
 
-
 /**
  * Interface for an ordered iterator that supports subsequent ordering.
  *

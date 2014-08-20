@@ -18,7 +18,7 @@ class SelectTest extends TraversableTest
     {
         $this->assertThatExecutionIsDeferred([$traversable, 'select']);
     }
-    
+
     /**
      * @dataProvider assocMixedValues
      */
@@ -40,12 +40,12 @@ class SelectTest extends TraversableTest
 
         $this->assertMatches($multipliedValues, array_map($multiply, $data));
     }
-    
+
     public function padStrings()
     {
         return $this->getImplementations([
-            5   => 'abc', 
-            10  => 'hello', 
+            5   => 'abc',
+            10  => 'hello',
             20  => 'foo-bar-baz',
         ]);
     }
@@ -58,10 +58,10 @@ class SelectTest extends TraversableTest
         //Signature: strlen($string)
         $paddedValues = $values->select('strlen');
         //Ensure that even though the key will be the second parameter, it does not trigger an error.
-        
+
         $this->assertMatches($paddedValues, [
-            5   => 3, 
-            10  => 5, 
+            5   => 3,
+            10  => 5,
             20  => 11,
         ]);
     }
@@ -76,24 +76,24 @@ class SelectTest extends TraversableTest
         //So the string should be $input and the key should be $pad_length and the rest is default values.
 
         $this->assertMatches($paddedValues, [
-            5   => 'abc  ', 
-            10  => 'hello     ', 
+            5   => 'abc  ',
+            10  => 'hello     ',
             20  => 'foo-bar-baz         ',
         ]);
     }
-    
+
     /**
      * @dataProvider emptyData
      */
     public function testThatSelectDoesNotMaintainReferences(\Pinq\ITraversable $traversable)
     {
         $data = $this->makeRefs(range('Z', 'A'));
-        
+
         $traversable
                 ->append($data)
                 ->select(function & (&$i) { return $i; })
                 ->iterate(function (&$i) { $i .= $i; });
-                
+
         $this->assertSame(range('Z', 'A'), $data);
     }
 }

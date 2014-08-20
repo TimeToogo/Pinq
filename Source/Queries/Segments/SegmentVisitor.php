@@ -2,7 +2,6 @@
 
 namespace Pinq\Queries\Segments;
 
-use Pinq\Providers\DSL\IScopeCompiler;
 use Pinq\Queries\IScope;
 
 /**

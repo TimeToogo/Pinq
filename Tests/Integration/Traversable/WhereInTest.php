@@ -2,7 +2,7 @@
 
 namespace Pinq\Tests\Integration\Traversable;
 
-class WhereIntTest extends TraversableTest
+class WhereInTest extends TraversableTest
 {
     protected function _testReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable)
     {
@@ -49,19 +49,19 @@ class WhereIntTest extends TraversableTest
 
         $this->assertMatches($insection, []);
     }
-    
+
     /**
      * @dataProvider emptyData
      */
     public function testThatWhereInMaintainsReferences(\Pinq\ITraversable $traversable)
     {
         $data = $this->makeRefs(range(100, 50, -10));
-        
+
         $traversable
                 ->append($data)
                 ->whereIn([70, 90])
                 ->iterate(function (&$i) { $i /= 10; });
-        
+
         $this->assertSame([100, 9, 80, 7, 60, 50], $data);
     }
 }

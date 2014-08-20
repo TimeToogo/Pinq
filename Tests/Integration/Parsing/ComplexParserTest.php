@@ -93,7 +93,7 @@ class ComplexParserTest extends ParserTest
     {
         $function =
                 function () {
-                    (double) (object) (bool) (int) (string)$i;
+                    (double) (object) (bool) (int) (string) $i;
                 };
         $this->assertParsedAs(
                 $function,
@@ -162,7 +162,6 @@ class ComplexParserTest extends ParserTest
                 O\Expression::methodCall(
                         O\Expression::variable(O\Expression::value('traversable')),
                         O\Expression::value('asArray')));
-
 
         $this->assertReturn(
                 function (\Pinq\ITraversable $traversable) {

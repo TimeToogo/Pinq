@@ -13,14 +13,14 @@ class IteratorSchemeTest extends TraversableTest
     {
         $this->assertInstanceOf(IIteratorScheme::IITERATOR_SCHEME_TYPE, $traversable->getIteratorScheme());
     }
-    
+
     /**
      * @dataProvider theImplementations
      */
     public function testThatMaintainsCorrectSameIteratorScheme(\Pinq\ITraversable $traversable, array $data)
     {
         $originalScheme = $traversable->getIteratorScheme();
-        
+
         $queriedTraversable = $traversable
                 ->where(function () { throw new \Exception('This should never be executed'); })
                 ->append([])
@@ -47,7 +47,7 @@ class IteratorSchemeTest extends TraversableTest
                 ->where(function () { return true; })
                 ->whereIn([]);
                 //Well that was fun
-        
+
         $this->assertSame($originalScheme, $queriedTraversable->getIteratorScheme());
     }
 }

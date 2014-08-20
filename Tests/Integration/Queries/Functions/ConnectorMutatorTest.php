@@ -2,8 +2,6 @@
 
 namespace Pinq\Tests\Integration\Queries\Functions;
 
-use Pinq\Expressions as O;
-use Pinq\Queries\Functions\Parameters;
 use Pinq\Queries\Functions;
 
 class ConnectorMutatorTest extends MutatorBaseTest
@@ -16,4 +14,3 @@ class ConnectorMutatorTest extends MutatorBaseTest
         return Functions\ConnectorMutator::factory();
     }
 }
- 

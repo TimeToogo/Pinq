@@ -2,8 +2,6 @@
 
 namespace Pinq\Parsing;
 
-use Pinq\Expressions as O;
-
 /**
  * Interface of a set of resolved magic constants for a function.
  *

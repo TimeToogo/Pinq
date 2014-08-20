@@ -2,11 +2,8 @@
 
 namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
-use Pinq\Providers\DSL\Compilation;
 use Pinq\Providers\DSL\RepositoryCompilerConfiguration;
 use Pinq\Queries;
-use Pinq\Queries\Requests;
-use Pinq\Queries\Segments;
 
 class Configuration extends RepositoryCompilerConfiguration
 {

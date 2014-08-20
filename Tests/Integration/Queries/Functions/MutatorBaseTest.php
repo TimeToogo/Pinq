@@ -35,4 +35,3 @@ abstract class MutatorBaseTest extends FunctionTest
         $this->assertSame(false, $function->valueParameterIsReference());
     }
 }
- 

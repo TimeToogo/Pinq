@@ -140,7 +140,7 @@ trait OrderedMap
 
         $newPosition = 0;
         foreach ($positionKeyIdentityMap as $stringPosition => $keyIdentityHash) {
-            $originalPosition = (int)$stringPosition;
+            $originalPosition = (int) $stringPosition;
 
             $sortedMap->keyIdentityPositionMap[$keyIdentityHash] = $newPosition;
             $sortedMap->keys[$newPosition]                       = $this->keys[$originalPosition];
@@ -178,6 +178,7 @@ trait OrderedMap
             return $this->values[$this->keyIdentityPositionMap[$identityHash]];
         } else {
             $null = null;
+
             return $null;
         }
     }

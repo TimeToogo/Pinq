@@ -2,9 +2,6 @@
 
 namespace Pinq\Providers\DSL\Compilation;
 
-use Pinq\Caching;
-use Pinq\Expressions as O;
-use Pinq\Providers\Configuration;
 use Pinq\Queries;
 
 /**

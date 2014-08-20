@@ -46,12 +46,12 @@ class BaseParser extends BaseInterpretation implements IQueryParser
         if ($function instanceof CallableFunction) {
             $reflection           = $this->functionInterpreter->getReflection($function->getCallable());
             $scopeType            = $reflection->getScope()->getScopeType();
-            $namespace            = $reflection->getInnerReflection()->getNamespaceName() ? : null;
+            $namespace            = $reflection->getInnerReflection()->getNamespaceName() ?: null;
             $parameterExpressions = $reflection->getSignature()->getParameterExpressions();
             $scopedVariableNames  = $reflection->getSignature()->isStatic() ? [] : ['this'];
             $scopedVariableNames  = array_merge(
                     $scopedVariableNames,
-                    $reflection->getSignature()->getScopedVariableNames() ? : []
+                    $reflection->getSignature()->getScopedVariableNames() ?: []
             );
             $bodyExpressions      = $reflection->getInnerReflection()->isUserDefined()
                     ? $this->functionInterpreter->getStructure($reflection)->getBodyExpressions() : null;
@@ -122,4 +122,4 @@ class BaseParser extends BaseInterpretation implements IQueryParser
 
         return $joinOptionsParser->getJoinOptions();
     }
-} 
+}

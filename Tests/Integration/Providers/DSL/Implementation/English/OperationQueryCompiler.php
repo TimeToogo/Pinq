@@ -4,7 +4,6 @@ namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
 use Pinq\Providers\DSL\Compilation\IOperationTemplate;
 use Pinq\Providers\DSL\Compilation;
-use Pinq\Queries\Requests;
 use Pinq\Queries;
 
 class OperationQueryCompiler extends Compilation\OperationQueryCompiler
@@ -24,6 +23,7 @@ class OperationQueryCompiler extends Compilation\OperationQueryCompiler
             Queries\IResolvedParameterRegistry $structuralParameters
     ) {
         /** @var $template Compilation\StaticOperationTemplate */
+
         return $template->getCompiledQuery();
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Pinq\Parsing;
 
-use Pinq\Expressions as O;
-
 /**
  * Interface containing the reflection data of a function.
  *

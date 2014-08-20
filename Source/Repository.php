@@ -4,8 +4,6 @@ namespace Pinq;
 
 use Pinq\Expressions as O;
 use Pinq\Iterators\IIteratorScheme;
-use Pinq\Queries;
-use Pinq\Queries\Operations;
 
 /**
  * The standard repository class, fully implements the repository API

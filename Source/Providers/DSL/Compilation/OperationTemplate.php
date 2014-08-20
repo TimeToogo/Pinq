@@ -2,8 +2,6 @@
 
 namespace Pinq\Providers\DSL\Compilation;
 
-use Pinq\Queries;
-
 /**
  * Base class of the operation template interface.
  *

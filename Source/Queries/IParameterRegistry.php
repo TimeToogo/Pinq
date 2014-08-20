@@ -2,8 +2,6 @@
 
 namespace Pinq\Queries;
 
-use Pinq\Expressions as O;
-
 /**
  * Interface for request and operation query template parameters.
  *
@@ -25,7 +23,7 @@ interface IParameterRegistry extends \Countable
      * @param IResolvedQuery $resolvedQuery
      *
      * @return IResolvedParameterRegistry
-     * @throws \Pinq\PinqException If there is a parameter mismatch.
+     * @throws \Pinq\PinqException        If there is a parameter mismatch.
      */
     public function resolve(IResolvedQuery $resolvedQuery);
 }

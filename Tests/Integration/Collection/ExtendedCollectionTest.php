@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Collection;
 class ExtendedCollection extends \Pinq\Collection
 {
     const EXTENDED_TYPE = __CLASS__;
-    
+
     public function four()
     {
         return 4;
@@ -18,23 +18,23 @@ class ExtendedCollectionTest extends CollectionTest
     {
         return [[new ExtendedCollection()]];
     }
-    
+
     private function assertExtended(\Pinq\ICollection $collection)
     {
         $this->assertSame(ExtendedCollection::EXTENDED_TYPE, get_class($collection));
         $this->assertSame(4, $collection->four());
     }
-    
+
     /**
      * @dataProvider extendedCollection
      */
     public function testThatExtendedClassIsMaintainedAfterWhereQuery(\Pinq\ICollection $collection)
     {
         $collection = $collection->where(function () { return true; });
-        
+
         $this->assertExtended($collection);
     }
-    
+
     /**
      * @dataProvider extendedCollection
      */
@@ -43,10 +43,10 @@ class ExtendedCollectionTest extends CollectionTest
         $collection = $collection
                 ->orderByAscending(function () { })
                 ->thenByDescending(function () { });
-        
+
         $this->assertExtended($collection);
     }
-    
+
     /**
      * @dataProvider extendedCollection
      */
@@ -54,10 +54,10 @@ class ExtendedCollectionTest extends CollectionTest
     {
         $collection = $collection
                 ->groupBy(function () { });
-        
+
         $this->assertExtended($collection);
     }
-    
+
     /**
      * @dataProvider extendedCollection
      */
@@ -67,10 +67,10 @@ class ExtendedCollectionTest extends CollectionTest
                 ->join([])
                 ->on(function () { return true; })
                 ->to(function () { });
-        
+
         $this->assertExtended($collection);
     }
-    
+
     /**
      * @dataProvider extendedCollection
      */
@@ -84,7 +84,7 @@ class ExtendedCollectionTest extends CollectionTest
                 ->unique()
                 ->select(function ($i) { return $i * 10; })
                 ->indexBy(function ($i) { return $i; });
-        
+
         $this->assertExtended($collection);
     }
 }

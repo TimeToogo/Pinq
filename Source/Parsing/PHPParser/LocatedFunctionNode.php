@@ -47,4 +47,3 @@ class LocatedFunctionNode extends LocatedFunction
         return $this->node->stmts;
     }
 }
-

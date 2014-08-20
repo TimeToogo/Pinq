@@ -57,4 +57,3 @@ abstract class ProjectionBaseTest extends FunctionTest
         $this->assertEquals(null, $function->getReturnValueExpression());
     }
 }
- 

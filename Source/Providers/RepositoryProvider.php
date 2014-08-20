@@ -33,7 +33,7 @@ abstract class RepositoryProvider extends ProviderBase implements IRepositoryPro
             IQueryProvider $queryProvider,
             Configuration\IRepositoryConfiguration $configuration = null
     ) {
-        parent::__construct($sourceInfo, $configuration ? : new Configuration\DefaultRepositoryConfiguration());
+        parent::__construct($sourceInfo, $configuration ?: new Configuration\DefaultRepositoryConfiguration());
 
         $this->queryProvider         = $queryProvider;
         $this->queryResultCollection = $queryProvider->getQueryResultCollection();
@@ -68,7 +68,7 @@ abstract class RepositoryProvider extends ProviderBase implements IRepositoryPro
     public function execute(O\Expression $operationExpression)
     {
         $this->executeOperationExpression($operationExpression);
-        if($this->queryResultCollection !== null) {
+        if ($this->queryResultCollection !== null) {
             $this->queryResultCollection->clearResults();
         }
     }

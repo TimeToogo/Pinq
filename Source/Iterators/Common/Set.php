@@ -23,7 +23,6 @@ trait Set
      */
     protected $length = 0;
 
-
     public function count()
     {
         return $this->length;
@@ -67,6 +66,7 @@ trait Set
 
         $this->values[$identityHash] =& $value;
         $this->length++;
+
         return true;
     }
 
@@ -83,6 +83,7 @@ trait Set
 
         unset($this->values[$identityHash]);
         $this->length--;
+
         return true;
     }
 }

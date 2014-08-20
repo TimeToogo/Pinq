@@ -2,20 +2,18 @@
 
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
-use Pinq\Expressions as O;
-
-trait TestTrait 
+trait TestTrait
 {
     public function classMagicConstant()
     {
         return __CLASS__;
     }
-    
+
     public function classMagicConstantInClosure()
     {
         return function () { return __CLASS__; };
     }
-    
+
     public function traitMagicConstant()
     {
         return __TRAIT__;
@@ -35,7 +33,7 @@ function testFuncMethodConstant()
 class MagicConstantInterpreterTest extends InterpreterTest
 {
     use TestTrait;
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -43,7 +41,7 @@ class MagicConstantInterpreterTest extends InterpreterTest
     {
         $this->assertRecompilesCorrectly(function () { return [__DIR__, __dir__]; });
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -51,7 +49,7 @@ class MagicConstantInterpreterTest extends InterpreterTest
     {
         $this->assertRecompilesCorrectly(function () { return [__FILE__, __file__]; });
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -59,7 +57,7 @@ class MagicConstantInterpreterTest extends InterpreterTest
     {
         $this->assertRecompilesCorrectly(function () { return [__NAMESPACE__, __namespace__]; });
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -67,18 +65,18 @@ class MagicConstantInterpreterTest extends InterpreterTest
     {
         $this->assertRecompilesCorrectly([$this, 'classMagicConstant']);
         $this->assertRecompilesCorrectly(function () { return [__CLASS__, __class__]; });
-        
+
         //Apparently when a closure is defined (only) in a trait, __CLASS__ returns the scoped class
         $closure = $this->classMagicConstantInClosure();
         $this->assertRecompilesCorrectly($closure);
-        
+
         $closure = \Closure::bind($closure, new \stdClass());
         $this->assertRecompilesCorrectly($closure);
-        
+
         $closure = \Closure::bind($closure, null, 'stdClass');
         $this->assertRecompilesCorrectly($closure);
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -87,12 +85,12 @@ class MagicConstantInterpreterTest extends InterpreterTest
         $this->assertRecompilesCorrectly(function () { return [__TRAIT__, __trait__]; });
         $this->assertRecompilesCorrectly([$this, 'traitMagicConstant']);
     }
-    
+
     public function functionConstant()
     {
         return __FUNCTION__;
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -102,17 +100,17 @@ class MagicConstantInterpreterTest extends InterpreterTest
         $this->assertRecompilesCorrectly(function () { return [__FUNCTION__, __function__]; });
         $this->assertRecompilesCorrectly(__NAMESPACE__ . '\\testFuncFunctionConstant');
     }
-    
+
     public function methodConstant()
     {
         return __METHOD__;
     }
-    
+
     public function methodConstantInClosure()
     {
         return call_user_func(function () { return __METHOD__; });
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -123,7 +121,7 @@ class MagicConstantInterpreterTest extends InterpreterTest
         $this->assertRecompilesCorrectly(__NAMESPACE__ . '\\testFuncMethodConstant');
         $this->assertRecompilesCorrectly([$this, 'methodConstantInClosure']);
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -131,7 +129,7 @@ class MagicConstantInterpreterTest extends InterpreterTest
     {
         $this->assertRecompilesCorrectly(function () { return [__LINE__, __line__]; });
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -145,13 +143,13 @@ class MagicConstantInterpreterTest extends InterpreterTest
         $this->assertRecompilesCorrectly(function ($i = [__METHOD__, __method__]) { return $i; });
         $this->assertRecompilesCorrectly(function ($i = [__FUNCTION__, __function__]) { return $i; });
         $this->assertRecompilesCorrectly(function ($i = [__LINE__, __line__]) { return $i; });
-        
+
         $this->assertRecompilesCorrectly(function ($i = [
             __DiR__         => __FIlE__,
             __NAMESPACE__   => __CLass__,
             __METHod__      => __LINE__,
             __LinE__        => [1,2,3, __tRaIT__]
-        ]) 
+        ])
         { return $i; });
     }
 }

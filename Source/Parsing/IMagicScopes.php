@@ -2,8 +2,6 @@
 
 namespace Pinq\Parsing;
 
-use Pinq\Expressions as O;
-
 /**
  * Interface for a set of resolved self::, static::, parent:: scopes of a function.
  *

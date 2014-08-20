@@ -26,7 +26,7 @@ class DynamicExpressionWalker extends ExpressionWalker
         $expressionType = get_class($expression);
 
         do {
-            if(isset($this->callableMap[$expressionType])) {
+            if (isset($this->callableMap[$expressionType])) {
                 return $this->callableMap[$expressionType]($expression, $this);
             }
         } while (($expressionType = get_parent_class($expressionType)) !== false
@@ -34,4 +34,4 @@ class DynamicExpressionWalker extends ExpressionWalker
 
         return $expression->traverse($this);
     }
-} 
+}

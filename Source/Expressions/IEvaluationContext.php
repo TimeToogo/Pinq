@@ -1,7 +1,6 @@
 <?php
 namespace Pinq\Expressions;
 
-
 /**
  * Interface of the evaluation context.
  *

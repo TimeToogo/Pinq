@@ -58,7 +58,7 @@ class DifferenceTest extends TraversableTest
     {
         $ref = 5;
         $traversable = $traversable->append([&$ref])->difference($traversable);
-        
+
         $this->assertReferenceEquals($ref, $traversable->asArray()[0]);
     }
 }

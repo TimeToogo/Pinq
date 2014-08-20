@@ -15,7 +15,7 @@ class GroupJoinApplyTest extends CollectionTest
             });
         }
     }
-    
+
     /**
      * @dataProvider theImplementations
      */
@@ -25,7 +25,7 @@ class GroupJoinApplyTest extends CollectionTest
             $this->assertThatExecutionIsNotDeferred(function (callable $function) use ($collection) {
                 $collection->groupJoin([1])->on($function)->apply($function);
             });
-            
+
             $this->assertThatExecutionIsNotDeferred(function (callable $function) use ($collection) {
                 $collection->groupJoin([1])->onEquality($function, $function)->apply($function);
             });
@@ -56,7 +56,7 @@ class GroupJoinApplyTest extends CollectionTest
                 ->apply(function (&$outer, \Pinq\ITraversable $group) {
                     $outer = $group->implode(':', function ($i) use ($outer) { return $i * $outer; });
                 });
-        
+
         $this->assertMatchesValues($collection, [
             '1:2:3',
             '2:4:6',
@@ -70,7 +70,7 @@ class GroupJoinApplyTest extends CollectionTest
             '10:20:30',
         ]);
     }
-    
+
     /**
      * @dataProvider oneToTen
      */
@@ -82,7 +82,7 @@ class GroupJoinApplyTest extends CollectionTest
                 ->apply(function (&$outer, \Pinq\ITraversable $innerGroup) {
                     $outer *= $innerGroup->sum();
                 });
-        
+
         $this->assertMatchesValues($collection, [
             1 * (1),
             2 * (1 + 2),
@@ -108,7 +108,7 @@ class GroupJoinApplyTest extends CollectionTest
                 ->apply(function (&$outer, \Pinq\ITraversable $innerGroup) {
                     $outer *= $innerGroup->first();
                 });
-        
+
         $this->assertMatchesValues($collection, [
             1 * 1,
             2 * 2,
@@ -135,7 +135,7 @@ class GroupJoinApplyTest extends CollectionTest
                 ->apply(function (&$outer, \Pinq\ITraversable $innerGroup) {
                     $outer .= ':' . $innerGroup->implode(',');
                 });
-        
+
         $this->assertMatchesValues($collection, [
             '1:1',
             '2:1,3',

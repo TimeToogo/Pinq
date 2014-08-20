@@ -3,7 +3,6 @@
 namespace Pinq\Tests\Integration\Queries\Functions;
 
 use Pinq\Expressions as O;
-use Pinq\Queries\Functions\Parameters;
 use Pinq\Queries\Functions;
 
 class ElementProjectionTest extends ProjectionBaseTest
@@ -180,4 +179,3 @@ class ElementProjectionTest extends ProjectionBaseTest
         );
     }
 }
- 

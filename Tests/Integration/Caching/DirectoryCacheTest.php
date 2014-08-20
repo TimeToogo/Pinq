@@ -8,7 +8,7 @@ class DirectoryCacheTest extends CacheTest
 {
     private static $cacheDirectoryPath;
 
-    public function __construct($name = NULL, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
         self::$cacheDirectoryPath = self::$rootCacheDirectory . 'DirectoryCache';

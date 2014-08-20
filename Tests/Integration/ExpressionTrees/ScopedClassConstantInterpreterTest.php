@@ -2,8 +2,6 @@
 
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
-use Pinq\Expressions as O;
-
 class ScopedClassConstantInterpreterTest extends ScopedClassInterpreterBaseTest
 {
     /**
@@ -13,14 +11,13 @@ class ScopedClassConstantInterpreterTest extends ScopedClassInterpreterBaseTest
 
     protected function setUp()
     {
-        if(version_compare(PHP_VERSION, '5.5.0', '>=')) {
+        if (version_compare(PHP_VERSION, '5.5.0', '>=')) {
             require_once __DIR__ . '/ScopedClassConstants.php';
             $this->constants = new ScopedClassConstants();
         } else {
             $this->markTestSkipped('Requires >=PHP 5.5');
         }
     }
-
 
     /**
      * @dataProvider interpreters
@@ -30,7 +27,6 @@ class ScopedClassConstantInterpreterTest extends ScopedClassInterpreterBaseTest
         $this->assertRecompilesWithRebind($this->constants->concreteClass());
     }
 
-
     /**
      * @dataProvider interpreters
      */
@@ -38,7 +34,7 @@ class ScopedClassConstantInterpreterTest extends ScopedClassInterpreterBaseTest
     {
         $this->assertRecompilesWithRebind($this->constants->selfClass());
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -46,7 +42,7 @@ class ScopedClassConstantInterpreterTest extends ScopedClassInterpreterBaseTest
     {
         $this->assertRecompilesWithRebind($this->constants->staticClass());
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -54,7 +50,7 @@ class ScopedClassConstantInterpreterTest extends ScopedClassInterpreterBaseTest
     {
         $this->assertRecompilesWithRebind($this->constants->parentClass());
     }
-    
+
     /**
      * @dataProvider interpreters
      */

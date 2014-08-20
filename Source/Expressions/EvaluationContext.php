@@ -96,7 +96,7 @@ class EvaluationContext implements IEvaluationContext
 
     public function withVariableTable(array $variableTable)
     {
-        if($this->variableTable === $variableTable) {
+        if ($this->variableTable === $variableTable) {
             return $this;
         }
 

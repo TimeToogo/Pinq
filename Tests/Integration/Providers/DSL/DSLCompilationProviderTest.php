@@ -3,11 +3,9 @@
 namespace Pinq\Tests\Integration\Providers\DSL;
 
 use Pinq\IQueryable;
-use Pinq\Parsing;
 use Pinq\Providers\DSL\IRepositoryCompilerConfiguration;
 use Pinq\Providers;
 use Pinq\Queries;
-use Pinq\Queries\Requests;
 use Pinq\Tests\Integration\Providers\DSL\Implementation\DummyDSLQueryProvider;
 use Pinq\Tests\Integration\Providers\DSL\Implementation\DummyDSLRepositoryProvider;
 use Pinq\Tests\Integration\Queries\QueryBuildingTest;
@@ -40,7 +38,7 @@ abstract class DSLCompilationProviderTest extends QueryBuildingTest
         $configuration = $this->queryable->getProvider()->getCompilerConfiguration();
         $requestQueryCompiler = $configuration->getRequestQueryCompiler();
         $template = $requestQueryCompiler->createRequestTemplate($requestQuery, Queries\ResolvedParameterRegistry::none());
-        $compiledString = (string)$requestQueryCompiler->compileRequestQuery($template, Queries\ResolvedParameterRegistry::none());
+        $compiledString = (string) $requestQueryCompiler->compileRequestQuery($template, Queries\ResolvedParameterRegistry::none());
 
         $this->assertSame($correctValue, $compiledString);
     }
@@ -51,7 +49,7 @@ abstract class DSLCompilationProviderTest extends QueryBuildingTest
         $configuration = $this->queryable->getProvider()->getCompilerConfiguration();
         $operationQueryCompiler = $configuration->getOperationQueryCompiler();
         $template = $operationQueryCompiler->createOperationTemplate($operationQuery, Queries\ResolvedParameterRegistry::none());
-        $compiledString = (string)$operationQueryCompiler->compileOperationQuery($template, Queries\ResolvedParameterRegistry::none());
+        $compiledString = (string) $operationQueryCompiler->compileOperationQuery($template, Queries\ResolvedParameterRegistry::none());
 
         $this->assertSame($correctValue, $compiledString);
     }
@@ -67,7 +65,6 @@ abstract class DSLCompilationProviderTest extends QueryBuildingTest
 
         $queryable
                 ->where(function () { return true; });
-
 
     }
 }

@@ -69,7 +69,7 @@ class ExceptTest extends TraversableTest
     {
         $ref = 5;
         $traversable = $traversable->append([&$ref])->except($traversable);
-        
+
         $this->assertReferenceEquals($ref, $traversable->asArray()[0]);
     }
 }

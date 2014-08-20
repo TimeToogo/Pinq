@@ -4,8 +4,6 @@ namespace Pinq\Providers\Traversable;
 
 use Pinq\ITraversable;
 use Pinq\Queries;
-use Pinq\Queries\Common;
-use Pinq\Queries\Segments;
 
 /**
  * Source info class for traversable queries.

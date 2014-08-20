@@ -2,7 +2,6 @@
 
 namespace Pinq\Iterators;
 
-
 /**
  * Interface for an ordered map, like an array on steroids,
  * this class supports any type of key associated with any

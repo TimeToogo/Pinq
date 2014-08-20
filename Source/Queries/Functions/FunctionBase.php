@@ -234,6 +234,7 @@ abstract class FunctionBase implements \Serializable
     final public function getBodyExpressions()
     {
         $this->verifyNotInternal(__FUNCTION__);
+
         return $this->bodyExpressions;
     }
 
@@ -267,6 +268,7 @@ abstract class FunctionBase implements \Serializable
     final public function countBodyExpressions()
     {
         $this->verifyNotInternal(__FUNCTION__);
+
         return count($this->bodyExpressions);
     }
 
@@ -280,6 +282,7 @@ abstract class FunctionBase implements \Serializable
     final public function countBodyExpressionsUntilReturn()
     {
         $this->verifyNotInternal(__FUNCTION__);
+
         return count($this->getBodyExpressionsUntilReturn());
     }
 

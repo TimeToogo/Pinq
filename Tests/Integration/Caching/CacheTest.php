@@ -2,7 +2,6 @@
 
 namespace Pinq\Tests\Integration\Caching;
 
-use Pinq\Expressions as O;
 use Pinq\Caching\ICacheAdapter;
 
 abstract class CacheTest extends \Pinq\Tests\PinqTestCase
@@ -14,7 +13,7 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
      */
     protected $cache;
 
-    public function __construct($name = NULL, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
         self::$rootCacheDirectory = __DIR__ . DIRECTORY_SEPARATOR . 'CacheFiles' . DIRECTORY_SEPARATOR;
@@ -36,15 +35,15 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
             [1,2,3,5, 'dsd' => 'sdsdasdsa'],
             new \stdClass(),
         ];
-        
-        foreach($values as $key => $value) {
+
+        foreach ($values as $key => $value) {
             $key = 'value' . $key;
-            
+
             $this->cache->save($key, $value);
             $this->assertTrue($this->cache->contains($key));
             $retrievedValue = $this->cache->tryGet($key);
 
-            if(is_object($value)) {
+            if (is_object($value)) {
                 $this->assertEquals($value, $retrievedValue);
             } else {
                 $this->assertSame($value, $retrievedValue);
@@ -84,10 +83,10 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
         $this->assertTrue($this->cache->contains('1'));
         $this->assertTrue($this->cache->contains('2'));
         $this->assertFalse($this->cache->contains('3'));
-        
+
         $this->cache->remove('1');
         $this->cache->remove('2');
-        
+
         $this->assertFalse($this->cache->contains('1'));
         $this->assertFalse($this->cache->contains('2'));
     }

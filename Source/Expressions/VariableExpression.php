@@ -23,7 +23,7 @@ class VariableExpression extends Expression
     public function asEvaluator(IEvaluationContext $context = null)
     {
         $nameExpression = $this->name;
-        if($nameExpression instanceof ValueExpression) {
+        if ($nameExpression instanceof ValueExpression) {
             return new VariableEvaluator($nameExpression->getValue(), $context);
         }
 

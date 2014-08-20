@@ -16,8 +16,8 @@ trait ArrayCompatibleIterator
     {
         if (is_int($key) || is_string($key)) {
             //Integer strings like "123" get auto cast to integers when set as array keys
-            $intKey = (int)$key;
-            if ((string)$intKey === (string)$key && $intKey >= $maxKey) {
+            $intKey = (int) $key;
+            if ((string) $intKey === (string) $key && $intKey >= $maxKey) {
                 $maxKey = $intKey + 1;
             }
         } elseif ($incompatibleKeyMap->contains($key)) {

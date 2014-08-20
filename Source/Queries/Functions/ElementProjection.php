@@ -2,8 +2,6 @@
 
 namespace Pinq\Queries\Functions;
 
-use Pinq\Expressions as O;
-
 /**
  * Structure of function that takes a value and key parameter
  * and returns a value.

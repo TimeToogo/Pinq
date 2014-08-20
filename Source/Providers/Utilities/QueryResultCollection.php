@@ -14,7 +14,7 @@ use Pinq\Traversable;
  * <code>
  * $someRows = $queryable->where(function ($row) { return $row['id'] <= 50; });
  *
- * foreach($someRows as $row) {
+ * foreach ($someRows as $row) {
  *     //This will load the values
  * }
  *
@@ -39,7 +39,7 @@ class QueryResultCollection implements IQueryResultCollection
     public function __construct(callable $traversableFactory = null)
     {
         $this->storage            = new \SplObjectStorage();
-        $this->traversableFactory = $traversableFactory ? : Traversable::factory();
+        $this->traversableFactory = $traversableFactory ?: Traversable::factory();
     }
 
     public function optimizeQuery(O\Expression $queryExpression)
@@ -102,6 +102,7 @@ class QueryResultCollection implements IQueryResultCollection
     {
         if (isset($this->storage[$queryExpression])) {
             $results = $this->storage[$queryExpression];
+
             return true;
         }
 
@@ -113,6 +114,7 @@ class QueryResultCollection implements IQueryResultCollection
                 function (O\Expression $expression, O\ExpressionWalker $self) use (&$foundApplicableResults) {
                     if (isset($this->storage[$expression])) {
                         $foundApplicableResults = true;
+
                         return O\Expression::value($this->newTraversable($this->storage[$expression]));
                     }
 
@@ -121,6 +123,7 @@ class QueryResultCollection implements IQueryResultCollection
                     }
 
                     /** @var $expression O\TraversalExpression */
+
                     return $expression->updateValue($self->walk($expression->getValue()));
                 };
 
@@ -134,6 +137,7 @@ class QueryResultCollection implements IQueryResultCollection
         //If found applicable results, execute the updated expression tree against the Traversable
         //implementation to compute the result of the query.
         $results = $foundApplicableResults ? $remainingQueryExpression->evaluate() : null;
+
         return $foundApplicableResults;
     }
 
@@ -151,6 +155,7 @@ class QueryResultCollection implements IQueryResultCollection
     protected function newTraversable($values)
     {
         $factory = $this->traversableFactory;
+
         return $factory($values);
     }
 }

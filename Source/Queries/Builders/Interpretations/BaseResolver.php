@@ -80,7 +80,7 @@ class BaseResolver extends BaseInterpretation implements IQueryResolver
     {
         $this->hash .= $reflection->getGlobalHash();
 
-        if(!$reflection->getSignature()->isStatic()) {
+        if (!$reflection->getSignature()->isStatic()) {
             $this->resolveParameter($this->getFunctionScopedVariableParameter($function, 'this'), $reflection->getScope()->getThis());
         }
 
@@ -98,4 +98,4 @@ class BaseResolver extends BaseInterpretation implements IQueryResolver
             $this->resolveParameter($name, $value);
         }
     }
-} 
+}

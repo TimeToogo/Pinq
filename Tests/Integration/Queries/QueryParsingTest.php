@@ -6,14 +6,12 @@ use Pinq\ICollection;
 use Pinq\Collection;
 use Pinq\Expressions as O;
 use Pinq\IQueryable;
-use Pinq\Parsing;
 use Pinq\Providers;
 use Pinq\Queries as Q;
 use Pinq\Traversable;
 
 class IgnoreParametersComparator extends \PHPUnit_Framework_Comparator
 {
-
 
     public function accepts($expected, $actual)
     {
@@ -31,9 +29,10 @@ class IgnoreParametersInArrayKeysComparator extends \PHPUnit_Framework_Comparato
 {
     public function assertEquals($expected, $actual, $delta = 0, $canonicalize = false, $ignoreCase = false)
     {
-        foreach($expected as $key => $value) {
-            if(!QueryParsingTest::isParameter($key)) {
+        foreach ($expected as $key => $value) {
+            if (!QueryParsingTest::isParameter($key)) {
                 parent::assertEquals($expected, $actual, $delta, $canonicalize, $ignoreCase);
+
                 return;
             }
         }
@@ -48,7 +47,6 @@ class QueryParsingTest extends QueryBuildingTest
      * @var ICollection
      */
     protected $collection;
-
 
     const PARAMETER_NAME = '~~~PARAMETER~~~';
     private static $number = 0;
@@ -128,7 +126,6 @@ class QueryParsingTest extends QueryBuildingTest
         \PHPUnit_Framework_ComparatorFactory::getDefaultInstance()->unregister(self::$ignoreParametersComparator);
         \PHPUnit_Framework_ComparatorFactory::getDefaultInstance()->unregister(self::$ignoreParametersInArrayKeysComparator);
     }
-
 
     protected function assertRequestQueryMatches(Q\IRequestQuery $requestQuery, $correctValue)
     {
@@ -682,6 +679,7 @@ class QueryParsingTest extends QueryBuildingTest
     protected function exampleFromDocsQuery()
     {
         $rowExpression = O\Expression::variable(O\Expression::value('row'));
+
         return $this->scopeRequest(
                 [
                         new Q\Segments\Filter(new Q\Functions\ElementProjection(
