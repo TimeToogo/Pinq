@@ -23,7 +23,7 @@ abstract class Evaluator implements IEvaluator
 
     protected function __construct(IEvaluationContext $context = null)
     {
-        $this->context = $context ? : EvaluationContext::globalScope();
+        $this->context = $context ?: EvaluationContext::globalScope();
         $this->requiredVariables = array_keys($this->context->getVariableTable());
     }
 
@@ -45,10 +45,11 @@ abstract class Evaluator implements IEvaluator
                     'Cannot evaluate expression: supplied variable table is invalid, variable names do not match the required variable names');
         }
 
-        $contextVariableTable = $this->context->getVariableTable() ? : [];
-        $customVariableTable = $variableTable ? : [];
+        $contextVariableTable = $this->context->getVariableTable() ?: [];
+        $customVariableTable = $variableTable ?: [];
+
         return $this->doEvaluation($customVariableTable + $contextVariableTable);
     }
 
-    protected abstract function doEvaluation(array $variableTable);
+    abstract protected function doEvaluation(array $variableTable);
 }

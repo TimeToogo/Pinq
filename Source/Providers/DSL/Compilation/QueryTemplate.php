@@ -49,6 +49,7 @@ abstract class QueryTemplate implements IQueryTemplate
     protected function getStructuralParameterHash(array $structuralParameters)
     {
         ksort($structuralParameters, \SORT_STRING);
+
         return md5(serialize($structuralParameters));
     }
 }

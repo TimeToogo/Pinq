@@ -67,7 +67,6 @@ class QueryResultCollectionTest extends PinqTestCase
         $this->queryResultsCollection->saveResults($sourceExpression = $this->queryable->getExpression(), 'test');
         $this->queryResultsCollection->saveResults($keysExpression = $this->queryable->keys()->getExpression(), 'keys');
 
-
         $this->assertComputesResult($sourceExpression, 'test');
         $this->assertComputesResult($keysExpression, 'keys');
 
@@ -87,7 +86,6 @@ class QueryResultCollectionTest extends PinqTestCase
                 $keysExpression = $this->queryable->keys()->getExpression(),
                 ['keys']
         );
-
 
         $this->assertComputesResult($takeExpression, ['take']);
         $this->assertComputesResult($keysExpression, ['keys']);
@@ -182,4 +180,3 @@ class QueryResultCollectionTest extends PinqTestCase
         $this->assertSame([10 => 50, 12 => 60, 14 => 70, 16 => 80, 0 => 0], $results->asArray());
     }
 }
- 

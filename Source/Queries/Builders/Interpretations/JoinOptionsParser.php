@@ -2,12 +2,10 @@
 
 namespace Pinq\Queries\Builders\Interpretations;
 
-use Pinq\Expressions as O;
 use Pinq\Queries;
 use Pinq\Queries\Builders\Functions\IFunction;
 use Pinq\Queries\Common\Join;
 use Pinq\Queries\Functions;
-use Pinq\Queries\Segments;
 
 class JoinOptionsParser extends BaseParser implements IJoinOptionsParser
 {

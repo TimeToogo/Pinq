@@ -40,7 +40,7 @@ class QueryCache implements IQueryCache
     public function tryGet($hash)
     {
         if (!isset(self::$secondLevelCache[$hash])) {
-            self::$secondLevelCache[$hash] = $this->cacheAdapter->tryGet($hash) ? : null;
+            self::$secondLevelCache[$hash] = $this->cacheAdapter->tryGet($hash) ?: null;
         }
 
         $cachedValue = self::$secondLevelCache[$hash];

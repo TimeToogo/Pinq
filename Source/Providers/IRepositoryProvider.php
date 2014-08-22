@@ -3,7 +3,6 @@
 namespace Pinq\Providers;
 
 use Pinq\Expressions as O;
-use Pinq\Queries;
 
 /**
  * The query provider is used to by the IRepository as the data source
@@ -23,7 +22,6 @@ interface IRepositoryProvider extends IQueryProvider
      * @return Configuration\IRepositoryConfiguration
      */
     public function getConfiguration();
-
 
     /**
      * @param O\TraversalExpression $scopeExpression

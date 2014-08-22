@@ -7,7 +7,6 @@ use Pinq\Interfaces;
 use Pinq\Providers;
 use Pinq\Queries;
 use Pinq\Queries\Common\Join;
-use Pinq\Queries\Segments;
 
 /**
  * Implements the filtering API for a join / group join queryable.

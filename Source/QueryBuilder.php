@@ -3,9 +3,6 @@
 namespace Pinq;
 
 use Pinq\Expressions as O;
-use Pinq\Queries;
-use Pinq\Queries\Requests;
-use Pinq\Queries\Segments;
 
 /**
  * Base class for a query builder.
@@ -31,7 +28,7 @@ abstract class QueryBuilder
     public function __construct(Providers\IQueryProvider $provider, O\TraversalExpression $queryExpression = null)
     {
         $this->provider   = $provider;
-        $this->expression = $queryExpression ? : O\Expression::value($this);
+        $this->expression = $queryExpression ?: O\Expression::value($this);
     }
 
     /**

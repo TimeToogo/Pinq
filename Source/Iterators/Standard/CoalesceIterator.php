@@ -34,9 +34,11 @@ class CoalesceIterator extends IteratorIterator
     {
         if ($element = $this->iterator->fetch()) {
             $this->isEmpty = false;
+
             return $element;
         } elseif ($this->isEmpty) {
             $this->isEmpty = false;
+
             return [$this->defaultKey, &$this->defaultValue];
         }
     }

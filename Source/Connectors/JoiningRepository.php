@@ -5,7 +5,6 @@ namespace Pinq\Connectors;
 use Pinq\Expressions as O;
 use Pinq\Interfaces;
 use Pinq\Providers;
-use Pinq\Queries;
 
 /**
  * Implements the filtering API for a join / group join repository.

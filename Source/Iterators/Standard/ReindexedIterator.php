@@ -2,8 +2,6 @@
 
 namespace Pinq\Iterators\Standard;
 
-use Pinq\Iterators\Common;
-
 /**
  * Implementation of the reindexer iterator using the fetch method.
  *

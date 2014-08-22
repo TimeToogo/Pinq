@@ -104,7 +104,7 @@ class DynamicExpressionWalkerTest extends ExpressionTest
         $expression = O\Expression::variable(O\Expression::value('foo'));
         $expressionWalker = new O\DynamicExpressionWalker([
                 O\ValueExpression::getType() =>
-                        function (O\ValueExpression $expression)  {
+                        function (O\ValueExpression $expression) {
                             return O\Expression::value('bar');
                         }
         ]);

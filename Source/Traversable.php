@@ -35,7 +35,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
 
     public function __construct($elements = [], IIteratorScheme $scheme = null, Traversable $source = null)
     {
-        $this->scheme   = $scheme ? : Iterators\SchemeProvider::getDefault();
+        $this->scheme   = $scheme ?: Iterators\SchemeProvider::getDefault();
         $this->source   = $source;
         $this->elements = $this->scheme->toIterator($elements);
     }
@@ -66,6 +66,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
     {
         //static:: doesn't work in closures?
         $static = get_called_class();
+
         return function ($elements) use ($static, $scheme, $source) {
             return $static::from($elements, $scheme, $source);
         };
@@ -94,7 +95,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
      */
     protected function constructScopedSelf($elements)
     {
-        return static::from($elements, $this->scheme, $this->source ? : $this);
+        return static::from($elements, $this->scheme, $this->source ?: $this);
     }
 
     public function isSource()
@@ -104,7 +105,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
 
     public function getSource()
     {
-        return $this->source ? : $this;
+        return $this->source ?: $this;
     }
 
     public function asArray()

@@ -2,13 +2,10 @@
 
 namespace Pinq\Queries\Builders\Interpretations;
 
-use Pinq\Expressions as O;
 use Pinq\Parsing\IFunctionInterpreter;
 use Pinq\Queries;
 use Pinq\Queries\Builders\Functions\IFunction;
-use Pinq\Queries\Common;
 use Pinq\Queries\Functions;
-use Pinq\Queries\Operations;
 
 /**
  * Implementation of the operation resolver.

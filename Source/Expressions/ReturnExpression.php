@@ -2,8 +2,6 @@
 
 namespace Pinq\Expressions;
 
-use Pinq\Expressions\Walkers\ExpressionSimplifier;
-
 /**
  * <code>
  * return true

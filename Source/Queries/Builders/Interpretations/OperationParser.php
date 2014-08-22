@@ -2,7 +2,6 @@
 
 namespace Pinq\Queries\Builders\Interpretations;
 
-use Pinq\Expressions as O;
 use Pinq\Parsing\IFunctionInterpreter;
 use Pinq\Queries\Builders\Functions\IFunction;
 use Pinq\Queries\Common;

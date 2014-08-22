@@ -35,7 +35,7 @@ class KeysTest extends TraversableTest
         $keys = $traversable
                 ->indexBy(function () { return new \stdClass(); })
                 ->keys();
-                
+
         $expectedKeys = empty($data) ? [] : array_fill_keys(range(0, count($data) - 1), new \stdClass());
 
         $this->assertEquals($expectedKeys, $keys->asArray());

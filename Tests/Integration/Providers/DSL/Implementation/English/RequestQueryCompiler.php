@@ -5,7 +5,6 @@ namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 use Pinq\Providers\DSL\Compilation\IRequestTemplate;
 use Pinq\Providers\DSL\Compilation;
 use Pinq\Queries;
-use Pinq\Queries\Requests;
 
 class RequestQueryCompiler extends Compilation\RequestQueryCompiler
 {
@@ -24,6 +23,7 @@ class RequestQueryCompiler extends Compilation\RequestQueryCompiler
             Queries\IResolvedParameterRegistry $structuralParameters
     ) {
         /** @var $template Compilation\StaticRequestTemplate */
+
         return $template->getCompiledQuery();
     }
 }

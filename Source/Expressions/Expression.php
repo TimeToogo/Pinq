@@ -220,6 +220,7 @@ abstract class Expression implements \Serializable
                 ValueExpression::getType() =>
                         function (ValueExpression $expression) {
                             $value = $expression->getValue();
+
                             return !is_scalar($value) && $value !== null ?
                                     Expression::constant(
                                             '{' . Utilities::getTypeOrClass($expression->getValue()) . '}'
@@ -595,12 +596,13 @@ abstract class Expression implements \Serializable
     }
 
     /**
-     * @param string $name
+     * @param string  $name
      * @param boolean $isReference
      *
      * @return ClosureUsedVariableExpression
      */
-    final public static function closureUsedVariable($name, $isReference = false) {
+    final public static function closureUsedVariable($name, $isReference = false)
+    {
         return new ClosureUsedVariableExpression($name, $isReference);
     }
 

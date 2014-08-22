@@ -2,8 +2,6 @@
 
 namespace Pinq\Queries\Functions;
 
-use Pinq\Expressions as O;
-
 /**
  * Structure of a function that receives an value and key parameter
  * and mutates the value parameter.

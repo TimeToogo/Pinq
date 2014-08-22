@@ -116,7 +116,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     /**
      * Filters the values by a supplied predicate.
      *
-     * @param  callable $predicate The predicate function
+     * @param callable $predicate The predicate function
      *
      * @return ITraversable
      */
@@ -126,8 +126,8 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Orders the values mapped from the supplied function according the supplied
      * direction.
      *
-     * @param  callable $function The projection function
-     * @param  int      $direction
+     * @param callable $function  The projection function
+     * @param int      $direction
      *
      * @return IOrderedTraversable
      */
@@ -137,7 +137,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Orders the values mapped from the supplied function ascendingly
      * Example function:
      *
-     * @param  callable $function The mapping function
+     * @param callable $function The mapping function
      *
      * @return IOrderedTraversable
      */
@@ -147,7 +147,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Orders the values mapped from the supplied function descendingly
      * Example expression function:
      *
-     * @param  callable $function The mapping function
+     * @param callable $function The mapping function
      *
      * @return IOrderedTraversable
      */
@@ -156,7 +156,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     /**
      * Skip the amount of values from the start.
      *
-     * @param  int $amount The amount of values to skip, must be > 0
+     * @param int $amount The amount of values to skip, must be > 0
      *
      * @return ITraversable
      */
@@ -165,7 +165,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     /**
      * Limits the amount of values by the supplied amount
      *
-     * @param  int|null $amount The amount of values to retrieve, must be > 0 or null if all
+     * @param int|null $amount The amount of values to retrieve, must be > 0 or null if all
      *
      * @return ITraversable
      */
@@ -174,8 +174,8 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     /**
      * Retrieve a slice of the values.
      *
-     * @param  int      $start  The amount of values to skip
-     * @param  int|null $amount The amount of values to retrieve
+     * @param int      $start  The amount of values to skip
+     * @param int|null $amount The amount of values to retrieve
      *
      * @return ITraversable
      */
@@ -186,7 +186,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * All duplicate indexes will be associated with the first value
      * for that index.
      *
-     * @param  callable $function The projection function
+     * @param callable $function The projection function
      *
      * @return ITraversable
      */
@@ -211,7 +211,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * The values will be grouped into instances of the traversable.
      * This will implicitly index each group by the group key returned from the supplied function.
      *
-     * @param  callable $function The grouping function
+     * @param callable $function The grouping function
      *
      * @return ITraversable
      */
@@ -221,7 +221,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Matches the values with the supplied values according to the supplied filter
      * then maps the results into as according to the supplied function.
      *
-     * @param  array|\Traversable $values
+     * @param array|\Traversable $values
      *
      * @return IJoiningOnTraversable
      */
@@ -232,7 +232,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * groups the the joined values for every original and then maps into as
      * according to the supplied function.
      *
-     * @param  array|\Traversable $values
+     * @param array|\Traversable $values
      *
      * @return IJoiningOnTraversable
      */
@@ -241,7 +241,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     /**
      * Returns the values mapped by the supplied function.
      *
-     * @param  callable $function The function returning the data to select
+     * @param callable $function The function returning the data to select
      *
      * @return ITraversable
      */
@@ -251,7 +251,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Returns the values mapped by the supplied function and then flattens
      * the values into a single traversable. Keys will be reindexed.
      *
-     * @param  callable $function The function returning the data to select
+     * @param callable $function The function returning the data to select
      *
      * @return ITraversable
      */
@@ -267,7 +267,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     /**
      * Returns values from the original and supplied values, keys will be reindexed.
      *
-     * @param  array|\Traversable $values The values to append
+     * @param array|\Traversable $values The values to append
      *
      * @return ITraversable
      */
@@ -277,7 +277,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Returns all values from the original present in the supplied values.
      * (Uses strict equality '===')
      *
-     * @param  array|\Traversable $values
+     * @param array|\Traversable $values
      *
      * @return ITraversable
      */
@@ -287,7 +287,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Returns values all values from the original not present in the supplied values.
      * (Uses strict equality '===')
      *
-     * @param  array|\Traversable $values The values to union
+     * @param array|\Traversable $values The values to union
      *
      * @return ITraversable
      */
@@ -298,7 +298,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * keys will be reindexed.
      * (Uses strict equality '===')
      *
-     * @param  array|\Traversable $values The values to union
+     * @param array|\Traversable $values The values to union
      *
      * @return ITraversable
      */
@@ -308,7 +308,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Returns unique values the are present in the original and supplied values.
      * (Uses strict equality '===')
      *
-     * @param  array|\Traversable $values The values to intersect with
+     * @param array|\Traversable $values The values to intersect with
      *
      * @return ITraversable
      */
@@ -318,7 +318,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      * Returns unique values from the original not present in the supplied values.
      * (Uses strict equality '===')
      *
-     * @param  array|\Traversable $values The values to remove
+     * @param array|\Traversable $values The values to remove
      *
      * @return ITraversable
      */

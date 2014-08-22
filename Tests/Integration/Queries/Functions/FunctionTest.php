@@ -152,4 +152,3 @@ abstract class FunctionTest extends PinqTestCase
         $this->assertEquals($function, unserialize(serialize($function)));
     }
 }
- 

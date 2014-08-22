@@ -49,7 +49,7 @@ class ClosureUsedVariableExpression extends Expression
     }
 
     /**
-     * @param string $name
+     * @param string  $name
      * @param boolean $isReference
      *
      * @return ClosureUsedVariableExpression

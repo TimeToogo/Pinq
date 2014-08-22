@@ -4,7 +4,6 @@ namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
 use Pinq\Expressions\Expression;
 use Pinq\Providers\DSL\Compilation;
-use Pinq\Queries\Requests;
 use Pinq\Queries;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
@@ -78,7 +77,7 @@ class CompiledQuery implements Compilation\ICompiledRequest, Compilation\ICompil
             $this->append('[array or iterator]');
         } elseif ($source instanceof Queries\Common\Source\SingleValue) {
             $this->append('[single value]');
-        }elseif ($source instanceof Queries\Common\Source\QueryScope) {
+        } elseif ($source instanceof Queries\Common\Source\QueryScope) {
             $compilation = $scopeCompiler->createCompiledScopeQuery($source->getScope(), $parameters);
 
             $this->appendLine('[');
@@ -96,7 +95,7 @@ class CompiledQuery implements Compilation\ICompiledRequest, Compilation\ICompil
     ) {
         $this->appendSource($scopeCompiler, $parameters, $joinOptions->getSource());
 
-        if($joinOptions->isGroupJoin()) {
+        if ($joinOptions->isGroupJoin()) {
             $this->append(' into groups');
         }
 
@@ -112,7 +111,7 @@ class CompiledQuery implements Compilation\ICompiledRequest, Compilation\ICompil
             }
         }
 
-        if($joinOptions->hasDefault()) {
+        if ($joinOptions->hasDefault()) {
             $this->append(' with default values');
         }
     }

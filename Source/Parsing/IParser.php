@@ -2,8 +2,6 @@
 
 namespace Pinq\Parsing;
 
-use Pinq\Expressions as O;
-
 /**
  * The parser interface is an abstraction over parsing a function
  * into an expression tree.

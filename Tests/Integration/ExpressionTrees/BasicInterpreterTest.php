@@ -2,8 +2,6 @@
 
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
-use Pinq\Expressions as O;
-use Pinq\IQueryable;
 use Pinq\ITraversable;
 use Pinq\ITraversable as AliasedTraversable;
 use Pinq\Traversable;
@@ -81,12 +79,12 @@ class BasicInterpreterTest extends InterpreterTest
     {
         $valueSet = [[1], [0], [true], [false]];
 
-        $this->assertRecompilesCorrectly(function ($i) { return (string)$i; }, $valueSet);
-        $this->assertRecompilesCorrectly(function ($i) { return (bool)$i; }, $valueSet);
-        $this->assertRecompilesCorrectly(function ($i) { return (int)$i; }, $valueSet);
-        $this->assertRecompilesCorrectly(function ($i) { return (array)$i; }, $valueSet);
-        $this->assertRecompilesCorrectly(function ($i) { return (object)$i; }, $valueSet);
-        $this->assertRecompilesCorrectly(function ($i) { return (double)$i; }, $valueSet);
+        $this->assertRecompilesCorrectly(function ($i) { return (string) $i; }, $valueSet);
+        $this->assertRecompilesCorrectly(function ($i) { return (bool) $i; }, $valueSet);
+        $this->assertRecompilesCorrectly(function ($i) { return (int) $i; }, $valueSet);
+        $this->assertRecompilesCorrectly(function ($i) { return (array) $i; }, $valueSet);
+        $this->assertRecompilesCorrectly(function ($i) { return (object) $i; }, $valueSet);
+        $this->assertRecompilesCorrectly(function ($i) { return (double) $i; }, $valueSet);
     }
 
     /**
@@ -136,9 +134,9 @@ class BasicInterpreterTest extends InterpreterTest
     public function testObjectField()
     {
         $valueSet = [
-            [(object)['prop' => null, 'foo' => null]],
-            [(object)['prop' => true, 'foo' => false]],
-            [(object)['prop' => 'fdsfdsdf', 'foo' => 'fewfew']]
+            [(object) ['prop' => null, 'foo' => null]],
+            [(object) ['prop' => true, 'foo' => false]],
+            [(object) ['prop' => 'fdsfdsdf', 'foo' => 'fewfew']]
         ];
 
         $this->assertRecompilesCorrectly(

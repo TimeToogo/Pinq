@@ -46,7 +46,7 @@ class FunctionScope implements IFunctionScope
      * Creates a function scope instance from the supplied reflection and callable.
      *
      * @param \ReflectionFunctionAbstract $reflection
-     * @param callable $callable
+     * @param callable                    $callable
      *
      * @return self
      */

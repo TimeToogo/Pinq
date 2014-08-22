@@ -44,14 +44,14 @@ class Scope implements IScope
 
     public function visit(ISegmentVisitor $visitor)
     {
-        foreach($this->segments as $segment) {
+        foreach ($this->segments as $segment) {
             $segment->traverse($visitor);
         }
     }
 
     public function update(ISourceInfo $sourceInfo, array $segments)
     {
-        if($this->sourceInfo === $sourceInfo && $this->segments === $segments) {
+        if ($this->sourceInfo === $sourceInfo && $this->segments === $segments) {
             return $this;
         }
 

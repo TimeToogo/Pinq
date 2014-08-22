@@ -2,8 +2,6 @@
 
 namespace Pinq\Tests\Integration\Providers\DSL;
 
-use Pinq\Queries;
-
 class EnglishDSLProviderTest extends DSLCompilationProviderTest
 {
     protected function compilerConfiguration()

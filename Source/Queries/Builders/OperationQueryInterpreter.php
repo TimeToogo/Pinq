@@ -5,7 +5,6 @@ namespace Pinq\Queries\Builders;
 use Pinq\Expressions as O;
 use Pinq\Queries;
 use Pinq\Queries\Builders\Interpretations\IOperationInterpretation;
-use Pinq\Queries\Common;
 
 class OperationQueryInterpreter extends QueryInterpreter implements IOperationQueryInterpreter
 {
@@ -37,7 +36,7 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
                 && ($assignTo = $expression->getAssignTo()) instanceof O\IndexExpression
         ) {
             /** @var $assignTo O\IndexExpression */
-            if(!$assignTo->hasIndex() || $this->getValue($assignTo->getIndex()) === null) {
+            if (!$assignTo->hasIndex() || $this->getValue($assignTo->getIndex()) === null) {
                 $this->{'visitAdd'}($expression);
             } else {
                 $this->{'visitOffsetSet'}($expression);
@@ -74,6 +73,7 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
             $methodName = $this->getMethodName($sourceExpression);
             if (in_array(strtolower($methodName), ['withdefault', 'on', 'onequality', 'join', 'groupjoin'], true)) {
                 $this->visitJoinApply($expression);
+
                 return;
             }
         }
@@ -196,6 +196,7 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
                     $this->getArgumentValueAt(0, $expression)
             );
             $this->interpretSourceAsScope($expression);
+
             return;
         } elseif ($expression instanceof O\UnsetExpression) {
             $unsetArguments = $expression->getValues();
@@ -207,6 +208,7 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
                         $this->getValue($unsetArguments[0]->getIndex(), 'index value must be constant, %s given')
                 );
                 $this->interpretSourceAsScope($unsetArguments[0]);
+
                 return;
             }
         }

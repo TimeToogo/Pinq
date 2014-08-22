@@ -35,7 +35,7 @@ class JoinTest extends TraversableTest
                 ->join($data)
                     ->on(function () { return true; })
                     ->to(function ($outerValue, $innerValue) { return [$outerValue, $innerValue]; });
-                    
+
         $cartesianProduct = [];
 
         foreach ($data as $outerValue) {
@@ -56,7 +56,7 @@ class JoinTest extends TraversableTest
                 ->join([0 => 0])
                     ->on(function () { return true; })
                     ->to(function ($outerValue, $innerValue) { return $outerValue; });
-        
+
         for ($count = 0; $count < 2; $count++) {
             $newData = [];
             foreach ($traversable as $value) {
@@ -168,7 +168,7 @@ class JoinTest extends TraversableTest
         $traversable = $traversable
                 ->indexBy(function ($value) { return $value; })
                 ->join(range(0, 5, 0.5))
-                    ->on(function ($outerValue, $innerValue, $outerKey) { return (double)($outerKey / 2) === $innerValue; })
+                    ->on(function ($outerValue, $innerValue, $outerKey) { return (double) ($outerKey / 2) === $innerValue; })
                     ->to(function ($outerValue, $innerValue, $outerKey) {
                         return $outerValue . ':' . $innerValue;
                     });
@@ -188,24 +188,24 @@ class JoinTest extends TraversableTest
                     '10:5',
                 ]);
     }
-    
+
     /**
      * @dataProvider emptyData
      */
     public function testThatJoinDoesNotMaintainProjectedReferences(\Pinq\ITraversable $traversable)
     {
         $data = $this->makeRefs(range(1, 20));
-        
+
         $traversable
                 ->append($data)
                 ->join($traversable)
                     ->on(function () { return true; })
                     ->to(function & (&$i) { return $i; })
                 ->iterate(function (&$i) { $i = null; });
-                
+
         $this->assertSame(range(1, 20), $data);
     }
-    
+
     /**
      * @dataProvider assocMixedValues
      */
@@ -213,18 +213,18 @@ class JoinTest extends TraversableTest
     {
         $value = new \stdClass();
         $key = new \stdClass();
-        
+
         $traversable = $traversable
                 ->join(range(1, 10))
                     ->on(function () { return false; })
                     ->withDefault($value, $key)
-                    ->to(function ($outer, $inner, $outerKey, $innerKey) { 
-                        return [$inner, $innerKey]; 
+                    ->to(function ($outer, $inner, $outerKey, $innerKey) {
+                        return [$inner, $innerKey];
                     });
-                
+
         $this->assertMatches($traversable, empty($data) ? [] : array_fill(0, count($data), [$value, $key]));
     }
-    
+
     /**
      * @dataProvider assocMixedValues
      */
@@ -234,13 +234,13 @@ class JoinTest extends TraversableTest
                 ->join([1])
                     ->on(function () { return true; })
                     ->withDefault(null, null)
-                    ->to(function ($outer, $inner, $outerKey, $innerKey) { 
-                        return $inner; 
+                    ->to(function ($outer, $inner, $outerKey, $innerKey) {
+                        return $inner;
                     });
-                
+
         $this->assertMatches($traversable, empty($data) ? [] : array_fill(0, count($data), 1));
     }
-    
+
     /**
      * @dataProvider oneToTen
      */
@@ -250,20 +250,20 @@ class JoinTest extends TraversableTest
                 ->join([2, 4, 8, 10, 16, 18])
                     ->on(function ($outer, $inner) { return $outer * 2 === $inner; })
                     ->withDefault('<DEFAULT>')
-                    ->to(function ($outer, $inner) { 
-                        return $outer . ':' . $inner; 
+                    ->to(function ($outer, $inner) {
+                        return $outer . ':' . $inner;
                     });
-                
+
         $this->assertMatches($traversable, [
-            '1:2', 
-            '2:4', 
+            '1:2',
+            '2:4',
             '3:<DEFAULT>',
             '4:8',
-            '5:10', 
-            '6:<DEFAULT>', 
+            '5:10',
+            '6:<DEFAULT>',
             '7:<DEFAULT>',
-            '8:16', 
-            '9:18', 
+            '8:16',
+            '9:18',
             '10:<DEFAULT>'
         ]);
     }

@@ -37,7 +37,7 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
     public function testThatProviderWillReturnTheQueryCacheWithTheCorrectInnerCache($method, $cache, $assertSameCache)
     {
         Caching\Provider::$method($cache);
-        
+
         $functionCache = Caching\Provider::getCache();
         $cacheAdapter = Caching\Provider::getCacheAdapter();
 
@@ -50,7 +50,7 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
                 $cacheAdapter);
 
         $this->assertSame($cacheAdapter, $functionCache->getCacheAdapter());
-            
+
         if ($assertSameCache === true) {
             $this->assertSame($cache, $cacheAdapter);
         } elseif (is_string($assertSameCache)) {

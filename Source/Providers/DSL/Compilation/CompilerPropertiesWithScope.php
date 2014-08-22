@@ -3,7 +3,6 @@
 namespace Pinq\Providers\DSL\Compilation;
 
 use Pinq\Queries;
-use Pinq\Queries\Requests;
 
 /**
  * Trait containing the common compilation properties for compiling parts of the query.

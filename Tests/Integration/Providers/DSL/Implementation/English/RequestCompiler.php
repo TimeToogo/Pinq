@@ -4,7 +4,6 @@ namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
 use Pinq\Providers\DSL\Compilation;
 use Pinq\Queries\Requests;
-use Pinq\Queries\Segments;
 use Pinq\Queries;
 
 class RequestCompiler extends Compilation\RequestCompiler
@@ -78,7 +77,7 @@ class RequestCompiler extends Compilation\RequestCompiler
     protected function appendOptionalProjection($string, Requests\ProjectionRequest $request)
     {
         $this->compilation->append($string);
-        if($request->hasProjectionFunction()) {
+        if ($request->hasProjectionFunction()) {
             $this->compilation->append(' according to the function: ');
             $this->compilation->appendFunction($request->getProjectionFunction());
         }
@@ -128,6 +127,5 @@ class RequestCompiler extends Compilation\RequestCompiler
     {
         $this->compilation->append('Get whether the index is set');
     }
-
 
 }

@@ -3,7 +3,6 @@
 namespace Pinq\Providers;
 
 use Pinq\Expressions as O;
-use Pinq\Queries;
 
 /**
  * The query provider is used to by the IQueryable as the data source

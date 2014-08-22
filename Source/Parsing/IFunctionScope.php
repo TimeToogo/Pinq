@@ -50,7 +50,7 @@ interface IFunctionScope
     /**
      * Gets an equivalent evaluation context for the function scope.
      *
-     * @param mixed $argumentMap
+     * @param mixed       $argumentMap
      * @param string|null $namespace
      *
      * @return O\IEvaluationContext

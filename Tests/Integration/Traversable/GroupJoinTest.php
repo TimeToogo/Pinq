@@ -4,13 +4,11 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class GroupJoinTest extends TraversableTest
 {
-    
-    
+
     protected function _testReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable)
     {
         return $traversable->groupJoin([])->on(function ($i) { })->to(function ($k) { });
     }
-    
 
     /**
      * @dataProvider theImplementations
@@ -20,7 +18,7 @@ class GroupJoinTest extends TraversableTest
         $this->assertThatExecutionIsDeferred(function (callable $function) use ($traversable) {
             return $traversable->groupJoin([])->to($function);
         });
-        
+
         $this->assertThatExecutionIsDeferred(function (callable $function) use ($traversable) {
             return $traversable->groupJoin([])->on($function)->to($function);
         });
@@ -29,7 +27,7 @@ class GroupJoinTest extends TraversableTest
             return $traversable->groupJoin([])->onEquality($function, $function)->to($function);
         });
     }
-    
+
     /**
      * @dataProvider assocMixedValues
      */
@@ -41,6 +39,7 @@ class GroupJoinTest extends TraversableTest
                         $this->assertSame($data[$outerKey], $outer);
                         $this->assertSame($inner, 0);
                         $this->assertSame($innerKey, 0);
+
                         return true;
                     })
                     ->to(function ($outer, \Pinq\ITraversable $group, $outerKey, $groupKey) use ($data) {
@@ -49,17 +48,19 @@ class GroupJoinTest extends TraversableTest
                         $this->assertSame($groupKey, 0);
                     })
                     ->asArray();
-        
+
         $traversable
                 ->groupJoin([0 => 0])
                     ->onEquality(
                     function ($outer, $outerKey) use ($data) {
                         $this->assertSame($data[$outerKey], $outer);
+
                         return 'group Key';
                     },
                     function ($inner, $innerKey) {
                         $this->assertSame($inner, 0);
                         $this->assertSame($innerKey, 0);
+
                         return 'group Key';
                     })
                     ->to(function ($outer, \Pinq\ITraversable $group, $outerKey, $groupKey) use ($data) {
@@ -197,64 +198,64 @@ class GroupJoinTest extends TraversableTest
                     '10:1|2|3|4|5|6|7|8|9|10'
                 ]);
     }
-    
+
     /**
      * @dataProvider emptyData
      */
     public function testThatGroupJoinDoesNotMaintainProjectedValueReferences(\Pinq\ITraversable $traversable)
     {
         $data = $this->makeRefs(range(1, 20));
-        
+
         $traversable
                 ->append($data)
                 ->groupJoin($traversable)
                     ->on(function () { return true; })
                     ->to(function & (&$i) { return $i; })
                 ->iterate(function (&$i) { $i = null; });
-                
+
         $this->assertSame(range(1, 20), $data);
     }
-    
+
     /**
      * @dataProvider emptyData
      */
     public function testThatGroupJoinMaintainsGroupedDataReferences(\Pinq\ITraversable $traversable)
     {
         $joinData = $this->makeRefs(range(1, 100));
-        
+
         $traversable
                 ->append(range(1, 100, 10))
                 ->groupJoin($joinData)
-                    ->on(function ($o, $i) { return (int)($o / 10) === (int)($i / 10); })
+                    ->on(function ($o, $i) { return (int) ($o / 10) === (int) ($i / 10); })
                     ->to(function ($o, \Pinq\ITraversable $group) {
                         return $group;
                     })
                 [3]
                 ->iterate(function (&$i) { $i *= 10; });
-                
+
         $this->assertSame(array_merge(range(1, 29), range(300, 390, 10), range(40, 100)), $joinData);
     }
-    
+
     /**
      * @dataProvider emptyData
      */
     public function testThatGroupJoinOnEqualityMaintainsGroupedDataReferences(\Pinq\ITraversable $traversable)
     {
         $joinData = $this->makeRefs(range(1, 100));
-        
+
         $traversable
                 ->append(range(1, 100, 10))
                 ->groupJoin($joinData)
-                    ->onEquality(function ($o) { return (int)($o / 10); }, function ($i) { return (int)($i / 10); })
+                    ->onEquality(function ($o) { return (int) ($o / 10); }, function ($i) { return (int) ($i / 10); })
                     ->to(function ($o, \Pinq\ITraversable $group) {
                         return $group;
                     })
                 [3]
                 ->iterate(function (&$i) { $i *= 10; });
-                
+
         $this->assertSame(array_merge(range(1, 29), range(300, 390, 10), range(40, 100)), $joinData);
     }
-    
+
     /**
      * @dataProvider everything
      */
@@ -262,18 +263,18 @@ class GroupJoinTest extends TraversableTest
     {
         $value = new \stdClass();
         $key = new \stdClass();
-        
+
         $traversable = $traversable
                 ->groupJoin(range(1, 10))
                     ->on(function () { return false; })
                     ->withDefault($value, $key)
-                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) use($key) { 
-                        return $innerGroup[$key]; 
+                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) use ($key) {
+                        return $innerGroup[$key];
                     });
-                
+
         $this->assertMatches($traversable, empty($data) ? [] : array_fill(0, count($data), $value));
     }
-    
+
     /**
      * @dataProvider everything
      */
@@ -283,13 +284,13 @@ class GroupJoinTest extends TraversableTest
                 ->groupJoin([1])
                     ->on(function () { return true; })
                     ->withDefault(null, null)
-                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) { 
-                        return $innerGroup->asArray(); 
+                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) {
+                        return $innerGroup->asArray();
                     });
-                
+
         $this->assertMatches($traversable, empty($data) ? [] : array_fill(0, count($data), [1]));
     }
-    
+
     /**
      * @dataProvider oneToTen
      */
@@ -299,10 +300,10 @@ class GroupJoinTest extends TraversableTest
                 ->groupJoin([1, 4, 9, 16, 25, 36, 49, 64, 81, 100])
                     ->on(function ($outer, $inner) { return $outer % 2 === 0 && $outer * $outer >= $inner; })
                     ->withDefault('<ODD>')
-                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) { 
-                        return $outer . ':' . $innerGroup->implode(','); 
+                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) {
+                        return $outer . ':' . $innerGroup->implode(',');
                     });
-                
+
         $this->assertMatches($traversable, [
             '1:<ODD>',
             '2:1,4',
@@ -316,7 +317,7 @@ class GroupJoinTest extends TraversableTest
             '10:1,4,9,16,25,36,49,64,81,100',
         ]);
     }
-    
+
     /**
      * @dataProvider oneToTen
      */
@@ -325,20 +326,20 @@ class GroupJoinTest extends TraversableTest
         $traversable = $traversable
                 ->groupJoin([])
                     ->withDefault('<DEFAULT>')
-                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) { 
-                        return $outer . ':' . $innerGroup->implode(''); 
+                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) {
+                        return $outer . ':' . $innerGroup->implode('');
                     });
-                
+
         $this->assertMatches($traversable, [
-            '1:<DEFAULT>', 
-            '2:<DEFAULT>', 
+            '1:<DEFAULT>',
+            '2:<DEFAULT>',
             '3:<DEFAULT>',
             '4:<DEFAULT>',
-            '5:<DEFAULT>', 
-            '6:<DEFAULT>', 
+            '5:<DEFAULT>',
+            '6:<DEFAULT>',
             '7:<DEFAULT>',
-            '8:<DEFAULT>', 
-            '9:<DEFAULT>', 
+            '8:<DEFAULT>',
+            '9:<DEFAULT>',
             '10:<DEFAULT>'
         ]);
     }

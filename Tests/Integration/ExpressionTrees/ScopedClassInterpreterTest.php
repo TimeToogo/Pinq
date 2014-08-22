@@ -2,15 +2,13 @@
 
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
-use Pinq\Expressions as O;
-
 class ScopedClassInterpreterTest extends ScopedClassInterpreterBaseTest
 {
     public static function StaticMethod()
     {
         return __METHOD__;
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -18,7 +16,7 @@ class ScopedClassInterpreterTest extends ScopedClassInterpreterBaseTest
     {
         $this->assertRecompilesWithRebind(function () { return self::StaticMethod(); });
     }
-    
+
     /**
      * @dataProvider interpreters
      */
@@ -26,7 +24,7 @@ class ScopedClassInterpreterTest extends ScopedClassInterpreterBaseTest
     {
         $this->assertRecompilesWithRebind(function () { return static::StaticMethod(); });
     }
-    
+
     /**
      * @dataProvider interpreters
      */

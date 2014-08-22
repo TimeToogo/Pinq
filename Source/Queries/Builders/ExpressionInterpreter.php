@@ -119,7 +119,8 @@ abstract class ExpressionInterpreter
         return $this->getValue($methodExpression->getName());
     }
 
-    final protected function getValue(O\Expression $expression) {
+    final protected function getValue(O\Expression $expression)
+    {
         return $expression->evaluate($this->evaluationContext);
     }
 

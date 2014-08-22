@@ -2,8 +2,6 @@
 
 namespace Pinq\Iterators\Standard;
 
-use Pinq\Iterators\Common;
-
 /**
  * Base class for a lazy iterator, initialized upon rewind.
  *

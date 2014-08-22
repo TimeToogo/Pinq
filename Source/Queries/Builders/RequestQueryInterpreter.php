@@ -5,7 +5,6 @@ namespace Pinq\Queries\Builders;
 use Pinq\Expressions as O;
 use Pinq\Queries;
 use Pinq\Queries\Builders\Interpretations\IRequestInterpretation;
-use Pinq\Queries\Common;
 
 class RequestQueryInterpreter extends QueryInterpreter implements IRequestQueryInterpreter
 {
@@ -110,6 +109,7 @@ class RequestQueryInterpreter extends QueryInterpreter implements IRequestQueryI
         if ($expression instanceof O\MethodCallExpression) {
             $this->interpretation->interpretOffsetExists($requestId, $indexId, $this->getArgumentValueAt(0, $expression));
             $this->interpretSourceAsScope($expression);
+
             return;
         } elseif ($expression instanceof O\IssetExpression) {
             $issetArguments = $expression->getValues();
@@ -121,6 +121,7 @@ class RequestQueryInterpreter extends QueryInterpreter implements IRequestQueryI
                         $this->getValue($issetArguments[0]->getIndex())
                 );
                 $this->interpretSourceAsScope($issetArguments[0]);
+
                 return;
             }
         }

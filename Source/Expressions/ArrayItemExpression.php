@@ -42,7 +42,6 @@ class ArrayItemExpression extends Expression
         );
     }
 
-
     /**
      * @return boolean
      */

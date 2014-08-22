@@ -15,7 +15,7 @@ abstract class InterpreterTest extends \Pinq\Tests\PinqTestCase
      */
     protected $currentImplementation;
 
-    public function __construct($name = NULL, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
         $this->implementations = $this->implementations();
@@ -114,11 +114,10 @@ abstract class InterpreterTest extends \Pinq\Tests\PinqTestCase
     {
         $this->verifyImplementation();
 
-
         $reflection = $this->currentImplementation->getReflection($function);
         $scopedVariables = $reflection->getScope()->getVariableTable();
 
-        if($removeThis) {
+        if ($removeThis) {
             unset($scopedVariables['this'], $variableValueMap['this']);
         }
 

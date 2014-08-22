@@ -15,7 +15,7 @@ class SerializableTest extends TraversableTest
                 $traversable->asArray(),
                 $unserializedTraversable->asArray());
     }
-    
+
     public static function whereLessThanSix($value)
     {
         return $value < 6;
@@ -26,10 +26,10 @@ class SerializableTest extends TraversableTest
         $traversable = new Traversable(range(1, 10));
         $traversable = $traversable
                 ->where([__CLASS__, 'whereLessThanSix']);
-        
+
         $serializedTraversable = serialize($traversable);
         $unserializedTraversable = unserialize($serializedTraversable);
-        
+
         $this->assertEquals(
                 $traversable->asArray(),
                 $unserializedTraversable->asArray());
@@ -44,7 +44,7 @@ class SerializableTest extends TraversableTest
         $traversable = new Traversable(range(1, 10));
         $traversable = $traversable
                 ->where(function ($i) { return $i !== false; });
-                
+
         serialize($traversable);
     }
 }

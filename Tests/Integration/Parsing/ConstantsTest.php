@@ -2,7 +2,6 @@
 
 namespace Pinq\Tests\Integration\Parsing;
 
-use Pinq\Parsing\IParser;
 use Pinq\Expressions as O;
 
 class ConstantsTest extends ParserTest
@@ -17,7 +16,7 @@ class ConstantsTest extends ParserTest
                     I_AM_CONSTANT;
                     I_AM_ANOTHER_CONSTANT;
                     namespace\TEST_CONST;
-                }, 
+                },
                 [O\Expression::constant('I_AM_CONSTANT'),
                 O\Expression::constant('I_AM_ANOTHER_CONSTANT'),
                 O\Expression::constant(__NAMESPACE__ . '\\TEST_CONST')]);
@@ -32,7 +31,7 @@ class ConstantsTest extends ParserTest
                 function () {
                     I_AM::A_CLASS_CONSTANT;
                     BOO::YEA;
-                }, 
+                },
                 [O\Expression::classConstant(O\Expression::value('\\' . __NAMESPACE__ . '\\I_AM'), 'A_CLASS_CONSTANT'),
                 O\Expression::classConstant(O\Expression::value('\\' . __NAMESPACE__ . '\\BOO'), 'YEA')]);
     }
@@ -45,7 +44,7 @@ class ConstantsTest extends ParserTest
         $this->assertParsedAs(
                 function () {
                     __DIR__;
-                }, 
+                },
                 [O\Expression::constant('__DIR__')]);
     }
 
@@ -57,7 +56,7 @@ class ConstantsTest extends ParserTest
         $this->assertParsedAs(
                 function () {
                     __FILE__;
-                }, 
+                },
                 [O\Expression::constant('__FILE__')]);
     }
 
@@ -69,7 +68,7 @@ class ConstantsTest extends ParserTest
         $this->assertParsedAs(
                 function () {
                     __NAMESPACE__;
-                }, 
+                },
                 [O\Expression::constant('__NAMESPACE__')]);
     }
 
@@ -81,7 +80,7 @@ class ConstantsTest extends ParserTest
         $this->assertParsedAs(
                 function () {
                     __CLASS__;
-                }, 
+                },
                 [O\Expression::constant('__CLASS__')]);
     }
 
@@ -93,7 +92,7 @@ class ConstantsTest extends ParserTest
         $this->assertParsedAs(
                 function () {
                     __TRAIT__;
-                }, 
+                },
                 [O\Expression::constant('__TRAIT__')]);
     }
 
@@ -105,7 +104,7 @@ class ConstantsTest extends ParserTest
         $this->assertParsedAs(
                 function () {
                     __FUNCTION__;
-                }, 
+                },
                 [O\Expression::constant('__FUNCTION__')]);
     }
 
@@ -117,7 +116,7 @@ class ConstantsTest extends ParserTest
         $this->assertParsedAs(
                 function () {
                     __METHOD__;
-                }, 
+                },
                 [O\Expression::constant('__METHOD__')]);
     }
 
@@ -129,7 +128,7 @@ class ConstantsTest extends ParserTest
         $this->assertParsedAs(
                 function () {
                     __LINE__;
-                }, 
+                },
                 [O\Expression::value(__LINE__ - 2)]);
     }
 }

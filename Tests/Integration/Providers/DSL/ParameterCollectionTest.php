@@ -140,4 +140,3 @@ class ParameterCollectionTest extends PinqTestCase
         $this->assertResolvesTo(['val1' => 5, 'val2' => 'abcde', 'val-combine' => '5abcde'], ['param1' => 5, 'param2' => 'abcde']);
     }
 }
- 

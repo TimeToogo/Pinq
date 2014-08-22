@@ -3,7 +3,6 @@ namespace Pinq\Providers\DSL\Compilation;
 
 use Pinq\Queries;
 
-
 /**
  * Base interface of a query compiler.
 

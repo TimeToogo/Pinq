@@ -2,8 +2,6 @@
 
 namespace Pinq\Queries;
 
-use Pinq\Expressions as O;
-
 /**
  * Implementation for request and operation query template parameters.
  *
@@ -26,15 +24,14 @@ class ParameterRegistry implements IParameterRegistry
                     __CLASS__);
         }
 
-        foreach($parameters as $parameter) {
-            if(!is_string($parameter) || $parameter === '') {
+        foreach ($parameters as $parameter) {
+            if (!is_string($parameter) || $parameter === '') {
                 throw new \Pinq\PinqException(
                         'Cannot construct %s: invalid parameter name, \'%s\'',
                         __CLASS__,
                         $parameter);
             }
         }
-
 
         $this->parameters = array_values($parameters);
         sort($this->parameters);

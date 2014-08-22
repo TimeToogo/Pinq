@@ -3,7 +3,6 @@
 namespace Pinq\Tests\Integration\Queries\Functions;
 
 use Pinq\Expressions as O;
-use Pinq\Queries\Functions\Parameters;
 use Pinq\Queries\Functions;
 
 class ConnectorProjectionTest extends ProjectionBaseTest
@@ -47,4 +46,3 @@ class ConnectorProjectionTest extends ProjectionBaseTest
         $this->assertSame([], $function->getUnusedParameterDefaultValueMap());
     }
 }
- 

@@ -2,7 +2,6 @@
 
 namespace Pinq\Queries\Builders;
 
-use Pinq\Expressions as O;
 use Pinq\Queries\Builders\Interpretations\IOperationInterpretation;
 
 /**

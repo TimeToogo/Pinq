@@ -15,7 +15,7 @@ class JoinApplyTest extends CollectionTest
             });
         }
     }
-    
+
     /**
      * @dataProvider theImplementations
      */
@@ -52,7 +52,7 @@ class JoinApplyTest extends CollectionTest
                 ->apply(function (&$outer, $inner) {
                     $outer *= $inner;
                 });
-        
+
         $this->assertMatchesValues($collection, [
             1 * 2 * 3,
             2 * 2 * 3,
@@ -78,7 +78,7 @@ class JoinApplyTest extends CollectionTest
                 ->apply(function (&$outer, $inner) {
                     $outer *= $inner;
                 });
-        
+
         $this->assertMatchesValues($collection, [
             1 * 1,
             2 * 1 * 2,
@@ -99,7 +99,7 @@ class JoinApplyTest extends CollectionTest
     public function testThatAppendedFilteredApplyJoinOperatesOnOriginalCollection(\Pinq\ICollection $collection, array $data)
     {
         $appendedReference = 3;
-        
+
         $collection
                 ->append([&$appendedReference])
                 ->join(range(1, 10))
@@ -107,7 +107,7 @@ class JoinApplyTest extends CollectionTest
                 ->apply(function (&$outer, $inner) {
                     $outer *= $inner;
                 });
-        
+
         $this->assertMatchesValues($collection, [
             1 * 1,
             2 * 1 * 2,
@@ -120,7 +120,7 @@ class JoinApplyTest extends CollectionTest
             9 * 1 * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9,
             10 * 1 * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10,
         ]);
-        
+
         $this->assertSame($appendedReference, 3 * 1 * 2 * 3);
     }
 
@@ -135,7 +135,7 @@ class JoinApplyTest extends CollectionTest
                 ->apply(function (&$outer, $inner) {
                     $outer *= $inner;
                 });
-        
+
         $this->assertMatchesValues($collection, [
             1 * 1,
             2 * 2,
@@ -162,7 +162,7 @@ class JoinApplyTest extends CollectionTest
                 ->apply(function (&$outer, $inner) {
                     $outer .= ':' . $inner;
                 });
-        
+
         $this->assertMatchesValues($collection, [
             '1:-1',
             '2:<EVEN>',

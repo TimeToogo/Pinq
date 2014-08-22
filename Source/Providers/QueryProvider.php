@@ -2,7 +2,6 @@
 
 namespace Pinq\Providers;
 
-use Pinq\Caching;
 use Pinq\Expressions as O;
 use Pinq\Queries;
 use Pinq\Queries\Builders;
@@ -23,7 +22,7 @@ abstract class QueryProvider extends ProviderBase implements IQueryProvider
             Queries\ISourceInfo $sourceInfo,
             Configuration\IQueryConfiguration $configuration = null
     ) {
-        parent::__construct($sourceInfo, $configuration ? : new Configuration\DefaultQueryConfiguration());
+        parent::__construct($sourceInfo, $configuration ?: new Configuration\DefaultQueryConfiguration());
 
         $this->requestBuilder        = $this->configuration->getRequestQueryBuilder();
         $this->queryResultCollection = $this->configuration->getQueryResultCollection();
@@ -34,7 +33,6 @@ abstract class QueryProvider extends ProviderBase implements IQueryProvider
         return $this->queryResultCollection;
     }
 
-
     public function createQueryable(O\TraversalExpression $scopeExpression = null)
     {
         return new \Pinq\Queryable($this, $this->sourceInfo, $scopeExpression, $this->scheme);
@@ -42,11 +40,11 @@ abstract class QueryProvider extends ProviderBase implements IQueryProvider
 
     public function load(O\Expression $requestExpression)
     {
-        if($this->queryResultCollection === null) {
+        if ($this->queryResultCollection === null) {
             return $this->loadRequestExpression($requestExpression);
         }
 
-        if($this->queryResultCollection->tryComputeResults($requestExpression, $results)) {
+        if ($this->queryResultCollection->tryComputeResults($requestExpression, $results)) {
             return $results;
         }
 

@@ -38,7 +38,6 @@ abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
         $this->repository = $this->queryable instanceof IRepository ? $this->queryable : null;
     }
 
-
     protected function setUp()
     {
         $this->functionInterpreter = Parsing\FunctionInterpreter::getDefault();
@@ -83,7 +82,7 @@ abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
     {
         $requestBuilder = $this->queryable->getProvider()->getConfiguration()->getRequestQueryBuilder();
 
-        if(!$onlyAsParsedExpression) {
+        if (!$onlyAsParsedExpression) {
             $request = $requestBuilder->parseRequest($requestFunction($this->queryable)->getExpression());
             $this->assertRequestQueryMatches($request, $correctValue);
         }
@@ -116,7 +115,7 @@ abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
         $parameterName = $reflection->getSignature()->getParameterExpressions()[0]->getName();
 
         $expression =  $expressions[0];
-        foreach([$parameterName => $this->queryable, 'this' => $this] as $variable => $value) {
+        foreach ([$parameterName => $this->queryable, 'this' => $this] as $variable => $value) {
             $variableReplacer = new O\DynamicExpressionWalker([
                     O\VariableExpression::getType() => function (O\VariableExpression $expression) use ($variable, &$value) {
                                 if($expression->getName() instanceof O\ValueExpression
@@ -133,7 +132,7 @@ abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
             $expression = $variableReplacer->walk($expression);
         }
 
-        if($expression instanceof O\ReturnExpression) {
+        if ($expression instanceof O\ReturnExpression) {
             return $expression->getValue();
         } else {
             return $expression;

@@ -42,7 +42,7 @@ class ParameterCollection
      */
     public function addExpression($name, O\Expression $expression, FunctionBase $context = null)
     {
-        if($context !== null) {
+        if ($context !== null) {
             $this->parameters[$name] = [
                     $context->getParameterScopedVariableMap(),
                     $expression->asEvaluator($context->getEvaluationContext())

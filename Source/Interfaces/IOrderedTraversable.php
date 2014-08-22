@@ -15,8 +15,8 @@ interface IOrderedTraversable extends ITraversable
      * Subsequently orders the results using the supplied function according to
      * the supplied direction
      *
-     * @param  callable $function
-     * @param  int      $direction
+     * @param callable $function
+     * @param int      $direction
      *
      * @return IOrderedTraversable
      */
@@ -25,7 +25,7 @@ interface IOrderedTraversable extends ITraversable
     /**
      * Subsequently orders the results using the supplied function ascendingly
      *
-     * @param  callable $function
+     * @param callable $function
      *
      * @return IOrderedTraversable
      */
@@ -34,7 +34,7 @@ interface IOrderedTraversable extends ITraversable
     /**
      * Subsequently orders the results using the supplied function descendingly
      *
-     * @param  callable $function
+     * @param callable $function
      *
      * @return IOrderedTraversable
      */

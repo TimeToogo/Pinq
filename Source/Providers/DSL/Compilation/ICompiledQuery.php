@@ -13,4 +13,4 @@ namespace Pinq\Providers\DSL\Compilation;
 interface ICompiledQuery
 {
 
-} 
+}

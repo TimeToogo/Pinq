@@ -42,17 +42,17 @@ class DateTimeTraversalTest extends \Pinq\Tests\Integration\Traversable\Traversa
                     return $dateGroup->keys()->asArray();
                 })
                 ->asArray();
-        
+
         $expectedDatesGroupedByDayOfWeek = [];
-        foreach($data as $date) {
+        foreach ($data as $date) {
             $dayOfWeek = $date->format('l');
-            if(!isset($expectedDatesGroupedByDayOfWeek[$dayOfWeek])) {
+            if (!isset($expectedDatesGroupedByDayOfWeek[$dayOfWeek])) {
                 $expectedDatesGroupedByDayOfWeek[$dayOfWeek] = [];
             }
-            
+
             $expectedDatesGroupedByDayOfWeek[$dayOfWeek][] = $date;
         }
-        
+
         $this->assertSame($expectedDatesGroupedByDayOfWeek, $datesGroupedByDayOfWeek);
     }
 

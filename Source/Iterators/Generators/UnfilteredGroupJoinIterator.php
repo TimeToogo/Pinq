@@ -2,7 +2,6 @@
 
 namespace Pinq\Iterators\Generators;
 
-use Pinq\Iterators\Common;
 use Pinq\Iterators\IJoinIterator;
 
 /**

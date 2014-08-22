@@ -13,4 +13,4 @@ abstract class CacheAdapter implements ICacheAdapter
     {
         return new NamespacedCache($this, $namespace);
     }
-} 
+}

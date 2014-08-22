@@ -2,8 +2,6 @@
 
 namespace Pinq\Parsing;
 
-use Pinq\Expressions as O;
-
 /**
  * Implementation of the function declaration inteface.
  *
@@ -89,6 +87,5 @@ class FunctionDeclaration implements IFunctionDeclaration
     {
         return $this->closureNestingLevel;
     }
-
 
 }

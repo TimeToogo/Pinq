@@ -62,21 +62,21 @@ class SliceTest extends TraversableTest
 
         $this->assertMatches($values, array_slice($data, 3, 2, true));
     }
-    
+
     /**
      * @dataProvider emptyData
      */
     public function testThatSliceMaintainsReferences(\Pinq\ITraversable $traversable)
     {
         $data = $this->makeRefs(range('Z', 'A'));
-        
+
         $traversable
                 ->append($data) //ZYXWVUTSRQPONMLKJIHGFEDCBA
                 ->skip(10)      //PONMLKJIHGFEDCBA
                 ->take(7)       //PONMLKJ
                 ->slice(5, 3)   //KJ
                 ->iterate(function (&$i) { $i = "-$i$i-"; });
-        
+
         $this->assertSame('ZYXWVUTSRQPONML-KK--JJ-IHGFEDCBA', implode('', $data));
     }
 }

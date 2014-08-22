@@ -41,7 +41,7 @@ final class Functions
         };
 
         /*
-         * If there are default values, just use the default closure to 
+         * If there are default values, just use the default closure to
          * ensure correct default values are used for unsupplied arguments.
          */
         if ($numberOfArguments !== $reflection->getNumberOfRequiredParameters()) {

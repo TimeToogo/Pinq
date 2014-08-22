@@ -95,8 +95,8 @@ class ExpressionEvaluationTest extends InterpreterTest
             $evaluatedValues[] = unserialize(serialize($evaluator))->evaluate();
         }
 
-        foreach($evaluatedValues as $evaluatedValue) {
-            if($useNativeEquals) {
+        foreach ($evaluatedValues as $evaluatedValue) {
+            if ($useNativeEquals) {
                 $this->assertTrue($value == $evaluatedValue);
             } else {
                 $this->assertEquals($value, $evaluatedValue);
@@ -198,12 +198,12 @@ class ExpressionEvaluationTest extends InterpreterTest
      */
     public function testCastOperations()
     {
-        $this->assertEvaluatesTo(function () { (string)4; },    '4');
-        $this->assertEvaluatesTo(function () { (bool)0; },      false);
-        $this->assertEvaluatesTo(function () { (int)6.9; },     6);
-        $this->assertEvaluatesTo(function () { (array)0; },     [0 => 0]);
-        $this->assertEvaluatesTo(function () { (object)null; }, new \stdClass());
-        $this->assertEvaluatesTo(function () { (double)'1'; },  1.0);
+        $this->assertEvaluatesTo(function () { (string) 4; },    '4');
+        $this->assertEvaluatesTo(function () { (bool) 0; },      false);
+        $this->assertEvaluatesTo(function () { (int) 6.9; },     6);
+        $this->assertEvaluatesTo(function () { (array) 0; },     [0 => 0]);
+        $this->assertEvaluatesTo(function () { (object) null; }, new \stdClass());
+        $this->assertEvaluatesTo(function () { (double) '1'; },  1.0);
     }
 
     /**
@@ -212,7 +212,7 @@ class ExpressionEvaluationTest extends InterpreterTest
     public function testUsedVariableCastOperator()
     {
         $var = 'hi';
-        $this->assertEvaluatesTo(function () use ($var) { (bool)$var; }, true);
+        $this->assertEvaluatesTo(function () use ($var) { (bool) $var; }, true);
     }
 
     /**
@@ -362,8 +362,8 @@ class ExpressionEvaluationTest extends InterpreterTest
      */
     public function testFields()
     {
-        self::$field = (object)['foobar' => 123];
-        self::$privateField = (object)['private' => 'posh'];
+        self::$field = (object) ['foobar' => 123];
+        self::$privateField = (object) ['private' => 'posh'];
 
         $this->assertEvaluatesTo(function () { self::$field->foobar; }, 123);
         $this->assertEvaluatesTo(function () { self::$privateField->private; }, 'posh');
@@ -469,16 +469,15 @@ class ExpressionEvaluationTest extends InterpreterTest
         $this->assertEvaluatesTo(function () { SORT_DESC; }, SORT_DESC);
     }
 
-
     /**
      * @dataProvider interpreters
      */
     public function testConstantsNamespaceResolution()
     {
-        if(!defined(__NAMESPACE__ . '\\CONST_FOO_BAR')) {
+        if (!defined(__NAMESPACE__ . '\\CONST_FOO_BAR')) {
             define(__NAMESPACE__ . '\\CONST_FOO_BAR', 'abcdefghijklmnop');
         }
-        if(!defined('CONST_FOO_BAR')) {
+        if (!defined('CONST_FOO_BAR')) {
             define('CONST_FOO_BAR', 'global-abcdefghijklmnop');
         }
 
@@ -636,7 +635,7 @@ class ExpressionEvaluationTest extends InterpreterTest
         $GLOBALS['bddbbddb'] = true;
         $this->assertEvaluatesTo(function () { isset($GLOBALS['bddbbddb']->foo); }, false);
 
-        $GLOBALS['bddbbddb'] = (object)['foo' => true];
+        $GLOBALS['bddbbddb'] = (object) ['foo' => true];
         $this->assertEvaluatesTo(function () { isset($GLOBALS['bddbbddb']->foo); }, true);
     }
 
@@ -721,7 +720,7 @@ class ExpressionEvaluationTest extends InterpreterTest
         $GLOBALS['dfdfdfda'] = 'bar';
         $this->assertEvaluatesTo(function () { empty($GLOBALS['dfdfdfda']->foo); }, true);
 
-        $GLOBALS['dfdfdfda'] = (object)['foo' => true];
+        $GLOBALS['dfdfdfda'] = (object) ['foo' => true];
         $this->assertEvaluatesTo(function () { empty($GLOBALS['dfdfdfda']->foo); }, false);
     }
 

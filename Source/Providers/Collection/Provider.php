@@ -2,7 +2,6 @@
 
 namespace Pinq\Providers\Collection;
 
-use Pinq\Expressions as O;
 use Pinq\ICollection;
 use Pinq\Providers\Traversable;
 use Pinq\Providers;

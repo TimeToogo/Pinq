@@ -19,7 +19,7 @@ class OrderByTest extends TraversableTest
         $this->assertThatExecutionIsDeferred([$traversable, 'orderByAscending']);
         $this->assertThatExecutionIsDeferred([$traversable, 'orderByDescending']);
     }
-    
+
     /**
      * @dataProvider assocMixedValues
      */
@@ -47,7 +47,7 @@ class OrderByTest extends TraversableTest
     public function testThatOrderByNegatingNumbersIsEquivalentToArrayReverse(\Pinq\ITraversable $numbers, array $data)
     {
         $reversedNumbers = $numbers->orderByAscending(function ($i) { return -$i; });
-        
+
         $this->assertMatches($reversedNumbers, array_reverse($data, true));
     }
 
@@ -250,7 +250,7 @@ class OrderByTest extends TraversableTest
                 ->orderByAscending(function (\DateTime $date) { return $date; })
                 ->select(function (\DateTime $date) { return $date->format('Y'); })
                 ->implode(':');
-                
+
         $this->assertSame('2000:2001:2002:2003:2004:2005', $years);
     }
 
@@ -261,27 +261,27 @@ class OrderByTest extends TraversableTest
     {
         $years = $dates
                 ->indexBy(function (\DateTime $date) { return $date; })
-                ->select(function (\DateTime $date) { return (int)$date->format('Y'); })
+                ->select(function (\DateTime $date) { return (int) $date->format('Y'); })
                 ->orderByDescending(function ($year, \DateTime $date) { return $year; })
                 ->select(function ($year, \DateTime $date) { return $date->format('Y'); })
                 ->implode(':');
-                
+
         $this->assertSame('2005:2004:2003:2002:2001:2000', $years);
     }
-    
+
     /**
      * @dataProvider emptyData
      */
     public function testThatOrderByMaintainsReferences(\Pinq\ITraversable $traversable)
     {
         $data = $this->makeRefs(range(1, 100));
-        
+
         $traversable
                 ->append($data)
-                ->orderByAscending(function ($i) { return (int)($i / 10); })
+                ->orderByAscending(function ($i) { return (int) ($i / 10); })
                 ->thenByDescending(function ($i) { return $i; })
                 ->iterate(function (&$i) { $i *= 10; });
-                
+
         $this->assertSame(range(10, 1000, 10), $data);
     }
 }

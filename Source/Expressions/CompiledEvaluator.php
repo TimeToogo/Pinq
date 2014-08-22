@@ -54,6 +54,7 @@ class CompiledEvaluator extends Evaluator implements \Serializable
 
                                 $name                             = 'o' . $name;
                                 $evaluator->extraVariables[$name] = $value;
+
                                 return Expression::variable(Expression::value($name));
                             }
 
@@ -72,8 +73,7 @@ class CompiledEvaluator extends Evaluator implements \Serializable
         $bodyCode .= implode(';', Expression::compileAll($expressions)) . ';';
         $evaluator->code = <<<PHP
 namespace {$namespace} {
-    return function ($$contextParameterName)
-    {
+    return function ($$contextParameterName) {
         $bodyCode
     };
 }

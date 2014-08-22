@@ -1,7 +1,6 @@
 <?php
 namespace Pinq\Caching;
 
-
 /**
  * Cache interface that prefixes all keys with the specified namespace.
  *

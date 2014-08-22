@@ -37,6 +37,7 @@ class RangeIterator extends IteratorIterator
                 return null;
             } elseif ($this->position >= $this->startPosition) {
                 $this->position++;
+
                 return $element;
             } else {
                 $this->position++;

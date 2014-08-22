@@ -17,7 +17,7 @@ class FixedNamespaceResolver extends \PHPParser_NodeVisitor_NameResolver
     protected function resolveClassName(PHPParser_Node_Name $name)
     {
         $type = strtolower($name);
-        if($type === 'self' || $type === 'static' || $type === 'parent') {
+        if ($type === 'self' || $type === 'static' || $type === 'parent') {
             return $name;
         }
 

@@ -32,4 +32,4 @@ interface IOperationInterpretation
     public function interpretOffsetSet($operationId, $indexId, $index, $valueId, $value);
 
     public function interpretOffsetUnset($operationId, $indexId, $index);
-} 
+}

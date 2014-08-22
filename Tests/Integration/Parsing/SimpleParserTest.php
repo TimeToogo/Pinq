@@ -530,13 +530,13 @@ class SimpleParserTest extends ParserTest
      */
     public function testCastOperators()
     {
-        $this->assertCast(function () { (string)$i; }, O\Operators\Cast::STRING, 'i');
-        $this->assertCast(function () { (int)$i; }, O\Operators\Cast::INTEGER, 'i');
-        $this->assertCast(function () { (integer)$i; }, O\Operators\Cast::INTEGER, 'i');
-        $this->assertCast(function () { (double)$i; }, O\Operators\Cast::DOUBLE, 'i');
-        $this->assertCast(function () { (float)$i; }, O\Operators\Cast::DOUBLE, 'i');
-        $this->assertCast(function () { (object)$i; }, O\Operators\Cast::OBJECT, 'i');
-        $this->assertCast(function () { (array)$i; }, O\Operators\Cast::ARRAY_CAST, 'i');
+        $this->assertCast(function () { (string) $i; }, O\Operators\Cast::STRING, 'i');
+        $this->assertCast(function () { (int) $i; }, O\Operators\Cast::INTEGER, 'i');
+        $this->assertCast(function () { (integer) $i; }, O\Operators\Cast::INTEGER, 'i');
+        $this->assertCast(function () { (double) $i; }, O\Operators\Cast::DOUBLE, 'i');
+        $this->assertCast(function () { (float) $i; }, O\Operators\Cast::DOUBLE, 'i');
+        $this->assertCast(function () { (object) $i; }, O\Operators\Cast::OBJECT, 'i');
+        $this->assertCast(function () { (array) $i; }, O\Operators\Cast::ARRAY_CAST, 'i');
     }
 
     /**

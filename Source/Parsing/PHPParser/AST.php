@@ -97,7 +97,7 @@ class AST
     final public function parseNameNode($node)
     {
         if ($node instanceof \PHPParser_Node_Name) {
-            return Expression::value(($node->isFullyQualified() ? '\\' : '') . (string)$node);
+            return Expression::value(($node->isFullyQualified() ? '\\' : '') . (string) $node);
         } elseif (is_string($node)) {
             return Expression::value($node);
         }
@@ -109,7 +109,7 @@ class AST
     {
         $type = $node->type;
         if ($type !== null) {
-            $type = (string)$type;
+            $type = (string) $type;
             $lowerType = strtolower($type);
             if ($type[0] !== '\\' && $lowerType !== 'array' && $lowerType !== 'callable') {
                 $type = '\\' . $type;
@@ -173,7 +173,7 @@ class AST
                 );
 
             case $node instanceof \PHPParser_Node_Expr_ConstFetch:
-                return Expression::constant((string)$node->name);
+                return Expression::constant((string) $node->name);
 
             case $node instanceof \PHPParser_Node_Expr_ClassConstFetch:
                 return Expression::classConstant(
@@ -264,7 +264,7 @@ class AST
         }
 
         $usedVariables   = [];
-        foreach($node->uses as $usedVariable) {
+        foreach ($node->uses as $usedVariable) {
             $usedVariables[] =  Expression::closureUsedVariable($usedVariable->var, $usedVariable->byRef);
         }
         $bodyExpressions = $this->parseNodes($node->stmts);
@@ -395,7 +395,7 @@ class AST
             case isset(self::$unaryOperatorsMap[$nodeType]):
                 return Expression::unaryOperation(
                         self::$unaryOperatorsMap[$nodeType],
-                        $this->parseNode($node->expr ? : $node->var)
+                        $this->parseNode($node->expr ?: $node->var)
                 );
 
             case isset(self::$castOperatorMap[$nodeType]):

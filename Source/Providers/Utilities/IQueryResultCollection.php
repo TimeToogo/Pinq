@@ -37,7 +37,7 @@ interface IQueryResultCollection
      * the results computed from the remaining query scope expression.
      *
      * @param O\Expression $queryExpression
-     * @param mixed        &$results If successful, the results will be set to this reference parameter
+     * @param mixed        &$results        If successful, the results will be set to this reference parameter
      *
      * @return boolean Whether the results were successfully computed
      */
@@ -48,7 +48,7 @@ interface IQueryResultCollection
      *
      * @param O\Expression $queryExpression
      *
-     * @return mixed The results
+     * @return mixed               The results
      * @throws \Pinq\PinqException
      */
     public function computeResults(O\Expression $queryExpression);

@@ -32,4 +32,4 @@ class BaseInterpretation
     {
         return $function->getId() . '--' . $variableName;
     }
-} 
+}

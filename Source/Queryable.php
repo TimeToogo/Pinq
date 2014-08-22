@@ -4,7 +4,6 @@ namespace Pinq;
 
 use Pinq\Expressions as O;
 use Pinq\Iterators\IIteratorScheme;
-use Pinq\Queries;
 use Pinq\Queries\Requests;
 use Pinq\Queries\Segments;
 
@@ -33,10 +32,9 @@ class Queryable extends QueryBuilder implements IQueryable, Interfaces\IOrderedQ
     ) {
         parent::__construct($provider);
         $this->sourceInfo = $sourceInfo;
-        $this->expression = $queryExpression ? : O\Expression::value($this);
-        $this->scheme     = $scheme ? : Iterators\SchemeProvider::getDefault();
+        $this->expression = $queryExpression ?: O\Expression::value($this);
+        $this->scheme     = $scheme ?: Iterators\SchemeProvider::getDefault();
     }
-
 
     /**
      * Returns the requested query from the query provider.

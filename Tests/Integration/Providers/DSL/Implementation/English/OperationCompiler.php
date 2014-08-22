@@ -2,11 +2,8 @@
 
 namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
-use Pinq\PinqException;
 use Pinq\Providers\DSL\Compilation;
 use Pinq\Queries\Operations;
-use Pinq\Queries\Requests;
-use Pinq\Queries\Segments;
 use Pinq\Queries;
 
 class OperationCompiler extends Compilation\OperationCompiler

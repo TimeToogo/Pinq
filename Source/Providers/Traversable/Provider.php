@@ -2,7 +2,6 @@
 
 namespace Pinq\Providers\Traversable;
 
-use Pinq\Expressions as O;
 use Pinq\Queries;
 
 /**

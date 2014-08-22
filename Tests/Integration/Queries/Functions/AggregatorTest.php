@@ -3,7 +3,6 @@
 namespace Pinq\Tests\Integration\Queries\Functions;
 
 use Pinq\Expressions as O;
-use Pinq\Queries\Functions\Parameters;
 use Pinq\Queries\Functions;
 
 class AggregatorTest extends FunctionTest
@@ -38,4 +37,3 @@ class AggregatorTest extends FunctionTest
         $this->assertSame([], $function->getUnusedParameterDefaultValueMap());
     }
 }
- 

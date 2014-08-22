@@ -2,11 +2,9 @@
 
 namespace Pinq\Queries\Builders\Interpretations;
 
-use Pinq\Expressions as O;
 use Pinq\IQueryable;
 use Pinq\Queries;
 use Pinq\Queries\Builders\Functions\IFunction;
-use Pinq\Queries\Common;
 use Pinq\Queries\Functions;
 use Pinq\Queries\Segments;
 

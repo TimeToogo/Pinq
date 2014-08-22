@@ -40,7 +40,7 @@ class FunctionMagicResolver extends O\ExpressionWalker
      * Resolves any magic constants / scopes with the supplied resolved values.
      *
      * @param IFunctionMagic $functionMagic
-     * @param O\Expression[]   $expressions
+     * @param O\Expression[] $expressions
      *
      * @return O\Expression[]
      */

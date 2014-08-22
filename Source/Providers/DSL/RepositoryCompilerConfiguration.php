@@ -2,11 +2,6 @@
 
 namespace Pinq\Providers\DSL;
 
-use Pinq\Caching;
-use Pinq\Iterators;
-use Pinq\Parsing;
-use Pinq\Queries\Builders;
-
 /**
  * Base class of the repository compiler configuration.
  *

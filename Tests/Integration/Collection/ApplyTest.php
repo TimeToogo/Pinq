@@ -38,7 +38,7 @@ class ApplyTest extends CollectionTest
         $collection
                 ->where(function ($i) { return $i % 2 === 0; })
                 ->apply(function (&$i) { $i *= 10; });
-        
+
         $this->assertMatches($collection, [
             1,
             20,
@@ -52,7 +52,7 @@ class ApplyTest extends CollectionTest
             100
         ]);
     }
-    
+
     public function arraysOfString()
     {
         return $this->getImplementations([

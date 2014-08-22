@@ -18,7 +18,7 @@ class IndexByTest extends TraversableTest
     {
         $this->assertThatExecutionIsDeferred([$traversable, 'indexBy']);
     }
-    
+
     /**
      * @dataProvider assocMixedValues
      */
@@ -55,28 +55,28 @@ class IndexByTest extends TraversableTest
     public function testThatIndexByDuplicateKeyWithForeachOnlyReturnsFirstAssociatedValue(\Pinq\ITraversable $traversable, array $data)
     {
         $indexedElements = $traversable->indexBy(function () { return null; });
-        
+
         $first = true;
-        foreach($indexedElements as $key => $element) {
+        foreach ($indexedElements as $key => $element) {
             $this->assertSame($key, 0);
             $this->assertSame(reset($data), $element);
             $this->assertTrue($first);
             $first = false;
         }
     }
-    
+
     /**
      * @dataProvider emptyData
      */
     public function testThatIndexByMaintainsReferences(\Pinq\ITraversable $traversable)
     {
         $data = $this->makeRefs(range('A', 'G', 2));
-        
+
         $traversable
                 ->append($data)
                 ->indexBy(function ($i) { return $i . '-key'; })
                 ->iterate(function (&$i) { $i .= ':'; });
-                
+
         $this->assertSame(['A:', 'C:', 'E:', 'G:'], $data);
     }
 }

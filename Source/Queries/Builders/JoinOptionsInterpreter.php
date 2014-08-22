@@ -5,8 +5,6 @@ namespace Pinq\Queries\Builders;
 use Pinq\Expressions as O;
 use Pinq\Queries;
 use Pinq\Queries\Builders\Interpretations\IJoinOptionsInterpretation;
-use Pinq\Queries\Common;
-use Pinq\Queries\Segments;
 
 /**
  * Implementation of the scope expression interpreter.
