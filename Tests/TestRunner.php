@@ -4,7 +4,7 @@ namespace Pinq\Tests;
 
 require_once 'TestBootstrapper.php';
 
-class TestRunner extends \PHPUnit_TextUI_ResultPrinter
+class StreamingHTMLPrinter extends \PHPUnit_TextUI_ResultPrinter
 {
     const PRINTER_CLASS = __CLASS__;
     private static $shouldDebug;
