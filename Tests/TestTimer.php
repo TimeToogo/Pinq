@@ -2,7 +2,7 @@
 
 namespace Pinq\Tests;
 
-class TestTimer implements \PHPUnit_Framework_TestListener
+class Timer implements \PHPUnit_Framework_TestListener
 {
     private static $log = [];
 
