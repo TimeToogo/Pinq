@@ -53,4 +53,11 @@ class MiscExpressionTest extends ExpressionTest
                 '${\'1var\'}'
         );
     }
+
+    public function testExpressionNameType()
+    {
+        $this->assertSame(O\BinaryOperationExpression::getExpressionTypeName(), 'BinaryOperation');
+        $this->assertSame(O\VariableExpression::getExpressionTypeName(), 'Variable');
+        $this->assertSame(O\Expression::getExpressionTypeName(), '');
+    }
 }

@@ -14,9 +14,27 @@ abstract class Expression implements \Serializable
 {
     const EXPRESSION_TYPE = __CLASS__;
 
+    /**
+     * Gets the class name as a string.
+     *
+     * @return string
+     */
     final public static function getType()
     {
         return get_called_class();
+    }
+
+    /**
+     * Gets a string representing the name of the expression.
+     *
+     * For instance \Pinq\Expressions\BinaryOperationExpression::getExpressionTypeName()
+     * returns 'BinaryOperation'
+     *
+     * @return string
+     */
+    final public static function getExpressionTypeName()
+    {
+        return substr(get_called_class(), strlen(__NAMESPACE__) + 1, -strlen('Expression'));
     }
 
     /**
