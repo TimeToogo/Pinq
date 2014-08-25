@@ -26,4 +26,9 @@ class StaticValueEvaluator extends Evaluator
     {
         return $this->value;
     }
+
+    protected function doEvaluationWithNewThis(array $variableTable, $newThis)
+    {
+        return $this->value;
+    }
 }

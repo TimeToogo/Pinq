@@ -19,7 +19,12 @@ class CompiledEvaluator extends Evaluator implements \Serializable
     /**
      * @var callable
      */
-    protected $compiledEvaluator;
+    protected $originalCompiledEvaluator;
+
+    /**
+     * @var callable
+     */
+    protected $boundCompiledEvaluator;
 
     /**
      * @var mixed[]
@@ -99,8 +104,8 @@ PHP;
     {
         //Note: must be eval'd in an instance context.
         //See: https://bugs.php.net/bug.php?id=65598
-        $compiledEvaluator       = eval($this->code);
-        $this->compiledEvaluator = $compiledEvaluator->bindTo(
+        $this->originalCompiledEvaluator = eval($this->code);
+        $this->boundCompiledEvaluator    = $this->originalCompiledEvaluator->bindTo(
                 $this->context->getThis(),
                 $this->context->getScopeType()
         );
@@ -116,7 +121,14 @@ PHP;
 
     protected function doEvaluation(array $variableTable)
     {
-        $evaluator = $this->compiledEvaluator;
+        $evaluator = $this->boundCompiledEvaluator;
+
+        return $evaluator($variableTable + $this->extraVariables);
+    }
+
+    protected function doEvaluationWithNewThis(array $variableTable, $newThis)
+    {
+        $evaluator = $this->originalCompiledEvaluator->bindTo($newThis, $this->context->getScopeType());
 
         return $evaluator($variableTable + $this->extraVariables);
     }

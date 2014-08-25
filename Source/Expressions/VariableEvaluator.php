@@ -38,4 +38,9 @@ class VariableEvaluator extends Evaluator
 
         return $variableTable[$this->name];
     }
+
+    protected function doEvaluationWithNewThis(array $variableTable, $newThis)
+    {
+        return $this->doEvaluation($variableTable);
+    }
 }
