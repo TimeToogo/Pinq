@@ -22,14 +22,6 @@ abstract class QueryBuilder extends BaseQueryBuilder
         $this->scopeBuilder = $scopeBuilder;
     }
 
-    protected function buildParameterRegistry(
-            Interpretations\IScopeParser $scopeParser,
-            Interpretations\IQueryParser $queryParser
-    ) {
-        return new Queries\ParameterRegistry(
-                $scopeParser->getRequiredParameters() + $queryParser->getRequiredParameters());
-    }
-
     protected function buildResolvedQuery(Interpretations\IScopeResolver $scopeResolver, Interpretations\IQueryResolver $queryResolver)
     {
         return new Queries\ResolvedQuery(

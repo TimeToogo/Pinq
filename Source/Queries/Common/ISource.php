@@ -13,7 +13,8 @@ use Pinq\Queries\Segments\ISegmentVisitor;
 interface ISource
 {
     const ARRAY_OR_ITERATOR = 0;
-    const QUERY_SCOPE       = 1;
+    const SINGLE_VALUE      = 1;
+    const QUERY_SCOPE       = 2;
 
     /**
      * @return int
@@ -21,9 +22,14 @@ interface ISource
     public function getType();
 
     /**
+     * @return string[]
+     */
+    public function getParameters();
+
+    /**
      * @param ISegmentVisitor $visitor
      *
-     * @return ISource
+     * @return void
      */
     public function visit(ISegmentVisitor $visitor);
 }

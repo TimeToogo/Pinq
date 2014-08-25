@@ -16,9 +16,14 @@ abstract class MutatorOperation extends Operation
      */
     private $mutatorFunction;
 
-    public function __construct(Functions\ElementMutator $mutatorFunction)
+    final public function __construct(Functions\ElementMutator $mutatorFunction)
     {
         $this->mutatorFunction = $mutatorFunction;
+    }
+
+    public function getParameters()
+    {
+        return $this->mutatorFunction->getParameterIds();
     }
 
     /**
@@ -27,5 +32,19 @@ abstract class MutatorOperation extends Operation
     public function getMutatorFunction()
     {
         return $this->mutatorFunction;
+    }
+
+    /**
+     * @param Functions\ElementMutator $mutatorFunction
+     *
+     * @return static
+     */
+    public function update(Functions\ElementMutator $mutatorFunction)
+    {
+        if ($this->mutatorFunction === $mutatorFunction) {
+            return $this;
+        }
+
+        return new static($mutatorFunction);
     }
 }

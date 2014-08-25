@@ -98,12 +98,12 @@ class RequestEvaluator extends Requests\RequestVisitor
 
     public function visitGetIndex(Requests\GetIndex $request)
     {
-        return $this->traversable[$this->resolvedParameters[$request->getIndexParameter()]];
+        return $this->traversable[$this->resolvedParameters[$request->getIndexId()]];
     }
 
     public function visitIssetIndex(Requests\IssetIndex $request)
     {
-        return isset($this->traversable[$this->resolvedParameters[$request->getIndexParameter()]]);
+        return isset($this->traversable[$this->resolvedParameters[$request->getIndexId()]]);
     }
 
     public function visitAggregate(Requests\Aggregate $request)
@@ -151,7 +151,7 @@ class RequestEvaluator extends Requests\RequestVisitor
         );
     }
 
-    private function getOptionalFunction(Requests\ProjectionRequest $request)
+    private function getOptionalFunction(Requests\ProjectionRequestBase $request)
     {
         return $request->hasProjectionFunction() ? $this->resolvedParameters[$request->getProjectionFunction()
                 ->getCallableId()] : null;

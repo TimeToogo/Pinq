@@ -12,7 +12,7 @@ abstract class IndexOperation extends Operation
     /**
      * @var string
      */
-    private $indexParameterId;
+    protected $indexParameterId;
 
     public function __construct($indexParameterId)
     {

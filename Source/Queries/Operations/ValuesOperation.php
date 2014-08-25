@@ -3,6 +3,7 @@
 namespace Pinq\Queries\Operations;
 
 use Pinq\Queries\Common;
+use string;
 
 /**
  * Base class for an operation query for with a range of values
@@ -16,9 +17,14 @@ abstract class ValuesOperation extends Operation
      */
     private $source;
 
-    public function __construct(Common\ISource $source)
+    final public function __construct(Common\ISource $source)
     {
         $this->source = $source;
+    }
+
+    public function getParameters()
+    {
+        return $this->source->getParameters();
     }
 
     /**
@@ -27,5 +33,19 @@ abstract class ValuesOperation extends Operation
     public function getSource()
     {
         return $this->source;
+    }
+
+    /**
+     * @param Common\ISource $source
+     *
+     * @return static
+     */
+    public function update(Common\ISource $source)
+    {
+        if ($this->source === $source) {
+            return $this;
+        }
+
+        return new static($source);
     }
 }

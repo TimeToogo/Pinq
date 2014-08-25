@@ -34,7 +34,7 @@ class OperationParser extends BaseParser implements IOperationParser
     public function interpretApply($operationId, IFunction $function)
     {
         $this->operation = new Operations\Apply(
-                $this->requireFunction(
+                $this->buildFunction(
                         $function,
                         Functions\ElementMutator::factory()
                 ));
@@ -47,31 +47,26 @@ class OperationParser extends BaseParser implements IOperationParser
     ) {
         /** @var $joinOptionsInterpretation IJoinOptionsParser */
         $this->operation = new Operations\JoinApply(
-                $this->requireJoinOptions($joinOptionsInterpretation),
-                $this->requireFunction($applyFunction, Functions\ConnectorMutator::factory()));
+                $joinOptionsInterpretation->getJoinOptions(),
+                $this->buildFunction($applyFunction, Functions\ConnectorMutator::factory()));
     }
 
     public function interpretAddRange($operationId, ISourceInterpretation $sourceInterpretation)
     {
         /** @var $sourceInterpretation ISourceParser */
-        $this->operation = new Operations\AddValues($this->requireSource($sourceInterpretation));
-    }
-
-    public function interpretRemove($operationId, $valueId, $value)
-    {
-        $this->operation = new Operations\RemoveValues(new Common\Source\ArrayOrIterator($this->requireParameter($valueId)));
+        $this->operation = new Operations\AddValues($sourceInterpretation->getSource());
     }
 
     public function interpretRemoveRange($operationId, ISourceInterpretation $sourceInterpretation)
     {
         /** @var $sourceInterpretation ISourceParser */
-        $this->operation = new Operations\RemoveValues($this->requireSource($sourceInterpretation));
+        $this->operation = new Operations\RemoveValues($sourceInterpretation->getSource());
     }
 
     public function interpretRemoveWhere($operationId, IFunction $function)
     {
         $this->operation = new Operations\RemoveWhere(
-                $this->requireFunction(
+                $this->buildFunction(
                         $function,
                         Functions\ElementProjection::factory()
                 ));
@@ -84,13 +79,11 @@ class OperationParser extends BaseParser implements IOperationParser
 
     public function interpretOffsetSet($operationId, $indexId, $index, $valueId, $value)
     {
-        $this->operation = new Operations\SetIndex(
-                $this->requireParameter($indexId),
-                $this->requireParameter($valueId));
+        $this->operation = new Operations\SetIndex($indexId, $valueId);
     }
 
     public function interpretOffsetUnset($operationId, $indexId, $index)
     {
-        $this->operation = new Operations\UnsetIndex($this->requireParameter($indexId));
+        $this->operation = new Operations\UnsetIndex($indexId);
     }
 }

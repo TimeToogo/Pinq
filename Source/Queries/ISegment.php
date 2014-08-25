@@ -34,9 +34,14 @@ interface ISegment
     public function getType();
 
     /**
+     * @return string[]
+     */
+    public function getParameters();
+
+    /**
      * @param Segments\ISegmentVisitor $visitor
      *
-     * @return ISegment
+     * @return void
      */
     public function traverse(ISegmentVisitor $visitor);
 }

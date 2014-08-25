@@ -61,6 +61,15 @@ class Options
         $this->defaultKeyId   = $defaultKeyId;
     }
 
+    public function getParameters()
+    {
+        return array_merge(
+                $this->source->getParameters(),
+                $this->filter === null ? [] : $this->filter->getParameters(),
+                $this->hasDefault ? [$this->defaultValueId, $this->defaultKeyId] : []
+        );
+    }
+
     /**
      * @return Common\ISource
      */
@@ -115,5 +124,40 @@ class Options
     final public function getDefaultKeyId()
     {
         return $this->defaultKeyId;
+    }
+
+    /**
+     * @param Common\ISource $source
+     * @param boolean        $isGroupJoin
+     * @param IFilter|null   $filter
+     * @param boolean        $hasDefault
+     *
+     * @return Options
+     */
+    public function update(
+            Common\ISource $source,
+            $isGroupJoin,
+            IFilter $filter = null,
+            $hasDefault = false
+    ) {
+        if ($this->source === $source
+                && $this->isGroupJoin === $isGroupJoin
+                && $this->filter === $filter
+                && $this->hasDefault === $hasDefault
+        ) {
+            return $this;
+        }
+
+        return new self($source, $isGroupJoin, $filter, $hasDefault, $this->defaultValueId, $this->defaultKeyId);
+    }
+
+    /**
+     * @param Common\ISource $source
+     *
+     * @return Options
+     */
+    public function updateSource(Common\ISource $source)
+    {
+        return $this->update($source, $this->isGroupJoin, $this->filter, $this->hasDefault);
     }
 }

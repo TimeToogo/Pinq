@@ -73,6 +73,14 @@ abstract class FunctionBase implements \Serializable
     }
 
     /**
+     * @return string[]
+     */
+    public function getParameterIds()
+    {
+        return array_merge([$this->callableId], array_keys($this->parameterScopedVariableMap));
+    }
+
+    /**
      * @param O\ParameterExpression[] $parameterExpressions
      *
      * @return Parameters\ParameterBase

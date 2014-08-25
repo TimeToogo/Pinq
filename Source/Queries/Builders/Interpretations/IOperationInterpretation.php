@@ -21,8 +21,6 @@ interface IOperationInterpretation
 
     public function interpretAddRange($operationId, ISourceInterpretation $sourceInterpretation);
 
-    public function interpretRemove($operationId, $valueId, $value);
-
     public function interpretRemoveRange($operationId, ISourceInterpretation $sourceInterpretation);
 
     public function interpretRemoveWhere($operationId, IFunction $function);

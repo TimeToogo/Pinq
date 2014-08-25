@@ -60,6 +60,11 @@ class Operation extends Segment
         return self::OPERATION;
     }
 
+    public function getParameters()
+    {
+        return $this->source->getParameters();
+    }
+
     public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitOperation($this);
@@ -81,6 +86,12 @@ class Operation extends Segment
         return $this->source;
     }
 
+    /**
+     * @param int            $operationType
+     * @param Common\ISource $source
+     *
+     * @return Operation
+     */
     public function update($operationType, Common\ISource $source)
     {
         if ($this->operationType === $operationType && $this->source === $source) {
@@ -88,5 +99,15 @@ class Operation extends Segment
         }
 
         return new self($operationType, $source);
+    }
+
+    /**
+     * @param Common\ISource $source
+     *
+     * @return Operation
+     */
+    public function updateSource(Common\ISource $source)
+    {
+        return $this->update($this->operationType, $source);
     }
 }

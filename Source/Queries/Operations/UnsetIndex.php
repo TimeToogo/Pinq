@@ -14,6 +14,11 @@ class UnsetIndex extends IndexOperation
         return self::UNSET_INDEX;
     }
 
+    public function getParameters()
+    {
+        return [$this->indexParameterId];
+    }
+
     public function traverse(IOperationVisitor $visitor)
     {
         return $visitor->visitUnsetIndex($this);

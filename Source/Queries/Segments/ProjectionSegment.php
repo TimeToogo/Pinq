@@ -21,6 +21,11 @@ abstract class ProjectionSegment extends Segment
         $this->projectionFunction = $projectionFunction;
     }
 
+    public function getParameters()
+    {
+        return $this->projectionFunction->getParameterIds();
+    }
+
     /**
      * @return Functions\ElementProjection
      */
@@ -29,6 +34,11 @@ abstract class ProjectionSegment extends Segment
         return $this->projectionFunction;
     }
 
+    /**
+     * @param Functions\ElementProjection $projectionFunction
+     *
+     * @return static
+     */
     public function update(Functions\ElementProjection $projectionFunction)
     {
         if ($this->projectionFunction === $projectionFunction) {

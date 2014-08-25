@@ -26,6 +26,11 @@ class Aggregate extends Request
         return self::AGGREGATE;
     }
 
+    public function getParameters()
+    {
+        return $this->aggregatorFunction->getParameterIds();
+    }
+
     /**
      * @return Functions\Aggregator
      */
@@ -37,5 +42,19 @@ class Aggregate extends Request
     public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitAggregate($this);
+    }
+
+    /**
+     * @param Functions\Aggregator $aggregatorFunction
+     *
+     * @return Aggregate
+     */
+    public function update(Functions\Aggregator $aggregatorFunction)
+    {
+        if ($this->aggregatorFunction === $aggregatorFunction) {
+            return $this;
+        }
+
+        return new self($aggregatorFunction);
     }
 }

@@ -91,6 +91,9 @@ class ScopeInterpreter extends ExpressionInterpreter implements IScopeInterprete
         $methodName = $this->getMethodName($expression);
         $this->segmentCounter++;
         $this->segmentId = "{$this->segmentCounter}-{$methodName}";
+        if(!method_exists($this, "visit$methodName")) {
+            throw new \Exception;
+        }
         $this->{"visit$methodName"}($expression);
     }
 

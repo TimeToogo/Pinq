@@ -32,6 +32,20 @@ class Scope implements IScope
         return $this->sourceInfo;
     }
 
+    public function getParameters()
+    {
+        if($this->isEmpty()) {
+            return [];
+        }
+
+        $parameterGroups = [];
+        foreach($this->segments as $segment) {
+            $parameterGroups[] = $segment->getParameters();
+        }
+
+        return call_user_func_array('array_merge', $parameterGroups);
+    }
+
     public function getSegments()
     {
         return $this->segments;

@@ -18,6 +18,11 @@ interface IScope
     public function getSourceInfo();
 
     /**
+     * @return string[]
+     */
+    public function getParameters();
+
+    /**
      * @return ISegment[]
      */
     public function getSegments();

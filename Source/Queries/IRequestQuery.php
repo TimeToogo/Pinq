@@ -14,4 +14,23 @@ interface IRequestQuery extends IQuery
      * @return IRequest
      */
     public function getRequest();
+
+    /**
+     * Returns the query with the supplied scope and request.
+     *
+     * @param IScope   $scope
+     * @param IRequest $request
+     *
+     * @return IRequestQuery
+     */
+    public function update(IScope $scope, IRequest $request);
+
+    /**
+     * Returns the query with the supplied request.
+     *
+     * @param IRequest $request
+     *
+     * @return IOperationQuery
+     */
+    public function updateRequest(IRequest $request);
 }

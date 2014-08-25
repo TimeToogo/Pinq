@@ -23,7 +23,8 @@ class SourceResolver extends BaseResolver implements ISourceResolver
 
     public function interpretQueryScope($sourceId, IScopeInterpretation $scopeInterpretation)
     {
-        //Scope will already be resolved from the scope interpretation
+        /** @var $scopeInterpretation IScopeResolver */
         $this->appendToHash($sourceId);
+        $this->resolveParametersFrom($scopeInterpretation);
     }
 }

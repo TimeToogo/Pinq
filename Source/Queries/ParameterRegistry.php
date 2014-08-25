@@ -18,7 +18,7 @@ class ParameterRegistry implements IParameterRegistry
 
     public function __construct(array $parameters)
     {
-        if (array_unique($parameters) !== $parameters) {
+        if (array_unique($parameters, SORT_STRING) !== $parameters) {
             throw new \Pinq\PinqException(
                     'Cannot construct %s: duplicate parameter identifiers found',
                     __CLASS__);

@@ -2,7 +2,6 @@
 
 namespace Pinq\Tests\Integration\Queries;
 
-use Pinq\ICollection;
 use Pinq\Collection;
 use Pinq\Expressions as O;
 use Pinq\IQueryable;
@@ -10,89 +9,12 @@ use Pinq\Providers;
 use Pinq\Queries as Q;
 use Pinq\Traversable;
 
-class IgnoreParametersComparator extends \PHPUnit_Framework_Comparator
+class QueryParsingTest extends ParsedQueryBuildingTest
 {
+    use QueryBuildingTestsTrait;
 
-    public function accepts($expected, $actual)
-    {
-        return (is_string($expected) && is_string($actual) && QueryParsingTest::isParameter($expected))
-        || ($expected instanceof Q\IParameterRegistry && $actual instanceof Q\IParameterRegistry);
-    }
-
-    public function assertEquals($expected, $actual, $delta = 0, $canonicalize = false, $ignoreCase = false)
-    {
-        return true;
-    }
-}
-
-class IgnoreParametersInArrayKeysComparator extends \PHPUnit_Framework_Comparator_Array
-{
-    public function assertEquals($expected, $actual, $delta = 0, $canonicalize = false, $ignoreCase = false)
-    {
-        foreach ($expected as $key => $value) {
-            if (!QueryParsingTest::isParameter($key)) {
-                parent::assertEquals($expected, $actual, $delta, $canonicalize, $ignoreCase);
-
-                return;
-            }
-        }
-
-        parent::assertEquals(array_values($expected), array_values($actual), $delta, $canonicalize, $ignoreCase);
-    }
-}
-
-class QueryParsingTest extends QueryBuildingTest
-{
-    /**
-     * @var ICollection
-     */
-    protected $collection;
-
-    const PARAMETER_NAME = '~~~PARAMETER~~~';
-    private static $number = 0;
-
-    public function parameter()
-    {
-        return self::PARAMETER_NAME . self::$number++;
-    }
-
-    public static function isParameter($value)
-    {
-        return is_string($value) && strpos($value, self::PARAMETER_NAME) === 0;
-    }
-
-    protected function scope(array $segments)
-    {
-        return new Q\Scope(
-                $this->queryable->getSourceInfo(),
-                $segments);
-    }
-
-    protected function scopeSource(array $segments)
-    {
-        return new Q\Common\Source\QueryScope($this->scope($segments));
-    }
-
-    protected function request(array $segments, Q\IRequest $request)
-    {
-        return new Q\RequestQuery(
-                $this->scope($segments),
-                $request,
-                new Q\ParameterRegistry([]));
-    }
-
-    protected function scopeRequest(array $segments)
-    {
-        return $this->request($segments, new Q\Requests\Values(Q\Requests\Values::AS_SELF));
-    }
-
-    protected function operation(array $segments, Q\IOperation $operation)
-    {
-        return new Q\OperationQuery(
-                $this->scope($segments),
-                $operation,
-                new Q\ParameterRegistry([]));
-    }
+    const SCOPE_TYPE = __CLASS__;
+    const SCOPE_NAMESPACE = __NAMESPACE__;
 
     /**
      * @return Providers\IQueryProvider[]
@@ -110,33 +32,16 @@ class QueryParsingTest extends QueryBuildingTest
         return [new Providers\Collection\Provider(new Collection())];
     }
 
-    private static $ignoreParametersComparator;
-    private static $ignoreParametersInArrayKeysComparator;
-
-    public static function setUpBeforeClass()
-    {
-        self::$ignoreParametersComparator = new IgnoreParametersComparator();
-        self::$ignoreParametersInArrayKeysComparator = new IgnoreParametersInArrayKeysComparator();
-        \PHPUnit_Framework_ComparatorFactory::getDefaultInstance()->register(self::$ignoreParametersComparator);
-        \PHPUnit_Framework_ComparatorFactory::getDefaultInstance()->register(self::$ignoreParametersInArrayKeysComparator);
-    }
-
-    public static function tearDownAfterClass()
-    {
-        \PHPUnit_Framework_ComparatorFactory::getDefaultInstance()->unregister(self::$ignoreParametersComparator);
-        \PHPUnit_Framework_ComparatorFactory::getDefaultInstance()->unregister(self::$ignoreParametersInArrayKeysComparator);
-    }
-
-    protected function assertRequestQueryMatches(Q\IRequestQuery $requestQuery, $correctValue)
+    protected function assertRequestQueryMatches(Q\IRequestQuery $requestQuery, Q\IResolvedParameterRegistry $registry, $correctValue)
     {
         /** @var $correctValue Q\IRequestQuery */
-        $this->assertEquals($correctValue, $requestQuery);
+        $this->assertEqualsButIgnoreParameterIds($correctValue, $requestQuery);
     }
 
-    protected function assertOperationQueryMatches(Q\IOperationQuery $operationQuery, $correctValue)
+    protected function assertOperationQueryMatches(Q\IOperationQuery $operationQuery, Q\IResolvedParameterRegistry $registry, $correctValue)
     {
         /** @var $correctValue Q\IOperationQuery */
-        $this->assertEquals($correctValue, $operationQuery);
+        $this->assertEqualsButIgnoreParameterIds($correctValue, $operationQuery);
     }
 
     protected function valuesAsSelfQuery()
@@ -177,6 +82,11 @@ class QueryParsingTest extends QueryBuildingTest
     protected function offsetIssetQuery()
     {
         return $this->request([], new Q\Requests\IssetIndex($this->parameter()));
+    }
+
+    protected function containsQuery()
+    {
+        return $this->request([], new Q\Requests\Contains($this->parameter()));
     }
 
     protected function isEmptyQuery()
@@ -286,16 +196,6 @@ class QueryParsingTest extends QueryBuildingTest
                                         )
                                 ]))
         );
-    }
-
-    protected function sequenceSource()
-    {
-        return new Q\Common\Source\ArrayOrIterator($this->parameter());
-    }
-
-    protected function singleValueSource()
-    {
-        return new Q\Common\Source\SingleValue($this->parameter());
     }
 
     protected function addRangeQuery()

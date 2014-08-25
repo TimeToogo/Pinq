@@ -25,6 +25,11 @@ class SetIndex extends IndexOperation
         return self::SET_INDEX;
     }
 
+    public function getParameters()
+    {
+        return [$this->indexParameterId, $this->valueParameterId];
+    }
+
     /**
      * Gets the value parameter id.
      *

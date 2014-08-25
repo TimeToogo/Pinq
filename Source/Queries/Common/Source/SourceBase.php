@@ -15,6 +15,6 @@ abstract class SourceBase implements ISource
 {
     public function visit(ISegmentVisitor $visitor)
     {
-        return $this;
+
     }
 }

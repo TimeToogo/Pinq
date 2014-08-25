@@ -35,6 +35,11 @@ interface IRequest
     public function getType();
 
     /**
+     * @return string[]
+     */
+    public function getParameters();
+
+    /**
      * @param Requests\IRequestVisitor $visitor
      *
      * @return mixed

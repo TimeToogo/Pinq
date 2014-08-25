@@ -10,31 +10,25 @@ use Pinq\Queries\Functions;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class ProjectionRequest extends Request
+abstract class ProjectionRequest extends ProjectionRequestBase
 {
-    /**
-     * @var Functions\ElementProjection|null
-     */
-    private $projectionFunction;
-
-    public function __construct(Functions\ElementProjection $projectionFunction = null)
+    final public function __construct(Functions\ElementProjection $projectionFunction = null)
     {
-        $this->projectionFunction = $projectionFunction;
+        parent::__construct($projectionFunction);
     }
 
     /**
-     * @return boolean
+     * @param Functions\ElementProjection $projectionFunction
+     *
+     * @return static
      */
-    public function hasProjectionFunction()
+    public function update(Functions\ElementProjection $projectionFunction = null)
     {
-        return $this->projectionFunction !== null;
+        return $this->updateProjection($projectionFunction);
     }
 
-    /**
-     * @return Functions\ElementProjection|null
-     */
-    public function getProjectionFunction()
+    protected function withProjectionFunction(Functions\ElementProjection $projectionFunction = null)
     {
-        return $this->projectionFunction;
+        return new static($projectionFunction);
     }
 }

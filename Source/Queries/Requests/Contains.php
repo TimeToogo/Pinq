@@ -25,6 +25,11 @@ class Contains extends Request
         return self::CONTAINS;
     }
 
+    public function getParameters()
+    {
+        return [$this->valueId];
+    }
+
     /**
      * Gets the value parameter id.
      *

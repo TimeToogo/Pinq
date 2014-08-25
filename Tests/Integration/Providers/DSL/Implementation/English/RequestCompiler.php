@@ -65,7 +65,7 @@ class RequestCompiler extends Compilation\RequestCompiler
 
     public function visitContains(Requests\Contains $request)
     {
-        $this->compilation->append('Get if contains the parameter');
+        $this->compilation->append('Whether contains the parameter');
     }
 
     public function visitAggregate(Requests\Aggregate $request)
@@ -74,7 +74,7 @@ class RequestCompiler extends Compilation\RequestCompiler
         $this->compilation->appendFunction($request->getAggregatorFunction());
     }
 
-    protected function appendOptionalProjection($string, Requests\ProjectionRequest $request)
+    protected function appendOptionalProjection($string, Requests\ProjectionRequestBase $request)
     {
         $this->compilation->append($string);
         if ($request->hasProjectionFunction()) {

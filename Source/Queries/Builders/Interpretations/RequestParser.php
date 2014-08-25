@@ -56,17 +56,17 @@ class RequestParser extends BaseParser implements IRequestParser
 
     public function interpretOffsetGet($requestId, $indexId, $index)
     {
-        $this->request = new Requests\GetIndex($this->requireParameter($indexId));
+        $this->request = new Requests\GetIndex($indexId);
     }
 
     public function interpretOffsetExists($requestId, $indexId, $index)
     {
-        $this->request = new Requests\IssetIndex($this->requireParameter($indexId));
+        $this->request = new Requests\IssetIndex($indexId);
     }
 
     public function interpretContains($requestId, $valueId, $value)
     {
-        $this->request = new Requests\Contains($this->requireParameter($valueId));
+        $this->request = new Requests\Contains($valueId);
     }
 
     public function interpretFirst($requestId)
@@ -92,7 +92,7 @@ class RequestParser extends BaseParser implements IRequestParser
     public function interpretAggregate($requestId, IFunction $function)
     {
         $this->request = new Requests\Aggregate(
-                $this->requireFunction(
+                $this->buildFunction(
                         $function,
                         Queries\Functions\Aggregator::factory()
                 ));
@@ -100,16 +100,16 @@ class RequestParser extends BaseParser implements IRequestParser
 
     public function interpretMaximum($requestId, IFunction $function = null)
     {
-        $this->request = new Requests\Maximum($this->requireOptionalProjection($function));
+        $this->request = new Requests\Maximum($this->buildOptionalProjection($function));
     }
 
-    protected function requireOptionalProjection(IFunction $function = null)
+    protected function buildOptionalProjection(IFunction $function = null)
     {
         if ($function === null) {
             return null;
         }
 
-        return $this->requireFunction(
+        return $this->buildFunction(
                 $function,
                 Queries\Functions\ElementProjection::factory()
         );
@@ -117,33 +117,33 @@ class RequestParser extends BaseParser implements IRequestParser
 
     public function interpretMinimum($requestId, IFunction $function = null)
     {
-        $this->request = new Requests\Minimum($this->requireOptionalProjection($function));
+        $this->request = new Requests\Minimum($this->buildOptionalProjection($function));
     }
 
     public function interpretSum($requestId, IFunction $function = null)
     {
-        $this->request = new Requests\Sum($this->requireOptionalProjection($function));
+        $this->request = new Requests\Sum($this->buildOptionalProjection($function));
     }
 
     public function interpretAverage($requestId, IFunction $function = null)
     {
-        $this->request = new Requests\Average($this->requireOptionalProjection($function));
+        $this->request = new Requests\Average($this->buildOptionalProjection($function));
     }
 
     public function interpretAll($requestId, IFunction $function = null)
     {
-        $this->request = new Requests\All($this->requireOptionalProjection($function));
+        $this->request = new Requests\All($this->buildOptionalProjection($function));
     }
 
     public function interpretAny($requestId, IFunction $function = null)
     {
-        $this->request = new Requests\Any($this->requireOptionalProjection($function));
+        $this->request = new Requests\Any($this->buildOptionalProjection($function));
     }
 
     public function interpretImplode($requestId, $delimiterId, $delimiter, IFunction $function = null)
     {
         $this->request = new Requests\Implode(
-                $this->requireParameter($delimiterId),
-                $this->requireOptionalProjection($function));
+                $delimiterId,
+                $this->buildOptionalProjection($function));
     }
 }

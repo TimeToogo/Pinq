@@ -9,8 +9,9 @@ use Pinq\Queries;
 use Pinq\Tests\Integration\Providers\DSL\Implementation\DummyDSLQueryProvider;
 use Pinq\Tests\Integration\Providers\DSL\Implementation\DummyDSLRepositoryProvider;
 use Pinq\Tests\Integration\Queries\QueryBuildingTest;
+use Pinq\Tests\Integration\Queries\ParsedQueryBuildingTest;
 
-abstract class DSLCompilationProviderTest extends QueryBuildingTest
+abstract class DSLCompilationProviderTest extends ParsedQueryBuildingTest
 {
     /**
      * @var IRepositoryCompilerConfiguration
@@ -32,7 +33,11 @@ abstract class DSLCompilationProviderTest extends QueryBuildingTest
         return [new DummyDSLRepositoryProvider(new Queries\SourceInfo(''), $this->compilerConfiguration())];
     }
 
-    protected function assertRequestQueryMatches(Queries\IRequestQuery $requestQuery, $correctValue)
+    protected function assertRequestQueryMatches(
+            Queries\IRequestQuery $requestQuery,
+            Queries\IResolvedParameterRegistry $resolvedParameters,
+            $correctValue
+    )
     {
         /** @var $configuration IRepositoryCompilerConfiguration */
         $configuration = $this->queryable->getProvider()->getCompilerConfiguration();
@@ -43,7 +48,11 @@ abstract class DSLCompilationProviderTest extends QueryBuildingTest
         $this->assertSame($correctValue, $compiledString);
     }
 
-    protected function assertOperationQueryMatches(Queries\IOperationQuery $operationQuery, $correctValue)
+    protected function assertOperationQueryMatches(
+            Queries\IOperationQuery $operationQuery,
+            Queries\IResolvedParameterRegistry $resolvedParameters,
+            $correctValue
+    )
     {
         /** @var $configuration IRepositoryCompilerConfiguration */
         $configuration = $this->queryable->getProvider()->getCompilerConfiguration();
@@ -52,19 +61,5 @@ abstract class DSLCompilationProviderTest extends QueryBuildingTest
         $compiledString = (string) $operationQueryCompiler->compileOperationQuery($template, Queries\ResolvedParameterRegistry::none());
 
         $this->assertSame($correctValue, $compiledString);
-    }
-
-    /**
-     * @dataProvider queryable
-     */
-    public function tesProviderCachesCompiledQuery(IQueryable $queryable)
-    {
-        /** @var $provider DummyDSLQueryProvider */
-        $provider = $queryable->getProvider();
-        $queryCache = $this->compilerConfig->getCompiledQueryCache($queryable->getSourceInfo());
-
-        $queryable
-                ->where(function () { return true; });
-
     }
 }

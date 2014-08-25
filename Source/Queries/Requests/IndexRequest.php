@@ -12,15 +12,20 @@ abstract class IndexRequest extends Request
     /**
      * @var string
      */
-    private $indexParameter;
+    private $indexId;
 
-    public function __construct($indexParameter)
+    public function __construct($indexId)
     {
-        $this->indexParameter = $indexParameter;
+        $this->indexId = $indexId;
     }
 
-    final public function getIndexParameter()
+    public function getParameters()
     {
-        return $this->indexParameter;
+        return [$this->indexId];
+    }
+
+    final public function getIndexId()
+    {
+        return $this->indexId;
     }
 }

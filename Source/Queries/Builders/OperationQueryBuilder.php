@@ -28,32 +28,31 @@ class OperationQueryBuilder extends QueryBuilder implements IOperationQueryBuild
 
         return $this->buildOperationQuery(
                 $scopeParser->getScope(),
-                $operationParser->getOperation(),
-                $this->buildParameterRegistry($scopeParser, $operationParser)
+                $operationParser->getOperation()
         );
     }
 
     /**
-     * @param Queries\IScope             $scope
-     * @param Queries\IOperation         $operation
-     * @param Queries\IParameterRegistry $parameters
+     * @param Queries\IScope     $scope
+     * @param Queries\IOperation $operation
      *
      * @return Queries\IOperationQuery
      */
     protected function buildOperationQuery(
             Queries\IScope $scope,
-            Queries\IOperation $operation,
-            Queries\IParameterRegistry $parameters
+            Queries\IOperation $operation
     ) {
-        return new Queries\OperationQuery($scope, $operation, $parameters);
+        return new Queries\OperationQuery($scope, $operation);
     }
 
-    public function resolveOperation(O\Expression $expression)
-    {
+    public function resolveOperation(
+            O\Expression $expression,
+            O\IEvaluationContext $evaluationContext = null
+    ) {
         $scopeResolver     = $this->scopeBuilder->buildScopeResolver();
         $operationResolver = $this->buildOperationResolver();
 
-        $this->interpretOperationQuery($expression, $scopeResolver, $operationResolver);
+        $this->interpretOperationQuery($expression, $scopeResolver, $operationResolver, $evaluationContext);
 
         return $this->buildResolvedQuery($scopeResolver, $operationResolver);
     }

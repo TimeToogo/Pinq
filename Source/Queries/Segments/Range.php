@@ -30,6 +30,11 @@ class Range extends Segment
         return self::RANGE;
     }
 
+    public function getParameters()
+    {
+        return [$this->startParameterId, $this->amountParameterId];
+    }
+
     public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitRange($this);

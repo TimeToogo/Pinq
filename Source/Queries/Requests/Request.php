@@ -10,5 +10,8 @@ namespace Pinq\Queries\Requests;
  */
 abstract class Request implements \Pinq\Queries\IRequest
 {
-
+    public function getParameters()
+    {
+        return [];
+    }
 }

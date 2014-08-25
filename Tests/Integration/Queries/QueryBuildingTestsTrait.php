@@ -10,134 +10,11 @@ use Pinq\Providers;
 use Pinq\Parsing;
 use Pinq\Queries as Q;
 
-abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
+trait QueryBuildingTestsTrait
 {
-    const SCOPE_TYPE = __CLASS__;
-    const SCOPE_NAMESPACE = __NAMESPACE__;
+    abstract protected function assertRequestIsCorrect(callable $requestFunction, $correctValue, $onlyAsParsedExpression = false);
 
-    /**
-     * @var Parsing\IFunctionInterpreter
-     */
-    protected $functionInterpreter;
-
-    /**
-     * @var IQueryable
-     */
-    protected $queryable;
-
-    /**
-     * @var IRepository
-     */
-    protected $repository;
-
-    public function __construct($name = null, array $data = array(), $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->queryable = isset($data[0]) ? $data[0] : null;
-        $this->repository = $this->queryable instanceof IRepository ? $this->queryable : null;
-    }
-
-    protected function setUp()
-    {
-        $this->functionInterpreter = Parsing\FunctionInterpreter::getDefault();
-    }
-
-    /**
-     * @return Providers\IQueryProvider[]
-     */
-    abstract public function queryProviders();
-
-    /**
-     * @return Providers\IRepositoryProvider[]
-     */
-    abstract public function repositoryProviders();
-
-    final public function queryables()
-    {
-        $queryables = [];
-        foreach ($this->queryProviders() as $provider) {
-            $queryables[] = [$provider->createQueryable()];
-        }
-
-        return $queryables;
-    }
-
-    final public function repositories()
-    {
-        $repositories = [];
-        foreach ($this->repositoryProviders() as $provider) {
-            $repositories[] = [$provider->createRepository()];
-        }
-
-        return $repositories;
-    }
-
-    final public function allImplementations()
-    {
-        return array_merge($this->queryables(), $this->repositories());
-    }
-
-    final protected function assertRequestIsCorrect(callable $requestFunction, $correctValue, $onlyAsParsedExpression = false)
-    {
-        $requestBuilder = $this->queryable->getProvider()->getConfiguration()->getRequestQueryBuilder();
-
-        if (!$onlyAsParsedExpression) {
-            $request = $requestBuilder->parseRequest($requestFunction($this->queryable)->getExpression());
-            $this->assertRequestQueryMatches($request, $correctValue);
-        }
-
-        $request = $requestBuilder->parseRequest($this->parseQueryExpression($requestFunction, $evaluationContext), $evaluationContext);
-        $this->assertRequestQueryMatches($request, $correctValue);
-    }
-
-    abstract protected function assertRequestQueryMatches(Q\IRequestQuery $requestQuery, $correctValue);
-
-    final protected function assertOperationIsCorrect(callable $operationFunction, $correctValue)
-    {
-        $operationBuilder = $this->repository->getProvider()->getConfiguration()->getOperationQueryBuilder();
-
-        $operation = $operationBuilder->parseOperation($this->parseQueryExpression($operationFunction, $evaluationContext), $evaluationContext);
-        $this->assertOperationQueryMatches($operation, $correctValue);
-    }
-
-    abstract protected function assertOperationQueryMatches(Q\IOperationQuery $operationQuery, $correctValue);
-
-    protected function parseQueryExpression(callable $queryFunction, O\IEvaluationContext &$evaluationContext = null)
-    {
-        $reflection        = $this->functionInterpreter->getReflection($queryFunction);
-        $evaluationContext = $reflection->asEvaluationContext();
-        $function          = $this->functionInterpreter->getStructure($reflection);
-        $expressions       = $function->getBodyExpressions();
-        $this->assertCount(1, $expressions);
-
-        //Resolve the parameter variable with the queryable value and $this
-        $parameterName = $reflection->getSignature()->getParameterExpressions()[0]->getName();
-
-        $expression =  $expressions[0];
-        foreach ([$parameterName => $this->queryable, 'this' => $this] as $variable => $value) {
-            $variableReplacer = new O\DynamicExpressionWalker([
-                    O\VariableExpression::getType() => function (O\VariableExpression $expression) use ($variable, &$value) {
-                                if($expression->getName() instanceof O\ValueExpression
-                                        && $expression->getName()->getValue() === $variable) {
-                                    return O\Expression::value($value);
-                                } else {
-                                    return $expression;
-                                }
-                            },
-                    //Ignore closures
-                    O\ClosureExpression::getType() => function ($closure) { return $closure; }
-            ]);
-
-            $expression = $variableReplacer->walk($expression);
-        }
-
-        if ($expression instanceof O\ReturnExpression) {
-            return $expression->getValue();
-        } else {
-            return $expression;
-        }
-    }
+    abstract protected function assertOperationIsCorrect(callable $operationFunction, $correctValue);
 
     /**
      * @dataProvider allImplementations
@@ -281,6 +158,22 @@ abstract class QueryBuildingTest extends \Pinq\Tests\PinqTestCase
     }
 
     abstract protected function offsetIssetQuery();
+
+    /**
+     * @dataProvider allImplementations
+     */
+    public function testContains()
+    {
+        $this->assertRequestIsCorrect(
+                function (IQueryable $queryable) {
+                    $queryable->contains(null);
+                },
+                $this->containsQuery(),
+                true
+        );
+    }
+
+    abstract protected function containsQuery();
 
     /**
      * @dataProvider allImplementations

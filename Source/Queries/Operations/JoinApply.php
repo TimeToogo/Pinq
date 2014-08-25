@@ -40,6 +40,11 @@ class JoinApply extends Operation implements \Pinq\Queries\IOperation
         return self::JOIN_APPLY;
     }
 
+    public function getParameters()
+    {
+        return array_merge($this->options->getParameters(), $this->mutatorFunction->getParameterIds());
+    }
+
     /**
      * @return Common\Join\Options
      */
@@ -59,5 +64,22 @@ class JoinApply extends Operation implements \Pinq\Queries\IOperation
     public function traverse(IOperationVisitor $visitor)
     {
         $visitor->visitJoinApply($this);
+    }
+
+    /**
+     * @param Common\Join\Options        $options
+     * @param Functions\ConnectorMutator $mutatorFunction
+     *
+     * @return JoinApply
+     */
+    public function update(
+            Common\Join\Options $options,
+            Functions\ConnectorMutator $mutatorFunction
+    ) {
+        if ($this->options === $options && $this->mutatorFunction === $mutatorFunction) {
+            return $this;
+        }
+
+        return new self($options, $mutatorFunction);
     }
 }

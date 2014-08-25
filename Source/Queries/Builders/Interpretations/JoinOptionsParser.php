@@ -26,7 +26,7 @@ class JoinOptionsParser extends BaseParser implements IJoinOptionsParser
 
     public function interpretCustomJoinFilter(IFunction $predicate)
     {
-        $this->joinFilter = new Join\Filter\Custom($this->requireFunction(
+        $this->joinFilter = new Join\Filter\Custom($this->buildFunction(
                 $predicate,
                 Functions\ConnectorProjection::factory()
         ));
@@ -35,8 +35,8 @@ class JoinOptionsParser extends BaseParser implements IJoinOptionsParser
     public function interpretEqualityJoinFilter(IFunction $outerProjection, IFunction $innerProjection)
     {
         $this->joinFilter = new Join\Filter\Equality(
-                $this->requireFunction($outerProjection, Functions\ElementProjection::factory()),
-                $this->requireFunction($innerProjection, Functions\ElementProjection::factory())
+                $this->buildFunction($outerProjection, Functions\ElementProjection::factory()),
+                $this->buildFunction($innerProjection, Functions\ElementProjection::factory())
         );
     }
 
@@ -52,12 +52,12 @@ class JoinOptionsParser extends BaseParser implements IJoinOptionsParser
         $hasDefault = $defaultValueKeyPair !== null;
 
         $this->joinOptions = new Join\Options(
-                $this->requireSource($sourceInterpretation),
+                $sourceInterpretation->getSource(),
                 $isGroupJoin,
                 $this->joinFilter,
                 $hasDefault,
-                $hasDefault ? $this->requireParameter($defaultValueId) : null,
-                $hasDefault ? $this->requireParameter($defaultKeyId) : null
+                $hasDefault ? $defaultValueId : null,
+                $hasDefault ? $defaultKeyId : null
         );
     }
 }

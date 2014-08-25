@@ -29,6 +29,11 @@ class RemoveWhere extends Operation
         return $this->predicateFunction;
     }
 
+    public function getParameters()
+    {
+        return $this->predicateFunction->getParameterIds();
+    }
+
     public function getType()
     {
         return self::REMOVE_WHERE;
@@ -37,5 +42,19 @@ class RemoveWhere extends Operation
     public function traverse(IOperationVisitor $visitor)
     {
         return $visitor->visitRemoveWhere($this);
+    }
+
+    /**
+     * @param Functions\ElementProjection $predicateFunction
+     *
+     * @return RemoveWhere
+     */
+    public function update(Functions\ElementProjection $predicateFunction)
+    {
+        if($this->predicateFunction === $predicateFunction) {
+            return $this;
+        }
+
+        return new self($predicateFunction);
     }
 }

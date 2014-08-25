@@ -28,6 +28,14 @@ class Ordering
     }
 
     /**
+     * @return string[]
+     */
+    public function getParameters()
+    {
+        return array_merge([$this->isAscendingId], $this->projectionFunction->getParameterIds());
+    }
+
+    /**
      * @return Functions\ElementProjection
      */
     public function getProjectionFunction()
@@ -43,5 +51,19 @@ class Ordering
     public function getIsAscendingId()
     {
         return $this->isAscendingId;
+    }
+
+    /**
+     * @param Functions\ElementProjection $projectionFunction
+     *
+     * @return Ordering
+     */
+    public function update(Functions\ElementProjection $projectionFunction)
+    {
+        if($this->projectionFunction === $projectionFunction) {
+            return $this;
+        }
+
+        return new self($projectionFunction, $this->isAscendingId);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Pinq\Queries\Common\Join;
 
+use Pinq\Expressions as O;
+
 /**
  * Interface for a join filter.
  *
@@ -16,4 +18,16 @@ interface IFilter
      * @return int
      */
     public function getType();
+
+    /**
+     * @return string[]
+     */
+    public function getParameters();
+
+    /**
+     * @param O\ExpressionWalker $walker
+     *
+     * @return static
+     */
+    public function walk(O\ExpressionWalker $walker);
 }

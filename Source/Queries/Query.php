@@ -19,10 +19,10 @@ abstract class Query implements IQuery
      */
     protected $parameters;
 
-    public function __construct(IScope $scope, IParameterRegistry $parameters)
+    public function __construct(IScope $scope, array $queryParameters)
     {
         $this->scope      = $scope;
-        $this->parameters = $parameters;
+        $this->parameters = new ParameterRegistry(array_merge($scope->getParameters(), $queryParameters));
     }
 
     final public function getScope()
@@ -34,4 +34,15 @@ abstract class Query implements IQuery
     {
         return $this->parameters;
     }
+
+    public function updateScope(IScope $scope)
+    {
+        if ($this->scope === $scope) {
+            return $this;
+        }
+
+        $this->withScope($scope);
+    }
+
+    abstract protected function withScope(IScope $scope);
 }

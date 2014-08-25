@@ -22,4 +22,13 @@ interface IQuery
      * @return IScope
      */
     public function getScope();
+
+    /**
+     * Returns the query with the supplied scope.
+     *
+     * @param IScope $scope
+     *
+     * @return static
+     */
+    public function updateScope(IScope $scope);
 }

@@ -2,6 +2,7 @@
 
 namespace Pinq\Queries\Common\Join\Filter;
 
+use Pinq\Expressions as O;
 use Pinq\Queries\Common\Join\IFilter;
 use Pinq\Queries\Functions;
 
@@ -29,11 +30,35 @@ final class Custom implements IFilter
         return self::CUSTOM;
     }
 
+    public function getParameters()
+    {
+        return $this->onFunction->getParameterIds();
+    }
+
     /**
      * @return Functions\ConnectorProjection
      */
     public function getOnFunction()
     {
         return $this->onFunction;
+    }
+
+    /**
+     * @param Functions\ConnectorProjection $onFunction
+     *
+     * @return Custom
+     */
+    public function update(Functions\ConnectorProjection $onFunction)
+    {
+        if ($this->onFunction === $onFunction) {
+            return $this;
+        }
+
+        return new self($onFunction);
+    }
+
+    public function walk(O\ExpressionWalker $walker)
+    {
+        return $this->update($this->onFunction->walk($walker));
     }
 }

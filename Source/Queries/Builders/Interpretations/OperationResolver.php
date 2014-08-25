@@ -43,12 +43,6 @@ class OperationResolver extends BaseResolver implements IOperationResolver
         $this->resolveParametersFrom($sourceInterpretation);
     }
 
-    public function interpretRemove($operationId, $valueId, $value)
-    {
-        $this->appendToHash($operationId);
-        $this->resolveParameter($valueId, $value);
-    }
-
     public function interpretRemoveRange($operationId, ISourceInterpretation $sourceInterpretation)
     {
         /** @var $sourceInterpretation ISourceResolver */

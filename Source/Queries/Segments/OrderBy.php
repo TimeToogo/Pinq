@@ -27,6 +27,19 @@ class OrderBy extends Segment
         return self::ORDER_BY;
     }
 
+    public function getParameters()
+    {
+        return call_user_func_array(
+                'array_merge',
+                array_map(
+                        function (Ordering $ordering) {
+                            return $ordering->getParameters();
+                        },
+                        $this->orderings
+                )
+        );
+    }
+
     public function traverse(ISegmentVisitor $visitor)
     {
         return $visitor->visitOrderBy($this);
@@ -40,6 +53,11 @@ class OrderBy extends Segment
         return $this->orderings;
     }
 
+    /**
+     * @param Ordering[] $orderings
+     *
+     * @return OrderBy
+     */
     public function update(array $orderings)
     {
         if ($this->orderings === $orderings) {

@@ -57,9 +57,9 @@ class ScopeParser extends BaseParser implements IScopeParser
      *
      * @return Functions\ElementProjection
      */
-    final protected function requireElementProjection(IFunction $function)
+    final protected function buildElementProjection(IFunction $function)
     {
-        return $this->requireFunction(
+        return $this->buildFunction(
                 $function,
                 Functions\ElementProjection::factory()
         );
@@ -67,7 +67,7 @@ class ScopeParser extends BaseParser implements IScopeParser
 
     public function interpretWhere($segmentId, IFunction $predicate)
     {
-        $this->segments[] = new Segments\Filter($this->requireElementProjection($predicate));
+        $this->segments[] = new Segments\Filter($this->buildElementProjection($predicate));
     }
 
     public function interpretOrderings($segmentId, array $orderings)
@@ -77,8 +77,8 @@ class ScopeParser extends BaseParser implements IScopeParser
         foreach ($orderings as $ordering) {
             list($projection, $isAscendingId, $isAscendingValue) = $ordering;
             $orderingSections[] = new Segments\Ordering(
-                    $this->requireElementProjection($projection),
-                    $this->requireParameter($isAscendingId));
+                    $this->buildElementProjection($projection),
+                    $isAscendingId);
         }
 
         $this->segments[] = new Segments\OrderBy($orderingSections);
@@ -86,14 +86,12 @@ class ScopeParser extends BaseParser implements IScopeParser
 
     public function interpretSlice($segmentId, $startId, $start, $amountId, $amount)
     {
-        $this->segments[] = new Segments\Range(
-                $this->requireParameter($startId),
-                $this->requireParameter($amountId));
+        $this->segments[] = new Segments\Range($startId, $amountId);
     }
 
     public function interpretIndexBy($segmentId, IFunction $projection)
     {
-        $this->segments[] = new Segments\IndexBy($this->requireElementProjection($projection));
+        $this->segments[] = new Segments\IndexBy($this->buildElementProjection($projection));
     }
 
     public function interpretKeys($segmentId)
@@ -108,7 +106,7 @@ class ScopeParser extends BaseParser implements IScopeParser
 
     public function interpretGroupBy($segmentId, IFunction $projection)
     {
-        $this->segments[] = new Segments\GroupBy($this->requireElementProjection($projection));
+        $this->segments[] = new Segments\GroupBy($this->buildElementProjection($projection));
     }
 
     public function interpretJoin(
@@ -118,18 +116,18 @@ class ScopeParser extends BaseParser implements IScopeParser
     ) {
         /* @var $joinOptionsInterpretation IJoinOptionsParser */
         $this->segments[] = new Segments\Join(
-                $this->requireJoinOptions($joinOptionsInterpretation),
-                $this->requireFunction($joinToFunction, Functions\ConnectorProjection::factory()));
+                $joinOptionsInterpretation->getJoinOptions(),
+                $this->buildFunction($joinToFunction, Functions\ConnectorProjection::factory()));
     }
 
     public function interpretSelect($segmentId, IFunction $projection)
     {
-        $this->segments[] = new Segments\Select($this->requireElementProjection($projection));
+        $this->segments[] = new Segments\Select($this->buildElementProjection($projection));
     }
 
     public function interpretSelectMany($segmentId, IFunction $projection)
     {
-        $this->segments[] = new Segments\SelectMany($this->requireElementProjection($projection));
+        $this->segments[] = new Segments\SelectMany($this->buildElementProjection($projection));
     }
 
     public function interpretUnique($segmentId)
@@ -142,6 +140,6 @@ class ScopeParser extends BaseParser implements IScopeParser
         /* @var $sourceInterpretation ISourceParser */
         $this->segments[] = new Segments\Operation(
                 $operationType,
-                $this->requireSource($sourceInterpretation));
+                $sourceInterpretation->getSource());
     }
 }

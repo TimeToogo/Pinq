@@ -27,9 +27,13 @@ interface IOperationQueryBuilder extends IQueryBuilder
     /**
      * Resolves the query requirements from the supplied expression.
      *
-     * @param O\Expression $expression
+     * @param O\Expression              $expression
+     * @param O\IEvaluationContext|null $evaluationContext
      *
      * @return Queries\IResolvedQuery
      */
-    public function resolveOperation(O\Expression $expression);
+    public function resolveOperation(
+            O\Expression $expression,
+            O\IEvaluationContext $evaluationContext = null
+    );
 }

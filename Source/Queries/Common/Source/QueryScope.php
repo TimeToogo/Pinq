@@ -2,9 +2,9 @@
 
 namespace Pinq\Queries\Common\Source;
 
-use Pinq\Queries;
-use Pinq\Queries\Segments;
 use Pinq\Queries\Segments\ISegmentVisitor;
+use Pinq\Queries\Segments;
+use Pinq\Queries;
 
 /**
  * Query scope value source.
@@ -36,8 +36,27 @@ class QueryScope extends SourceBase
         return $this->scope;
     }
 
+    public function getParameters()
+    {
+        return $this->scope->getParameters();
+    }
+
     public function visit(ISegmentVisitor $visitor)
     {
-        $visitor->visit($this->scope);
+        $this->scope->visit($visitor);
+    }
+
+    /**
+     * @param Queries\IScope $scope
+     *
+     * @return QueryScope
+     */
+    public function update(Queries\IScope $scope)
+    {
+        if ($this->scope === $scope) {
+            return $this;
+        }
+
+        return new self($scope);
     }
 }

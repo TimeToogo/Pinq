@@ -39,6 +39,11 @@ class Join implements \Pinq\Queries\ISegment
         return self::JOIN;
     }
 
+    public function getParameters()
+    {
+        return array_merge($this->options->getParameters(), $this->joiningFunction->getParameterIds());
+    }
+
     /**
      * @return Common\Join\Options
      */
@@ -60,6 +65,12 @@ class Join implements \Pinq\Queries\ISegment
         return $visitor->visitJoin($this);
     }
 
+    /**
+     * @param Common\Join\Options           $options
+     * @param Functions\ConnectorProjection $joiningFunction
+     *
+     * @return Join
+     */
     public function update(
             Common\Join\Options $options,
             Functions\ConnectorProjection $joiningFunction

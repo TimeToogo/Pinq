@@ -2,8 +2,12 @@
 
 namespace Pinq\Tests\Integration\Providers\DSL;
 
+use Pinq\Tests\Integration\Queries\QueryBuildingTestsTrait;
+
 class EnglishDSLProviderTest extends DSLCompilationProviderTest
 {
+    use QueryBuildingTestsTrait;
+
     protected function compilerConfiguration()
     {
         return new Implementation\English\Configuration();
@@ -62,6 +66,13 @@ ENG;
     {
         return <<<'ENG'
 Get whether the index is set
+ENG;
+    }
+
+    protected function containsQuery()
+    {
+        return <<<'ENG'
+Whether contains the parameter
 ENG;
     }
 

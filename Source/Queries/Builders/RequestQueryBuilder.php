@@ -23,32 +23,31 @@ class RequestQueryBuilder extends QueryBuilder implements IRequestQueryBuilder
 
         return $this->buildRequestQuery(
                 $scopeParser->getScope(),
-                $requestParser->getRequest(),
-                $this->buildParameterRegistry($scopeParser, $requestParser)
+                $requestParser->getRequest()
         );
     }
 
     /**
-     * @param Queries\IScope             $scope
-     * @param Queries\IRequest           $request
-     * @param Queries\IParameterRegistry $parameters
+     * @param Queries\IScope   $scope
+     * @param Queries\IRequest $request
      *
      * @return Queries\IRequestQuery
      */
     protected function buildRequestQuery(
             Queries\IScope $scope,
-            Queries\IRequest $request,
-            Queries\IParameterRegistry $parameters
+            Queries\IRequest $request
     ) {
-        return new Queries\RequestQuery($scope, $request, $parameters);
+        return new Queries\RequestQuery($scope, $request);
     }
 
-    public function resolveRequest(O\Expression $expression)
-    {
+    public function resolveRequest(
+            O\Expression $expression,
+            O\IEvaluationContext $evaluationContext = null
+    ) {
         $scopeResolver   = $this->scopeBuilder->buildScopeResolver();
         $requestResolver = $this->buildRequestResolver();
 
-        $this->interpretRequestQuery($expression, $scopeResolver, $requestResolver);
+        $this->interpretRequestQuery($expression, $scopeResolver, $requestResolver, $evaluationContext);
 
         return $this->buildResolvedQuery($scopeResolver, $requestResolver);
     }

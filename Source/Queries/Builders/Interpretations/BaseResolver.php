@@ -2,11 +2,12 @@
 
 namespace Pinq\Queries\Builders\Interpretations;
 
-use Pinq\Parsing;
 use Pinq\Parsing\IFunctionInterpreter;
-use Pinq\Queries;
+use Pinq\Parsing;
 use Pinq\Queries\Builders\Functions\CallableFunction;
+use Pinq\Queries\Builders\Functions\ClosureExpressionFunction;
 use Pinq\Queries\Builders\Functions\IFunction;
+use Pinq\Queries;
 
 class BaseResolver extends BaseInterpretation implements IQueryResolver
 {
@@ -56,6 +57,23 @@ class BaseResolver extends BaseInterpretation implements IQueryResolver
         if ($function instanceof CallableFunction) {
             $reflection = $this->functionInterpreter->getReflection($callable);
             $this->resolveFunctionScope($function, $reflection);
+        } elseif ($function instanceof ClosureExpressionFunction) {
+            $expression = $function->getExpression();
+            $this->hash .= $expression->hash();
+            if($function->hasEvaluationContext()) {
+                $evaluationContext = $function->getEvaluationContext();
+                $this->resolveParameter(
+                        $this->getFunctionScopedVariableParameter($function, 'this'),
+                        $evaluationContext->getThis()
+                );
+
+                foreach (array_intersect_key(
+                                 $evaluationContext->getVariableTable(),
+                                 array_flip($expression->getUsedVariableNames())
+                         ) as $variableName => $value) {
+                    $this->resolveParameter($this->getFunctionScopedVariableParameter($function, $variableName), $value);
+                }
+            }
         } else {
             throw new \Pinq\PinqException(
                     'Cannot resolve function: unsupported function type %s',
@@ -81,7 +99,10 @@ class BaseResolver extends BaseInterpretation implements IQueryResolver
         $this->hash .= $reflection->getGlobalHash();
 
         if (!$reflection->getSignature()->isStatic()) {
-            $this->resolveParameter($this->getFunctionScopedVariableParameter($function, 'this'), $reflection->getScope()->getThis());
+            $this->resolveParameter(
+                    $this->getFunctionScopedVariableParameter($function, 'this'),
+                    $reflection->getScope()->getThis()
+            );
         }
 
         $variableValueMap = $reflection->getScope()->getVariableTable();

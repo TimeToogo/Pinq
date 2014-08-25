@@ -27,6 +27,11 @@ interface IOperation
     public function getType();
 
     /**
+     * @return string[]
+     */
+    public function getParameters();
+
+    /**
      * @param Operations\IOperationVisitor $visitor
      *
      * @return mixed

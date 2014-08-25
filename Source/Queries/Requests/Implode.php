@@ -6,11 +6,11 @@ use Pinq\Queries\Functions;
 
 /**
  * Request query for a string of all the projected values
- * concatenated by the specified delimiter
+ * concatenated with the specified delimiter.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class Implode extends ProjectionRequest
+class Implode extends ProjectionRequestBase
 {
     /**
      * @var string
@@ -29,6 +29,11 @@ class Implode extends ProjectionRequest
         return self::IMPLODE;
     }
 
+    public function getParameters()
+    {
+        return array_merge([$this->delimiterId], parent::getParameters());
+    }
+
     /**
      * Gets the value parameter id.
      *
@@ -42,5 +47,10 @@ class Implode extends ProjectionRequest
     public function traverse(IRequestVisitor $visitor)
     {
         return $visitor->visitImplode($this);
+    }
+
+    protected function withProjectionFunction(Functions\ElementProjection $projectionFunction = null)
+    {
+        return new self($this->delimiterId, $projectionFunction);
     }
 }
