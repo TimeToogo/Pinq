@@ -14,6 +14,9 @@ class GeneratorScheme extends Common\IteratorScheme
 {
     public static function compatibleWith($phpVersion)
     {
+        // HHVM does not support foreach by reference on iterators.
+        // This is used extensively by the generator classes,
+        // hence fallback to the standard iterator scheme.
         return version_compare($phpVersion, '5.5.0', '>=')
                 && strpos($phpVersion, 'hhvm') === false
                 && strpos($phpVersion, 'hiphop') === false;
