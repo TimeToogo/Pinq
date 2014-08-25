@@ -3,7 +3,6 @@
 namespace Pinq\Queries\Functions;
 
 use Pinq\Expressions as O;
-use Pinq\Queries\IResolvedParameterRegistry;
 
 /**
  * Base class of a function structure.
@@ -13,27 +12,9 @@ use Pinq\Queries\IResolvedParameterRegistry;
 abstract class FunctionBase implements \Serializable
 {
     /**
-     * @var string
+     * @var FunctionEvaluationContextFactory
      */
-    protected $callableId;
-
-    /**
-     * @var string|null
-     */
-    protected $scopeType;
-
-    /**
-     * @var string|null
-     */
-    protected $namespace;
-
-    /**
-     * Array containing the scoped variable names of the function indexed
-     * by their respective parameter names.
-     *
-     * @var array<string, string>
-     */
-    protected $parameterScopedVariableMap;
+    protected $evaluationContextFactory;
 
     /**
      * The structure of the function's parameters
@@ -57,12 +38,15 @@ abstract class FunctionBase implements \Serializable
             array $parameterExpressions,
             array $bodyExpressions = null
     ) {
-        $this->callableId                 = $callableId;
-        $this->scopeType                  = $scopeType;
-        $this->namespace                  = $namespace;
-        $this->parameterScopedVariableMap = $parameterScopedVariableMap;
-        $this->parameters                 = $this->getParameterStructure($parameterExpressions);
-        $this->bodyExpressions            = $bodyExpressions;
+        $this->parameters               = $this->getParameterStructure($parameterExpressions);
+        $this->bodyExpressions          = $bodyExpressions;
+        $this->evaluationContextFactory =
+                new FunctionEvaluationContextFactory(
+                        $namespace,
+                        $scopeType,
+                        $callableId,
+                        $parameterScopedVariableMap,
+                        $this->parameters->getUnusedParameterDefaultMap());
 
         $this->initialize();
     }
@@ -70,14 +54,6 @@ abstract class FunctionBase implements \Serializable
     protected function initialize()
     {
 
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getParameterIds()
-    {
-        return array_merge([$this->callableId], array_keys($this->parameterScopedVariableMap));
     }
 
     /**
@@ -121,7 +97,7 @@ abstract class FunctionBase implements \Serializable
      */
     final public function getCallableId()
     {
-        return $this->callableId;
+        return $this->evaluationContextFactory->getCallableId();
     }
 
     /**
@@ -131,7 +107,7 @@ abstract class FunctionBase implements \Serializable
      */
     public function hasScopeType()
     {
-        return $this->scopeType !== null;
+        return $this->evaluationContextFactory->hasScopeType();
     }
 
     /**
@@ -142,7 +118,7 @@ abstract class FunctionBase implements \Serializable
      */
     public function getScopeType()
     {
-        return $this->scopeType;
+        return $this->evaluationContextFactory->getScopeType();
     }
 
     /**
@@ -152,7 +128,7 @@ abstract class FunctionBase implements \Serializable
      */
     public function hasNamespace()
     {
-        return $this->namespace !== null;
+        return $this->evaluationContextFactory->hasNamespace();
     }
 
     /**
@@ -163,7 +139,7 @@ abstract class FunctionBase implements \Serializable
      */
     public function getNamespace()
     {
-        return $this->namespace;
+        return $this->evaluationContextFactory->getNamespace();
     }
 
     /**
@@ -192,17 +168,14 @@ abstract class FunctionBase implements \Serializable
      */
     public function getParameterScopedVariableMap()
     {
-        return $this->parameterScopedVariableMap;
+        return $this->evaluationContextFactory->getParameterScopedVariableMap();
     }
 
     final public function serialize()
     {
         return serialize(
                 [
-                        $this->callableId,
-                        $this->scopeType,
-                        $this->namespace,
-                        $this->parameterScopedVariableMap,
+                        $this->evaluationContextFactory,
                         $this->parameters,
                         $this->bodyExpressions,
                         $this->dataToSerialize()
@@ -218,10 +191,7 @@ abstract class FunctionBase implements \Serializable
     final public function unserialize($data)
     {
         list(
-                $this->callableId,
-                $this->scopeType,
-                $this->namespace,
-                $this->parameterScopedVariableMap,
+                $this->evaluationContextFactory,
                 $this->parameters,
                 $this->bodyExpressions,
                 $data) = unserialize($data);
@@ -303,51 +273,24 @@ abstract class FunctionBase implements \Serializable
     }
 
     /**
-     * Gets an array containing default values indexed by their
-     * respective unused parameter name.
-     * This is useful as it will introduce variables in the scope of the
-     * function that may be validly used.
-     *
-     * @return array<string, mixed>
+     * @return string[]
      */
-    public function getUnusedParameterDefaultValueMap()
+    public function getParameterIds()
     {
-        $defaultValueMap = [];
-        foreach ($this->parameters->getUnusedParameterDefaultMap() as $name => $defaultValueExpression) {
-            if ($defaultValueExpression !== null) {
-                /** @var $defaultValueExpression O\Expression */
-                $defaultValueMap[$name] = $defaultValueExpression->evaluate(
-                        O\EvaluationContext::staticContext($this->namespace, $this->scopeType)
-                );
-            }
-        }
-
-        return $defaultValueMap;
+        return array_merge(
+                [$this->evaluationContextFactory->getCallableId()],
+                array_keys($this->evaluationContextFactory->getParameterScopedVariableMap())
+        );
     }
 
     /**
-     * Gets an evaluation context for function with the resolved parameters.
+     * Gets an evaluation context factory of the function.
      *
-     * @param IResolvedParameterRegistry|null $parameters
-     *
-     * @return O\IEvaluationContext
+     * @return FunctionEvaluationContextFactory
      */
-    public function getEvaluationContext(IResolvedParameterRegistry $parameters = null)
+    public function getEvaluationContextFactory()
     {
-        $thisObject    = null;
-        $variableTable = array_fill_keys($this->parameterScopedVariableMap, null);
-        if ($parameters !== null) {
-            foreach ($this->parameterScopedVariableMap as $parameter => $variableName) {
-                if ($variableName === 'this') {
-                    $thisObject = $parameters[$parameter];
-                } else {
-                    $variableTable[$variableName] = $parameters[$parameter];
-                }
-            }
-        }
-        $variableTable = $variableTable + $this->getUnusedParameterDefaultValueMap();
-
-        return new O\EvaluationContext($this->namespace, $this->scopeType, $thisObject, $variableTable);
+        return $this->evaluationContextFactory;
     }
 
     /**
@@ -366,9 +309,9 @@ abstract class FunctionBase implements \Serializable
             array $parameterExpressions,
             array $bodyExpressions = null
     ) {
-        if ($this->scopeType === $scopeType
-                && $this->namespace === $namespace
-                && $this->parameterScopedVariableMap === $parameterScopedVariableMap
+        if ($this->evaluationContextFactory->getScopeType() === $scopeType
+                && $this->evaluationContextFactory->getNamespace() === $namespace
+                && $this->evaluationContextFactory->getParameterScopedVariableMap() === $parameterScopedVariableMap
                 && $this->parameters->getAll() === $parameterExpressions
                 && $this->bodyExpressions === $bodyExpressions
         ) {
@@ -376,7 +319,7 @@ abstract class FunctionBase implements \Serializable
         }
 
         return new static(
-                $this->callableId,
+                $this->evaluationContextFactory->getCallableId(),
                 $scopeType,
                 $namespace,
                 $parameterScopedVariableMap,
@@ -397,6 +340,22 @@ abstract class FunctionBase implements \Serializable
                 $this->parameterScopedVariableMap,
                 $this->parameters->getAll(),
                 $bodyExpressions
+        );
+    }
+
+    /**
+     * @param O\ExpressionWalker $walker
+     *
+     * @return static
+     */
+    final public function walk(O\ExpressionWalker $walker)
+    {
+        return $this->update(
+                $this->evaluationContextFactory->getScopeType(),
+                $this->evaluationContextFactory->getNamespace(),
+                $this->evaluationContextFactory->getParameterScopedVariableMap(),
+                $walker->walkAll($this->parameters->getAll()),
+                $this->isInternal() ? null : $walker->walkAll($this->bodyExpressions)
         );
     }
 }

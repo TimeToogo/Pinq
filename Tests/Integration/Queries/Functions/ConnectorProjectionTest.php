@@ -43,6 +43,5 @@ class ConnectorProjectionTest extends ProjectionBaseTest
         $this->assertSame([], $function->getParameters()->getRequiredUnusedParameters());
         $this->assertSame([], $function->getParameters()->getUnused());
         $this->assertSame([], $function->getParameters()->getUnusedParameterDefaultMap());
-        $this->assertSame([], $function->getUnusedParameterDefaultValueMap());
     }
 }

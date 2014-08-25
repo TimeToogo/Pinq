@@ -34,7 +34,6 @@ class ElementProjectionTest extends ProjectionBaseTest
         $this->assertSame([], $function->getParameters()->getRequiredUnusedParameters());
         $this->assertSame([], $function->getParameters()->getUnused());
         $this->assertSame([], $function->getParameters()->getUnusedParameterDefaultMap());
-        $this->assertSame([], $function->getUnusedParameterDefaultValueMap());
     }
 
     public function testEmptyParameters()
@@ -50,7 +49,6 @@ class ElementProjectionTest extends ProjectionBaseTest
         $this->assertSame([], $function->getParameters()->getRequiredUnusedParameters());
         $this->assertSame([], $function->getParameters()->getUnused());
         $this->assertSame([], $function->getParameters()->getUnusedParameterDefaultMap());
-        $this->assertSame([], $function->getUnusedParameterDefaultValueMap());
     }
 
     public function testRequiredExcessiveParameters()
@@ -84,11 +82,7 @@ class ElementProjectionTest extends ProjectionBaseTest
         );
         $this->assertEquals(
                 [],
-                $function->getUnusedParameterDefaultValueMap()
-        );
-        $this->assertEquals(
-                [],
-                $function->getEvaluationContext()->getVariableTable()
+                $function->getEvaluationContextFactory()->getEvaluationContext()->getVariableTable()
         );
     }
 
@@ -123,11 +117,7 @@ class ElementProjectionTest extends ProjectionBaseTest
         );
         $this->assertEquals(
                 ['excessive1' => [true], 'excessive2' => [false]],
-                $function->getUnusedParameterDefaultValueMap()
-        );
-        $this->assertEquals(
-                ['excessive1' => [true], 'excessive2' => [false]],
-                $function->getEvaluationContext()->getVariableTable()
+                $function->getEvaluationContextFactory()->getEvaluationContext()->getVariableTable()
         );
     }
 
@@ -165,17 +155,21 @@ class ElementProjectionTest extends ProjectionBaseTest
                 $function->getParameters()->getUnusedParameterDefaultMap()
         );
 
-        define('__RELATIVE_CONSTANT', 'in global namespace');
-        $this->assertEquals(
-                ['excessive1' => 'in global namespace', 'excessive2' => [false]],
-                $function->getUnusedParameterDefaultValueMap()
-        );
+        //This fails in PHP due to strange behaviour with closures and relative constants.
+        //Bug reported: https://bugs.php.net/bug.php?id=67897
+        if (defined('HHVM_VERSION')) {
+            define('__RELATIVE_CONSTANT', 'in global namespace');
+            $this->assertEquals(
+                    ['excessive1' => 'in global namespace', 'excessive2' => [false]],
+                    $function->getEvaluationContextFactory()->getEvaluationContext()->getVariableTable()
+            );
 
-        //Should take precedence
-        define(__NAMESPACE__ . '\\__RELATIVE_CONSTANT', 'in relative namespace');
-        $this->assertEquals(
-                ['excessive1' => 'in relative namespace', 'excessive2' => [false]],
-                $function->getUnusedParameterDefaultValueMap()
-        );
+            //Should take precedence
+            define(__NAMESPACE__ . '\\__RELATIVE_CONSTANT', 'in relative namespace');
+            $this->assertEquals(
+                    ['excessive1' => 'in relative namespace', 'excessive2' => [false]],
+                    $function->getEvaluationContextFactory()->getEvaluationContext()->getVariableTable()
+            );
+        }
     }
 }

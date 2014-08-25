@@ -87,9 +87,10 @@ abstract class FunctionTest extends PinqTestCase
         $this->assertSame(0, $function->countBodyExpressionsUntilReturn());
         $this->assertEquals([], $function->getBodyExpressions());
         $this->assertEquals([], $function->getBodyExpressionsUntilReturn());
+        $this->assertEquals(['CALLABLE!!'], $function->getParameterIds());
         $this->assertEquals(
                 O\EvaluationContext::globalScope(),
-                $function->getEvaluationContext(ResolvedParameterRegistry::none())
+                $function->getEvaluationContextFactory()->getEvaluationContext(ResolvedParameterRegistry::none())
         );
     }
 
@@ -101,6 +102,7 @@ abstract class FunctionTest extends PinqTestCase
         $this->assertSame(1, $function->getParameters()->count());
         $this->assertEquals([O\Expression::parameter('foo')], $function->getParameters()->getAll());
         $this->assertEquals(['param' => 'scope'], $function->getParameterScopedVariableMap());
+        $this->assertEquals(['', 'param'], $function->getParameterIds());
         $this->assertSame(true, $function->hasScopeType());
         $this->assertSame(__CLASS__, $function->getScopeType());
         $this->assertSame(true, $function->hasNamespace());
@@ -125,7 +127,7 @@ abstract class FunctionTest extends PinqTestCase
         );
         $this->assertEquals(
                 new O\EvaluationContext(__NAMESPACE__, __CLASS__, null, ['scope' => 'value']),
-                $function->getEvaluationContext(new ResolvedParameterRegistry(['param' => 'value']))
+                $function->getEvaluationContextFactory()->getEvaluationContext(new ResolvedParameterRegistry(['param' => 'value']))
         );
     }
 
