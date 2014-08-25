@@ -42,13 +42,21 @@ class ExpressionWalker
      */
     final public function walkAll(array $expressions)
     {
-        $walkedExpressions = $expressions;
+        return $this->doWalkAll($expressions);
+    }
 
-        foreach ($expressions as $key => $expression) {
-            $walkedExpressions[$key] = $this->walk($expression);
+    /**
+     * @param Expression|null[] $expressions
+     *
+     * @return Expression[]
+     */
+    protected function doWalkAll(array $expressions)
+    {
+        foreach($expressions as $key => $expression) {
+            $expressions[$key] = $this->walk($expression);
         }
 
-        return $walkedExpressions;
+        return $expressions;
     }
 
     public function walkArray(ArrayExpression $expression)
