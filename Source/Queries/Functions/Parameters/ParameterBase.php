@@ -115,7 +115,7 @@ abstract class ParameterBase implements \Countable
      * This is useful as it will introduce variables in the scope of the
      * function that may be validly used.
      *
-     * @return array<string, O\Expression>
+     * @return O\Expression[]
      */
     public function getUnusedParameterDefaultMap()
     {
