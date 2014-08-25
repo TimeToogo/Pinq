@@ -2,6 +2,8 @@
 
 namespace Pinq\Expressions;
 
+use Pinq\PinqException;
+
 /**
  * Implementation of the evaluation context.
  *
@@ -31,10 +33,15 @@ class EvaluationContext implements IEvaluationContext
 
     public function __construct($namespace, $scopeType, $thisObject = null, array $variableTable = [])
     {
-        $this->namespace        = $namespace;
-        $this->scopeType        = $scopeType;
-        $this->thisObject       = $thisObject;
+        $this->namespace     = $namespace;
+        $this->scopeType     = $scopeType;
+        $this->thisObject    = $thisObject;
         $this->variableTable = $variableTable;
+        if(array_key_exists('this', $this->variableTable)) {
+            throw new PinqException(
+                    'Cannot create %s: invalid variable table, \'this\' variable is disallowed (use $thisObject constructor argument instead).',
+                    get_class($this));
+        }
     }
 
     /**
