@@ -4,15 +4,21 @@ namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
 use Pinq\Expressions\Expression;
 use Pinq\Providers\DSL\Compilation;
+use Pinq\Providers\DSL\Compilation\Parameters;
 use Pinq\Queries;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
-class CompiledQuery implements Compilation\ICompiledRequest, Compilation\ICompiledOperation
+class CompiledQuery extends Compilation\CompiledQuery implements Compilation\ICompiledRequest, Compilation\ICompiledOperation
 {
     /**
      * @var string
      */
     private $english = '';
+
+    public function __construct($english = '')
+    {
+        parent::__construct(Parameters\ExpressionRegistry::none());
+        $this->english = $english;
+    }
 
     /**
      * @param string $english
@@ -69,8 +75,6 @@ class CompiledQuery implements Compilation\ICompiledRequest, Compilation\ICompil
     }
 
     public function appendSource(
-            ScopeCompiler $scopeCompiler,
-            Queries\IResolvedParameterRegistry $parameters,
             Queries\Common\ISource $source
     ) {
         if ($source instanceof Queries\Common\Source\ArrayOrIterator) {
@@ -78,7 +82,9 @@ class CompiledQuery implements Compilation\ICompiledRequest, Compilation\ICompil
         } elseif ($source instanceof Queries\Common\Source\SingleValue) {
             $this->append('[single value]');
         } elseif ($source instanceof Queries\Common\Source\QueryScope) {
-            $compilation = $scopeCompiler->createCompiledScopeQuery($source->getScope(), $parameters);
+            $compilation = new self();
+            $compiler = new ScopeCompiler($compilation, $source->getScope());
+            $compiler->buildScope();
 
             $this->appendLine('[');
             foreach (array_filter(explode(PHP_EOL, $compilation)) as $line) {
@@ -88,12 +94,8 @@ class CompiledQuery implements Compilation\ICompiledRequest, Compilation\ICompil
         }
     }
 
-    public function appendJoinOptions(
-            ScopeCompiler $scopeCompiler,
-            Queries\IResolvedParameterRegistry $parameters,
-            Queries\Common\Join\Options $joinOptions
-    ) {
-        $this->appendSource($scopeCompiler, $parameters, $joinOptions->getSource());
+    public function appendJoinOptions(Queries\Common\Join\Options $joinOptions) {
+        $this->appendSource($joinOptions->getSource());
 
         if ($joinOptions->isGroupJoin()) {
             $this->append(' into groups');

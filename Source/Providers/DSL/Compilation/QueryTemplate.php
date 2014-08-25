@@ -12,21 +12,33 @@ use Pinq\Queries;
 abstract class QueryTemplate implements IQueryTemplate
 {
     /**
+     * @var Queries\IQuery
+     */
+    protected $query;
+
+    /**
      * @var Queries\IParameterRegistry
      */
     protected $parameters;
 
     /**
-     * The parameters of the query which affect the structure of the compiled query.
-     *
-     * @var ParameterCollection
+     * @var Parameters\StructuralExpressionRegistry
      */
-    protected $structuralParameters;
+    protected $structuralExpressions;
 
-    public function __construct(Queries\IParameterRegistry $parameters, ParameterCollection $structuralParameters)
+    public function __construct(
+            Queries\IQuery $query = null,
+            Queries\IParameterRegistry $expressions,
+            Parameters\StructuralExpressionRegistry $structuralExpressions
+    ) {
+        $this->query                 = $query;
+        $this->parameters            = $expressions;
+        $this->structuralExpressions = $structuralExpressions;
+    }
+
+    final public function getQuery()
     {
-        $this->parameters = $parameters;
-        $this->structuralParameters = $structuralParameters;
+        return $this->query;
     }
 
     final public function getParameters()
@@ -34,22 +46,28 @@ abstract class QueryTemplate implements IQueryTemplate
         return $this->parameters;
     }
 
-    final public function getStructuralParameters()
+    final public function getStructuralExpressions()
     {
-        return $this->structuralParameters;
+        return $this->structuralExpressions;
     }
 
-    public function getCompiledQueryHash(Queries\IResolvedParameterRegistry $parameters)
+    final public function getStructuralExpressionProcessors()
     {
-        $structuralParameterValues = $this->structuralParameters->resolveParameters($parameters);
-
-        return $this->getStructuralParameterHash($structuralParameterValues);
+        return $this->structuralExpressions->getProcessors();
     }
 
-    protected function getStructuralParameterHash(array $structuralParameters)
+    public function resolveStructuralExpressions(Queries\IResolvedParameterRegistry $parameterRegistry, &$hash)
     {
-        ksort($structuralParameters, \SORT_STRING);
+        $hash                          = '';
+        $resolvedStructuralExpressions = $this->structuralExpressions->resolve($parameterRegistry);
+        foreach ($resolvedStructuralExpressions->getProcessors() as $processor) {
+            $hash .= '::';
+            $structuralExpressions = $resolvedStructuralExpressions->getExpressions($processor);
+            foreach ($structuralExpressions->getExpressions() as $expression) {
+                $hash .= '_' . $processor->hash($expression, $structuralExpressions);
+            }
+        }
 
-        return md5(serialize($structuralParameters));
+        return $resolvedStructuralExpressions;
     }
 }

@@ -5,9 +5,6 @@ namespace Pinq\Providers\DSL;
 use Pinq\Caching;
 use Pinq\Expressions as O;
 use Pinq\Providers\Configuration;
-use Pinq\Providers\DSL\Compilation\ICompiledRequest;
-use Pinq\Providers\DSL\Compilation\IRequestTemplate;
-use Pinq\Providers\DSL\Compilation\IStaticQueryTemplate;
 use Pinq\Providers;
 use Pinq\Queries;
 
@@ -24,26 +21,13 @@ abstract class QueryProvider extends Providers\QueryProvider
      */
     protected $compilerConfiguration;
 
-    /**
-     * @var Compilation\IRequestQueryCompiler
-     */
-    protected $requestQueryCompiler;
-
-    /**
-     * @var Caching\ICacheAdapter
-     */
-    protected $compiledQueryCache;
-
     public function __construct(
             Queries\ISourceInfo $sourceInfo,
-            IQueryCompilerConfiguration $compilerConfiguration,
-            Configuration\IQueryConfiguration $configuration = null
+            IQueryCompilerConfiguration $compilerConfiguration
     ) {
-        parent::__construct($sourceInfo, $configuration);
+        parent::__construct($sourceInfo, $compilerConfiguration->getQueryConfiguration());
 
         $this->compilerConfiguration = $compilerConfiguration;
-        $this->compiledQueryCache    = $compilerConfiguration->getCompiledQueryCache($sourceInfo);
-        $this->requestQueryCompiler  = $compilerConfiguration->getRequestQueryCompiler();
     }
 
     /**
@@ -56,45 +40,14 @@ abstract class QueryProvider extends Providers\QueryProvider
 
     public function loadRequestExpression(O\Expression $requestExpression)
     {
-        $resolution    = $this->requestBuilder->resolveRequest($requestExpression);
-        $queryHash     = $resolution->getHash();
-        $queryTemplate = $this->compiledQueryCache->tryGet($queryHash);
-
-        if (!($queryTemplate instanceof Compilation\IRequestTemplate)) {
-            $requestQuery       = $this->requestBuilder->parseRequest($requestExpression);
-            $resolvedParameters = $requestQuery->getParameters()->resolve($resolution);
-            $queryTemplate      = $this->requestQueryCompiler->createRequestTemplate(
-                    $requestQuery,
-                    $resolvedParameters
-            );
-            $this->compiledQueryCache->save($queryHash, $queryTemplate);
-        } else {
-            $resolvedParameters = $queryTemplate->getParameters()->resolve($resolution);
-        }
-
-        $compiledQuery = $this->getCompiledQuery($queryHash, $queryTemplate, $resolvedParameters);
+        $compiledQuery = $this->compilerConfiguration->loadCompiledRequestQuery(
+                $this->sourceInfo,
+                $requestExpression,
+                null,
+                $resolvedParameters
+        );
 
         return $this->loadCompiledRequest($compiledQuery, $resolvedParameters);
-    }
-
-    final protected function getCompiledQuery(
-            $queryHash,
-            IRequestTemplate $template,
-            Queries\IResolvedParameterRegistry $parameters
-    ) {
-        if ($template instanceof IStaticQueryTemplate) {
-            return $template->getCompiledQuery();
-        } else {
-            $compiledQueryHash = $queryHash . '-' . $template->getCompiledQueryHash($parameters);
-            $compiledQuery     = $this->compiledQueryCache->tryGet($compiledQueryHash);
-
-            if (!($compiledQuery instanceof ICompiledRequest)) {
-                $compiledQuery = $this->requestQueryCompiler->compileRequestQuery($template, $parameters);
-                $this->compiledQueryCache->save($compiledQueryHash, $compiledQuery);
-            }
-
-            return $compiledQuery;
-        }
     }
 
     abstract protected function loadCompiledRequest(

@@ -19,18 +19,26 @@ interface IQueryTemplate
     public function getParameters();
 
     /**
-     * Gets the parameters which affect the structure of the compiled query.
+     * Gets the query object.
      *
-     * @return ParameterCollection
+     * @return Queries\IQuery|null
      */
-    public function getStructuralParameters();
+    public function getQuery();
 
     /**
-     * Returns a unique string representing the compiled query structure.
+     * Gets the structural expression registry.
      *
-     * @param Queries\IResolvedParameterRegistry $parameters
-     *
-     * @return string
+     * @return Parameters\StructuralExpressionRegistry
      */
-    public function getCompiledQueryHash(Queries\IResolvedParameterRegistry $parameters);
+    public function getStructuralExpressions();
+
+    /**
+     * Resolves the structural expressions of the query template.
+     *
+     * @param Queries\IResolvedParameterRegistry $parameterRegistry
+     * @param string                             $hash
+     *
+     * @return Parameters\ResolvedStructuralExpressionRegistry
+     */
+    public function resolveStructuralExpressions(Queries\IResolvedParameterRegistry $parameterRegistry, &$hash);
 }

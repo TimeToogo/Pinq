@@ -2,33 +2,28 @@
 
 namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
-use Pinq\Providers\DSL\RepositoryCompilerConfiguration;
+use Pinq\Expressions as O;
+use Pinq\Providers\DSL\Compilation;
 use Pinq\Queries;
+use Pinq\Tests\Integration\Providers\DSL\Implementation\ConfigurationBase;
 
-class Configuration extends RepositoryCompilerConfiguration
+class Configuration extends ConfigurationBase
 {
-    protected function buildScopeCompiler()
+    protected function makeCompiledRequestQuery(Queries\IRequestQuery $query)
     {
-        return new ScopeCompiler();
+        $compiledQuery = new CompiledQuery();
+        $compiler = new RequestCompiler($compiledQuery, $query);
+        $compiler->buildQuery();
+
+        return $compiledQuery;
     }
 
-    protected function buildRequestCompiler()
+    protected function makeCompiledOperationQuery(Queries\IOperationQuery $query)
     {
-        return new RequestCompiler();
-    }
+        $compiledQuery = new CompiledQuery();
+        $compiler = new OperationCompiler($compiledQuery, $query);
+        $compiler->buildQuery();
 
-    protected function buildRequestQueryCompiler()
-    {
-        return new RequestQueryCompiler($this->requestCompiler, $this->scopeCompiler);
-    }
-
-    protected function buildOperationCompiler()
-    {
-        return new OperationCompiler();
-    }
-
-    protected function buildOperationQueryCompiler()
-    {
-        return new OperationQueryCompiler($this->operationCompiler, $this->scopeCompiler);
+        return $compiledQuery;
     }
 }

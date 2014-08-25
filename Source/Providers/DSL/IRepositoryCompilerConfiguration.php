@@ -1,5 +1,11 @@
 <?php
+
 namespace Pinq\Providers\DSL;
+
+use Pinq\Expressions as O;
+use Pinq\Providers\Configuration;
+use Pinq\Providers\DSL\Compilation\Parameters;
+use Pinq\Queries;
 
 /**
  * Interface of the repository compiler configuration.
@@ -9,16 +15,25 @@ namespace Pinq\Providers\DSL;
 interface IRepositoryCompilerConfiguration extends IQueryCompilerConfiguration
 {
     /**
-     * Gets the operation compiler.
-     *
-     * @return Compilation\IOperationCompiler
+     * @return Configuration\IRepositoryConfiguration
      */
-    public function getOperationCompiler();
+    public function getQueryConfiguration();
 
     /**
-     * Gets the operation query compiler.
+     * Loads the compiled query from the supplied operation expression and assigns
+     * the resolved parameters to the $resolvedParameters parameter.
      *
-     * @return Compilation\IOperationQueryCompiler
+     * @param Queries\ISourceInfo                $sourceInfo
+     * @param O\Expression                       $operationExpression
+     * @param O\IEvaluationContext|null          $evaluationContext
+     * @param Queries\IResolvedParameterRegistry $resolvedParameters
+     *
+     * @return Compilation\ICompiledOperation
      */
-    public function getOperationQueryCompiler();
+    public function loadCompiledOperationQuery(
+            Queries\ISourceInfo $sourceInfo,
+            O\Expression $operationExpression,
+            O\IEvaluationContext $evaluationContext = null,
+            Queries\IResolvedParameterRegistry &$resolvedParameters = null
+    );
 }

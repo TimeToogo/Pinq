@@ -12,5 +12,10 @@ namespace Pinq\Providers\DSL\Compilation;
  */
 interface ICompiledQuery
 {
-
+    /**
+     * Gets the parameter registry of the compiled query.
+     *
+     * @return Parameters\ExpressionRegistry
+     */
+    public function getParameterRegistry();
 }

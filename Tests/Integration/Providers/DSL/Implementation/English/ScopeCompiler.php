@@ -2,24 +2,29 @@
 
 namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
-use Pinq\Providers\DSL\Compilation;
+use Pinq\Providers\DSL\Compilation\Processors;
 use Pinq\Queries;
 use Pinq\Queries\Segments;
 
-class ScopeCompiler extends Compilation\ScopeCompiler
+class ScopeCompiler extends Processors\Visitors\ScopeProcessor
 {
     /**
      * @var CompiledQuery
      */
     protected $compilation;
 
-    public function createCompiledScopeQuery(Queries\IScope $scope, Queries\IResolvedParameterRegistry $structuralParameters)
+    public function __construct(CompiledQuery $compiledQuery, Queries\IScope $scope)
     {
-        $query = new CompiledQuery();
-        $this->compileScope($query, $scope, $structuralParameters);
-
-        return $query;
+        parent::__construct($scope);
+        $this->compilation = $compiledQuery;
     }
+
+    protected function processSegments(array $segments)
+    {
+        parent::processSegments($segments);
+        return $segments;
+    }
+
 
     public function visitIndexBy(Segments\IndexBy $query)
     {
@@ -57,7 +62,7 @@ class ScopeCompiler extends Compilation\ScopeCompiler
         ];
 
         $this->compilation->append($textMap[$query->getOperationType()]);
-        $this->compilation->appendSource($this, $this->parameters, $query->getSource());
+        $this->compilation->appendSource($query->getSource());
         $this->compilation->appendLine();
     }
 
@@ -113,7 +118,7 @@ class ScopeCompiler extends Compilation\ScopeCompiler
     public function visitJoin(Segments\Join $query)
     {
         $this->compilation->append('Join with: ');
-        $this->compilation->appendJoinOptions($this, $this->parameters, $query->getOptions());
+        $this->compilation->appendJoinOptions($query->getOptions());
 
         $this->compilation->append(' and correlate the values according to: ');
         $this->compilation->appendFunction($query->getJoiningFunction());

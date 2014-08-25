@@ -1,6 +1,6 @@
 <?php
 
-namespace Pinq\Providers\DSL\Compilation;
+namespace Pinq\Providers\DSL\Compilation\Parameters;
 
 use Pinq\Expressions as O;
 use Pinq\Queries\Functions\FunctionBase;
@@ -10,7 +10,7 @@ use Pinq\Queries\Functions\FunctionBase;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class ParameterCollectionContext
+class ExpressionCollectionContext
 {
     /**
      * @var FunctionBase
@@ -18,26 +18,34 @@ class ParameterCollectionContext
     protected $contextFunction;
 
     /**
-     * @var ParameterCollection
+     * @var ExpressionCollection
      */
     protected $parameterCollection;
 
-    public function __construct(FunctionBase $contextFunction, ParameterCollection $parameterCollection)
+    public function __construct(FunctionBase $contextFunction, ExpressionCollection $parameterCollection)
     {
         $this->contextFunction     = $contextFunction;
         $this->parameterCollection = $parameterCollection;
     }
 
     /**
+     * @return FunctionBase
+     */
+    public function getFunction()
+    {
+        return $this->contextFunction;
+    }
+
+    /**
      * Adds an expression parameter to the collection.
      *
-     * @param string       $name
      * @param O\Expression $expression
+     * @param mixed        $data
      *
      * @return void
      */
-    public function addExpression($name, O\Expression $expression)
+    public function add(O\Expression $expression, $data = null)
     {
-        $this->parameterCollection->addExpression($name, $expression, $this->contextFunction);
+        $this->parameterCollection->add($expression, $this->contextFunction, $data);
     }
 }

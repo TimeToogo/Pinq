@@ -3,6 +3,7 @@
 namespace Pinq\Tests\Integration\Providers\DSL;
 
 use Pinq\Providers;
+use Pinq\Providers\DSL\Compilation;
 use Pinq\Queries;
 use Pinq\Tests\PinqTestCase;
 
@@ -11,17 +12,11 @@ class DSLProviderTest extends PinqTestCase
     public function testRequestCallsLoadsAndCachesCompiledRequest()
     {
         $requestTemplateMock = $this->getMockForAbstractClass('Pinq\\Providers\\DSL\\Compilation\\IRequestTemplate');
-        $compiledRequestMock = $this->getMockForAbstractClass('Pinq\\Providers\\DSL\\Compilation\\ICompiledRequest');
-
-        $requestQueryCompilerMock = $this->getMockBuilder('Pinq\\Providers\\DSL\\Compilation\\RequestQueryCompiler')
-                ->disableOriginalConstructor()
-                ->getMockForAbstractClass();
-        $requestQueryCompilerMock->expects($this->once())
-                ->method('createRequestTemplate')
-                ->will($this->returnValue($requestTemplateMock));
-        $requestQueryCompilerMock->expects($this->once())
-                ->method('compileRequestQuery')
-                ->will($this->returnValue($compiledRequestMock));
+        $requestTemplateMock
+                ->expects($this->once())
+                ->method('resolveStructuralExpressions')
+                ->will($this->returnValue(Compilation\Parameters\ResolvedStructuralExpressionRegistry::none()));
+        $compiledRequestMock = $this->getMockForAbstractClass('Pinq\\Providers\\DSL\\Compilation\\ICompiledRequest');;
 
         $cacheMock = $this->getMockForAbstractClass('Pinq\\Caching\\CacheAdapter');
         $cacheMock->expects($this->any())
@@ -39,15 +34,18 @@ class DSLProviderTest extends PinqTestCase
                 ->will($this->returnValue(null));
 
         $configurationMock = $this->getMockBuilder('Pinq\\Providers\\DSL\\QueryCompilerConfiguration')
-                ->setMethods(['buildCompiledQueryCache'])
+                ->setMethods(['buildCompiledQueryCache', 'createRequestTemplate', 'compileRequestQuery'])
                 ->disableOriginalConstructor()
                 ->getMockForAbstractClass();
         $configurationMock->expects($this->once())
                 ->method('buildCompiledQueryCache')
                 ->will($this->returnValue($cacheMock));
         $configurationMock->expects($this->once())
-                ->method('buildRequestQueryCompiler')
-                ->will($this->returnValue($requestQueryCompilerMock));
+                ->method('createRequestTemplate')
+                ->will($this->returnValue($requestTemplateMock));
+        $configurationMock->expects($this->once())
+                ->method('compileRequestQuery')
+                ->will($this->returnValue($compiledRequestMock));
         $configurationMock->__construct();
 
         /** @var $provider \Pinq\Providers\DSL\QueryProvider|\PHPUnit_Framework_MockObject_MockObject */
@@ -71,19 +69,13 @@ class DSLProviderTest extends PinqTestCase
         $operationTemplateMock = $this->getMockForAbstractClass(
                 'Pinq\\Providers\\DSL\\Compilation\\IOperationTemplate'
         );
+        $operationTemplateMock
+                ->expects($this->once())
+                ->method('resolveStructuralExpressions')
+                ->will($this->returnValue(Compilation\Parameters\ResolvedStructuralExpressionRegistry::none()));
         $compiledOperationMock = $this->getMockForAbstractClass(
                 'Pinq\\Providers\\DSL\\Compilation\\ICompiledOperation'
         );
-
-        $operationQueryCompilerMock = $this->getMockBuilder('Pinq\\Providers\\DSL\\Compilation\\OperationQueryCompiler')
-                ->disableOriginalConstructor()
-                ->getMockForAbstractClass();
-        $operationQueryCompilerMock->expects($this->once())
-                ->method('createOperationTemplate')
-                ->will($this->returnValue($operationTemplateMock));
-        $operationQueryCompilerMock->expects($this->once())
-                ->method('compileOperationQuery')
-                ->will($this->returnValue($compiledOperationMock));
 
         $cacheMock = $this->getMockForAbstractClass('Pinq\\Caching\\CacheAdapter');
         $cacheMock->expects($this->any())
@@ -101,15 +93,18 @@ class DSLProviderTest extends PinqTestCase
                 ->will($this->returnValue(null));
 
         $configurationMock = $this->getMockBuilder('Pinq\\Providers\\DSL\\RepositoryCompilerConfiguration')
-                ->setMethods(['buildCompiledQueryCache'])
+                ->setMethods(['buildCompiledQueryCache', 'createOperationTemplate', 'compileOperationQuery'])
                 ->disableOriginalConstructor()
                 ->getMockForAbstractClass();
         $configurationMock->expects($this->once())
                 ->method('buildCompiledQueryCache')
                 ->will($this->returnValue($cacheMock));
         $configurationMock->expects($this->once())
-                ->method('buildOperationQueryCompiler')
-                ->will($this->returnValue($operationQueryCompilerMock));
+                ->method('createOperationTemplate')
+                ->will($this->returnValue($operationTemplateMock));
+        $configurationMock->expects($this->once())
+                ->method('compileOperationQuery')
+                ->will($this->returnValue($compiledOperationMock));
         $configurationMock->__construct();
 
         /** @var $provider \Pinq\Providers\DSL\RepositoryProvider|\PHPUnit_Framework_MockObject_MockObject */

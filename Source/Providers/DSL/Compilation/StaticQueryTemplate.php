@@ -18,7 +18,7 @@ abstract class StaticQueryTemplate extends QueryTemplate implements IStaticQuery
 
     public function __construct(Queries\IParameterRegistry $parameters, ICompiledQuery $compiledQuery)
     {
-        parent::__construct($parameters, ParameterCollection::none());
+        parent::__construct(null, $parameters, Parameters\StructuralExpressionRegistry::none(), []);
 
         $this->compiledQuery = $compiledQuery;
     }
@@ -26,11 +26,5 @@ abstract class StaticQueryTemplate extends QueryTemplate implements IStaticQuery
     public function getCompiledQuery()
     {
         return $this->compiledQuery;
-    }
-
-    final public function getCompiledQueryHash(Queries\IResolvedParameterRegistry $parameters)
-    {
-        //For the static template, there are no structural parameters and hence an empty hash
-        return '';
     }
 }

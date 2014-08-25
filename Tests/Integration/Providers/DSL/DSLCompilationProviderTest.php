@@ -2,64 +2,122 @@
 
 namespace Pinq\Tests\Integration\Providers\DSL;
 
-use Pinq\IQueryable;
-use Pinq\Providers\DSL\IRepositoryCompilerConfiguration;
+use Pinq\Expressions as O;
+use Pinq\Parsing;
 use Pinq\Providers;
+use Pinq\Providers\DSL\Compilation;
 use Pinq\Queries;
 use Pinq\Tests\Integration\Providers\DSL\Implementation\DummyDSLQueryProvider;
 use Pinq\Tests\Integration\Providers\DSL\Implementation\DummyDSLRepositoryProvider;
-use Pinq\Tests\Integration\Queries\QueryBuildingTest;
+use Pinq\Providers\DSL\Compilation\Processors\Structure\IStructuralExpressionProcessor;
 use Pinq\Tests\Integration\Queries\ParsedQueryBuildingTest;
 
 abstract class DSLCompilationProviderTest extends ParsedQueryBuildingTest
 {
     /**
-     * @var IRepositoryCompilerConfiguration
+     * @var Implementation\SpyingCache
      */
-    protected $compilerConfig;
+    protected $compiledQueryCache;
 
     /**
-     * @return IRepositoryCompilerConfiguration
+     * @var Implementation\ConfigurationBase
+     */
+    protected $compilerConfiguration;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        /** @var $provider Implementation\DummyDSLQueryProvider */
+        $provider = $this->queryable->getProvider();
+        $this->compilerConfiguration = $provider->getCompilerConfiguration();
+        $this->compiledQueryCache = $this->compilerConfiguration->getCompiledQueryCache($this->queryable->getSourceInfo());
+    }
+
+    /**
+     * @return Implementation\ConfigurationBase
      */
     abstract protected function compilerConfiguration();
 
+    /**
+     * @return callable[]
+     */
+    protected function preprocessorFactories()
+    {
+        return [];
+    }
+
+    /**
+     * @return IStructuralExpressionProcessor[]
+     */
+    protected function structuralExpressionProcessors()
+    {
+        return [];
+    }
+
+    private function makeCompilerConfiguration()
+    {
+        $configuration = $this->compilerConfiguration();
+        $configuration->setProcessorFactories($this->preprocessorFactories());
+        $configuration->setStructuralExpressionProcessors($this->structuralExpressionProcessors());
+
+        return $configuration;
+    }
+
     public function queryProviders()
     {
-        return [new DummyDSLQueryProvider(new Queries\SourceInfo(''), $this->compilerConfiguration())];
+        return [new DummyDSLQueryProvider(new Queries\SourceInfo(''), $this->makeCompilerConfiguration())];
     }
 
     public function repositoryProviders()
     {
-        return [new DummyDSLRepositoryProvider(new Queries\SourceInfo(''), $this->compilerConfiguration())];
+        return [new DummyDSLRepositoryProvider(new Queries\SourceInfo(''), $this->makeCompilerConfiguration())];
     }
 
-    protected function assertRequestQueryMatches(
-            Queries\IRequestQuery $requestQuery,
-            Queries\IResolvedParameterRegistry $resolvedParameters,
+    protected function assertRequestExpressionMatches(
+            O\Expression $requestExpression,
+            O\IEvaluationContext $evaluationContext = null,
             $correctValue
-    )
-    {
-        /** @var $configuration IRepositoryCompilerConfiguration */
-        $configuration = $this->queryable->getProvider()->getCompilerConfiguration();
-        $requestQueryCompiler = $configuration->getRequestQueryCompiler();
-        $template = $requestQueryCompiler->createRequestTemplate($requestQuery, Queries\ResolvedParameterRegistry::none());
-        $compiledString = (string) $requestQueryCompiler->compileRequestQuery($template, Queries\ResolvedParameterRegistry::none());
-
-        $this->assertSame($correctValue, $compiledString);
+    ) {
+        $compiledQuery = $this->loadCompiledRequestQuery($requestExpression, $evaluationContext);
+        $this->assertQueryCompiledCorrectly($compiledQuery, $correctValue);
     }
 
-    protected function assertOperationQueryMatches(
-            Queries\IOperationQuery $operationQuery,
-            Queries\IResolvedParameterRegistry $resolvedParameters,
-            $correctValue
-    )
+    protected function loadCompiledRequestQuery(O\Expression $requestExpression, O\IEvaluationContext $evaluationContext = null)
     {
-        /** @var $configuration IRepositoryCompilerConfiguration */
+        /** @var $configuration Implementation\ConfigurationBase */
         $configuration = $this->queryable->getProvider()->getCompilerConfiguration();
-        $operationQueryCompiler = $configuration->getOperationQueryCompiler();
-        $template = $operationQueryCompiler->createOperationTemplate($operationQuery, Queries\ResolvedParameterRegistry::none());
-        $compiledString = (string) $operationQueryCompiler->compileOperationQuery($template, Queries\ResolvedParameterRegistry::none());
+        return $configuration->loadCompiledRequestQuery($this->queryable->getSourceInfo(), $requestExpression, $evaluationContext, $resolvedParameters);
+    }
 
-        $this->assertSame($correctValue, $compiledString);
+    protected function assertOperationExpressionMatches(
+            O\Expression $operationExpression,
+            O\IEvaluationContext $evaluationContext = null,
+            $correctValue
+    ) {
+        $compiledQuery = $this->loadCompiledOperationQuery($operationExpression, $evaluationContext);
+
+        $this->assertQueryCompiledCorrectly($compiledQuery, $correctValue);
+    }
+
+    protected function loadCompiledOperationQuery(O\Expression $operationExpression, O\IEvaluationContext $evaluationContext = null)
+    {
+        /** @var $configuration Implementation\ConfigurationBase */
+        $configuration = $this->queryable->getProvider()->getCompilerConfiguration();
+        return $configuration->loadCompiledOperationQuery($this->queryable->getSourceInfo(), $operationExpression, $evaluationContext, $resolvedParameters);
+    }
+
+    protected function assertQueryCompiledCorrectly($compiledQuery, $correctValue)
+    {
+        $this->assertSame($correctValue, (string)$compiledQuery);
+    }
+
+    protected function assertRequestQueryMatches(Queries\IRequestQuery $requestQuery, Queries\IResolvedParameterRegistry $resolvedParameters, $correctValue)
+    {
+
+    }
+
+    protected function assertOperationQueryMatches(Queries\IOperationQuery $operationQuery, Queries\IResolvedParameterRegistry $resolvedParameters, $correctValue)
+    {
+
     }
 }

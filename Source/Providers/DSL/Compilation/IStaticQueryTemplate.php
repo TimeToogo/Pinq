@@ -11,7 +11,12 @@ namespace Pinq\Providers\DSL\Compilation;
 interface IStaticQueryTemplate extends IQueryTemplate
 {
     /**
-     * Gets the original query object.
+     * @return null
+     */
+    public function getQuery();
+
+    /**
+     * Gets the compiled query object.
      *
      * @return ICompiledQuery
      */

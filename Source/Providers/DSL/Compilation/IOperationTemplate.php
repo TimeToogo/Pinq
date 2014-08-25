@@ -2,6 +2,8 @@
 
 namespace Pinq\Providers\DSL\Compilation;
 
+use Pinq\Queries;
+
 /**
  * Interface of a operation query template.
  *
@@ -9,5 +11,10 @@ namespace Pinq\Providers\DSL\Compilation;
  */
 interface IOperationTemplate extends IQueryTemplate
 {
-
+    /**
+     * Gets the operation query object.
+     *
+     * @return Queries\IOperationQuery|null
+     */
+    public function getQuery();
 }

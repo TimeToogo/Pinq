@@ -2,16 +2,28 @@
 
 namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
-use Pinq\Providers\DSL\Compilation;
+use Pinq\Providers\DSL\Compilation\Processors;
 use Pinq\Queries\Operations;
 use Pinq\Queries;
 
-class OperationCompiler extends Compilation\OperationCompiler
+class OperationCompiler extends Processors\Visitors\OperationQueryProcessor
 {
     /**
      * @var CompiledQuery
      */
     protected $compilation;
+
+    public function __construct(CompiledQuery $compiledQuery, Queries\IOperationQuery $operationQuery)
+    {
+        parent::__construct(new ScopeCompiler($compiledQuery, $operationQuery->getScope()), $operationQuery->getOperation());
+        $this->compilation = $compiledQuery;
+    }
+
+    protected function processOperation(Queries\IScope $scope, Queries\IOperation $operation)
+    {
+        parent::processOperation($scope, $operation);
+        return $operation;
+    }
 
     public function visitApply(Operations\Apply $operation)
     {
@@ -22,7 +34,7 @@ class OperationCompiler extends Compilation\OperationCompiler
     public function visitJoinApply(Operations\JoinApply $operation)
     {
         $this->compilation->append('Join with: ');
-        $this->compilation->appendJoinOptions($this->scopeCompiler, $this->parameters, $operation->getOptions());
+        $this->compilation->appendJoinOptions($operation->getOptions());
 
         $this->compilation->append(' and update the outer values according to: ');
         $this->compilation->appendFunction($operation->getMutatorFunction());
@@ -31,13 +43,13 @@ class OperationCompiler extends Compilation\OperationCompiler
     public function visitAddValues(Operations\AddValues $operation)
     {
         $this->compilation->append('Add the following values: ');
-        $this->compilation->appendSource($this->scopeCompiler, $this->parameters, $operation->getSource());
+        $this->compilation->appendSource($operation->getSource());
     }
 
     public function visitRemoveValues(Operations\RemoveValues $operation)
     {
         $this->compilation->append('Remove the following values: ');
-        $this->compilation->appendSource($this->scopeCompiler, $this->parameters, $operation->getSource());
+        $this->compilation->appendSource($operation->getSource());
     }
 
     public function visitRemoveWhere(Operations\RemoveWhere $operation)

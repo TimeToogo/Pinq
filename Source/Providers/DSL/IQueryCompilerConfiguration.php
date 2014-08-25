@@ -2,6 +2,9 @@
 namespace Pinq\Providers\DSL;
 
 use Pinq\Caching;
+use Pinq\Expressions as O;
+use Pinq\Providers\Configuration;
+use Pinq\Providers\DSL\Compilation\Parameters;
 use Pinq\Queries;
 
 /**
@@ -11,6 +14,11 @@ use Pinq\Queries;
  */
 interface IQueryCompilerConfiguration
 {
+    /**
+     * @return Configuration\IQueryConfiguration
+     */
+    public function getQueryConfiguration();
+
     /**
      * Gets the cache adapter to store the query templates and
      * compiled queries.
@@ -22,23 +30,20 @@ interface IQueryCompilerConfiguration
     public function getCompiledQueryCache(Queries\ISourceInfo $sourceInfo);
 
     /**
-     * Gets the request compiler.
+     * Loads the compiled query from the supplied request expression and assigns
+     * the resolved parameters to the $resolvedParameters parameter.
      *
-     * @return Compilation\IRequestQueryCompiler
-     */
-    public function getRequestQueryCompiler();
-
-    /**
-     * Builds a request compiler for the supplied request.
+     * @param Queries\ISourceInfo                $sourceInfo
+     * @param O\Expression                       $requestExpression
+     * @param O\IEvaluationContext|null          $evaluationContext
+     * @param Queries\IResolvedParameterRegistry $resolvedParameters
      *
-     * @return Compilation\IRequestCompiler
+     * @return Compilation\ICompiledRequest
      */
-    public function getRequestCompiler();
-
-    /**
-     * Builds a scope compiler for the supplied scope.
-     *
-     * @return Compilation\IScopeCompiler
-     */
-    public function getScopeCompiler();
+    public function loadCompiledRequestQuery(
+            Queries\ISourceInfo $sourceInfo,
+            O\Expression $requestExpression,
+            O\IEvaluationContext $evaluationContext = null,
+            Queries\IResolvedParameterRegistry &$resolvedParameters = null
+    );
 }

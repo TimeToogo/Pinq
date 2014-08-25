@@ -26,16 +26,6 @@ abstract class RepositoryProvider extends Providers\RepositoryProvider
      */
     protected $queryProvider;
 
-    /**
-     * @var Compilation\IOperationQueryCompiler
-     */
-    protected $operationCompiler;
-
-    /**
-     * @var ICacheAdapter
-     */
-    protected $compiledQueryCache;
-
     public function __construct(
             Queries\ISourceInfo $sourceInfo,
             IRepositoryCompilerConfiguration $compilerConfiguration,
@@ -44,9 +34,7 @@ abstract class RepositoryProvider extends Providers\RepositoryProvider
     ) {
         parent::__construct($sourceInfo, $queryProvider, $configuration);
 
-        $this->compilerConfiguration = $compilerConfiguration;
-        $this->operationCompiler     = $compilerConfiguration->getOperationQueryCompiler();
-        $this->compiledQueryCache    = $compilerConfiguration->getCompiledQueryCache($sourceInfo);
+        $this->compilerConfiguration = $compilerConfiguration;;
     }
 
     /**
@@ -59,45 +47,14 @@ abstract class RepositoryProvider extends Providers\RepositoryProvider
 
     public function executeOperationExpression(O\Expression $operationExpression)
     {
-        $resolution    = $this->operationQueryBuilder->resolveOperation($operationExpression);
-        $queryHash     = $resolution->getHash();
-        $queryTemplate = $this->compiledQueryCache->tryGet($queryHash);
+        $compiledQuery = $this->compilerConfiguration->loadCompiledOperationQuery(
+                $this->sourceInfo,
+                $operationExpression,
+                null,
+                $resolvedParameters
+        );
 
-        if (!($queryTemplate instanceof Compilation\IOperationTemplate)) {
-            $operationQuery     = $this->operationQueryBuilder->parseOperation($operationExpression);
-            $resolvedParameters = $operationQuery->getParameters()->resolve($resolution);
-            $queryTemplate      = $this->operationCompiler->createOperationTemplate(
-                    $operationQuery,
-                    $resolvedParameters
-            );
-            $this->compiledQueryCache->save($queryHash, $queryTemplate);
-        } else {
-            $resolvedParameters = $queryTemplate->getParameters()->resolve($resolution);
-        }
-
-        $compiledQuery = $this->getCompiledQuery($queryHash, $queryTemplate, $resolvedParameters);
-
-        return $this->executeCompiledOperation($compiledQuery, $resolvedParameters);
-    }
-
-    final protected function getCompiledQuery(
-            $queryHash,
-            IOperationTemplate $template,
-            Queries\IResolvedParameterRegistry $parameters
-    ) {
-        if ($template instanceof IStaticOperationTemplate) {
-            return $template->getCompiledQuery();
-        } else {
-            $compiledQueryHash = $queryHash . '-' . $template->getCompiledQueryHash($parameters);
-            $compiledQuery     = $this->compiledQueryCache->tryGet($compiledQueryHash);
-
-            if (!($compiledQuery instanceof ICompiledOperation)) {
-                $compiledQuery = $this->operationCompiler->compileOperationQuery($template, $parameters);
-                $this->compiledQueryCache->save($compiledQueryHash, $compiledQuery);
-            }
-
-            return $compiledQuery;
-        }
+        $this->executeCompiledOperation($compiledQuery, $resolvedParameters);
     }
 
     abstract protected function executeCompiledOperation(
