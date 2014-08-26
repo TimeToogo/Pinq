@@ -10,6 +10,11 @@ namespace Pinq\Parsing;
 class FunctionInterpreter implements IFunctionInterpreter
 {
     /**
+     * @var FunctionInterpreter
+     */
+    private static $defaultInstance;
+
+    /**
      * @var IParser
      */
     protected $parser;
@@ -29,7 +34,11 @@ class FunctionInterpreter implements IFunctionInterpreter
      */
     public static function getDefault()
     {
-        return new self(new PHPParser\Parser());
+        if(self::$defaultInstance === null) {
+            self::$defaultInstance = new self(new PHPParser\Parser());
+        }
+
+        return self::$defaultInstance;
     }
 
     final public function getParser()
