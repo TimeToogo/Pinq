@@ -38,13 +38,11 @@ abstract class RepositoryCompilerConfiguration extends QueryCompilerConfiguratio
     }
 
     public function loadCompiledOperationQuery(
-            Queries\ISourceInfo $sourceInfo,
             O\Expression $operationExpression,
             O\IEvaluationContext $evaluationContext = null,
             Queries\IResolvedParameterRegistry &$resolvedParameters = null
     ) {
         return $this->loadCompiledQuery(
-                $sourceInfo,
                 $operationExpression,
                 $evaluationContext,
                 $resolvedParameters,

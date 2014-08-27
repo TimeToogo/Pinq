@@ -86,7 +86,7 @@ abstract class DSLCompilationProviderTest extends ParsedQueryBuildingTest
     {
         /** @var $configuration Implementation\ConfigurationBase */
         $configuration = $this->queryable->getProvider()->getCompilerConfiguration();
-        return $configuration->loadCompiledRequestQuery($this->queryable->getSourceInfo(), $requestExpression, $evaluationContext, $resolvedParameters);
+        return $configuration->loadCompiledRequestQuery($requestExpression, $evaluationContext, $resolvedParameters);
     }
 
     protected function assertOperationExpressionMatches(
@@ -103,7 +103,7 @@ abstract class DSLCompilationProviderTest extends ParsedQueryBuildingTest
     {
         /** @var $configuration Implementation\ConfigurationBase */
         $configuration = $this->queryable->getProvider()->getCompilerConfiguration();
-        return $configuration->loadCompiledOperationQuery($this->queryable->getSourceInfo(), $operationExpression, $evaluationContext, $resolvedParameters);
+        return $configuration->loadCompiledOperationQuery($operationExpression, $evaluationContext, $resolvedParameters);
     }
 
     protected function assertQueryCompiledCorrectly($compiledQuery, $correctValue)

@@ -33,7 +33,6 @@ interface IQueryCompilerConfiguration
      * Loads the compiled query from the supplied request expression and assigns
      * the resolved parameters to the $resolvedParameters parameter.
      *
-     * @param Queries\ISourceInfo                $sourceInfo
      * @param O\Expression                       $requestExpression
      * @param O\IEvaluationContext|null          $evaluationContext
      * @param Queries\IResolvedParameterRegistry $resolvedParameters
@@ -41,7 +40,6 @@ interface IQueryCompilerConfiguration
      * @return Compilation\ICompiledRequest
      */
     public function loadCompiledRequestQuery(
-            Queries\ISourceInfo $sourceInfo,
             O\Expression $requestExpression,
             O\IEvaluationContext $evaluationContext = null,
             Queries\IResolvedParameterRegistry &$resolvedParameters = null

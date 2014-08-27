@@ -41,7 +41,6 @@ abstract class QueryProvider extends Providers\QueryProvider
     public function loadRequestExpression(O\Expression $requestExpression)
     {
         $compiledQuery = $this->compilerConfiguration->loadCompiledRequestQuery(
-                $this->sourceInfo,
                 $requestExpression,
                 null,
                 $resolvedParameters

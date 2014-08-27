@@ -48,7 +48,6 @@ abstract class RepositoryProvider extends Providers\RepositoryProvider
     public function executeOperationExpression(O\Expression $operationExpression)
     {
         $compiledQuery = $this->compilerConfiguration->loadCompiledOperationQuery(
-                $this->sourceInfo,
                 $operationExpression,
                 null,
                 $resolvedParameters

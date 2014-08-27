@@ -66,13 +66,11 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
     }
 
     public function loadCompiledRequestQuery(
-            Queries\ISourceInfo $sourceInfo,
             O\Expression $requestExpression,
             O\IEvaluationContext $evaluationContext = null,
             Queries\IResolvedParameterRegistry &$resolvedParameters = null
     ) {
         return $this->loadCompiledQuery(
-                $sourceInfo,
                 $requestExpression,
                 $evaluationContext,
                 $resolvedParameters,
@@ -84,7 +82,6 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
     }
 
     protected function loadCompiledQuery(
-            Queries\ISourceInfo $sourceInfo,
             O\Expression $requestExpression,
             O\IEvaluationContext $evaluationContext = null,
             Queries\IResolvedParameterRegistry &$resolvedParameters = null,
@@ -93,10 +90,11 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
             callable $createTemplateCallback,
             callable $compileQueryCallback
     ) {
-        $queryCache    = $this->getCompiledQueryCache($sourceInfo);
         /** @var $resolution Queries\IResolvedQuery */
         $resolution    = $resolveQueryCallback($requestExpression, $evaluationContext);
         $templateHash  = $resolution->getHash();
+
+        $queryCache    = $this->getCompiledQueryCache($resolution->getQueryable()->getSourceInfo());
         $queryTemplate = $queryCache->tryGet($templateHash);
 
         if (!($queryTemplate instanceof Compilation\IQueryTemplate)) {

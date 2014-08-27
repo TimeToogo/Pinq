@@ -23,7 +23,6 @@ interface IRepositoryCompilerConfiguration extends IQueryCompilerConfiguration
      * Loads the compiled query from the supplied operation expression and assigns
      * the resolved parameters to the $resolvedParameters parameter.
      *
-     * @param Queries\ISourceInfo                $sourceInfo
      * @param O\Expression                       $operationExpression
      * @param O\IEvaluationContext|null          $evaluationContext
      * @param Queries\IResolvedParameterRegistry $resolvedParameters
@@ -31,7 +30,6 @@ interface IRepositoryCompilerConfiguration extends IQueryCompilerConfiguration
      * @return Compilation\ICompiledOperation
      */
     public function loadCompiledOperationQuery(
-            Queries\ISourceInfo $sourceInfo,
             O\Expression $operationExpression,
             O\IEvaluationContext $evaluationContext = null,
             Queries\IResolvedParameterRegistry &$resolvedParameters = null
