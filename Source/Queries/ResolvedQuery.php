@@ -2,6 +2,8 @@
 
 namespace Pinq\Queries;
 
+use Pinq\IQueryable;
+
 /**
  * Implementation of the resolved query interface.
  *
@@ -9,6 +11,11 @@ namespace Pinq\Queries;
  */
 class ResolvedQuery implements IResolvedQuery
 {
+    /**
+     * @var IQueryable
+     */
+    protected $queryable;
+
     /**
      * @var array<string, string>
      */
@@ -19,10 +26,16 @@ class ResolvedQuery implements IResolvedQuery
      */
     protected $hash;
 
-    public function __construct(array $resolvedParameters, $hash)
+    public function __construct(IQueryable $queryable, array $resolvedParameters, $hash)
     {
+        $this->queryable          = $queryable;
         $this->resolvedParameters = $resolvedParameters;
         $this->hash               = $hash;
+    }
+
+    public function getQueryable()
+    {
+        return $this->queryable;
     }
 
     public function getResolvedParameters()

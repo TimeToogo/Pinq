@@ -2,6 +2,8 @@
 
 namespace Pinq\Queries;
 
+use Pinq\IQueryable;
+
 /**
  * Interface for a resolved query.
  *
@@ -9,6 +11,13 @@ namespace Pinq\Queries;
  */
 interface IResolvedQuery
 {
+    /**
+     * Gets the source queryable instance.
+     *
+     * @return IQueryable
+     */
+    public function getQueryable();
+
     /**
      * Gets the array of resolved values indexed by their respective
      * parameter name.

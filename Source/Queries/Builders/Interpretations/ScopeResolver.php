@@ -14,6 +14,18 @@ use Pinq\Queries;
  */
 class ScopeResolver extends BaseResolver implements IScopeResolver
 {
+    /**
+     * @var IQueryable
+     */
+    protected $queryable;
+
+    /**
+     * @return IQueryable
+     */
+    public function getQueryable()
+    {
+        return $this->queryable;
+    }
 
     public function buildScopeInterpretation()
     {
@@ -32,6 +44,7 @@ class ScopeResolver extends BaseResolver implements IScopeResolver
 
     public function interpretScopeSource(IQueryable $queryable)
     {
+        $this->queryable = $queryable;
         $this->appendToHash($queryable->getSourceInfo()->getHash());
     }
 

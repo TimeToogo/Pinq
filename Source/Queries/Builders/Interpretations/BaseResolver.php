@@ -36,14 +36,6 @@ class BaseResolver extends BaseInterpretation implements IQueryResolver
         return $this->resolvedParameters;
     }
 
-    /**
-     * @return Queries\IResolvedQuery
-     */
-    protected function buildResolvedQuery()
-    {
-        return new Queries\ResolvedQuery($this->resolvedParameters, $this->hash);
-    }
-
     final protected function appendToHash($value)
     {
         $this->hash .= $value;

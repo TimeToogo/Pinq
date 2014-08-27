@@ -25,6 +25,7 @@ abstract class QueryBuilder extends BaseQueryBuilder
     protected function buildResolvedQuery(Interpretations\IScopeResolver $scopeResolver, Interpretations\IQueryResolver $queryResolver)
     {
         return new Queries\ResolvedQuery(
+                $scopeResolver->getQueryable(),
                 $scopeResolver->getResolvedParameters() + $queryResolver->getResolvedParameters(),
                 $scopeResolver->getHash() . '#' . $queryResolver->getHash());
     }
