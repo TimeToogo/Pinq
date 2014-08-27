@@ -34,16 +34,11 @@ abstract class ExpressionInterpreter
 
     final protected function getFunction($id, O\Expression $expression)
     {
-        if ($expression instanceof O\ValueExpression) {
-            return new Functions\CallableFunction($this->getId($id), $expression->getValue());
-        } elseif ($expression instanceof O\ClosureExpression) {
+        if ($expression instanceof O\ClosureExpression) {
             return new Functions\ClosureExpressionFunction(
                     $this->getId($id), $expression, $this->evaluationContext);
         } else {
-            throw new \Pinq\PinqException(
-                    'Cannot get function from expression: expecting %s, %s given',
-                    O\ClosureExpression::getType() . ' or ' . O\ValueExpression::getType(),
-                    $expression->getType());
+            return new Functions\CallableFunction($this->getId($id), $expression->evaluate($this->evaluationContext));
         }
     }
 
