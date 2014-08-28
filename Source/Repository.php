@@ -30,6 +30,27 @@ class Repository extends Queryable implements IRepository, Interfaces\IOrderedRe
         $this->repositoryProvider = $provider;
     }
 
+    /**
+     * Executes the supplied operation query expression on the underlying repository provider.
+     *
+     * @param O\Expression $expression
+     *
+     * @return void
+     */
+    private function executeQuery(O\Expression $expression)
+    {
+        $this->repositoryProvider->execute($expression);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return IRepository
+     */
+    protected function newMethodSegment($name, array $arguments = [])
+    {
+        return $this->repositoryProvider->createRepository($this->newMethod($name, $arguments));
+    }
+
     public function join($values)
     {
         return new Connectors\JoiningRepository(
@@ -51,18 +72,6 @@ class Repository extends Queryable implements IRepository, Interfaces\IOrderedRe
         }
 
         $this->executeQuery($this->newMethod(__FUNCTION__, [$values]));
-    }
-
-    /**
-     * Executes the supplied operation query expression on the underlying repository provider.
-     *
-     * @param O\Expression $expression
-     *
-     * @return void
-     */
-    private function executeQuery(O\Expression $expression)
-    {
-        $this->repositoryProvider->execute($expression);
     }
 
     public function apply(callable $function)
@@ -102,14 +111,5 @@ class Repository extends Queryable implements IRepository, Interfaces\IOrderedRe
     public function offsetUnset($index)
     {
         $this->executeQuery($this->newMethod(__FUNCTION__, [$index]));
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return IRepository
-     */
-    protected function newMethodSegment($name, array $arguments = [])
-    {
-        return $this->repositoryProvider->createRepository($this->newMethod($name, $arguments));
     }
 }
