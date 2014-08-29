@@ -166,7 +166,7 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
         }
 
         $resolvedStructuralParameters = $template->resolveStructuralParameters($parameters, $hash);
-        $compiledQueryHash            = $templateHash . '-' . $hash;
+        $compiledQueryHash            = md5($templateHash . '-' . $hash);
         $compiledQuery                = $queryCache->tryGet($compiledQueryHash);
 
         if (!($compiledQuery instanceof ICompiledQuery)) {

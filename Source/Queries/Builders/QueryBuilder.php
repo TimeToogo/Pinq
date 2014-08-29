@@ -27,6 +27,6 @@ abstract class QueryBuilder extends BaseQueryBuilder
         return new Queries\ResolvedQuery(
                 $scopeResolver->getQueryable(),
                 $scopeResolver->getResolvedParameters() + $queryResolver->getResolvedParameters(),
-                $scopeResolver->getHash() . '#' . $queryResolver->getHash());
+                md5($scopeResolver->getHash() . '#' . $queryResolver->getHash()));
     }
 }
