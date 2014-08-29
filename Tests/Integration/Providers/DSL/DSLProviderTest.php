@@ -2,22 +2,28 @@
 
 namespace Pinq\Tests\Integration\Providers\DSL;
 
-use Pinq\Providers;
 use Pinq\Providers\DSL\Compilation;
+use Pinq\Providers;
 use Pinq\Queries;
 use Pinq\Tests\PinqTestCase;
 
 class DSLProviderTest extends PinqTestCase
 {
-    public function testRequestCallsLoadsAndCachesCompiledRequest()
+    protected function queryTemplateMock($queryTemplateClass)
     {
-        $requestTemplateMock = $this->getMockForAbstractClass('Pinq\\Providers\\DSL\\Compilation\\IRequestTemplate');
-        $requestTemplateMock
+        $queryTemplateMock = $this->getMockForAbstractClass($queryTemplateClass);
+        $queryTemplateMock
                 ->expects($this->once())
                 ->method('resolveStructuralParameters')
                 ->will($this->returnValue(Compilation\Parameters\ResolvedParameterRegistry::none()));
-        $compiledRequestMock = $this->getMockForAbstractClass('Pinq\\Providers\\DSL\\Compilation\\ICompiledRequest');;
 
+        return $queryTemplateMock;
+    }
+
+    protected function queryCacheAdapterMock(
+            Compilation\IQueryTemplate $queryTemplateMock,
+            Compilation\ICompiledQuery $compiledQueryMock
+    ) {
         $cacheMock = $this->getMockForAbstractClass('Pinq\\Caching\\CacheAdapter');
         $cacheMock->expects($this->any())
                 ->method('tryGet')
@@ -27,11 +33,21 @@ class DSLProviderTest extends PinqTestCase
                 ->with(
                         $this->isType('string'),
                         $this->logicalOr(
-                                $this->identicalTo($requestTemplateMock),
-                                $this->identicalTo($compiledRequestMock)
+                                $this->identicalTo($queryTemplateMock),
+                                $this->identicalTo($compiledQueryMock)
                         )
                 )
                 ->will($this->returnValue(null));
+
+        return $cacheMock;
+    }
+
+    public function testRequestCallsLoadsAndCachesCompiledRequest()
+    {
+        $requestTemplateMock = $this->queryTemplateMock('Pinq\\Providers\\DSL\\Compilation\\IRequestTemplate');
+        $compiledRequestMock = $this->getMockForAbstractClass('Pinq\\Providers\\DSL\\Compilation\\ICompiledRequest');;
+
+        $cacheMock = $this->queryCacheAdapterMock($requestTemplateMock, $compiledRequestMock);
 
         $configurationMock = $this->getMockBuilder('Pinq\\Providers\\DSL\\QueryCompilerConfiguration')
                 ->setMethods(['buildCompiledQueryCache', 'createRequestTemplate', 'compileRequestQuery'])
@@ -61,36 +77,18 @@ class DSLProviderTest extends PinqTestCase
 
         $queryable = $provider->createQueryable();
 
+        //Perform request
         $queryable->getIterator();
     }
 
     public function testOperationCallsLoadsAndCachesCompiledRequest()
     {
-        $operationTemplateMock = $this->getMockForAbstractClass(
-                'Pinq\\Providers\\DSL\\Compilation\\IOperationTemplate'
-        );
-        $operationTemplateMock
-                ->expects($this->once())
-                ->method('resolveStructuralParameters')
-                ->will($this->returnValue(Compilation\Parameters\ResolvedParameterRegistry::none()));
+        $operationTemplateMock = $this->queryTemplateMock('Pinq\\Providers\\DSL\\Compilation\\IOperationTemplate');
         $compiledOperationMock = $this->getMockForAbstractClass(
                 'Pinq\\Providers\\DSL\\Compilation\\ICompiledOperation'
         );
 
-        $cacheMock = $this->getMockForAbstractClass('Pinq\\Caching\\CacheAdapter');
-        $cacheMock->expects($this->any())
-                ->method('tryGet')
-                ->will($this->returnValue(null));
-        $cacheMock->expects($this->exactly(2))
-                ->method('save')
-                ->with(
-                        $this->isType('string'),
-                        $this->logicalOr(
-                                $this->identicalTo($operationTemplateMock),
-                                $this->identicalTo($compiledOperationMock)
-                        )
-                )
-                ->will($this->returnValue(null));
+        $cacheMock = $this->queryCacheAdapterMock($operationTemplateMock, $compiledOperationMock);
 
         $configurationMock = $this->getMockBuilder('Pinq\\Providers\\DSL\\RepositoryCompilerConfiguration')
                 ->setMethods(['buildCompiledQueryCache', 'createOperationTemplate', 'compileOperationQuery'])
@@ -124,6 +122,7 @@ class DSLProviderTest extends PinqTestCase
 
         $repository = $provider->createRepository();
 
+        //Perform operation
         $repository->clear();
     }
 }
