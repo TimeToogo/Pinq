@@ -15,7 +15,7 @@ interface ICompiledQuery
     /**
      * Gets the parameter registry of the compiled query.
      *
-     * @return Parameters\ExpressionRegistry
+     * @return Parameters\ParameterRegistry
      */
     public function getParameterRegistry();
 }

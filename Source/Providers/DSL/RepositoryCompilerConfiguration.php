@@ -55,22 +55,22 @@ abstract class RepositoryCompilerConfiguration extends QueryCompilerConfiguratio
 
     protected function createOperationTemplate(Queries\IOperationQuery $operationQuery)
     {
-        $structuralExpressions = $this->locateStructuralExpressions($operationQuery, $structuralExpressionProcessors);
+        $structuralParameters = $this->locateStructuralParameters($operationQuery);
 
-        if ($structuralExpressions->countExpressions() === 0) {
+        if ($structuralParameters->count() === 0) {
             return new StaticOperationTemplate($operationQuery->getParameters(), $this->buildCompiledOperationQuery(
                     $operationQuery
             ));
         }
 
-        return new OperationTemplate($operationQuery, $structuralExpressions);
+        return new OperationTemplate($operationQuery, $structuralParameters);
     }
 
     protected function compileOperationQuery(
             Compilation\IOperationTemplate $template,
-            Parameters\ResolvedStructuralExpressionRegistry $structuralExpressions
+            Parameters\ResolvedParameterRegistry $structuralParameters
     ) {
-        $structuredQuery = $this->inlineStructuralExpressions($template, $structuralExpressions);
+        $structuredQuery = $this->inlineStructuralParameters($template->getQuery(), $structuralParameters);
 
         return $this->buildCompiledOperationQuery($structuredQuery);
     }

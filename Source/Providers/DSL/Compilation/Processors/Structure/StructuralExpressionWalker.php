@@ -40,7 +40,7 @@ class StructuralExpressionWalker extends O\ExpressionWalker
 
     protected function doWalk(O\Expression $expression)
     {
-        if($this->processor->matches($expression)) {
+        if($this->processor->matches($this->function, $expression)) {
             $processParameterCallback = $this->processParameterCallback;
             $expression = $processParameterCallback($this->processor, $expression);
         }

@@ -9,9 +9,6 @@ use Pinq\Providers\DSL\Compilation\ICompiledQuery;
 use Pinq\Providers\DSL\Compilation\IQueryTemplate;
 use Pinq\Providers\DSL\Compilation\IStaticQueryTemplate;
 use Pinq\Providers\DSL\Compilation\Parameters;
-use Pinq\Providers\DSL\Compilation\Processors\Structure\IStructuralExpressionProcessor;
-use Pinq\Providers\DSL\Compilation\Processors\Structure\StructuralExpressionInliner;
-use Pinq\Providers\DSL\Compilation\Processors\Structure\StructuralExpressionLocator;
 use Pinq\Providers\DSL\Compilation\RequestTemplate;
 use Pinq\Providers\DSL\Compilation\StaticRequestTemplate;
 use Pinq\Queries;
@@ -91,8 +88,8 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
             callable $compileQueryCallback
     ) {
         /** @var $resolution Queries\IResolvedQuery */
-        $resolution    = $resolveQueryCallback($requestExpression, $evaluationContext);
-        $templateHash  = $resolution->getHash();
+        $resolution   = $resolveQueryCallback($requestExpression, $evaluationContext);
+        $templateHash = $resolution->getHash();
 
         $queryCache    = $this->getCompiledQueryCache($resolution->getQueryable()->getSourceInfo());
         $queryTemplate = $queryCache->tryGet($templateHash);
@@ -102,7 +99,7 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
             $query              = $parseQueryCallback($requestExpression, $evaluationContext);
             $resolvedParameters = $query->getParameters()->resolve($resolution);
             /** @var $queryTemplate Compilation\IQueryTemplate */
-            $queryTemplate      = $createTemplateCallback($query);
+            $queryTemplate = $createTemplateCallback($query);
             $queryCache->save($templateHash, $queryTemplate);
         } else {
             $resolvedParameters = $queryTemplate->getParameters()->resolve($resolution);
@@ -128,12 +125,12 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
             return $template->getCompiledQuery();
         }
 
-        $resolvedStructuralExpressions = $template->resolveStructuralExpressions($parameters, $hash);
-        $compiledQueryHash             = $templateHash . '-' . $hash;
-        $compiledQuery                 = $queryCache->tryGet($compiledQueryHash);
+        $resolvedStructuralParameters = $template->resolveStructuralParameters($parameters, $hash);
+        $compiledQueryHash            = $templateHash . '-' . $hash;
+        $compiledQuery                = $queryCache->tryGet($compiledQueryHash);
 
         if (!($compiledQuery instanceof ICompiledQuery)) {
-            $compiledQuery = $compileRequestCallback($template, $resolvedStructuralExpressions);
+            $compiledQuery = $compileRequestCallback($template, $resolvedStructuralParameters);
             $queryCache->save($compiledQueryHash, $compiledQuery);
         }
 
@@ -141,57 +138,45 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
     }
 
     /**
+     * Returns a registry of all the structural parameters of the query.
+     *
      * @param Queries\IQuery $query
      *
-     * @return IStructuralExpressionProcessor[]
+     * @return Parameters\ParameterRegistry
      */
-    abstract protected function structuralExpressionProcessors(Queries\IQuery $query);
-
-    protected function locateStructuralExpressions(Queries\IQuery $query, &$structuralExpressionProcessors)
-    {
-        $structuralExpressionProcessors = $this->structuralExpressionProcessors($query);
-        $structuralExpressions          = new Parameters\StructuralExpressionCollection();
-        foreach ($structuralExpressionProcessors as $processor) {
-            $structuralExpressions->add($processor, StructuralExpressionLocator::processQuery($query, $processor));
-        }
-
-        return $structuralExpressions->buildRegistry();
-    }
+    abstract protected function locateStructuralParameters(Queries\IQuery $query);
 
     protected function createRequestTemplate(Queries\IRequestQuery $requestQuery)
     {
-        $structuralExpressions = $this->locateStructuralExpressions($requestQuery, $structuralExpressionProcessors);
+        $structuralParameters = $this->locateStructuralParameters($requestQuery);
 
-        if ($structuralExpressions->countExpressions() === 0) {
+        if ($structuralParameters->count() === 0) {
             return new StaticRequestTemplate($requestQuery->getParameters(), $this->buildCompiledRequestQuery(
                     $requestQuery
             ));
         }
 
-        return new RequestTemplate($requestQuery, $structuralExpressions);
+        return new RequestTemplate($requestQuery, $structuralParameters);
     }
 
-    protected function inlineStructuralExpressions(
-            IQueryTemplate $queryTemplate,
-            Parameters\ResolvedStructuralExpressionRegistry $structuralExpressions
-    ) {
-        $query = $queryTemplate->getQuery();
-        foreach ($structuralExpressions->getProcessors() as $processor) {
-            $query = StructuralExpressionInliner::processQuery(
-                    $query,
-                    $processor,
-                    $structuralExpressions->getExpressions($processor)
-            );
-        }
-
-        return $query;
-    }
+    /**
+     * Creates a new query with inlined resolved structural parameters.
+     *
+     * @param Queries\IQuery                       $query
+     * @param Parameters\ResolvedParameterRegistry $structuralParameters
+     *
+     * @return Queries\IRequestQuery|Queries\IOperationQuery
+     */
+    abstract protected function inlineStructuralParameters(
+            Queries\IQuery $query,
+            Parameters\ResolvedParameterRegistry $structuralParameters
+    );
 
     public function compileRequestQuery(
             Compilation\IRequestTemplate $template,
-            Parameters\ResolvedStructuralExpressionRegistry $structuralExpressions
+            Parameters\ResolvedParameterRegistry $structuralExpressions
     ) {
-        $structuredQuery = $this->inlineStructuralExpressions($template, $structuralExpressions);
+        $structuredQuery = $this->inlineStructuralParameters($template->getQuery(), $structuralExpressions);
 
         return $this->buildCompiledRequestQuery($structuredQuery);
     }

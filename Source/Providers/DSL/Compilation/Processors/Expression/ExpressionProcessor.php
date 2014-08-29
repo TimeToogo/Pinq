@@ -3,7 +3,6 @@
 namespace Pinq\Providers\DSL\Compilation\Processors\Expression;
 
 use Pinq\Queries;
-use Pinq\Queries\Functions\FunctionBase;
 
 /**
  * Base class of expression processor.

@@ -13,8 +13,8 @@ class RequestTemplate extends QueryTemplate implements IRequestTemplate
 {
     public function __construct(
             Queries\IRequestQuery $query,
-            Parameters\StructuralExpressionRegistry $structuralExpressions
+            Parameters\ParameterRegistry $structuralParameters
     ) {
-        parent::__construct($query, $query->getParameters(), $structuralExpressions);
+        parent::__construct($query, $query->getParameters(), $structuralParameters);
     }
 }

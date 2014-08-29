@@ -3,8 +3,7 @@
 namespace Pinq\Providers\DSL\Compilation\Processors\Structure;
 
 use Pinq\Expressions as O;
-use Pinq\Providers\DSL\Compilation\Parameters\ExpressionCollection;
-use Pinq\Providers\DSL\Compilation\Parameters\ExpressionRegistry;
+use Pinq\Providers\DSL\Compilation\Parameters\ParameterCollection;
 use Pinq\Providers\DSL\Compilation\Processors\Expression;
 use Pinq\Queries;
 use Pinq\Queries\Functions\FunctionBase;
@@ -14,15 +13,15 @@ use Pinq\Queries\Functions\FunctionBase;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class StructuralExpressionLocator extends StructuralExpressionProcessor
+class StructuralExpressionLocator extends StructuralExpressionQueryProcessor
 {
     /**
-     * @var ExpressionCollection
+     * @var ParameterCollection
      */
-    protected $expressions;
+    protected $parameters;
 
     public function __construct(
-            ExpressionCollection $expressionCollection,
+            ParameterCollection $expressionCollection,
             IStructuralExpressionProcessor $processor,
             Queries\IScope $scope
     ) {
@@ -30,37 +29,34 @@ class StructuralExpressionLocator extends StructuralExpressionProcessor
     }
 
     /**
-     * @param Queries\IQuery                 $query
-     * @param IStructuralExpressionProcessor $processor
+     * @param ParameterCollection $parameters
+     * @param Queries\IQuery                                                 $query
+     * @param IStructuralExpressionProcessor                                 $processor
      *
-     * @return ExpressionRegistry
+     * @return void
      */
-    public static function processQuery(Queries\IQuery $query, IStructuralExpressionProcessor $processor)
+    public static function processQuery(ParameterCollection $parameters, Queries\IQuery $query, IStructuralExpressionProcessor $processor)
     {
-        $expressionCollection = new ExpressionCollection();
         $processor            = Expression\ProcessorFactory::from(
                 $query,
-                new self($expressionCollection, $processor, $query->getScope())
+                new self($parameters, $processor, $query->getScope())
         );
         $processor->buildQuery();
-
-        return $expressionCollection->buildRegistry();
     }
 
     public function forSubScope(Queries\IScope $scope)
     {
-        return new static($this->expressions, $this->processor, $scope);
+        return new static($this->parameters, $this->processor, $scope);
     }
 
     public function processFunction(FunctionBase $function)
     {
-        $expressionContext       = $this->expressions->forFunction($function);
         $expressionParameterizer = new StructuralExpressionWalker(
                 function (
                         IStructuralExpressionProcessor $processor,
                         O\Expression $expression
-                ) use ($expressionContext) {
-                    $processor->parameterize($expression, $expressionContext);
+                ) use ($function) {
+                    $processor->parameterize($function, $expression, $this->parameters);
                     return $expression;
                 },
                 $function,

@@ -16,7 +16,7 @@ class CompiledQuery extends Compilation\CompiledQuery implements Compilation\ICo
 
     public function __construct($english = '')
     {
-        parent::__construct(Parameters\ExpressionRegistry::none());
+        parent::__construct(Parameters\ParameterRegistry::none());
         $this->english = $english;
     }
 

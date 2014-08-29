@@ -3,22 +3,23 @@
 namespace Pinq\Tests\Integration\Providers\DSL;
 
 use Pinq\Expressions as O;
-use Pinq\Providers\DSL\Compilation\Parameters\ExpressionCollection;
+use Pinq\Providers\DSL\Compilation\Parameters\ParameterCollection;
 use Pinq\Providers\DSL\Compilation\Parameters\ExpressionParameter;
+use Pinq\Providers\DSL\Compilation\Parameters\ParameterHasher;
 use Pinq\Queries\Functions;
 use Pinq\Queries\ResolvedParameterRegistry;
 use Pinq\Tests\PinqTestCase;
 
-class ExpressionParameterCollectionTest extends PinqTestCase
+class ParameterCollectionTest extends PinqTestCase
 {
     /**
-     * @var ExpressionCollection
+     * @var ParameterCollection
      */
     protected $collection;
 
     protected function setUp()
     {
-        $this->collection = new ExpressionCollection();
+        $this->collection = new ParameterCollection();
     }
 
     protected function assertResolvesTo($value, array $resolvedParameters = null)
@@ -41,37 +42,30 @@ class ExpressionParameterCollectionTest extends PinqTestCase
 
     public function testCollectionCanEvaluateValueExpressions()
     {
-        $this->collection->add(O\Expression::value('val-test'));
+        $this->collection->addExpression(O\Expression::value('val-test'), ParameterHasher::valueType());
 
         $this->assertResolvesTo(['val-test']);
     }
 
-    public function testCollectionAddsExpressionCorrectly()
-    {
-        $this->collection->add($expression = O\Expression::value('val-test1'));
-
-        $this->assertContains($expression, $this->collection->getExpressions());
-        $this->assertSame('val-test1', $this->collection->buildRegistry()->resolve(ResolvedParameterRegistry::none())->evaluate($expression));
-    }
-
     public function testCollectionAddsExpressionParameterCorrectly()
     {
-        $this->collection->add($expression = O\Expression::value('val-test1'), null, $instance = new \stdClass());
+        $this->collection->addExpression($expression = O\Expression::value('val-test1'), ParameterHasher::valueType(), null, $instance = new \stdClass());
 
-        $this->assertEquals([new ExpressionParameter($expression, null, $instance)], $this->collection->getExpressionParameters());
+        $this->assertEquals([new ExpressionParameter($expression, ParameterHasher::valueType(), null, $instance)], $this->collection->getParameters());
     }
 
     public function testCollectionAddsExpressionWithDataCorrectly()
     {
-        $this->collection->add($expression = O\Expression::value('val-test1'), null, $instance = new \stdClass());
+        $this->collection->addExpression(O\Expression::value('val-test1'), ParameterHasher::valueType(), null, $instance = new \stdClass());
 
-        $this->assertSame($instance, $this->collection->getData($expression));
+        $this->assertSame($instance, $this->collection->getParameters()[0]->getData());
     }
 
     public function testParameterCollectionCanEvaluateParameterVariableExpressions()
     {
-        $this->collection->add(
+        $this->collection->addExpression(
                 O\Expression::variable(O\Expression::value('var-foo')),
+                ParameterHasher::valueType(),
                 new Functions\ElementProjection(
                         '',
                         null,
@@ -86,12 +80,13 @@ class ExpressionParameterCollectionTest extends PinqTestCase
 
     public function testParameterCollectionCanEvaluateExpressions()
     {
-        $this->collection->add(
+        $this->collection->addExpression(
                 O\Expression::binaryOperation(
                         O\Expression::value('foo'),
                         O\Operators\Binary::CONCATENATION,
                         O\Expression::value('--bar')
-                )
+                ),
+                ParameterHasher::valueType()
         );
 
         $this->assertResolvesTo(['foo--bar']);
@@ -99,12 +94,13 @@ class ExpressionParameterCollectionTest extends PinqTestCase
 
     public function testParameterCollectionCanEvaluateAlteredParameterVariableExpressions()
     {
-        $this->collection->add(
+        $this->collection->addExpression(
                 O\Expression::binaryOperation(
                         O\Expression::variable(O\Expression::value('var-foo')),
                         O\Operators\Binary::CONCATENATION,
                         O\Expression::value('--concat')
                 ),
+                ParameterHasher::valueType(),
                 new Functions\ElementProjection(
                         '',
                         null,
@@ -124,11 +120,12 @@ class ExpressionParameterCollectionTest extends PinqTestCase
      */
     public function testParameterCollectionCanEvaluateSuperGlobalExpression()
     {
-        $this->collection->add(
+        $this->collection->addExpression(
                 O\Expression::index(
                         O\Expression::variable(O\Expression::value('_POST')),
                         O\Expression::value('var')
-                )
+                ),
+                ParameterHasher::valueType()
         );
 
         $_POST['var'] = [1, 2, 3];
@@ -136,28 +133,18 @@ class ExpressionParameterCollectionTest extends PinqTestCase
         $this->assertResolvesTo([[1, 2, 3]]);
     }
 
-    public function testParameterCollectionForFunctionContextVariables()
+    public function testStandardParameterId()
     {
-        $context = $this->collection
-                ->forFunction(
-                        new Functions\ElementProjection(
-                                '',
-                                null,
-                                null,
-                                ['param1' => 'var1', 'param2' => 'var2'],
-                                [],
-                                [])
-                );
+        $this->collection->addId('foo-bar', ParameterHasher::valueType());
 
-        $context->add(O\Expression::variable(O\Expression::value('var1')));
-        $context->add(O\Expression::variable(O\Expression::value('var2')));
-        $context->add(O\Expression::binaryOperation(
-                O\Expression::variable(O\Expression::value('var1')),
-                O\Operators\Binary::CONCATENATION,
-                O\Expression::variable(O\Expression::value('var2'))
-        ));
+        $this->assertResolvesTo(['123ewq'], ['foo-bar' => '123ewq']);
+    }
 
-        $this->assertResolvesTo([5, 'abcde', '5abcde'], ['param1' => 5, 'param2' => 'abcde']);
+    public function testCollectionSuppliesCorrectParameterHasToExpressionParameter()
+    {
+        $this->collection->addExpression(O\Expression::value('val-test'), $hasher = ParameterHasher::valueType());
+
+        $this->assertSame($hasher, $this->collection->getParameters()[0]->getHasher());
     }
 }
  

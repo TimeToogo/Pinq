@@ -10,11 +10,11 @@ namespace Pinq\Providers\DSL\Compilation;
 class CompiledQuery implements ICompiledQuery
 {
     /**
-     * @var Parameters\ExpressionRegistry
+     * @var Parameters\ParameterRegistry
      */
     protected $parameters;
 
-    public function __construct(Parameters\ExpressionRegistry $parameters)
+    public function __construct(Parameters\ParameterRegistry $parameters)
     {
         $this->parameters = $parameters;
     }

@@ -3,53 +3,54 @@
 namespace Pinq\Providers\DSL\Compilation\Processors\Structure;
 
 use Pinq\Expressions as O;
-use Pinq\Providers\DSL\Compilation\Parameters\ResolvedExpressionRegistry;
+use Pinq\Providers\DSL\Compilation\Parameters\ResolvedParameterRegistry;
 use Pinq\Providers\DSL\Compilation\Processors\Expression;
-use Pinq\Queries\Functions\FunctionBase;
 use Pinq\Queries;
+use Pinq\Queries\Functions\FunctionBase;
 
 /**
  * Implementation of the structural expression inliner.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class StructuralExpressionInliner extends StructuralExpressionProcessor
+class StructuralExpressionInliner extends StructuralExpressionQueryProcessor
 {
     /**
-     * @var ResolvedExpressionRegistry
+     * @var ResolvedParameterRegistry
      */
-    protected $expressions;
+    protected $parameters;
 
     public function __construct(
-            ResolvedExpressionRegistry $expressionRegistry,
+            ResolvedParameterRegistry $parameters,
             IStructuralExpressionProcessor $processor,
             Queries\IScope $scope
     ) {
-        parent::__construct($expressionRegistry, $processor, $scope);
+        parent::__construct($parameters, $processor, $scope);
     }
 
     /**
+     * @param ResolvedParameterRegistry      $parameters
      * @param Queries\IQuery                 $query
      * @param IStructuralExpressionProcessor $processor
-     * @param ResolvedExpressionRegistry     $expressionRegistry
      *
      * @return Queries\IOperationQuery|Queries\IRequestQuery
      */
     public static function processQuery(
+            ResolvedParameterRegistry $parameters,
             Queries\IQuery $query,
-            IStructuralExpressionProcessor $processor,
-            ResolvedExpressionRegistry $expressionRegistry
+            IStructuralExpressionProcessor $processor
     ) {
         $processor = Expression\ProcessorFactory::from(
                 $query,
-                new self($expressionRegistry, $processor, $query->getScope())
+                new self($parameters, $processor, $query->getScope())
         );
+
         return $processor->buildQuery();
     }
 
     public function forSubScope(Queries\IScope $scope)
     {
-        return new static($this->expressions, $this->processor, $scope);
+        return new static($this->parameters, $this->processor, $scope);
     }
 
     public function processFunction(FunctionBase $function)
@@ -58,8 +59,8 @@ class StructuralExpressionInliner extends StructuralExpressionProcessor
                 function (
                         IStructuralExpressionProcessor $processor,
                         O\Expression $expression
-                ) {
-                    return $processor->inline($expression, $this->expressions);
+                ) use ($function) {
+                    return $processor->inline($function, $expression, $this->parameters);
                 },
                 $function,
                 $this->processor);

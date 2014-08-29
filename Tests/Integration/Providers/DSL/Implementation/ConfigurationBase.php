@@ -6,6 +6,7 @@ use Pinq\Caching;
 use Pinq\Expressions as O;
 use Pinq\Providers\DSL\Compilation;
 use Pinq\Providers\DSL\Compilation\Processors;
+use Pinq\Providers\DSL\Compilation\Parameters;
 use Pinq\Providers\DSL\RepositoryCompilerConfiguration;
 use Pinq\Providers\DSL\Compilation\Processors\Structure\IStructuralExpressionProcessor;
 use Pinq\Queries;
@@ -53,13 +54,34 @@ abstract class ConfigurationBase extends RepositoryCompilerConfiguration
         $this->structuralExpressionProcessors = $structuralExpressionProcessors;
     }
 
-    protected function structuralExpressionProcessors(Queries\IQuery $query)
+    protected function locateStructuralParameters(Queries\IQuery $query)
     {
-        return $this->structuralExpressionProcessors;
+        $parameters = new Parameters\ParameterCollection();
+        foreach($this->structuralExpressionProcessors as $processor) {
+            Processors\Structure\StructuralExpressionLocator::processQuery($parameters, $query, $processor);
+        }
+
+        return $parameters->buildRegistry();
+    }
+
+    protected function inlineStructuralParameters(
+            Queries\IQuery $query,
+            Parameters\ResolvedParameterRegistry $parameters
+    ) {
+        foreach($this->structuralExpressionProcessors as $processor) {
+            $query = Processors\Structure\StructuralExpressionInliner::processQuery($parameters, $query, $processor);
+        }
+
+        return $query;
     }
 
     abstract protected function makeCompiledRequestQuery(Queries\IRequestQuery $query);
 
+    /**
+     * @param Queries\IQuery $query
+     *
+     * @return Queries\IRequestQuery|Queries\IOperationQuery
+     */
     final protected function preprocessQuery(Queries\IQuery $query)
     {
         foreach($this->processorFactories as $processorFactory) {

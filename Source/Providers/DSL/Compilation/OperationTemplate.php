@@ -13,8 +13,8 @@ class OperationTemplate extends QueryTemplate implements IOperationTemplate
 {
     public function __construct(
             Queries\IOperationQuery $query,
-            Parameters\StructuralExpressionRegistry $structuralExpressions
+            Parameters\ParameterRegistry $structuralParameters
     ) {
-        parent::__construct($query, $query->getParameters(), $structuralExpressions);
+        parent::__construct($query, $query->getParameters(), $structuralParameters);
     }
 }

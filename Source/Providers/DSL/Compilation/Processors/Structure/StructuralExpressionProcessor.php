@@ -2,34 +2,52 @@
 
 namespace Pinq\Providers\DSL\Compilation\Processors\Structure;
 
-use Pinq\Providers\DSL\Compilation\Parameters\ExpressionCollectionBase;
-use Pinq\Providers\DSL\Compilation\Processors\Expression\ExpressionProcessor;
-use Pinq\Queries;
+use Pinq\Expressions as O;
+use Pinq\PinqException;
+use Pinq\Providers\DSL\Compilation\Parameters;
+use Pinq\Providers\DSL\Compilation\Parameters\ResolvedParameterRegistry;
+use Pinq\Queries\Functions\FunctionBase;
 
 /**
  * Base class of the structural expression processor.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class StructuralExpressionProcessor extends ExpressionProcessor
+abstract class StructuralExpressionProcessor implements IStructuralExpressionProcessor
 {
-    /**
-     * @var ExpressionCollectionBase
-     */
-    protected $expressions;
-
-    /**
-     * @var IStructuralExpressionProcessor
-     */
-    protected $processor;
-
-    public function __construct(
-            ExpressionCollectionBase $expressions,
-            IStructuralExpressionProcessor $processor,
-            Queries\IScope $scope
+    protected function addParameter(
+            Parameters\ParameterCollection $parameters,
+            FunctionBase $function,
+            O\Expression $expression,
+            Parameters\IParameterHasher $hasher = null
     ) {
-        parent::__construct($scope);
-        $this->expressions = $expressions;
-        $this->processor   = $processor;
+        $parameters->add(
+                new StructuralExpressionParameter(
+                        $expression,
+                        $hasher ? : Parameters\ParameterHasher::valueType(),
+                        $function)
+        );
+    }
+
+    protected function getResolvedValue(
+            ResolvedParameterRegistry $resolvedParameters,
+            O\Expression $expression
+    ) {
+        foreach ($resolvedParameters->getParameters() as $parameter) {
+            if ($parameter instanceof StructuralExpressionParameter
+                    && $parameter->getExpression() === $expression
+            ) {
+                return $resolvedParameters->getValue($parameter);
+            }
+        }
+
+        throw new PinqException('Could not get structural expression: matching expression was not found.');
+    }
+
+    protected function getResolvedValueExpression(
+            ResolvedParameterRegistry $resolvedParameters,
+            O\Expression $expression
+    ) {
+        return O\Expression::value($this->getResolvedValue($resolvedParameters, $expression));
     }
 }

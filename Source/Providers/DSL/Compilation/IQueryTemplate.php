@@ -28,9 +28,9 @@ interface IQueryTemplate
     /**
      * Gets the structural expression registry.
      *
-     * @return Parameters\StructuralExpressionRegistry
+     * @return Parameters\ParameterRegistry
      */
-    public function getStructuralExpressions();
+    public function getStructuralParameters();
 
     /**
      * Resolves the structural expressions of the query template.
@@ -38,7 +38,7 @@ interface IQueryTemplate
      * @param Queries\IResolvedParameterRegistry $parameterRegistry
      * @param string                             $hash
      *
-     * @return Parameters\ResolvedStructuralExpressionRegistry
+     * @return Parameters\ResolvedParameterRegistry
      */
-    public function resolveStructuralExpressions(Queries\IResolvedParameterRegistry $parameterRegistry, &$hash);
+    public function resolveStructuralParameters(Queries\IResolvedParameterRegistry $parameterRegistry, &$hash);
 }

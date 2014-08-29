@@ -10,11 +10,11 @@ use Pinq\Queries\IResolvedParameterRegistry;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class ExpressionRegistry extends ExpressionCollectionBase
+class ParameterRegistry extends ParameterCollectionBase
 {
     public static function none()
     {
-        return new self(new \SplObjectStorage());
+        return new self([]);
     }
 
     /**
@@ -22,10 +22,10 @@ class ExpressionRegistry extends ExpressionCollectionBase
      *
      * @param IResolvedParameterRegistry $resolvedParameters
      *
-     * @return ResolvedExpressionRegistry
+     * @return ResolvedParameterRegistry
      */
     public function resolve(IResolvedParameterRegistry $resolvedParameters)
     {
-        return new ResolvedExpressionRegistry($this->expressions, $resolvedParameters);
+        return new ResolvedParameterRegistry($this->parameters, $resolvedParameters);
     }
 }

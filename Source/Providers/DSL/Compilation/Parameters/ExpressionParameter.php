@@ -8,11 +8,11 @@ use Pinq\Queries\Functions\FunctionEvaluationContextFactory;
 use Pinq\Queries\IResolvedParameterRegistry;
 
 /**
- * Implementation of the expression parameter collection.
+ * Implementation of the expression parameter.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class ExpressionParameter
+class ExpressionParameter extends QueryParameterBase
 {
     /**
      * @var O\IEvaluator
@@ -24,13 +24,9 @@ class ExpressionParameter
      */
     protected $contextFactory;
 
-    /**
-     * @var mixed
-     */
-    protected $data;
-
-    public function __construct(O\Expression $expression, FunctionBase $function = null, $data = null)
+    public function __construct(O\Expression $expression, IParameterHasher $hasher, FunctionBase $function = null, $data = null)
     {
+        parent::__construct($hasher, $data);
         if ($function !== null) {
             $this->contextFactory = $function->getEvaluationContextFactory();
             $this->evaluator      = $expression->asEvaluator($this->contextFactory->getEvaluationContext());
@@ -49,20 +45,7 @@ class ExpressionParameter
         return $this->evaluator;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param IResolvedParameterRegistry $parameters
-     *
-     * @return mixed
-     */
-    public function evaluate(IResolvedParameterRegistry $parameters)
+    public function doEvaluate(IResolvedParameterRegistry $parameters)
     {
         if ($this->contextFactory === null) {
             return $this->evaluator->evaluate();

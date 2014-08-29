@@ -4,6 +4,7 @@ namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
 use Pinq\Expressions as O;
 use Pinq\Providers\DSL\Compilation;
+use Pinq\Providers\DSL\Compilation\Parameters;
 use Pinq\Queries;
 use Pinq\Tests\Integration\Providers\DSL\Implementation\ConfigurationBase;
 

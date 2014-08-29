@@ -14,8 +14,8 @@ class DSLProviderTest extends PinqTestCase
         $requestTemplateMock = $this->getMockForAbstractClass('Pinq\\Providers\\DSL\\Compilation\\IRequestTemplate');
         $requestTemplateMock
                 ->expects($this->once())
-                ->method('resolveStructuralExpressions')
-                ->will($this->returnValue(Compilation\Parameters\ResolvedStructuralExpressionRegistry::none()));
+                ->method('resolveStructuralParameters')
+                ->will($this->returnValue(Compilation\Parameters\ResolvedParameterRegistry::none()));
         $compiledRequestMock = $this->getMockForAbstractClass('Pinq\\Providers\\DSL\\Compilation\\ICompiledRequest');;
 
         $cacheMock = $this->getMockForAbstractClass('Pinq\\Caching\\CacheAdapter');
@@ -71,8 +71,8 @@ class DSLProviderTest extends PinqTestCase
         );
         $operationTemplateMock
                 ->expects($this->once())
-                ->method('resolveStructuralExpressions')
-                ->will($this->returnValue(Compilation\Parameters\ResolvedStructuralExpressionRegistry::none()));
+                ->method('resolveStructuralParameters')
+                ->will($this->returnValue(Compilation\Parameters\ResolvedParameterRegistry::none()));
         $compiledOperationMock = $this->getMockForAbstractClass(
                 'Pinq\\Providers\\DSL\\Compilation\\ICompiledOperation'
         );

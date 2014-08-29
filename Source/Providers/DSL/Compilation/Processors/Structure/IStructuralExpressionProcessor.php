@@ -4,6 +4,7 @@ namespace Pinq\Providers\DSL\Compilation\Processors\Structure;
 
 use Pinq\Expressions as O;
 use Pinq\Providers\DSL\Compilation\Parameters;
+use Pinq\Queries\Functions\FunctionBase;
 
 /**
  * Interface of the structural expression processor.
@@ -15,43 +16,44 @@ interface IStructuralExpressionProcessor
     /**
      * Whether the supplied expression should be processed as structural expression.
      *
+     * @param FunctionBase $function
      * @param O\Expression $expression
      *
      * @return boolean
      */
-    public function matches(O\Expression $expression);
+    public function matches(
+            FunctionBase $function,
+            O\Expression $expression
+    );
 
     /**
      * Adds the necessary expression(s) to the supplied collection.
      *
-     * @param O\Expression                           $expression The *matched* expression
-     * @param Parameters\ExpressionCollectionContext $expressionCollection
+     * @param FunctionBase                   $function
+     * @param O\Expression                   $expression
+     * @param Parameters\ParameterCollection $parameters
      *
      * @return void
      */
     public function parameterize(
+            FunctionBase $function,
             O\Expression $expression,
-            Parameters\ExpressionCollectionContext $expressionCollection
+            Parameters\ParameterCollection $parameters
     );
 
     /**
-     * Gets a unique hash of the *parameterized* expression from the supplied registry.
-     *
-     * @param O\Expression                          $expression The *parameterized* expression
-     * @param Parameters\ResolvedExpressionRegistry $expressionRegistry
-     *
-     * @return string
-     */
-    public function hash(O\Expression $expression, Parameters\ResolvedExpressionRegistry $expressionRegistry);
-
-    /**
-     * Updates the *matched* expression with it's resolved value from
+     * Updates the matched expression with it's resolved value from
      * the supplied registry.
      *
-     * @param O\Expression                          $expression The *matched* expression
-     * @param Parameters\ResolvedExpressionRegistry $expressionRegistry
+     * @param FunctionBase                         $function
+     * @param O\Expression                         $expression
+     * @param Parameters\ResolvedParameterRegistry $parameters
      *
      * @return O\Expression
      */
-    public function inline(O\Expression $expression, Parameters\ResolvedExpressionRegistry $expressionRegistry);
+    public function inline(
+            FunctionBase $function,
+            O\Expression $expression,
+            Parameters\ResolvedParameterRegistry $parameters
+    );
 }

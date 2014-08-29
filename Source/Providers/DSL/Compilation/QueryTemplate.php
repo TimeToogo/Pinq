@@ -22,18 +22,18 @@ abstract class QueryTemplate implements IQueryTemplate
     protected $parameters;
 
     /**
-     * @var Parameters\StructuralExpressionRegistry
+     * @var Parameters\ParameterRegistry
      */
-    protected $structuralExpressions;
+    protected $structuralParameters;
 
     public function __construct(
             Queries\IQuery $query = null,
-            Queries\IParameterRegistry $expressions,
-            Parameters\StructuralExpressionRegistry $structuralExpressions
+            Queries\IParameterRegistry $parameters,
+            Parameters\ParameterRegistry $structuralParameters
     ) {
-        $this->query                 = $query;
-        $this->parameters            = $expressions;
-        $this->structuralExpressions = $structuralExpressions;
+        $this->query                = $query;
+        $this->parameters           = $parameters;
+        $this->structuralParameters = $structuralParameters;
     }
 
     final public function getQuery()
@@ -46,27 +46,15 @@ abstract class QueryTemplate implements IQueryTemplate
         return $this->parameters;
     }
 
-    final public function getStructuralExpressions()
+    final public function getStructuralParameters()
     {
-        return $this->structuralExpressions;
+        return $this->structuralParameters;
     }
 
-    final public function getStructuralExpressionProcessors()
+    public function resolveStructuralParameters(Queries\IResolvedParameterRegistry $parameterRegistry, &$hash)
     {
-        return $this->structuralExpressions->getProcessors();
-    }
-
-    public function resolveStructuralExpressions(Queries\IResolvedParameterRegistry $parameterRegistry, &$hash)
-    {
-        $hash                          = '';
-        $resolvedStructuralExpressions = $this->structuralExpressions->resolve($parameterRegistry);
-        foreach ($resolvedStructuralExpressions->getProcessors() as $processor) {
-            $hash .= '::';
-            $structuralExpressions = $resolvedStructuralExpressions->getExpressions($processor);
-            foreach ($structuralExpressions->getExpressions() as $expression) {
-                $hash .= '_' . $processor->hash($expression, $structuralExpressions);
-            }
-        }
+        $resolvedStructuralExpressions = $this->structuralParameters->resolve($parameterRegistry);
+        $hash                          = implode('::', $resolvedStructuralExpressions->getHashesAsArray());
 
         return $resolvedStructuralExpressions;
     }
