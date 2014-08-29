@@ -50,4 +50,12 @@ abstract class ProviderBase implements IQueryProvider
     {
         return $this->configuration;
     }
+
+    /**
+     * @return string
+     */
+    final public static function getType()
+    {
+        return get_called_class();
+    }
 }

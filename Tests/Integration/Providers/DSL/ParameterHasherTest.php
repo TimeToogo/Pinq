@@ -4,8 +4,11 @@ namespace Pinq\Tests\Integration\Providers\DSL;
 
 use Pinq\Expressions as O;
 use Pinq\Providers\DSL\Compilation\Parameters\ParameterHasher;
+use Pinq\Queries;
 use Pinq\Queries\Functions;
+use Pinq\Queryable;
 use Pinq\Tests\PinqTestCase;
+use Pinq\Traversable;
 
 function userDefinedFunction(array &$gg = [1, 2, 3], $t = __LINE__, \stdClass $f = null)
 {
@@ -69,6 +72,49 @@ class ParameterHasherTest extends PinqTestCase
         $this->assertNotSame(
                 $hasher->hash(function ($i) { }),
                 $hasher->hash(function ($i) { }));
+    }
+
+    /**
+     * @expectedException \Pinq\PinqException
+     */
+    public function testCompiledRequestQueryHasherThrowsExceptionForNonQueryable()
+    {
+        $hasher = ParameterHasher::compiledRequestQuery();
+
+        $hasher->hash(new \stdClass());
+    }
+
+    /**
+     * @expectedException \Pinq\PinqException
+     */
+    public function testCompiledRequestQueryHasherThrowsExceptionForQueryableWithoutDSLProvider()
+    {
+        $hasher = ParameterHasher::compiledRequestQuery();
+
+        $hasher->hash((new \Pinq\Providers\Traversable\Provider(Traversable::from([])))->createQueryable());
+    }
+
+    public function testCompiledRequestQueryHasher()
+    {
+        $hasher = ParameterHasher::compiledRequestQuery();
+
+        $configurationMock = $this->getMockBuilder('Pinq\\Providers\\DSL\\QueryCompilerConfiguration')
+                ->setMethods(['getCompiledRequestQueryHash'])
+                ->disableOriginalConstructor()
+                ->getMockForAbstractClass();
+        $configurationMock->expects($this->once())
+                ->method('getCompiledRequestQueryHash')
+                ->will($this->returnValue('123456789'));
+
+        /** @var $provider \Pinq\Providers\DSL\QueryProvider|\PHPUnit_Framework_MockObject_MockObject */
+        $provider = $this->getMockForAbstractClass(
+                'Pinq\\Providers\\DSL\\QueryProvider',
+                [new Queries\SourceInfo(''), $configurationMock]
+        );
+
+        $queryable = $provider->createQueryable();
+
+        $this->assertSame($hasher->hash($queryable), '123456789');
     }
 }
  

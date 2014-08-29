@@ -43,7 +43,7 @@ abstract class QueryProvider extends Providers\QueryProvider
         $compiledQuery = $this->compilerConfiguration->loadCompiledRequestQuery(
                 $requestExpression,
                 null,
-                $resolvedParameters
+                /* out */ $resolvedParameters
         );
 
         return $this->loadCompiledRequest($compiledQuery, $resolvedParameters);

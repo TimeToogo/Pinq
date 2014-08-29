@@ -50,7 +50,7 @@ abstract class RepositoryProvider extends Providers\RepositoryProvider
         $compiledQuery = $this->compilerConfiguration->loadCompiledOperationQuery(
                 $operationExpression,
                 null,
-                $resolvedParameters
+                /* out */ $resolvedParameters
         );
 
         $this->executeCompiledOperation($compiledQuery, $resolvedParameters);

@@ -30,6 +30,19 @@ interface IQueryCompilerConfiguration
     public function getCompiledQueryCache(Queries\ISourceInfo $sourceInfo);
 
     /**
+     * Gets a unique string identifier of the compiled request query.
+     *
+     * @param O\Expression              $requestExpression
+     * @param O\IEvaluationContext|null $evaluationContext
+     *
+     * @return string
+     */
+    public function getCompiledRequestQueryHash(
+            O\Expression $requestExpression,
+            O\IEvaluationContext $evaluationContext = null
+    );
+
+    /**
      * Loads the compiled query from the supplied request expression and assigns
      * the resolved parameters to the $resolvedParameters parameter.
      *
@@ -42,6 +55,6 @@ interface IQueryCompilerConfiguration
     public function loadCompiledRequestQuery(
             O\Expression $requestExpression,
             O\IEvaluationContext $evaluationContext = null,
-            Queries\IResolvedParameterRegistry &$resolvedParameters = null
+            /* out */ Queries\IResolvedParameterRegistry &$resolvedParameters = null
     );
 }

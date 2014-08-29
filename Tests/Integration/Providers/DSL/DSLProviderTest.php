@@ -16,6 +16,10 @@ class DSLProviderTest extends PinqTestCase
                 ->expects($this->once())
                 ->method('resolveStructuralParameters')
                 ->will($this->returnValue(Compilation\Parameters\ResolvedParameterRegistry::none()));
+        $queryTemplateMock
+                ->expects($this->once())
+                ->method('getParameters')
+                ->will($this->returnValue(new Queries\ParameterRegistry([])));
 
         return $queryTemplateMock;
     }

@@ -6,8 +6,10 @@ use Pinq\Caching;
 use Pinq\Expressions as O;
 use Pinq\Providers\Configuration;
 use Pinq\Providers\DSL\Compilation\ICompiledQuery;
+use Pinq\Providers\DSL\Compilation\ICompiledRequest;
 use Pinq\Providers\DSL\Compilation\IQueryTemplate;
 use Pinq\Providers\DSL\Compilation\IStaticQueryTemplate;
+use Pinq\Providers\DSL\Compilation\IStaticRequestTemplate;
 use Pinq\Providers\DSL\Compilation\Parameters;
 use Pinq\Providers\DSL\Compilation\RequestTemplate;
 use Pinq\Providers\DSL\Compilation\StaticRequestTemplate;
@@ -62,33 +64,78 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
         return $this->compiledQueryCache->forNamespace($sourceInfo->getHash());
     }
 
+    public function getCompiledRequestQueryHash(
+            O\Expression $requestExpression,
+            /* out */ O\IEvaluationContext $evaluationContext = null)
+    {
+        $queryTemplate = $this->loadRequestQueryTemplate(
+                $requestExpression,
+                $evaluationContext,
+                /* out */ $resolvedParameters,
+                /* out */ $queryCache,
+                /* out */ $templateHash
+        );
+
+        if($queryTemplate instanceof IStaticRequestTemplate) {
+            return $templateHash;
+        }
+
+        $queryTemplate->resolveStructuralParameters($resolvedParameters, /* out */ $structuralHash);
+
+        return $templateHash . '-' . $structuralHash;
+    }
+
     public function loadCompiledRequestQuery(
             O\Expression $requestExpression,
             O\IEvaluationContext $evaluationContext = null,
             Queries\IResolvedParameterRegistry &$resolvedParameters = null
     ) {
-        return $this->loadCompiledQuery(
+        $requestTemplate = $this->loadRequestQueryTemplate(
                 $requestExpression,
+                $evaluationContext,
+                $resolvedParameters,
+                /* out */ $queryCache,
+                /* out */ $templateHash
+        );
+
+        return $this->loadCompiledQueryFromTemplate(
+                $queryCache,
+                $templateHash,
+                $requestTemplate,
+                $resolvedParameters,
+                [$this, 'compileRequestQuery']
+        );
+    }
+
+    protected function loadRequestQueryTemplate(
+            O\Expression $queryExpression,
+            O\IEvaluationContext $evaluationContext = null,
+            Queries\IResolvedParameterRegistry &$resolvedParameters = null,
+            /* out */ Caching\ICacheAdapter &$queryCache = null,
+            /* out */ &$templateHash)
+    {
+        return $this->loadQueryTemplate($queryExpression,
                 $evaluationContext,
                 $resolvedParameters,
                 [$this->requestQueryBuilder, 'resolveRequest'],
                 [$this->requestQueryBuilder, 'parseRequest'],
                 [$this, 'createRequestTemplate'],
-                [$this, 'compileRequestQuery']
-        );
+                $queryCache,
+                $templateHash);
     }
 
-    protected function loadCompiledQuery(
-            O\Expression $requestExpression,
+    protected function loadQueryTemplate(
+            O\Expression $queryExpression,
             O\IEvaluationContext $evaluationContext = null,
             Queries\IResolvedParameterRegistry &$resolvedParameters = null,
             callable $resolveQueryCallback,
             callable $parseQueryCallback,
             callable $createTemplateCallback,
-            callable $compileQueryCallback
+            /* out */ Caching\ICacheAdapter &$queryCache = null,
+            /* out */ &$templateHash
     ) {
         /** @var $resolution Queries\IResolvedQuery */
-        $resolution   = $resolveQueryCallback($requestExpression, $evaluationContext);
+        $resolution   = $resolveQueryCallback($queryExpression, $evaluationContext);
         $templateHash = $resolution->getHash();
 
         $queryCache    = $this->getCompiledQueryCache($resolution->getQueryable()->getSourceInfo());
@@ -96,22 +143,15 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
 
         if (!($queryTemplate instanceof Compilation\IQueryTemplate)) {
             /** @var $query Queries\IQuery */
-            $query              = $parseQueryCallback($requestExpression, $evaluationContext);
-            $resolvedParameters = $query->getParameters()->resolve($resolution);
+            $query = $parseQueryCallback($queryExpression, $evaluationContext);
             /** @var $queryTemplate Compilation\IQueryTemplate */
             $queryTemplate = $createTemplateCallback($query);
             $queryCache->save($templateHash, $queryTemplate);
-        } else {
-            $resolvedParameters = $queryTemplate->getParameters()->resolve($resolution);
         }
 
-        return $this->loadCompiledQueryFromTemplate(
-                $queryCache,
-                $templateHash,
-                $queryTemplate,
-                $resolvedParameters,
-                $compileQueryCallback
-        );
+        $resolvedParameters = $queryTemplate->getParameters()->resolve($resolution);
+
+        return $queryTemplate;
     }
 
     protected function loadCompiledQueryFromTemplate(

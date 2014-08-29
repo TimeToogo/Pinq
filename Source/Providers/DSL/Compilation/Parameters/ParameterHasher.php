@@ -39,10 +39,10 @@ class ParameterHasher
     /**
      * @param O\IEvaluationContext $evaluationContext
      *
-     * @return _
+     * @return CompiledRequestQueryHasher
      */
-    public static function query(OIEvaluationContext $evaluationContext = null)
+    public static function compiledRequestQuery(O\IEvaluationContext $evaluationContext = null)
     {
-        throw new PinqException;//TODO: Implement parameter hashing based on compiled query.
+        return new CompiledRequestQueryHasher($evaluationContext);
     }
 } 

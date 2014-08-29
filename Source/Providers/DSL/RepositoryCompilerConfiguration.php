@@ -3,6 +3,7 @@
 namespace Pinq\Providers\DSL;
 
 use Pinq\Expressions as O;
+use Pinq\Caching;
 use Pinq\Providers\Configuration;
 use Pinq\Providers\DSL\Compilation\OperationTemplate;
 use Pinq\Providers\DSL\Compilation\Parameters;
@@ -42,15 +43,39 @@ abstract class RepositoryCompilerConfiguration extends QueryCompilerConfiguratio
             O\IEvaluationContext $evaluationContext = null,
             Queries\IResolvedParameterRegistry &$resolvedParameters = null
     ) {
-        return $this->loadCompiledQuery(
+        $operationTemplate = $this->loadOperationQueryTemplate(
                 $operationExpression,
+                $evaluationContext,
+                $resolvedParameters,
+                /* out */ $queryCache,
+                /* out */ $templateHash
+        );
+
+        return $this->loadCompiledQueryFromTemplate(
+                $queryCache,
+                $templateHash,
+                $operationTemplate,
+                $resolvedParameters,
+                [$this, 'compileOperationQuery']
+        );
+    }
+
+    protected function loadOperationQueryTemplate(
+            O\Expression $queryExpression,
+            O\IEvaluationContext $evaluationContext = null,
+            Queries\IResolvedParameterRegistry &$resolvedParameters = null,
+            /* out */ Caching\ICacheAdapter &$queryCache = null,
+            /* out */ &$templateHash)
+    {
+        return $this->loadQueryTemplate(
+                $queryExpression,
                 $evaluationContext,
                 $resolvedParameters,
                 [$this->operationQueryBuilder, 'resolveOperation'],
                 [$this->operationQueryBuilder, 'parseOperation'],
                 [$this, 'createOperationTemplate'],
-                [$this, 'compileOperationQuery']
-        );
+                $queryCache,
+                $templateHash);
     }
 
     protected function createOperationTemplate(Queries\IOperationQuery $operationQuery)
