@@ -42,27 +42,22 @@ class DirectoryCache extends CacheAdapter
 
     public function save($key, $value)
     {
-        file_put_contents($this->getKeyFilePath($key), serialize($value));
+        file_put_contents($this->getCacheFilePath($key), serialize($value));
     }
 
-    private function getKeyFilePath($key)
+    private function getCacheFilePath($fileName, $suffix = '')
     {
-        return $this->getCacheFilePath(bin2hex($key));
-    }
-
-    private function getCacheFilePath($fileName)
-    {
-        return $this->directory . DIRECTORY_SEPARATOR . $fileName . $this->fileExtension;
+        return $this->directory . DIRECTORY_SEPARATOR . bin2hex($fileName) . $suffix . $this->fileExtension;
     }
 
     public function contains($key)
     {
-        return is_readable($this->getKeyFilePath($key));
+        return is_readable($this->getCacheFilePath($key));
     }
 
     public function tryGet($key)
     {
-        $filePath = $this->getKeyFilePath($key);
+        $filePath = $this->getCacheFilePath($key);
 
         if (!is_readable($filePath)) {
             return null;
@@ -73,13 +68,13 @@ class DirectoryCache extends CacheAdapter
 
     public function clear($namespace = null)
     {
-        foreach (glob($this->getCacheFilePath(bin2hex($namespace) . '*')) as $path) {
+        foreach (glob($this->getCacheFilePath($namespace, '*')) as $path) {
             unlink($path);
         }
     }
 
     public function remove($key)
     {
-        unlink($this->getKeyFilePath($key));
+        unlink($this->getCacheFilePath($key));
     }
 }
