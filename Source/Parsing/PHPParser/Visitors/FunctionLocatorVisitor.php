@@ -22,7 +22,7 @@ class FunctionLocatorVisitor extends \PHPParser_NodeVisitorAbstract
     private $filePath;
 
     /**
-     * The locatied function nodes grouped by their location hash.
+     * The located function nodes grouped by their location hash.
      *
      * @var LocatedFunctionNode[][]
      */
