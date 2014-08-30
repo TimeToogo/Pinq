@@ -112,7 +112,7 @@ final class CacheProvider
      */
     public static function setDoctrineCache(\Doctrine\Common\Cache\Cache $cache)
     {
-        self::$cacheImplementation = new DoctrineCacheAdapter($cache);
+        self::$cacheImplementation = new DoctrineCache($cache);
         self::$hasBeenCleared      = false;
     }
 

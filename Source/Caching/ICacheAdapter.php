@@ -25,7 +25,7 @@ interface ICacheAdapter
     public function getNamespace();
 
     /**
-     * Returns a new cache implementation for a child namespace.
+     * Returns a new cache implementation for a new namespace.
      *
      * @param string $namespace
      *

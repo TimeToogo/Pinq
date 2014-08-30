@@ -143,12 +143,12 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
         $this->assertSame('--NAMESPACE--', $namespacedCache->getNamespace());
     }
 
-    public function testThatForChildNamespaceReturnsCacheInCorrectNamespace()
+    public function testThatForAnotherNamespaceReturnsCacheInCorrectNamespace()
     {
         $chlidNamespacedCache = $this->namespacedCache->forNamespace('--NAMESPACE--');
 
         $this->assertTrue($chlidNamespacedCache->hasNamespace());
-        $this->assertSame(self::TEST_NAMESPACE . '--NAMESPACE--', $chlidNamespacedCache->getNamespace());
+        $this->assertSame('--NAMESPACE--', $chlidNamespacedCache->getNamespace());
     }
 
     public function testThatInGlobalNamespaceReturnsCacheWithoutANamespace()
@@ -245,22 +245,22 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
         $this->assertFalse($childNamespaceCache->contains('in-child-namespace-2'));
     }
 
-    public function testThatParentNamespaceWillClearChildNamespaces()
+    public function testThatNamespaceWillNotClearInAnotherNamespaces()
     {
-        $childNamespaceCache = $this->namespacedCache->forNamespace('CHILD::namespace');
-        $childNamespaceCache->save('in-child-namespace-1', 1);
-        $childNamespaceCache->save('in-child-namespace-2', 2);
+        $anotherNamespaceCache = $this->namespacedCache->forNamespace('another::namespace');
+        $anotherNamespaceCache->save('in-another-namespace-1', 1);
+        $anotherNamespaceCache->save('in-another-namespace-2', 2);
 
         $this->namespacedCache->save('in-namespace', 2);
 
         $this->namespacedCache->clear();
 
         $this->assertFalse($this->namespacedCache->contains('in-namespace'));
-        $this->assertFalse($childNamespaceCache->contains('in-child-namespace-1'));
-        $this->assertFalse($childNamespaceCache->contains('in-child-namespace-2'));
+        $this->assertTrue($anotherNamespaceCache->contains('in-another-namespace-1'));
+        $this->assertTrue($anotherNamespaceCache->contains('in-another-namespace-2'));
     }
 
-    public function testThaGlobalNamespaceCacheWillClearChildNamespaces()
+    public function testThaGlobalNamespaceCacheWillNotClearOtherNamespaces()
     {
         $childNamespaceCache = $this->namespacedCache->forNamespace('CHILD::namespace');
         $childNamespaceCache->save('in-child-namespace-1', 1);

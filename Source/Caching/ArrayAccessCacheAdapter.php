@@ -54,9 +54,7 @@ class ArrayAccessCacheAdapter extends OneDimensionalCacheAdapter
 
     public function doClear($namespace = null)
     {
-        if (method_exists($this->arrayAccess, 'clear')) {
-            $this->arrayAccess->clear();
-        } elseif ($this->arrayAccess instanceof \Traversable) {
+        if ($this->arrayAccess instanceof \Traversable) {
             $keys = array_keys(iterator_to_array($this->arrayAccess, true));
 
             foreach ($keys as $key) {

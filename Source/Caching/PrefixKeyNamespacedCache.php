@@ -32,7 +32,7 @@ class PrefixKeyNamespacedCache extends CacheAdapter implements INamespacedCacheA
 
     public function forNamespace($namespace)
     {
-        return $this->innerCache->forNamespace($this->namespace . $namespace);
+        return $this->innerCache->forNamespace($namespace);
     }
 
     public function save($key, $value)

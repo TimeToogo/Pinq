@@ -56,9 +56,8 @@ class DirectoryCache extends CacheAdapter
 
     public function forNamespace($namespace)
     {
-        $cache                = new self($this->directory, $this->fileExtension, $namespace);
-        $cache->rootDirectory = $this->rootDirectory;
-        $cache->namespace     = $this->namespace . $namespace;
+        $cache            = new self($this->rootDirectory, $this->fileExtension, $namespace);
+        $cache->namespace = $namespace;
 
         return $cache;
     }

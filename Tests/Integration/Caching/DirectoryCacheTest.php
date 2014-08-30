@@ -4,37 +4,10 @@ namespace Pinq\Tests\Integration\Caching;
 
 use Pinq\Caching\DirectoryCache;
 
-class DirectoryCacheTest extends CacheTest
+class DirectoryCacheTest extends DirectoryCacheTestBase
 {
-    private static $cacheDirectoryPath;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-        self::$cacheDirectoryPath = self::$rootCacheDirectory . 'DirectoryCache';
-    }
-
     protected function setUpCache()
     {
         return new DirectoryCache(self::$cacheDirectoryPath);
-    }
-
-    protected function tearDownCache()
-    {
-        usleep(1000);
-        self::deleteDirectory(self::$cacheDirectoryPath);
-    }
-
-    private static function deleteDirectory($directory)
-    {
-        foreach (glob($directory . DIRECTORY_SEPARATOR . '*') as $path) {
-            if (is_dir($path)) {
-                self::deleteDirectory($path);
-            } else {
-                unlink($path);
-            }
-        }
-
-        rmdir($directory);
     }
 }
