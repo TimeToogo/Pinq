@@ -46,7 +46,7 @@ class DirectoryCache extends CacheAdapter
         }
 
         if (!is_dir($this->directory)) {
-            if (!mkdir($this->directory, 0777, true)) {
+            if (!@mkdir($this->directory, 0777, true)) {
                 throw new \Pinq\PinqException(
                         'Invalid cache directory: %s does not exist and could not be created',
                         $this->directory);
