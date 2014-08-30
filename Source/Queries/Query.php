@@ -41,7 +41,7 @@ abstract class Query implements IQuery
             return $this;
         }
 
-        $this->withScope($scope);
+        return $this->withScope($scope);
     }
 
     abstract protected function withScope(IScope $scope);
