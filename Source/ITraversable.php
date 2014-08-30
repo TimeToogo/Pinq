@@ -68,7 +68,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
     public function iterate(callable $function);
 
     /**
-     * Returns an array compatable iterator for the elements.
+     * Returns an array compatible iterator for the elements.
      * Non string or integer keys will be numerically reindexed.
      *
      * @return \Traversable
