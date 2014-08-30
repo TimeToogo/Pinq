@@ -22,9 +22,9 @@ class ProcessorFactory
     public static function from(Queries\IQuery $query, IExpressionProcessor $expressionProcessor)
     {
         if($query instanceof Queries\IRequestQuery) {
-            return new RequestQueryProcessor($expressionProcessor, $query->getRequest());
+            return new RequestQueryProcessor($expressionProcessor, $query);
         } elseif ($query instanceof Queries\IOperationQuery) {
-            return new OperationQueryProcessor($expressionProcessor, $query->getOperation());
+            return new OperationQueryProcessor($expressionProcessor, $query);
         }
     }
 }

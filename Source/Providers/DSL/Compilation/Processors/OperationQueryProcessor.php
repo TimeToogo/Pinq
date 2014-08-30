@@ -12,23 +12,27 @@ use Pinq\Queries;
 abstract class OperationQueryProcessor extends QueryProcessor implements IOperationQueryProcessor
 {
     /**
-     * @var Queries\IOperation
+     * @var Queries\IOperationQuery
      */
-    private $operation;
+    private $operationQuery;
 
-    public function __construct(IScopeProcessor $scopeProcessor, Queries\IOperation $operation)
+    public function __construct(IScopeProcessor $scopeProcessor, Queries\IOperationQuery $operationQuery)
     {
         parent::__construct($scopeProcessor);
-        $this->operation = $operation;
+        $this->operationQuery = $operationQuery;
     }
 
     public function buildQuery()
     {
-        $scope = $this->scopeProcessor->buildScope();
-        return new Queries\OperationQuery($this->processScope($scope, $this->operation), $this->processOperation(
-                $scope,
-                $this->operation
-        ));
+        $scope     = $this->scopeProcessor->buildScope();
+        $operation = $this->operationQuery->getOperation();
+        return $this->operationQuery->update(
+                $this->processScope($scope, $operation),
+                $this->processOperation(
+                        $scope,
+                        $operation
+                )
+        );
     }
 
     /**

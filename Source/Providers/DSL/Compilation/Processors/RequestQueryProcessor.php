@@ -12,25 +12,29 @@ use Pinq\Queries;
 abstract class RequestQueryProcessor extends QueryProcessor implements IRequestQueryProcessor
 {
     /**
-     * @var Queries\IRequest
+     * @var Queries\IRequestQuery
      */
-    private $request;
+    private $requestQuery;
 
-    public function __construct(IScopeProcessor $scopeProcessor, Queries\IRequest $request)
+    public function __construct(IScopeProcessor $scopeProcessor, Queries\IRequestQuery $requestQuery)
     {
         parent::__construct($scopeProcessor);
-        $this->request = $request;
+        $this->requestQuery = $requestQuery;
     }
 
     public function buildQuery()
     {
-        $scope = $this->scopeProcessor->buildScope();
-        return new Queries\RequestQuery($this->processScope($scope, $this->request), $this->processRequest($scope, $this->request));
+        $scope   = $this->scopeProcessor->buildScope();
+        $request = $this->requestQuery->getRequest();
+        return $this->requestQuery->update(
+                $this->processScope($scope, $request),
+                $this->processRequest($scope, $request)
+        );
     }
 
     /**
-     * @param Queries\IScope $scope
-     * @param Queries\IRequest     $request
+     * @param Queries\IScope   $scope
+     * @param Queries\IRequest $request
      *
      * @return Queries\IScope
      */
@@ -40,8 +44,8 @@ abstract class RequestQueryProcessor extends QueryProcessor implements IRequestQ
     }
 
     /**
-     * @param Queries\IScope $scope
-     * @param Queries\IRequest     $request
+     * @param Queries\IScope   $scope
+     * @param Queries\IRequest $request
      *
      * @return Queries\IRequest
      */

@@ -3,9 +3,9 @@
 namespace Pinq\Providers\DSL\Compilation\Processors\Expression;
 
 use Pinq\Providers\DSL\Compilation\Processors\Visitors;
+use Pinq\Queries;
 use Pinq\Queries\Operations;
 use Pinq\Queries\Requests;
-use Pinq\Queries;
 
 /**
  * Implementation of the operation query processor to update function
@@ -25,9 +25,9 @@ class OperationQueryProcessor extends Visitors\OperationQueryProcessor
      */
     protected $expressionProcessor;
 
-    public function __construct(IExpressionProcessor $expressionProcessor, Queries\IOperation $operation)
+    public function __construct(IExpressionProcessor $expressionProcessor, Queries\IOperationQuery $operationQuery)
     {
-        parent::__construct(new ScopeProcessor($expressionProcessor), $operation);
+        parent::__construct(new ScopeProcessor($expressionProcessor), $operationQuery);
 
         $this->expressionProcessor = $expressionProcessor;
     }

@@ -24,9 +24,9 @@ class RequestQueryProcessor extends Visitors\RequestQueryProcessor
      */
     protected $expressionProcessor;
 
-    public function __construct(IExpressionProcessor $expressionProcessor, Queries\IRequest $request)
+    public function __construct(IExpressionProcessor $expressionProcessor, Queries\IRequestQuery $requestQuery)
     {
-        parent::__construct(new ScopeProcessor($expressionProcessor), $request);
+        parent::__construct(new ScopeProcessor($expressionProcessor), $requestQuery);
 
         $this->expressionProcessor = $expressionProcessor;
     }
