@@ -115,7 +115,7 @@ dev-master
  - Refactored caching implementation:
     - `Caching\IQueryCache` now acts as a wrapper to `Caching\ICacheAdapter`.
     - Any type of value can be cached and retrieved through the cache adapter.
-    - Implemented namespacing api and `NamespacedCache`.
+    - Implemented cache namespacing API.
  - Fixed issue with `ITraversable::union` not reindexing keys.
  - Fixed issue with `Iterators\Common\Set` not detecting null values.
 

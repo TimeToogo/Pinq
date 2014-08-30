@@ -7,9 +7,8 @@ namespace Pinq\Caching;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class NullCache extends CacheAdapter
+class NullCache extends OneDimensionalCacheAdapter
 {
-
     public function save($key, $value)
     {
 
@@ -31,6 +30,11 @@ class NullCache extends CacheAdapter
     }
 
     public function clear($namespace = null)
+    {
+
+    }
+
+    public function clearInNamespace($namespace)
     {
 
     }

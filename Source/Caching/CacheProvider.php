@@ -7,7 +7,7 @@ namespace Pinq\Caching;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-final class Provider
+final class CacheProvider
 {
     /**
      * @var boolean

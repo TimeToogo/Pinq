@@ -64,7 +64,7 @@ class DefaultQueryConfiguration implements IQueryConfiguration
 
     protected function buildQueryCache()
     {
-        return Caching\Provider::getCache();
+        return Caching\CacheProvider::getCache();
     }
 
     protected function buildFunctionInterpreter()

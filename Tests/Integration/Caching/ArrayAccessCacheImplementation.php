@@ -3,7 +3,7 @@
 namespace Pinq\Tests\Integration\Caching;
 
 /**
- * Simple array access cache implemenetation
+ * Simple array access cache implementation
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */

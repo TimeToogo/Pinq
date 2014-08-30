@@ -6,12 +6,19 @@ use Pinq\Caching\ICacheAdapter;
 
 abstract class CacheTest extends \Pinq\Tests\PinqTestCase
 {
+    const TEST_NAMESPACE = 'namespace-';
+
     protected static $rootCacheDirectory;
 
     /**
      * @var ICacheAdapter
      */
     protected $cache;
+
+    /**
+     * @var ICacheAdapter
+     */
+    protected $namespacedCache;
 
     public function __construct($name = null, array $data = [], $dataName = '')
     {
@@ -23,7 +30,33 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
         }
     }
 
-    public function testThatCacheSavesAllAndRetreivesValues()
+    /**
+     * @return ICacheAdapter
+     */
+    abstract protected function setUpCache();
+
+    protected function setUp()
+    {
+        $this->cache = $this->setUpCache();
+        $this->namespacedCache = $this->cache->forNamespace(self::TEST_NAMESPACE);
+    }
+
+    /**
+     * @return void
+     */
+    protected function tearDownCache()
+    {
+
+    }
+
+    protected function tearDown()
+    {
+        $this->cache = null;
+        $this->namespacedCache = null;
+        $this->tearDownCache();
+    }
+
+    public function testThatCacheSavesAllAndRetrievesValues()
     {
         $values = [
             null,
@@ -51,7 +84,7 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
         }
     }
 
-    public function testThatTryingToGetNonExistentExpressionTreeReturnsNull()
+    public function testThatTryingToGetNonExistentValueReturnsNull()
     {
         $this->assertNull($this->cache->tryGet('abcde34343'));
     }
@@ -102,28 +135,143 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
         $this->assertNull($this->cache->tryGet('value2'));
     }
 
-    public function testThatClearingCacheWithNamespaceOnlyRemovesEntriesWithNamespacedPrefix()
+    public function testThatForNamespaceReturnsCacheInCorrectNamespace()
     {
-        $this->cache->save('name-foo', true);
-        $this->cache->save('name-bar', [1,2,3]);
-        $this->cache->save('car-three', [1,2,3]);
+        $namespacedCache = $this->cache->forNamespace('--NAMESPACE--');
 
-        $this->cache->clear('name');
-
-        $this->assertFalse($this->cache->contains('name-foo'));
-        $this->assertFalse($this->cache->contains('name-bar'));
-        $this->assertTrue($this->cache->contains('car-three'));
-
-        $this->cache->clear('car');
-
-        $this->assertFalse($this->cache->contains('car-three'));
+        $this->assertTrue($namespacedCache->hasNamespace());
+        $this->assertSame('--NAMESPACE--', $namespacedCache->getNamespace());
     }
 
-    public function testThatForNamespaceReturnsNamespacedCacheWithNamespacePrefix()
+    public function testThatForChildNamespaceReturnsCacheInCorrectNamespace()
     {
-        $namespacedCache = $this->cache->forNamespace('foo-bar-');
+        $chlidNamespacedCache = $this->namespacedCache->forNamespace('--NAMESPACE--');
 
-        $this->assertInstanceOf('\\Pinq\\Caching\\INamespacedCacheAdapter', $namespacedCache);
-        $this->assertNotSame(false, strpos($namespacedCache->getNamespace(), 'foo-bar-'));
+        $this->assertTrue($chlidNamespacedCache->hasNamespace());
+        $this->assertSame(self::TEST_NAMESPACE . '--NAMESPACE--', $chlidNamespacedCache->getNamespace());
+    }
+
+    public function testThatInGlobalNamespaceReturnsCacheWithoutANamespace()
+    {
+        $globalNamespaceCache = $this->namespacedCache->inGlobalNamespace();
+
+        $this->assertFalse($globalNamespaceCache->hasNamespace());
+        $this->assertSame(null, $globalNamespaceCache->getNamespace());
+    }
+
+    public function testThatClearingCacheNamespaceOnlyRemovesEntriesInNamespace()
+    {
+        $this->cache->save('name-foo', true);
+        $this->namespacedCache->save('name-bar', [1,2,3]);
+        $this->namespacedCache->save('car-three', [1,2,3]);
+
+        $this->namespacedCache->clear();
+
+        $this->assertTrue($this->cache->contains('name-foo'));
+        $this->assertFalse($this->namespacedCache->contains('name-bar'));
+        $this->assertFalse($this->namespacedCache->contains('car-three'));
+
+        $this->cache->clear();
+
+        $this->assertFalse($this->cache->contains('name-foo'));
+    }
+
+    public function testThatNamespacedCacheDoesNotContainValuesOutsideOfNamespace()
+    {
+        $this->cache->save('not-in-namespace', true);
+
+        $this->assertTrue($this->cache->contains('not-in-namespace'));
+        $this->assertFalse($this->namespacedCache->contains('not-in-namespace'));
+    }
+
+    public function testThatCacheDoesNotContainValuesNotInGlobalNamespace()
+    {
+        $this->namespacedCache->save('some-key', true);
+
+        $this->assertTrue($this->namespacedCache->contains('some-key'));
+        $this->assertFalse($this->cache->contains('some-key'));
+    }
+
+    public function testThatCacheDoesNotGetValuesOutsideOfNamespace()
+    {
+        $this->cache->save('not-in-namespace', true);
+
+        $this->assertSame($this->cache->tryGet('not-in-namespace'), true);
+        $this->assertSame($this->namespacedCache->tryGet('not-in-namespace'), null);
+    }
+
+    public function testThatCacheDoesNotRemoveValuesOutsideOfNamespace()
+    {
+        $this->cache->save('not-in-namespace', true);
+        $this->namespacedCache->remove('not-in-namespace');
+
+        $this->assertTrue($this->cache->contains('not-in-namespace'));
+        $this->assertFalse($this->namespacedCache->contains('not-in-namespace'));
+    }
+
+    public function testThatCacheDoesNotClearValuesOutsideOfNamespace()
+    {
+        $this->cache->save('not-in-namespace-1', 1);
+        $this->cache->save('not-in-namespace-2', 2);
+        $this->namespacedCache->save('in-namespace-1', 1);
+        $this->namespacedCache->save('in-namespace-2', 2);
+
+        $this->assertTrue($this->namespacedCache->contains('in-namespace-1'));
+        $this->assertTrue($this->namespacedCache->contains('in-namespace-2'));
+
+        $this->namespacedCache->clear();
+
+        $this->assertTrue($this->cache->contains('not-in-namespace-1'));
+        $this->assertTrue($this->cache->contains('not-in-namespace-2'));
+        $this->assertFalse($this->namespacedCache->contains('in-namespace-1'));
+        $this->assertFalse($this->namespacedCache->contains('in-namespace-2'));
+    }
+
+    public function testThatCacheDoesNotClearValuesOutsideOfChildNamespace()
+    {
+        $childNamespaceCache = $this->namespacedCache->forNamespace('CHILD::namespace');
+        $childNamespaceCache->save('in-child-namespace-1', 1);
+        $childNamespaceCache->save('in-child-namespace-2', 2);
+
+        $this->namespacedCache->save('in-namespace', 2);
+
+        $this->assertTrue($childNamespaceCache->contains('in-child-namespace-1'));
+        $this->assertTrue($childNamespaceCache->contains('in-child-namespace-2'));
+
+        $childNamespaceCache->clear();
+
+        $this->assertTrue($this->namespacedCache->contains('in-namespace'));
+        $this->assertFalse($childNamespaceCache->contains('in-child-namespace-1'));
+        $this->assertFalse($childNamespaceCache->contains('in-child-namespace-2'));
+    }
+
+    public function testThatParentNamespaceWillClearChildNamespaces()
+    {
+        $childNamespaceCache = $this->namespacedCache->forNamespace('CHILD::namespace');
+        $childNamespaceCache->save('in-child-namespace-1', 1);
+        $childNamespaceCache->save('in-child-namespace-2', 2);
+
+        $this->namespacedCache->save('in-namespace', 2);
+
+        $this->namespacedCache->clear();
+
+        $this->assertFalse($this->namespacedCache->contains('in-namespace'));
+        $this->assertFalse($childNamespaceCache->contains('in-child-namespace-1'));
+        $this->assertFalse($childNamespaceCache->contains('in-child-namespace-2'));
+    }
+
+    public function testThaGlobalNamespaceCacheWillClearChildNamespaces()
+    {
+        $childNamespaceCache = $this->namespacedCache->forNamespace('CHILD::namespace');
+        $childNamespaceCache->save('in-child-namespace-1', 1);
+        $childNamespaceCache->save('in-child-namespace-2', 2);
+
+        $this->namespacedCache->save('in-namespace', 2);
+
+        $this->cache->inGlobalNamespace()->clear();
+
+        $this->assertFalse($this->namespacedCache->contains('in-namespace'));
+        $this->assertFalse($childNamespaceCache->contains('in-child-namespace-1'));
+        $this->assertFalse($childNamespaceCache->contains('in-child-namespace-2'));
     }
 }

@@ -56,7 +56,7 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
 
     protected function buildCompiledQueryCache()
     {
-        return Caching\Provider::getCacheAdapter()->forNamespace(get_class($this));
+        return Caching\CacheProvider::getCacheAdapter()->forNamespace(get_class($this));
     }
 
     public function getCompiledQueryCache(Queries\ISourceInfo $sourceInfo)

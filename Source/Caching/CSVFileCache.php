@@ -8,7 +8,7 @@ namespace Pinq\Caching;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class CSVFileCache extends CacheAdapter
+class CSVFileCache extends OneDimensionalCacheAdapter
 {
     const CSV_DELIMITER = ',';
     const CSV_SEPARATOR = '|';
@@ -24,12 +24,13 @@ class CSVFileCache extends CacheAdapter
     private $fileHandle;
 
     /**
-     * @var array|null
+     * @var \ArrayObject|null
      */
     private $fileData;
 
     public function __construct($fileName)
     {
+        parent::__construct();
         $this->fileName = $fileName;
 
         try {
@@ -48,7 +49,7 @@ class CSVFileCache extends CacheAdapter
 
     public function save($key, $value)
     {
-        $fileData        =& $this->getFileData();
+        $fileData        = $this->getFileData();
         $serializedValue = serialize($value);
 
         if (isset($fileData[$key])) {
@@ -61,18 +62,18 @@ class CSVFileCache extends CacheAdapter
         $this->flushFileData();
     }
 
-    private function &getFileData()
+    private function getFileData()
     {
         if ($this->fileData === null) {
-            $this->fileData = [];
+            $this->fileData = new \ArrayObject();
 
             foreach ($this->fileHandle as $row) {
                 if (count($row) < 2) {
                     continue;
                 }
 
-                list($key, $serializedExpressionTree) = $row;
-                $this->fileData[$key] = $serializedExpressionTree;
+                list($key, $serializedValue) = $row;
+                $this->fileData[$key] = $serializedValue;
             }
         }
 
@@ -115,7 +116,7 @@ class CSVFileCache extends CacheAdapter
 
     public function remove($key)
     {
-        $fileData =& $this->getFileData();
+        $fileData = $this->getFileData();
 
         if (!isset($fileData[$key])) {
             return;
@@ -125,17 +126,24 @@ class CSVFileCache extends CacheAdapter
         $this->flushFileData();
     }
 
-    public function clear($namespace = null)
+    public function clear()
     {
-        if ($namespace === null) {
-            $this->fileData = [];
-        } else {
-            $fileData =&  $this->getFileData();
-            foreach ($fileData as $key => $value) {
-                if (strpos($key, $namespace) === 0) {
-                    unset($fileData[$key]);
-                }
+        $this->fileData = new \ArrayObject();
+        $this->flushFileData();
+    }
+
+    public function clearInNamespace($namespace)
+    {
+        $fileData = $this->getFileData();
+        $keysToUnset = [];
+        foreach ($fileData as $key => $value) {
+            if (strpos($key, $namespace) === 0) {
+                $keysToUnset[] = $key;
             }
+        }
+
+        foreach($keysToUnset as $key) {
+            unset($fileData[$key]);
         }
 
         $this->flushFileData();

@@ -10,10 +10,10 @@ use Doctrine\Common\Cache\Cache;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class DoctrineCacheAdapter extends CacheAdapter
+class DoctrineCacheAdapter extends OneDimensionalCacheAdapter
 {
     /**
-     * The doctrine cache implementation
+     * The doctrine cache implementation.
      *
      * @var Cache
      */
@@ -21,6 +21,7 @@ class DoctrineCacheAdapter extends CacheAdapter
 
     public function __construct(Cache $doctrineCache)
     {
+        parent::__construct();
         $this->doctrineCache = $doctrineCache;
     }
 
@@ -44,16 +45,28 @@ class DoctrineCacheAdapter extends CacheAdapter
         $this->doctrineCache->delete($key);
     }
 
-    public function clear($namespace = null)
+    public function clear()
     {
-        if ($this->doctrineCache instanceof \Doctrine\Common\Cache\CacheProvider && $namespace === null) {
+        if ($this->doctrineCache instanceof \Doctrine\Common\Cache\CacheProvider) {
             $this->doctrineCache->deleteAll();
         } else {
             throw new \Pinq\PinqException(
-                    'Cannot clear cache %s: cache does not support %s',
-                    get_class($this->doctrineCache),
-                    $namespace === null ? ' clearing.' : ' namespaced clearing.');
+                    'Cannot clear cache %s: cache does not support %s deleting all elements.',
+                    get_class($this->doctrineCache));
         }
     }
 
+    public function clearInNamespace($namespace)
+    {
+        if ($this->doctrineCache instanceof \Doctrine\Common\Cache\CacheProvider) {
+            $originalNamespace = $this->doctrineCache->getNamespace();
+            $this->doctrineCache->setNamespace($namespace);
+            $this->doctrineCache->deleteAll();
+            $this->doctrineCache->setNamespace($originalNamespace);
+        } else {
+            throw new \Pinq\PinqException(
+                    'Cannot clear cache %s: cache does not support %s deleting elements in an namespace.',
+                    get_class($this->doctrineCache));
+        }
+    }
 }

@@ -28,7 +28,10 @@ class DSLProviderTest extends PinqTestCase
             Compilation\IQueryTemplate $queryTemplateMock,
             Compilation\ICompiledQuery $compiledQueryMock
     ) {
-        $cacheMock = $this->getMockForAbstractClass('Pinq\\Caching\\CacheAdapter');
+        $cacheMock = $this->getMockBuilder('Pinq\\Caching\\NullCache')
+                ->disableOriginalConstructor()
+                ->setMethods(['tryGet', 'save'])
+                ->getMock();
         $cacheMock->expects($this->any())
                 ->method('tryGet')
                 ->will($this->returnValue(null));

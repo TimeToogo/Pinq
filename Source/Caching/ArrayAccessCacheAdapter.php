@@ -7,7 +7,7 @@ namespace Pinq\Caching;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class ArrayAccessCacheAdapter extends CacheAdapter
+class ArrayAccessCacheAdapter extends OneDimensionalCacheAdapter
 {
     /**
      * The cache object implementing array access
@@ -18,6 +18,7 @@ class ArrayAccessCacheAdapter extends CacheAdapter
 
     public function __construct(\ArrayAccess $innerCache)
     {
+        parent::__construct();
         $this->arrayAccess = $innerCache;
     }
 
@@ -41,7 +42,17 @@ class ArrayAccessCacheAdapter extends CacheAdapter
         unset($this->arrayAccess[$key]);
     }
 
-    public function clear($namespace = null)
+    public function clear()
+    {
+        $this->doClear();
+    }
+
+    public function clearInNamespace($namespace)
+    {
+        $this->doClear($namespace);
+    }
+
+    public function doClear($namespace = null)
     {
         if (method_exists($this->arrayAccess, 'clear')) {
             $this->arrayAccess->clear();

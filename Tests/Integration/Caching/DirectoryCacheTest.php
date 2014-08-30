@@ -14,14 +14,13 @@ class DirectoryCacheTest extends CacheTest
         self::$cacheDirectoryPath = self::$rootCacheDirectory . 'DirectoryCache';
     }
 
-    protected function setUp()
+    protected function setUpCache()
     {
-        $this->cache = new DirectoryCache(self::$cacheDirectoryPath);
+        return new DirectoryCache(self::$cacheDirectoryPath);
     }
 
-    protected function tearDown()
+    protected function tearDownCache()
     {
-        $this->cache = null;
         usleep(1000);
         self::deleteDirectory(self::$cacheDirectoryPath);
     }

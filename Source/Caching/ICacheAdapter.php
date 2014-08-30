@@ -11,13 +11,34 @@ namespace Pinq\Caching;
 interface ICacheAdapter
 {
     /**
-     * Returns a new cache implementation for a new namespace.
+     * Whether the cache is namespaced.
+     *
+     * @return boolean
+     */
+    public function hasNamespace();
+
+    /**
+     * The namespace of the cache.
+     *
+     * @return string
+     */
+    public function getNamespace();
+
+    /**
+     * Returns a new cache implementation for a child namespace.
      *
      * @param string $namespace
      *
-     * @return INamespacedCacheAdapter
+     * @return ICacheAdapter
      */
     public function forNamespace($namespace);
+
+    /**
+     * Returns a new cache implementation for the global namespace.
+     *
+     * @return ICacheAdapter
+     */
+    public function inGlobalNamespace();
 
     /**
      * Saves the supplied value to the cache.
@@ -57,11 +78,9 @@ interface ICacheAdapter
     public function remove($key);
 
     /**
-     * Clears all cached values under the specified namespace or all if null.
-     *
-     * @param string|null $namespace
+     * Clears all cached values under the namespace.
      *
      * @return void
      */
-    public function clear($namespace = null);
+    public function clear();
 }

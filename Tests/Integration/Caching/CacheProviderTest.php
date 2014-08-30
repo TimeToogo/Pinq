@@ -8,13 +8,13 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
 {
     protected function tearDown()
     {
-        Caching\Provider::removeCache();
-        Caching\Provider::setDevelopmentMode(false);
+        Caching\CacheProvider::removeCache();
+        Caching\CacheProvider::setDevelopmentMode(false);
     }
 
     public function testThatNoCacheWillReturnANullCache()
     {
-        $cacheImplementation = Caching\Provider::getCache();
+        $cacheImplementation = Caching\CacheProvider::getCache();
 
         $this->assertInstanceOf(
                 'Pinq\\Caching\\NullCache',
@@ -36,10 +36,10 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
      */
     public function testThatProviderWillReturnTheQueryCacheWithTheCorrectInnerCache($method, $cache, $assertSameCache)
     {
-        Caching\Provider::$method($cache);
+        Caching\CacheProvider::$method($cache);
 
-        $functionCache = Caching\Provider::getCache();
-        $cacheAdapter = Caching\Provider::getCacheAdapter();
+        $functionCache = Caching\CacheProvider::getCache();
+        $cacheAdapter = Caching\CacheProvider::getCacheAdapter();
 
         $this->assertInstanceOf(
                 'Pinq\\Caching\\IQueryCache',
@@ -68,11 +68,11 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
                 ->expects($this->once())
                 ->method('clear');
 
-        Caching\Provider::setCustomCache($functionCacheMock);
-        Caching\Provider::setDevelopmentMode(true);
+        Caching\CacheProvider::setCustomCache($functionCacheMock);
+        Caching\CacheProvider::setDevelopmentMode(true);
         //Should clear
-        Caching\Provider::getCache();
+        Caching\CacheProvider::getCache();
         //Should not clear again
-        Caching\Provider::getCache();
+        Caching\CacheProvider::getCache();
     }
 }

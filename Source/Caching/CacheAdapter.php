@@ -9,8 +9,23 @@ namespace Pinq\Caching;
  */
 abstract class CacheAdapter implements ICacheAdapter
 {
-    public function forNamespace($namespace)
+    /**
+     * @var string|null
+     */
+    protected $namespace;
+
+    public function __construct($namespace)
     {
-        return new NamespacedCache($this, $namespace);
+        $this->namespace = $namespace;
+    }
+
+    public function hasNamespace()
+    {
+        return $this->namespace !== null;
+    }
+
+    public function getNamespace()
+    {
+        return $this->namespace;
     }
 }

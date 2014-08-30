@@ -14,14 +14,13 @@ class CSVFileCacheTest extends CacheTest
         self::$cacheFilePath = self::$rootCacheDirectory . 'CSVCache.cache';
     }
 
-    protected function setUp()
+    protected function setUpCache()
     {
-        $this->cache = new CSVFileCache(self::$cacheFilePath);
+        return new CSVFileCache(self::$cacheFilePath);
     }
 
-    protected function tearDown()
+    protected function tearDownCache()
     {
-        $this->cache = null;
         usleep(1000);
         unlink(self::$cacheFilePath);
     }

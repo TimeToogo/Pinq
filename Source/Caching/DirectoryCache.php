@@ -13,7 +13,14 @@ class DirectoryCache extends CacheAdapter
     const DEFAULT_EXTENSION = '.cached';
 
     /**
-     * The directory to store the files
+     * The root directory to store the files.
+     *
+     * @var string
+     */
+    private $rootDirectory;
+
+    /**
+     * The directory of the namespace to store the files
      *
      * @var string
      */
@@ -26,18 +33,39 @@ class DirectoryCache extends CacheAdapter
      */
     private $fileExtension;
 
-    public function __construct($directory, $fileExtension = self::DEFAULT_EXTENSION)
+    public function __construct($directory, $fileExtension = self::DEFAULT_EXTENSION, $namespace = null)
     {
-        if (!is_dir($directory)) {
-            if (!mkdir($directory, 0777, true)) {
-                throw new \Pinq\PinqException(
-                        'Invalid cache directory: %s does not exist and could not be created',
-                        $directory);
-            }
+        parent::__construct($namespace);
+        $this->rootDirectory = $directory . DIRECTORY_SEPARATOR;
+        $this->fileExtension = $fileExtension;
+
+        if ($namespace !== null) {
+            $this->directory = $this->rootDirectory . md5($namespace) . DIRECTORY_SEPARATOR;
+        } else {
+            $this->directory = $this->rootDirectory;
         }
 
-        $this->directory     = $directory;
-        $this->fileExtension = $fileExtension;
+        if (!is_dir($this->directory)) {
+            if (!mkdir($this->directory, 0777, true)) {
+                throw new \Pinq\PinqException(
+                        'Invalid cache directory: %s does not exist and could not be created',
+                        $this->directory);
+            }
+        }
+    }
+
+    public function forNamespace($namespace)
+    {
+        $cache                = new self($this->directory, $this->fileExtension, $namespace);
+        $cache->rootDirectory = $this->rootDirectory;
+        $cache->namespace     = $this->namespace . $namespace;
+
+        return $cache;
+    }
+
+    public function inGlobalNamespace()
+    {
+        return new self($this->rootDirectory, $this->fileExtension);
     }
 
     public function save($key, $value)
@@ -45,9 +73,9 @@ class DirectoryCache extends CacheAdapter
         file_put_contents($this->getCacheFilePath($key), serialize($value));
     }
 
-    private function getCacheFilePath($fileName, $suffix = '')
+    private function getCacheFilePath($key)
     {
-        return $this->directory . DIRECTORY_SEPARATOR . bin2hex($fileName) . $suffix . $this->fileExtension;
+        return $this->directory . md5($key) . $this->fileExtension;
     }
 
     public function contains($key)
@@ -66,15 +94,27 @@ class DirectoryCache extends CacheAdapter
         return unserialize(file_get_contents($filePath));
     }
 
-    public function clear($namespace = null)
+    public function clear()
     {
-        foreach (glob($this->getCacheFilePath($namespace, '*')) as $path) {
-            unlink($path);
+        self::deleteDirectoryFiles($this->directory);
+    }
+
+    protected static function deleteDirectoryFiles($directory)
+    {
+        foreach (glob($directory . DIRECTORY_SEPARATOR . '*') as $file) {
+            if (is_dir($file)) {
+                self::deleteDirectoryFiles($file);
+            } else {
+                unlink($file);
+            }
         }
     }
 
     public function remove($key)
     {
-        unlink($this->getCacheFilePath($key));
+        $filePath = $this->getCacheFilePath($key);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
     }
 }
