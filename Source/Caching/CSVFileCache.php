@@ -11,7 +11,7 @@ namespace Pinq\Caching;
 class CSVFileCache extends CacheAdapter
 {
     const CSV_DELIMITER = ',';
-    const CSV_SEPERATOR = '|';
+    const CSV_SEPARATOR = '|';
 
     /**
      * @var string
@@ -35,7 +35,7 @@ class CSVFileCache extends CacheAdapter
         try {
             $this->fileHandle = new \SplFileObject($fileName, 'c+');
             $this->fileHandle->setFlags(\SplFileObject::READ_CSV);
-            $this->fileHandle->setCsvControl(self::CSV_DELIMITER, self::CSV_SEPERATOR);
+            $this->fileHandle->setCsvControl(self::CSV_DELIMITER, self::CSV_SEPARATOR);
         } catch (\Exception $exception) {
             throw new \Pinq\PinqException(
                     'Invalid cache file: %s is not readable with the message, "%s"',
