@@ -31,6 +31,22 @@ class AllTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
     }
 
     /**
+     * @dataProvider oneToTen
+     */
+    public function testThatAllReturnsTrueWhenAllElementMatch(\Pinq\ITraversable $traversable, array $data)
+    {
+        $this->assertTrue($traversable->all(function ($i) { return $i > -5; }));
+    }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatAllReturnsFalseWhenNotAllElementMatch(\Pinq\ITraversable $traversable, array $data)
+    {
+        $this->assertFalse($traversable->all(function ($i) { return $i > 5; }));
+    }
+
+    /**
      * @dataProvider everything
      */
     public function testThatAllOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)

@@ -552,8 +552,8 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
         } else {
             return $this->scheme->projectionIterator(
                     $this->elements,
-                    $function,
-                    null
+                    null,
+                    $function
             );
         }
     }
