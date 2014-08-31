@@ -25,7 +25,7 @@ class MethodCallExpression extends ObjectOperationExpression
     {
         parent::__construct($value);
         $this->name      = $name;
-        $this->arguments = $arguments;
+        $this->arguments = Expression::verifyAll($arguments);
     }
 
     /**

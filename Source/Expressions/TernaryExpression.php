@@ -16,7 +16,7 @@ class TernaryExpression extends Expression
     private $condition;
 
     /**
-     * @var Expression
+     * @var Expression|null
      */
     private $ifTrue;
 
@@ -116,7 +116,7 @@ class TernaryExpression extends Expression
     public function __clone()
     {
         $this->condition = clone $this->condition;
-        $this->ifTrue    = clone $this->ifTrue;
+        $this->ifTrue    = $this->ifTrue === null ? null : clone $this->ifTrue;
         $this->ifFalse   = clone $this->ifFalse;
     }
 }

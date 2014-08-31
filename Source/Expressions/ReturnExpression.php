@@ -87,6 +87,6 @@ class ReturnExpression extends Expression
 
     public function __clone()
     {
-        $this->value = clone $this->value;
+        $this->value = $this->value === null ? null : clone $this->value;
     }
 }

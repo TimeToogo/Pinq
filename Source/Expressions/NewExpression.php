@@ -71,12 +71,12 @@ class NewExpression extends StaticClassExpression
 
     protected function dataToSerialize()
     {
-        return [$this->classTypeExpression, $this->arguments];
+        return [$this->arguments];
     }
 
     protected function unserializeData($data)
     {
-        list($this->classTypeExpression, $this->arguments) = $data;
+        list($this->arguments) = $data;
     }
 
     public function __clone()

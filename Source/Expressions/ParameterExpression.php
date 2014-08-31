@@ -63,21 +63,33 @@ class ParameterExpression extends Expression
         return $walker->walkParameter($this);
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @return boolean
+     */
     public function hasTypeHint()
     {
         return $this->typeHint !== null;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTypeHint()
     {
         return $this->typeHint;
     }
 
+    /**
+     * @return boolean
+     */
     public function hasDefaultValue()
     {
         return $this->defaultValue !== null;
@@ -91,6 +103,9 @@ class ParameterExpression extends Expression
         return $this->defaultValue;
     }
 
+    /**
+     * @return boolean
+     */
     public function isPassedByReference()
     {
         return $this->isPassedByReference;
