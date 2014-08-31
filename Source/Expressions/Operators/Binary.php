@@ -9,7 +9,7 @@ namespace Pinq\Expressions\Operators;
  */
 final class Binary
 {
-    //Arthmetic
+    //Arithmetic
     const ADDITION       = '+';
     const SUBTRACTION    = '-';
     const MULTIPLICATION = '*';

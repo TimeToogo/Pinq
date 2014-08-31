@@ -11,7 +11,7 @@ final class Assignment
 {
     const EQUAL           = '=';
     const EQUAL_REFERENCE = '=&';
-    //Arthmetic
+    //Arithmetic
     const ADDITION       = '+=';
     const SUBTRACTION    = '-=';
     const MULTIPLICATION = '*=';

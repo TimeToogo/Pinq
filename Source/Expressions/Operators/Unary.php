@@ -11,7 +11,6 @@ final class Unary
 {
     //Arithmetic
     const PLUS = '+%s';
-    //Usless
     const NEGATION      = '-%s';
     const INCREMENT     = '%s++';
     const DECREMENT     = '%s--';
