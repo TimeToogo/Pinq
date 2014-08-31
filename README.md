@@ -6,9 +6,9 @@ PHP Integrated query - [Official site](http://timetoogo.github.io/Pinq/)
 [![Stable Release](https://poser.pugx.org/timetoogo/pinq/v/stable.png)](https://packagist.org/packages/timetoogo/pinq)
 [![License](https://poser.pugx.org/timetoogo/pinq/license.png)](https://packagist.org/packages/timetoogo/pinq)
 
-What is Pinq?
+What is PINQ?
 =============
-Based off the .NET's [Linq (Language integrated query)](http://msdn.microsoft.com/en-us/library/bb397926.aspx), 
+Based off the .NET's [LINQ (Language integrated query)](http://msdn.microsoft.com/en-us/library/bb397926.aspx), 
 Pinq unifies querying across [arrays/iterators](http://timetoogo.github.io/Pinq/examples.html) and [external data sources](http://timetoogo.github.io/Pinq/query-provider.html), 
 in a single readable and concise [fluent API](http://timetoogo.github.io/Pinq/api.html).
 
@@ -36,7 +36,7 @@ $youngPeopleDetails = $people
 Installation
 ============
 
-Pinq is compatible with >= PHP 5.4
+PINQ is compatible with >= PHP 5.4
 
 Add package to your composer.json:
 ```json
