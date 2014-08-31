@@ -3,6 +3,7 @@
 namespace Pinq\Queries\Builders;
 
 use Pinq\Expressions as O;
+use Pinq\PinqException;
 
 /**
  * Base class for expression interpreters.
@@ -106,7 +107,18 @@ abstract class ExpressionInterpreter
     {
         $argumentExpressions = $methodExpression->getArguments();
 
-        return isset($argumentExpressions[$index]) ? $argumentExpressions[$index] : null;
+        if(isset($argumentExpressions[$index])) {
+            if($argumentExpressions[$index]->isUnpacked()) {
+                throw new PinqException(
+                        'Cannot get argument from method call %s at index %d: argument unpacking is not supported',
+                        $methodExpression->getName()->compileDebug(),
+                        $index);
+            }
+
+            return $argumentExpressions[$index]->getValue();
+        } else {
+            return null;
+        }
     }
 
     final protected function getMethodName(O\MethodCallExpression $methodExpression)

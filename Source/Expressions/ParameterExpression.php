@@ -22,6 +22,11 @@ class ParameterExpression extends Expression
     private $typeHint;
 
     /**
+     * @var boolean
+     */
+    private $isVariadic;
+
+    /**
      * @var Expression
      */
     private $defaultValue;
@@ -35,12 +40,14 @@ class ParameterExpression extends Expression
             $name,
             $typeHint = null,
             Expression $defaultValue = null,
-            $isPassedByReference = false
+            $isPassedByReference = false,
+            $isVariadic = false
     ) {
         $this->name                = $name;
         $this->typeHint            = $typeHint;
         $this->defaultValue        = $defaultValue;
         $this->isPassedByReference = $isPassedByReference;
+        $this->isVariadic          = $isVariadic;
     }
 
     public function asEvaluator(IEvaluationContext $context = null)
@@ -54,7 +61,8 @@ class ParameterExpression extends Expression
                 $this->name,
                 $this->typeHint,
                 $this->defaultValue === null ? null : $this->defaultValue->simplify($context),
-                $this->isPassedByReference
+                $this->isPassedByReference,
+                $this->isVariadic
         );
     }
 
@@ -111,20 +119,27 @@ class ParameterExpression extends Expression
         return $this->isPassedByReference;
     }
 
+    public function isVariadic()
+    {
+        return $this->isVariadic;
+    }
+
     /**
      * @param string          $name
      * @param string|null     $typeHint
      * @param Expression|null $defaultValue
      * @param boolean         $isPassedByReference
+     * @param boolean         $isVariadic
      *
      * @return self
      */
-    public function update($name, $typeHint, Expression $defaultValue = null, $isPassedByReference)
+    public function update($name, $typeHint, Expression $defaultValue = null, $isPassedByReference, $isVariadic)
     {
         if ($this->name === $name
                 && $this->typeHint === $typeHint
                 && $this->defaultValue === $defaultValue
                 && $this->isPassedByReference === $isPassedByReference
+                && $this->isVariadic === $isVariadic
         ) {
             return $this;
         }
@@ -133,7 +148,8 @@ class ParameterExpression extends Expression
                 $name,
                 $typeHint,
                 $defaultValue,
-                $isPassedByReference);
+                $isPassedByReference,
+                $isVariadic);
     }
 
     protected function compileCode(&$code)
@@ -144,6 +160,10 @@ class ParameterExpression extends Expression
 
         if ($this->isPassedByReference) {
             $code .= '&';
+        }
+
+        if ($this->isVariadic) {
+            $code .= '...';
         }
 
         $code .= '$' . $this->name;
@@ -161,7 +181,8 @@ class ParameterExpression extends Expression
                         $this->defaultValue,
                         $this->isPassedByReference,
                         $this->name,
-                        $this->typeHint
+                        $this->typeHint,
+                        $this->isVariadic
                 ]
         );
     }
@@ -172,7 +193,8 @@ class ParameterExpression extends Expression
                 $this->defaultValue,
                 $this->isPassedByReference,
                 $this->name,
-                $this->typeHint) = unserialize($serialized);
+                $this->typeHint,
+                $this->isVariadic) = unserialize($serialized);
     }
 
     public function __clone()

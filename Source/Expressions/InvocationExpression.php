@@ -12,18 +12,18 @@ namespace Pinq\Expressions;
 class InvocationExpression extends TraversalExpression
 {
     /**
-     * @var Expression[]
+     * @var ArgumentExpression[]
      */
     private $arguments;
 
     public function __construct(Expression $value, array $arguments)
     {
         parent::__construct($value);
-        $this->arguments = self::verifyAll($arguments);
+        $this->arguments = self::verifyAll($arguments, ArgumentExpression::getType());
     }
 
     /**
-     * @return Expression[]
+     * @return ArgumentExpression[]
      */
     public function getArguments()
     {
@@ -37,7 +37,7 @@ class InvocationExpression extends TraversalExpression
 
     /**
      * @param Expression   $value
-     * @param Expression[] $arguments
+     * @param ArgumentExpression[] $arguments
      *
      * @return self
      */

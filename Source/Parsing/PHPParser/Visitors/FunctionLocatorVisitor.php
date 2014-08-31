@@ -2,6 +2,9 @@
 
 namespace Pinq\Parsing\PHPParser\Visitors;
 
+use PhpParser\Node;
+use PhpParser\NodeVisitor;
+use PhpParser\NodeVisitorAbstract;
 use Pinq\Expressions as O;
 use Pinq\Parsing\FunctionDeclaration;
 use Pinq\Parsing\FunctionLocation;
@@ -14,7 +17,7 @@ use Pinq\Parsing\PHPParser\LocatedFunctionNode;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class FunctionLocatorVisitor extends \PHPParser_NodeVisitorAbstract
+class FunctionLocatorVisitor extends NodeVisitorAbstract
 {
     /**
      * @var string
@@ -66,7 +69,7 @@ class FunctionLocatorVisitor extends \PHPParser_NodeVisitorAbstract
         return $this->functionNodes;
     }
 
-    private function getFunctionNodeSignature(\PHPParser_Node_Stmt_Function $node)
+    private function getFunctionNodeSignature(Node\Stmt\Function_ $node)
     {
         return FunctionSignature::func(
                 $node->byRef,
@@ -75,7 +78,7 @@ class FunctionLocatorVisitor extends \PHPParser_NodeVisitorAbstract
         );
     }
 
-    private function getClosureNodeSignature(\PHPParser_Node_Expr_Closure $node)
+    private function getClosureNodeSignature(Node\Expr\Closure $node)
     {
         $scopedVariableNames = [];
         foreach ($node->uses as $use) {
@@ -89,7 +92,7 @@ class FunctionLocatorVisitor extends \PHPParser_NodeVisitorAbstract
         );
     }
 
-    private function getMethodNodeSignature(\PHPParser_Node_Stmt_ClassMethod $node)
+    private function getMethodNodeSignature(Node\Stmt\ClassMethod $node)
     {
         if ($node->isPublic()) {
             $accessModifier = FunctionSignature::ACCESS_PUBLIC;
@@ -117,7 +120,7 @@ class FunctionLocatorVisitor extends \PHPParser_NodeVisitorAbstract
         );
     }
 
-    private function getLocatedFunctionNode(\PHPParser_Node $node, FunctionSignature $signature)
+    private function getLocatedFunctionNode(Node $node, FunctionSignature $signature)
     {
         return new LocatedFunctionNode(
                 $signature,
@@ -136,7 +139,7 @@ class FunctionLocatorVisitor extends \PHPParser_NodeVisitorAbstract
         return AST::convert($parameters);
     }
 
-    private function getFunctionLocation(\PHPParser_Node $node)
+    private function getFunctionLocation(Node $node)
     {
         return new FunctionLocation(
                 $this->filePath,
@@ -154,35 +157,35 @@ class FunctionLocatorVisitor extends \PHPParser_NodeVisitorAbstract
                 $this->closureNestingLevel);
     }
 
-    public function enterNode(\PHPParser_Node $node)
+    public function enterNode(Node $node)
     {
         switch (true) {
 
-            case $node instanceof \PHPParser_Node_Stmt_Namespace:
-                $this->namespace = (string) $node->name;
+            case $node instanceof Node\Stmt\Namespace_:
+                $this->namespace = (string)$node->name;
                 break;
 
-            case $node instanceof \PHPParser_Node_Stmt_Class:
+            case $node instanceof Node\Stmt\Class_:
                 $this->class = $node->name;
                 break;
 
-            case $node instanceof \PHPParser_Node_Stmt_Trait:
+            case $node instanceof Node\Stmt\Trait_:
                 $this->trait = $node->name;
                 break;
 
-            case $node instanceof \PHPParser_Node_Stmt_Function:
+            case $node instanceof Node\Stmt\Function_:
                 $signature = $this->getFunctionNodeSignature($node);
                 $this->foundFunctionNode($this->getLocatedFunctionNode($node, $signature));
                 $this->function = $node->name;
                 break;
 
-            case $node instanceof \PHPParser_Node_Stmt_ClassMethod:
+            case $node instanceof Node\Stmt\ClassMethod:
                 $signature = $this->getMethodNodeSignature($node);
                 $this->foundFunctionNode($this->getLocatedFunctionNode($node, $signature));
                 $this->function = $node->name;
                 break;
 
-            case $node instanceof \PHPParser_Node_Expr_Closure:
+            case $node instanceof Node\Expr\Closure:
                 $signature = $this->getClosureNodeSignature($node);
                 $this->foundFunctionNode($this->getLocatedFunctionNode($node, $signature));
                 $this->closureNestingLevel++;
@@ -193,28 +196,28 @@ class FunctionLocatorVisitor extends \PHPParser_NodeVisitorAbstract
         }
     }
 
-    public function leaveNode(\PHPParser_Node $node)
+    public function leaveNode(Node $node)
     {
         switch (true) {
 
-            case $node instanceof \PHPParser_Node_Stmt_Namespace:
+            case $node instanceof Node\Stmt\Namespace_:
                 $this->namespace = null;
                 break;
 
-            case $node instanceof \PHPParser_Node_Stmt_Class:
+            case $node instanceof Node\Stmt\Class_:
                 $this->class = null;
                 break;
 
-            case $node instanceof \PHPParser_Node_Stmt_Trait:
+            case $node instanceof Node\Stmt\Trait_:
                 $this->trait = null;
                 break;
 
-            case $node instanceof \PHPParser_Node_Stmt_Function:
-            case $node instanceof \PHPParser_Node_Stmt_ClassMethod:
+            case $node instanceof Node\Stmt\Function_:
+            case $node instanceof Node\Stmt\ClassMethod:
                 $this->function = null;
                 break;
 
-            case $node instanceof \PHPParser_Node_Expr_Closure:
+            case $node instanceof Node\Expr\Closure:
                 $this->closureNestingLevel--;
                 break;
 

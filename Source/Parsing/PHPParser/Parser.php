@@ -6,6 +6,7 @@ use Pinq\Parsing\FunctionStructure;
 use Pinq\Parsing\IFunctionReflection;
 use Pinq\Parsing\ParserBase;
 use Pinq\Parsing\PHPParser\Visitors\FixedNamespaceResolver;
+use PhpParser;
 
 /**
  * Function parser implementation utilising nikic\PHP-Parser to
@@ -20,7 +21,7 @@ class Parser extends ParserBase
      * The PHP-Parser parser instance, static because it is expensive
      * to instantiate.
      *
-     * @var \PHPParser_Parser
+     * @var PhpParser\Parser
      */
     private static $phpParser;
 
@@ -41,7 +42,7 @@ class Parser extends ParserBase
     protected function parseFunction(IFunctionReflection $reflection, $filePath)
     {
         if (self::$phpParser === null) {
-            self::$phpParser = new \PHPParser_Parser(new \PHPParser_Lexer());
+            self::$phpParser = new PhpParser\Parser(new PhpParser\Lexer());
         }
 
         $locatedFunctionNodes = $this->getLocatedFunctionNodesIn($filePath);
@@ -58,7 +59,7 @@ class Parser extends ParserBase
             $parsedNodes = self::$phpParser->parse(file_get_contents($filePath));
 
             //Resolve any relative, used or aliased types to their fully qualified equivalent
-            $namespaceResolverTraverser = new \PHPParser_NodeTraverser();
+            $namespaceResolverTraverser = new PhpParser\NodeTraverser();
             $namespaceResolver = new FixedNamespaceResolver();
             $namespaceResolverTraverser->addVisitor($namespaceResolver);
             $resolvedNodes = $namespaceResolverTraverser->traverse($parsedNodes);

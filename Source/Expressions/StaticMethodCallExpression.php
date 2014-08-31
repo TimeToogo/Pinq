@@ -17,7 +17,7 @@ class StaticMethodCallExpression extends StaticClassExpression
     private $name;
 
     /**
-     * @var Expression[]
+     * @var ArgumentExpression[]
      */
     private $arguments;
 
@@ -25,7 +25,7 @@ class StaticMethodCallExpression extends StaticClassExpression
     {
         parent::__construct($class);
         $this->name      = $name;
-        $this->arguments = self::verifyAll($arguments);
+        $this->arguments = self::verifyAll($arguments, ArgumentExpression::getType());
     }
 
     /**
@@ -37,7 +37,7 @@ class StaticMethodCallExpression extends StaticClassExpression
     }
 
     /**
-     * @return Expression[]
+     * @return ArgumentExpression[]
      */
     public function getArguments()
     {
@@ -52,7 +52,7 @@ class StaticMethodCallExpression extends StaticClassExpression
     /**
      * @param Expression   $class
      * @param Expression   $name
-     * @param Expression[] $arguments
+     * @param ArgumentExpression[] $arguments
      *
      * @return self
      */

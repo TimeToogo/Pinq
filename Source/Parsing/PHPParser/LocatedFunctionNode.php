@@ -6,6 +6,7 @@ use Pinq\Parsing\IFunctionDeclaration;
 use Pinq\Parsing\IFunctionLocation;
 use Pinq\Parsing\IFunctionSignature;
 use Pinq\Parsing\LocatedFunction;
+use PhpParser\Node;
 
 class LocatedFunctionNode extends LocatedFunction
 {
@@ -15,7 +16,7 @@ class LocatedFunctionNode extends LocatedFunction
     private $declaration;
 
     /**
-     * @var PHPParser_Node_Stmt_Function|PHPParser_Node_Stmt_ClassMethod|PHPParser_Node_Expr_Closure
+     * @var Node\Stmt\Function_|Node\Stmt\ClassMethod|Node\Expr\Closure
      */
     private $node;
 
@@ -23,7 +24,7 @@ class LocatedFunctionNode extends LocatedFunction
             IFunctionSignature $signature,
             IFunctionLocation $location,
             IFunctionDeclaration $declaration,
-            \PHPParser_Node $node
+            Node $node
     ) {
         parent::__construct($signature, $location);
 
@@ -40,7 +41,7 @@ class LocatedFunctionNode extends LocatedFunction
     }
 
     /**
-     * @return \PHPParser_Node[]
+     * @return Node[]
      */
     public function getBodyNodes()
     {
