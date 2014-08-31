@@ -281,7 +281,7 @@ abstract class Expression implements \Serializable
     final public static function cloneAll(array $expressions)
     {
         return array_map(
-                function (self $expression = null) {
+                function (Expression $expression = null) {
                     return $expression === null ? null : clone $expression;
                 },
                 $expressions
