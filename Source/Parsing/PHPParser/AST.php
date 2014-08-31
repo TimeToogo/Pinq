@@ -120,7 +120,8 @@ class AST
                 $node->name,
                 $type,
                 $node->default === null ? null : $this->parseNode($node->default),
-                $node->byRef
+                $node->byRef,
+                $node->variadic
         );
     }
 

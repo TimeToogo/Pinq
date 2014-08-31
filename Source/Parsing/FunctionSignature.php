@@ -267,7 +267,8 @@ class FunctionSignature extends MagicResolvable implements IFunctionSignature
                 $parameter->getName(),
                 $typeHint,
                 $parameter->isDefaultValueAvailable() ? O\Expression::value($parameter->getDefaultValue()) : null,
-                $parameter->isPassedByReference()
+                $parameter->isPassedByReference(),
+                method_exists($parameter, 'isVariadic') && $parameter->isVariadic()
         );
     }
 

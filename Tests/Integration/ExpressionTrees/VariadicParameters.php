@@ -4,7 +4,7 @@ namespace Pinq\Tests\Integration\ExpressionTrees;
 
 class VariadicParameters
 {
-    public function simpleVaridic(...$arguments)
+    public function simpleVariadic(...$arguments)
     {
         return $arguments;
     }
@@ -14,8 +14,8 @@ class VariadicParameters
         return $arguments;
     }
 
-    public function argumentUnpacking()
+    public function argumentUnpacking(callable $function, array $arguments)
     {
-        $function(...[]);
+        return $function(...$arguments);
     }
 }

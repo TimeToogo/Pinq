@@ -4,18 +4,18 @@ namespace Pinq\Tests\Integration\Parsing;
 
 class VariadicParameters
 {
-    public function simpleVaridic()
+    public function simpleVariadic()
     {
-        return function (...$arguments) {};
+        function (...$arguments) {};
     }
 
     public function onlyArraysByRef()
     {
-        return function (array &...$arguments) {};
+        function (array &...$arguments) {};
     }
 
     public function argumentUnpacking()
     {
-        return func(...$arguments);
+        func(...[]);
     }
 }

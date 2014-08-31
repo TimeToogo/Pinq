@@ -11,8 +11,7 @@ class VariadicParameterTest extends InterpreterTest
 
     protected function setUp()
     {
-        if (version_compare(PHP_VERSION, '5.6.0', '>=')) {
-            require_once __DIR__ . '/VaridicParameters.php';
+        if (version_compare(PHP_VERSION, '5.6.0-alpha3', '>=')) {
             $this->parameters = new VariadicParameters();
         } else {
             $this->markTestSkipped('Requires >=PHP 5.6');
@@ -38,9 +37,12 @@ class VariadicParameterTest extends InterpreterTest
      */
     public function testOnlyArraysByRef()
     {
+        $array1 = [];
+        $array2 = [1,2,3];
+        $array3 = [[[[2]]]];
         $valueSet = [
-                [[]],
-                [[1,2,3], [1], [[[2]]]],
+                [&$array1],
+                [&$array2, &$array3, &$array1],
         ];
         $this->assertRecompilesCorrectly([$this->parameters, 'onlyArraysByRef'], $valueSet);
     }

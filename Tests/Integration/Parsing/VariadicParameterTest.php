@@ -13,8 +13,7 @@ class VariadicParameterTest extends ParserTest
 
     protected function setUp()
     {
-        if (version_compare(PHP_VERSION, '5.6.0', '>=')) {
-            require_once __DIR__ . '/VaridicParameters.php';
+        if (version_compare(PHP_VERSION, '5.6.0-alpha3', '>=')) {
             $this->parameters = new VariadicParameters();
         } else {
             $this->markTestSkipped('Requires >=PHP 5.6');
@@ -27,16 +26,14 @@ class VariadicParameterTest extends ParserTest
     public function testSimpleVariadic()
     {
         $this->assertParsedAs(
-                $this->parameters->simpleVaridic(),
+                [$this->parameters, 'simpleVariadic'],
                 [
-                        O\Expression::returnExpression(
-                                O\Expression::closure(
-                                        false,
-                                        false,
-                                        [O\Expression::parameter('arguments', null, null, false, true)],
-                                        [],
-                                        []
-                                )
+                        O\Expression::closure(
+                                false,
+                                false,
+                                [O\Expression::parameter('arguments', null, null, false, true)],
+                                [],
+                                []
                         )
                 ]
         );
@@ -48,16 +45,14 @@ class VariadicParameterTest extends ParserTest
     public function testOnlyArraysByRef()
     {
         $this->assertParsedAs(
-                $this->parameters->onlyArraysByRef(),
+                [$this->parameters, 'onlyArraysByRef'],
                 [
-                        O\Expression::returnExpression(
-                                O\Expression::closure(
-                                        false,
-                                        false,
-                                        [O\Expression::parameter('arguments', 'array', null, true, true)],
-                                        [],
-                                        []
-                                )
+                        O\Expression::closure(
+                                false,
+                                false,
+                                [O\Expression::parameter('arguments', 'array', null, true, true)],
+                                [],
+                                []
                         )
                 ]
         );
@@ -71,10 +66,10 @@ class VariadicParameterTest extends ParserTest
         $this->assertParsedAs(
                 [$this->parameters, 'argumentUnpacking'],
                 [
-                    O\Expression::functionCall(
-                            O\Expression::value('func'),
-                            [O\Expression::argument(O\Expression::arrayExpression([]), true)]
-                    )
+                        O\Expression::functionCall(
+                                O\Expression::value('func'),
+                                [O\Expression::argument(O\Expression::arrayExpression([]), true)]
+                        )
                 ]
         );
     }
