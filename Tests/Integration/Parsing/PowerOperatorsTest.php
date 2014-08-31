@@ -29,4 +29,21 @@ class PowerOperatorsTest extends ParserTest
                 ]
         );
     }
+
+    /**
+     * @dataProvider parsers
+     */
+    public function testAssignmentOperator()
+    {
+        $this->assertParsedAs(
+                [PowerOperators::TYPE, 'assignmentOperator'],
+                [
+                        O\Expression::assign(
+                                O\Expression::variable(O\Expression::value('i')),
+                                O\Operators\Assignment::POWER,
+                                O\Expression::value(5)
+                        )
+                ]
+        );
+    }
 }
