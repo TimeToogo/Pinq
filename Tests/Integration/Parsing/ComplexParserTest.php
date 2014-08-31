@@ -173,7 +173,7 @@ class ComplexParserTest extends ParserTest
                         O\Expression::methodCall(
                                 O\Expression::variable(O\Expression::value('traversable')),
                                 O\Expression::value('where'),
-                                [O\Expression::closure(
+                                [O\Expression::argument(O\Expression::closure(
                                         false,
                                         false,
                                         [O\Expression::parameter('i')],
@@ -181,9 +181,9 @@ class ComplexParserTest extends ParserTest
                                         [O\Expression::returnExpression(O\Expression::binaryOperation(
                                                 O\Expression::variable(O\Expression::value('i')),
                                                 O\Operators\Binary::GREATER_THAN,
-                                                O\Expression::value(0)))])]),
+                                                O\Expression::value(0)))]))]),
                         O\Expression::value('all'),
-                        [O\Expression::closure(
+                        [O\Expression::argument(O\Expression::closure(
                                 false,
                                 false,
                                 [O\Expression::parameter('i')],
@@ -194,6 +194,6 @@ class ComplexParserTest extends ParserTest
                                                 O\Operators\Binary::MODULUS,
                                                 O\Expression::value(2)),
                                         O\Operators\Binary::IDENTITY,
-                                        O\Expression::value(0)))])]));
+                                        O\Expression::value(0)))]))]));
     }
 }

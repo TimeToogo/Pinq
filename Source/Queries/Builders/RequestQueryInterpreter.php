@@ -163,7 +163,7 @@ class RequestQueryInterpreter extends QueryInterpreter implements IRequestQueryI
         } elseif ($expression instanceof O\FunctionCallExpression
                 && count($expression->getArguments()) > 0
         ) {
-            $this->scopeInterpreter->interpretScope($expression->getArguments()[0]);
+            $this->scopeInterpreter->interpretScope($expression->getArguments()[0]->getValue());
         } else {
             throw new \Pinq\PinqException(
                     'Cannot interpret count request: invalid expression type, expecting %s, %s given',

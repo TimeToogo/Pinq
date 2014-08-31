@@ -37,6 +37,7 @@ abstract class ExpressionTest extends \Pinq\Tests\PinqTestCase
                         O\Expression::value(0))],
                 [O\Expression::newExpression(O\Expression::value(0))],
                 [O\Expression::parameter('')],
+                [O\Expression::argument(O\Expression::value(0))],
                 [O\Expression::returnExpression()],
                 [O\Expression::staticMethodCall(
                         O\Expression::value(0),

@@ -17,14 +17,14 @@ class FunctionCallExpression extends Expression
     private $name;
 
     /**
-     * @var Expression[]
+     * @var ArgumentExpression[]
      */
     private $arguments;
 
     public function __construct(Expression $nameExpression, array $argumentExpressions = [])
     {
         $this->name      = $nameExpression;
-        $this->arguments = self::verifyAll($argumentExpressions);
+        $this->arguments = self::verifyAll($argumentExpressions, ArgumentExpression::getType());
     }
 
     /**
@@ -36,7 +36,7 @@ class FunctionCallExpression extends Expression
     }
 
     /**
-     * @return Expression[]
+     * @return ArgumentExpression[]
      */
     public function getArguments()
     {
@@ -50,7 +50,7 @@ class FunctionCallExpression extends Expression
 
     /**
      * @param Expression   $name
-     * @param Expression[] $arguments
+     * @param ArgumentExpression[] $arguments
      *
      * @return self
      */

@@ -12,7 +12,7 @@ namespace Pinq\Expressions;
 class NewExpression extends StaticClassExpression
 {
     /**
-     * @var Expression[]
+     * @var ArgumentExpression[]
      */
     private $arguments;
 
@@ -20,7 +20,7 @@ class NewExpression extends StaticClassExpression
     {
         parent::__construct($class);
 
-        $this->arguments = self::verifyAll($arguments);
+        $this->arguments = self::verifyAll($arguments, ArgumentExpression::getType());
     }
 
     /**
@@ -38,9 +38,9 @@ class NewExpression extends StaticClassExpression
 
     /**
      * @param Expression   $class
-     * @param Expression[] $arguments
+     * @param ArgumentExpression[] $arguments
      *
-     * @return NewExpression|\self
+     * @return NewExpression
      */
     public function update(Expression $class, array $arguments = [])
     {

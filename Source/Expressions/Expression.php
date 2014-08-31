@@ -330,8 +330,8 @@ abstract class Expression implements \Serializable
     }
 
     /**
-     * @param Expression   $classType
-     * @param Expression[] $arguments
+     * @param Expression           $classType
+     * @param ArgumentExpression[] $arguments
      *
      * @return NewExpression
      */
@@ -341,9 +341,9 @@ abstract class Expression implements \Serializable
     }
 
     /**
-     * @param Expression   $value
-     * @param Expression   $name
-     * @param Expression[] $arguments
+     * @param Expression           $value
+     * @param Expression           $name
+     * @param ArgumentExpression[] $arguments
      *
      * @return MethodCallExpression
      */
@@ -378,8 +378,8 @@ abstract class Expression implements \Serializable
     }
 
     /**
-     * @param Expression   $valueExpression
-     * @param Expression[] $arguments
+     * @param Expression           $valueExpression
+     * @param ArgumentExpression[] $arguments
      *
      * @return InvocationExpression
      */
@@ -432,8 +432,8 @@ abstract class Expression implements \Serializable
     }
 
     /**
-     * @param Expression   $name
-     * @param Expression[] $arguments
+     * @param Expression           $name
+     * @param ArgumentExpression[] $arguments
      *
      * @return FunctionCallExpression
      */
@@ -443,9 +443,9 @@ abstract class Expression implements \Serializable
     }
 
     /**
-     * @param Expression   $class
-     * @param Expression   $name
-     * @param Expression[] $arguments
+     * @param Expression           $class
+     * @param Expression           $name
+     * @param ArgumentExpression[] $arguments
      *
      * @return StaticMethodCallExpression
      */
@@ -510,6 +510,7 @@ abstract class Expression implements \Serializable
      * @param string|null $typeHint
      * @param Expression  $defaultValue
      * @param boolean     $isPassedByReference
+     * @param boolean     $isVariadic
      *
      * @return ParameterExpression
      */
@@ -517,13 +518,28 @@ abstract class Expression implements \Serializable
             $name,
             $typeHint = null,
             Expression $defaultValue = null,
-            $isPassedByReference = false
+            $isPassedByReference = false,
+            $isVariadic = false
     ) {
         return new ParameterExpression(
                 $name,
                 $typeHint,
                 $defaultValue,
-                $isPassedByReference);
+                $isPassedByReference,
+                $isVariadic);
+    }
+
+    /**
+     * @param Expression $value
+     * @param boolean    $isUnpacked
+     *
+     * @return ArgumentExpression
+     */
+    final public static function argument(
+            Expression $value,
+            $isUnpacked = false
+    ) {
+        return new ArgumentExpression($value, $isUnpacked);
     }
 
     /**

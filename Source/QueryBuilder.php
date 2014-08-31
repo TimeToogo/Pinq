@@ -42,7 +42,7 @@ abstract class QueryBuilder
         return O\Expression::methodCall(
                 $this->expression,
                 O\Expression::value($name),
-                array_map([O\Expression::getType(), 'value'], $arguments)
+                array_map([O\Expression::getType(), 'argument'], array_map([O\Expression::getType(), 'value'], $arguments))
         );
     }
 

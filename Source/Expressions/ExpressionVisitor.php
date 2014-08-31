@@ -131,6 +131,18 @@ class ExpressionVisitor extends ExpressionWalker
 
     }
 
+    final public function walkArgument(ArgumentExpression $expression)
+    {
+        $this->visitArgument($expression);
+
+        return $expression;
+    }
+
+    protected function visitArgument(ArgumentExpression $expression)
+    {
+
+    }
+
     final public function walkEmpty(EmptyExpression $expression)
     {
         $this->visitEmpty($expression);

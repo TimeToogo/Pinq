@@ -2,6 +2,7 @@
 
 namespace Pinq\Parsing\PHPParser;
 
+use PhpParser\Node;
 use Pinq\Expressions as O;
 use Pinq\Expressions\Expression;
 use Pinq\Expressions\Operators;
@@ -15,7 +16,7 @@ use Pinq\Parsing\ASTException;
 class AST
 {
     /**
-     * @var \PHPParser_Node[]
+     * @var Node[]
      */
     private $nodes = [];
 
@@ -28,7 +29,7 @@ class AST
      * Converts the supplied php parser nodes to an equivalent
      * expression tree.
      *
-     * @param \PHPParser_Node[] $nodes
+     * @param Node[] $nodes
      *
      * @return Expression[]
      */
@@ -48,7 +49,7 @@ class AST
     }
 
     /**
-     * @param \PHPParser_Node[] $nodes
+     * @param Node[] $nodes
      *
      * @return Expression[]
      */
@@ -63,26 +64,25 @@ class AST
     }
 
     /**
-     * @param \PHPParser_Node $node
+     * @param Node $node
      *
      * @throws \Pinq\Parsing\ASTException
      * @return Expression
      */
-    private function parseNode(\PHPParser_Node $node)
+    protected function parseNode(Node $node)
     {
         switch (true) {
-            case $node instanceof \PHPParser_Node_Stmt:
+            case $node instanceof Node\Stmt:
                 return $this->parseStatementNode($node);
 
-            case $node instanceof \PHPParser_Node_Expr:
+            case $node instanceof Node\Expr:
                 return $this->parseExpressionNode($node);
 
-            case $node instanceof \PHPParser_Node_Param:
+            case $node instanceof Node\Param:
                 return $this->parseParameterNode($node);
 
-            //Irrelevant node, no call time pass by ref anymore
-            case $node instanceof \PHPParser_Node_Arg:
-                return $this->parseNode($node->value);
+            case $node instanceof Node\Arg:
+                return $this->parseArgumentNode($node);
 
             default:
                 throw new ASTException('Unsupported node type: %s', get_class($node));
@@ -96,8 +96,8 @@ class AST
      */
     final public function parseNameNode($node)
     {
-        if ($node instanceof \PHPParser_Node_Name) {
-            return Expression::value(($node->isFullyQualified() ? '\\' : '') . (string) $node);
+        if ($node instanceof Node\Name) {
+            return Expression::value(($node->isFullyQualified() ? '\\' : '') . (string)$node);
         } elseif (is_string($node)) {
             return Expression::value($node);
         }
@@ -105,11 +105,11 @@ class AST
         return $this->parseNode($node);
     }
 
-    private function parseParameterNode(\PHPParser_Node_Param $node)
+    private function parseParameterNode(Node\Param $node)
     {
         $type = $node->type;
         if ($type !== null) {
-            $type = (string) $type;
+            $type      = (string)$type;
             $lowerType = strtolower($type);
             if ($type[0] !== '\\' && $lowerType !== 'array' && $lowerType !== 'callable') {
                 $type = '\\' . $type;
@@ -120,90 +120,97 @@ class AST
                 $node->name,
                 $type,
                 $node->default === null ? null : $this->parseNode($node->default),
-                $node->byRef
+                $node->byRef,
+                $node->variadic
+        );
+    }
+
+    private function parseArgumentNode(Node\Arg $node)
+    {
+        return Expression::argument(
+                $this->parseNode($node->value),
+                $node->unpack
         );
     }
 
     // <editor-fold defaultstate="collapsed" desc="Expression node parsers">
 
-    public function parseExpressionNode(\PHPParser_Node_Expr $node)
+    public function parseExpressionNode(Node\Expr $node)
     {
-        $fullNodeName = get_class($node);
-        $nodeType     = str_replace('PHPParser_Node_Expr_', '', $fullNodeName);
         switch (true) {
-            case $mappedNode = $this->parseOperatorNode($node, $nodeType):
+            case $mappedNode = $this->parseOperatorNode($node):
                 return $mappedNode;
 
-            case $node instanceof \PHPParser_Node_Scalar
+            case $node instanceof Node\Scalar
                     && $mappedNode = $this->parseScalarNode($node):
                 return $mappedNode;
 
-            case $node instanceof \PHPParser_Node_Expr_Variable:
+            case $node instanceof Node\Expr\Variable:
                 return Expression::variable($this->parseNameNode($node->name));
 
-            case $node instanceof \PHPParser_Node_Expr_Array:
+            case $node instanceof Node\Expr\Array_:
                 return $this->parseArrayNode($node);
 
-            case $node instanceof \PHPParser_Node_Expr_FuncCall:
+            case $node instanceof Node\Expr\FuncCall:
                 return $this->parseFunctionCallNode($node);
 
-            case $node instanceof \PHPParser_Node_Expr_New:
+            case $node instanceof Node\Expr\New_:
                 return Expression::newExpression(
                         $this->parseNameNode($node->class),
                         $this->parseNodes($node->args)
                 );
 
-            case $node instanceof \PHPParser_Node_Expr_MethodCall:
+            case $node instanceof Node\Expr\MethodCall:
                 return Expression::methodCall(
                         $this->parseNode($node->var),
                         $this->parseNameNode($node->name),
                         $this->parseNodes($node->args)
                 );
 
-            case $node instanceof \PHPParser_Node_Expr_PropertyFetch:
+            case $node instanceof Node\Expr\PropertyFetch:
                 return Expression::field(
                         $this->parseNode($node->var),
                         $this->parseNameNode($node->name)
                 );
 
-            case $node instanceof \PHPParser_Node_Expr_ArrayDimFetch:
+            case $node instanceof Node\Expr\ArrayDimFetch:
                 return Expression::index(
                         $this->parseNode($node->var),
                         $node->dim === null ? null : $this->parseNode($node->dim)
                 );
 
-            case $node instanceof \PHPParser_Node_Expr_ConstFetch:
-                return Expression::constant((string) $node->name);
+            case $node instanceof Node\Expr\ConstFetch:
+                return Expression::constant((string)$node->name);
 
-            case $node instanceof \PHPParser_Node_Expr_ClassConstFetch:
+            case $node instanceof Node\Expr\ClassConstFetch:
                 return Expression::classConstant(
                         $this->parseNameNode($node->class),
                         $node->name
                 );
 
-            case $node instanceof \PHPParser_Node_Expr_StaticCall:
+            case $node instanceof Node\Expr\StaticCall:
                 return Expression::staticMethodCall(
                         $this->parseNameNode($node->class),
                         $this->parseNameNode($node->name),
                         $this->parseNodes($node->args)
                 );
 
-            case $node instanceof \PHPParser_Node_Expr_StaticPropertyFetch:
+            case $node instanceof Node\Expr\StaticPropertyFetch:
                 return Expression::staticField(
                         $this->parseNameNode($node->class),
                         $this->parseNameNode($node->name)
                 );
 
-            case $node instanceof \PHPParser_Node_Expr_Ternary:
+            case $node instanceof Node\Expr\Ternary:
                 return $this->parseTernaryNode($node);
 
-            case $node instanceof \PHPParser_Node_Expr_Closure:
+            case $node instanceof Node\Expr\Closure:
                 return $this->parseClosureNode($node);
 
-            case $node instanceof \PHPParser_Node_Expr_Empty:
+            case $node instanceof Node\Expr\Empty_:
                 return Expression::emptyExpression($this->parseNode($node->expr));
 
-            case $node instanceof \PHPParser_Node_Expr_Isset:
+            case $node instanceof Node\Expr\Isset_:
                 return Expression::issetExpression($this->parseNodes($node->vars));
 
             default:
@@ -213,7 +220,7 @@ class AST
         }
     }
 
-    private function parseArrayNode(\PHPParser_Node_Expr_Array $node)
+    private function parseArrayNode(Node\Expr\Array_ $node)
     {
         $itemExpressions = [];
 
@@ -229,7 +236,7 @@ class AST
         return Expression::arrayExpression($itemExpressions);
     }
 
-    private function parseFunctionCallNode(\PHPParser_Node_Expr_FuncCall $node)
+    private function parseFunctionCallNode(Node\Expr\FuncCall $node)
     {
         $nameExpression = $this->parseNameNode($node->name);
 
@@ -246,7 +253,7 @@ class AST
         }
     }
 
-    private function parseTernaryNode(\PHPParser_Node_Expr_Ternary $node)
+    private function parseTernaryNode(Node\Expr\Ternary $node)
     {
         return Expression::ternary(
                 $this->parseNode($node->cond),
@@ -255,7 +262,7 @@ class AST
         );
     }
 
-    private function parseClosureNode(\PHPParser_Node_Expr_Closure $node)
+    private function parseClosureNode(Node\Expr\Closure $node)
     {
         $parameterExpressions = [];
 
@@ -263,9 +270,9 @@ class AST
             $parameterExpressions[] = $this->parseParameterNode($parameterNode);
         }
 
-        $usedVariables   = [];
+        $usedVariables = [];
         foreach ($node->uses as $usedVariable) {
-            $usedVariables[] =  Expression::closureUsedVariable($usedVariable->var, $usedVariable->byRef);
+            $usedVariables[] = Expression::closureUsedVariable($usedVariable->var, $usedVariable->byRef);
         }
         $bodyExpressions = $this->parseNodes($node->stmts);
 
@@ -278,37 +285,19 @@ class AST
         );
     }
 
-    private function parseScalarNode(\PHPParser_Node_Scalar $node)
+    private function parseScalarNode(Node\Scalar $node)
     {
         switch (true) {
-            case $node instanceof \PHPParser_Node_Scalar_DNumber:
-            case $node instanceof \PHPParser_Node_Scalar_LNumber:
-            case $node instanceof \PHPParser_Node_Scalar_String:
+            case $node instanceof Node\Scalar\DNumber:
+            case $node instanceof Node\Scalar\LNumber:
+            case $node instanceof Node\Scalar\String:
                 return Expression::value($node->value);
 
-            case $node instanceof \PHPParser_Node_Scalar_DirConst:
-                return Expression::constant('__DIR__');
-
-            case $node instanceof \PHPParser_Node_Scalar_FileConst:
-                return Expression::constant('__FILE__');
-
-            case $node instanceof \PHPParser_Node_Scalar_NSConst:
-                return Expression::constant('__NAMESPACE__');
-
-            case $node instanceof \PHPParser_Node_Scalar_ClassConst:
-                return Expression::constant('__CLASS__');
-
-            case $node instanceof \PHPParser_Node_Scalar_TraitConst:
-                return Expression::constant('__TRAIT__');
-
-            case $node instanceof \PHPParser_Node_Scalar_FuncConst:
-                return Expression::constant('__FUNCTION__');
-
-            case $node instanceof \PHPParser_Node_Scalar_MethodConst:
-                return Expression::constant('__METHOD__');
-
-            case $node instanceof \PHPParser_Node_Scalar_LineConst:
+            case $node instanceof Node\Scalar\MagicConst\Line:
                 return Expression::value($node->getAttribute('startLine'));
+
+            case $node instanceof Node\Scalar\MagicConst:
+                return Expression::constant($node->getName());
 
             default:
                 return;
@@ -319,17 +308,17 @@ class AST
 
     // <editor-fold defaultstate="collapsed" desc="Statement node parsers">
 
-    private function parseStatementNode(\PHPParser_Node_Stmt $node)
+    private function parseStatementNode(Node\Stmt $node)
     {
         switch (true) {
 
-            case $node instanceof \PHPParser_Node_Stmt_Return:
+            case $node instanceof Node\Stmt\Return_:
                 return Expression::returnExpression($node->expr !== null ? $this->parseNode($node->expr) : null);
 
-            case $node instanceof \PHPParser_Node_Stmt_Throw:
+            case $node instanceof Node\Stmt\Throw_:
                 return Expression::throwExpression($this->parseNode($node->expr));
 
-            case $node instanceof \PHPParser_Node_Stmt_Unset:
+            case $node instanceof Node\Stmt\Unset_:
                 return Expression::unsetExpression($this->parseNodes($node->vars));
 
             default:
@@ -351,9 +340,9 @@ class AST
             'While'    => ASTException::WHILE_LOOP
     ];
 
-    private function verifyNotControlStructure(\PHPParser_Node_Stmt $node)
+    private function verifyNotControlStructure(Node\Stmt $node)
     {
-        $nodeType = str_replace('PHPParser_Node_Stmt_', '', get_class($node));
+        $nodeType = str_replace('Stmt_', '', $node->getType());
 
         if (isset(self::$constructStructureMap[$nodeType])) {
             throw ASTException::containsControlStructure(
@@ -367,8 +356,9 @@ class AST
 
     // <editor-fold defaultstate="collapsed" desc="Operator node maps">
 
-    private function parseOperatorNode(\PHPParser_Node_Expr $node, $nodeType)
+    private function parseOperatorNode(Node\Expr $node)
     {
+        $nodeType = str_replace('Expr_', '', $node->getType());
         switch (true) {
 
             case isset(self::$assignOperatorsMap[$nodeType]):
@@ -378,7 +368,7 @@ class AST
                         $this->parseNode($node->expr)
                 );
 
-            case $node instanceof \PHPParser_Node_Expr_Instanceof:
+            case $node instanceof Node\Expr\Instanceof_:
                 return Expression::binaryOperation(
                         $this->parseNode($node->expr),
                         Operators\Binary::IS_INSTANCE_OF,
@@ -395,7 +385,7 @@ class AST
             case isset(self::$unaryOperatorsMap[$nodeType]):
                 return Expression::unaryOperation(
                         self::$unaryOperatorsMap[$nodeType],
-                        $this->parseNode($node->expr ?: $node->var)
+                        $this->parseNode($node->expr ? : $node->var)
                 );
 
             case isset(self::$castOperatorMap[$nodeType]):
@@ -430,45 +420,47 @@ class AST
     ];
 
     private static $binaryOperatorsMap = [
-            'BitwiseAnd'     => Operators\Binary::BITWISE_AND,
-            'BitwiseOr'      => Operators\Binary::BITWISE_OR,
-            'BitwiseXor'     => Operators\Binary::BITWISE_XOR,
-            'ShiftLeft'      => Operators\Binary::SHIFT_LEFT,
-            'ShiftRight'     => Operators\Binary::SHIFT_RIGHT,
-            'BooleanAnd'     => Operators\Binary::LOGICAL_AND,
-            'BooleanOr'      => Operators\Binary::LOGICAL_OR,
-            'LogicalAnd'     => Operators\Binary::LOGICAL_AND,
-            'LogicalOr'      => Operators\Binary::LOGICAL_OR,
-            'Plus'           => Operators\Binary::ADDITION,
-            'Minus'          => Operators\Binary::SUBTRACTION,
-            'Mul'            => Operators\Binary::MULTIPLICATION,
-            'Div'            => Operators\Binary::DIVISION,
-            'Mod'            => Operators\Binary::MODULUS,
-            'Concat'         => Operators\Binary::CONCATENATION,
-            'Equal'          => Operators\Binary::EQUALITY,
-            'Identical'      => Operators\Binary::IDENTITY,
-            'NotEqual'       => Operators\Binary::INEQUALITY,
-            'NotIdentical'   => Operators\Binary::NOT_IDENTICAL,
-            'Smaller'        => Operators\Binary::LESS_THAN,
-            'SmallerOrEqual' => Operators\Binary::LESS_THAN_OR_EQUAL_TO,
-            'Greater'        => Operators\Binary::GREATER_THAN,
-            'GreaterOrEqual' => Operators\Binary::GREATER_THAN_OR_EQUAL_TO
+            'BinaryOp_BitwiseAnd'     => Operators\Binary::BITWISE_AND,
+            'BinaryOp_BitwiseOr'      => Operators\Binary::BITWISE_OR,
+            'BinaryOp_BitwiseXor'     => Operators\Binary::BITWISE_XOR,
+            'BinaryOp_ShiftLeft'      => Operators\Binary::SHIFT_LEFT,
+            'BinaryOp_ShiftRight'     => Operators\Binary::SHIFT_RIGHT,
+            'BinaryOp_BooleanAnd'     => Operators\Binary::LOGICAL_AND,
+            'BinaryOp_BooleanOr'      => Operators\Binary::LOGICAL_OR,
+            'BinaryOp_LogicalAnd'     => Operators\Binary::LOGICAL_AND,
+            'BinaryOp_LogicalOr'      => Operators\Binary::LOGICAL_OR,
+            'BinaryOp_Plus'           => Operators\Binary::ADDITION,
+            'BinaryOp_Minus'          => Operators\Binary::SUBTRACTION,
+            'BinaryOp_Mul'            => Operators\Binary::MULTIPLICATION,
+            'BinaryOp_Div'            => Operators\Binary::DIVISION,
+            'BinaryOp_Mod'            => Operators\Binary::MODULUS,
+            'BinaryOp_Pow'            => Operators\Binary::POWER,
+            'BinaryOp_Concat'         => Operators\Binary::CONCATENATION,
+            'BinaryOp_Equal'          => Operators\Binary::EQUALITY,
+            'BinaryOp_Identical'      => Operators\Binary::IDENTITY,
+            'BinaryOp_NotEqual'       => Operators\Binary::INEQUALITY,
+            'BinaryOp_NotIdentical'   => Operators\Binary::NOT_IDENTICAL,
+            'BinaryOp_Smaller'        => Operators\Binary::LESS_THAN,
+            'BinaryOp_SmallerOrEqual' => Operators\Binary::LESS_THAN_OR_EQUAL_TO,
+            'BinaryOp_Greater'        => Operators\Binary::GREATER_THAN,
+            'BinaryOp_GreaterOrEqual' => Operators\Binary::GREATER_THAN_OR_EQUAL_TO
     ];
 
     private static $assignOperatorsMap = [
-            'Assign'           => Operators\Assignment::EQUAL,
-            'AssignBitwiseAnd' => Operators\Assignment::BITWISE_AND,
-            'AssignBitwiseOr'  => Operators\Assignment::BITWISE_OR,
-            'AssignBitwiseXor' => Operators\Assignment::BITWISE_XOR,
-            'AssignConcat'     => Operators\Assignment::CONCATENATE,
-            'AssignDiv'        => Operators\Assignment::DIVISION,
-            'AssignMinus'      => Operators\Assignment::SUBTRACTION,
-            'AssignMod'        => Operators\Assignment::MODULUS,
-            'AssignMul'        => Operators\Assignment::MULTIPLICATION,
-            'AssignPlus'       => Operators\Assignment::ADDITION,
-            'AssignRef'        => Operators\Assignment::EQUAL_REFERENCE,
-            'AssignShiftLeft'  => Operators\Assignment::SHIFT_LEFT,
-            'AssignShiftRight' => Operators\Assignment::SHIFT_RIGHT
+            'Assign'              => Operators\Assignment::EQUAL,
+            'AssignRef'           => Operators\Assignment::EQUAL_REFERENCE,
+            'AssignOp_BitwiseAnd' => Operators\Assignment::BITWISE_AND,
+            'AssignOp_BitwiseOr'  => Operators\Assignment::BITWISE_OR,
+            'AssignOp_BitwiseXor' => Operators\Assignment::BITWISE_XOR,
+            'AssignOp_Concat'     => Operators\Assignment::CONCATENATE,
+            'AssignOp_Div'        => Operators\Assignment::DIVISION,
+            'AssignOp_Minus'      => Operators\Assignment::SUBTRACTION,
+            'AssignOp_Mod'        => Operators\Assignment::MODULUS,
+            'AssignOp_Mul'        => Operators\Assignment::MULTIPLICATION,
+            'AssignOp_Pow'        => Operators\Assignment::POWER,
+            'AssignOp_Plus'       => Operators\Assignment::ADDITION,
+            'AssignOp_ShiftLeft'  => Operators\Assignment::SHIFT_LEFT,
+            'AssignOp_ShiftRight' => Operators\Assignment::SHIFT_RIGHT
     ];
 
     // </editor-fold>

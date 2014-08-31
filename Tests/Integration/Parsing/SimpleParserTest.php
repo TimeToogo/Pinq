@@ -282,7 +282,7 @@ class SimpleParserTest extends ParserTest
                 [
                         O\Expression::functionCall(
                                 O\Expression::value('f'),
-                                [O\Expression::index(O\Expression::variable(O\Expression::value('i')))]
+                                [O\Expression::argument(O\Expression::index(O\Expression::variable(O\Expression::value('i'))))]
                         )
                 ]
         );

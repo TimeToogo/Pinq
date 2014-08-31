@@ -3,6 +3,7 @@
 namespace Pinq\Queries\Functions\Parameters;
 
 use Pinq\Expressions as O;
+use Pinq\PinqException;
 
 /**
  * Base class for the structure of parameters of a function.
@@ -38,6 +39,16 @@ abstract class ParameterBase implements \Countable
 
     protected function __construct(array $parameterExpressions, $usedParameters)
     {
+        /** @var $parameterExpressions O\ParameterExpression[] */
+        foreach($parameterExpressions as $parameter) {
+            if($parameter->isVariadic()) {
+                throw new PinqException(
+                        'Cannot construct %s: invalid expression for parameter \'%s\', variadic parameters are not supported.',
+                        get_class($this),
+                        $parameter->getName());
+            }
+        }
+
         $this->expressions       = $parameterExpressions;
         $this->unusedExpressions = array_slice($parameterExpressions, $usedParameters);
 

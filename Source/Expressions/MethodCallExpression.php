@@ -17,7 +17,7 @@ class MethodCallExpression extends ObjectOperationExpression
     private $name;
 
     /**
-     * @var Expression[]
+     * @var ArgumentExpression[]
      */
     private $arguments;
 
@@ -25,7 +25,7 @@ class MethodCallExpression extends ObjectOperationExpression
     {
         parent::__construct($value);
         $this->name      = $name;
-        $this->arguments = Expression::verifyAll($arguments);
+        $this->arguments = self::verifyAll($arguments, ArgumentExpression::getType());
     }
 
     /**
@@ -37,7 +37,7 @@ class MethodCallExpression extends ObjectOperationExpression
     }
 
     /**
-     * @return Expression[]
+     * @return ArgumentExpression[]
      */
     public function getArguments()
     {
@@ -52,9 +52,9 @@ class MethodCallExpression extends ObjectOperationExpression
     /**
      * @param Expression   $value
      * @param Expression   $name
-     * @param Expression[] $arguments
+     * @param ArgumentExpression[] $arguments
      *
-     * @return MethodCallExpression|\self
+     * @return MethodCallExpression
      */
     public function update(
             Expression $value,

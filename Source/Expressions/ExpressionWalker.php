@@ -219,7 +219,16 @@ class ExpressionWalker
                 $expression->getName(),
                 $expression->getTypeHint(),
                 $this->walk($expression->getDefaultValue()),
-                $expression->isPassedByReference()
+                $expression->isPassedByReference(),
+                $expression->isVariadic()
+        );
+    }
+
+    public function walkArgument(ArgumentExpression $expression)
+    {
+        return $expression->update(
+                $this->walk($expression->getValue()),
+                $expression->isUnpacked()
         );
     }
 
