@@ -4,6 +4,8 @@ namespace Pinq\Tests\Integration\ExpressionTrees;
 
 class PowerOperators
 {
+    const TYPE = __CLASS__;
+
     public static function power($i, $e)
     {
         return $i ** $e;

@@ -16,7 +16,7 @@ class UsedFunctionsAndConstantsWithExpressionTest extends InterpreterTest
      */
     public function testUsedFunction()
     {
-        $this->assertRecompilesCorrectly([UsedFunctionsAndConstantsWithExpression::class, 'usedFunction']);
+        $this->assertRecompilesCorrectly([UsedFunctionsAndConstantsWithExpression::TYPE, 'usedFunction']);
     }
 
     /**
@@ -24,6 +24,6 @@ class UsedFunctionsAndConstantsWithExpressionTest extends InterpreterTest
      */
     public function testUsedConstantWithScalarExpression()
     {
-        $this->assertRecompilesCorrectly([UsedFunctionsAndConstantsWithExpression::class, 'usedConstantWithScalarExpression']);
+        $this->assertRecompilesCorrectly([UsedFunctionsAndConstantsWithExpression::TYPE, 'usedConstantWithScalarExpression']);
     }
 }

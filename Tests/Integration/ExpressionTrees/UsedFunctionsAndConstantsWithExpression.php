@@ -15,6 +15,8 @@ namespace Pinq\Tests\Integration\ExpressionTrees {
 
     class UsedFunctionsAndConstantsWithExpression
     {
+        const TYPE = __CLASS__;
+
         public static function usedFunction()
         {
             return aliasedFunction();

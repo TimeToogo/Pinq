@@ -23,7 +23,7 @@ class PowerOperatorsTest extends InterpreterTest
                 [6, 8]
         ];
 
-        $this->assertRecompilesCorrectly([PowerOperators::class, 'power'], $valueSet);
+        $this->assertRecompilesCorrectly([PowerOperators::TYPE, 'power'], $valueSet);
     }
 
     /**
@@ -38,6 +38,6 @@ class PowerOperatorsTest extends InterpreterTest
                 [6, 8]
         ];
 
-        $this->assertRecompilesCorrectly([PowerOperators::class, 'square'], $valueSet);
+        $this->assertRecompilesCorrectly([PowerOperators::TYPE, 'square'], $valueSet);
     }
 }

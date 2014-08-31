@@ -19,7 +19,7 @@ class PowerOperatorsTest extends ParserTest
     public function testBinaryOperator()
     {
         $this->assertParsedAs(
-                [PowerOperators::class, 'binaryOperator'],
+                [PowerOperators::TYPE, 'binaryOperator'],
                 [
                         O\Expression::binaryOperation(
                                 O\Expression::value(4),
