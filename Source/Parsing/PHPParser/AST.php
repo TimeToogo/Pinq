@@ -434,6 +434,7 @@ class AST
             'BinaryOp_Mul'            => Operators\Binary::MULTIPLICATION,
             'BinaryOp_Div'            => Operators\Binary::DIVISION,
             'BinaryOp_Mod'            => Operators\Binary::MODULUS,
+            'BinaryOp_Pow'            => Operators\Binary::POWER,
             'BinaryOp_Concat'         => Operators\Binary::CONCATENATION,
             'BinaryOp_Equal'          => Operators\Binary::EQUALITY,
             'BinaryOp_Identical'      => Operators\Binary::IDENTITY,
@@ -456,6 +457,7 @@ class AST
             'AssignOp_Minus'      => Operators\Assignment::SUBTRACTION,
             'AssignOp_Mod'        => Operators\Assignment::MODULUS,
             'AssignOp_Mul'        => Operators\Assignment::MULTIPLICATION,
+            'AssignOp_Pow'        => Operators\Assignment::POWER,
             'AssignOp_Plus'       => Operators\Assignment::ADDITION,
             'AssignOp_ShiftLeft'  => Operators\Assignment::SHIFT_LEFT,
             'AssignOp_ShiftRight' => Operators\Assignment::SHIFT_RIGHT

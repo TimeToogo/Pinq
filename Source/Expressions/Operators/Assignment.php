@@ -17,6 +17,7 @@ final class Assignment
     const MULTIPLICATION = '*=';
     const DIVISION       = '/=';
     const MODULUS        = '%=';
+    const POWER          = '**=';
     //Bitwise
     const BITWISE_AND = '&=';
     const BITWISE_OR  = '|=';
