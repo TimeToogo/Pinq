@@ -143,6 +143,7 @@ class FunctionLocatorVisitor extends NodeVisitorAbstract
     {
         return new FunctionLocation(
                 $this->filePath,
+                $this->namespace,
                 $node->getAttribute('startLine'),
                 $node->getAttribute('endLine'));
     }

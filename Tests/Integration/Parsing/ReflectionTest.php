@@ -39,6 +39,8 @@ class ReflectionTest extends PinqTestCase
         $signature = $reflection->getSignature();
 
         $this->assertSame(__FILE__, $location->getFilePath());
+        $this->assertSame(true, $location->inNamespace());
+        $this->assertSame(__NAMESPACE__, $location->getNamespace());
         $this->assertSame($startLine, $location->getStartLine());
         $this->assertSame($endLine, $location->getEndLine());
         $this->assertSame($this, $scope->getThis());
@@ -71,6 +73,8 @@ class ReflectionTest extends PinqTestCase
         $signature = $reflection->getSignature();
 
         $this->assertSame(__FILE__, $location->getFilePath());
+        $this->assertSame(true, $location->inNamespace());
+        $this->assertSame(__NAMESPACE__, $location->getNamespace());
         $this->assertSame($this->method()['start'], $location->getStartLine());
         $this->assertSame($this->method()['end'], $location->getEndLine());
         $this->assertSame($this, $scope->getThis());
@@ -96,6 +100,8 @@ class ReflectionTest extends PinqTestCase
         $signature = $reflection->getSignature();
 
         $this->assertSame(__FILE__, $location->getFilePath());
+        $this->assertSame(true, $location->inNamespace());
+        $this->assertSame(__NAMESPACE__, $location->getNamespace());
         $this->assertSame(func()['start'], $location->getStartLine());
         $this->assertSame(func()['end'], $location->getEndLine());
         $this->assertSame(null, $scope->getThis());

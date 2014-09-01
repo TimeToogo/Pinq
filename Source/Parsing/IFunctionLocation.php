@@ -17,6 +17,21 @@ interface IFunctionLocation
     public function getFilePath();
 
     /**
+     * Whether the function is defined in a namespace.
+     *
+     * @return boolean
+     */
+    public function inNamespace();
+
+    /**
+     * Gets the namespace which the function was defined in.
+     * Null if in the global namespace.
+     *
+     * @return string|null
+     */
+    public function getNamespace();
+
+    /**
      * Gets the start line of the function.
      *
      * @return int

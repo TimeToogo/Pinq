@@ -36,10 +36,12 @@ class FunctionLocation implements IFunctionLocation
 
     public function __construct(
             $filePath,
+            $namespace,
             $startLine,
             $endLine
     ) {
         $this->filePath  = $filePath;
+        $this->namespace = $namespace;
         $this->startLine = $startLine;
         $this->endLine   = $endLine;
 
@@ -47,6 +49,7 @@ class FunctionLocation implements IFunctionLocation
                 '-',
                 [
                         $filePath,
+                        $namespace,
                         $startLine,
                         $endLine,
                 ]
@@ -62,8 +65,17 @@ class FunctionLocation implements IFunctionLocation
      */
     public static function fromReflection(\ReflectionFunctionAbstract $reflection)
     {
+        if($reflection instanceof \ReflectionFunction) {
+            $namespace = $reflection->getNamespaceName();
+        } elseif ($reflection instanceof \ReflectionMethod) {
+            $namespace = $reflection->getDeclaringClass()->getNamespaceName();
+        } else {
+            $namespace = null;
+        }
+
         return new self(
                 $reflection->getFileName(),
+                $namespace,
                 $reflection->getStartLine(),
                 $reflection->getEndLine());
     }
@@ -71,6 +83,16 @@ class FunctionLocation implements IFunctionLocation
     public function getFilePath()
     {
         return $this->filePath;
+    }
+
+    public function inNamespace()
+    {
+        return $this->namespace !== null;
+    }
+
+    public function getNamespace()
+    {
+        return $this->namespace;
     }
 
     public function getStartLine()
@@ -82,6 +104,7 @@ class FunctionLocation implements IFunctionLocation
     {
         return $this->endLine;
     }
+
 
     public function getHash()
     {
