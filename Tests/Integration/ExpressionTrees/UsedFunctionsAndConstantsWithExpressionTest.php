@@ -24,6 +24,28 @@ class UsedFunctionsAndConstantsWithExpressionTest extends InterpreterTest
      */
     public function testUsedConstantWithScalarExpression()
     {
-        $this->assertRecompilesCorrectly([UsedFunctionsAndConstantsWithExpression::TYPE, 'usedConstantWithScalarExpression']);
+        $this->assertRecompilesCorrectly(
+                [UsedFunctionsAndConstantsWithExpression::TYPE, 'usedConstantWithScalarExpression']
+        );
+    }
+
+    /**
+     * @dataProvider interpreters
+     */
+    public function testClassConstantArrayDereference()
+    {
+        $this->assertRecompilesCorrectly(
+                [UsedFunctionsAndConstantsWithExpression::TYPE, 'classConstantArrayDereference']
+        );
+    }
+
+    /**
+     * @dataProvider interpreters
+     */
+    public function testConstantArrayDereference()
+    {
+        $this->assertRecompilesCorrectly(
+                [UsedFunctionsAndConstantsWithExpression::TYPE, 'constantArrayDereference']
+        );
     }
 }

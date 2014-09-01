@@ -186,6 +186,6 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
 
     public function asEvaluationContext(array $variableTable = [])
     {
-        return $this->scope->asEvaluationContext($variableTable, $this->innerReflection->getNamespaceName() ?: null);
+        return $this->scope->asEvaluationContext($variableTable, $this->location->getNamespace());
     }
 }

@@ -5,7 +5,6 @@ namespace Pinq\Parsing\PHPParser;
 use Pinq\Parsing\FunctionStructure;
 use Pinq\Parsing\IFunctionReflection;
 use Pinq\Parsing\ParserBase;
-use Pinq\Parsing\PHPParser\Visitors\FixedNamespaceResolver;
 use PhpParser;
 
 /**
@@ -60,7 +59,7 @@ class Parser extends ParserBase
 
             //Resolve any relative, used or aliased types to their fully qualified equivalent
             $namespaceResolverTraverser = new PhpParser\NodeTraverser();
-            $namespaceResolver = new FixedNamespaceResolver();
+            $namespaceResolver = new PhpParser\NodeVisitor\NameResolver();
             $namespaceResolverTraverser->addVisitor($namespaceResolver);
             $resolvedNodes = $namespaceResolverTraverser->traverse($parsedNodes);
 

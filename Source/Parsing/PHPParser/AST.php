@@ -97,12 +97,17 @@ class AST
     final public function parseNameNode($node)
     {
         if ($node instanceof Node\Name) {
-            return Expression::value(($node->isFullyQualified() ? '\\' : '') . (string)$node);
+            return Expression::value($this->parseAbsoluteName($node));
         } elseif (is_string($node)) {
             return Expression::value($node);
         }
 
         return $this->parseNode($node);
+    }
+
+    protected function parseAbsoluteName(Node\Name $node)
+    {
+        return ($node->isFullyQualified() ? '\\' : '') . (string)$node;
     }
 
     private function parseParameterNode(Node\Param $node)
@@ -180,7 +185,7 @@ class AST
                 );
 
             case $node instanceof Node\Expr\ConstFetch:
-                return Expression::constant((string)$node->name);
+                return Expression::constant($this->parseAbsoluteName($node->name));
 
             case $node instanceof Node\Expr\ClassConstFetch:
                 return Expression::classConstant(

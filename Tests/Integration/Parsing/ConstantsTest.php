@@ -19,7 +19,7 @@ class ConstantsTest extends ParserTest
                 },
                 [O\Expression::constant('I_AM_CONSTANT'),
                 O\Expression::constant('I_AM_ANOTHER_CONSTANT'),
-                O\Expression::constant(__NAMESPACE__ . '\\TEST_CONST')]);
+                O\Expression::constant('\\' . __NAMESPACE__ . '\\TEST_CONST')]);
     }
 
     /**
