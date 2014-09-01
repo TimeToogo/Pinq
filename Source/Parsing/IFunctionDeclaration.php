@@ -3,7 +3,7 @@
 namespace Pinq\Parsing;
 
 /**
- * Interface containing the declarion location of a function.
+ * Interface containing the declaration location of a function.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
