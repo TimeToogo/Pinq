@@ -184,8 +184,8 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
         return $this->globalHash;
     }
 
-    public function asEvaluationContext(array $argumentsMap = [])
+    public function asEvaluationContext(array $variableTable = [])
     {
-        return $this->scope->asEvaluationContext($argumentsMap, $this->innerReflection->getNamespaceName() ?: null);
+        return $this->scope->asEvaluationContext($variableTable, $this->innerReflection->getNamespaceName() ?: null);
     }
 }

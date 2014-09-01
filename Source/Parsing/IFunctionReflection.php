@@ -51,11 +51,11 @@ interface IFunctionReflection extends ILocatedFunction
     public function getGlobalHash();
 
     /**
-     * Gets an evaluation context for the same context as the function.
+     * Gets an evaluation context for the same context as the reflected function.
      *
-     * @param mixed $argumentsMap
+     * @param mixed $variableTable
      *
      * @return O\IEvaluationContext
      */
-    public function asEvaluationContext(array $argumentsMap = []);
+    public function asEvaluationContext(array $variableTable = []);
 }
