@@ -63,7 +63,7 @@ class ReflectionTest extends PinqTestCase
     final public function & method($start = __LINE__)
     {
 
-    $var = ['start' => $start, 'end' => __LINE__]; return $var; }
+        $var = ['start' => $start, 'end' => __LINE__]; return $var; }
 
     public function testMethod()
     {
@@ -88,6 +88,38 @@ class ReflectionTest extends PinqTestCase
         $this->assertSame('method', $signature->getName());
         $this->assertSame(IFunctionSignature::POLYMORPH_FINAL, $signature->getPolymorphModifier());
         $this->assertEquals([O\Expression::parameter('start', null,  O\Expression::value($this->method()['start']))],
+                $signature->getParameterExpressions());
+        $this->assertEquals(null, $signature->getScopedVariableNames());
+    }
+
+    public static function & staticMethod($start = __LINE__)
+    {
+
+        $var = ['start' => $start, 'end' => __LINE__]; return $var; }
+
+    public function testStaticMethod()
+    {
+        $reflection = $this->interpreter->getReflection([__CLASS__, 'staticMethod']);
+        $location  = $reflection->getLocation();
+        $scope     = $reflection->getScope();
+        $signature = $reflection->getSignature();
+
+        $this->assertSame(__FILE__, $location->getFilePath());
+        $this->assertSame(true, $location->inNamespace());
+        $this->assertSame(__NAMESPACE__, $location->getNamespace());
+        $this->assertSame(self::staticMethod()['start'], $location->getStartLine());
+        $this->assertSame(self::staticMethod()['end'], $location->getEndLine());
+        $this->assertSame(null, $scope->getThis());
+        $this->assertEquals([], $scope->getVariableTable());
+        $this->assertSame(__CLASS__, $scope->getScopeType());
+        $this->assertSame(null, $scope->getThisType());
+        $this->assertSame(IFunctionSignature::TYPE_METHOD, $signature->getType());
+        $this->assertSame(IFunctionSignature::ACCESS_PUBLIC, $signature->getAccessModifier());
+        $this->assertSame(true, $signature->isStatic());
+        $this->assertSame(true, $signature->returnsReference());
+        $this->assertSame('staticMethod', $signature->getName());
+        $this->assertSame(null, $signature->getPolymorphModifier());
+        $this->assertEquals([O\Expression::parameter('start', null,  O\Expression::value(self::staticMethod()['start']))],
                 $signature->getParameterExpressions());
         $this->assertEquals(null, $signature->getScopedVariableNames());
     }
