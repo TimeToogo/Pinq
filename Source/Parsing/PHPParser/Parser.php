@@ -65,7 +65,7 @@ class Parser extends ParserBase
             $resolvedNodes = $namespaceResolverTraverser->traverse($parsedNodes);
 
             //Locate all function nodes
-            $functionLocatorTraverser = new \PHPParser_NodeTraverser();
+            $functionLocatorTraverser = new PhpParser\NodeTraverser();
             $functionLocator = new Visitors\FunctionLocatorVisitor($filePath);
             $functionLocatorTraverser->addVisitor($functionLocator);
 
