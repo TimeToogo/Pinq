@@ -26,7 +26,7 @@ class ScopedClassConstants extends ParentScopeClass
 
     public function staticClass()
     {
-        return function () { return [static::class, static::class]; };
+        return function () { return [static::class, STATIC::class]; };
     }
 
     //Only self::class does not throw a fatal error
