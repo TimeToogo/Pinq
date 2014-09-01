@@ -38,6 +38,14 @@ class ScopedClassConstantInterpreterTest extends ScopedClassInterpreterBaseTest
     /**
      * @dataProvider interpreters
      */
+    public function testSelfInStaticMethod()
+    {
+        $this->assertRecompilesCorrectly([ScopedClassConstants::TYPE, 'selfClassStaticMethod']);
+    }
+
+    /**
+     * @dataProvider interpreters
+     */
     public function testStatic()
     {
         $this->assertRecompilesWithRebind($this->constants->staticClass());
@@ -46,9 +54,25 @@ class ScopedClassConstantInterpreterTest extends ScopedClassInterpreterBaseTest
     /**
      * @dataProvider interpreters
      */
+    public function testStaticInStaticMethod()
+    {
+        $this->assertRecompilesCorrectly([ScopedClassConstants::TYPE, 'staticClassStaticMethod']);
+    }
+
+    /**
+     * @dataProvider interpreters
+     */
     public function testParent()
     {
         $this->assertRecompilesWithRebind($this->constants->parentClass());
+    }
+
+    /**
+     * @dataProvider interpreters
+     */
+    public function testParentInStaticMethod()
+    {
+        $this->assertRecompilesCorrectly([ScopedClassConstants::TYPE, 'parentClassStaticMethod']);
     }
 
     /**

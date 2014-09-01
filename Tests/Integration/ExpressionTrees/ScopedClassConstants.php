@@ -9,6 +9,8 @@ class ParentScopeClass
 
 class ScopedClassConstants extends ParentScopeClass
 {
+    const TYPE = __CLASS__;
+
     public function concreteClass()
     {
         return function () { return [\DateTime::class, \DatetiME::class]; };
@@ -19,14 +21,29 @@ class ScopedClassConstants extends ParentScopeClass
         return function () { return [self::class, SELF::class]; };
     }
 
+    public static function selfClassStaticMethod()
+    {
+        return [self::class, SELF::class];
+    }
+
     public function parentClass()
     {
         return function () { return [parent::class, PARENT::class]; };
     }
 
+    public static function parentClassStaticMethod()
+    {
+        return [self::class, SELF::class];
+    }
+
     public function staticClass()
     {
         return function () { return [static::class, STATIC::class]; };
+    }
+
+    public static function staticClassStaticMethod()
+    {
+        return [static::class, STATIC::class];
     }
 
     //Only self::class does not throw a fatal error
