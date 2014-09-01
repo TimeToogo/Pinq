@@ -50,10 +50,10 @@ interface IFunctionScope
     /**
      * Gets an equivalent evaluation context for the function scope.
      *
-     * @param mixed       $argumentMap
+     * @param mixed       $variableTable
      * @param string|null $namespace
      *
      * @return O\IEvaluationContext
      */
-    public function asEvaluationContext(array $argumentMap = [], $namespace = null);
+    public function asEvaluationContext(array $variableTable = [], $namespace = null);
 }

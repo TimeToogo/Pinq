@@ -98,14 +98,14 @@ class FunctionScope implements IFunctionScope
         return $this->variableValueMap;
     }
 
-    public function asEvaluationContext(array $argumentsMap = [], $namespace = null)
+    public function asEvaluationContext(array $variableTable = [], $namespace = null)
     {
         return new O\EvaluationContext(
                 $namespace,
                 $this->scopeType,
                 $this->thisObject,
                 //Used variables take precedence over arguments: http://3v4l.org/V4LSE
-                $this->variableValueMap + $argumentsMap
+                $this->variableValueMap + $variableTable
         );
     }
 }
