@@ -130,7 +130,7 @@ class FunctionLocatorVisitor extends NodeVisitorAbstract
     }
 
     /**
-     * @param \PHPParser_Node_Param[] $parameters
+     * @param Node\Param[] $parameters
      *
      * @return O\ParameterExpression[]
      */

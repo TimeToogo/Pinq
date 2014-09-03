@@ -77,8 +77,7 @@ dev-master
     - Largely improved signature matching using all reflection data to resolve to the correct function.
       Functions now have to be defined on the same line with identical signatures to cause an ambiguity.
     - Fixed fully qualified namespace detection in AST parsing.
-    - Fixed case sensitivity issue with `self::` scopes in `PHPParser_NodeVisitor_NameResolver`.
-    - Upgraded to `nikic/php-parser` V1.0.0beta1 with compatibility for 5.6 syntax features.
+    - Upgraded to `nikic/php-parser` V1.0.0beta2 with compatibility for 5.6 syntax features.
  - Improved query representations (`Queries` namespace)
     - New builder API (under `Builders`) to build query objects from expression trees.
       `Queryable`/`Repository` now only construct the query expression tree.
