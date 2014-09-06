@@ -29,6 +29,8 @@ interface IJoiningToCollection extends IJoiningToTraversable
      * Both the original and joined values and keys will be passed as arguments
      * to the supplied function as (&outerValue, innerValue, outerKey, innerKey).
      *
+     * @param callable $applyFunction Called with parameters (&outerValue, innerValue, outerKey, innerKey)
+     *
      * @return void
      */
     public function apply(callable $applyFunction);
