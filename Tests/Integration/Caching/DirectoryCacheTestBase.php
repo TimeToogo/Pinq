@@ -24,10 +24,10 @@ abstract class DirectoryCacheTestBase extends CacheTest
             if (is_dir($path)) {
                 self::deleteDirectory($path);
             } else {
-                unlink($path);
+                @unlink($path);
             }
         }
 
-        rmdir($directory);
+        @rmdir($directory);
     }
 }
