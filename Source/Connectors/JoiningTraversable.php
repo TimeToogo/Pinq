@@ -22,7 +22,7 @@ class JoiningTraversable implements Interfaces\IJoiningOnTraversable
     /**
      * @var IJoinIterator|IJoinToIterator
      */
-    protected $joinInterator;
+    protected $joinIterator;
 
     /**
      * @var callable
@@ -32,27 +32,27 @@ class JoiningTraversable implements Interfaces\IJoiningOnTraversable
     public function __construct(IIteratorScheme $scheme, IJoinIterator $joinIterator, callable $traversableFactory)
     {
         $this->scheme             = $scheme;
-        $this->joinInterator      = $joinIterator;
+        $this->joinIterator      = $joinIterator;
         $this->traversableFactory = $traversableFactory;
     }
 
     public function on(callable $joiningOnFunction)
     {
-        $this->joinInterator = $this->joinInterator->filterOn($joiningOnFunction);
+        $this->joinIterator = $this->joinIterator->filterOn($joiningOnFunction);
 
         return $this;
     }
 
     public function onEquality(callable $outerKeyFunction, callable $innerKeyFunction)
     {
-        $this->joinInterator = $this->joinInterator->filterOnEquality($outerKeyFunction, $innerKeyFunction);
+        $this->joinIterator = $this->joinIterator->filterOnEquality($outerKeyFunction, $innerKeyFunction);
 
         return $this;
     }
 
     public function withDefault($value, $key = null)
     {
-        $this->joinInterator = $this->joinInterator->withDefault($value, $key);
+        $this->joinIterator = $this->joinIterator->withDefault($value, $key);
 
         return $this;
     }
@@ -61,6 +61,6 @@ class JoiningTraversable implements Interfaces\IJoiningOnTraversable
     {
         $traversableFactory = $this->traversableFactory;
 
-        return $traversableFactory($this->joinInterator->projectTo($joinFunction));
+        return $traversableFactory($this->joinIterator->projectTo($joinFunction));
     }
 }

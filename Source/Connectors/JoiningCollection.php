@@ -25,6 +25,6 @@ class JoiningCollection extends JoiningTraversable implements Interfaces\IJoinin
 
     public function apply(callable $applyFunction)
     {
-        $this->joinInterator->walk($applyFunction);
+        $this->joinIterator->walk($applyFunction);
     }
 }
