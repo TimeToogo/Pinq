@@ -9,7 +9,7 @@ use Pinq\IRepository;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-interface IOrderedRepository extends IRepository, IOrderedCollection
+interface IOrderedRepository extends IRepository, IOrderedQueryable, IOrderedCollection
 {
     /**
      * {@inheritDoc}

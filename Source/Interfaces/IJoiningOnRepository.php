@@ -7,7 +7,7 @@ namespace Pinq\Interfaces;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-interface IJoiningOnRepository extends IJoiningOnCollection, IJoiningToRepository
+interface IJoiningOnRepository extends IJoiningOnQueryable, IJoiningOnCollection, IJoiningToRepository
 {
     /**
      * {@inheritDoc}

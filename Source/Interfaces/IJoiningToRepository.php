@@ -10,7 +10,7 @@ use Pinq\IRepository;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-interface IJoiningToRepository extends IJoiningToCollection
+interface IJoiningToRepository extends IJoiningToQueryable, IJoiningToCollection
 {
     /**
      * {@inheritDoc}
