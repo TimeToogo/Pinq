@@ -47,7 +47,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
      * @param IIteratorScheme|null $scheme
      * @param Traversable|null     $source
      *
-     * @return static
+     * @return ITraversable
      */
     public static function from($elements, IIteratorScheme $scheme = null, Traversable $source = null)
     {
