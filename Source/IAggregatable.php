@@ -88,7 +88,7 @@ interface IAggregatable extends \Countable
     public function any(callable $function = null);
 
     /**
-     * Returns a string of all the values concatented by the delimiter.
+     * Returns a string of all the values concatenated by the delimiter.
      *
      * @param string   $delimiter The string to delimit the values by.
      * @param callable $function  The function which will return the values.
