@@ -106,6 +106,7 @@ class BasicInterpreterTest extends InterpreterTest
         $valueSet = [[1], [0], [-1], [-5], [5], [-500], [500]];
 
         $this->assertRecompilesCorrectly(function ($i) { return $i > 0 ? 5 : -50; }, $valueSet);
+        $this->assertRecompilesCorrectly(function ($i) { return $i > 0 ? : -50; }, $valueSet);
     }
 
     /**

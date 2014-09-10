@@ -71,12 +71,12 @@ class TernaryExpression extends Expression
 
     /**
      * @param Expression $condition
-     * @param Expression $ifTrue
+     * @param Expression|null $ifTrue
      * @param Expression $ifFalse
      *
      * @return self
      */
-    public function update(Expression $condition, Expression $ifTrue, Expression $ifFalse)
+    public function update(Expression $condition, Expression $ifTrue = null, Expression $ifFalse)
     {
         if ($this->condition === $condition
                 && $this->ifTrue === $ifTrue

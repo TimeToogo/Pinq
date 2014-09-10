@@ -310,9 +310,17 @@ class SimpleParserTest extends ParserTest
                     true ? true : false;
                 },
                 [O\Expression::ternary(
-                        O\Expression::constant('true'),
-                        O\Expression::constant('true'),
-                        O\Expression::constant('false'))]);
+                         O\Expression::constant('true'),
+                         O\Expression::constant('true'),
+                         O\Expression::constant('false'))]);
+        $this->assertParsedAs(
+                function () {
+                    true ? : false;
+                },
+                [O\Expression::ternary(
+                         O\Expression::constant('true'),
+                         null,
+                         O\Expression::constant('false'))]);
     }
 
     // </editor-fold>
