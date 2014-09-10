@@ -30,6 +30,8 @@ interface IOrderedMap extends \Traversable, \ArrayAccess, \Countable
     /**
      * Maps the keys / values of the dictionary to new dictionary.
      *
+     * @param callable $function The elements are passed as ($value, $key)
+     *
      * @return IOrderedMap
      */
     public function map(callable $function);
