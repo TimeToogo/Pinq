@@ -11,6 +11,8 @@ use Pinq\ICollection;
  */
 interface IOrderedCollection extends ICollection, IOrderedTraversable
 {
+    const IORDERED_COLLECTION_TYPE = __CLASS__;
+
     /**
      * {@inheritDoc}
      * @return IOrderedCollection

@@ -12,6 +12,8 @@ use Pinq\IRepository;
  */
 interface IJoiningToRepository extends IJoiningToQueryable, IJoiningToCollection
 {
+    const IJOINING_TO_REPOSITORY_TYPE = __CLASS__;
+
     /**
      * {@inheritDoc}
      * @return IJoiningToRepository

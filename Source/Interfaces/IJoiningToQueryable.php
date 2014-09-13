@@ -12,6 +12,8 @@ use Pinq\IQueryable;
  */
 interface IJoiningToQueryable extends IJoiningToTraversable
 {
+    const IJOINING_TO_QUERYABLE_TYPE = __CLASS__;
+
     /**
      * {@inheritDoc}
      * @return IJoiningToQueryable

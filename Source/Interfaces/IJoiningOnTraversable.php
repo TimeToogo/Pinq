@@ -9,6 +9,8 @@ namespace Pinq\Interfaces;
  */
 interface IJoiningOnTraversable extends IJoiningToTraversable
 {
+    const IJOINING_ON_TRAVERSABLE_TYPE = __CLASS__;
+
     /**
      * Filters the join values according to the supplied function.
      * Both values and keys will be passed as arguments to the supplied function

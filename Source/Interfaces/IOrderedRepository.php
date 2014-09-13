@@ -11,6 +11,8 @@ use Pinq\IRepository;
  */
 interface IOrderedRepository extends IRepository, IOrderedQueryable, IOrderedCollection
 {
+    const IORDERED_REPOSITORY_TYPE = __CLASS__;
+
     /**
      * {@inheritDoc}
      * @return IOrderedRepository

@@ -9,6 +9,8 @@ namespace Pinq\Interfaces;
  */
 interface IJoiningOnRepository extends IJoiningOnQueryable, IJoiningOnCollection, IJoiningToRepository
 {
+    const IJOINING_ON_REPOSITORY_TYPE = __CLASS__;
+
     /**
      * {@inheritDoc}
      * @return IJoiningToRepository

@@ -11,6 +11,8 @@ use Pinq\IQueryable;
  */
 interface IOrderedQueryable extends IOrderedTraversable, IQueryable
 {
+    const IORDERED_QUERYABLE_TYPE = __CLASS__;
+
     /**
      * {@inheritDoc}
      * @return IOrderedQueryable

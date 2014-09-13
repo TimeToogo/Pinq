@@ -9,6 +9,8 @@ namespace Pinq\Interfaces;
  */
 interface IJoiningOnCollection extends IJoiningOnTraversable, IJoiningToCollection
 {
+    const IJOINING_ON_COLLECTION_TYPE = __CLASS__;
+
     /**
      * {@inheritDoc}
      * @return IJoiningToCollection

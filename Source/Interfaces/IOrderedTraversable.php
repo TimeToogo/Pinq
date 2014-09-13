@@ -11,6 +11,8 @@ use Pinq\ITraversable;
  */
 interface IOrderedTraversable extends ITraversable
 {
+    const IORDERED_TRAVERSABLE_TYPE = __CLASS__;
+
     /**
      * Subsequently orders the results using the supplied function according to
      * the supplied direction

@@ -12,6 +12,8 @@ use Pinq\ITraversable;
  */
 interface IJoiningToTraversable
 {
+    const IJOINING_TO_TRAVERSABLE_TYPE = __CLASS__;
+
     /**
      * Sets the default element value and key to be joined if no matching inner
      * elements are found for any outer element.

@@ -12,6 +12,8 @@ use Pinq\ICollection;
  */
 interface IJoiningToCollection extends IJoiningToTraversable
 {
+    const IJOINING_TO_COLLECTION_TYPE = __CLASS__;
+
     /**
      * {@inheritDoc}
      * @return IJoiningToCollection

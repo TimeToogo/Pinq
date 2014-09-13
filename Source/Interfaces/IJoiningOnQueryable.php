@@ -9,6 +9,8 @@ namespace Pinq\Interfaces;
  */
 interface IJoiningOnQueryable extends IJoiningOnTraversable, IJoiningToQueryable
 {
+    const IJOINING_ON_QUERYABLE_TYPE = __CLASS__;
+
     /**
      * {@inheritDoc}
      * @return IJoiningToQueryable
