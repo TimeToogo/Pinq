@@ -74,17 +74,19 @@ class ExpressionAnalyser extends O\ExpressionVisitor implements IExpressionAnaly
         $assignTo = $expression->getAssignTo();
         $assignmentValue = $expression->getAssignmentValue();
 
-        //$this->walk($assignTo);
         $this->walk($assignmentValue);
 
         $operator = $expression->getOperator();
         if ($operator === O\Operators\Assignment::EQUAL) {
             $this->analysisContext->setExpressionType($assignTo, $this->analysis[$assignmentValue]);
+            $this->analysis[$expression] = $this->analysis[$assignmentValue];
         } elseif ($operator === O\Operators\Assignment::EQUAL_REFERENCE) {
             $this->analysisContext->removeExpressionType($assignTo);
             $this->analysisContext->setExpressionType($assignTo, $this->analysis[$assignmentValue]);
             $this->analysisContext->createReference($assignTo, $assignmentValue);
+            $this->analysis[$expression] = $this->analysis[$assignmentValue];
         } else {
+            $this->walk($assignTo);
             $binaryOperation             = $this->typeSystem->getBinaryOperation(
                     $this->analysis[$assignTo],
                     O\Operators\Assignment::toBinaryOperator($operator),

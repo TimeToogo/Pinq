@@ -359,6 +359,51 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
         }
     }
 
+    public function testAssignmentOperators()
+    {
+        $asserts = [
+                INativeType::TYPE_INT => [
+                        [function () { $var = 1; }],
+                        [function () { $i %= 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_INT)]],
+                        [function () { $i ^= 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_INT)]],
+                        [function () { $i &= 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_INT)]],
+                        [function () { $i |= 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_INT)]],
+                        [function () { $i >>= 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_INT)]],
+                        [function () { $i <<= 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_INT)]],
+                        [function () { $i += 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_INT)]],
+                        [function () { $i -= 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_INT)]],
+                ],
+                INativeType::TYPE_DOUBLE => [
+                        [function ($var) { $i = 3.22; }],
+                        [function () { $i += 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_DOUBLE)]],
+                        [function () { $i -= 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_DOUBLE)]],
+                ],
+                INativeType::TYPE_BOOL => [
+                        [function ($var) { $i = true; }],
+                ],
+                INativeType::TYPE_ARRAY => [
+                        [function () { $i = [1,12]; }],
+                        [function () { $i += [1,12]; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_ARRAY)]],
+                ],
+                INativeType::TYPE_STRING => [
+                        [function ($var) { $var .= 1; }],
+                ],
+                INativeType::TYPE_MIXED => [
+                        [function ($var) { $i = $var; }],
+                        [function ($var) { $i =& $var; }],
+                        [function () { $i += 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_STRING)]],
+                        [function () { $i -= 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_STRING)]],
+                ],
+        ];
+
+        foreach($asserts as $expectedType => $expressions)
+        {
+            foreach($expressions as $assert) {
+                $this->assertReturnsNativeType($assert[0], $expectedType, isset($assert[1]) ? $assert[1] : []);
+            }
+        }
+    }
+
     public function testInvalidBinaryOperator()
     {
         $this->assertAnalysisFails(function () { [] - 3.4; });
