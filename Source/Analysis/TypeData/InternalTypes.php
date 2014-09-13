@@ -22,14 +22,6 @@ class InternalTypes extends TypeDataModule
                                 'offsetUnset'  => INativeType::TYPE_NULL,
                         ]
                 ],
-                'ArrayAccess' => [
-                        'methods' => [
-                                'offsetExists' => INativeType::TYPE_BOOL,
-                                'offsetGet'    => INativeType::TYPE_MIXED,
-                                'offsetSet'    => INativeType::TYPE_NULL,
-                                'offsetUnset'  => INativeType::TYPE_NULL,
-                        ]
-                ],
                 'Closure'     => [
                         'methods' => [
                                 'bind'     => self::TYPE_SELF,
