@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <phpunit
-    bootstrap="Tests/TestBootstrapper.php"
-    colors="true"
-    backupGlobals="false"
-    stopOnFailure="true">
+        bootstrap="Tests/TestBootstrapper.php"
+        colors="true"
+        backupGlobals="false"
+        stopOnFailure="true">
 
     <testsuites>
-      <testsuite name="Entirety">
-        <directory>./Tests/Integration/</directory>
-      </testsuite>
-      <testsuite name="Caching">
-        <directory>./Tests/Integration/Caching/</directory>
-      </testsuite>
-      <testsuite name="Functions">
-        <directory>./Tests/Integration/ExpressionTrees/</directory>
-        <directory>./Tests/Integration/Expressions/</directory>
-        <directory>./Tests/Integration/Parsing/</directory>
-      </testsuite>
-      <testsuite name="Providers">
-        <directory>./Tests/Integration/Providers/</directory>
-        <directory>./Tests/Integration/Queries/</directory>
-      </testsuite>
-      <testsuite name="API">
-        <directory>./Tests/Integration/Traversable/</directory>
-        <directory>./Tests/Integration/Collection/</directory>
-      </testsuite>
-      <testsuite name="Traversable">
-        <directory>./Tests/Integration/Traversable/</directory>
-      </testsuite>
-      <testsuite name="Collection">
-        <directory>./Tests/Integration/Collection/</directory>
-      </testsuite>
+        <testsuite name="Entirety">
+            <directory>./Tests/Integration/</directory>
+        </testsuite>
+        <testsuite name="Caching">
+            <directory>./Tests/Integration/Caching/</directory>
+        </testsuite>
+        <testsuite name="Functions">
+            <directory>./Tests/Integration/ExpressionTrees/</directory>
+            <directory>./Tests/Integration/Expressions/</directory>
+            <directory>./Tests/Integration/Parsing/</directory>
+        </testsuite>
+        <testsuite name="Providers">
+            <directory>./Tests/Integration/Providers/</directory>
+            <directory>./Tests/Integration/Queries/</directory>
+        </testsuite>
+        <testsuite name="API">
+            <directory>./Tests/Integration/Traversable/</directory>
+            <directory>./Tests/Integration/Collection/</directory>
+        </testsuite>
+        <testsuite name="Traversable">
+            <directory>./Tests/Integration/Traversable/</directory>
+        </testsuite>
+        <testsuite name="Collection">
+            <directory>./Tests/Integration/Collection/</directory>
+        </testsuite>
     </testsuites>
-    
+
     <filter>
         <whitelist>
             <directory suffix=".php">./Source/</directory>
@@ -41,8 +41,8 @@
             <directory>./vendor/</directory>
         </blacklist>
     </filter>
-    
+
     <listeners>
-        <listener class="Pinq\Tests\Timer" file="./Tests/TestTimer.php" />
+        <listener class="Pinq\Tests\Timer" file="./Tests/TestTimer.php"/>
     </listeners>
 </phpunit>
