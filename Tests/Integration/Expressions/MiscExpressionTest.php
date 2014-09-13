@@ -60,4 +60,15 @@ class MiscExpressionTest extends ExpressionTest
         $this->assertSame(O\VariableExpression::getExpressionTypeName(), 'Variable');
         $this->assertSame(O\Expression::getExpressionTypeName(), '');
     }
+
+    public function testNamedParameterExpressionAsVariableMethod()
+    {
+        $this->assertEquals(
+                O\Expression::variable(O\Expression::value('foo')),
+                O\Expression::parameter('foo')->asVariable());
+
+        $this->assertEquals(
+                O\Expression::variable(O\Expression::value('foobar')),
+                O\Expression::closureUsedVariable('foobar')->asVariable());
+    }
 }

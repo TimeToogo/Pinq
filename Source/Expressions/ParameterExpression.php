@@ -9,13 +9,8 @@ namespace Pinq\Expressions;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class ParameterExpression extends Expression
+class ParameterExpression extends NamedParameterExpression
 {
-    /**
-     * @var string
-     */
-    private $name;
-
     /**
      * @var string|null
      */
@@ -43,7 +38,7 @@ class ParameterExpression extends Expression
             $isPassedByReference = false,
             $isVariadic = false
     ) {
-        $this->name                = $name;
+        parent::__construct($name);
         $this->typeHint            = $typeHint;
         $this->defaultValue        = $defaultValue;
         $this->isPassedByReference = $isPassedByReference;
@@ -70,15 +65,6 @@ class ParameterExpression extends Expression
     {
         return $walker->walkParameter($this);
     }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
     /**
      * @return boolean
      */

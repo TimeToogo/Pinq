@@ -9,13 +9,8 @@ namespace Pinq\Expressions;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class ClosureUsedVariableExpression extends Expression
+class ClosureUsedVariableExpression extends NamedParameterExpression
 {
-    /**
-     * @var string
-     */
-    private $name;
-
     /**
      * @var boolean
      */
@@ -23,16 +18,8 @@ class ClosureUsedVariableExpression extends Expression
 
     public function __construct($name, $isReference)
     {
-        $this->name        = $name;
+        parent::__construct($name);
         $this->isReference = $isReference;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
