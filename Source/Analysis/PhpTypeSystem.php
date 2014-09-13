@@ -519,6 +519,7 @@ class PhpTypeSystem extends TypeSystem
                 $this->mathOperators(Operators\Binary::MULTIPLICATION),
                 $this->mathOperators(Operators\Binary::DIVISION, INativeType::TYPE_MIXED),
                 $this->mathOperators(Operators\Binary::MODULUS),
+                $this->mathOperators(Operators\Binary::POWER),
                 $this->bitwiseOperators(Operators\Binary::BITWISE_AND),
                 $this->bitwiseOperators(Operators\Binary::BITWISE_OR),
                 $this->bitwiseOperators(Operators\Binary::BITWISE_XOR),
