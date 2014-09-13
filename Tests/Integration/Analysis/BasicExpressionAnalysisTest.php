@@ -53,6 +53,11 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
                 ['var' => $this->typeSystem->getTypeFromValue(fopen('php://memory', 'r'))]);
     }
 
+    public function testInvalidVariable()
+    {
+        $this->assertAnalysisFails(function ($foo) { $bar; });
+    }
+
     public function testCasts()
     {
         $values = [
@@ -440,5 +445,36 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
                     $this->typeSystem->getTypeFromValue($value)
             );
         }
+    }
+
+    public function testConstantTypeAnalysis()
+    {
+        $this->assertReturnsNativeType(
+                function () { SORT_ASC; },
+                INativeType::TYPE_INT
+        );
+
+        $this->assertReturnsNativeType(
+                function () { M_PI; },
+                INativeType::TYPE_DOUBLE
+        );
+    }
+
+    public function testClassConstantTypeAnalysis()
+    {
+        $this->assertReturnsNativeType(
+                function () { \ArrayObject::ARRAY_AS_PROPS; },
+                INativeType::TYPE_INT
+        );
+
+        $this->assertReturnsNativeType(
+                function () { \DateTime::ATOM; },
+                INativeType::TYPE_STRING
+        );
+    }
+
+    public function testInvalidClassConstantTypeAnalysis()
+    {
+        $this->assertAnalysisFails(function ($foo) { $foo::ARRAY_AS_PROPS; });
     }
 }

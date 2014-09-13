@@ -344,6 +344,19 @@ class TypeAnalysisTest extends ExpressionAnalysisTestCase
         }
     }
 
+    public function testThrow()
+    {
+        $this->doAnalysisTest(
+                function () { throw new \LogicException(); },
+                function (ITypeAnalysis $analysis, O\ThrowExpression $expression) {
+                    $this->assertTypeMatchesValue(
+                            $analysis,
+                            $expression->getException(),
+                            $this->typeSystem->getObjectType('LogicException'));
+                }
+        );
+    }
+
     /**
      * @expectedException \Pinq\Analysis\TypeException
      */
