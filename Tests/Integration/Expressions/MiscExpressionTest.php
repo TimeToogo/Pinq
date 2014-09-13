@@ -71,4 +71,13 @@ class MiscExpressionTest extends ExpressionTest
                 O\Expression::variable(O\Expression::value('foobar')),
                 O\Expression::closureUsedVariable('foobar')->asVariable());
     }
+
+    public function testAssignmentToBinaryOperator()
+    {
+        $this->assertSame(O\Operators\Binary::ADDITION, O\Operators\Assignment::toBinaryOperator(O\Operators\Assignment::ADDITION));
+        $this->assertSame(O\Operators\Binary::CONCATENATION, O\Operators\Assignment::toBinaryOperator(O\Operators\Assignment::CONCATENATE));
+        $this->assertSame(null, O\Operators\Assignment::toBinaryOperator(O\Operators\Assignment::EQUAL));
+        $this->assertSame(null, O\Operators\Assignment::toBinaryOperator(O\Operators\Assignment::EQUAL_REFERENCE));
+        $this->assertSame(null, O\Operators\Assignment::toBinaryOperator('no-such-operator'));
+    }
 }

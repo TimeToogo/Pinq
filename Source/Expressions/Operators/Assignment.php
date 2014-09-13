@@ -26,4 +26,34 @@ final class Assignment
     const SHIFT_RIGHT = '>>=';
     //String
     const CONCATENATE = '.=';
+
+    private static $toBinaryOperatorMap = [
+            self::EQUAL           => null,
+            self::EQUAL_REFERENCE => null,
+            self::ADDITION        => Binary::ADDITION,
+            self::SUBTRACTION     => Binary::SUBTRACTION,
+            self::MULTIPLICATION  => Binary::MULTIPLICATION,
+            self::DIVISION        => Binary::DIVISION,
+            self::MODULUS         => Binary::MODULUS,
+            self::POWER           => Binary::POWER,
+            self::BITWISE_AND     => Binary::BITWISE_AND,
+            self::BITWISE_OR      => Binary::BITWISE_OR,
+            self::BITWISE_XOR     => Binary::BITWISE_XOR,
+            self::SHIFT_LEFT      => Binary::SHIFT_LEFT,
+            self::SHIFT_RIGHT     => Binary::SHIFT_RIGHT,
+            self::CONCATENATE     => Binary::CONCATENATION,
+    ];
+
+    /**
+     * Returns the equivalent binary operator of the supplied assignment operator
+     * or null if there is no equivalent.
+     *
+     * @param string $assignment
+     *
+     * @return string|null
+     */
+    public static function toBinaryOperator($assignment)
+    {
+        return isset(self::$toBinaryOperatorMap[$assignment]) ? self::$toBinaryOperatorMap[$assignment] : null;
+    }
 }
