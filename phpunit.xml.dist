@@ -9,6 +9,9 @@
         <testsuite name="Entirety">
             <directory>./Tests/Integration/</directory>
         </testsuite>
+        <testsuite name="Analysis">
+            <directory>./Tests/Integration/Analysis/</directory>
+        </testsuite>
         <testsuite name="Caching">
             <directory>./Tests/Integration/Caching/</directory>
         </testsuite>

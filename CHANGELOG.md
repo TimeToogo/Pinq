@@ -101,6 +101,7 @@ dev-master
     - Extracted interfaces from `Request`/`Operation`/`Segment` visitor classes.
  - Removed obsolete query providers (`Loadable`, `Caching`) in favour of a new integrated helper `Providers\Utilities\IQueryResultCollection`
  - Implemented new DSL query provider under `Providers\DSL`.
+ - Implemented new static analysis tools and infrastructure for expression trees under the `Analysis` namespace.
  - New structure of query providers
     - `RepositoryProvider` decorates the `QueryProvider`
     - New configuration classes (under `Providers\Configuration` namespace)
