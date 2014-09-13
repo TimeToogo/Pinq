@@ -303,6 +303,7 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
                         function () { false || 2.1; },
                         function () { [] || true; },
                         function () { false || [1,2]; },
+                        function () { false instanceof \stdClass; },
                 ],
                 INativeType::TYPE_ARRAY => [
                         function () { [] + [1,2]; },
