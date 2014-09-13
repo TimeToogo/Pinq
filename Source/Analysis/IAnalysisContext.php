@@ -9,7 +9,7 @@ use Pinq\Expressions as O;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-interface IAnalysisContext
+interface IAnalysisContext extends ITyped
 {
     /**
      * Gets the evaluation context.

@@ -41,6 +41,11 @@ class ExpressionAnalyser extends O\ExpressionVisitor implements IExpressionAnaly
         return $this->typeSystem;
     }
 
+    public function createAnalysisContext(O\IEvaluationContext $evaluationContext)
+    {
+        return new AnalysisContext($this->typeSystem, $evaluationContext);
+    }
+
     public function analyse(IAnalysisContext $analysisContext, O\Expression $expression)
     {
         $this->analysisContext = $analysisContext;

@@ -19,6 +19,16 @@ interface IExpressionAnalyser
     public function getTypeSystem();
 
     /**
+     * Creates a new analysis context with the supplied evaluation context.
+     *
+     * @param O\IEvaluationContext $evaluationContext
+     *
+     * @return IAnalysisContext
+     */
+    public function createAnalysisContext(O\IEvaluationContext $evaluationContext);
+
+
+    /**
      * Analyses the supplied expression tree.
      *
      * @param IAnalysisContext $analysisContext

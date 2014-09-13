@@ -3,6 +3,7 @@
 namespace Pinq\Tests\Integration\Analysis;
 
 use Pinq\Analysis\INativeType;
+use Pinq\Analysis\TypeData\DateTime;
 use Pinq\IQueryable;
 use Pinq\IRepository;
 use Pinq\ITraversable;
@@ -429,5 +430,15 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
                         ]
                 )
         );
+    }
+
+    public function testVariableTableFromEvaluationContextFromScopedVariables()
+    {
+        foreach ([1, null, true, 3.4, 'abc', new DateTime()] as $value) {
+            $this->assertReturnsType(
+                    function () use ($value) { $value; },
+                    $this->typeSystem->getTypeFromValue($value)
+            );
+        }
     }
 }

@@ -129,7 +129,7 @@ class ExpressionAnalysisTestCase extends PinqTestCase
                     $parameterExpression->getTypeHint()
             );
         }
-        $analysisContext = new AnalysisContext(new EvaluationContext(__NAMESPACE__, get_called_class(), $this));
+        $analysisContext = $this->expressionAnalyser->createAnalysisContext($reflection->asEvaluationContext());
         foreach ($variableTypeMap as $variable => $type) {
             $analysisContext->setExpressionType(O\Expression::variable(O\Expression::value($variable)), $type);
         }

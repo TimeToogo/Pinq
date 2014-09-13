@@ -9,7 +9,7 @@ use Pinq\Expressions as O;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class AnalysisContext implements IAnalysisContext
+class AnalysisContext extends Typed implements IAnalysisContext
 {
     /**
      * @var O\IEvaluationContext
@@ -21,10 +21,13 @@ class AnalysisContext implements IAnalysisContext
      */
     protected $expressionTypes = [];
 
-    public function __construct(O\IEvaluationContext $evaluationContext)
+    public function __construct(ITypeSystem $typeSystem, O\IEvaluationContext $evaluationContext)
     {
-
+        parent::__construct($typeSystem);
         $this->evaluationContext = $evaluationContext;
+        foreach($evaluationContext->getVariableTable() as $variable => $value) {
+            $this->setExpressionType(O\Expression::variable(O\Expression::value($variable)), $typeSystem->getTypeFromValue($value));
+        }
     }
 
     public function getEvaluationContext()
@@ -55,6 +58,6 @@ class AnalysisContext implements IAnalysisContext
 
     public function inNewScope()
     {
-        return new self($this->evaluationContext);
+        return new self($this->typeSystem, $this->evaluationContext);
     }
 }
