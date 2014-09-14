@@ -112,6 +112,7 @@ dev-master
  - Ensure PSR-2 code guidelines adherence.
  - Fixed binary operation `instanceof` compilation bug with literal class names.
  - Refactored caching implementation:
+    - `Caching\Provider` renamed to `Caching\CacheProvider`
     - `Caching\IQueryCache` now acts as a wrapper to `Caching\ICacheAdapter`.
     - Any type of value can be cached and retrieved through the cache adapter.
     - Implemented cache namespacing API.
