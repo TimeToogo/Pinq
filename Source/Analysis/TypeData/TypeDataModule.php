@@ -5,17 +5,28 @@ namespace Pinq\Analysis\TypeData;
 use Pinq\Analysis\PhpTypeSystem;
 
 /**
- * Base class for type data modules.
+ * Base class of the type data module.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class TypeDataModule
+abstract class TypeDataModule implements ITypeDataModule
 {
     const TYPE_SELF = PhpTypeSystem::TYPE_SELF;
 
-    public function __construct()
-    {
+    /**
+     * @var array
+     */
+    private $types;
 
+    /**
+     * @var array
+     */
+    private $functions;
+
+    public function __construct(array $types = [], array $functions = [])
+    {
+        $this->types = $types;
+        $this->functions = $functions;
     }
 
     public static function getType()
@@ -23,13 +34,13 @@ abstract class TypeDataModule
         return get_called_class();
     }
 
-    public function functions()
-    {
-        return [];
-    }
-
     public function types()
     {
-        return [];
+        return $this->types;
+    }
+
+    public function functions()
+    {
+        return $this->functions;
     }
 } 

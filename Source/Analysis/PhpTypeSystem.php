@@ -4,6 +4,7 @@ namespace Pinq\Analysis;
 
 use Pinq;
 use Pinq\Analysis\Functions\Func;
+use Pinq\Analysis\TypeData\ITypeDataModule;
 use Pinq\Analysis\TypeOperations\Constructor;
 use Pinq\Analysis\TypeOperations\Field;
 use Pinq\Analysis\TypeOperations\Indexer;
@@ -36,14 +37,14 @@ class PhpTypeSystem extends TypeSystem
     protected $classTypeMap = [];
 
     /**
-     * @param TypeData\TypeDataModule[] $customTypeDataModules
+     * @param ITypeDataModule $customTypeDataModules
      */
     public function __construct(array $customTypeDataModules = [])
     {
         parent::__construct();
 
         $modules = array_merge($this->typeDataModules(), $customTypeDataModules);
-        /** @var $module TypeData\TypeDataModule */
+        /** @var $module ITypeDataModule */
         foreach($modules as $module) {
             foreach ($module->functions() as $name => $returnType) {
                 $this->functionTypeMap[$this->normalizeFunctionName($name)] = $returnType;
@@ -56,7 +57,7 @@ class PhpTypeSystem extends TypeSystem
     }
 
     /**
-     * @return TypeData\TypeDataModule[]
+     * @return ITypeDataModule
      */
     protected function typeDataModules()
     {
