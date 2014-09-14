@@ -5,11 +5,11 @@ namespace Pinq\Analysis\TypeData;
 use Pinq\Analysis\PhpTypeSystem;
 
 /**
- * Base class of the type data module.
+ * Implementation of the type data module.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class TypeDataModule implements ITypeDataModule
+class TypeDataModule implements ITypeDataModule
 {
     const TYPE_SELF = PhpTypeSystem::TYPE_SELF;
 
