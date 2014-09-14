@@ -27,7 +27,6 @@ interface IExpressionAnalyser
      */
     public function createAnalysisContext(O\IEvaluationContext $evaluationContext);
 
-
     /**
      * Analyses the supplied expression tree.
      *
