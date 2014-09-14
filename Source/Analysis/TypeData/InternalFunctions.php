@@ -31,10 +31,10 @@ class InternalFunctions extends TypeDataModule
                 'is_callable' => INativeType::TYPE_BOOL,
                 'gettype'     => INativeType::TYPE_STRING,
                 'serialize'   => INativeType::TYPE_STRING,
-                'boolval'  => INativeType::TYPE_BOOL,
-                'intval'   => INativeType::TYPE_INT,
-                'strval'   => INativeType::TYPE_STRING,
-                'floatval' => INativeType::TYPE_DOUBLE,
+                'boolval'     => INativeType::TYPE_BOOL,
+                'intval'      => INativeType::TYPE_INT,
+                'strval'      => INativeType::TYPE_STRING,
+                'floatval'    => INativeType::TYPE_DOUBLE,
         ];
     }
 
