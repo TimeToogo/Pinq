@@ -1,3 +1,4 @@
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/TimeToogo/Pinq?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 PHP Integrated query - [Official site](http://timetoogo.github.io/Pinq/)
 ========================================================================
 [![Build status](https://api.travis-ci.org/TimeToogo/Pinq.png)](https://travis-ci.org/TimeToogo/Pinq)
