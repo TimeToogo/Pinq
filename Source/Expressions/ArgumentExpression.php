@@ -52,6 +52,9 @@ class ArgumentExpression extends Expression
         return $this->value;
     }
 
+    /**
+     * @return boolean
+     */
     public function isUnpacked()
     {
         return $this->isUnpacked;
