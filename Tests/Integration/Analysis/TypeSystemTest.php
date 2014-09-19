@@ -5,6 +5,7 @@ namespace Pinq\Tests\Integration\Analysis;
 use Pinq\Analysis\IIndexer;
 use Pinq\Analysis\INativeType;
 use Pinq\Analysis\IType;
+use Pinq\Analysis\TypeId;
 use Pinq\Expressions as O;
 use Pinq\ICollection;
 use Pinq\IRepository;
@@ -193,4 +194,21 @@ class TypeSystemTest extends ExpressionAnalysisTestCase
             $this->assertEqualsNativeType(INativeType::TYPE_MIXED, $indexer->getReturnTypeOfIndex('abc'));
         }
     }
-} 
+
+    public function testCompositeType()
+    {
+        $compositeType = $this->typeSystem->getType(TypeId::getComposite([TypeId::getObject('ArrayAccess'), TypeId::getObject('Countable')]));
+
+        $indexer = $compositeType->getIndex(O\Expression::index(O\Expression::value([]), O\Expression::value('s')));
+        $this->assertEqualTypes($this->typeSystem->getObjectType('ArrayAccess'), $indexer->getSourceType());
+        $this->assertEqualsNativeType(INativeType::TYPE_MIXED, $indexer->getReturnType());
+
+        $method = $compositeType->getMethod(O\Expression::methodCall(O\Expression::value([]), O\Expression::value('offsetExists')));
+        $this->assertEqualTypes($this->typeSystem->getObjectType('ArrayAccess'), $method->getSourceType());
+        $this->assertEqualsNativeType(INativeType::TYPE_BOOL, $method->getReturnType());
+
+        $method = $compositeType->getMethod(O\Expression::methodCall(O\Expression::value([]), O\Expression::value('count')));
+        $this->assertEqualTypes($this->typeSystem->getObjectType('Countable'), $method->getSourceType());
+        $this->assertEqualsNativeType(INativeType::TYPE_INT, $method->getReturnType());
+    }
+}

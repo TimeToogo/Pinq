@@ -41,6 +41,6 @@ final class TypeId
 
     public static function getComposedTypeIds($compositeId)
     {
-        return explode('|', substr($id, strlen('composite<'), -strlen('>')));
+        return explode('|', substr($compositeId, strlen('composite<'), -strlen('>')));
     }
 } 
