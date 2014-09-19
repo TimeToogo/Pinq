@@ -122,10 +122,10 @@ abstract class TypeSystem implements ITypeSystem
     public function getType($typeIdentifier)
     {
         if (TypeId::isObject($typeIdentifier)) {
-            return $this->getObjectType(TypeId::getClassType($typeIdentifier));
+            return $this->getObjectType(TypeId::getClassTypeFromId($typeIdentifier));
         } elseif (TypeId::isComposite($typeIdentifier)) {
             return $this->getCompositeType(
-                    array_map([$this, __FUNCTION__], TypeId::getComposedTypeIds($typeIdentifier))
+                    array_map([$this, __FUNCTION__], TypeId::getComposedTypeIdsFromId($typeIdentifier))
             );
         } else {
             return $this->getNativeType($typeIdentifier);

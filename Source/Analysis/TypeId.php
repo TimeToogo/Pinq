@@ -24,7 +24,7 @@ final class TypeId
         return strpos($id, 'object:') === 0;
     }
 
-    public static function getClassType($objectId)
+    public static function getClassTypeFromId($objectId)
     {
         return substr($objectId, strlen('object:'));
     }
@@ -39,7 +39,7 @@ final class TypeId
         return strpos($id, 'composite<') === 0 && $id[strlen($id) - 1] === '>';
     }
 
-    public static function getComposedTypeIds($compositeId)
+    public static function getComposedTypeIdsFromId($compositeId)
     {
         return explode('|', substr($compositeId, strlen('composite<'), -strlen('>')));
     }
