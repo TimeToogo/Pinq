@@ -22,6 +22,11 @@ class InternalTypes extends TypeDataModule
                                 'offsetUnset'  => INativeType::TYPE_NULL,
                         ]
                 ],
+                'Countable'   => [
+                        'methods' => [
+                                'count' => INativeType::TYPE_INT,
+                        ]
+                ],
                 'Closure'     => [
                         'methods' => [
                                 'bind'     => self::TYPE_SELF,
