@@ -44,103 +44,131 @@ class PinqAPI extends TypeDataModule
 
         $pinqTypes = [];
         foreach ($traversableInterfaceGroups as $traversableInterface => $traversableGroup) {
-            $traversableType          = TypeId::getObject($traversableInterface);
-            $orderedTraversableType   = TypeId::getObject($traversableGroup['ordered']);
-            $joiningOnTraversableType = TypeId::getObject($traversableGroup['joining-on']);
-            $joiningToTraversableType = TypeId::getObject($traversableGroup['joining-to']);
+            $pinqTypes += $this->generatePinqTypeData(
+                    $traversableInterface,
+                    $traversableGroup['ordered'],
+                    $traversableGroup['joining-on'],
+                    $traversableGroup['joining-to'],
+                    !empty($traversableGroup['mutable'])
+            );
+        }
 
-            $commonMethods = [
-                    'asArray'           => INativeType::TYPE_ARRAY,
-                    'asTraversable'     => TypeId::getObject(Pinq\ITraversable::ITRAVERSABLE_TYPE),
-                    'asCollection'      => TypeId::getObject(Pinq\ICollection::ICOLLECTION_TYPE),
-                    'isSource'          => INativeType::TYPE_BOOL,
-                    'getSource'         => $traversableType,
-                    'iterate'           => INativeType::TYPE_NULL,
-                    'getIterator'       => TypeId::getObject('Traversable'),
-                    'getTrueIterator'   => TypeId::getObject('Traversable'),
-                    'getIteratorScheme' => TypeId::getObject(IIteratorScheme::IITERATOR_SCHEME_TYPE),
-                    'first'             => INativeType::TYPE_MIXED,
-                    'last'              => INativeType::TYPE_MIXED,
-                    'count'             => INativeType::TYPE_INT,
-                    'isEmpty'           => INativeType::TYPE_BOOL,
-                    'aggregate'         => INativeType::TYPE_MIXED,
-                    'maximum'           => INativeType::TYPE_MIXED,
-                    'minimum'           => INativeType::TYPE_MIXED,
-                    'sum'               => INativeType::TYPE_MIXED,
-                    'average'           => INativeType::TYPE_MIXED,
-                    'all'               => INativeType::TYPE_BOOL,
-                    'any'               => INativeType::TYPE_BOOL,
-                    'implode'           => INativeType::TYPE_STRING,
-                    'contains'          => INativeType::TYPE_BOOL,
-                    'where'             => $traversableType,
-                    'orderBy'           => $orderedTraversableType,
-                    'orderByAscending'  => $orderedTraversableType,
-                    'orderByDescending' => $orderedTraversableType,
-                    'skip'              => $traversableType,
-                    'take'              => $traversableType,
-                    'slice'             => $traversableType,
-                    'indexBy'           => $traversableType,
-                    'keys'              => $traversableType,
-                    'reindex'           => $traversableType,
-                    'groupBy'           => $traversableType,
-                    'join'              => $joiningOnTraversableType,
-                    'groupJoin'         => $joiningOnTraversableType,
-                    'select'            => $traversableType,
-                    'selectMany'        => $traversableType,
-                    'unique'            => $traversableType,
-                    'append'            => $traversableType,
-                    'whereIn'           => $traversableType,
-                    'except'            => $traversableType,
-                    'union'             => $traversableType,
-                    'intersect'         => $traversableType,
-                    'difference'        => $traversableType,
-            ];
+        return $pinqTypes;
+    }
 
-            if (!empty($traversableGroup['mutable'])) {
-                $commonMethods += [
-                        'apply'       => INativeType::TYPE_NULL,
-                        'addRange'    => INativeType::TYPE_NULL,
-                        'remove'      => INativeType::TYPE_NULL,
-                        'removeRange' => INativeType::TYPE_NULL,
-                        'removeWhere' => INativeType::TYPE_NULL,
-                        'clear'       => INativeType::TYPE_NULL,
-                ];
-            }
+    /**
+     * @param string $traversableType
+     * @param string $orderedTraversableType
+     * @param string $joiningOnTraversableType
+     * @param string $joiningToTraversableType
+     * @param bool   $mutable
+     *
+     * @return array
+     */
+    protected function generatePinqTypeData(
+            $traversableType,
+            $orderedTraversableType,
+            $joiningOnTraversableType,
+            $joiningToTraversableType,
+            $mutable = false
+    ) {
+        $pinqTypes                  = [];
+        $traversableTypeId          = TypeId::getObject($traversableType);
+        $orderedTraversableTypeId   = TypeId::getObject($orderedTraversableType);
+        $joiningOnTraversableTypeId = TypeId::getObject($joiningOnTraversableType);
+        $joiningToTraversableTypeId = TypeId::getObject($joiningToTraversableType);
 
-            $pinqTypes[$traversableInterface] = [
-                    'methods' => $commonMethods
-            ];
+        $commonMethods = [
+                'asArray'           => INativeType::TYPE_ARRAY,
+                'asTraversable'     => TypeId::getObject(Pinq\ITraversable::ITRAVERSABLE_TYPE),
+                'asCollection'      => TypeId::getObject(Pinq\ICollection::ICOLLECTION_TYPE),
+                'isSource'          => INativeType::TYPE_BOOL,
+                'getSource'         => $traversableTypeId,
+                'iterate'           => INativeType::TYPE_NULL,
+                'getIterator'       => TypeId::getObject('Traversable'),
+                'getTrueIterator'   => TypeId::getObject('Traversable'),
+                'getIteratorScheme' => TypeId::getObject(IIteratorScheme::IITERATOR_SCHEME_TYPE),
+                'first'             => INativeType::TYPE_MIXED,
+                'last'              => INativeType::TYPE_MIXED,
+                'count'             => INativeType::TYPE_INT,
+                'isEmpty'           => INativeType::TYPE_BOOL,
+                'aggregate'         => INativeType::TYPE_MIXED,
+                'maximum'           => INativeType::TYPE_MIXED,
+                'minimum'           => INativeType::TYPE_MIXED,
+                'sum'               => INativeType::TYPE_MIXED,
+                'average'           => INativeType::TYPE_MIXED,
+                'all'               => INativeType::TYPE_BOOL,
+                'any'               => INativeType::TYPE_BOOL,
+                'implode'           => INativeType::TYPE_STRING,
+                'contains'          => INativeType::TYPE_BOOL,
+                'where'             => $traversableTypeId,
+                'orderBy'           => $orderedTraversableTypeId,
+                'orderByAscending'  => $orderedTraversableTypeId,
+                'orderByDescending' => $orderedTraversableTypeId,
+                'skip'              => $traversableTypeId,
+                'take'              => $traversableTypeId,
+                'slice'             => $traversableTypeId,
+                'indexBy'           => $traversableTypeId,
+                'keys'              => $traversableTypeId,
+                'reindex'           => $traversableTypeId,
+                'groupBy'           => $traversableTypeId,
+                'join'              => $joiningOnTraversableTypeId,
+                'groupJoin'         => $joiningOnTraversableTypeId,
+                'select'            => $traversableTypeId,
+                'selectMany'        => $traversableTypeId,
+                'unique'            => $traversableTypeId,
+                'append'            => $traversableTypeId,
+                'whereIn'           => $traversableTypeId,
+                'except'            => $traversableTypeId,
+                'union'             => $traversableTypeId,
+                'intersect'         => $traversableTypeId,
+                'difference'        => $traversableTypeId,
+        ];
 
-            $pinqTypes[$traversableGroup['ordered']] = [
-                    'methods' => [
-                                    'thenBy'           => $orderedTraversableType,
-                                    'thenByAscending'  => $orderedTraversableType,
-                                    'thenByDescending' => $orderedTraversableType,
-                            ] + $commonMethods
-            ];
-
-            $joiningMethods = [
-                    'withDefault' => $joiningToTraversableType,
-                    'to'          => $traversableType,
-            ];
-
-            if (!empty($traversableGroup['mutable'])) {
-                $joiningMethods += [
-                        'apply' => INativeType::TYPE_NULL,
-                ];
-            }
-
-            $pinqTypes[$traversableGroup['joining-to']] = [
-                    'methods' => $joiningMethods
-            ];
-
-            $pinqTypes[$traversableGroup['joining-on']] = [
-                    'methods' => [
-                                    'on'         => $joiningToTraversableType,
-                                    'onEquality' => $joiningToTraversableType,
-                            ] + $joiningMethods
+        if ($mutable) {
+            $commonMethods += [
+                    'apply'       => INativeType::TYPE_NULL,
+                    'addRange'    => INativeType::TYPE_NULL,
+                    'remove'      => INativeType::TYPE_NULL,
+                    'removeRange' => INativeType::TYPE_NULL,
+                    'removeWhere' => INativeType::TYPE_NULL,
+                    'clear'       => INativeType::TYPE_NULL,
             ];
         }
+
+        $pinqTypes[$traversableType] = [
+                'methods' => $commonMethods
+        ];
+
+        $pinqTypes[$orderedTraversableType] = [
+                'methods' => [
+                                'thenBy'           => $orderedTraversableTypeId,
+                                'thenByAscending'  => $orderedTraversableTypeId,
+                                'thenByDescending' => $orderedTraversableTypeId,
+                        ] + $commonMethods
+        ];
+
+        $joiningMethods = [
+                'withDefault' => $joiningToTraversableTypeId,
+                'to'          => $traversableTypeId,
+        ];
+
+        if ($mutable) {
+            $joiningMethods += [
+                    'apply' => INativeType::TYPE_NULL,
+            ];
+        }
+
+        $pinqTypes[$joiningToTraversableType] = [
+                'methods' => $joiningMethods
+        ];
+
+        $pinqTypes[$joiningOnTraversableType] = [
+                'methods' => [
+                                'on'         => $joiningToTraversableTypeId,
+                                'onEquality' => $joiningToTraversableTypeId,
+                        ] + $joiningMethods
+        ];
 
         return $pinqTypes;
     }
