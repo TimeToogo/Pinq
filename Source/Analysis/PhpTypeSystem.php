@@ -37,7 +37,7 @@ class PhpTypeSystem extends TypeSystem
     protected $classTypeMap = [];
 
     /**
-     * @param ITypeDataModule $customTypeDataModules
+     * @param ITypeDataModule[] $customTypeDataModules
      */
     public function __construct(array $customTypeDataModules = [])
     {
@@ -57,7 +57,7 @@ class PhpTypeSystem extends TypeSystem
     }
 
     /**
-     * @return ITypeDataModule
+     * @return ITypeDataModule[]
      */
     protected function typeDataModules()
     {
