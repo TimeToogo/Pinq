@@ -389,7 +389,7 @@ abstract class Expression implements \Serializable
     }
 
     /**
-     * @param int        $castType
+     * @param string     $castType
      * @param Expression $castValue
      *
      * @return CastExpression

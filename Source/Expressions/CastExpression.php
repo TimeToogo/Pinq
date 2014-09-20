@@ -12,7 +12,7 @@ namespace Pinq\Expressions;
 class CastExpression extends Expression
 {
     /**
-     * @var int
+     * @var string
      */
     private $castType;
 
@@ -49,7 +49,7 @@ class CastExpression extends Expression
     }
 
     /**
-     * @param int        $castType
+     * @param string     $castType
      * @param Expression $castValue
      *
      * @return self
