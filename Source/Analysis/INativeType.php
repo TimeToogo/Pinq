@@ -16,7 +16,7 @@ interface INativeType extends IType
     const TYPE_INT      = 'native:int';
     const TYPE_ARRAY    = 'native:array';
     const TYPE_DOUBLE   = 'native:double';
-    const TYPE_BOOL  = 'native:boolean';
+    const TYPE_BOOL     = 'native:boolean';
     const TYPE_NULL     = 'native:null';
     const TYPE_RESOURCE = 'native:resource';
 
