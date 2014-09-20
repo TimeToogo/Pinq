@@ -5,6 +5,8 @@ namespace Pinq\Tests\Integration\Analysis;
 use Pinq\Analysis\IIndexer;
 use Pinq\Analysis\INativeType;
 use Pinq\Analysis\IType;
+use Pinq\Analysis\PhpTypeSystem;
+use Pinq\Analysis\TypeData\TypeDataModule;
 use Pinq\Analysis\TypeId;
 use Pinq\Expressions as O;
 use Pinq\ICollection;
@@ -210,5 +212,31 @@ class TypeSystemTest extends ExpressionAnalysisTestCase
         $method = $compositeType->getMethod(O\Expression::methodCall(O\Expression::value([]), O\Expression::value('count')));
         $this->assertEqualTypes($this->typeSystem->getObjectType('Countable'), $method->getSourceType());
         $this->assertEqualsNativeType(INativeType::TYPE_INT, $method->getReturnType());
+    }
+
+    public function testRegisteringTypeDataModules()
+    {
+        if($this->typeSystem instanceof PhpTypeSystem) {
+            $typeDataModule = new TypeDataModule(
+                    [__CLASS__ => ['methods' => ['assertEquals' => INativeType::TYPE_NULL]]],
+                    ['get_defined_functions' => INativeType::TYPE_INT]
+            );
+
+            $this->assertNotContains($typeDataModule, $this->typeSystem->getTypeDataModules());
+            $this->typeSystem->registerTypeDataModule($typeDataModule);
+            $this->assertContains($typeDataModule, $this->typeSystem->getTypeDataModules());
+
+            $this->assertEqualsNativeType(
+                    INativeType::TYPE_NULL,
+                    $this->typeSystem->getObjectType(__CLASS__)->getMethod(
+                            O\Expression::methodCall(O\Expression::value($this), O\Expression::value('assertEquals'))
+                    )->getReturnType()
+            );
+
+            $this->assertEqualsNativeType(
+                    INativeType::TYPE_INT,
+                    $this->typeSystem->getFunction('get_defined_functions')->getReturnType()
+            );
+        }
     }
 }

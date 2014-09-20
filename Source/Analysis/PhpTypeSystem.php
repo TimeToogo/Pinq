@@ -27,6 +27,11 @@ class PhpTypeSystem extends TypeSystem
     const TYPE_SELF = '~~SELF_TYPE~~';
 
     /**
+     * @var ITypeDataModule[]
+     */
+    protected $typeDataModules = [];
+
+    /**
      * @var string[]
      */
     protected $functionTypeMap = [];
@@ -43,16 +48,10 @@ class PhpTypeSystem extends TypeSystem
     {
         parent::__construct();
 
-        $modules = array_merge($this->typeDataModules(), $customTypeDataModules);
-        /** @var $module ITypeDataModule */
-        foreach($modules as $module) {
-            foreach ($module->functions() as $name => $returnType) {
-                $this->functionTypeMap[$this->normalizeFunctionName($name)] = $returnType;
-            }
-
-            foreach ($module->types() as $name => $typeData) {
-                $this->classTypeMap[$this->normalizeClassName($name)] = $typeData;
-            }
+        $typeDataModules = array_merge($this->typeDataModules(), $customTypeDataModules);
+        /** @var $typeDataModules ITypeDataModule[] */
+        foreach($typeDataModules as $module) {
+            $this->registerTypeDataModule($module);
         }
     }
 
@@ -68,6 +67,40 @@ class PhpTypeSystem extends TypeSystem
                 new TypeData\PinqAPI(),
         ];
     }
+
+    /**
+     * Gets the type data modules from the type system.
+     *
+     * @return ITypeDataModule[]
+     */
+    public function getTypeDataModules()
+    {
+        return $this->typeDataModules;
+    }
+
+    /**
+     * Adds the type data module to the type system.
+     *
+     * @param ITypeDataModule $module
+     *
+     * @return void
+     */
+    public function registerTypeDataModule(ITypeDataModule $module)
+    {
+        $this->typeDataModules[] = $module;
+        foreach ($module->functions() as $name => $returnType) {
+            $normalizedFunctionName                         = $this->normalizeFunctionName($name);
+            $this->functionTypeMap[$normalizedFunctionName] = $returnType;
+            unset($this->functions[$normalizedFunctionName]);
+        }
+
+        foreach ($module->types() as $name => $typeData) {
+            $normalizedClassName                      = $this->normalizeClassName($name);
+            $this->classTypeMap[$normalizedClassName] = $typeData;
+            unset($this->objectTypes[$normalizedClassName]);
+        }
+    }
+
 
     // Normalize function / type names using reflection to get originally defined name
     // but fallback to lower casing due to some functions that are not universally available
