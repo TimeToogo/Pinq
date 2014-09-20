@@ -1,6 +1,6 @@
 {
     "name": "timetoogo/pinq",
-    "description": "PHP Integrated query - A real LINQ library for PHP",
+    "description": "PHP Integrated Query - A real LINQ library for PHP",
     "keywords": ["collection", "query", "pinq"],
     "homepage": "http://www.github.com/TimeToogo/Pinq",
     "type": "library",
