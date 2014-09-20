@@ -137,12 +137,12 @@ class ObjectType extends Type implements IObjectType
         return parent::getStaticMethod($expression);
     }
 
-    protected function getMethodByName(O\Expression $nameExpression, $static)
+    protected function getMethodByName(O\Expression $nameExpression, $mustBeStatic)
     {
         if ($nameExpression instanceof O\ValueExpression) {
             $methodName = $nameExpression->getValue();
             foreach ($this->methods as $otherMethodName => $method) {
-                if ($method->getReflection()->isStatic() === $static
+                if ((!$mustBeStatic || $method->getReflection()->isStatic() === true)
                         && strcasecmp($methodName, $otherMethodName) === 0
                 ) {
                     return $method;

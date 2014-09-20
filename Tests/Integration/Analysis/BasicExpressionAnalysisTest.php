@@ -146,6 +146,11 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
         $this->assertReturnsNativeType(function () { \DateTime::getLastErrors(); }, INativeType::TYPE_ARRAY);
     }
 
+    public function testStaticMethodCallOnInstance()
+    {
+        $this->assertReturnsObjectType(function (\DateTime $instance) { $instance->createFromFormat(); }, 'DateTime');
+    }
+
     public function testInvalidStaticMethodCall()
     {
         $this->assertAnalysisFails(function () { \DateTime::AasfFFD(); });
@@ -161,6 +166,8 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
     {
         $this->assertAnalysisFails(function () { \DateTimeZone::$abcdef; });
         $this->assertAnalysisFails(function ($var) { \DateTime::$$var; });
+        //PHP does not allow instance access of static fields unlike methods
+        $this->assertAnalysisFails(function (self $instance) { $instance->field; });
     }
 
     public function testNew()
