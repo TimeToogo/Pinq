@@ -24,12 +24,12 @@ class MixedType extends NativeType
         return true;
     }
 
-    protected function unsupported(O\Expression $expression, $message)
+    protected function unsupported(O\Expression $expression, $message, array $formatValues = [])
     {
         return new TypeException(
                 'Type does not support expression \'%s\': %s',
                 $expression->compileDebug(),
-                $message);
+                vsprintf($message, $formatValues));
     }
 
     public function getConstructor(O\NewExpression $expression)
@@ -39,22 +39,22 @@ class MixedType extends NativeType
 
     public function getMethod(O\MethodCallExpression $expression)
     {
-        throw $this->unsupported($expression, 'method is not supported');
+        throw $this->unsupported($expression, 'method %s is not supported', [$expression->getName()->compileDebug()]);
     }
 
     public function getStaticMethod(O\StaticMethodCallExpression $expression)
     {
-        throw $this->unsupported($expression, 'static method is not supported');
+        throw $this->unsupported($expression, 'static method %s is not supported', [$expression->getName()->compileDebug()]);
     }
 
     public function getField(O\FieldExpression $expression)
     {
-        throw $this->unsupported($expression, 'field is not supported');
+        throw $this->unsupported($expression, 'field %s is not supported', [$expression->getName()->compileDebug()]);
     }
 
     public function getStaticField(O\StaticFieldExpression $expression)
     {
-        throw $this->unsupported($expression, 'static field is not supported');
+        throw $this->unsupported($expression, 'static field %s is not supported', [$expression->getName()->compileDebug()]);
     }
 
     public function getInvocation(O\InvocationExpression $expression)
@@ -69,11 +69,11 @@ class MixedType extends NativeType
 
     public function getCast(O\CastExpression $expression)
     {
-        throw $this->unsupported($expression, 'cast is not supported');
+        throw $this->unsupported($expression, 'cast \'%s\' is not supported', [$expression->getCastType()]);
     }
 
     public function getUnaryOperation(O\UnaryOperationExpression $expression)
     {
-        throw $this->unsupported($expression, 'unary operator is not supported');
+        throw $this->unsupported($expression, 'unary operator \'%s\' is not supported', [$expression->getOperator()]);
     }
 }
