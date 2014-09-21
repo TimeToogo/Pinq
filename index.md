@@ -24,8 +24,8 @@ $youngPeopleDetails = $people
         ->indexBy(function ($row) { return $row['phoneNumber']; })
         ->select(function ($row) { 
             return [
-                'fullName'    => $row['firstName'] . ' ' . $row['lastName'],
-                'address'     => $row['address'],
+                'fullName'     => $row['firstName'] . ' ' . $row['lastName'],
+                'address'       => $row['address'],
                 'dateOfBirth' => $row['dateOfBirth'],
             ]; 
         })
