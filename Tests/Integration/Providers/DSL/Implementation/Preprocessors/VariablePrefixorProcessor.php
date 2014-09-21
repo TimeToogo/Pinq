@@ -4,8 +4,8 @@ namespace Pinq\Tests\Integration\Providers\DSL\Implementation\Preprocessors;
 
 use Pinq\Expressions as O;
 use Pinq\Providers\DSL\Compilation\Processors\Expression;
-use Pinq\Queries\Functions\FunctionBase;
 use Pinq\Queries;
+use Pinq\Queries\Functions\IFunction;
 
 /**
  * @author Elliot Levin <elliotlevin@hotmail.com>
@@ -35,7 +35,7 @@ class VariablePrefixorProcessor extends Expression\ExpressionProcessor
         return new self($this->prefix, $scope);
     }
 
-    public function processFunction(FunctionBase $function)
+    public function processFunction(IFunction $function)
     {
         $variablePrefixor = new O\DynamicExpressionWalker([
             O\VariableExpression::getType() =>

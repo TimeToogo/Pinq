@@ -6,7 +6,7 @@ use Pinq\Expressions as O;
 use Pinq\PinqException;
 use Pinq\Providers\DSL\Compilation\Parameters;
 use Pinq\Providers\DSL\Compilation\Parameters\ResolvedParameterRegistry;
-use Pinq\Queries\Functions\FunctionBase;
+use Pinq\Queries\Functions\IFunction;
 
 /**
  * Base class of the structural expression processor.
@@ -17,7 +17,7 @@ abstract class StructuralExpressionProcessor implements IStructuralExpressionPro
 {
     protected function addParameter(
             Parameters\ParameterCollection $parameters,
-            FunctionBase $function,
+            IFunction $function,
             O\Expression $expression,
             Parameters\IParameterHasher $hasher = null
     ) {

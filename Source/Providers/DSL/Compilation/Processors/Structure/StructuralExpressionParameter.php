@@ -5,7 +5,7 @@ namespace Pinq\Providers\DSL\Compilation\Processors\Structure;
 use Pinq\Expressions as O;
 use Pinq\Providers\DSL\Compilation\Parameters\ExpressionParameter;
 use Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher;
-use Pinq\Queries\Functions\FunctionBase;
+use Pinq\Queries\Functions\IFunction;
 
 /**
  * Implementation of the structural expression parameter.
@@ -22,7 +22,7 @@ class StructuralExpressionParameter extends ExpressionParameter
     public function __construct(
             O\Expression $expression,
             IParameterHasher $hasher,
-            FunctionBase $function = null,
+            IFunction $function = null,
             $data = null
     ) {
         parent::__construct($expression, $hasher, $function, $data);

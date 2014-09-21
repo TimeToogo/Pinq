@@ -3,8 +3,8 @@
 namespace Pinq\Providers\DSL\Compilation\Parameters;
 
 use Pinq\Expressions as O;
-use Pinq\Queries\Functions\FunctionBase;
 use Pinq\Queries\Functions\FunctionEvaluationContextFactory;
+use Pinq\Queries\Functions\IFunction;
 use Pinq\Queries\IResolvedParameterRegistry;
 
 /**
@@ -24,7 +24,7 @@ class ExpressionParameter extends QueryParameterBase
      */
     protected $contextFactory;
 
-    public function __construct(O\Expression $expression, IParameterHasher $hasher, FunctionBase $function = null, $data = null)
+    public function __construct(O\Expression $expression, IParameterHasher $hasher, IFunction $function = null, $data = null)
     {
         parent::__construct($hasher, $data);
         if ($function !== null) {

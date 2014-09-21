@@ -3,7 +3,7 @@
 namespace Pinq\Providers\DSL\Compilation\Parameters;
 
 use Pinq\Expressions as O;
-use Pinq\Queries\Functions\FunctionBase;
+use Pinq\Queries\Functions\IFunction;
 
 /**
  * Implementation of the expression parameter collection.
@@ -20,17 +20,17 @@ class ParameterCollection extends ParameterCollectionBase
     /**
      * Adds an expression parameter to the collection.
      *
-     * @param O\Expression      $expression
-     * @param IParameterHasher  $hasher
-     * @param FunctionBase|null $context
-     * @param mixed             $data
+     * @param O\Expression     $expression
+     * @param IParameterHasher $hasher
+     * @param IFunction|null   $context
+     * @param mixed            $data
      *
      * @return void
      */
     public function addExpression(
             O\Expression $expression,
             IParameterHasher $hasher,
-            FunctionBase $context = null,
+            IFunction $context = null,
             $data = null
     ) {
         $this->parameters[] = new ExpressionParameter($expression, $hasher, $context, $data);

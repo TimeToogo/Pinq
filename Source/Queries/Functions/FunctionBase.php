@@ -10,7 +10,7 @@ use Pinq\PinqException;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class FunctionBase implements \Serializable
+abstract class FunctionBase implements IFunction
 {
     /**
      * @var FunctionEvaluationContextFactory
@@ -91,61 +91,31 @@ abstract class FunctionBase implements \Serializable
         };
     }
 
-    /**
-     * Gets the parameter id of the callable for the function.
-     *
-     * @return string
-     */
     final public function getCallableId()
     {
         return $this->evaluationContextFactory->getCallableId();
     }
 
-    /**
-     * Whether the function has a scoped type.
-     *
-     * @return boolean
-     */
     public function hasScopeType()
     {
         return $this->evaluationContextFactory->hasScopeType();
     }
 
-    /**
-     * Gets the bound type of the function.
-     * Null if there is no bound type.
-     *
-     * @return string|null
-     */
     public function getScopeType()
     {
         return $this->evaluationContextFactory->getScopeType();
     }
 
-    /**
-     * Whether the function is defined in a namespace.
-     *
-     * @return boolean
-     */
     public function hasNamespace()
     {
         return $this->evaluationContextFactory->hasNamespace();
     }
 
-    /**
-     * Gets the namespace the function was defined in.
-     * Null if was defined in the global namespace.
-     *
-     * @return string|null
-     */
     public function getNamespace()
     {
         return $this->evaluationContextFactory->getNamespace();
     }
 
-    /**
-     * @return boolean
-     */
     public function isInternal()
     {
         return $this->bodyExpressions === null;
@@ -161,12 +131,6 @@ abstract class FunctionBase implements \Serializable
         }
     }
 
-    /**
-     * Gets an array containing the parameter ids as keys with their
-     * respective scoped variable name as the value.
-     *
-     * @return array<string, string>
-     */
     public function getParameterScopedVariableMap()
     {
         return $this->evaluationContextFactory->getParameterScopedVariableMap();
@@ -204,12 +168,6 @@ abstract class FunctionBase implements \Serializable
 
     }
 
-    /**
-     * Gets the body expressions of the function.
-     *
-     * @return O\Expression[]
-     * @throws PinqException  if the function is internal
-     */
     final public function getBodyExpressions()
     {
         $this->verifyNotInternal(__FUNCTION__);
@@ -217,13 +175,6 @@ abstract class FunctionBase implements \Serializable
         return $this->bodyExpressions;
     }
 
-    /**
-     * Gets the body expressions of the function before and including
-     * the first return statement.
-     *
-     * @return O\Expression[]
-     * @throws PinqException  if the function is internal
-     */
     final public function getBodyExpressionsUntilReturn()
     {
         $this->verifyNotInternal(__FUNCTION__);
@@ -238,12 +189,6 @@ abstract class FunctionBase implements \Serializable
         return $expressions;
     }
 
-    /**
-     * Gets amount of body expressions of the function.
-     *
-     * @return int
-     * @throws PinqException if the function is internal
-     */
     final public function countBodyExpressions()
     {
         $this->verifyNotInternal(__FUNCTION__);
@@ -251,13 +196,6 @@ abstract class FunctionBase implements \Serializable
         return count($this->bodyExpressions);
     }
 
-    /**
-     * Gets amount of body expressions of the function before and including
-     * the first return statement.
-     *
-     * @return int
-     * @throws PinqException if the function is internal
-     */
     final public function countBodyExpressionsUntilReturn()
     {
         $this->verifyNotInternal(__FUNCTION__);
@@ -265,17 +203,11 @@ abstract class FunctionBase implements \Serializable
         return count($this->getBodyExpressionsUntilReturn());
     }
 
-    /**
-     * @return Parameters\ParameterBase
-     */
     public function getParameters()
     {
         return $this->parameters;
     }
 
-    /**
-     * @return string[]
-     */
     public function getParameterIds()
     {
         return array_merge(
@@ -284,25 +216,11 @@ abstract class FunctionBase implements \Serializable
         );
     }
 
-    /**
-     * Gets an evaluation context factory of the function.
-     *
-     * @return FunctionEvaluationContextFactory
-     */
     public function getEvaluationContextFactory()
     {
         return $this->evaluationContextFactory;
     }
 
-    /**
-     * @param string|null             $scopeType
-     * @param string|null             $namespace
-     * @param string[]                $parameterScopedVariableMap
-     * @param O\ParameterExpression[] $parameterExpressions
-     * @param O\Expression[]|null     $bodyExpressions
-     *
-     * @return static
-     */
     public function update(
             $scopeType,
             $namespace,
@@ -328,11 +246,6 @@ abstract class FunctionBase implements \Serializable
                 $bodyExpressions);
     }
 
-    /**
-     * @param O\Expression[]|null $bodyExpressions
-     *
-     * @return static
-     */
     public function updateBody(array $bodyExpressions = null)
     {
         return $this->update(
@@ -344,11 +257,6 @@ abstract class FunctionBase implements \Serializable
         );
     }
 
-    /**
-     * @param O\ExpressionWalker $walker
-     *
-     * @return static
-     */
     final public function walk(O\ExpressionWalker $walker)
     {
         return $this->update(

@@ -5,7 +5,7 @@ namespace Pinq\Tests\Integration\Providers\DSL\Implementation\Preprocessors;
 use Pinq\Expressions as O;
 use Pinq\Providers\DSL\Compilation\Parameters;
 use Pinq\Providers\DSL\Compilation\Processors\Structure\StructuralExpressionProcessor;
-use Pinq\Queries\Functions\FunctionBase;
+use Pinq\Queries\Functions\IFunction;
 
 /**
  * Inlines variable variables as structural parameters
@@ -15,14 +15,14 @@ use Pinq\Queries\Functions\FunctionBase;
 class StructuralVariableProcessor extends StructuralExpressionProcessor
 {
     public function matches(
-            FunctionBase $function,
+            IFunction $function,
             O\Expression $expression
     ) {
         return $expression instanceof O\VariableExpression && !($expression->getName() instanceof O\ValueExpression);
     }
 
     public function parameterize(
-            FunctionBase $function,
+            IFunction $function,
             O\Expression $expression,
             Parameters\ParameterCollection $parameters
     ) {
@@ -31,7 +31,7 @@ class StructuralVariableProcessor extends StructuralExpressionProcessor
     }
 
     public function inline(
-            FunctionBase $function,
+            IFunction $function,
             O\Expression $expression,
             Parameters\ResolvedParameterRegistry $parameters
     ) {

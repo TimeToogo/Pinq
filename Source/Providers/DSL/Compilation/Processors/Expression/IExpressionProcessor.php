@@ -3,7 +3,7 @@
 namespace Pinq\Providers\DSL\Compilation\Processors\Expression;
 
 use Pinq\Queries;
-use Pinq\Queries\Functions\FunctionBase;
+use Pinq\Queries\Functions\IFunction;
 
 /**
  * Interface of the expression processor.
@@ -47,9 +47,9 @@ interface IExpressionProcessor
     /**
      * Processes/updates the supplied function's expression.
      *
-     * @param FunctionBase $function
+     * @param IFunction $function
      *
-     * @return FunctionBase
+     * @return IFunction
      */
-    public function processFunction(FunctionBase $function);
+    public function processFunction(IFunction $function);
 }

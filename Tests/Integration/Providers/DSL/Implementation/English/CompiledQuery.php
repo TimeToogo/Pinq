@@ -6,6 +6,7 @@ use Pinq\Expressions\Expression;
 use Pinq\Providers\DSL\Compilation;
 use Pinq\Providers\DSL\Compilation\Parameters;
 use Pinq\Queries;
+use Pinq\Queries\Functions\IFunction;
 
 class CompiledQuery extends Compilation\CompiledQuery implements Compilation\ICompiledRequest, Compilation\ICompiledOperation
 {
@@ -40,7 +41,7 @@ class CompiledQuery extends Compilation\CompiledQuery implements Compilation\ICo
         $this->english .= $english . PHP_EOL;
     }
 
-    public function appendFunction(Queries\Functions\FunctionBase $function)
+    public function appendFunction(IFunction $function)
     {
         if ($function->isInternal()) {
             throw new Exception('Internal functions are not supported');

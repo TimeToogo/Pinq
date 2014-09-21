@@ -4,6 +4,7 @@ namespace Pinq\Tests\Integration\Queries\Functions;
 
 use Pinq\Expressions as O;
 use Pinq\Queries\Functions;
+use Pinq\Queries\Functions\IFunction;
 use Pinq\Queries\ResolvedParameterRegistry;
 use Pinq\Tests\PinqTestCase;
 
@@ -22,7 +23,7 @@ abstract class FunctionTest extends PinqTestCase
      * @param array  $parameterExpressions
      * @param array  $bodyExpressions
      *
-     * @return Functions\FunctionBase
+     * @return IFunction
      */
     protected function buildFunction(
             $callableParameter,

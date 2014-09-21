@@ -6,7 +6,7 @@ use Pinq\Expressions as O;
 use Pinq\Providers\DSL\Compilation\Parameters\ParameterCollection;
 use Pinq\Providers\DSL\Compilation\Processors\Expression;
 use Pinq\Queries;
-use Pinq\Queries\Functions\FunctionBase;
+use Pinq\Queries\Functions\IFunction;
 
 /**
  * Implementation of the structural expression locator.
@@ -49,7 +49,7 @@ class StructuralExpressionLocator extends StructuralExpressionQueryProcessor
         return new static($this->parameters, $this->processor, $scope);
     }
 
-    public function processFunction(FunctionBase $function)
+    public function processFunction(IFunction $function)
     {
         $expressionParameterizer = new StructuralExpressionWalker(
                 function (

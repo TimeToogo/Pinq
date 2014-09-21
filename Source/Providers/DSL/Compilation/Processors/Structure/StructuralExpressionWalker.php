@@ -3,8 +3,8 @@
 namespace Pinq\Providers\DSL\Compilation\Processors\Structure;
 
 use Pinq\Expressions as O;
-use Pinq\Queries\Functions\FunctionBase;
 use Pinq\Queries;
+use Pinq\Queries\Functions\IFunction;
 
 /**
  * Implementation of the structural expression walker.
@@ -19,7 +19,7 @@ class StructuralExpressionWalker extends O\ExpressionWalker
     protected $processParameterCallback;
 
     /**
-     * @var FunctionBase
+     * @var IFunction
      */
     protected $function;
 
@@ -30,7 +30,7 @@ class StructuralExpressionWalker extends O\ExpressionWalker
 
     public function __construct(
             callable $processParameterCallback,
-            FunctionBase $function,
+            IFunction $function,
             IStructuralExpressionProcessor $processors
     ) {
         $this->processParameterCallback = $processParameterCallback;
