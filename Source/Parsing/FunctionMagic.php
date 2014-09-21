@@ -3,7 +3,7 @@
 namespace Pinq\Parsing;
 
 /**
- * Implementation of the function magic inteface.
+ * Implementation of the function magic interface.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */

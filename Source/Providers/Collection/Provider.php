@@ -8,7 +8,7 @@ use Pinq\Providers;
 use Pinq\Queries;
 
 /**
- * Repository provider for evalating query of the supplied collection instance,
+ * Repository provider for evaluating query of the supplied collection instance,
  * this is useful for mocking a repository against an in memory collection.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>

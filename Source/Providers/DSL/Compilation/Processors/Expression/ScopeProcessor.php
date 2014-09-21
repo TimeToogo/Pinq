@@ -7,7 +7,7 @@ use Pinq\Queries\Segments;
 use Pinq\Queries;
 
 /**
- * Implementation of the scppe processor to add expressions.
+ * Implementation of the scope processor to add expressions.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */

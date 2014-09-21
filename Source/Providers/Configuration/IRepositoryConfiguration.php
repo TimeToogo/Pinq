@@ -6,7 +6,7 @@ use Pinq\Queries;
 use Pinq\Queries\Builders;
 
 /**
- * Interface for the configurable services of the respository
+ * Interface for the configurable services of the repository
  * provider.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>

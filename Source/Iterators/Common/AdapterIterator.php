@@ -3,7 +3,7 @@
 namespace Pinq\Iterators\Common;
 
 /**
- * Common functionality for the adapeter iterator
+ * Common functionality for the adapter iterator
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */

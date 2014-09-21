@@ -5,7 +5,7 @@ namespace Pinq\Iterators\Generators;
 /**
  * This a wrapper for Generator object, maintaining typical foreach
  * behaviour while also allowing generators to be 'rewound' without the
- * overhead of a wrapper iterato. This is accomplished by means of
+ * overhead of a wrapper iterator. This is accomplished by means of
  * calling the generator function on every call to the
  * IteratorAggregate::getIterator which is called on every foreach loop.
  * The IGenerator class is able to be used with foreach-by-ref.

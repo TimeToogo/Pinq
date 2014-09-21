@@ -3,7 +3,7 @@
 namespace Pinq\Parsing;
 
 /**
- * Implementation of the magic scopes inteface.
+ * Implementation of the magic scopes interface.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */

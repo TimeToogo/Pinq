@@ -3,7 +3,7 @@
 namespace Pinq\Parsing;
 
 /**
- * Implementation of the magic constants inteface.
+ * Implementation of the magic constants interface.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */

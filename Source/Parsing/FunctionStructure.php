@@ -5,7 +5,7 @@ namespace Pinq\Parsing;
 use Pinq\Expressions as O;
 
 /**
- * Implementation of the function structure inteface.
+ * Implementation of the function structure interface.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */

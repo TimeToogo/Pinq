@@ -3,7 +3,7 @@
 namespace Pinq\Parsing;
 
 /**
- * Implementation of the function declaration inteface.
+ * Implementation of the function declaration interface.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */

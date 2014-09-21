@@ -5,7 +5,7 @@ namespace Pinq\Queries\Functions\Parameters;
 use Pinq\Expressions as O;
 
 /**
- * Parameter structure for the standared element functions.
+ * Parameter structure for the standard element functions.
  * The parameters are passed as the (value, key).
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>

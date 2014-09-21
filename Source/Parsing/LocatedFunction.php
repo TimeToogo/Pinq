@@ -3,7 +3,7 @@
 namespace Pinq\Parsing;
 
 /**
- * Implementation of the located function inteface.
+ * Implementation of the located function interface.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */

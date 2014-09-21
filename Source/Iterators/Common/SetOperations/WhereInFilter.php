@@ -3,7 +3,7 @@
 namespace Pinq\Iterators\Common\SetOperations;
 
 /**
- * Returns values prensent in the comparison values
+ * Returns values present in the comparison values
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */

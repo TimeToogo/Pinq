@@ -3,7 +3,7 @@
 namespace Pinq\Parsing;
 
 /**
- * Interface containing the nessecary methods to resolve any magic
+ * Interface containing the necessary methods to resolve any magic
  * constants/scopes of the contained expressions.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
