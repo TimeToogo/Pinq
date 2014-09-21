@@ -2,13 +2,13 @@
 
 namespace Pinq\Tests\Integration\Providers\DSL;
 
-use Pinq\Tests\Integration\Providers\DSL\Implementation\Preprocessors\VariablePrefixorProcessor;
+use Pinq\Tests\Integration\Providers\DSL\Implementation\Preprocessors\VariablePrefixerProcessor;
 
 class EnglishDSLProviderWithExpressionPreprocessingTest extends EnglishDSLProviderTest
 {
     protected function preprocessorFactories()
     {
-        return [VariablePrefixorProcessor::factory('__')];
+        return [VariablePrefixerProcessor::factory('__')];
     }
 
     protected function aggregateQuery()

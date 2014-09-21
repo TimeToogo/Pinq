@@ -10,7 +10,7 @@ use Pinq\Queries\Functions\IFunction;
 /**
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class VariablePrefixorProcessor extends Expression\ExpressionProcessor
+class VariablePrefixerProcessor extends Expression\ExpressionProcessor
 {
     /**
      * @var string
