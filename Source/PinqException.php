@@ -26,12 +26,7 @@ class PinqException extends \Exception
 
     public static function construct(array $parameters)
     {
-        if ($parameters === 1) {
-            $messageFormat = array_shift($messageFormat);
-            $message       = $messageFormat;
-        } else {
-            $message = call_user_func_array('sprintf', $parameters);
-        }
+        $message = call_user_func_array('sprintf', $parameters);
 
         return new static($message);
     }
