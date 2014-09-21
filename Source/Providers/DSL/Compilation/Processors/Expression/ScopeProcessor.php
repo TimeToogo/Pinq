@@ -28,6 +28,7 @@ class ScopeProcessor extends Visitors\ScopeProcessor
     public function buildScope()
     {
         $this->processSegments($this->scope->getSegments());
+
         return $this->expressionProcessor->buildScope();
     }
 
@@ -40,6 +41,7 @@ class ScopeProcessor extends Visitors\ScopeProcessor
     {
         if ($source instanceof Queries\Common\Source\QueryScope) {
             $processor = new self($this->expressionProcessor->forSubScope($source->getScope()));
+
             return $source->update($processor->buildScope());
         }
 

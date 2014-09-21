@@ -1,7 +1,6 @@
 <?php
 namespace Pinq\Analysis;
 
-
 /**
  * Interface for classes using the type system.
  *

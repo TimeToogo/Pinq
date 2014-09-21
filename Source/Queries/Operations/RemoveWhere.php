@@ -51,7 +51,7 @@ class RemoveWhere extends Operation
      */
     public function update(Functions\ElementProjection $predicateFunction)
     {
-        if($this->predicateFunction === $predicateFunction) {
+        if ($this->predicateFunction === $predicateFunction) {
             return $this;
         }
 

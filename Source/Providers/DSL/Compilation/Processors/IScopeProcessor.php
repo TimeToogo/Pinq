@@ -6,7 +6,7 @@ use Pinq\Queries;
 
 /**
  * Interface of the scope processor.
- * 
+ *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IScopeProcessor
@@ -15,4 +15,4 @@ interface IScopeProcessor
      * @return Queries\IScope
      */
     public function buildScope();
-} 
+}

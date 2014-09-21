@@ -34,12 +34,12 @@ class Scope implements IScope
 
     public function getParameters()
     {
-        if($this->isEmpty()) {
+        if ($this->isEmpty()) {
             return [];
         }
 
         $parameterGroups = [];
-        foreach($this->segments as $segment) {
+        foreach ($this->segments as $segment) {
             $parameterGroups[] = $segment->getParameters();
         }
 

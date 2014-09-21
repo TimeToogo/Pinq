@@ -2,10 +2,8 @@
 
 namespace Pinq\Providers\DSL;
 
-use Pinq\Caching;
 use Pinq\Expressions as O;
 use Pinq\PinqException;
-use Pinq\Providers\Configuration;
 use Pinq\Providers;
 use Pinq\Queries;
 

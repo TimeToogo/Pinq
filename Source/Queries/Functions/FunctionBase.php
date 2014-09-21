@@ -208,7 +208,7 @@ abstract class FunctionBase implements \Serializable
      * Gets the body expressions of the function.
      *
      * @return O\Expression[]
-     * @throws PinqException if the function is internal
+     * @throws PinqException  if the function is internal
      */
     final public function getBodyExpressions()
     {
@@ -222,7 +222,7 @@ abstract class FunctionBase implements \Serializable
      * the first return statement.
      *
      * @return O\Expression[]
-     * @throws PinqException if the function is internal
+     * @throws PinqException  if the function is internal
      */
     final public function getBodyExpressionsUntilReturn()
     {

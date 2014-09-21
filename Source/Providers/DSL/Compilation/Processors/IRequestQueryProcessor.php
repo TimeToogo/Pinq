@@ -6,7 +6,7 @@ use Pinq\Queries;
 
 /**
  * Interface of the request query processor.
- * 
+ *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 interface IRequestQueryProcessor extends IQueryProcessor
@@ -16,4 +16,4 @@ interface IRequestQueryProcessor extends IQueryProcessor
      * @return Queries\IRequestQuery
      */
     public function buildQuery();
-} 
+}

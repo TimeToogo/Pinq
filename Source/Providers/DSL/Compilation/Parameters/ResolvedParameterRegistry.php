@@ -2,7 +2,6 @@
 
 namespace Pinq\Providers\DSL\Compilation\Parameters;
 
-use Pinq\Expressions as O;
 use Pinq\Queries;
 
 /**

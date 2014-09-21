@@ -53,7 +53,7 @@ class BaseResolver extends BaseInterpretation implements IQueryResolver
         } elseif ($function instanceof ClosureExpressionFunction) {
             $expression = $function->getExpression();
             $this->hash .= $expression->hash();
-            if($function->hasEvaluationContext()) {
+            if ($function->hasEvaluationContext()) {
                 $evaluationContext = $function->getEvaluationContext();
                 $this->resolveParameter(
                         $this->getFunctionScopedVariableParameter($function, 'this'),

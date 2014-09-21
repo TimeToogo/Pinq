@@ -25,7 +25,7 @@ class AnalysisContext extends Typed implements IAnalysisContext
     {
         parent::__construct($typeSystem);
         $this->evaluationContext = $evaluationContext;
-        foreach($evaluationContext->getVariableTable() as $variable => $value) {
+        foreach ($evaluationContext->getVariableTable() as $variable => $value) {
             $this->setExpressionType(O\Expression::variable(O\Expression::value($variable)), $typeSystem->getTypeFromValue($value));
         }
     }
@@ -38,6 +38,7 @@ class AnalysisContext extends Typed implements IAnalysisContext
     public function getExpressionType(O\Expression $expression)
     {
         $hash = $expression->hash();
+
         return isset($this->expressionTypes[$hash]) ? $this->expressionTypes[$hash] : null;
     }
 

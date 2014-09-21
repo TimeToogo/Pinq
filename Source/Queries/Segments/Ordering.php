@@ -60,7 +60,7 @@ class Ordering
      */
     public function update(Functions\ElementProjection $projectionFunction)
     {
-        if($this->projectionFunction === $projectionFunction) {
+        if ($this->projectionFunction === $projectionFunction) {
             return $this;
         }
 

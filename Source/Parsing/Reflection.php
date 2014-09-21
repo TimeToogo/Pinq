@@ -35,7 +35,7 @@ final class Reflection
             $reflection = new \ReflectionFunction($function);
 
             // If the name is {closure} it as an actual closure
-            if($reflection->getShortName() === '{closure}') {
+            if ($reflection->getShortName() === '{closure}') {
                 return $reflection;
             }
             // Bail out, no (sane) way of determining the actual function

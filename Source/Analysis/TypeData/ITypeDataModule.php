@@ -1,7 +1,6 @@
 <?php
 namespace Pinq\Analysis\TypeData;
 
-
 /**
  * Interface of a type data module.
  *

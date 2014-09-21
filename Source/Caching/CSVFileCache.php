@@ -144,7 +144,7 @@ class CSVFileCache extends OneDimensionalCacheAdapter
             }
         }
 
-        foreach($keysToUnset as $key) {
+        foreach ($keysToUnset as $key) {
             unset($fileData[$key]);
         }
 

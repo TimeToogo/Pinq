@@ -49,7 +49,7 @@ final class Unary
             ];
         }
 
-        if(!isset(self::$unaryOperations[$operator])) {
+        if (!isset(self::$unaryOperations[$operator])) {
             throw new PinqException('Unary operator \'%s\' is not supported', $operator);
         }
 

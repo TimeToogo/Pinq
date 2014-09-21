@@ -43,4 +43,4 @@ final class TypeId
     {
         return explode('|', substr($compositeId, strlen('composite<'), -strlen('>')));
     }
-} 
+}

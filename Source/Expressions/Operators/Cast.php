@@ -38,7 +38,7 @@ final class Cast
      */
     public static function doCast($castTypeOperator, $value)
     {
-        if(!isset(self::$castTypeMap[$castTypeOperator])) {
+        if (!isset(self::$castTypeMap[$castTypeOperator])) {
             throw new PinqException('Cast operator \'%s\' is not supported', $castTypeOperator);
         }
 

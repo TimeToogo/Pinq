@@ -107,8 +107,8 @@ abstract class ExpressionInterpreter
     {
         $argumentExpressions = $methodExpression->getArguments();
 
-        if(isset($argumentExpressions[$index])) {
-            if($argumentExpressions[$index]->isUnpacked()) {
+        if (isset($argumentExpressions[$index])) {
+            if ($argumentExpressions[$index]->isUnpacked()) {
                 throw new PinqException(
                         'Cannot get argument from method call %s at index %d: argument unpacking is not supported',
                         $methodExpression->getName()->compileDebug(),

@@ -245,4 +245,4 @@ class InternalFunctions extends TypeDataModule
                 'tanh'          => INativeType::TYPE_DOUBLE,
         ];
     }
-} 
+}

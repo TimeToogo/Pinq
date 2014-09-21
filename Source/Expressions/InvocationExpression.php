@@ -36,7 +36,7 @@ class InvocationExpression extends TraversalExpression
     }
 
     /**
-     * @param Expression   $value
+     * @param Expression           $value
      * @param ArgumentExpression[] $arguments
      *
      * @return self

@@ -75,7 +75,7 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
                 /* out */ $templateHash
         );
 
-        if($queryTemplate instanceof IStaticRequestTemplate) {
+        if ($queryTemplate instanceof IStaticRequestTemplate) {
             return $templateHash;
         }
 

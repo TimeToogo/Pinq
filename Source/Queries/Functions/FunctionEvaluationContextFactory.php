@@ -56,7 +56,7 @@ class FunctionEvaluationContextFactory
         $this->parameterScopedVariableMap = $parameterScopedVariableMap;
         $this->scopeType                  = $scopeType;
         foreach ($unusedParameterDefaultExpressionMap as $parameter => $expression) {
-            if($expression !== null) {
+            if ($expression !== null) {
                 /** @var $expression O\Expression */
                 $this->unusedParameterDefaultMap[$parameter] = $expression->asEvaluator(
                         O\EvaluationContext::staticContext($this->namespace, $this->scopeType)
@@ -142,4 +142,4 @@ class FunctionEvaluationContextFactory
 
         return new O\EvaluationContext($this->namespace, $this->scopeType, $thisObject, $variableTable);
     }
-} 
+}

@@ -23,7 +23,7 @@ class TypeOperation extends Typed implements ITypeOperation
      */
     protected $returnType;
 
-    public  function __construct(ITypeSystem $typeSystem, $sourceType, $returnType)
+    public function __construct(ITypeSystem $typeSystem, $sourceType, $returnType)
     {
         parent::__construct($typeSystem);
         $this->sourceType = $sourceType;

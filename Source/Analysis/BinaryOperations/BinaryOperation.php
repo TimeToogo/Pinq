@@ -5,7 +5,6 @@ namespace Pinq\Analysis\BinaryOperations;
 use Pinq\Analysis\IBinaryOperation;
 use Pinq\Analysis\ITypeSystem;
 use Pinq\Analysis\Typed;
-use Pinq\Expressions as O;
 
 /**
  * Implementation of the binary operation.

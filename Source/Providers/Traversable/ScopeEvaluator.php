@@ -113,7 +113,7 @@ class ScopeEvaluator extends Segments\SegmentVisitor
     /**
      * Evaluates the join segment values and filter upon the supplied traversable.
      *
-     * @param ITraversable $traversable
+     * @param ITraversable                       $traversable
      * @param Common\Join\Options                $join
      * @param Queries\IResolvedParameterRegistry $resolvedParameters
      *

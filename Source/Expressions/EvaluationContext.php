@@ -37,7 +37,7 @@ class EvaluationContext implements IEvaluationContext
         $this->scopeType     = $scopeType;
         $this->thisObject    = $thisObject;
         $this->variableTable = $variableTable;
-        if(array_key_exists('this', $this->variableTable)) {
+        if (array_key_exists('this', $this->variableTable)) {
             throw new PinqException(
                     'Cannot create %s: invalid variable table, \'this\' variable is disallowed (use $thisObject constructor argument instead).',
                     get_class($this));

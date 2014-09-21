@@ -51,4 +51,4 @@ class InternalTypes extends TypeDataModule
                 ],
         ];
     }
-} 
+}

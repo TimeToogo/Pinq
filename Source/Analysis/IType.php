@@ -106,7 +106,7 @@ interface IType
      * @param O\IndexExpression $expression
      *
      * @return ITypeOperation
-     * @throws TypeException if the indexer is not supported.
+     * @throws TypeException  if the indexer is not supported.
      */
     public function getIndex(O\IndexExpression $expression);
 
@@ -116,7 +116,7 @@ interface IType
      * @param O\InvocationExpression $expression
      *
      * @return ITypeOperation|IMethod
-     * @throws TypeException if the invocation is not supported.
+     * @throws TypeException          if the invocation is not supported.
      */
     public function getInvocation(O\InvocationExpression $expression);
 
@@ -126,7 +126,7 @@ interface IType
      * @param O\CastExpression $expression
      *
      * @return ITypeOperation|IMethod
-     * @throws TypeException if the cast is not supported.
+     * @throws TypeException          if the cast is not supported.
      */
     public function getCast(O\CastExpression $expression);
 
@@ -136,7 +136,7 @@ interface IType
      * @param O\UnaryOperationExpression $expression
      *
      * @return ITypeOperation|IMethod
-     * @throws TypeException if the unary operation is not supported.
+     * @throws TypeException          if the unary operation is not supported.
      */
     public function getUnaryOperation(O\UnaryOperationExpression $expression);
 }

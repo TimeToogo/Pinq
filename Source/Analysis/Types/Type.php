@@ -135,4 +135,4 @@ abstract class Type implements IType
 
         return $this->parentType->getUnaryOperation($expression);
     }
-} 
+}

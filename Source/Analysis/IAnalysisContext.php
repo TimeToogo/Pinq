@@ -52,7 +52,7 @@ interface IAnalysisContext extends ITyped
      * Creates a reference between the supplied expressions.
      *
      * @param O\Expression $expression
-     * @param  O\Expression $referencedExpression
+     * @param O\Expression $referencedExpression
      *
      * @return void
      */
@@ -64,4 +64,4 @@ interface IAnalysisContext extends ITyped
      * @return IAnalysisContext
      */
     public function inNewScope();
-} 
+}

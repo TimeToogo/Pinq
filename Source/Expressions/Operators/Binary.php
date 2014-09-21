@@ -83,7 +83,7 @@ final class Binary
             ];
         }
 
-        if(!isset(self::$binaryOperations[$operator])) {
+        if (!isset(self::$binaryOperations[$operator])) {
             throw new PinqException('Binary operator \'%s\' is not supported', $operator);
         }
 

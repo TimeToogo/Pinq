@@ -91,7 +91,7 @@ interface ITypeAnalysis extends ITyped
      * @param O\IndexExpression $expression
      *
      * @return ITypeOperation
-     * @throws TypeException if the supplied expression was not in the analysed expression tree.
+     * @throws TypeException  if the supplied expression was not in the analysed expression tree.
      */
     public function getIndex(O\IndexExpression $expression);
 
@@ -101,7 +101,7 @@ interface ITypeAnalysis extends ITyped
      * @param O\InvocationExpression $expression
      *
      * @return ITypeOperation
-     * @throws TypeException if the supplied expression was not in the analysed expression tree.
+     * @throws TypeException  if the supplied expression was not in the analysed expression tree.
      */
     public function getInvocation(O\InvocationExpression $expression);
 
@@ -111,7 +111,7 @@ interface ITypeAnalysis extends ITyped
      * @param O\UnaryOperationExpression $expression
      *
      * @return ITypeOperation
-     * @throws TypeException if the supplied expression was not in the analysed expression tree.
+     * @throws TypeException  if the supplied expression was not in the analysed expression tree.
      */
     public function getUnaryOperation(O\UnaryOperationExpression $expression);
 
@@ -121,7 +121,7 @@ interface ITypeAnalysis extends ITyped
      * @param O\CastExpression $expression
      *
      * @return ITypeOperation
-     * @throws TypeException if the supplied expression was not in the analysed expression tree.
+     * @throws TypeException  if the supplied expression was not in the analysed expression tree.
      */
     public function getCast(O\CastExpression $expression);
 
@@ -141,7 +141,7 @@ interface ITypeAnalysis extends ITyped
      * @param O\BinaryOperationExpression $expression
      *
      * @return IBinaryOperation
-     * @throws TypeException if the supplied expression was not in the analysed expression tree.
+     * @throws TypeException    if the supplied expression was not in the analysed expression tree.
      */
     public function getBinaryOperation(O\BinaryOperationExpression $expression);
 }

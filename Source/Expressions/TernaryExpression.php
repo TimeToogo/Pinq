@@ -70,9 +70,9 @@ class TernaryExpression extends Expression
     }
 
     /**
-     * @param Expression $condition
+     * @param Expression      $condition
      * @param Expression|null $ifTrue
-     * @param Expression $ifFalse
+     * @param Expression      $ifFalse
      *
      * @return self
      */

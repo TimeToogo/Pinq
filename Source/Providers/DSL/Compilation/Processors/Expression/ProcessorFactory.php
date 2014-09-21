@@ -6,7 +6,7 @@ use Pinq\Queries;
 
 /**
  * Factory class to build a query processor from the supplied query.
- * 
+ *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class ProcessorFactory
@@ -21,7 +21,7 @@ class ProcessorFactory
      */
     public static function from(Queries\IQuery $query, IExpressionProcessor $expressionProcessor)
     {
-        if($query instanceof Queries\IRequestQuery) {
+        if ($query instanceof Queries\IRequestQuery) {
             return new RequestQueryProcessor($expressionProcessor, $query);
         } elseif ($query instanceof Queries\IOperationQuery) {
             return new OperationQueryProcessor($expressionProcessor, $query);

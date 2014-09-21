@@ -50,8 +50,8 @@ class MethodCallExpression extends ObjectOperationExpression
     }
 
     /**
-     * @param Expression   $value
-     * @param Expression   $name
+     * @param Expression           $value
+     * @param Expression           $name
      * @param ArgumentExpression[] $arguments
      *
      * @return MethodCallExpression

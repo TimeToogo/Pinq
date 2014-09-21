@@ -5,7 +5,6 @@ namespace Pinq\Analysis\Functions;
 use Pinq\Analysis\IFunction;
 use Pinq\Analysis\ITypeSystem;
 use Pinq\Analysis\Typed;
-use Pinq\Expressions as O;
 
 /**
  * Implementation of the function.

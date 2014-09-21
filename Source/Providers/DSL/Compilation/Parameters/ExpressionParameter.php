@@ -52,6 +52,7 @@ class ExpressionParameter extends QueryParameterBase
         }
 
         $resolvedContext = $this->contextFactory->getEvaluationContext($parameters);
+
         return $this->evaluator->evaluateWithNewThis($resolvedContext->getThis(), $resolvedContext->getVariableTable());
     }
 }

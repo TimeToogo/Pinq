@@ -14,7 +14,7 @@ abstract class NamedParameterExpression extends Expression
      */
     protected $name;
 
-    protected  function __construct($name)
+    protected function __construct($name)
     {
         $this->name = $name;
     }

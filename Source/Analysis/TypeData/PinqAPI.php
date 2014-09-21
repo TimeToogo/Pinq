@@ -172,4 +172,4 @@ class PinqAPI extends TypeDataModule
 
         return $pinqTypes;
     }
-} 
+}

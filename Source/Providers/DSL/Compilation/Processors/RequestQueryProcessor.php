@@ -26,6 +26,7 @@ abstract class RequestQueryProcessor extends QueryProcessor implements IRequestQ
     {
         $scope   = $this->scopeProcessor->buildScope();
         $request = $this->requestQuery->getRequest();
+
         return $this->requestQuery->update(
                 $this->processScope($scope, $request),
                 $this->processRequest($scope, $request)

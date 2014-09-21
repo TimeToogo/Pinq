@@ -64,7 +64,7 @@ class DoctrineCache extends CacheAdapter
 
     public function clear()
     {
-        if(!$this->hasNamespace()) {
+        if (!$this->hasNamespace()) {
             $this->doctrineCache->flushAll();
         } else {
             $this->withNamespace()->deleteAll();

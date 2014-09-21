@@ -5,7 +5,6 @@ namespace Pinq\Analysis\Types;
 use Pinq\Analysis\INativeType;
 use Pinq\Analysis\IType;
 use Pinq\Analysis\ITypeOperation;
-use Pinq\Expressions as O;
 
 /**
  * Implementation of the native type. (eg arrays, strings, resources)

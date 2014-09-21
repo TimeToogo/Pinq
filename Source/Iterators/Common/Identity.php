@@ -28,6 +28,7 @@ final class Identity
         switch ($typeIdentifier) {
 
             case 's': //string
+
                 return 's' . (strlen($value) > 32 ? md5($value) : $value);
 
             case 'i': //integer
@@ -35,15 +36,19 @@ final class Identity
             case 'd': //double
             case 'r': //resource
             case 'u': //unknown type
+
                 return $typeIdentifier . $value;
 
             case 'N': //NULL
+
                 return 'N';
 
             case 'o': //object
+
                 return 'o' . spl_object_hash($value);
 
             case 'a': //array
+
                 return self::arrayHash($value);
         }
     }

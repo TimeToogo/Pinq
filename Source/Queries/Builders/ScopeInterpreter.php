@@ -92,7 +92,7 @@ class ScopeInterpreter extends ExpressionInterpreter implements IScopeInterprete
         $methodName = $this->getMethodName($expression);
         $this->segmentCounter++;
         $this->segmentId = "{$this->segmentCounter}-{$methodName}";
-        if(!method_exists($this, "visit$methodName")) {
+        if (!method_exists($this, "visit$methodName")) {
             throw new PinqException('Cannot interpret query scope with method call \'%s\'', $methodName);
         }
         $this->{"visit$methodName"}($expression);

@@ -50,8 +50,8 @@ class StaticMethodCallExpression extends StaticClassExpression
     }
 
     /**
-     * @param Expression   $class
-     * @param Expression   $name
+     * @param Expression           $class
+     * @param Expression           $name
      * @param ArgumentExpression[] $arguments
      *
      * @return self

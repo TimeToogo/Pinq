@@ -2,8 +2,6 @@
 
 namespace Pinq\Providers\DSL\Compilation\Processors;
 
-use Pinq\Queries;
-
 /**
  * Base class of the query processor.
  *

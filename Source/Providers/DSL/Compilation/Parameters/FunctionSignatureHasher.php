@@ -23,7 +23,6 @@ class FunctionSignatureHasher implements IParameterHasher
         $this->functionInterpreter = $functionInterpreter ?: FunctionInterpreter::getDefault();
     }
 
-
     public function hash($value)
     {
         return $this->functionInterpreter->getReflection($value)->getGlobalHash();

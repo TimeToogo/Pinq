@@ -34,7 +34,7 @@ class FunctionInterpreter implements IFunctionInterpreter
      */
     public static function getDefault()
     {
-        if(self::$defaultInstance === null) {
+        if (self::$defaultInstance === null) {
             self::$defaultInstance = new self(new PhpParser\Parser());
         }
 

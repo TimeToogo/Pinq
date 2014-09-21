@@ -36,4 +36,4 @@ class StructuralExpressionParameter extends ExpressionParameter
     {
         return $this->expression;
     }
-} 
+}

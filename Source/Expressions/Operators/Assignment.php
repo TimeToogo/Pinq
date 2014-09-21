@@ -59,7 +59,6 @@ final class Assignment
         return isset(self::$toBinaryOperatorMap[$assignment]) ? self::$toBinaryOperatorMap[$assignment] : null;
     }
 
-
     private static $assignments;
 
     /**
@@ -93,7 +92,7 @@ final class Assignment
             ];
         }
 
-        if(!isset(self::$assignments[$operator])) {
+        if (!isset(self::$assignments[$operator])) {
             throw new PinqException('Assignment operator \'%s\' is not supported', $operator);
         }
 

@@ -14,7 +14,6 @@ use Pinq\Analysis\Types\MixedType;
 use Pinq\Analysis\Types\NativeType;
 use Pinq\Analysis\Types\ObjectType;
 use Pinq\Expressions\Operators;
-use Pinq\Interfaces;
 
 /**
  * Default implementation of the type system representing a subset
@@ -50,7 +49,7 @@ class PhpTypeSystem extends TypeSystem
 
         $typeDataModules = array_merge($this->typeDataModules(), $customTypeDataModules);
         /** @var $typeDataModules ITypeDataModule[] */
-        foreach($typeDataModules as $module) {
+        foreach ($typeDataModules as $module) {
             $this->registerTypeDataModule($module);
         }
     }
@@ -100,7 +99,6 @@ class PhpTypeSystem extends TypeSystem
             unset($this->objectTypes[$normalizedClassName]);
         }
     }
-
 
     // Normalize function / type names using reflection to get originally defined name
     // but fallback to lower casing due to some functions that are not universally available
@@ -245,6 +243,7 @@ class PhpTypeSystem extends TypeSystem
     protected function nativeTypes()
     {
         $this->nativeTypes[INativeType::TYPE_MIXED] = new MixedType(INativeType::TYPE_MIXED);
+
         return [
                 $this->nativeTypes[INativeType::TYPE_MIXED],
                 $this->nativeType(

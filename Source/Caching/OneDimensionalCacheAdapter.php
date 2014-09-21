@@ -16,7 +16,6 @@ abstract class OneDimensionalCacheAdapter extends CacheAdapter
         parent::__construct(null);
     }
 
-
     public function forNamespace($namespace)
     {
         return new PrefixKeyNamespacedCache($this, $namespace);

@@ -161,7 +161,7 @@ abstract class TypeSystem implements ITypeSystem
     }
 
     /**
-     * @param string $typeId
+     * @param string  $typeId
      * @param IType[] $types
      *
      * @return ICompositeType

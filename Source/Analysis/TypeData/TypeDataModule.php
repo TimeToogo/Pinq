@@ -43,4 +43,4 @@ class TypeDataModule implements ITypeDataModule
     {
         return $this->functions;
     }
-} 
+}

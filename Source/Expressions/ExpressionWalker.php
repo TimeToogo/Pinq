@@ -52,7 +52,7 @@ class ExpressionWalker
      */
     protected function doWalkAll(array $expressions)
     {
-        foreach($expressions as $key => $expression) {
+        foreach ($expressions as $key => $expression) {
             $expressions[$key] = $this->walk($expression);
         }
 

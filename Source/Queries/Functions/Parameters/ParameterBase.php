@@ -40,8 +40,8 @@ abstract class ParameterBase implements \Countable
     protected function __construct(array $parameterExpressions, $usedParameters)
     {
         /** @var $parameterExpressions O\ParameterExpression[] */
-        foreach($parameterExpressions as $parameter) {
-            if($parameter->isVariadic()) {
+        foreach ($parameterExpressions as $parameter) {
+            if ($parameter->isVariadic()) {
                 throw new PinqException(
                         'Cannot construct %s: invalid expression for parameter \'%s\', variadic parameters are not supported.',
                         get_class($this),

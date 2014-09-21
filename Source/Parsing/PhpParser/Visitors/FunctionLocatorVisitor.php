@@ -3,7 +3,6 @@
 namespace Pinq\Parsing\PhpParser\Visitors;
 
 use PhpParser\Node;
-use PhpParser\NodeVisitor;
 use PhpParser\NodeVisitorAbstract;
 use Pinq\Expressions as O;
 use Pinq\Parsing\FunctionDeclaration;
@@ -163,7 +162,7 @@ class FunctionLocatorVisitor extends NodeVisitorAbstract
         switch (true) {
 
             case $node instanceof Node\Stmt\Namespace_:
-                $this->namespace = (string)$node->name;
+                $this->namespace = (string) $node->name;
                 break;
 
             case $node instanceof Node\Stmt\Class_:

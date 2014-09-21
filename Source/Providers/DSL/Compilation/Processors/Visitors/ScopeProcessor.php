@@ -8,7 +8,7 @@ use Pinq\Queries\Segments;
 
 /**
  * Implementation of the scope processor using the visitor pattern.
- * 
+ *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
 class ScopeProcessor extends Processors\ScopeProcessor implements Segments\ISegmentVisitor
@@ -21,7 +21,7 @@ class ScopeProcessor extends Processors\ScopeProcessor implements Segments\ISegm
     protected function processSegments(array $segments)
     {
         $this->segments = [];
-        foreach($segments as $segment) {
+        foreach ($segments as $segment) {
             $segment->traverse($this);
         }
 

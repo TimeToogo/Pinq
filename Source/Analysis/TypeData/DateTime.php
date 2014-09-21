@@ -31,7 +31,6 @@ class DateTime extends TypeDataModule
         ];
     }
 
-
     public function types()
     {
         return [
@@ -82,4 +81,4 @@ class DateTime extends TypeDataModule
                 ]
         ];
     }
-} 
+}

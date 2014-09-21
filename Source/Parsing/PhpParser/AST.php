@@ -107,14 +107,14 @@ class AST
 
     protected function parseAbsoluteName(Node\Name $node)
     {
-        return ($node->isFullyQualified() ? '\\' : '') . (string)$node;
+        return ($node->isFullyQualified() ? '\\' : '') . (string) $node;
     }
 
     private function parseParameterNode(Node\Param $node)
     {
         $type = $node->type;
         if ($type !== null) {
-            $type      = (string)$type;
+            $type      = (string) $type;
             $lowerType = strtolower($type);
             if ($type[0] !== '\\' && $lowerType !== 'array' && $lowerType !== 'callable') {
                 $type = '\\' . $type;
@@ -390,7 +390,7 @@ class AST
             case isset(self::$unaryOperatorsMap[$nodeType]):
                 return Expression::unaryOperation(
                         self::$unaryOperatorsMap[$nodeType],
-                        $this->parseNode($node->expr ? : $node->var)
+                        $this->parseNode($node->expr ?: $node->var)
                 );
 
             case isset(self::$castOperatorMap[$nodeType]):

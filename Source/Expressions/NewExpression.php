@@ -37,7 +37,7 @@ class NewExpression extends StaticClassExpression
     }
 
     /**
-     * @param Expression   $class
+     * @param Expression           $class
      * @param ArgumentExpression[] $arguments
      *
      * @return NewExpression

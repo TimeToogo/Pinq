@@ -49,7 +49,7 @@ class FunctionCallExpression extends Expression
     }
 
     /**
-     * @param Expression   $name
+     * @param Expression           $name
      * @param ArgumentExpression[] $arguments
      *
      * @return self

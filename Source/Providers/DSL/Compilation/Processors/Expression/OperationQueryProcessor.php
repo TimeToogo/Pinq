@@ -5,7 +5,6 @@ namespace Pinq\Providers\DSL\Compilation\Processors\Expression;
 use Pinq\Providers\DSL\Compilation\Processors\Visitors;
 use Pinq\Queries;
 use Pinq\Queries\Operations;
-use Pinq\Queries\Requests;
 
 /**
  * Implementation of the operation query processor to update function

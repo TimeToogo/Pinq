@@ -29,9 +29,9 @@ class StructuralExpressionLocator extends StructuralExpressionQueryProcessor
     }
 
     /**
-     * @param ParameterCollection $parameters
-     * @param Queries\IQuery                                                 $query
-     * @param IStructuralExpressionProcessor                                 $processor
+     * @param ParameterCollection            $parameters
+     * @param Queries\IQuery                 $query
+     * @param IStructuralExpressionProcessor $processor
      *
      * @return void
      */
@@ -57,6 +57,7 @@ class StructuralExpressionLocator extends StructuralExpressionQueryProcessor
                         O\Expression $expression
                 ) use ($function) {
                     $processor->parameterize($function, $expression, $this->parameters);
+
                     return $expression;
                 },
                 $function,

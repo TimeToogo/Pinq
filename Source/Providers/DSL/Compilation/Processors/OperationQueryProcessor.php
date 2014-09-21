@@ -26,6 +26,7 @@ abstract class OperationQueryProcessor extends QueryProcessor implements IOperat
     {
         $scope     = $this->scopeProcessor->buildScope();
         $operation = $this->operationQuery->getOperation();
+
         return $this->operationQuery->update(
                 $this->processScope($scope, $operation),
                 $this->processOperation(

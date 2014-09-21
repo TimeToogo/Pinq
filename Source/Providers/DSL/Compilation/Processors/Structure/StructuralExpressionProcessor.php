@@ -24,7 +24,7 @@ abstract class StructuralExpressionProcessor implements IStructuralExpressionPro
         $parameters->add(
                 new StructuralExpressionParameter(
                         $expression,
-                        $hasher ? : Parameters\ParameterHasher::valueType(),
+                        $hasher ?: Parameters\ParameterHasher::valueType(),
                         $function)
         );
     }

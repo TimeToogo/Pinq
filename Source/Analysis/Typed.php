@@ -12,7 +12,7 @@ class Typed implements ITyped
     /**
      * @var ITypeSystem
      */
-    protected  $typeSystem;
+    protected $typeSystem;
 
     public function __construct(ITypeSystem $typeSystem)
     {

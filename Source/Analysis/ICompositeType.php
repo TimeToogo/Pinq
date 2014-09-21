@@ -2,8 +2,6 @@
 
 namespace Pinq\Analysis;
 
-use Pinq\Expressions as O;
-
 /**
  * Interface of a composite type.
  *

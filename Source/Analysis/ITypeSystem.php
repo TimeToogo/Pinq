@@ -95,7 +95,7 @@ interface ITypeSystem
      * @param IType $rightOperandType
      *
      * @return IBinaryOperation
-     * @throws TypeException If the binary operation is not supported
+     * @throws TypeException    If the binary operation is not supported
      */
     public function getBinaryOperation(IType $leftOperandType, $operator, IType $rightOperandType);
 }

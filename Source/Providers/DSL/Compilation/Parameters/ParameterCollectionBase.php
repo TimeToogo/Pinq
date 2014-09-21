@@ -2,8 +2,6 @@
 
 namespace Pinq\Providers\DSL\Compilation\Parameters;
 
-use Pinq\Expressions as O;
-
 /**
  * Base class of the expression collection.
  *

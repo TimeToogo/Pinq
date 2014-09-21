@@ -65,7 +65,7 @@ class FunctionLocation implements IFunctionLocation
      */
     public static function fromReflection(\ReflectionFunctionAbstract $reflection)
     {
-        if($reflection instanceof \ReflectionFunction) {
+        if ($reflection instanceof \ReflectionFunction) {
             $namespace = $reflection->getNamespaceName();
         } elseif ($reflection instanceof \ReflectionMethod) {
             $namespace = $reflection->getDeclaringClass()->getNamespaceName();
@@ -104,7 +104,6 @@ class FunctionLocation implements IFunctionLocation
     {
         return $this->endLine;
     }
-
 
     public function getHash()
     {
