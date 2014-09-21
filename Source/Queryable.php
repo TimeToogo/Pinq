@@ -15,7 +15,7 @@ use Pinq\Queries\Segments;
 class Queryable extends QueryBuilder implements IQueryable, Interfaces\IOrderedQueryable
 {
     /**
-     * @var ISourceInfo
+     * @var Queries\ISourceInfo
      */
     protected $sourceInfo;
 

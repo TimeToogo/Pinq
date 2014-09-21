@@ -3,7 +3,6 @@
 namespace Pinq\Queries\Operations;
 
 use Pinq\Queries\Common;
-use string;
 
 /**
  * Base class for an operation query for with a range of values

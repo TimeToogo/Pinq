@@ -2,7 +2,6 @@
 
 namespace Pinq\Providers\DSL\Compilation\Processors\Expression;
 
-use Pinq\Providers\DSL\Compilation\Context;
 use Pinq\Queries;
 use Pinq\Queries\Functions\FunctionBase;
 
