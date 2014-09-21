@@ -2,13 +2,9 @@
 
 namespace Pinq\Providers\DSL;
 
-use Pinq\Caching\ICacheAdapter;
 use Pinq\Expressions as O;
 use Pinq\PinqException;
 use Pinq\Providers\Configuration;
-use Pinq\Providers\DSL\Compilation\ICompiledOperation;
-use Pinq\Providers\DSL\Compilation\IOperationTemplate;
-use Pinq\Providers\DSL\Compilation\IStaticOperationTemplate;
 use Pinq\Providers;
 use Pinq\Queries;
 

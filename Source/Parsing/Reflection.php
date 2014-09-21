@@ -2,8 +2,6 @@
 
 namespace Pinq\Parsing;
 
-use Pinq\PinqException;
-
 /**
  * Utility class for getting the reflection from any type
  * of callable.

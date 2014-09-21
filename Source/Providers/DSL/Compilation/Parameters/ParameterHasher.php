@@ -4,7 +4,6 @@ namespace Pinq\Providers\DSL\Compilation\Parameters;
 
 use Pinq\Expressions as O;
 use Pinq\Parsing\IFunctionInterpreter;
-use Pinq\PinqException;
 
 /**
  * Factory class for the parameter hasher implementations.

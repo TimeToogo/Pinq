@@ -6,7 +6,6 @@ use Pinq\Caching;
 use Pinq\Expressions as O;
 use Pinq\Providers\Configuration;
 use Pinq\Providers\DSL\Compilation\ICompiledQuery;
-use Pinq\Providers\DSL\Compilation\ICompiledRequest;
 use Pinq\Providers\DSL\Compilation\IQueryTemplate;
 use Pinq\Providers\DSL\Compilation\IStaticQueryTemplate;
 use Pinq\Providers\DSL\Compilation\IStaticRequestTemplate;
