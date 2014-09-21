@@ -2,7 +2,7 @@
 
 namespace Pinq\Caching;
 
-use Doctrine\Common\Cache\Cache;
+use Doctrine\Common\Cache\CacheProvider as DoctrineCacheProvider;
 
 /**
  * Static provider to configure and retrieve the cache implementation
@@ -108,11 +108,11 @@ final class CacheProvider
     /**
      * Uses the supplied doctrine cache to store the parsed queries.
      *
-     * @param Cache $cache The doctrine cache
+     * @param DoctrineCacheProvider $cache The doctrine cache
      *
      * @return void
      */
-    public static function setDoctrineCache(Cache $cache)
+    public static function setDoctrineCache(DoctrineCacheProvider $cache)
     {
         self::$cacheImplementation = new DoctrineCache($cache);
         self::$hasBeenCleared      = false;

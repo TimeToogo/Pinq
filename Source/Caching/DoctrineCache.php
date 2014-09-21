@@ -2,7 +2,6 @@
 
 namespace Pinq\Caching;
 
-use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Cache\CacheProvider as DoctrineCacheProvider;
 
 /**
