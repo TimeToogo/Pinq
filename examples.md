@@ -161,7 +161,7 @@ $numberData = $numbers
         ->select(function (ITraversable $numbers, $isEven) {
             return [
                 'isEven'     => $isEven,
-                'average'   => $numbers->average(),
+                'average'  => $numbers->average(),
                 'count'      => $numbers->count(),
                 'numbers' => $numbers->asArray(),
             ];
