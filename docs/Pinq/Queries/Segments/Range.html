@@ -39,10 +39,21 @@
             <table>
                     <tr>
                 <td class="type">
+                    string[]
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>($rangeStart, $rangeAmount)
+                    <a href="#method___construct">__construct</a>($startParameterId, $amountParameterId)
                     <p>
 </p>
                 </td>
@@ -61,10 +72,10 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
+                    void
                 </td>
                 <td class="last">
-                    <a href="#method_traverse">traverse</a>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $walker)
+                    <a href="#method_traverse">traverse</a>(<a href="../../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> $visitor)
                     <p>
 </p>
                 </td>
@@ -72,34 +83,21 @@
             </tr>
                     <tr>
                 <td class="type">
-                    int
+                    string
                 </td>
                 <td class="last">
-                    <a href="#method_getRangeStart">getRangeStart</a>()
-                    <p>
-</p>
+                    <a href="#method_getStartId">getStartId</a>()
+                    <p>Gets the start parameter id.</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    int|null
+                    string
                 </td>
                 <td class="last">
-                    <a href="#method_getRangeAmount">getRangeAmount</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_update">update</a>($rangeStart, $rangeAmount)
-                    <p>
-</p>
+                    <a href="#method_getAmountId">getAmountId</a>()
+                    <p>Gets the amount parameter id.</p>
                 </td>
                 <td></td>
             </tr>
@@ -108,10 +106,37 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method___construct">
-        <div class="location">at line 16</div>
+                        <h3 id="method_getParameters">
+        <div class="location">at line 33</div>
+        <code>            public            string[]
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method___construct">
+        <div class="location">at line 22</div>
         <code>            public            
-    <strong>__construct</strong>($rangeStart, $rangeAmount)</code>
+    <strong>__construct</strong>($startParameterId, $amountParameterId)</code>
     </h3>
     <div class="details">
         <p>
@@ -124,13 +149,13 @@
                     <table>
                     <tr>
                 <td></td>
-                <td>$rangeStart</td>
+                <td>$startParameterId</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td></td>
-                <td>$rangeAmount</td>
+                <td>$amountParameterId</td>
                 <td>
 </td>
             </tr>
@@ -143,7 +168,7 @@
     </div>
 
                 <h3 id="method_getType">
-        <div class="location">at line 22</div>
+        <div class="location">at line 28</div>
         <code>            public            int
     <strong>getType</strong>()</code>
     </h3>
@@ -169,9 +194,9 @@
     </div>
 
                 <h3 id="method_traverse">
-        <div class="location">at line 27</div>
-        <code>            public            <a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
-    <strong>traverse</strong>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $walker)</code>
+        <div class="location">at line 38</div>
+        <code>            public            void
+    <strong>traverse</strong>(<a href="../../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> $visitor)</code>
     </h3>
     <div class="details">
         <p>
@@ -183,8 +208,8 @@
 
                     <table>
                     <tr>
-                <td><a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a></td>
-                <td>$walker</td>
+                <td><a href="../../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></td>
+                <td>$visitor</td>
                 <td>
 </td>
             </tr>
@@ -195,7 +220,7 @@
 
                     <table>
         <tr>
-            <td><a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a></td>
+            <td>void</td>
             <td>
 </td>
         </tr>
@@ -206,89 +231,53 @@
                     </div>
     </div>
 
-                <h3 id="method_getRangeStart">
-        <div class="location">at line 35</div>
-        <code>            public            int
-    <strong>getRangeStart</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>int</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_getRangeAmount">
-        <div class="location">at line 43</div>
-        <code>            public            int|null
-    <strong>getRangeAmount</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>int|null</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_update">
+                <h3 id="method_getStartId">
         <div class="location">at line 48</div>
-        <code>            public            
-    <strong>update</strong>($rangeStart, $rangeAmount)</code>
+        <code>            public            string
+    <strong>getStartId</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
+        <p>Gets the start parameter id.</p>
         <p>
 </p>
         <div class="tags">
-                            <h4>Parameters</h4>
+            
+                            <h4>Return Value</h4>
 
                     <table>
-                    <tr>
-                <td></td>
-                <td>$rangeStart</td>
-                <td>
+        <tr>
+            <td>string</td>
+            <td>
 </td>
-            </tr>
-                    <tr>
-                <td></td>
-                <td>$rangeAmount</td>
-                <td>
-</td>
-            </tr>
-            </table>
+        </tr>
+    </table>
 
             
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAmountId">
+        <div class="location">at line 58</div>
+        <code>            public            string
+    <strong>getAmountId</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the amount parameter id.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
             
             
                     </div>

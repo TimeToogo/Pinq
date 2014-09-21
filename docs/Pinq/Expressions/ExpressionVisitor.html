@@ -27,7 +27,7 @@
     <strong>ExpressionVisitor</strong>        extends <a href="../../Pinq/Expressions/ExpressionWalker.html"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></p>
 
             <div class="description">
-            <p>Base class for traversing an expression tree, only the top expression will be visisted, the subclass should implement such that is visits all the appropriate expressions</p>
+            <p>Base class for traversing an expression tree, only the top expression will be visited, the subclass should implement such that is visits all the appropriate expressions</p>
             <p>
 </p>
         </div>
@@ -43,8 +43,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_walk">walk</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $expression = null)
-                    <p>
-</p>
+                    <p>Walks the expression tree and returns the updated expression tree.</p>
                 </td>
                 <td><small>from&nbsp;<a href="../../Pinq/Expressions/ExpressionWalker.html#method_walk"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></small></td>
             </tr>
@@ -65,6 +64,17 @@
                 </td>
                 <td class="last">
                     <a href="#method_walkArray">walkArray</a>(<a href="../../Pinq/Expressions/ArrayExpression.html"><abbr title="Pinq\Expressions\ArrayExpression">ArrayExpression</abbr></a> $expression)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_walkArrayItem">walkArrayItem</a>(<a href="../../Pinq/Expressions/ArrayItemExpression.html"><abbr title="Pinq\Expressions\ArrayItemExpression">ArrayItemExpression</abbr></a> $expression)
                     <p>
 </p>
                 </td>
@@ -119,6 +129,28 @@
                     
                 </td>
                 <td class="last">
+                    <a href="#method_walkConstant">walkConstant</a>(<a href="../../Pinq/Expressions/ConstantExpression.html"><abbr title="Pinq\Expressions\ConstantExpression">ConstantExpression</abbr></a> $expression)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_walkClassConstant">walkClassConstant</a>(<a href="../../Pinq/Expressions/ClassConstantExpression.html"><abbr title="Pinq\Expressions\ClassConstantExpression">ClassConstantExpression</abbr></a> $expression)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
                     <a href="#method_walkEmpty">walkEmpty</a>(<a href="../../Pinq/Expressions/EmptyExpression.html"><abbr title="Pinq\Expressions\EmptyExpression">EmptyExpression</abbr></a> $expression)
                     <p>
 </p>
@@ -131,6 +163,17 @@
                 </td>
                 <td class="last">
                     <a href="#method_walkIsset">walkIsset</a>(<a href="../../Pinq/Expressions/IssetExpression.html"><abbr title="Pinq\Expressions\IssetExpression">IssetExpression</abbr></a> $expression)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_walkUnset">walkUnset</a>(<a href="../../Pinq/Expressions/UnsetExpression.html"><abbr title="Pinq\Expressions\UnsetExpression">UnsetExpression</abbr></a> $expression)
                     <p>
 </p>
                 </td>
@@ -207,6 +250,17 @@
                     
                 </td>
                 <td class="last">
+                    <a href="#method_walkStaticField">walkStaticField</a>(<a href="../../Pinq/Expressions/StaticFieldExpression.html"><abbr title="Pinq\Expressions\StaticFieldExpression">StaticFieldExpression</abbr></a> $expression)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
                     <a href="#method_walkNew">walkNew</a>(<a href="../../Pinq/Expressions/NewExpression.html"><abbr title="Pinq\Expressions\NewExpression">NewExpression</abbr></a> $expression)
                     <p>
 </p>
@@ -251,6 +305,17 @@
                     
                 </td>
                 <td class="last">
+                    <a href="#method_walkArgument">walkArgument</a>(<a href="../../Pinq/Expressions/ArgumentExpression.html"><abbr title="Pinq\Expressions\ArgumentExpression">ArgumentExpression</abbr></a> $expression)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
                     <a href="#method_walkTernary">walkTernary</a>(<a href="../../Pinq/Expressions/TernaryExpression.html"><abbr title="Pinq\Expressions\TernaryExpression">TernaryExpression</abbr></a> $expression)
                     <p>
 </p>
@@ -284,7 +349,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_walkSubQuery">walkSubQuery</a>(<a href="../../Pinq/Expressions/SubQueryExpression.html"><abbr title="Pinq\Expressions\SubQueryExpression">SubQueryExpression</abbr></a> $expression)
+                    <a href="#method_walkClosure">walkClosure</a>(<a href="../../Pinq/Expressions/ClosureExpression.html"><abbr title="Pinq\Expressions\ClosureExpression">ClosureExpression</abbr></a> $expression)
                     <p>
 </p>
                 </td>
@@ -295,7 +360,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_walkClosure">walkClosure</a>(<a href="../../Pinq/Expressions/ClosureExpression.html"><abbr title="Pinq\Expressions\ClosureExpression">ClosureExpression</abbr></a> $expression)
+                    <a href="#method_walkClosureUsedVariable">walkClosureUsedVariable</a>(<a href="../../Pinq/Expressions/ClosureUsedVariableExpression.html"><abbr title="Pinq\Expressions\ClosureUsedVariableExpression">ClosureUsedVariableExpression</abbr></a> $expression)
                     <p>
 </p>
                 </td>
@@ -307,13 +372,12 @@
         <h2>Details</h2>
 
                         <h3 id="method_walk">
-        <div class="location">in <a href="../../Pinq/Expressions/ExpressionWalker.html#method_walk"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 15</div>
+        <div class="location">in <a href="../../Pinq/Expressions/ExpressionWalker.html#method_walk"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 19</div>
         <code>final            public            <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>|null
     <strong>walk</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $expression = null)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
+        <p>Walks the expression tree and returns the updated expression tree.</p>
         <p>
 </p>
         <div class="tags">
@@ -345,7 +409,7 @@
     </div>
 
                 <h3 id="method_walkAll">
-        <div class="location">in <a href="../../Pinq/Expressions/ExpressionWalker.html#method_walkAll"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 23</div>
+        <div class="location">in <a href="../../Pinq/Expressions/ExpressionWalker.html#method_walkAll"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> at line 43</div>
         <code>final            public            <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]
     <strong>walkAll</strong>(array $expressions)</code>
     </h3>
@@ -410,8 +474,36 @@
                     </div>
     </div>
 
-                <h3 id="method_walkAssignment">
+                <h3 id="method_walkArrayItem">
         <div class="location">at line 26</div>
+        <code>final            public            
+    <strong>walkArrayItem</strong>(<a href="../../Pinq/Expressions/ArrayItemExpression.html"><abbr title="Pinq\Expressions\ArrayItemExpression">ArrayItemExpression</abbr></a> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/ArrayItemExpression.html"><abbr title="Pinq\Expressions\ArrayItemExpression">ArrayItemExpression</abbr></a></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_walkAssignment">
+        <div class="location">at line 38</div>
         <code>final            public            
     <strong>walkAssignment</strong>(<a href="../../Pinq/Expressions/AssignmentExpression.html"><abbr title="Pinq\Expressions\AssignmentExpression">AssignmentExpression</abbr></a> $expression)</code>
     </h3>
@@ -439,7 +531,7 @@
     </div>
 
                 <h3 id="method_walkBinaryOperation">
-        <div class="location">at line 38</div>
+        <div class="location">at line 50</div>
         <code>final            public            
     <strong>walkBinaryOperation</strong>(<a href="../../Pinq/Expressions/BinaryOperationExpression.html"><abbr title="Pinq\Expressions\BinaryOperationExpression">BinaryOperationExpression</abbr></a> $expression)</code>
     </h3>
@@ -467,7 +559,7 @@
     </div>
 
                 <h3 id="method_walkUnaryOperation">
-        <div class="location">at line 242</div>
+        <div class="location">at line 314</div>
         <code>final            public            
     <strong>walkUnaryOperation</strong>(<a href="../../Pinq/Expressions/UnaryOperationExpression.html"><abbr title="Pinq\Expressions\UnaryOperationExpression">UnaryOperationExpression</abbr></a> $expression)</code>
     </h3>
@@ -495,7 +587,7 @@
     </div>
 
                 <h3 id="method_walkCast">
-        <div class="location">at line 50</div>
+        <div class="location">at line 62</div>
         <code>final            public            
     <strong>walkCast</strong>(<a href="../../Pinq/Expressions/CastExpression.html"><abbr title="Pinq\Expressions\CastExpression">CastExpression</abbr></a> $expression)</code>
     </h3>
@@ -522,8 +614,64 @@
                     </div>
     </div>
 
+                <h3 id="method_walkConstant">
+        <div class="location">at line 98</div>
+        <code>            public            
+    <strong>walkConstant</strong>(<a href="../../Pinq/Expressions/ConstantExpression.html"><abbr title="Pinq\Expressions\ConstantExpression">ConstantExpression</abbr></a> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/ConstantExpression.html"><abbr title="Pinq\Expressions\ConstantExpression">ConstantExpression</abbr></a></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_walkClassConstant">
+        <div class="location">at line 110</div>
+        <code>            public            
+    <strong>walkClassConstant</strong>(<a href="../../Pinq/Expressions/ClassConstantExpression.html"><abbr title="Pinq\Expressions\ClassConstantExpression">ClassConstantExpression</abbr></a> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/ClassConstantExpression.html"><abbr title="Pinq\Expressions\ClassConstantExpression">ClassConstantExpression</abbr></a></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_walkEmpty">
-        <div class="location">at line 86</div>
+        <div class="location">at line 146</div>
         <code>final            public            
     <strong>walkEmpty</strong>(<a href="../../Pinq/Expressions/EmptyExpression.html"><abbr title="Pinq\Expressions\EmptyExpression">EmptyExpression</abbr></a> $expression)</code>
     </h3>
@@ -551,7 +699,7 @@
     </div>
 
                 <h3 id="method_walkIsset">
-        <div class="location">at line 98</div>
+        <div class="location">at line 158</div>
         <code>final            public            
     <strong>walkIsset</strong>(<a href="../../Pinq/Expressions/IssetExpression.html"><abbr title="Pinq\Expressions\IssetExpression">IssetExpression</abbr></a> $expression)</code>
     </h3>
@@ -578,8 +726,36 @@
                     </div>
     </div>
 
+                <h3 id="method_walkUnset">
+        <div class="location">at line 170</div>
+        <code>final            public            
+    <strong>walkUnset</strong>(<a href="../../Pinq/Expressions/UnsetExpression.html"><abbr title="Pinq\Expressions\UnsetExpression">UnsetExpression</abbr></a> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/UnsetExpression.html"><abbr title="Pinq\Expressions\UnsetExpression">UnsetExpression</abbr></a></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_walkField">
-        <div class="location">at line 110</div>
+        <div class="location">at line 182</div>
         <code>final            public            
     <strong>walkField</strong>(<a href="../../Pinq/Expressions/FieldExpression.html"><abbr title="Pinq\Expressions\FieldExpression">FieldExpression</abbr></a> $expression)</code>
     </h3>
@@ -607,7 +783,7 @@
     </div>
 
                 <h3 id="method_walkMethodCall">
-        <div class="location">at line 158</div>
+        <div class="location">at line 230</div>
         <code>final            public            
     <strong>walkMethodCall</strong>(<a href="../../Pinq/Expressions/MethodCallExpression.html"><abbr title="Pinq\Expressions\MethodCallExpression">MethodCallExpression</abbr></a> $expression)</code>
     </h3>
@@ -635,7 +811,7 @@
     </div>
 
                 <h3 id="method_walkIndex">
-        <div class="location">at line 134</div>
+        <div class="location">at line 206</div>
         <code>final            public            
     <strong>walkIndex</strong>(<a href="../../Pinq/Expressions/IndexExpression.html"><abbr title="Pinq\Expressions\IndexExpression">IndexExpression</abbr></a> $expression)</code>
     </h3>
@@ -663,7 +839,7 @@
     </div>
 
                 <h3 id="method_walkInvocation">
-        <div class="location">at line 146</div>
+        <div class="location">at line 218</div>
         <code>final            public            
     <strong>walkInvocation</strong>(<a href="../../Pinq/Expressions/InvocationExpression.html"><abbr title="Pinq\Expressions\InvocationExpression">InvocationExpression</abbr></a> $expression)</code>
     </h3>
@@ -691,7 +867,7 @@
     </div>
 
                 <h3 id="method_walkFunctionCall">
-        <div class="location">at line 122</div>
+        <div class="location">at line 194</div>
         <code>final            public            
     <strong>walkFunctionCall</strong>(<a href="../../Pinq/Expressions/FunctionCallExpression.html"><abbr title="Pinq\Expressions\FunctionCallExpression">FunctionCallExpression</abbr></a> $expression)</code>
     </h3>
@@ -719,7 +895,7 @@
     </div>
 
                 <h3 id="method_walkStaticMethodCall">
-        <div class="location">at line 206</div>
+        <div class="location">at line 278</div>
         <code>final            public            
     <strong>walkStaticMethodCall</strong>(<a href="../../Pinq/Expressions/StaticMethodCallExpression.html"><abbr title="Pinq\Expressions\StaticMethodCallExpression">StaticMethodCallExpression</abbr></a> $expression)</code>
     </h3>
@@ -746,8 +922,36 @@
                     </div>
     </div>
 
+                <h3 id="method_walkStaticField">
+        <div class="location">at line 290</div>
+        <code>final            public            
+    <strong>walkStaticField</strong>(<a href="../../Pinq/Expressions/StaticFieldExpression.html"><abbr title="Pinq\Expressions\StaticFieldExpression">StaticFieldExpression</abbr></a> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/StaticFieldExpression.html"><abbr title="Pinq\Expressions\StaticFieldExpression">StaticFieldExpression</abbr></a></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_walkNew">
-        <div class="location">at line 170</div>
+        <div class="location">at line 242</div>
         <code>final            public            
     <strong>walkNew</strong>(<a href="../../Pinq/Expressions/NewExpression.html"><abbr title="Pinq\Expressions\NewExpression">NewExpression</abbr></a> $expression)</code>
     </h3>
@@ -775,7 +979,7 @@
     </div>
 
                 <h3 id="method_walkReturn">
-        <div class="location">at line 182</div>
+        <div class="location">at line 254</div>
         <code>final            public            
     <strong>walkReturn</strong>(<a href="../../Pinq/Expressions/ReturnExpression.html"><abbr title="Pinq\Expressions\ReturnExpression">ReturnExpression</abbr></a> $expression)</code>
     </h3>
@@ -803,8 +1007,8 @@
     </div>
 
                 <h3 id="method_walkThrow">
-        <div class="location">at line 194</div>
-        <code>            public            
+        <div class="location">at line 266</div>
+        <code>final            public            
     <strong>walkThrow</strong>(<a href="../../Pinq/Expressions/ThrowExpression.html"><abbr title="Pinq\Expressions\ThrowExpression">ThrowExpression</abbr></a> $expression)</code>
     </h3>
     <div class="details">
@@ -831,7 +1035,7 @@
     </div>
 
                 <h3 id="method_walkParameter">
-        <div class="location">at line 74</div>
+        <div class="location">at line 122</div>
         <code>final            public            
     <strong>walkParameter</strong>(<a href="../../Pinq/Expressions/ParameterExpression.html"><abbr title="Pinq\Expressions\ParameterExpression">ParameterExpression</abbr></a> $expression)</code>
     </h3>
@@ -858,8 +1062,36 @@
                     </div>
     </div>
 
+                <h3 id="method_walkArgument">
+        <div class="location">at line 134</div>
+        <code>final            public            
+    <strong>walkArgument</strong>(<a href="../../Pinq/Expressions/ArgumentExpression.html"><abbr title="Pinq\Expressions\ArgumentExpression">ArgumentExpression</abbr></a> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/ArgumentExpression.html"><abbr title="Pinq\Expressions\ArgumentExpression">ArgumentExpression</abbr></a></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_walkTernary">
-        <div class="location">at line 230</div>
+        <div class="location">at line 302</div>
         <code>final            public            
     <strong>walkTernary</strong>(<a href="../../Pinq/Expressions/TernaryExpression.html"><abbr title="Pinq\Expressions\TernaryExpression">TernaryExpression</abbr></a> $expression)</code>
     </h3>
@@ -887,7 +1119,7 @@
     </div>
 
                 <h3 id="method_walkVariable">
-        <div class="location">at line 266</div>
+        <div class="location">at line 338</div>
         <code>final            public            
     <strong>walkVariable</strong>(<a href="../../Pinq/Expressions/VariableExpression.html"><abbr title="Pinq\Expressions\VariableExpression">VariableExpression</abbr></a> $expression)</code>
     </h3>
@@ -915,7 +1147,7 @@
     </div>
 
                 <h3 id="method_walkValue">
-        <div class="location">at line 254</div>
+        <div class="location">at line 326</div>
         <code>final            public            
     <strong>walkValue</strong>(<a href="../../Pinq/Expressions/ValueExpression.html"><abbr title="Pinq\Expressions\ValueExpression">ValueExpression</abbr></a> $expression)</code>
     </h3>
@@ -942,36 +1174,8 @@
                     </div>
     </div>
 
-                <h3 id="method_walkSubQuery">
-        <div class="location">at line 218</div>
-        <code>final            public            
-    <strong>walkSubQuery</strong>(<a href="../../Pinq/Expressions/SubQueryExpression.html"><abbr title="Pinq\Expressions\SubQueryExpression">SubQueryExpression</abbr></a> $expression)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../Pinq/Expressions/SubQueryExpression.html"><abbr title="Pinq\Expressions\SubQueryExpression">SubQueryExpression</abbr></a></td>
-                <td>$expression</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
                 <h3 id="method_walkClosure">
-        <div class="location">at line 62</div>
+        <div class="location">at line 74</div>
         <code>final            public            
     <strong>walkClosure</strong>(<a href="../../Pinq/Expressions/ClosureExpression.html"><abbr title="Pinq\Expressions\ClosureExpression">ClosureExpression</abbr></a> $expression)</code>
     </h3>
@@ -986,6 +1190,34 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/ClosureExpression.html"><abbr title="Pinq\Expressions\ClosureExpression">ClosureExpression</abbr></a></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_walkClosureUsedVariable">
+        <div class="location">at line 86</div>
+        <code>final            public            
+    <strong>walkClosureUsedVariable</strong>(<a href="../../Pinq/Expressions/ClosureUsedVariableExpression.html"><abbr title="Pinq\Expressions\ClosureUsedVariableExpression">ClosureUsedVariableExpression</abbr></a> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/ClosureUsedVariableExpression.html"><abbr title="Pinq\Expressions\ClosureUsedVariableExpression">ClosureUsedVariableExpression</abbr></a></td>
                 <td>$expression</td>
                 <td>
 </td>

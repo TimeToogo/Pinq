@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Queries\Functions\ElementProjection | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Pinq/Queries/Functions.html">Pinq\Queries\Functions</a>\ElementProjection</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>ElementProjection</strong>        extends <a href="../../../Pinq/Queries/Functions/ProjectionBase.html"><abbr title="Pinq\Queries\Functions\ProjectionBase">ProjectionBase</abbr></a></p>
+
+            <div class="description">
+            <p>Structure of function that takes a value and key parameter and returns a value.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>($callableId, $scopeType, $namespace, array $parameterScopedVariableMap, array $parameterExpressions, array $bodyExpressions = null)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method___construct"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;callable
+                </td>
+                <td class="last">
+                    <a href="#method_factory">factory</a>()
+                    <p>Gets a callable factory for the function structure.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_factory"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getCallableId">getCallableId</a>()
+                    <p>Gets the parameter id of the callable for the function.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getCallableId"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_hasScopeType">hasScopeType</a>()
+                    <p>Whether the function has a scoped type.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_hasScopeType"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getScopeType">getScopeType</a>()
+                    <p>Gets the bound type of the function.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getScopeType"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_hasNamespace">hasNamespace</a>()
+                    <p>Whether the function is defined in a namespace.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_hasNamespace"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getNamespace">getNamespace</a>()
+                    <p>Gets the namespace the function was defined in.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getNamespace"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isInternal">isInternal</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_isInternal"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Queries\Functions\array&lt;string,">array&lt;string,</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_getParameterScopedVariableMap">getParameterScopedVariableMap</a>()
+                    <p>Gets an array containing the parameter ids as keys with their respective scoped variable name as the value.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getParameterScopedVariableMap"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_serialize">serialize</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_serialize"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_unserialize">unserialize</a>($data)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_unserialize"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Queries\Functions\O\Expression">Expression</abbr>[]
+                </td>
+                <td class="last">
+                    <a href="#method_getBodyExpressions">getBodyExpressions</a>()
+                    <p>Gets the body expressions of the function.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getBodyExpressions"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Queries\Functions\O\Expression">Expression</abbr>[]
+                </td>
+                <td class="last">
+                    <a href="#method_getBodyExpressionsUntilReturn">getBodyExpressionsUntilReturn</a>()
+                    <p>Gets the body expressions of the function before and including the first return statement.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getBodyExpressionsUntilReturn"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    int
+                </td>
+                <td class="last">
+                    <a href="#method_countBodyExpressions">countBodyExpressions</a>()
+                    <p>Gets amount of body expressions of the function.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_countBodyExpressions"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    int
+                </td>
+                <td class="last">
+                    <a href="#method_countBodyExpressionsUntilReturn">countBodyExpressionsUntilReturn</a>()
+                    <p>Gets amount of body expressions of the function before and including the first return statement.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_countBodyExpressionsUntilReturn"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/Functions/Parameters/ValueKey.html"><abbr title="Pinq\Queries\Functions\Parameters\ValueKey">ValueKey</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string[]
+                </td>
+                <td class="last">
+                    <a href="#method_getParameterIds">getParameterIds</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getParameterIds"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/Functions/FunctionEvaluationContextFactory.html"><abbr title="Pinq\Queries\Functions\FunctionEvaluationContextFactory">FunctionEvaluationContextFactory</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getEvaluationContextFactory">getEvaluationContextFactory</a>()
+                    <p>Gets an evaluation context factory of the function.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getEvaluationContextFactory"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_update">update</a>(string|null $scopeType, string|null $namespace, array $parameterScopedVariableMap, array $parameterExpressions, array $bodyExpressions = null)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_update"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_updateBody">updateBody</a>(array $bodyExpressions = null)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_updateBody"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_walk">walk</a>(<abbr title="Pinq\Queries\Functions\O\ExpressionWalker">ExpressionWalker</abbr> $walker)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_walk"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_hasReturnExpression">hasReturnExpression</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/ProjectionBase.html#method_hasReturnExpression"><abbr title="Pinq\Queries\Functions\ProjectionBase">ProjectionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Queries\Functions\O\ReturnExpression">ReturnExpression</abbr>|null
+                </td>
+                <td class="last">
+                    <a href="#method_getReturnExpression">getReturnExpression</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/ProjectionBase.html#method_getReturnExpression"><abbr title="Pinq\Queries\Functions\ProjectionBase">ProjectionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_hasReturnValueExpression">hasReturnValueExpression</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/ProjectionBase.html#method_hasReturnValueExpression"><abbr title="Pinq\Queries\Functions\ProjectionBase">ProjectionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Queries\Functions\O\Expression">Expression</abbr>|null
+                </td>
+                <td class="last">
+                    <a href="#method_getReturnValueExpression">getReturnValueExpression</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Functions/ProjectionBase.html#method_getReturnValueExpression"><abbr title="Pinq\Queries\Functions\ProjectionBase">ProjectionBase</abbr></a></small></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method___construct"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 34</div>
+        <code>final            public            
+    <strong>__construct</strong>($callableId, $scopeType, $namespace, array $parameterScopedVariableMap, array $parameterExpressions, array $bodyExpressions = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$callableId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$scopeType</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$namespace</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$parameterScopedVariableMap</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$parameterExpressions</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$bodyExpressions</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_factory">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_factory"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 72</div>
+        <code>        static    public            callable
+    <strong>factory</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets a callable factory for the function structure.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>callable</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCallableId">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getCallableId"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 94</div>
+        <code>final            public            string
+    <strong>getCallableId</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the parameter id of the callable for the function.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasScopeType">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_hasScopeType"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 99</div>
+        <code>            public            boolean
+    <strong>hasScopeType</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Whether the function has a scoped type.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getScopeType">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getScopeType"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 104</div>
+        <code>            public            string|null
+    <strong>getScopeType</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the bound type of the function.</p>
+        <p>Null if there is no bound type.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasNamespace">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_hasNamespace"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 109</div>
+        <code>            public            boolean
+    <strong>hasNamespace</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Whether the function is defined in a namespace.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getNamespace">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getNamespace"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 114</div>
+        <code>            public            string|null
+    <strong>getNamespace</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the namespace the function was defined in.</p>
+        <p>Null if was defined in the global namespace.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isInternal">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_isInternal"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 119</div>
+        <code>            public            boolean
+    <strong>isInternal</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getParameterScopedVariableMap">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getParameterScopedVariableMap"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 134</div>
+        <code>            public            <abbr title="Pinq\Queries\Functions\array&lt;string,">array&lt;string,</abbr>
+    <strong>getParameterScopedVariableMap</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets an array containing the parameter ids as keys with their respective scoped variable name as the value.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Queries\Functions\array&lt;string,">array&lt;string,</abbr></td>
+            <td>string></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_serialize">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_serialize"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 139</div>
+        <code>final            public            
+    <strong>serialize</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_unserialize">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_unserialize"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 156</div>
+        <code>final            public            
+    <strong>unserialize</strong>($data)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$data</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getBodyExpressions">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getBodyExpressions"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 171</div>
+        <code>final            public            <abbr title="Pinq\Queries\Functions\O\Expression">Expression</abbr>[]
+    <strong>getBodyExpressions</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the body expressions of the function.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Queries\Functions\O\Expression">Expression</abbr>[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="PinqException">PinqException</abbr></td>
+                <td>if the function is internal</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getBodyExpressionsUntilReturn">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getBodyExpressionsUntilReturn"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 178</div>
+        <code>final            public            <abbr title="Pinq\Queries\Functions\O\Expression">Expression</abbr>[]
+    <strong>getBodyExpressionsUntilReturn</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the body expressions of the function before and including the first return statement.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Queries\Functions\O\Expression">Expression</abbr>[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="PinqException">PinqException</abbr></td>
+                <td>if the function is internal</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_countBodyExpressions">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_countBodyExpressions"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 192</div>
+        <code>final            public            int
+    <strong>countBodyExpressions</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets amount of body expressions of the function.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>int</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="PinqException">PinqException</abbr></td>
+                <td>if the function is internal</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_countBodyExpressionsUntilReturn">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_countBodyExpressionsUntilReturn"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 199</div>
+        <code>final            public            int
+    <strong>countBodyExpressionsUntilReturn</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets amount of body expressions of the function before and including the first return statement.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>int</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="PinqException">PinqException</abbr></td>
+                <td>if the function is internal</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getParameters">
+        <div class="location">at line 23</div>
+        <code>            public            <a href="../../../Pinq/Queries/Functions/Parameters/ValueKey.html"><abbr title="Pinq\Queries\Functions\Parameters\ValueKey">ValueKey</abbr></a>
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Functions/Parameters/ValueKey.html"><abbr title="Pinq\Queries\Functions\Parameters\ValueKey">ValueKey</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getParameterIds">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getParameterIds"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 211</div>
+        <code>            public            string[]
+    <strong>getParameterIds</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getEvaluationContextFactory">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_getEvaluationContextFactory"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 219</div>
+        <code>            public            <a href="../../../Pinq/Queries/Functions/FunctionEvaluationContextFactory.html"><abbr title="Pinq\Queries\Functions\FunctionEvaluationContextFactory">FunctionEvaluationContextFactory</abbr></a>
+    <strong>getEvaluationContextFactory</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets an evaluation context factory of the function.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Functions/FunctionEvaluationContextFactory.html"><abbr title="Pinq\Queries\Functions\FunctionEvaluationContextFactory">FunctionEvaluationContextFactory</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_update">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_update"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 224</div>
+        <code>            public            <a href="../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a>
+    <strong>update</strong>(string|null $scopeType, string|null $namespace, array $parameterScopedVariableMap, array $parameterExpressions, array $bodyExpressions = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string|null</td>
+                <td>$scopeType</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$namespace</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$parameterScopedVariableMap</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$parameterExpressions</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$bodyExpressions</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_updateBody">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_updateBody"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 249</div>
+        <code>            public            <a href="../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a>
+    <strong>updateBody</strong>(array $bodyExpressions = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$bodyExpressions</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_walk">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/FunctionBase.html#method_walk"><abbr title="Pinq\Queries\Functions\FunctionBase">FunctionBase</abbr></a> at line 260</div>
+        <code>final            public            <a href="../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a>
+    <strong>walk</strong>(<abbr title="Pinq\Queries\Functions\O\ExpressionWalker">ExpressionWalker</abbr> $walker)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Functions\O\ExpressionWalker">ExpressionWalker</abbr></td>
+                <td>$walker</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasReturnExpression">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/ProjectionBase.html#method_hasReturnExpression"><abbr title="Pinq\Queries\Functions\ProjectionBase">ProjectionBase</abbr></a> at line 50</div>
+        <code>final            public            boolean
+    <strong>hasReturnExpression</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getReturnExpression">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/ProjectionBase.html#method_getReturnExpression"><abbr title="Pinq\Queries\Functions\ProjectionBase">ProjectionBase</abbr></a> at line 60</div>
+        <code>final            public            <abbr title="Pinq\Queries\Functions\O\ReturnExpression">ReturnExpression</abbr>|null
+    <strong>getReturnExpression</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Queries\Functions\O\ReturnExpression">ReturnExpression</abbr>|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasReturnValueExpression">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/ProjectionBase.html#method_hasReturnValueExpression"><abbr title="Pinq\Queries\Functions\ProjectionBase">ProjectionBase</abbr></a> at line 70</div>
+        <code>final            public            boolean
+    <strong>hasReturnValueExpression</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getReturnValueExpression">
+        <div class="location">in <a href="../../../Pinq/Queries/Functions/ProjectionBase.html#method_getReturnValueExpression"><abbr title="Pinq\Queries\Functions\ProjectionBase">ProjectionBase</abbr></a> at line 80</div>
+        <code>final            public            <abbr title="Pinq\Queries\Functions\O\Expression">Expression</abbr>|null
+    <strong>getReturnValueExpression</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Queries\Functions\O\Expression">Expression</abbr>|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

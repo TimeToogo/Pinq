@@ -25,8 +25,60 @@
         <div class="content">
                         <table>
                             <tr>
-                    <td><a href="../Pinq/Parsing/FunctionToExpressionTreeConverter.html"><abbr title="Pinq\Parsing\FunctionToExpressionTreeConverter">FunctionToExpressionTreeConverter</abbr></a></td>
-                    <td class="last">Default implementaion for the IFunctionToExpressionTreeConverter.</td>
+                    <td><a href="../Pinq/Parsing/ASTException.html"><abbr title="Pinq\Parsing\ASTException">ASTException</abbr></a></td>
+                    <td class="last">Exception for errors while converting the AST into an expression tree</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/FunctionDeclaration.html"><abbr title="Pinq\Parsing\FunctionDeclaration">FunctionDeclaration</abbr></a></td>
+                    <td class="last">Implementation of the function declaration inteface.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/FunctionInterpreter.html"><abbr title="Pinq\Parsing\FunctionInterpreter">FunctionInterpreter</abbr></a></td>
+                    <td class="last">Implementation of the function interpreter interface.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/FunctionLocation.html"><abbr title="Pinq\Parsing\FunctionLocation">FunctionLocation</abbr></a></td>
+                    <td class="last">Implementation of the function location inteface.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/FunctionMagic.html"><abbr title="Pinq\Parsing\FunctionMagic">FunctionMagic</abbr></a></td>
+                    <td class="last">Implementation of the function magic inteface.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/FunctionReflection.html"><abbr title="Pinq\Parsing\FunctionReflection">FunctionReflection</abbr></a></td>
+                    <td class="last">Implementation of the function reflection inteface.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/FunctionScope.html"><abbr title="Pinq\Parsing\FunctionScope">FunctionScope</abbr></a></td>
+                    <td class="last">Implementation of the function scope inteface.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/FunctionSignature.html"><abbr title="Pinq\Parsing\FunctionSignature">FunctionSignature</abbr></a></td>
+                    <td class="last">Implementation of the function signature interface.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/FunctionStructure.html"><abbr title="Pinq\Parsing\FunctionStructure">FunctionStructure</abbr></a></td>
+                    <td class="last">Implementation of the function structure inteface.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/InvalidFunctionException.html"><abbr title="Pinq\Parsing\InvalidFunctionException">InvalidFunctionException</abbr></a></td>
+                    <td class="last">Exception for errors while converting a function into an expression tree</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/LocatedFunction.html"><abbr title="Pinq\Parsing\LocatedFunction">LocatedFunction</abbr></a></td>
+                    <td class="last">Implementation of the located function inteface.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/MagicConstants.html"><abbr title="Pinq\Parsing\MagicConstants">MagicConstants</abbr></a></td>
+                    <td class="last">Implementation of the magic constants inteface.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/MagicResolvable.html"><abbr title="Pinq\Parsing\MagicResolvable">MagicResolvable</abbr></a></td>
+                    <td class="last">Implementation of the function magic inteface.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/MagicScopes.html"><abbr title="Pinq\Parsing\MagicScopes">MagicScopes</abbr></a></td>
+                    <td class="last">Implementation of the magic scopes inteface.</td>
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Parsing/ParserBase.html"><abbr title="Pinq\Parsing\ParserBase">ParserBase</abbr></a></td>
@@ -41,26 +93,59 @@
             <h2>Interfaces</h2>
         <table>
                             <tr>
-                    <td><a href="../Pinq/Parsing/IFunctionToExpressionTreeConverter.html"><abbr title="Pinq\Parsing\IFunctionToExpressionTreeConverter">IFunctionToExpressionTreeConverter</abbr></a></td>
-                    <td class="last">Facade for converting a function into the equivalent expression tree</td>
+                    <td><a href="../Pinq/Parsing/IFunctionDeclaration.html"><abbr title="Pinq\Parsing\IFunctionDeclaration">IFunctionDeclaration</abbr></a></td>
+                    <td class="last">Interface containing the declarion location of a function.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/IFunctionInterpreter.html"><abbr title="Pinq\Parsing\IFunctionInterpreter">IFunctionInterpreter</abbr></a></td>
+                    <td class="last">Interface for loading reflection and expression data from functions.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/IFunctionLocation.html"><abbr title="Pinq\Parsing\IFunctionLocation">IFunctionLocation</abbr></a></td>
+                    <td class="last">Interface containing the reflection data of a function.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/IFunctionMagic.html"><abbr title="Pinq\Parsing\IFunctionMagic">IFunctionMagic</abbr></a></td>
+                    <td class="last">Interface containing the structural information of a function.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/IFunctionReflection.html"><abbr title="Pinq\Parsing\IFunctionReflection">IFunctionReflection</abbr></a></td>
+                    <td class="last">Interface for the reflection of a function.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/IFunctionScope.html"><abbr title="Pinq\Parsing\IFunctionScope">IFunctionScope</abbr></a></td>
+                    <td class="last">Interface containing the scope data of a function.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/IFunctionSignature.html"><abbr title="Pinq\Parsing\IFunctionSignature">IFunctionSignature</abbr></a></td>
+                    <td class="last">Interface containing the reflection data of a function.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/IFunctionStructure.html"><abbr title="Pinq\Parsing\IFunctionStructure">IFunctionStructure</abbr></a></td>
+                    <td class="last">Interface containing the structural information of a function.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/ILocatedFunction.html"><abbr title="Pinq\Parsing\ILocatedFunction">ILocatedFunction</abbr></a></td>
+                    <td class="last">Interface of a function whose signature and location has been found.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/IMagicConstants.html"><abbr title="Pinq\Parsing\IMagicConstants">IMagicConstants</abbr></a></td>
+                    <td class="last">Interface of a set of resolved magic constants for a function.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/IMagicResolvable.html"><abbr title="Pinq\Parsing\IMagicResolvable">IMagicResolvable</abbr></a></td>
+                    <td class="last">Interface containing the nessecary methods to resolve any magic constants/scopes of the contained expressions.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Parsing/IMagicScopes.html"><abbr title="Pinq\Parsing\IMagicScopes">IMagicScopes</abbr></a></td>
+                    <td class="last">Interface for a set of resolved self::, static::, parent:: scopes of a function.</td>
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Parsing/IParser.html"><abbr title="Pinq\Parsing\IParser">IParser</abbr></a></td>
-                    <td class="last">The IParser is an abstraction for converting a function to an expression tree.</td>
+                    <td class="last">The parser interface is an abstraction over parsing a function into an expression tree.</td>
                 </tr>
                     </table>
     
-            <h2>Exceptions</h2>
-        <table>
-                            <tr>
-                    <td><a href="../Pinq/Parsing/ASTException.html"><abbr title="Pinq\Parsing\ASTException">ASTException</abbr></a></td>
-                    <td class="last">Exception for errors while converting the AST into  an expression tree</td>
-                </tr>
-                            <tr>
-                    <td><a href="../Pinq/Parsing/InvalidFunctionException.html"><abbr title="Pinq\Parsing\InvalidFunctionException">InvalidFunctionException</abbr></a></td>
-                    <td class="last">Exception for errors while converting a function into  an expression tree</td>
-                </tr>
-                    </table>
             </div>
             <div id="footer">
         Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.

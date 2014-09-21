@@ -11,16 +11,18 @@ This is base interface for all query objects, it supports the following methods:
 **Queries**
 
  - `where` - Filters the values according to the supplied predicate
- - `orderBy/orderByAscending/orderByDescending->thenBy/thenByAscending/thenByDescending...` - 
+ - `orderBy[Ascending|Descending]->thenBy[Ascending|Descending]...` -
     Orders the values according the supplied order functions and direction(s)
  - `skip` - Skip the supplied amount of values
  - `take` - Limits the amount of values by the supplied amount
  - `slice` - Retrieve a slice of values according to the specified offset and amount
  - `indexBy` - Index the values according to the supplied mapping function
- - `groupBy->andBy...` - Groups the values according the supplied grouping function(s)
- - `join->on/onEquality->to` - Matches the values with the supplied values according to the supplied filter then 
+ - `keys` - Gets the keys as the values.
+ - `reindex` - Indexes the values according to their 0-based position
+ - `groupBy` - Groups the values according the supplied grouping function
+ - `join->on/onEquality[->withDefault]->to` - Matches the values with the supplied values according to the supplied filter
    then maps the results into as according to the supplied function.
- - `groupJoin->on/onEquality->to` - Matches the values with the supplied values according to the supplied filter, 
+ - `groupJoin->on/onEquality[->withDefault]->to` - Matches the values with the supplied values according to the supplied filter,
    groups the results and then maps into as according to the supplied function.
  - `unique` - Only return unique values
  - `select` - Map the values according to the supplied function
@@ -43,8 +45,8 @@ This is base interface for all query objects, it supports the following methods:
 
 **Aggregates**
 
- - `count` - The amount of values
- - `exists` - Whether there are any values
+ - `count` - The amount of elements
+ - `isEmpty` - Whether there are no elements
  - `aggregate` - Aggregates the values according to the supplied
  - `maximum` - The maximum value
  - `minimum` - The minimum value
@@ -52,11 +54,15 @@ This is base interface for all query objects, it supports the following methods:
  - `average` - The average of all the values
  - `all` - Whether all the values evaluate to true
  - `any` - Whether any of the values evaluate to true
- - `implode` - Concatenates the values seperated by the supplied delimiter
+ - `implode` - Concatenates the values separated by the supplied delimiter
 
 **Other**
 
- - `asArray` - The values as an array
+ - `getIterator` - Gets the  elements as an iterator with non scalar keys mapped to integers
+ - `getTrueIterator` - Gets the elements as an iterator
+ - `asArray` - Gets the elements as an array. Non scalar keys will be mapped to integers
+ - `asTraversable` - Gets the elements as a `ITraversable`
+ - `asCollection` - Gets the elements as a `ICollection`
 
 ICollection
 ===========
@@ -65,8 +71,11 @@ The `ICollection` interface represents a queryable range of values that are also
 they can be manipulated and altered using the additional methods:
 
  - `apply` - Walks the values with the supplied function
- - `addRange` - Adds a range of values to the collection
- - `removeRange` - Removes a range of values from the collection
+ - `groupJoin->on/onEquality[->withDefault]->apply` - Matches the values with the supplied values according to the supplied filter
+   then walks the results using to the supplied function.
+ - `addRange` - Adds a list of values to the collection
+ - `remove` - Removes all occurrences of a value from the collection
+ - `removeRange` - Removes all occurrences of a set of values from the collection
  - `removeWhere` - Removes the values according to the supplied predicate function
  - `clear` - Removes all the values from the collection.
  - `offsetSet` - Sets a value to supplied index
@@ -93,16 +102,17 @@ Limitations
  - Within a query, one should not use control structures such as `if, switch, goto, while, foreach,...`, 
    these are not classified as valid query expressions and cannot be used with external data sources.
 
- - One should not define multiple closures on the same line. An exception will be thrown for the following:
+ - One should not define multiple functions on the same line. An exception will be thrown for the following
+   as it is ambiguous to determine the correct function:
    {% highlight php startinline %}
-   $Queryable->where(function ($i) { return $i > 50; })->where(function ($i) { return $i !== 70; });{% endhighlight %}
+   $queryable->where(function ($i) { return $i > 50; })->where(function ($i) { return $i !== 70; });{% endhighlight %}
 
 
 Standard Classes
 ================
 
-Along side the [API](api.html), Pinq comes the set of standard implementations for each of
-the interfaces. If you need to add and custom functionality to the Pinq API, you should extend
+Along side the [API](api.html), PINQ comes the set of standard implementations for each of
+the interfaces. If you need to add and custom functionality to the PINQ API, you should extend
 these classes as they contain the [correct and tested implementation](details.html) for the 
 standard API.
 

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Parsing\IFunctionDeclaration | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../Pinq/Parsing.html">Pinq\Parsing</a>\IFunctionDeclaration</h1>
+    </div>
+        <div class="content">
+                <p>    interface
+    <strong>IFunctionDeclaration</strong></p>
+
+            <div class="description">
+            <p>Interface containing the declaration location of a function.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isWithinNamespace">isWithinNamespace</a>()
+                    <p>Whether the function was declared within a namespace.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getNamespace">getNamespace</a>()
+                    <p>Gets the namespace which the function was declared within.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isWithinClass">isWithinClass</a>()
+                    <p>Whether the function was declared within a class.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getClass">getClass</a>()
+                    <p>Gets the class which the function was declared within.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isWithinTrait">isWithinTrait</a>()
+                    <p>Whether the function was declared within a trait.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getTrait">getTrait</a>()
+                    <p>Gets the trait which the function was declared within.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isWithinFunction">isWithinFunction</a>()
+                    <p>Whether the function was declared within a function.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getFunction">getFunction</a>()
+                    <p>Gets the function which the function was declared within.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    int
+                </td>
+                <td class="last">
+                    <a href="#method_getClosureNestingLevel">getClosureNestingLevel</a>()
+                    <p>Gets the amount of closures function which the function was declared within.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_isWithinNamespace">
+        <div class="location">at line 17</div>
+        <code>            public            boolean
+    <strong>isWithinNamespace</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Whether the function was declared within a namespace.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getNamespace">
+        <div class="location">at line 25</div>
+        <code>            public            string|null
+    <strong>getNamespace</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the namespace which the function was declared within.</p>
+        <p>Null if in the global namespace.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isWithinClass">
+        <div class="location">at line 32</div>
+        <code>            public            boolean
+    <strong>isWithinClass</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Whether the function was declared within a class.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getClass">
+        <div class="location">at line 40</div>
+        <code>            public            string|null
+    <strong>getClass</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the class which the function was declared within.</p>
+        <p>Null if not defined within a class.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isWithinTrait">
+        <div class="location">at line 47</div>
+        <code>            public            boolean
+    <strong>isWithinTrait</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Whether the function was declared within a trait.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getTrait">
+        <div class="location">at line 55</div>
+        <code>            public            string|null
+    <strong>getTrait</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the trait which the function was declared within.</p>
+        <p>Null if not defined within a trait.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isWithinFunction">
+        <div class="location">at line 62</div>
+        <code>            public            boolean
+    <strong>isWithinFunction</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Whether the function was declared within a function.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFunction">
+        <div class="location">at line 70</div>
+        <code>            public            string|null
+    <strong>getFunction</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the function which the function was declared within.</p>
+        <p>Null if not defined within a function.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getClosureNestingLevel">
+        <div class="location">at line 77</div>
+        <code>            public            int
+    <strong>getClosureNestingLevel</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the amount of closures function which the function was declared within.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>int</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

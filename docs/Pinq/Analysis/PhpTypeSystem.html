@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Analysis\PhpTypeSystem | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../Pinq/Analysis.html">Pinq\Analysis</a>\PhpTypeSystem</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>PhpTypeSystem</strong>        extends <a href="../../Pinq/Analysis/TypeSystem.html"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a></p>
+
+            <div class="description">
+            <p>Default implementation of the type system representing a subset of PHP's excuse of a type system.</p>
+            <p>
+</p>
+        </div>
+    
+            <h2>Constants</h2>
+
+            <table>
+                    <tr>
+                <td>TYPE_SELF</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+            </table>
+
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(array $customTypeDataModules = array())
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getType">getType</a>(string $typeIdentifier)
+                    <p>Gets of the type with the supplied identifier.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Analysis/TypeSystem.html#method_getType"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/INativeType.html"><abbr title="Pinq\Analysis\INativeType">INativeType</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getNativeType">getNativeType</a>(string $nativeType)
+                    <p>Gets the native type with the supplied int from the INativeType::TYPE_* constants.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Analysis/TypeSystem.html#method_getNativeType"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/IObjectType.html"><abbr title="Pinq\Analysis\IObjectType">IObjectType</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getObjectType">getObjectType</a>(string $classType)
+                    <p>Gets the object type with the supplied class name.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Analysis/TypeSystem.html#method_getObjectType"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getCompositeType">getCompositeType</a>(array $types)
+                    <p>Gets a type composed of the supplied types.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Analysis/TypeSystem.html#method_getCompositeType"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/IFunction.html"><abbr title="Pinq\Analysis\IFunction">IFunction</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getFunction">getFunction</a>(string $name)
+                    <p>Gets the function with the supplied name.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Analysis/TypeSystem.html#method_getFunction"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/IBinaryOperation.html"><abbr title="Pinq\Analysis\IBinaryOperation">IBinaryOperation</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getBinaryOperation">getBinaryOperation</a>(<a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a> $leftOperandType, int $operator, <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a> $rightOperandType)
+                    <p>Gets the binary operation matching the supplied types.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Analysis/TypeSystem.html#method_getBinaryOperation"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/TypeData/ITypeDataModule.html"><abbr title="Pinq\Analysis\TypeData\ITypeDataModule">ITypeDataModule</abbr></a>[]
+                </td>
+                <td class="last">
+                    <a href="#method_getTypeDataModules">getTypeDataModules</a>()
+                    <p>Gets the type data modules from the type system.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_registerTypeDataModule">registerTypeDataModule</a>(<a href="../../Pinq/Analysis/TypeData/ITypeDataModule.html"><abbr title="Pinq\Analysis\TypeData\ITypeDataModule">ITypeDataModule</abbr></a> $module)
+                    <p>Adds the type data module to the type system.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getCommonAncestorType">getCommonAncestorType</a>(<a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a> $type, <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a> $otherType)
+                    <p>Gets of a common ancestor type of the supplied types.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getTypeFromValue">getTypeFromValue</a>(mixed $value)
+                    <p>Gets of the type of the supplied value.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getTypeFromTypeHint">getTypeFromTypeHint</a>(string|null $typeHint)
+                    <p>Gets of the type from the supplied parameter type hint.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 46</div>
+        <code>            public            
+    <strong>__construct</strong>(array $customTypeDataModules = array())</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$customTypeDataModules</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getType">
+        <div class="location">in <a href="../../Pinq/Analysis/TypeSystem.html#method_getType"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a> at line 122</div>
+        <code>            public            <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+    <strong>getType</strong>(string $typeIdentifier)</code>
+    </h3>
+    <div class="details">
+        <p>Gets of the type with the supplied identifier.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$typeIdentifier</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getNativeType">
+        <div class="location">in <a href="../../Pinq/Analysis/TypeSystem.html#method_getNativeType"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a> at line 135</div>
+        <code>            public            <a href="../../Pinq/Analysis/INativeType.html"><abbr title="Pinq\Analysis\INativeType">INativeType</abbr></a>
+    <strong>getNativeType</strong>(string $nativeType)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the native type with the supplied int from the INativeType::TYPE_* constants.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$nativeType</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/INativeType.html"><abbr title="Pinq\Analysis\INativeType">INativeType</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>If the native type is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getObjectType">
+        <div class="location">in <a href="../../Pinq/Analysis/TypeSystem.html#method_getObjectType"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a> at line 152</div>
+        <code>            public            <a href="../../Pinq/Analysis/IObjectType.html"><abbr title="Pinq\Analysis\IObjectType">IObjectType</abbr></a>
+    <strong>getObjectType</strong>(string $classType)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the object type with the supplied class name.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$classType</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/IObjectType.html"><abbr title="Pinq\Analysis\IObjectType">IObjectType</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>If the class is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCompositeType">
+        <div class="location">in <a href="../../Pinq/Analysis/TypeSystem.html#method_getCompositeType"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a> at line 171</div>
+        <code>            public            <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+    <strong>getCompositeType</strong>(array $types)</code>
+    </h3>
+    <div class="details">
+        <p>Gets a type composed of the supplied types.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$types</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>If the types is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFunction">
+        <div class="location">in <a href="../../Pinq/Analysis/TypeSystem.html#method_getFunction"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a> at line 228</div>
+        <code>            public            <a href="../../Pinq/Analysis/IFunction.html"><abbr title="Pinq\Analysis\IFunction">IFunction</abbr></a>
+    <strong>getFunction</strong>(string $name)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the function with the supplied name.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/IFunction.html"><abbr title="Pinq\Analysis\IFunction">IFunction</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>If the function is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getBinaryOperation">
+        <div class="location">in <a href="../../Pinq/Analysis/TypeSystem.html#method_getBinaryOperation"><abbr title="Pinq\Analysis\TypeSystem">TypeSystem</abbr></a> at line 238</div>
+        <code>            public            <a href="../../Pinq/Analysis/IBinaryOperation.html"><abbr title="Pinq\Analysis\IBinaryOperation">IBinaryOperation</abbr></a>
+    <strong>getBinaryOperation</strong>(<a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a> $leftOperandType, int $operator, <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a> $rightOperandType)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the binary operation matching the supplied types.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+                <td>$leftOperandType</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$operator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+                <td>$rightOperandType</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/IBinaryOperation.html"><abbr title="Pinq\Analysis\IBinaryOperation">IBinaryOperation</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>If the binary operation is not supported</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getTypeDataModules">
+        <div class="location">at line 75</div>
+        <code>            public            <a href="../../Pinq/Analysis/TypeData/ITypeDataModule.html"><abbr title="Pinq\Analysis\TypeData\ITypeDataModule">ITypeDataModule</abbr></a>[]
+    <strong>getTypeDataModules</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the type data modules from the type system.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/TypeData/ITypeDataModule.html"><abbr title="Pinq\Analysis\TypeData\ITypeDataModule">ITypeDataModule</abbr></a>[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_registerTypeDataModule">
+        <div class="location">at line 87</div>
+        <code>            public            void
+    <strong>registerTypeDataModule</strong>(<a href="../../Pinq/Analysis/TypeData/ITypeDataModule.html"><abbr title="Pinq\Analysis\TypeData\ITypeDataModule">ITypeDataModule</abbr></a> $module)</code>
+    </h3>
+    <div class="details">
+        <p>Adds the type data module to the type system.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Analysis/TypeData/ITypeDataModule.html"><abbr title="Pinq\Analysis\TypeData\ITypeDataModule">ITypeDataModule</abbr></a></td>
+                <td>$module</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCommonAncestorType">
+        <div class="location">at line 140</div>
+        <code>            public            <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+    <strong>getCommonAncestorType</strong>(<a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a> $type, <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a> $otherType)</code>
+    </h3>
+    <div class="details">
+        <p>Gets of a common ancestor type of the supplied types.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+                <td>$otherType</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getTypeFromValue">
+        <div class="location">at line 159</div>
+        <code>            public            <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+    <strong>getTypeFromValue</strong>(mixed $value)</code>
+    </h3>
+    <div class="details">
+        <p>Gets of the type of the supplied value.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>If the type is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getTypeFromTypeHint">
+        <div class="location">at line 189</div>
+        <code>            public            <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+    <strong>getTypeFromTypeHint</strong>(string|null $typeHint)</code>
+    </h3>
+    <div class="details">
+        <p>Gets of the type from the supplied parameter type hint.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string|null</td>
+                <td>$typeHint</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Analysis\Types\Type | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Pinq/Analysis/Types.html">Pinq\Analysis\Types</a>\Type</h1>
+    </div>
+        <div class="content">
+                <p>abstract     class
+    <strong>Type</strong>        implements
+        <a href="../../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></p>
+
+            <div class="description">
+            <p>Base class of the type.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(string $identifier, <a href="../../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a> $parentType = null, <a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a> $indexer = null, array $castOperations = array(), array $unaryOperations = array())
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_hasParentType">hasParentType</a>()
+                    <p>Whether the type has a parent type.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>|null
+                </td>
+                <td class="last">
+                    <a href="#method_getParentType">getParentType</a>()
+                    <p>Gets the parent type or null if their is no parent.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getIdentifier">getIdentifier</a>()
+                    <p>Gets a unique string representation of the type.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isEqualTo">isEqualTo</a>(<a href="../../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a> $type)
+                    <p>Whether the supplied type is equivalent to the current type.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Analysis/IConstructor.html"><abbr title="Pinq\Analysis\IConstructor">IConstructor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getConstructor">getConstructor</a>(<abbr title="Pinq\Analysis\Types\O\NewExpression">NewExpression</abbr> $expression)
+                    <p>Gets the supplied expression matches the type's constructor.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getMethod">getMethod</a>(<abbr title="Pinq\Analysis\Types\O\MethodCallExpression">MethodCallExpression</abbr> $expression)
+                    <p>Gets the matched method of the supplied expression.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getStaticMethod">getStaticMethod</a>(<abbr title="Pinq\Analysis\Types\O\StaticMethodCallExpression">StaticMethodCallExpression</abbr> $expression)
+                    <p>Gets the matched method of the supplied expression.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Analysis/IField.html"><abbr title="Pinq\Analysis\IField">IField</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getField">getField</a>(<abbr title="Pinq\Analysis\Types\O\FieldExpression">FieldExpression</abbr> $expression)
+                    <p>Gets the matched field of the supplied expression.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Analysis/IField.html"><abbr title="Pinq\Analysis\IField">IField</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getStaticField">getStaticField</a>(<abbr title="Pinq\Analysis\Types\O\StaticFieldExpression">StaticFieldExpression</abbr> $expression)
+                    <p>Gets the matched field of the supplied expression.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a>|<a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getInvocation">getInvocation</a>(<abbr title="Pinq\Analysis\Types\O\InvocationExpression">InvocationExpression</abbr> $expression)
+                    <p>Gets the invocation expression matches the type.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getIndex">getIndex</a>(<abbr title="Pinq\Analysis\Types\O\IndexExpression">IndexExpression</abbr> $expression)
+                    <p>Get the supplied index expression matches the type.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a>|<a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getCast">getCast</a>(<abbr title="Pinq\Analysis\Types\O\CastExpression">CastExpression</abbr> $expression)
+                    <p>Gets the matched unary operator from the supplied expression.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a>|<a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getUnaryOperation">getUnaryOperation</a>(<abbr title="Pinq\Analysis\Types\O\UnaryOperationExpression">UnaryOperationExpression</abbr> $expression)
+                    <p>Gets the matched unary operator from the supplied expression.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 48</div>
+        <code>            public            
+    <strong>__construct</strong>(string $identifier, <a href="../../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a> $parentType = null, <a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a> $indexer = null, array $castOperations = array(), array $unaryOperations = array())</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$identifier</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+                <td>$parentType</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a></td>
+                <td>$indexer</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$castOperations</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$unaryOperations</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasParentType">
+        <div class="location">at line 62</div>
+        <code>            public            boolean
+    <strong>hasParentType</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Whether the type has a parent type.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getParentType">
+        <div class="location">at line 67</div>
+        <code>            public            <a href="../../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>|null
+    <strong>getParentType</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the parent type or null if their is no parent.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getIdentifier">
+        <div class="location">at line 72</div>
+        <code>            public            string
+    <strong>getIdentifier</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets a unique string representation of the type.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isEqualTo">
+        <div class="location">at line 77</div>
+        <code>            public            boolean
+    <strong>isEqualTo</strong>(<a href="../../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+        <p>Whether the supplied type is equivalent to the current type.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getConstructor">
+        <div class="location">at line 82</div>
+        <code>            public            <a href="../../../Pinq/Analysis/IConstructor.html"><abbr title="Pinq\Analysis\IConstructor">IConstructor</abbr></a>
+    <strong>getConstructor</strong>(<abbr title="Pinq\Analysis\Types\O\NewExpression">NewExpression</abbr> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the supplied expression matches the type's constructor.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Analysis\Types\O\NewExpression">NewExpression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Analysis/IConstructor.html"><abbr title="Pinq\Analysis\IConstructor">IConstructor</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>if the constructor is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getMethod">
+        <div class="location">at line 87</div>
+        <code>            public            <a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a>
+    <strong>getMethod</strong>(<abbr title="Pinq\Analysis\Types\O\MethodCallExpression">MethodCallExpression</abbr> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the matched method of the supplied expression.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Analysis\Types\O\MethodCallExpression">MethodCallExpression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>if the method is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getStaticMethod">
+        <div class="location">at line 92</div>
+        <code>            public            <a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a>
+    <strong>getStaticMethod</strong>(<abbr title="Pinq\Analysis\Types\O\StaticMethodCallExpression">StaticMethodCallExpression</abbr> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the matched method of the supplied expression.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Analysis\Types\O\StaticMethodCallExpression">StaticMethodCallExpression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>if the static method is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getField">
+        <div class="location">at line 97</div>
+        <code>            public            <a href="../../../Pinq/Analysis/IField.html"><abbr title="Pinq\Analysis\IField">IField</abbr></a>
+    <strong>getField</strong>(<abbr title="Pinq\Analysis\Types\O\FieldExpression">FieldExpression</abbr> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the matched field of the supplied expression.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Analysis\Types\O\FieldExpression">FieldExpression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Analysis/IField.html"><abbr title="Pinq\Analysis\IField">IField</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>if the field is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getStaticField">
+        <div class="location">at line 102</div>
+        <code>            public            <a href="../../../Pinq/Analysis/IField.html"><abbr title="Pinq\Analysis\IField">IField</abbr></a>
+    <strong>getStaticField</strong>(<abbr title="Pinq\Analysis\Types\O\StaticFieldExpression">StaticFieldExpression</abbr> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the matched field of the supplied expression.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Analysis\Types\O\StaticFieldExpression">StaticFieldExpression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Analysis/IField.html"><abbr title="Pinq\Analysis\IField">IField</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>if the static field is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getInvocation">
+        <div class="location">at line 107</div>
+        <code>            public            <a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a>|<a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a>
+    <strong>getInvocation</strong>(<abbr title="Pinq\Analysis\Types\O\InvocationExpression">InvocationExpression</abbr> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the invocation expression matches the type.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Analysis\Types\O\InvocationExpression">InvocationExpression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a>|<a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>if the invocation is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getIndex">
+        <div class="location">at line 112</div>
+        <code>            public            <a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a>
+    <strong>getIndex</strong>(<abbr title="Pinq\Analysis\Types\O\IndexExpression">IndexExpression</abbr> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Get the supplied index expression matches the type.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Analysis\Types\O\IndexExpression">IndexExpression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>if the indexer is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCast">
+        <div class="location">at line 121</div>
+        <code>            public            <a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a>|<a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a>
+    <strong>getCast</strong>(<abbr title="Pinq\Analysis\Types\O\CastExpression">CastExpression</abbr> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the matched unary operator from the supplied expression.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Analysis\Types\O\CastExpression">CastExpression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a>|<a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>if the cast is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getUnaryOperation">
+        <div class="location">at line 130</div>
+        <code>            public            <a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a>|<a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a>
+    <strong>getUnaryOperation</strong>(<abbr title="Pinq\Analysis\Types\O\UnaryOperationExpression">UnaryOperationExpression</abbr> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the matched unary operator from the supplied expression.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Analysis\Types\O\UnaryOperationExpression">UnaryOperationExpression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a>|<a href="../../../Pinq/Analysis/IMethod.html"><abbr title="Pinq\Analysis\IMethod">IMethod</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="TypeException">TypeException</abbr></td>
+                <td>if the unary operation is not supported.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

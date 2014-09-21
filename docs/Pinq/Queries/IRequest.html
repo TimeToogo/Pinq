@@ -54,7 +54,7 @@
                 </td>
             </tr>
                     <tr>
-                <td>EXISTS</td>
+                <td>IS_EMPTY</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -199,10 +199,21 @@
             </tr>
                     <tr>
                 <td class="type">
+                    string[]
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     mixed
                 </td>
                 <td class="last">
-                    <a href="#method_traverse">traverse</a>(<a href="../../Pinq/Queries/Requests/RequestVisitor.html"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a> $visitor)
+                    <a href="#method_traverse">traverse</a>(<a href="../../Pinq/Queries/Requests/IRequestVisitor.html"><abbr title="Pinq\Queries\Requests\IRequestVisitor">IRequestVisitor</abbr></a> $visitor)
                     <p>
 </p>
                 </td>
@@ -214,7 +225,7 @@
         <h2>Details</h2>
 
                         <h3 id="method_getType">
-        <div class="location">at line 33</div>
+        <div class="location">at line 35</div>
         <code>            public            int
     <strong>getType</strong>()</code>
     </h3>
@@ -240,10 +251,37 @@
                     </div>
     </div>
 
+                <h3 id="method_getParameters">
+        <div class="location">at line 40</div>
+        <code>            public            string[]
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_traverse">
-        <div class="location">at line 38</div>
+        <div class="location">at line 47</div>
         <code>            public            mixed
-    <strong>traverse</strong>(<a href="../../Pinq/Queries/Requests/RequestVisitor.html"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a> $visitor)</code>
+    <strong>traverse</strong>(<a href="../../Pinq/Queries/Requests/IRequestVisitor.html"><abbr title="Pinq\Queries\Requests\IRequestVisitor">IRequestVisitor</abbr></a> $visitor)</code>
     </h3>
     <div class="details">
         <p>
@@ -255,7 +293,7 @@
 
                     <table>
                     <tr>
-                <td><a href="../../Pinq/Queries/Requests/RequestVisitor.html"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a></td>
+                <td><a href="../../Pinq/Queries/Requests/IRequestVisitor.html"><abbr title="Pinq\Queries\Requests\IRequestVisitor">IRequestVisitor</abbr></a></td>
                 <td>$visitor</td>
                 <td>
 </td>

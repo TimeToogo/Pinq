@@ -42,18 +42,28 @@
                     static&nbsp;void
                 </td>
                 <td class="last">
-                    <a href="#method_setDevelopmentMode">setDevelopmentMode</a>(boolean $trueOrFalse)
+                    <a href="#method_setDevelopmentMode">setDevelopmentMode</a>(boolean $isDevelopmentMode)
                     <p>If set to true, the cache will be cleared when needed.</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    static&nbsp;<a href="../../Pinq/Caching/IFunctionCache.html"><abbr title="Pinq\Caching\IFunctionCache">IFunctionCache</abbr></a>
+                    static&nbsp;<a href="../../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getCacheAdapter">getCacheAdapter</a>()
+                    <p>Returns the configured cache implementation</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;<a href="../../Pinq/Caching/IQueryCache.html"><abbr title="Pinq\Caching\IQueryCache">IQueryCache</abbr></a>
                 </td>
                 <td class="last">
                     <a href="#method_getCache">getCache</a>()
-                    <p>Returns the configured cache implementation</p>
+                    <p>Returns a query cache with the configured adapter.</p>
                 </td>
                 <td></td>
             </tr>
@@ -63,7 +73,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_setFileCache">setFileCache</a>(string $fileName)
-                    <p>Uses the supplied file to store the parsed functions</p>
+                    <p>Uses the supplied file to store the parsed queries.</p>
                 </td>
                 <td></td>
             </tr>
@@ -72,8 +82,8 @@
                     static&nbsp;void
                 </td>
                 <td class="last">
-                    <a href="#method_setDirectoryCache">setDirectoryCache</a>(string $directory, string $fileExtension = DirectoryFunctionCache::DEFAULT_EXTENSION)
-                    <p>Uses the supplied directory to store the parsed functions</p>
+                    <a href="#method_setDirectoryCache">setDirectoryCache</a>(string $directory, string $fileExtension = DirectoryCache::DEFAULT_EXTENSION)
+                    <p>Uses the supplied directory to store the parsed queries.</p>
                 </td>
                 <td></td>
             </tr>
@@ -83,7 +93,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_setDoctrineCache">setDoctrineCache</a>(<abbr title="Pinq\Caching\Doctrine\Common\Cache\Cache">Cache</abbr> $cache)
-                    <p>Uses the supplied doctrine cache to store the parsed functions</p>
+                    <p>Uses the supplied doctrine cache to store the parsed queries.</p>
                 </td>
                 <td></td>
             </tr>
@@ -93,7 +103,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_setArrayAccessCache">setArrayAccessCache</a>(<abbr title="Pinq\Caching\ArrayAccess">ArrayAccess</abbr> $cache)
-                    <p>Uses the supplied array access cache to store the parsed functions</p>
+                    <p>Uses the supplied array access cache to store the parsed queries.</p>
                 </td>
                 <td></td>
             </tr>
@@ -102,8 +112,8 @@
                     static&nbsp;void
                 </td>
                 <td class="last">
-                    <a href="#method_setCustomCache">setCustomCache</a>(<a href="../../Pinq/Caching/IFunctionCache.html"><abbr title="Pinq\Caching\IFunctionCache">IFunctionCache</abbr></a> $cache)
-                    <p>Uses the supplied cache to store the parsed functions</p>
+                    <a href="#method_setCustomCache">setCustomCache</a>(<a href="../../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a> $cache)
+                    <p>Uses the supplied cache to store the parsed queries.</p>
                 </td>
                 <td></td>
             </tr>
@@ -113,7 +123,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_removeCache">removeCache</a>()
-                    <p>Removes the configured cache implementation</p>
+                    <p>Removes the configured cache implementation.</p>
                 </td>
                 <td></td>
             </tr>
@@ -123,9 +133,9 @@
         <h2>Details</h2>
 
                         <h3 id="method_setDevelopmentMode">
-        <div class="location">at line 57</div>
+        <div class="location">at line 37</div>
         <code>        static    public            void
-    <strong>setDevelopmentMode</strong>(boolean $trueOrFalse)</code>
+    <strong>setDevelopmentMode</strong>(boolean $isDevelopmentMode)</code>
     </h3>
     <div class="details">
         <p>If set to true, the cache will be cleared when needed.</p>
@@ -137,7 +147,7 @@
                     <table>
                     <tr>
                 <td>boolean</td>
-                <td>$trueOrFalse</td>
+                <td>$isDevelopmentMode</td>
                 <td>
 </td>
             </tr>
@@ -159,10 +169,10 @@
                     </div>
     </div>
 
-                <h3 id="method_getCache">
-        <div class="location">at line 67</div>
-        <code>        static    public            <a href="../../Pinq/Caching/IFunctionCache.html"><abbr title="Pinq\Caching\IFunctionCache">IFunctionCache</abbr></a>
-    <strong>getCache</strong>()</code>
+                <h3 id="method_getCacheAdapter">
+        <div class="location">at line 47</div>
+        <code>        static    public            <a href="../../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a>
+    <strong>getCacheAdapter</strong>()</code>
     </h3>
     <div class="details">
         <p>Returns the configured cache implementation</p>
@@ -174,7 +184,33 @@
 
                     <table>
         <tr>
-            <td><a href="../../Pinq/Caching/IFunctionCache.html"><abbr title="Pinq\Caching\IFunctionCache">IFunctionCache</abbr></a></td>
+            <td><a href="../../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCache">
+        <div class="location">at line 74</div>
+        <code>        static    public            <a href="../../Pinq/Caching/IQueryCache.html"><abbr title="Pinq\Caching\IQueryCache">IQueryCache</abbr></a>
+    <strong>getCache</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns a query cache with the configured adapter.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Caching/IQueryCache.html"><abbr title="Pinq\Caching\IQueryCache">IQueryCache</abbr></a></td>
             <td>
 </td>
         </tr>
@@ -186,12 +222,12 @@
     </div>
 
                 <h3 id="method_setFileCache">
-        <div class="location">at line 78</div>
+        <div class="location">at line 86</div>
         <code>        static    public            void
     <strong>setFileCache</strong>(string $fileName)</code>
     </h3>
     <div class="details">
-        <p>Uses the supplied file to store the parsed functions</p>
+        <p>Uses the supplied file to store the parsed queries.</p>
         <p>
 </p>
         <div class="tags">
@@ -222,12 +258,12 @@
     </div>
 
                 <h3 id="method_setDirectoryCache">
-        <div class="location">at line 91</div>
+        <div class="location">at line 100</div>
         <code>        static    public            void
-    <strong>setDirectoryCache</strong>(string $directory, string $fileExtension = DirectoryFunctionCache::DEFAULT_EXTENSION)</code>
+    <strong>setDirectoryCache</strong>(string $directory, string $fileExtension = DirectoryCache::DEFAULT_EXTENSION)</code>
     </h3>
     <div class="details">
-        <p>Uses the supplied directory to store the parsed functions</p>
+        <p>Uses the supplied directory to store the parsed queries.</p>
         <p>
 </p>
         <div class="tags">
@@ -263,12 +299,12 @@
     </div>
 
                 <h3 id="method_setDoctrineCache">
-        <div class="location">at line 103</div>
+        <div class="location">at line 113</div>
         <code>        static    public            void
     <strong>setDoctrineCache</strong>(<abbr title="Pinq\Caching\Doctrine\Common\Cache\Cache">Cache</abbr> $cache)</code>
     </h3>
     <div class="details">
-        <p>Uses the supplied doctrine cache to store the parsed functions</p>
+        <p>Uses the supplied doctrine cache to store the parsed queries.</p>
         <p>
 </p>
         <div class="tags">
@@ -299,12 +335,12 @@
     </div>
 
                 <h3 id="method_setArrayAccessCache">
-        <div class="location">at line 115</div>
+        <div class="location">at line 126</div>
         <code>        static    public            void
     <strong>setArrayAccessCache</strong>(<abbr title="Pinq\Caching\ArrayAccess">ArrayAccess</abbr> $cache)</code>
     </h3>
     <div class="details">
-        <p>Uses the supplied array access cache to store the parsed functions</p>
+        <p>Uses the supplied array access cache to store the parsed queries.</p>
         <p>
 </p>
         <div class="tags">
@@ -335,12 +371,12 @@
     </div>
 
                 <h3 id="method_setCustomCache">
-        <div class="location">at line 127</div>
+        <div class="location">at line 139</div>
         <code>        static    public            void
-    <strong>setCustomCache</strong>(<a href="../../Pinq/Caching/IFunctionCache.html"><abbr title="Pinq\Caching\IFunctionCache">IFunctionCache</abbr></a> $cache)</code>
+    <strong>setCustomCache</strong>(<a href="../../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a> $cache)</code>
     </h3>
     <div class="details">
-        <p>Uses the supplied cache to store the parsed functions</p>
+        <p>Uses the supplied cache to store the parsed queries.</p>
         <p>
 </p>
         <div class="tags">
@@ -348,7 +384,7 @@
 
                     <table>
                     <tr>
-                <td><a href="../../Pinq/Caching/IFunctionCache.html"><abbr title="Pinq\Caching\IFunctionCache">IFunctionCache</abbr></a></td>
+                <td><a href="../../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a></td>
                 <td>$cache</td>
                 <td>The cache implementations</td>
             </tr>
@@ -371,12 +407,12 @@
     </div>
 
                 <h3 id="method_removeCache">
-        <div class="location">at line 138</div>
+        <div class="location">at line 150</div>
         <code>        static    public            void
     <strong>removeCache</strong>()</code>
     </h3>
     <div class="details">
-        <p>Removes the configured cache implementation</p>
+        <p>Removes the configured cache implementation.</p>
         <p>
 </p>
         <div class="tags">

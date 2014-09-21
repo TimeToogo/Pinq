@@ -40,12 +40,21 @@
             <table>
                     <tr>
                 <td class="type">
-                    <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]
+                    <a href="../../Pinq/Parsing/IFunctionReflection.html"><abbr title="Pinq\Parsing\IFunctionReflection">IFunctionReflection</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_parse">parse</a>(<abbr title="Pinq\Parsing\ReflectionFunctionAbstract">ReflectionFunctionAbstract</abbr> $reflection)
-                    <p>
-</p>
+                    <a href="#method_getReflection">getReflection</a>(callable $function)
+                    <p>Gets a function reflection from the supplied function.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Parsing/IFunctionStructure.html"><abbr title="Pinq\Parsing\IFunctionStructure">IFunctionStructure</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_parse">parse</a>(<a href="../../Pinq/Parsing/IFunctionReflection.html"><abbr title="Pinq\Parsing\IFunctionReflection">IFunctionReflection</abbr></a> $reflection)
+                    <p>Parses the supplied function and returns it's declaration and body structure.</p>
                 </td>
                 <td></td>
             </tr>
@@ -54,14 +63,13 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method_parse">
-        <div class="location">at line 14</div>
-        <code>final            public            <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]
-    <strong>parse</strong>(<abbr title="Pinq\Parsing\ReflectionFunctionAbstract">ReflectionFunctionAbstract</abbr> $reflection)</code>
+                        <h3 id="method_getReflection">
+        <div class="location">at line 12</div>
+        <code>            public            <a href="../../Pinq/Parsing/IFunctionReflection.html"><abbr title="Pinq\Parsing\IFunctionReflection">IFunctionReflection</abbr></a>
+    <strong>getReflection</strong>(callable $function)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
+        <p>Gets a function reflection from the supplied function.</p>
         <p>
 </p>
         <div class="tags">
@@ -69,7 +77,43 @@
 
                     <table>
                     <tr>
-                <td><abbr title="Pinq\Parsing\ReflectionFunctionAbstract">ReflectionFunctionAbstract</abbr></td>
+                <td>callable</td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Parsing/IFunctionReflection.html"><abbr title="Pinq\Parsing\IFunctionReflection">IFunctionReflection</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_parse">
+        <div class="location">at line 17</div>
+        <code>final            public            <a href="../../Pinq/Parsing/IFunctionStructure.html"><abbr title="Pinq\Parsing\IFunctionStructure">IFunctionStructure</abbr></a>
+    <strong>parse</strong>(<a href="../../Pinq/Parsing/IFunctionReflection.html"><abbr title="Pinq\Parsing\IFunctionReflection">IFunctionReflection</abbr></a> $reflection)</code>
+    </h3>
+    <div class="details">
+        <p>Parses the supplied function and returns it's declaration and body structure.</p>
+        <p>The <strong>LINE</strong> magic constant should be resolved to is correct value.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Parsing/IFunctionReflection.html"><abbr title="Pinq\Parsing\IFunctionReflection">IFunctionReflection</abbr></a></td>
                 <td>$reflection</td>
                 <td>
 </td>
@@ -81,13 +125,23 @@
 
                     <table>
         <tr>
-            <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]</td>
+            <td><a href="../../Pinq/Parsing/IFunctionStructure.html"><abbr title="Pinq\Parsing\IFunctionStructure">IFunctionStructure</abbr></a></td>
             <td>
 </td>
         </tr>
     </table>
 
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="InvalidFunctionException">InvalidFunctionException</abbr></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                     </div>
     </div>

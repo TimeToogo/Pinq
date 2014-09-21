@@ -27,7 +27,7 @@
     <strong>IQuery</strong></p>
 
             <div class="description">
-            <p>Base interface for request / operation query types which both act upon the supplied scope</p>
+            <p>Base interface for request and operation queries.</p>
             <p>
 </p>
         </div>
@@ -39,11 +39,31 @@
             <table>
                     <tr>
                 <td class="type">
+                    <a href="../../Pinq/Queries/IParameterRegistry.html"><abbr title="Pinq\Queries\IParameterRegistry">IParameterRegistry</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>Gets the query parameter registry.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
                 </td>
                 <td class="last">
                     <a href="#method_getScope">getScope</a>()
-                    <p>The query scope</p>
+                    <p>Gets the query scope.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Queries/IQuery.html"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_updateScope">updateScope</a>(<a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a> $scope)
+                    <p>Returns the query with the supplied scope.</p>
                 </td>
                 <td></td>
             </tr>
@@ -52,13 +72,39 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method_getScope">
-        <div class="location">at line 18</div>
+                        <h3 id="method_getParameters">
+        <div class="location">at line 17</div>
+        <code>            public            <a href="../../Pinq/Queries/IParameterRegistry.html"><abbr title="Pinq\Queries\IParameterRegistry">IParameterRegistry</abbr></a>
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the query parameter registry.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Queries/IParameterRegistry.html"><abbr title="Pinq\Queries\IParameterRegistry">IParameterRegistry</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getScope">
+        <div class="location">at line 24</div>
         <code>            public            <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
     <strong>getScope</strong>()</code>
     </h3>
     <div class="details">
-        <p>The query scope</p>
+        <p>Gets the query scope.</p>
         <p>
 </p>
         <div class="tags">
@@ -68,6 +114,43 @@
                     <table>
         <tr>
             <td><a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_updateScope">
+        <div class="location">at line 33</div>
+        <code>            public            <a href="../../Pinq/Queries/IQuery.html"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a>
+    <strong>updateScope</strong>(<a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a> $scope)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the query with the supplied scope.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a></td>
+                <td>$scope</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Queries/IQuery.html"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a></td>
             <td>
 </td>
         </tr>

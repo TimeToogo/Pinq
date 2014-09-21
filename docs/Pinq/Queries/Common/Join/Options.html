@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Queries\Common\Join\Options | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../../classes.html">Classes</a></li>
+                            <li><a href="../../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../../traits.html">Traits</a></li>
+            <li><a href="../../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../../Pinq/Queries/Common/Join.html">Pinq\Queries\Common\Join</a>\Options</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>Options</strong></p>
+
+            <div class="description">
+            <p>Class containing common join options</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<abbr title="Pinq\Queries\Common\Join\Common\ISource">ISource</abbr> $source, $isGroupJoin, <a href="../../../../Pinq/Queries/Common/Join/IFilter.html"><abbr title="Pinq\Queries\Common\Join\IFilter">IFilter</abbr></a> $filter = null, $hasDefault = false, $defaultValueId = null, $defaultKeyId = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Queries\Common\Join\Common\ISource">ISource</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_getSource">getSource</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isGroupJoin">isGroupJoin</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_hasFilter">hasFilter</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../Pinq/Queries/Common/Join/IFilter.html"><abbr title="Pinq\Queries\Common\Join\IFilter">IFilter</abbr></a>|null
+                </td>
+                <td class="last">
+                    <a href="#method_getFilter">getFilter</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_hasDefault">hasDefault</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getDefaultValueId">getDefaultValueId</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getDefaultKeyId">getDefaultKeyId</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../Pinq/Queries/Common/Join/Options.html"><abbr title="Pinq\Queries\Common\Join\Options">Options</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_update">update</a>(<abbr title="Pinq\Queries\Common\Join\Common\ISource">ISource</abbr> $source, boolean $isGroupJoin, <a href="../../../../Pinq/Queries/Common/Join/IFilter.html"><abbr title="Pinq\Queries\Common\Join\IFilter">IFilter</abbr></a> $filter = null, boolean $hasDefault = false)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../Pinq/Queries/Common/Join/Options.html"><abbr title="Pinq\Queries\Common\Join\Options">Options</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_updateSource">updateSource</a>(<abbr title="Pinq\Queries\Common\Join\Common\ISource">ISource</abbr> $source)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 48</div>
+        <code>            public            
+    <strong>__construct</strong>(<abbr title="Pinq\Queries\Common\Join\Common\ISource">ISource</abbr> $source, $isGroupJoin, <a href="../../../../Pinq/Queries/Common/Join/IFilter.html"><abbr title="Pinq\Queries\Common\Join\IFilter">IFilter</abbr></a> $filter = null, $hasDefault = false, $defaultValueId = null, $defaultKeyId = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Common\Join\Common\ISource">ISource</abbr></td>
+                <td>$source</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$isGroupJoin</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Common/Join/IFilter.html"><abbr title="Pinq\Queries\Common\Join\IFilter">IFilter</abbr></a></td>
+                <td>$filter</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$hasDefault</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$defaultValueId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$defaultKeyId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getParameters">
+        <div class="location">at line 64</div>
+        <code>            public            
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getSource">
+        <div class="location">at line 76</div>
+        <code>final            public            <abbr title="Pinq\Queries\Common\Join\Common\ISource">ISource</abbr>
+    <strong>getSource</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Queries\Common\Join\Common\ISource">ISource</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isGroupJoin">
+        <div class="location">at line 84</div>
+        <code>final            public            boolean
+    <strong>isGroupJoin</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasFilter">
+        <div class="location">at line 92</div>
+        <code>final            public            boolean
+    <strong>hasFilter</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFilter">
+        <div class="location">at line 100</div>
+        <code>final            public            <a href="../../../../Pinq/Queries/Common/Join/IFilter.html"><abbr title="Pinq\Queries\Common\Join\IFilter">IFilter</abbr></a>|null
+    <strong>getFilter</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../Pinq/Queries/Common/Join/IFilter.html"><abbr title="Pinq\Queries\Common\Join\IFilter">IFilter</abbr></a>|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasDefault">
+        <div class="location">at line 108</div>
+        <code>final            public            boolean
+    <strong>hasDefault</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getDefaultValueId">
+        <div class="location">at line 116</div>
+        <code>final            public            string
+    <strong>getDefaultValueId</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getDefaultKeyId">
+        <div class="location">at line 124</div>
+        <code>final            public            string
+    <strong>getDefaultKeyId</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_update">
+        <div class="location">at line 137</div>
+        <code>            public            <a href="../../../../Pinq/Queries/Common/Join/Options.html"><abbr title="Pinq\Queries\Common\Join\Options">Options</abbr></a>
+    <strong>update</strong>(<abbr title="Pinq\Queries\Common\Join\Common\ISource">ISource</abbr> $source, boolean $isGroupJoin, <a href="../../../../Pinq/Queries/Common/Join/IFilter.html"><abbr title="Pinq\Queries\Common\Join\IFilter">IFilter</abbr></a> $filter = null, boolean $hasDefault = false)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Common\Join\Common\ISource">ISource</abbr></td>
+                <td>$source</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$isGroupJoin</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Common/Join/IFilter.html"><abbr title="Pinq\Queries\Common\Join\IFilter">IFilter</abbr></a></td>
+                <td>$filter</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$hasDefault</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../Pinq/Queries/Common/Join/Options.html"><abbr title="Pinq\Queries\Common\Join\Options">Options</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_updateSource">
+        <div class="location">at line 159</div>
+        <code>            public            <a href="../../../../Pinq/Queries/Common/Join/Options.html"><abbr title="Pinq\Queries\Common\Join\Options">Options</abbr></a>
+    <strong>updateSource</strong>(<abbr title="Pinq\Queries\Common\Join\Common\ISource">ISource</abbr> $source)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Common\Join\Common\ISource">ISource</abbr></td>
+                <td>$source</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../Pinq/Queries/Common/Join/Options.html"><abbr title="Pinq\Queries\Common\Join\Options">Options</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

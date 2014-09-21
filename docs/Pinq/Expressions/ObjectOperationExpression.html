@@ -27,6 +27,20 @@
     <strong>ObjectOperationExpression</strong>        extends <a href="../../Pinq/Expressions/TraversalExpression.html"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a></p>
 
     
+            <h2>Constants</h2>
+
+            <table>
+                    <tr>
+                <td>EXPRESSION_TYPE</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+            </table>
+
     
     
             <h2>Methods</h2>
@@ -45,6 +59,17 @@
             </tr>
                     <tr>
                 <td class="type">
+                    static&nbsp;<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]
+                </td>
+                <td class="last">
+                    <a href="#method_simplifyAll">simplifyAll</a>(array $expressions, <a href="../../Pinq/Parsing/IFunctionScope.html"><abbr title="Pinq\Parsing\IFunctionScope">IFunctionScope</abbr></a> $scope = null, string|null $resolutionNamespace = null)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_simplifyAll"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
                 </td>
                 <td class="last">
@@ -56,35 +81,33 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
+                    mixed
                 </td>
                 <td class="last">
-                    <a href="#method_simplify">simplify</a>()
-                    <p>
-</p>
+                    <a href="#method_simplifyToValue">simplifyToValue</a>(<a href="../../Pinq/Parsing/IFunctionScope.html"><abbr title="Pinq\Parsing\IFunctionScope">IFunctionScope</abbr></a> $scope = null, string|null $resolutionNamespace = null)
+                    <p>Resolves and simplifies the expression tree and returns the resulting value.</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_simplify"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_simplifyToValue"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
-                    static&nbsp;<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]
+                    <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_simplifyAll">simplifyAll</a>(array $expressions)
-                    <p>
-</p>
+                    <a href="#method_simplify">simplify</a>(<a href="../../Pinq/Parsing/IFunctionScope.html"><abbr title="Pinq\Parsing\IFunctionScope">IFunctionScope</abbr></a> $scope = null, string|null $resolutionNamespace = null)
+                    <p>Simplifies the expression tree in the supplied class scope.</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_simplifyAll"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_simplify"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
                     string
                 </td>
                 <td class="last">
-                    <a href="#method_compile">compile</a>()
-                    <p>Compiles into equivalent PHP code</p>
+                    <a href="#method_hash">hash</a>()
+                    <p>Returns a value hash for the expression.</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_compile"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_hash"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -99,17 +122,6 @@
             </tr>
                     <tr>
                 <td class="type">
-                    static&nbsp;string[]
-                </td>
-                <td class="last">
-                    <a href="#method_compileAll">compileAll</a>(array $expressions)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_compileAll"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
                     
                 </td>
                 <td class="last">
@@ -121,7 +133,67 @@
             </tr>
                     <tr>
                 <td class="type">
-                    static&nbsp;array
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_equals">equals</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $expression)
+                    <p>Returns whether the expression is equivalent to the supplied expression.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_equals"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;string
+                </td>
+                <td class="last">
+                    <a href="#method_hashAll">hashAll</a>(array $expressions)
+                    <p>Returns a value hash for the supplied expressions.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_hashAll"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;string[]
+                </td>
+                <td class="last">
+                    <a href="#method_compileAll">compileAll</a>(array $expressions)
+                    <p>Compiles into equivalent PHP code</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_compileAll"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_compile">compile</a>()
+                    <p>Compiles the expression tree into equivalent PHP code</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_compile"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_compileDebug">compileDebug</a>()
+                    <p>Compiles the expression tree into debug code.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_compileDebug"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;boolean
+                </td>
+                <td class="last">
+                    <a href="#method_allOfType">allOfType</a>(array $expressions, string $type, boolean $allowNull = false)
+                    <p>Returns whether the expressions are all of the supplied type.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_allOfType"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>|null[]
                 </td>
                 <td class="last">
                     <a href="#method_cloneAll">cloneAll</a>(array $expressions)
@@ -135,7 +207,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/AssignmentExpression.html"><abbr title="Pinq\Expressions\AssignmentExpression">AssignmentExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_assign">assign</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignToValueExpression, $assignmentOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignmentValueExpression)
+                    <a href="#method_assign">assign</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignToValue, int $assignmentOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignmentValue)
                     <p>
 </p>
                 </td>
@@ -146,7 +218,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/BinaryOperationExpression.html"><abbr title="Pinq\Expressions\BinaryOperationExpression">BinaryOperationExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_binaryOperation">binaryOperation</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $leftOperandExpression, $operator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $rightOperandExpression)
+                    <a href="#method_binaryOperation">binaryOperation</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $leftOperand, int $operator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $rightOperand)
                     <p>
 </p>
                 </td>
@@ -157,7 +229,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/UnaryOperationExpression.html"><abbr title="Pinq\Expressions\UnaryOperationExpression">UnaryOperationExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_unaryOperation">unaryOperation</a>($unaryOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $operandExpression)
+                    <a href="#method_unaryOperation">unaryOperation</a>(int $unaryOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $operand)
                     <p>
 </p>
                 </td>
@@ -168,7 +240,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/NewExpression.html"><abbr title="Pinq\Expressions\NewExpression">NewExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_newExpression">newExpression</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $classTypeExpression, array $argumentValueExpressions = array())
+                    <a href="#method_newExpression">newExpression</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $classType, array $arguments = array())
                     <p>
 </p>
                 </td>
@@ -179,7 +251,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/MethodCallExpression.html"><abbr title="Pinq\Expressions\MethodCallExpression">MethodCallExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_methodCall">methodCall</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $nameExpression, array $argumentValueExpressions = array())
+                    <a href="#method_methodCall">methodCall</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $name, array $arguments = array())
                     <p>
 </p>
                 </td>
@@ -190,7 +262,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/FieldExpression.html"><abbr title="Pinq\Expressions\FieldExpression">FieldExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_field">field</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $nameExpression)
+                    <a href="#method_field">field</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $name)
                     <p>
 </p>
                 </td>
@@ -201,7 +273,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/IndexExpression.html"><abbr title="Pinq\Expressions\IndexExpression">IndexExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_index">index</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $indexExpression)
+                    <a href="#method_index">index</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $index)
                     <p>
 </p>
                 </td>
@@ -212,7 +284,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/InvocationExpression.html"><abbr title="Pinq\Expressions\InvocationExpression">InvocationExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_invocation">invocation</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression, array $argumentExpressions = array())
+                    <a href="#method_invocation">invocation</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression, array $arguments = array())
                     <p>
 </p>
                 </td>
@@ -223,7 +295,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/CastExpression.html"><abbr title="Pinq\Expressions\CastExpression">CastExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_cast">cast</a>($castType, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $castValueExpression)
+                    <a href="#method_cast">cast</a>(int $castType, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $castValue)
                     <p>
 </p>
                 </td>
@@ -234,7 +306,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/EmptyExpression.html"><abbr title="Pinq\Expressions\EmptyExpression">EmptyExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_emptyExpression">emptyExpression</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression)
+                    <a href="#method_emptyExpression">emptyExpression</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value)
                     <p>
 </p>
                 </td>
@@ -245,7 +317,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/IssetExpression.html"><abbr title="Pinq\Expressions\IssetExpression">IssetExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_issetExpression">issetExpression</a>(array $valueExpressions)
+                    <a href="#method_issetExpression">issetExpression</a>(array $values)
                     <p>
 </p>
                 </td>
@@ -253,10 +325,21 @@
             </tr>
                     <tr>
                 <td class="type">
+                    static&nbsp;<a href="../../Pinq/Expressions/UnsetExpression.html"><abbr title="Pinq\Expressions\UnsetExpression">UnsetExpression</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_unsetExpression">unsetExpression</a>(array $values)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_unsetExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     static&nbsp;<a href="../../Pinq/Expressions/FunctionCallExpression.html"><abbr title="Pinq\Expressions\FunctionCallExpression">FunctionCallExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_functionCall">functionCall</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $nameExpression, array $argumentValueExpressions = array())
+                    <a href="#method_functionCall">functionCall</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $name, array $arguments = array())
                     <p>
 </p>
                 </td>
@@ -267,7 +350,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/StaticMethodCallExpression.html"><abbr title="Pinq\Expressions\StaticMethodCallExpression">StaticMethodCallExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_staticMethodCall">staticMethodCall</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $classExpression, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $nameExpression, array $argumentValueExpressions = array())
+                    <a href="#method_staticMethodCall">staticMethodCall</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $class, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $name, array $arguments = array())
                     <p>
 </p>
                 </td>
@@ -275,10 +358,21 @@
             </tr>
                     <tr>
                 <td class="type">
+                    static&nbsp;<a href="../../Pinq/Expressions/StaticFieldExpression.html"><abbr title="Pinq\Expressions\StaticFieldExpression">StaticFieldExpression</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_staticField">staticField</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $class, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $name)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_staticField"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     static&nbsp;<a href="../../Pinq/Expressions/TernaryExpression.html"><abbr title="Pinq\Expressions\TernaryExpression">TernaryExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_ternary">ternary</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $conditionExpression, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $ifTrueExpression = null, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $ifFalseExpression)
+                    <a href="#method_ternary">ternary</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $condition, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $ifTrue = null, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $ifFalse)
                     <p>
 </p>
                 </td>
@@ -289,7 +383,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/ReturnExpression.html"><abbr title="Pinq\Expressions\ReturnExpression">ReturnExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_returnExpression">returnExpression</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression = null)
+                    <a href="#method_returnExpression">returnExpression</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value = null)
                     <p>
 </p>
                 </td>
@@ -300,7 +394,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/ThrowExpression.html"><abbr title="Pinq\Expressions\ThrowExpression">ThrowExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_throwExpression">throwExpression</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $exceptionExpression)
+                    <a href="#method_throwExpression">throwExpression</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $exception)
                     <p>
 </p>
                 </td>
@@ -311,7 +405,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/ParameterExpression.html"><abbr title="Pinq\Expressions\ParameterExpression">ParameterExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_parameter">parameter</a>($name, $typeHint = null, $hasDefaultValue = false, $defaultValue = null, $isPassedByReference = false)
+                    <a href="#method_parameter">parameter</a>(string $name, string|null $typeHint = null, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $defaultValue = null, boolean $isPassedByReference = false)
                     <p>
 </p>
                 </td>
@@ -322,7 +416,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/ValueExpression.html"><abbr title="Pinq\Expressions\ValueExpression">ValueExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_value">value</a>($value)
+                    <a href="#method_value">value</a>(mixed $value)
                     <p>
 </p>
                 </td>
@@ -330,10 +424,32 @@
             </tr>
                     <tr>
                 <td class="type">
+                    static&nbsp;<a href="../../Pinq/Expressions/ConstantExpression.html"><abbr title="Pinq\Expressions\ConstantExpression">ConstantExpression</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_constant">constant</a>(string $name)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_constant"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;<a href="../../Pinq/Expressions/ClassConstantExpression.html"><abbr title="Pinq\Expressions\ClassConstantExpression">ClassConstantExpression</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_classConstant">classConstant</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $class, string $name)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_classConstant"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     static&nbsp;<a href="../../Pinq/Expressions/VariableExpression.html"><abbr title="Pinq\Expressions\VariableExpression">VariableExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_variable">variable</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $nameExpression)
+                    <a href="#method_variable">variable</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $name)
                     <p>
 </p>
                 </td>
@@ -344,7 +460,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/ArrayExpression.html"><abbr title="Pinq\Expressions\ArrayExpression">ArrayExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_arrayExpression">arrayExpression</a>(array $keyExpressions, array $valueExpressions)
+                    <a href="#method_arrayExpression">arrayExpression</a>(array $items)
                     <p>
 </p>
                 </td>
@@ -352,10 +468,21 @@
             </tr>
                     <tr>
                 <td class="type">
+                    static&nbsp;<a href="../../Pinq/Expressions/ArrayItemExpression.html"><abbr title="Pinq\Expressions\ArrayItemExpression">ArrayItemExpression</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_arrayItem">arrayItem</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $key = null, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value, boolean $isReference = false)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_arrayItem"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     static&nbsp;<a href="../../Pinq/Expressions/ClosureExpression.html"><abbr title="Pinq\Expressions\ClosureExpression">ClosureExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_closure">closure</a>(array $parameterExpressions, array $usedVariables, array $bodyExpressions)
+                    <a href="#method_closure">closure</a>(boolean $returnsReference, boolean $isStatic, array $parameterExpressions, array $usedVariables, array $bodyExpressions)
                     <p>
 </p>
                 </td>
@@ -363,21 +490,10 @@
             </tr>
                     <tr>
                 <td class="type">
-                    static&nbsp;<a href="../../Pinq/Expressions/SubQueryExpression.html"><abbr title="Pinq\Expressions\SubQueryExpression">SubQueryExpression</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_subQuery">subQuery</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression, <abbr title="Pinq\Expressions\Pinq\Queries\IRequestQuery">IRequestQuery</abbr> $requestQuery, <a href="../../Pinq/Expressions/TraversalExpression.html"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> $originalExpression)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Expression.html#method_subQuery"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $objectValueExpression)
+                    <a href="#method___construct">__construct</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value)
                     <p>
 </p>
                 </td>
@@ -385,54 +501,21 @@
             </tr>
                     <tr>
                 <td class="type">
-                    boolean
-                </td>
-                <td class="last">
-                    <a href="#method_originatesFrom">originatesFrom</a>(string $expressionType)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Pinq/Expressions/TraversalExpression.html#method_originatesFrom"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
                     <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_getOriginExpression">getOriginExpression</a>()
+                    <a href="#method_getValue">getValue</a>()
                     <p>
 </p>
                 </td>
-                <td><small>from&nbsp;<a href="../../Pinq/Expressions/TraversalExpression.html#method_getOriginExpression"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/TraversalExpression.html#method_getValue"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
-                    int
+                    <a href="../../Pinq/Expressions/TraversalExpression.html"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_getTraversalDepth">getTraversalDepth</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Pinq/Expressions/TraversalExpression.html#method_getTraversalDepth"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_getValueExpression">getValueExpression</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Pinq/Expressions/TraversalExpression.html#method_getValueExpression"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_updateValue">updateValue</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression)
+                    <a href="#method_updateValue">updateValue</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value)
                     <p>
 </p>
                 </td>
@@ -466,7 +549,7 @@
         <h2>Details</h2>
 
                         <h3 id="method_getType">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_getType"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 12</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_getType"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 17</div>
         <code>final        static    public            
     <strong>getType</strong>()</code>
     </h3>
@@ -482,8 +565,58 @@
                     </div>
     </div>
 
+                <h3 id="method_simplifyAll">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_simplifyAll"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 29</div>
+        <code>final        static    public            <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]
+    <strong>simplifyAll</strong>(array $expressions, <a href="../../Pinq/Parsing/IFunctionScope.html"><abbr title="Pinq\Parsing\IFunctionScope">IFunctionScope</abbr></a> $scope = null, string|null $resolutionNamespace = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$expressions</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Pinq/Parsing/IFunctionScope.html"><abbr title="Pinq\Parsing\IFunctionScope">IFunctionScope</abbr></a></td>
+                <td>$scope</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$resolutionNamespace</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_traverse">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_traverse"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 20</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_traverse"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 85</div>
         <code>    abstract        public            <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
     <strong>traverse</strong>(<a href="../../Pinq/Expressions/ExpressionWalker.html"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a> $walker)</code>
     </h3>
@@ -520,17 +653,91 @@
                     </div>
     </div>
 
-                <h3 id="method_simplify">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_simplify"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 25</div>
-        <code>    abstract        public            <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
-    <strong>simplify</strong>()</code>
+                <h3 id="method_simplifyToValue">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_simplifyToValue"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 97</div>
+        <code>final            public            mixed
+    <strong>simplifyToValue</strong>(<a href="../../Pinq/Parsing/IFunctionScope.html"><abbr title="Pinq\Parsing\IFunctionScope">IFunctionScope</abbr></a> $scope = null, string|null $resolutionNamespace = null)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
+        <p>Resolves and simplifies the expression tree and returns the resulting value.</p>
         <p>
 </p>
         <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Parsing/IFunctionScope.html"><abbr title="Pinq\Parsing\IFunctionScope">IFunctionScope</abbr></a></td>
+                <td>$scope</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$resolutionNamespace</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/PinqException.html"><abbr title="Pinq\PinqException">PinqException</abbr></a></td>
+                <td>If the expression tree cannot be fully resolved.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_simplify">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_simplify"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 127</div>
+        <code>final            public            <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
+    <strong>simplify</strong>(<a href="../../Pinq/Parsing/IFunctionScope.html"><abbr title="Pinq\Parsing\IFunctionScope">IFunctionScope</abbr></a> $scope = null, string|null $resolutionNamespace = null)</code>
+    </h3>
+    <div class="details">
+        <p>Simplifies the expression tree in the supplied class scope.</p>
+        <p>Example:
+<code>
+-2 + 4
+</code>
+Will become:
+<code>
+2
+</code></p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Parsing/IFunctionScope.html"><abbr title="Pinq\Parsing\IFunctionScope">IFunctionScope</abbr></a></td>
+                <td>$scope</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$resolutionNamespace</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>Return Value</h4>
 
@@ -547,51 +754,13 @@
                     </div>
     </div>
 
-                <h3 id="method_simplifyAll">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_simplifyAll"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 30</div>
-        <code>final        static    public            <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]
-    <strong>simplifyAll</strong>(array $expressions)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>array</td>
-                <td>$expressions</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>[]</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_compile">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_compile"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 46</div>
+                <h3 id="method_hash">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_hash"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 139</div>
         <code>final            public            string
-    <strong>compile</strong>()</code>
+    <strong>hash</strong>()</code>
     </h3>
     <div class="details">
-        <p>Compiles into equivalent PHP code</p>
+        <p>Returns a value hash for the expression.</p>
         <p>
 </p>
         <div class="tags">
@@ -612,7 +781,7 @@
     </div>
 
                 <h3 id="method___toString">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method___toString"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 56</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method___toString"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 144</div>
         <code>final            public            
     <strong>__toString</strong>()</code>
     </h3>
@@ -628,14 +797,104 @@
                     </div>
     </div>
 
-                <h3 id="method_compileAll">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_compileAll"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 64</div>
-        <code>final        static    public            string[]
-    <strong>compileAll</strong>(array $expressions)</code>
+                <h3 id="method___clone">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method___clone"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 149</div>
+        <code>    abstract        public            
+    <strong>__clone</strong>()</code>
     </h3>
     <div class="details">
         <p>
 </p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_equals">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_equals"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 158</div>
+        <code>            public            boolean
+    <strong>equals</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Returns whether the expression is equivalent to the supplied expression.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hashAll">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_hashAll"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 170</div>
+        <code>final        static    public            string
+    <strong>hashAll</strong>(array $expressions)</code>
+    </h3>
+    <div class="details">
+        <p>Returns a value hash for the supplied expressions.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$expressions</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_compileAll">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_compileAll"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 182</div>
+        <code>final        static    public            string[]
+    <strong>compileAll</strong>(array $expressions)</code>
+    </h3>
+    <div class="details">
+        <p>Compiles into equivalent PHP code</p>
         <p>
 </p>
         <div class="tags">
@@ -666,26 +925,110 @@
                     </div>
     </div>
 
-                <h3 id="method___clone">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method___clone"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 88</div>
-        <code>    abstract        public            
-    <strong>__clone</strong>()</code>
+                <h3 id="method_compile">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_compile"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 197</div>
+        <code>final            public            string
+    <strong>compile</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
+        <p>Compiles the expression tree into equivalent PHP code</p>
         <p>
 </p>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_compileDebug">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_compileDebug"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 210</div>
+        <code>final            public            string
+    <strong>compileDebug</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Compiles the expression tree into debug code.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_allOfType">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_allOfType"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 233</div>
+        <code>final        static    public            boolean
+    <strong>allOfType</strong>(array $expressions, string $type, boolean $allowNull = false)</code>
+    </h3>
+    <div class="details">
+        <p>Returns whether the expressions are all of the supplied type.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$expressions</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$allowNull</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_cloneAll">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_cloneAll"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 93</div>
-        <code>final        static    public            array
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_cloneAll"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 251</div>
+        <code>final        static    public            <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>|null[]
     <strong>cloneAll</strong>(array $expressions)</code>
     </h3>
     <div class="details">
@@ -710,7 +1053,7 @@
 
                     <table>
         <tr>
-            <td>array</td>
+            <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>|null[]</td>
             <td>
 </td>
         </tr>
@@ -722,9 +1065,9 @@
     </div>
 
                 <h3 id="method_assign">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_assign"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 104</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_assign"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 268</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/AssignmentExpression.html"><abbr title="Pinq\Expressions\AssignmentExpression">AssignmentExpression</abbr></a>
-    <strong>assign</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignToValueExpression, $assignmentOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignmentValueExpression)</code>
+    <strong>assign</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignToValue, int $assignmentOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignmentValue)</code>
     </h3>
     <div class="details">
         <p>
@@ -737,19 +1080,19 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$assignToValueExpression</td>
+                <td>$assignToValue</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td></td>
+                <td>int</td>
                 <td>$assignmentOperator</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$assignmentValueExpression</td>
+                <td>$assignmentValue</td>
                 <td>
 </td>
             </tr>
@@ -772,9 +1115,9 @@
     </div>
 
                 <h3 id="method_binaryOperation">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_binaryOperation"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 115</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_binaryOperation"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 283</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/BinaryOperationExpression.html"><abbr title="Pinq\Expressions\BinaryOperationExpression">BinaryOperationExpression</abbr></a>
-    <strong>binaryOperation</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $leftOperandExpression, $operator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $rightOperandExpression)</code>
+    <strong>binaryOperation</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $leftOperand, int $operator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $rightOperand)</code>
     </h3>
     <div class="details">
         <p>
@@ -787,19 +1130,19 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$leftOperandExpression</td>
+                <td>$leftOperand</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td></td>
+                <td>int</td>
                 <td>$operator</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$rightOperandExpression</td>
+                <td>$rightOperand</td>
                 <td>
 </td>
             </tr>
@@ -822,9 +1165,9 @@
     </div>
 
                 <h3 id="method_unaryOperation">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_unaryOperation"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 126</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_unaryOperation"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 297</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/UnaryOperationExpression.html"><abbr title="Pinq\Expressions\UnaryOperationExpression">UnaryOperationExpression</abbr></a>
-    <strong>unaryOperation</strong>($unaryOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $operandExpression)</code>
+    <strong>unaryOperation</strong>(int $unaryOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $operand)</code>
     </h3>
     <div class="details">
         <p>
@@ -836,14 +1179,14 @@
 
                     <table>
                     <tr>
-                <td></td>
+                <td>int</td>
                 <td>$unaryOperator</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$operandExpression</td>
+                <td>$operand</td>
                 <td>
 </td>
             </tr>
@@ -866,9 +1209,9 @@
     </div>
 
                 <h3 id="method_newExpression">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_newExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 134</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_newExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 308</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/NewExpression.html"><abbr title="Pinq\Expressions\NewExpression">NewExpression</abbr></a>
-    <strong>newExpression</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $classTypeExpression, array $argumentValueExpressions = array())</code>
+    <strong>newExpression</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $classType, array $arguments = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -881,13 +1224,13 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$classTypeExpression</td>
+                <td>$classType</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td>array</td>
-                <td>$argumentValueExpressions</td>
+                <td>$arguments</td>
                 <td>
 </td>
             </tr>
@@ -910,9 +1253,9 @@
     </div>
 
                 <h3 id="method_methodCall">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_methodCall"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 142</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_methodCall"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 320</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/MethodCallExpression.html"><abbr title="Pinq\Expressions\MethodCallExpression">MethodCallExpression</abbr></a>
-    <strong>methodCall</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $nameExpression, array $argumentValueExpressions = array())</code>
+    <strong>methodCall</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $name, array $arguments = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -925,19 +1268,19 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$valueExpression</td>
+                <td>$value</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$nameExpression</td>
+                <td>$name</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td>array</td>
-                <td>$argumentValueExpressions</td>
+                <td>$arguments</td>
                 <td>
 </td>
             </tr>
@@ -960,9 +1303,9 @@
     </div>
 
                 <h3 id="method_field">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_field"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 153</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_field"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 334</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/FieldExpression.html"><abbr title="Pinq\Expressions\FieldExpression">FieldExpression</abbr></a>
-    <strong>field</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $nameExpression)</code>
+    <strong>field</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $name)</code>
     </h3>
     <div class="details">
         <p>
@@ -975,13 +1318,13 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$valueExpression</td>
+                <td>$value</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$nameExpression</td>
+                <td>$name</td>
                 <td>
 </td>
             </tr>
@@ -1004,9 +1347,9 @@
     </div>
 
                 <h3 id="method_index">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_index"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 161</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_index"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 345</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/IndexExpression.html"><abbr title="Pinq\Expressions\IndexExpression">IndexExpression</abbr></a>
-    <strong>index</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $indexExpression)</code>
+    <strong>index</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $index)</code>
     </h3>
     <div class="details">
         <p>
@@ -1019,13 +1362,13 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$valueExpression</td>
+                <td>$value</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$indexExpression</td>
+                <td>$index</td>
                 <td>
 </td>
             </tr>
@@ -1048,9 +1391,9 @@
     </div>
 
                 <h3 id="method_invocation">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_invocation"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 169</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_invocation"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 356</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/InvocationExpression.html"><abbr title="Pinq\Expressions\InvocationExpression">InvocationExpression</abbr></a>
-    <strong>invocation</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression, array $argumentExpressions = array())</code>
+    <strong>invocation</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression, array $arguments = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -1069,7 +1412,7 @@
             </tr>
                     <tr>
                 <td>array</td>
-                <td>$argumentExpressions</td>
+                <td>$arguments</td>
                 <td>
 </td>
             </tr>
@@ -1092,9 +1435,9 @@
     </div>
 
                 <h3 id="method_cast">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_cast"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 177</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_cast"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 367</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/CastExpression.html"><abbr title="Pinq\Expressions\CastExpression">CastExpression</abbr></a>
-    <strong>cast</strong>($castType, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $castValueExpression)</code>
+    <strong>cast</strong>(int $castType, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $castValue)</code>
     </h3>
     <div class="details">
         <p>
@@ -1106,14 +1449,14 @@
 
                     <table>
                     <tr>
-                <td></td>
+                <td>int</td>
                 <td>$castType</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$castValueExpression</td>
+                <td>$castValue</td>
                 <td>
 </td>
             </tr>
@@ -1136,9 +1479,9 @@
     </div>
 
                 <h3 id="method_emptyExpression">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_emptyExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 185</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_emptyExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 379</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/EmptyExpression.html"><abbr title="Pinq\Expressions\EmptyExpression">EmptyExpression</abbr></a>
-    <strong>emptyExpression</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression)</code>
+    <strong>emptyExpression</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value)</code>
     </h3>
     <div class="details">
         <p>
@@ -1151,7 +1494,7 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$valueExpression</td>
+                <td>$value</td>
                 <td>
 </td>
             </tr>
@@ -1174,9 +1517,9 @@
     </div>
 
                 <h3 id="method_issetExpression">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_issetExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 193</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_issetExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 389</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/IssetExpression.html"><abbr title="Pinq\Expressions\IssetExpression">IssetExpression</abbr></a>
-    <strong>issetExpression</strong>(array $valueExpressions)</code>
+    <strong>issetExpression</strong>(array $values)</code>
     </h3>
     <div class="details">
         <p>
@@ -1189,7 +1532,7 @@
                     <table>
                     <tr>
                 <td>array</td>
-                <td>$valueExpressions</td>
+                <td>$values</td>
                 <td>
 </td>
             </tr>
@@ -1211,10 +1554,48 @@
                     </div>
     </div>
 
+                <h3 id="method_unsetExpression">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_unsetExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 399</div>
+        <code>final        static    public            <a href="../../Pinq/Expressions/UnsetExpression.html"><abbr title="Pinq\Expressions\UnsetExpression">UnsetExpression</abbr></a>
+    <strong>unsetExpression</strong>(array $values)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$values</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Expressions/UnsetExpression.html"><abbr title="Pinq\Expressions\UnsetExpression">UnsetExpression</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_functionCall">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_functionCall"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 201</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_functionCall"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 410</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/FunctionCallExpression.html"><abbr title="Pinq\Expressions\FunctionCallExpression">FunctionCallExpression</abbr></a>
-    <strong>functionCall</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $nameExpression, array $argumentValueExpressions = array())</code>
+    <strong>functionCall</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $name, array $arguments = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -1227,13 +1608,13 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$nameExpression</td>
+                <td>$name</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td>array</td>
-                <td>$argumentValueExpressions</td>
+                <td>$arguments</td>
                 <td>
 </td>
             </tr>
@@ -1256,9 +1637,9 @@
     </div>
 
                 <h3 id="method_staticMethodCall">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_staticMethodCall"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 209</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_staticMethodCall"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 422</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/StaticMethodCallExpression.html"><abbr title="Pinq\Expressions\StaticMethodCallExpression">StaticMethodCallExpression</abbr></a>
-    <strong>staticMethodCall</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $classExpression, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $nameExpression, array $argumentValueExpressions = array())</code>
+    <strong>staticMethodCall</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $class, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $name, array $arguments = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -1271,19 +1652,19 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$classExpression</td>
+                <td>$class</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$nameExpression</td>
+                <td>$name</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td>array</td>
-                <td>$argumentValueExpressions</td>
+                <td>$arguments</td>
                 <td>
 </td>
             </tr>
@@ -1305,10 +1686,10 @@
                     </div>
     </div>
 
-                <h3 id="method_ternary">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_ternary"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 220</div>
-        <code>final        static    public            <a href="../../Pinq/Expressions/TernaryExpression.html"><abbr title="Pinq\Expressions\TernaryExpression">TernaryExpression</abbr></a>
-    <strong>ternary</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $conditionExpression, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $ifTrueExpression = null, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $ifFalseExpression)</code>
+                <h3 id="method_staticField">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_staticField"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 436</div>
+        <code>final        static    public            <a href="../../Pinq/Expressions/StaticFieldExpression.html"><abbr title="Pinq\Expressions\StaticFieldExpression">StaticFieldExpression</abbr></a>
+    <strong>staticField</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $class, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $name)</code>
     </h3>
     <div class="details">
         <p>
@@ -1321,19 +1702,63 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$conditionExpression</td>
+                <td>$class</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$ifTrueExpression</td>
+                <td>$name</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Expressions/StaticFieldExpression.html"><abbr title="Pinq\Expressions\StaticFieldExpression">StaticFieldExpression</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_ternary">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_ternary"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 450</div>
+        <code>final        static    public            <a href="../../Pinq/Expressions/TernaryExpression.html"><abbr title="Pinq\Expressions\TernaryExpression">TernaryExpression</abbr></a>
+    <strong>ternary</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $condition, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $ifTrue = null, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $ifFalse)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
+                <td>$condition</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$ifFalseExpression</td>
+                <td>$ifTrue</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
+                <td>$ifFalse</td>
                 <td>
 </td>
             </tr>
@@ -1356,9 +1781,9 @@
     </div>
 
                 <h3 id="method_returnExpression">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_returnExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 231</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_returnExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 463</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/ReturnExpression.html"><abbr title="Pinq\Expressions\ReturnExpression">ReturnExpression</abbr></a>
-    <strong>returnExpression</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression = null)</code>
+    <strong>returnExpression</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -1371,7 +1796,7 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$valueExpression</td>
+                <td>$value</td>
                 <td>
 </td>
             </tr>
@@ -1394,9 +1819,9 @@
     </div>
 
                 <h3 id="method_throwExpression">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_throwExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 239</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_throwExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 473</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/ThrowExpression.html"><abbr title="Pinq\Expressions\ThrowExpression">ThrowExpression</abbr></a>
-    <strong>throwExpression</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $exceptionExpression)</code>
+    <strong>throwExpression</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $exception)</code>
     </h3>
     <div class="details">
         <p>
@@ -1409,7 +1834,7 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$exceptionExpression</td>
+                <td>$exception</td>
                 <td>
 </td>
             </tr>
@@ -1432,9 +1857,9 @@
     </div>
 
                 <h3 id="method_parameter">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_parameter"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 248</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_parameter"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 486</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/ParameterExpression.html"><abbr title="Pinq\Expressions\ParameterExpression">ParameterExpression</abbr></a>
-    <strong>parameter</strong>($name, $typeHint = null, $hasDefaultValue = false, $defaultValue = null, $isPassedByReference = false)</code>
+    <strong>parameter</strong>(string $name, string|null $typeHint = null, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $defaultValue = null, boolean $isPassedByReference = false)</code>
     </h3>
     <div class="details">
         <p>
@@ -1446,31 +1871,25 @@
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$name</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td></td>
+                <td>string|null</td>
                 <td>$typeHint</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td></td>
-                <td>$hasDefaultValue</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td></td>
+                <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
                 <td>$defaultValue</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td></td>
+                <td>boolean</td>
                 <td>$isPassedByReference</td>
                 <td>
 </td>
@@ -1494,9 +1913,9 @@
     </div>
 
                 <h3 id="method_value">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_value"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 261</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_value"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 504</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/ValueExpression.html"><abbr title="Pinq\Expressions\ValueExpression">ValueExpression</abbr></a>
-    <strong>value</strong>($value)</code>
+    <strong>value</strong>(mixed $value)</code>
     </h3>
     <div class="details">
         <p>
@@ -1508,7 +1927,7 @@
 
                     <table>
                     <tr>
-                <td></td>
+                <td>mixed</td>
                 <td>$value</td>
                 <td>
 </td>
@@ -1531,10 +1950,48 @@
                     </div>
     </div>
 
-                <h3 id="method_variable">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_variable"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 269</div>
-        <code>final        static    public            <a href="../../Pinq/Expressions/VariableExpression.html"><abbr title="Pinq\Expressions\VariableExpression">VariableExpression</abbr></a>
-    <strong>variable</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $nameExpression)</code>
+                <h3 id="method_constant">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_constant"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 514</div>
+        <code>final        static    public            <a href="../../Pinq/Expressions/ConstantExpression.html"><abbr title="Pinq\Expressions\ConstantExpression">ConstantExpression</abbr></a>
+    <strong>constant</strong>(string $name)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Expressions/ConstantExpression.html"><abbr title="Pinq\Expressions\ConstantExpression">ConstantExpression</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_classConstant">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_classConstant"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 525</div>
+        <code>final        static    public            <a href="../../Pinq/Expressions/ClassConstantExpression.html"><abbr title="Pinq\Expressions\ClassConstantExpression">ClassConstantExpression</abbr></a>
+    <strong>classConstant</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $class, string $name)</code>
     </h3>
     <div class="details">
         <p>
@@ -1547,7 +2004,51 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$nameExpression</td>
+                <td>$class</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Expressions/ClassConstantExpression.html"><abbr title="Pinq\Expressions\ClassConstantExpression">ClassConstantExpression</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_variable">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_variable"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 535</div>
+        <code>final        static    public            <a href="../../Pinq/Expressions/VariableExpression.html"><abbr title="Pinq\Expressions\VariableExpression">VariableExpression</abbr></a>
+    <strong>variable</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $name)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
+                <td>$name</td>
                 <td>
 </td>
             </tr>
@@ -1570,9 +2071,9 @@
     </div>
 
                 <h3 id="method_arrayExpression">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_arrayExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 277</div>
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_arrayExpression"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 545</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/ArrayExpression.html"><abbr title="Pinq\Expressions\ArrayExpression">ArrayExpression</abbr></a>
-    <strong>arrayExpression</strong>(array $keyExpressions, array $valueExpressions)</code>
+    <strong>arrayExpression</strong>(array $items)</code>
     </h3>
     <div class="details">
         <p>
@@ -1585,13 +2086,7 @@
                     <table>
                     <tr>
                 <td>array</td>
-                <td>$keyExpressions</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>array</td>
-                <td>$valueExpressions</td>
+                <td>$items</td>
                 <td>
 </td>
             </tr>
@@ -1613,10 +2108,10 @@
                     </div>
     </div>
 
-                <h3 id="method_closure">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_closure"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 285</div>
-        <code>final        static    public            <a href="../../Pinq/Expressions/ClosureExpression.html"><abbr title="Pinq\Expressions\ClosureExpression">ClosureExpression</abbr></a>
-    <strong>closure</strong>(array $parameterExpressions, array $usedVariables, array $bodyExpressions)</code>
+                <h3 id="method_arrayItem">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_arrayItem"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 557</div>
+        <code>final        static    public            <a href="../../Pinq/Expressions/ArrayItemExpression.html"><abbr title="Pinq\Expressions\ArrayItemExpression">ArrayItemExpression</abbr></a>
+    <strong>arrayItem</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $key = null, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value, boolean $isReference = false)</code>
     </h3>
     <div class="details">
         <p>
@@ -1627,6 +2122,68 @@
                             <h4>Parameters</h4>
 
                     <table>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$isReference</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Expressions/ArrayItemExpression.html"><abbr title="Pinq\Expressions\ArrayItemExpression">ArrayItemExpression</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_closure">
+        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_closure"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 571</div>
+        <code>final        static    public            <a href="../../Pinq/Expressions/ClosureExpression.html"><abbr title="Pinq\Expressions\ClosureExpression">ClosureExpression</abbr></a>
+    <strong>closure</strong>(boolean $returnsReference, boolean $isStatic, array $parameterExpressions, array $usedVariables, array $bodyExpressions)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>boolean</td>
+                <td>$returnsReference</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$isStatic</td>
+                <td>
+</td>
+            </tr>
                     <tr>
                 <td>array</td>
                 <td>$parameterExpressions</td>
@@ -1663,60 +2220,10 @@
                     </div>
     </div>
 
-                <h3 id="method_subQuery">
-        <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_subQuery"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 296</div>
-        <code>final        static    public            <a href="../../Pinq/Expressions/SubQueryExpression.html"><abbr title="Pinq\Expressions\SubQueryExpression">SubQueryExpression</abbr></a>
-    <strong>subQuery</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression, <abbr title="Pinq\Expressions\Pinq\Queries\IRequestQuery">IRequestQuery</abbr> $requestQuery, <a href="../../Pinq/Expressions/TraversalExpression.html"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> $originalExpression)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$valueExpression</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td><abbr title="Pinq\Expressions\Pinq\Queries\IRequestQuery">IRequestQuery</abbr></td>
-                <td>$requestQuery</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td><a href="../../Pinq/Expressions/TraversalExpression.html"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a></td>
-                <td>$originalExpression</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td><a href="../../Pinq/Expressions/SubQueryExpression.html"><abbr title="Pinq\Expressions\SubQueryExpression">SubQueryExpression</abbr></a></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
                 <h3 id="method___construct">
         <div class="location">at line 10</div>
         <code>            public            
-    <strong>__construct</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $objectValueExpression)</code>
+    <strong>__construct</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value)</code>
     </h3>
     <div class="details">
         <p>
@@ -1729,7 +2236,7 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$objectValueExpression</td>
+                <td>$value</td>
                 <td>
 </td>
             </tr>
@@ -1741,102 +2248,10 @@
                     </div>
     </div>
 
-                <h3 id="method_originatesFrom">
-        <div class="location">in <a href="../../Pinq/Expressions/TraversalExpression.html#method_originatesFrom"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> at line 44</div>
-        <code>final            public            boolean
-    <strong>originatesFrom</strong>(string $expressionType)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>string</td>
-                <td>$expressionType</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>boolean</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_getOriginExpression">
-        <div class="location">in <a href="../../Pinq/Expressions/TraversalExpression.html#method_getOriginExpression"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> at line 52</div>
+                <h3 id="method_getValue">
+        <div class="location">in <a href="../../Pinq/Expressions/TraversalExpression.html#method_getValue"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> at line 25</div>
         <code>final            public            <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
-    <strong>getOriginExpression</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_getTraversalDepth">
-        <div class="location">in <a href="../../Pinq/Expressions/TraversalExpression.html#method_getTraversalDepth"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> at line 60</div>
-        <code>final            public            int
-    <strong>getTraversalDepth</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>int</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_getValueExpression">
-        <div class="location">in <a href="../../Pinq/Expressions/TraversalExpression.html#method_getValueExpression"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> at line 68</div>
-        <code>final            public            <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
-    <strong>getValueExpression</strong>()</code>
+    <strong>getValue</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -1861,9 +2276,9 @@
     </div>
 
                 <h3 id="method_updateValue">
-        <div class="location">in <a href="../../Pinq/Expressions/TraversalExpression.html#method_updateValue"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> at line 76</div>
-        <code>final            public            <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
-    <strong>updateValue</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $valueExpression)</code>
+        <div class="location">in <a href="../../Pinq/Expressions/TraversalExpression.html#method_updateValue"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> at line 35</div>
+        <code>final            public            <a href="../../Pinq/Expressions/TraversalExpression.html"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a>
+    <strong>updateValue</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $value)</code>
     </h3>
     <div class="details">
         <p>
@@ -1876,7 +2291,7 @@
                     <table>
                     <tr>
                 <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
-                <td>$valueExpression</td>
+                <td>$value</td>
                 <td>
 </td>
             </tr>
@@ -1887,7 +2302,7 @@
 
                     <table>
         <tr>
-            <td><a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
+            <td><a href="../../Pinq/Expressions/TraversalExpression.html"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a></td>
             <td>
 </td>
         </tr>
@@ -1899,7 +2314,7 @@
     </div>
 
                 <h3 id="method_serialize">
-        <div class="location">in <a href="../../Pinq/Expressions/TraversalExpression.html#method_serialize"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> at line 87</div>
+        <div class="location">in <a href="../../Pinq/Expressions/TraversalExpression.html#method_serialize"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> at line 46</div>
         <code>final            public            
     <strong>serialize</strong>()</code>
     </h3>
@@ -1916,7 +2331,7 @@
     </div>
 
                 <h3 id="method_unserialize">
-        <div class="location">in <a href="../../Pinq/Expressions/TraversalExpression.html#method_unserialize"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> at line 94</div>
+        <div class="location">in <a href="../../Pinq/Expressions/TraversalExpression.html#method_unserialize"><abbr title="Pinq\Expressions\TraversalExpression">TraversalExpression</abbr></a> at line 53</div>
         <code>final            public            
     <strong>unserialize</strong>($serialized)</code>
     </h3>

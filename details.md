@@ -6,7 +6,7 @@ title:  Details
 Lazy Evaluation 
 ==============
 
-Like its cousin, Linq, Pinq makes extensive use of **lazy evaluation**:
+Like its cousin, LINQ, PINQ makes extensive use of **lazy evaluation**:
 
 {% highlight php startinline %}
 $filteredValues = $values->where(function ($i) { return strlen($i) < 50; });
@@ -50,10 +50,8 @@ foreach($values->where(function ($i) { return $i >= 5; }) as $value) {
 }
 
 foreach($values->where(function ($i) { return $i < 5; }) as $value) {
-    /* 
-     * If the queries mutated the original object,
-     * no values would be iterated here, this would be very unintuitive and bug-prone
-     */
+    // If the queries mutated the original object,
+    // no values would be iterated here, this would be very unintuitive and bug-prone
 }
 
 {% endhighlight %}

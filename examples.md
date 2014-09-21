@@ -30,6 +30,10 @@ foreach($numbers->where(function ($i) { return $i % 2 === 1; }) as $number) {
 foreach($strings->where(function ($i) { return strpos($i, 'w') === 0; })) as $string) {
     //'whiskey', 'which'
 }
+
+foreach($strings->where(function ($i, $key) { return $key % 2 === 0; })) as $string) {
+    //'foo', 'baz', 'cow'
+}
 {% endhighlight %}
 
 **Ordering**
@@ -110,7 +114,7 @@ foreach($strings->select('strlen') as $length) {
 
 {% highlight php startinline %}
 
-foreach($strings->selectMany('str_split') as $character) {
+foreach($strings->selectMany(function ($i) { return str_split($i); }) as $character) {
     //'f', 'o', 'o', 'b', 'a'...
 }
 
@@ -156,9 +160,9 @@ $numberData = $numbers
         ->where(function (ITraversable $i) { return $i->count() % 2 === 0; }) //Only groups with an even amount of values
         ->select(function (ITraversable $numbers) {
             return [
-                'First' => $numbers->first(),
-                'Average' => $numbers->average(),
-                'Count' => $numbers->count(),
+                'first' => $numbers->first(),
+                'average' => $numbers->average(),
+                'count' => $numbers->count(),
                 'numbers' => $numbers->asArray(),
             ];
         });

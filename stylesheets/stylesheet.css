@@ -237,8 +237,9 @@ aside a.button.active {
 code, pre {
     font-family: 'Segoe UI', sans-serif, Arial;
     color: #222;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     font-size: 13px;
+    line-height: 1.5!important;
 }
 
 code {
@@ -248,7 +249,7 @@ code {
 }
 
 pre {
-    padding: 20px;
+    padding: 10px;
     background: #fff;
     text-shadow: none;
     overflow: auto;
@@ -388,7 +389,11 @@ h6:before {
 }
 
 p {
-    margin-bottom: 20px;
+
+}
+
+em {
+    font-style: italic;
 }
 
 a {
@@ -407,7 +412,7 @@ blockquote {
 }
 
 ul {
-    list-style: disc inside;
+    list-style: disc;
     padding-left: 20px;
 }
 

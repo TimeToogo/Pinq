@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Providers\DSL\Compilation\Parameters\ParameterCollection | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../../../classes.html">Classes</a></li>
+                            <li><a href="../../../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../../../traits.html">Traits</a></li>
+            <li><a href="../../../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters.html">Pinq\Providers\DSL\Compilation\Parameters</a>\ParameterCollection</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>ParameterCollection</strong>        extends <a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/ParameterCollectionBase.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ParameterCollectionBase">ParameterCollectionBase</abbr></a></p>
+
+            <div class="description">
+            <p>Implementation of the expression parameter collection.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_count">count</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/ParameterCollectionBase.html#method_count"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ParameterCollectionBase">ParameterCollectionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/IQueryParameter.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IQueryParameter">IQueryParameter</abbr></a>[]
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/ParameterCollectionBase.html#method_getParameters"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ParameterCollectionBase">ParameterCollectionBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_addExpression">addExpression</a>(<abbr title="Pinq\Providers\DSL\Compilation\Parameters\O\Expression">Expression</abbr> $expression, <a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/IParameterHasher.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher">IParameterHasher</abbr></a> $hasher, <a href="../../../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a> $context = null, mixed $data = null)
+                    <p>Adds an expression parameter to the collection.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_addId">addId</a>(<abbr title="Pinq\Providers\DSL\Compilation\Parameters\$parameterId">$parameterId</abbr> $parameterId, <a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/IParameterHasher.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher">IParameterHasher</abbr></a> $hasher, mixed $data = null)
+                    <p>Adds a standard parameter id to the collection.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_add">add</a>(<a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/IQueryParameter.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IQueryParameter">IQueryParameter</abbr></a> $parameter)
+                    <p>Adds an parameter to the collection with the supplied context.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/ParameterRegistry.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ParameterRegistry">ParameterRegistry</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_buildRegistry">buildRegistry</a>()
+                    <p>Builds an immutable parameter registry from the added parameters.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 15</div>
+        <code>            public            
+    <strong>__construct</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_count">
+        <div class="location">in <a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/ParameterCollectionBase.html#method_count"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ParameterCollectionBase">ParameterCollectionBase</abbr></a> at line 22</div>
+        <code>            public            
+    <strong>count</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getParameters">
+        <div class="location">in <a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/ParameterCollectionBase.html#method_getParameters"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ParameterCollectionBase">ParameterCollectionBase</abbr></a> at line 30</div>
+        <code>            public            <a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/IQueryParameter.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IQueryParameter">IQueryParameter</abbr></a>[]
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/IQueryParameter.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IQueryParameter">IQueryParameter</abbr></a>[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_addExpression">
+        <div class="location">at line 30</div>
+        <code>            public            void
+    <strong>addExpression</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Parameters\O\Expression">Expression</abbr> $expression, <a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/IParameterHasher.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher">IParameterHasher</abbr></a> $hasher, <a href="../../../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a> $context = null, mixed $data = null)</code>
+    </h3>
+    <div class="details">
+        <p>Adds an expression parameter to the collection.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Parameters\O\Expression">Expression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/IParameterHasher.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher">IParameterHasher</abbr></a></td>
+                <td>$hasher</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$context</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$data</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_addId">
+        <div class="location">at line 48</div>
+        <code>            public            void
+    <strong>addId</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Parameters\$parameterId">$parameterId</abbr> $parameterId, <a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/IParameterHasher.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher">IParameterHasher</abbr></a> $hasher, mixed $data = null)</code>
+    </h3>
+    <div class="details">
+        <p>Adds a standard parameter id to the collection.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Parameters\$parameterId">$parameterId</abbr></td>
+                <td>$parameterId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/IParameterHasher.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher">IParameterHasher</abbr></a></td>
+                <td>$hasher</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$data</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_add">
+        <div class="location">at line 60</div>
+        <code>            public            void
+    <strong>add</strong>(<a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/IQueryParameter.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IQueryParameter">IQueryParameter</abbr></a> $parameter)</code>
+    </h3>
+    <div class="details">
+        <p>Adds an parameter to the collection with the supplied context.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/IQueryParameter.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IQueryParameter">IQueryParameter</abbr></a></td>
+                <td>$parameter</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_buildRegistry">
+        <div class="location">at line 70</div>
+        <code>            public            <a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/ParameterRegistry.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ParameterRegistry">ParameterRegistry</abbr></a>
+    <strong>buildRegistry</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Builds an immutable parameter registry from the added parameters.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../../Pinq/Providers/DSL/Compilation/Parameters/ParameterRegistry.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ParameterRegistry">ParameterRegistry</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

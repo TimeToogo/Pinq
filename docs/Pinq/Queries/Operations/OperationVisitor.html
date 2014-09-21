@@ -24,12 +24,13 @@
     </div>
         <div class="content">
                 <p>    class
-    <strong>OperationVisitor</strong></p>
+    <strong>OperationVisitor</strong>        implements
+        <a href="../../../Pinq/Queries/Operations/IOperationVisitor.html"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a></p>
 
             <div class="description">
             <p>The operation visitor is a utility class that will visit any operation in a respective method.</p>
-            <p>This is used by the repository providers to as to execute
-the supplied operation query</p>
+            <p>
+</p>
         </div>
     
     
@@ -39,7 +40,7 @@ the supplied operation query</p>
             <table>
                     <tr>
                 <td class="type">
-                    
+                    mixed
                 </td>
                 <td class="last">
                     <a href="#method_visit">visit</a>(<a href="../../../Pinq/Queries/IOperation.html"><abbr title="Pinq\Queries\IOperation">IOperation</abbr></a> $operation)
@@ -54,6 +55,17 @@ the supplied operation query</p>
                 </td>
                 <td class="last">
                     <a href="#method_visitApply">visitApply</a>(<a href="../../../Pinq/Queries/Operations/Apply.html"><abbr title="Pinq\Queries\Operations\Apply">Apply</abbr></a> $operation)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitJoinApply">visitJoinApply</a>(<a href="../../../Pinq/Queries/Operations/JoinApply.html"><abbr title="Pinq\Queries\Operations\JoinApply">JoinApply</abbr></a> $operation)
                     <p>
 </p>
                 </td>
@@ -131,8 +143,8 @@ the supplied operation query</p>
         <h2>Details</h2>
 
                         <h3 id="method_visit">
-        <div class="location">at line 21</div>
-        <code>final            public            
+        <div class="location">at line 20</div>
+        <code>final            public            mixed
     <strong>visit</strong>(<a href="../../../Pinq/Queries/IOperation.html"><abbr title="Pinq\Queries\IOperation">IOperation</abbr></a> $operation)</code>
     </h3>
     <div class="details">
@@ -147,18 +159,29 @@ the supplied operation query</p>
                     <tr>
                 <td><a href="../../../Pinq/Queries/IOperation.html"><abbr title="Pinq\Queries\IOperation">IOperation</abbr></a></td>
                 <td>$operation</td>
-                <td>The returned value</td>
+                <td>
+</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_visitApply">
-        <div class="location">at line 26</div>
+        <div class="location">at line 25</div>
         <code>            public            
     <strong>visitApply</strong>(<a href="../../../Pinq/Queries/Operations/Apply.html"><abbr title="Pinq\Queries\Operations\Apply">Apply</abbr></a> $operation)</code>
     </h3>
@@ -185,8 +208,36 @@ the supplied operation query</p>
                     </div>
     </div>
 
+                <h3 id="method_visitJoinApply">
+        <div class="location">at line 30</div>
+        <code>            public            
+    <strong>visitJoinApply</strong>(<a href="../../../Pinq/Queries/Operations/JoinApply.html"><abbr title="Pinq\Queries\Operations\JoinApply">JoinApply</abbr></a> $operation)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Queries/Operations/JoinApply.html"><abbr title="Pinq\Queries\Operations\JoinApply">JoinApply</abbr></a></td>
+                <td>$operation</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_visitAddValues">
-        <div class="location">at line 31</div>
+        <div class="location">at line 35</div>
         <code>            public            
     <strong>visitAddValues</strong>(<a href="../../../Pinq/Queries/Operations/AddValues.html"><abbr title="Pinq\Queries\Operations\AddValues">AddValues</abbr></a> $operation)</code>
     </h3>
@@ -214,7 +265,7 @@ the supplied operation query</p>
     </div>
 
                 <h3 id="method_visitRemoveValues">
-        <div class="location">at line 36</div>
+        <div class="location">at line 40</div>
         <code>            public            
     <strong>visitRemoveValues</strong>(<a href="../../../Pinq/Queries/Operations/RemoveValues.html"><abbr title="Pinq\Queries\Operations\RemoveValues">RemoveValues</abbr></a> $operation)</code>
     </h3>
@@ -242,7 +293,7 @@ the supplied operation query</p>
     </div>
 
                 <h3 id="method_visitRemoveWhere">
-        <div class="location">at line 41</div>
+        <div class="location">at line 45</div>
         <code>            public            
     <strong>visitRemoveWhere</strong>(<a href="../../../Pinq/Queries/Operations/RemoveWhere.html"><abbr title="Pinq\Queries\Operations\RemoveWhere">RemoveWhere</abbr></a> $operation)</code>
     </h3>
@@ -270,7 +321,7 @@ the supplied operation query</p>
     </div>
 
                 <h3 id="method_visitClear">
-        <div class="location">at line 46</div>
+        <div class="location">at line 50</div>
         <code>            public            
     <strong>visitClear</strong>(<a href="../../../Pinq/Queries/Operations/Clear.html"><abbr title="Pinq\Queries\Operations\Clear">Clear</abbr></a> $operation)</code>
     </h3>
@@ -298,7 +349,7 @@ the supplied operation query</p>
     </div>
 
                 <h3 id="method_visitUnsetIndex">
-        <div class="location">at line 51</div>
+        <div class="location">at line 55</div>
         <code>            public            
     <strong>visitUnsetIndex</strong>(<a href="../../../Pinq/Queries/Operations/UnsetIndex.html"><abbr title="Pinq\Queries\Operations\UnsetIndex">UnsetIndex</abbr></a> $operation)</code>
     </h3>
@@ -326,7 +377,7 @@ the supplied operation query</p>
     </div>
 
                 <h3 id="method_visitSetIndex">
-        <div class="location">at line 56</div>
+        <div class="location">at line 60</div>
         <code>            public            
     <strong>visitSetIndex</strong>(<a href="../../../Pinq/Queries/Operations/SetIndex.html"><abbr title="Pinq\Queries\Operations\SetIndex">SetIndex</abbr></a> $operation)</code>
     </h3>

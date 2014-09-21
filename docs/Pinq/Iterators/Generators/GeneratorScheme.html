@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Iterators\Generators\GeneratorScheme | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Pinq/Iterators/Generators.html">Pinq\Iterators\Generators</a>\GeneratorScheme</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>GeneratorScheme</strong>        extends <a href="../../../Pinq/Iterators/Common/IteratorScheme.html"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a></p>
+
+            <div class="description">
+            <p>Iterator scheme using rewindable generator implementations.</p>
+            <p>Compatible with >= PHP 5.5.0.</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_toIterator">toIterator</a>(<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>|array $traversableOrArray)
+                    <p>Returns the supplied traversable or array as an iterator compatible with this scheme.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_toIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_flattenedIterator">flattenedIterator</a>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator)
+                    <p>Returns an iterator which will iterate each element of the inner iterator's values.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_flattenedIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_appendIterator">appendIterator</a>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator, <abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $otherIterator)
+                    <p>Returns an iterator which will return all values from both the supplied iterators.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_appendIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_unionIterator">unionIterator</a>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator, <abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $otherIterator)
+                    <p>Returns an iterator which will return unique values present in the first or second iterator.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_unionIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_uniqueIterator">uniqueIterator</a>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator)
+                    <p>Returns an iterator which will return unique values using strict equality.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_uniqueIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_uniqueKeyIterator">uniqueKeyIterator</a>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator)
+                    <p>Returns an iterator which will return only the first associated value for any key.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_uniqueKeyIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_whereInIterator">whereInIterator</a>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator, <abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $otherIterator)
+                    <p>Returns an iterator which will return all values in the first iterator present in the second.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_whereInIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_exceptIterator">exceptIterator</a>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator, <abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $otherIterator)
+                    <p>Returns an iterator which will return all values in the first but not present in the second iterator.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_exceptIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_intersectionIterator">intersectionIterator</a>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator, <abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $otherIterator)
+                    <p>Returns an iterator which will return unique values present in the first and second iterator.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_intersectionIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_differenceIterator">differenceIterator</a>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator, <abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $otherIterator)
+                    <p>Returns an iterator which will return uniqe values present in the first but not the second iterator.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_differenceIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;
+                </td>
+                <td class="last">
+                    <a href="#method_compatibleWith">compatibleWith</a>($phpVersion)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IOrderedMap.html"><abbr title="Pinq\Iterators\IOrderedMap">IOrderedMap</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_createOrderedMap">createOrderedMap</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator = null)
+                    <p>Creates an ordered map from the supplied iterator.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/ISet.html"><abbr title="Pinq\Iterators\ISet">ISet</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_createSet">createSet</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator = null)
+                    <p>Creates an set from the supplied iterator values.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_walk">walk</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator, callable $function)
+                    <p>Iterate over the keys and values of the supplied iterator and passes them (value, key) to the supplied function.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_toArray">toArray</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator)
+                    <p>Safely converts the supplied iterator to an array.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_arrayCompatibleIterator">arrayCompatibleIterator</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator)
+                    <p>Returns an iterator which will map any non integer or string keys to incrementing integers.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;<a href="../../../Pinq/Iterators/Generators/IGenerator.html"><abbr title="Pinq\Iterators\Generators\IGenerator">IGenerator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_adapter">adapter</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_arrayIterator">arrayIterator</a>(array $array)
+                    <p>Returns an iterator for the supplied array.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_emptyIterator">emptyIterator</a>()
+                    <p>Returns an empty iterator.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_filterIterator">filterIterator</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator, callable $predicate)
+                    <p>Returns an iterator which will filter the elements according to the supplied predicate function.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_projectionIterator">projectionIterator</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator, callable $keyProjectionFunction = null, callable $valueProjectionFunction = null)
+                    <p>Returns an iterator which will return the elements mapped by the supplied functions or the original if no function is supplied.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_reindexerIterator">reindexerIterator</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator)
+                    <p>Returns an iterator which will return the map the keys to 0-based incrementing integers</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IJoinIterator.html"><abbr title="Pinq\Iterators\IJoinIterator">IJoinIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_joinIterator">joinIterator</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $outerIterator, <abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $innerIterator)
+                    <p>Returns an iterator which will return the outer elements joined to the inner elements.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IJoinIterator.html"><abbr title="Pinq\Iterators\IJoinIterator">IJoinIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_groupJoinIterator">groupJoinIterator</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $outerIterator, <abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $innerIterator, callable $traversableFactory)
+                    <p>Returns an iterator which will return the outer elements joined to the inner elements.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_rangeIterator">rangeIterator</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator, int $start, int|null $amount)
+                    <p>Returns an iterator which will only iterate the elements in the supplied range.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_groupedIterator">groupedIterator</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator, callable $groupKeyFunction, callable $traversableFactory)
+                    <p>Returns an iterator which will group the elements according to the supplied function and wrap each group in a traversable implementation from the supplied factory.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Iterators/IOrderedIterator.html"><abbr title="Pinq\Iterators\IOrderedIterator">IOrderedIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_orderedIterator">orderedIterator</a>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator, callable $function, boolean $isAscending)
+                    <p>Returns an iterator with will sort the elements according to the supplied function and direction.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_toIterator">
+        <div class="location">in <a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_toIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a> at line 15</div>
+        <code>            public            <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+    <strong>toIterator</strong>(<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>|array $traversableOrArray)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the supplied traversable or array as an iterator compatible with this scheme.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>|array</td>
+                <td>$traversableOrArray</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_flattenedIterator">
+        <div class="location">in <a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_flattenedIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a> at line 36</div>
+        <code>final            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>flattenedIterator</strong>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will iterate each element of the inner iterator's values.</p>
+        <p>An exception will be thrown
+if an invalid iterator is returned from the supplied iterator.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_appendIterator">
+        <div class="location">in <a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_appendIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a> at line 49</div>
+        <code>final            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>appendIterator</strong>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator, <abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $otherIterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will return all values from both the supplied iterators.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$otherIterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_unionIterator">
+        <div class="location">in <a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_unionIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a> at line 54</div>
+        <code>final            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>unionIterator</strong>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator, <abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $otherIterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will return unique values present in the first or second iterator.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$otherIterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_uniqueIterator">
+        <div class="location">in <a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_uniqueIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a> at line 59</div>
+        <code>final            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>uniqueIterator</strong>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will return unique values using strict equality.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_uniqueKeyIterator">
+        <div class="location">in <a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_uniqueKeyIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a> at line 67</div>
+        <code>final            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>uniqueKeyIterator</strong>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will return only the first associated value for any key.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_whereInIterator">
+        <div class="location">in <a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_whereInIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a> at line 75</div>
+        <code>final            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>whereInIterator</strong>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator, <abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $otherIterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will return all values in the first iterator present in the second.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$otherIterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_exceptIterator">
+        <div class="location">in <a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_exceptIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a> at line 83</div>
+        <code>final            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>exceptIterator</strong>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator, <abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $otherIterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will return all values in the first but not present in the second iterator.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$otherIterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_intersectionIterator">
+        <div class="location">in <a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_intersectionIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a> at line 91</div>
+        <code>final            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>intersectionIterator</strong>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator, <abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $otherIterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will return unique values present in the first and second iterator.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$otherIterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_differenceIterator">
+        <div class="location">in <a href="../../../Pinq/Iterators/Common/IteratorScheme.html#method_differenceIterator"><abbr title="Pinq\Iterators\Common\IteratorScheme">IteratorScheme</abbr></a> at line 99</div>
+        <code>final            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>differenceIterator</strong>(<abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $iterator, <abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr> $otherIterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will return uniqe values present in the first but not the second iterator.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Common\Traversable">Traversable</abbr></td>
+                <td>$otherIterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_compatibleWith">
+        <div class="location">at line 16</div>
+        <code>        static    public            
+    <strong>compatibleWith</strong>($phpVersion)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$phpVersion</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_createOrderedMap">
+        <div class="location">at line 26</div>
+        <code>            public            <a href="../../../Pinq/Iterators/IOrderedMap.html"><abbr title="Pinq\Iterators\IOrderedMap">IOrderedMap</abbr></a>
+    <strong>createOrderedMap</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator = null)</code>
+    </h3>
+    <div class="details">
+        <p>Creates an ordered map from the supplied iterator.</p>
+        <p>Keys can only be associated with a single value and such
+if the iterator returns duplicate keys the last respective
+value will be used.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IOrderedMap.html"><abbr title="Pinq\Iterators\IOrderedMap">IOrderedMap</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_createSet">
+        <div class="location">at line 31</div>
+        <code>            public            <a href="../../../Pinq/Iterators/ISet.html"><abbr title="Pinq\Iterators\ISet">ISet</abbr></a>
+    <strong>createSet</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator = null)</code>
+    </h3>
+    <div class="details">
+        <p>Creates an set from the supplied iterator values.</p>
+        <p>A set can only contain unique values and such duplicates
+will be lost.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/ISet.html"><abbr title="Pinq\Iterators\ISet">ISet</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_walk">
+        <div class="location">at line 36</div>
+        <code>            public            void
+    <strong>walk</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator, callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Iterate over the keys and values of the supplied iterator and passes them (value, key) to the supplied function.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_toArray">
+        <div class="location">at line 46</div>
+        <code>            public            array
+    <strong>toArray</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator)</code>
+    </h3>
+    <div class="details">
+        <p>Safely converts the supplied iterator to an array.</p>
+        <p>Non integer or string keys will be reindexed to
+respective incremented integers.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_arrayCompatibleIterator">
+        <div class="location">at line 58</div>
+        <code>            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>arrayCompatibleIterator</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will map any non integer or string keys to incrementing integers.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_adapter">
+        <div class="location">at line 68</div>
+        <code>        static    public            <a href="../../../Pinq/Iterators/Generators/IGenerator.html"><abbr title="Pinq\Iterators\Generators\IGenerator">IGenerator</abbr></a>
+    <strong>adapter</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/Generators/IGenerator.html"><abbr title="Pinq\Iterators\Generators\IGenerator">IGenerator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_arrayIterator">
+        <div class="location">at line 88</div>
+        <code>            public            <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+    <strong>arrayIterator</strong>(array $array)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator for the supplied array.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$array</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_emptyIterator">
+        <div class="location">at line 93</div>
+        <code>            public            <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+    <strong>emptyIterator</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns an empty iterator.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_filterIterator">
+        <div class="location">at line 98</div>
+        <code>            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>filterIterator</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator, callable $predicate)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will filter the elements according to the supplied predicate function.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$predicate</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_projectionIterator">
+        <div class="location">at line 103</div>
+        <code>            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>projectionIterator</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator, callable $keyProjectionFunction = null, callable $valueProjectionFunction = null)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will return the elements mapped by the supplied functions or the original if no function is supplied.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$keyProjectionFunction</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$valueProjectionFunction</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_reindexerIterator">
+        <div class="location">at line 114</div>
+        <code>            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>reindexerIterator</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will return the map the keys to 0-based incrementing integers</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_joinIterator">
+        <div class="location">at line 119</div>
+        <code>            public            <a href="../../../Pinq/Iterators/IJoinIterator.html"><abbr title="Pinq\Iterators\IJoinIterator">IJoinIterator</abbr></a>
+    <strong>joinIterator</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $outerIterator, <abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $innerIterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will return the outer elements joined to the inner elements.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$outerIterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$innerIterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IJoinIterator.html"><abbr title="Pinq\Iterators\IJoinIterator">IJoinIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_groupJoinIterator">
+        <div class="location">at line 126</div>
+        <code>            public            <a href="../../../Pinq/Iterators/IJoinIterator.html"><abbr title="Pinq\Iterators\IJoinIterator">IJoinIterator</abbr></a>
+    <strong>groupJoinIterator</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $outerIterator, <abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $innerIterator, callable $traversableFactory)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will return the outer elements joined to the inner elements.</p>
+        <p>All matched inner elements for each
+outer element will be wrapped in a traversable implementation from the supplied factory.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$outerIterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$innerIterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$traversableFactory</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IJoinIterator.html"><abbr title="Pinq\Iterators\IJoinIterator">IJoinIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_rangeIterator">
+        <div class="location">at line 137</div>
+        <code>            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>rangeIterator</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator, int $start, int|null $amount)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will only iterate the elements in the supplied range.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$start</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>int|null</td>
+                <td>$amount</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_groupedIterator">
+        <div class="location">at line 142</div>
+        <code>            public            <a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>groupedIterator</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator, callable $groupKeyFunction, callable $traversableFactory)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator which will group the elements according to the supplied function and wrap each group in a traversable implementation from the supplied factory.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$groupKeyFunction</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$traversableFactory</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_orderedIterator">
+        <div class="location">at line 153</div>
+        <code>            public            <a href="../../../Pinq/Iterators/IOrderedIterator.html"><abbr title="Pinq\Iterators\IOrderedIterator">IOrderedIterator</abbr></a>
+    <strong>orderedIterator</strong>(<abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr> $iterator, callable $function, boolean $isAscending)</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator with will sort the elements according to the supplied function and direction.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Generators\Traversable">Traversable</abbr></td>
+                <td>$iterator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$isAscending</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Iterators/IOrderedIterator.html"><abbr title="Pinq\Iterators\IOrderedIterator">IOrderedIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Queries\Builders\Interpretations\OperationParser | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../../classes.html">Classes</a></li>
+                            <li><a href="../../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../../traits.html">Traits</a></li>
+            <li><a href="../../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../../Pinq/Queries/Builders/Interpretations.html">Pinq\Queries\Builders\Interpretations</a>\OperationParser</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>OperationParser</strong>        extends <a href="../../../../Pinq/Queries/Builders/Interpretations/BaseParser.html"><abbr title="Pinq\Queries\Builders\Interpretations\BaseParser">BaseParser</abbr></a>        implements
+        <a href="../../../../Pinq/Queries/Builders/Interpretations/IOperationParser.html"><abbr title="Pinq\Queries\Builders\Interpretations\IOperationParser">IOperationParser</abbr></a></p>
+
+            <div class="description">
+            <p>Implementation of the operation parser.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../Pinq/Parsing/IFunctionInterpreter.html"><abbr title="Pinq\Parsing\IFunctionInterpreter">IFunctionInterpreter</abbr></a> $functionInterpreter)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../Pinq/Queries/IOperation.html"><abbr title="Pinq\Queries\IOperation">IOperation</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getOperation">getOperation</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretApply">interpretApply</a>($operationId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretJoinApply">interpretJoinApply</a>($operationId, <a href="../../../../Pinq/Queries/Builders/Interpretations/IJoinOptionsInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\IJoinOptionsInterpretation">IJoinOptionsInterpretation</abbr></a> $joinOptionsInterpretation, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $applyFunction)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretAddRange">interpretAddRange</a>($operationId, <a href="../../../../Pinq/Queries/Builders/Interpretations/ISourceInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\ISourceInterpretation">ISourceInterpretation</abbr></a> $sourceInterpretation)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretRemoveRange">interpretRemoveRange</a>($operationId, <a href="../../../../Pinq/Queries/Builders/Interpretations/ISourceInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\ISourceInterpretation">ISourceInterpretation</abbr></a> $sourceInterpretation)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretRemoveWhere">interpretRemoveWhere</a>($operationId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretClear">interpretClear</a>($operationId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretOffsetSet">interpretOffsetSet</a>($operationId, $indexId, $index, $valueId, $value)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretOffsetUnset">interpretOffsetUnset</a>($operationId, $indexId, $index)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 23</div>
+        <code>            public            
+    <strong>__construct</strong>(<a href="../../../../Pinq/Parsing/IFunctionInterpreter.html"><abbr title="Pinq\Parsing\IFunctionInterpreter">IFunctionInterpreter</abbr></a> $functionInterpreter)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../Pinq/Parsing/IFunctionInterpreter.html"><abbr title="Pinq\Parsing\IFunctionInterpreter">IFunctionInterpreter</abbr></a></td>
+                <td>$functionInterpreter</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getOperation">
+        <div class="location">at line 28</div>
+        <code>            public            <a href="../../../../Pinq/Queries/IOperation.html"><abbr title="Pinq\Queries\IOperation">IOperation</abbr></a>
+    <strong>getOperation</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../Pinq/Queries/IOperation.html"><abbr title="Pinq\Queries\IOperation">IOperation</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretApply">
+        <div class="location">at line 33</div>
+        <code>            public            
+    <strong>interpretApply</strong>($operationId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$operationId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretJoinApply">
+        <div class="location">at line 42</div>
+        <code>            public            
+    <strong>interpretJoinApply</strong>($operationId, <a href="../../../../Pinq/Queries/Builders/Interpretations/IJoinOptionsInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\IJoinOptionsInterpretation">IJoinOptionsInterpretation</abbr></a> $joinOptionsInterpretation, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $applyFunction)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$operationId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Interpretations/IJoinOptionsInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\IJoinOptionsInterpretation">IJoinOptionsInterpretation</abbr></a></td>
+                <td>$joinOptionsInterpretation</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$applyFunction</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretAddRange">
+        <div class="location">at line 53</div>
+        <code>            public            
+    <strong>interpretAddRange</strong>($operationId, <a href="../../../../Pinq/Queries/Builders/Interpretations/ISourceInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\ISourceInterpretation">ISourceInterpretation</abbr></a> $sourceInterpretation)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$operationId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Interpretations/ISourceInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\ISourceInterpretation">ISourceInterpretation</abbr></a></td>
+                <td>$sourceInterpretation</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretRemoveRange">
+        <div class="location">at line 59</div>
+        <code>            public            
+    <strong>interpretRemoveRange</strong>($operationId, <a href="../../../../Pinq/Queries/Builders/Interpretations/ISourceInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\ISourceInterpretation">ISourceInterpretation</abbr></a> $sourceInterpretation)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$operationId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Interpretations/ISourceInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\ISourceInterpretation">ISourceInterpretation</abbr></a></td>
+                <td>$sourceInterpretation</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretRemoveWhere">
+        <div class="location">at line 65</div>
+        <code>            public            
+    <strong>interpretRemoveWhere</strong>($operationId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$operationId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretClear">
+        <div class="location">at line 74</div>
+        <code>            public            
+    <strong>interpretClear</strong>($operationId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$operationId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretOffsetSet">
+        <div class="location">at line 79</div>
+        <code>            public            
+    <strong>interpretOffsetSet</strong>($operationId, $indexId, $index, $valueId, $value)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$operationId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$indexId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$index</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$valueId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretOffsetUnset">
+        <div class="location">at line 84</div>
+        <code>            public            
+    <strong>interpretOffsetUnset</strong>($operationId, $indexId, $index)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$operationId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$indexId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$index</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

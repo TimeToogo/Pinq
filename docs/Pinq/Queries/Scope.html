@@ -43,7 +43,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(array $segments)
+                    <a href="#method___construct">__construct</a>(<a href="../../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a> $sourceInfo, array $segments)
                     <p>
 </p>
                 </td>
@@ -51,10 +51,21 @@
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    <a href="../../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_getIterator">getIterator</a>()
+                    <a href="#method_getSourceInfo">getSourceInfo</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string[]
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
                     <p>
 </p>
                 </td>
@@ -84,10 +95,10 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
+                    void
                 </td>
                 <td class="last">
-                    <a href="#method_append">append</a>(<a href="../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a> $query)
+                    <a href="#method_visit">visit</a>(<a href="../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> $visitor)
                     <p>
 </p>
                 </td>
@@ -98,7 +109,7 @@
                     <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_update">update</a>(array $segments)
+                    <a href="#method_update">update</a>(<a href="../../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a> $sourceInfo, array $segments)
                     <p>
 </p>
                 </td>
@@ -109,7 +120,18 @@
                     <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_updateLast">updateLast</a>(<a href="../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a> $segment)
+                    <a href="#method_updateSource">updateSource</a>(<a href="../../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a> $sourceInfo)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_updateSegments">updateSegments</a>(array $segments)
                     <p>
 </p>
                 </td>
@@ -121,9 +143,9 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 17</div>
+        <div class="location">at line 24</div>
         <code>            public            
-    <strong>__construct</strong>(array $segments)</code>
+    <strong>__construct</strong>(<a href="../../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a> $sourceInfo, array $segments)</code>
     </h3>
     <div class="details">
         <p>
@@ -134,6 +156,12 @@
                             <h4>Parameters</h4>
 
                     <table>
+                    <tr>
+                <td><a href="../../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a></td>
+                <td>$sourceInfo</td>
+                <td>
+</td>
+            </tr>
                     <tr>
                 <td>array</td>
                 <td>$segments</td>
@@ -148,10 +176,10 @@
                     </div>
     </div>
 
-                <h3 id="method_getIterator">
-        <div class="location">at line 22</div>
-        <code>            public            
-    <strong>getIterator</strong>()</code>
+                <h3 id="method_getSourceInfo">
+        <div class="location">at line 30</div>
+        <code>            public            <a href="../../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a>
+    <strong>getSourceInfo</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -160,13 +188,50 @@
 </p>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getParameters">
+        <div class="location">at line 35</div>
+        <code>            public            string[]
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_getSegments">
-        <div class="location">at line 30</div>
+        <div class="location">at line 49</div>
         <code>            public            <a href="../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>[]
     <strong>getSegments</strong>()</code>
     </h3>
@@ -193,7 +258,7 @@
     </div>
 
                 <h3 id="method_isEmpty">
-        <div class="location">at line 35</div>
+        <div class="location">at line 54</div>
         <code>            public            boolean
     <strong>isEmpty</strong>()</code>
     </h3>
@@ -219,10 +284,10 @@
                     </div>
     </div>
 
-                <h3 id="method_append">
-        <div class="location">at line 40</div>
-        <code>            public            <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
-    <strong>append</strong>(<a href="../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a> $query)</code>
+                <h3 id="method_visit">
+        <div class="location">at line 59</div>
+        <code>            public            void
+    <strong>visit</strong>(<a href="../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> $visitor)</code>
     </h3>
     <div class="details">
         <p>
@@ -234,8 +299,8 @@
 
                     <table>
                     <tr>
-                <td><a href="../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a></td>
-                <td>$query</td>
+                <td><a href="../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></td>
+                <td>$visitor</td>
                 <td>
 </td>
             </tr>
@@ -246,7 +311,7 @@
 
                     <table>
         <tr>
-            <td><a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a></td>
+            <td>void</td>
             <td>
 </td>
         </tr>
@@ -258,9 +323,9 @@
     </div>
 
                 <h3 id="method_update">
-        <div class="location">at line 45</div>
+        <div class="location">at line 66</div>
         <code>            public            <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
-    <strong>update</strong>(array $segments)</code>
+    <strong>update</strong>(<a href="../../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a> $sourceInfo, array $segments)</code>
     </h3>
     <div class="details">
         <p>
@@ -271,6 +336,12 @@
                             <h4>Parameters</h4>
 
                     <table>
+                    <tr>
+                <td><a href="../../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a></td>
+                <td>$sourceInfo</td>
+                <td>
+</td>
+            </tr>
                     <tr>
                 <td>array</td>
                 <td>$segments</td>
@@ -295,10 +366,10 @@
                     </div>
     </div>
 
-                <h3 id="method_updateLast">
-        <div class="location">at line 54</div>
+                <h3 id="method_updateSource">
+        <div class="location">at line 75</div>
         <code>            public            <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
-    <strong>updateLast</strong>(<a href="../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a> $segment)</code>
+    <strong>updateSource</strong>(<a href="../../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a> $sourceInfo)</code>
     </h3>
     <div class="details">
         <p>
@@ -310,8 +381,46 @@
 
                     <table>
                     <tr>
-                <td><a href="../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a></td>
-                <td>$segment</td>
+                <td><a href="../../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a></td>
+                <td>$sourceInfo</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_updateSegments">
+        <div class="location">at line 80</div>
+        <code>            public            <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
+    <strong>updateSegments</strong>(array $segments)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$segments</td>
                 <td>
 </td>
             </tr>

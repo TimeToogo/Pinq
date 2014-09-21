@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Queries\Builders\Interpretations\RequestParser | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../../classes.html">Classes</a></li>
+                            <li><a href="../../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../../traits.html">Traits</a></li>
+            <li><a href="../../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../../Pinq/Queries/Builders/Interpretations.html">Pinq\Queries\Builders\Interpretations</a>\RequestParser</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>RequestParser</strong>        extends <a href="../../../../Pinq/Queries/Builders/Interpretations/BaseParser.html"><abbr title="Pinq\Queries\Builders\Interpretations\BaseParser">BaseParser</abbr></a>        implements
+        <a href="../../../../Pinq/Queries/Builders/Interpretations/IRequestParser.html"><abbr title="Pinq\Queries\Builders\Interpretations\IRequestParser">IRequestParser</abbr></a></p>
+
+            <div class="description">
+            <p>Implementation of the request interpreter.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../Pinq/Parsing/IFunctionInterpreter.html"><abbr title="Pinq\Parsing\IFunctionInterpreter">IFunctionInterpreter</abbr></a> $functionInterpreter)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getRequest">getRequest</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretGetIterator">interpretGetIterator</a>($requestId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretGetTrueIterator">interpretGetTrueIterator</a>($requestId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretAsArray">interpretAsArray</a>($requestId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretAsCollection">interpretAsCollection</a>($requestId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretAsTraversable">interpretAsTraversable</a>($requestId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretOffsetGet">interpretOffsetGet</a>($requestId, $indexId, $index)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretOffsetExists">interpretOffsetExists</a>($requestId, $indexId, $index)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretContains">interpretContains</a>($requestId, $valueId, $value)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretFirst">interpretFirst</a>($requestId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretLast">interpretLast</a>($requestId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretCount">interpretCount</a>($requestId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretIsEmpty">interpretIsEmpty</a>($requestId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretAggregate">interpretAggregate</a>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretMaximum">interpretMaximum</a>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretMinimum">interpretMinimum</a>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretSum">interpretSum</a>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretAverage">interpretAverage</a>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretAll">interpretAll</a>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretAny">interpretAny</a>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_interpretImplode">interpretImplode</a>($requestId, $delimiterId, $delimiter, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 22</div>
+        <code>            public            
+    <strong>__construct</strong>(<a href="../../../../Pinq/Parsing/IFunctionInterpreter.html"><abbr title="Pinq\Parsing\IFunctionInterpreter">IFunctionInterpreter</abbr></a> $functionInterpreter)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../Pinq/Parsing/IFunctionInterpreter.html"><abbr title="Pinq\Parsing\IFunctionInterpreter">IFunctionInterpreter</abbr></a></td>
+                <td>$functionInterpreter</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRequest">
+        <div class="location">at line 27</div>
+        <code>            public            <a href="../../../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a>
+    <strong>getRequest</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretGetIterator">
+        <div class="location">at line 32</div>
+        <code>            public            
+    <strong>interpretGetIterator</strong>($requestId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretGetTrueIterator">
+        <div class="location">at line 37</div>
+        <code>            public            
+    <strong>interpretGetTrueIterator</strong>($requestId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretAsArray">
+        <div class="location">at line 42</div>
+        <code>            public            
+    <strong>interpretAsArray</strong>($requestId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretAsCollection">
+        <div class="location">at line 47</div>
+        <code>            public            
+    <strong>interpretAsCollection</strong>($requestId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretAsTraversable">
+        <div class="location">at line 52</div>
+        <code>            public            
+    <strong>interpretAsTraversable</strong>($requestId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretOffsetGet">
+        <div class="location">at line 57</div>
+        <code>            public            
+    <strong>interpretOffsetGet</strong>($requestId, $indexId, $index)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$indexId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$index</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretOffsetExists">
+        <div class="location">at line 62</div>
+        <code>            public            
+    <strong>interpretOffsetExists</strong>($requestId, $indexId, $index)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$indexId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$index</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretContains">
+        <div class="location">at line 67</div>
+        <code>            public            
+    <strong>interpretContains</strong>($requestId, $valueId, $value)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$valueId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretFirst">
+        <div class="location">at line 72</div>
+        <code>            public            
+    <strong>interpretFirst</strong>($requestId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretLast">
+        <div class="location">at line 77</div>
+        <code>            public            
+    <strong>interpretLast</strong>($requestId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretCount">
+        <div class="location">at line 82</div>
+        <code>            public            
+    <strong>interpretCount</strong>($requestId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretIsEmpty">
+        <div class="location">at line 87</div>
+        <code>            public            
+    <strong>interpretIsEmpty</strong>($requestId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretAggregate">
+        <div class="location">at line 92</div>
+        <code>            public            
+    <strong>interpretAggregate</strong>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretMaximum">
+        <div class="location">at line 101</div>
+        <code>            public            
+    <strong>interpretMaximum</strong>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretMinimum">
+        <div class="location">at line 118</div>
+        <code>            public            
+    <strong>interpretMinimum</strong>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretSum">
+        <div class="location">at line 123</div>
+        <code>            public            
+    <strong>interpretSum</strong>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretAverage">
+        <div class="location">at line 128</div>
+        <code>            public            
+    <strong>interpretAverage</strong>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretAll">
+        <div class="location">at line 133</div>
+        <code>            public            
+    <strong>interpretAll</strong>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretAny">
+        <div class="location">at line 138</div>
+        <code>            public            
+    <strong>interpretAny</strong>($requestId, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretImplode">
+        <div class="location">at line 143</div>
+        <code>            public            
+    <strong>interpretImplode</strong>($requestId, $delimiterId, $delimiter, <a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a> $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$requestId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$delimiterId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$delimiter</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Queries/Builders/Functions/IFunction.html"><abbr title="Pinq\Queries\Builders\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

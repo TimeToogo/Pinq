@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Providers\DSL\Compilation\StaticRequestTemplate | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../../classes.html">Classes</a></li>
+                            <li><a href="../../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../../traits.html">Traits</a></li>
+            <li><a href="../../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../../Pinq/Providers/DSL/Compilation.html">Pinq\Providers\DSL\Compilation</a>\StaticRequestTemplate</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>StaticRequestTemplate</strong>        extends <a href="../../../../Pinq/Providers/DSL/Compilation/StaticQueryTemplate.html"><abbr title="Pinq\Providers\DSL\Compilation\StaticQueryTemplate">StaticQueryTemplate</abbr></a>        implements
+        <a href="../../../../Pinq/Providers/DSL/Compilation/IStaticRequestTemplate.html"><abbr title="Pinq\Providers\DSL\Compilation\IStaticRequestTemplate">IStaticRequestTemplate</abbr></a></p>
+
+            <div class="description">
+            <p>Base class of the static request template interface.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<abbr title="Pinq\Providers\DSL\Compilation\Queries\IParameterRegistry">IParameterRegistry</abbr> $parameters, <a href="../../../../Pinq/Providers/DSL/Compilation/ICompiledRequest.html"><abbr title="Pinq\Providers\DSL\Compilation\ICompiledRequest">ICompiledRequest</abbr></a> $compiledRequestQuery)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Providers\DSL\Compilation\Queries\IQuery">IQuery</abbr>|null
+                </td>
+                <td class="last">
+                    <a href="#method_getQuery">getQuery</a>()
+                    <p>Gets the query object.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../Pinq/Providers/DSL/Compilation/QueryTemplate.html#method_getQuery"><abbr title="Pinq\Providers\DSL\Compilation\QueryTemplate">QueryTemplate</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Providers\DSL\Compilation\Queries\IParameterRegistry">IParameterRegistry</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>Gets the parameter registry.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../Pinq/Providers/DSL/Compilation/QueryTemplate.html#method_getParameters"><abbr title="Pinq\Providers\DSL\Compilation\QueryTemplate">QueryTemplate</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../Pinq/Providers/DSL/Compilation/Parameters/ParameterRegistry.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ParameterRegistry">ParameterRegistry</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getStructuralParameters">getStructuralParameters</a>()
+                    <p>Gets the structural expression registry.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../Pinq/Providers/DSL/Compilation/QueryTemplate.html#method_getStructuralParameters"><abbr title="Pinq\Providers\DSL\Compilation\QueryTemplate">QueryTemplate</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../Pinq/Providers/DSL/Compilation/Parameters/ResolvedParameterRegistry.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ResolvedParameterRegistry">ResolvedParameterRegistry</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_resolveStructuralParameters">resolveStructuralParameters</a>(<abbr title="Pinq\Providers\DSL\Compilation\Queries\IResolvedParameterRegistry">IResolvedParameterRegistry</abbr> $parameterRegistry, string $hash)
+                    <p>Resolves the structural expressions of the query template.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../Pinq/Providers/DSL/Compilation/QueryTemplate.html#method_resolveStructuralParameters"><abbr title="Pinq\Providers\DSL\Compilation\QueryTemplate">QueryTemplate</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../Pinq/Providers/DSL/Compilation/ICompiledQuery.html"><abbr title="Pinq\Providers\DSL\Compilation\ICompiledQuery">ICompiledQuery</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getCompiledQuery">getCompiledQuery</a>()
+                    <p>Gets the compiled query object.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../Pinq/Providers/DSL/Compilation/StaticQueryTemplate.html#method_getCompiledQuery"><abbr title="Pinq\Providers\DSL\Compilation\StaticQueryTemplate">StaticQueryTemplate</abbr></a></small></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 19</div>
+        <code>            public            
+    <strong>__construct</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Queries\IParameterRegistry">IParameterRegistry</abbr> $parameters, <a href="../../../../Pinq/Providers/DSL/Compilation/ICompiledRequest.html"><abbr title="Pinq\Providers\DSL\Compilation\ICompiledRequest">ICompiledRequest</abbr></a> $compiledRequestQuery)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Queries\IParameterRegistry">IParameterRegistry</abbr></td>
+                <td>$parameters</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Pinq/Providers/DSL/Compilation/ICompiledRequest.html"><abbr title="Pinq\Providers\DSL\Compilation\ICompiledRequest">ICompiledRequest</abbr></a></td>
+                <td>$compiledRequestQuery</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getQuery">
+        <div class="location">in <a href="../../../../Pinq/Providers/DSL/Compilation/QueryTemplate.html#method_getQuery"><abbr title="Pinq\Providers\DSL\Compilation\QueryTemplate">QueryTemplate</abbr></a> at line 39</div>
+        <code>final            public            <abbr title="Pinq\Providers\DSL\Compilation\Queries\IQuery">IQuery</abbr>|null
+    <strong>getQuery</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the query object.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Providers\DSL\Compilation\Queries\IQuery">IQuery</abbr>|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getParameters">
+        <div class="location">in <a href="../../../../Pinq/Providers/DSL/Compilation/QueryTemplate.html#method_getParameters"><abbr title="Pinq\Providers\DSL\Compilation\QueryTemplate">QueryTemplate</abbr></a> at line 44</div>
+        <code>final            public            <abbr title="Pinq\Providers\DSL\Compilation\Queries\IParameterRegistry">IParameterRegistry</abbr>
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the parameter registry.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Providers\DSL\Compilation\Queries\IParameterRegistry">IParameterRegistry</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getStructuralParameters">
+        <div class="location">in <a href="../../../../Pinq/Providers/DSL/Compilation/QueryTemplate.html#method_getStructuralParameters"><abbr title="Pinq\Providers\DSL\Compilation\QueryTemplate">QueryTemplate</abbr></a> at line 49</div>
+        <code>final            public            <a href="../../../../Pinq/Providers/DSL/Compilation/Parameters/ParameterRegistry.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ParameterRegistry">ParameterRegistry</abbr></a>
+    <strong>getStructuralParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the structural expression registry.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../Pinq/Providers/DSL/Compilation/Parameters/ParameterRegistry.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ParameterRegistry">ParameterRegistry</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_resolveStructuralParameters">
+        <div class="location">in <a href="../../../../Pinq/Providers/DSL/Compilation/QueryTemplate.html#method_resolveStructuralParameters"><abbr title="Pinq\Providers\DSL\Compilation\QueryTemplate">QueryTemplate</abbr></a> at line 54</div>
+        <code>            public            <a href="../../../../Pinq/Providers/DSL/Compilation/Parameters/ResolvedParameterRegistry.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ResolvedParameterRegistry">ResolvedParameterRegistry</abbr></a>
+    <strong>resolveStructuralParameters</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Queries\IResolvedParameterRegistry">IResolvedParameterRegistry</abbr> $parameterRegistry, string $hash)</code>
+    </h3>
+    <div class="details">
+        <p>Resolves the structural expressions of the query template.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Queries\IResolvedParameterRegistry">IResolvedParameterRegistry</abbr></td>
+                <td>$parameterRegistry</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$hash</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../Pinq/Providers/DSL/Compilation/Parameters/ResolvedParameterRegistry.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ResolvedParameterRegistry">ResolvedParameterRegistry</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCompiledQuery">
+        <div class="location">in <a href="../../../../Pinq/Providers/DSL/Compilation/StaticQueryTemplate.html#method_getCompiledQuery"><abbr title="Pinq\Providers\DSL\Compilation\StaticQueryTemplate">StaticQueryTemplate</abbr></a> at line 26</div>
+        <code>            public            <a href="../../../../Pinq/Providers/DSL/Compilation/ICompiledQuery.html"><abbr title="Pinq\Providers\DSL\Compilation\ICompiledQuery">ICompiledQuery</abbr></a>
+    <strong>getCompiledQuery</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the compiled query object.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../Pinq/Providers/DSL/Compilation/ICompiledQuery.html"><abbr title="Pinq\Providers\DSL\Compilation\ICompiledQuery">ICompiledQuery</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

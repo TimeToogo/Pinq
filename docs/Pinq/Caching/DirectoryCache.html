@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Caching\DirectoryCache | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../Pinq/Caching.html">Pinq\Caching</a>\DirectoryCache</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>DirectoryCache</strong>        extends <a href="../../Pinq/Caching/CacheAdapter.html"><abbr title="Pinq\Caching\CacheAdapter">CacheAdapter</abbr></a></p>
+
+            <div class="description">
+            <p>Cache implementation for storing the serialized expression trees each in their own file in the specified directory</p>
+            <p>
+</p>
+        </div>
+    
+            <h2>Constants</h2>
+
+            <table>
+                    <tr>
+                <td>DEFAULT_EXTENSION</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+            </table>
+
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>($directory, $fileExtension = self::DEFAULT_EXTENSION, $namespace = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_hasNamespace">hasNamespace</a>()
+                    <p>Whether the cache is namespaced.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Caching/CacheAdapter.html#method_hasNamespace"><abbr title="Pinq\Caching\CacheAdapter">CacheAdapter</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getNamespace">getNamespace</a>()
+                    <p>The namespace of the cache.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Caching/CacheAdapter.html#method_getNamespace"><abbr title="Pinq\Caching\CacheAdapter">CacheAdapter</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_forNamespace">forNamespace</a>(string $namespace)
+                    <p>Returns a new cache implementation for a new namespace.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_inGlobalNamespace">inGlobalNamespace</a>()
+                    <p>Returns a new cache implementation for the global namespace.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_save">save</a>(string $key, mixed $value)
+                    <p>Saves the supplied value to the cache.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_contains">contains</a>(string $key)
+                    <p>Returns whether the supplied function has</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_tryGet">tryGet</a>(string $key)
+                    <p>Attempt to get the cached value associated with the supplied key</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_clear">clear</a>()
+                    <p>Clears all cached values under the namespace.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_remove">remove</a>(string $key)
+                    <p>Removes the value associated with the supplied key</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 38</div>
+        <code>            public            
+    <strong>__construct</strong>($directory, $fileExtension = self::DEFAULT_EXTENSION, $namespace = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$directory</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$fileExtension</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$namespace</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasNamespace">
+        <div class="location">in <a href="../../Pinq/Caching/CacheAdapter.html#method_hasNamespace"><abbr title="Pinq\Caching\CacheAdapter">CacheAdapter</abbr></a> at line 22</div>
+        <code>            public            boolean
+    <strong>hasNamespace</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Whether the cache is namespaced.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getNamespace">
+        <div class="location">in <a href="../../Pinq/Caching/CacheAdapter.html#method_getNamespace"><abbr title="Pinq\Caching\CacheAdapter">CacheAdapter</abbr></a> at line 27</div>
+        <code>            public            string
+    <strong>getNamespace</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>The namespace of the cache.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_forNamespace">
+        <div class="location">at line 59</div>
+        <code>            public            <a href="../../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a>
+    <strong>forNamespace</strong>(string $namespace)</code>
+    </h3>
+    <div class="details">
+        <p>Returns a new cache implementation for a new namespace.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$namespace</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_inGlobalNamespace">
+        <div class="location">at line 67</div>
+        <code>            public            <a href="../../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a>
+    <strong>inGlobalNamespace</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns a new cache implementation for the global namespace.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_save">
+        <div class="location">at line 72</div>
+        <code>            public            void
+    <strong>save</strong>(string $key, mixed $value)</code>
+    </h3>
+    <div class="details">
+        <p>Saves the supplied value to the cache.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_contains">
+        <div class="location">at line 82</div>
+        <code>            public            boolean
+    <strong>contains</strong>(string $key)</code>
+    </h3>
+    <div class="details">
+        <p>Returns whether the supplied function has</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_tryGet">
+        <div class="location">at line 87</div>
+        <code>            public            mixed
+    <strong>tryGet</strong>(string $key)</code>
+    </h3>
+    <div class="details">
+        <p>Attempt to get the cached value associated with the supplied key</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_clear">
+        <div class="location">at line 98</div>
+        <code>            public            void
+    <strong>clear</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Clears all cached values under the namespace.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_remove">
+        <div class="location">at line 114</div>
+        <code>            public            void
+    <strong>remove</strong>(string $key)</code>
+    </h3>
+    <div class="details">
+        <p>Removes the value associated with the supplied key</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Iterators\IOrderedMap | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../Pinq/Iterators.html">Pinq\Iterators</a>\IOrderedMap</h1>
+    </div>
+        <div class="content">
+                <p>    interface
+    <strong>IOrderedMap</strong>        implements
+        <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>, <a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>, <a href="http://php.net/Countable"><abbr title="Countable">Countable</abbr></a></p>
+
+            <div class="description">
+            <p>Interface for an ordered map, like an array on steroids, this class supports any type of key associated with any type of value.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_keys">keys</a>()
+                    <p>Returns all the keys from the map as an array.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_values">values</a>()
+                    <p>Returns all the values from the map as an array.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Iterators/IOrderedMap.html"><abbr title="Pinq\Iterators\IOrderedMap">IOrderedMap</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_map">map</a>(callable $function)
+                    <p>Maps the keys / values of the dictionary to new dictionary.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_walk">walk</a>(callable $function)
+                    <p>Walks the elements with the supplied function</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Iterators/IOrderedMap.html"><abbr title="Pinq\Iterators\IOrderedMap">IOrderedMap</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_groupBy">groupBy</a>(callable $groupKeyFunction)
+                    <p>Groups the keys / values using the supplied function into new ordered map.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Iterators/IOrderedMap.html"><abbr title="Pinq\Iterators\IOrderedMap">IOrderedMap</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_multisort">multisort</a>(array $orderFunctions, array $isAscending)
+                    <p>Creates a new ordered map with the keys and values sorted according the the supplied functions and order directions.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_get">get</a>(mixed $key)
+                    <p>Returns the value associated with the supplied key or null if it does not exist.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_offsetGet">offsetGet</a>(mixed $key)
+                    <p>Returns the value associated with the supplied key or null if it does not exist.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_contains">contains</a>(mixed $key)
+                    <p>Returns whether their is value associated with the supplied key.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_set">set</a>(mixed $key, mixed $value)
+                    <p>Sets the supplied key to the supplied value.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_setRef">setRef</a>(mixed $key, mixed $value)
+                    <p>Sets the supplied key to the supplied value by reference.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_setAll">setAll</a>(<abbr title="Pinq\Iterators\Traversable">Traversable</abbr> $elements)
+                    <p>Sets the supplied keys and values from the elements iterator.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_clear">clear</a>()
+                    <p>Removes all keys and values from the map.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_remove">remove</a>(mixed $key)
+                    <p>Removes the element (if exists) with the supplied key.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_keys">
+        <div class="location">at line 20</div>
+        <code>            public            array
+    <strong>keys</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns all the keys from the map as an array.</p>
+        <p>Indexed by their 0-based position.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_values">
+        <div class="location">at line 28</div>
+        <code>            public            array
+    <strong>values</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns all the values from the map as an array.</p>
+        <p>Indexed by their 0-based position.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_map">
+        <div class="location">at line 37</div>
+        <code>            public            <a href="../../Pinq/Iterators/IOrderedMap.html"><abbr title="Pinq\Iterators\IOrderedMap">IOrderedMap</abbr></a>
+    <strong>map</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Maps the keys / values of the dictionary to new dictionary.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The elements are passed as ($value, $key)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Iterators/IOrderedMap.html"><abbr title="Pinq\Iterators\IOrderedMap">IOrderedMap</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_walk">
+        <div class="location">at line 46</div>
+        <code>            public            void
+    <strong>walk</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Walks the elements with the supplied function</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_groupBy">
+        <div class="location">at line 56</div>
+        <code>            public            <a href="../../Pinq/Iterators/IOrderedMap.html"><abbr title="Pinq\Iterators\IOrderedMap">IOrderedMap</abbr></a>
+    <strong>groupBy</strong>(callable $groupKeyFunction)</code>
+    </h3>
+    <div class="details">
+        <p>Groups the keys / values using the supplied function into new ordered map.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$groupKeyFunction</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Iterators/IOrderedMap.html"><abbr title="Pinq\Iterators\IOrderedMap">IOrderedMap</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_multisort">
+        <div class="location">at line 68</div>
+        <code>            public            <a href="../../Pinq/Iterators/IOrderedMap.html"><abbr title="Pinq\Iterators\IOrderedMap">IOrderedMap</abbr></a>
+    <strong>multisort</strong>(array $orderFunctions, array $isAscending)</code>
+    </h3>
+    <div class="details">
+        <p>Creates a new ordered map with the keys and values sorted according the the supplied functions and order directions.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$orderFunctions</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$isAscending</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Iterators/IOrderedMap.html"><abbr title="Pinq\Iterators\IOrderedMap">IOrderedMap</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_get">
+        <div class="location">at line 78</div>
+        <code>            public            mixed
+    <strong>get</strong>(mixed $key)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the value associated with the supplied key or null if it does not exist.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_offsetGet">
+        <div class="location">at line 88</div>
+        <code>            public            mixed
+    <strong>offsetGet</strong>(mixed $key)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the value associated with the supplied key or null if it does not exist.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_contains">
+        <div class="location">at line 97</div>
+        <code>            public            boolean
+    <strong>contains</strong>(mixed $key)</code>
+    </h3>
+    <div class="details">
+        <p>Returns whether their is value associated with the supplied key.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_set">
+        <div class="location">at line 107</div>
+        <code>            public            void
+    <strong>set</strong>(mixed $key, mixed $value)</code>
+    </h3>
+    <div class="details">
+        <p>Sets the supplied key to the supplied value.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setRef">
+        <div class="location">at line 117</div>
+        <code>            public            void
+    <strong>setRef</strong>(mixed $key, mixed $value)</code>
+    </h3>
+    <div class="details">
+        <p>Sets the supplied key to the supplied value by reference.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setAll">
+        <div class="location">at line 126</div>
+        <code>            public            void
+    <strong>setAll</strong>(<abbr title="Pinq\Iterators\Traversable">Traversable</abbr> $elements)</code>
+    </h3>
+    <div class="details">
+        <p>Sets the supplied keys and values from the elements iterator.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Traversable">Traversable</abbr></td>
+                <td>$elements</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_clear">
+        <div class="location">at line 133</div>
+        <code>            public            void
+    <strong>clear</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Removes all keys and values from the map.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_remove">
+        <div class="location">at line 142</div>
+        <code>            public            boolean
+    <strong>remove</strong>(mixed $key)</code>
+    </h3>
+    <div class="details">
+        <p>Removes the element (if exists) with the supplied key.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>Whether the key was succefully remove or false if does not exist</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

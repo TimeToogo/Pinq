@@ -39,10 +39,21 @@
             <table>
                     <tr>
                 <td class="type">
+                    string[]
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>($value)
+                    <a href="#method___construct">__construct</a>($valueId)
                     <p>
 </p>
                 </td>
@@ -61,12 +72,11 @@
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    string
                 </td>
                 <td class="last">
-                    <a href="#method_getValue">getValue</a>()
-                    <p>
-</p>
+                    <a href="#method_getValueId">getValueId</a>()
+                    <p>Gets the value parameter id.</p>
                 </td>
                 <td></td>
             </tr>
@@ -75,7 +85,7 @@
                     mixed
                 </td>
                 <td class="last">
-                    <a href="#method_traverse">traverse</a>(<a href="../../../Pinq/Queries/Requests/RequestVisitor.html"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a> $visitor)
+                    <a href="#method_traverse">traverse</a>(<a href="../../../Pinq/Queries/Requests/IRequestVisitor.html"><abbr title="Pinq\Queries\Requests\IRequestVisitor">IRequestVisitor</abbr></a> $visitor)
                     <p>
 </p>
                 </td>
@@ -86,10 +96,37 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method___construct">
-        <div class="location">at line 15</div>
+                        <h3 id="method_getParameters">
+        <div class="location">at line 28</div>
+        <code>            public            string[]
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method___construct">
+        <div class="location">at line 18</div>
         <code>            public            
-    <strong>__construct</strong>($value)</code>
+    <strong>__construct</strong>($valueId)</code>
     </h3>
     <div class="details">
         <p>
@@ -102,7 +139,7 @@
                     <table>
                     <tr>
                 <td></td>
-                <td>$value</td>
+                <td>$valueId</td>
                 <td>
 </td>
             </tr>
@@ -115,7 +152,7 @@
     </div>
 
                 <h3 id="method_getType">
-        <div class="location">at line 20</div>
+        <div class="location">at line 23</div>
         <code>            public            int
     <strong>getType</strong>()</code>
     </h3>
@@ -141,27 +178,36 @@
                     </div>
     </div>
 
-                <h3 id="method_getValue">
-        <div class="location">at line 25</div>
-        <code>            public            
-    <strong>getValue</strong>()</code>
+                <h3 id="method_getValueId">
+        <div class="location">at line 38</div>
+        <code>            public            string
+    <strong>getValueId</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
+        <p>Gets the value parameter id.</p>
         <p>
 </p>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_traverse">
-        <div class="location">at line 30</div>
+        <div class="location">at line 43</div>
         <code>            public            mixed
-    <strong>traverse</strong>(<a href="../../../Pinq/Queries/Requests/RequestVisitor.html"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a> $visitor)</code>
+    <strong>traverse</strong>(<a href="../../../Pinq/Queries/Requests/IRequestVisitor.html"><abbr title="Pinq\Queries\Requests\IRequestVisitor">IRequestVisitor</abbr></a> $visitor)</code>
     </h3>
     <div class="details">
         <p>
@@ -173,7 +219,7 @@
 
                     <table>
                     <tr>
-                <td><a href="../../../Pinq/Queries/Requests/RequestVisitor.html"><abbr title="Pinq\Queries\Requests\RequestVisitor">RequestVisitor</abbr></a></td>
+                <td><a href="../../../Pinq/Queries/Requests/IRequestVisitor.html"><abbr title="Pinq\Queries\Requests\IRequestVisitor">IRequestVisitor</abbr></a></td>
                 <td>$visitor</td>
                 <td>
 </td>

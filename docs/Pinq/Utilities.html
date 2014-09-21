@@ -57,43 +57,13 @@
                 </td>
                 <td></td>
             </tr>
-                    <tr>
-                <td class="type">
-                    static&nbsp;array
-                </td>
-                <td class="last">
-                    <a href="#method_toArray">toArray</a>(<a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a> $iterator)
-                    <p>Returns the iterator as an array</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    static&nbsp;<a href="http://php.net/Iterator"><abbr title="Iterator">Iterator</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_toIterator">toIterator</a>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $traversableOrArray)
-                    <p>Returns the values as an iterator</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    static&nbsp;boolean
-                </td>
-                <td class="last">
-                    <a href="#method_isNormalSyntaxName">isNormalSyntaxName</a>(string $name)
-                    <p>Returns whether the supplied name is cosidered normal name syntax and can be used plainly in code.</p>
-                </td>
-                <td></td>
-            </tr>
             </table>
 
 
         <h2>Details</h2>
 
                         <h3 id="method_getTypeOrClass">
-        <div class="location">at line 25</div>
+        <div class="location">at line 24</div>
         <code>        static    public            string
     <strong>getTypeOrClass</strong>(mixed $value)</code>
     </h3>
@@ -154,124 +124,6 @@
         <tr>
             <td>boolean</td>
             <td>Whether the value is iterable</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_toArray">
-        <div class="location">at line 47</div>
-        <code>        static    public            array
-    <strong>toArray</strong>(<a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a> $iterator)</code>
-    </h3>
-    <div class="details">
-        <p>Returns the iterator as an array</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a></td>
-                <td>$iterator</td>
-                <td>The iterator value</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>array</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_toIterator">
-        <div class="location">at line 80</div>
-        <code>        static    public            <a href="http://php.net/Iterator"><abbr title="Iterator">Iterator</abbr></a>
-    <strong>toIterator</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $traversableOrArray)</code>
-    </h3>
-    <div class="details">
-        <p>Returns the values as an iterator</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
-                <td>$traversableOrArray</td>
-                <td>The value</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td><a href="http://php.net/Iterator"><abbr title="Iterator">Iterator</abbr></a></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-                            <h4>Exceptions</h4>
-
-                    <table>
-                    <tr>
-                <td><abbr title="PinqException">PinqException</abbr></td>
-                <td>If the value is not a array nor \Traversable</td>
-            </tr>
-            </table>
-
-            
-                    </div>
-    </div>
-
-                <h3 id="method_isNormalSyntaxName">
-        <div class="location">at line 108</div>
-        <code>        static    public            boolean
-    <strong>isNormalSyntaxName</strong>(string $name)</code>
-    </h3>
-    <div class="details">
-        <p>Returns whether the supplied name is cosidered normal name syntax and can be used plainly in code.</p>
-        <p>Example:
-'foo' -> yes: $foo
-'foo bar' -> no: ${'foo bar'}</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>string</td>
-                <td>$name</td>
-                <td>The field, function, method or variable name</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>boolean</td>
-            <td>
-</td>
         </tr>
     </table>
 

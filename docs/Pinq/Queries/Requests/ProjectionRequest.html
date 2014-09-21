@@ -24,10 +24,10 @@
     </div>
         <div class="content">
                 <p>abstract     class
-    <strong>ProjectionRequest</strong>        extends <a href="../../../Pinq/Queries/Requests/Request.html"><abbr title="Pinq\Queries\Requests\Request">Request</abbr></a></p>
+    <strong>ProjectionRequest</strong>        extends <a href="../../../Pinq/Queries/Requests/ProjectionRequestBase.html"><abbr title="Pinq\Queries\Requests\ProjectionRequestBase">ProjectionRequestBase</abbr></a></p>
 
             <div class="description">
-            <p>Base class for a request which optionally projects the values with the supplied function</p>
+            <p>Base class for a request which optionally projects the elements with the supplied function.</p>
             <p>
 </p>
         </div>
@@ -39,10 +39,21 @@
             <table>
                     <tr>
                 <td class="type">
+                    string[]
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Requests/ProjectionRequestBase.html#method_getParameters"><abbr title="Pinq\Queries\Requests\ProjectionRequestBase">ProjectionRequestBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(<a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $functionExpressionTree = null)
+                    <a href="#method___construct">__construct</a>(<abbr title="Pinq\Queries\Requests\Functions\ElementProjection">ElementProjection</abbr> $projectionFunction = null)
                     <p>
 </p>
                 </td>
@@ -53,18 +64,40 @@
                     boolean
                 </td>
                 <td class="last">
-                    <a href="#method_hasFunctionExpressionTree">hasFunctionExpressionTree</a>()
+                    <a href="#method_hasProjectionFunction">hasProjectionFunction</a>()
                     <p>
 </p>
                 </td>
-                <td></td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Requests/ProjectionRequestBase.html#method_hasProjectionFunction"><abbr title="Pinq\Queries\Requests\ProjectionRequestBase">ProjectionRequestBase</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>|null
+                    <abbr title="Pinq\Queries\Requests\Functions\ElementProjection">ElementProjection</abbr>|null
                 </td>
                 <td class="last">
-                    <a href="#method_getFunctionExpressionTree">getFunctionExpressionTree</a>()
+                    <a href="#method_getProjectionFunction">getProjectionFunction</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Requests/ProjectionRequestBase.html#method_getProjectionFunction"><abbr title="Pinq\Queries\Requests\ProjectionRequestBase">ProjectionRequestBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/Requests/ProjectionRequestBase.html"><abbr title="Pinq\Queries\Requests\ProjectionRequestBase">ProjectionRequestBase</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_updateProjection">updateProjection</a>(<abbr title="Pinq\Queries\Requests\Functions\ElementProjection">ElementProjection</abbr> $projectionFunction = null)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Requests/ProjectionRequestBase.html#method_updateProjection"><abbr title="Pinq\Queries\Requests\ProjectionRequestBase">ProjectionRequestBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/Requests/ProjectionRequest.html"><abbr title="Pinq\Queries\Requests\ProjectionRequest">ProjectionRequest</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_update">update</a>(<abbr title="Pinq\Queries\Requests\Functions\ElementProjection">ElementProjection</abbr> $projectionFunction = null)
                     <p>
 </p>
                 </td>
@@ -75,10 +108,37 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method___construct">
-        <div class="location">at line 20</div>
-        <code>            public            
-    <strong>__construct</strong>(<a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $functionExpressionTree = null)</code>
+                        <h3 id="method_getParameters">
+        <div class="location">in <a href="../../../Pinq/Queries/Requests/ProjectionRequestBase.html#method_getParameters"><abbr title="Pinq\Queries\Requests\ProjectionRequestBase">ProjectionRequestBase</abbr></a> at line 25</div>
+        <code>            public            string[]
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method___construct">
+        <div class="location">at line 15</div>
+        <code>final            public            
+    <strong>__construct</strong>(<abbr title="Pinq\Queries\Requests\Functions\ElementProjection">ElementProjection</abbr> $projectionFunction = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -90,8 +150,8 @@
 
                     <table>
                     <tr>
-                <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
-                <td>$functionExpressionTree</td>
+                <td><abbr title="Pinq\Queries\Requests\Functions\ElementProjection">ElementProjection</abbr></td>
+                <td>$projectionFunction</td>
                 <td>
 </td>
             </tr>
@@ -103,10 +163,10 @@
                     </div>
     </div>
 
-                <h3 id="method_hasFunctionExpressionTree">
-        <div class="location">at line 28</div>
+                <h3 id="method_hasProjectionFunction">
+        <div class="location">in <a href="../../../Pinq/Queries/Requests/ProjectionRequestBase.html#method_hasProjectionFunction"><abbr title="Pinq\Queries\Requests\ProjectionRequestBase">ProjectionRequestBase</abbr></a> at line 33</div>
         <code>            public            boolean
-    <strong>hasFunctionExpressionTree</strong>()</code>
+    <strong>hasProjectionFunction</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -130,10 +190,10 @@
                     </div>
     </div>
 
-                <h3 id="method_getFunctionExpressionTree">
-        <div class="location">at line 36</div>
-        <code>            public            <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>|null
-    <strong>getFunctionExpressionTree</strong>()</code>
+                <h3 id="method_getProjectionFunction">
+        <div class="location">in <a href="../../../Pinq/Queries/Requests/ProjectionRequestBase.html#method_getProjectionFunction"><abbr title="Pinq\Queries\Requests\ProjectionRequestBase">ProjectionRequestBase</abbr></a> at line 41</div>
+        <code>            public            <abbr title="Pinq\Queries\Requests\Functions\ElementProjection">ElementProjection</abbr>|null
+    <strong>getProjectionFunction</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -146,7 +206,83 @@
 
                     <table>
         <tr>
-            <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>|null</td>
+            <td><abbr title="Pinq\Queries\Requests\Functions\ElementProjection">ElementProjection</abbr>|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_updateProjection">
+        <div class="location">in <a href="../../../Pinq/Queries/Requests/ProjectionRequestBase.html#method_updateProjection"><abbr title="Pinq\Queries\Requests\ProjectionRequestBase">ProjectionRequestBase</abbr></a> at line 51</div>
+        <code>            public            <a href="../../../Pinq/Queries/Requests/ProjectionRequestBase.html"><abbr title="Pinq\Queries\Requests\ProjectionRequestBase">ProjectionRequestBase</abbr></a>
+    <strong>updateProjection</strong>(<abbr title="Pinq\Queries\Requests\Functions\ElementProjection">ElementProjection</abbr> $projectionFunction = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Requests\Functions\ElementProjection">ElementProjection</abbr></td>
+                <td>$projectionFunction</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Requests/ProjectionRequestBase.html"><abbr title="Pinq\Queries\Requests\ProjectionRequestBase">ProjectionRequestBase</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_update">
+        <div class="location">at line 25</div>
+        <code>            public            <a href="../../../Pinq/Queries/Requests/ProjectionRequest.html"><abbr title="Pinq\Queries\Requests\ProjectionRequest">ProjectionRequest</abbr></a>
+    <strong>update</strong>(<abbr title="Pinq\Queries\Requests\Functions\ElementProjection">ElementProjection</abbr> $projectionFunction = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Requests\Functions\ElementProjection">ElementProjection</abbr></td>
+                <td>$projectionFunction</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Requests/ProjectionRequest.html"><abbr title="Pinq\Queries\Requests\ProjectionRequest">ProjectionRequest</abbr></a></td>
             <td>
 </td>
         </tr>

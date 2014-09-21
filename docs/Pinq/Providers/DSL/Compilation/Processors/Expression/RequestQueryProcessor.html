@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Providers\DSL\Compilation\Processors\Expression\RequestQueryProcessor | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../../../../classes.html">Classes</a></li>
+                            <li><a href="../../../../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../../../../traits.html">Traits</a></li>
+            <li><a href="../../../../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Expression.html">Pinq\Providers\DSL\Compilation\Processors\Expression</a>\RequestQueryProcessor</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>RequestQueryProcessor</strong>        extends <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a></p>
+
+            <div class="description">
+            <p>Implementation of the request query processor to update function expression trees of the query.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Expression/IExpressionProcessor.html"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\IExpressionProcessor">IExpressionProcessor</abbr></a> $expressionProcessor, <abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Queries\IRequestQuery">IRequestQuery</abbr> $requestQuery)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/IScopeProcessor.html"><abbr title="Pinq\Providers\DSL\Compilation\Processors\IScopeProcessor">IScopeProcessor</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getScopeProcessor">getScopeProcessor</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/QueryProcessor.html#method_getScopeProcessor"><abbr title="Pinq\Providers\DSL\Compilation\Processors\QueryProcessor">QueryProcessor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Providers\DSL\Compilation\Processors\Queries\IRequestQuery">IRequestQuery</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_buildQuery">buildQuery</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/RequestQueryProcessor.html#method_buildQuery"><abbr title="Pinq\Providers\DSL\Compilation\Processors\RequestQueryProcessor">RequestQueryProcessor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitAverage">visitAverage</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Average">Average</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitLast">visitLast</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\Last">Last</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitLast"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitGetIndex">visitGetIndex</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\GetIndex">GetIndex</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitGetIndex"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitIsEmpty">visitIsEmpty</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\IsEmpty">IsEmpty</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitIsEmpty"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitValues">visitValues</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\Values">Values</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitValues"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitFirst">visitFirst</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\First">First</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitFirst"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitAggregate">visitAggregate</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Aggregate">Aggregate</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitContains">visitContains</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\Contains">Contains</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitContains"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitMinimum">visitMinimum</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Minimum">Minimum</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitMaximum">visitMaximum</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Maximum">Maximum</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitAll">visitAll</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\All">All</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitIssetIndex">visitIssetIndex</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\IssetIndex">IssetIndex</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitIssetIndex"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitSum">visitSum</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Sum">Sum</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitAny">visitAny</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Any">Any</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitCount">visitCount</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\Count">Count</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitCount"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitImplode">visitImplode</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Implode">Implode</abbr> $request)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 27</div>
+        <code>            public            
+    <strong>__construct</strong>(<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Expression/IExpressionProcessor.html"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\IExpressionProcessor">IExpressionProcessor</abbr></a> $expressionProcessor, <abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Queries\IRequestQuery">IRequestQuery</abbr> $requestQuery)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Expression/IExpressionProcessor.html"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\IExpressionProcessor">IExpressionProcessor</abbr></a></td>
+                <td>$expressionProcessor</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Queries\IRequestQuery">IRequestQuery</abbr></td>
+                <td>$requestQuery</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getScopeProcessor">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/QueryProcessor.html#method_getScopeProcessor"><abbr title="Pinq\Providers\DSL\Compilation\Processors\QueryProcessor">QueryProcessor</abbr></a> at line 22</div>
+        <code>            public            <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/IScopeProcessor.html"><abbr title="Pinq\Providers\DSL\Compilation\Processors\IScopeProcessor">IScopeProcessor</abbr></a>
+    <strong>getScopeProcessor</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/IScopeProcessor.html"><abbr title="Pinq\Providers\DSL\Compilation\Processors\IScopeProcessor">IScopeProcessor</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_buildQuery">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/RequestQueryProcessor.html#method_buildQuery"><abbr title="Pinq\Providers\DSL\Compilation\Processors\RequestQueryProcessor">RequestQueryProcessor</abbr></a> at line 25</div>
+        <code>            public            <abbr title="Pinq\Providers\DSL\Compilation\Processors\Queries\IRequestQuery">IRequestQuery</abbr>
+    <strong>buildQuery</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Queries\IRequestQuery">IRequestQuery</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitAverage">
+        <div class="location">at line 43</div>
+        <code>            public            
+    <strong>visitAverage</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Average">Average</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Average">Average</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitLast">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitLast"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a> at line 33</div>
+        <code>            public            
+    <strong>visitLast</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\Last">Last</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\Last">Last</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitGetIndex">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitGetIndex"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a> at line 38</div>
+        <code>            public            
+    <strong>visitGetIndex</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\GetIndex">GetIndex</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\GetIndex">GetIndex</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitIsEmpty">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitIsEmpty"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a> at line 43</div>
+        <code>            public            
+    <strong>visitIsEmpty</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\IsEmpty">IsEmpty</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\IsEmpty">IsEmpty</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitValues">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitValues"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a> at line 48</div>
+        <code>            public            
+    <strong>visitValues</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\Values">Values</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\Values">Values</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitFirst">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitFirst"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a> at line 53</div>
+        <code>            public            
+    <strong>visitFirst</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\First">First</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\First">First</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitAggregate">
+        <div class="location">at line 78</div>
+        <code>            public            
+    <strong>visitAggregate</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Aggregate">Aggregate</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Aggregate">Aggregate</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitContains">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitContains"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a> at line 63</div>
+        <code>            public            
+    <strong>visitContains</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\Contains">Contains</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\Contains">Contains</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitMinimum">
+        <div class="location">at line 48</div>
+        <code>            public            
+    <strong>visitMinimum</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Minimum">Minimum</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Minimum">Minimum</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitMaximum">
+        <div class="location">at line 53</div>
+        <code>            public            
+    <strong>visitMaximum</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Maximum">Maximum</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Maximum">Maximum</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitAll">
+        <div class="location">at line 58</div>
+        <code>            public            
+    <strong>visitAll</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\All">All</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\All">All</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitIssetIndex">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitIssetIndex"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a> at line 83</div>
+        <code>            public            
+    <strong>visitIssetIndex</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\IssetIndex">IssetIndex</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\IssetIndex">IssetIndex</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitSum">
+        <div class="location">at line 63</div>
+        <code>            public            
+    <strong>visitSum</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Sum">Sum</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Sum">Sum</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitAny">
+        <div class="location">at line 68</div>
+        <code>            public            
+    <strong>visitAny</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Any">Any</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Any">Any</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitCount">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/RequestQueryProcessor.html#method_visitCount"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\RequestQueryProcessor">RequestQueryProcessor</abbr></a> at line 98</div>
+        <code>            public            
+    <strong>visitCount</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\Count">Count</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Requests\Count">Count</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitImplode">
+        <div class="location">at line 73</div>
+        <code>            public            
+    <strong>visitImplode</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Implode">Implode</abbr> $request)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Requests\Implode">Implode</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

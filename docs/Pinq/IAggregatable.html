@@ -53,8 +53,8 @@
                     boolean
                 </td>
                 <td class="last">
-                    <a href="#method_exists">exists</a>()
-                    <p>Returns whether any values exist.</p>
+                    <a href="#method_isEmpty">isEmpty</a>()
+                    <p>Returns whether the traversable contains no elements.</p>
                 </td>
                 <td></td>
             </tr>
@@ -64,7 +64,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_aggregate">aggregate</a>(callable $function)
-                    <p>Aggregates the values with the supplied function</p>
+                    <p>Aggregates the values with the supplied function.</p>
                 </td>
                 <td></td>
             </tr>
@@ -114,7 +114,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_all">all</a>(callable $function = null)
-                    <p>Returns a boolean of if all the values evaluate to true</p>
+                    <p>Returns a boolean of if all the values evaluate to true.</p>
                 </td>
                 <td></td>
             </tr>
@@ -124,7 +124,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_any">any</a>(callable $function = null)
-                    <p>Returns a boolean of if any of the values evaluate to true</p>
+                    <p>Returns a boolean of if any of the values evaluate to true.</p>
                 </td>
                 <td></td>
             </tr>
@@ -134,7 +134,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_implode">implode</a>(string $delimiter, callable $function = null)
-                    <p>Returns a string of all the values concatented by the delimiter</p>
+                    <p>Returns a string of all the values concatenated by the delimiter.</p>
                 </td>
                 <td></td>
             </tr>
@@ -169,13 +169,13 @@
                     </div>
     </div>
 
-                <h3 id="method_exists">
+                <h3 id="method_isEmpty">
         <div class="location">at line 25</div>
         <code>            public            boolean
-    <strong>exists</strong>()</code>
+    <strong>isEmpty</strong>()</code>
     </h3>
     <div class="details">
-        <p>Returns whether any values exist.</p>
+        <p>Returns whether the traversable contains no elements.</p>
         <p>
 </p>
         <div class="tags">
@@ -196,12 +196,12 @@
     </div>
 
                 <h3 id="method_aggregate">
-        <div class="location">at line 33</div>
+        <div class="location">at line 34</div>
         <code>            public            mixed
     <strong>aggregate</strong>(callable $function)</code>
     </h3>
     <div class="details">
-        <p>Aggregates the values with the supplied function</p>
+        <p>Aggregates the values with the supplied function.</p>
         <p>
 </p>
         <div class="tags">
@@ -211,7 +211,7 @@
                     <tr>
                 <td>callable</td>
                 <td>$function</td>
-                <td>The aggregate function</td>
+                <td>The aggregate function, parameters: ($aggregate, $step)</td>
             </tr>
             </table>
 
@@ -232,7 +232,7 @@
     </div>
 
                 <h3 id="method_maximum">
-        <div class="location">at line 41</div>
+        <div class="location">at line 43</div>
         <code>            public            mixed
     <strong>maximum</strong>(callable $function = null)</code>
     </h3>
@@ -247,7 +247,7 @@
                     <tr>
                 <td>callable</td>
                 <td>$function</td>
-                <td>The function which will return the values</td>
+                <td>The function which will return the values.</td>
             </tr>
             </table>
 
@@ -268,7 +268,7 @@
     </div>
 
                 <h3 id="method_minimum">
-        <div class="location">at line 49</div>
+        <div class="location">at line 52</div>
         <code>            public            mixed
     <strong>minimum</strong>(callable $function = null)</code>
     </h3>
@@ -283,7 +283,7 @@
                     <tr>
                 <td>callable</td>
                 <td>$function</td>
-                <td>The function which will return the values</td>
+                <td>The function which will return the values.</td>
             </tr>
             </table>
 
@@ -304,7 +304,7 @@
     </div>
 
                 <h3 id="method_sum">
-        <div class="location">at line 57</div>
+        <div class="location">at line 61</div>
         <code>            public            int|null
     <strong>sum</strong>(callable $function = null)</code>
     </h3>
@@ -319,7 +319,7 @@
                     <tr>
                 <td>callable</td>
                 <td>$function</td>
-                <td>The function which will return the values</td>
+                <td>The function which will return the values.</td>
             </tr>
             </table>
 
@@ -340,7 +340,7 @@
     </div>
 
                 <h3 id="method_average">
-        <div class="location">at line 65</div>
+        <div class="location">at line 70</div>
         <code>            public            double|null
     <strong>average</strong>(callable $function = null)</code>
     </h3>
@@ -355,7 +355,7 @@
                     <tr>
                 <td>callable</td>
                 <td>$function</td>
-                <td>The function which will return the values</td>
+                <td>The function which will return the values.</td>
             </tr>
             </table>
 
@@ -376,12 +376,12 @@
     </div>
 
                 <h3 id="method_all">
-        <div class="location">at line 73</div>
+        <div class="location">at line 79</div>
         <code>            public            bool
     <strong>all</strong>(callable $function = null)</code>
     </h3>
     <div class="details">
-        <p>Returns a boolean of if all the values evaluate to true</p>
+        <p>Returns a boolean of if all the values evaluate to true.</p>
         <p>
 </p>
         <div class="tags">
@@ -391,7 +391,7 @@
                     <tr>
                 <td>callable</td>
                 <td>$function</td>
-                <td>The function which will return the values</td>
+                <td>The function which will return the values.</td>
             </tr>
             </table>
 
@@ -412,12 +412,12 @@
     </div>
 
                 <h3 id="method_any">
-        <div class="location">at line 81</div>
+        <div class="location">at line 88</div>
         <code>            public            bool
     <strong>any</strong>(callable $function = null)</code>
     </h3>
     <div class="details">
-        <p>Returns a boolean of if any of the values evaluate to true</p>
+        <p>Returns a boolean of if any of the values evaluate to true.</p>
         <p>
 </p>
         <div class="tags">
@@ -427,7 +427,7 @@
                     <tr>
                 <td>callable</td>
                 <td>$function</td>
-                <td>The function which will return the values</td>
+                <td>The function which will return the values.</td>
             </tr>
             </table>
 
@@ -448,12 +448,12 @@
     </div>
 
                 <h3 id="method_implode">
-        <div class="location">at line 90</div>
+        <div class="location">at line 98</div>
         <code>            public            string
     <strong>implode</strong>(string $delimiter, callable $function = null)</code>
     </h3>
     <div class="details">
-        <p>Returns a string of all the values concatented by the delimiter</p>
+        <p>Returns a string of all the values concatenated by the delimiter.</p>
         <p>
 </p>
         <div class="tags">
@@ -463,12 +463,12 @@
                     <tr>
                 <td>string</td>
                 <td>$delimiter</td>
-                <td>The string to delimit the values by</td>
+                <td>The string to delimit the values by.</td>
             </tr>
                     <tr>
                 <td>callable</td>
                 <td>$function</td>
-                <td>The function which will return the values</td>
+                <td>The function which will return the values.</td>
             </tr>
             </table>
 

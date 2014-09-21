@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Parsing\IFunctionLocation | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../Pinq/Parsing.html">Pinq\Parsing</a>\IFunctionLocation</h1>
+    </div>
+        <div class="content">
+                <p>    interface
+    <strong>IFunctionLocation</strong></p>
+
+            <div class="description">
+            <p>Interface containing the reflection data of a function.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getFilePath">getFilePath</a>()
+                    <p>Gets the file path where the function was declared.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_inNamespace">inNamespace</a>()
+                    <p>Whether the function is defined in a namespace.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getNamespace">getNamespace</a>()
+                    <p>Gets the namespace which the function was defined in.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    int
+                </td>
+                <td class="last">
+                    <a href="#method_getStartLine">getStartLine</a>()
+                    <p>Gets the start line of the function.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    int
+                </td>
+                <td class="last">
+                    <a href="#method_getEndLine">getEndLine</a>()
+                    <p>Gets the end line of the function.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getHash">getHash</a>()
+                    <p>Gets a hash of the function location.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_getFilePath">
+        <div class="location">at line 17</div>
+        <code>            public            string
+    <strong>getFilePath</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the file path where the function was declared.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_inNamespace">
+        <div class="location">at line 24</div>
+        <code>            public            boolean
+    <strong>inNamespace</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Whether the function is defined in a namespace.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getNamespace">
+        <div class="location">at line 32</div>
+        <code>            public            string|null
+    <strong>getNamespace</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the namespace which the function was defined in.</p>
+        <p>Null if in the global namespace.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getStartLine">
+        <div class="location">at line 39</div>
+        <code>            public            int
+    <strong>getStartLine</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the start line of the function.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>int</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getEndLine">
+        <div class="location">at line 46</div>
+        <code>            public            int
+    <strong>getEndLine</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the end line of the function.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>int</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getHash">
+        <div class="location">at line 53</div>
+        <code>            public            string
+    <strong>getHash</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets a hash of the function location.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

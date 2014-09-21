@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Parsing\IMagicScopes | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../Pinq/Parsing.html">Pinq\Parsing</a>\IMagicScopes</h1>
+    </div>
+        <div class="content">
+                <p>    interface
+    <strong>IMagicScopes</strong></p>
+
+            <div class="description">
+            <p>Interface for a set of resolved self::, static::, parent:: scopes of a function.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getSelfClass">getSelfClass</a>()
+                    <p>Gets the fully qualified class of self:: scope.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getSelfClassConstant">getSelfClassConstant</a>()
+                    <p>Gets the value of self::class constant.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getStaticClass">getStaticClass</a>()
+                    <p>Gets the fully qualified class of static:: scope.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getStaticClassConstant">getStaticClassConstant</a>()
+                    <p>Gets the value of static::class constant.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getParentClass">getParentClass</a>()
+                    <p>Gets the fully qualified class of parent:: scope.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getParentClassConstant">getParentClassConstant</a>()
+                    <p>Gets the value of parent::class constant.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_getSelfClass">
+        <div class="location">at line 18</div>
+        <code>            public            string|null
+    <strong>getSelfClass</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the fully qualified class of self:: scope.</p>
+        <p>Null if not applicable.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getSelfClassConstant">
+        <div class="location">at line 26</div>
+        <code>            public            string|null
+    <strong>getSelfClassConstant</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the value of self::class constant.</p>
+        <p>Null if not applicable.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getStaticClass">
+        <div class="location">at line 34</div>
+        <code>            public            string|null
+    <strong>getStaticClass</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the fully qualified class of static:: scope.</p>
+        <p>Null if not applicable.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getStaticClassConstant">
+        <div class="location">at line 42</div>
+        <code>            public            string|null
+    <strong>getStaticClassConstant</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the value of static::class constant.</p>
+        <p>Null if not applicable.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getParentClass">
+        <div class="location">at line 50</div>
+        <code>            public            string|null
+    <strong>getParentClass</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the fully qualified class of parent:: scope.</p>
+        <p>Null if not applicable.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getParentClassConstant">
+        <div class="location">at line 58</div>
+        <code>            public            string|null
+    <strong>getParentClassConstant</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the value of parent::class constant.</p>
+        <p>Null if not applicable.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>
