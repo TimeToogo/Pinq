@@ -336,9 +336,9 @@ abstract class FunctionBase implements \Serializable
     public function updateBody(array $bodyExpressions = null)
     {
         return $this->update(
-                $this->scopeType,
-                $this->namespace,
-                $this->parameterScopedVariableMap,
+                $this->evaluationContextFactory->getScopeType(),
+                $this->evaluationContextFactory->getNamespace(),
+                $this->evaluationContextFactory->getParameterScopedVariableMap(),
                 $this->parameters->getAll(),
                 $bodyExpressions
         );

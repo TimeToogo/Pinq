@@ -153,4 +153,40 @@ abstract class FunctionTest extends PinqTestCase
         $function = $this->functionWithReturnStatement();
         $this->assertEquals($function, unserialize(serialize($function)));
     }
+
+    public function testUpdate()
+    {
+        $function = $this->functionWithReturnStatement();
+
+        $this->assertEquals(
+                $function,
+                $function->update(
+                        $function->getScopeType(),
+                        $function->getNamespace(),
+                        $function->getParameterScopedVariableMap(),
+                        $function->getParameters()->getAll(),
+                        $function->getBodyExpressions()
+                )
+        );
+    }
+
+    public function testUpdateBody()
+    {
+        $function = $this->functionWithReturnStatement();
+
+        $this->assertEquals(
+                $function,
+                $function->updateBody($function->getBodyExpressions())
+        );
+    }
+
+    public function testWalk()
+    {
+        $function = $this->functionWithReturnStatement();
+
+        $this->assertEquals(
+                $function,
+                $function->walk(new O\DynamicExpressionWalker([]))
+        );
+    }
 }
