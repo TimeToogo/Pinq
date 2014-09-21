@@ -1,6 +1,6 @@
 <?php
 
-namespace Pinq\Parsing\PHPParser;
+namespace Pinq\Parsing\PhpParser;
 
 use PhpParser\Node;
 use Pinq\Expressions as O;

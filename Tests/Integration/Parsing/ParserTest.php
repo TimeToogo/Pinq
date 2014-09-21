@@ -24,7 +24,7 @@ abstract class ParserTest extends \Pinq\Tests\PinqTestCase
 
     protected function implementations()
     {
-        return [new Parsing\PHPParser\Parser()];
+        return [new Parsing\PhpParser\Parser()];
     }
 
     final public function parsers()

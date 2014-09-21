@@ -1,6 +1,6 @@
 <?php
 
-namespace Pinq\Parsing\PHPParser\Visitors;
+namespace Pinq\Parsing\PhpParser\Visitors;
 
 use PhpParser\Node;
 use PhpParser\NodeVisitor;
@@ -9,8 +9,8 @@ use Pinq\Expressions as O;
 use Pinq\Parsing\FunctionDeclaration;
 use Pinq\Parsing\FunctionLocation;
 use Pinq\Parsing\FunctionSignature;
-use Pinq\Parsing\PHPParser\AST;
-use Pinq\Parsing\PHPParser\LocatedFunctionNode;
+use Pinq\Parsing\PhpParser\AST;
+use Pinq\Parsing\PhpParser\LocatedFunctionNode;
 
 /**
  * Visits the supplied nodes and stores any located functions.

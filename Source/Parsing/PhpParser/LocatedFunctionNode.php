@@ -1,6 +1,6 @@
 <?php
 
-namespace Pinq\Parsing\PHPParser;
+namespace Pinq\Parsing\PhpParser;
 
 use Pinq\Parsing\IFunctionDeclaration;
 use Pinq\Parsing\IFunctionLocation;
