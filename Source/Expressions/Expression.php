@@ -79,15 +79,15 @@ abstract class Expression implements \Serializable
      * @param string  $type
      *
      * @return Expression[]
-     * @throws \Pinq\PinqException If the array contains invalid expressions.
+     * @throws PinqException If the array contains invalid expressions.
      */
     final protected static function verifyAll(array $expressions, $type = __CLASS__)
     {
         foreach ($expressions as $key => $expression) {
             if (!($expression instanceof $type)) {
-                throw new \Pinq\PinqException(
+                throw new PinqException(
                         'Invalid array of expressions: invalid expression of type %s at index %s, expecting %s',
-                        \Pinq\Utilities::getTypeOrClass($expression),
+                        Utilities::getTypeOrClass($expression),
                         $key,
                         $type);
             }

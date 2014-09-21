@@ -3,13 +3,14 @@
 namespace Pinq\Iterators\Generators;
 
 use Pinq\Iterators\Common;
+use Pinq\Iterators\IAdapterIterator;
 
 /**
  * Implementation of the adapter iterator for standard iterators using the generator
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class IteratorAdapter extends Generator implements \Pinq\Iterators\IAdapterIterator
+class IteratorAdapter extends Generator implements IAdapterIterator
 {
     use Common\AdapterIterator;
 

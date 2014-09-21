@@ -2,6 +2,8 @@
 
 namespace Pinq\Caching;
 
+use Pinq\PinqException;
+
 /**
  * Adapter class for a cache that implements \ArrayAccess
  *
@@ -63,7 +65,7 @@ class ArrayAccessCacheAdapter extends OneDimensionalCacheAdapter
                 }
             }
         } else {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot clear cache %s: does not support clearing',
                     get_class($this->arrayAccess));
         }

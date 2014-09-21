@@ -2,6 +2,7 @@
 
 namespace Pinq\Connectors;
 
+use Pinq\ICollection;
 use Pinq\Interfaces;
 use Pinq\Iterators\IJoinIterator;
 
@@ -13,11 +14,11 @@ use Pinq\Iterators\IJoinIterator;
 class JoiningCollection extends JoiningTraversable implements Interfaces\IJoiningOnCollection
 {
     /**
-     * @var \Pinq\ICollection
+     * @var ICollection
      */
     private $collection;
 
-    public function __construct(\Pinq\ICollection $collection, IJoinIterator $joinIterator, callable $collectionFactory)
+    public function __construct(ICollection $collection, IJoinIterator $joinIterator, callable $collectionFactory)
     {
         parent::__construct($collection->getIteratorScheme(), $joinIterator, $collectionFactory);
         $this->collection = $collection;

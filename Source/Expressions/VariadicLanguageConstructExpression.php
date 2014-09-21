@@ -2,6 +2,8 @@
 
 namespace Pinq\Expressions;
 
+use Pinq\PinqException;
+
 /**
  * Base class for a variadic language construct.
  *
@@ -17,7 +19,7 @@ abstract class VariadicLanguageConstructExpression extends Expression
     public function __construct(array $values)
     {
         if (count($values) === 0) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Invalid amount of value expressions for %s: must be greater than 0',
                     __CLASS__);
         }

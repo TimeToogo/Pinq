@@ -4,13 +4,14 @@ namespace Pinq\Queries\Segments;
 
 use Pinq\Queries\Common;
 use Pinq\Queries\Functions;
+use Pinq\Queries\ISegment;
 
 /**
  * Query segment for joining values.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class Join implements \Pinq\Queries\ISegment
+class Join implements ISegment
 {
     /**
      * The join options.

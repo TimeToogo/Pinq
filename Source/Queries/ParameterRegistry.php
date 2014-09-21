@@ -2,6 +2,8 @@
 
 namespace Pinq\Queries;
 
+use Pinq\PinqException;
+
 /**
  * Implementation for request and operation query template parameters.
  *
@@ -19,14 +21,14 @@ class ParameterRegistry implements IParameterRegistry
     public function __construct(array $parameters)
     {
         if (array_unique($parameters, SORT_STRING) !== $parameters) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot construct %s: duplicate parameter identifiers found',
                     __CLASS__);
         }
 
         foreach ($parameters as $parameter) {
             if (!is_string($parameter) || $parameter === '') {
-                throw new \Pinq\PinqException(
+                throw new PinqException(
                         'Cannot construct %s: invalid parameter name, \'%s\'',
                         __CLASS__,
                         $parameter);
@@ -54,7 +56,7 @@ class ParameterRegistry implements IParameterRegistry
 
         sort($resolvedParameterNames);
         if ($resolvedParameterNames !== $this->parameters) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot resolve query parameters: resolved parameter mismatch, [%s] != [%s]',
                     implode(', ', $this->parameters),
                     implode(', ', $resolvedParameterNames));

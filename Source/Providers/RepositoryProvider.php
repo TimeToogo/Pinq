@@ -5,6 +5,7 @@ namespace Pinq\Providers;
 use Pinq\Expressions as O;
 use Pinq\Queries\Builders;
 use Pinq\Queries;
+use Pinq\Repository;
 
 /**
  * Base class for the repository provider.
@@ -57,7 +58,7 @@ abstract class RepositoryProvider extends ProviderBase implements IRepositoryPro
 
     public function createRepository(O\TraversalExpression $scopeExpression = null)
     {
-        return new \Pinq\Repository($this, $this->sourceInfo, $scopeExpression, $this->scheme);
+        return new Repository($this, $this->sourceInfo, $scopeExpression, $this->scheme);
     }
 
     final public function load(O\Expression $requestExpression)

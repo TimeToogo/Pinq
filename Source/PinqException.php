@@ -36,7 +36,7 @@ class PinqException extends \Exception
         return new self(
                 'Invalid argument for %s: expecting array or \\Traversable, %s given',
                 $method,
-                \Pinq\Utilities::getTypeOrClass($value));
+                Utilities::getTypeOrClass($value));
     }
 
     public static function notSupported($method)

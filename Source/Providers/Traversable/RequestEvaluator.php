@@ -2,6 +2,7 @@
 
 namespace Pinq\Providers\Traversable;
 
+use Pinq\ITraversable;
 use Pinq\Queries;
 use Pinq\Queries\Requests;
 
@@ -13,7 +14,7 @@ use Pinq\Queries\Requests;
 class RequestEvaluator extends Requests\RequestVisitor
 {
     /**
-     * @var \Pinq\ITraversable
+     * @var ITraversable
      */
     private $traversable;
 
@@ -23,7 +24,7 @@ class RequestEvaluator extends Requests\RequestVisitor
     protected $resolvedParameters;
 
     public function __construct(
-            \Pinq\ITraversable $traversable,
+            ITraversable $traversable,
             Queries\IResolvedParameterRegistry $resolvedParameters
     ) {
         $this->traversable        = $traversable;
@@ -31,7 +32,7 @@ class RequestEvaluator extends Requests\RequestVisitor
     }
 
     public static function evaluate(
-            \Pinq\ITraversable $traversable,
+            ITraversable $traversable,
             Queries\IRequest $request,
             Queries\IResolvedParameterRegistry $resolvedParameters
     ) {
@@ -41,7 +42,7 @@ class RequestEvaluator extends Requests\RequestVisitor
     }
 
     /**
-     * @return \Pinq\ITraversable
+     * @return ITraversable
      */
     public function getTraversable()
     {

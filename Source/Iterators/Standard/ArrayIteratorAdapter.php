@@ -3,13 +3,14 @@
 namespace Pinq\Iterators\Standard;
 
 use Pinq\Iterators\Common;
+use Pinq\Iterators\IAdapterIterator;
 
 /**
  * Implementation of the adapter iterator for \ArrayIterator using the fetch method
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class ArrayIteratorAdapter extends Iterator implements \Pinq\Iterators\IAdapterIterator
+class ArrayIteratorAdapter extends Iterator implements IAdapterIterator
 {
     use Common\AdapterIterator;
 

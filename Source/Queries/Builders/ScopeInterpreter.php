@@ -2,6 +2,7 @@
 
 namespace Pinq\Queries\Builders;
 
+use Pinq\Direction;
 use Pinq\Expressions as O;
 use Pinq\IQueryable;
 use Pinq\PinqException;
@@ -143,7 +144,7 @@ class ScopeInterpreter extends ExpressionInterpreter implements IScopeInterprete
         }
 
         if (stripos($this->getMethodName($expression), 'orderBy') !== 0) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot visit ordering query: must begin with an orderBy[Ascending|Descending] query method, %s given');
         }
 
@@ -168,7 +169,7 @@ class ScopeInterpreter extends ExpressionInterpreter implements IScopeInterprete
         } elseif (stripos($methodName, 'Descending') !== false) {
             $isAscending = false;
         } else {
-            $isAscending = $this->getArgumentValueAt(1, $expression) !== \Pinq\Direction::DESCENDING;
+            $isAscending = $this->getArgumentValueAt(1, $expression) !== Direction::DESCENDING;
         }
 
         return [

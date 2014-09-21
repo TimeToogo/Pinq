@@ -2,6 +2,8 @@
 
 namespace Pinq\Caching;
 
+use Pinq\PinqException;
+
 /**
  * Cache implementation for storing the serialized expression trees
  * in a single file in a csv format, not very good for concurrency
@@ -38,7 +40,7 @@ class CSVFileCache extends OneDimensionalCacheAdapter
             $this->fileHandle->setFlags(\SplFileObject::READ_CSV);
             $this->fileHandle->setCsvControl(self::CSV_DELIMITER, self::CSV_SEPARATOR);
         } catch (\Exception $exception) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Invalid cache file: %s is not readable with the message, "%s"',
                     $fileName,
                     $exception->getMessage());

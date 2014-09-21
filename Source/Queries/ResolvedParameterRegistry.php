@@ -2,6 +2,8 @@
 
 namespace Pinq\Queries;
 
+use Pinq\PinqException;
+
 /**
  * Implementation of the resolved parameter registry.
  *
@@ -50,7 +52,7 @@ class ResolvedParameterRegistry implements IResolvedParameterRegistry
     public function offsetGet($parameter)
     {
         if (!$this->offsetExists($parameter)) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot retrieve parameter %s: parameter is not resolved',
                     $parameter);
         }
@@ -60,11 +62,11 @@ class ResolvedParameterRegistry implements IResolvedParameterRegistry
 
     public function offsetSet($offset, $value)
     {
-        throw \Pinq\PinqException::notSupported(__METHOD__);
+        throw PinqException::notSupported(__METHOD__);
     }
 
     public function offsetUnset($offset)
     {
-        throw \Pinq\PinqException::notSupported(__METHOD__);
+        throw PinqException::notSupported(__METHOD__);
     }
 }

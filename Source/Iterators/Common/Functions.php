@@ -2,6 +2,8 @@
 
 namespace Pinq\Iterators\Common;
 
+use Pinq\Parsing\Reflection;
+
 /**
  * Utility methods for allow internal functions to have excessive arguments.
  *
@@ -25,12 +27,12 @@ final class Functions
      */
     public static function allowExcessiveArguments(callable $function)
     {
-        $reflection = \Pinq\Parsing\Reflection::fromCallable($function);
+        $reflection = Reflection::fromCallable($function);
         if ($reflection->isUserDefined()) {
             return $function;
         }
 
-        if (\Pinq\Parsing\Reflection::isVariadic($reflection)) {
+        if (Reflection::isVariadic($reflection)) {
             return $function;
         }
 

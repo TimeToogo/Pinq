@@ -3,6 +3,7 @@
 namespace Pinq\Queries\Builders;
 
 use Pinq\Expressions as O;
+use Pinq\PinqException;
 use Pinq\Queries;
 use Pinq\Queries\Builders\Interpretations\IRequestInterpretation;
 
@@ -92,7 +93,7 @@ class RequestQueryInterpreter extends QueryInterpreter implements IRequestQueryI
                     $this->getValue($expression->getIndex())
             );
         } else {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot interpret offset get request: invalid expression type, expecting %s, %s given',
                     O\MethodCallExpression::getType() . ' or ' . O\IndexExpression::getType(),
                     $expression->getType());
@@ -126,7 +127,7 @@ class RequestQueryInterpreter extends QueryInterpreter implements IRequestQueryI
             }
         }
 
-        throw new \Pinq\PinqException(
+        throw new PinqException(
                 'Cannot interpret offset exists request: invalid expression type, expecting %s, %s given',
                 O\MethodCallExpression::getType() . ' or ' . O\IssetExpression::getType(
                 ) . ' with a single parameter index',
@@ -165,7 +166,7 @@ class RequestQueryInterpreter extends QueryInterpreter implements IRequestQueryI
         ) {
             $this->scopeInterpreter->interpretScope($expression->getArguments()[0]->getValue());
         } else {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot interpret count request: invalid expression type, expecting %s, %s given',
                     O\MethodCallExpression::getType() . ' or ' . O\FunctionCallExpression::getType(
                     ) . ' with at least one argument',

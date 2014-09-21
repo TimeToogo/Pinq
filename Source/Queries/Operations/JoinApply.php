@@ -4,6 +4,7 @@ namespace Pinq\Queries\Operations;
 
 use Pinq\Queries\Common;
 use Pinq\Queries\Functions;
+use Pinq\Queries\IOperation;
 
 /**
  * Operation query for applying the supplied function
@@ -11,7 +12,7 @@ use Pinq\Queries\Functions;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class JoinApply extends Operation implements \Pinq\Queries\IOperation
+class JoinApply extends Operation implements IOperation
 {
     /**
      * The join options.

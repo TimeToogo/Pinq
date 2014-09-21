@@ -4,6 +4,7 @@ namespace Pinq\Providers\DSL;
 
 use Pinq\Caching\ICacheAdapter;
 use Pinq\Expressions as O;
+use Pinq\PinqException;
 use Pinq\Providers\Configuration;
 use Pinq\Providers\DSL\Compilation\ICompiledOperation;
 use Pinq\Providers\DSL\Compilation\IOperationTemplate;
@@ -66,6 +67,6 @@ abstract class RepositoryProvider extends Providers\RepositoryProvider
             Queries\IResolvedParameterRegistry $resolvedParameters
     ) {
         //Overrides parent::executeOperationExpression
-        throw \Pinq\PinqException::notSupported(__METHOD__);
+        throw PinqException::notSupported(__METHOD__);
     }
 }

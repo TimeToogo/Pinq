@@ -3,6 +3,7 @@
 namespace Pinq\Iterators\Generators;
 
 use Pinq\Iterators\Common;
+use Pinq\Iterators\Standard\IIterator;
 
 /**
  * Iterator scheme using rewindable generator implementations.
@@ -68,7 +69,7 @@ class GeneratorScheme extends Common\IteratorScheme
     {
         if ($iterator instanceof IGenerator) {
             return $iterator;
-        } elseif ($iterator instanceof \Pinq\Iterators\Standard\IIterator) {
+        } elseif ($iterator instanceof IIterator) {
             return new IIteratorAdapter($iterator);
         } elseif ($iterator instanceof \ArrayIterator) {
             return new ArrayIteratorAdapter($iterator);

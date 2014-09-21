@@ -4,6 +4,7 @@ namespace Pinq\Providers\DSL;
 
 use Pinq\Caching;
 use Pinq\Expressions as O;
+use Pinq\PinqException;
 use Pinq\Providers\Configuration;
 use Pinq\Providers;
 use Pinq\Queries;
@@ -59,6 +60,6 @@ abstract class QueryProvider extends Providers\QueryProvider
             Queries\IResolvedParameterRegistry $resolvedParameters
     ) {
         //Due to overriding parent::loadRequestExpression, this should never be called.
-        throw \Pinq\PinqException::notSupported(__METHOD__);
+        throw PinqException::notSupported(__METHOD__);
     }
 }

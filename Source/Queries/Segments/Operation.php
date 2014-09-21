@@ -2,6 +2,7 @@
 
 namespace Pinq\Queries\Segments;
 
+use Pinq\PinqException;
 use Pinq\Queries;
 use Pinq\Queries\Common;
 
@@ -32,7 +33,7 @@ class Operation extends Segment
     public function __construct($operationType, Common\ISource $source)
     {
         if (!self::isValid($operationType)) {
-            throw new \Pinq\PinqException('Invalid operation type');
+            throw new PinqException('Invalid operation type');
         }
 
         $this->operationType = $operationType;

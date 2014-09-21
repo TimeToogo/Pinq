@@ -3,6 +3,7 @@
 namespace Pinq\Iterators\Common;
 
 use Pinq\Iterators\IIteratorScheme;
+use Pinq\PinqException;
 
 /**
  * Supplies common implementation for an iterator scheme
@@ -15,7 +16,7 @@ abstract class IteratorScheme implements IIteratorScheme
     {
         $isArray = is_array($traversableOrArray);
         if (!$isArray && !($traversableOrArray instanceof \Traversable)) {
-            throw \Pinq\PinqException::invalidIterable(__METHOD__, $traversableOrArray);
+            throw PinqException::invalidIterable(__METHOD__, $traversableOrArray);
         }
 
         if ($isArray) {

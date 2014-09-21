@@ -4,6 +4,7 @@ namespace Pinq\Queries\Builders\Interpretations;
 
 use Pinq\Parsing\IFunctionInterpreter;
 use Pinq\Parsing;
+use Pinq\PinqException;
 use Pinq\Queries\Builders\Functions\CallableFunction;
 use Pinq\Queries\Builders\Functions\ClosureExpressionFunction;
 use Pinq\Queries\Builders\Functions\IFunction;
@@ -67,7 +68,7 @@ class BaseResolver extends BaseInterpretation implements IQueryResolver
                 }
             }
         } else {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot resolve function: unsupported function type %s',
                     get_class($function));
         }
@@ -76,7 +77,7 @@ class BaseResolver extends BaseInterpretation implements IQueryResolver
     final protected function resolveParameter($name, $resolvedValue)
     {
         if (array_key_exists($name, $this->resolvedParameters)) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot resolve parameter %s: parameter has already been resolved.',
                     $name);
         }

@@ -2,13 +2,15 @@
 
 namespace Pinq\Parsing;
 
+use Pinq\PinqException;
+
 /**
  * Exception for errors while converting a function into
  * an expression tree
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class InvalidFunctionException extends \Pinq\PinqException
+class InvalidFunctionException extends PinqException
 {
     /**
      * @param string                      $messageFormat

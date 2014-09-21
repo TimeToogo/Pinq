@@ -66,7 +66,7 @@ abstract class ExpressionInterpreter
         $argument = $this->getOptionalArgumentValueAt($index, $methodExpression, $instance);
 
         if ($argument === $instance) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Could not get argument value of method %s at index %d: argument not supplied',
                     $methodExpression->getName()->compileDebug(),
                     $index);
@@ -94,7 +94,7 @@ abstract class ExpressionInterpreter
         $argumentExpression = $this->getOptionalArgumentAt($index, $methodExpression);
 
         if ($argumentExpression === null) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Could not get argument at index %d of method %s: argument not supplied',
                     $index,
                     $methodExpression->getName()->compileDebug());
@@ -135,14 +135,14 @@ abstract class ExpressionInterpreter
      * @param O\MethodCallExpression $methodExpression
      *
      * @return O\MethodCallExpression
-     * @throws \Pinq\PinqException
+     * @throws PinqException
      */
     final protected function getSourceMethodCall(O\MethodCallExpression $methodExpression)
     {
         $sourceExpression = $methodExpression->getValue();
 
         if (!($sourceExpression instanceof O\MethodCallExpression)) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot get source method call expression: source is not a method call, %s given',
                     get_class($methodExpression));
         }

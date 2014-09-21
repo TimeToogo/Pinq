@@ -3,13 +3,14 @@
 namespace Pinq\Iterators\Generators;
 
 use Pinq\Iterators\Common;
+use Pinq\Iterators\IAdapterIterator;
 
 /**
  * Implementation of the adapter iterator for \ArrayIterator using the generator
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class ArrayIteratorAdapter extends Generator implements \Pinq\Iterators\IAdapterIterator
+class ArrayIteratorAdapter extends Generator implements IAdapterIterator
 {
     use Common\AdapterIterator;
 

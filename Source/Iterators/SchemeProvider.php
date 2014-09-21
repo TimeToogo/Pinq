@@ -2,6 +2,8 @@
 
 namespace Pinq\Iterators;
 
+use Pinq\PinqException;
+
 /**
  * Provider class for accessing the built in provider schemes.
  * Currently the implemented schemes are as follows:
@@ -35,12 +37,13 @@ final class SchemeProvider
 
     /**
      * @return IIteratorScheme
+     * @throws PinqException
      */
     public static function getDefault()
     {
         $schemes = self::getAvailableSchemes();
         if (empty($schemes)) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot get default iterator scheme: None are supported in the PHP v%s',
                     PHP_VERSION);
         }

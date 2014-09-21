@@ -2,6 +2,8 @@
 
 namespace Pinq\Providers\Traversable;
 
+use Pinq\ITraversable;
+use Pinq\Providers\QueryProvider;
 use Pinq\Queries;
 
 /**
@@ -10,14 +12,14 @@ use Pinq\Queries;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class Provider extends \Pinq\Providers\QueryProvider
+class Provider extends QueryProvider
 {
     /**
      * @var array<string, \Pinq\ITraversable>
      */
     protected $traversableCache = [];
 
-    public function __construct(\Pinq\ITraversable $traversable)
+    public function __construct(ITraversable $traversable)
     {
         parent::__construct(new SourceInfo($traversable));
 

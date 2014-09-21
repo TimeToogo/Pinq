@@ -3,6 +3,7 @@
 namespace Pinq\Queries\Builders\Interpretations;
 
 use Pinq\Parsing\IFunctionInterpreter;
+use Pinq\PinqException;
 use Pinq\Queries;
 use Pinq\Queries\Builders\Functions\CallableFunction;
 use Pinq\Queries\Builders\Functions\ClosureExpressionFunction;
@@ -47,7 +48,7 @@ class BaseParser extends BaseInterpretation implements IQueryParser
             $bodyExpressions      = $expression->getBodyExpressions();
             $scopedVariableNames  = array_merge(['this'], $expression->getUsedVariableNames());
         } else {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot build function: unsupported function type, %s',
                     get_class($function));
         }

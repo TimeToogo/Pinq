@@ -5,6 +5,7 @@ namespace Pinq\Providers;
 use Pinq\Expressions as O;
 use Pinq\Queries;
 use Pinq\Queries\Builders;
+use Pinq\Queryable;
 
 /**
  * Base class for the query provider.
@@ -35,7 +36,7 @@ abstract class QueryProvider extends ProviderBase implements IQueryProvider
 
     public function createQueryable(O\TraversalExpression $scopeExpression = null)
     {
-        return new \Pinq\Queryable($this, $this->sourceInfo, $scopeExpression, $this->scheme);
+        return new Queryable($this, $this->sourceInfo, $scopeExpression, $this->scheme);
     }
 
     public function load(O\Expression $requestExpression)

@@ -3,6 +3,7 @@
 namespace Pinq\Queries\Functions;
 
 use Pinq\Expressions as O;
+use Pinq\PinqException;
 
 /**
  * Base class of a function structure.
@@ -153,7 +154,7 @@ abstract class FunctionBase implements \Serializable
     final protected function verifyNotInternal($method)
     {
         if ($this->isInternal()) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Invalid call to %s::%s: function is not user defined.',
                     get_class($this),
                     $method);
@@ -207,7 +208,7 @@ abstract class FunctionBase implements \Serializable
      * Gets the body expressions of the function.
      *
      * @return O\Expression[]
-     * @throws \Pinq\PinqException if the function is internal
+     * @throws PinqException if the function is internal
      */
     final public function getBodyExpressions()
     {
@@ -221,7 +222,7 @@ abstract class FunctionBase implements \Serializable
      * the first return statement.
      *
      * @return O\Expression[]
-     * @throws \Pinq\PinqException if the function is internal
+     * @throws PinqException if the function is internal
      */
     final public function getBodyExpressionsUntilReturn()
     {
@@ -241,7 +242,7 @@ abstract class FunctionBase implements \Serializable
      * Gets amount of body expressions of the function.
      *
      * @return int
-     * @throws \Pinq\PinqException if the function is internal
+     * @throws PinqException if the function is internal
      */
     final public function countBodyExpressions()
     {
@@ -255,7 +256,7 @@ abstract class FunctionBase implements \Serializable
      * the first return statement.
      *
      * @return int
-     * @throws \Pinq\PinqException if the function is internal
+     * @throws PinqException if the function is internal
      */
     final public function countBodyExpressionsUntilReturn()
     {

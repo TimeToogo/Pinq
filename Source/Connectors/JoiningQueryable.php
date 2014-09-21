@@ -7,13 +7,14 @@ use Pinq\Interfaces;
 use Pinq\Providers;
 use Pinq\Queries;
 use Pinq\Queries\Common\Join;
+use Pinq\QueryBuilder;
 
 /**
  * Implements the filtering API for a join / group join queryable.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class JoiningQueryable extends \Pinq\QueryBuilder implements Interfaces\IJoiningOnQueryable
+class JoiningQueryable extends QueryBuilder implements Interfaces\IJoiningOnQueryable
 {
     public function __construct(Providers\IQueryProvider $provider, O\TraversalExpression $queryExpression)
     {

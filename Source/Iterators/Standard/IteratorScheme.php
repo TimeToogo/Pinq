@@ -3,6 +3,7 @@
 namespace Pinq\Iterators\Standard;
 
 use Pinq\Iterators\Common;
+use Pinq\Iterators\Generators\IGenerator;
 
 /**
  * Iterator scheme using the extended iterator API.
@@ -60,7 +61,7 @@ class IteratorScheme extends Common\IteratorScheme
     {
         if ($iterator instanceof IIterator) {
             return $iterator;
-        } elseif ($iterator instanceof \Pinq\Iterators\Generators\IGenerator) {
+        } elseif ($iterator instanceof IGenerator) {
             return new IGeneratorAdapter($iterator);
         } elseif ($iterator instanceof \ArrayIterator) {
             return new ArrayIteratorAdapter($iterator);

@@ -2,7 +2,9 @@
 
 namespace Pinq\Providers\Traversable;
 
+use Pinq\Direction;
 use Pinq\ITraversable;
+use Pinq\PinqException;
 use Pinq\Queries;
 use Pinq\Queries\Common;
 use Pinq\Queries\Segments;
@@ -74,7 +76,7 @@ class ScopeEvaluator extends Segments\SegmentVisitor
 
         foreach ($query->getOrderings() as $orderFunction) {
             $direction = $this->resolvedParameters[$orderFunction->getIsAscendingId(
-            )] ? \Pinq\Direction::ASCENDING : \Pinq\Direction::DESCENDING;
+            )] ? Direction::ASCENDING : Direction::DESCENDING;
 
             if ($first) {
                 $this->traversable = $this->traversable->orderBy(
@@ -111,14 +113,14 @@ class ScopeEvaluator extends Segments\SegmentVisitor
     /**
      * Evaluates the join segment values and filter upon the supplied traversable.
      *
-     * @param \Pinq\ITraversable                 $traversable
+     * @param ITraversable $traversable
      * @param Common\Join\Options                $join
      * @param Queries\IResolvedParameterRegistry $resolvedParameters
      *
      * @return \Pinq\Interfaces\IJoiningToTraversable
      */
     public static function evaluateJoinOptions(
-            \Pinq\ITraversable $traversable,
+            ITraversable $traversable,
             Common\Join\Options $join,
             Queries\IResolvedParameterRegistry $resolvedParameters
     ) {
@@ -169,7 +171,7 @@ class ScopeEvaluator extends Segments\SegmentVisitor
     ) {
         $sourceInfo = $scope->getSourceInfo();
         if (!($sourceInfo instanceof SourceInfo)) {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Incompatible query source: expecting source info of type %s, %s given',
                     SourceInfo::SOURCE_INFO_TYPE,
                     get_class($sourceInfo));

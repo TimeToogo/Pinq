@@ -2,6 +2,8 @@
 
 namespace Pinq\Caching;
 
+use Pinq\PinqException;
+
 /**
  * Cache implementation for storing the serialized expression trees
  * each in their own file in the specified directory
@@ -47,7 +49,7 @@ class DirectoryCache extends CacheAdapter
 
         if (!is_dir($this->directory)) {
             if (!@mkdir($this->directory, 0777, true)) {
-                throw new \Pinq\PinqException(
+                throw new PinqException(
                         'Invalid cache directory: %s does not exist and could not be created',
                         $this->directory);
             }

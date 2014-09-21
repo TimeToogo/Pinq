@@ -3,6 +3,7 @@
 namespace Pinq\Queries\Builders;
 
 use Pinq\Expressions as O;
+use Pinq\PinqException;
 use Pinq\Queries;
 use Pinq\Queries\Builders\Interpretations\IOperationInterpretation;
 
@@ -163,13 +164,13 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
                 $index = $this->getValue($sourceExpression->getIndex());
                 $value = $this->getValue($expression->getAssignmentValue());
             } else {
-                throw new \Pinq\PinqException(
+                throw new PinqException(
                         'Cannot interpret set index operation: invalid source expression type, expecting %s, %s given',
                         O\IndexExpression::getType(),
                         $expression->getType());
             }
         } else {
-            throw new \Pinq\PinqException(
+            throw new PinqException(
                     'Cannot interpret set index operation: invalid expression type, expecting %s, %s given',
                     O\MethodCallExpression::getType() . ' or ' . O\AssignmentExpression::getType(),
                     $expression->getType());
@@ -213,7 +214,7 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
             }
         }
 
-        throw new \Pinq\PinqException(
+        throw new PinqException(
                 'Cannot interpret offset unset operation: invalid expression type, expecting %s, %s given',
                 O\MethodCallExpression::getType() . ' or ' . O\IssetExpression::getType(
                 ) . ' with a single parameter index',

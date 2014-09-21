@@ -4,6 +4,7 @@ namespace Pinq\Parsing\PhpParser;
 
 use Pinq\Parsing\FunctionStructure;
 use Pinq\Parsing\IFunctionReflection;
+use Pinq\Parsing\InvalidFunctionException;
 use Pinq\Parsing\ParserBase;
 use PhpParser;
 
@@ -80,7 +81,7 @@ class Parser extends ParserBase
      * @param array <array<LocatedFunctionNode>> $locatedFunctionNodes
      * @param IFunctionReflection                $reflection
      *
-     * @throws \Pinq\Parsing\InvalidFunctionException
+     * @throws InvalidFunctionException
      * @return LocatedFunctionNode
      */
     private function getMatchingFunctionNode(array $locatedFunctionNodes, IFunctionReflection $reflection)
@@ -88,7 +89,7 @@ class Parser extends ParserBase
         $locationHash = $reflection->getLocation()->getHash();
 
         if (empty($locatedFunctionNodes[$locationHash])) {
-            throw \Pinq\Parsing\InvalidFunctionException::invalidFunctionMessage(
+            throw InvalidFunctionException::invalidFunctionMessage(
                     'Cannot parse function, the function could not be located',
                     $reflection->getInnerReflection()
             );
@@ -117,12 +118,12 @@ class Parser extends ParserBase
         }
 
         if (empty($fullyMatchedFunctions)) {
-            throw \Pinq\Parsing\InvalidFunctionException::invalidFunctionMessage(
+            throw InvalidFunctionException::invalidFunctionMessage(
                     'Cannot parse function, the function\'s signature could not be matched',
                     $reflection->getInnerReflection()
             );
         } elseif (count($fullyMatchedFunctions) > 1) {
-            throw \Pinq\Parsing\InvalidFunctionException::invalidFunctionMessage(
+            throw InvalidFunctionException::invalidFunctionMessage(
                     'Cannot parse function, %d ambiguous functions are defined on the same line '
                     . 'with identical signatures',
                     $reflection->getInnerReflection(),
