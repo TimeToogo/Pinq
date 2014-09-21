@@ -9,7 +9,7 @@ PHP Integrated Query - [Official site](http://timetoogo.github.io/Pinq/)
 What is PINQ?
 =============
 Based off the .NET's [LINQ (Language integrated query)](http://msdn.microsoft.com/en-us/library/bb397926.aspx), 
-Pinq unifies querying across [arrays/iterators](http://timetoogo.github.io/Pinq/examples.html) and [external data sources](http://timetoogo.github.io/Pinq/query-provider.html), 
+PINQ unifies querying across [arrays/iterators](http://timetoogo.github.io/Pinq/examples.html) and [external data sources](http://timetoogo.github.io/Pinq/query-provider.html),
 in a single readable and concise [fluent API](http://timetoogo.github.io/Pinq/api.html).
 
 An example
@@ -42,7 +42,7 @@ Add package to your composer.json:
 ```json
 {
     "require": {
-        "timetoogo/pinq": "~2.1"
+        "timetoogo/pinq": "~3.0"
     }
 }
 ```

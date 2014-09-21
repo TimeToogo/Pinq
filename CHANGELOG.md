@@ -1,5 +1,5 @@
-dev-master
-==========
+3.0.0 (22/9/14)
+===============
  - Query functions are passed each value with their associated key as the second parameter while
    maintaining support for single parameter internal functions.
  - Proper support for non scalar keys:
