@@ -18,6 +18,8 @@ interface IIteratorScheme
      * if the iterator returns duplicate keys the last respective
      * value will be used.
      *
+     * @param \Traversable|null $iterator
+     *
      * @return IOrderedMap
      */
     public function createOrderedMap(\Traversable $iterator = null);
@@ -26,6 +28,8 @@ interface IIteratorScheme
      * Creates an set from the supplied iterator values.
      * A set can only contain unique values and such duplicates
      * will be lost.
+     *
+     * @param \Traversable|null $iterator
      *
      * @return ISet
      */
@@ -46,6 +50,8 @@ interface IIteratorScheme
      * Non integer or string keys will be reindexed to
      * respective incremented integers.
      *
+     * @param \Traversable|null $iterator
+     *
      * @return array
      */
     public function toArray(\Traversable $iterator);
@@ -53,6 +59,9 @@ interface IIteratorScheme
     /**
      * Iterate over the keys and values of the supplied iterator and
      * passes them (value, key) to the supplied function.
+     *
+     * @param \Traversable|null $iterator
+     * @param callable          $function
      *
      * @return void
      */

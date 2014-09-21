@@ -24,6 +24,8 @@ abstract class LazyGenerator extends IteratorGenerator
     }
 
     /**
+     * @param IGenerator $innerIterator
+     *
      * @return \Traversable
      */
     abstract protected function initializeGenerator(IGenerator $innerIterator);

@@ -99,6 +99,9 @@ abstract class JoinIterator extends IteratorIterator
     }
 
     /**
+     * @param mixed $outerKey
+     * @param mixed $outerValue
+     *
      * @return IIterator
      */
     abstract protected function getInnerValuesIterator($outerKey, $outerValue);

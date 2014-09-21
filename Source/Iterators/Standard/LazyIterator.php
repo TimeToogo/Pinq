@@ -21,6 +21,8 @@ abstract class LazyIterator extends IteratorIterator
     }
 
     /**
+     * @param IIterator $innerIterator
+     *
      * @return IIterator
      */
     abstract protected function initializeIterator(IIterator $innerIterator);

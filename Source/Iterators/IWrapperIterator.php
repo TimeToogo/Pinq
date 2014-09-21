@@ -20,6 +20,8 @@ interface IWrapperIterator extends \Traversable
      * Returns a new instance of the iterator with the supplied
      * source iterator.
      *
+     * @param \Traversable $sourceIterator
+     *
      * @return static
      */
     public function updateSourceIterator(\Traversable $sourceIterator);

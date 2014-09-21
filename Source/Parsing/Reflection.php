@@ -21,6 +21,7 @@ final class Reflection
      * @param callable $function
      *
      * @return \ReflectionFunctionAbstract
+     * @throws InvalidFunctionException
      */
     final public static function fromCallable(callable $function)
     {
