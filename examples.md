@@ -79,14 +79,14 @@ foreach($numbers
 foreach($numbers
         ->groupJoin($strings)
         ->onEquality(function ($outer) { return $outer; }, 'strlen')
-        ->to(function($outer, \Pinq\ITraversable $innerGroup) { return $outer . ':' . $innerGroup->implode('|'); }) as $joined) {
+        ->to(function($outer, ITraversable $innerGroup) { return $outer . ':' . $innerGroup->implode('|'); }) as $joined) {
     //'1:', '2:', '3:foo|bar|baz|cow', '4:tear|sand', '5:which', '6:tripod|whisky', '7:'...
 }
 
 foreach($numbers
         ->groupJoin($numbers)
         ->on(function ($outer, $inner) { return $outer >= $inner; })
-        ->to(function($outer, \Pinq\ITraversable $innerGroup) { return $outer . ':' . $innerGroup->implode('|'); }) as $joined) {
+        ->to(function($outer, ITraversable $innerGroup) { return $outer . ':' . $innerGroup->implode('|'); }) as $joined) {
     //'1:1', '2:1|2', '3:1|2|3', '4:1|2|3|4', '5:1|2|3|4|5'...
 }
 
