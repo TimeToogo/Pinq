@@ -33,24 +33,24 @@ set up the default caching mechanisms:
  - **File Cache** - Caches the data in a single file, this is not optimal for high concurrency 
    but is suited to those without access to a proper memory cache.
 
-   {% highlight php startinline %}\Pinq\Caching\Provider::setFileCache($filePath);{% endhighlight %}
+   {% highlight php startinline %}\Pinq\Caching\CacheProvider::setFileCache($filePath);{% endhighlight %}
 
  - **Directory Cache** - Caches the data in multiple files of a directory, while this may be
    relatively better for concurrency, is not very performant and a proper memory cache should be prefered.
 
-   {% highlight php startinline %}\Pinq\Caching\Provider::setDirectoryCache($directoryPath);{% endhighlight %}
+   {% highlight php startinline %}\Pinq\Caching\CacheProvider::setDirectoryCache($directoryPath);{% endhighlight %}
 
  - **Doctrine Cache** - This allows you to use any cache from the `Doctrine\Cache` component,
 
-   {% highlight php startinline %}\Pinq\Caching\Provider::setDoctrineCache($cacheImplementation);{% endhighlight %}
+   {% highlight php startinline %}\Pinq\Caching\CacheProvider::setDoctrineCache($cacheImplementation);{% endhighlight %}
 
  - **Array Access Cache** - This allows you to use any cache that implements `ArrayAccess`
 
-   {% highlight php startinline %}\Pinq\Caching\Provider::setArrayAccessCache($cacheImplementation);{% endhighlight %}
+   {% highlight php startinline %}\Pinq\Caching\CacheProvider::setArrayAccessCache($cacheImplementation);{% endhighlight %}
 
  - **Custom Cache** - Allows any cache implementing `Pinq\Caching\ICacheAdapter`
 
-   {% highlight php startinline %}\Pinq\Caching\Provider::setCustomCache($cacheImplementation);{% endhighlight %}
+   {% highlight php startinline %}\Pinq\Caching\CacheProvider::setCustomCache($cacheImplementation);{% endhighlight %}
 
 All of the above options will significantly reduce the performance penalties by removing
 the need to parse the queries on every request. A proper memory cache such as
