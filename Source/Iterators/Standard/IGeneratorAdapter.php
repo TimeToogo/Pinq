@@ -49,7 +49,6 @@ class IGeneratorAdapter extends IteratorAdapter
     //hence we should be able to utilise generator in this iterator
     protected function buildGeneratorWrapper()
     {
-        $this->preventFirstNext = true;
         foreach ($this->generator as $key => &$value) {
             yield;
             $this->currentKey   = $key;
