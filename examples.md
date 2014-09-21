@@ -158,11 +158,11 @@ $numberData = $numbers
         ->orderByDescending(function ($i) { return $i; }) //Order from largest to smallest
         ->groupBy(function ($i) { return $i % 7; }) //Put into seven groups
         ->where(function (ITraversable $i) { return $i->count() % 2 === 0; }) //Only groups with an even amount of values
-        ->select(function (ITraversable $numbers) {
+        ->select(function (ITraversable $numbers, $isEven) {
             return [
-                'first' => $numbers->first(),
-                'average' => $numbers->average(),
-                'count' => $numbers->count(),
+                'isEven'     => $isEven,
+                'average'   => $numbers->average(),
+                'count'      => $numbers->count(),
                 'numbers' => $numbers->asArray(),
             ];
         });
