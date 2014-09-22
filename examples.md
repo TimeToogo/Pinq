@@ -128,7 +128,7 @@ $numbers->aggregate(function ($i, $k) { return $i * $k }); //100! (1 * 2 * 3 * 4
 
 $numbers->count(); //100
 
-$numbers->exists(); //true
+$numbers->isEmpty(); //false
 
 $numbers->sum(); //5050 (1 + 2 + 3 + 4...)
 
