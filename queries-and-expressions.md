@@ -116,7 +116,7 @@ You can explore all the implementations in the [API documentation]({{ site.url }
    are cached using the configured cache adapter.
  - The retrieved parameter values are matched against the query parameters.
 
-Both the query object and resolved parameter values are interpreted to retrieve the underlying parameter values.
+Both the query object and resolved parameter values are interpreted to execute the query.
 
 Representing functions as objects
 =================================
