@@ -95,7 +95,7 @@ Using the above terminology, PINQ provides the ability to represent any query as
  - `IResolvedParameterRegistry` - interface of a collection of resolved parameter values.
 
 As there are many types of **segments, requests, operations and functions** as defined in the `IQueryable`/`IRepository` interface,
-**for each of their interfaces, concrete types are defined under the following:**
+**for each of their interfaces, concrete types are defined under the following namespaces:**
 
  - `Queries\Segments` - contains all the types of segments.
  - `Queries\Requests` - contains all the types of requests.
