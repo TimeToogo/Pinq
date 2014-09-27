@@ -104,7 +104,7 @@ As there are many types of **segments, requests, operations and functions** as d
 
 Expressions are implemented under the `Pinq\Expressions` namespace with a base `Expression` class.
 
-You can explore all the implementations in the [API documentation](/docs)
+You can explore all the implementations in the [API documentation]({{ site.url }}/docs)
 
 **There are two stages in the process of parsing the PHP code into a query object:**
 
