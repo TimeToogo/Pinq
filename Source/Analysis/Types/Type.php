@@ -14,7 +14,7 @@ use Pinq\Expressions as O;
 abstract class Type implements IType
 {
     /**
-     * @var IType[]
+     * @var IType
      */
     protected $parentType;
 
@@ -53,7 +53,7 @@ abstract class Type implements IType
             array $unaryOperations = []
     ) {
         $this->identifier      = $identifier;
-        $this->parentType = $parentType;
+        $this->parentType      = $parentType;
         $this->indexer         = $indexer;
         $this->castOperations  = $castOperations;
         $this->unaryOperations = $unaryOperations;
