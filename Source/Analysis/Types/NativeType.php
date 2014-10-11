@@ -27,9 +27,9 @@ class NativeType extends Type implements INativeType
             array $unaryOperations = []
     ) {
         parent::__construct($identifier, $parentType);
-        $this->typeOfType = $typeOfType;
-        $this->indexer = $indexer;
-        $this->castOperations = $castOperations;
+        $this->typeOfType      = $typeOfType;
+        $this->indexer         = $indexer;
+        $this->castOperations  = $castOperations;
         $this->unaryOperations = $unaryOperations;
     }
 
