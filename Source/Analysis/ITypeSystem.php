@@ -90,9 +90,9 @@ interface ITypeSystem
     /**
      * Gets the binary operation matching the supplied types.
      *
-     * @param IType $leftOperandType
-     * @param int   $operator
-     * @param IType $rightOperandType
+     * @param IType  $leftOperandType
+     * @param string $operator
+     * @param IType  $rightOperandType
      *
      * @return IBinaryOperation
      * @throws TypeException    If the binary operation is not supported

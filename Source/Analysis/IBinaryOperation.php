@@ -19,7 +19,7 @@ interface IBinaryOperation extends ITyped
     /**
      * Gets the operator of the binary operation.
      *
-     * @return int The binary operator from the Expressions\Operators\Binary::* constants
+     * @return string The binary operator from the Expressions\Operators\Binary::* constants
      */
     public function getOperator();
 

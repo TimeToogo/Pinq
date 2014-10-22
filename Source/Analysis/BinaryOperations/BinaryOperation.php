@@ -19,7 +19,7 @@ class BinaryOperation extends Typed implements IBinaryOperation
     protected $leftOperandType;
 
     /**
-     * @var int
+     * @var string
      */
     protected $operator;
 
