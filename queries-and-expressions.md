@@ -39,7 +39,7 @@ $peopleTable
 
  - The following method calls can defined as the scope of the query: {% highlight php startinline %}
 $peopleTable
-        ->where(function ($row) { return $row['age'] <= 50; })
+        ->where(function ($row) use ($maxAge) { return $row['age'] <= $maxAge; })
         ->orderByAscending(function ($row) { return $row['firstName']; })
         ->thenByAscending(function ($row) { return $row['lastName']; })
         ->take(50)
