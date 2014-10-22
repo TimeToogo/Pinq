@@ -44,7 +44,7 @@ $peopleTable
         ->thenByAscending(function ($row) { return $row['lastName']; })
         ->take(50)
 {% endhighlight %}
- - `$peopleTable`: Is source of the query, the instance of `IQueryable` that contains the necessary data about the source of the query.
+ - `$peopleTable`: Is the source of the query, the instance of `IQueryable` that will delegate the query to the underlying query provider.
  - The method calls can be further dissected into individual segments:
     - A segment which filters the elements: {% highlight php startinline %}
 ->where(function ($row) use ($maxAge) { return $row['age'] <= $maxAge; })
