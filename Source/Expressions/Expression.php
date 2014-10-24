@@ -290,7 +290,7 @@ abstract class Expression implements \Serializable
 
     /**
      * @param Expression $assignToValue
-     * @param int        $assignmentOperator
+     * @param string     $assignmentOperator
      * @param Expression $assignmentValue
      *
      * @return AssignmentExpression
@@ -305,7 +305,7 @@ abstract class Expression implements \Serializable
 
     /**
      * @param Expression $leftOperand
-     * @param int        $operator
+     * @param string     $operator
      * @param Expression $rightOperand
      *
      * @return BinaryOperationExpression
@@ -319,7 +319,7 @@ abstract class Expression implements \Serializable
     }
 
     /**
-     * @param int        $unaryOperator
+     * @param string     $unaryOperator
      * @param Expression $operand
      *
      * @return UnaryOperationExpression
