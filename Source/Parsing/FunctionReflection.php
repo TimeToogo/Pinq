@@ -105,9 +105,9 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
             if ($reflection instanceof \ReflectionMethod) {
                 $__CLASS__ = $reflection->getDeclaringClass()->getName();
             }
-            //If the function is a closure declared in a trait, __CLASS__ will resolve to
+            //Else the function must be a closure declared in a trait, __CLASS__ will resolve to
             //the scoped class e.g. get_called_class().
-            elseif ($reflection->isClosure()) {
+            else {
                 $__CLASS__ = $this->scope->getScopeType() ?: '';
             }
         } else {

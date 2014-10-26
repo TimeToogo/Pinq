@@ -30,7 +30,6 @@ class ScopeEvaluator extends Segments\SegmentVisitor
             ITraversable $traversable,
             Queries\IResolvedParameterRegistry $resolvedParameters
     ) {
-        $this->originalTraversable = $traversable;
         $this->traversable         = $traversable;
         $this->resolvedParameters  = $resolvedParameters;
     }

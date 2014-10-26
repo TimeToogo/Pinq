@@ -17,12 +17,12 @@ class CompiledEvaluator extends Evaluator implements \Serializable
     protected $code;
 
     /**
-     * @var callable
+     * @var \Closure
      */
     protected $originalCompiledEvaluator;
 
     /**
-     * @var callable
+     * @var \Closure
      */
     protected $boundCompiledEvaluator;
 

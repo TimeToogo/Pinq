@@ -206,7 +206,7 @@ class OperationQueryInterpreter extends QueryInterpreter implements IOperationQu
                 $this->interpretation->interpretOffsetUnset(
                         $operationId,
                         $indexId,
-                        $this->getValue($unsetArguments[0]->getIndex(), 'index value must be constant, %s given')
+                        $this->getValue($unsetArguments[0]->getIndex())
                 );
                 $this->interpretSourceAsScope($unsetArguments[0]);
 

@@ -32,7 +32,7 @@ class JoiningTraversable implements Interfaces\IJoiningOnTraversable
     public function __construct(IIteratorScheme $scheme, IJoinIterator $joinIterator, callable $traversableFactory)
     {
         $this->scheme             = $scheme;
-        $this->joinIterator      = $joinIterator;
+        $this->joinIterator       = $joinIterator;
         $this->traversableFactory = $traversableFactory;
     }
 

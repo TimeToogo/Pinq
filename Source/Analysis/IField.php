@@ -15,7 +15,7 @@ interface IField extends ITypeOperation
     /**
      * Gets the name of the field.
      *
-     * @return IType
+     * @return string
      */
     public function getName();
 

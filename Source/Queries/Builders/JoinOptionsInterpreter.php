@@ -18,6 +18,11 @@ class JoinOptionsInterpreter extends ExpressionInterpreter implements IJoinOptio
      */
     protected $interpretation;
 
+    /**
+     * @var ISourceInterpreter
+     */
+    protected $sourceInterpreter;
+
     public function __construct(
             $segmentId,
             IJoinOptionsInterpretation $interpretation,

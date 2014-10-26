@@ -70,7 +70,10 @@ class AssignmentExpression extends Expression
      */
     public function update(Expression $assignTo, $operator, Expression $assignmentValue)
     {
-        if ($this->assignTo === $assignTo && $this->operator === $operator && $this->assignmentValue === $assignmentValue) {
+        if ($this->assignTo === $assignTo
+                && $this->operator === $operator
+                && $this->assignmentValue === $assignmentValue
+        ) {
             return $this;
         }
 

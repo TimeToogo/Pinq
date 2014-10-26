@@ -23,8 +23,7 @@ class Provider extends QueryProvider
     {
         parent::__construct(new SourceInfo($traversable));
 
-        $this->scheme           = $traversable->getIteratorScheme();
-        $this->traversable      = $traversable;
+        $this->scheme = $traversable->getIteratorScheme();
     }
 
     public function evaluateScope(

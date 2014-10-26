@@ -30,7 +30,7 @@ interface IRequestQuery extends IQuery
      *
      * @param IRequest $request
      *
-     * @return IOperationQuery
+     * @return IRequestQuery
      */
     public function updateRequest(IRequest $request);
 }

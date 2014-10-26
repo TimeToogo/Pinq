@@ -92,7 +92,7 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
         $requestTemplate = $this->loadRequestQueryTemplate(
                 $requestExpression,
                 $evaluationContext,
-                $resolvedParameters,
+                /* out */ $resolvedParameters,
                 /* out */ $queryCache,
                 /* out */ $templateHash
         );
@@ -109,7 +109,7 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
     protected function loadRequestQueryTemplate(
             O\Expression $queryExpression,
             O\IEvaluationContext $evaluationContext = null,
-            Queries\IResolvedParameterRegistry &$resolvedParameters = null,
+            /* out */ Queries\IResolvedParameterRegistry &$resolvedParameters = null,
             /* out */ Caching\ICacheAdapter &$queryCache = null,
             /* out */ &$templateHash)
     {

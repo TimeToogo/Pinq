@@ -356,7 +356,6 @@ class PhpTypeSystem extends TypeSystem
         $staticFieldTypeMap  = $typeData['static-fields'];
 
         $reflection      = new \ReflectionClass($classType);
-        $parentType      = null;
         $constructor     = new Constructor($this, $typeId, $reflection->getConstructor());
         $methods         = [];
         $fields          = [];
@@ -370,7 +369,7 @@ class PhpTypeSystem extends TypeSystem
             $parentTypes[] = $this->getObjectType($parentClass->getName());
         }
 
-        $parentType = $this->getCompositeType($parentTypes);
+        $parentType      = $this->getCompositeType($parentTypes);
 
         if ($reflection->hasMethod('__toString')) {
             $methodReturnTypeMap += ['__toString' => INativeType::TYPE_STRING];
