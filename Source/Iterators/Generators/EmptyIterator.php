@@ -12,6 +12,6 @@ class EmptyIterator extends Generator
     public function &getIterator()
     {
         return;
-        yield;
+        yield null;
     }
 }

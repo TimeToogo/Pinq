@@ -50,7 +50,7 @@ class IGeneratorAdapter extends IteratorAdapter
     protected function buildGeneratorWrapper()
     {
         foreach ($this->generator as $key => &$value) {
-            yield;
+            yield null;
             $this->currentKey   = $key;
             $this->currentValue =& $value;
         }
