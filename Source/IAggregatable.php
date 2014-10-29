@@ -56,7 +56,7 @@ interface IAggregatable extends \Countable
      *
      * @param callable $function The function which will return the values.
      *
-     * @return int|null
+     * @return int|double|null
      */
     public function sum(callable $function = null);
 
@@ -65,7 +65,7 @@ interface IAggregatable extends \Countable
      *
      * @param callable $function The function which will return the values.
      *
-     * @return double|null
+     * @return int|double|null
      */
     public function average(callable $function = null);
 
