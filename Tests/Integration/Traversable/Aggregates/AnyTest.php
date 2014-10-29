@@ -33,7 +33,7 @@ class AnyTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
      */
     public function testThatAnyOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals(
+        $this->assertSame(
                 count(array_filter($data)) > 0,
                 $traversable->any());
     }

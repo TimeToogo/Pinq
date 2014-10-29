@@ -17,6 +17,6 @@ class ImplodeTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
      */
     public function testImplodeOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals(implode(',', $data), $traversable->implode(','));
+        $this->assertSame(implode(',', $data), $traversable->implode(','));
     }
 }

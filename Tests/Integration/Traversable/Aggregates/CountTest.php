@@ -9,6 +9,6 @@ class CountTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
      */
     public function testThatCountReturnsTheAmountOfElements(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals($traversable->count(), count($data));
+        $this->assertSame($traversable->count(), count($data));
     }
 }

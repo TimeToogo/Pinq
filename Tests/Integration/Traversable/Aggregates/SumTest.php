@@ -9,7 +9,7 @@ class SumTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
      */
     public function testThatSumOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals(
+        $this->assertSame(
                 empty($data) ? null : array_sum($data),
                 $traversable->sum());
     }

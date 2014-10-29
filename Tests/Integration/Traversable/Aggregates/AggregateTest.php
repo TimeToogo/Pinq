@@ -14,7 +14,7 @@ class AggregateTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
                     return $a * $b;
                 };
 
-        $this->assertEquals(
+        $this->assertSame(
                 array_reduce($data, $aggregator, 1),
                 $traversable->aggregate($aggregator));
     }
@@ -29,7 +29,7 @@ class AggregateTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
                     return $a . $b;
                 };
 
-        $this->assertEquals(
+        $this->assertSame(
                 array_reduce($data, $aggregator, ''),
                 $traversable->aggregate($aggregator));
     }

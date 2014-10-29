@@ -51,7 +51,7 @@ class AllTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
      */
     public function testThatAllOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals(
+        $this->assertSame(
                 empty($data) ?: count(array_filter($data)) === count($data),
                 $traversable->all());
     }

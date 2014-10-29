@@ -9,7 +9,7 @@ class AverageTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
      */
     public function testThatAverageOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals(
+        $this->assertSame(
                 empty($data) ? null : array_sum($data) / count($data),
                 $traversable->average());
     }

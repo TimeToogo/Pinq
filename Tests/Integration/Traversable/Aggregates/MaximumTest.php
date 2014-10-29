@@ -9,7 +9,7 @@ class MaximumTest extends \Pinq\Tests\Integration\Traversable\TraversableTest
      */
     public function testThatMaximumOperatesCorrectly(\Pinq\ITraversable $traversable, array $data)
     {
-        $this->assertEquals(
+        $this->assertSame(
                 empty($data) ? null : max($data),
                 $traversable->maximum());
     }
