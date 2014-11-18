@@ -27,7 +27,8 @@ class MixedType extends NativeType
     protected function unsupported(O\Expression $expression, $message, array $formatValues = [])
     {
         return new TypeException(
-                'Type does not support expression \'%s\': %s',
+                'Type %s does not support expression \'%s\': %s',
+                $this->identifier,
                 $expression->compileDebug(),
                 vsprintf($message, $formatValues));
     }
