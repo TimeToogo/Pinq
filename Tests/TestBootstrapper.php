@@ -4,8 +4,16 @@ namespace Pinq\Tests;
 
 date_default_timezone_set('Australia/Melbourne');
 error_reporting(-1);
-set_time_limit(1000);
+set_time_limit(2000);
 ini_set('display_errors', 'On');
+
+register_shutdown_function(function () {
+    $error = error_get_last();
+    if(in_array($error['type'], [E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR], true)) {
+        echo "-- Error occurred in {$error['file']} on line {$error['line']} --";
+    }
+});
+
 $pinqAsProjectAutoLoaderPath = __DIR__ . '/../vendor/autoload.php';
 $pinqAsDependencyAutoLoaderPath = __DIR__ . '/../../../../autoload.php';
 
