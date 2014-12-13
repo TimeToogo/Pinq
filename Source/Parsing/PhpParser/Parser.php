@@ -95,20 +95,17 @@ class Parser extends ParserBase
             );
         }
 
-        //Should be multiple functions defined on a single line
-        //Perform all possible resolution to resolve the conflict.
-        //So we attempt to match on the function signature as well.
-        //Magic constants / scopes are resolved in parameter expressions
-        //to allow matching of functions with these special constants in
-        //default values.
+        // If multiple functions defined on a single line we
+        // perform all possible resolution to resolve the conflict.
+        // Magic constants / scopes are resolved in parameter expressions
+        // to allow matching of functions with these special constants in
+        // default values.
         /** @var $matchedFunctionsByLocation LocatedFunctionNode[] */
         $matchedFunctionsByLocation = $locatedFunctionNodes[$locationHash];
         $functionSignature          = $reflection->getSignature();
         $fullyMatchedFunctions      = [];
 
         foreach ($matchedFunctionsByLocation as $matchedFunction) {
-            //Determine and resolve magic constants/scopes with the function reflection of which
-            //we are searching
             $magicData                        = $reflection->resolveMagic($matchedFunction->getDeclaration());
             $resolvedMatchedFunctionSignature = $matchedFunction->getSignature()->resolveMagic($magicData);
 
