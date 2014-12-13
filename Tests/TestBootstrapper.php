@@ -9,7 +9,7 @@ ini_set('display_errors', 'On');
 
 register_shutdown_function(function () {
     $error = error_get_last();
-    if(in_array($error['type'], [E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR], true)) {
+    if(in_array($error['type'], [E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR, E_PARSE], true)) {
         echo "-- Error occurred in {$error['file']} on line {$error['line']} --";
     }
 });
