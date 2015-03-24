@@ -114,8 +114,6 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
     public function testInvalidUnaryOperators()
     {
         $asserts = [
-                [function () { +[]; }],
-                [function () { -[]; }],
                 [function () { ~[]; }],
                 [function () { ++$i; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_ARRAY)]],
                 [function () { --$i; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_ARRAY)]],
