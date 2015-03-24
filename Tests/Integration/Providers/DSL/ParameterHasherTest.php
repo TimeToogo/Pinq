@@ -66,7 +66,7 @@ class ParameterHasherTest extends PinqTestCase
         $this->assertNotSame($hasher->hash(function ($i) { }), $hasher->hash(function ($o) { }));
         $this->assertNotSame($hasher->hash(function ($i) { }), $hasher->hash(function & ($i) { }));
         $this->assertNotSame($hasher->hash(function ($i) { }), $hasher->hash(function (&$i) { }));
-        $this->assertNotSame($hasher->hash(function ($i) { }), $hasher->hash(function ($i, $i) { }));
+        $this->assertNotSame($hasher->hash(function ($i) { }), $hasher->hash(function ($i, $j) { }));
         $this->assertNotSame($hasher->hash(function ($i) { }), $hasher->hash(function ($i = null) { }));
         //Same signature but distinguishable location
         $this->assertNotSame(
