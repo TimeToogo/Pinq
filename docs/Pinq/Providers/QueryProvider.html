@@ -24,11 +24,11 @@
     </div>
         <div class="content">
                 <p>abstract     class
-    <strong>QueryProvider</strong>        implements
+    <strong>QueryProvider</strong>        extends <a href="../../Pinq/Providers/ProviderBase.html"><abbr title="Pinq\Providers\ProviderBase">ProviderBase</abbr></a>        implements
         <a href="../../Pinq/Providers/IQueryProvider.html"><abbr title="Pinq\Providers\IQueryProvider">IQueryProvider</abbr></a></p>
 
             <div class="description">
-            <p>Base class for the query provider, with default functionality for the function to expression tree converter and request evaluation</p>
+            <p>Base class for the query provider.</p>
             <p>
 </p>
         </div>
@@ -43,7 +43,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(<abbr title="Pinq\Providers\Pinq\Caching\IFunctionCache">IFunctionCache</abbr> $FunctionCache = null)
+                    <a href="#method___construct">__construct</a>(<abbr title="Pinq\Providers\Queries\ISourceInfo">ISourceInfo</abbr> $sourceInfo, <a href="../../Pinq/Providers/Configuration/IQueryConfiguration.html"><abbr title="Pinq\Providers\Configuration\IQueryConfiguration">IQueryConfiguration</abbr></a> $configuration = null)
                     <p>
 </p>
                 </td>
@@ -51,10 +51,32 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../Pinq/Parsing/IFunctionToExpressionTreeConverter.html"><abbr title="Pinq\Parsing\IFunctionToExpressionTreeConverter">IFunctionToExpressionTreeConverter</abbr></a>
+                    <a href="../../Pinq/Providers/Configuration/IQueryConfiguration.html"><abbr title="Pinq\Providers\Configuration\IQueryConfiguration">IQueryConfiguration</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_GetFunctionToExpressionTreeConverter">GetFunctionToExpressionTreeConverter</a>()
+                    <a href="#method_getConfiguration">getConfiguration</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Providers/ProviderBase.html#method_getConfiguration"><abbr title="Pinq\Providers\ProviderBase">ProviderBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;string
+                </td>
+                <td class="last">
+                    <a href="#method_getType">getType</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Providers/ProviderBase.html#method_getType"><abbr title="Pinq\Providers\ProviderBase">ProviderBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Providers/Utilities/IQueryResultCollection.html"><abbr title="Pinq\Providers\Utilities\IQueryResultCollection">IQueryResultCollection</abbr></a>|null
+                </td>
+                <td class="last">
+                    <a href="#method_getQueryResultCollection">getQueryResultCollection</a>()
                     <p>
 </p>
                 </td>
@@ -65,7 +87,7 @@
                     <a href="../../Pinq/IQueryable.html"><abbr title="Pinq\IQueryable">IQueryable</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_CreateQueryable">CreateQueryable</a>(<abbr title="Pinq\Providers\Queries\IScope">IScope</abbr> $Scope = null)
+                    <a href="#method_createQueryable">createQueryable</a>(<abbr title="Pinq\Providers\O\TraversalExpression">TraversalExpression</abbr> $scopeExpression = null)
                     <p>
 </p>
                 </td>
@@ -76,7 +98,7 @@
                     mixed
                 </td>
                 <td class="last">
-                    <a href="#method_Load">Load</a>(<abbr title="Pinq\Providers\Queries\IRequestQuery">IRequestQuery</abbr> $Query)
+                    <a href="#method_load">load</a>(<abbr title="Pinq\Providers\O\Expression">Expression</abbr> $requestExpression)
                     <p>
 </p>
                 </td>
@@ -90,7 +112,7 @@
                         <h3 id="method___construct">
         <div class="location">at line 22</div>
         <code>            public            
-    <strong>__construct</strong>(<abbr title="Pinq\Providers\Pinq\Caching\IFunctionCache">IFunctionCache</abbr> $FunctionCache = null)</code>
+    <strong>__construct</strong>(<abbr title="Pinq\Providers\Queries\ISourceInfo">ISourceInfo</abbr> $sourceInfo, <a href="../../Pinq/Providers/Configuration/IQueryConfiguration.html"><abbr title="Pinq\Providers\Configuration\IQueryConfiguration">IQueryConfiguration</abbr></a> $configuration = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -102,8 +124,14 @@
 
                     <table>
                     <tr>
-                <td><abbr title="Pinq\Providers\Pinq\Caching\IFunctionCache">IFunctionCache</abbr></td>
-                <td>$FunctionCache</td>
+                <td><abbr title="Pinq\Providers\Queries\ISourceInfo">ISourceInfo</abbr></td>
+                <td>$sourceInfo</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Pinq/Providers/Configuration/IQueryConfiguration.html"><abbr title="Pinq\Providers\Configuration\IQueryConfiguration">IQueryConfiguration</abbr></a></td>
+                <td>$configuration</td>
                 <td>
 </td>
             </tr>
@@ -115,10 +143,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetFunctionToExpressionTreeConverter">
-        <div class="location">at line 27</div>
-        <code>            public            <a href="../../Pinq/Parsing/IFunctionToExpressionTreeConverter.html"><abbr title="Pinq\Parsing\IFunctionToExpressionTreeConverter">IFunctionToExpressionTreeConverter</abbr></a>
-    <strong>GetFunctionToExpressionTreeConverter</strong>()</code>
+                <h3 id="method_getConfiguration">
+        <div class="location">in <a href="../../Pinq/Providers/ProviderBase.html#method_getConfiguration"><abbr title="Pinq\Providers\ProviderBase">ProviderBase</abbr></a> at line 49</div>
+        <code>final            public            <a href="../../Pinq/Providers/Configuration/IQueryConfiguration.html"><abbr title="Pinq\Providers\Configuration\IQueryConfiguration">IQueryConfiguration</abbr></a>
+    <strong>getConfiguration</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -131,7 +159,7 @@
 
                     <table>
         <tr>
-            <td><a href="../../Pinq/Parsing/IFunctionToExpressionTreeConverter.html"><abbr title="Pinq\Parsing\IFunctionToExpressionTreeConverter">IFunctionToExpressionTreeConverter</abbr></a></td>
+            <td><a href="../../Pinq/Providers/Configuration/IQueryConfiguration.html"><abbr title="Pinq\Providers\Configuration\IQueryConfiguration">IQueryConfiguration</abbr></a></td>
             <td>
 </td>
         </tr>
@@ -142,10 +170,64 @@
                     </div>
     </div>
 
-                <h3 id="method_CreateQueryable">
+                <h3 id="method_getType">
+        <div class="location">in <a href="../../Pinq/Providers/ProviderBase.html#method_getType"><abbr title="Pinq\Providers\ProviderBase">ProviderBase</abbr></a> at line 57</div>
+        <code>final        static    public            string
+    <strong>getType</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getQueryResultCollection">
         <div class="location">at line 32</div>
+        <code>            public            <a href="../../Pinq/Providers/Utilities/IQueryResultCollection.html"><abbr title="Pinq\Providers\Utilities\IQueryResultCollection">IQueryResultCollection</abbr></a>|null
+    <strong>getQueryResultCollection</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Providers/Utilities/IQueryResultCollection.html"><abbr title="Pinq\Providers\Utilities\IQueryResultCollection">IQueryResultCollection</abbr></a>|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_createQueryable">
+        <div class="location">at line 37</div>
         <code>            public            <a href="../../Pinq/IQueryable.html"><abbr title="Pinq\IQueryable">IQueryable</abbr></a>
-    <strong>CreateQueryable</strong>(<abbr title="Pinq\Providers\Queries\IScope">IScope</abbr> $Scope = null)</code>
+    <strong>createQueryable</strong>(<abbr title="Pinq\Providers\O\TraversalExpression">TraversalExpression</abbr> $scopeExpression = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -157,8 +239,8 @@
 
                     <table>
                     <tr>
-                <td><abbr title="Pinq\Providers\Queries\IScope">IScope</abbr></td>
-                <td>$Scope</td>
+                <td><abbr title="Pinq\Providers\O\TraversalExpression">TraversalExpression</abbr></td>
+                <td>$scopeExpression</td>
                 <td>
 </td>
             </tr>
@@ -180,10 +262,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Load">
-        <div class="location">at line 37</div>
+                <h3 id="method_load">
+        <div class="location">at line 42</div>
         <code>            public            mixed
-    <strong>Load</strong>(<abbr title="Pinq\Providers\Queries\IRequestQuery">IRequestQuery</abbr> $Query)</code>
+    <strong>load</strong>(<abbr title="Pinq\Providers\O\Expression">Expression</abbr> $requestExpression)</code>
     </h3>
     <div class="details">
         <p>
@@ -195,8 +277,8 @@
 
                     <table>
                     <tr>
-                <td><abbr title="Pinq\Providers\Queries\IRequestQuery">IRequestQuery</abbr></td>
-                <td>$Query</td>
+                <td><abbr title="Pinq\Providers\O\Expression">Expression</abbr></td>
+                <td>$requestExpression</td>
                 <td>
 </td>
             </tr>

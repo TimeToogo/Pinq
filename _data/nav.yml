@@ -2,6 +2,10 @@
   url: /
   sub: 
       
+- name: V3.0.0 
+  url: /v3.html
+  sub: What's new and improved
+      
 - name: Query API 
   url: /api.html
   sub: Standard query methods
@@ -22,9 +26,9 @@
   url: /performance.html
   sub: Practicality and optimizations
 
-- name: Expressions 
-  url: /expressions.html
-  sub: Function representations
+- name: Queries and expressions
+  url: /queries-and-expressions.html
+  sub: Structured query representations
 
 - name: The query provider 
   url: /query-provider.html

@@ -39,10 +39,21 @@
             <table>
                     <tr>
                 <td class="type">
+                    string[]
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(array $FunctionExpressionTrees, array $IsAscendingArray)
+                    <a href="#method___construct">__construct</a>(array $orderings)
                     <p>
 </p>
                 </td>
@@ -53,7 +64,7 @@
                     int
                 </td>
                 <td class="last">
-                    <a href="#method_GetType">GetType</a>()
+                    <a href="#method_getType">getType</a>()
                     <p>
 </p>
                 </td>
@@ -61,10 +72,10 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
+                    void
                 </td>
                 <td class="last">
-                    <a href="#method_Traverse">Traverse</a>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $Walker)
+                    <a href="#method_traverse">traverse</a>(<a href="../../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> $visitor)
                     <p>
 </p>
                 </td>
@@ -72,10 +83,10 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>[]
+                    <a href="../../../Pinq/Queries/Segments/Ordering.html"><abbr title="Pinq\Queries\Segments\Ordering">Ordering</abbr></a>[]
                 </td>
                 <td class="last">
-                    <a href="#method_GetFunctionExpressionTrees">GetFunctionExpressionTrees</a>()
+                    <a href="#method_getOrderings">getOrderings</a>()
                     <p>
 </p>
                 </td>
@@ -83,32 +94,10 @@
             </tr>
                     <tr>
                 <td class="type">
-                    bool[]
+                    <a href="../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_GetIsAscendingArray">GetIsAscendingArray</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_ThenBy">ThenBy</a>(<a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $FunctionExpressionTree, $IsAscending)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_Update">Update</a>(array $FunctionExpressionTrees, array $IsAscendingArray)
+                    <a href="#method_update">update</a>(array $orderings)
                     <p>
 </p>
                 </td>
@@ -119,10 +108,37 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method___construct">
-        <div class="location">at line 25</div>
+                        <h3 id="method_getParameters">
+        <div class="location">at line 30</div>
+        <code>            public            string[]
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method___construct">
+        <div class="location">at line 20</div>
         <code>            public            
-    <strong>__construct</strong>(array $FunctionExpressionTrees, array $IsAscendingArray)</code>
+    <strong>__construct</strong>(array $orderings)</code>
     </h3>
     <div class="details">
         <p>
@@ -135,13 +151,7 @@
                     <table>
                     <tr>
                 <td>array</td>
-                <td>$FunctionExpressionTrees</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>array</td>
-                <td>$IsAscendingArray</td>
+                <td>$orderings</td>
                 <td>
 </td>
             </tr>
@@ -153,10 +163,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetType">
-        <div class="location">at line 35</div>
+                <h3 id="method_getType">
+        <div class="location">at line 25</div>
         <code>            public            int
-    <strong>GetType</strong>()</code>
+    <strong>getType</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -179,10 +189,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Traverse">
-        <div class="location">at line 40</div>
-        <code>            public            <a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
-    <strong>Traverse</strong>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $Walker)</code>
+                <h3 id="method_traverse">
+        <div class="location">at line 43</div>
+        <code>            public            void
+    <strong>traverse</strong>(<a href="../../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> $visitor)</code>
     </h3>
     <div class="details">
         <p>
@@ -194,8 +204,8 @@
 
                     <table>
                     <tr>
-                <td><a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a></td>
-                <td>$Walker</td>
+                <td><a href="../../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></td>
+                <td>$visitor</td>
                 <td>
 </td>
             </tr>
@@ -206,7 +216,7 @@
 
                     <table>
         <tr>
-            <td><a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a></td>
+            <td>void</td>
             <td>
 </td>
         </tr>
@@ -217,10 +227,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetFunctionExpressionTrees">
-        <div class="location">at line 48</div>
-        <code>            public            <a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>[]
-    <strong>GetFunctionExpressionTrees</strong>()</code>
+                <h3 id="method_getOrderings">
+        <div class="location">at line 51</div>
+        <code>            public            <a href="../../../Pinq/Queries/Segments/Ordering.html"><abbr title="Pinq\Queries\Segments\Ordering">Ordering</abbr></a>[]
+    <strong>getOrderings</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -233,7 +243,7 @@
 
                     <table>
         <tr>
-            <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a>[]</td>
+            <td><a href="../../../Pinq/Queries/Segments/Ordering.html"><abbr title="Pinq\Queries\Segments\Ordering">Ordering</abbr></a>[]</td>
             <td>
 </td>
         </tr>
@@ -244,71 +254,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetIsAscendingArray">
-        <div class="location">at line 56</div>
-        <code>            public            bool[]
-    <strong>GetIsAscendingArray</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>bool[]</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_ThenBy">
-        <div class="location">at line 64</div>
-        <code>            public            
-    <strong>ThenBy</strong>(<a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a> $FunctionExpressionTree, $IsAscending)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../../Pinq/FunctionExpressionTree.html"><abbr title="Pinq\FunctionExpressionTree">FunctionExpressionTree</abbr></a></td>
-                <td>$FunctionExpressionTree</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td></td>
-                <td>$IsAscending</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_Update">
-        <div class="location">at line 71</div>
-        <code>            public            
-    <strong>Update</strong>(array $FunctionExpressionTrees, array $IsAscendingArray)</code>
+                <h3 id="method_update">
+        <div class="location">at line 61</div>
+        <code>            public            <a href="../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a>
+    <strong>update</strong>(array $orderings)</code>
     </h3>
     <div class="details">
         <p>
@@ -321,19 +270,23 @@
                     <table>
                     <tr>
                 <td>array</td>
-                <td>$FunctionExpressionTrees</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>array</td>
-                <td>$IsAscendingArray</td>
+                <td>$orderings</td>
                 <td>
 </td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
             
             
                     </div>

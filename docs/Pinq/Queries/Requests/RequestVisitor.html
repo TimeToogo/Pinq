@@ -24,12 +24,13 @@
     </div>
         <div class="content">
                 <p>    class
-    <strong>RequestVisitor</strong></p>
+    <strong>RequestVisitor</strong>        implements
+        <a href="../../../Pinq/Queries/Requests/IRequestVisitor.html"><abbr title="Pinq\Queries\Requests\IRequestVisitor">IRequestVisitor</abbr></a></p>
 
             <div class="description">
-            <p>The operation visitor is a utility class that will visit any request in a respective method.</p>
-            <p>This is used by the query providers to as to load the
-supplied request query</p>
+            <p>The request visitor is a utility class that will visit any request in a respective method.</p>
+            <p>
+</p>
         </div>
     
     
@@ -39,10 +40,10 @@ supplied request query</p>
             <table>
                     <tr>
                 <td class="type">
-                    
+                    mixed
                 </td>
                 <td class="last">
-                    <a href="#method_Visit">Visit</a>(<a href="../../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a> $Request)
+                    <a href="#method_visit">visit</a>(<a href="../../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -53,7 +54,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitValues">VisitValues</a>(<a href="../../../Pinq/Queries/Requests/Values.html"><abbr title="Pinq\Queries\Requests\Values">Values</abbr></a> $Request)
+                    <a href="#method_visitValues">visitValues</a>(<a href="../../../Pinq/Queries/Requests/Values.html"><abbr title="Pinq\Queries\Requests\Values">Values</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -64,7 +65,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitCount">VisitCount</a>(<a href="../../../Pinq/Queries/Requests/Count.html"><abbr title="Pinq\Queries\Requests\Count">Count</abbr></a> $Request)
+                    <a href="#method_visitCount">visitCount</a>(<a href="../../../Pinq/Queries/Requests/Count.html"><abbr title="Pinq\Queries\Requests\Count">Count</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -75,7 +76,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitExists">VisitExists</a>(<a href="../../../Pinq/Queries/Requests/Exists.html"><abbr title="Pinq\Queries\Requests\Exists">Exists</abbr></a> $Request)
+                    <a href="#method_visitIsEmpty">visitIsEmpty</a>(<a href="../../../Pinq/Queries/Requests/IsEmpty.html"><abbr title="Pinq\Queries\Requests\IsEmpty">IsEmpty</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -86,7 +87,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitFirst">VisitFirst</a>(<a href="../../../Pinq/Queries/Requests/First.html"><abbr title="Pinq\Queries\Requests\First">First</abbr></a> $Request)
+                    <a href="#method_visitFirst">visitFirst</a>(<a href="../../../Pinq/Queries/Requests/First.html"><abbr title="Pinq\Queries\Requests\First">First</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -97,7 +98,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitLast">VisitLast</a>(<a href="../../../Pinq/Queries/Requests/Last.html"><abbr title="Pinq\Queries\Requests\Last">Last</abbr></a> $Request)
+                    <a href="#method_visitLast">visitLast</a>(<a href="../../../Pinq/Queries/Requests/Last.html"><abbr title="Pinq\Queries\Requests\Last">Last</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -108,7 +109,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitContains">VisitContains</a>(<a href="../../../Pinq/Queries/Requests/Contains.html"><abbr title="Pinq\Queries\Requests\Contains">Contains</abbr></a> $Request)
+                    <a href="#method_visitContains">visitContains</a>(<a href="../../../Pinq/Queries/Requests/Contains.html"><abbr title="Pinq\Queries\Requests\Contains">Contains</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -119,7 +120,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitAggregate">VisitAggregate</a>(<a href="../../../Pinq/Queries/Requests/Aggregate.html"><abbr title="Pinq\Queries\Requests\Aggregate">Aggregate</abbr></a> $Request)
+                    <a href="#method_visitAggregate">visitAggregate</a>(<a href="../../../Pinq/Queries/Requests/Aggregate.html"><abbr title="Pinq\Queries\Requests\Aggregate">Aggregate</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -130,7 +131,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitMaximum">VisitMaximum</a>(<a href="../../../Pinq/Queries/Requests/Maximum.html"><abbr title="Pinq\Queries\Requests\Maximum">Maximum</abbr></a> $Request)
+                    <a href="#method_visitMaximum">visitMaximum</a>(<a href="../../../Pinq/Queries/Requests/Maximum.html"><abbr title="Pinq\Queries\Requests\Maximum">Maximum</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -141,7 +142,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitMinimum">VisitMinimum</a>(<a href="../../../Pinq/Queries/Requests/Minimum.html"><abbr title="Pinq\Queries\Requests\Minimum">Minimum</abbr></a> $Request)
+                    <a href="#method_visitMinimum">visitMinimum</a>(<a href="../../../Pinq/Queries/Requests/Minimum.html"><abbr title="Pinq\Queries\Requests\Minimum">Minimum</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -152,7 +153,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitSum">VisitSum</a>(<a href="../../../Pinq/Queries/Requests/Sum.html"><abbr title="Pinq\Queries\Requests\Sum">Sum</abbr></a> $Request)
+                    <a href="#method_visitSum">visitSum</a>(<a href="../../../Pinq/Queries/Requests/Sum.html"><abbr title="Pinq\Queries\Requests\Sum">Sum</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -163,7 +164,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitAverage">VisitAverage</a>(<a href="../../../Pinq/Queries/Requests/Average.html"><abbr title="Pinq\Queries\Requests\Average">Average</abbr></a> $Request)
+                    <a href="#method_visitAverage">visitAverage</a>(<a href="../../../Pinq/Queries/Requests/Average.html"><abbr title="Pinq\Queries\Requests\Average">Average</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -174,7 +175,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitAll">VisitAll</a>(<a href="../../../Pinq/Queries/Requests/All.html"><abbr title="Pinq\Queries\Requests\All">All</abbr></a> $Request)
+                    <a href="#method_visitAll">visitAll</a>(<a href="../../../Pinq/Queries/Requests/All.html"><abbr title="Pinq\Queries\Requests\All">All</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -185,7 +186,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitAny">VisitAny</a>(<a href="../../../Pinq/Queries/Requests/Any.html"><abbr title="Pinq\Queries\Requests\Any">Any</abbr></a> $Request)
+                    <a href="#method_visitAny">visitAny</a>(<a href="../../../Pinq/Queries/Requests/Any.html"><abbr title="Pinq\Queries\Requests\Any">Any</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -196,7 +197,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitImplode">VisitImplode</a>(<a href="../../../Pinq/Queries/Requests/Implode.html"><abbr title="Pinq\Queries\Requests\Implode">Implode</abbr></a> $Request)
+                    <a href="#method_visitImplode">visitImplode</a>(<a href="../../../Pinq/Queries/Requests/Implode.html"><abbr title="Pinq\Queries\Requests\Implode">Implode</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -207,7 +208,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitGetIndex">VisitGetIndex</a>(<a href="../../../Pinq/Queries/Requests/GetIndex.html"><abbr title="Pinq\Queries\Requests\GetIndex">GetIndex</abbr></a> $Request)
+                    <a href="#method_visitGetIndex">visitGetIndex</a>(<a href="../../../Pinq/Queries/Requests/GetIndex.html"><abbr title="Pinq\Queries\Requests\GetIndex">GetIndex</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -218,7 +219,7 @@ supplied request query</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitIssetIndex">VisitIssetIndex</a>(<a href="../../../Pinq/Queries/Requests/IssetIndex.html"><abbr title="Pinq\Queries\Requests\IssetIndex">IssetIndex</abbr></a> $Request)
+                    <a href="#method_visitIssetIndex">visitIssetIndex</a>(<a href="../../../Pinq/Queries/Requests/IssetIndex.html"><abbr title="Pinq\Queries\Requests\IssetIndex">IssetIndex</abbr></a> $request)
                     <p>
 </p>
                 </td>
@@ -229,10 +230,10 @@ supplied request query</p>
 
         <h2>Details</h2>
 
-                        <h3 id="method_Visit">
-        <div class="location">at line 21</div>
-        <code>final            public            
-    <strong>Visit</strong>(<a href="../../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a> $Request)</code>
+                        <h3 id="method_visit">
+        <div class="location">at line 20</div>
+        <code>final            public            mixed
+    <strong>visit</strong>(<a href="../../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -245,21 +246,32 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a></td>
-                <td>$Request</td>
-                <td>The returned value</td>
+                <td>$request</td>
+                <td>
+</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
-                <h3 id="method_VisitValues">
-        <div class="location">at line 26</div>
+                <h3 id="method_visitValues">
+        <div class="location">at line 25</div>
         <code>            public            
-    <strong>VisitValues</strong>(<a href="../../../Pinq/Queries/Requests/Values.html"><abbr title="Pinq\Queries\Requests\Values">Values</abbr></a> $Request)</code>
+    <strong>visitValues</strong>(<a href="../../../Pinq/Queries/Requests/Values.html"><abbr title="Pinq\Queries\Requests\Values">Values</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -272,7 +284,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/Values.html"><abbr title="Pinq\Queries\Requests\Values">Values</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -284,10 +296,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitCount">
-        <div class="location">at line 28</div>
+                <h3 id="method_visitCount">
+        <div class="location">at line 30</div>
         <code>            public            
-    <strong>VisitCount</strong>(<a href="../../../Pinq/Queries/Requests/Count.html"><abbr title="Pinq\Queries\Requests\Count">Count</abbr></a> $Request)</code>
+    <strong>visitCount</strong>(<a href="../../../Pinq/Queries/Requests/Count.html"><abbr title="Pinq\Queries\Requests\Count">Count</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -300,7 +312,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/Count.html"><abbr title="Pinq\Queries\Requests\Count">Count</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -312,10 +324,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitExists">
-        <div class="location">at line 30</div>
+                <h3 id="method_visitIsEmpty">
+        <div class="location">at line 35</div>
         <code>            public            
-    <strong>VisitExists</strong>(<a href="../../../Pinq/Queries/Requests/Exists.html"><abbr title="Pinq\Queries\Requests\Exists">Exists</abbr></a> $Request)</code>
+    <strong>visitIsEmpty</strong>(<a href="../../../Pinq/Queries/Requests/IsEmpty.html"><abbr title="Pinq\Queries\Requests\IsEmpty">IsEmpty</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -327,8 +339,8 @@ supplied request query</p>
 
                     <table>
                     <tr>
-                <td><a href="../../../Pinq/Queries/Requests/Exists.html"><abbr title="Pinq\Queries\Requests\Exists">Exists</abbr></a></td>
-                <td>$Request</td>
+                <td><a href="../../../Pinq/Queries/Requests/IsEmpty.html"><abbr title="Pinq\Queries\Requests\IsEmpty">IsEmpty</abbr></a></td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -340,10 +352,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitFirst">
-        <div class="location">at line 32</div>
+                <h3 id="method_visitFirst">
+        <div class="location">at line 40</div>
         <code>            public            
-    <strong>VisitFirst</strong>(<a href="../../../Pinq/Queries/Requests/First.html"><abbr title="Pinq\Queries\Requests\First">First</abbr></a> $Request)</code>
+    <strong>visitFirst</strong>(<a href="../../../Pinq/Queries/Requests/First.html"><abbr title="Pinq\Queries\Requests\First">First</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -356,7 +368,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/First.html"><abbr title="Pinq\Queries\Requests\First">First</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -368,10 +380,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitLast">
-        <div class="location">at line 34</div>
+                <h3 id="method_visitLast">
+        <div class="location">at line 45</div>
         <code>            public            
-    <strong>VisitLast</strong>(<a href="../../../Pinq/Queries/Requests/Last.html"><abbr title="Pinq\Queries\Requests\Last">Last</abbr></a> $Request)</code>
+    <strong>visitLast</strong>(<a href="../../../Pinq/Queries/Requests/Last.html"><abbr title="Pinq\Queries\Requests\Last">Last</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -384,7 +396,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/Last.html"><abbr title="Pinq\Queries\Requests\Last">Last</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -396,10 +408,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitContains">
-        <div class="location">at line 36</div>
+                <h3 id="method_visitContains">
+        <div class="location">at line 50</div>
         <code>            public            
-    <strong>VisitContains</strong>(<a href="../../../Pinq/Queries/Requests/Contains.html"><abbr title="Pinq\Queries\Requests\Contains">Contains</abbr></a> $Request)</code>
+    <strong>visitContains</strong>(<a href="../../../Pinq/Queries/Requests/Contains.html"><abbr title="Pinq\Queries\Requests\Contains">Contains</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -412,7 +424,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/Contains.html"><abbr title="Pinq\Queries\Requests\Contains">Contains</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -424,10 +436,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitAggregate">
-        <div class="location">at line 38</div>
+                <h3 id="method_visitAggregate">
+        <div class="location">at line 55</div>
         <code>            public            
-    <strong>VisitAggregate</strong>(<a href="../../../Pinq/Queries/Requests/Aggregate.html"><abbr title="Pinq\Queries\Requests\Aggregate">Aggregate</abbr></a> $Request)</code>
+    <strong>visitAggregate</strong>(<a href="../../../Pinq/Queries/Requests/Aggregate.html"><abbr title="Pinq\Queries\Requests\Aggregate">Aggregate</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -440,7 +452,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/Aggregate.html"><abbr title="Pinq\Queries\Requests\Aggregate">Aggregate</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -452,10 +464,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitMaximum">
-        <div class="location">at line 40</div>
+                <h3 id="method_visitMaximum">
+        <div class="location">at line 60</div>
         <code>            public            
-    <strong>VisitMaximum</strong>(<a href="../../../Pinq/Queries/Requests/Maximum.html"><abbr title="Pinq\Queries\Requests\Maximum">Maximum</abbr></a> $Request)</code>
+    <strong>visitMaximum</strong>(<a href="../../../Pinq/Queries/Requests/Maximum.html"><abbr title="Pinq\Queries\Requests\Maximum">Maximum</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -468,7 +480,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/Maximum.html"><abbr title="Pinq\Queries\Requests\Maximum">Maximum</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -480,10 +492,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitMinimum">
-        <div class="location">at line 42</div>
+                <h3 id="method_visitMinimum">
+        <div class="location">at line 65</div>
         <code>            public            
-    <strong>VisitMinimum</strong>(<a href="../../../Pinq/Queries/Requests/Minimum.html"><abbr title="Pinq\Queries\Requests\Minimum">Minimum</abbr></a> $Request)</code>
+    <strong>visitMinimum</strong>(<a href="../../../Pinq/Queries/Requests/Minimum.html"><abbr title="Pinq\Queries\Requests\Minimum">Minimum</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -496,7 +508,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/Minimum.html"><abbr title="Pinq\Queries\Requests\Minimum">Minimum</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -508,10 +520,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitSum">
-        <div class="location">at line 44</div>
+                <h3 id="method_visitSum">
+        <div class="location">at line 70</div>
         <code>            public            
-    <strong>VisitSum</strong>(<a href="../../../Pinq/Queries/Requests/Sum.html"><abbr title="Pinq\Queries\Requests\Sum">Sum</abbr></a> $Request)</code>
+    <strong>visitSum</strong>(<a href="../../../Pinq/Queries/Requests/Sum.html"><abbr title="Pinq\Queries\Requests\Sum">Sum</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -524,7 +536,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/Sum.html"><abbr title="Pinq\Queries\Requests\Sum">Sum</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -536,10 +548,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitAverage">
-        <div class="location">at line 46</div>
+                <h3 id="method_visitAverage">
+        <div class="location">at line 75</div>
         <code>            public            
-    <strong>VisitAverage</strong>(<a href="../../../Pinq/Queries/Requests/Average.html"><abbr title="Pinq\Queries\Requests\Average">Average</abbr></a> $Request)</code>
+    <strong>visitAverage</strong>(<a href="../../../Pinq/Queries/Requests/Average.html"><abbr title="Pinq\Queries\Requests\Average">Average</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -552,7 +564,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/Average.html"><abbr title="Pinq\Queries\Requests\Average">Average</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -564,10 +576,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitAll">
-        <div class="location">at line 48</div>
+                <h3 id="method_visitAll">
+        <div class="location">at line 80</div>
         <code>            public            
-    <strong>VisitAll</strong>(<a href="../../../Pinq/Queries/Requests/All.html"><abbr title="Pinq\Queries\Requests\All">All</abbr></a> $Request)</code>
+    <strong>visitAll</strong>(<a href="../../../Pinq/Queries/Requests/All.html"><abbr title="Pinq\Queries\Requests\All">All</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -580,7 +592,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/All.html"><abbr title="Pinq\Queries\Requests\All">All</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -592,10 +604,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitAny">
-        <div class="location">at line 50</div>
+                <h3 id="method_visitAny">
+        <div class="location">at line 85</div>
         <code>            public            
-    <strong>VisitAny</strong>(<a href="../../../Pinq/Queries/Requests/Any.html"><abbr title="Pinq\Queries\Requests\Any">Any</abbr></a> $Request)</code>
+    <strong>visitAny</strong>(<a href="../../../Pinq/Queries/Requests/Any.html"><abbr title="Pinq\Queries\Requests\Any">Any</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -608,7 +620,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/Any.html"><abbr title="Pinq\Queries\Requests\Any">Any</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -620,10 +632,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitImplode">
-        <div class="location">at line 52</div>
+                <h3 id="method_visitImplode">
+        <div class="location">at line 90</div>
         <code>            public            
-    <strong>VisitImplode</strong>(<a href="../../../Pinq/Queries/Requests/Implode.html"><abbr title="Pinq\Queries\Requests\Implode">Implode</abbr></a> $Request)</code>
+    <strong>visitImplode</strong>(<a href="../../../Pinq/Queries/Requests/Implode.html"><abbr title="Pinq\Queries\Requests\Implode">Implode</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -636,7 +648,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/Implode.html"><abbr title="Pinq\Queries\Requests\Implode">Implode</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -648,10 +660,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitGetIndex">
-        <div class="location">at line 54</div>
+                <h3 id="method_visitGetIndex">
+        <div class="location">at line 95</div>
         <code>            public            
-    <strong>VisitGetIndex</strong>(<a href="../../../Pinq/Queries/Requests/GetIndex.html"><abbr title="Pinq\Queries\Requests\GetIndex">GetIndex</abbr></a> $Request)</code>
+    <strong>visitGetIndex</strong>(<a href="../../../Pinq/Queries/Requests/GetIndex.html"><abbr title="Pinq\Queries\Requests\GetIndex">GetIndex</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -664,7 +676,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/GetIndex.html"><abbr title="Pinq\Queries\Requests\GetIndex">GetIndex</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>
@@ -676,10 +688,10 @@ supplied request query</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitIssetIndex">
-        <div class="location">at line 56</div>
+                <h3 id="method_visitIssetIndex">
+        <div class="location">at line 100</div>
         <code>            public            
-    <strong>VisitIssetIndex</strong>(<a href="../../../Pinq/Queries/Requests/IssetIndex.html"><abbr title="Pinq\Queries\Requests\IssetIndex">IssetIndex</abbr></a> $Request)</code>
+    <strong>visitIssetIndex</strong>(<a href="../../../Pinq/Queries/Requests/IssetIndex.html"><abbr title="Pinq\Queries\Requests\IssetIndex">IssetIndex</abbr></a> $request)</code>
     </h3>
     <div class="details">
         <p>
@@ -692,7 +704,7 @@ supplied request query</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Requests/IssetIndex.html"><abbr title="Pinq\Queries\Requests\IssetIndex">IssetIndex</abbr></a></td>
-                <td>$Request</td>
+                <td>$request</td>
                 <td>
 </td>
             </tr>

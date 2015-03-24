@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Interfaces\IOrderedTraversable | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../Pinq/Interfaces.html">Pinq\Interfaces</a>\IOrderedTraversable</h1>
+    </div>
+        <div class="content">
+                <p>    interface
+    <strong>IOrderedTraversable</strong>        implements
+        <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></p>
+
+            <div class="description">
+            <p>The API for subsequent orderings of a ITraversable</p>
+            <p>
+</p>
+        </div>
+    
+            <h2>Constants</h2>
+
+            <table>
+                    <tr>
+                <td>IORDERED_TRAVERSABLE_TYPE</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+            </table>
+
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    int
+                </td>
+                <td class="last">
+                    <a href="#method_count">count</a>()
+                    <p>Returns the amount of the values.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/IAggregatable.html#method_count"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isEmpty">isEmpty</a>()
+                    <p>Returns whether the traversable contains no elements.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/IAggregatable.html#method_isEmpty"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_aggregate">aggregate</a>(callable $function)
+                    <p>Aggregates the values with the supplied function.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/IAggregatable.html#method_aggregate"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_maximum">maximum</a>(callable $function = null)
+                    <p>Returns the maximum value.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/IAggregatable.html#method_maximum"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_minimum">minimum</a>(callable $function = null)
+                    <p>Returns the maximum value.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/IAggregatable.html#method_minimum"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    int|null
+                </td>
+                <td class="last">
+                    <a href="#method_sum">sum</a>(callable $function = null)
+                    <p>Returns the sum of the values.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/IAggregatable.html#method_sum"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    double|null
+                </td>
+                <td class="last">
+                    <a href="#method_average">average</a>(callable $function = null)
+                    <p>Returns the average of the values.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/IAggregatable.html#method_average"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    bool
+                </td>
+                <td class="last">
+                    <a href="#method_all">all</a>(callable $function = null)
+                    <p>Returns a boolean of if all the values evaluate to true.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/IAggregatable.html#method_all"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    bool
+                </td>
+                <td class="last">
+                    <a href="#method_any">any</a>(callable $function = null)
+                    <p>Returns a boolean of if any of the values evaluate to true.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/IAggregatable.html#method_any"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_implode">implode</a>(string $delimiter, callable $function = null)
+                    <p>Returns a string of all the values concatenated by the delimiter.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/IAggregatable.html#method_implode"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_asArray">asArray</a>()
+                    <p>Returns the values as an array.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_asArray"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_asTraversable">asTraversable</a>()
+                    <p>Returns the values as a traversable.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_asTraversable"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ICollection.html"><abbr title="Pinq\ICollection">ICollection</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_asCollection">asCollection</a>()
+                    <p>Returns the values as a collection.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_asCollection"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isSource">isSource</a>()
+                    <p>Returns whether the traversable is the source of the elements.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_isSource"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getSource">getSource</a>()
+                    <p>Returns the source traversable or itself if the current traversable is the source.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_getSource"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_iterate">iterate</a>(callable $function)
+                    <p>Iterates the elements with the supplied function.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_iterate"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getIterator">getIterator</a>()
+                    <p>Returns an array compatible iterator for the elements.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_getIterator"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getTrueIterator">getTrueIterator</a>()
+                    <p>Returns an iterator for all the elements.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_getTrueIterator"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Iterators/IIteratorScheme.html"><abbr title="Pinq\Iterators\IIteratorScheme">IIteratorScheme</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getIteratorScheme">getIteratorScheme</a>()
+                    <p>Returns the underlying iterator scheme used by the implementation.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_getIteratorScheme"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_first">first</a>()
+                    <p>Returns the first value, null if empty</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_first"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_last">last</a>()
+                    <p>Returns the last value, null if empty</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_last"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_contains">contains</a>(mixed $value)
+                    <p>Returns whether the supplied value is contained within the aggregate</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_contains"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_where">where</a>(callable $predicate)
+                    <p>Filters the values by a supplied predicate.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_where"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_orderBy">orderBy</a>(callable $function, int $direction)
+                    <p>Orders the values mapped from the supplied function according the supplied direction.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_orderBy"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_orderByAscending">orderByAscending</a>(callable $function)
+                    <p>Orders the values mapped from the supplied function ascendingly Example function:</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_orderByAscending"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_orderByDescending">orderByDescending</a>(callable $function)
+                    <p>Orders the values mapped from the supplied function descendingly Example expression function:</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_orderByDescending"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_skip">skip</a>(int $amount)
+                    <p>Skip the amount of values from the start.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_skip"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_take">take</a>(int|null $amount)
+                    <p>Limits the amount of values by the supplied amount</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_take"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_slice">slice</a>(int $start, int|null $amount)
+                    <p>Retrieve a slice of the values.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_slice"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_indexBy">indexBy</a>(callable $function)
+                    <p>Index the values according to the supplied mapping function.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_indexBy"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_keys">keys</a>()
+                    <p>Selects the keys as the values (indexed by their 0-based position).</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_keys"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_reindex">reindex</a>()
+                    <p>Indexes the values by their 0-based position.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_reindex"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_groupBy">groupBy</a>(callable $function)
+                    <p>Groups values according the supplied function.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_groupBy"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Interfaces/IJoiningOnTraversable.html"><abbr title="Pinq\Interfaces\IJoiningOnTraversable">IJoiningOnTraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_join">join</a>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)
+                    <p>Matches the values with the supplied values according to the supplied filter then maps the results into as according to the supplied function.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_join"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Interfaces/IJoiningOnTraversable.html"><abbr title="Pinq\Interfaces\IJoiningOnTraversable">IJoiningOnTraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_groupJoin">groupJoin</a>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)
+                    <p>Matches the values with the supplied values according to the supplied filter, groups the the joined values for every original and then maps into as according to the supplied function.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_groupJoin"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_select">select</a>(callable $function)
+                    <p>Returns the values mapped by the supplied function.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_select"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_selectMany">selectMany</a>(callable $function)
+                    <p>Returns the values mapped by the supplied function and then flattens the values into a single traversable.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_selectMany"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_unique">unique</a>()
+                    <p>Only return unique values.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_unique"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_append">append</a>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)
+                    <p>Returns values from the original and supplied values, keys will be reindexed.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_append"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_whereIn">whereIn</a>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)
+                    <p>Returns all values from the original present in the supplied values.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_whereIn"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_except">except</a>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)
+                    <p>Returns values all values from the original not present in the supplied values.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_except"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_union">union</a>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)
+                    <p>Returns unique results present in both the original and supplied values, keys will be reindexed.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_union"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_intersect">intersect</a>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)
+                    <p>Returns unique values the are present in the original and supplied values.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_intersect"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_difference">difference</a>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)
+                    <p>Returns unique values from the original not present in the supplied values.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/ITraversable.html#method_difference"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_thenBy">thenBy</a>(callable $function, int $direction)
+                    <p>Subsequently orders the results using the supplied function according to the supplied direction</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_thenByAscending">thenByAscending</a>(callable $function)
+                    <p>Subsequently orders the results using the supplied function ascendingly</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_thenByDescending">thenByDescending</a>(callable $function)
+                    <p>Subsequently orders the results using the supplied function descendingly</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_count">
+        <div class="location">in <a href="../../Pinq/IAggregatable.html#method_count"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a> at line 18</div>
+        <code>            public            int
+    <strong>count</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the amount of the values.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>int</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isEmpty">
+        <div class="location">in <a href="../../Pinq/IAggregatable.html#method_isEmpty"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a> at line 25</div>
+        <code>            public            boolean
+    <strong>isEmpty</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns whether the traversable contains no elements.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_aggregate">
+        <div class="location">in <a href="../../Pinq/IAggregatable.html#method_aggregate"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a> at line 34</div>
+        <code>            public            mixed
+    <strong>aggregate</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Aggregates the values with the supplied function.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The aggregate function, parameters: ($aggregate, $step)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_maximum">
+        <div class="location">in <a href="../../Pinq/IAggregatable.html#method_maximum"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a> at line 43</div>
+        <code>            public            mixed
+    <strong>maximum</strong>(callable $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the maximum value.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The function which will return the values.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_minimum">
+        <div class="location">in <a href="../../Pinq/IAggregatable.html#method_minimum"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a> at line 52</div>
+        <code>            public            mixed
+    <strong>minimum</strong>(callable $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the maximum value.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The function which will return the values.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_sum">
+        <div class="location">in <a href="../../Pinq/IAggregatable.html#method_sum"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a> at line 61</div>
+        <code>            public            int|null
+    <strong>sum</strong>(callable $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the sum of the values.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The function which will return the values.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>int|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_average">
+        <div class="location">in <a href="../../Pinq/IAggregatable.html#method_average"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a> at line 70</div>
+        <code>            public            double|null
+    <strong>average</strong>(callable $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the average of the values.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The function which will return the values.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>double|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_all">
+        <div class="location">in <a href="../../Pinq/IAggregatable.html#method_all"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a> at line 79</div>
+        <code>            public            bool
+    <strong>all</strong>(callable $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>Returns a boolean of if all the values evaluate to true.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The function which will return the values.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_any">
+        <div class="location">in <a href="../../Pinq/IAggregatable.html#method_any"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a> at line 88</div>
+        <code>            public            bool
+    <strong>any</strong>(callable $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>Returns a boolean of if any of the values evaluate to true.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The function which will return the values.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_implode">
+        <div class="location">in <a href="../../Pinq/IAggregatable.html#method_implode"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a> at line 98</div>
+        <code>            public            string
+    <strong>implode</strong>(string $delimiter, callable $function = null)</code>
+    </h3>
+    <div class="details">
+        <p>Returns a string of all the values concatenated by the delimiter.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$delimiter</td>
+                <td>The string to delimit the values by.</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The function which will return the values.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_asArray">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_asArray"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 27</div>
+        <code>            public            array
+    <strong>asArray</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the values as an array.</p>
+        <p>Only valid array keys (strings or integers) will be used,
+all others will be reindexed numerically.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_asTraversable">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_asTraversable"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 35</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>asTraversable</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the values as a traversable.</p>
+        <p>The following queries will be performed in memory.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_asCollection">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_asCollection"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 43</div>
+        <code>            public            <a href="../../Pinq/ICollection.html"><abbr title="Pinq\ICollection">ICollection</abbr></a>
+    <strong>asCollection</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the values as a collection.</p>
+        <p>The following queries will be performed in memory.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ICollection.html"><abbr title="Pinq\ICollection">ICollection</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isSource">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_isSource"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 50</div>
+        <code>            public            boolean
+    <strong>isSource</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns whether the traversable is the source of the elements.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getSource">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_getSource"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 58</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>getSource</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the source traversable or itself if the current traversable is the source.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_iterate">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_iterate"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 68</div>
+        <code>            public            void
+    <strong>iterate</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Iterates the elements with the supplied function.</p>
+        <p>Returning false will break the iteration loop.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The iteration function, parameters are passed as ($value, $key)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getIterator">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_getIterator"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 76</div>
+        <code>            public            <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+    <strong>getIterator</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns an array compatible iterator for the elements.</p>
+        <p>Non string or integer keys will be numerically reindexed.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getTrueIterator">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_getTrueIterator"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 84</div>
+        <code>            public            <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+    <strong>getTrueIterator</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns an iterator for all the elements.</p>
+        <p>All keys types will remain unaltered.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getIteratorScheme">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_getIteratorScheme"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 91</div>
+        <code>            public            <a href="../../Pinq/Iterators/IIteratorScheme.html"><abbr title="Pinq\Iterators\IIteratorScheme">IIteratorScheme</abbr></a>
+    <strong>getIteratorScheme</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the underlying iterator scheme used by the implementation.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Iterators/IIteratorScheme.html"><abbr title="Pinq\Iterators\IIteratorScheme">IIteratorScheme</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_first">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_first"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 98</div>
+        <code>            public            mixed
+    <strong>first</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the first value, null if empty</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>The first value</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_last">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_last"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 105</div>
+        <code>            public            mixed
+    <strong>last</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the last value, null if empty</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>The last value</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_contains">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_contains"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 114</div>
+        <code>            public            boolean
+    <strong>contains</strong>(mixed $value)</code>
+    </h3>
+    <div class="details">
+        <p>Returns whether the supplied value is contained within the aggregate</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$value</td>
+                <td>The value to check for</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_where">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_where"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 123</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>where</strong>(callable $predicate)</code>
+    </h3>
+    <div class="details">
+        <p>Filters the values by a supplied predicate.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$predicate</td>
+                <td>The predicate function</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_orderBy">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_orderBy"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 134</div>
+        <code>            public            <a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
+    <strong>orderBy</strong>(callable $function, int $direction)</code>
+    </h3>
+    <div class="details">
+        <p>Orders the values mapped from the supplied function according the supplied direction.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The projection function</td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$direction</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_orderByAscending">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_orderByAscending"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 144</div>
+        <code>            public            <a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
+    <strong>orderByAscending</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Orders the values mapped from the supplied function ascendingly Example function:</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The mapping function</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_orderByDescending">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_orderByDescending"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 154</div>
+        <code>            public            <a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
+    <strong>orderByDescending</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Orders the values mapped from the supplied function descendingly Example expression function:</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The mapping function</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_skip">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_skip"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 163</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>skip</strong>(int $amount)</code>
+    </h3>
+    <div class="details">
+        <p>Skip the amount of values from the start.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>int</td>
+                <td>$amount</td>
+                <td>The amount of values to skip, must be > 0</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_take">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_take"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 172</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>take</strong>(int|null $amount)</code>
+    </h3>
+    <div class="details">
+        <p>Limits the amount of values by the supplied amount</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>int|null</td>
+                <td>$amount</td>
+                <td>The amount of values to retrieve, must be > 0 or null if all</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_slice">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_slice"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 182</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>slice</strong>(int $start, int|null $amount)</code>
+    </h3>
+    <div class="details">
+        <p>Retrieve a slice of the values.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>int</td>
+                <td>$start</td>
+                <td>The amount of values to skip</td>
+            </tr>
+                    <tr>
+                <td>int|null</td>
+                <td>$amount</td>
+                <td>The amount of values to retrieve</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_indexBy">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_indexBy"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 193</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>indexBy</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Index the values according to the supplied mapping function.</p>
+        <p>All duplicate indexes will be associated with the first value
+for that index.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The projection function</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_keys">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_keys"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 200</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>keys</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Selects the keys as the values (indexed by their 0-based position).</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_reindex">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_reindex"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 207</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>reindex</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Indexes the values by their 0-based position.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_groupBy">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_groupBy"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 218</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>groupBy</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Groups values according the supplied function.</p>
+        <p>(Uses strict equality '===')
+The values will be grouped into instances of the traversable.
+This will implicitly index each group by the group key returned from the supplied function.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The grouping function</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_join">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_join"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 228</div>
+        <code>            public            <a href="../../Pinq/Interfaces/IJoiningOnTraversable.html"><abbr title="Pinq\Interfaces\IJoiningOnTraversable">IJoiningOnTraversable</abbr></a>
+    <strong>join</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
+    </h3>
+    <div class="details">
+        <p>Matches the values with the supplied values according to the supplied filter then maps the results into as according to the supplied function.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+                <td>$values</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Interfaces/IJoiningOnTraversable.html"><abbr title="Pinq\Interfaces\IJoiningOnTraversable">IJoiningOnTraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_groupJoin">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_groupJoin"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 239</div>
+        <code>            public            <a href="../../Pinq/Interfaces/IJoiningOnTraversable.html"><abbr title="Pinq\Interfaces\IJoiningOnTraversable">IJoiningOnTraversable</abbr></a>
+    <strong>groupJoin</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
+    </h3>
+    <div class="details">
+        <p>Matches the values with the supplied values according to the supplied filter, groups the the joined values for every original and then maps into as according to the supplied function.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+                <td>$values</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Interfaces/IJoiningOnTraversable.html"><abbr title="Pinq\Interfaces\IJoiningOnTraversable">IJoiningOnTraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_select">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_select"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 248</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>select</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the values mapped by the supplied function.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The function returning the data to select</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_selectMany">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_selectMany"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 258</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>selectMany</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the values mapped by the supplied function and then flattens the values into a single traversable.</p>
+        <p>Keys will be reindexed.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>The function returning the data to select</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_unique">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_unique"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 265</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>unique</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Only return unique values.</p>
+        <p>(Uses strict equality '===')</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_append">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_append"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 274</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>append</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
+    </h3>
+    <div class="details">
+        <p>Returns values from the original and supplied values, keys will be reindexed.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+                <td>$values</td>
+                <td>The values to append</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_whereIn">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_whereIn"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 284</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>whereIn</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
+    </h3>
+    <div class="details">
+        <p>Returns all values from the original present in the supplied values.</p>
+        <p>(Uses strict equality '===')</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+                <td>$values</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_except">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_except"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 294</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>except</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
+    </h3>
+    <div class="details">
+        <p>Returns values all values from the original not present in the supplied values.</p>
+        <p>(Uses strict equality '===')</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+                <td>$values</td>
+                <td>The values to union</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_union">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_union"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 305</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>union</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
+    </h3>
+    <div class="details">
+        <p>Returns unique results present in both the original and supplied values, keys will be reindexed.</p>
+        <p>(Uses strict equality '===')</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+                <td>$values</td>
+                <td>The values to union</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_intersect">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_intersect"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 315</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>intersect</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
+    </h3>
+    <div class="details">
+        <p>Returns unique values the are present in the original and supplied values.</p>
+        <p>(Uses strict equality '===')</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+                <td>$values</td>
+                <td>The values to intersect with</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_difference">
+        <div class="location">in <a href="../../Pinq/ITraversable.html#method_difference"><abbr title="Pinq\ITraversable">ITraversable</abbr></a> at line 325</div>
+        <code>            public            <a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
+    <strong>difference</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
+    </h3>
+    <div class="details">
+        <p>Returns unique values from the original not present in the supplied values.</p>
+        <p>(Uses strict equality '===')</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+                <td>$values</td>
+                <td>The values to remove</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_thenBy">
+        <div class="location">at line 25</div>
+        <code>            public            <a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
+    <strong>thenBy</strong>(callable $function, int $direction)</code>
+    </h3>
+    <div class="details">
+        <p>Subsequently orders the results using the supplied function according to the supplied direction</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$direction</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_thenByAscending">
+        <div class="location">at line 34</div>
+        <code>            public            <a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
+    <strong>thenByAscending</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Subsequently orders the results using the supplied function ascendingly</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_thenByDescending">
+        <div class="location">at line 43</div>
+        <code>            public            <a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
+    <strong>thenByDescending</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Subsequently orders the results using the supplied function descendingly</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

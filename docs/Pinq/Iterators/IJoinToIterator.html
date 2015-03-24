@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Iterators\IJoinToIterator | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../Pinq/Iterators.html">Pinq\Iterators</a>\IJoinToIterator</h1>
+    </div>
+        <div class="content">
+                <p>    interface
+    <strong>IJoinToIterator</strong>        implements
+        <a href="../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></p>
+
+            <div class="description">
+            <p>Interface for an ordered iterator that supports subsequent ordering.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getSourceIterator">getSourceIterator</a>()
+                    <p>Returns the inner iterator.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Iterators/IWrapperIterator.html#method_getSourceIterator"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_updateSourceIterator">updateSourceIterator</a>(<abbr title="Pinq\Iterators\Traversable">Traversable</abbr> $sourceIterator)
+                    <p>Returns a new instance of the iterator with the supplied source iterator.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Iterators/IWrapperIterator.html#method_updateSourceIterator"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Iterators/IJoinToIterator.html"><abbr title="Pinq\Iterators\IJoinToIterator">IJoinToIterator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_withDefault">withDefault</a>(mixed $value, mixed $key = null)
+                    <p>Returns a new join iterator that will join the supplied element if no matching inner elements are given.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_projectTo">projectTo</a>(callable $function)
+                    <p>Returns a new join iterator that will project the values with the supplied function, called with the parameters ($outerValue, $innerValue, $outerKey, $innerKey).</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_walk">walk</a>(callable $function)
+                    <p>Walks the joined elements</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_getSourceIterator">
+        <div class="location">in <a href="../../Pinq/Iterators/IWrapperIterator.html#method_getSourceIterator"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a> at line 17</div>
+        <code>            public            <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+    <strong>getSourceIterator</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Returns the inner iterator.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_updateSourceIterator">
+        <div class="location">in <a href="../../Pinq/Iterators/IWrapperIterator.html#method_updateSourceIterator"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a> at line 27</div>
+        <code>            public            <a href="../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a>
+    <strong>updateSourceIterator</strong>(<abbr title="Pinq\Iterators\Traversable">Traversable</abbr> $sourceIterator)</code>
+    </h3>
+    <div class="details">
+        <p>Returns a new instance of the iterator with the supplied source iterator.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Iterators\Traversable">Traversable</abbr></td>
+                <td>$sourceIterator</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Iterators/IWrapperIterator.html"><abbr title="Pinq\Iterators\IWrapperIterator">IWrapperIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_withDefault">
+        <div class="location">at line 21</div>
+        <code>            public            <a href="../../Pinq/Iterators/IJoinToIterator.html"><abbr title="Pinq\Iterators\IJoinToIterator">IJoinToIterator</abbr></a>
+    <strong>withDefault</strong>(mixed $value, mixed $key = null)</code>
+    </h3>
+    <div class="details">
+        <p>Returns a new join iterator that will join the supplied element if no matching inner elements are given.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Iterators/IJoinToIterator.html"><abbr title="Pinq\Iterators\IJoinToIterator">IJoinToIterator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_projectTo">
+        <div class="location">at line 31</div>
+        <code>            public            <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
+    <strong>projectTo</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Returns a new join iterator that will project the values with the supplied function, called with the parameters ($outerValue, $innerValue, $outerKey, $innerKey).</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_walk">
+        <div class="location">at line 40</div>
+        <code>            public            void
+    <strong>walk</strong>(callable $function)</code>
+    </h3>
+    <div class="details">
+        <p>Walks the joined elements</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

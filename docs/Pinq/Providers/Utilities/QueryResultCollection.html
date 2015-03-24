@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Providers\Utilities\QueryResultCollection | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Pinq/Providers/Utilities.html">Pinq\Providers\Utilities</a>\QueryResultCollection</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>QueryResultCollection</strong>        implements
+        <a href="../../../Pinq/Providers/Utilities/IQueryResultCollection.html"><abbr title="Pinq\Providers\Utilities\IQueryResultCollection">IQueryResultCollection</abbr></a></p>
+
+            <div class="description">
+            <p>Implementation of the query results collection that will cache the query results and is able to evaluate queries in memory when applicable parent values are loaded:</p>
+            <p><code>
+$someRows = $queryable->where(function ($row) { return $row['id'] &lt;= 50; });</p>
+
+<p>foreach ($someRows as $row) {
+    //This will load the values
+}</p>
+
+<p>//This should be evaluated in memory
+$filteredRows = $someRows->where(function ($row) { return $row['isActive'] === true; });
+</code></p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(callable $traversableFactory = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_optimizeQuery">optimizeQuery</a>(<abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr> $queryExpression)
+                    <p>Optimizes the expression for caching purposes.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_saveResults">saveResults</a>(<abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr> $expression, mixed $results)
+                    <p>Saves the query results for the supplied expression.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_clearResults">clearResults</a>()
+                    <p>Clears the query results.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_removeResults">removeResults</a>(<abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr> $queryExpression)
+                    <p>Removes the query result associated with the supplied expression.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_tryComputeResults">tryComputeResults</a>(<abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr> $queryExpression, mixed $results)
+                    <p>Attempts to find the appropriate query results from the supplied expression.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_computeResults">computeResults</a>(<abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr> $expression)
+                    <p>Computes the results of the request query expression.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 39</div>
+        <code>            public            
+    <strong>__construct</strong>(callable $traversableFactory = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>callable</td>
+                <td>$traversableFactory</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_optimizeQuery">
+        <div class="location">at line 45</div>
+        <code>            public            <abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr>
+    <strong>optimizeQuery</strong>(<abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr> $queryExpression)</code>
+    </h3>
+    <div class="details">
+        <p>Optimizes the expression for caching purposes.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr></td>
+                <td>$queryExpression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_saveResults">
+        <div class="location">at line 86</div>
+        <code>            public            mixed
+    <strong>saveResults</strong>(<abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr> $expression, mixed $results)</code>
+    </h3>
+    <div class="details">
+        <p>Saves the query results for the supplied expression.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$results</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_clearResults">
+        <div class="location">at line 91</div>
+        <code>            public            void
+    <strong>clearResults</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Clears the query results.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_removeResults">
+        <div class="location">at line 96</div>
+        <code>            public            void
+    <strong>removeResults</strong>(<abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr> $queryExpression)</code>
+    </h3>
+    <div class="details">
+        <p>Removes the query result associated with the supplied expression.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr></td>
+                <td>$queryExpression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_tryComputeResults">
+        <div class="location">at line 101</div>
+        <code>            public            boolean
+    <strong>tryComputeResults</strong>(<abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr> $queryExpression, mixed $results)</code>
+    </h3>
+    <div class="details">
+        <p>Attempts to find the appropriate query results from the supplied expression.</p>
+        <p>If the exact results cannot be found, the query expression is traversed
+to find whether an appropriate parent query result is available. If so
+the results computed from the remaining query scope expression.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr></td>
+                <td>$queryExpression</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$results</td>
+                <td>If successful, the results will be set to this reference parameter</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>Whether the results were successfully computed</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_computeResults">
+        <div class="location">at line 144</div>
+        <code>            public            mixed
+    <strong>computeResults</strong>(<abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Computes the results of the request query expression.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\Utilities\O\Expression">Expression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>The results</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/PinqException.html"><abbr title="Pinq\PinqException">PinqException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

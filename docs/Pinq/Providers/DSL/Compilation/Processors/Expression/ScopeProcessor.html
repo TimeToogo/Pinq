@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Providers\DSL\Compilation\Processors\Expression\ScopeProcessor | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../../../../classes.html">Classes</a></li>
+                            <li><a href="../../../../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../../../../traits.html">Traits</a></li>
+            <li><a href="../../../../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Expression.html">Pinq\Providers\DSL\Compilation\Processors\Expression</a>\ScopeProcessor</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>ScopeProcessor</strong>        extends <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors/ScopeProcessor.html"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\ScopeProcessor">ScopeProcessor</abbr></a></p>
+
+            <div class="description">
+            <p>Implementation of the scope processor to add expressions.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Expression/IExpressionProcessor.html"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\IExpressionProcessor">IExpressionProcessor</abbr></a> $expressionProcessor)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Providers\DSL\Compilation\Processors\Queries\IScope">IScope</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_buildScope">buildScope</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitIndexBy">visitIndexBy</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\IndexBy">IndexBy</abbr> $segment)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitSelect">visitSelect</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Select">Select</abbr> $segment)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitGroupBy">visitGroupBy</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\GroupBy">GroupBy</abbr> $segment)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitSelectMany">visitSelectMany</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\SelectMany">SelectMany</abbr> $segment)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitFilter">visitFilter</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Filter">Filter</abbr> $segment)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitOrderBy">visitOrderBy</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\OrderBy">OrderBy</abbr> $segment)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitJoin">visitJoin</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Join">Join</abbr> $segment)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitKeys">visitKeys</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Keys">Keys</abbr> $segment)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitOperation">visitOperation</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Operation">Operation</abbr> $segment)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitRange">visitRange</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Range">Range</abbr> $segment)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitUnique">visitUnique</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Unique">Unique</abbr> $segment)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitReindex">visitReindex</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Reindex">Reindex</abbr> $segment)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Queries\Common\ISource">ISource</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_processSource">processSource</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Queries\Common\ISource">ISource</abbr> $source)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_updateJoinOptions">updateJoinOptions</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Queries\Common\Join\Options">Options</abbr> $options)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 21</div>
+        <code>            public            
+    <strong>__construct</strong>(<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Expression/IExpressionProcessor.html"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\IExpressionProcessor">IExpressionProcessor</abbr></a> $expressionProcessor)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Expression/IExpressionProcessor.html"><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\IExpressionProcessor">IExpressionProcessor</abbr></a></td>
+                <td>$expressionProcessor</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_buildScope">
+        <div class="location">at line 28</div>
+        <code>            public            <abbr title="Pinq\Providers\DSL\Compilation\Processors\Queries\IScope">IScope</abbr>
+    <strong>buildScope</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Queries\IScope">IScope</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitIndexBy">
+        <div class="location">at line 56</div>
+        <code>            public            
+    <strong>visitIndexBy</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\IndexBy">IndexBy</abbr> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\IndexBy">IndexBy</abbr></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitSelect">
+        <div class="location">at line 61</div>
+        <code>            public            
+    <strong>visitSelect</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Select">Select</abbr> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Select">Select</abbr></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitGroupBy">
+        <div class="location">at line 66</div>
+        <code>            public            
+    <strong>visitGroupBy</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\GroupBy">GroupBy</abbr> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\GroupBy">GroupBy</abbr></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitSelectMany">
+        <div class="location">at line 71</div>
+        <code>            public            
+    <strong>visitSelectMany</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\SelectMany">SelectMany</abbr> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\SelectMany">SelectMany</abbr></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitFilter">
+        <div class="location">at line 76</div>
+        <code>            public            
+    <strong>visitFilter</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Filter">Filter</abbr> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Filter">Filter</abbr></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitOrderBy">
+        <div class="location">at line 81</div>
+        <code>            public            
+    <strong>visitOrderBy</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\OrderBy">OrderBy</abbr> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\OrderBy">OrderBy</abbr></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitJoin">
+        <div class="location">at line 92</div>
+        <code>            public            
+    <strong>visitJoin</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Join">Join</abbr> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Join">Join</abbr></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitKeys">
+        <div class="location">at line 127</div>
+        <code>            public            
+    <strong>visitKeys</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Keys">Keys</abbr> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Keys">Keys</abbr></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitOperation">
+        <div class="location">at line 122</div>
+        <code>            public            
+    <strong>visitOperation</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Operation">Operation</abbr> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Operation">Operation</abbr></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitRange">
+        <div class="location">at line 132</div>
+        <code>            public            
+    <strong>visitRange</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Range">Range</abbr> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Range">Range</abbr></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitUnique">
+        <div class="location">at line 137</div>
+        <code>            public            
+    <strong>visitUnique</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Unique">Unique</abbr> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Unique">Unique</abbr></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitReindex">
+        <div class="location">at line 142</div>
+        <code>            public            
+    <strong>visitReindex</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Reindex">Reindex</abbr> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Segments\Reindex">Reindex</abbr></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_processSource">
+        <div class="location">at line 40</div>
+        <code>            public            <abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Queries\Common\ISource">ISource</abbr>
+    <strong>processSource</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Queries\Common\ISource">ISource</abbr> $source)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Queries\Common\ISource">ISource</abbr></td>
+                <td>$source</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Queries\Common\ISource">ISource</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_updateJoinOptions">
+        <div class="location">at line 102</div>
+        <code>            public            
+    <strong>updateJoinOptions</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Queries\Common\Join\Options">Options</abbr> $options)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Expression\Queries\Common\Join\Options">Options</abbr></td>
+                <td>$options</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

@@ -27,7 +27,7 @@
     <strong>Operation</strong>        extends <a href="../../../Pinq/Queries/Segments/Segment.html"><abbr title="Pinq\Queries\Segments\Segment">Segment</abbr></a></p>
 
             <div class="description">
-            <p>Query segment for a set/range operation</p>
+            <p>Query segment for a set/multiset operation</p>
             <p>
 </p>
         </div>
@@ -36,7 +36,7 @@
 
             <table>
                     <tr>
-                <td>Union</td>
+                <td>UNION</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -45,7 +45,7 @@
                 </td>
             </tr>
                     <tr>
-                <td>Intersect</td>
+                <td>INTERSECT</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -54,7 +54,7 @@
                 </td>
             </tr>
                     <tr>
-                <td>Difference</td>
+                <td>DIFFERENCE</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -63,7 +63,7 @@
                 </td>
             </tr>
                     <tr>
-                <td>Append</td>
+                <td>APPEND</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -72,7 +72,7 @@
                 </td>
             </tr>
                     <tr>
-                <td>WhereIn</td>
+                <td>WHERE_IN</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -81,7 +81,7 @@
                 </td>
             </tr>
                     <tr>
-                <td>Except</td>
+                <td>EXCEPT</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -98,10 +98,21 @@
             <table>
                     <tr>
                 <td class="type">
+                    string[]
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>($OperationType, $Values)
+                    <a href="#method___construct">__construct</a>($operationType, <abbr title="Pinq\Queries\Segments\Common\ISource">ISource</abbr> $source)
                     <p>
 </p>
                 </td>
@@ -112,7 +123,7 @@
                     static&nbsp;
                 </td>
                 <td class="last">
-                    <a href="#method_IsValid">IsValid</a>($OperationType)
+                    <a href="#method_isValid">isValid</a>($operationType)
                     <p>
 </p>
                 </td>
@@ -123,7 +134,7 @@
                     int
                 </td>
                 <td class="last">
-                    <a href="#method_GetType">GetType</a>()
+                    <a href="#method_getType">getType</a>()
                     <p>
 </p>
                 </td>
@@ -131,10 +142,10 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
+                    void
                 </td>
                 <td class="last">
-                    <a href="#method_Traverse">Traverse</a>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $Walker)
+                    <a href="#method_traverse">traverse</a>(<a href="../../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> $visitor)
                     <p>
 </p>
                 </td>
@@ -145,7 +156,7 @@
                     int
                 </td>
                 <td class="last">
-                    <a href="#method_GetOperationType">GetOperationType</a>()
+                    <a href="#method_getOperationType">getOperationType</a>()
                     <p>
 </p>
                 </td>
@@ -153,10 +164,32 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>|array
+                    <abbr title="Pinq\Queries\Segments\Common\ISource">ISource</abbr>
                 </td>
                 <td class="last">
-                    <a href="#method_GetTraversable">GetTraversable</a>()
+                    <a href="#method_getSource">getSource</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_update">update</a>(int $operationType, <abbr title="Pinq\Queries\Segments\Common\ISource">ISource</abbr> $source)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_updateSource">updateSource</a>(<abbr title="Pinq\Queries\Segments\Common\ISource">ISource</abbr> $source)
                     <p>
 </p>
                 </td>
@@ -167,10 +200,37 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method___construct">
-        <div class="location">at line 30</div>
+                        <h3 id="method_getParameters">
+        <div class="location">at line 64</div>
+        <code>            public            string[]
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method___construct">
+        <div class="location">at line 33</div>
         <code>            public            
-    <strong>__construct</strong>($OperationType, $Values)</code>
+    <strong>__construct</strong>($operationType, <abbr title="Pinq\Queries\Segments\Common\ISource">ISource</abbr> $source)</code>
     </h3>
     <div class="details">
         <p>
@@ -183,13 +243,13 @@
                     <table>
                     <tr>
                 <td></td>
-                <td>$OperationType</td>
+                <td>$operationType</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td></td>
-                <td>$Values</td>
+                <td><abbr title="Pinq\Queries\Segments\Common\ISource">ISource</abbr></td>
+                <td>$source</td>
                 <td>
 </td>
             </tr>
@@ -201,10 +261,10 @@
                     </div>
     </div>
 
-                <h3 id="method_IsValid">
-        <div class="location">at line 42</div>
+                <h3 id="method_isValid">
+        <div class="location">at line 43</div>
         <code>final        static    public            
-    <strong>IsValid</strong>($OperationType)</code>
+    <strong>isValid</strong>($operationType)</code>
     </h3>
     <div class="details">
         <p>
@@ -217,7 +277,7 @@
                     <table>
                     <tr>
                 <td></td>
-                <td>$OperationType</td>
+                <td>$operationType</td>
                 <td>
 </td>
             </tr>
@@ -229,10 +289,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetType">
-        <div class="location">at line 47</div>
+                <h3 id="method_getType">
+        <div class="location">at line 59</div>
         <code>            public            int
-    <strong>GetType</strong>()</code>
+    <strong>getType</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -255,10 +315,10 @@
                     </div>
     </div>
 
-                <h3 id="method_Traverse">
-        <div class="location">at line 52</div>
-        <code>            public            <a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
-    <strong>Traverse</strong>(<a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $Walker)</code>
+                <h3 id="method_traverse">
+        <div class="location">at line 69</div>
+        <code>            public            void
+    <strong>traverse</strong>(<a href="../../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> $visitor)</code>
     </h3>
     <div class="details">
         <p>
@@ -270,8 +330,8 @@
 
                     <table>
                     <tr>
-                <td><a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a></td>
-                <td>$Walker</td>
+                <td><a href="../../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></td>
+                <td>$visitor</td>
                 <td>
 </td>
             </tr>
@@ -282,7 +342,7 @@
 
                     <table>
         <tr>
-            <td><a href="../../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a></td>
+            <td>void</td>
             <td>
 </td>
         </tr>
@@ -293,10 +353,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetOperationType">
-        <div class="location">at line 60</div>
+                <h3 id="method_getOperationType">
+        <div class="location">at line 77</div>
         <code>            public            int
-    <strong>GetOperationType</strong>()</code>
+    <strong>getOperationType</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -320,10 +380,10 @@
                     </div>
     </div>
 
-                <h3 id="method_GetTraversable">
-        <div class="location">at line 68</div>
-        <code>            public            <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>|array
-    <strong>GetTraversable</strong>()</code>
+                <h3 id="method_getSource">
+        <div class="location">at line 85</div>
+        <code>            public            <abbr title="Pinq\Queries\Segments\Common\ISource">ISource</abbr>
+    <strong>getSource</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -336,7 +396,89 @@
 
                     <table>
         <tr>
-            <td><a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>|array</td>
+            <td><abbr title="Pinq\Queries\Segments\Common\ISource">ISource</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_update">
+        <div class="location">at line 96</div>
+        <code>            public            <a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a>
+    <strong>update</strong>(int $operationType, <abbr title="Pinq\Queries\Segments\Common\ISource">ISource</abbr> $source)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>int</td>
+                <td>$operationType</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Segments\Common\ISource">ISource</abbr></td>
+                <td>$source</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_updateSource">
+        <div class="location">at line 110</div>
+        <code>            public            <a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a>
+    <strong>updateSource</strong>(<abbr title="Pinq\Queries\Segments\Common\ISource">ISource</abbr> $source)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Segments\Common\ISource">ISource</abbr></td>
+                <td>$source</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a></td>
             <td>
 </td>
         </tr>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Queries\Builders\IRequestQueryBuilder | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../../Pinq/Queries/Builders.html">Pinq\Queries\Builders</a>\IRequestQueryBuilder</h1>
+    </div>
+        <div class="content">
+                <p>    interface
+    <strong>IRequestQueryBuilder</strong>        implements
+        <a href="../../../Pinq/Queries/Builders/IQueryBuilder.html"><abbr title="Pinq\Queries\Builders\IQueryBuilder">IQueryBuilder</abbr></a></p>
+
+            <div class="description">
+            <p>Interface of the request query builder.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Parsing/IFunctionInterpreter.html"><abbr title="Pinq\Parsing\IFunctionInterpreter">IFunctionInterpreter</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getFunctionInterpreter">getFunctionInterpreter</a>()
+                    <p>Gets the function interpreter.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Builders/IQueryBuilder.html#method_getFunctionInterpreter"><abbr title="Pinq\Queries\Builders\IQueryBuilder">IQueryBuilder</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Queries\Builders\Queries\IRequestQuery">IRequestQuery</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_parseRequest">parseRequest</a>(<abbr title="Pinq\Queries\Builders\O\Expression">Expression</abbr> $expression, <abbr title="Pinq\Queries\Builders\O\IEvaluationContext">IEvaluationContext</abbr> $evaluationContext = null)
+                    <p>Parses the supplied expression into a request query template.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Queries\Builders\Queries\IResolvedQuery">IResolvedQuery</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_resolveRequest">resolveRequest</a>(<abbr title="Pinq\Queries\Builders\O\Expression">Expression</abbr> $expression, <abbr title="Pinq\Queries\Builders\O\IEvaluationContext">IEvaluationContext</abbr> $evaluationContext = null)
+                    <p>Resolves the query requirements from the supplied expression.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_getFunctionInterpreter">
+        <div class="location">in <a href="../../../Pinq/Queries/Builders/IQueryBuilder.html#method_getFunctionInterpreter"><abbr title="Pinq\Queries\Builders\IQueryBuilder">IQueryBuilder</abbr></a> at line 13</div>
+        <code>            public            <a href="../../../Pinq/Parsing/IFunctionInterpreter.html"><abbr title="Pinq\Parsing\IFunctionInterpreter">IFunctionInterpreter</abbr></a>
+    <strong>getFunctionInterpreter</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the function interpreter.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Parsing/IFunctionInterpreter.html"><abbr title="Pinq\Parsing\IFunctionInterpreter">IFunctionInterpreter</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_parseRequest">
+        <div class="location">at line 22</div>
+        <code>            public            <abbr title="Pinq\Queries\Builders\Queries\IRequestQuery">IRequestQuery</abbr>
+    <strong>parseRequest</strong>(<abbr title="Pinq\Queries\Builders\O\Expression">Expression</abbr> $expression, <abbr title="Pinq\Queries\Builders\O\IEvaluationContext">IEvaluationContext</abbr> $evaluationContext = null)</code>
+    </h3>
+    <div class="details">
+        <p>Parses the supplied expression into a request query template.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Builders\O\Expression">Expression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Builders\O\IEvaluationContext">IEvaluationContext</abbr></td>
+                <td>$evaluationContext</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Queries\Builders\Queries\IRequestQuery">IRequestQuery</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_resolveRequest">
+        <div class="location">at line 35</div>
+        <code>            public            <abbr title="Pinq\Queries\Builders\Queries\IResolvedQuery">IResolvedQuery</abbr>
+    <strong>resolveRequest</strong>(<abbr title="Pinq\Queries\Builders\O\Expression">Expression</abbr> $expression, <abbr title="Pinq\Queries\Builders\O\IEvaluationContext">IEvaluationContext</abbr> $evaluationContext = null)</code>
+    </h3>
+    <div class="details">
+        <p>Resolves the query requirements from the supplied expression.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Builders\O\Expression">Expression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Builders\O\IEvaluationContext">IEvaluationContext</abbr></td>
+                <td>$evaluationContext</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Queries\Builders\Queries\IResolvedQuery">IResolvedQuery</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

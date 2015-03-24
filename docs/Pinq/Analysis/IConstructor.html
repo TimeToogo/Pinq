@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Analysis\IConstructor | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../Pinq/Analysis.html">Pinq\Analysis</a>\IConstructor</h1>
+    </div>
+        <div class="content">
+                <p>    interface
+    <strong>IConstructor</strong>        implements
+        <a href="../../Pinq/Analysis/ITypeOperation.html"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a></p>
+
+            <div class="description">
+            <p>Interface of the constructor of a type.</p>
+            <p><code>
+new stdClass();
+</code></p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/ITypeSystem.html"><abbr title="Pinq\Analysis\ITypeSystem">ITypeSystem</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getTypeSystem">getTypeSystem</a>()
+                    <p>Gets the type system.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Analysis/ITyped.html#method_getTypeSystem"><abbr title="Pinq\Analysis\ITyped">ITyped</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getSourceType">getSourceType</a>()
+                    <p>Gets the type being operated on.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Analysis/ITypeOperation.html#method_getSourceType"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getReturnType">getReturnType</a>()
+                    <p>Gets return type of the operation.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Analysis/ITypeOperation.html#method_getReturnType"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_hasMethod">hasMethod</a>()
+                    <p>Whether the type has a __construct method.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="http://php.net/ReflectionMethod"><abbr title="ReflectionMethod">ReflectionMethod</abbr></a>|null
+                </td>
+                <td class="last">
+                    <a href="#method_getReflection">getReflection</a>()
+                    <p>Gets the reflection of the constructor.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_getTypeSystem">
+        <div class="location">in <a href="../../Pinq/Analysis/ITyped.html#method_getTypeSystem"><abbr title="Pinq\Analysis\ITyped">ITyped</abbr></a> at line 16</div>
+        <code>            public            <a href="../../Pinq/Analysis/ITypeSystem.html"><abbr title="Pinq\Analysis\ITypeSystem">ITypeSystem</abbr></a>
+    <strong>getTypeSystem</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the type system.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/ITypeSystem.html"><abbr title="Pinq\Analysis\ITypeSystem">ITypeSystem</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getSourceType">
+        <div class="location">in <a href="../../Pinq/Analysis/ITypeOperation.html#method_getSourceType"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a> at line 17</div>
+        <code>            public            <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+    <strong>getSourceType</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the type being operated on.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getReturnType">
+        <div class="location">in <a href="../../Pinq/Analysis/ITypeOperation.html#method_getReturnType"><abbr title="Pinq\Analysis\ITypeOperation">ITypeOperation</abbr></a> at line 24</div>
+        <code>            public            <a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a>
+    <strong>getReturnType</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets return type of the operation.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/IType.html"><abbr title="Pinq\Analysis\IType">IType</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasMethod">
+        <div class="location">at line 20</div>
+        <code>            public            boolean
+    <strong>hasMethod</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Whether the type has a __construct method.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getReflection">
+        <div class="location">at line 28</div>
+        <code>            public            <a href="http://php.net/ReflectionMethod"><abbr title="ReflectionMethod">ReflectionMethod</abbr></a>|null
+    <strong>getReflection</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the reflection of the constructor.</p>
+        <p>Null if there is no __construct method.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="http://php.net/ReflectionMethod"><abbr title="ReflectionMethod">ReflectionMethod</abbr></a>|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

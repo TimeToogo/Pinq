@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Queries\Builders\ScopeInterpreter | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Pinq/Queries/Builders.html">Pinq\Queries\Builders</a>\ScopeInterpreter</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>ScopeInterpreter</strong>        extends <a href="../../../Pinq/Queries/Builders/ExpressionInterpreter.html"><abbr title="Pinq\Queries\Builders\ExpressionInterpreter">ExpressionInterpreter</abbr></a>        implements
+        <a href="../../../Pinq/Queries/Builders/IScopeInterpreter.html"><abbr title="Pinq\Queries\Builders\IScopeInterpreter">IScopeInterpreter</abbr></a></p>
+
+            <div class="description">
+            <p>Implementation of the scope expression interpreter.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<a href="../../../Pinq/Queries/Builders/Interpretations/IScopeInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\IScopeInterpretation">IScopeInterpretation</abbr></a> $interpretation, <abbr title="Pinq\Queries\Builders\O\IEvaluationContext">IEvaluationContext</abbr> $evaluationContext = null, $idPrefix = &#039;scope&#039;)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/Builders/Interpretations/IScopeInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\IScopeInterpretation">IScopeInterpretation</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getInterpretation">getInterpretation</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_interpretScope">interpretScope</a>(<abbr title="Pinq\Queries\Builders\O\Expression">Expression</abbr> $expression)
+                    <p>Interprets the supplied scope expression.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/Builders/IJoinOptionsInterpreter.html"><abbr title="Pinq\Queries\Builders\IJoinOptionsInterpreter">IJoinOptionsInterpreter</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_buildJoinOptionsInterpreter">buildJoinOptionsInterpreter</a>(string $segmentId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Queries/Builders/ISourceInterpreter.html"><abbr title="Pinq\Queries\Builders\ISourceInterpreter">ISourceInterpreter</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_buildSourceInterpreter">buildSourceInterpreter</a>(string $segmentId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 45</div>
+        <code>            public            
+    <strong>__construct</strong>(<a href="../../../Pinq/Queries/Builders/Interpretations/IScopeInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\IScopeInterpretation">IScopeInterpretation</abbr></a> $interpretation, <abbr title="Pinq\Queries\Builders\O\IEvaluationContext">IEvaluationContext</abbr> $evaluationContext = null, $idPrefix = &#039;scope&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Queries/Builders/Interpretations/IScopeInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\IScopeInterpretation">IScopeInterpretation</abbr></a></td>
+                <td>$interpretation</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Builders\O\IEvaluationContext">IEvaluationContext</abbr></td>
+                <td>$evaluationContext</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$idPrefix</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getInterpretation">
+        <div class="location">at line 54</div>
+        <code>            public            <a href="../../../Pinq/Queries/Builders/Interpretations/IScopeInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\IScopeInterpretation">IScopeInterpretation</abbr></a>
+    <strong>getInterpretation</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Builders/Interpretations/IScopeInterpretation.html"><abbr title="Pinq\Queries\Builders\Interpretations\IScopeInterpretation">IScopeInterpretation</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_interpretScope">
+        <div class="location">at line 59</div>
+        <code>            public            void
+    <strong>interpretScope</strong>(<abbr title="Pinq\Queries\Builders\O\Expression">Expression</abbr> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Interprets the supplied scope expression.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Queries\Builders\O\Expression">Expression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_buildJoinOptionsInterpreter">
+        <div class="location">at line 316</div>
+        <code>            public            <a href="../../../Pinq/Queries/Builders/IJoinOptionsInterpreter.html"><abbr title="Pinq\Queries\Builders\IJoinOptionsInterpreter">IJoinOptionsInterpreter</abbr></a>
+    <strong>buildJoinOptionsInterpreter</strong>(string $segmentId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$segmentId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Builders/IJoinOptionsInterpreter.html"><abbr title="Pinq\Queries\Builders\IJoinOptionsInterpreter">IJoinOptionsInterpreter</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_buildSourceInterpreter">
+        <div class="location">at line 326</div>
+        <code>            public            <a href="../../../Pinq/Queries/Builders/ISourceInterpreter.html"><abbr title="Pinq\Queries\Builders\ISourceInterpreter">ISourceInterpreter</abbr></a>
+    <strong>buildSourceInterpreter</strong>(string $segmentId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$segmentId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Queries/Builders/ISourceInterpreter.html"><abbr title="Pinq\Queries\Builders\ISourceInterpreter">ISourceInterpreter</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

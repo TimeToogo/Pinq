@@ -40,22 +40,62 @@
             <table>
                     <tr>
                 <td class="type">
+                    <a href="../../Pinq/Queries/IParameterRegistry.html"><abbr title="Pinq\Queries\IParameterRegistry">IParameterRegistry</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>Gets the query parameter registry.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Queries/IQuery.html#method_getParameters"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_GetScope">GetScope</a>()
-                    <p>The query scope</p>
+                    <a href="#method_getScope">getScope</a>()
+                    <p>Gets the query scope.</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../Pinq/Queries/IQuery.html#method_GetScope"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../Pinq/Queries/IQuery.html#method_getScope"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Queries/IQuery.html"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_updateScope">updateScope</a>(<a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a> $scope)
+                    <p>Returns the query with the supplied scope.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Queries/IQuery.html#method_updateScope"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
                     <a href="../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_GetRequest">GetRequest</a>()
+                    <a href="#method_getRequest">getRequest</a>()
                     <p>
 </p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Queries/IRequestQuery.html"><abbr title="Pinq\Queries\IRequestQuery">IRequestQuery</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_update">update</a>(<a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a> $scope, <a href="../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a> $request)
+                    <p>Returns the query with the supplied scope and request.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Queries/IOperationQuery.html"><abbr title="Pinq\Queries\IOperationQuery">IOperationQuery</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_updateRequest">updateRequest</a>(<a href="../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a> $request)
+                    <p>Returns the query with the supplied request.</p>
                 </td>
                 <td></td>
             </tr>
@@ -64,13 +104,39 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method_GetScope">
-        <div class="location">in <a href="../../Pinq/Queries/IQuery.html#method_GetScope"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a> at line 18</div>
-        <code>            public            <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
-    <strong>GetScope</strong>()</code>
+                        <h3 id="method_getParameters">
+        <div class="location">in <a href="../../Pinq/Queries/IQuery.html#method_getParameters"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a> at line 17</div>
+        <code>            public            <a href="../../Pinq/Queries/IParameterRegistry.html"><abbr title="Pinq\Queries\IParameterRegistry">IParameterRegistry</abbr></a>
+    <strong>getParameters</strong>()</code>
     </h3>
     <div class="details">
-        <p>The query scope</p>
+        <p>Gets the query parameter registry.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Queries/IParameterRegistry.html"><abbr title="Pinq\Queries\IParameterRegistry">IParameterRegistry</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getScope">
+        <div class="location">in <a href="../../Pinq/Queries/IQuery.html#method_getScope"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a> at line 24</div>
+        <code>            public            <a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
+    <strong>getScope</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the query scope.</p>
         <p>
 </p>
         <div class="tags">
@@ -90,10 +156,47 @@
                     </div>
     </div>
 
-                <h3 id="method_GetRequest">
+                <h3 id="method_updateScope">
+        <div class="location">in <a href="../../Pinq/Queries/IQuery.html#method_updateScope"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a> at line 33</div>
+        <code>            public            <a href="../../Pinq/Queries/IQuery.html"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a>
+    <strong>updateScope</strong>(<a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a> $scope)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the query with the supplied scope.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a></td>
+                <td>$scope</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Queries/IQuery.html"><abbr title="Pinq\Queries\IQuery">IQuery</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRequest">
         <div class="location">at line 16</div>
         <code>            public            <a href="../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a>
-    <strong>GetRequest</strong>()</code>
+    <strong>getRequest</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -107,6 +210,86 @@
                     <table>
         <tr>
             <td><a href="../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_update">
+        <div class="location">at line 26</div>
+        <code>            public            <a href="../../Pinq/Queries/IRequestQuery.html"><abbr title="Pinq\Queries\IRequestQuery">IRequestQuery</abbr></a>
+    <strong>update</strong>(<a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a> $scope, <a href="../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a> $request)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the query with the supplied scope and request.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a></td>
+                <td>$scope</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Queries/IRequestQuery.html"><abbr title="Pinq\Queries\IRequestQuery">IRequestQuery</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_updateRequest">
+        <div class="location">at line 35</div>
+        <code>            public            <a href="../../Pinq/Queries/IOperationQuery.html"><abbr title="Pinq\Queries\IOperationQuery">IOperationQuery</abbr></a>
+    <strong>updateRequest</strong>(<a href="../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a> $request)</code>
+    </h3>
+    <div class="details">
+        <p>Returns the query with the supplied request.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Queries/IRequest.html"><abbr title="Pinq\Queries\IRequest">IRequest</abbr></a></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Queries/IOperationQuery.html"><abbr title="Pinq\Queries\IOperationQuery">IOperationQuery</abbr></a></td>
             <td>
 </td>
         </tr>

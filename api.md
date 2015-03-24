@@ -10,55 +10,59 @@ This is base interface for all query objects, it supports the following methods:
 
 **Queries**
 
- - `Where` - Filters the values according to the supplied predicate
- - `OrderBy/OrderByAscending/OrderByDescending->ThenBy/ThenByAscending/ThenByDescending...` - 
+ - `where` - Filters the values according to the supplied predicate
+ - `orderBy[Ascending|Descending]->thenBy[Ascending|Descending]...` -
     Orders the values according the supplied order functions and direction(s)
- - `Skip` - Skip the supplied amount of values
- - `Take` - Limits the amount of values by the supplied amount
- - `Slice` - Retrieve a slice of values according to the specified offset and amount
- - `IndexBy` - Index the values according to the supplied mapping function
- - `GroupBy->AndBy...` - Groups the values according the supplied grouping function(s)
- - `Join->On/OnEquality->To` - Matches the values with the supplied values according to the supplied filter then 
+ - `skip` - Skip the supplied amount of values
+ - `take` - Limits the amount of values by the supplied amount
+ - `slice` - Retrieve a slice of values according to the specified offset and amount
+ - `indexBy` - Index the values according to the supplied mapping function
+ - `keys` - Gets the keys as the values.
+ - `reindex` - Indexes the values according to their 0-based position
+ - `groupBy` - Groups the values according the supplied grouping function
+ - `join->on/onEquality[->withDefault]->to` - Matches the values with the supplied values according to the supplied filter
    then maps the results into as according to the supplied function.
- - `GroupJoin->On/OnEquality->To` - Matches the values with the supplied values according to the supplied filter, 
+ - `groupJoin->on/onEquality[->withDefault]->to` - Matches the values with the supplied values according to the supplied filter,
    groups the results and then maps into as according to the supplied function.
- - `Unique` - Only return unique values
- - `Select` - Map the values according to the supplied function
- - `SelectMany` - Map the values according to the supplied function and merge the results
- - `First` - Returns the first value or null if empty
- - `Last` - Returns the last value or null if empty
- - `Contains` - Returns if the supplied value is present in the values
+ - `unique` - Only return unique values
+ - `select` - Map the values according to the supplied function
+ - `selectMany` - Map the values according to the supplied function and merge the results
+ - `first` - Returns the first value or null if empty
+ - `last` - Returns the last value or null if empty
+ - `contains` - Returns if the supplied value is present in the values
  - `offsetGet` - Returns a value at the supplied index
  - `offsetExists` - Whether a value exists for the supplied index
 
 
 **Set/List Operations**
 
- - `Append` - All values present in either the original or supplied values
- - `WhereIn` - All values present in both the original and supplied values
- - `Except` - All values present in the original but not in the supplied values
- - `Union` - Unique values present in either the original or supplied values
- - `Intersect` - Unique values present in both the original and supplied values
- - `Difference` - Unique values present in the original but not in the supplied values
- - `offsetSet` - Sets a value to supplied index
- - `offsetUnset` - Removes any value at the supplied index
+ - `append` - All values present in either the original or supplied values
+ - `whereIn` - All values present in both the original and supplied values
+ - `except` - All values present in the original but not in the supplied values
+ - `union` - Unique values present in either the original or supplied values
+ - `intersect` - Unique values present in both the original and supplied values
+ - `difference` - Unique values present in the original but not in the supplied values
 
 **Aggregates**
 
- - `Count` - The amount of values
- - `Exists` - Whether there are any values
- - `Aggregate` - Aggregates the values according to the supplied
- - `Maximum` - The maximum value
- - `Minimum` - The minimum value
- - `Sum` - The sum of all the values
- - `Average` - The average of all the values
- - `All` - Whether all the values evaluate to true
- - `Any` - Whether any of the values evaluate to true
- - `Implode` - Concatenates the values seperated by the supplied delimiter
+ - `count` - The amount of elements
+ - `isEmpty` - Whether there are no elements
+ - `aggregate` - Aggregates the values according to the supplied
+ - `maximum` - The maximum value
+ - `minimum` - The minimum value
+ - `sum` - The sum of all the values
+ - `average` - The average of all the values
+ - `all` - Whether all the values evaluate to true
+ - `any` - Whether any of the values evaluate to true
+ - `implode` - Concatenates the values separated by the supplied delimiter
 
 **Other**
 
- - `AsArray` - The values as an array
+ - `getIterator` - Gets the  elements as an iterator with non scalar keys mapped to integers
+ - `getTrueIterator` - Gets the elements as an iterator
+ - `asArray` - Gets the elements as an array. Non scalar keys will be mapped to integers
+ - `asTraversable` - Gets the elements as a `ITraversable`
+ - `asCollection` - Gets the elements as a `ICollection`
 
 ICollection
 ===========
@@ -66,11 +70,16 @@ ICollection
 The `ICollection` interface represents a queryable range of values that are also mutable, 
 they can be manipulated and altered using the additional methods:
 
- - `Apply` - Walks the values with the supplied function
- - `AddRange` - Adds a range of values to the collection
- - `RemoveRange` - Removes a range of values from the collection
- - `RemoveWhere` - Removes the values according to the supplied predicate function
- - `Clear` - Removes all the values from the collection.
+ - `apply` - Walks the values with the supplied function
+ - `groupJoin->on/onEquality[->withDefault]->apply` - Matches the values with the supplied values according to the supplied filter
+   then walks the results using to the supplied function.
+ - `addRange` - Adds a list of values to the collection
+ - `remove` - Removes all occurrences of a value from the collection
+ - `removeRange` - Removes all occurrences of a set of values from the collection
+ - `removeWhere` - Removes the values according to the supplied predicate function
+ - `clear` - Removes all the values from the collection.
+ - `offsetSet` - Sets a value to supplied index
+ - `offsetUnset` - Removes any value at the supplied index
 
 IQueryable 
 ==========
@@ -89,15 +98,21 @@ it supports querying and mutating external data sources.
 
 Limitations
 ===========
+
  - Within a query, one should not use control structures such as `if, switch, goto, while, foreach,...`, 
    these are not classified as valid query expressions and cannot be used with external data sources.
+
+ - One should not define multiple functions on the same line. An exception will be thrown for the following
+   as it is ambiguous to determine the correct function:
+   {% highlight php startinline %}
+   $queryable->where(function ($i) { return $i > 50; })->where(function ($i) { return $i !== 70; });{% endhighlight %}
 
 
 Standard Classes
 ================
 
-Along side the [API](api.html), Pinq comes the set of standard implementations for each of
-the interfaces. If you need to add and custom functionality to the Pinq API, you should extend
+Along side the [API](api.html), PINQ comes the set of standard implementations for each of
+the interfaces. If you need to add and custom functionality to the PINQ API, you should extend
 these classes as they contain the [correct and tested implementation](details.html) for the 
 standard API.
 

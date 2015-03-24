@@ -6,17 +6,17 @@ title:  Details
 Lazy Evaluation 
 ==============
 
-Like its cousin, Linq, Pinq makes extensive use of **lazy evaluation**:
+Like its cousin, LINQ, PINQ makes extensive use of **lazy evaluation**:
 
 {% highlight php startinline %}
-$FilteredValues = $Values->Where(function ($I) { return strlen($I) < 50; });
+$filteredValues = $values->where(function ($i) { return strlen($i) < 50; });
 {% endhighlight %}
 
 In the above example, the supplied function would not be executed until the values are actually
 required:
 
 {% highlight php startinline %}
-foreach($FilteredValues as $Value) {
+foreach($filteredValues as $value) {
     //The function would begin executing as the values are iterated
 }
 {% endhighlight %}
@@ -28,11 +28,11 @@ Pinq queries are also **immutable**, that is:
 
 {% highlight php startinline %}
 
-$Values = \Pinq\Traversable::From(range(1, 10));
+$values = \Pinq\Traversable::from(range(1, 10));
 
-$Values->Where(function ($I) { return $I >= 5; });
+$values->where(function ($i) { return $i >= 5; });
 
-foreach($Values as $Value) {
+foreach($values as $value) {
     //1, 2, 3, 4, 5, 6....
 }
 
@@ -42,18 +42,16 @@ You might ask why it is this way, the reason being is demonstrated below:
 
 {% highlight php startinline %}
 
-$Values = \Pinq\Traversable::From(range(1, 10));
+$values = \Pinq\Traversable::from(range(1, 10));
 
 
-foreach($Values->Where(function ($I) { return $I >= 5; }) as $Value) {
+foreach($values->where(function ($i) { return $i >= 5; }) as $value) {
     //5, 6, 7, 8....
 }
 
-foreach($Values->Where(function ($I) { return $I < 5; }) as $Value) {
-    /* 
-     * If the queries mutated the original object,
-     * no values would be iterated here, this would be very unintuitive and bug-prone
-     */
+foreach($values->where(function ($i) { return $i < 5; }) as $value) {
+    // If the queries mutated the original object,
+    // no values would be iterated here, this would be very unintuitive and bug-prone
 }
 
 {% endhighlight %}
@@ -62,12 +60,12 @@ The correct way to write the original query would be as follows:
 
 {% highlight php startinline %}
 
-$Values = \Pinq\Traversable::From(range(1, 10));
+$values = \Pinq\Traversable::from(range(1, 10));
 
 //Override the original with the filtered values
-$Values = $Values->Where(function ($I) { return $I >= 5; });
+$values = $values->where(function ($i) { return $i >= 5; });
 
-foreach($Values as $Value) {
+foreach($values as $value) {
     //5, 6, 7, 8....
 }
 
@@ -83,11 +81,11 @@ This may get a bit confusing but bear with me, all the queries specific to
 
 {% highlight php startinline %}
 
-$Values = \Pinq\Collection::From(range(1, 10));
+$values = \Pinq\Collection::from(range(1, 10));
 
-$Values->RemoveRange(range(1, 4));
+$values->removeRange(range(1, 4));
 
-foreach($Values as $Value) {
+foreach($values as $value) {
     //5, 6, 7, 8...
 }
 
@@ -98,11 +96,11 @@ The `ICollection` is designed to offer the additional mutability aspect to the `
 One could easily write the same using just the `ITraversable`:
 
 {% highlight php startinline %}
-$Values = \Pinq\Traversable::From(range(1, 10));
+$values = \Pinq\Traversable::from(range(1, 10));
 
-$Values = $Values->Except(range(1, 4));
+$values = $values->except(range(1, 4));
 
-foreach($Values as $Value) {
+foreach($values as $value) {
     //5, 6, 7, 8...
 }
 {% endhighlight %}
@@ -119,9 +117,9 @@ Mutability is something that needs to be catered for.
 
 {% highlight php startinline %}
 
-$Values = \Pinq\Collection::From(range(1, 10));
+$values = \Pinq\Collection::from(range(1, 10));
 
-$Values->Apply(function (&$Number) { $Number *= 10; });
+$values->apply(function (&$number) { $number *= 10; });
 
 {% endhighlight %}
 
@@ -130,12 +128,12 @@ have to execute against the values right away and also be evaluated upon iterati
 Well, no, back to the same point with external data sources, if you happend to call:
 
 {% highlight php startinline %}
-$Values->Apply(function (&$Number) { $Number *= 10; });
+$values->apply(function (&$number) { $number *= 10; });
 {% endhighlight %}
 
-And the `$Values` was not an `ICollection` with an underlying array array but instead 
+And the `$values` was not an `ICollection` with an underlying array array but instead 
 a `IRepository` querying a flatfile. But since the values were never iterated, the query
  would never have executed and your flatfile data would remain untouched. This is clearly 
-the wrong path to go down. If this is the behaviour you are seeking, you should be using `Select`. 
+the wrong path to go down. If this is the behaviour you are seeking, you should be using `select`. 
 
 That is why the queries specific to `ICollection`/`IRepository` are evaluated **eagerly**.

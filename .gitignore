@@ -1,4 +1,5 @@
 /_site/
 /vendor/
 /.idea/
-/nbproject/private/
+/nbproject/
+/_layouts/api/cache/

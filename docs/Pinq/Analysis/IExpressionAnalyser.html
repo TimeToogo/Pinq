@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Analysis\IExpressionAnalyser | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../Pinq/Analysis.html">Pinq\Analysis</a>\IExpressionAnalyser</h1>
+    </div>
+        <div class="content">
+                <p>    interface
+    <strong>IExpressionAnalyser</strong></p>
+
+            <div class="description">
+            <p>Interface of a expression type analyser.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/ITypeSystem.html"><abbr title="Pinq\Analysis\ITypeSystem">ITypeSystem</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getTypeSystem">getTypeSystem</a>()
+                    <p>Gets the type system for the expression analyser.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/IAnalysisContext.html"><abbr title="Pinq\Analysis\IAnalysisContext">IAnalysisContext</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_createAnalysisContext">createAnalysisContext</a>(<abbr title="Pinq\Analysis\O\IEvaluationContext">IEvaluationContext</abbr> $evaluationContext)
+                    <p>Creates a new analysis context with the supplied evaluation context.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Analysis/ITypeAnalysis.html"><abbr title="Pinq\Analysis\ITypeAnalysis">ITypeAnalysis</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_analyse">analyse</a>(<a href="../../Pinq/Analysis/IAnalysisContext.html"><abbr title="Pinq\Analysis\IAnalysisContext">IAnalysisContext</abbr></a> $analysisContext, <abbr title="Pinq\Analysis\O\Expression">Expression</abbr> $expression)
+                    <p>Analyses the supplied expression tree.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_getTypeSystem">
+        <div class="location">at line 19</div>
+        <code>            public            <a href="../../Pinq/Analysis/ITypeSystem.html"><abbr title="Pinq\Analysis\ITypeSystem">ITypeSystem</abbr></a>
+    <strong>getTypeSystem</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the type system for the expression analyser.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/ITypeSystem.html"><abbr title="Pinq\Analysis\ITypeSystem">ITypeSystem</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_createAnalysisContext">
+        <div class="location">at line 28</div>
+        <code>            public            <a href="../../Pinq/Analysis/IAnalysisContext.html"><abbr title="Pinq\Analysis\IAnalysisContext">IAnalysisContext</abbr></a>
+    <strong>createAnalysisContext</strong>(<abbr title="Pinq\Analysis\O\IEvaluationContext">IEvaluationContext</abbr> $evaluationContext)</code>
+    </h3>
+    <div class="details">
+        <p>Creates a new analysis context with the supplied evaluation context.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Analysis\O\IEvaluationContext">IEvaluationContext</abbr></td>
+                <td>$evaluationContext</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/IAnalysisContext.html"><abbr title="Pinq\Analysis\IAnalysisContext">IAnalysisContext</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_analyse">
+        <div class="location">at line 38</div>
+        <code>            public            <a href="../../Pinq/Analysis/ITypeAnalysis.html"><abbr title="Pinq\Analysis\ITypeAnalysis">ITypeAnalysis</abbr></a>
+    <strong>analyse</strong>(<a href="../../Pinq/Analysis/IAnalysisContext.html"><abbr title="Pinq\Analysis\IAnalysisContext">IAnalysisContext</abbr></a> $analysisContext, <abbr title="Pinq\Analysis\O\Expression">Expression</abbr> $expression)</code>
+    </h3>
+    <div class="details">
+        <p>Analyses the supplied expression tree.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/Analysis/IAnalysisContext.html"><abbr title="Pinq\Analysis\IAnalysisContext">IAnalysisContext</abbr></a></td>
+                <td>$analysisContext</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Pinq\Analysis\O\Expression">Expression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Analysis/ITypeAnalysis.html"><abbr title="Pinq\Analysis\ITypeAnalysis">ITypeAnalysis</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

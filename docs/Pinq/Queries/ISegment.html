@@ -28,7 +28,7 @@
 
             <div class="description">
             <p>The interface for a query segment, one of the const types, they are all implemented as their own class class in Segments namespace.</p>
-            <p>What seperates a segment from a request is that a segment will always
+            <p>What separates a segment from a request is that a segment will always
 return a projection of the original values, where as a request will not
 remain queryable and thus is the final part of the query in IRequestQuery.</p>
         </div>
@@ -37,7 +37,7 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
 
             <table>
                     <tr>
-                <td>Filter</td>
+                <td>FILTER</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -46,7 +46,7 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
                 </td>
             </tr>
                     <tr>
-                <td>OrderBy</td>
+                <td>ORDER_BY</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -55,7 +55,7 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
                 </td>
             </tr>
                     <tr>
-                <td>Range</td>
+                <td>RANGE</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -64,7 +64,7 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
                 </td>
             </tr>
                     <tr>
-                <td>GroupBy</td>
+                <td>GROUP_BY</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -73,7 +73,7 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
                 </td>
             </tr>
                     <tr>
-                <td>Join</td>
+                <td>JOIN</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -82,7 +82,7 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
                 </td>
             </tr>
                     <tr>
-                <td>EqualityJoin</td>
+                <td>SELECT</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -91,7 +91,7 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
                 </td>
             </tr>
                     <tr>
-                <td>Select</td>
+                <td>SELECT_MANY</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -100,7 +100,7 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
                 </td>
             </tr>
                     <tr>
-                <td>SelectMany</td>
+                <td>OPERATION</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -109,7 +109,7 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
                 </td>
             </tr>
                     <tr>
-                <td>Operate</td>
+                <td>UNIQUE</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -118,7 +118,7 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
                 </td>
             </tr>
                     <tr>
-                <td>Unique</td>
+                <td>INDEX_BY</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -127,7 +127,16 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
                 </td>
             </tr>
                     <tr>
-                <td>IndexBy</td>
+                <td>KEYS</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>REINDEX</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -147,7 +156,7 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
                     int
                 </td>
                 <td class="last">
-                    <a href="#method_GetType">GetType</a>()
+                    <a href="#method_getType">getType</a>()
                     <p>
 </p>
                 </td>
@@ -155,10 +164,21 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
+                    string[]
                 </td>
                 <td class="last">
-                    <a href="#method_Traverse">Traverse</a>(<a href="../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $Walker)
+                    <a href="#method_getParameters">getParameters</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_traverse">traverse</a>(<a href="../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> $visitor)
                     <p>
 </p>
                 </td>
@@ -169,10 +189,10 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
 
         <h2>Details</h2>
 
-                        <h3 id="method_GetType">
-        <div class="location">at line 32</div>
+                        <h3 id="method_getType">
+        <div class="location">at line 34</div>
         <code>            public            int
-    <strong>GetType</strong>()</code>
+    <strong>getType</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -195,10 +215,37 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
                     </div>
     </div>
 
-                <h3 id="method_Traverse">
-        <div class="location">at line 37</div>
-        <code>            public            <a href="../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a>
-    <strong>Traverse</strong>(<a href="../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> $Walker)</code>
+                <h3 id="method_getParameters">
+        <div class="location">at line 39</div>
+        <code>            public            string[]
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_traverse">
+        <div class="location">at line 46</div>
+        <code>            public            void
+    <strong>traverse</strong>(<a href="../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> $visitor)</code>
     </h3>
     <div class="details">
         <p>
@@ -210,8 +257,8 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
 
                     <table>
                     <tr>
-                <td><a href="../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a></td>
-                <td>$Walker</td>
+                <td><a href="../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></td>
+                <td>$visitor</td>
                 <td>
 </td>
             </tr>
@@ -222,7 +269,7 @@ remain queryable and thus is the final part of the query in IRequestQuery.</p>
 
                     <table>
         <tr>
-            <td><a href="../../Pinq/Queries/ISegment.html"><abbr title="Pinq\Queries\ISegment">ISegment</abbr></a></td>
+            <td>void</td>
             <td>
 </td>
         </tr>

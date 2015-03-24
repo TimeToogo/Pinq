@@ -25,39 +25,56 @@
         <div class="content">
                         <table>
                             <tr>
-                    <td><a href="../Pinq/Caching/ArrayAccessCache.html"><abbr title="Pinq\Caching\ArrayAccessCache">ArrayAccessCache</abbr></a></td>
+                    <td><a href="../Pinq/Caching/ArrayAccessCacheAdapter.html"><abbr title="Pinq\Caching\ArrayAccessCacheAdapter">ArrayAccessCacheAdapter</abbr></a></td>
                     <td class="last">Adapter class for a cache that implements \ArrayAccess</td>
                 </tr>
                             <tr>
-                    <td><a href="../Pinq/Caching/CSVFileFunctionCache.html"><abbr title="Pinq\Caching\CSVFileFunctionCache">CSVFileFunctionCache</abbr></a></td>
+                    <td><a href="../Pinq/Caching/CSVFileCache.html"><abbr title="Pinq\Caching\CSVFileCache">CSVFileCache</abbr></a></td>
                     <td class="last">Cache implementation for storing the serialized expression trees in a single file in a csv format, not very good for concurrency</td>
                 </tr>
                             <tr>
-                    <td><a href="../Pinq/Caching/DirectoryFunctionCache.html"><abbr title="Pinq\Caching\DirectoryFunctionCache">DirectoryFunctionCache</abbr></a></td>
+                    <td><a href="../Pinq/Caching/CacheAdapter.html"><abbr title="Pinq\Caching\CacheAdapter">CacheAdapter</abbr></a></td>
+                    <td class="last">Base class for cache implementations</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Caching/DirectoryCache.html"><abbr title="Pinq\Caching\DirectoryCache">DirectoryCache</abbr></a></td>
                     <td class="last">Cache implementation for storing the serialized expression trees each in their own file in the specified directory</td>
                 </tr>
                             <tr>
-                    <td><a href="../Pinq/Caching/DoctrineFunctionCache.html"><abbr title="Pinq\Caching\DoctrineFunctionCache">DoctrineFunctionCache</abbr></a></td>
-                    <td class="last">Adapter class for a doctring cache component that implements \Doctrine\Common\Cache\Cache</td>
+                    <td><a href="../Pinq/Caching/DoctrineCacheAdapter.html"><abbr title="Pinq\Caching\DoctrineCacheAdapter">DoctrineCacheAdapter</abbr></a></td>
+                    <td class="last">Adapter class for a doctrine cache component that implements \Doctrine\Common\Cache\Cache</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Caching/NamespacedCache.html"><abbr title="Pinq\Caching\NamespacedCache">NamespacedCache</abbr></a></td>
+                    <td class="last">
+</td>
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Caching/NullCache.html"><abbr title="Pinq\Caching\NullCache">NullCache</abbr></a></td>
-                    <td class="last">Used if no cache is configure, it will be wrapped in a second level cache so no need to do anything</td>
+                    <td class="last">Null cache implementation.</td>
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Caching/Provider.html"><abbr title="Pinq\Caching\Provider">Provider</abbr></a></td>
                     <td class="last">Static provider to configure and retrieve the cache implementation</td>
                 </tr>
                             <tr>
-                    <td><a href="../Pinq/Caching/SecondLevelFunctionCache.html"><abbr title="Pinq\Caching\SecondLevelFunctionCache">SecondLevelFunctionCache</abbr></a></td>
-                    <td class="last">Cache implementation that acts as second level cache for the supplied implementation</td>
+                    <td><a href="../Pinq/Caching/QueryCache.html"><abbr title="Pinq\Caching\QueryCache">QueryCache</abbr></a></td>
+                    <td class="last">Cache implementation that acts as wrapper and second level cache for the underlying cache implementation.</td>
                 </tr>
                     </table>
     
             <h2>Interfaces</h2>
         <table>
                             <tr>
-                    <td><a href="../Pinq/Caching/IFunctionCache.html"><abbr title="Pinq\Caching\IFunctionCache">IFunctionCache</abbr></a></td>
+                    <td><a href="../Pinq/Caching/ICacheAdapter.html"><abbr title="Pinq\Caching\ICacheAdapter">ICacheAdapter</abbr></a></td>
+                    <td class="last">The API for a cache implementation that can persist in memory variables to be accessed later.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Caching/INamespacedCacheAdapter.html"><abbr title="Pinq\Caching\INamespacedCacheAdapter">INamespacedCacheAdapter</abbr></a></td>
+                    <td class="last">Cache interface that prefixes all keys with the specified namespace.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Caching/IQueryCache.html"><abbr title="Pinq\Caching\IQueryCache">IQueryCache</abbr></a></td>
                     <td class="last">The API for a cache implementation to store the expression trees of parsed functions.</td>
                 </tr>
                     </table>

@@ -24,12 +24,13 @@
     </div>
         <div class="content">
                 <p>    class
-    <strong>SegmentVisitor</strong>        extends <a href="../../../Pinq/Queries/Segments/SegmentWalker.html"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a></p>
+    <strong>SegmentVisitor</strong>        implements
+        <a href="../../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></p>
 
             <div class="description">
-            <p>The segment visitor is a utility class that will visit any segment in a respective method.</p>
-            <p>This is used by the query providers to as to evaluate the
-scope of the query with the specified query segments</p>
+            <p>The segment visitor traverses through the segments in the supplied query scope.</p>
+            <p>
+</p>
         </div>
     
     
@@ -42,18 +43,7 @@ scope of the query with the specified query segments</p>
                     <a href="../../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_Walk">Walk</a>(<a href="../../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a> $Scope)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Segments/SegmentWalker.html#method_Walk"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_WalkOperation">WalkOperation</a>(<a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a> $Query)
+                    <a href="#method_visit">visit</a>(<a href="../../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a> $scope)
                     <p>
 </p>
                 </td>
@@ -64,7 +54,7 @@ scope of the query with the specified query segments</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_WalkRange">WalkRange</a>(<a href="../../../Pinq/Queries/Segments/Range.html"><abbr title="Pinq\Queries\Segments\Range">Range</abbr></a> $Query)
+                    <a href="#method_visitOperation">visitOperation</a>(<a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a> $segment)
                     <p>
 </p>
                 </td>
@@ -75,7 +65,7 @@ scope of the query with the specified query segments</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_WalkUnique">WalkUnique</a>(<a href="../../../Pinq/Queries/Segments/Unique.html"><abbr title="Pinq\Queries\Segments\Unique">Unique</abbr></a> $Query)
+                    <a href="#method_visitRange">visitRange</a>(<a href="../../../Pinq/Queries/Segments/Range.html"><abbr title="Pinq\Queries\Segments\Range">Range</abbr></a> $segment)
                     <p>
 </p>
                 </td>
@@ -86,7 +76,7 @@ scope of the query with the specified query segments</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_WalkFilter">WalkFilter</a>(<a href="../../../Pinq/Queries/Segments/Filter.html"><abbr title="Pinq\Queries\Segments\Filter">Filter</abbr></a> $Query)
+                    <a href="#method_visitUnique">visitUnique</a>(<a href="../../../Pinq/Queries/Segments/Unique.html"><abbr title="Pinq\Queries\Segments\Unique">Unique</abbr></a> $segment)
                     <p>
 </p>
                 </td>
@@ -97,7 +87,7 @@ scope of the query with the specified query segments</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_WalkGroupBy">WalkGroupBy</a>(<a href="../../../Pinq/Queries/Segments/GroupBy.html"><abbr title="Pinq\Queries\Segments\GroupBy">GroupBy</abbr></a> $Query)
+                    <a href="#method_visitFilter">visitFilter</a>(<a href="../../../Pinq/Queries/Segments/Filter.html"><abbr title="Pinq\Queries\Segments\Filter">Filter</abbr></a> $segment)
                     <p>
 </p>
                 </td>
@@ -108,7 +98,7 @@ scope of the query with the specified query segments</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_WalkJoin">WalkJoin</a>(<a href="../../../Pinq/Queries/Segments/Join.html"><abbr title="Pinq\Queries\Segments\Join">Join</abbr></a> $Query)
+                    <a href="#method_visitGroupBy">visitGroupBy</a>(<a href="../../../Pinq/Queries/Segments/GroupBy.html"><abbr title="Pinq\Queries\Segments\GroupBy">GroupBy</abbr></a> $segment)
                     <p>
 </p>
                 </td>
@@ -119,7 +109,7 @@ scope of the query with the specified query segments</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_WalkEqualityJoin">WalkEqualityJoin</a>(<a href="../../../Pinq/Queries/Segments/EqualityJoin.html"><abbr title="Pinq\Queries\Segments\EqualityJoin">EqualityJoin</abbr></a> $Query)
+                    <a href="#method_visitJoin">visitJoin</a>(<a href="../../../Pinq/Queries/Segments/Join.html"><abbr title="Pinq\Queries\Segments\Join">Join</abbr></a> $segment)
                     <p>
 </p>
                 </td>
@@ -130,7 +120,7 @@ scope of the query with the specified query segments</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_WalkOrderBy">WalkOrderBy</a>(<a href="../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a> $Query)
+                    <a href="#method_visitOrderBy">visitOrderBy</a>(<a href="../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a> $segment)
                     <p>
 </p>
                 </td>
@@ -141,7 +131,7 @@ scope of the query with the specified query segments</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_WalkSelect">WalkSelect</a>(<a href="../../../Pinq/Queries/Segments/Select.html"><abbr title="Pinq\Queries\Segments\Select">Select</abbr></a> $Query)
+                    <a href="#method_visitSelect">visitSelect</a>(<a href="../../../Pinq/Queries/Segments/Select.html"><abbr title="Pinq\Queries\Segments\Select">Select</abbr></a> $segment)
                     <p>
 </p>
                 </td>
@@ -152,7 +142,7 @@ scope of the query with the specified query segments</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_WalkSelectMany">WalkSelectMany</a>(<a href="../../../Pinq/Queries/Segments/SelectMany.html"><abbr title="Pinq\Queries\Segments\SelectMany">SelectMany</abbr></a> $Query)
+                    <a href="#method_visitSelectMany">visitSelectMany</a>(<a href="../../../Pinq/Queries/Segments/SelectMany.html"><abbr title="Pinq\Queries\Segments\SelectMany">SelectMany</abbr></a> $segment)
                     <p>
 </p>
                 </td>
@@ -163,7 +153,7 @@ scope of the query with the specified query segments</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_WalkIndexBy">WalkIndexBy</a>(<a href="../../../Pinq/Queries/Segments/IndexBy.html"><abbr title="Pinq\Queries\Segments\IndexBy">IndexBy</abbr></a> $Query)
+                    <a href="#method_visitIndexBy">visitIndexBy</a>(<a href="../../../Pinq/Queries/Segments/IndexBy.html"><abbr title="Pinq\Queries\Segments\IndexBy">IndexBy</abbr></a> $segment)
                     <p>
 </p>
                 </td>
@@ -174,7 +164,7 @@ scope of the query with the specified query segments</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitOperation">VisitOperation</a>(<a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a> $Query)
+                    <a href="#method_visitKeys">visitKeys</a>(<a href="../../../Pinq/Queries/Segments/Keys.html"><abbr title="Pinq\Queries\Segments\Keys">Keys</abbr></a> $segment)
                     <p>
 </p>
                 </td>
@@ -185,95 +175,7 @@ scope of the query with the specified query segments</p>
                     
                 </td>
                 <td class="last">
-                    <a href="#method_VisitRange">VisitRange</a>(<a href="../../../Pinq/Queries/Segments/Range.html"><abbr title="Pinq\Queries\Segments\Range">Range</abbr></a> $Query)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_VisitUnique">VisitUnique</a>(<a href="../../../Pinq/Queries/Segments/Unique.html"><abbr title="Pinq\Queries\Segments\Unique">Unique</abbr></a> $Query)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_VisitFilter">VisitFilter</a>(<a href="../../../Pinq/Queries/Segments/Filter.html"><abbr title="Pinq\Queries\Segments\Filter">Filter</abbr></a> $Query)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_VisitGroupBy">VisitGroupBy</a>(<a href="../../../Pinq/Queries/Segments/GroupBy.html"><abbr title="Pinq\Queries\Segments\GroupBy">GroupBy</abbr></a> $Query)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_VisitJoin">VisitJoin</a>(<a href="../../../Pinq/Queries/Segments/Join.html"><abbr title="Pinq\Queries\Segments\Join">Join</abbr></a> $Query)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_VisitEqualityJoin">VisitEqualityJoin</a>(<a href="../../../Pinq/Queries/Segments/EqualityJoin.html"><abbr title="Pinq\Queries\Segments\EqualityJoin">EqualityJoin</abbr></a> $Query)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_VisitOrderBy">VisitOrderBy</a>(<a href="../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a> $Query)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_VisitSelect">VisitSelect</a>(<a href="../../../Pinq/Queries/Segments/Select.html"><abbr title="Pinq\Queries\Segments\Select">Select</abbr></a> $Query)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_VisitSelectMany">VisitSelectMany</a>(<a href="../../../Pinq/Queries/Segments/SelectMany.html"><abbr title="Pinq\Queries\Segments\SelectMany">SelectMany</abbr></a> $Query)
+                    <a href="#method_visitReindex">visitReindex</a>(<a href="../../../Pinq/Queries/Segments/Reindex.html"><abbr title="Pinq\Queries\Segments\Reindex">Reindex</abbr></a> $segment)
                     <p>
 </p>
                 </td>
@@ -284,10 +186,10 @@ scope of the query with the specified query segments</p>
 
         <h2>Details</h2>
 
-                        <h3 id="method_Walk">
-        <div class="location">in <a href="../../../Pinq/Queries/Segments/SegmentWalker.html#method_Walk"><abbr title="Pinq\Queries\Segments\SegmentWalker">SegmentWalker</abbr></a> at line 20</div>
+                        <h3 id="method_visit">
+        <div class="location">at line 20</div>
         <code>final            public            <a href="../../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a>
-    <strong>Walk</strong>(<a href="../../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a> $Scope)</code>
+    <strong>visit</strong>(<a href="../../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a> $scope)</code>
     </h3>
     <div class="details">
         <p>
@@ -300,7 +202,7 @@ scope of the query with the specified query segments</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/IScope.html"><abbr title="Pinq\Queries\IScope">IScope</abbr></a></td>
-                <td>$Scope</td>
+                <td>$scope</td>
                 <td>
 </td>
             </tr>
@@ -322,10 +224,10 @@ scope of the query with the specified query segments</p>
                     </div>
     </div>
 
-                <h3 id="method_WalkOperation">
-        <div class="location">at line 16</div>
-        <code>final            public            
-    <strong>WalkOperation</strong>(<a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a> $Query)</code>
+                <h3 id="method_visitOperation">
+        <div class="location">at line 25</div>
+        <code>            public            
+    <strong>visitOperation</strong>(<a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a> $segment)</code>
     </h3>
     <div class="details">
         <p>
@@ -338,7 +240,7 @@ scope of the query with the specified query segments</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a></td>
-                <td>$Query</td>
+                <td>$segment</td>
                 <td>
 </td>
             </tr>
@@ -350,10 +252,10 @@ scope of the query with the specified query segments</p>
                     </div>
     </div>
 
-                <h3 id="method_WalkRange">
-        <div class="location">at line 23</div>
-        <code>final            public            
-    <strong>WalkRange</strong>(<a href="../../../Pinq/Queries/Segments/Range.html"><abbr title="Pinq\Queries\Segments\Range">Range</abbr></a> $Query)</code>
+                <h3 id="method_visitRange">
+        <div class="location">at line 30</div>
+        <code>            public            
+    <strong>visitRange</strong>(<a href="../../../Pinq/Queries/Segments/Range.html"><abbr title="Pinq\Queries\Segments\Range">Range</abbr></a> $segment)</code>
     </h3>
     <div class="details">
         <p>
@@ -366,7 +268,7 @@ scope of the query with the specified query segments</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Segments/Range.html"><abbr title="Pinq\Queries\Segments\Range">Range</abbr></a></td>
-                <td>$Query</td>
+                <td>$segment</td>
                 <td>
 </td>
             </tr>
@@ -378,10 +280,10 @@ scope of the query with the specified query segments</p>
                     </div>
     </div>
 
-                <h3 id="method_WalkUnique">
-        <div class="location">at line 30</div>
-        <code>final            public            
-    <strong>WalkUnique</strong>(<a href="../../../Pinq/Queries/Segments/Unique.html"><abbr title="Pinq\Queries\Segments\Unique">Unique</abbr></a> $Query)</code>
+                <h3 id="method_visitUnique">
+        <div class="location">at line 35</div>
+        <code>            public            
+    <strong>visitUnique</strong>(<a href="../../../Pinq/Queries/Segments/Unique.html"><abbr title="Pinq\Queries\Segments\Unique">Unique</abbr></a> $segment)</code>
     </h3>
     <div class="details">
         <p>
@@ -394,7 +296,7 @@ scope of the query with the specified query segments</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Segments/Unique.html"><abbr title="Pinq\Queries\Segments\Unique">Unique</abbr></a></td>
-                <td>$Query</td>
+                <td>$segment</td>
                 <td>
 </td>
             </tr>
@@ -406,10 +308,10 @@ scope of the query with the specified query segments</p>
                     </div>
     </div>
 
-                <h3 id="method_WalkFilter">
-        <div class="location">at line 37</div>
-        <code>final            public            
-    <strong>WalkFilter</strong>(<a href="../../../Pinq/Queries/Segments/Filter.html"><abbr title="Pinq\Queries\Segments\Filter">Filter</abbr></a> $Query)</code>
+                <h3 id="method_visitFilter">
+        <div class="location">at line 40</div>
+        <code>            public            
+    <strong>visitFilter</strong>(<a href="../../../Pinq/Queries/Segments/Filter.html"><abbr title="Pinq\Queries\Segments\Filter">Filter</abbr></a> $segment)</code>
     </h3>
     <div class="details">
         <p>
@@ -422,7 +324,7 @@ scope of the query with the specified query segments</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Segments/Filter.html"><abbr title="Pinq\Queries\Segments\Filter">Filter</abbr></a></td>
-                <td>$Query</td>
+                <td>$segment</td>
                 <td>
 </td>
             </tr>
@@ -434,10 +336,10 @@ scope of the query with the specified query segments</p>
                     </div>
     </div>
 
-                <h3 id="method_WalkGroupBy">
-        <div class="location">at line 44</div>
-        <code>final            public            
-    <strong>WalkGroupBy</strong>(<a href="../../../Pinq/Queries/Segments/GroupBy.html"><abbr title="Pinq\Queries\Segments\GroupBy">GroupBy</abbr></a> $Query)</code>
+                <h3 id="method_visitGroupBy">
+        <div class="location">at line 45</div>
+        <code>            public            
+    <strong>visitGroupBy</strong>(<a href="../../../Pinq/Queries/Segments/GroupBy.html"><abbr title="Pinq\Queries\Segments\GroupBy">GroupBy</abbr></a> $segment)</code>
     </h3>
     <div class="details">
         <p>
@@ -450,7 +352,7 @@ scope of the query with the specified query segments</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Segments/GroupBy.html"><abbr title="Pinq\Queries\Segments\GroupBy">GroupBy</abbr></a></td>
-                <td>$Query</td>
+                <td>$segment</td>
                 <td>
 </td>
             </tr>
@@ -462,10 +364,10 @@ scope of the query with the specified query segments</p>
                     </div>
     </div>
 
-                <h3 id="method_WalkJoin">
-        <div class="location">at line 51</div>
-        <code>final            public            
-    <strong>WalkJoin</strong>(<a href="../../../Pinq/Queries/Segments/Join.html"><abbr title="Pinq\Queries\Segments\Join">Join</abbr></a> $Query)</code>
+                <h3 id="method_visitJoin">
+        <div class="location">at line 50</div>
+        <code>            public            
+    <strong>visitJoin</strong>(<a href="../../../Pinq/Queries/Segments/Join.html"><abbr title="Pinq\Queries\Segments\Join">Join</abbr></a> $segment)</code>
     </h3>
     <div class="details">
         <p>
@@ -478,7 +380,7 @@ scope of the query with the specified query segments</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Segments/Join.html"><abbr title="Pinq\Queries\Segments\Join">Join</abbr></a></td>
-                <td>$Query</td>
+                <td>$segment</td>
                 <td>
 </td>
             </tr>
@@ -490,38 +392,10 @@ scope of the query with the specified query segments</p>
                     </div>
     </div>
 
-                <h3 id="method_WalkEqualityJoin">
-        <div class="location">at line 58</div>
-        <code>final            public            
-    <strong>WalkEqualityJoin</strong>(<a href="../../../Pinq/Queries/Segments/EqualityJoin.html"><abbr title="Pinq\Queries\Segments\EqualityJoin">EqualityJoin</abbr></a> $Query)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../../Pinq/Queries/Segments/EqualityJoin.html"><abbr title="Pinq\Queries\Segments\EqualityJoin">EqualityJoin</abbr></a></td>
-                <td>$Query</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_WalkOrderBy">
-        <div class="location">at line 65</div>
-        <code>final            public            
-    <strong>WalkOrderBy</strong>(<a href="../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a> $Query)</code>
+                <h3 id="method_visitOrderBy">
+        <div class="location">at line 55</div>
+        <code>            public            
+    <strong>visitOrderBy</strong>(<a href="../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a> $segment)</code>
     </h3>
     <div class="details">
         <p>
@@ -534,7 +408,7 @@ scope of the query with the specified query segments</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a></td>
-                <td>$Query</td>
+                <td>$segment</td>
                 <td>
 </td>
             </tr>
@@ -546,10 +420,10 @@ scope of the query with the specified query segments</p>
                     </div>
     </div>
 
-                <h3 id="method_WalkSelect">
-        <div class="location">at line 72</div>
-        <code>final            public            
-    <strong>WalkSelect</strong>(<a href="../../../Pinq/Queries/Segments/Select.html"><abbr title="Pinq\Queries\Segments\Select">Select</abbr></a> $Query)</code>
+                <h3 id="method_visitSelect">
+        <div class="location">at line 60</div>
+        <code>            public            
+    <strong>visitSelect</strong>(<a href="../../../Pinq/Queries/Segments/Select.html"><abbr title="Pinq\Queries\Segments\Select">Select</abbr></a> $segment)</code>
     </h3>
     <div class="details">
         <p>
@@ -562,7 +436,7 @@ scope of the query with the specified query segments</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Segments/Select.html"><abbr title="Pinq\Queries\Segments\Select">Select</abbr></a></td>
-                <td>$Query</td>
+                <td>$segment</td>
                 <td>
 </td>
             </tr>
@@ -574,10 +448,10 @@ scope of the query with the specified query segments</p>
                     </div>
     </div>
 
-                <h3 id="method_WalkSelectMany">
-        <div class="location">at line 79</div>
-        <code>final            public            
-    <strong>WalkSelectMany</strong>(<a href="../../../Pinq/Queries/Segments/SelectMany.html"><abbr title="Pinq\Queries\Segments\SelectMany">SelectMany</abbr></a> $Query)</code>
+                <h3 id="method_visitSelectMany">
+        <div class="location">at line 65</div>
+        <code>            public            
+    <strong>visitSelectMany</strong>(<a href="../../../Pinq/Queries/Segments/SelectMany.html"><abbr title="Pinq\Queries\Segments\SelectMany">SelectMany</abbr></a> $segment)</code>
     </h3>
     <div class="details">
         <p>
@@ -590,7 +464,7 @@ scope of the query with the specified query segments</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Segments/SelectMany.html"><abbr title="Pinq\Queries\Segments\SelectMany">SelectMany</abbr></a></td>
-                <td>$Query</td>
+                <td>$segment</td>
                 <td>
 </td>
             </tr>
@@ -602,10 +476,10 @@ scope of the query with the specified query segments</p>
                     </div>
     </div>
 
-                <h3 id="method_WalkIndexBy">
-        <div class="location">at line 86</div>
-        <code>final            public            
-    <strong>WalkIndexBy</strong>(<a href="../../../Pinq/Queries/Segments/IndexBy.html"><abbr title="Pinq\Queries\Segments\IndexBy">IndexBy</abbr></a> $Query)</code>
+                <h3 id="method_visitIndexBy">
+        <div class="location">at line 70</div>
+        <code>            public            
+    <strong>visitIndexBy</strong>(<a href="../../../Pinq/Queries/Segments/IndexBy.html"><abbr title="Pinq\Queries\Segments\IndexBy">IndexBy</abbr></a> $segment)</code>
     </h3>
     <div class="details">
         <p>
@@ -618,7 +492,7 @@ scope of the query with the specified query segments</p>
                     <table>
                     <tr>
                 <td><a href="../../../Pinq/Queries/Segments/IndexBy.html"><abbr title="Pinq\Queries\Segments\IndexBy">IndexBy</abbr></a></td>
-                <td>$Query</td>
+                <td>$segment</td>
                 <td>
 </td>
             </tr>
@@ -630,10 +504,10 @@ scope of the query with the specified query segments</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitOperation">
-        <div class="location">at line 21</div>
+                <h3 id="method_visitKeys">
+        <div class="location">at line 75</div>
         <code>            public            
-    <strong>VisitOperation</strong>(<a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a> $Query)</code>
+    <strong>visitKeys</strong>(<a href="../../../Pinq/Queries/Segments/Keys.html"><abbr title="Pinq\Queries\Segments\Keys">Keys</abbr></a> $segment)</code>
     </h3>
     <div class="details">
         <p>
@@ -645,8 +519,8 @@ scope of the query with the specified query segments</p>
 
                     <table>
                     <tr>
-                <td><a href="../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a></td>
-                <td>$Query</td>
+                <td><a href="../../../Pinq/Queries/Segments/Keys.html"><abbr title="Pinq\Queries\Segments\Keys">Keys</abbr></a></td>
+                <td>$segment</td>
                 <td>
 </td>
             </tr>
@@ -658,10 +532,10 @@ scope of the query with the specified query segments</p>
                     </div>
     </div>
 
-                <h3 id="method_VisitRange">
-        <div class="location">at line 28</div>
+                <h3 id="method_visitReindex">
+        <div class="location">at line 80</div>
         <code>            public            
-    <strong>VisitRange</strong>(<a href="../../../Pinq/Queries/Segments/Range.html"><abbr title="Pinq\Queries\Segments\Range">Range</abbr></a> $Query)</code>
+    <strong>visitReindex</strong>(<a href="../../../Pinq/Queries/Segments/Reindex.html"><abbr title="Pinq\Queries\Segments\Reindex">Reindex</abbr></a> $segment)</code>
     </h3>
     <div class="details">
         <p>
@@ -673,232 +547,8 @@ scope of the query with the specified query segments</p>
 
                     <table>
                     <tr>
-                <td><a href="../../../Pinq/Queries/Segments/Range.html"><abbr title="Pinq\Queries\Segments\Range">Range</abbr></a></td>
-                <td>$Query</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_VisitUnique">
-        <div class="location">at line 35</div>
-        <code>            public            
-    <strong>VisitUnique</strong>(<a href="../../../Pinq/Queries/Segments/Unique.html"><abbr title="Pinq\Queries\Segments\Unique">Unique</abbr></a> $Query)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../../Pinq/Queries/Segments/Unique.html"><abbr title="Pinq\Queries\Segments\Unique">Unique</abbr></a></td>
-                <td>$Query</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_VisitFilter">
-        <div class="location">at line 42</div>
-        <code>            public            
-    <strong>VisitFilter</strong>(<a href="../../../Pinq/Queries/Segments/Filter.html"><abbr title="Pinq\Queries\Segments\Filter">Filter</abbr></a> $Query)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../../Pinq/Queries/Segments/Filter.html"><abbr title="Pinq\Queries\Segments\Filter">Filter</abbr></a></td>
-                <td>$Query</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_VisitGroupBy">
-        <div class="location">at line 49</div>
-        <code>            public            
-    <strong>VisitGroupBy</strong>(<a href="../../../Pinq/Queries/Segments/GroupBy.html"><abbr title="Pinq\Queries\Segments\GroupBy">GroupBy</abbr></a> $Query)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../../Pinq/Queries/Segments/GroupBy.html"><abbr title="Pinq\Queries\Segments\GroupBy">GroupBy</abbr></a></td>
-                <td>$Query</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_VisitJoin">
-        <div class="location">at line 56</div>
-        <code>            public            
-    <strong>VisitJoin</strong>(<a href="../../../Pinq/Queries/Segments/Join.html"><abbr title="Pinq\Queries\Segments\Join">Join</abbr></a> $Query)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../../Pinq/Queries/Segments/Join.html"><abbr title="Pinq\Queries\Segments\Join">Join</abbr></a></td>
-                <td>$Query</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_VisitEqualityJoin">
-        <div class="location">at line 63</div>
-        <code>            public            
-    <strong>VisitEqualityJoin</strong>(<a href="../../../Pinq/Queries/Segments/EqualityJoin.html"><abbr title="Pinq\Queries\Segments\EqualityJoin">EqualityJoin</abbr></a> $Query)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../../Pinq/Queries/Segments/EqualityJoin.html"><abbr title="Pinq\Queries\Segments\EqualityJoin">EqualityJoin</abbr></a></td>
-                <td>$Query</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_VisitOrderBy">
-        <div class="location">at line 70</div>
-        <code>            public            
-    <strong>VisitOrderBy</strong>(<a href="../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a> $Query)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a></td>
-                <td>$Query</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_VisitSelect">
-        <div class="location">at line 77</div>
-        <code>            public            
-    <strong>VisitSelect</strong>(<a href="../../../Pinq/Queries/Segments/Select.html"><abbr title="Pinq\Queries\Segments\Select">Select</abbr></a> $Query)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../../Pinq/Queries/Segments/Select.html"><abbr title="Pinq\Queries\Segments\Select">Select</abbr></a></td>
-                <td>$Query</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_VisitSelectMany">
-        <div class="location">at line 84</div>
-        <code>            public            
-    <strong>VisitSelectMany</strong>(<a href="../../../Pinq/Queries/Segments/SelectMany.html"><abbr title="Pinq\Queries\Segments\SelectMany">SelectMany</abbr></a> $Query)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../../Pinq/Queries/Segments/SelectMany.html"><abbr title="Pinq\Queries\Segments\SelectMany">SelectMany</abbr></a></td>
-                <td>$Query</td>
+                <td><a href="../../../Pinq/Queries/Segments/Reindex.html"><abbr title="Pinq\Queries\Segments\Reindex">Reindex</abbr></a></td>
+                <td>$segment</td>
                 <td>
 </td>
             </tr>

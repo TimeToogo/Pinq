@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Parsing\PhpParser\LocatedFunctionNode | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Pinq/Parsing/PhpParser.html">Pinq\Parsing\PhpParser</a>\LocatedFunctionNode</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>LocatedFunctionNode</strong>        extends <a href="../../../Pinq/Parsing/LocatedFunction.html"><abbr title="Pinq\Parsing\LocatedFunction">LocatedFunction</abbr></a></p>
+
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<a href="../../../Pinq/Parsing/IFunctionSignature.html"><abbr title="Pinq\Parsing\IFunctionSignature">IFunctionSignature</abbr></a> $signature, <a href="../../../Pinq/Parsing/IFunctionLocation.html"><abbr title="Pinq\Parsing\IFunctionLocation">IFunctionLocation</abbr></a> $location, <a href="../../../Pinq/Parsing/IFunctionDeclaration.html"><abbr title="Pinq\Parsing\IFunctionDeclaration">IFunctionDeclaration</abbr></a> $declaration, <abbr title="PhpParser\Node">Node</abbr> $node)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Parsing/IFunctionSignature.html"><abbr title="Pinq\Parsing\IFunctionSignature">IFunctionSignature</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getSignature">getSignature</a>()
+                    <p>Gets the function's signature.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Parsing/LocatedFunction.html#method_getSignature"><abbr title="Pinq\Parsing\LocatedFunction">LocatedFunction</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Parsing/IFunctionLocation.html"><abbr title="Pinq\Parsing\IFunctionLocation">IFunctionLocation</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getLocation">getLocation</a>()
+                    <p>Gets the function's location.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Parsing/LocatedFunction.html#method_getLocation"><abbr title="Pinq\Parsing\LocatedFunction">LocatedFunction</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getLocationAndSignatureHash">getLocationAndSignatureHash</a>()
+                    <p>Gets a hash of the located function from its location and signature.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Parsing/LocatedFunction.html#method_getLocationAndSignatureHash"><abbr title="Pinq\Parsing\LocatedFunction">LocatedFunction</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Pinq/Parsing/IFunctionDeclaration.html"><abbr title="Pinq\Parsing\IFunctionDeclaration">IFunctionDeclaration</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getDeclaration">getDeclaration</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="PhpParser\Node">Node</abbr>[]
+                </td>
+                <td class="last">
+                    <a href="#method_getBodyNodes">getBodyNodes</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 23</div>
+        <code>            public            
+    <strong>__construct</strong>(<a href="../../../Pinq/Parsing/IFunctionSignature.html"><abbr title="Pinq\Parsing\IFunctionSignature">IFunctionSignature</abbr></a> $signature, <a href="../../../Pinq/Parsing/IFunctionLocation.html"><abbr title="Pinq\Parsing\IFunctionLocation">IFunctionLocation</abbr></a> $location, <a href="../../../Pinq/Parsing/IFunctionDeclaration.html"><abbr title="Pinq\Parsing\IFunctionDeclaration">IFunctionDeclaration</abbr></a> $declaration, <abbr title="PhpParser\Node">Node</abbr> $node)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Pinq/Parsing/IFunctionSignature.html"><abbr title="Pinq\Parsing\IFunctionSignature">IFunctionSignature</abbr></a></td>
+                <td>$signature</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Pinq/Parsing/IFunctionLocation.html"><abbr title="Pinq\Parsing\IFunctionLocation">IFunctionLocation</abbr></a></td>
+                <td>$location</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Pinq/Parsing/IFunctionDeclaration.html"><abbr title="Pinq\Parsing\IFunctionDeclaration">IFunctionDeclaration</abbr></a></td>
+                <td>$declaration</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="PhpParser\Node">Node</abbr></td>
+                <td>$node</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getSignature">
+        <div class="location">in <a href="../../../Pinq/Parsing/LocatedFunction.html#method_getSignature"><abbr title="Pinq\Parsing\LocatedFunction">LocatedFunction</abbr></a> at line 43</div>
+        <code>            public            <a href="../../../Pinq/Parsing/IFunctionSignature.html"><abbr title="Pinq\Parsing\IFunctionSignature">IFunctionSignature</abbr></a>
+    <strong>getSignature</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the function's signature.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Parsing/IFunctionSignature.html"><abbr title="Pinq\Parsing\IFunctionSignature">IFunctionSignature</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLocation">
+        <div class="location">in <a href="../../../Pinq/Parsing/LocatedFunction.html#method_getLocation"><abbr title="Pinq\Parsing\LocatedFunction">LocatedFunction</abbr></a> at line 48</div>
+        <code>            public            <a href="../../../Pinq/Parsing/IFunctionLocation.html"><abbr title="Pinq\Parsing\IFunctionLocation">IFunctionLocation</abbr></a>
+    <strong>getLocation</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the function's location.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Parsing/IFunctionLocation.html"><abbr title="Pinq\Parsing\IFunctionLocation">IFunctionLocation</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLocationAndSignatureHash">
+        <div class="location">in <a href="../../../Pinq/Parsing/LocatedFunction.html#method_getLocationAndSignatureHash"><abbr title="Pinq\Parsing\LocatedFunction">LocatedFunction</abbr></a> at line 53</div>
+        <code>            public            string
+    <strong>getLocationAndSignatureHash</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets a hash of the located function from its location and signature.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getDeclaration">
+        <div class="location">at line 38</div>
+        <code>            public            <a href="../../../Pinq/Parsing/IFunctionDeclaration.html"><abbr title="Pinq\Parsing\IFunctionDeclaration">IFunctionDeclaration</abbr></a>
+    <strong>getDeclaration</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Pinq/Parsing/IFunctionDeclaration.html"><abbr title="Pinq\Parsing\IFunctionDeclaration">IFunctionDeclaration</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getBodyNodes">
+        <div class="location">at line 46</div>
+        <code>            public            <abbr title="PhpParser\Node">Node</abbr>[]
+    <strong>getBodyNodes</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="PhpParser\Node">Node</abbr>[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

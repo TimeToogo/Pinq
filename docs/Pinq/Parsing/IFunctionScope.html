@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Parsing\IFunctionScope | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../Pinq/Parsing.html">Pinq\Parsing</a>\IFunctionScope</h1>
+    </div>
+        <div class="content">
+                <p>    interface
+    <strong>IFunctionScope</strong></p>
+
+            <div class="description">
+            <p>Interface containing the scope data of a function.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_hasThis">hasThis</a>()
+                    <p>Whether the function has a scoped $this class.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getThisType">getThisType</a>()
+                    <p>Gets the scoped $this variable type.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    object|null
+                </td>
+                <td class="last">
+                    <a href="#method_getThis">getThis</a>()
+                    <p>Gets the scoped $this variable object.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getScopeType">getScopeType</a>()
+                    <p>Gets the scoped class type (determines which private/protected members are accessible).</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Parsing\array&lt;string,">array&lt;string,</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_getVariableTable">getVariableTable</a>()
+                    <p>Gets an array containing scoped values indexed by their respective variable name.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Parsing\O\IEvaluationContext">IEvaluationContext</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_asEvaluationContext">asEvaluationContext</a>(array $variableTable = array(), string|null $namespace = null)
+                    <p>Gets an equivalent evaluation context for the function scope.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_hasThis">
+        <div class="location">at line 19</div>
+        <code>            public            boolean
+    <strong>hasThis</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Whether the function has a scoped $this class.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getThisType">
+        <div class="location">at line 26</div>
+        <code>            public            string|null
+    <strong>getThisType</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the scoped $this variable type.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getThis">
+        <div class="location">at line 33</div>
+        <code>            public            object|null
+    <strong>getThis</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the scoped $this variable object.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>object|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getScopeType">
+        <div class="location">at line 40</div>
+        <code>            public            string|null
+    <strong>getScopeType</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the scoped class type (determines which private/protected members are accessible).</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getVariableTable">
+        <div class="location">at line 48</div>
+        <code>            public            <abbr title="Pinq\Parsing\array&lt;string,">array&lt;string,</abbr>
+    <strong>getVariableTable</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets an array containing scoped values indexed by their respective variable name.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Parsing\array&lt;string,">array&lt;string,</abbr></td>
+            <td>mixed></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_asEvaluationContext">
+        <div class="location">at line 58</div>
+        <code>            public            <abbr title="Pinq\Parsing\O\IEvaluationContext">IEvaluationContext</abbr>
+    <strong>asEvaluationContext</strong>(array $variableTable = array(), string|null $namespace = null)</code>
+    </h3>
+    <div class="details">
+        <p>Gets an equivalent evaluation context for the function scope.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$variableTable</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$namespace</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Parsing\O\IEvaluationContext">IEvaluationContext</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

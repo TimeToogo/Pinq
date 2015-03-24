@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Providers\DSL\Compilation\Processors\Structure\StructuralExpressionParameter | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../../../../classes.html">Classes</a></li>
+                            <li><a href="../../../../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../../../../traits.html">Traits</a></li>
+            <li><a href="../../../../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Structure.html">Pinq\Providers\DSL\Compilation\Processors\Structure</a>\StructuralExpressionParameter</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>StructuralExpressionParameter</strong>        extends <a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/ExpressionParameter.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ExpressionParameter">ExpressionParameter</abbr></a></p>
+
+            <div class="description">
+            <p>Implementation of the structural expression parameter.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Structure\O\Expression">Expression</abbr> $expression, <a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/IParameterHasher.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher">IParameterHasher</abbr></a> $hasher, <a href="../../../../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a> $function = null, $data = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/IParameterHasher.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher">IParameterHasher</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getHasher">getHasher</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/QueryParameterBase.html#method_getHasher"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\QueryParameterBase">QueryParameterBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_getData">getData</a>()
+                    <p>Gets any associated data of the parameter.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/QueryParameterBase.html#method_getData"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\QueryParameterBase">QueryParameterBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_evaluate">evaluate</a>(<a href="../../../../../../Pinq/Queries/IResolvedParameterRegistry.html"><abbr title="Pinq\Queries\IResolvedParameterRegistry">IResolvedParameterRegistry</abbr></a> $parameters, string $hash)
+                    <p>Gets the query parameter value with the supplied resolved parameters.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/QueryParameterBase.html#method_evaluate"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\QueryParameterBase">QueryParameterBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_hash">hash</a>(<a href="../../../../../../Pinq/Queries/IResolvedParameterRegistry.html"><abbr title="Pinq\Queries\IResolvedParameterRegistry">IResolvedParameterRegistry</abbr></a> $parameters)
+                    <p>Returns a unique identifier of the query parameter according the resolved values.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/QueryParameterBase.html#method_hash"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\QueryParameterBase">QueryParameterBase</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Providers\DSL\Compilation\Parameters\O\IEvaluator">IEvaluator</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_getEvaluator">getEvaluator</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/ExpressionParameter.html#method_getEvaluator"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ExpressionParameter">ExpressionParameter</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_doEvaluate">doEvaluate</a>(<a href="../../../../../../Pinq/Queries/IResolvedParameterRegistry.html"><abbr title="Pinq\Queries\IResolvedParameterRegistry">IResolvedParameterRegistry</abbr></a> $parameters)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/ExpressionParameter.html#method_doEvaluate"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ExpressionParameter">ExpressionParameter</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getExpression">getExpression</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 22</div>
+        <code>            public            
+    <strong>__construct</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Structure\O\Expression">Expression</abbr> $expression, <a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/IParameterHasher.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher">IParameterHasher</abbr></a> $hasher, <a href="../../../../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a> $function = null, $data = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Structure\O\Expression">Expression</abbr></td>
+                <td>$expression</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/IParameterHasher.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher">IParameterHasher</abbr></a></td>
+                <td>$hasher</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../../../Pinq/Queries/Functions/IFunction.html"><abbr title="Pinq\Queries\Functions\IFunction">IFunction</abbr></a></td>
+                <td>$function</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$data</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getHasher">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/QueryParameterBase.html#method_getHasher"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\QueryParameterBase">QueryParameterBase</abbr></a> at line 33</div>
+        <code>final            public            <a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/IParameterHasher.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher">IParameterHasher</abbr></a>
+    <strong>getHasher</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/IParameterHasher.html"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\IParameterHasher">IParameterHasher</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getData">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/QueryParameterBase.html#method_getData"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\QueryParameterBase">QueryParameterBase</abbr></a> at line 38</div>
+        <code>final            public            mixed
+    <strong>getData</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets any associated data of the parameter.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_evaluate">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/QueryParameterBase.html#method_evaluate"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\QueryParameterBase">QueryParameterBase</abbr></a> at line 43</div>
+        <code>            public            string
+    <strong>evaluate</strong>(<a href="../../../../../../Pinq/Queries/IResolvedParameterRegistry.html"><abbr title="Pinq\Queries\IResolvedParameterRegistry">IResolvedParameterRegistry</abbr></a> $parameters, string $hash)</code>
+    </h3>
+    <div class="details">
+        <p>Gets the query parameter value with the supplied resolved parameters.</p>
+        <p>A unique identifier is assigned to the $hash parameter.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../../Pinq/Queries/IResolvedParameterRegistry.html"><abbr title="Pinq\Queries\IResolvedParameterRegistry">IResolvedParameterRegistry</abbr></a></td>
+                <td>$parameters</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$hash</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hash">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/QueryParameterBase.html#method_hash"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\QueryParameterBase">QueryParameterBase</abbr></a> at line 51</div>
+        <code>            public            string
+    <strong>hash</strong>(<a href="../../../../../../Pinq/Queries/IResolvedParameterRegistry.html"><abbr title="Pinq\Queries\IResolvedParameterRegistry">IResolvedParameterRegistry</abbr></a> $parameters)</code>
+    </h3>
+    <div class="details">
+        <p>Returns a unique identifier of the query parameter according the resolved values.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../../Pinq/Queries/IResolvedParameterRegistry.html"><abbr title="Pinq\Queries\IResolvedParameterRegistry">IResolvedParameterRegistry</abbr></a></td>
+                <td>$parameters</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getEvaluator">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/ExpressionParameter.html#method_getEvaluator"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ExpressionParameter">ExpressionParameter</abbr></a> at line 43</div>
+        <code>            public            <abbr title="Pinq\Providers\DSL\Compilation\Parameters\O\IEvaluator">IEvaluator</abbr>
+    <strong>getEvaluator</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Providers\DSL\Compilation\Parameters\O\IEvaluator">IEvaluator</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_doEvaluate">
+        <div class="location">in <a href="../../../../../../Pinq/Providers/DSL/Compilation/Parameters/ExpressionParameter.html#method_doEvaluate"><abbr title="Pinq\Providers\DSL\Compilation\Parameters\ExpressionParameter">ExpressionParameter</abbr></a> at line 48</div>
+        <code>            public            
+    <strong>doEvaluate</strong>(<a href="../../../../../../Pinq/Queries/IResolvedParameterRegistry.html"><abbr title="Pinq\Queries\IResolvedParameterRegistry">IResolvedParameterRegistry</abbr></a> $parameters)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../../Pinq/Queries/IResolvedParameterRegistry.html"><abbr title="Pinq\Queries\IResolvedParameterRegistry">IResolvedParameterRegistry</abbr></a></td>
+                <td>$parameters</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getExpression">
+        <div class="location">at line 35</div>
+        <code>            public            <a href="../../../../../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
+    <strong>getExpression</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

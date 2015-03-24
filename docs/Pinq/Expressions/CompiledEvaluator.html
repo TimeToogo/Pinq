@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Expressions\CompiledEvaluator | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../Pinq/Expressions.html">Pinq\Expressions</a>\CompiledEvaluator</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>CompiledEvaluator</strong>        extends <a href="../../Pinq/Expressions/Evaluator.html"><abbr title="Pinq\Expressions\Evaluator">Evaluator</abbr></a>        implements
+        <a href="http://php.net/Serializable"><abbr title="Serializable">Serializable</abbr></a></p>
+
+            <div class="description">
+            <p>Implementation of the expression evaluator using compiled closures.</p>
+            <p>
+</p>
+        </div>
+    
+            <h2>Constants</h2>
+
+            <table>
+                    <tr>
+                <td>CONTEXT_PARAMETER_NAME</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+            </table>
+
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    <a href="../../Pinq/Expressions/IEvaluationContext.html"><abbr title="Pinq\Expressions\IEvaluationContext">IEvaluationContext</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getContext">getContext</a>()
+                    <p>Gets the evaluation context.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Evaluator.html#method_getContext"><abbr title="Pinq\Expressions\Evaluator">Evaluator</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string[]
+                </td>
+                <td class="last">
+                    <a href="#method_getRequiredVariables">getRequiredVariables</a>()
+                    <p>Gets the required variables for the evaluator.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Evaluator.html#method_getRequiredVariables"><abbr title="Pinq\Expressions\Evaluator">Evaluator</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_evaluate">evaluate</a>(array $variableTable = null)
+                    <p>Evaluates the expression with the supplied variable table and returns the returned value.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Evaluator.html#method_evaluate"><abbr title="Pinq\Expressions\Evaluator">Evaluator</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_evaluateWithNewThis">evaluateWithNewThis</a>(object|null $thisObject, array $variableTable = null)
+                    <p>Evaluates the expression with the supplied variable table and this object and returns the returned value.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Pinq/Expressions/Evaluator.html#method_evaluateWithNewThis"><abbr title="Pinq\Expressions\Evaluator">Evaluator</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;<a href="../../Pinq/Expressions/CompiledEvaluator.html"><abbr title="Pinq\Expressions\CompiledEvaluator">CompiledEvaluator</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_fromExpressions">fromExpressions</a>(array $expressions, <a href="../../Pinq/Expressions/IEvaluationContext.html"><abbr title="Pinq\Expressions\IEvaluationContext">IEvaluationContext</abbr></a> $context = null)
+                    <p>Creates a new compiled evaluator from the supplied expressions.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_serialize">serialize</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_unserialize">unserialize</a>($serialized)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getCode">getCode</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_getContext">
+        <div class="location">in <a href="../../Pinq/Expressions/Evaluator.html#method_getContext"><abbr title="Pinq\Expressions\Evaluator">Evaluator</abbr></a> at line 30</div>
+        <code>final            public            <a href="../../Pinq/Expressions/IEvaluationContext.html"><abbr title="Pinq\Expressions\IEvaluationContext">IEvaluationContext</abbr></a>
+    <strong>getContext</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the evaluation context.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Expressions/IEvaluationContext.html"><abbr title="Pinq\Expressions\IEvaluationContext">IEvaluationContext</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRequiredVariables">
+        <div class="location">in <a href="../../Pinq/Expressions/Evaluator.html#method_getRequiredVariables"><abbr title="Pinq\Expressions\Evaluator">Evaluator</abbr></a> at line 35</div>
+        <code>final            public            string[]
+    <strong>getRequiredVariables</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the required variables for the evaluator.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_evaluate">
+        <div class="location">in <a href="../../Pinq/Expressions/Evaluator.html#method_evaluate"><abbr title="Pinq\Expressions\Evaluator">Evaluator</abbr></a> at line 40</div>
+        <code>            public            mixed
+    <strong>evaluate</strong>(array $variableTable = null)</code>
+    </h3>
+    <div class="details">
+        <p>Evaluates the expression with the supplied variable table and returns the returned value.</p>
+        <p>The default variables from the context can be overridden in the first parameter.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$variableTable</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Pinq/PinqException.html"><abbr title="Pinq\PinqException">PinqException</abbr></a></td>
+                <td>if invalid variables are supplied in the variable table.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_evaluateWithNewThis">
+        <div class="location">in <a href="../../Pinq/Expressions/Evaluator.html#method_evaluateWithNewThis"><abbr title="Pinq\Expressions\Evaluator">Evaluator</abbr></a> at line 45</div>
+        <code>            public            mixed
+    <strong>evaluateWithNewThis</strong>(object|null $thisObject, array $variableTable = null)</code>
+    </h3>
+    <div class="details">
+        <p>Evaluates the expression with the supplied variable table and this object and returns the returned value.</p>
+        <p>The default variables from the context can be overridden in the first parameter.</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>object|null</td>
+                <td>$thisObject</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$variableTable</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_fromExpressions">
+        <div class="location">at line 42</div>
+        <code>        static    public            <a href="../../Pinq/Expressions/CompiledEvaluator.html"><abbr title="Pinq\Expressions\CompiledEvaluator">CompiledEvaluator</abbr></a>
+    <strong>fromExpressions</strong>(array $expressions, <a href="../../Pinq/Expressions/IEvaluationContext.html"><abbr title="Pinq\Expressions\IEvaluationContext">IEvaluationContext</abbr></a> $context = null)</code>
+    </h3>
+    <div class="details">
+        <p>Creates a new compiled evaluator from the supplied expressions.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$expressions</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Pinq/Expressions/IEvaluationContext.html"><abbr title="Pinq\Expressions\IEvaluationContext">IEvaluationContext</abbr></a></td>
+                <td>$context</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Pinq/Expressions/CompiledEvaluator.html"><abbr title="Pinq\Expressions\CompiledEvaluator">CompiledEvaluator</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_serialize">
+        <div class="location">at line 92</div>
+        <code>            public            
+    <strong>serialize</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_unserialize">
+        <div class="location">at line 97</div>
+        <code>            public            
+    <strong>unserialize</strong>($serialized)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$serialized</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCode">
+        <div class="location">at line 117</div>
+        <code>            public            string
+    <strong>getCode</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

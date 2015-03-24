@@ -39,10 +39,10 @@
             <table>
                     <tr>
                 <td class="type">
-                    
+                    string[]
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>($Index, $Value)
+                    <a href="#method_getParameters">getParameters</a>()
                     <p>
 </p>
                 </td>
@@ -53,18 +53,28 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_GetIndex">GetIndex</a>()
+                    <a href="#method___construct">__construct</a>($indexParameter, $valueParameterId)
                     <p>
 </p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Operations/IndexOperation.html#method_GetIndex"><abbr title="Pinq\Queries\Operations\IndexOperation">IndexOperation</abbr></a></small></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getIndexId">getIndexId</a>()
+                    <p>Gets the index parameter id.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Pinq/Queries/Operations/IndexOperation.html#method_getIndexId"><abbr title="Pinq\Queries\Operations\IndexOperation">IndexOperation</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
                     int
                 </td>
                 <td class="last">
-                    <a href="#method_GetType">GetType</a>()
+                    <a href="#method_getType">getType</a>()
                     <p>
 </p>
                 </td>
@@ -72,21 +82,20 @@
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    string
                 </td>
                 <td class="last">
-                    <a href="#method_GetValue">GetValue</a>()
-                    <p>
-</p>
+                    <a href="#method_getValueId">getValueId</a>()
+                    <p>Gets the value parameter id.</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    void
+                    mixed
                 </td>
                 <td class="last">
-                    <a href="#method_Traverse">Traverse</a>(<a href="../../../Pinq/Queries/Operations/OperationVisitor.html"><abbr title="Pinq\Queries\Operations\OperationVisitor">OperationVisitor</abbr></a> $Visitor)
+                    <a href="#method_traverse">traverse</a>(<a href="../../../Pinq/Queries/Operations/IOperationVisitor.html"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a> $visitor)
                     <p>
 </p>
                 </td>
@@ -97,10 +106,37 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method___construct">
-        <div class="location">at line 14</div>
+                        <h3 id="method_getParameters">
+        <div class="location">at line 28</div>
+        <code>            public            string[]
+    <strong>getParameters</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string[]</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method___construct">
+        <div class="location">at line 17</div>
         <code>            public            
-    <strong>__construct</strong>($Index, $Value)</code>
+    <strong>__construct</strong>($indexParameter, $valueParameterId)</code>
     </h3>
     <div class="details">
         <p>
@@ -113,13 +149,13 @@
                     <table>
                     <tr>
                 <td></td>
-                <td>$Index</td>
+                <td>$indexParameter</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td></td>
-                <td>$Value</td>
+                <td>$valueParameterId</td>
                 <td>
 </td>
             </tr>
@@ -131,27 +167,36 @@
                     </div>
     </div>
 
-                <h3 id="method_GetIndex">
-        <div class="location">in <a href="../../../Pinq/Queries/Operations/IndexOperation.html#method_GetIndex"><abbr title="Pinq\Queries\Operations\IndexOperation">IndexOperation</abbr></a> at line 22</div>
-        <code>final            public            
-    <strong>GetIndex</strong>()</code>
+                <h3 id="method_getIndexId">
+        <div class="location">in <a href="../../../Pinq/Queries/Operations/IndexOperation.html#method_getIndexId"><abbr title="Pinq\Queries\Operations\IndexOperation">IndexOperation</abbr></a> at line 27</div>
+        <code>final            public            string
+    <strong>getIndexId</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
+        <p>Gets the index parameter id.</p>
         <p>
 </p>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
-                <h3 id="method_GetType">
-        <div class="location">at line 20</div>
+                <h3 id="method_getType">
+        <div class="location">at line 23</div>
         <code>            public            int
-    <strong>GetType</strong>()</code>
+    <strong>getType</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -175,27 +220,36 @@
                     </div>
     </div>
 
-                <h3 id="method_GetValue">
-        <div class="location">at line 25</div>
-        <code>            public            
-    <strong>GetValue</strong>()</code>
+                <h3 id="method_getValueId">
+        <div class="location">at line 38</div>
+        <code>            public            string
+    <strong>getValueId</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
+        <p>Gets the value parameter id.</p>
         <p>
 </p>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
-                <h3 id="method_Traverse">
-        <div class="location">at line 30</div>
-        <code>            public            void
-    <strong>Traverse</strong>(<a href="../../../Pinq/Queries/Operations/OperationVisitor.html"><abbr title="Pinq\Queries\Operations\OperationVisitor">OperationVisitor</abbr></a> $Visitor)</code>
+                <h3 id="method_traverse">
+        <div class="location">at line 43</div>
+        <code>            public            mixed
+    <strong>traverse</strong>(<a href="../../../Pinq/Queries/Operations/IOperationVisitor.html"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a> $visitor)</code>
     </h3>
     <div class="details">
         <p>
@@ -207,8 +261,8 @@
 
                     <table>
                     <tr>
-                <td><a href="../../../Pinq/Queries/Operations/OperationVisitor.html"><abbr title="Pinq\Queries\Operations\OperationVisitor">OperationVisitor</abbr></a></td>
-                <td>$Visitor</td>
+                <td><a href="../../../Pinq/Queries/Operations/IOperationVisitor.html"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a></td>
+                <td>$visitor</td>
                 <td>
 </td>
             </tr>
@@ -219,7 +273,7 @@
 
                     <table>
         <tr>
-            <td>void</td>
+            <td>mixed</td>
             <td>
 </td>
         </tr>

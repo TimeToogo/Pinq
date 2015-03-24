@@ -27,7 +27,7 @@
     <strong>InvalidFunctionException</strong>        extends <a href="../../Pinq/PinqException.html"><abbr title="Pinq\PinqException">PinqException</abbr></a></p>
 
             <div class="description">
-            <p>Exception for errors while converting a function into  an expression tree</p>
+            <p>Exception for errors while converting a function into an expression tree</p>
             <p>
 </p>
         </div>
@@ -42,7 +42,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(<abbr title="Pinq\type">type</abbr> $MessageFormat = &#039;&#039;, mixed $_ = null)
+                    <a href="#method___construct">__construct</a>(string $messageFormat = &#039;&#039;, mixed $_ = null)
                     <p>
 </p>
                 </td>
@@ -53,51 +53,40 @@
                     static&nbsp;
                 </td>
                 <td class="last">
-                    <a href="#method_Construct">Construct</a>(array $Parameters)
+                    <a href="#method_construct">construct</a>(array $parameters)
                     <p>
 </p>
                 </td>
-                <td><small>from&nbsp;<a href="../../Pinq/PinqException.html#method_Construct"><abbr title="Pinq\PinqException">PinqException</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../Pinq/PinqException.html#method_construct"><abbr title="Pinq\PinqException">PinqException</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
                     static&nbsp;
                 </td>
                 <td class="last">
-                    <a href="#method_InvalidIterable">InvalidIterable</a>($Method, $Value)
+                    <a href="#method_invalidIterable">invalidIterable</a>($method, $value)
                     <p>
 </p>
                 </td>
-                <td><small>from&nbsp;<a href="../../Pinq/PinqException.html#method_InvalidIterable"><abbr title="Pinq\PinqException">PinqException</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../Pinq/PinqException.html#method_invalidIterable"><abbr title="Pinq\PinqException">PinqException</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
                     static&nbsp;
                 </td>
                 <td class="last">
-                    <a href="#method_NotSupported">NotSupported</a>($Method)
+                    <a href="#method_notSupported">notSupported</a>($method)
                     <p>
 </p>
                 </td>
-                <td><small>from&nbsp;<a href="../../Pinq/PinqException.html#method_NotSupported"><abbr title="Pinq\PinqException">PinqException</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../Pinq/PinqException.html#method_notSupported"><abbr title="Pinq\PinqException">PinqException</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
                     static&nbsp;<a href="../../Pinq/Parsing/InvalidFunctionException.html"><abbr title="Pinq\Parsing\InvalidFunctionException">InvalidFunctionException</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_InvalidFunctionMessage">InvalidFunctionMessage</a>(string $MessageFormat, <abbr title="Pinq\Parsing\ReflectionFunctionAbstract">ReflectionFunctionAbstract</abbr> $Reflection)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    static&nbsp;<a href="../../Pinq/Parsing/InvalidFunctionException.html"><abbr title="Pinq\Parsing\InvalidFunctionException">InvalidFunctionException</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_MustContainValidReturnExpression">MustContainValidReturnExpression</a>(<abbr title="Pinq\Parsing\ReflectionFunctionAbstract">ReflectionFunctionAbstract</abbr> $Reflection)
+                    <a href="#method_invalidFunctionMessage">invalidFunctionMessage</a>(string $messageFormat, <abbr title="Pinq\Parsing\ReflectionFunctionAbstract">ReflectionFunctionAbstract</abbr> $reflection)
                     <p>
 </p>
                 </td>
@@ -111,130 +100,7 @@
                         <h3 id="method___construct">
         <div class="location">in <a href="../../Pinq/PinqException.html#method___construct"><abbr title="Pinq\PinqException">PinqException</abbr></a> at line 16</div>
         <code>            public            
-    <strong>__construct</strong>(<abbr title="Pinq\type">type</abbr> $MessageFormat = &#039;&#039;, mixed $_ = null)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><abbr title="Pinq\type">type</abbr></td>
-                <td>$MessageFormat</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>mixed</td>
-                <td>$_</td>
-                <td>... The values to interpole the message with</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_Construct">
-        <div class="location">in <a href="../../Pinq/PinqException.html#method_Construct"><abbr title="Pinq\PinqException">PinqException</abbr></a> at line 28</div>
-        <code>        static    public            
-    <strong>Construct</strong>(array $Parameters)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>array</td>
-                <td>$Parameters</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_InvalidIterable">
-        <div class="location">in <a href="../../Pinq/PinqException.html#method_InvalidIterable"><abbr title="Pinq\PinqException">PinqException</abbr></a> at line 40</div>
-        <code>        static    public            
-    <strong>InvalidIterable</strong>($Method, $Value)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td></td>
-                <td>$Method</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td></td>
-                <td>$Value</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_NotSupported">
-        <div class="location">in <a href="../../Pinq/PinqException.html#method_NotSupported"><abbr title="Pinq\PinqException">PinqException</abbr></a> at line 48</div>
-        <code>        static    public            
-    <strong>NotSupported</strong>($Method)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td></td>
-                <td>$Method</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_InvalidFunctionMessage">
-        <div class="location">at line 18</div>
-        <code>        static    public            <a href="../../Pinq/Parsing/InvalidFunctionException.html"><abbr title="Pinq\Parsing\InvalidFunctionException">InvalidFunctionException</abbr></a>
-    <strong>InvalidFunctionMessage</strong>(string $MessageFormat, <abbr title="Pinq\Parsing\ReflectionFunctionAbstract">ReflectionFunctionAbstract</abbr> $Reflection)</code>
+    <strong>__construct</strong>(string $messageFormat = &#039;&#039;, mixed $_ = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -247,38 +113,27 @@
                     <table>
                     <tr>
                 <td>string</td>
-                <td>$MessageFormat</td>
+                <td>$messageFormat</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td><abbr title="Pinq\Parsing\ReflectionFunctionAbstract">ReflectionFunctionAbstract</abbr></td>
-                <td>$Reflection</td>
-                <td>
-</td>
+                <td>mixed</td>
+                <td>$_</td>
+                <td>The values to interpolate the message with</td>
             </tr>
             </table>
 
             
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td><a href="../../Pinq/Parsing/InvalidFunctionException.html"><abbr title="Pinq\Parsing\InvalidFunctionException">InvalidFunctionException</abbr></a></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
             
             
                     </div>
     </div>
 
-                <h3 id="method_MustContainValidReturnExpression">
-        <div class="location">at line 33</div>
-        <code>        static    public            <a href="../../Pinq/Parsing/InvalidFunctionException.html"><abbr title="Pinq\Parsing\InvalidFunctionException">InvalidFunctionException</abbr></a>
-    <strong>MustContainValidReturnExpression</strong>(<abbr title="Pinq\Parsing\ReflectionFunctionAbstract">ReflectionFunctionAbstract</abbr> $Reflection)</code>
+                <h3 id="method_construct">
+        <div class="location">in <a href="../../Pinq/PinqException.html#method_construct"><abbr title="Pinq\PinqException">PinqException</abbr></a> at line 27</div>
+        <code>        static    public            
+    <strong>construct</strong>(array $parameters)</code>
     </h3>
     <div class="details">
         <p>
@@ -290,8 +145,104 @@
 
                     <table>
                     <tr>
+                <td>array</td>
+                <td>$parameters</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_invalidIterable">
+        <div class="location">in <a href="../../Pinq/PinqException.html#method_invalidIterable"><abbr title="Pinq\PinqException">PinqException</abbr></a> at line 34</div>
+        <code>        static    public            
+    <strong>invalidIterable</strong>($method, $value)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$method</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_notSupported">
+        <div class="location">in <a href="../../Pinq/PinqException.html#method_notSupported"><abbr title="Pinq\PinqException">PinqException</abbr></a> at line 42</div>
+        <code>        static    public            
+    <strong>notSupported</strong>($method)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$method</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_invalidFunctionMessage">
+        <div class="location">at line 21</div>
+        <code>        static    public            <a href="../../Pinq/Parsing/InvalidFunctionException.html"><abbr title="Pinq\Parsing\InvalidFunctionException">InvalidFunctionException</abbr></a>
+    <strong>invalidFunctionMessage</strong>(string $messageFormat, <abbr title="Pinq\Parsing\ReflectionFunctionAbstract">ReflectionFunctionAbstract</abbr> $reflection)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$messageFormat</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
                 <td><abbr title="Pinq\Parsing\ReflectionFunctionAbstract">ReflectionFunctionAbstract</abbr></td>
-                <td>$Reflection</td>
+                <td>$reflection</td>
                 <td>
 </td>
             </tr>

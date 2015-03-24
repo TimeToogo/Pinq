@@ -29,6 +29,10 @@
                     <td class="last"><code> [1, 2, 'test' => 4] </code></td>
                 </tr>
                             <tr>
+                    <td><a href="../Pinq/Expressions/ArrayItemExpression.html"><abbr title="Pinq\Expressions\ArrayItemExpression">ArrayItemExpression</abbr></a></td>
+                    <td class="last"><code> 'test' => 4 </code></td>
+                </tr>
+                            <tr>
                     <td><a href="../Pinq/Expressions/AssignmentExpression.html"><abbr title="Pinq\Expressions\AssignmentExpression">AssignmentExpression</abbr></a></td>
                     <td class="last"><code> $Variable += 5 </code></td>
                 </tr>
@@ -41,8 +45,20 @@
                     <td class="last"><code> (string)$I </code></td>
                 </tr>
                             <tr>
+                    <td><a href="../Pinq/Expressions/ClassConstantExpression.html"><abbr title="Pinq\Expressions\ClassConstantExpression">ClassConstantExpression</abbr></a></td>
+                    <td class="last"><code> Class:constant </code></td>
+                </tr>
+                            <tr>
                     <td><a href="../Pinq/Expressions/ClosureExpression.html"><abbr title="Pinq\Expressions\ClosureExpression">ClosureExpression</abbr></a></td>
                     <td class="last"><code> function ($I) { return $I + 5; } </code></td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Expressions/ConstantExpression.html"><abbr title="Pinq\Expressions\ConstantExpression">ConstantExpression</abbr></a></td>
+                    <td class="last"><code> SORT_ASC </code></td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Expressions/DynamicExpressionWalker.html"><abbr title="Pinq\Expressions\DynamicExpressionWalker">DynamicExpressionWalker</abbr></a></td>
+                    <td class="last">Implementation of the expression walker takes an array of callables and delegates walking the expressions to those callables.</td>
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Expressions/EmptyExpression.html"><abbr title="Pinq\Expressions\EmptyExpression">EmptyExpression</abbr></a></td>
@@ -54,7 +70,7 @@
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Expressions/ExpressionVisitor.html"><abbr title="Pinq\Expressions\ExpressionVisitor">ExpressionVisitor</abbr></a></td>
-                    <td class="last">Base class for traversing an expression tree, only the top expression will be visisted, the subclass should implement such that is visits all the appropriate expressions</td>
+                    <td class="last">Base class for traversing an expression tree, only the top expression will be visited, the subclass should implement such that is visits all the appropriate expressions</td>
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Expressions/ExpressionWalker.html"><abbr title="Pinq\Expressions\ExpressionWalker">ExpressionWalker</abbr></a></td>
@@ -78,11 +94,11 @@
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Expressions/IssetExpression.html"><abbr title="Pinq\Expressions\IssetExpression">IssetExpression</abbr></a></td>
-                    <td class="last"><code> isset($I, $B) </code></td>
+                    <td class="last"><code> isset($var, $other) </code></td>
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Expressions/MethodCallExpression.html"><abbr title="Pinq\Expressions\MethodCallExpression">MethodCallExpression</abbr></a></td>
-                    <td class="last"><code> $I->Method($One, true) </code></td>
+                    <td class="last"><code> $var->method($one, true) </code></td>
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Expressions/NewExpression.html"><abbr title="Pinq\Expressions\NewExpression">NewExpression</abbr></a></td>
@@ -102,16 +118,20 @@
                     <td class="last"><code> return true </code></td>
                 </tr>
                             <tr>
+                    <td><a href="../Pinq/Expressions/StaticClassExpression.html"><abbr title="Pinq\Expressions\StaticClassExpression">StaticClassExpression</abbr></a></td>
+                    <td class="last"><code> Class::...</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Expressions/StaticFieldExpression.html"><abbr title="Pinq\Expressions\StaticFieldExpression">StaticFieldExpression</abbr></a></td>
+                    <td class="last"><code> Class::$field </code></td>
+                </tr>
+                            <tr>
                     <td><a href="../Pinq/Expressions/StaticMethodCallExpression.html"><abbr title="Pinq\Expressions\StaticMethodCallExpression">StaticMethodCallExpression</abbr></a></td>
                     <td class="last"><code> Class::Method('foo') </code></td>
                 </tr>
                             <tr>
-                    <td><a href="../Pinq/Expressions/SubQueryExpression.html"><abbr title="Pinq\Expressions\SubQueryExpression">SubQueryExpression</abbr></a></td>
-                    <td class="last"><code> $Traversable->Where(function ($I) { return $I > 5 })->Average(); </code></td>
-                </tr>
-                            <tr>
                     <td><a href="../Pinq/Expressions/TernaryExpression.html"><abbr title="Pinq\Expressions\TernaryExpression">TernaryExpression</abbr></a></td>
-                    <td class="last"><code> $I ? 1 : -1 </code></td>
+                    <td class="last"><code> $condition ? 1 : -1 </code></td>
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Expressions/ThrowExpression.html"><abbr title="Pinq\Expressions\ThrowExpression">ThrowExpression</abbr></a></td>
@@ -126,12 +146,20 @@
                     <td class="last"><code> -$I; $I++; </code></td>
                 </tr>
                             <tr>
+                    <td><a href="../Pinq/Expressions/UnsetExpression.html"><abbr title="Pinq\Expressions\UnsetExpression">UnsetExpression</abbr></a></td>
+                    <td class="last"><code> unset($I, $B) </code></td>
+                </tr>
+                            <tr>
                     <td><a href="../Pinq/Expressions/ValueExpression.html"><abbr title="Pinq\Expressions\ValueExpression">ValueExpression</abbr></a></td>
                     <td class="last"><code> 1, 'foo', [], null etc </code></td>
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Expressions/VariableExpression.html"><abbr title="Pinq\Expressions\VariableExpression">VariableExpression</abbr></a></td>
                     <td class="last"><code> $I </code></td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Expressions/VariadicLanguageConstructExpression.html"><abbr title="Pinq\Expressions\VariadicLanguageConstructExpression">VariadicLanguageConstructExpression</abbr></a></td>
+                    <td class="last">Base class for a variadic language construct.</td>
                 </tr>
                     </table>
     
