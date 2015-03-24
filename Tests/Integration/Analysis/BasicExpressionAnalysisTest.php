@@ -114,7 +114,9 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
     public function testInvalidUnaryOperators()
     {
         $asserts = [
-                [function () { ~[]; }],
+                [function ($a) { +[$a]; }],
+                [function ($a) { -[$a]; }],
+                [function ($a) { ~[$a]; }],
                 [function () { ++$i; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_ARRAY)]],
                 [function () { --$i; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_ARRAY)]],
                 [function () { $i++; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_ARRAY)]],
@@ -321,7 +323,7 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
                         function () { 3.0 >= 3; },
                         function () { 3 >= 3.0; },
                         function () { 3 >= '3'; },
-                        function () { false instanceof \stdClass; },
+                        function ($a) { (false || $a) instanceof \stdClass; },
                 ],
                 INativeType::TYPE_ARRAY => [
                         function () { [] + [1,2]; },
@@ -348,7 +350,7 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
                         function () { 3 + 'av1'; },
                         function () { 3 - 'av1'; },
                         function () { 3 * 'av1'; },
-                        function () { 3 / 'av1'; },
+                        function ($a) { 3 / ('av1' . $a); },
                         function () { 'as' + 'av1'; },
                         function () { 1 / 2; },
                         function () { 1 / 1; },
@@ -411,7 +413,7 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
 
     public function testInvalidBinaryOperator()
     {
-        $this->assertAnalysisFails(function () { [] - 3.4; });
+        $this->assertAnalysisFails(function ($a) { [$a] - 3.4; });
     }
 
     public function testTernaryWithNativeTypes()
