@@ -295,7 +295,7 @@ class AST
         switch (true) {
             case $node instanceof Node\Scalar\DNumber:
             case $node instanceof Node\Scalar\LNumber:
-            case $node instanceof Node\Scalar\String:
+            case $node instanceof Node\Scalar\String_:
                 return Expression::value($node->value);
 
             case $node instanceof Node\Scalar\MagicConst\Line:
@@ -390,7 +390,7 @@ class AST
             case isset(self::$unaryOperatorsMap[$nodeType]):
                 return Expression::unaryOperation(
                         self::$unaryOperatorsMap[$nodeType],
-                        $this->parseNode($node->expr ?: $node->var)
+                        $this->parseNode(isset($node->expr) ? $node->expr : $node->var)
                 );
 
             case isset(self::$castOperatorMap[$nodeType]):
