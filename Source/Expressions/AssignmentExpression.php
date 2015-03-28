@@ -2,9 +2,12 @@
 
 namespace Pinq\Expressions;
 
+use Pinq\Expressions\Operators\Assignment;
+use Pinq\Expressions\Operators\Binary;
+
 /**
  * <code>
- * $Variable += 5
+ * $variable += 5
  * </code>
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
@@ -56,6 +59,39 @@ class AssignmentExpression extends Expression
         return $this->assignmentValue;
     }
 
+    /**
+     * Converts the assignment expression with compound assignment operators
+     * to the equivalent assignment and binary operator combination
+     *
+     * <code>
+     * $variable += 5
+     * </code>
+     * becomes
+     * <code>
+     * $variable = $variable + 5
+     * </code>
+     *
+     * @return AssignmentExpression
+     */
+    public function toBinaryOperationEquivalent()
+    {
+        $binaryOperator = Assignment::toBinaryOperator($this->operator);
+
+        if($binaryOperator === null) {
+            return $this;
+        }
+
+        return $this->update(
+                $this->assignTo,
+                Assignment::EQUAL,
+                Expression::binaryOperation(
+                        $this->assignTo,
+                        $binaryOperator,
+                        $this->assignmentValue
+                )
+        );
+    }
+
     public function traverse(ExpressionWalker $walker)
     {
         return $walker->walkAssignment($this);
@@ -63,7 +99,7 @@ class AssignmentExpression extends Expression
 
     /**
      * @param Expression $assignTo
-     * @param int        $operator
+     * @param string     $operator
      * @param Expression $assignmentValue
      *
      * @return self

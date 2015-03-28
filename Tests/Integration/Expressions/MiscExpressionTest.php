@@ -72,12 +72,33 @@ class MiscExpressionTest extends ExpressionTest
                 O\Expression::closureUsedVariable('foobar')->asVariable());
     }
 
-    public function testAssignmentToBinaryOperator()
+    public function testAssignmentToBinaryOperatorEquivalent()
     {
-        $this->assertSame(O\Operators\Binary::ADDITION, O\Operators\Assignment::toBinaryOperator(O\Operators\Assignment::ADDITION));
-        $this->assertSame(O\Operators\Binary::CONCATENATION, O\Operators\Assignment::toBinaryOperator(O\Operators\Assignment::CONCATENATE));
-        $this->assertSame(null, O\Operators\Assignment::toBinaryOperator(O\Operators\Assignment::EQUAL));
-        $this->assertSame(null, O\Operators\Assignment::toBinaryOperator(O\Operators\Assignment::EQUAL_REFERENCE));
-        $this->assertSame(null, O\Operators\Assignment::toBinaryOperator('no-such-operator'));
+        foreach([O\Operators\Assignment::EQUAL, O\Operators\Assignment::EQUAL_REFERENCE] as $operatorThatShouldNotChange) {
+            $assignment = O\Expression::assign(
+                    O\Expression::variable(O\Expression::value('foo')),
+                    $operatorThatShouldNotChange,
+                    O\Expression::variable(O\Expression::value('bar'))
+            );
+
+            $this->assertSame($assignment, $assignment->toBinaryOperationEquivalent());
+        }
+
+        $assignment = O\Expression::assign(
+                O\Expression::variable(O\Expression::value('foo')),
+                O\Operators\Assignment::ADDITION,
+                O\Expression::variable(O\Expression::value('bar'))
+        );
+
+
+        $this->assertEquals(O\Expression::assign(
+                O\Expression::variable(O\Expression::value('foo')),
+                O\Operators\Assignment::EQUAL,
+                O\Expression::binaryOperation(
+                        O\Expression::variable(O\Expression::value('foo')),
+                        O\Operators\Binary::ADDITION,
+                        O\Expression::variable(O\Expression::value('bar'))
+                )
+        ), $assignment->toBinaryOperationEquivalent());
     }
 }

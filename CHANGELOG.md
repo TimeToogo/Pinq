@@ -1,3 +1,8 @@
+dev-master
+==========
+ - Upgraded to `nikic/php-parser` V1.2.0
+ - Added `Expressions\AssignmentExpression::toBinaryOperationEquivalent`, reducing compound assignment operators to the expanded equivalent
+
 3.0.0 (22/9/14)
 ===============
  - Query functions are passed each value with their associated key as the second parameter while

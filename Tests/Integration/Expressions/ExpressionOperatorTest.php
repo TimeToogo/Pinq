@@ -131,4 +131,13 @@ class ExpressionOperatorTest extends ExpressionTest
     {
         Cast::doCast('addddsdsaf', null);
     }
+
+    public function testAssignmentToBinaryOperator()
+    {
+        $this->assertSame(Binary::ADDITION, Assignment::toBinaryOperator(Assignment::ADDITION));
+        $this->assertSame(Binary::CONCATENATION, Assignment::toBinaryOperator(Assignment::CONCATENATE));
+        $this->assertSame(null, Assignment::toBinaryOperator(Assignment::EQUAL));
+        $this->assertSame(null, Assignment::toBinaryOperator(Assignment::EQUAL_REFERENCE));
+        $this->assertSame(null, Assignment::toBinaryOperator('no-such-operator'));
+    }
 }
