@@ -2,7 +2,6 @@
 
 namespace Pinq\Providers\DSL\Compilation\Processors\Expression;
 
-use Pinq\Providers\DSL\Compilation\Processors\IScopeProcessor;
 use Pinq\Providers\DSL\Compilation\Processors\Visitors;
 use Pinq\Queries\Segments;
 use Pinq\Queries;
@@ -33,7 +32,7 @@ class ScopeProcessor extends Visitors\ScopeProcessor
 
     public function buildScope()
     {
-        return $this->processSegments($this->scope->getSegments());
+        return $this->scope->updateSegments($this->processSegments($this->scope->getSegments()));
     }
 
     protected function visitProjectionSegment(Segments\ProjectionSegment $segment)

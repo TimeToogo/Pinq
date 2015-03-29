@@ -31,7 +31,7 @@ abstract class ScopeProcessor extends Processors\ScopeProcessor implements Segme
             $this->segments[] = $segment->traverse($this);
         }
 
-        return $this->scope->updateSegments($this->segments);
+        return $this->segments;
     }
 
     public function processSource(Queries\Common\ISource $source)
