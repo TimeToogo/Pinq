@@ -5,6 +5,8 @@ namespace Pinq\Tests\Integration\Providers\DSL\Implementation;
 use Pinq\Caching;
 use Pinq\Expressions as O;
 use Pinq\Providers\DSL\Compilation;
+use Pinq\Providers\DSL\Compilation\Compilers\IOperationQueryCompiler;
+use Pinq\Providers\DSL\Compilation\Compilers\IRequestQueryCompiler;
 use Pinq\Providers\DSL\Compilation\Processors;
 use Pinq\Providers\DSL\Compilation\Parameters;
 use Pinq\Providers\DSL\RepositoryCompilerConfiguration;
@@ -93,15 +95,27 @@ abstract class ConfigurationBase extends RepositoryCompilerConfiguration
         return $query;
     }
 
-    protected function buildCompiledRequestQuery(Queries\IRequestQuery $query)
+    protected function getRequestQueryCompiler(Queries\IRequestQuery $query)
     {
-        return $this->makeCompiledRequestQuery($this->preprocessQuery($query));
+        return $this->buildRequestQueryCompiler($this->preprocessQuery($query));
     }
 
-    abstract protected function makeCompiledOperationQuery(Queries\IOperationQuery $query);
+    /**
+     * @param Queries\IRequestQuery $query
+     *
+     * @return IRequestQueryCompiler
+     */
+    abstract protected function buildRequestQueryCompiler(Queries\IRequestQuery $query);
 
-    protected function buildCompiledOperationQuery(Queries\IOperationQuery $query)
+    protected function getOperationQueryCompiler(Queries\IOperationQuery $query)
     {
-        return $this->makeCompiledOperationQuery($this->preprocessQuery($query));
+        return $this->buildOperationQueryCompiler($this->preprocessQuery($query));
     }
+
+    /**
+     * @param Queries\IOperationQuery $query
+     *
+     * @return IOperationQueryCompiler
+     */
+    abstract protected function buildOperationQueryCompiler(Queries\IOperationQuery $query);
 }

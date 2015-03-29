@@ -3,26 +3,20 @@
 namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
 use Pinq\Providers\DSL\Compilation\Processors;
+use Pinq\Providers\DSL\Compilation\Compilers\RequestQueryCompiler;
 use Pinq\Queries\Requests;
 use Pinq\Queries;
 
-class RequestCompiler extends Processors\Visitors\RequestQueryProcessor
+class RequestCompiler extends RequestQueryCompiler
 {
     /**
-     * @var CompiledQuery
+     * @var QueryCompilation
      */
     protected $compilation;
 
-    public function __construct(CompiledQuery $compiledQuery, Queries\IRequestQuery $requestQuery)
+    public function __construct(Queries\IRequestQuery $requestQuery, QueryCompilation $compilation)
     {
-        parent::__construct(new ScopeCompiler($compiledQuery, $requestQuery->getScope()), $requestQuery);
-        $this->compilation = $compiledQuery;
-    }
-
-    protected function processRequest(Queries\IScope $scope, Queries\IRequest $request)
-    {
-        parent::processRequest($scope, $request);
-        return $request;
+        parent::__construct($requestQuery, new ScopeCompiler($compilation, $requestQuery->getScope()));
     }
 
     public function visitValues(Requests\Values $request)

@@ -20,48 +20,57 @@ class OperationQueryProcessor extends Processors\OperationQueryProcessor impleme
 
     protected function processOperation(Queries\IScope $scope, Queries\IOperation $operation)
     {
-        $operation->traverse($this);
+        $this->operation = $operation->traverse($this);
 
         return $this->operation;
     }
 
     public function visitUnsetIndex(Operations\UnsetIndex $operation)
     {
-        $this->operation = $operation;
+        return $operation;
     }
 
     public function visitApply(Operations\Apply $operation)
     {
-        $this->operation = $operation;
+        return $operation;
     }
 
     public function visitClear(Operations\Clear $operation)
     {
-        $this->operation = $operation;
+        return $operation;
     }
 
     public function visitSetIndex(Operations\SetIndex $operation)
     {
-        $this->operation = $operation;
+        return $operation;
     }
 
     public function visitAddValues(Operations\AddValues $operation)
     {
-        $this->operation = $operation;
+        return $operation->update(
+                $this->scopeProcessor->processSource($operation->getSource())
+        );
     }
 
     public function visitRemoveWhere(Operations\RemoveWhere $operation)
     {
-        $this->operation = $operation;
+        return $operation;
     }
 
     public function visitJoinApply(Operations\JoinApply $operation)
     {
-        $this->operation = $operation;
+        return $operation->update(
+                $operation->getOptions()->updateSource(
+                        $this->scopeProcessor->processSource($operation->getOptions()->getSource())
+                ),
+                $operation->getMutatorFunction()
+        );
     }
 
     public function visitRemoveValues(Operations\RemoveValues $operation)
     {
-        $this->operation = $operation;
+        return $operation->update(
+                $this->scopeProcessor->processSource($operation->getSource())
+        );
     }
 }

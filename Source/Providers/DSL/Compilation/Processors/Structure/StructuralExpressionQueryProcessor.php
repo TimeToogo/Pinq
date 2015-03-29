@@ -25,10 +25,8 @@ abstract class StructuralExpressionQueryProcessor extends ExpressionProcessor
 
     public function __construct(
             ParameterCollectionBase $parameters,
-            IStructuralExpressionProcessor $processor,
-            Queries\IScope $scope
+            IStructuralExpressionProcessor $processor
     ) {
-        parent::__construct($scope);
         $this->parameters = $parameters;
         $this->processor  = $processor;
     }

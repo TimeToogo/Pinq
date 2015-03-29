@@ -11,80 +11,104 @@ use Pinq\Queries\Segments;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class ScopeProcessor extends Processors\ScopeProcessor implements Segments\ISegmentVisitor
+abstract class ScopeProcessor extends Processors\ScopeProcessor implements Segments\ISegmentVisitor
 {
     /**
      * @var Queries\ISegment[]
      */
     private $segments;
 
+    /**
+     * @param Queries\ISegment[] $segments
+     *
+     * @return Queries\ISegment[]
+     */
     protected function processSegments(array $segments)
     {
         $this->segments = [];
+
         foreach ($segments as $segment) {
-            $segment->traverse($this);
+            $this->segments[] = $segment->traverse($this);
         }
 
-        return $this->segments;
+        return $this->scope->updateSegments($this->segments);
+    }
+
+    public function processSource(Queries\Common\ISource $source)
+    {
+        if ($source instanceof Queries\Common\Source\QueryScope) {
+            $processor = $this->forSubScope($source->getScope());
+
+            return $source->update($processor->buildScope());
+        }
+
+        return $source;
     }
 
     public function visitIndexBy(Segments\IndexBy $segment)
     {
-        $this->segments[] = $segment;
+        return $segment;
     }
 
     public function visitSelect(Segments\Select $segment)
     {
-        $this->segments[] = $segment;
+        return $segment;
     }
 
     public function visitGroupBy(Segments\GroupBy $segment)
     {
-        $this->segments[] = $segment;
+        return $segment;
     }
 
     public function visitSelectMany(Segments\SelectMany $segment)
     {
-        $this->segments[] = $segment;
+        return $segment;
     }
 
     public function visitFilter(Segments\Filter $segment)
     {
-        $this->segments[] = $segment;
+        return $segment;
     }
 
     public function visitOrderBy(Segments\OrderBy $segment)
     {
-        $this->segments[] = $segment;
+        return $segment;
     }
 
     public function visitJoin(Segments\Join $segment)
     {
-        $this->segments[] = $segment;
+        return $segment->update(
+                $segment->getOptions()->updateSource(
+                        $this->processSource($segment->getOptions()->getSource())
+                ),
+                $segment->getJoiningFunction()
+        );
     }
 
     public function visitKeys(Segments\Keys $segment)
     {
-        $this->segments[] = $segment;
+        return $segment;
     }
 
     public function visitOperation(Segments\Operation $segment)
     {
-        $this->segments[] = $segment;
+        return $segment->updateSource(
+                $this->processSource($segment->getSource())
+        );
     }
 
     public function visitRange(Segments\Range $segment)
     {
-        $this->segments[] = $segment;
+        return $segment;
     }
 
     public function visitUnique(Segments\Unique $segment)
     {
-        $this->segments[] = $segment;
+        return $segment;
     }
 
     public function visitReindex(Segments\Reindex $segment)
     {
-        $this->segments[] = $segment;
+        return $segment;
     }
 }

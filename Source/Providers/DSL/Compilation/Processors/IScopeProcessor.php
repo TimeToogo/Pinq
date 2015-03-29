@@ -12,6 +12,20 @@ use Pinq\Queries;
 interface IScopeProcessor
 {
     /**
+     * @param Queries\IScope $subScope
+     *
+     * @return IScopeProcessor
+     */
+    public function forSubScope(Queries\IScope $subScope);
+
+    /**
+     * @param Queries\Common\ISource $source
+     *
+     * @return Queries\Common\ISource
+     */
+    public function processSource(Queries\Common\ISource $source);
+
+    /**
      * @return Queries\IScope
      */
     public function buildScope();

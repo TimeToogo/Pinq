@@ -26,21 +26,21 @@ class OperationQueryProcessor extends Visitors\OperationQueryProcessor
 
     public function __construct(IExpressionProcessor $expressionProcessor, Queries\IOperationQuery $operationQuery)
     {
-        parent::__construct(new ScopeProcessor($expressionProcessor), $operationQuery);
+        parent::__construct(new ScopeProcessor($operationQuery->getScope(), $expressionProcessor), $operationQuery);
 
         $this->expressionProcessor = $expressionProcessor;
     }
 
     public function visitApply(Operations\Apply $operation)
     {
-        parent::visitApply(
+        return parent::visitApply(
                 $operation->update($this->expressionProcessor->processFunction($operation->getMutatorFunction()))
         );
     }
 
     public function visitJoinApply(Operations\JoinApply $operation)
     {
-        parent::visitJoinApply(
+        return parent::visitJoinApply(
                 $operation->update(
                         $this->scopeProcessor->updateJoinOptions($operation->getOptions()),
                         $this->expressionProcessor->processFunction($operation->getMutatorFunction())
@@ -48,19 +48,9 @@ class OperationQueryProcessor extends Visitors\OperationQueryProcessor
         );
     }
 
-    public function visitAddValues(Operations\AddValues $operation)
-    {
-        parent::visitAddValues($operation->update($this->scopeProcessor->processSource($operation->getSource())));
-    }
-
-    public function visitRemoveValues(Operations\RemoveValues $operation)
-    {
-        parent::visitRemoveValues($operation->update($this->scopeProcessor->processSource($operation->getSource())));
-    }
-
     public function visitRemoveWhere(Operations\RemoveWhere $operation)
     {
-        parent::visitRemoveWhere(
+        return parent::visitRemoveWhere(
                 $operation->update($this->expressionProcessor->processFunction($operation->getPredicateFunction()))
         );
     }

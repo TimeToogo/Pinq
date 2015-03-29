@@ -22,10 +22,9 @@ class StructuralExpressionLocator extends StructuralExpressionQueryProcessor
 
     public function __construct(
             ParameterCollection $expressionCollection,
-            IStructuralExpressionProcessor $processor,
-            Queries\IScope $scope
+            IStructuralExpressionProcessor $processor
     ) {
-        parent::__construct($expressionCollection, $processor, $scope);
+        parent::__construct($expressionCollection, $processor);
     }
 
     /**
@@ -37,9 +36,9 @@ class StructuralExpressionLocator extends StructuralExpressionQueryProcessor
      */
     public static function processQuery(ParameterCollection $parameters, Queries\IQuery $query, IStructuralExpressionProcessor $processor)
     {
-        $processor            = Expression\ProcessorFactory::from(
+        $processor = Expression\ProcessorFactory::from(
                 $query,
-                new self($parameters, $processor, $query->getScope())
+                new self($parameters, $processor)
         );
         $processor->buildQuery();
     }

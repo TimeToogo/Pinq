@@ -3,26 +3,20 @@
 namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
 use Pinq\Providers\DSL\Compilation\Processors;
+use Pinq\Providers\DSL\Compilation\Compilers\OperationQueryCompiler;
 use Pinq\Queries\Operations;
 use Pinq\Queries;
 
-class OperationCompiler extends Processors\Visitors\OperationQueryProcessor
+class OperationCompiler extends OperationQueryCompiler
 {
     /**
-     * @var CompiledQuery
+     * @var QueryCompilation
      */
     protected $compilation;
 
-    public function __construct(CompiledQuery $compiledQuery, Queries\IOperationQuery $operationQuery)
+    public function __construct(Queries\IOperationQuery $operationQuery, QueryCompilation $compilation)
     {
-        parent::__construct(new ScopeCompiler($compiledQuery, $operationQuery->getScope()), $operationQuery);
-        $this->compilation = $compiledQuery;
-    }
-
-    protected function processOperation(Queries\IScope $scope, Queries\IOperation $operation)
-    {
-        parent::processOperation($scope, $operation);
-        return $operation;
+        parent::__construct($operationQuery, new ScopeCompiler($compilation, $operationQuery->getScope()));
     }
 
     public function visitApply(Operations\Apply $operation)

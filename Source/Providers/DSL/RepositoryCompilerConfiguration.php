@@ -5,6 +5,7 @@ namespace Pinq\Providers\DSL;
 use Pinq\Expressions as O;
 use Pinq\Caching;
 use Pinq\Providers\Configuration;
+use Pinq\Providers\DSL\Compilation\Compilers\IOperationQueryCompiler;
 use Pinq\Providers\DSL\Compilation\OperationTemplate;
 use Pinq\Providers\DSL\Compilation\Parameters;
 use Pinq\Providers\DSL\Compilation\StaticOperationTemplate;
@@ -105,5 +106,18 @@ abstract class RepositoryCompilerConfiguration extends QueryCompilerConfiguratio
      *
      * @return Compilation\ICompiledOperation
      */
-    abstract protected function buildCompiledOperationQuery(Queries\IOperationQuery $query);
+    protected function buildCompiledOperationQuery(Queries\IOperationQuery $query)
+    {
+        $compiler = $this->getOperationQueryCompiler($query);
+        $compiler->compile();
+
+        return $compiler->getCompilation()->asCompiled();
+    }
+
+    /**
+     * @param Queries\IOperationQuery $query
+     *
+     * @return IOperationQueryCompiler
+     */
+    abstract protected function getOperationQueryCompiler(Queries\IOperationQuery $query);
 }

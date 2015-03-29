@@ -2,29 +2,22 @@
 
 namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
+use Pinq\Providers\DSL\Compilation\Compilers\ScopeCompiler as ScopeCompilerBase;
 use Pinq\Providers\DSL\Compilation\Processors;
 use Pinq\Queries;
 use Pinq\Queries\Segments;
 
-class ScopeCompiler extends Processors\Visitors\ScopeProcessor
+class ScopeCompiler extends ScopeCompilerBase
 {
     /**
-     * @var CompiledQuery
+     * @var QueryCompilation
      */
     protected $compilation;
 
-    public function __construct(CompiledQuery $compiledQuery, Queries\IScope $scope)
+    public function __construct(QueryCompilation $compilation, Queries\IScope $scope)
     {
-        parent::__construct($scope);
-        $this->compilation = $compiledQuery;
+        parent::__construct($scope, $compilation);
     }
-
-    protected function processSegments(array $segments)
-    {
-        parent::processSegments($segments);
-        return $segments;
-    }
-
 
     public function visitIndexBy(Segments\IndexBy $query)
     {
@@ -62,7 +55,7 @@ class ScopeCompiler extends Processors\Visitors\ScopeProcessor
         ];
 
         $this->compilation->append($textMap[$query->getOperationType()]);
-        $this->compilation->appendSource($query->getSource());
+        $this->compilation->appendSource($query->getSource(), true);
         $this->compilation->appendLine();
     }
 

@@ -41,7 +41,7 @@ interface ISegment
     /**
      * @param Segments\ISegmentVisitor $visitor
      *
-     * @return void
+     * @return mixed
      */
     public function traverse(ISegmentVisitor $visitor);
 }

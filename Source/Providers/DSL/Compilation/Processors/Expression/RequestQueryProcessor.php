@@ -26,7 +26,7 @@ class RequestQueryProcessor extends Visitors\RequestQueryProcessor
 
     public function __construct(IExpressionProcessor $expressionProcessor, Queries\IRequestQuery $requestQuery)
     {
-        parent::__construct(new ScopeProcessor($expressionProcessor), $requestQuery);
+        parent::__construct(new ScopeProcessor($requestQuery->getScope(), $expressionProcessor), $requestQuery);
 
         $this->expressionProcessor = $expressionProcessor;
     }
@@ -42,42 +42,42 @@ class RequestQueryProcessor extends Visitors\RequestQueryProcessor
 
     public function visitAverage(Requests\Average $request)
     {
-        parent::visitAverage($this->updateOptionalProjection($request));
+        return parent::visitAverage($this->updateOptionalProjection($request));
     }
 
     public function visitMinimum(Requests\Minimum $request)
     {
-        parent::visitMinimum($this->updateOptionalProjection($request));
+        return parent::visitMinimum($this->updateOptionalProjection($request));
     }
 
     public function visitMaximum(Requests\Maximum $request)
     {
-        parent::visitMaximum($this->updateOptionalProjection($request));
+        return parent::visitMaximum($this->updateOptionalProjection($request));
     }
 
     public function visitAll(Requests\All $request)
     {
-        parent::visitAll($this->updateOptionalProjection($request));
+        return parent::visitAll($this->updateOptionalProjection($request));
     }
 
     public function visitSum(Requests\Sum $request)
     {
-        parent::visitSum($this->updateOptionalProjection($request));
+        return parent::visitSum($this->updateOptionalProjection($request));
     }
 
     public function visitAny(Requests\Any $request)
     {
-        parent::visitAny($this->updateOptionalProjection($request));
+        return parent::visitAny($this->updateOptionalProjection($request));
     }
 
     public function visitImplode(Requests\Implode $request)
     {
-        parent::visitImplode($this->updateOptionalProjection($request));
+        return parent::visitImplode($this->updateOptionalProjection($request));
     }
 
     public function visitAggregate(Requests\Aggregate $request)
     {
-        parent::visitAggregate(
+        return parent::visitAggregate(
                 $request->update($this->expressionProcessor->processFunction($request->getAggregatorFunction()))
         );
     }

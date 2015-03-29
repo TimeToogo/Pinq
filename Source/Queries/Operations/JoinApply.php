@@ -64,7 +64,7 @@ class JoinApply extends Operation implements IOperation
 
     public function traverse(IOperationVisitor $visitor)
     {
-        $visitor->visitJoinApply($this);
+        return $visitor->visitJoinApply($this);
     }
 
     /**

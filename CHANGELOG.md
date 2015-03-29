@@ -2,6 +2,13 @@ dev-master
 ==========
  - Upgraded to `nikic/php-parser` V1.2.0
  - Added `Expressions\AssignmentExpression::toBinaryOperationEquivalent`, reducing compound assignment operators to the expanded equivalent
+ - Restructured the DSL query provider (providers `Providers\DSL` namespace)
+    - Query processor classes under `Compilation\Processors\Visitors` will now process query subscopes.
+    - Extract fields for the query scope from `Compilation\Processors\Expression\IExpressionProcessor` and use the scope processor instead.
+    - `Compilation\Processors\Expression\ExpressionProcessor` now extends from `Expressions\ExpressionWalker`
+    - Added dedicated compiler classes under `Compilation\Compilers`
+    - Added `Compilation\IRequestCompilation`/`Compilation\IOperationCompilation` interfaces and base implementations to be used as the
+    state holders by the compiler classes.
 
 3.0.0 (22/9/14)
 ===============

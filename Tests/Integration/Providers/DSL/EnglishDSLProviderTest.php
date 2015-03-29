@@ -188,6 +188,15 @@ Add the following values: [array or iterator]
 ENG;
     }
 
+    protected function addSubscopeQuery()
+    {
+        return <<<'ENG'
+Add the following values: [
+    Filter according to: { return ($i > 5); } with parameters: [$this]
+]
+ENG;
+    }
+
     protected function addQuery()
     {
         return <<<'ENG'
@@ -199,6 +208,15 @@ ENG;
     {
         return <<<'ENG'
 Remove the following values: [array or iterator]
+ENG;
+    }
+
+    protected function removeSubscopeQuery()
+    {
+        return <<<'ENG'
+Remove the following values: [
+    Filter according to: { return ($i < 3); } with parameters: [$this]
+]
 ENG;
     }
 

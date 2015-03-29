@@ -5,14 +5,12 @@ namespace Pinq\Tests\Integration\Providers\DSL;
 use Pinq\Expressions as O;
 use Pinq\IQueryable;
 use Pinq\IRepository;
-use Pinq\Providers\DSL\Compilation\RequestTemplate;
 use Pinq\Providers\DSL\Compilation\StaticOperationTemplate;
 use Pinq\Providers\DSL\Compilation\StaticRequestTemplate;
 use Pinq\Queries;
 use Pinq\Queries\ParameterRegistry;
 use Pinq\Tests\Integration\Providers\DSL\Implementation\English\CompiledQuery;
 use Pinq\Tests\Integration\Providers\DSL\Implementation\Preprocessors\StructuralVariableProcessor;
-use Pinq\Tests\Integration\Queries\QueryBuildingTestsTrait;
 
 class EnglishDSLProviderCachingTest extends DSLCompilationProviderTest
 {

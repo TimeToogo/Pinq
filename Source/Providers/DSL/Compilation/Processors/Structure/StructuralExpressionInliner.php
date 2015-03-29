@@ -22,10 +22,9 @@ class StructuralExpressionInliner extends StructuralExpressionQueryProcessor
 
     public function __construct(
             ResolvedParameterRegistry $parameters,
-            IStructuralExpressionProcessor $processor,
-            Queries\IScope $scope
+            IStructuralExpressionProcessor $processor
     ) {
-        parent::__construct($parameters, $processor, $scope);
+        parent::__construct($parameters, $processor);
     }
 
     /**
@@ -42,15 +41,10 @@ class StructuralExpressionInliner extends StructuralExpressionQueryProcessor
     ) {
         $processor = Expression\ProcessorFactory::from(
                 $query,
-                new self($parameters, $processor, $query->getScope())
+                new self($parameters, $processor)
         );
 
         return $processor->buildQuery();
-    }
-
-    public function forSubScope(Queries\IScope $scope)
-    {
-        return new static($this->parameters, $this->processor, $scope);
     }
 
     public function processFunction(IFunction $function)

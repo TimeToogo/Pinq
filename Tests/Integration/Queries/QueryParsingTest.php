@@ -203,6 +203,26 @@ class QueryParsingTest extends ParsedQueryBuildingTest
         return $this->operation([], new Q\Operations\AddValues($this->sequenceSource()));
     }
 
+    protected function addSubscopeQuery()
+    {
+        return $this->operation([], new Q\Operations\AddValues(
+                $this->scopeSource([new Q\Segments\Filter(new Q\Functions\ElementProjection(
+                        $this->parameter(),
+                        self::SCOPE_TYPE,
+                        self::SCOPE_NAMESPACE,
+                        [$this->parameter() => 'this'],
+                        [O\Expression::parameter('i')],
+                        [O\Expression::returnExpression(
+                                O\Expression::binaryOperation(
+                                        O\Expression::variable(O\Expression::value('i')),
+                                        O\Operators\Binary::GREATER_THAN,
+                                        O\Expression::value(5)
+                                )
+                        )]
+                ))])
+        ));
+    }
+
     protected function addQuery()
     {
         return $this->operation([], new Q\Operations\AddValues($this->singleValueSource()));
@@ -211,6 +231,26 @@ class QueryParsingTest extends ParsedQueryBuildingTest
     protected function removeRangeQuery()
     {
         return $this->operation([], new Q\Operations\RemoveValues($this->sequenceSource()));
+    }
+
+    protected function removeSubscopeQuery()
+    {
+        return $this->operation([], new Q\Operations\RemoveValues(
+                $this->scopeSource([new Q\Segments\Filter(new Q\Functions\ElementProjection(
+                        $this->parameter(),
+                        self::SCOPE_TYPE,
+                        self::SCOPE_NAMESPACE,
+                        [$this->parameter() => 'this'],
+                        [O\Expression::parameter('i')],
+                        [O\Expression::returnExpression(
+                                O\Expression::binaryOperation(
+                                        O\Expression::variable(O\Expression::value('i')),
+                                        O\Operators\Binary::LESS_THAN,
+                                        O\Expression::value(3)
+                                )
+                        )]
+                ))])
+        ));
     }
 
     protected function removeWhereQuery()

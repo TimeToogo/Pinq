@@ -4,7 +4,9 @@ namespace Pinq\Tests\Integration\Providers\DSL\Implementation\English;
 
 use Pinq\Expressions as O;
 use Pinq\Providers\DSL\Compilation;
+use Pinq\Providers\DSL\Compilation\Compilers\IRequestQueryCompiler;
 use Pinq\Providers\DSL\Compilation\Parameters;
+use Pinq\Providers\DSL\Compilation\Processors\Compilers\IOperationQueryCompiler;
 use Pinq\Queries;
 use Pinq\Tests\Integration\Providers\DSL\Implementation\ConfigurationBase;
 
@@ -26,5 +28,15 @@ class Configuration extends ConfigurationBase
         $compiler->buildQuery();
 
         return $compiledQuery;
+    }
+
+    protected function buildRequestQueryCompiler(Queries\IRequestQuery $query)
+    {
+        return new RequestCompiler($query, new QueryCompilation());
+    }
+
+    protected function buildOperationQueryCompiler(Queries\IOperationQuery $query)
+    {
+        return new OperationCompiler($query, new QueryCompilation());
     }
 }

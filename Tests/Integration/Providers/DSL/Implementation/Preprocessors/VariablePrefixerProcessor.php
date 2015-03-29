@@ -3,6 +3,7 @@
 namespace Pinq\Tests\Integration\Providers\DSL\Implementation\Preprocessors;
 
 use Pinq\Expressions as O;
+use Pinq\Expressions\VariableExpression;
 use Pinq\Providers\DSL\Compilation\Processors\Expression;
 use Pinq\Queries;
 use Pinq\Queries\Functions\IFunction;
@@ -17,53 +18,46 @@ class VariablePrefixerProcessor extends Expression\ExpressionProcessor
      */
     private $prefix;
 
-    public function __construct($prefix, Queries\IScope $scope)
+    public function __construct($prefix)
     {
-        parent::__construct($scope);
         $this->prefix = $prefix;
     }
 
     public static function factory($prefix)
     {
         return function (Queries\IQuery $query) use ($prefix) {
-            return Expression\ProcessorFactory::from($query, new self($prefix, $query->getScope()));
+            return Expression\ProcessorFactory::from($query, new self($prefix));
         };
     }
 
-    public function forSubScope(Queries\IScope $scope)
+    public function walkVariable(VariableExpression $expression)
     {
-        return new self($this->prefix, $scope);
+        $name = $expression->getName();
+        if ($name instanceof O\ValueExpression) {
+            return $expression->update(
+                    O\Expression::value($this->prefix . $name->getValue())
+            );
+        }
+
+        return $expression->update(
+                O\Expression::binaryOperation(
+                        O\Expression::value($this->prefix),
+                        O\Operators\Binary::CONCATENATION,
+                        $name
+                )
+        );
     }
 
     public function processFunction(IFunction $function)
     {
-        $variablePrefixor = new O\DynamicExpressionWalker([
-            O\VariableExpression::getType() =>
-                    function (O\VariableExpression $expression) {
-                        $name = $expression->getName();
-                        if ($name instanceof O\ValueExpression) {
-                            return $expression->update(
-                                    O\Expression::value($this->prefix . $name->getValue())
-                            );
-                        } else {
-                            return $expression->update(
-                                    O\Expression::binaryOperation(
-                                            O\Expression::value($this->prefix),
-                                            O\Operators\Binary::CONCATENATION,
-                                            $name
-                                    )
-                            );
-                        }
-                    }
-        ]);
-
         $parameterScopeVariableMap = array_map(function ($variable) { return $this->prefix . $variable; }, $function->getParameterScopedVariableMap());
 
         return $function->update(
                 $function->getScopeType(),
                 $function->getNamespace(),
                 $parameterScopeVariableMap,
-                $variablePrefixor->walkAll($function->getParameters()->getAll()),
-                $variablePrefixor->walkAll($function->getBodyExpressions()));
+                $this->walkAll($function->getParameters()->getAll()),
+                $this->walkAll($function->getBodyExpressions())
+        );
     }
 }

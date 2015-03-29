@@ -25,6 +25,25 @@ Update the values according to the function: { $__i *= 10; } with parameters: [$
 ENG;
     }
 
+
+    protected function addSubscopeQuery()
+    {
+        return <<<'ENG'
+Add the following values: [
+    Filter according to: { return ($__i > 5); } with parameters: [$__this]
+]
+ENG;
+    }
+
+    protected function removeSubscopeQuery()
+    {
+        return <<<'ENG'
+Remove the following values: [
+    Filter according to: { return ($__i < 3); } with parameters: [$__this]
+]
+ENG;
+    }
+
     protected function removeWhereQuery()
     {
         return <<<'ENG'

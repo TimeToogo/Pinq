@@ -452,6 +452,21 @@ trait QueryBuildingTestsTrait
     /**
      * @dataProvider repositories
      */
+    public function testAddSubScope()
+    {
+        $this->assertOperationIsCorrect(
+                function (IRepository $repository) {
+                    $repository->addRange($repository->where(function ($i) { return $i > 5; }));
+                },
+                $this->addSubscopeQuery()
+        );
+    }
+
+    abstract protected function addSubscopeQuery();
+
+    /**
+     * @dataProvider repositories
+     */
     public function testAdd()
     {
         $this->assertOperationIsCorrect(
@@ -478,6 +493,21 @@ trait QueryBuildingTestsTrait
     }
 
     abstract protected function removeRangeQuery();
+
+    /**
+     * @dataProvider repositories
+     */
+    public function testRemoveSubScope()
+    {
+        $this->assertOperationIsCorrect(
+                function (IRepository $repository) {
+                    $repository->removeRange($repository->where(function ($i) { return $i < 3; }));
+                },
+                $this->removeSubscopeQuery()
+        );
+    }
+
+    abstract protected function removeSubscopeQuery();
 
     /**
      * @dataProvider repositories

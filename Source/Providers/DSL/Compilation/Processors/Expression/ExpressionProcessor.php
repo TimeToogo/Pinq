@@ -2,46 +2,28 @@
 
 namespace Pinq\Providers\DSL\Compilation\Processors\Expression;
 
+use Pinq\Expressions\ExpressionWalker;
 use Pinq\Queries;
+use Pinq\Queries\Functions\IFunction;
 
 /**
  * Base class of expression processor.
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-abstract class ExpressionProcessor implements IExpressionProcessor
+abstract class ExpressionProcessor extends ExpressionWalker implements IExpressionProcessor
 {
     /**
-     * The original scope.
-     *
-     * @var Queries\IScope
+     * {@inheritDoc}
      */
-    protected $scope;
-
-    /**
-     * The processed segments.
-     *
-     * @var Queries\ISegment[]
-     */
-    protected $segments = [];
-
-    public function __construct(Queries\IScope $scope)
+    public function processFunction(IFunction $function)
     {
-        $this->scope = $scope;
-    }
-
-    public function getScope()
-    {
-        return $this->scope;
-    }
-
-    public function addSegment(Queries\ISegment $segment)
-    {
-        $this->segments[] = $segment;
-    }
-
-    public function buildScope()
-    {
-        return $this->scope->updateSegments($this->segments);
+        return $function->update(
+                $function->getScopeType(),
+                $function->getNamespace(),
+                $function->getParameterScopedVariableMap(),
+                $this->walkAll($function->getParameters()->getAll()),
+                $this->walkAll($function->getBodyExpressions())
+        );
     }
 }

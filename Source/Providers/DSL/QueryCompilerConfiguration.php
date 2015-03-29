@@ -5,6 +5,7 @@ namespace Pinq\Providers\DSL;
 use Pinq\Caching;
 use Pinq\Expressions as O;
 use Pinq\Providers\Configuration;
+use Pinq\Providers\DSL\Compilation\Compilers\IRequestQueryCompiler;
 use Pinq\Providers\DSL\Compilation\ICompiledQuery;
 use Pinq\Providers\DSL\Compilation\IQueryTemplate;
 use Pinq\Providers\DSL\Compilation\IStaticQueryTemplate;
@@ -225,5 +226,18 @@ abstract class QueryCompilerConfiguration implements IQueryCompilerConfiguration
      *
      * @return Compilation\ICompiledRequest
      */
-    abstract protected function buildCompiledRequestQuery(Queries\IRequestQuery $query);
+    protected function buildCompiledRequestQuery(Queries\IRequestQuery $query)
+    {
+        $compiler = $this->getRequestQueryCompiler($query);
+        $compiler->compile();
+
+        return $compiler->getCompilation()->asCompiled();
+    }
+
+    /**
+     * @param Queries\IRequestQuery $query
+     *
+     * @return IRequestQueryCompiler
+     */
+    abstract protected function getRequestQueryCompiler(Queries\IRequestQuery $query);
 }

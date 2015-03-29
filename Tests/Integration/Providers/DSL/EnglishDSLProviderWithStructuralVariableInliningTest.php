@@ -4,10 +4,7 @@ namespace Pinq\Tests\Integration\Providers\DSL;
 
 use Pinq\IQueryable;
 use Pinq\IRepository;
-use Pinq\Providers\DSL\Compilation\ICompiledRequest;
-use Pinq\Providers\DSL\Compilation\IRequestTemplate;
 use Pinq\Tests\Integration\Providers\DSL\Implementation\Preprocessors\StructuralVariableProcessor;
-use Pinq\Tests\Integration\Queries\QueryBuildingTestsTrait;
 
 class EnglishDSLProviderWithStructuralVariableInliningTest extends DSLCompilationProviderTest
 {
