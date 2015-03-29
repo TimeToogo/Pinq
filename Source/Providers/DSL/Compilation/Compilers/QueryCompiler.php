@@ -2,6 +2,7 @@
 
 namespace Pinq\Providers\DSL\Compilation\Compilers;
 
+use Pinq\Providers\DSL\Compilation\IQueryCompilation;
 use Pinq\Providers\DSL\Compilation\Processors;
 use Pinq\Queries;
 use Pinq\Queries\IQuery;
@@ -24,9 +25,9 @@ abstract class QueryCompiler extends Compiler implements IQueryCompiler
      */
     protected $scopeCompiler;
 
-    public function __construct(IQuery $query, IScopeCompiler $scopeCompiler)
+    public function __construct(IQueryCompilation $compilation, IQuery $query, IScopeCompiler $scopeCompiler)
     {
-        $this->compilation   = $scopeCompiler->getCompilation();
+        $this->compilation   = $compilation;
         $this->query         = $query;
         $this->scopeCompiler = $scopeCompiler;
     }
