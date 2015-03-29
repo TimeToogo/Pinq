@@ -1,5 +1,8 @@
 dev-master
 ==========
+
+3.1.0 (29/3/15)
+===============
  - Upgraded to `nikic/php-parser` V1.2.0
  - Added `Expressions\AssignmentExpression::toBinaryOperationEquivalent`, reducing compound assignment operators to the expanded equivalent
  - Restructured the DSL query provider (providers `Providers\DSL` namespace)
