@@ -23,7 +23,7 @@
     <h1><a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/Visitors.html">Pinq\Providers\DSL\Compilation\Processors\Visitors</a>\ScopeProcessor</h1>
     </div>
         <div class="content">
-                <p>    class
+                <p>abstract     class
     <strong>ScopeProcessor</strong>        extends <a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/ScopeProcessor.html"><abbr title="Pinq\Providers\DSL\Compilation\Processors\ScopeProcessor">ScopeProcessor</abbr></a>        implements
         <a href="../../../../../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></p>
 
@@ -59,6 +59,17 @@
 </p>
                 </td>
                 <td><small>from&nbsp;<a href="../../../../../../Pinq/Providers/DSL/Compilation/Processors/ScopeProcessor.html#method_buildScope"><abbr title="Pinq\Providers\DSL\Compilation\Processors\ScopeProcessor">ScopeProcessor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Providers\DSL\Compilation\Processors\Queries\Common\ISource">ISource</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_processSource">processSource</a>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Queries\Common\ISource">ISource</abbr> $source)
+                    <p>
+</p>
+                </td>
+                <td></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -252,8 +263,46 @@
                     </div>
     </div>
 
+                <h3 id="method_processSource">
+        <div class="location">at line 37</div>
+        <code>            public            <abbr title="Pinq\Providers\DSL\Compilation\Processors\Queries\Common\ISource">ISource</abbr>
+    <strong>processSource</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Queries\Common\ISource">ISource</abbr> $source)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Queries\Common\ISource">ISource</abbr></td>
+                <td>$source</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Providers\DSL\Compilation\Processors\Queries\Common\ISource">ISource</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_visitIndexBy">
-        <div class="location">at line 31</div>
+        <div class="location">at line 48</div>
         <code>            public            
     <strong>visitIndexBy</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Segments\IndexBy">IndexBy</abbr> $segment)</code>
     </h3>
@@ -281,7 +330,7 @@
     </div>
 
                 <h3 id="method_visitSelect">
-        <div class="location">at line 36</div>
+        <div class="location">at line 53</div>
         <code>            public            
     <strong>visitSelect</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Segments\Select">Select</abbr> $segment)</code>
     </h3>
@@ -309,7 +358,7 @@
     </div>
 
                 <h3 id="method_visitGroupBy">
-        <div class="location">at line 41</div>
+        <div class="location">at line 58</div>
         <code>            public            
     <strong>visitGroupBy</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Segments\GroupBy">GroupBy</abbr> $segment)</code>
     </h3>
@@ -337,7 +386,7 @@
     </div>
 
                 <h3 id="method_visitSelectMany">
-        <div class="location">at line 46</div>
+        <div class="location">at line 63</div>
         <code>            public            
     <strong>visitSelectMany</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Segments\SelectMany">SelectMany</abbr> $segment)</code>
     </h3>
@@ -365,7 +414,7 @@
     </div>
 
                 <h3 id="method_visitFilter">
-        <div class="location">at line 51</div>
+        <div class="location">at line 68</div>
         <code>            public            
     <strong>visitFilter</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Segments\Filter">Filter</abbr> $segment)</code>
     </h3>
@@ -393,7 +442,7 @@
     </div>
 
                 <h3 id="method_visitOrderBy">
-        <div class="location">at line 56</div>
+        <div class="location">at line 73</div>
         <code>            public            
     <strong>visitOrderBy</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Segments\OrderBy">OrderBy</abbr> $segment)</code>
     </h3>
@@ -421,7 +470,7 @@
     </div>
 
                 <h3 id="method_visitJoin">
-        <div class="location">at line 61</div>
+        <div class="location">at line 78</div>
         <code>            public            
     <strong>visitJoin</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Segments\Join">Join</abbr> $segment)</code>
     </h3>
@@ -449,7 +498,7 @@
     </div>
 
                 <h3 id="method_visitKeys">
-        <div class="location">at line 66</div>
+        <div class="location">at line 88</div>
         <code>            public            
     <strong>visitKeys</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Segments\Keys">Keys</abbr> $segment)</code>
     </h3>
@@ -477,7 +526,7 @@
     </div>
 
                 <h3 id="method_visitOperation">
-        <div class="location">at line 71</div>
+        <div class="location">at line 93</div>
         <code>            public            
     <strong>visitOperation</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Segments\Operation">Operation</abbr> $segment)</code>
     </h3>
@@ -505,7 +554,7 @@
     </div>
 
                 <h3 id="method_visitRange">
-        <div class="location">at line 76</div>
+        <div class="location">at line 100</div>
         <code>            public            
     <strong>visitRange</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Segments\Range">Range</abbr> $segment)</code>
     </h3>
@@ -533,7 +582,7 @@
     </div>
 
                 <h3 id="method_visitUnique">
-        <div class="location">at line 81</div>
+        <div class="location">at line 105</div>
         <code>            public            
     <strong>visitUnique</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Segments\Unique">Unique</abbr> $segment)</code>
     </h3>
@@ -561,7 +610,7 @@
     </div>
 
                 <h3 id="method_visitReindex">
-        <div class="location">at line 86</div>
+        <div class="location">at line 110</div>
         <code>            public            
     <strong>visitReindex</strong>(<abbr title="Pinq\Providers\DSL\Compilation\Processors\Visitors\Segments\Reindex">Reindex</abbr> $segment)</code>
     </h3>

@@ -51,7 +51,7 @@
             </tr>
                     <tr>
                 <td class="type">
-                    static&nbsp;<a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a>
+                    static&nbsp;<a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
                 </td>
                 <td class="last">
                     <a href="#method_from">from</a>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $elements, <a href="../Pinq/Iterators/IIteratorScheme.html"><abbr title="Pinq\Iterators\IIteratorScheme">IIteratorScheme</abbr></a> $scheme = null, <a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a> $source = null)
@@ -105,7 +105,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_getIterator">getIterator</a>()
-                    <p>Returns an array compatable iterator for the elements.</p>
+                    <p>Returns an array compatible iterator for the elements.</p>
                 </td>
                 <td><small>from&nbsp;<a href="../Pinq/Traversable.html#method_getIterator"><abbr title="Pinq\Traversable">Traversable</abbr></a></small></td>
             </tr>
@@ -535,7 +535,7 @@
             </tr>
                     <tr>
                 <td class="type">
-                    int|null
+                    int|double|null
                 </td>
                 <td class="last">
                     <a href="#method_sum">sum</a>(callable $function = null)
@@ -545,7 +545,7 @@
             </tr>
                     <tr>
                 <td class="type">
-                    double|null
+                    int|double|null
                 </td>
                 <td class="last">
                     <a href="#method_average">average</a>(callable $function = null)
@@ -579,7 +579,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_implode">implode</a>(string $delimiter, callable $function = null)
-                    <p>Returns a string of all the values concatented by the delimiter.</p>
+                    <p>Returns a string of all the values concatenated by the delimiter.</p>
                 </td>
                 <td><small>from&nbsp;<a href="../Pinq/Traversable.html#method_implode"><abbr title="Pinq\Traversable">Traversable</abbr></a></small></td>
             </tr>
@@ -690,7 +690,7 @@
 
                 <h3 id="method_from">
         <div class="location">at line 39</div>
-        <code>        static    public            <a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a>
+        <code>        static    public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>from</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $elements, <a href="../Pinq/Iterators/IIteratorScheme.html"><abbr title="Pinq\Iterators\IIteratorScheme">IIteratorScheme</abbr></a> $scheme = null, <a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a> $source = null)</code>
     </h3>
     <div class="details">
@@ -726,7 +726,7 @@
 
                     <table>
         <tr>
-            <td><a href="../Pinq/Traversable.html"><abbr title="Pinq\Traversable">Traversable</abbr></a></td>
+            <td><a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></td>
             <td>
 </td>
         </tr>
@@ -781,7 +781,7 @@
     </div>
 
                 <h3 id="method_isSource">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_isSource"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 100</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_isSource"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 101</div>
         <code>            public            boolean
     <strong>isSource</strong>()</code>
     </h3>
@@ -807,7 +807,7 @@
     </div>
 
                 <h3 id="method_getSource">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_getSource"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 105</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_getSource"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 106</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>getSource</strong>()</code>
     </h3>
@@ -833,7 +833,7 @@
     </div>
 
                 <h3 id="method_asArray">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_asArray"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 110</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_asArray"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 111</div>
         <code>            public            array
     <strong>asArray</strong>()</code>
     </h3>
@@ -859,12 +859,12 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_getIterator">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_getIterator"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 115</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_getIterator"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 116</div>
         <code>            public            <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
     <strong>getIterator</strong>()</code>
     </h3>
     <div class="details">
-        <p>Returns an array compatable iterator for the elements.</p>
+        <p>Returns an array compatible iterator for the elements.</p>
         <p>Non string or integer keys will be numerically reindexed.</p>
         <div class="tags">
             
@@ -884,7 +884,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_getTrueIterator">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_getTrueIterator"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 120</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_getTrueIterator"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 121</div>
         <code>            public            <a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a>
     <strong>getTrueIterator</strong>()</code>
     </h3>
@@ -909,7 +909,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_getIteratorScheme">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_getIteratorScheme"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 125</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_getIteratorScheme"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 126</div>
         <code>            public            <a href="../Pinq/Iterators/IIteratorScheme.html"><abbr title="Pinq\Iterators\IIteratorScheme">IIteratorScheme</abbr></a>
     <strong>getIteratorScheme</strong>()</code>
     </h3>
@@ -960,7 +960,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_asCollection">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_asCollection"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 135</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_asCollection"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 136</div>
         <code>            public            <a href="../Pinq/ICollection.html"><abbr title="Pinq\ICollection">ICollection</abbr></a>
     <strong>asCollection</strong>()</code>
     </h3>
@@ -985,7 +985,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_iterate">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_iterate"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 149</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_iterate"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 150</div>
         <code>            public            void
     <strong>iterate</strong>(callable $function)</code>
     </h3>
@@ -1020,7 +1020,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_first">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_first"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 156</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_first"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 157</div>
         <code>            public            mixed
     <strong>first</strong>()</code>
     </h3>
@@ -1045,7 +1045,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_last">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_last"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 165</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_last"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 166</div>
         <code>            public            mixed
     <strong>last</strong>()</code>
     </h3>
@@ -1070,7 +1070,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_where">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_where"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 176</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_where"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 177</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>where</strong>(callable $predicate)</code>
     </h3>
@@ -1106,7 +1106,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_orderByAscending">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_orderByAscending"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 186</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_orderByAscending"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 187</div>
         <code>            public            <a href="../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
     <strong>orderByAscending</strong>(callable $function)</code>
     </h3>
@@ -1142,7 +1142,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_orderByDescending">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_orderByDescending"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 197</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_orderByDescending"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 198</div>
         <code>            public            <a href="../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
     <strong>orderByDescending</strong>(callable $function)</code>
     </h3>
@@ -1178,7 +1178,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_orderBy">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_orderBy"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 208</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_orderBy"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 209</div>
         <code>            public            <a href="../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
     <strong>orderBy</strong>(callable $function, int $direction)</code>
     </h3>
@@ -1220,7 +1220,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_thenBy">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_thenBy"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 236</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_thenBy"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 237</div>
         <code>            public            <a href="../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
     <strong>thenBy</strong>(callable $function, int $direction)</code>
     </h3>
@@ -1263,7 +1263,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_thenByAscending">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_thenByAscending"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 246</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_thenByAscending"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 247</div>
         <code>            public            <a href="../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
     <strong>thenByAscending</strong>(callable $function)</code>
     </h3>
@@ -1300,7 +1300,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_thenByDescending">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_thenByDescending"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 254</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_thenByDescending"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 255</div>
         <code>            public            <a href="../Pinq/Interfaces/IOrderedTraversable.html"><abbr title="Pinq\Interfaces\IOrderedTraversable">IOrderedTraversable</abbr></a>
     <strong>thenByDescending</strong>(callable $function)</code>
     </h3>
@@ -1337,7 +1337,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_skip">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_skip"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 262</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_skip"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 263</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>skip</strong>(int $amount)</code>
     </h3>
@@ -1373,7 +1373,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_take">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_take"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 273</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_take"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 274</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>take</strong>(int|null $amount)</code>
     </h3>
@@ -1409,7 +1409,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_slice">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_slice"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 284</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_slice"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 285</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>slice</strong>(int $start, int|null $amount)</code>
     </h3>
@@ -1450,7 +1450,7 @@ all others will be reindexed numerically.</p>
     </div>
 
                 <h3 id="method_indexBy">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_indexBy"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 295</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_indexBy"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 296</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>indexBy</strong>(callable $function)</code>
     </h3>
@@ -1486,7 +1486,7 @@ for that index.</p>
     </div>
 
                 <h3 id="method_keys">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_keys"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 308</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_keys"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 309</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>keys</strong>()</code>
     </h3>
@@ -1512,7 +1512,7 @@ for that index.</p>
     </div>
 
                 <h3 id="method_reindex">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_reindex"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 323</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_reindex"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 324</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>reindex</strong>()</code>
     </h3>
@@ -1538,7 +1538,7 @@ for that index.</p>
     </div>
 
                 <h3 id="method_groupBy">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_groupBy"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 330</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_groupBy"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 331</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>groupBy</strong>(callable $function)</code>
     </h3>
@@ -1649,7 +1649,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_unique">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_unique"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 364</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_unique"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 365</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>unique</strong>()</code>
     </h3>
@@ -1674,7 +1674,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_select">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_select"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 369</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_select"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 370</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>select</strong>(callable $function)</code>
     </h3>
@@ -1710,7 +1710,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_selectMany">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_selectMany"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 380</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_selectMany"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 381</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>selectMany</strong>(callable $function)</code>
     </h3>
@@ -1745,7 +1745,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_union">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_union"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 396</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_union"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 397</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>union</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
     </h3>
@@ -1780,7 +1780,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_intersect">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_intersect"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 406</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_intersect"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 407</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>intersect</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
     </h3>
@@ -1815,7 +1815,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_difference">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_difference"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 416</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_difference"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 417</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>difference</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
     </h3>
@@ -1850,7 +1850,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_append">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_append"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 430</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_append"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 431</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>append</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
     </h3>
@@ -1886,7 +1886,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_whereIn">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_whereIn"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 440</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_whereIn"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 441</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>whereIn</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
     </h3>
@@ -1922,7 +1922,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_except">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_except"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 450</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_except"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 451</div>
         <code>            public            <a href="../Pinq/ITraversable.html"><abbr title="Pinq\ITraversable">ITraversable</abbr></a>
     <strong>except</strong>(array|<a href="http://php.net/Traversable"><abbr title="Traversable">Traversable</abbr></a> $values)</code>
     </h3>
@@ -1957,7 +1957,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_offsetExists">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_offsetExists"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 464</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_offsetExists"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 465</div>
         <code>            public            
     <strong>offsetExists</strong>($index)</code>
     </h3>
@@ -2075,7 +2075,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_count">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_count"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 488</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_count"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 489</div>
         <code>            public            int
     <strong>count</strong>()</code>
     </h3>
@@ -2101,7 +2101,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_isEmpty">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_isEmpty"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 494</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_isEmpty"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 495</div>
         <code>            public            boolean
     <strong>isEmpty</strong>()</code>
     </h3>
@@ -2127,7 +2127,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_contains">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_contains"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 503</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_contains"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 504</div>
         <code>            public            boolean
     <strong>contains</strong>(mixed $value)</code>
     </h3>
@@ -2163,7 +2163,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_aggregate">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_aggregate"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 514</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_aggregate"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 515</div>
         <code>            public            mixed
     <strong>aggregate</strong>(callable $function)</code>
     </h3>
@@ -2199,7 +2199,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_maximum">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_maximum"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 560</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_maximum"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 561</div>
         <code>            public            mixed
     <strong>maximum</strong>(callable $function = null)</code>
     </h3>
@@ -2235,7 +2235,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_minimum">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_minimum"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 567</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_minimum"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 568</div>
         <code>            public            mixed
     <strong>minimum</strong>(callable $function = null)</code>
     </h3>
@@ -2271,8 +2271,8 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_sum">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_sum"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 574</div>
-        <code>            public            int|null
+        <div class="location">in <a href="../Pinq/Traversable.html#method_sum"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 575</div>
+        <code>            public            int|double|null
     <strong>sum</strong>(callable $function = null)</code>
     </h3>
     <div class="details">
@@ -2295,7 +2295,7 @@ This will implicitly index each group by the group key returned from the supplie
 
                     <table>
         <tr>
-            <td>int|null</td>
+            <td>int|double|null</td>
             <td>
 </td>
         </tr>
@@ -2307,8 +2307,8 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_average">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_average"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 581</div>
-        <code>            public            double|null
+        <div class="location">in <a href="../Pinq/Traversable.html#method_average"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 582</div>
+        <code>            public            int|double|null
     <strong>average</strong>(callable $function = null)</code>
     </h3>
     <div class="details">
@@ -2331,7 +2331,7 @@ This will implicitly index each group by the group key returned from the supplie
 
                     <table>
         <tr>
-            <td>double|null</td>
+            <td>int|double|null</td>
             <td>
 </td>
         </tr>
@@ -2343,7 +2343,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_all">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_all"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 588</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_all"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 589</div>
         <code>            public            bool
     <strong>all</strong>(callable $function = null)</code>
     </h3>
@@ -2379,7 +2379,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_any">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_any"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 599</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_any"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 600</div>
         <code>            public            bool
     <strong>any</strong>(callable $function = null)</code>
     </h3>
@@ -2415,12 +2415,12 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_implode">
-        <div class="location">in <a href="../Pinq/Traversable.html#method_implode"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 610</div>
+        <div class="location">in <a href="../Pinq/Traversable.html#method_implode"><abbr title="Pinq\Traversable">Traversable</abbr></a> at line 611</div>
         <code>            public            string
     <strong>implode</strong>(string $delimiter, callable $function = null)</code>
     </h3>
     <div class="details">
-        <p>Returns a string of all the values concatented by the delimiter.</p>
+        <p>Returns a string of all the values concatenated by the delimiter.</p>
         <p>
 </p>
         <div class="tags">

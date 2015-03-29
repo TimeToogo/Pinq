@@ -25,6 +25,10 @@
         <div class="content">
                         <table>
                             <tr>
+                    <td><a href="../Pinq/Expressions/ArgumentExpression.html"><abbr title="Pinq\Expressions\ArgumentExpression">ArgumentExpression</abbr></a></td>
+                    <td class="last"><code> $i, ...&amp;$i </code></td>
+                </tr>
+                            <tr>
                     <td><a href="../Pinq/Expressions/ArrayExpression.html"><abbr title="Pinq\Expressions\ArrayExpression">ArrayExpression</abbr></a></td>
                     <td class="last"><code> [1, 2, 'test' => 4] </code></td>
                 </tr>
@@ -34,7 +38,7 @@
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Expressions/AssignmentExpression.html"><abbr title="Pinq\Expressions\AssignmentExpression">AssignmentExpression</abbr></a></td>
-                    <td class="last"><code> $Variable += 5 </code></td>
+                    <td class="last"><code> $variable += 5 </code></td>
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Expressions/BinaryOperationExpression.html"><abbr title="Pinq\Expressions\BinaryOperationExpression">BinaryOperationExpression</abbr></a></td>
@@ -53,6 +57,14 @@
                     <td class="last"><code> function ($I) { return $I + 5; } </code></td>
                 </tr>
                             <tr>
+                    <td><a href="../Pinq/Expressions/ClosureUsedVariableExpression.html"><abbr title="Pinq\Expressions\ClosureUsedVariableExpression">ClosureUsedVariableExpression</abbr></a></td>
+                    <td class="last"><code> use (&amp;$i) </code></td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Expressions/CompiledEvaluator.html"><abbr title="Pinq\Expressions\CompiledEvaluator">CompiledEvaluator</abbr></a></td>
+                    <td class="last">Implementation of the expression evaluator using compiled closures.</td>
+                </tr>
+                            <tr>
                     <td><a href="../Pinq/Expressions/ConstantExpression.html"><abbr title="Pinq\Expressions\ConstantExpression">ConstantExpression</abbr></a></td>
                     <td class="last"><code> SORT_ASC </code></td>
                 </tr>
@@ -63,6 +75,14 @@
                             <tr>
                     <td><a href="../Pinq/Expressions/EmptyExpression.html"><abbr title="Pinq\Expressions\EmptyExpression">EmptyExpression</abbr></a></td>
                     <td class="last"><code> empty($I) </code></td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Expressions/EvaluationContext.html"><abbr title="Pinq\Expressions\EvaluationContext">EvaluationContext</abbr></a></td>
+                    <td class="last">Implementation of the evaluation context.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Expressions/Evaluator.html"><abbr title="Pinq\Expressions\Evaluator">Evaluator</abbr></a></td>
+                    <td class="last">Implementation of the expression evaluator using compiled closures.</td>
                 </tr>
                             <tr>
                     <td><a href="../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a></td>
@@ -101,6 +121,10 @@
                     <td class="last"><code> $var->method($one, true) </code></td>
                 </tr>
                             <tr>
+                    <td><a href="../Pinq/Expressions/NamedParameterExpression.html"><abbr title="Pinq\Expressions\NamedParameterExpression">NamedParameterExpression</abbr></a></td>
+                    <td class="last">Base class for parameters representing named variables.</td>
+                </tr>
+                            <tr>
                     <td><a href="../Pinq/Expressions/NewExpression.html"><abbr title="Pinq\Expressions\NewExpression">NewExpression</abbr></a></td>
                     <td class="last"><code> new \stdClass() </code></td>
                 </tr>
@@ -130,6 +154,10 @@
                     <td class="last"><code> Class::Method('foo') </code></td>
                 </tr>
                             <tr>
+                    <td><a href="../Pinq/Expressions/StaticValueEvaluator.html"><abbr title="Pinq\Expressions\StaticValueEvaluator">StaticValueEvaluator</abbr></a></td>
+                    <td class="last">Implementation of the expression evaluator using a static return value.</td>
+                </tr>
+                            <tr>
                     <td><a href="../Pinq/Expressions/TernaryExpression.html"><abbr title="Pinq\Expressions\TernaryExpression">TernaryExpression</abbr></a></td>
                     <td class="last"><code> $condition ? 1 : -1 </code></td>
                 </tr>
@@ -154,6 +182,10 @@
                     <td class="last"><code> 1, 'foo', [], null etc </code></td>
                 </tr>
                             <tr>
+                    <td><a href="../Pinq/Expressions/VariableEvaluator.html"><abbr title="Pinq\Expressions\VariableEvaluator">VariableEvaluator</abbr></a></td>
+                    <td class="last">Implementation of the expression evaluator using a variable from the variable table or from the standard superglobals.</td>
+                </tr>
+                            <tr>
                     <td><a href="../Pinq/Expressions/VariableExpression.html"><abbr title="Pinq\Expressions\VariableExpression">VariableExpression</abbr></a></td>
                     <td class="last"><code> $I </code></td>
                 </tr>
@@ -163,6 +195,17 @@
                 </tr>
                     </table>
     
+            <h2>Interfaces</h2>
+        <table>
+                            <tr>
+                    <td><a href="../Pinq/Expressions/IEvaluationContext.html"><abbr title="Pinq\Expressions\IEvaluationContext">IEvaluationContext</abbr></a></td>
+                    <td class="last">Interface of the evaluation context.</td>
+                </tr>
+                            <tr>
+                    <td><a href="../Pinq/Expressions/IEvaluator.html"><abbr title="Pinq\Expressions\IEvaluator">IEvaluator</abbr></a></td>
+                    <td class="last">Interface of the expression evaluation.</td>
+                </tr>
+                    </table>
     
             </div>
             <div id="footer">

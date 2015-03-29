@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Providers\DSL\Compilation\Compilers\IOperationQueryCompiler | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../../../classes.html">Classes</a></li>
+                            <li><a href="../../../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../../../traits.html">Traits</a></li>
+            <li><a href="../../../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../../../../Pinq/Providers/DSL/Compilation/Compilers.html">Pinq\Providers\DSL\Compilation\Compilers</a>\IOperationQueryCompiler</h1>
+    </div>
+        <div class="content">
+                <p>    interface
+    <strong>IOperationQueryCompiler</strong>        implements
+        <a href="../../../../../Pinq/Providers/DSL/Compilation/Compilers/IQueryCompiler.html"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\IQueryCompiler">IQueryCompiler</abbr></a>, <a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a></p>
+
+            <div class="description">
+            <p>Interface of the operation query compiler.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../../Pinq/Queries/IOperationQuery.html"><abbr title="Pinq\Queries\IOperationQuery">IOperationQuery</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getQuery">getQuery</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../../Pinq/Providers/DSL/Compilation/IOperationCompilation.html"><abbr title="Pinq\Providers\DSL\Compilation\IOperationCompilation">IOperationCompilation</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getCompilation">getCompilation</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../../Pinq/Providers/DSL/Compilation/Compilers/IScopeCompiler.html"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\IScopeCompiler">IScopeCompiler</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getScopeCompiler">getScopeCompiler</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Providers/DSL/Compilation/Compilers/IQueryCompiler.html#method_getScopeCompiler"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\IQueryCompiler">IQueryCompiler</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_compile">compile</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Providers/DSL/Compilation/Compilers/IQueryCompiler.html#method_compile"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\IQueryCompiler">IQueryCompiler</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitUnsetIndex">visitUnsetIndex</a>(<a href="../../../../../Pinq/Queries/Operations/UnsetIndex.html"><abbr title="Pinq\Queries\Operations\UnsetIndex">UnsetIndex</abbr></a> $operation)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitUnsetIndex"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitApply">visitApply</a>(<a href="../../../../../Pinq/Queries/Operations/Apply.html"><abbr title="Pinq\Queries\Operations\Apply">Apply</abbr></a> $operation)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitApply"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitClear">visitClear</a>(<a href="../../../../../Pinq/Queries/Operations/Clear.html"><abbr title="Pinq\Queries\Operations\Clear">Clear</abbr></a> $operation)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitClear"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitSetIndex">visitSetIndex</a>(<a href="../../../../../Pinq/Queries/Operations/SetIndex.html"><abbr title="Pinq\Queries\Operations\SetIndex">SetIndex</abbr></a> $operation)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitSetIndex"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitAddValues">visitAddValues</a>(<a href="../../../../../Pinq/Queries/Operations/AddValues.html"><abbr title="Pinq\Queries\Operations\AddValues">AddValues</abbr></a> $operation)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitAddValues"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitRemoveWhere">visitRemoveWhere</a>(<a href="../../../../../Pinq/Queries/Operations/RemoveWhere.html"><abbr title="Pinq\Queries\Operations\RemoveWhere">RemoveWhere</abbr></a> $operation)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitRemoveWhere"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitJoinApply">visitJoinApply</a>(<a href="../../../../../Pinq/Queries/Operations/JoinApply.html"><abbr title="Pinq\Queries\Operations\JoinApply">JoinApply</abbr></a> $operation)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitJoinApply"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitRemoveValues">visitRemoveValues</a>(<a href="../../../../../Pinq/Queries/Operations/RemoveValues.html"><abbr title="Pinq\Queries\Operations\RemoveValues">RemoveValues</abbr></a> $operation)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitRemoveValues"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a></small></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_getQuery">
+        <div class="location">at line 20</div>
+        <code>            public            <a href="../../../../../Pinq/Queries/IOperationQuery.html"><abbr title="Pinq\Queries\IOperationQuery">IOperationQuery</abbr></a>
+    <strong>getQuery</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../../Pinq/Queries/IOperationQuery.html"><abbr title="Pinq\Queries\IOperationQuery">IOperationQuery</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCompilation">
+        <div class="location">at line 25</div>
+        <code>            public            <a href="../../../../../Pinq/Providers/DSL/Compilation/IOperationCompilation.html"><abbr title="Pinq\Providers\DSL\Compilation\IOperationCompilation">IOperationCompilation</abbr></a>
+    <strong>getCompilation</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../../Pinq/Providers/DSL/Compilation/IOperationCompilation.html"><abbr title="Pinq\Providers\DSL\Compilation\IOperationCompilation">IOperationCompilation</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getScopeCompiler">
+        <div class="location">in <a href="../../../../../Pinq/Providers/DSL/Compilation/Compilers/IQueryCompiler.html#method_getScopeCompiler"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\IQueryCompiler">IQueryCompiler</abbr></a> at line 29</div>
+        <code>            public            <a href="../../../../../Pinq/Providers/DSL/Compilation/Compilers/IScopeCompiler.html"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\IScopeCompiler">IScopeCompiler</abbr></a>
+    <strong>getScopeCompiler</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../../Pinq/Providers/DSL/Compilation/Compilers/IScopeCompiler.html"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\IScopeCompiler">IScopeCompiler</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_compile">
+        <div class="location">in <a href="../../../../../Pinq/Providers/DSL/Compilation/Compilers/IQueryCompiler.html#method_compile"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\IQueryCompiler">IQueryCompiler</abbr></a> at line 34</div>
+        <code>            public            void
+    <strong>compile</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitUnsetIndex">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitUnsetIndex"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a> at line 12</div>
+        <code>            public            
+    <strong>visitUnsetIndex</strong>(<a href="../../../../../Pinq/Queries/Operations/UnsetIndex.html"><abbr title="Pinq\Queries\Operations\UnsetIndex">UnsetIndex</abbr></a> $operation)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Operations/UnsetIndex.html"><abbr title="Pinq\Queries\Operations\UnsetIndex">UnsetIndex</abbr></a></td>
+                <td>$operation</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitApply">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitApply"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a> at line 14</div>
+        <code>            public            
+    <strong>visitApply</strong>(<a href="../../../../../Pinq/Queries/Operations/Apply.html"><abbr title="Pinq\Queries\Operations\Apply">Apply</abbr></a> $operation)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Operations/Apply.html"><abbr title="Pinq\Queries\Operations\Apply">Apply</abbr></a></td>
+                <td>$operation</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitClear">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitClear"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a> at line 16</div>
+        <code>            public            
+    <strong>visitClear</strong>(<a href="../../../../../Pinq/Queries/Operations/Clear.html"><abbr title="Pinq\Queries\Operations\Clear">Clear</abbr></a> $operation)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Operations/Clear.html"><abbr title="Pinq\Queries\Operations\Clear">Clear</abbr></a></td>
+                <td>$operation</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitSetIndex">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitSetIndex"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a> at line 18</div>
+        <code>            public            
+    <strong>visitSetIndex</strong>(<a href="../../../../../Pinq/Queries/Operations/SetIndex.html"><abbr title="Pinq\Queries\Operations\SetIndex">SetIndex</abbr></a> $operation)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Operations/SetIndex.html"><abbr title="Pinq\Queries\Operations\SetIndex">SetIndex</abbr></a></td>
+                <td>$operation</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitAddValues">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitAddValues"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a> at line 20</div>
+        <code>            public            
+    <strong>visitAddValues</strong>(<a href="../../../../../Pinq/Queries/Operations/AddValues.html"><abbr title="Pinq\Queries\Operations\AddValues">AddValues</abbr></a> $operation)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Operations/AddValues.html"><abbr title="Pinq\Queries\Operations\AddValues">AddValues</abbr></a></td>
+                <td>$operation</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitRemoveWhere">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitRemoveWhere"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a> at line 22</div>
+        <code>            public            
+    <strong>visitRemoveWhere</strong>(<a href="../../../../../Pinq/Queries/Operations/RemoveWhere.html"><abbr title="Pinq\Queries\Operations\RemoveWhere">RemoveWhere</abbr></a> $operation)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Operations/RemoveWhere.html"><abbr title="Pinq\Queries\Operations\RemoveWhere">RemoveWhere</abbr></a></td>
+                <td>$operation</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitJoinApply">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitJoinApply"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a> at line 24</div>
+        <code>            public            
+    <strong>visitJoinApply</strong>(<a href="../../../../../Pinq/Queries/Operations/JoinApply.html"><abbr title="Pinq\Queries\Operations\JoinApply">JoinApply</abbr></a> $operation)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Operations/JoinApply.html"><abbr title="Pinq\Queries\Operations\JoinApply">JoinApply</abbr></a></td>
+                <td>$operation</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitRemoveValues">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Operations/IOperationVisitor.html#method_visitRemoveValues"><abbr title="Pinq\Queries\Operations\IOperationVisitor">IOperationVisitor</abbr></a> at line 26</div>
+        <code>            public            
+    <strong>visitRemoveValues</strong>(<a href="../../../../../Pinq/Queries/Operations/RemoveValues.html"><abbr title="Pinq\Queries\Operations\RemoveValues">RemoveValues</abbr></a> $operation)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Operations/RemoveValues.html"><abbr title="Pinq\Queries\Operations\RemoveValues">RemoveValues</abbr></a></td>
+                <td>$operation</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

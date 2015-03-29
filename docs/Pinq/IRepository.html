@@ -104,7 +104,7 @@
             </tr>
                     <tr>
                 <td class="type">
-                    int|null
+                    int|double|null
                 </td>
                 <td class="last">
                     <a href="#method_sum">sum</a>(callable $function = null)
@@ -114,7 +114,7 @@
             </tr>
                     <tr>
                 <td class="type">
-                    double|null
+                    int|double|null
                 </td>
                 <td class="last">
                     <a href="#method_average">average</a>(callable $function = null)
@@ -148,7 +148,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_implode">implode</a>(string $delimiter, callable $function = null)
-                    <p>Returns a string of all the values concatented by the delimiter.</p>
+                    <p>Returns a string of all the values concatenated by the delimiter.</p>
                 </td>
                 <td><small>from&nbsp;<a href="../Pinq/IAggregatable.html#method_implode"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a></small></td>
             </tr>
@@ -218,7 +218,7 @@
                 </td>
                 <td class="last">
                     <a href="#method_getIterator">getIterator</a>()
-                    <p>Returns an array compatable iterator for the elements.</p>
+                    <p>Returns an array compatible iterator for the elements.</p>
                 </td>
                 <td><small>from&nbsp;<a href="../Pinq/ITraversable.html#method_getIterator"><abbr title="Pinq\ITraversable">ITraversable</abbr></a></small></td>
             </tr>
@@ -749,7 +749,7 @@
 
                 <h3 id="method_sum">
         <div class="location">in <a href="../Pinq/IAggregatable.html#method_sum"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a> at line 61</div>
-        <code>            public            int|null
+        <code>            public            int|double|null
     <strong>sum</strong>(callable $function = null)</code>
     </h3>
     <div class="details">
@@ -772,7 +772,7 @@
 
                     <table>
         <tr>
-            <td>int|null</td>
+            <td>int|double|null</td>
             <td>
 </td>
         </tr>
@@ -785,7 +785,7 @@
 
                 <h3 id="method_average">
         <div class="location">in <a href="../Pinq/IAggregatable.html#method_average"><abbr title="Pinq\IAggregatable">IAggregatable</abbr></a> at line 70</div>
-        <code>            public            double|null
+        <code>            public            int|double|null
     <strong>average</strong>(callable $function = null)</code>
     </h3>
     <div class="details">
@@ -808,7 +808,7 @@
 
                     <table>
         <tr>
-            <td>double|null</td>
+            <td>int|double|null</td>
             <td>
 </td>
         </tr>
@@ -897,7 +897,7 @@
     <strong>implode</strong>(string $delimiter, callable $function = null)</code>
     </h3>
     <div class="details">
-        <p>Returns a string of all the values concatented by the delimiter.</p>
+        <p>Returns a string of all the values concatenated by the delimiter.</p>
         <p>
 </p>
         <div class="tags">
@@ -1101,7 +1101,7 @@ all others will be reindexed numerically.</p>
     <strong>getIterator</strong>()</code>
     </h3>
     <div class="details">
-        <p>Returns an array compatable iterator for the elements.</p>
+        <p>Returns an array compatible iterator for the elements.</p>
         <p>Non string or integer keys will be numerically reindexed.</p>
         <div class="tags">
             
@@ -2054,7 +2054,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_getExpression">
-        <div class="location">in <a href="../Pinq/IQueryable.html#method_getExpression"><abbr title="Pinq\IQueryable">IQueryable</abbr></a> at line 31</div>
+        <div class="location">in <a href="../Pinq/IQueryable.html#method_getExpression"><abbr title="Pinq\IQueryable">IQueryable</abbr></a> at line 29</div>
         <code>            public            <a href="../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a>
     <strong>getExpression</strong>()</code>
     </h3>
@@ -2080,7 +2080,7 @@ This will implicitly index each group by the group key returned from the supplie
     </div>
 
                 <h3 id="method_getSourceInfo">
-        <div class="location">in <a href="../Pinq/IQueryable.html#method_getSourceInfo"><abbr title="Pinq\IQueryable">IQueryable</abbr></a> at line 38</div>
+        <div class="location">in <a href="../Pinq/IQueryable.html#method_getSourceInfo"><abbr title="Pinq\IQueryable">IQueryable</abbr></a> at line 36</div>
         <code>            public            <a href="../Pinq/Queries/ISourceInfo.html"><abbr title="Pinq\Queries\ISourceInfo">ISourceInfo</abbr></a>
     <strong>getSourceInfo</strong>()</code>
     </h3>

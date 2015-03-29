@@ -231,7 +231,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/AssignmentExpression.html"><abbr title="Pinq\Expressions\AssignmentExpression">AssignmentExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_assign">assign</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignToValue, int $assignmentOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignmentValue)
+                    <a href="#method_assign">assign</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignToValue, string $assignmentOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignmentValue)
                     <p>
 </p>
                 </td>
@@ -242,7 +242,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/BinaryOperationExpression.html"><abbr title="Pinq\Expressions\BinaryOperationExpression">BinaryOperationExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_binaryOperation">binaryOperation</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $leftOperand, int $operator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $rightOperand)
+                    <a href="#method_binaryOperation">binaryOperation</a>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $leftOperand, string $operator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $rightOperand)
                     <p>
 </p>
                 </td>
@@ -253,7 +253,7 @@
                     static&nbsp;<a href="../../Pinq/Expressions/UnaryOperationExpression.html"><abbr title="Pinq\Expressions\UnaryOperationExpression">UnaryOperationExpression</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_unaryOperation">unaryOperation</a>(int $unaryOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $operand)
+                    <a href="#method_unaryOperation">unaryOperation</a>(string $unaryOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $operand)
                     <p>
 </p>
                 </td>
@@ -1202,7 +1202,7 @@ Will become:
                 <h3 id="method_assign">
         <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_assign"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 298</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/AssignmentExpression.html"><abbr title="Pinq\Expressions\AssignmentExpression">AssignmentExpression</abbr></a>
-    <strong>assign</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignToValue, int $assignmentOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignmentValue)</code>
+    <strong>assign</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignToValue, string $assignmentOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $assignmentValue)</code>
     </h3>
     <div class="details">
         <p>
@@ -1220,7 +1220,7 @@ Will become:
 </td>
             </tr>
                     <tr>
-                <td>int</td>
+                <td>string</td>
                 <td>$assignmentOperator</td>
                 <td>
 </td>
@@ -1252,7 +1252,7 @@ Will become:
                 <h3 id="method_binaryOperation">
         <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_binaryOperation"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 313</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/BinaryOperationExpression.html"><abbr title="Pinq\Expressions\BinaryOperationExpression">BinaryOperationExpression</abbr></a>
-    <strong>binaryOperation</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $leftOperand, int $operator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $rightOperand)</code>
+    <strong>binaryOperation</strong>(<a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $leftOperand, string $operator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $rightOperand)</code>
     </h3>
     <div class="details">
         <p>
@@ -1270,7 +1270,7 @@ Will become:
 </td>
             </tr>
                     <tr>
-                <td>int</td>
+                <td>string</td>
                 <td>$operator</td>
                 <td>
 </td>
@@ -1302,7 +1302,7 @@ Will become:
                 <h3 id="method_unaryOperation">
         <div class="location">in <a href="../../Pinq/Expressions/Expression.html#method_unaryOperation"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> at line 327</div>
         <code>final        static    public            <a href="../../Pinq/Expressions/UnaryOperationExpression.html"><abbr title="Pinq\Expressions\UnaryOperationExpression">UnaryOperationExpression</abbr></a>
-    <strong>unaryOperation</strong>(int $unaryOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $operand)</code>
+    <strong>unaryOperation</strong>(string $unaryOperator, <a href="../../Pinq/Expressions/Expression.html"><abbr title="Pinq\Expressions\Expression">Expression</abbr></a> $operand)</code>
     </h3>
     <div class="details">
         <p>
@@ -1314,7 +1314,7 @@ Will become:
 
                     <table>
                     <tr>
-                <td>int</td>
+                <td>string</td>
                 <td>$unaryOperator</td>
                 <td>
 </td>

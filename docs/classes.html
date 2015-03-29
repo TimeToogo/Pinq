@@ -556,7 +556,7 @@
                                         <a href="Pinq/Expressions/AssignmentExpression.html" target="main"><abbr title="Pinq\Expressions\AssignmentExpression">Pinq\Expressions\AssignmentExpression</abbr></a>
                                     </td>
                 <td>
-                    <code> $Variable += 5 </code>
+                    <code> $variable += 5 </code>
                 </td>
             </tr>
                     <tr>
@@ -2164,6 +2164,78 @@
             </tr>
                     <tr>
                 <td>
+                                        <a href="Pinq/Providers/DSL/Compilation/Compilers/Compiler.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\Compiler">Pinq\Providers\DSL\Compilation\Compilers\Compiler</abbr></a>
+                                    </td>
+                <td>
+                    Base class of the compiler
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Providers/DSL/Compilation/Compilers/IOperationQueryCompiler.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\IOperationQueryCompiler">Pinq\Providers\DSL\Compilation\Compilers\IOperationQueryCompiler</abbr></a>
+                    </em>                </td>
+                <td>
+                    Interface of the operation query compiler.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Providers/DSL/Compilation/Compilers/IQueryCompiler.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\IQueryCompiler">Pinq\Providers\DSL\Compilation\Compilers\IQueryCompiler</abbr></a>
+                    </em>                </td>
+                <td>
+                    Interface of the query compiler.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Providers/DSL/Compilation/Compilers/IRequestQueryCompiler.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\IRequestQueryCompiler">Pinq\Providers\DSL\Compilation\Compilers\IRequestQueryCompiler</abbr></a>
+                    </em>                </td>
+                <td>
+                    Interface of the request query compiler.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Providers/DSL/Compilation/Compilers/IScopeCompiler.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\IScopeCompiler">Pinq\Providers\DSL\Compilation\Compilers\IScopeCompiler</abbr></a>
+                    </em>                </td>
+                <td>
+                    Interface of the scope compiler.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/DSL/Compilation/Compilers/OperationQueryCompiler.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\OperationQueryCompiler">Pinq\Providers\DSL\Compilation\Compilers\OperationQueryCompiler</abbr></a>
+                                    </td>
+                <td>
+                    Implementation of the operation query compiler using the visitor pattern.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/DSL/Compilation/Compilers/QueryCompiler.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\QueryCompiler">Pinq\Providers\DSL\Compilation\Compilers\QueryCompiler</abbr></a>
+                                    </td>
+                <td>
+                    Base class of the query compiler
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/DSL/Compilation/Compilers/RequestQueryCompiler.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\RequestQueryCompiler">Pinq\Providers\DSL\Compilation\Compilers\RequestQueryCompiler</abbr></a>
+                                    </td>
+                <td>
+                    Implementation of the request query compiler using the visitor pattern.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/DSL/Compilation/Compilers/ScopeCompiler.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\Compilers\ScopeCompiler">Pinq\Providers\DSL\Compilation\Compilers\ScopeCompiler</abbr></a>
+                                    </td>
+                <td>
+                    Implementation of the scope compiler using the visitor pattern.
+                </td>
+            </tr>
+                    <tr>
+                <td>
                     <em>                    <a href="Pinq/Providers/DSL/Compilation/ICompiledOperation.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\ICompiledOperation">Pinq\Providers\DSL\Compilation\ICompiledOperation</abbr></a>
                     </em>                </td>
                 <td>
@@ -2188,6 +2260,14 @@
             </tr>
                     <tr>
                 <td>
+                    <em>                    <a href="Pinq/Providers/DSL/Compilation/IOperationCompilation.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\IOperationCompilation">Pinq\Providers\DSL\Compilation\IOperationCompilation</abbr></a>
+                    </em>                </td>
+                <td>
+                    Base interface for a operation query undergoing compilation.
+                </td>
+            </tr>
+                    <tr>
+                <td>
                     <em>                    <a href="Pinq/Providers/DSL/Compilation/IOperationTemplate.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\IOperationTemplate">Pinq\Providers\DSL\Compilation\IOperationTemplate</abbr></a>
                     </em>                </td>
                 <td>
@@ -2196,10 +2276,26 @@
             </tr>
                     <tr>
                 <td>
+                    <em>                    <a href="Pinq/Providers/DSL/Compilation/IQueryCompilation.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\IQueryCompilation">Pinq\Providers\DSL\Compilation\IQueryCompilation</abbr></a>
+                    </em>                </td>
+                <td>
+                    Base interface for an request / operation query undergoing compilation.
+                </td>
+            </tr>
+                    <tr>
+                <td>
                     <em>                    <a href="Pinq/Providers/DSL/Compilation/IQueryTemplate.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\IQueryTemplate">Pinq\Providers\DSL\Compilation\IQueryTemplate</abbr></a>
                     </em>                </td>
                 <td>
                     Base interface for a request / operation query template.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                    <em>                    <a href="Pinq/Providers/DSL/Compilation/IRequestCompilation.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\IRequestCompilation">Pinq\Providers\DSL\Compilation\IRequestCompilation</abbr></a>
+                    </em>                </td>
+                <td>
+                    Base interface for a request query undergoing compilation.
                 </td>
             </tr>
                     <tr>
@@ -2536,6 +2632,14 @@
                                     </td>
                 <td>
                     Implementation of the scope processor using the visitor pattern.
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                        <a href="Pinq/Providers/DSL/Compilation/QueryCompilation.html" target="main"><abbr title="Pinq\Providers\DSL\Compilation\QueryCompilation">Pinq\Providers\DSL\Compilation\QueryCompilation</abbr></a>
+                                    </td>
+                <td>
+                    Base class for an request / operation query undergoing compilation.
                 </td>
             </tr>
                     <tr>

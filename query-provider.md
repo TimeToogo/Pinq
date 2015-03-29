@@ -2,9 +2,11 @@
 layout: default
 title:  Implementing a Query Provider
 ---
-Implementing a DSL IQueryProvider
+Implementing a DSL query provider
 =================================
-**Guide coming soon.**
 
-Hopefully, this helps to illustrate the capabilities of PINQ and its built-in expression language and query infrastructure.
-The ability and to provide a seamless integration with PHP and external data sources.
+A page on this site could not do this topic justice.
+
+[Here][1] is a documented demo repo implementing the DSL query provider mapping to MySQL database.
+
+[1]: https://github.com/TimeToogo/Pinq.Demo.Sql

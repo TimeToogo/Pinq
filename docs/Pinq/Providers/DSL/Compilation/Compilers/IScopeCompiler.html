@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Pinq\Providers\DSL\Compilation\Compilers\IScopeCompiler | </title>
+                    <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../../../classes.html">Classes</a></li>
+                            <li><a href="../../../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../../../traits.html">Traits</a></li>
+            <li><a href="../../../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../../../../Pinq/Providers/DSL/Compilation/Compilers.html">Pinq\Providers\DSL\Compilation\Compilers</a>\IScopeCompiler</h1>
+    </div>
+        <div class="content">
+                <p>    interface
+    <strong>IScopeCompiler</strong>        implements
+        <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></p>
+
+            <div class="description">
+            <p>Interface of the scope compiler.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitIndexBy">visitIndexBy</a>(<a href="../../../../../Pinq/Queries/Segments/IndexBy.html"><abbr title="Pinq\Queries\Segments\IndexBy">IndexBy</abbr></a> $segment)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitIndexBy"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitSelect">visitSelect</a>(<a href="../../../../../Pinq/Queries/Segments/Select.html"><abbr title="Pinq\Queries\Segments\Select">Select</abbr></a> $segment)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitSelect"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitKeys">visitKeys</a>(<a href="../../../../../Pinq/Queries/Segments/Keys.html"><abbr title="Pinq\Queries\Segments\Keys">Keys</abbr></a> $segment)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitKeys"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitOperation">visitOperation</a>(<a href="../../../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a> $segment)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitOperation"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitRange">visitRange</a>(<a href="../../../../../Pinq/Queries/Segments/Range.html"><abbr title="Pinq\Queries\Segments\Range">Range</abbr></a> $segment)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitRange"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitOrderBy">visitOrderBy</a>(<a href="../../../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a> $segment)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitOrderBy"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitGroupBy">visitGroupBy</a>(<a href="../../../../../Pinq/Queries/Segments/GroupBy.html"><abbr title="Pinq\Queries\Segments\GroupBy">GroupBy</abbr></a> $segment)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitGroupBy"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitSelectMany">visitSelectMany</a>(<a href="../../../../../Pinq/Queries/Segments/SelectMany.html"><abbr title="Pinq\Queries\Segments\SelectMany">SelectMany</abbr></a> $segment)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitSelectMany"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitFilter">visitFilter</a>(<a href="../../../../../Pinq/Queries/Segments/Filter.html"><abbr title="Pinq\Queries\Segments\Filter">Filter</abbr></a> $segment)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitFilter"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitUnique">visitUnique</a>(<a href="../../../../../Pinq/Queries/Segments/Unique.html"><abbr title="Pinq\Queries\Segments\Unique">Unique</abbr></a> $segment)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitUnique"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitJoin">visitJoin</a>(<a href="../../../../../Pinq/Queries/Segments/Join.html"><abbr title="Pinq\Queries\Segments\Join">Join</abbr></a> $segment)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitJoin"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_visitReindex">visitReindex</a>(<a href="../../../../../Pinq/Queries/Segments/Reindex.html"><abbr title="Pinq\Queries\Segments\Reindex">Reindex</abbr></a> $segment)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitReindex"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../../Pinq/Providers/DSL/Compilation/IQueryCompilation.html"><abbr title="Pinq\Providers\DSL\Compilation\IQueryCompilation">IQueryCompilation</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getCompilation">getCompilation</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Pinq\Providers\DSL\Compilation\Compilers\Queries\IScope">IScope</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_getScope">getScope</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_compile">compile</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_visitIndexBy">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitIndexBy"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> at line 12</div>
+        <code>            public            
+    <strong>visitIndexBy</strong>(<a href="../../../../../Pinq/Queries/Segments/IndexBy.html"><abbr title="Pinq\Queries\Segments\IndexBy">IndexBy</abbr></a> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Segments/IndexBy.html"><abbr title="Pinq\Queries\Segments\IndexBy">IndexBy</abbr></a></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitSelect">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitSelect"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> at line 14</div>
+        <code>            public            
+    <strong>visitSelect</strong>(<a href="../../../../../Pinq/Queries/Segments/Select.html"><abbr title="Pinq\Queries\Segments\Select">Select</abbr></a> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Segments/Select.html"><abbr title="Pinq\Queries\Segments\Select">Select</abbr></a></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitKeys">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitKeys"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> at line 16</div>
+        <code>            public            
+    <strong>visitKeys</strong>(<a href="../../../../../Pinq/Queries/Segments/Keys.html"><abbr title="Pinq\Queries\Segments\Keys">Keys</abbr></a> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Segments/Keys.html"><abbr title="Pinq\Queries\Segments\Keys">Keys</abbr></a></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitOperation">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitOperation"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> at line 18</div>
+        <code>            public            
+    <strong>visitOperation</strong>(<a href="../../../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Segments/Operation.html"><abbr title="Pinq\Queries\Segments\Operation">Operation</abbr></a></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitRange">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitRange"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> at line 20</div>
+        <code>            public            
+    <strong>visitRange</strong>(<a href="../../../../../Pinq/Queries/Segments/Range.html"><abbr title="Pinq\Queries\Segments\Range">Range</abbr></a> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Segments/Range.html"><abbr title="Pinq\Queries\Segments\Range">Range</abbr></a></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitOrderBy">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitOrderBy"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> at line 22</div>
+        <code>            public            
+    <strong>visitOrderBy</strong>(<a href="../../../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Segments/OrderBy.html"><abbr title="Pinq\Queries\Segments\OrderBy">OrderBy</abbr></a></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitGroupBy">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitGroupBy"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> at line 24</div>
+        <code>            public            
+    <strong>visitGroupBy</strong>(<a href="../../../../../Pinq/Queries/Segments/GroupBy.html"><abbr title="Pinq\Queries\Segments\GroupBy">GroupBy</abbr></a> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Segments/GroupBy.html"><abbr title="Pinq\Queries\Segments\GroupBy">GroupBy</abbr></a></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitSelectMany">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitSelectMany"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> at line 26</div>
+        <code>            public            
+    <strong>visitSelectMany</strong>(<a href="../../../../../Pinq/Queries/Segments/SelectMany.html"><abbr title="Pinq\Queries\Segments\SelectMany">SelectMany</abbr></a> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Segments/SelectMany.html"><abbr title="Pinq\Queries\Segments\SelectMany">SelectMany</abbr></a></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitFilter">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitFilter"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> at line 28</div>
+        <code>            public            
+    <strong>visitFilter</strong>(<a href="../../../../../Pinq/Queries/Segments/Filter.html"><abbr title="Pinq\Queries\Segments\Filter">Filter</abbr></a> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Segments/Filter.html"><abbr title="Pinq\Queries\Segments\Filter">Filter</abbr></a></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitUnique">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitUnique"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> at line 30</div>
+        <code>            public            
+    <strong>visitUnique</strong>(<a href="../../../../../Pinq/Queries/Segments/Unique.html"><abbr title="Pinq\Queries\Segments\Unique">Unique</abbr></a> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Segments/Unique.html"><abbr title="Pinq\Queries\Segments\Unique">Unique</abbr></a></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitJoin">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitJoin"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> at line 32</div>
+        <code>            public            
+    <strong>visitJoin</strong>(<a href="../../../../../Pinq/Queries/Segments/Join.html"><abbr title="Pinq\Queries\Segments\Join">Join</abbr></a> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Segments/Join.html"><abbr title="Pinq\Queries\Segments\Join">Join</abbr></a></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_visitReindex">
+        <div class="location">in <a href="../../../../../Pinq/Queries/Segments/ISegmentVisitor.html#method_visitReindex"><abbr title="Pinq\Queries\Segments\ISegmentVisitor">ISegmentVisitor</abbr></a> at line 34</div>
+        <code>            public            
+    <strong>visitReindex</strong>(<a href="../../../../../Pinq/Queries/Segments/Reindex.html"><abbr title="Pinq\Queries\Segments\Reindex">Reindex</abbr></a> $segment)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../../Pinq/Queries/Segments/Reindex.html"><abbr title="Pinq\Queries\Segments\Reindex">Reindex</abbr></a></td>
+                <td>$segment</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCompilation">
+        <div class="location">at line 19</div>
+        <code>            public            <a href="../../../../../Pinq/Providers/DSL/Compilation/IQueryCompilation.html"><abbr title="Pinq\Providers\DSL\Compilation\IQueryCompilation">IQueryCompilation</abbr></a>
+    <strong>getCompilation</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../../Pinq/Providers/DSL/Compilation/IQueryCompilation.html"><abbr title="Pinq\Providers\DSL\Compilation\IQueryCompilation">IQueryCompilation</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getScope">
+        <div class="location">at line 24</div>
+        <code>            public            <abbr title="Pinq\Providers\DSL\Compilation\Compilers\Queries\IScope">IScope</abbr>
+    <strong>getScope</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Pinq\Providers\DSL\Compilation\Compilers\Queries\IScope">IScope</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_compile">
+        <div class="location">at line 29</div>
+        <code>            public            void
+    <strong>compile</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>
