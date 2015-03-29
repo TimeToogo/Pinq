@@ -25,9 +25,9 @@ abstract class QueryCompiler extends Compiler implements IQueryCompiler
      */
     protected $scopeCompiler;
 
-    public function __construct(IQueryCompilation $compilation, IQuery $query, IScopeCompiler $scopeCompiler)
+    public function __construct(IQuery $query, IQueryCompilation $compilation, IScopeCompiler $scopeCompiler)
     {
-        $this->compilation   = $compilation;
+        parent::__construct($compilation);
         $this->query         = $query;
         $this->scopeCompiler = $scopeCompiler;
     }

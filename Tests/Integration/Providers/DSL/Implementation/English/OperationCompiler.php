@@ -17,8 +17,8 @@ class OperationCompiler extends OperationQueryCompiler
     public function __construct(Queries\IOperationQuery $operationQuery, QueryCompilation $compilation)
     {
         parent::__construct(
-                $compilation,
                 $operationQuery,
+                $compilation,
                 new ScopeCompiler($compilation, $operationQuery->getScope())
         );
     }

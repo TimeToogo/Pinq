@@ -26,11 +26,11 @@ abstract class OperationQueryCompiler extends QueryCompiler implements IOperatio
     protected $query;
 
     public function __construct(
-            IOperationCompilation $compilation,
             IOperationQuery $query,
+            IOperationCompilation $compilation,
             IScopeCompiler $scopeCompiler
     ) {
-        parent::__construct($compilation, $query, $scopeCompiler);
+        parent::__construct($query, $compilation, $scopeCompiler);
     }
 
     /**

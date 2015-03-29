@@ -26,11 +26,11 @@ abstract class RequestQueryCompiler extends QueryCompiler implements IRequestQue
     protected $query;
 
     public function __construct(
-            IRequestCompilation $compilation,
             IRequestQuery $query,
+            IRequestCompilation $compilation,
             IScopeCompiler $scopeCompiler
     ) {
-        parent::__construct($compilation, $query, $scopeCompiler);
+        parent::__construct($query, $compilation, $scopeCompiler);
     }
 
     /**

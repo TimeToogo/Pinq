@@ -17,8 +17,8 @@ class RequestCompiler extends RequestQueryCompiler
     public function __construct(Queries\IRequestQuery $requestQuery, QueryCompilation $compilation)
     {
         parent::__construct(
-                $compilation,
                 $requestQuery,
+                $compilation,
                 new ScopeCompiler($compilation, $requestQuery->getScope())
         );
     }
