@@ -3,7 +3,6 @@
 namespace Pinq\Expressions;
 
 use Pinq\Expressions\Operators\Assignment;
-use Pinq\Expressions\Operators\Binary;
 
 /**
  * <code>
@@ -19,7 +18,7 @@ class AssignmentExpression extends Expression
     private $assignTo;
 
     /**
-     * @var int
+     * @var string
      */
     private $operator;
 
