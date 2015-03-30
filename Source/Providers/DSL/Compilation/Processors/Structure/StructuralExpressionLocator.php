@@ -43,11 +43,6 @@ class StructuralExpressionLocator extends StructuralExpressionQueryProcessor
         $processor->buildQuery();
     }
 
-    public function forSubScope(Queries\IScope $scope)
-    {
-        return new static($this->parameters, $this->processor, $scope);
-    }
-
     public function processFunction(IFunction $function)
     {
         $expressionParameterizer = new StructuralExpressionWalker(
