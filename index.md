@@ -50,7 +50,7 @@ syntax is cool, but not only what LINQ is about. PINQ aims to provide:
  - Complete and thorough documentation
  - LINQ-style fluent query API with lazy evaluation and immutable query objects
  - Truly seamless external query support
- - Full support for PHP closures and callable syntax (No magic strings)
+ - Full support for PHP closures and callable syntax
  - And even building on the original LINQ with offering an additional mutable query API
 
 Installation
