@@ -17,8 +17,9 @@ matrix:
 install: composer install --dev --no-interaction
 
 script:
+ - if [[ $TRAVIS_PHP_VERSION = '7' || $TRAVIS_PHP_VERSION = 'hhvm' || $TRAVIS_PHP_VERSION = 'hhvm-nightly' ]]; then PHPUNIT_FLAGS="--process-isolation"
  - mkdir -p build/logs
- - phpunit --configuration "phpunit.xml.dist" --coverage-clover build/logs/clover.xml
+ - phpunit -v --configuration "phpunit.xml.dist" --coverage-clover build/logs/clover.xml $PHPUNIT_FLAGS
 
 after_script:
  - php vendor/bin/coveralls -v
