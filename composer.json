@@ -17,7 +17,7 @@
         "nikic/php-parser": "~1.2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*",
+        "phpunit/phpunit": "4.6.*",
         "doctrine/cache": "1.3.*",
         "satooshi/php-coveralls": "0.6.1"
     },

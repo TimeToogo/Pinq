@@ -2,6 +2,9 @@
 
 namespace Pinq\Tests;
 
+use Exception;
+use PHPUnit_Framework_Test;
+
 class Timer implements \PHPUnit_Framework_TestListener
 {
     private static $log = [];
@@ -25,4 +28,5 @@ class Timer implements \PHPUnit_Framework_TestListener
     public function addSkippedTest(\PHPUnit_Framework_Test $test, \Exception $e, $time) {}
     public function startTestSuite(\PHPUnit_Framework_TestSuite $suite) { }
     public function endTestSuite(\PHPUnit_Framework_TestSuite $suite) {}
+    public function addRiskyTest(PHPUnit_Framework_Test $test, Exception $e, $time) {}
 }

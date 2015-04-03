@@ -3,6 +3,8 @@
 namespace Pinq\Tests\Integration\Queries;
 
 use Pinq\Queries\IParameterRegistry;
+use SebastianBergmann\Comparator\Comparator;
+use SebastianBergmann\Comparator\Factory as ComparatorFactory;
 
 /**
  * Comparator to assert whether queries are equal.
@@ -10,7 +12,7 @@ use Pinq\Queries\IParameterRegistry;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class QueryComparator extends \PHPUnit_Framework_Comparator
+class QueryComparator extends Comparator
 {
     const PARAMETER_NAME = '~~~PARAMETER~~~';
     private static $number = 0;
@@ -58,7 +60,7 @@ class QueryComparator extends \PHPUnit_Framework_Comparator
     public static function assertEqualsButIgnoreParameterIds($expected, $actual)
     {
         $comparator = new self();
-        $factory    = \PHPUnit_Framework_ComparatorFactory::getDefaultInstance();
+        $factory    = ComparatorFactory::getInstance();
         $comparator->setFactory($factory);
         $factory->register($comparator);
 
