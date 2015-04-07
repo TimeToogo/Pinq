@@ -22,9 +22,9 @@ interface IQueryParameter
      * A unique identifier is assigned to the $hash parameter.
      *
      * @param IResolvedParameterRegistry $parameters
-     * @param string                     $hash
+     * @param string                     $hash The hash will be set to this variable
      *
-     * @return string
+     * @return mixed The parameter value
      */
     public function evaluate(IResolvedParameterRegistry $parameters, &$hash);
 
