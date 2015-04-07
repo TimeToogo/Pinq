@@ -23,7 +23,7 @@ class TypeSystemTest extends ExpressionAnalysisTestCase
         $values = [
                 INativeType::TYPE_STRING   => 'abc',
                 INativeType::TYPE_INT      => -34,
-                INativeType::TYPE_BOOL  => true,
+                INativeType::TYPE_BOOL     => true,
                 INativeType::TYPE_DOUBLE   => -4.2454,
                 INativeType::TYPE_NULL     => null,
                 INativeType::TYPE_ARRAY    => [222, ''],

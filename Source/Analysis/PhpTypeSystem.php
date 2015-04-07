@@ -158,32 +158,7 @@ class PhpTypeSystem extends TypeSystem
 
     public function getTypeFromValue($value)
     {
-        switch (gettype($value)) {
-            case 'string':
-                return $this->nativeTypes[INativeType::TYPE_STRING];
-
-            case 'integer':
-                return $this->nativeTypes[INativeType::TYPE_INT];
-
-            case 'boolean':
-                return $this->nativeTypes[INativeType::TYPE_BOOL];
-
-            case 'double':
-                return $this->nativeTypes[INativeType::TYPE_DOUBLE];
-
-            case 'NULL':
-                return $this->nativeTypes[INativeType::TYPE_NULL];
-
-            case 'array':
-                return $this->nativeTypes[INativeType::TYPE_ARRAY];
-
-            case 'resource':
-            case 'unknown type':
-                return $this->nativeTypes[INativeType::TYPE_RESOURCE];
-
-            case 'object':
-                return $this->getObjectType(get_class($value));
-        }
+        return $this->getType(TypeId::fromValue($value));
     }
 
     public function getTypeFromTypeHint($typeHint)

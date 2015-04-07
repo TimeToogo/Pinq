@@ -2,6 +2,8 @@
 
 namespace Pinq\Analysis;
 
+use Pinq\PinqException;
+
 /**
  * Static helper to generate and interpret type identifiers.
  *
@@ -42,5 +44,37 @@ final class TypeId
     public static function getComposedTypeIdsFromId($compositeId)
     {
         return explode('|', substr($compositeId, strlen('composite<'), -strlen('>')));
+    }
+
+    public static function fromValue($value)
+    {
+        switch (gettype($value)) {
+            case 'string':
+                return INativeType::TYPE_STRING;
+
+            case 'integer':
+                return INativeType::TYPE_INT;
+
+            case 'boolean':
+                return INativeType::TYPE_BOOL;
+
+            case 'double':
+                return INativeType::TYPE_DOUBLE;
+
+            case 'NULL':
+                return INativeType::TYPE_NULL;
+
+            case 'array':
+                return INativeType::TYPE_ARRAY;
+
+            case 'resource':
+            case 'unknown type':
+                return INativeType::TYPE_RESOURCE;
+
+            case 'object':
+                return self::getObject(get_class($value));
+        }
+
+        throw new PinqException('Unknown variable type %s given', gettype($value));
     }
 }
