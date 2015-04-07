@@ -1,5 +1,7 @@
 dev-master
 ==========
+ - Refactor `Analysis\PhpTypeSystem::getTypeFromValue` method logic into new static method `Analysis\TypeId::fromValue`
+ - Fix bug when attempting to parse function with a magic scope parameter type hint (eg `function (self $param) { ... }`.
 
 3.1.0 (29/3/15)
 ===============

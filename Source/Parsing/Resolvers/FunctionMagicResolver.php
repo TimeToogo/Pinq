@@ -3,6 +3,7 @@
 namespace Pinq\Parsing\Resolvers;
 
 use Pinq\Expressions as O;
+use Pinq\Expressions\ParameterExpression;
 use Pinq\Parsing\IFunctionMagic;
 use Pinq\Parsing\IMagicConstants;
 use Pinq\Parsing\IMagicScopes;
@@ -51,6 +52,19 @@ class FunctionMagicResolver extends O\ExpressionWalker
         return $self->walkAll($expressions);
     }
 
+    public function walkParameter(ParameterExpression $expression)
+    {
+        $parameter = parent::walkParameter($expression);
+
+        return $parameter->update(
+                $parameter->getName(),
+                $this->resolveMagicScopeClass($expression->getTypeHint()) ?: $expression->getTypeHint(),
+                $parameter->getDefaultValue(),
+                $parameter->isPassedByReference(),
+                $parameter->isVariadic()
+        );
+    }
+
     public function walkClosure(O\ClosureExpression $expression)
     {
         $this->closureNestingLevel++;
@@ -89,7 +103,7 @@ class FunctionMagicResolver extends O\ExpressionWalker
 
     private function resolveMagicScopeClassConstant($class)
     {
-        switch (strtolower($class)) {
+        switch ($this->normalScopeClass($class)) {
             case 'self':
                 return $this->magicScopes->getSelfClassConstant();
 
@@ -99,6 +113,11 @@ class FunctionMagicResolver extends O\ExpressionWalker
             case 'parent':
                 return $this->magicScopes->getParentClassConstant();
         }
+    }
+
+    private function normalScopeClass($class)
+    {
+        return strtolower(ltrim($class, '\\'));
     }
 
     private function resolveMagicScopeExpression(O\StaticClassExpression $expression)
@@ -120,7 +139,7 @@ class FunctionMagicResolver extends O\ExpressionWalker
 
     private function resolveMagicScopeClass($class)
     {
-        switch (strtolower($class)) {
+        switch ($this->normalScopeClass($class)) {
             case 'self':
                 return $this->magicScopes->getSelfClass();
 

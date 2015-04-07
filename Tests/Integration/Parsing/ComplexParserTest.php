@@ -9,6 +9,49 @@ class ComplexParserTest extends ParserTest
     /**
      * @dataProvider parsers
      */
+    public function testWithRelativeParameterInSignature()
+    {
+        $function =
+                function (self $parameter) {
+                    1;
+                };
+        $this->assertParsedAs(
+                $function,
+                [O\Expression::value(1)]);
+
+        $function =
+                function (parent $parameter) {
+                    3;
+                };
+        $this->assertParsedAs(
+                $function,
+                [O\Expression::value(3)]);
+    }
+    /**
+     * @dataProvider parsers
+     */
+    public function testWithRelativeParameterInBody()
+    {
+        $function =
+                function () {
+                    function (self $parameter) {};
+                };
+        $this->assertParsedAs(
+                $function,
+                [O\Expression::closure(false, false, [O\Expression::parameter('parameter', '\self')], [], [])]);
+
+        $function =
+                function () {
+                    function (parent $parameter) {};
+                };
+        $this->assertParsedAs(
+                $function,
+                [O\Expression::closure(false, false, [O\Expression::parameter('parameter', '\parent')], [], [])]);
+    }
+
+    /**
+     * @dataProvider parsers
+     */
     public function testNestedVariableOperations()
     {
         $function =

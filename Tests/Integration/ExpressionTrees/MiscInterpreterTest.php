@@ -41,6 +41,10 @@ class MiscInterpreterTest extends InterpreterTest
                 [O\Expression::parameter('i', '\\' . __CLASS__)]);
 
         $this->assertParametersAre(
+                function (parent $i) { },
+                [O\Expression::parameter('i', '\\' . get_parent_class())]);
+
+        $this->assertParametersAre(
                 function (MiscInterpreterTest $i) { },
                 [O\Expression::parameter('i', '\\' . __CLASS__)]);
 

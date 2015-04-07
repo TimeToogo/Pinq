@@ -7,6 +7,7 @@ use Pinq\Parsing\IFunctionReflection;
 use Pinq\Parsing\InvalidFunctionException;
 use Pinq\Parsing\ParserBase;
 use PhpParser;
+use Pinq\Parsing\Resolvers\FunctionMagicResolver;
 
 /**
  * Function parser implementation utilising nikic\PHP-Parser to
