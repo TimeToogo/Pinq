@@ -136,13 +136,24 @@ class ExpressionAnalyser extends O\ExpressionVisitor implements IExpressionAnaly
 
     public function visitConstant(O\ConstantExpression $expression)
     {
+        $this->verifyConstantDefined($expression->getName());
+
         $this->analysis[$expression] = $this->typeSystem->getTypeFromValue($expression->evaluate($this->analysisContext->getEvaluationContext()));
     }
 
     public function visitClassConstant(O\ClassConstantExpression $expression)
     {
         $this->validateStaticClassName($expression->getClass(), 'class constant');
+        $this->verifyConstantDefined($expression->getClass()->getValue() . '::' . $expression->getName());
+
         $this->analysis[$expression] = $this->typeSystem->getTypeFromValue($expression->evaluate($this->analysisContext->getEvaluationContext()));
+    }
+
+    private function verifyConstantDefined($constantName)
+    {
+        if (!defined($constantName)) {
+            throw new TypeException('Cannot get type from constant %s: constant is not defined', $constantName);
+        }
     }
 
     public function visitEmpty(O\EmptyExpression $expression)

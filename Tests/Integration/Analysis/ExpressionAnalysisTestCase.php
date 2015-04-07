@@ -105,12 +105,16 @@ class ExpressionAnalysisTestCase extends PinqTestCase
 
     protected function assertAnalysisFails(callable $expression, array $variableTypeMap = [], $message = '')
     {
+        $failed = false;
         try {
             $this->getAnalysis($expression, $variableTypeMap);
-            $this->fail(
-                    'Expecting analysis to fail with exception of type \\Pinq\\Analysis\\TypeException: no exception was thrown' . $message);
-        } catch (\Exception $exception) {
+            $failed = true;
+        } catch (\Exception $exception) {}
 
+        if($failed) {
+            $this->fail(
+                    'Expecting analysis to fail with exception of type \\Pinq\\Analysis\\TypeException: no exception was thrown' . $message
+            );
         }
     }
 
