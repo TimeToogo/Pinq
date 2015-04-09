@@ -37,7 +37,9 @@ abstract class IteratorGenerator extends Generator implements IWrapperIterator
 
     final public function &getIterator()
     {
-        return $this->iteratorGenerator($this->iterator);
+        foreach($this->iteratorGenerator($this->iterator) as $key => &$value) {
+            yield $key => $value;
+        }
     }
 
     abstract protected function &iteratorGenerator(IGenerator $iterator);

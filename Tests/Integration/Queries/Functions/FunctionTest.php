@@ -145,14 +145,15 @@ abstract class FunctionTest extends PinqTestCase
 
     public function testSerialization()
     {
-        $function = $this->internalFunction();
-        $this->assertEquals($function, unserialize(serialize($function)));
+        $function1 = $this->internalFunction();
+        $this->assertEquals($function1, unserialize(serialize($function1)));
 
-        $function = $this->emptyFunction();
-        $this->assertEquals($function, unserialize(serialize($function)));
+        $function2 = $this->emptyFunction();
+        $this->assertEquals($function2, unserialize(serialize($function2)));
 
-        $function = $this->functionWithReturnStatement();
-        $this->assertEquals($function, unserialize(serialize($function)));
+        $function3 = $this->functionWithReturnStatement();
+
+        $this->assertEquals($function3, unserialize(serialize($function3)));
     }
 
     public function testUpdate()

@@ -43,15 +43,22 @@ abstract class JoinIterator extends IteratorGenerator implements IJoinToIterator
 
     final protected function &iteratorGenerator(IGenerator $iterator)
     {
-        $projectionFunction = $this->projectionFunction;
-        $count              = 0;
+        $count = 0;
 
         foreach ($this->outerIterator as $outerKey => $outerValue) {
-            foreach ($this->innerGenerator($outerKey, $outerValue) as $innerKey => $innerValue) {
-                $value = $projectionFunction($outerValue, $innerValue, $outerKey, $innerKey);
-                yield $count++ => $value;
+            foreach($this->innerForeach($outerKey, $outerValue, $count) as $key => $value) {
+                yield $key => $value;
                 unset($value);
             }
+        }
+    }
+
+    protected function innerForeach($outerKey, $outerValue, &$count)
+    {
+        $projectionFunction = $this->projectionFunction;
+
+        foreach ($this->innerGenerator($outerKey, $outerValue) as $innerKey => $innerValue) {
+            yield $count++ => $projectionFunction($outerValue, $innerValue, $outerKey, $innerKey);
         }
     }
 
