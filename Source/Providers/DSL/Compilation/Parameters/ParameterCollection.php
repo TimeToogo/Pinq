@@ -63,6 +63,22 @@ class ParameterCollection extends ParameterCollectionBase
     }
 
     /**
+     * Removes a query parameter from the collection.
+     *
+     * @param IQueryParameter $parameter
+     *
+     * @return void
+     */
+    public function remove(IQueryParameter $parameter)
+    {
+        foreach($this->parameters as $key => $someParameter) {
+            if($someParameter === $parameter) {
+                unset($this->parameters[$key]);
+            }
+        }
+    }
+
+    /**
      * Builds an immutable parameter registry from the added parameters.
      *
      * @return ParameterRegistry

@@ -25,6 +25,18 @@ abstract class ParameterCollectionBase implements \Countable
     }
 
     /**
+     * Returns whether the collection contains the supplied parameter.
+     *
+     * @param IQueryParameter $parameter
+     *
+     * @return bool
+     */
+    public function contains(IQueryParameter $parameter)
+    {
+        return in_array($parameter, $this->parameters, true);
+    }
+
+    /**
      * @return IQueryParameter[]
      */
     public function getParameters()

@@ -3,9 +3,11 @@
 namespace Pinq\Tests\Integration\Providers\DSL;
 
 use Pinq\Expressions as O;
+use Pinq\Providers\DSL\Compilation\Parameters\IQueryParameter;
 use Pinq\Providers\DSL\Compilation\Parameters\ParameterCollection;
 use Pinq\Providers\DSL\Compilation\Parameters\ExpressionParameter;
 use Pinq\Providers\DSL\Compilation\Parameters\ParameterHasher;
+use Pinq\Providers\DSL\Compilation\Parameters\StandardParameter;
 use Pinq\Queries\Functions;
 use Pinq\Queries\ResolvedParameterRegistry;
 use Pinq\Tests\PinqTestCase;
@@ -138,6 +140,47 @@ class ParameterCollectionTest extends PinqTestCase
         $this->collection->addId('foo-bar', ParameterHasher::valueType());
 
         $this->assertResolvesTo(['123ewq'], ['foo-bar' => '123ewq']);
+    }
+
+    public function testCustomParameter()
+    {
+        $parameterMock = $this->getMock('Pinq\Providers\DSL\Compilation\Parameters\IQueryParameter');
+        $parameterMock->expects($this->any())
+                ->method('evaluate')
+                ->with($this->equalTo(new ResolvedParameterRegistry(['abc' => 'foobar'])))
+                ->willReturn('resolved-value');
+
+        $this->collection->add($parameterMock);
+
+        $this->assertResolvesTo(['resolved-value'], ['abc' => 'foobar']);
+    }
+
+    public function testContainsParameter()
+    {
+        $this->collection->addId('foo', ParameterHasher::valueType());
+        $this->collection->addId('bar', ParameterHasher::valueType());
+
+        $parameters = $this->collection->getParameters();
+
+        $this->assertTrue($this->collection->contains($parameters[0]));
+        $this->assertFalse($this->collection->contains(new StandardParameter('some-id', ParameterHasher::valueType())));
+    }
+
+    public function testRemoveParameter()
+    {
+        $this->collection->addId('foo', ParameterHasher::valueType());
+        $this->collection->addId('bar', ParameterHasher::valueType());
+
+        $this->assertCount(2, $this->collection->getParameters());
+
+        $parameters = $this->collection->getParameters();
+        $this->collection->remove($parameters[0]);
+
+        $this->assertSame([1 => $parameters[1]], $this->collection->getParameters());
+
+        $this->collection->remove($parameters[1]);
+
+        $this->assertSame([], $this->collection->getParameters());
     }
 
     public function testCollectionSuppliesCorrectParameterHasToExpressionParameter()

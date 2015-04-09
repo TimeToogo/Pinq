@@ -16,6 +16,11 @@ class StandardParameter extends QueryParameterBase
      */
     protected $parameterId;
 
+    /**
+     * @param string           $parameterId
+     * @param IParameterHasher $hasher
+     * @param null             $data
+     */
     public function __construct($parameterId, IParameterHasher $hasher, $data = null)
     {
         parent::__construct($hasher, $data);
