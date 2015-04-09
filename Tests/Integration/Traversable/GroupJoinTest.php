@@ -262,16 +262,16 @@ class GroupJoinTest extends TraversableTest
     {
         $value = new \stdClass();
         $key = new \stdClass();
-//
-//        $traversable = $traversable
-//                ->groupJoin(range(1, 10))
-//                    ->on(function () { return false; })
-//                    ->withDefault($value, $key)
-//                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) use ($key) {
-//                        return $innerGroup[$key];
-//                    });
-//
-//        $this->assertMatches($traversable, empty($data) ? [] : array_fill(0, count($data), $value));
+
+        $traversable = $traversable
+                ->groupJoin(range(1, 10))
+                    ->on(function () { return false; })
+                    ->withDefault($value, $key)
+                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) use ($key) {
+                        return $innerGroup[$key];
+                    });
+
+        $this->assertMatches($traversable, empty($data) ? [] : array_fill(0, count($data), $value));
     }
 
     /**
@@ -279,15 +279,15 @@ class GroupJoinTest extends TraversableTest
      */
     public function testThatGroupJoinWithDefaultDoesNotSupplyDefaultElementWhenThereAreMatchingInnerElements(\Pinq\ITraversable $traversable, array $data)
     {
-//        $traversable = $traversable
-//                ->groupJoin([1])
-//                    ->on(function () { return true; })
-//                    ->withDefault(null, null)
-//                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) {
-//                        return $innerGroup->asArray();
-//                    });
-//
-//        $this->assertMatches($traversable, empty($data) ? [] : array_fill(0, count($data), [1]));
+        $traversable = $traversable
+                ->groupJoin([1])
+                    ->on(function () { return true; })
+                    ->withDefault(null, null)
+                    ->to(function ($outer, \Pinq\ITraversable $innerGroup) {
+                        return $innerGroup->asArray();
+                    });
+
+        $this->assertMatches($traversable, empty($data) ? [] : array_fill(0, count($data), [1]));
     }
 
     /**
