@@ -149,6 +149,36 @@ class GroupJoinApplyTest extends CollectionTest
             '10:1,3,5,7,9,11,13,15,17,19',
         ]);
     }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testThatOnEqualityWillNotMatchNullsAndUseDefault(\Pinq\ICollection $collection, array $data)
+    {
+        $collection
+                ->groupJoin($collection)
+                ->onEquality(
+                        function ($i) { return $i % 2 === 0 ? $i : null; },
+                        function ($i) { return $i % 2 === 0 ? $i : null; })
+                ->withDefault('<DEFAULT>')
+                ->apply(function (&$outer, \Pinq\ITraversable $innerGroup) {
+                    $outer .= ':' . $innerGroup->implode('-');
+                });
+
+        $this->assertMatches($collection, [
+                '1:<DEFAULT>',
+                '2:2',
+                '3:<DEFAULT>',
+                '4:4',
+                '5:<DEFAULT>',
+                '6:6',
+                '7:<DEFAULT>',
+                '8:8',
+                '9:<DEFAULT>',
+                '10:10'
+        ]);
+    }
+
     /**
      * @dataProvider oneToTen
      */

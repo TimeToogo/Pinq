@@ -7,6 +7,7 @@ dev
  - Add `Providers\DSL\Compilation\Parameters\ParameterCollection::remove` to remove a previously added parameter.\
  - Introduce `Analysis\INativeType::TYPE_NUMERIC` acting as a union type for `Analysis\INativeType::TYPE_INT` and `Analysis\INativeType::TYPE_DOUBLE`  
  - Fix bug when joining to the same `ITraversable` instance with an `->indexBy(...)` only returning the first element.
+ - Change identity hash to hash instances of `DateTimeInterface` by class and timestamp hence treating it as a value type throughout the PINQ API
  
 3.1.0 (29/3/15)
 ===============
