@@ -1,5 +1,5 @@
-dev-master
-==========
+dev
+===
  - Refactor `Analysis\PhpTypeSystem::getTypeFromValue` method logic into new static method `Analysis\TypeId::fromValue`
  - Fix bug when attempting to parse function with a magic scope parameter type hint (eg `function (self $param) { ... }`.
  - Implement `Analysis\TolerantExpressionAnalyser` which will convert analysis exceptions into the *mixed* type.
