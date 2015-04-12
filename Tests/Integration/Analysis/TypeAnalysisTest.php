@@ -293,7 +293,8 @@ class TypeAnalysisTest extends ExpressionAnalysisTestCase
                 INativeType::TYPE_DOUBLE => function () { 3 ? 343.23 : 2.34; },
                 INativeType::TYPE_STRING => function () { false ? 'abce' : '1234.3'; },
                 INativeType::TYPE_ARRAY => function () { false ? ['abc'] : [1,2,3]; },
-                INativeType::TYPE_MIXED => function () { '' ? 3 : 4.3; },
+                INativeType::TYPE_NUMERIC => function () { '' ? 3 : 4.3; },
+                INativeType::TYPE_MIXED => function () { '' ? '3' : 4.3; },
         ];
 
         foreach($values as $expectedType => $expression) {

@@ -73,7 +73,7 @@ interface ITypeSystem
      * @param IType[] $types
      *
      * @return IType
-     * @throws TypeException If the types is not supported.
+     * @throws TypeException If the type is not supported.
      */
     public function getCompositeType(array $types);
 

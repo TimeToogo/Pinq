@@ -10,6 +10,7 @@ namespace Pinq\Analysis;
 interface INativeType extends IType
 {
     const TYPE_MIXED    = 'native:mixed';
+    const TYPE_NUMERIC  = 'native:numeric';
     const TYPE_STRING   = 'native:string';
     const TYPE_INT      = 'native:int';
     const TYPE_ARRAY    = 'native:array';

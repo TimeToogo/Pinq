@@ -342,7 +342,7 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
                         function () { false . 3.2; },
                         function () { 3 . 9; },
                 ],
-                INativeType::TYPE_MIXED => [
+                INativeType::TYPE_NUMERIC => [
                         function () { '123' + 1; },
                         function () { '123' - 1; },
                         function () { '123' * 1; },
@@ -395,11 +395,13 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
                 INativeType::TYPE_STRING => [
                         [function ($var) { $var .= 1; }],
                 ],
+                INativeType::TYPE_NUMERIC => [
+                        [function () { $i += 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_STRING)]],
+                        [function () { $i -= 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_STRING)]],
+                ],
                 INativeType::TYPE_MIXED => [
                         [function ($var) { $i = $var; }],
                         [function ($var) { $i =& $var; }],
-                        [function () { $i += 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_STRING)]],
-                        [function () { $i -= 1; }, ['i' => $this->typeSystem->getNativeType(INativeType::TYPE_STRING)]],
                 ],
         ];
 
@@ -443,9 +445,10 @@ class BasicExpressionAnalysisTest extends ExpressionAnalysisTestCase
                         function () { true ? 'abc' : '343'; },
                         function () { true ? (string)2 : '343'; },
                 ],
-                INativeType::TYPE_MIXED => [
-                        function () { true ? (string)2 : 343; },
+                INativeType::TYPE_NUMERIC => [
                         function () { true ? 1 : 2.0; },
+                ],
+                INativeType::TYPE_MIXED => [
                         function () { true ? strlen('') : 'abc'; },
                         function () { true ? [] : 123; },
                         function () { true ? [] : new \stdClass(); },

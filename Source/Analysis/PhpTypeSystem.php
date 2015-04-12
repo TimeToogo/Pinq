@@ -190,13 +190,14 @@ class PhpTypeSystem extends TypeSystem
 
     protected function nativeType(
             $typeOfType,
+            IType $parentType,
             IIndexer $indexer = null,
             array $unaryOperatorMap = [],
             array $castMap = []
     ) {
         return new NativeType(
                 $typeOfType,
-                $this->nativeTypes[INativeType::TYPE_MIXED],
+                $parentType,
                 $typeOfType,
                 $indexer,
                 $this->buildTypeOperations($typeOfType, array_filter($castMap + $this->nativeCasts())),
@@ -217,12 +218,25 @@ class PhpTypeSystem extends TypeSystem
 
     protected function nativeTypes()
     {
-        $this->nativeTypes[INativeType::TYPE_MIXED] = new MixedType(INativeType::TYPE_MIXED);
-
         return [
-                $this->nativeTypes[INativeType::TYPE_MIXED],
+                $mixedType = new MixedType(INativeType::TYPE_MIXED),
+                $numericType = $this->nativeType(
+                        INativeType::TYPE_NUMERIC,
+                        $mixedType,
+                        null,
+                        [
+                                Operators\Unary::BITWISE_NOT   => INativeType::TYPE_INT,
+                                Operators\Unary::PLUS          => INativeType::TYPE_NUMERIC,
+                                Operators\Unary::NEGATION      => INativeType::TYPE_NUMERIC,
+                                Operators\Unary::INCREMENT     => INativeType::TYPE_NUMERIC,
+                                Operators\Unary::DECREMENT     => INativeType::TYPE_NUMERIC,
+                                Operators\Unary::PRE_INCREMENT => INativeType::TYPE_NUMERIC,
+                                Operators\Unary::PRE_DECREMENT => INativeType::TYPE_NUMERIC,
+                        ]
+                ),
                 $this->nativeType(
                         INativeType::TYPE_STRING,
+                        $mixedType,
                         new Indexer($this, INativeType::TYPE_STRING, INativeType::TYPE_STRING),
                         [
                                 Operators\Unary::BITWISE_NOT   => INativeType::TYPE_STRING,
@@ -234,6 +248,7 @@ class PhpTypeSystem extends TypeSystem
                 ),
                 $this->nativeType(
                         INativeType::TYPE_ARRAY,
+                        $mixedType,
                         new Indexer($this, INativeType::TYPE_ARRAY, INativeType::TYPE_MIXED),
                         [
                                 Operators\Unary::PLUS     => null,
@@ -245,6 +260,7 @@ class PhpTypeSystem extends TypeSystem
                 ),
                 $this->nativeType(
                         INativeType::TYPE_INT,
+                        $numericType,
                         null,
                         [
                                 Operators\Unary::BITWISE_NOT   => INativeType::TYPE_INT,
@@ -255,17 +271,8 @@ class PhpTypeSystem extends TypeSystem
                         ]
                 ),
                 $this->nativeType(
-                        INativeType::TYPE_BOOL,
-                        null,
-                        [
-                                Operators\Unary::INCREMENT     => INativeType::TYPE_BOOL,
-                                Operators\Unary::DECREMENT     => INativeType::TYPE_BOOL,
-                                Operators\Unary::PRE_INCREMENT => INativeType::TYPE_BOOL,
-                                Operators\Unary::PRE_DECREMENT => INativeType::TYPE_BOOL,
-                        ]
-                ),
-                $this->nativeType(
                         INativeType::TYPE_DOUBLE,
+                        $numericType,
                         null,
                         [
                                 Operators\Unary::BITWISE_NOT   => INativeType::TYPE_INT,
@@ -277,8 +284,19 @@ class PhpTypeSystem extends TypeSystem
                                 Operators\Unary::PRE_DECREMENT => INativeType::TYPE_DOUBLE,
                         ]
                 ),
-                $this->nativeType(INativeType::TYPE_NULL),
-                $this->nativeType(INativeType::TYPE_RESOURCE),
+                $this->nativeType(
+                        INativeType::TYPE_BOOL,
+                        $mixedType,
+                        null,
+                        [
+                                Operators\Unary::INCREMENT     => INativeType::TYPE_BOOL,
+                                Operators\Unary::DECREMENT     => INativeType::TYPE_BOOL,
+                                Operators\Unary::PRE_INCREMENT => INativeType::TYPE_BOOL,
+                                Operators\Unary::PRE_DECREMENT => INativeType::TYPE_BOOL,
+                        ]
+                ),
+                $this->nativeType(INativeType::TYPE_NULL, $mixedType),
+                $this->nativeType(INativeType::TYPE_RESOURCE, $mixedType),
         ];
     }
 
@@ -431,6 +449,7 @@ class PhpTypeSystem extends TypeSystem
         foreach ([
                          INativeType::TYPE_INT,
                          INativeType::TYPE_DOUBLE,
+                         INativeType::TYPE_NUMERIC,
                          INativeType::TYPE_STRING,
                          INativeType::TYPE_RESOURCE,
                          INativeType::TYPE_BOOL,
@@ -441,7 +460,7 @@ class PhpTypeSystem extends TypeSystem
                     [
                             [$type, $operator, INativeType::TYPE_NULL, 'return' => $otherIntReturnType],
                             [$type, $operator, INativeType::TYPE_BOOL, 'return' => $otherIntReturnType],
-                            [$type, $operator, INativeType::TYPE_STRING, 'return' => INativeType::TYPE_MIXED],
+                            [$type, $operator, INativeType::TYPE_STRING, 'return' => INativeType::TYPE_NUMERIC],
                             [$type, $operator, INativeType::TYPE_RESOURCE, 'return' => $otherIntReturnType],
                     ]
             );
@@ -471,6 +490,7 @@ class PhpTypeSystem extends TypeSystem
         foreach ([
                          INativeType::TYPE_INT,
                          INativeType::TYPE_DOUBLE,
+                         INativeType::TYPE_NUMERIC,
                          INativeType::TYPE_STRING,
                          INativeType::TYPE_RESOURCE,
                          INativeType::TYPE_BOOL,
@@ -524,7 +544,7 @@ class PhpTypeSystem extends TypeSystem
                 $this->mathOperators(Operators\Binary::ADDITION),
                 $this->mathOperators(Operators\Binary::SUBTRACTION),
                 $this->mathOperators(Operators\Binary::MULTIPLICATION),
-                $this->mathOperators(Operators\Binary::DIVISION, INativeType::TYPE_MIXED),
+                $this->mathOperators(Operators\Binary::DIVISION, INativeType::TYPE_NUMERIC),
                 $this->mathOperators(Operators\Binary::MODULUS),
                 $this->mathOperators(Operators\Binary::POWER),
                 $this->bitwiseOperators(Operators\Binary::BITWISE_AND),

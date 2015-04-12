@@ -4,7 +4,8 @@ dev
  - Fix bug when attempting to parse function with a magic scope parameter type hint (eg `function (self $param) { ... }`.
  - Implement `Analysis\TolerantExpressionAnalyser` which will convert analysis exceptions into the *mixed* type.
  - Add `Providers\DSL\Compilation\Parameters\ParameterCollection::contains` to check whether the collection contains a parameter.
- - Add `Providers\DSL\Compilation\Parameters\ParameterCollection::remove` to remove a previously added parameter.
+ - Add `Providers\DSL\Compilation\Parameters\ParameterCollection::remove` to remove a previously added parameter.\
+ - Introduce `Analysis\INativeType::TYPE_NUMERIC` acting as a union type for `Analysis\INativeType::TYPE_INT` and `Analysis\INativeType::TYPE_DOUBLE`  
 
 3.1.0 (29/3/15)
 ===============
