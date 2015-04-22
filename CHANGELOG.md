@@ -6,7 +6,8 @@ dev
  - Add `Providers\DSL\Compilation\Parameters\ParameterCollection::contains` to check whether the collection contains a parameter.
  - Add `Providers\DSL\Compilation\Parameters\ParameterCollection::remove` to remove a previously added parameter.\
  - Introduce `Analysis\INativeType::TYPE_NUMERIC` acting as a union type for `Analysis\INativeType::TYPE_INT` and `Analysis\INativeType::TYPE_DOUBLE`  
-
+ - Fix bug when joining to the same `ITraversable` instance with an `->indexBy(...)` only returning the first element.
+ 
 3.1.0 (29/3/15)
 ===============
  - Upgraded to `nikic/php-parser` V1.2.0

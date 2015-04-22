@@ -346,4 +346,32 @@ class JoinTest extends TraversableTest
             '10:10'
         ]);
     }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testJoinToSelfWithInnerIndexBy(\Pinq\ITraversable $traversable)
+    {
+        $traversable = $traversable
+                ->indexBy(function ($i) { return $i - 1; });
+
+        $traversable = $traversable
+                ->take(4)
+                ->join($traversable)
+                ->on(function ($outer, $inner) { return $outer > $inner; })
+                ->to(function ($outer, $inner) {
+                    return $outer . ':' . $inner;
+                });
+
+        $this->assertMatches($traversable, [
+                '2:1',
+
+                '3:1',
+                '3:2',
+
+                '4:1',
+                '4:2',
+                '4:3',
+        ]);
+    }
 }

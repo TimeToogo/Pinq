@@ -401,4 +401,33 @@ class GroupJoinTest extends TraversableTest
             '10:10'
         ]);
     }
+
+    /**
+     * @dataProvider oneToTen
+     */
+    public function testGroupJoinToSelfWithInnerIndexBy(\Pinq\ITraversable $traversable)
+    {
+        $traversable = $traversable
+                ->indexBy(function ($i) { return $i - 1; });
+
+        $traversable = $traversable
+                ->groupJoin($traversable)
+                ->on(function ($outer, $inner) { return $outer > $inner; })
+                ->to(function ($outer, \Pinq\ITraversable $group) {
+                    return $outer . ':' . $group->implode(',');
+                });
+
+        $this->assertMatches($traversable, [
+                0 => '1:',
+                1 => '2:1',
+                2 => '3:1,2',
+                3 => '4:1,2,3',
+                4 => '5:1,2,3,4',
+                5 => '6:1,2,3,4,5',
+                6 => '7:1,2,3,4,5,6',
+                7 => '8:1,2,3,4,5,6,7',
+                8 => '9:1,2,3,4,5,6,7,8',
+                9 => '10:1,2,3,4,5,6,7,8,9',
+        ]);
+    }
 }

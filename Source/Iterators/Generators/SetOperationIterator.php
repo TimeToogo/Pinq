@@ -22,10 +22,11 @@ class SetOperationIterator extends IteratorGenerator
 
     protected function &iteratorGenerator(IGenerator $iterator)
     {
-        $this->setFilter->initialize();
+        $setFilter = clone $this->setFilter;
+        $setFilter->initialize();
 
         foreach ($iterator as $key => &$value) {
-            if ($this->setFilter->filter($key, $value)) {
+            if ($setFilter->filter($key, $value)) {
                 yield $key => $value;
             }
         }
