@@ -15,5 +15,5 @@
   url: https://packagist.org/packages/timetoogo/pinq
   
 - name: License
-  image: https://img.shields.io/github/license/TimeToogo/Pinq.svg?style=flat-square
+  image: https://img.shields.io/packagist/l/TimeToogo/Pinq.svg?style=flat-square
   url: https://packagist.org/packages/timetoogo/pinq
