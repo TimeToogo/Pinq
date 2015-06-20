@@ -210,8 +210,7 @@ class GroupJoinTest extends TraversableTest
                 ->append($data)
                 ->groupJoin($traversable)
                     ->on(function () { return true; })
-                    ->to(function & (&$i) { return $i; })
-                ->iterate(function (&$i) { $i = null; });
+                    ->to(function & (&$i) { return $i; });
 
         $this->assertSame(range(1, 20), $data);
     }
