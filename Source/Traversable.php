@@ -517,7 +517,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
         $hasValue       = false;
         $aggregateValue = null;
 
-        foreach ($this->asArray() as $value) {
+        foreach ($this->elements as $value) {
             if (!$hasValue) {
                 $aggregateValue = $value;
                 $hasValue       = true;
@@ -528,21 +528,6 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
         }
 
         return $aggregateValue;
-    }
-
-    private function mapArray(callable $function = null)
-    {
-        if ($function === null) {
-            return $this->asArray();
-        } else {
-            return $this->scheme->toArray(
-                    $this->scheme->projectionIterator(
-                            $this->asOrderedMap(),
-                            null,
-                            $function
-                    )
-            );
-        }
     }
 
     private function mapIterator(callable $function = null)
@@ -560,30 +545,54 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
 
     public function maximum(callable $function = null)
     {
-        $array = $this->mapArray($function);
+        $max = null;
 
-        return empty($array) ? null : max($array);
+        foreach ($this->mapIterator($function) as $value) {
+            if ($value > $max) {
+                $max = $value;
+            }
+        }
+
+        return $max;
     }
 
     public function minimum(callable $function = null)
     {
-        $array = $this->mapArray($function);
+        $min = null;
+        $first = true;
 
-        return empty($array) ? null : min($array);
+        foreach ($this->mapIterator($function) as $value) {
+            if ($value < $min || $first) {
+                $min   = $value;
+                $first = false;
+            }
+        }
+
+        return $min;
     }
 
     public function sum(callable $function = null)
     {
-        $array = $this->mapArray($function);
+        $sum = null;
 
-        return empty($array) ? null : array_sum($array);
+        foreach ($this->mapIterator($function) as $value) {
+            $sum += $value;
+        }
+
+        return $sum;
     }
 
     public function average(callable $function = null)
     {
-        $array = $this->mapArray($function);
+        $sum = null;
+        $count = 0;
 
-        return empty($array) ? null : array_sum($array) / count($array);
+        foreach ($this->mapIterator($function) as $value) {
+            $sum += $value;
+            $count++;
+        }
+
+        return $count === 0 ? null : $sum / $count;
     }
 
     public function all(callable $function = null)
@@ -610,7 +619,13 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
 
     public function implode($delimiter, callable $function = null)
     {
-        return implode($delimiter, $this->mapArray($function));
+        $string = '';
+
+        foreach ($this->mapIterator($function) as $value) {
+            $string .= $delimiter . $value;
+        }
+
+        return $string === '' ? '' : substr($string, strlen($delimiter));
     }
 
     // </editor-fold>
