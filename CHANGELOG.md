@@ -1,5 +1,6 @@
-dev
-===
+3.2.0 (20/6/15)
+===============
+ - Fix return by reference issue in generator scheme for PHP versions >=5.6.8 
  - Refactor `Analysis\PhpTypeSystem::getTypeFromValue` method logic into new static method `Analysis\TypeId::fromValue`
  - Fix bug when attempting to parse function with a magic scope parameter type hint (eg `function (self $param) { ... }`.
  - Implement `Analysis\TolerantExpressionAnalyser` which will convert analysis exceptions into the *mixed* type.
