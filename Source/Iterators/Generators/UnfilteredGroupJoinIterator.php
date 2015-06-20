@@ -30,10 +30,19 @@ class UnfilteredGroupJoinIterator extends GroupJoinIterator implements IJoinIter
                 $innerKeyFunction);
     }
 
-    protected function innerGenerator($outerKey, $outerValue)
+
+    protected function beforeOuterLoopData()
+    {
+        return [
+                'innerGroup' => new OrderedMap($this->defaultIterator($this->innerIterator)),
+        ];
+    }
+
+
+    protected function innerGenerator($outerKey, $outerValue, array $outerData)
     {
         $traversableFactory = $this->traversableFactory;
-        $innerGroup         = $traversableFactory(new OrderedMap($this->defaultIterator($this->innerIterator)));
+        $innerGroup         = $traversableFactory($outerData['innerGroup']);
 
         return new ArrayIterator([0 => $innerGroup]);
     }

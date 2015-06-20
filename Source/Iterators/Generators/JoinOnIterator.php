@@ -19,9 +19,16 @@ class JoinOnIterator extends JoinIterator
         self::__constructJoinOnIterator($filter);
     }
 
-    protected function innerGenerator($outerKey, $outerValue)
+    protected function beforeOuterLoopData()
     {
-        $innerValues = new OrderedMap($this->innerIterator);
+        return [
+                'innerValues' => new OrderedMap($this->innerIterator)
+        ];
+    }
+
+    protected function innerGenerator($outerKey, $outerValue, array $outerData)
+    {
+        $innerValues = $outerData['innerValues'];
 
         return $this->defaultIterator(
                 new FilterIterator(

@@ -23,11 +23,20 @@ class JoinOnEqualityIterator extends JoinIterator
         self::__constructJoinOnEqualityIterator($outerKeyFunction, $innerKeyFunction);
     }
 
-    protected function innerGenerator($outerKey, $outerValue)
+
+    protected function beforeOuterLoopData()
+    {
+        return [
+                'innerGroups' => (new OrderedMap($this->innerIterator))->groupBy($this->innerKeyFunction),
+        ];
+    }
+
+
+    protected function innerGenerator($outerKey, $outerValue, array $outerData)
     {
         $outerKeyFunction = $this->outerKeyFunction;
         $groupKey         = $outerKeyFunction($outerValue, $outerKey);
-        $innerGroups      = (new OrderedMap($this->innerIterator))->groupBy($this->innerKeyFunction);
+        $innerGroups      = $outerData['innerGroups'];
 
         return $this->defaultIterator(
                 $innerGroups->contains($groupKey) && $groupKey !== null ?

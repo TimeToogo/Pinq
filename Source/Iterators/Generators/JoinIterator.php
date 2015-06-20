@@ -32,10 +32,16 @@ abstract class JoinIterator extends IteratorGenerator implements IJoinToIterator
         $this->innerIterator = $innerIterator;
     }
 
+    protected function beforeOuterLoopData()
+    {
+        return [];
+    }
+
     public function walk(callable $function)
     {
+        $data = $this->beforeOuterLoopData();
         foreach ($this->outerIterator as $outerKey => &$outerValue) {
-            foreach ($this->innerGenerator($outerKey, $outerValue) as $innerKey => &$innerValue) {
+            foreach ($this->innerGenerator($outerKey, $outerValue, $data) as $innerKey => &$innerValue) {
                 $function($outerValue, $innerValue, $outerKey, $innerKey);
             }
         }
@@ -45,19 +51,20 @@ abstract class JoinIterator extends IteratorGenerator implements IJoinToIterator
     {
         $count = 0;
 
+        $data = $this->beforeOuterLoopData();
         foreach ($this->outerIterator as $outerKey => $outerValue) {
-            foreach($this->innerForeach($outerKey, $outerValue, $count) as $key => $value) {
+            foreach($this->innerForeach($outerKey, $outerValue, $data, $count) as $key => $value) {
                 yield $key => $value;
                 unset($value);
             }
         }
     }
 
-    protected function innerForeach($outerKey, $outerValue, &$count)
+    protected function innerForeach($outerKey, $outerValue, array $data, &$count)
     {
         $projectionFunction = $this->projectionFunction;
 
-        foreach ($this->innerGenerator($outerKey, $outerValue) as $innerKey => $innerValue) {
+        foreach ($this->innerGenerator($outerKey, $outerValue, $data) as $innerKey => $innerValue) {
             yield $count++ => $projectionFunction($outerValue, $innerValue, $outerKey, $innerKey);
         }
     }
@@ -71,8 +78,9 @@ abstract class JoinIterator extends IteratorGenerator implements IJoinToIterator
     /**
      * @param mixed $outerKey
      * @param mixed $outerValue
+     * @param array $outerData
      *
      * @return IGenerator
      */
-    abstract protected function innerGenerator($outerKey, $outerValue);
+    abstract protected function innerGenerator($outerKey, $outerValue, array $outerData);
 }
