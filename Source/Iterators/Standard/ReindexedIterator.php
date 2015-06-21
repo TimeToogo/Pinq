@@ -33,4 +33,12 @@ class ReindexedIterator extends IteratorIterator
             return $element;
         }
     }
+
+    /**
+     * @return bool
+     */
+    final public function isArrayCompatible()
+    {
+        return true;
+    }
 }

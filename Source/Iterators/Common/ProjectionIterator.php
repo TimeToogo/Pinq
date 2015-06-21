@@ -2,6 +2,8 @@
 
 namespace Pinq\Iterators\Common;
 
+use Pinq\Iterators\IIterator;
+
 /**
  * Common functionality for the projection iterator
  *
@@ -56,5 +58,18 @@ trait ProjectionIterator
         }
 
         return [&$keyProjection, &$valueProjection];
+    }
+
+    /**
+     * @return IIterator
+     */
+    abstract protected function getSourceIterator();
+
+    /**
+     * @return bool
+     */
+    final public function isArrayCompatible()
+    {
+        return $this->keyProjectionFunction === null && $this->getSourceIterator()->isArrayCompatible();
     }
 }

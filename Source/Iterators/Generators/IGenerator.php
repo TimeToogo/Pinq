@@ -2,6 +2,8 @@
 
 namespace Pinq\Iterators\Generators;
 
+use Pinq\Iterators\IIterator;
+
 /**
  * This a wrapper for Generator object, maintaining typical foreach
  * behaviour while also allowing generators to be 'rewound' without the
@@ -12,7 +14,7 @@ namespace Pinq\Iterators\Generators;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-interface IGenerator extends \IteratorAggregate
+interface IGenerator extends \IteratorAggregate, IIterator
 {
     /**
      * Returns a new generator instance.

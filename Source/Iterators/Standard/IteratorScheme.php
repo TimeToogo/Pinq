@@ -74,6 +74,11 @@ class IteratorScheme extends Common\IteratorScheme
 
     public function arrayCompatibleIterator(\Traversable $iterator)
     {
+        $iterator = $this->adapter($iterator);
+        if ($iterator->isArrayCompatible()) {
+            return $iterator;
+        }
+
         return new ArrayCompatibleIterator($this->adapter($iterator));
     }
 

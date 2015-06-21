@@ -24,4 +24,12 @@ trait GroupedIterator
         $this->groupKeyFunction   = Functions::allowExcessiveArguments($groupKeyFunction);
         $this->traversableFactory = $traversableFactory;
     }
+
+    /**
+     * @return bool
+     */
+    final public function isArrayCompatible()
+    {
+        return false;
+    }
 }

@@ -20,4 +20,12 @@ class ReindexedIterator extends IteratorGenerator
             yield $value;
         }
     }
+
+    /**
+     * @return bool
+     */
+    final public function isArrayCompatible()
+    {
+        return true;
+    }
 }

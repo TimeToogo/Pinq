@@ -2,6 +2,7 @@
 
 namespace Pinq\Iterators\Common;
 
+use Pinq\Iterators\IIterator;
 use Pinq\Iterators\IOrderedIterator;
 use Pinq\Iterators\IOrderedMap;
 
@@ -48,12 +49,20 @@ trait OrderedIterator
     }
 
     /**
-     * @return \Traversable
+     * @return IIterator
      */
     abstract protected function getSourceIterator();
 
     final protected function sortMap(IOrderedMap $map)
     {
         return $map->multisort($this->orderByFunctions, $this->isAscendingArray);
+    }
+
+    /**
+     * @return bool
+     */
+    final public function isArrayCompatible()
+    {
+        return  $this->getSourceIterator()->isArrayCompatible();
     }
 }

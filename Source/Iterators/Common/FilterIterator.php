@@ -2,6 +2,8 @@
 
 namespace Pinq\Iterators\Common;
 
+use Pinq\Iterators\IIterator;
+
 /**
  * Common functionality for the filter iterator
  *
@@ -17,5 +19,18 @@ trait FilterIterator
     final protected function __constructIterator(callable $filter)
     {
         $this->filter = Functions::allowExcessiveArguments($filter);
+    }
+
+    /**
+     * @return IIterator
+     */
+    abstract protected function getSourceIterator();
+
+    /**
+     * @return bool
+     */
+    final public function isArrayCompatible()
+    {
+        return $this->getSourceIterator()->isArrayCompatible();
     }
 }

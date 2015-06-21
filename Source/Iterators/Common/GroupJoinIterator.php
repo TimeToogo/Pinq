@@ -2,6 +2,8 @@
 
 namespace Pinq\Iterators\Common;
 
+use Pinq\Iterators\IIterator;
+
 /**
  * Common functionality for the group join iterator
  *

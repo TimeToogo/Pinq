@@ -52,4 +52,12 @@ class FlatteningIterator extends Iterator
 
         return [$this->count++, &$innerElement[1]];
     }
+
+    /**
+     * @return bool
+     */
+    public function isArrayCompatible()
+    {
+        return true;
+    }
 }

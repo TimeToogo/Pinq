@@ -53,4 +53,12 @@ trait JoinIterator
 
         return $self;
     }
+
+    /**
+     * @return bool
+     */
+    final public function isArrayCompatible()
+    {
+        return true;
+    }
 }

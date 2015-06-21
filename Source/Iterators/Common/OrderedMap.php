@@ -291,4 +291,12 @@ trait OrderedMap
     {
         return $this->remove($offset);
     }
+
+    /**
+     * @return bool
+     */
+    final public function isArrayCompatible()
+    {
+        return false;
+    }
 }

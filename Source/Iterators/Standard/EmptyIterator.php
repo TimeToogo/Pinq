@@ -13,4 +13,12 @@ class EmptyIterator extends Iterator
     {
         return null;
     }
+
+    /**
+     * @return bool
+     */
+    public function isArrayCompatible()
+    {
+        return true;
+    }
 }

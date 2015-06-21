@@ -14,4 +14,12 @@ class EmptyIterator extends Generator
         return;
         yield null;
     }
+
+    /**
+     * @return bool
+     */
+    public function isArrayCompatible()
+    {
+        return true;
+    }
 }

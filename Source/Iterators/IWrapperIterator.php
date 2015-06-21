@@ -7,7 +7,7 @@ namespace Pinq\Iterators;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-interface IWrapperIterator extends \Traversable
+interface IWrapperIterator extends \Traversable, IIterator
 {
     /**
      * Returns the inner iterator.

@@ -19,4 +19,12 @@ class FlatteningIterator extends IteratorGenerator
             }
         }
     }
+
+    /**
+     * @return bool
+     */
+    public function isArrayCompatible()
+    {
+        return true;
+    }
 }

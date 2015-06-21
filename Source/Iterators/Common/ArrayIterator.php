@@ -26,4 +26,12 @@ trait ArrayIterator
     {
         return $this->array;
     }
+
+    /**
+     * @return bool
+     */
+    final public function isArrayCompatible()
+    {
+        return true;
+    }
 }

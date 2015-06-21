@@ -35,7 +35,7 @@ namespace Pinq\Iterators\Standard;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-interface IIterator extends \Iterator
+interface IIterator extends \Iterator, \Pinq\Iterators\IIterator
 {
     const IITERATOR_TYPE = __CLASS__;
 

@@ -86,4 +86,12 @@ trait Set
 
         return true;
     }
+
+    /**
+     * @return bool
+     */
+    final public function isArrayCompatible()
+    {
+        return true;
+    }
 }

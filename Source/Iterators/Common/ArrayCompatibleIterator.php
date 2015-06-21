@@ -28,4 +28,12 @@ trait ArrayCompatibleIterator
             $incompatibleKeyMap->set($originalKey, $key);
         }
     }
+
+    /**
+     * @return bool
+     */
+    final public function isArrayCompatible()
+    {
+        return true;
+    }
 }

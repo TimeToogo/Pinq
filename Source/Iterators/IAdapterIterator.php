@@ -7,7 +7,7 @@ namespace Pinq\Iterators;
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-interface IAdapterIterator
+interface IAdapterIterator extends IIterator
 {
     /**
      * Gets the source iterator.

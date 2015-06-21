@@ -464,12 +464,24 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
 
     public function offsetExists($index)
     {
-        return $this->asOrderedMap()->offsetExists($index);
+        foreach ($this->keys() as $key) {
+            if ($key === $index) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function offsetGet($index)
     {
-        return $this->asOrderedMap()->offsetGet($index);
+        foreach ($this->select(function ($value, $key) { return [$key, $value]; }) as $element) {
+            if ($element[0] === $index) {
+                return $element[1];
+            }
+        }
+
+        return false;
     }
 
     public function offsetSet($index, $value)
@@ -488,8 +500,17 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
 
     public function count()
     {
-        return $this->elements instanceof \Countable ?
-                $this->elements->count() : $this->asOrderedMap()->count();
+        if($this->elements instanceof \Countable) {
+            return $this->elements->count();
+        }
+
+        $count = 0;
+
+        foreach($this->elements as $value) {
+            $count++;
+        }
+
+        return $count;
     }
 
     public function isEmpty()

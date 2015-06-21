@@ -2,6 +2,8 @@
 
 namespace Pinq\Iterators\Common;
 
+use Pinq\Iterators\Standard\IIterator;
+
 /**
  * Common functionality for the adapter iterator
  *
@@ -31,5 +33,13 @@ trait AdapterIterator
     final public function getSourceIterator()
     {
         return $this->source;
+    }
+
+    /**
+     * @return bool
+     */
+    final public function isArrayCompatible()
+    {
+        return $this->source instanceof IIterator ? $this->source->isArrayCompatible() : false;
     }
 }
