@@ -3,9 +3,22 @@
 namespace Pinq\Tests\Integration\Traversable;
 
 use Pinq\Iterators\IIteratorScheme;
+use Pinq\Iterators\SchemeProvider;
+use Pinq\Traversable;
 
 class IteratorSchemeTest extends TraversableTest
 {
+    public function schemes()
+    {
+        $schemes = [];
+
+        foreach (SchemeProvider::getAvailableSchemes() as $scheme) {
+            $schemes[] = [$scheme];
+        }
+
+        return $schemes;
+    }
+
     /**
      * @dataProvider theImplementations
      */
@@ -28,13 +41,13 @@ class IteratorSchemeTest extends TraversableTest
                 ->except([])
                 ->groupBy(function () { return 1; })
                 ->groupJoin([])
-                        ->on(function () { return true; })
-                        ->to(function () { return 1; })
+                ->on(function () { return true; })
+                ->to(function () { return 1; })
                 ->indexBy(function () { return 1; })
                 ->intersect([])
                 ->join([])
-                        ->on(function () { return true; })
-                        ->to(function () { return 1; })
+                ->on(function () { return true; })
+                ->to(function () { return 1; })
                 ->keys()
                 ->orderBy(function () { return 1; }, \Pinq\Direction::ASCENDING)
                 ->thenByDescending(function () { return 1; })
@@ -46,8 +59,33 @@ class IteratorSchemeTest extends TraversableTest
                 ->union([])
                 ->where(function () { return true; })
                 ->whereIn([]);
-                //Well that was fun
+        //Well that was fun
 
         $this->assertSame($originalScheme, $queriedTraversable->getIteratorScheme());
+    }
+
+    /**
+     * @dataProvider schemes
+     */
+    public function testThatArrayCompatibleIsNotUsedForArrays(IIteratorScheme $scheme)
+    {
+        $iterator = Traversable::from([1,2,3], $scheme)
+                ->where(function () { return true; })
+                ->select(function ($v) { return $v; })
+                ->getIterator();
+
+        $this->assertNotInstanceOf(get_class($scheme->arrayCompatibleIterator(new \EmptyIterator())), $iterator);
+    }
+
+    /**
+     * @dataProvider schemes
+     */
+    public function testThatArrayCompatibleIsUsedForIndexBy(IIteratorScheme $scheme)
+    {
+        $iterator = Traversable::from([1,2,3], $scheme)
+                ->indexBy(function () { return new \stdClass(); })
+                ->getIterator();
+
+        $this->assertInstanceOf(get_class($scheme->arrayCompatibleIterator(new \EmptyIterator())), $iterator);
     }
 }

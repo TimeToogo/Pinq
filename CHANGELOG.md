@@ -1,3 +1,7 @@
+3.2.2 (21/6/15)
+===============
+ - Optimize standard and generator iterators to only use array compatible iterator (replaces non scalar keys) where necessary
+
 3.2.1 (20/6/15)
 ===============
  - Update join generator classes such that they dont perform unnecessary inner loop computations for every iteration.
