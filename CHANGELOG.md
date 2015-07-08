@@ -1,6 +1,10 @@
-3.2.2 (21/6/15)
+3.2.3 (8/7/15)
 ===============
- - Optimize standard and generator iterators to only use array compatible iterator (replaces non scalar keys) where necessary
+ - Loosen accessibility of `Collection::updateElements` from `private` to `protected`.
+ 
+ 3.2.2 (21/6/15)
+ ===============
+  - Optimize standard and generator iterators to only use array compatible iterator (replaces non scalar keys) where necessary
 
 3.2.1 (20/6/15)
 ===============

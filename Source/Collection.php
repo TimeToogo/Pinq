@@ -49,7 +49,7 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
         return new static($elements, $scheme, $source);
     }
 
-    private function updateElements(\Traversable $elements)
+    protected function updateElements(\Traversable $elements)
     {
         $collectionElements = $this->toOrderedMap();
 
