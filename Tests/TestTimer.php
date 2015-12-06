@@ -22,6 +22,7 @@ class Timer implements \PHPUnit_Framework_TestListener
     }
 
     public function startTest(\PHPUnit_Framework_Test $test) {}
+    public function addWarning(PHPUnit_Framework_Test $test, \PHPUnit_Framework_Warning $e, $time) {}
     public function addError(\PHPUnit_Framework_Test $test, \Exception $e, $time) {}
     public function addFailure(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_AssertionFailedError $e, $time) {}
     public function addIncompleteTest(\PHPUnit_Framework_Test $test, \Exception $e, $time) {}
