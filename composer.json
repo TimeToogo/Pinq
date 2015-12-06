@@ -19,7 +19,7 @@
     "require-dev": {
         "phpunit/phpunit": "4.8.*",
         "doctrine/cache": "1.3.*",
-        "satooshi/php-coveralls": "0.6.1"
+        "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
         "psr-4": { 
