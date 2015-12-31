@@ -2,6 +2,7 @@
 
 namespace Pinq\Parsing\PhpParser;
 
+use PhpParser\ParserFactory;
 use Pinq\Parsing\FunctionStructure;
 use Pinq\Parsing\IFunctionReflection;
 use Pinq\Parsing\InvalidFunctionException;
@@ -43,7 +44,7 @@ class Parser extends ParserBase
     protected function parseFunction(IFunctionReflection $reflection, $filePath)
     {
         if (self::$phpParser === null) {
-            self::$phpParser = new PhpParser\Parser(new PhpParser\Lexer());
+            self::$phpParser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
         }
 
         $locatedFunctionNodes = $this->getLocatedFunctionNodesIn($filePath);
