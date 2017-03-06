@@ -38,13 +38,13 @@ $youngPeopleDetails = $people
 Installation
 ============
 
-PINQ is compatible with >= PHP 5.4
+PINQ is compatible with >= PHP 5.5
 
 Add package to your composer.json:
 ```json
 {
     "require": {
-        "timetoogo/pinq": "~3.3"
+        "timetoogo/pinq": "~3.4"
     }
 }
 ```
