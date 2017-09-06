@@ -40,12 +40,9 @@ Installation
 
 PINQ is compatible with >= PHP 5.5
 
-Add package to your composer.json:
-```json
-{
-    "require": {
-        "timetoogo/pinq": "~3.4"
-    }
-}
+Install the package via composer:
+
+```
+composer require timetoogo/pinq
 ```
 
