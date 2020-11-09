@@ -86,7 +86,7 @@ class FunctionSignature extends MagicResolvable implements IFunctionSignature
                         $polymorphModifier,
                         $isStatic,
                         $name,
-                        O\Expression::hashAll($parameterExpressions),
+                        serialize($parameterExpressions),
                         $scopedVariableNames !== null ? implode('|', $scopedVariableNames) : '',
                 ]
         );

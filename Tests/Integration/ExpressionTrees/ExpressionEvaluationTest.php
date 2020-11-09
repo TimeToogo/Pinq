@@ -662,7 +662,7 @@ class ExpressionEvaluationTest extends InterpreterTest
      * @dataProvider interpreters
      * @backupGlobals enabled
      * @expectedException PHPUnit_Framework_Error_Notice
-     * @expectedExceptionMessage Trying to get property of non-object
+     * @expectedExceptionMessage Trying to get property 'foo' of non-object
      */
     public function testIssetWithFieldsInIndexEmitsNotice()
     {
@@ -745,7 +745,7 @@ class ExpressionEvaluationTest extends InterpreterTest
      * @dataProvider interpreters
      * @backupGlobals enabled
      * @expectedException PHPUnit_Framework_Error_Notice
-     * @expectedExceptionMessage Trying to get property of non-object
+     * @expectedExceptionMessage Trying to get property 'foo' of non-object
      */
     public function testEmptyWithFieldsInIndexEmitsNotice()
     {

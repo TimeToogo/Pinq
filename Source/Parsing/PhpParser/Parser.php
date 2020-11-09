@@ -111,6 +111,7 @@ class Parser extends ParserBase
             $magicData                        = $reflection->resolveMagic($matchedFunction->getDeclaration());
             $resolvedMatchedFunctionSignature = $matchedFunction->getSignature()->resolveMagic($magicData);
 
+            // var_dump($functionSignature->getHash(), $resolvedMatchedFunctionSignature->getHash());
             if ($functionSignature->getHash() === $resolvedMatchedFunctionSignature->getHash()) {
                 $fullyMatchedFunctions[] = $matchedFunction;
             }
