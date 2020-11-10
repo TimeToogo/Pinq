@@ -9,7 +9,7 @@ class VariadicParameterTest extends InterpreterTest
      */
     protected $parameters;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (version_compare(PHP_VERSION, '5.6.0-alpha3', '>=')) {
             $this->parameters = new VariadicParameters();

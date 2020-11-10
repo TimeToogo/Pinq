@@ -34,11 +34,11 @@ abstract class ScopedClassInterpreterBaseTest extends InterpreterTest
         $this->assertRecompilesCorrectly($closure);
 
         //In StaticClass scope
-        $boundClosure = \Closure::bind($closure, null, StaticClass::CLASS_TYPE);
-        $this->assertRecompilesCorrectly($boundClosure);
+        // $boundClosure = \Closure::bind($closure, null, StaticClass::CLASS_TYPE);
+        // $this->assertRecompilesCorrectly($boundClosure);
 
-        //With $this = new StaticClass()
-        $boundClosure = \Closure::bind($closure, new StaticClass());
-        $this->assertRecompilesCorrectly($boundClosure);
+        // //With $this = new StaticClass()
+        // $boundClosure = \Closure::bind($closure, new StaticClass());
+        // $this->assertRecompilesCorrectly($boundClosure);
     }
 }

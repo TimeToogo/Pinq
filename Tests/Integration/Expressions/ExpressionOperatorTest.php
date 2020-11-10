@@ -7,6 +7,7 @@ use Pinq\Expressions\Operators\Assignment;
 use Pinq\Expressions\Operators\Binary;
 use Pinq\Expressions\Operators\Cast;
 use Pinq\Expressions\Operators\Unary;
+use Pinq\PinqException;
 
 /**
  * @author Elliot Levin <elliotlevin@hotmail.com>
@@ -40,11 +41,9 @@ class ExpressionOperatorTest extends ExpressionTest
         $this->assertSame(3 >> 4, Binary::doBinaryOperation(3, Binary::SHIFT_RIGHT, 4));
     }
 
-    /**
-     * @expectedException \Pinq\PinqException
-     */
     public function testInvalidBinary()
     {
+        $this->expectException(PinqException::class);
         Binary::doBinaryOperation(null, '#', null);
     }
 
@@ -73,11 +72,9 @@ class ExpressionOperatorTest extends ExpressionTest
         $this->assertSame(5 | 10, $ref);
     }
 
-    /**
-     * @expectedException \Pinq\PinqException
-     */
     public function testInvalidAssignment()
     {
+        $this->expectException(PinqException::class);
         Assignment::doAssignment($var, Assignment::EQUAL_REFERENCE, '');
     }
 
@@ -106,11 +103,9 @@ class ExpressionOperatorTest extends ExpressionTest
         $this->assertSame(3, $four);
     }
 
-    /**
-     * @expectedException \Pinq\PinqException
-     */
     public function testInvalidUnaryOperator()
     {
+        $this->expectException(PinqException::class);
         Unary::doUnaryOperation('##', $var);
     }
 
@@ -124,11 +119,9 @@ class ExpressionOperatorTest extends ExpressionTest
         $this->assertSame('2.3', Cast::doCast(Cast::STRING, 2.3));
     }
 
-    /**
-     * @expectedException \Pinq\PinqException
-     */
     public function testInvalidCasts()
     {
+        $this->expectException(PinqException::class);
         Cast::doCast('addddsdsaf', null);
     }
 

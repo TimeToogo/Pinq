@@ -6,7 +6,7 @@ use Pinq\Expressions as O;
 
 class ConstantArrayDereferenceTest extends ParserTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!version_compare(PHP_VERSION, '5.6.0-RC4', '>=')) {
             $this->markTestSkipped('Requires >=PHP 5.6');

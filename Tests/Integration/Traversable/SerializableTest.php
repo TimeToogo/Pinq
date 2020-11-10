@@ -3,6 +3,7 @@
 namespace Pinq\Tests\Integration\Traversable;
 
 use Pinq\Traversable;
+use Pinq\PinqException;
 
 class SerializableTest extends TraversableTest
 {
@@ -35,12 +36,10 @@ class SerializableTest extends TraversableTest
                 $unserializedTraversable->asArray());
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Serialization of 'Closure' is not allowed
-     */
     public function testThatTraversableIsNotSerializableAfterQueriesWithClosures()
     {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Serialization of 'Closure' is not allowed");
         $traversable = new Traversable(range(1, 10));
         $traversable = $traversable
                 ->where(function ($i) { return $i !== false; });

@@ -9,7 +9,7 @@ class ScopedClassConstantInterpreterTest extends ScopedClassInterpreterBaseTest
      */
     protected $constants;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (version_compare(PHP_VERSION, '5.5.0', '>=')) {
             require_once __DIR__ . '/ScopedClassConstants.php';

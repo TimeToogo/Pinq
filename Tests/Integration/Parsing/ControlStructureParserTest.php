@@ -3,15 +3,16 @@
 namespace Pinq\Tests\Integration\Parsing;
 
 use Pinq\Parsing;
+use Pinq\Parsing\InvalidFunctionException;
 
 class ControlStructureParserTest extends ParserTest
 {
     /**
      * @dataProvider parsers
-     * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithIfStatement()
     {
+        $this->expectException(InvalidFunctionException::class);
         $function =
                 function () {
                     if (true) {
@@ -25,10 +26,10 @@ class ControlStructureParserTest extends ParserTest
 
     /**
      * @dataProvider parsers
-     * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithForLoop()
     {
+        $this->expectException(InvalidFunctionException::class);
         $function =
                 function () {
                     for (;;) {
@@ -40,10 +41,10 @@ class ControlStructureParserTest extends ParserTest
 
     /**
      * @dataProvider parsers
-     * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithForeachLoop()
     {
+        $this->expectException(InvalidFunctionException::class);
         $function =
                 function () {
                     foreach ($i as $i) {
@@ -55,10 +56,10 @@ class ControlStructureParserTest extends ParserTest
 
     /**
      * @dataProvider parsers
-     * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithWhileLoop()
     {
+        $this->expectException(InvalidFunctionException::class);
         $function =
                 function () {
                     while (true) {
@@ -70,10 +71,10 @@ class ControlStructureParserTest extends ParserTest
 
     /**
      * @dataProvider parsers
-     * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithDoWhileLoop()
     {
+        $this->expectException(InvalidFunctionException::class);
         $function =
                 function () {
                     do {
@@ -85,10 +86,10 @@ class ControlStructureParserTest extends ParserTest
 
     /**
      * @dataProvider parsers
-     * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithGotoStatement()
     {
+        $this->expectException(InvalidFunctionException::class);
         $function =
                 function () {
                     goto Bed;
@@ -99,10 +100,10 @@ class ControlStructureParserTest extends ParserTest
 
     /**
      * @dataProvider parsers
-     * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithSwitchStatement()
     {
+        $this->expectException(InvalidFunctionException::class);
         $function =
                 function () {
                     switch (true) {
@@ -114,10 +115,10 @@ class ControlStructureParserTest extends ParserTest
 
     /**
      * @dataProvider parsers
-     * @expectedException Pinq\Parsing\InvalidFunctionException
      */
     public function testThrowsExceptionWithTryCatchStatement()
     {
+        $this->expectException(InvalidFunctionException::class);
         $function =
                 function () {
                     try {

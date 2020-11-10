@@ -35,7 +35,7 @@ class ExpressionAnalysisTestCase extends PinqTestCase
      */
     protected $expressionAnalyser;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->functionInterpreter = $this->functionInterpreter();
         $this->typeSystem          = $this->setUpTypeSystem();

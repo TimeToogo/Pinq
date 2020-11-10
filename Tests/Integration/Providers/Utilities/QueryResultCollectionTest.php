@@ -22,7 +22,7 @@ class QueryResultCollectionTest extends PinqTestCase
      */
     protected $queryable;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->queryResultsCollection = new QueryResultCollection();
         $this->queryable              = (new Traversable\Provider(\Pinq\Traversable::from([])))->createQueryable();

@@ -20,7 +20,7 @@ class ReflectionTest extends PinqTestCase
      */
     protected $interpreter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->interpreter = FunctionInterpreter::getDefault();
     }

@@ -9,6 +9,7 @@ use Pinq\Queries\Functions;
 use Pinq\Queryable;
 use Pinq\Tests\PinqTestCase;
 use Pinq\Traversable;
+use Pinq\PinqException;
 
 function userDefinedFunction(array &$gg = [1, 2, 3], $t = __LINE__, \stdClass $f = null)
 {
@@ -74,21 +75,17 @@ class ParameterHasherTest extends PinqTestCase
                 $hasher->hash(function ($i) { }));
     }
 
-    /**
-     * @expectedException \Pinq\PinqException
-     */
     public function testCompiledRequestQueryHasherThrowsExceptionForNonQueryable()
     {
+        $this->expectException(PinqException::class);
         $hasher = ParameterHasher::compiledRequestQuery();
 
         $hasher->hash(new \stdClass());
     }
 
-    /**
-     * @expectedException \Pinq\PinqException
-     */
     public function testCompiledRequestQueryHasherThrowsExceptionForQueryableWithoutDSLProvider()
     {
+        $this->expectException(PinqException::class);
         $hasher = ParameterHasher::compiledRequestQuery();
 
         $hasher->hash((new \Pinq\Providers\Traversable\Provider(Traversable::from([])))->createQueryable());

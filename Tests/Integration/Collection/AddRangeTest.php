@@ -2,6 +2,8 @@
 
 namespace Pinq\Tests\Integration\Collection;
 
+use Pinq\PinqException;
+
 class AddRangeTest extends CollectionTest
 {
     /**
@@ -32,10 +34,10 @@ class AddRangeTest extends CollectionTest
 
     /**
      * @dataProvider oneToTen
-     * @expectedException \Pinq\PinqException
      */
     public function testThatInvalidValueThrowsExceptionWhenCallingAddRange(\Pinq\ICollection $collection, array $data)
     {
+        $this->expectException(PinqException::class);
         $collection->addRange(1);
     }
 }

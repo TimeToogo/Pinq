@@ -4,6 +4,7 @@ namespace Pinq\Tests\Integration\Parsing;
 
 use Pinq\Parsing\IParser;
 use Pinq\Expressions as O;
+use Pinq\Parsing\InvalidFunctionException;
 
 class SimpleParserTest extends ParserTest
 {
@@ -215,19 +216,19 @@ class SimpleParserTest extends ParserTest
 
     /**
      * @dataProvider parsers
-     * @expectedException \Pinq\Parsing\InvalidFunctionException
      */
     public function testInternalFunctionIsRejected(IParser $parser)
     {
+        $this->expectException(InvalidFunctionException::class);
         $parser->parse($parser->getReflection('strlen'));
     }
 
     /**
      * @dataProvider parsers
-     * @expectedException \Pinq\Parsing\InvalidFunctionException
      */
     public function testEvaledFunctionIsRejected(IParser $parser)
     {
+        $this->expectException(InvalidFunctionException::class);
         $evaledFunction = eval('return function () {};');
         $parser->parse($parser->getReflection($evaledFunction));
     }

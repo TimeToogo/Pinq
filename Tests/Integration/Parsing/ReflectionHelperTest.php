@@ -3,6 +3,7 @@
 namespace Pinq\Tests\Integration\Parsing;
 
 use Pinq\Expressions as O;
+use Pinq\Parsing\InvalidFunctionException;
 use Pinq\Parsing\Reflection;
 use Pinq\Tests\PinqTestCase;
 
@@ -80,11 +81,9 @@ class ReflectionHelperTest extends PinqTestCase
         $this->assertIsMethodReflection($reflection);
     }
 
-    /**
-     * @expectedException \Pinq\Parsing\InvalidFunctionException
-     */
     public function testMethodAfterReflectionGetClosure()
     {
+        $this->expectException(InvalidFunctionException::class);
         $asClosure = (new \ReflectionMethod(__CLASS__, 'method'))->getClosure($this);
         $reflection = Reflection::fromCallable($asClosure);
 
@@ -116,11 +115,9 @@ class ReflectionHelperTest extends PinqTestCase
         $this->assertIsStaticMethodReflection($reflection);
     }
 
-    /**
-     * @expectedException \Pinq\Parsing\InvalidFunctionException
-     */
     public function testStaticMethodAfterReflectionGetClosure()
     {
+        $this->expectException(InvalidFunctionException::class);
         $asClosure = (new \ReflectionMethod(__CLASS__, 'staticMethod'))->getClosure(null);
         $reflection = Reflection::fromCallable($asClosure);
 
@@ -147,11 +144,9 @@ class ReflectionHelperTest extends PinqTestCase
         $this->assertIsFunctionReflection($reflection);
     }
 
-    /**
-     * @expectedException \Pinq\Parsing\InvalidFunctionException
-     */
     public function testFunctionAfterReflectionGetClosure()
     {
+        $this->expectException(InvalidFunctionException::class);
         $asClosure = (new \ReflectionFunction(__NAMESPACE__ . '\\funcHelper'))->getClosure();
         $reflection = Reflection::fromCallable($asClosure);
 

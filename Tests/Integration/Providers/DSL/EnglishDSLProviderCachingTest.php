@@ -38,7 +38,7 @@ class EnglishDSLProviderCachingTest extends DSLCompilationProviderTest
     protected function assertInCache($value)
     {
         $cachedArray = $this->compiledQueryCache->getCachedArray();
-        $this->assertContains($value, $cachedArray, '', false, false);//Only check equality
+        $this->assertContainsEquals($value, $cachedArray, '', false, false);//Only check equality
     }
 
     protected function assertContainsInstanceofInCache($type)

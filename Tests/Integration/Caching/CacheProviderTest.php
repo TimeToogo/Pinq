@@ -6,7 +6,7 @@ use Pinq\Caching;
 
 class CacheProviderTest extends \Pinq\Tests\PinqTestCase
 {
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Caching\CacheProvider::removeCache();
         Caching\CacheProvider::setDevelopmentMode(false);
@@ -24,7 +24,7 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
     public function caches()
     {
         return [
-            ['setCustomCache', $this->getMock('Pinq\\Caching\\ICacheAdapter'), true],
+            ['setCustomCache', $this->createMock('Pinq\\Caching\\ICacheAdapter'), true],
             ['setArrayAccessCache', new \ArrayObject(), 'Pinq\\Caching\\ArrayAccessCacheAdapter'],
             ['setFileCache', 'php://memory', 'Pinq\\Caching\\CSVFileCache'],
             ['setDirectoryCache', __DIR__, 'Pinq\\Caching\\DirectoryCache']
@@ -62,7 +62,7 @@ class CacheProviderTest extends \Pinq\Tests\PinqTestCase
 
     public function testThatDevelopmentModeWillClearTheCacheOnce()
     {
-        $functionCacheMock = $this->getMock('Pinq\\Caching\\ICacheAdapter');
+        $functionCacheMock = $this->createMock('Pinq\\Caching\\ICacheAdapter');
 
         $functionCacheMock
                 ->expects($this->once())

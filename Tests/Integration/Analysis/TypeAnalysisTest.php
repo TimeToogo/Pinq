@@ -6,7 +6,7 @@ use Pinq\Analysis\IType;
 use Pinq\Expressions as O;
 use Pinq\Analysis\INativeType;
 use Pinq\Analysis\ITypeAnalysis;
-
+use Pinq\Analysis\TypeException;
 
 /**
  * @author Elliot Levin <elliotlevin@hotmail.com>
@@ -358,20 +358,16 @@ class TypeAnalysisTest extends ExpressionAnalysisTestCase
         );
     }
 
-    /**
-     * @expectedException \Pinq\Analysis\TypeException
-     */
     public function testReturnTypeWithInvalidExpressionThrowsException()
     {
+        $this->expectException(TypeException::class);
         //Data stored through identity
         $this->getAnalysis(function () { 1; })->getReturnTypeOf(O\Expression::value(1));
     }
 
-    /**
-     * @expectedException \Pinq\Analysis\TypeException
-     */
     public function testMetaDataWithInvalidExpressionThrowsException()
     {
+        $this->expectException(TypeException::class);
         $this->getAnalysis(function () { 1 + 2; })->getFunction(O\Expression::functionCall(O\Expression::value('s')));
     }
 

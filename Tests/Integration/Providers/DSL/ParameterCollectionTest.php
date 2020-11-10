@@ -19,7 +19,7 @@ class ParameterCollectionTest extends PinqTestCase
      */
     protected $collection;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->collection = new ParameterCollection();
     }
@@ -144,7 +144,7 @@ class ParameterCollectionTest extends PinqTestCase
 
     public function testCustomParameter()
     {
-        $parameterMock = $this->getMock('Pinq\Providers\DSL\Compilation\Parameters\IQueryParameter');
+        $parameterMock = $this->createMock('Pinq\Providers\DSL\Compilation\Parameters\IQueryParameter');
         $parameterMock->expects($this->any())
                 ->method('evaluate')
                 ->with($this->equalTo(new ResolvedParameterRegistry(['abc' => 'foobar'])))

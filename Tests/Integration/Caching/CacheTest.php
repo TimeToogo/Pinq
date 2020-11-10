@@ -35,7 +35,7 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
      */
     abstract protected function setUpCache();
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->cache = $this->setUpCache();
         $this->namespacedCache = $this->cache->forNamespace(self::TEST_NAMESPACE);
@@ -49,7 +49,7 @@ abstract class CacheTest extends \Pinq\Tests\PinqTestCase
 
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->cache = null;
         $this->namespacedCache = null;

@@ -35,7 +35,7 @@ abstract class QueryBuildingTestBase extends \Pinq\Tests\PinqTestCase
         $this->repository = $this->queryable instanceof IRepository ? $this->queryable : null;
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->functionInterpreter = Parsing\FunctionInterpreter::getDefault();
     }

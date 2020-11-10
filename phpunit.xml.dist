@@ -3,7 +3,8 @@
         bootstrap="Tests/TestBootstrapper.php"
         colors="true"
         backupGlobals="false"
-        stopOnFailure="false">
+        stopOnFailure="false"
+        beStrictAboutTestsThatDoNotTestAnything="false">
 
     <testsuites>
         <testsuite name="Entirety">
@@ -39,13 +40,13 @@
     <filter>
         <whitelist>
             <directory suffix=".php">./Source/</directory>
+            <exclude>
+                <directory>./vendor/</directory>
+            </exclude>
         </whitelist>
-        <blacklist>
-            <directory>./vendor/</directory>
-        </blacklist>
     </filter>
 
-    <listeners>
-        <listener class="Pinq\Tests\Timer" file="./Tests/TestTimer.php"/>
-    </listeners>
+    <extensions>
+        <extension class="Pinq\Tests\Timer" />
+    </extensions>
 </phpunit>

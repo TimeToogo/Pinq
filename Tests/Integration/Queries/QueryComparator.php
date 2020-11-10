@@ -2,6 +2,7 @@
 
 namespace Pinq\Tests\Integration\Queries;
 
+use PHPUnit\Framework\Constraint\IsEqual;
 use Pinq\Queries\IParameterRegistry;
 use SebastianBergmann\Comparator\Comparator;
 use SebastianBergmann\Comparator\Factory as ComparatorFactory;
@@ -64,7 +65,7 @@ class QueryComparator extends Comparator
         $comparator->setFactory($factory);
         $factory->register($comparator);
 
-        $constraint = new \PHPUnit_Framework_Constraint_IsEqual($expected);
+        $constraint = new IsEqual($expected);
 
         try {
             $constraint->evaluate($actual, 'Queries must be equivalent');

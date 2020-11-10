@@ -3,6 +3,7 @@
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
 use Pinq\Expressions as O;
+use Pinq\Parsing\InvalidFunctionException;
 
 class ParameterClassTest
 {
@@ -85,10 +86,10 @@ class MiscInterpreterTest extends InterpreterTest
 
     /**
      * @dataProvider interpreters
-     * @expectedException \Pinq\Parsing\InvalidFunctionException
      */
     public function testInternalFunction()
     {
+        $this->expectException(InvalidFunctionException::class);
         $valueSet = [
             [''],
             ['1'],
@@ -104,10 +105,10 @@ class MiscInterpreterTest extends InterpreterTest
 
     /**
      * @dataProvider interpreters
-     * @expectedException \Pinq\Parsing\InvalidFunctionException
      */
     public function testVariadicInternalFunction()
     {
+        $this->expectException(InvalidFunctionException::class);
         $valueSet = [
             [[1], [2], [3]],
             [[1, 3], [2, 5], [6, 3]],

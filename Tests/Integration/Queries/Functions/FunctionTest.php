@@ -3,6 +3,7 @@
 namespace Pinq\Tests\Integration\Queries\Functions;
 
 use Pinq\Expressions as O;
+use Pinq\PinqException;
 use Pinq\Queries\Functions;
 use Pinq\Queries\Functions\IFunction;
 use Pinq\Queries\ResolvedParameterRegistry;
@@ -132,11 +133,9 @@ abstract class FunctionTest extends PinqTestCase
         );
     }
 
-    /**
-     * @expectedException \Pinq\PinqException
-     */
     public function testInternalFunctionThrowsException()
     {
+        $this->expectException(PinqException::class);
         $function = $this->internalFunction();
 
         $this->assertTrue($function->isInternal());

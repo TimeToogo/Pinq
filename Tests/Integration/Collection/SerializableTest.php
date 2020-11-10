@@ -3,6 +3,7 @@
 namespace Pinq\Tests\Integration\Collection;
 
 use Pinq\Collection;
+use Pinq\PinqException;
 
 class SerializableTest extends CollectionTest
 {
@@ -36,12 +37,10 @@ class SerializableTest extends CollectionTest
                 $unserializedCollection->asArray());
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Serialization of 'Closure' is not allowed
-     */
     public function testThatCollectionIsNotSerializableAfterQueriesWithClosures()
     {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Serialization of 'Closure' is not allowed");
         $collection = Collection::from(range(1, 10));
         $collection = $collection
                 ->where(function ($i) { return $i !== false; });

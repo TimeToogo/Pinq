@@ -2,12 +2,14 @@
 
 namespace Pinq\Tests;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * The base class for all Pinq test cases
  *
  * @author Elliot Levin <elliotlevin@hotmail.com>
  */
-class PinqTestCase extends \PHPUnit_Framework_TestCase
+class PinqTestCase extends TestCase
 {
     const TEST_NAMESPACE = __NAMESPACE__;
     const ROOT_NAMESPACE = '\\Pinq\\';

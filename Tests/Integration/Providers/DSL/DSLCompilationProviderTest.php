@@ -24,7 +24,7 @@ abstract class DSLCompilationProviderTest extends ParsedQueryBuildingTest
      */
     protected $compilerConfiguration;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         /** @var $provider Implementation\DummyDSLQueryProvider */

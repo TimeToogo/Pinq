@@ -7,6 +7,7 @@ use Pinq\Analysis\INativeType;
 use Pinq\Analysis\IType;
 use Pinq\Analysis\PhpTypeSystem;
 use Pinq\Analysis\TypeData\TypeDataModule;
+use Pinq\Analysis\TypeException;
 use Pinq\Analysis\TypeId;
 use Pinq\Expressions as O;
 use Pinq\ICollection;
@@ -175,11 +176,9 @@ class TypeSystemTest extends ExpressionAnalysisTestCase
         $this->assertSame(false, $field->isStatic());
     }
 
-    /**
-     * @expectedException \Pinq\Analysis\TypeException
-     */
     public function testFieldsAreCaseSensitive()
     {
+        $this->expectException(TypeException::class);
         $class = $this->typeSystem->getObjectType('DateInterval');
         $class->getField(O\Expression::field(O\Expression::value(''), O\Expression::value('T')));
     }

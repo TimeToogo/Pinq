@@ -3,3 +3,4 @@
 composer.lock
 /.idea/
 /_site/
+*.cache

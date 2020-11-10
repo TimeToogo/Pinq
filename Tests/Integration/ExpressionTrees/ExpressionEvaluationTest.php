@@ -2,6 +2,7 @@
 
 namespace Pinq\Tests\Integration\ExpressionTrees;
 
+use PHPUnit\Framework\Error\Notice;
 use Pinq\Expressions as O;
 
 //Used to test relative namespaced function calls
@@ -52,7 +53,7 @@ class ExpressionEvaluationTest extends InterpreterTest
     //Backup globals is not working for this class...
     private static $globalsBackup = [];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$globalsBackup = [
             $_SERVER,
@@ -64,12 +65,12 @@ class ExpressionEvaluationTest extends InterpreterTest
             $_FILES,];
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         list($_SERVER, $_ENV, $_REQUEST, $_GET, $_POST, $_COOKIE, $_FILES) = self::$globalsBackup;
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         self::$field = null;
         self::$privateField = null;
@@ -661,11 +662,11 @@ class ExpressionEvaluationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      * @backupGlobals enabled
-     * @expectedException PHPUnit_Framework_Error_Notice
-     * @expectedExceptionMessage Trying to get property 'foo' of non-object
      */
     public function testIssetWithFieldsInIndexEmitsNotice()
     {
+        $this->expectNotice();
+        $this->expectExceptionMessage("Trying to get property 'foo' of non-object");
         $this->assertEvaluatesTo(function () { isset($GLOBALS[$GLOBALS->foo]); }, null);
     }
 
@@ -744,11 +745,11 @@ class ExpressionEvaluationTest extends InterpreterTest
     /**
      * @dataProvider interpreters
      * @backupGlobals enabled
-     * @expectedException PHPUnit_Framework_Error_Notice
-     * @expectedExceptionMessage Trying to get property 'foo' of non-object
      */
     public function testEmptyWithFieldsInIndexEmitsNotice()
     {
+        $this->expectNotice();
+        $this->expectExceptionMessage("Trying to get property 'foo' of non-object");
         $this->assertEvaluatesTo(function () { empty($GLOBALS[$GLOBALS->foo]); }, null);
     }
 

@@ -2,6 +2,8 @@
 
 namespace Pinq\Tests\Integration\Collection;
 
+use Pinq\PinqException;
+
 class RemoveRangeTest extends CollectionTest
 {
     /**
@@ -31,10 +33,10 @@ class RemoveRangeTest extends CollectionTest
 
     /**
      * @dataProvider oneToTen
-     * @expectedException \Pinq\PinqException
      */
     public function testThatInvalidValueThrowsExceptionWhenCallingRemoveRange(\Pinq\ICollection $collection, array $data)
     {
+        $this->expectException(PinqException::class);
         $collection->removeRange(1);
     }
 }

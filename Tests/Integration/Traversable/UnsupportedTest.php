@@ -10,7 +10,7 @@ class UnsupportedTest extends TraversableTest
     public function testThatSetIndexThrowsAndException(\Pinq\ITraversable $traversable, array $data)
     {
         if (!$traversable instanceof \Pinq\ICollection) {
-            $this->setExpectedException('\\Pinq\\PinqException');
+            $this->expectException('\\Pinq\\PinqException');
             $traversable[0] = null;
         }
     }
@@ -21,7 +21,7 @@ class UnsupportedTest extends TraversableTest
     public function testThatUnsetIndexThrowsAndException(\Pinq\ITraversable $traversable, array $data)
     {
         if (!$traversable instanceof \Pinq\ICollection) {
-            $this->setExpectedException('\\Pinq\\PinqException');
+            $this->expectException('\\Pinq\\PinqException');
             unset($traversable[0]);
         }
     }

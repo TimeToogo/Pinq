@@ -11,7 +11,7 @@ class ExpressionProcessorTest extends PinqTestCase
 {
     public function testWalksBodyAndParameterExpressions()
     {
-        $processor = $this->getMock('Pinq\Providers\DSL\Compilation\Processors\Expression\ExpressionProcessor', ['walkValue']);
+        $processor = $this->createPartialMock('Pinq\Providers\DSL\Compilation\Processors\Expression\ExpressionProcessor', ['walkValue']);
         $processor->expects($this->exactly(2))
                     ->method('walkValue')
                     ->will($this->returnValue(O\Expression::value('updated')));
