@@ -32,14 +32,14 @@ abstract class ParserBase implements IParser
                     $filePath);
         }
 
-        try {
+        // try {
             return $this->parseFunction($reflection, $filePath);
-        } catch (ASTException $astException) {
-            throw InvalidFunctionException::invalidFunctionMessage(
-                    $astException->getMessage(),
-                    $innerReflection
-            );
-        }
+        // } catch (ASTException $astException) {
+        //     throw InvalidFunctionException::invalidFunctionMessage(
+        //             $astException->getMessage(),
+        //             $innerReflection
+        //     );
+        // }
     }
 
     /**

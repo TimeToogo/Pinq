@@ -81,7 +81,7 @@ class FunctionLocatorVisitor extends NodeVisitorAbstract
     {
         $scopedVariableNames = [];
         foreach ($node->uses as $use) {
-            $scopedVariableNames[] = $use->var;
+            $scopedVariableNames[] = (string)$use->var->name;
         }
 
         return FunctionSignature::closure(

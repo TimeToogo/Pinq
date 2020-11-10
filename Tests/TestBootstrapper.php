@@ -6,6 +6,7 @@ date_default_timezone_set('Australia/Melbourne');
 error_reporting(-1);
 set_time_limit(2000);
 ini_set('display_errors', 'On');
+ini_set('memory_limit', '1G');
 
 register_shutdown_function(function () {
     $error = error_get_last();

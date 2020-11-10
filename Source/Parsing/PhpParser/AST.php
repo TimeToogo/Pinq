@@ -98,8 +98,8 @@ class AST
     {
         if ($node instanceof Node\Name) {
             return Expression::value($this->parseAbsoluteName($node));
-        } elseif (is_string($node)) {
-            return Expression::value($node);
+        } elseif (is_string($node) || $node instanceof Node\Identifier) {
+            return Expression::value((string)$node);
         }
 
         return $this->parseNode($node);
@@ -122,7 +122,7 @@ class AST
         }
 
         return Expression::parameter(
-                $node->name,
+                $node->var->name,
                 $type,
                 $node->default === null ? null : $this->parseNode($node->default),
                 $node->byRef,
@@ -277,7 +277,7 @@ class AST
 
         $usedVariables = [];
         foreach ($node->uses as $usedVariable) {
-            $usedVariables[] = Expression::closureUsedVariable($usedVariable->var, $usedVariable->byRef);
+            $usedVariables[] = Expression::closureUsedVariable((string)$usedVariable->var->name, $usedVariable->byRef);
         }
         $bodyExpressions = $this->parseNodes($node->stmts);
 
@@ -325,6 +325,9 @@ class AST
 
             case $node instanceof Node\Stmt\Unset_:
                 return Expression::unsetExpression($this->parseNodes($node->vars));
+
+            case $node instanceof Node\Stmt\Expression:
+                return $this->parseNode($node->expr);
 
             default:
                 $this->verifyNotControlStructure($node);
