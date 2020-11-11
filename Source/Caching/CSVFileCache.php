@@ -102,7 +102,7 @@ class CSVFileCache extends OneDimensionalCacheAdapter
     {
         $fileData = $this->getFileData();
 
-        return array_key_exists($key, $fileData);
+        return $fileData->offsetExists($key);
     }
 
     public function tryGet($key)

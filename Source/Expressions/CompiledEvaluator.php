@@ -102,13 +102,16 @@ PHP;
 
     private function initializeEvaluator()
     {
-        //Note: must be eval'd in an instance context.
-        //See: https://bugs.php.net/bug.php?id=65598
-        $this->originalCompiledEvaluator = eval($this->code);
+        $this->originalCompiledEvaluator = self::evalCode($this->code);
         $this->boundCompiledEvaluator    = $this->originalCompiledEvaluator->bindTo(
                 $this->context->getThis(),
                 $this->context->getScopeType()
         );
+    }
+
+    private static function evalCode(string $code): \Closure
+    {
+        return eval($code);
     }
 
     /**

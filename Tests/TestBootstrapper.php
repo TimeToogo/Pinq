@@ -10,7 +10,7 @@ ini_set('memory_limit', '1G');
 
 register_shutdown_function(function () {
     $error = error_get_last();
-    if(in_array($error['type'], [E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR, E_PARSE], true)) {
+    if($error && in_array($error['type'], [E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR, E_PARSE], true)) {
         echo "-- Error occurred in {$error['file']} on line {$error['line']} --";
     }
 });

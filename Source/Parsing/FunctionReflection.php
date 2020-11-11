@@ -161,7 +161,7 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
 
     protected function fullyQualify($type)
     {
-        return $type[0] !== '\\' ? '\\' . $type : $type;
+        return $type && $type[0] !== '\\' ? '\\' . $type : $type;
     }
 
     public function getCallable()
