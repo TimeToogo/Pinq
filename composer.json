@@ -13,7 +13,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=7.3.0",
         "nikic/php-parser": "~4.10"
     },
     "require-dev": {

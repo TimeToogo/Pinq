@@ -38,7 +38,7 @@ $youngPeopleDetails = $people
 Installation
 ============
 
-PINQ is compatible with >= PHP 5.5
+PINQ is compatible with >= PHP 7.3
 
 Install the package via composer:
 
