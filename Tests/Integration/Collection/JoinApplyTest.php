@@ -206,31 +206,25 @@ class JoinApplyTest extends CollectionTest
     }
 
     /**
-     * @dataProvider oneToTen
+     * @dataProvider emptyData
      */
-    public function testThatOnEqualityWillNotMatchNullsAndUseDefault(\Pinq\ICollection $collection, array $data)
+    public function testThatOnEqualityWillPassForValueWiseIdenticalDateTimes(\Pinq\ICollection $collection, array $data)
     {
+        $dateTime        = new \DateTime('2-1-2001');
+        $anotherDateTime = new \DateTime('2-1-2000');
+        $collection[] = $dateTime;
+        $collection[] = $anotherDateTime;
+
         $collection
-                ->groupJoin($collection)
-                ->onEquality(
-                        function ($i) { return $i % 2 === 0 ? $i : null; },
-                        function ($i) { return $i % 2 === 0 ? $i : null; })
-                ->withDefault('<DEFAULT>')
-                ->apply(function (&$outer, \Pinq\ITraversable $innerGroup) {
-                    $outer .= ':' . $innerGroup->implode('-');
+                ->join([$dateTime])
+                ->onEquality(function ($outer) { return $outer; }, function ($inner) { return $inner; })
+                ->apply(function (&$outer) {
+                    $outer = '<MATCHED>';
                 });
 
-        $this->assertMatches($collection, [
-            '1:<DEFAULT>',
-            '2:2',
-            '3:<DEFAULT>',
-            '4:4',
-            '5:<DEFAULT>',
-            '6:6',
-            '7:<DEFAULT>',
-            '8:8',
-            '9:<DEFAULT>',
-            '10:10'
+        $this->assertMatchesValues($collection, [
+            '<MATCHED>',
+            $anotherDateTime
         ]);
     }
 }

@@ -2,6 +2,9 @@
 
 namespace Pinq\Tests\Integration\Traversable;
 
+use Pinq\Analysis\TypeData\DateTime;
+use Pinq\Tests\Helpers\ExtendedDateTime;
+
 class UniqueTest extends TraversableTest
 {
     protected function _testReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable)
@@ -106,5 +109,34 @@ class UniqueTest extends TraversableTest
                 ->iterate(function (&$i) { $i *= 10; });
 
         $this->assertSame([10, 30, 50, 70, 90, 1, 20, 3, 40, 5, 60, 7, 80, 9, 100], $data);
+    }
+
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatUniqueWillDateTimeByTimestampAndClass(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable = $traversable
+                ->append([
+                        new \DateTime('2-1-2001'),
+                        new \DateTime('2-1-2001'),
+                        new \DateTime('2-1-2001 00:00:01'),
+                        new \DateTime('1-1-2001'),
+                        new \DateTime('1-1-2001'),
+                        new \DateTime('3-1-2001'),
+                        new ExtendedDateTime('1-1-2001'),
+                ])
+                ->unique()
+                ->select(function (\DateTime $outer) {
+                    return get_class($outer) . ':' . $outer->format('d-m-Y H:i:s');
+                });
+
+        $this->assertMatchesValues($traversable, [
+                'DateTime:02-01-2001 00:00:00',
+                'DateTime:02-01-2001 00:00:01',
+                'DateTime:01-01-2001 00:00:00',
+                'DateTime:03-01-2001 00:00:00',
+                'Pinq\Tests\Helpers\ExtendedDateTime:01-01-2001 00:00:00',
+        ]);
     }
 }

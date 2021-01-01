@@ -374,4 +374,25 @@ class JoinTest extends TraversableTest
                 '4:3',
         ]);
     }
+
+   /**
+    * @dataProvider emptyData
+    */
+    public function testThatOnEqualityWillPassForValueWiseIdenticalDateTimes(\Pinq\ITraversable $traversable, array $data)
+    {
+        $dateTime        = new \DateTime('2-1-2001');
+        $anotherDateTime = new \DateTime('2-1-2000');
+
+        $traversable = $traversable
+                ->append([$dateTime, $anotherDateTime])
+                ->join([$dateTime])
+                ->onEquality(function ($outer) { return $outer; }, function ($inner) { return $inner; })
+                ->to(function (\DateTime $outer) {
+                    return $outer->format('d-m-Y');
+                });
+
+        $this->assertMatchesValues($traversable, [
+                        '02-01-2001',
+        ]);
+    }
 }

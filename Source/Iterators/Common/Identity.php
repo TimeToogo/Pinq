@@ -45,7 +45,9 @@ final class Identity
 
             case 'o': //object
 
-                return 'o' . spl_object_hash($value);
+                return $value instanceof \DateTimeInterface || $value instanceof \DateTime
+                        ? 'dt:' . get_class($value) . ':' . $value->getTimestamp()
+                        : 'o' . spl_object_hash($value);
 
             case 'a': //array
 
