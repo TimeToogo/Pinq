@@ -274,7 +274,8 @@ trait OrderedMap
         return $this->contains($offset);
     }
 
-    public function &offsetGet($offset): mixed
+    #[\ReturnTypeWillChange]
+    public function &offsetGet($offset)
     {
         return $this->get($offset);
     }

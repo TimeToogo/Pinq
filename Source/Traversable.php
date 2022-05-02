@@ -473,7 +473,8 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
         return false;
     }
 
-    public function offsetGet($index): mixed
+    #[\ReturnTypeWillChange]
+    public function offsetGet($index)
     {
         foreach ($this->select(function ($value, $key) { return [$key, $value]; }) as $element) {
             if ($element[0] === $index) {

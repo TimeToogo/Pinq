@@ -259,7 +259,8 @@ class Queryable extends QueryBuilder implements IQueryable, Interfaces\IOrderedQ
         return $this->loadQuery($this->newMethod(__FUNCTION__, [$index]));
     }
 
-    public function offsetGet($index): mixed
+    #[\ReturnTypeWillChange]
+    public function offsetGet($index)
     {
         return $this->loadQuery($this->newMethod(__FUNCTION__, [$index]));
     }

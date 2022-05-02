@@ -43,7 +43,8 @@ abstract class Iterator implements IIterator
         return $this->valid;
     }
 
-    final public function key(): mixed
+    #[\ReturnTypeWillChange]
+    final public function key()
     {
         if ($this->requiresFirstFetch) {
             $this->fetch();
@@ -52,7 +53,8 @@ abstract class Iterator implements IIterator
         return $this->key;
     }
 
-    final public function &current(): mixed
+    #[\ReturnTypeWillChange]
+    final public function &current()
     {
         if ($this->requiresFirstFetch) {
             $this->fetch();

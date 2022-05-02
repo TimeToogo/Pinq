@@ -21,7 +21,8 @@ class ArrayAccessCacheImplementation implements \ArrayAccess, \IteratorAggregate
         return array_key_exists($offset, $this->array);
     }
 
-    public function offsetGet($offset): mixed
+    #[\ReturnTypeWillChange]
+    public function offsetGet($offset)
     {
         return isset($this->array[$offset]) ? $this->array[$offset] : null;
     }

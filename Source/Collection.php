@@ -159,7 +159,8 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
         $this->removeRange($elementsToRemove);
     }
 
-    public function offsetGet($key): mixed
+    #[\ReturnTypeWillChange]
+    public function offsetGet($key)
     {
         return $this->asOrderedMap()->offsetGet($key);
     }

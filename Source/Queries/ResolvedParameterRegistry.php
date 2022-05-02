@@ -49,7 +49,8 @@ class ResolvedParameterRegistry implements IResolvedParameterRegistry
         return array_key_exists($parameter, $this->resolvedParameters);
     }
 
-    public function offsetGet($parameter): mixed
+    #[\ReturnTypeWillChange]
+    public function offsetGet($parameter)
     {
         if (!$this->offsetExists($parameter)) {
             throw new PinqException(
