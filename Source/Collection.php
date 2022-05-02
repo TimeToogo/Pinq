@@ -159,12 +159,12 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
         $this->removeRange($elementsToRemove);
     }
 
-    public function offsetGet($key)
+    public function offsetGet($key): mixed
     {
         return $this->asOrderedMap()->offsetGet($key);
     }
 
-    public function offsetSet($index, $value)
+    public function offsetSet($index, $value): void
     {
         if ($this->source !== null) {
             $this->source->offsetSet($index, $value);
@@ -173,7 +173,7 @@ class Collection extends Traversable implements ICollection, Interfaces\IOrdered
         }
     }
 
-    public function offsetUnset($index)
+    public function offsetUnset($index): void
     {
         if ($this->source !== null) {
             $this->source->offsetUnset($index);

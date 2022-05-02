@@ -152,7 +152,7 @@ trait OrderedMap
         return $sortedMap;
     }
 
-    public function count()
+    public function count(): int
     {
         return $this->length;
     }
@@ -269,17 +269,17 @@ trait OrderedMap
         $this->largestIntKey          = -1;
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return $this->contains($offset);
     }
 
-    public function &offsetGet($offset)
+    public function &offsetGet($offset): mixed
     {
         return $this->get($offset);
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if ($offset === null) {
             $offset = ++$this->largestIntKey;
@@ -287,9 +287,9 @@ trait OrderedMap
         $this->set($offset, $value);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
-        return $this->remove($offset);
+        $this->remove($offset);
     }
 
     /**

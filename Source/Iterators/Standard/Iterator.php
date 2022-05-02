@@ -34,7 +34,7 @@ abstract class Iterator implements IIterator
 
     }
 
-    final public function valid()
+    final public function valid(): bool
     {
         if ($this->requiresFirstFetch) {
             $this->fetch();
@@ -43,7 +43,7 @@ abstract class Iterator implements IIterator
         return $this->valid;
     }
 
-    final public function key()
+    final public function key(): mixed
     {
         if ($this->requiresFirstFetch) {
             $this->fetch();
@@ -52,7 +52,7 @@ abstract class Iterator implements IIterator
         return $this->key;
     }
 
-    final public function &current()
+    final public function &current(): mixed
     {
         if ($this->requiresFirstFetch) {
             $this->fetch();
@@ -61,7 +61,7 @@ abstract class Iterator implements IIterator
         return $this->value;
     }
 
-    final public function rewind()
+    final public function rewind(): void
     {
         $this->valid = false;
         $this->doRewind();
@@ -73,7 +73,7 @@ abstract class Iterator implements IIterator
 
     }
 
-    final public function next()
+    final public function next(): void
     {
         if ($this->requiresFirstFetch) {
             $this->fetch();

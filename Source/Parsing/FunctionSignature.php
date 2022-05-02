@@ -253,14 +253,18 @@ class FunctionSignature extends MagicResolvable implements IFunctionSignature
     private static function getParameterExpression(\ReflectionParameter $parameter)
     {
         $typeHint = null;
+        $type = $parameter->getType();
 
-        if ($parameter->isArray()) {
-            $typeHint = 'array';
-        } elseif ($parameter->isCallable()) {
-            $typeHint = 'callable';
-        } elseif ($parameter->getClass() !== null) {
-            $typeHint = $parameter->getClass()->getName();
-            $typeHint = $typeHint[0] === '\\' ? $typeHint : '\\' . $typeHint;
+        if ($type instanceof \ReflectionNamedType) {
+            $typeHint = $type->getName();
+
+            if ($typeHint === 'parent') {
+                $typeHint = '\\' . $parameter->getDeclaringClass()->getParentClass()->getName();
+            } else if ($typeHint === 'self') {
+                $typeHint = '\\' . $parameter->getDeclaringClass()->getName();
+            } elseif (! in_array($typeHint, ['int', 'float', 'string', 'bool', 'array', 'callable', 'iterable', 'object', 'void'])) {
+                $typeHint = '\\' . $typeHint;
+            }
         }
 
         return O\Expression::parameter(

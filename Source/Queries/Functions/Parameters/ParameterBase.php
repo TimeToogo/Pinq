@@ -65,7 +65,7 @@ abstract class ParameterBase implements \Countable
         }
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->expressions);
     }

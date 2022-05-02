@@ -94,9 +94,20 @@ PHP;
         return serialize([$this->code, $this->context, $this->requiredVariables, $this->extraVariables]);
     }
 
+    public function __serialize(): array
+    {
+        return [$this->code, $this->context, $this->requiredVariables, $this->extraVariables];
+    }
+
     public function unserialize($serialized)
     {
         list($this->code, $this->context, $this->requiredVariables, $this->extraVariables) = unserialize($serialized);
+        $this->initializeEvaluator();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        list($this->code, $this->context, $this->requiredVariables, $this->extraVariables) = $data;
         $this->initializeEvaluator();
     }
 

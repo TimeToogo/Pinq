@@ -39,17 +39,17 @@ class ResolvedParameterRegistry implements IResolvedParameterRegistry
         return $this->resolvedParameters;
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->resolvedParameters);
     }
 
-    public function offsetExists($parameter)
+    public function offsetExists($parameter): bool
     {
         return array_key_exists($parameter, $this->resolvedParameters);
     }
 
-    public function offsetGet($parameter)
+    public function offsetGet($parameter): mixed
     {
         if (!$this->offsetExists($parameter)) {
             throw new PinqException(
@@ -60,12 +60,12 @@ class ResolvedParameterRegistry implements IResolvedParameterRegistry
         return $this->resolvedParameters[$parameter];
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         throw PinqException::notSupported(__METHOD__);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         throw PinqException::notSupported(__METHOD__);
     }

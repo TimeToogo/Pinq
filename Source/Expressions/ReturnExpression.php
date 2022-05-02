@@ -80,9 +80,19 @@ class ReturnExpression extends Expression
         return serialize($this->value);
     }
 
+    public function __serialize(): array
+    {
+        return [$this->value];
+    }
+
     public function unserialize($serialized)
     {
         $this->value = unserialize($serialized);
+    }
+
+    public function __unserialize(array $data)
+    {
+        list($this->value) = $data;
     }
 
     public function __clone()

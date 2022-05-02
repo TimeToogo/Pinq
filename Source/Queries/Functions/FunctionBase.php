@@ -148,6 +148,16 @@ abstract class FunctionBase implements IFunction
         );
     }
 
+    final public function __serialize(): array
+    {
+        return [
+                $this->evaluationContextFactory,
+                $this->parameters,
+                $this->bodyExpressions,
+                $this->dataToSerialize()
+        ];
+    }
+
     protected function dataToSerialize()
     {
 
@@ -160,6 +170,16 @@ abstract class FunctionBase implements IFunction
                 $this->parameters,
                 $this->bodyExpressions,
                 $data) = unserialize($data);
+        $this->unserializeData($data);
+    }
+
+    final public function __unserialize(array $data): void
+    {
+        list(
+                $this->evaluationContextFactory,
+                $this->parameters,
+                $this->bodyExpressions,
+                $data) = $data;
         $this->unserializeData($data);
     }
 

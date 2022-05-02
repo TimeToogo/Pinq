@@ -20,7 +20,7 @@ class IteratorAdapter extends Generator implements IAdapterIterator
         self::__constructIterator($iterator);
     }
 
-    public function &getIterator()
+    public function &getIterator(): \Traversable
     {
         foreach ($this->iterator as $key => $value) {
             yield $key => $value;

@@ -4,7 +4,7 @@ namespace Pinq\Tests\Integration\Traversable;
 
 class NonIntegerOrStringIterator extends \IteratorIterator
 {
-    public function key()
+    public function key(): mixed
     {
         return new \stdClass();
     }

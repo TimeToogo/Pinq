@@ -19,7 +19,7 @@ abstract class ParameterCollectionBase implements \Countable
         $this->parameters = $parameters;
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->parameters);
     }

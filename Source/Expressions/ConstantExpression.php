@@ -58,11 +58,22 @@ class ConstantExpression extends Expression
         return serialize($this->name);
     }
 
+    
+    public function __serialize(): array
+    {
+        return [$this->name];
+    }
+
     public function unserialize($serialized)
     {
         $this->name = unserialize($serialized);
     }
 
+    public function __unserialize(array $data): void
+    {
+        list($this->name) = $data;
+    }
+    
     public function __clone()
     {
 

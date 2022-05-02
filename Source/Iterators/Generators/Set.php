@@ -25,7 +25,7 @@ class Set extends Generator implements ISet
         }
     }
 
-    public function &getIterator()
+    public function &getIterator(): \Traversable
     {
         foreach ($this->values as &$value) {
             yield $value;

@@ -25,7 +25,7 @@ class VariableEvaluator extends Evaluator
     protected function doEvaluation(array $variableTable)
     {
         $variableTable += [
-                'GLOBALS'  => &$GLOBALS,
+                'GLOBALS'  => $GLOBALS,
                 '_SERVER'  => &$_SERVER,
                 '_ENV'     => &$_ENV,
                 '_REQUEST' => &$_REQUEST,

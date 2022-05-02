@@ -147,7 +147,7 @@ class FunctionReflection extends LocatedFunction implements IFunctionReflection
                 ($declaration->getNamespace() !== null ? $declaration->getNamespace() . '\\' : '') . $declarationType : null;
         $staticType      = $this->scope->getThisType() ? $this->scope->getThisType() : $selfType;
         $staticConstant  = $staticType;
-        $parentType      = get_parent_class($selfType) ?: null;
+        $parentType      = $selfType ? (get_parent_class($selfType) ?: null) : null;
         $parentConstant  = $parentType;
 
         return new MagicScopes(

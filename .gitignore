@@ -4,3 +4,4 @@ composer.lock
 /.idea/
 /_site/
 *.cache
+/.vscode

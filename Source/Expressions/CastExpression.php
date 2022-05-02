@@ -74,9 +74,19 @@ class CastExpression extends Expression
         return serialize([$this->castType, $this->castValue]);
     }
 
+    public function __serialize(): array
+    {
+        return [$this->castType, $this->castValue];
+    }
+
     public function unserialize($serialized)
     {
         list($this->castType, $this->castValue) = unserialize($serialized);
+    }
+
+    public function __unserialize(array $data): void
+    {
+        list($this->castType, $this->castValue) = $data;
     }
 
     public function __clone()

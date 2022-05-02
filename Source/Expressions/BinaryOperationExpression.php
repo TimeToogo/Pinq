@@ -104,11 +104,21 @@ class BinaryOperationExpression extends Expression
         return serialize([$this->leftOperand, $this->operator, $this->rightOperand]);
     }
 
+    public function __serialize(): array
+    {
+        return [$this->leftOperand, $this->operator, $this->rightOperand];
+    }
+    
     public function unserialize($serialized)
     {
         list($this->leftOperand, $this->operator, $this->rightOperand) = unserialize($serialized);
     }
 
+    public function __unserialize(array $data): void
+    {
+        list($this->leftOperand, $this->operator, $this->rightOperand) = $data;
+    }
+    
     public function __clone()
     {
         $this->leftOperand  = clone $this->leftOperand;

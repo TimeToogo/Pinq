@@ -83,11 +83,21 @@ class FunctionCallExpression extends Expression
         return serialize([$this->name, $this->arguments]);
     }
 
+    public function __serialize(): array
+    {
+        return [$this->name, $this->arguments];
+    }
+    
     public function unserialize($serialized)
     {
         list($this->name, $this->arguments) = unserialize($serialized);
     }
 
+    public function __unserialize(array $data): void
+    {
+        list($this->name, $this->arguments) = $data;
+    }
+    
     public function __clone()
     {
         $this->name      = clone $this->name;

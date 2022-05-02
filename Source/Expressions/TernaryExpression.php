@@ -108,9 +108,19 @@ class TernaryExpression extends Expression
         return serialize([$this->condition, $this->ifTrue, $this->ifFalse]);
     }
 
+    public function __serialize(): array
+    {
+        return [$this->condition, $this->ifTrue, $this->ifFalse];
+    }
+    
     public function unserialize($serialized)
     {
         list($this->condition, $this->ifTrue, $this->ifFalse) = unserialize($serialized);
+    }
+
+    public function __unserialize(array $data): void
+    {
+        list($this->condition, $this->ifTrue, $this->ifFalse) = $data;
     }
 
     public function __clone()

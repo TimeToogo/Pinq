@@ -109,9 +109,19 @@ class ValueExpression extends Expression
         return serialize([$this->value]);
     }
 
+    public function __serialize()
+    {
+        return [$this->value];
+    }
+
     public function unserialize($serialized)
     {
         list($this->value) = unserialize($serialized);
+    }
+
+    public function __unserialize($data)
+    {
+        list($this->value) = $data;
     }
 
     public function __clone()

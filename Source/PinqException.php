@@ -21,7 +21,7 @@ class PinqException extends \Exception
             $message = call_user_func_array('sprintf', func_get_args());
         }
 
-        parent::__construct($message, null, null);
+        parent::__construct($message, 0, null);
     }
 
     public static function construct(array $parameters)
