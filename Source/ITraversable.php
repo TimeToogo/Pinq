@@ -73,7 +73,7 @@ interface ITraversable extends IAggregatable, \IteratorAggregate, \ArrayAccess
      *
      * @return \Traversable
      */
-    public function getIterator();
+    public function getIterator(): \Traversable;
 
     /**
      * Returns an iterator for all the elements.

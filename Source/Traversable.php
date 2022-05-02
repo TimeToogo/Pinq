@@ -113,7 +113,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
         return $this->scheme->toArray($this->elements);
     }
 
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return $this->scheme->arrayCompatibleIterator($this->getTrueIterator());
     }
@@ -462,7 +462,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
 
     // <editor-fold defaultstate="collapsed" desc="Array Access">
 
-    public function offsetExists($index)
+    public function offsetExists($index): bool
     {
         foreach ($this->keys() as $key) {
             if ($key === $index) {
@@ -473,7 +473,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
         return false;
     }
 
-    public function offsetGet($index)
+    public function offsetGet($index): mixed
     {
         foreach ($this->select(function ($value, $key) { return [$key, $value]; }) as $element) {
             if ($element[0] === $index) {
@@ -484,12 +484,12 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
         return false;
     }
 
-    public function offsetSet($index, $value)
+    public function offsetSet($index, $value): void
     {
         throw PinqException::notSupported(__METHOD__);
     }
 
-    public function offsetUnset($index)
+    public function offsetUnset($index): void
     {
         throw PinqException::notSupported(__METHOD__);
     }
@@ -498,7 +498,7 @@ class Traversable implements ITraversable, Interfaces\IOrderedTraversable
 
     // <editor-fold defaultstate="collapsed" desc="Aggregates">
 
-    public function count()
+    public function count(): int
     {
         if($this->elements instanceof \Countable) {
             return $this->elements->count();
