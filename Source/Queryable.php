@@ -88,7 +88,7 @@ class Queryable extends QueryBuilder implements IQueryable, Interfaces\IOrderedQ
         return $this->loadQuery($this->newMethod(__FUNCTION__));
     }
 
-    final public function getIterator()
+    final public function getIterator(): \Traversable
     {
         return $this->loadQuery($this->newMethod(__FUNCTION__));
     }
@@ -254,22 +254,23 @@ class Queryable extends QueryBuilder implements IQueryable, Interfaces\IOrderedQ
 
     // <editor-fold defaultstate="collapsed" desc="Query Requests">
 
-    public function offsetExists($index)
+    public function offsetExists($index): bool
     {
         return $this->loadQuery($this->newMethod(__FUNCTION__, [$index]));
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($index)
     {
         return $this->loadQuery($this->newMethod(__FUNCTION__, [$index]));
     }
 
-    public function offsetSet($index, $value)
+    public function offsetSet($index, $value): void
     {
         throw PinqException::notSupported(__METHOD__);
     }
 
-    public function offsetUnset($index)
+    public function offsetUnset($index): void
     {
         throw PinqException::notSupported(__METHOD__);
     }
@@ -284,7 +285,7 @@ class Queryable extends QueryBuilder implements IQueryable, Interfaces\IOrderedQ
         return $this->loadQuery($this->newMethod(__FUNCTION__));
     }
 
-    public function count()
+    public function count(): int
     {
         return $this->loadQuery($this->newMethod(__FUNCTION__));
     }

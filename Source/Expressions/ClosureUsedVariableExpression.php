@@ -69,11 +69,21 @@ class ClosureUsedVariableExpression extends NamedParameterExpression
         );
     }
 
+    public function __serialize(): array
+    {
+        return [$this->name, $this->isReference];
+    }
+    
     public function unserialize($serialized)
     {
         list(
                 $this->name,
                 $this->isReference) = unserialize($serialized);
+    }
+
+    public function __unserialize(array $data): void
+    {
+        list($this->name, $this->isReference) = $data;
     }
 
     public function __clone()

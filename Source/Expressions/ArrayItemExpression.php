@@ -117,6 +117,16 @@ class ArrayItemExpression extends Expression
         return serialize([$this->key, $this->value, $this->isReference]);
     }
 
+    public function __serialize(): array
+    {
+        return [$this->key, $this->value, $this->isReference];
+    }
+
+    public function __unserialize(array $data): void
+    {
+        list($this->key, $this->value, $this->isReference) = $data;
+    }
+
     public function unserialize($serialized)
     {
         list($this->key, $this->value, $this->isReference) = unserialize($serialized);

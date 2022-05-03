@@ -173,6 +173,17 @@ class ParameterExpression extends NamedParameterExpression
         );
     }
 
+    public function __serialize(): array
+    {
+        return [
+                $this->defaultValue,
+                $this->isPassedByReference,
+                $this->name,
+                $this->typeHint,
+                $this->isVariadic
+        ];
+    }
+
     public function unserialize($serialized)
     {
         list(
@@ -181,6 +192,16 @@ class ParameterExpression extends NamedParameterExpression
                 $this->name,
                 $this->typeHint,
                 $this->isVariadic) = unserialize($serialized);
+    }
+
+    public function __unserialize(array $data): void
+    {
+        list(
+            $this->defaultValue,
+            $this->isPassedByReference,
+            $this->name,
+            $this->typeHint,
+            $this->isVariadic) = $data;
     }
 
     public function __clone()

@@ -70,10 +70,20 @@ class ArrayExpression extends Expression
     {
         return serialize([$this->items]);
     }
+    
+    public function __serialize(): array
+    {
+        return [$this->items];
+    }
 
     public function unserialize($serialized)
     {
         list($this->items) = unserialize($serialized);
+    }
+    
+    public function __unserialize(array $data): void
+    {
+        list($this->items) = $data;
     }
 
     public function __clone()

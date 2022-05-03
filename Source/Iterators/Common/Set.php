@@ -23,7 +23,7 @@ trait Set
      */
     protected $length = 0;
 
-    public function count()
+    public function count(): int
     {
         return $this->length;
     }

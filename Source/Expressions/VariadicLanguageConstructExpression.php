@@ -61,9 +61,19 @@ abstract class VariadicLanguageConstructExpression extends Expression
         return serialize([$this->values]);
     }
 
+    final public function __serialize(): array
+    {
+        return [$this->values];
+    }
+
     final public function unserialize($serialized)
     {
         list($this->values) = unserialize($serialized);
+    }
+
+    final public function __unserialize(array $data): void
+    {
+        list($this->values) = $data;
     }
 
     final public function __clone()

@@ -115,9 +115,9 @@ class FunctionMagicResolver extends O\ExpressionWalker
         }
     }
 
-    private function normalScopeClass($class)
+    private function normalScopeClass(?string $class)
     {
-        return strtolower(ltrim($class, '\\'));
+        return $class ? strtolower(ltrim($class, '\\')) : null;
     }
 
     private function resolveMagicScopeExpression(O\StaticClassExpression $expression)

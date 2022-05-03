@@ -103,12 +103,12 @@ class Repository extends Queryable implements IRepository, Interfaces\IOrderedRe
         $this->executeQuery($this->newMethod(__FUNCTION__));
     }
 
-    public function offsetSet($index, $value)
+    public function offsetSet($index, $value): void
     {
         $this->executeQuery($this->newMethod(__FUNCTION__, [$index, $value]));
     }
 
-    public function offsetUnset($index)
+    public function offsetUnset($index): void
     {
         $this->executeQuery($this->newMethod(__FUNCTION__, [$index]));
     }

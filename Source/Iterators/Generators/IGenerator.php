@@ -21,5 +21,5 @@ interface IGenerator extends \IteratorAggregate, IIterator
      *
      * @return \Generator
      */
-    public function &getIterator();
+    public function &getIterator(): \Traversable;
 }

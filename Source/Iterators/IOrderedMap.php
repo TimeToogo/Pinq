@@ -85,6 +85,7 @@ interface IOrderedMap extends \Traversable, \ArrayAccess, \Countable
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function &offsetGet($key);
 
     /**

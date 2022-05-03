@@ -17,5 +17,5 @@ abstract class Generator implements IGenerator
     /**
      * {@inheritDoc}
      */
-    abstract public function &getIterator();
+    abstract public function &getIterator(): \Traversable;
 }

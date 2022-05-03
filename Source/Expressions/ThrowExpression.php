@@ -59,11 +59,21 @@ class ThrowExpression extends Expression
         return serialize($this->exception);
     }
 
+    public function __serialize(): array
+    {
+        return [$this->exception];
+    }
+    
     public function unserialize($serialized)
     {
         $this->exception = unserialize($serialized);
     }
 
+    public function __unserialize(array $data): void
+    {
+        list($this->exception) = $data;
+    }
+    
     public function __clone()
     {
         $this->exception = clone $this->exception;

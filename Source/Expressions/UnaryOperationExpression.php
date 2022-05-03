@@ -75,11 +75,21 @@ class UnaryOperationExpression extends Expression
         return serialize([$this->operand, $this->operator]);
     }
 
+    public function __serialize(): array
+    {
+        return [$this->operand, $this->operator];
+    }
+    
     public function unserialize($serialized)
     {
         list($this->operand, $this->operator) = unserialize($serialized);
     }
 
+    public function __unserialize(array $data): void
+    {
+        list($this->operand, $this->operator) = $data;
+    }
+    
     public function __clone()
     {
         $this->operand = clone $this->operand;

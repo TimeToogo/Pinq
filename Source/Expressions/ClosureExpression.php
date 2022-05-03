@@ -193,6 +193,18 @@ class ClosureExpression extends Expression
         );
     }
 
+    public function __serialize(): array
+    {
+        return [
+            $this->returnsReference,
+            $this->isStatic,
+            $this->parameters,
+            $this->usedVariables,
+            $this->usedVariableNames,
+            $this->bodyExpressions
+        ];
+    }
+
     public function unserialize($serialized)
     {
         list(
@@ -204,6 +216,17 @@ class ClosureExpression extends Expression
                 $this->bodyExpressions) = unserialize($serialized);
     }
 
+    public function __unserialize(array $data): void
+    {
+        list(
+            $this->returnsReference,
+            $this->isStatic,
+            $this->parameters,
+            $this->usedVariables,
+            $this->usedVariableNames,
+            $this->bodyExpressions) = $data;
+    }
+    
     public function __clone()
     {
         $this->parameters      = self::cloneAll($this->parameters);

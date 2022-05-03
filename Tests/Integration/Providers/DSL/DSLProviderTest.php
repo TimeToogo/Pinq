@@ -80,7 +80,7 @@ class DSLProviderTest extends PinqTestCase
         $provider->expects($this->once())
                 ->method('loadCompiledRequest')
                 ->with($this->identicalTo($compiledRequestMock))
-                ->will($this->returnValue([1, 2, 3]));
+                ->will($this->returnValue(new \Pinq\Traversable([1, 2, 3])));
 
         $queryable = $provider->createQueryable();
 

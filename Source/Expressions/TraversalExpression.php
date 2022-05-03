@@ -48,11 +48,22 @@ abstract class TraversalExpression extends Expression
         return serialize([$this->value, $this->dataToSerialize()]);
     }
 
+    final public function __serialize(): array
+    {
+        return [$this->value, $this->dataToSerialize()];
+    }
+
     abstract protected function dataToSerialize();
 
     final public function unserialize($serialized)
     {
         list($this->value, $childData) = unserialize($serialized);
+        $this->unserializeData($childData);
+    }
+
+    final public function __unserialize(array $data): void
+    {
+        list($this->value, $childData) = $data;
         $this->unserializeData($childData);
     }
 

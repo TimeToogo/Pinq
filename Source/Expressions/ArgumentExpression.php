@@ -96,6 +96,11 @@ class ArgumentExpression extends Expression
         );
     }
 
+    public function __serialize(): array
+    {
+        return [$this->value, $this->isUnpacked];
+    }
+
     public function unserialize($serialized)
     {
         list(
@@ -103,6 +108,11 @@ class ArgumentExpression extends Expression
                 $this->isUnpacked) = unserialize($serialized);
     }
 
+    public function __unserialize(array $data): void
+    {
+        list($this->value, $this->isUnpacked) = $data;
+    }
+    
     public function __clone()
     {
         $this->value = clone $this->value;

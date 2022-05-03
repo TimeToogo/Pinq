@@ -126,12 +126,22 @@ class AssignmentExpression extends Expression
     {
         return serialize([$this->assignTo, $this->operator, $this->assignmentValue]);
     }
+    
+    public function __serialize(): array
+    {
+        return [$this->assignTo, $this->operator, $this->assignmentValue];
+    }
 
     public function unserialize($serialized)
     {
         list($this->assignTo, $this->operator, $this->assignmentValue) = unserialize($serialized);
     }
 
+    public function __unserialize(array $data): void
+    {
+        list($this->assignTo, $this->operator, $this->assignmentValue) = $data;
+    }
+    
     public function __clone()
     {
         $this->assignTo        = clone $this->assignTo;

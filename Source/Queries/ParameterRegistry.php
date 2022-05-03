@@ -44,7 +44,7 @@ class ParameterRegistry implements IParameterRegistry
         return $this->parameters;
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->parameters);
     }

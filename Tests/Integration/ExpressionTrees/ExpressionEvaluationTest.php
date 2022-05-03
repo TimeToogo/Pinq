@@ -588,13 +588,6 @@ class ExpressionEvaluationTest extends InterpreterTest
 
         $GLOBALS['poopop'] = 'globals';
         $this->assertEvaluatesTo(function () { $GLOBALS['poopop']; }, 'globals');
-
-        $GLOBALS = ['abcdef'];
-        $this->assertEvaluatesTo(function () { $GLOBALS; }, ['abcdef']);
-
-        $var = [1];
-        $GLOBALS =& $var;
-        $this->assertEvaluatesTo(function () { $GLOBALS; }, $var);
     }
 
     /**
@@ -665,8 +658,8 @@ class ExpressionEvaluationTest extends InterpreterTest
      */
     public function testIssetWithFieldsInIndexEmitsNotice()
     {
-        $this->expectNotice();
-        $this->expectExceptionMessage("Trying to get property 'foo' of non-object");
+        PHP_VERSION_ID >= 80000 ? $this->expectWarning() : $this->expectNotice();
+        PHP_VERSION_ID >= 80000 ? $this->expectExceptionMessage('Attempt to read property "foo" on array') : $this->expectExceptionMessage("Trying to get property 'foo' of non-object");
         $this->assertEvaluatesTo(function () { isset($GLOBALS[$GLOBALS->foo]); }, null);
     }
 
@@ -748,8 +741,11 @@ class ExpressionEvaluationTest extends InterpreterTest
      */
     public function testEmptyWithFieldsInIndexEmitsNotice()
     {
-        $this->expectNotice();
-        $this->expectExceptionMessage("Trying to get property 'foo' of non-object");
+        PHP_VERSION_ID >= 80000 ? $this->expectWarning() : $this->expectNotice();
+        PHP_VERSION_ID >= 80000 ?
+            $this->expectExceptionMessage('Attempt to read property "foo" on array')
+            : $this->expectExceptionMessage("Trying to get property 'foo' of non-object");
+
         $this->assertEvaluatesTo(function () { empty($GLOBALS[$GLOBALS->foo]); }, null);
     }
 

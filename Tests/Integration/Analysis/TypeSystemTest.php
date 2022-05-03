@@ -124,9 +124,7 @@ class TypeSystemTest extends ExpressionAnalysisTestCase
 
         $this->assertObjectCommonAncestor('Iterator', 'SeekableIterator', 'RecursiveIterator');
 
-        $this->assertObjectCommonAncestor('Traversable', 'Iterator', ['IteratorAggregate', 'ArrayObject', 'ArrayObject']);
-
-        $this->assertObjectCommonAncestor('Traversable', 'ArrayObject', 'DatePeriod');
+        $this->assertObjectCommonAncestor(PHP_VERSION_ID >= 80000 ? 'IteratorAggregate' :'Traversable', 'ArrayObject', 'DatePeriod');
     }
 
     public function testFunction()
