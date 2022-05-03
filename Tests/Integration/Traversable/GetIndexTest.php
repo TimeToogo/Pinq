@@ -61,4 +61,26 @@ class GetIndexTest extends TraversableTest
                     'Should be using strict equality for arrays (order matters)');
         }
     }
+
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatDateTimeIndexesAreComparedByValueAndClass(\Pinq\ITraversable $traversable, array $data)
+    {
+        $dateTime        = new \DateTime('2-1-2001');
+        $anotherDateTime = new \DateTime('2-1-2000');
+
+        $traversable = $traversable
+                ->append([$dateTime, $anotherDateTime])
+                ->indexBy(function ($value) { return $value; })
+                ->select(function (\DateTime $dateTime) { return $dateTime->format('j-n-Y'); });
+
+        $this->assertSame('2-1-2001', $traversable[$dateTime]);
+        $this->assertSame('2-1-2001', $traversable[clone $dateTime]);
+        $this->assertSame('2-1-2001', $traversable[new \DateTime('2-1-2001')]);
+
+        if(class_exists('DateTimeImmutable', false)) {
+            $this->assertNull($traversable[new \DateTimeImmutable('2-1-2001')]);
+        }
+    }
 }

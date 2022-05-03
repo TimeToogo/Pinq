@@ -2,6 +2,8 @@
 
 namespace Pinq\Tests\Integration\Traversable;
 
+use Pinq\ITraversable;
+
 class GroupByTest extends TraversableTest
 {
     protected function _testReturnsNewInstanceOfSameTypeWithSameScheme(\Pinq\ITraversable $traversable)
@@ -136,5 +138,24 @@ class GroupByTest extends TraversableTest
                 ->iterate(function (&$i) { $i['foo'] = $i[0]; });
 
         $this->assertSame($data, [[1], [2], [1, 2, 'foo' => 1], [3, 5, 'foo' => 3], [4, 2, 'foo' => 4]]);
+    }
+
+    /**
+     * @dataProvider emptyData
+     */
+    public function testThatDateTimeAreGroupedByValue(\Pinq\ITraversable $traversable, array $data)
+    {
+        $traversable = $traversable
+                ->append([2000, 2000, 2001, 2000, 2002, 2000, 2001, 2000, 2002])
+                ->groupBy(function ($year) { return new \DateTime('1-1-' . $year); })
+                ->select(function (ITraversable $years, \DateTime $dateTime) {
+                    return [$dateTime->format('Y'), $years->count()];
+                });
+
+        $this->assertMatchesValues($traversable, [
+                ['2000', 5],
+                ['2001', 2],
+                ['2002', 2],
+        ]);
     }
 }

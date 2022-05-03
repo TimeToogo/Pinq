@@ -33,4 +33,20 @@ class RemoveTest extends CollectionTest
 
         $this->assertMatchesValues($collection, $data);
     }
+
+    /**
+     * @dataProvider dateTimes
+     */
+    public function testRemovesDateTimeClassesByValueRatherThenReference(
+            \Pinq\ICollection $collection,
+            array $data
+    ) {
+        $originalCount = $collection->count();
+        $dateTime      = $collection[2];
+
+        $collection->remove($dateTime);
+
+        $this->assertCount($originalCount - 1, $collection);
+        $this->assertNotContains($dateTime, $collection);
+    }
 }

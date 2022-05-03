@@ -28,7 +28,8 @@ abstract class DataTest extends \Pinq\Tests\PinqTestCase
             'oneToTenTwice',
             'assocOneToTen',
             'tenRandomStrings',
-            'assocMixedValues'
+            'assocMixedValues',
+            'dateTimes'
         ];
 
         foreach ($dataProviders as $provider) {
@@ -104,6 +105,17 @@ abstract class DataTest extends \Pinq\Tests\PinqTestCase
     public function assocTenRandomStrings()
     {
         return $this->getImplementations(array_combine($this->randomStrings(10), $this->randomStrings(10)));
+    }
+
+    public function dateTimes()
+    {
+        return $this->getImplementations(iterator_to_array(
+                new \DatePeriod(
+                        new \DateTime('1-1-2000'),
+                        new \DateInterval('P4M'),
+                        new \DateTime('2-3-2004')
+                )
+        ));
     }
 
     private function randomStrings($amount)
